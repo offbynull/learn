@@ -20,7 +20,7 @@ export default class Markdown {
         this.markdownIt.use(indexer);
     }
 
-    public render(markdown: string) {
+    public render(markdown: string): string {
         let ret: string;
         ret = this.markdownIt.render(markdown);
         ret = '<html><head></head><body>' + ret + '</body></html>'

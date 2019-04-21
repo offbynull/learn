@@ -16,7 +16,7 @@ class BookmarkReferenceIgnoreExtension {
         this.name = 'bookmark-ref-ignore';
         this.type = extender_plugin_1.Type.INLINE;
     }
-    process(markdownIt, tokens, tokenIdx, context) {
+    process(markdownIt, tokens, tokenIdx) {
         const token = tokens[tokenIdx];
         token.type = 'text_no_bookmark_reference';
         token.tag = '';

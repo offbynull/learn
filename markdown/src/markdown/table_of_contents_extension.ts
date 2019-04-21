@@ -1,12 +1,12 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { Extension, ExtenderConfig, Type } from "./extender_plugin";
+import { Extension, Type } from "./extender_plugin";
 
 export class TocExtension implements Extension {
-    readonly name: string = 'toc';
-    readonly type: Type = Type.BLOCK;
+    public readonly name: string = 'toc';
+    public readonly type: Type = Type.BLOCK;
 
-    public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number): string {
+    public render(markdownIt: MarkdownIt, tokens: Token[]): string {
         let ret = '';
         let inHeader = false;
         let headerLevel = 0;

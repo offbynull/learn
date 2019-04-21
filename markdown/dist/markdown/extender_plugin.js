@@ -81,7 +81,7 @@ function extender(markdownIt, extensionConfig) {
         const beforeTokenLen = state.tokens.length;
         // @ts-ignore the typedef for RuleBlock is incorrect
         let ret = foundOldFenceRule(state, startLine, endLine, silent);
-        if (ret === false) {
+        if (ret !== true) {
             return ret;
         }
         const afterTokenLen = state.tokens.length;
@@ -129,7 +129,7 @@ function extender(markdownIt, extensionConfig) {
     const newBacktickRule = function (state, silent) {
         const beforeTokenLen = state.tokens.length;
         let ret = foundOldBacktickRule(state, silent);
-        if (ret === false) {
+        if (ret !== true) {
             return ret;
         }
         const afterTokenLen = state.tokens.length;
@@ -186,7 +186,7 @@ function extender(markdownIt, extensionConfig) {
     for (const extension of inlineExtensions) {
         if (extension.render !== undefined) {
             const renderFn = extension.render;
-            markdownIt.renderer.rules[extension.name] = function (tokens, idx, options, env, self) {
+            markdownIt.renderer.rules[extension.name] = function (tokens, idx) {
                 return renderFn(markdownIt, tokens, idx, context);
             };
         }
@@ -194,7 +194,7 @@ function extender(markdownIt, extensionConfig) {
     for (const extension of blockExtensions) {
         if (extension.render !== undefined) {
             const renderFn = extension.render;
-            markdownIt.renderer.rules[extension.name] = function (tokens, idx, options, env, self) {
+            markdownIt.renderer.rules[extension.name] = function (tokens, idx) {
                 return renderFn(markdownIt, tokens, idx, context);
             };
         }

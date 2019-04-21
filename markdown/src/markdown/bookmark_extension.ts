@@ -1,6 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { Extension, ExtenderConfig, Type } from './extender_plugin';
+import { Extension, Type } from './extender_plugin';
 
 class BookmarkData {
     public readonly bookmarks: Map<string, string> = new Map<string, string>();
@@ -11,7 +11,7 @@ export class BookmarkReferenceIgnoreExtension implements Extension {
     public readonly name: string = 'bookmark-ref-ignore';
     public readonly type: Type = Type.INLINE;
 
-    public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): void {
+    public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number): void {
         const token = tokens[tokenIdx];
         token.type = 'text_no_bookmark_reference';
         token.tag = '';
@@ -107,7 +107,7 @@ export class BookmarkExtension implements Extension {
         }
     }
     
-    public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) {
+    public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): string {
         const bookmarkData: BookmarkData = context.get('bookmark') || new BookmarkData();
         context.set('bookmark', bookmarkData);
 

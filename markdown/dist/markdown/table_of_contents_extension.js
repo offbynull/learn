@@ -6,7 +6,7 @@ class TocExtension {
         this.name = 'toc';
         this.type = extender_plugin_1.Type.BLOCK;
     }
-    render(markdownIt, tokens, tokenIdx) {
+    render(markdownIt, tokens) {
         let ret = '';
         let inHeader = false;
         let headerLevel = 0;

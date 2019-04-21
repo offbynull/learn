@@ -1,9 +1,10 @@
 import MarkdownIt from 'markdown-it';
+import Token from 'markdown-it/lib/token';
 
-export function indexer(md: MarkdownIt) {
+export function indexer(md: MarkdownIt): void {
     const oldParse = md.parse;
 
-    md.parse = function(src, env) {
+    md.parse = function(src, env): Token[] {
         let ret = oldParse.apply(md, [src, env]);
 
         let idx = 0;
@@ -18,7 +19,7 @@ export function indexer(md: MarkdownIt) {
                     break;
                 }
                 default:
-                break; // do nothing
+                    break; // do nothing
             }
         }
 
