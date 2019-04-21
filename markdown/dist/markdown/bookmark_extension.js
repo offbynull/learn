@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const token_1 = __importDefault(require("markdown-it/lib/token"));
 class BookmarkData {
     constructor() {
-        this.bookmarks = {};
+        this.bookmarks = new Map();
         this.nextId = 0;
     }
 }
@@ -39,10 +39,10 @@ class BookmarkExtenderContext {
             showText = true;
         }
         token.content = content;
-        if (typeof bookmarkData.bookmarks[content] !== 'undefined') {
+        if (bookmarkData.bookmarks.has(content)) {
             throw 'Bookmark already defined: ' + content;
         }
-        bookmarkData.bookmarks[content] = 'bookmark' + bookmarkData.nextId;
+        bookmarkData.bookmarks.set(content, 'bookmark' + bookmarkData.nextId);
         bookmarkData.nextId++;
         if (showText === true) {
             const textToken = new token_1.default('text_no_bookmark_reference', '', 0);
@@ -68,7 +68,7 @@ class BookmarkExtenderContext {
             let newTokens = [];
             let oldContent = token.content;
             const bookmarks = bookmarkData.bookmarks;
-            for (const [bookmarkText, bookmarkId] of Object.entries(bookmarks)) {
+            for (const [bookmarkText, bookmarkId] of bookmarks) {
                 let oldIdx = 0;
                 while (true) {
                     let newIdx = oldContent.indexOf(bookmarkText, oldIdx);
@@ -105,7 +105,10 @@ class BookmarkExtenderContext {
         context.set('bookmark', bookmarkData);
         const token = tokens[tokenIdx];
         const content = token.content;
-        const bookmarkId = bookmarkData.bookmarks[content];
+        const bookmarkId = bookmarkData.bookmarks.get(content);
+        if (bookmarkId === undefined) {
+            throw 'Undefined bookmark when rendering'; // this should never happen
+        }
         return '<a name="' + markdownIt.utils.escapeHtml(bookmarkId) + '"></a>';
     }
 }

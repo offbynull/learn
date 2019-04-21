@@ -3,7 +3,7 @@ import Token from 'markdown-it/lib/token';
 import { Extension, ExtenderConfig } from './extender_plugin';
 
 class BookmarkData {
-    public readonly bookmarks: object = {};
+    public readonly bookmarks: Map<string, string> = new Map<string, string>();
     public nextId: number = 0;
 }
 
@@ -36,11 +36,11 @@ class BookmarkExtenderContext implements Extension {
         }
         token.content = content;
 
-        if (typeof bookmarkData.bookmarks[content] !== 'undefined') {
+        if (bookmarkData.bookmarks.has(content)) {
             throw 'Bookmark already defined: ' + content;
         }
 
-        bookmarkData.bookmarks[content] = 'bookmark' + bookmarkData.nextId;
+        bookmarkData.bookmarks.set(content, 'bookmark' + bookmarkData.nextId);
         bookmarkData.nextId++;
 
         if (showText === true) {
@@ -72,7 +72,7 @@ class BookmarkExtenderContext implements Extension {
             let newTokens: Token[] = [];
             let oldContent = token.content;
             const bookmarks = bookmarkData.bookmarks;
-            for (const [bookmarkText, bookmarkId] of Object.entries(bookmarks)) {
+            for (const [bookmarkText, bookmarkId] of bookmarks) {
                 let oldIdx = 0;
                 while (true) {
                     let newIdx = oldContent.indexOf(bookmarkText, oldIdx);
@@ -112,7 +112,10 @@ class BookmarkExtenderContext implements Extension {
         const token = tokens[tokenIdx];
         const content = token.content;
         
-        const bookmarkId = bookmarkData.bookmarks[content];
+        const bookmarkId = bookmarkData.bookmarks.get(content);
+        if (bookmarkId === undefined) {
+            throw 'Undefined bookmark when rendering'; // this should never happen
+        }
         return '<a name="' + markdownIt.utils.escapeHtml(bookmarkId) + '"></a>';
     }
 }

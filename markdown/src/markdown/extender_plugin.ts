@@ -28,14 +28,14 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
 
     // sanity check keys
     const keyRegex = /^[A-Za-z0-9_\-]+$/;
-    for (const key of Object.keys(blockExtensions)) {
-        if (!key.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + key;
+    for (const blockExtension of blockExtensions) {
+        if (!blockExtension.name.match(keyRegex)) {
+            throw "Key must only contain " + keyRegex + ": " + blockExtension.name;
         }
     }
-    for (const key of Object.keys(inlineExtensions)) {
-        if (!key.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + key;
+    for (const inlineExtension of inlineExtensions) {
+        if (!inlineExtension.name.match(keyRegex)) {
+            throw "Key must only contain " + keyRegex + ": " + inlineExtension.name;
         }
     }
 
@@ -43,7 +43,7 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
 
 
     // Augment block fence rule to parse our fence extensions
-    let oldFenceRule;
+    let oldFenceRule: RuleBlock | undefined;
     const blockRules = markdownIt.block.ruler.getRules('');
     for (const blockRule of blockRules) {
         if (blockRule.name === 'fence') {
@@ -51,13 +51,15 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
             break;
         }
     }
-    if (typeof oldFenceRule === 'undefined') {
+    if (oldFenceRule === undefined) {
         throw 'Fence rule not found';
     }
+    const foundOldFenceRule = oldFenceRule;
     // @ts-ignore the typedef for RuleBlock is incorrect
     const newFenceRule: RuleBlock = function(state, startLine, endLine, silent) {
         const beforeTokenLen = state.tokens.length;
-        let ret = oldFenceRule(state, startLine, endLine, silent);
+        // @ts-ignore the typedef for RuleBlock is incorrect
+        let ret = foundOldFenceRule(state, startLine, endLine, silent);
         if (ret === false) {
             return ret;
         }
@@ -76,11 +78,11 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
             if (info.length === 0) { // if empty id, remove it and fallback to normal
                 const skipLen = infoMatch[0].length;
                 token.info = token.info.slice(skipLen);
-            } else if (typeof extension !== 'undefined') { // if id is expected, keep it
+            } else if (extension !== undefined) { // if id is expected, keep it
                 token.type = info;
                 token.info = '';
                 token.tag = '';
-                if (typeof extension.process === 'function') { // call if handler is a function
+                if (extension.process !== undefined) { // call if handler is a function
                     extension.process(markdownIt, state.tokens, tokenIdx, context);
                 }
             } else { // otherwise throw error
@@ -94,7 +96,7 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
 
 
     // Augment inline backticks rule to parse our inline extensions
-    let oldBacktickRule;
+    let oldBacktickRule: RuleInline | undefined;
     const inlineRules = markdownIt.inline.ruler.getRules('');
     for (const inlineRule of inlineRules) {
         if (inlineRule.name === 'backtick') {
@@ -102,12 +104,13 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
             break;
         }
     }
-    if (typeof oldBacktickRule === 'undefined') {
+    if (oldBacktickRule === undefined) {
         throw 'Backtick rule not found';
     }
+    const foundOldBacktickRule: RuleInline = oldBacktickRule;
     const newBacktickRule:RuleInline = function(state, silent) {
         const beforeTokenLen = state.tokens.length;
-        let ret = oldBacktickRule(state, silent);
+        let ret = foundOldBacktickRule(state, silent);
         if (ret === false) {
             return ret;
         }
@@ -130,12 +133,12 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
                 const extension = findExtension(inlineExtensions, info);
                 if (info.length === 0) { // if empty id, remove it and fallback to normal
                     token.content = token.content.slice(skipLen);
-                } else if (typeof extension !== 'undefined') { // if id is expected, keep it
+                } else if (extension !== undefined) { // if id is expected, keep it
                     token.type = info;
                     token.info = '';
                     token.tag = '';
                     token.content = token.content.slice(skipLen);
-                    if (typeof extension.process === 'function') { // call if handler is a function
+                    if (extension.process !== undefined) { // call if handler is a function
                         extension.process(markdownIt, state.tokens, tokenIdx, context);
                     }
                 } else { // otherwise throw error
@@ -155,13 +158,13 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
         const tokens = oldMdParse.apply(markdownIt, [src, env]);
         
         for (const extension of inlineExtensions) {
-            if (typeof extension.postProcess === 'function') {
+            if (extension.postProcess !== undefined) {
                 extension.postProcess(markdownIt, tokens, context);
             }
         }
 
         for (const extension of blockExtensions) {
-            if (typeof extension.postProcess === 'function') {
+            if (extension.postProcess !== undefined) {
                 extension.postProcess(markdownIt, tokens, context);
             }
         }
@@ -172,7 +175,7 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
 
     // Augment md's renderer to render out tokens
     for (const extension of inlineExtensions) {
-        if (typeof extension.render !== 'undefined') {
+        if (extension.render !== undefined) {
             const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);
@@ -181,7 +184,7 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
     }
 
     for (const extension of blockExtensions) {
-        if (typeof extension.render !== 'undefined') {
+        if (extension.render !== undefined) {
             const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);

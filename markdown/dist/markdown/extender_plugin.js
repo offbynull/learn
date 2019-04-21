@@ -20,14 +20,14 @@ function extender(markdownIt, extensionConfig) {
     const inlineExtensions = extensionConfig.inlineExtensions;
     // sanity check keys
     const keyRegex = /^[A-Za-z0-9_\-]+$/;
-    for (const key of Object.keys(blockExtensions)) {
-        if (!key.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + key;
+    for (const blockExtension of blockExtensions) {
+        if (!blockExtension.name.match(keyRegex)) {
+            throw "Key must only contain " + keyRegex + ": " + blockExtension.name;
         }
     }
-    for (const key of Object.keys(inlineExtensions)) {
-        if (!key.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + key;
+    for (const inlineExtension of inlineExtensions) {
+        if (!inlineExtension.name.match(keyRegex)) {
+            throw "Key must only contain " + keyRegex + ": " + inlineExtension.name;
         }
     }
     const context = new Map(); // simple map for sharing data between invocations
@@ -40,13 +40,15 @@ function extender(markdownIt, extensionConfig) {
             break;
         }
     }
-    if (typeof oldFenceRule === 'undefined') {
+    if (oldFenceRule === undefined) {
         throw 'Fence rule not found';
     }
+    const foundOldFenceRule = oldFenceRule;
     // @ts-ignore the typedef for RuleBlock is incorrect
     const newFenceRule = function (state, startLine, endLine, silent) {
         const beforeTokenLen = state.tokens.length;
-        let ret = oldFenceRule(state, startLine, endLine, silent);
+        // @ts-ignore the typedef for RuleBlock is incorrect
+        let ret = foundOldFenceRule(state, startLine, endLine, silent);
         if (ret === false) {
             return ret;
         }
@@ -64,11 +66,11 @@ function extender(markdownIt, extensionConfig) {
                 const skipLen = infoMatch[0].length;
                 token.info = token.info.slice(skipLen);
             }
-            else if (typeof extension !== 'undefined') { // if id is expected, keep it
+            else if (extension !== undefined) { // if id is expected, keep it
                 token.type = info;
                 token.info = '';
                 token.tag = '';
-                if (typeof extension.process === 'function') { // call if handler is a function
+                if (extension.process !== undefined) { // call if handler is a function
                     extension.process(markdownIt, state.tokens, tokenIdx, context);
                 }
             }
@@ -88,12 +90,13 @@ function extender(markdownIt, extensionConfig) {
             break;
         }
     }
-    if (typeof oldBacktickRule === 'undefined') {
+    if (oldBacktickRule === undefined) {
         throw 'Backtick rule not found';
     }
+    const foundOldBacktickRule = oldBacktickRule;
     const newBacktickRule = function (state, silent) {
         const beforeTokenLen = state.tokens.length;
-        let ret = oldBacktickRule(state, silent);
+        let ret = foundOldBacktickRule(state, silent);
         if (ret === false) {
             return ret;
         }
@@ -114,12 +117,12 @@ function extender(markdownIt, extensionConfig) {
                 if (info.length === 0) { // if empty id, remove it and fallback to normal
                     token.content = token.content.slice(skipLen);
                 }
-                else if (typeof extension !== 'undefined') { // if id is expected, keep it
+                else if (extension !== undefined) { // if id is expected, keep it
                     token.type = info;
                     token.info = '';
                     token.tag = '';
                     token.content = token.content.slice(skipLen);
-                    if (typeof extension.process === 'function') { // call if handler is a function
+                    if (extension.process !== undefined) { // call if handler is a function
                         extension.process(markdownIt, state.tokens, tokenIdx, context);
                     }
                 }
@@ -136,12 +139,12 @@ function extender(markdownIt, extensionConfig) {
     markdownIt.parse = function (src, env) {
         const tokens = oldMdParse.apply(markdownIt, [src, env]);
         for (const extension of inlineExtensions) {
-            if (typeof extension.postProcess === 'function') {
+            if (extension.postProcess !== undefined) {
                 extension.postProcess(markdownIt, tokens, context);
             }
         }
         for (const extension of blockExtensions) {
-            if (typeof extension.postProcess === 'function') {
+            if (extension.postProcess !== undefined) {
                 extension.postProcess(markdownIt, tokens, context);
             }
         }
@@ -149,7 +152,7 @@ function extender(markdownIt, extensionConfig) {
     };
     // Augment md's renderer to render out tokens
     for (const extension of inlineExtensions) {
-        if (typeof extension.render !== 'undefined') {
+        if (extension.render !== undefined) {
             const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function (tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);
@@ -157,7 +160,7 @@ function extender(markdownIt, extensionConfig) {
         }
     }
     for (const extension of blockExtensions) {
-        if (typeof extension.render !== 'undefined') {
+        if (extension.render !== undefined) {
             const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function (tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);
