@@ -1,7 +1,7 @@
 import MarkdownIt, { RuleBlock, RuleInline } from 'markdown-it';
 import Token from 'markdown-it/lib/token';
 
-function findExtension(extensions: Extension[], name: string): Extension | undefined {
+function findExtension(extensions: ReadonlyArray<Extension>, name: string): Extension | undefined {
     for (const extension of extensions) {
         if (name === extension.name) {
             return extension;
@@ -10,32 +10,70 @@ function findExtension(extensions: Extension[], name: string): Extension | undef
     return undefined;
 }
 
+export enum Type {
+    BLOCK = 'block',
+    INLINE = 'inline'
+}
+
 export interface Extension {
     readonly name: string;
+    readonly type: Type;
     process?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => void;
     postProcess?: (markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>) => void;
     render?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => string; 
 }
 
 export class ExtenderConfig {
-    public readonly blockExtensions: Array<Extension> = [];
-    public readonly inlineExtensions: Array<Extension> = [];
+    private readonly blockExtensions: Array<Extension> = [];
+    private readonly inlineExtensions: Array<Extension> = [];
+
+    public register(extension: Extension) {
+        let extensions: Array<Extension>;
+        switch (extension.type) {
+            case Type.BLOCK: {
+                extensions = this.blockExtensions;
+                break;
+            }
+            case Type.INLINE: {
+                extensions = this.inlineExtensions;
+                break;
+            }
+            default: {
+                throw "Unrecognized type"; // should never happen
+            }
+        }
+
+        if (extensions.filter(e => e.name === extension.name).length) {
+            throw 'Duplicate registeration of ' + extension.type + ' extension not allowed: ' + extension.name;
+        }
+        extensions.push(extension);
+    }
+
+    public viewBlockExtensions(): ReadonlyArray<Extension> {
+        return this.blockExtensions;
+    }
+
+    public viewInlineExtensions(): ReadonlyArray<Extension> {
+        return this.inlineExtensions;
+    }
 }
 
+const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
+const NAME_EXTRACT_REGEX = /^\s*\{([A-Za-z0-9_\-]*)\}\s*/;
+
 export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig) {
-    const blockExtensions = extensionConfig.blockExtensions;
-    const inlineExtensions = extensionConfig.inlineExtensions;
+    const blockExtensions = extensionConfig.viewBlockExtensions();
+    const inlineExtensions = extensionConfig.viewInlineExtensions();
 
     // sanity check keys
-    const keyRegex = /^[A-Za-z0-9_\-]+$/;
     for (const blockExtension of blockExtensions) {
-        if (!blockExtension.name.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + blockExtension.name;
+        if (!blockExtension.name.match(NAME_REGEX)) {
+            throw "Key must only contain " + NAME_REGEX + ": " + blockExtension.name;
         }
     }
     for (const inlineExtension of inlineExtensions) {
-        if (!inlineExtension.name.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + inlineExtension.name;
+        if (!inlineExtension.name.match(NAME_REGEX)) {
+            throw "Key must only contain " + NAME_REGEX + ": " + inlineExtension.name;
         }
     }
 
@@ -71,7 +109,7 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
 
         const tokenIdx = beforeTokenLen;
         const token = state.tokens[tokenIdx];
-        const infoMatch = token.info.match(/^\s*\{([A-Za-z0-9_\-]*)\}\s*/);
+        const infoMatch = token.info.match(NAME_EXTRACT_REGEX);
         if (infoMatch !== null && infoMatch.length === 2) { //infoMatch[0] is the whole thing, infoMatch[1] is the group
             const info = infoMatch[1];
             const extension = findExtension(blockExtensions, info);
@@ -126,7 +164,7 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
                 continue;
             }
             
-            const infoMatch = token.content.match(/^\s*\{([A-Za-z0-9_\-]*)\}\s*/);
+            const infoMatch = token.content.match(NAME_EXTRACT_REGEX);
             if (infoMatch !== null && infoMatch.length === 2) { //infoMatch[0] is the whole thing, infoMatch[1] is the group
                 const skipLen = infoMatch[0].length;
                 const info = infoMatch[1];

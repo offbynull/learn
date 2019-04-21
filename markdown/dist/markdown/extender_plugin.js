@@ -8,26 +8,58 @@ function findExtension(extensions, name) {
     }
     return undefined;
 }
+var Type;
+(function (Type) {
+    Type["BLOCK"] = "block";
+    Type["INLINE"] = "inline";
+})(Type = exports.Type || (exports.Type = {}));
 class ExtenderConfig {
     constructor() {
         this.blockExtensions = [];
         this.inlineExtensions = [];
     }
+    register(extension) {
+        let extensions;
+        switch (extension.type) {
+            case Type.BLOCK: {
+                extensions = this.blockExtensions;
+                break;
+            }
+            case Type.INLINE: {
+                extensions = this.inlineExtensions;
+                break;
+            }
+            default: {
+                throw "Unrecognized type"; // should never happen
+            }
+        }
+        if (extensions.filter(e => e.name === extension.name).length) {
+            throw 'Duplicate registeration of ' + extension.type + ' extension not allowed: ' + extension.name;
+        }
+        extensions.push(extension);
+    }
+    viewBlockExtensions() {
+        return this.blockExtensions;
+    }
+    viewInlineExtensions() {
+        return this.inlineExtensions;
+    }
 }
 exports.ExtenderConfig = ExtenderConfig;
+const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
+const NAME_EXTRACT_REGEX = /^\s*\{([A-Za-z0-9_\-]*)\}\s*/;
 function extender(markdownIt, extensionConfig) {
-    const blockExtensions = extensionConfig.blockExtensions;
-    const inlineExtensions = extensionConfig.inlineExtensions;
+    const blockExtensions = extensionConfig.viewBlockExtensions();
+    const inlineExtensions = extensionConfig.viewInlineExtensions();
     // sanity check keys
-    const keyRegex = /^[A-Za-z0-9_\-]+$/;
     for (const blockExtension of blockExtensions) {
-        if (!blockExtension.name.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + blockExtension.name;
+        if (!blockExtension.name.match(NAME_REGEX)) {
+            throw "Key must only contain " + NAME_REGEX + ": " + blockExtension.name;
         }
     }
     for (const inlineExtension of inlineExtensions) {
-        if (!inlineExtension.name.match(keyRegex)) {
-            throw "Key must only contain " + keyRegex + ": " + inlineExtension.name;
+        if (!inlineExtension.name.match(NAME_REGEX)) {
+            throw "Key must only contain " + NAME_REGEX + ": " + inlineExtension.name;
         }
     }
     const context = new Map(); // simple map for sharing data between invocations
@@ -58,7 +90,7 @@ function extender(markdownIt, extensionConfig) {
         }
         const tokenIdx = beforeTokenLen;
         const token = state.tokens[tokenIdx];
-        const infoMatch = token.info.match(/^\s*\{([A-Za-z0-9_\-]*)\}\s*/);
+        const infoMatch = token.info.match(NAME_EXTRACT_REGEX);
         if (infoMatch !== null && infoMatch.length === 2) { //infoMatch[0] is the whole thing, infoMatch[1] is the group
             const info = infoMatch[1];
             const extension = findExtension(blockExtensions, info);
@@ -109,7 +141,7 @@ function extender(markdownIt, extensionConfig) {
             if (token.type !== 'code_inline') {
                 continue;
             }
-            const infoMatch = token.content.match(/^\s*\{([A-Za-z0-9_\-]*)\}\s*/);
+            const infoMatch = token.content.match(NAME_EXTRACT_REGEX);
             if (infoMatch !== null && infoMatch.length === 2) { //infoMatch[0] is the whole thing, infoMatch[1] is the group
                 const skipLen = infoMatch[0].length;
                 const info = infoMatch[1];

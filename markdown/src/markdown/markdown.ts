@@ -3,8 +3,8 @@ import MarkdownIt from 'markdown-it';
 
 import { indexer } from './index_plugin';
 import { extender, ExtenderConfig } from './extender_plugin';
-import { tocExtension } from './table_of_contents_extension';
-import { bookmarkExtension } from './bookmark_extension';
+import { TocExtension } from './table_of_contents_extension';
+import { BookmarkExtension, BookmarkReferenceIgnoreExtension } from './bookmark_extension';
 
 export default class Markdown {
     private readonly markdownIt: MarkdownIt;
@@ -13,8 +13,9 @@ export default class Markdown {
         this.markdownIt = new MarkdownIt('commonmark');
 
         const extenderConfig: ExtenderConfig = new ExtenderConfig();
-        tocExtension(extenderConfig);
-        bookmarkExtension(extenderConfig);
+        extenderConfig.register(new BookmarkExtension());
+        extenderConfig.register(new BookmarkReferenceIgnoreExtension());
+        extenderConfig.register(new TocExtension());
         this.markdownIt.use(extender, extenderConfig);
         this.markdownIt.use(indexer);
     }

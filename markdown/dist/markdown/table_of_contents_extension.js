@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const extender_plugin_1 = require("./extender_plugin");
 class TocExtension {
     constructor() {
         this.name = 'toc';
+        this.type = extender_plugin_1.Type.BLOCK;
     }
     render(markdownIt, tokens, tokenIdx) {
         let ret = '';
@@ -41,8 +43,5 @@ class TocExtension {
         return '<div class="toc">\n' + ret + '</div>\n';
     }
 }
-function tocExtension(config) {
-    config.blockExtensions.push(new TocExtension());
-}
-exports.tocExtension = tocExtension;
+exports.TocExtension = TocExtension;
 //# sourceMappingURL=table_of_contents_extension.js.map

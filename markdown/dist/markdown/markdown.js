@@ -13,8 +13,9 @@ class Markdown {
     constructor() {
         this.markdownIt = new markdown_it_1.default('commonmark');
         const extenderConfig = new extender_plugin_1.ExtenderConfig();
-        table_of_contents_extension_1.tocExtension(extenderConfig);
-        bookmark_extension_1.bookmarkExtension(extenderConfig);
+        extenderConfig.register(new bookmark_extension_1.BookmarkExtension());
+        extenderConfig.register(new bookmark_extension_1.BookmarkReferenceIgnoreExtension());
+        extenderConfig.register(new table_of_contents_extension_1.TocExtension());
         this.markdownIt.use(extender_plugin_1.extender, extenderConfig);
         this.markdownIt.use(index_plugin_1.indexer);
     }

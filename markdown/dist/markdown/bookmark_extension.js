@@ -4,15 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const token_1 = __importDefault(require("markdown-it/lib/token"));
+const extender_plugin_1 = require("./extender_plugin");
 class BookmarkData {
     constructor() {
         this.bookmarks = new Map();
         this.nextId = 0;
     }
 }
-class BookmarkReferenceIgnoreExtenderContext {
+class BookmarkReferenceIgnoreExtension {
     constructor() {
         this.name = 'bookmark-ref-ignore';
+        this.type = extender_plugin_1.Type.INLINE;
     }
     process(markdownIt, tokens, tokenIdx, context) {
         const token = tokens[tokenIdx];
@@ -20,9 +22,11 @@ class BookmarkReferenceIgnoreExtenderContext {
         token.tag = '';
     }
 }
-class BookmarkExtenderContext {
+exports.BookmarkReferenceIgnoreExtension = BookmarkReferenceIgnoreExtension;
+class BookmarkExtension {
     constructor() {
         this.name = 'bookmark';
+        this.type = extender_plugin_1.Type.INLINE;
     }
     process(markdownIt, tokens, tokenIdx, context) {
         const bookmarkData = context.get('bookmark') || new BookmarkData();
@@ -112,9 +116,5 @@ class BookmarkExtenderContext {
         return '<a name="' + markdownIt.utils.escapeHtml(bookmarkId) + '"></a>';
     }
 }
-function bookmarkExtension(config) {
-    config.inlineExtensions.push(new BookmarkReferenceIgnoreExtenderContext());
-    config.inlineExtensions.push(new BookmarkExtenderContext());
-}
-exports.bookmarkExtension = bookmarkExtension;
+exports.BookmarkExtension = BookmarkExtension;
 //# sourceMappingURL=bookmark_extension.js.map

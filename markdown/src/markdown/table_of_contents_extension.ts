@@ -1,9 +1,10 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { Extension, ExtenderConfig } from "./extender_plugin";
+import { Extension, ExtenderConfig, Type } from "./extender_plugin";
 
-class TocExtension implements Extension {
+export class TocExtension implements Extension {
     readonly name: string = 'toc';
+    readonly type: Type = Type.BLOCK;
 
     public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number): string {
         let ret = '';
@@ -44,9 +45,4 @@ class TocExtension implements Extension {
     
         return '<div class="toc">\n' + ret + '</div>\n';
     }
-}
-
-
-export function tocExtension(config: ExtenderConfig) {
-    config.blockExtensions.push(new TocExtension());
 }
