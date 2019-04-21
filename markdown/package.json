@@ -10,8 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/js-beautify": "^1.8.0",
     "js-beautify": "^1.9.1",
-    "markdown-it": "^8.4.2"
+    "markdown-it": "^8.4.2",
+    "typescript": "^3.4.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/markdown-it": "0.0.7"
+  }
 }

@@ -1,30 +1,54 @@
-function findExtension(extensionConfig, name) {
-    for (const extension of extensionConfig) {
-        if (name === extension.name) {
-            return extension.context;
+import MarkdownIt, { RuleBlock, RuleInline } from 'markdown-it';
+import Token from 'markdown-it/lib/token';
+
+function findExtension(extenderHandlers: ExtenderHandler[], name: string) {
+    for (const extenderHandler of extenderHandlers) {
+        if (name === extenderHandler.name) {
+            return extenderHandler.context;
         }
     }
     return undefined;
 }
 
-module.exports = function(markdownIt, extensionConfig) {
-    blockExtensions = extensionConfig.blockHandlers || [];
-    inlineExtensions = extensionConfig.inlineHandlers || [];
+export interface ExtenderContext {
+    process?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => void;
+    postProcess?: (markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>) => void;
+    render?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => string; 
+}
+
+export class ExtenderHandler {
+    public readonly name: string;
+    public readonly context: ExtenderContext;
+
+    constructor(name: string, context: ExtenderContext) {
+        this.name = name;
+        this.context = context;
+    }
+}
+
+export class ExtenderConfig {
+    public readonly blockHandlers: Array<ExtenderHandler> = [];
+    public readonly inlineHandlers: Array<ExtenderHandler> = [];
+}
+
+export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig) {
+    const blockExtensions = extensionConfig.blockHandlers;
+    const inlineExtensions = extensionConfig.inlineHandlers;
 
     // sanity check keys
     const keyRegex = /^[A-Za-z0-9_\-]+$/;
-    for (key of Object.keys(blockExtensions)) {
+    for (const key of Object.keys(blockExtensions)) {
         if (!key.match(keyRegex)) {
             throw "Key must only contain " + keyRegex + ": " + key;
         }
     }
-    for (key of Object.keys(inlineExtensions)) {
+    for (const key of Object.keys(inlineExtensions)) {
         if (!key.match(keyRegex)) {
             throw "Key must only contain " + keyRegex + ": " + key;
         }
     }
 
-    context = {}; // simple map for sharing data between invocations
+    const context: Map<string, any> = new Map(); // simple map for sharing data between invocations
 
 
     // Augment block fence rule to parse our fence extensions
@@ -39,7 +63,8 @@ module.exports = function(markdownIt, extensionConfig) {
     if (typeof oldFenceRule === 'undefined') {
         throw 'Fence rule not found';
     }
-    const newFenceRule = function(state, startLine, endLine, silent) {
+    // @ts-ignore the typedef for RuleBlock is incorrect
+    const newFenceRule: RuleBlock = function(state, startLine, endLine, silent) {
         const beforeTokenLen = state.tokens.length;
         let ret = oldFenceRule(state, startLine, endLine, silent);
         if (ret === false) {
@@ -89,7 +114,7 @@ module.exports = function(markdownIt, extensionConfig) {
     if (typeof oldBacktickRule === 'undefined') {
         throw 'Backtick rule not found';
     }
-    const newBacktickRule = function(state, silent) {
+    const newBacktickRule:RuleInline = function(state, silent) {
         const beforeTokenLen = state.tokens.length;
         let ret = oldBacktickRule(state, silent);
         if (ret === false) {
@@ -156,14 +181,20 @@ module.exports = function(markdownIt, extensionConfig) {
 
     // Augment md's renderer to render out tokens
     for (const extension of inlineExtensions) {
-        markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
-            return extension.context.render(markdownIt, tokens, idx, context);
+        if (typeof extension.context.render !== 'undefined') {
+            const renderFn = extension.context.render;
+            markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
+                return renderFn(markdownIt, tokens, idx, context);
+            }
         }
     }
 
     for (const extension of blockExtensions) {
-        markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
-            return extension.context.render(markdownIt, tokens, idx, context);
+        if (typeof extension.context.render !== 'undefined') {
+            const renderFn = extension.context.render;
+            markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
+                return renderFn(markdownIt, tokens, idx, context);
+            }
         }
     }
 }

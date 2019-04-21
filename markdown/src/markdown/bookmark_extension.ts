@@ -1,17 +1,24 @@
-const Token = require('markdown-it/lib/token');
+import MarkdownIt from 'markdown-it';
+import Token from 'markdown-it/lib/token';
+import { ExtenderContext, ExtenderConfig, ExtenderHandler } from './extender_plugin';
 
-const bookmarkReferenceIgnoreContext = {
-    process: function(markdownIt, tokens, tokenIdx, context) {
+class BookmarkData {
+    public readonly bookmarks: object = {};
+    public nextId: number = 0;
+}
+
+class BookmarkReferenceIgnoreExtenderContext implements ExtenderContext {
+    public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): void {
         const token = tokens[tokenIdx];
         token.type = 'text_no_bookmark_reference';
         token.tag = '';
     }
 }
 
-const bookmarkContext = {
-    process: function(markdownIt, tokens, tokenIdx, context) {
-        context.bookmark = context.bookmark || {}
-        const bookmarkContext = context.bookmark;
+class BookmarkExtenderContext implements ExtenderContext {
+    public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): void {
+        const bookmarkData: BookmarkData = context.get('bookmark') || new BookmarkData();
+        context.set('bookmark', bookmarkData);
 
         const token = tokens[tokenIdx];
         let content = token.content;
@@ -25,25 +32,23 @@ const bookmarkContext = {
         }
         token.content = content;
 
-        bookmarkContext.bookmarks = bookmarkContext.bookmarks || {};
-        bookmarkContext.nextId = bookmarkContext.nextId || 0;
-
-        if (typeof bookmarkContext.bookmarks[content] !== 'undefined') {
+        if (typeof bookmarkData.bookmarks[content] !== 'undefined') {
             throw 'Bookmark already defined: ' + content;
         }
 
-        bookmarkContext.bookmarks[content] = 'bookmark' + bookmarkContext.nextId;
-        bookmarkContext.nextId++;
+        bookmarkData.bookmarks[content] = 'bookmark' + bookmarkData.nextId;
+        bookmarkData.nextId++;
 
         if (showText === true) {
             const textToken = new Token('text_no_bookmark_reference', '', 0);
             textToken.content = content;
             tokens.splice(tokenIdx + 1, 0, textToken);
         }
-    },
-    postProcess: function f(markdownIt, tokens, context) {
-        context.bookmark = context.bookmark || {}
-        const bookmarkContext = context.bookmark;
+    }
+
+    public postProcess(markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>): void {
+        const bookmarkData: BookmarkData = context.get('bookmark') || new BookmarkData();
+        context.set('bookmark', bookmarkData);
 
         for (let tokenIdx = 0; tokenIdx < tokens.length; tokenIdx++) {
             const token = tokens[tokenIdx];
@@ -55,18 +60,18 @@ const bookmarkContext = {
 
             if (token.type !== 'text') {
                 if (token.children !== null) {
-                    f(markdownIt, token.children, context)
+                    this.postProcess(markdownIt, token.children, context)
                 }
                 continue;
             }
 
-            let newTokens = [];
+            let newTokens: Token[] = [];
             let oldContent = token.content;
-            const bookmarks = bookmarkContext.bookmarks || {};
+            const bookmarks = bookmarkData.bookmarks;
             for (const [bookmarkText, bookmarkId] of Object.entries(bookmarks)) {
                 let oldIdx = 0;
                 while (true) {
-                    newIdx = oldContent.indexOf(bookmarkText, oldIdx);
+                    let newIdx = oldContent.indexOf(bookmarkText, oldIdx);
                     if (newIdx === -1) {
                         const textTokens = [
                             new Token('text', '', 0)
@@ -94,30 +99,21 @@ const bookmarkContext = {
             tokens.splice(tokenIdx, 1, ...newTokens);
             tokenIdx += newTokens.length - 1;
         }
-    },
-    render: function(markdownIt, tokens, tokenIdx, context) {
-        context.bookmark = context.bookmark || {}
-        const bookmarkContext = context.bookmark;
+    }
+    
+    public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) {
+        const bookmarkData: BookmarkData = context.get('bookmark') || new BookmarkData();
+        context.set('bookmark', bookmarkData);
 
         const token = tokens[tokenIdx];
         const content = token.content;
         
-        const bookmarkId = bookmarkContext.bookmarks[content];
+        const bookmarkId = bookmarkData.bookmarks[content];
         return '<a name="' + markdownIt.utils.escapeHtml(bookmarkId) + '"></a>';
     }
 }
 
-module.exports = function(config) {
-    // why are we using an array instead of a map/object? because the exection order matters
-    config.blockHandlers = config.blockHandlers || [];
-    config.inlineHandlers = config.inlineHandlers || [];
-
-    config.inlineHandlers.push({
-        name: 'bookmark-ref-ignore',
-        context: bookmarkReferenceIgnoreContext
-    });
-    config.inlineHandlers.push({
-        name: 'bookmark',
-        context: bookmarkContext
-    });
+export function bookmarkExtension(config: ExtenderConfig) {
+    config.inlineHandlers.push(new ExtenderHandler('bookmark-ref-ignore', new BookmarkReferenceIgnoreExtenderContext()));
+    config.inlineHandlers.push(new ExtenderHandler('bookmark', new BookmarkExtenderContext()));
 }

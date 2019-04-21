@@ -1,6 +1,7 @@
-let Markdown = require('./markdown/markdown')
-let mdInstantance = new Markdown();
-result = mdInstantance.render(`
+import Markdown from './markdown/markdown';
+
+const mdInstantance: Markdown = new Markdown();
+const result = mdInstantance.render(`
 # heading1
 \`\`\`{toc}
 \`\`\`

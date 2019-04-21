@@ -1,5 +1,9 @@
-const tocContext = {
-    render: function(markdownIt, tokens, tokenIdx) {
+import MarkdownIt from 'markdown-it';
+import Token from 'markdown-it/lib/token';
+import { ExtenderContext, ExtenderConfig, ExtenderHandler } from "./extender_plugin";
+
+class TocExtenderContext implements ExtenderContext {
+    public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number): string {
         let ret = '';
         let inHeader = false;
         let headerLevel = 0;
@@ -41,13 +45,6 @@ const tocContext = {
 }
 
 
-module.exports = function(config) {
-    // why are we using an array instead of a map/object? because the exection order matters
-    config.blockHandlers = config.blockHandlers || [];
-    config.inlineHandlers = config.inlineHandlers || [];
-
-    config.blockHandlers.push({
-        name: 'toc',
-        context: tocContext
-    });
+export function tocExtension(config: ExtenderConfig) {
+    config.blockHandlers.push(new ExtenderHandler('toc', new TocExtenderContext()));
 }
