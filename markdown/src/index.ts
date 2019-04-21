@@ -13,5 +13,6 @@ const result = mdInstantance.render(`
 <b>yo</b>
 [this my link](http://github.com) jump to my message.
 however, this \`{bookmark-ref-ignore} my message\` should not be highlighted
+link using \`{bm} shorthand\` can be accessed using shorthand but not \`{bm-ri} shorthand\`
 `);
 console.log(result);

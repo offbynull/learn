@@ -3,7 +3,7 @@ import Token from 'markdown-it/lib/token';
 import { Extension, Type } from "./extender_plugin";
 
 export class TocExtension implements Extension {
-    public readonly name: string = 'toc';
+    public readonly names: ReadonlyArray<string> = [ 'toc' ];
     public readonly type: Type = Type.BLOCK;
 
     public render(markdownIt: MarkdownIt, tokens: Token[]): string {

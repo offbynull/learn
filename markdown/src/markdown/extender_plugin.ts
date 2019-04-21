@@ -3,7 +3,7 @@ import Token from 'markdown-it/lib/token';
 
 function findExtension(extensions: ReadonlyArray<Extension>, name: string): Extension | undefined {
     for (const extension of extensions) {
-        if (name === extension.name) {
+        if (extension.names.includes(name)) {
             return extension;
         }
     }
@@ -16,12 +16,15 @@ export enum Type {
 }
 
 export interface Extension {
-    readonly name: string;
+    readonly names: ReadonlyArray<string>;
     readonly type: Type;
     process?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => void;
     postProcess?: (markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>) => void;
     render?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => string; 
 }
+
+const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
+const NAME_EXTRACT_REGEX = /^\s*\{([A-Za-z0-9_\-]*)\}\s*/;
 
 export class ExtenderConfig {
     private readonly blockExtensions: Extension[] = [];
@@ -42,9 +45,15 @@ export class ExtenderConfig {
                 throw "Unrecognized type"; // should never happen
             }
         }
- 
-        if (extensions.filter(e => e.name === extension.name).length) {
-            throw 'Duplicate registeration of ' + extension.type + ' extension not allowed: ' + extension.name;
+
+        if (extension.names.filter(n => n.match(NAME_REGEX)).length !== extension.names.length) {
+            throw "Key must only contain " + NAME_REGEX + ": " + extension.names;
+        }
+
+        for (const name of extension.names) {
+            if (extensions.filter(e => e.names.includes(name)).length !== 0) {
+                throw 'Duplicate registeration of ' + extension.type + ' extension not allowed: ' + extension.names;
+            }
         }
         extensions.push(extension);
     }
@@ -58,24 +67,9 @@ export class ExtenderConfig {
     }
 }
 
-const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
-const NAME_EXTRACT_REGEX = /^\s*\{([A-Za-z0-9_\-]*)\}\s*/;
-
 export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig): void {
     const blockExtensions = extensionConfig.viewBlockExtensions();
     const inlineExtensions = extensionConfig.viewInlineExtensions();
-
-    // sanity check keys
-    for (const blockExtension of blockExtensions) {
-        if (!blockExtension.name.match(NAME_REGEX)) {
-            throw "Key must only contain " + NAME_REGEX + ": " + blockExtension.name;
-        }
-    }
-    for (const inlineExtension of inlineExtensions) {
-        if (!inlineExtension.name.match(NAME_REGEX)) {
-            throw "Key must only contain " + NAME_REGEX + ": " + inlineExtension.name;
-        }
-    }
 
     const context: Map<string, any> = new Map(); // simple map for sharing data between invocations
 
@@ -215,8 +209,10 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
     for (const extension of inlineExtensions) {
         if (extension.render !== undefined) {
             const renderFn = extension.render;
-            markdownIt.renderer.rules[extension.name] = function(tokens, idx): string {
-                return renderFn(markdownIt, tokens, idx, context);
+            for (const name of extension.names) {
+                markdownIt.renderer.rules[name] = function(tokens, idx): string {
+                    return renderFn(markdownIt, tokens, idx, context);
+                }
             }
         }
     }
@@ -224,8 +220,10 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
     for (const extension of blockExtensions) {
         if (extension.render !== undefined) {
             const renderFn = extension.render;
-            markdownIt.renderer.rules[extension.name] = function(tokens, idx): string {
-                return renderFn(markdownIt, tokens, idx, context);
+            for (const name of extension.names) {
+                markdownIt.renderer.rules[name] = function(tokens, idx): string {
+                    return renderFn(markdownIt, tokens, idx, context);
+                }
             }
         }
     }

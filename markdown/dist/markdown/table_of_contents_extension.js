@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const extender_plugin_1 = require("./extender_plugin");
 class TocExtension {
     constructor() {
-        this.name = 'toc';
+        this.names = ['toc'];
         this.type = extender_plugin_1.Type.BLOCK;
     }
     render(markdownIt, tokens) {

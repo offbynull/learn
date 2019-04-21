@@ -13,6 +13,7 @@ module.exports = {
         //     array.filter(x => x === someValue)
         // vs
         //     array.filter((x): boolean => x === someValue)
+        // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md
         "@typescript-eslint/explicit-function-return-type": {
             "allowExpressions": true,
             "allowTypedFunctionExpressions": true
