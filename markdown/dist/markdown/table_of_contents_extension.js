@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const extender_plugin_1 = require("./extender_plugin");
-class TocExtenderContext {
+class TocExtension {
+    constructor() {
+        this.name = 'toc';
+    }
     render(markdownIt, tokens, tokenIdx) {
         let ret = '';
         let inHeader = false;
@@ -40,7 +42,7 @@ class TocExtenderContext {
     }
 }
 function tocExtension(config) {
-    config.blockHandlers.push(new extender_plugin_1.ExtenderHandler('toc', new TocExtenderContext()));
+    config.blockExtensions.push(new TocExtension());
 }
 exports.tocExtension = tocExtension;
 //# sourceMappingURL=table_of_contents_extension.js.map

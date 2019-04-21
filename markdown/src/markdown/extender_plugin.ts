@@ -1,39 +1,30 @@
 import MarkdownIt, { RuleBlock, RuleInline } from 'markdown-it';
 import Token from 'markdown-it/lib/token';
 
-function findExtension(extenderHandlers: ExtenderHandler[], name: string) {
-    for (const extenderHandler of extenderHandlers) {
-        if (name === extenderHandler.name) {
-            return extenderHandler.context;
+function findExtension(extensions: Extension[], name: string): Extension | undefined {
+    for (const extension of extensions) {
+        if (name === extension.name) {
+            return extension;
         }
     }
     return undefined;
 }
 
-export interface ExtenderContext {
+export interface Extension {
+    readonly name: string;
     process?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => void;
     postProcess?: (markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>) => void;
     render?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => string; 
 }
 
-export class ExtenderHandler {
-    public readonly name: string;
-    public readonly context: ExtenderContext;
-
-    constructor(name: string, context: ExtenderContext) {
-        this.name = name;
-        this.context = context;
-    }
-}
-
 export class ExtenderConfig {
-    public readonly blockHandlers: Array<ExtenderHandler> = [];
-    public readonly inlineHandlers: Array<ExtenderHandler> = [];
+    public readonly blockExtensions: Array<Extension> = [];
+    public readonly inlineExtensions: Array<Extension> = [];
 }
 
 export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig) {
-    const blockExtensions = extensionConfig.blockHandlers;
-    const inlineExtensions = extensionConfig.inlineHandlers;
+    const blockExtensions = extensionConfig.blockExtensions;
+    const inlineExtensions = extensionConfig.inlineExtensions;
 
     // sanity check keys
     const keyRegex = /^[A-Za-z0-9_\-]+$/;
@@ -164,14 +155,14 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
         const tokens = oldMdParse.apply(markdownIt, [src, env]);
         
         for (const extension of inlineExtensions) {
-            if (typeof extension.context.postProcess === 'function') {
-                extension.context.postProcess(markdownIt, tokens, context);
+            if (typeof extension.postProcess === 'function') {
+                extension.postProcess(markdownIt, tokens, context);
             }
         }
 
         for (const extension of blockExtensions) {
-            if (typeof extension.context.postProcess === 'function') {
-                extension.context.postProcess(markdownIt, tokens, context);
+            if (typeof extension.postProcess === 'function') {
+                extension.postProcess(markdownIt, tokens, context);
             }
         }
 
@@ -181,8 +172,8 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
 
     // Augment md's renderer to render out tokens
     for (const extension of inlineExtensions) {
-        if (typeof extension.context.render !== 'undefined') {
-            const renderFn = extension.context.render;
+        if (typeof extension.render !== 'undefined') {
+            const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);
             }
@@ -190,8 +181,8 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
     }
 
     for (const extension of blockExtensions) {
-        if (typeof extension.context.render !== 'undefined') {
-            const renderFn = extension.context.render;
+        if (typeof extension.render !== 'undefined') {
+            const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function(tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);
             }

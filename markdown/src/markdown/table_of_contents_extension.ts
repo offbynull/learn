@@ -1,8 +1,10 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { ExtenderContext, ExtenderConfig, ExtenderHandler } from "./extender_plugin";
+import { Extension, ExtenderConfig } from "./extender_plugin";
 
-class TocExtenderContext implements ExtenderContext {
+class TocExtension implements Extension {
+    readonly name: string = 'toc';
+
     public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number): string {
         let ret = '';
         let inHeader = false;
@@ -46,5 +48,5 @@ class TocExtenderContext implements ExtenderContext {
 
 
 export function tocExtension(config: ExtenderConfig) {
-    config.blockHandlers.push(new ExtenderHandler('toc', new TocExtenderContext()));
+    config.blockExtensions.push(new TocExtension());
 }

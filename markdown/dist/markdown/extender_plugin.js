@@ -1,30 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function findExtension(extenderHandlers, name) {
-    for (const extenderHandler of extenderHandlers) {
-        if (name === extenderHandler.name) {
-            return extenderHandler.context;
+function findExtension(extensions, name) {
+    for (const extension of extensions) {
+        if (name === extension.name) {
+            return extension;
         }
     }
     return undefined;
 }
-class ExtenderHandler {
-    constructor(name, context) {
-        this.name = name;
-        this.context = context;
-    }
-}
-exports.ExtenderHandler = ExtenderHandler;
 class ExtenderConfig {
     constructor() {
-        this.blockHandlers = [];
-        this.inlineHandlers = [];
+        this.blockExtensions = [];
+        this.inlineExtensions = [];
     }
 }
 exports.ExtenderConfig = ExtenderConfig;
 function extender(markdownIt, extensionConfig) {
-    const blockExtensions = extensionConfig.blockHandlers;
-    const inlineExtensions = extensionConfig.inlineHandlers;
+    const blockExtensions = extensionConfig.blockExtensions;
+    const inlineExtensions = extensionConfig.inlineExtensions;
     // sanity check keys
     const keyRegex = /^[A-Za-z0-9_\-]+$/;
     for (const key of Object.keys(blockExtensions)) {
@@ -143,29 +136,29 @@ function extender(markdownIt, extensionConfig) {
     markdownIt.parse = function (src, env) {
         const tokens = oldMdParse.apply(markdownIt, [src, env]);
         for (const extension of inlineExtensions) {
-            if (typeof extension.context.postProcess === 'function') {
-                extension.context.postProcess(markdownIt, tokens, context);
+            if (typeof extension.postProcess === 'function') {
+                extension.postProcess(markdownIt, tokens, context);
             }
         }
         for (const extension of blockExtensions) {
-            if (typeof extension.context.postProcess === 'function') {
-                extension.context.postProcess(markdownIt, tokens, context);
+            if (typeof extension.postProcess === 'function') {
+                extension.postProcess(markdownIt, tokens, context);
             }
         }
         return tokens;
     };
     // Augment md's renderer to render out tokens
     for (const extension of inlineExtensions) {
-        if (typeof extension.context.render !== 'undefined') {
-            const renderFn = extension.context.render;
+        if (typeof extension.render !== 'undefined') {
+            const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function (tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);
             };
         }
     }
     for (const extension of blockExtensions) {
-        if (typeof extension.context.render !== 'undefined') {
-            const renderFn = extension.context.render;
+        if (typeof extension.render !== 'undefined') {
+            const renderFn = extension.render;
             markdownIt.renderer.rules[extension.name] = function (tokens, idx, options, env, self) {
                 return renderFn(markdownIt, tokens, idx, context);
             };

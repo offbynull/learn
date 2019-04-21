@@ -1,13 +1,15 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { ExtenderContext, ExtenderConfig, ExtenderHandler } from './extender_plugin';
+import { Extension, ExtenderConfig } from './extender_plugin';
 
 class BookmarkData {
     public readonly bookmarks: object = {};
     public nextId: number = 0;
 }
 
-class BookmarkReferenceIgnoreExtenderContext implements ExtenderContext {
+class BookmarkReferenceIgnoreExtenderContext implements Extension {
+    public readonly name: string = 'bookmark-ref-ignore';
+
     public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): void {
         const token = tokens[tokenIdx];
         token.type = 'text_no_bookmark_reference';
@@ -15,7 +17,9 @@ class BookmarkReferenceIgnoreExtenderContext implements ExtenderContext {
     }
 }
 
-class BookmarkExtenderContext implements ExtenderContext {
+class BookmarkExtenderContext implements Extension {
+    public readonly name: string = 'bookmark';
+
     public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): void {
         const bookmarkData: BookmarkData = context.get('bookmark') || new BookmarkData();
         context.set('bookmark', bookmarkData);
@@ -114,6 +118,6 @@ class BookmarkExtenderContext implements ExtenderContext {
 }
 
 export function bookmarkExtension(config: ExtenderConfig) {
-    config.inlineHandlers.push(new ExtenderHandler('bookmark-ref-ignore', new BookmarkReferenceIgnoreExtenderContext()));
-    config.inlineHandlers.push(new ExtenderHandler('bookmark', new BookmarkExtenderContext()));
+    config.inlineExtensions.push(new BookmarkReferenceIgnoreExtenderContext());
+    config.inlineExtensions.push(new BookmarkExtenderContext());
 }

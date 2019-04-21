@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const token_1 = __importDefault(require("markdown-it/lib/token"));
-const extender_plugin_1 = require("./extender_plugin");
 class BookmarkData {
     constructor() {
         this.bookmarks = {};
@@ -12,6 +11,9 @@ class BookmarkData {
     }
 }
 class BookmarkReferenceIgnoreExtenderContext {
+    constructor() {
+        this.name = 'bookmark-ref-ignore';
+    }
     process(markdownIt, tokens, tokenIdx, context) {
         const token = tokens[tokenIdx];
         token.type = 'text_no_bookmark_reference';
@@ -19,6 +21,9 @@ class BookmarkReferenceIgnoreExtenderContext {
     }
 }
 class BookmarkExtenderContext {
+    constructor() {
+        this.name = 'bookmark';
+    }
     process(markdownIt, tokens, tokenIdx, context) {
         const bookmarkData = context.get('bookmark') || new BookmarkData();
         context.set('bookmark', bookmarkData);
@@ -105,8 +110,8 @@ class BookmarkExtenderContext {
     }
 }
 function bookmarkExtension(config) {
-    config.inlineHandlers.push(new extender_plugin_1.ExtenderHandler('bookmark-ref-ignore', new BookmarkReferenceIgnoreExtenderContext()));
-    config.inlineHandlers.push(new extender_plugin_1.ExtenderHandler('bookmark', new BookmarkExtenderContext()));
+    config.inlineExtensions.push(new BookmarkReferenceIgnoreExtenderContext());
+    config.inlineExtensions.push(new BookmarkExtenderContext());
 }
 exports.bookmarkExtension = bookmarkExtension;
 //# sourceMappingURL=bookmark_extension.js.map
