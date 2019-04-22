@@ -1,13 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function findExtension(extensions, name) {
-    for (const extension of extensions) {
-        if (extension.names.includes(name)) {
-            return extension;
-        }
-    }
-    return undefined;
-}
 var Type;
 (function (Type) {
     Type["BLOCK"] = "block";
@@ -53,28 +45,58 @@ class ExtenderConfig {
     }
 }
 exports.ExtenderConfig = ExtenderConfig;
+function findExtension(extensions, name) {
+    for (const extension of extensions) {
+        if (extension.names.includes(name)) {
+            return extension;
+        }
+    }
+    return undefined;
+}
+function findRule(markdownIt, name, rules) {
+    let ret;
+    for (const inlineRule of rules) {
+        if (inlineRule.name === name) {
+            ret = inlineRule;
+            break;
+        }
+    }
+    if (ret === undefined) {
+        throw name + ' rule not found';
+    }
+    return ret;
+}
+function invokePostProcessors(extensions, markdownIt, tokens, context) {
+    for (const extension of extensions) {
+        if (extension.postProcess !== undefined) {
+            extension.postProcess(markdownIt, tokens, context);
+        }
+    }
+}
+function addRenderersToMarkdown(extensions, markdownIt, context) {
+    for (const extension of extensions) {
+        if (extension.render !== undefined) {
+            const renderFn = extension.render;
+            for (const name of extension.names) {
+                markdownIt.renderer.rules[name] = function (tokens, idx) {
+                    return renderFn(markdownIt, tokens, idx, context);
+                };
+            }
+        }
+    }
+}
 function extender(markdownIt, extensionConfig) {
     const blockExtensions = extensionConfig.viewBlockExtensions();
     const inlineExtensions = extensionConfig.viewInlineExtensions();
     const context = new Map(); // simple map for sharing data between invocations
-    // Augment block fence rule to parse our fence extensions
-    let oldFenceRule;
+    // Augment block fence rule to call the extension processor with the matching name.
     const blockRules = markdownIt.block.ruler.getRules('');
-    for (const blockRule of blockRules) {
-        if (blockRule.name === 'fence') {
-            oldFenceRule = blockRule;
-            break;
-        }
-    }
-    if (oldFenceRule === undefined) {
-        throw 'Fence rule not found';
-    }
-    const foundOldFenceRule = oldFenceRule;
+    const oldFenceRule = findRule(markdownIt, 'fence', blockRules);
     // @ts-ignore the typedef for RuleBlock is incorrect
     const newFenceRule = function (state, startLine, endLine, silent) {
         const beforeTokenLen = state.tokens.length;
         // @ts-ignore the typedef for RuleBlock is incorrect
-        let ret = foundOldFenceRule(state, startLine, endLine, silent);
+        let ret = oldFenceRule(state, startLine, endLine, silent);
         if (ret !== true) {
             return ret;
         }
@@ -107,22 +129,12 @@ function extender(markdownIt, extensionConfig) {
         return ret;
     };
     markdownIt.block.ruler.at('fence', newFenceRule);
-    // Augment inline backticks rule to parse our inline extensions
-    let oldBacktickRule;
+    // Augment inline backticks rule to call the extension processor with the matching name.
     const inlineRules = markdownIt.inline.ruler.getRules('');
-    for (const inlineRule of inlineRules) {
-        if (inlineRule.name === 'backtick') {
-            oldBacktickRule = inlineRule;
-            break;
-        }
-    }
-    if (oldBacktickRule === undefined) {
-        throw 'Backtick rule not found';
-    }
-    const foundOldBacktickRule = oldBacktickRule;
+    const oldBacktickRule = findRule(markdownIt, 'backtick', inlineRules);
     const newBacktickRule = function (state, silent) {
         const beforeTokenLen = state.tokens.length;
-        let ret = foundOldBacktickRule(state, silent);
+        let ret = oldBacktickRule(state, silent);
         if (ret !== true) {
             return ret;
         }
@@ -160,43 +172,19 @@ function extender(markdownIt, extensionConfig) {
         return ret;
     };
     markdownIt.inline.ruler.at('backticks', newBacktickRule);
-    // Augment md's tokenization process to call our post processing functions after tokenization
+    // Augment md's parsing to call our extension post processors after executing (to go over all tokens and
+    // potentially manipulate them prior to rendering)
     const oldMdParse = markdownIt.parse;
     markdownIt.parse = function (src, env) {
         const tokens = oldMdParse.apply(markdownIt, [src, env]);
-        for (const extension of inlineExtensions) {
-            if (extension.postProcess !== undefined) {
-                extension.postProcess(markdownIt, tokens, context);
-            }
-        }
-        for (const extension of blockExtensions) {
-            if (extension.postProcess !== undefined) {
-                extension.postProcess(markdownIt, tokens, context);
-            }
-        }
+        invokePostProcessors(inlineExtensions, markdownIt, tokens, context);
+        invokePostProcessors(blockExtensions, markdownIt, tokens, context);
         return tokens;
     };
-    // Augment md's renderer to render out tokens
-    for (const extension of inlineExtensions) {
-        if (extension.render !== undefined) {
-            const renderFn = extension.render;
-            for (const name of extension.names) {
-                markdownIt.renderer.rules[name] = function (tokens, idx) {
-                    return renderFn(markdownIt, tokens, idx, context);
-                };
-            }
-        }
-    }
-    for (const extension of blockExtensions) {
-        if (extension.render !== undefined) {
-            const renderFn = extension.render;
-            for (const name of extension.names) {
-                markdownIt.renderer.rules[name] = function (tokens, idx) {
-                    return renderFn(markdownIt, tokens, idx, context);
-                };
-            }
-        }
-    }
+    // Augment md's renderer to call our extension custom render functions when that extension's name is encountered
+    // as a token's type.
+    addRenderersToMarkdown(inlineExtensions, markdownIt, context);
+    addRenderersToMarkdown(blockExtensions, markdownIt, context);
 }
 exports.extender = extender;
 //# sourceMappingURL=extender_plugin.js.map
