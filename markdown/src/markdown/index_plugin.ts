@@ -7,15 +7,13 @@ export function indexer(md: MarkdownIt): void {
     md.parse = function(src, env): Token[] {
         let ret = oldParse.apply(md, [src, env]);
 
-        let idx = 0;
         for (const token of ret) {
             switch (token.type) {
                 case 'paragraph_open':
                 case 'heading_open':
                 case 'list_item_open':
                 case 'table_open': {
-                    token.attrSet('data-index', String(idx))
-                    idx++;
+                    token.attrSet('data-line', String(token.map[0])); // map[0] = startline, map[1] = endline
                     break;
                 }
                 default:
