@@ -75,13 +75,17 @@ function invokePostProcessors(extensions, markdownIt, tokens, context) {
 }
 function addRenderersToMarkdown(extensions, markdownIt, context) {
     for (const extension of extensions) {
-        if (extension.render !== undefined) {
-            const renderFn = extension.render;
-            for (const name of extension.names) {
-                markdownIt.renderer.rules[name] = function (tokens, idx) {
-                    return renderFn(markdownIt, tokens, idx, context);
-                };
+        for (const name of extension.names) {
+            if (extension.render === undefined) {
+                continue;
             }
+            // Calling extension.render directly in the render rule won't work because it happens in a new function...
+            // the undefined guard above no longer applies. Copy the reference into a new const (we know the new ref
+            // can't be undefined because of the guard) and invoke that instead
+            const renderFn = extension.render;
+            markdownIt.renderer.rules[name] = function (tokens, idx) {
+                return renderFn.apply(extension, [markdownIt, tokens, idx, context]); // Use apply() to keep this ptr
+            };
         }
     }
 }

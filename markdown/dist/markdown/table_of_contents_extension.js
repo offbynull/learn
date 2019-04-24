@@ -13,7 +13,7 @@ class TocData {
 }
 class TocExtension {
     constructor() {
-        this.names = ['toc'];
+        this.names = ['toc', '__toc_anchor'];
         this.type = extender_plugin_1.Type.BLOCK;
     }
     postProcess(markdownIt, tokens, context) {
@@ -22,16 +22,16 @@ class TocExtension {
         for (let tokenIdx = 0; tokenIdx < tokens.length; tokenIdx++) {
             const token = tokens[tokenIdx];
             if (token.type === 'heading_open') {
-                const linkReferenceTokens = [
-                    new token_1.default('link_open', 'a', 1),
-                    new token_1.default('link_close', 'a', -1)
-                ];
+                // Generate anchor ID
                 const anchorId = 'HEADREF' + tocData.nextId;
                 tocData.nextId++;
                 tocData.headingAnchors.set(token, anchorId);
-                linkReferenceTokens[0].attrSet('name', markdownIt.utils.escapeHtml(anchorId));
-                tokens.splice(tokenIdx, 0, ...linkReferenceTokens);
-                tokenIdx += linkReferenceTokens.length;
+                // Put in custom token just before the heading -- will get translated to anchor when rendered
+                //   (Alternatively, you can add in a link_open and link_close tag instead of a custom token)
+                const tocAnchorToken = new token_1.default('__toc_anchor', '', 0);
+                tocAnchorToken.info = anchorId;
+                tokens.splice(tokenIdx, 0, tocAnchorToken);
+                tokenIdx += 1;
                 if (token.children !== null) { // typedef is wrong -- children MAY be null
                     this.postProcess(markdownIt, token.children, context); // not really required but just incase
                 }
@@ -39,6 +39,22 @@ class TocExtension {
         }
     }
     render(markdownIt, tokens, tokenIdx, context) {
+        const type = tokens[tokenIdx].type;
+        switch (type) {
+            case 'toc':
+                return this.renderToc(markdownIt, tokens, tokenIdx, context);
+            case '__toc_anchor':
+                return this.renderTocAnchor(markdownIt, tokens, tokenIdx, context);
+            default:
+                throw 'Render called for unrecognized type: ' + type;
+        }
+    }
+    renderTocAnchor(markdownIt, tokens, tokenIdx, context) {
+        const tocAnchorToken = tokens[tokenIdx];
+        const tocAnchorId = tocAnchorToken.info;
+        return '<a name="' + markdownIt.utils.escapeHtml(tocAnchorId) + '"></a>';
+    }
+    renderToc(markdownIt, tokens, tokenIdx, context) {
         const tocData = context.get('toc') || new TocData();
         context.set('toc', tocData);
         let ret = '';
