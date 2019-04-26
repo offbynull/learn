@@ -18,6 +18,12 @@ const result = mdInstantance.render(`
 [this my link](http://github.com) jump to my message.
 however, this \`{bookmark-ref-ignore} my message\` should not be highlighted
 link using \`{bm} shorthand\` can be accessed using shorthand but not \`{bm-ri} shorthand\`
+
+Here's a dot graph
+
+\`\`\`{dot}
+digraph { a -> b; }
+\`\`\`
 `);
 console.log(result);
 //# sourceMappingURL=index.js.map

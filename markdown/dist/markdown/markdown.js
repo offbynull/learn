@@ -9,6 +9,7 @@ const index_plugin_1 = require("./index_plugin");
 const extender_plugin_1 = require("./extender_plugin");
 const table_of_contents_extension_1 = require("./table_of_contents_extension");
 const bookmark_extension_1 = require("./bookmark_extension");
+const dot_graph_extension_1 = require("./dot_graph_extension");
 class Markdown {
     constructor() {
         this.markdownIt = new markdown_it_1.default('commonmark');
@@ -16,6 +17,7 @@ class Markdown {
         extenderConfig.register(new bookmark_extension_1.BookmarkExtension());
         extenderConfig.register(new bookmark_extension_1.BookmarkReferenceIgnoreExtension());
         extenderConfig.register(new table_of_contents_extension_1.TocExtension());
+        extenderConfig.register(new dot_graph_extension_1.DotExtension());
         this.markdownIt.use(extender_plugin_1.extender, extenderConfig);
         this.markdownIt.use(index_plugin_1.indexer);
     }
