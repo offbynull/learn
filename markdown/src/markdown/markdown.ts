@@ -6,6 +6,7 @@ import { extender, ExtenderConfig } from './extender_plugin';
 import { TocExtension } from './table_of_contents_extension';
 import { BookmarkExtension, BookmarkReferenceIgnoreExtension } from './bookmark_extension';
 import { DotExtension } from './dot_graph_extension'
+import { NoteExtension } from './note_extension'
 
 export default class Markdown {
     private readonly markdownIt: MarkdownIt;
@@ -18,6 +19,7 @@ export default class Markdown {
         extenderConfig.register(new BookmarkReferenceIgnoreExtension());
         extenderConfig.register(new TocExtension());
         extenderConfig.register(new DotExtension());
+        extenderConfig.register(new NoteExtension());
         this.markdownIt.use(extender, extenderConfig);
         this.markdownIt.use(indexer);
     }

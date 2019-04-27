@@ -20,5 +20,9 @@ Here's a dot graph
 \`\`\`{dot}
 digraph { a -> b; }
 \`\`\`
+
+\`\`\`{note}
+This is a custom note
+\`\`\`
 `);
 console.log(result);
