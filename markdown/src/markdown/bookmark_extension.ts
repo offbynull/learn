@@ -1,6 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { Extension, Type } from './extender_plugin';
+import { Extension, TokenIdentifier, Type } from './extender_plugin';
 
 class BookmarkData {
     public readonly bookmarks: Map<string, string> = new Map<string, string>();
@@ -8,8 +8,10 @@ class BookmarkData {
 }
 
 export class BookmarkReferenceIgnoreExtension implements Extension {
-    public readonly names: ReadonlyArray<string> = [ 'bookmark-ref-ignore', 'bm-ri' ];
-    public readonly type: Type = Type.INLINE;
+    public readonly tokenIds: ReadonlyArray<TokenIdentifier> = [
+        new TokenIdentifier('bookmark-ref-ignore', Type.INLINE),
+        new TokenIdentifier('bm-ri', Type.INLINE)
+    ];
 
     public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number): void {
         const token = tokens[tokenIdx];
@@ -19,8 +21,10 @@ export class BookmarkReferenceIgnoreExtension implements Extension {
 }
 
 export class BookmarkExtension implements Extension {
-    public readonly names: ReadonlyArray<string> = [ 'bookmark', 'bm' ];
-    public readonly type: Type = Type.INLINE;
+    public readonly tokenIds: ReadonlyArray<TokenIdentifier> = [
+        new TokenIdentifier('bookmark', Type.INLINE),
+        new TokenIdentifier('bm', Type.INLINE)
+    ];
 
     public process(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): void {
         const bookmarkData: BookmarkData = context.get('bookmark') || new BookmarkData();

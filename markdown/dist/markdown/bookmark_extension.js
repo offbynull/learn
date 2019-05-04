@@ -13,8 +13,10 @@ class BookmarkData {
 }
 class BookmarkReferenceIgnoreExtension {
     constructor() {
-        this.names = ['bookmark-ref-ignore', 'bm-ri'];
-        this.type = extender_plugin_1.Type.INLINE;
+        this.tokenIds = [
+            new extender_plugin_1.TokenIdentifier('bookmark-ref-ignore', extender_plugin_1.Type.INLINE),
+            new extender_plugin_1.TokenIdentifier('bm-ri', extender_plugin_1.Type.INLINE)
+        ];
     }
     process(markdownIt, tokens, tokenIdx) {
         const token = tokens[tokenIdx];
@@ -25,8 +27,10 @@ class BookmarkReferenceIgnoreExtension {
 exports.BookmarkReferenceIgnoreExtension = BookmarkReferenceIgnoreExtension;
 class BookmarkExtension {
     constructor() {
-        this.names = ['bookmark', 'bm'];
-        this.type = extender_plugin_1.Type.INLINE;
+        this.tokenIds = [
+            new extender_plugin_1.TokenIdentifier('bookmark', extender_plugin_1.Type.INLINE),
+            new extender_plugin_1.TokenIdentifier('bm', extender_plugin_1.Type.INLINE)
+        ];
     }
     process(markdownIt, tokens, tokenIdx, context) {
         const bookmarkData = context.get('bookmark') || new BookmarkData();

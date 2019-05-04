@@ -1,13 +1,14 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { Extension, Type } from "./extender_plugin";
+import { Extension, TokenIdentifier, Type } from "./extender_plugin";
 
 // import Viz from 'viz.js';
 import { Module, render } from 'viz.js/full.render.js';
 
 export class DotExtension implements Extension {
-    public readonly names: ReadonlyArray<string> = [ 'dot' ];
-    public readonly type: Type = Type.BLOCK;
+    public readonly tokenIds: ReadonlyArray<TokenIdentifier> = [
+        new TokenIdentifier('dot', Type.BLOCK)
+    ];
 
     public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): string {
         // The following code had to be ripped out of viz.js's internals because the only public interfaces viz.js

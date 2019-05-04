@@ -19,6 +19,9 @@ module.exports = {
             "allowTypedFunctionExpressions": true
         },
         // If we explicitly used any, it means we want it.
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        // Functions should be usable before they're declared. JS/TS allows it and it's more similar to how C#/Java operate.
+        // https://github.com/bradzacher/eslint-plugin-typescript/blob/master/docs/rules/no-use-before-define.md
+        "@typescript-eslint/no-use-before-define": "nofunc"
     }
 }

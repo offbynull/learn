@@ -5,8 +5,9 @@ const extender_plugin_1 = require("./extender_plugin");
 const full_render_js_1 = require("viz.js/full.render.js");
 class DotExtension {
     constructor() {
-        this.names = ['dot'];
-        this.type = extender_plugin_1.Type.BLOCK;
+        this.tokenIds = [
+            new extender_plugin_1.TokenIdentifier('dot', extender_plugin_1.Type.BLOCK)
+        ];
     }
     render(markdownIt, tokens, tokenIdx, context) {
         // The following code had to be ripped out of viz.js's internals because the only public interfaces viz.js

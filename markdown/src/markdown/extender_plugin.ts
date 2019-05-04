@@ -1,18 +1,30 @@
 import MarkdownIt, { RuleBlock, RuleInline } from 'markdown-it';
 import Token from 'markdown-it/lib/token';
 import StateCore = require('markdown-it/lib/rules_core/state_core');
+import { JSDOM } from 'jsdom';
+import JsBeautify from 'js-beautify';
 
 export enum Type {
     BLOCK = 'block',
     INLINE = 'inline'
 }
 
+export class TokenIdentifier {
+    public readonly name: string;
+    public readonly type: Type;
+
+    public constructor(name: string, type: Type) {
+        this.name = name;
+        this.type = type;
+    }
+}
+
 export interface Extension {
-    readonly names: ReadonlyArray<string>;
-    readonly type: Type;
+    readonly tokenIds: ReadonlyArray<TokenIdentifier>;
     process?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => void;
     postProcess?: (markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>) => void;
-    render?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => string; 
+    render?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => string;
+    postHtml?: (html: string, context: Map<string, any>) => string;
 }
 
 const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
@@ -23,31 +35,45 @@ export class ExtenderConfig {
     private readonly inlineExtensions: Extension[] = [];
 
     public register(extension: Extension): void {
-        let extensions: Extension[];
-        switch (extension.type) {
-            case Type.BLOCK: {
-                extensions = this.blockExtensions;
-                break;
+        let includeInBlock = false;
+        let includeInInline = false;
+
+        for (const tokenId of extension.tokenIds) {
+            let extensions: Extension[];
+            switch (tokenId.type) {
+                case Type.BLOCK: {
+                    extensions = this.blockExtensions;
+                    includeInBlock = true;
+                    break;
+                }
+                case Type.INLINE: {
+                    extensions = this.inlineExtensions;
+                    includeInInline = true;
+                    break;
+                }
+                default: {
+                    throw "Unrecognized type"; // should never happen
+                }
             }
-            case Type.INLINE: {
-                extensions = this.inlineExtensions;
-                break;
+
+            if (!tokenId.name.match(NAME_REGEX)) {
+                throw "Key must only contain " + NAME_REGEX + ": " + tokenId.name;
             }
-            default: {
-                throw "Unrecognized type"; // should never happen
+
+            const isDupe = extensions.filter(ext =>
+                ext.tokenIds.map(t => t.name).includes(tokenId.name)
+            ).length !== 0;
+            if (isDupe === true) {
+                throw 'Duplicate registeration of ' + tokenId.type + ' extension not allowed: ' + tokenId.name;
             }
         }
 
-        if (extension.names.filter(n => n.match(NAME_REGEX)).length !== extension.names.length) {
-            throw "Key must only contain " + NAME_REGEX + ": " + extension.names;
+        if (includeInBlock) {
+            this.blockExtensions.push(extension);
         }
-
-        for (const name of extension.names) {
-            if (extensions.filter(e => e.names.includes(name)).length !== 0) {
-                throw 'Duplicate registeration of ' + extension.type + ' extension not allowed: ' + extension.names;
-            }
+        if (includeInInline) {
+            this.inlineExtensions.push(extension);
         }
-        extensions.push(extension);
     }
 
     public viewBlockExtensions(): ReadonlyArray<Extension> {
@@ -63,7 +89,7 @@ export class ExtenderConfig {
 
 function findExtension(extensions: ReadonlyArray<Extension>, name: string): Extension | undefined {
     for (const extension of extensions) {
-        if (extension.names.includes(name)) {
+        if (extension.tokenIds.map(t => t.name).includes(name)) {
             return extension;
         }
     }
@@ -72,9 +98,9 @@ function findExtension(extensions: ReadonlyArray<Extension>, name: string): Exte
 
 function findRule<S extends StateCore>(markdownIt: MarkdownIt, name: string, rules: MarkdownIt.Rule<S>[]): MarkdownIt.Rule<S> {
     let ret: MarkdownIt.Rule<S> | undefined;
-    for (const inlineRule of rules) {
-        if (inlineRule.name === name) {
-            ret = inlineRule;
+    for (const rule of rules) {
+        if (rule.name === name) {
+            ret = rule;
             break;
         }
     }
@@ -92,19 +118,39 @@ function invokePostProcessors(extensions: ReadonlyArray<Extension>, markdownIt: 
     }
 }
 
-function addRenderersToMarkdown(extensions: ReadonlyArray<Extension>, markdownIt: MarkdownIt, context: Map<string, any>) {
+function invokePostHtmls(extensions: ReadonlyArray<Extension>, html: string, context: Map<string, any>): string {
     for (const extension of extensions) {
-        for (const name of extension.names) {
-            if (extension.render === undefined) {
-                continue;
+        if (extension.postHtml !== undefined) {
+            html = extension.postHtml(html, context);
+        }
+    }
+    return html;
+}
+
+function addRenderersToMarkdown(inlineExtensions: ReadonlyArray<Extension>, blockExtensions: ReadonlyArray<Extension>, markdownIt: MarkdownIt, context: Map<string, any>) {
+    const names = new Set<string>();
+    inlineExtensions.forEach(ext => ext.tokenIds.forEach(tId => names.add(tId.name)));
+    blockExtensions.forEach(ext => ext.tokenIds.forEach(tId => names.add(tId.name)));
+
+    for (const name of names) {
+        // Calling extension.render directly in the render rule won't work because it happens in a new function...
+        // the undefined guard above no longer applies. Copy the reference into a new const (we know the new ref
+        // can't be undefined because of the guard) and invoke that instead
+        const blockExt = blockExtensions.find(ext => ext.tokenIds.map(t => t.name).includes(name));
+        const inlineExt = inlineExtensions.find(ext => ext.tokenIds.map(t => t.name).includes(name));
+        markdownIt.renderer.rules[name] = function(tokens, idx): string {
+            const token = tokens[idx];
+            if (token.block === true && blockExt !== undefined) {
+                if (blockExt.render !== undefined) {
+                    return blockExt.render(markdownIt, tokens, idx, context);
+                }
+            } else if (token.block === false && inlineExt !== undefined) {
+                if (inlineExt.render !== undefined) {
+                    return inlineExt.render(markdownIt, tokens, idx, context);
+                }
             }
-            // Calling extension.render directly in the render rule won't work because it happens in a new function...
-            // the undefined guard above no longer applies. Copy the reference into a new const (we know the new ref
-            // can't be undefined because of the guard) and invoke that instead
-            const renderFn = extension.render;
-            markdownIt.renderer.rules[name] = function(tokens, idx): string {
-                return renderFn.apply(extension, [markdownIt, tokens, idx, context]); // Use apply() to keep this ptr
-            }
+
+            throw 'Unrecognized render type'; // should never happen
         }
     }
 }
@@ -217,8 +263,23 @@ export function extender(markdownIt: MarkdownIt, extensionConfig: ExtenderConfig
     }
 
 
+    // Augment md's render output to call our extension post renderers after executing
+    const oldMdRender = markdownIt.render;
+    markdownIt.render = function(src, env): string {
+        let html = '<html><head></head><body>' + oldMdRender.apply(markdownIt, [src, env]) + '</body></html>';
+        
+        html = new JSDOM(html).serialize(); // clean up
+
+        html = invokePostHtmls(inlineExtensions, html, context);
+        html = invokePostHtmls(blockExtensions, html, context);
+        
+        html = JsBeautify.html_beautify(html); // format
+
+        return html;
+    }
+
+
     // Augment md's renderer to call our extension custom render functions when that extension's name is encountered
     // as a token's type.
-    addRenderersToMarkdown(inlineExtensions, markdownIt, context);
-    addRenderersToMarkdown(blockExtensions, markdownIt, context);
+    addRenderersToMarkdown(inlineExtensions, blockExtensions, markdownIt, context);
 }

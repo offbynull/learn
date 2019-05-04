@@ -13,8 +13,10 @@ class TocData {
 }
 class TocExtension {
     constructor() {
-        this.names = ['toc', '__toc_anchor'];
-        this.type = extender_plugin_1.Type.BLOCK;
+        this.tokenIds = [
+            new extender_plugin_1.TokenIdentifier('toc', extender_plugin_1.Type.BLOCK),
+            new extender_plugin_1.TokenIdentifier('__toc_anchor', extender_plugin_1.Type.INLINE)
+        ];
     }
     postProcess(markdownIt, tokens, context) {
         const tocData = context.get('toc') || new TocData();

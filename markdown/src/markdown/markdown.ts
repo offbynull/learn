@@ -1,12 +1,12 @@
-import JsBeautify from 'js-beautify';
 import MarkdownIt from 'markdown-it';
 
 import { indexer } from './index_plugin';
 import { extender, ExtenderConfig } from './extender_plugin';
 import { TocExtension } from './table_of_contents_extension';
 import { BookmarkExtension, BookmarkReferenceIgnoreExtension } from './bookmark_extension';
-import { DotExtension } from './dot_graph_extension'
-import { NoteExtension } from './note_extension'
+import { DotExtension } from './dot_graph_extension';
+import { NoteExtension } from './note_extension';
+import { MathJaxExtension } from './mathjax_extension';
 
 export default class Markdown {
     private readonly markdownIt: MarkdownIt;
@@ -20,15 +20,12 @@ export default class Markdown {
         extenderConfig.register(new TocExtension());
         extenderConfig.register(new DotExtension());
         extenderConfig.register(new NoteExtension());
+        extenderConfig.register(new MathJaxExtension());
         this.markdownIt.use(extender, extenderConfig);
         this.markdownIt.use(indexer);
     }
 
     public render(markdown: string): string {
-        let ret: string;
-        ret = this.markdownIt.render(markdown);
-        ret = '<html><head></head><body>' + ret + '</body></html>'
-        ret = JsBeautify.html_beautify(ret);
-        return ret;
+        return this.markdownIt.render(markdown);
     }
 }

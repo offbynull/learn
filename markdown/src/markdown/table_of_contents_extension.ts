@@ -1,6 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { Extension, Type } from "./extender_plugin";
+import { Extension, TokenIdentifier, Type } from "./extender_plugin";
 
 class TocData {
     public readonly headingAnchors: Map<Token, string> = new Map<Token, string>();
@@ -8,8 +8,10 @@ class TocData {
 }
 
 export class TocExtension implements Extension {
-    public readonly names: ReadonlyArray<string> = [ 'toc', '__toc_anchor' ];
-    public readonly type: Type = Type.BLOCK;
+    public readonly tokenIds: ReadonlyArray<TokenIdentifier> = [
+        new TokenIdentifier('toc', Type.BLOCK),
+        new TokenIdentifier('__toc_anchor', Type.INLINE)
+    ];
 
     public postProcess(markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>): void {
         const tocData: TocData = context.get('toc') || new TocData();

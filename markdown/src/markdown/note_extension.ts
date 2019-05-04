@@ -1,11 +1,11 @@
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
-import { Extension, Type } from "./extender_plugin";
+import { Extension, TokenIdentifier, Type } from "./extender_plugin";
 
 export class NoteExtension implements Extension {
-    public readonly names: ReadonlyArray<string> = [ 'note' ];
-    public readonly type: Type = Type.BLOCK;
-
+    public readonly tokenIds: ReadonlyArray<TokenIdentifier> = [
+        new TokenIdentifier('note', Type.BLOCK)
+    ];
 
     public render(markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>): string {
         const token = tokens[tokenIdx];

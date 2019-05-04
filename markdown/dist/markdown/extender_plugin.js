@@ -1,10 +1,22 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const jsdom_1 = require("jsdom");
+const js_beautify_1 = __importDefault(require("js-beautify"));
 var Type;
 (function (Type) {
     Type["BLOCK"] = "block";
     Type["INLINE"] = "inline";
 })(Type = exports.Type || (exports.Type = {}));
+class TokenIdentifier {
+    constructor(name, type) {
+        this.name = name;
+        this.type = type;
+    }
+}
+exports.TokenIdentifier = TokenIdentifier;
 const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
 const NAME_EXTRACT_REGEX = /^\s*\{([A-Za-z0-9_\-]*)\}\s*/;
 class ExtenderConfig {
@@ -13,29 +25,39 @@ class ExtenderConfig {
         this.inlineExtensions = [];
     }
     register(extension) {
-        let extensions;
-        switch (extension.type) {
-            case Type.BLOCK: {
-                extensions = this.blockExtensions;
-                break;
+        let includeInBlock = false;
+        let includeInInline = false;
+        for (const tokenId of extension.tokenIds) {
+            let extensions;
+            switch (tokenId.type) {
+                case Type.BLOCK: {
+                    extensions = this.blockExtensions;
+                    includeInBlock = true;
+                    break;
+                }
+                case Type.INLINE: {
+                    extensions = this.inlineExtensions;
+                    includeInInline = true;
+                    break;
+                }
+                default: {
+                    throw "Unrecognized type"; // should never happen
+                }
             }
-            case Type.INLINE: {
-                extensions = this.inlineExtensions;
-                break;
+            if (!tokenId.name.match(NAME_REGEX)) {
+                throw "Key must only contain " + NAME_REGEX + ": " + tokenId.name;
             }
-            default: {
-                throw "Unrecognized type"; // should never happen
+            const isDupe = extensions.filter(ext => ext.tokenIds.map(t => t.name).includes(tokenId.name)).length !== 0;
+            if (isDupe === true) {
+                throw 'Duplicate registeration of ' + tokenId.type + ' extension not allowed: ' + tokenId.name;
             }
         }
-        if (extension.names.filter(n => n.match(NAME_REGEX)).length !== extension.names.length) {
-            throw "Key must only contain " + NAME_REGEX + ": " + extension.names;
+        if (includeInBlock) {
+            this.blockExtensions.push(extension);
         }
-        for (const name of extension.names) {
-            if (extensions.filter(e => e.names.includes(name)).length !== 0) {
-                throw 'Duplicate registeration of ' + extension.type + ' extension not allowed: ' + extension.names;
-            }
+        if (includeInInline) {
+            this.inlineExtensions.push(extension);
         }
-        extensions.push(extension);
     }
     viewBlockExtensions() {
         return this.blockExtensions;
@@ -47,7 +69,7 @@ class ExtenderConfig {
 exports.ExtenderConfig = ExtenderConfig;
 function findExtension(extensions, name) {
     for (const extension of extensions) {
-        if (extension.names.includes(name)) {
+        if (extension.tokenIds.map(t => t.name).includes(name)) {
             return extension;
         }
     }
@@ -55,9 +77,9 @@ function findExtension(extensions, name) {
 }
 function findRule(markdownIt, name, rules) {
     let ret;
-    for (const inlineRule of rules) {
-        if (inlineRule.name === name) {
-            ret = inlineRule;
+    for (const rule of rules) {
+        if (rule.name === name) {
+            ret = rule;
             break;
         }
     }
@@ -73,20 +95,38 @@ function invokePostProcessors(extensions, markdownIt, tokens, context) {
         }
     }
 }
-function addRenderersToMarkdown(extensions, markdownIt, context) {
+function invokePostHtmls(extensions, html, context) {
     for (const extension of extensions) {
-        for (const name of extension.names) {
-            if (extension.render === undefined) {
-                continue;
-            }
-            // Calling extension.render directly in the render rule won't work because it happens in a new function...
-            // the undefined guard above no longer applies. Copy the reference into a new const (we know the new ref
-            // can't be undefined because of the guard) and invoke that instead
-            const renderFn = extension.render;
-            markdownIt.renderer.rules[name] = function (tokens, idx) {
-                return renderFn.apply(extension, [markdownIt, tokens, idx, context]); // Use apply() to keep this ptr
-            };
+        if (extension.postHtml !== undefined) {
+            html = extension.postHtml(html, context);
         }
+    }
+    return html;
+}
+function addRenderersToMarkdown(inlineExtensions, blockExtensions, markdownIt, context) {
+    const names = new Set();
+    inlineExtensions.forEach(ext => ext.tokenIds.forEach(tId => names.add(tId.name)));
+    blockExtensions.forEach(ext => ext.tokenIds.forEach(tId => names.add(tId.name)));
+    for (const name of names) {
+        // Calling extension.render directly in the render rule won't work because it happens in a new function...
+        // the undefined guard above no longer applies. Copy the reference into a new const (we know the new ref
+        // can't be undefined because of the guard) and invoke that instead
+        const blockExt = blockExtensions.find(ext => ext.tokenIds.map(t => t.name).includes(name));
+        const inlineExt = inlineExtensions.find(ext => ext.tokenIds.map(t => t.name).includes(name));
+        markdownIt.renderer.rules[name] = function (tokens, idx) {
+            const token = tokens[idx];
+            if (token.block === true && blockExt !== undefined) {
+                if (blockExt.render !== undefined) {
+                    return blockExt.render(markdownIt, tokens, idx, context);
+                }
+            }
+            else if (token.block === false && inlineExt !== undefined) {
+                if (inlineExt.render !== undefined) {
+                    return inlineExt.render(markdownIt, tokens, idx, context);
+                }
+            }
+            throw 'Unrecognized render type'; // should never happen
+        };
     }
 }
 function extender(markdownIt, extensionConfig) {
@@ -185,10 +225,19 @@ function extender(markdownIt, extensionConfig) {
         invokePostProcessors(blockExtensions, markdownIt, tokens, context);
         return tokens;
     };
+    // Augment md's render output to call our extension post renderers after executing
+    const oldMdRender = markdownIt.render;
+    markdownIt.render = function (src, env) {
+        let html = '<html><head></head><body>' + oldMdRender.apply(markdownIt, [src, env]) + '</body></html>';
+        html = new jsdom_1.JSDOM(html).serialize(); // clean up
+        html = invokePostHtmls(inlineExtensions, html, context);
+        html = invokePostHtmls(blockExtensions, html, context);
+        html = js_beautify_1.default.html_beautify(html); // format
+        return html;
+    };
     // Augment md's renderer to call our extension custom render functions when that extension's name is encountered
     // as a token's type.
-    addRenderersToMarkdown(inlineExtensions, markdownIt, context);
-    addRenderersToMarkdown(blockExtensions, markdownIt, context);
+    addRenderersToMarkdown(inlineExtensions, blockExtensions, markdownIt, context);
 }
 exports.extender = extender;
 //# sourceMappingURL=extender_plugin.js.map

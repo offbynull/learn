@@ -28,6 +28,15 @@ digraph { a -> b; }
 \`\`\`{note}
 This is a custom note
 \`\`\`
+
+This is an inline mathjax expression: \`{mj} \\frac{a}{b}\`
+
+This is a block mathjax expression:
+
+\`\`\`{mj}
+\\frac{c}{d}
+\`\`\`
+
 `);
 console.log(result);
 //# sourceMappingURL=index.js.map
