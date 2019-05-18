@@ -10,71 +10,75 @@ var Type;
     Type["BLOCK"] = "block";
     Type["INLINE"] = "inline";
 })(Type = exports.Type || (exports.Type = {}));
+const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
+const NAME_EXTRACT_REGEX = /^\s*\{([A-Za-z0-9_\-]*)\}\s*/;
 class TokenIdentifier {
     constructor(name, type) {
+        if (!name.match(NAME_REGEX)) {
+            throw "Key must only contain " + NAME_REGEX + ": " + name;
+        }
         this.name = name;
         this.type = type;
     }
 }
 exports.TokenIdentifier = TokenIdentifier;
-const NAME_REGEX = /^[A-Za-z0-9_\-]+$/;
-const NAME_EXTRACT_REGEX = /^\s*\{([A-Za-z0-9_\-]*)\}\s*/;
+class NameEntry {
+    constructor(block, inline) {
+        this.block = block;
+        this.inline = inline;
+    }
+    updateBlockExtension(block) {
+        return new NameEntry(block, this.inline);
+    }
+    updateInlineExtension(inline) {
+        return new NameEntry(this.block, inline);
+    }
+}
+exports.NameEntry = NameEntry;
 class ExtenderConfig {
     constructor() {
-        this.blockExtensions = [];
-        this.inlineExtensions = [];
+        this.exts = [];
+        this.nameLookup = new Map();
     }
     register(extension) {
-        let includeInBlock = false;
-        let includeInInline = false;
-        for (const tokenId of extension.tokenIds) {
-            let extensions;
-            switch (tokenId.type) {
-                case Type.BLOCK: {
-                    extensions = this.blockExtensions;
-                    includeInBlock = true;
+        for (const tId of extension.tokenIds) {
+            let obj = this.nameLookup.get(tId.name);
+            if (obj === undefined) {
+                obj = new NameEntry(undefined, undefined);
+            }
+            switch (tId.type) {
+                case Type.BLOCK:
+                    if (obj.block !== undefined) {
+                        extension.tokenIds.forEach(tIdToRemove => this.nameLookup.delete(tIdToRemove.name)); // remove any added
+                        throw 'Block already exists: ' + tId.name;
+                    }
+                    obj = obj.updateBlockExtension(extension);
                     break;
-                }
-                case Type.INLINE: {
-                    extensions = this.inlineExtensions;
-                    includeInInline = true;
+                case Type.INLINE:
+                    if (obj.inline !== undefined) {
+                        extension.tokenIds.forEach(tIdToRemove => this.nameLookup.delete(tIdToRemove.name)); // remove any added
+                        throw 'Inline already exists: ' + tId.name;
+                    }
+                    obj = obj.updateInlineExtension(extension);
                     break;
-                }
-                default: {
-                    throw "Unrecognized type"; // should never happen
-                }
+                default:
+                    throw 'Unrecognized type';
             }
-            if (!tokenId.name.match(NAME_REGEX)) {
-                throw "Key must only contain " + NAME_REGEX + ": " + tokenId.name;
-            }
-            const isDupe = extensions.filter(ext => ext.tokenIds.map(t => t.name).includes(tokenId.name)).length !== 0;
-            if (isDupe === true) {
-                throw 'Duplicate registeration of ' + tokenId.type + ' extension not allowed: ' + tokenId.name;
-            }
+            this.nameLookup.set(tId.name, obj);
         }
-        if (includeInBlock) {
-            this.blockExtensions.push(extension);
-        }
-        if (includeInInline) {
-            this.inlineExtensions.push(extension);
-        }
+        this.exts.push(extension);
     }
-    viewBlockExtensions() {
-        return this.blockExtensions;
+    get(name) {
+        return this.nameLookup.get(name);
     }
-    viewInlineExtensions() {
-        return this.inlineExtensions;
+    names() {
+        return Array.from(this.nameLookup.keys());
+    }
+    extensions() {
+        return Array.from(this.exts);
     }
 }
 exports.ExtenderConfig = ExtenderConfig;
-function findExtension(extensions, name) {
-    for (const extension of extensions) {
-        if (extension.tokenIds.map(t => t.name).includes(name)) {
-            return extension;
-        }
-    }
-    return undefined;
-}
 function findRule(markdownIt, name, rules) {
     let ret;
     for (const rule of rules) {
@@ -88,50 +92,40 @@ function findRule(markdownIt, name, rules) {
     }
     return ret;
 }
-function invokePostProcessors(extensions, markdownIt, tokens, context) {
-    for (const extension of extensions) {
+function invokePostProcessors(extenderConfig, markdownIt, tokens, context) {
+    for (const extension of extenderConfig.extensions()) {
         if (extension.postProcess !== undefined) {
             extension.postProcess(markdownIt, tokens, context);
         }
     }
 }
-function invokePostHtmls(extensions, html, context) {
-    for (const extension of extensions) {
+function invokePostHtmls(extenderConfig, html, context) {
+    for (const extension of extenderConfig.extensions()) {
         if (extension.postHtml !== undefined) {
             html = extension.postHtml(html, context);
         }
     }
     return html;
 }
-function addRenderersToMarkdown(inlineExtensions, blockExtensions, markdownIt, context) {
-    const names = new Set();
-    inlineExtensions.forEach(ext => ext.tokenIds.forEach(tId => names.add(tId.name)));
-    blockExtensions.forEach(ext => ext.tokenIds.forEach(tId => names.add(tId.name)));
-    for (const name of names) {
-        // Calling extension.render directly in the render rule won't work because it happens in a new function...
-        // the undefined guard above no longer applies. Copy the reference into a new const (we know the new ref
-        // can't be undefined because of the guard) and invoke that instead
-        const blockExt = blockExtensions.find(ext => ext.tokenIds.map(t => t.name).includes(name));
-        const inlineExt = inlineExtensions.find(ext => ext.tokenIds.map(t => t.name).includes(name));
+function addRenderersToMarkdown(extenderConfig, markdownIt, context) {
+    for (const name of extenderConfig.names()) {
+        const obj = extenderConfig.get(name);
+        if (obj === undefined) {
+            throw 'Should never be undefined';
+        }
         markdownIt.renderer.rules[name] = function (tokens, idx) {
             const token = tokens[idx];
-            if (token.block === true && blockExt !== undefined) {
-                if (blockExt.render !== undefined) {
-                    return blockExt.render(markdownIt, tokens, idx, context);
-                }
+            if (token.block === true && obj.block !== undefined && obj.block.render !== undefined) {
+                return obj.block.render(markdownIt, tokens, idx, context);
             }
-            else if (token.block === false && inlineExt !== undefined) {
-                if (inlineExt.render !== undefined) {
-                    return inlineExt.render(markdownIt, tokens, idx, context);
-                }
+            else if (token.block === false && obj.inline !== undefined && obj.inline.render !== undefined) {
+                return obj.inline.render(markdownIt, tokens, idx, context);
             }
             throw 'Unrecognized render type'; // should never happen
         };
     }
 }
-function extender(markdownIt, extensionConfig) {
-    const blockExtensions = extensionConfig.viewBlockExtensions();
-    const inlineExtensions = extensionConfig.viewInlineExtensions();
+function extender(markdownIt, extenderConfig) {
     const context = new Map(); // simple map for sharing data between invocations
     // Augment block fence rule to call the extension processor with the matching name.
     const blockRules = markdownIt.block.ruler.getRules('');
@@ -153,17 +147,17 @@ function extender(markdownIt, extensionConfig) {
         const infoMatch = token.info.match(NAME_EXTRACT_REGEX);
         if (infoMatch !== null && infoMatch.length === 2) { //infoMatch[0] is the whole thing, infoMatch[1] is the group
             const info = infoMatch[1];
-            const extension = findExtension(blockExtensions, info);
+            const extensionEntries = extenderConfig.get(info);
             if (info.length === 0) { // if empty id, remove it and fallback to normal
                 const skipLen = infoMatch[0].length;
                 token.info = token.info.slice(skipLen);
             }
-            else if (extension !== undefined) { // if id is expected, keep it
+            else if (extensionEntries !== undefined && extensionEntries.block !== undefined) { // if id is expected, keep it
                 token.type = info;
                 token.info = '';
                 token.tag = '';
-                if (extension.process !== undefined) { // call if handler is a function
-                    extension.process(markdownIt, state.tokens, tokenIdx, context);
+                if (extensionEntries.block.process !== undefined) { // call if handler is a function
+                    extensionEntries.block.process(markdownIt, state.tokens, tokenIdx, context);
                 }
             }
             else { // otherwise throw error
@@ -195,17 +189,17 @@ function extender(markdownIt, extensionConfig) {
             if (infoMatch !== null && infoMatch.length === 2) { //infoMatch[0] is the whole thing, infoMatch[1] is the group
                 const skipLen = infoMatch[0].length;
                 const info = infoMatch[1];
-                const extension = findExtension(inlineExtensions, info);
+                const extensionEntries = extenderConfig.get(info);
                 if (info.length === 0) { // if empty id, remove it and fallback to normal
                     token.content = token.content.slice(skipLen);
                 }
-                else if (extension !== undefined) { // if id is expected, keep it
+                else if (extensionEntries !== undefined && extensionEntries.inline !== undefined) { // if id is expected, keep it
                     token.type = info;
                     token.info = '';
                     token.tag = '';
                     token.content = token.content.slice(skipLen);
-                    if (extension.process !== undefined) { // call if handler is a function
-                        extension.process(markdownIt, state.tokens, tokenIdx, context);
+                    if (extensionEntries.inline.process !== undefined) { // call if handler is a function
+                        extensionEntries.inline.process(markdownIt, state.tokens, tokenIdx, context);
                     }
                 }
                 else { // otherwise throw error
@@ -221,8 +215,7 @@ function extender(markdownIt, extensionConfig) {
     const oldMdParse = markdownIt.parse;
     markdownIt.parse = function (src, env) {
         const tokens = oldMdParse.apply(markdownIt, [src, env]);
-        invokePostProcessors(inlineExtensions, markdownIt, tokens, context);
-        invokePostProcessors(blockExtensions, markdownIt, tokens, context);
+        invokePostProcessors(extenderConfig, markdownIt, tokens, context);
         return tokens;
     };
     // Augment md's render output to call our extension post renderers after executing
@@ -230,14 +223,13 @@ function extender(markdownIt, extensionConfig) {
     markdownIt.render = function (src, env) {
         let html = '<html><head></head><body>' + oldMdRender.apply(markdownIt, [src, env]) + '</body></html>';
         html = new jsdom_1.JSDOM(html).serialize(); // clean up
-        html = invokePostHtmls(inlineExtensions, html, context);
-        html = invokePostHtmls(blockExtensions, html, context);
+        html = invokePostHtmls(extenderConfig, html, context);
         html = js_beautify_1.default.html_beautify(html); // format
         return html;
     };
     // Augment md's renderer to call our extension custom render functions when that extension's name is encountered
     // as a token's type.
-    addRenderersToMarkdown(inlineExtensions, blockExtensions, markdownIt, context);
+    addRenderersToMarkdown(extenderConfig, markdownIt, context);
 }
 exports.extender = extender;
 //# sourceMappingURL=extender_plugin.js.map
