@@ -2,8 +2,17 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const markdown_1 = __importDefault(require("./markdown/markdown"));
+const WebResourceInliner = __importStar(require("web-resource-inliner"));
+const FileSystem = __importStar(require("fs"));
 const mdInstantance = new markdown_1.default();
 const result = mdInstantance.render(`
 # heading1
@@ -38,5 +47,20 @@ This is a block mathjax expression:
 \`\`\`
 
 `);
-console.log(result);
+const config = {
+    'fileContent': result,
+    'images': true,
+    'links': true,
+    'scripts': true,
+    'svgs': true,
+    'strict': true
+};
+WebResourceInliner.html(config, (error, result) => {
+    if (error) {
+        console.error(error);
+        return;
+    }
+    FileSystem.writeFile('output.html', result, err => { if (err)
+        console.error(err); });
+});
 //# sourceMappingURL=index.js.map

@@ -1,4 +1,6 @@
 import Markdown from './markdown/markdown';
+import * as WebResourceInliner from 'web-resource-inliner';
+import * as FileSystem from 'fs';
 
 const mdInstantance: Markdown = new Markdown();
 const result = mdInstantance.render(`
@@ -34,4 +36,21 @@ This is a block mathjax expression:
 \`\`\`
 
 `);
-console.log(result);
+
+
+const config: WebResourceInliner.Options = {
+    'fileContent': result,
+    'images': true,
+    'links': true,
+    'scripts': true,
+    'svgs': true,
+    'strict': true
+};
+WebResourceInliner.html(config, (error: any, result: any) => {
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    FileSystem.writeFile('output.html', result as string, err => { if (err) console.error(err) });
+});
