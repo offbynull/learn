@@ -31,7 +31,7 @@ export interface Extension {
     process?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => void;
     postProcess?: (markdownIt: MarkdownIt, tokens: Token[], context: Map<string, any>) => void;
     render?: (markdownIt: MarkdownIt, tokens: Token[], tokenIdx: number, context: Map<string, any>) => string;
-    postHtml?: (html: string, context: Map<string, any>) => string;
+    postHtml?: (dom: JSDOM, context: Map<string, any>) => JSDOM;
 }
 
 export class NameEntry {
@@ -129,13 +129,16 @@ function invokePostProcessors(extenderConfig: ExtenderConfig, markdownIt: Markdo
     }
 }
 
-function invokePostHtmls(extenderConfig: ExtenderConfig, html: string, context: Map<string, any>): string {
+function invokePostHtmls(extenderConfig: ExtenderConfig, dom: JSDOM, context: Map<string, any>): JSDOM {
     for (const extension of extenderConfig.extensions()) {
         if (extension.postHtml !== undefined) {
-            html = extension.postHtml(html, context);
+            const newDom = extension.postHtml(dom, context);
+            if (newDom !== undefined) {
+                dom = newDom;
+            }
         }
     }
-    return html;
+    return dom;
 }
 
 function addRenderersToMarkdown(extenderConfig: ExtenderConfig, markdownIt: MarkdownIt, context: Map<string, any>) {
@@ -272,11 +275,10 @@ export function extender(markdownIt: MarkdownIt, extenderConfig: ExtenderConfig)
           <body>` + oldMdRender.apply(markdownIt, [src, env]) + `</body>
         </html>`;
         
-        html = new JSDOM(html).serialize(); // clean up
-        html = invokePostHtmls(extenderConfig, html, context);
-        html = JsBeautify.html_beautify(html); // format
+        let dom = new JSDOM(html);
+        dom = invokePostHtmls(extenderConfig, dom, context);
 
-        return html;
+        return dom.serialize(); // JsBeautify.html_beautify(dom.serialize());
     }
 
 

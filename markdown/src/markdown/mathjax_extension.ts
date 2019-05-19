@@ -24,8 +24,7 @@ export class MathJaxExtension implements Extension {
         }
     }
 
-    public postHtml(html: string, context: Map<string, any>): string {
-        const dom = new JSDOM(html);
+    public postHtml(dom: JSDOM, context: Map<string, any>): JSDOM {
         const document = dom.window.document;
     
     
@@ -64,6 +63,7 @@ export class MathJaxExtension implements Extension {
         mjScriptElem.setAttribute('src', 'node_modules/mathjax-single-file/dist/TeXSVGTeX/MathJax.min.js'); // using SVG because TeXCommonHTMLTeX accesses cdn for fonts (NOT embedded?)
         headElement.appendChild(mjScriptElem);
 
-        return dom.serialize();
+
+        return dom;
     }
 }

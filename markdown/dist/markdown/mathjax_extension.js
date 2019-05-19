@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const extender_plugin_1 = require("./extender_plugin");
-const jsdom_1 = require("jsdom");
 class MathJaxExtension {
     constructor() {
         this.tokenIds = [
@@ -23,8 +22,7 @@ class MathJaxExtension {
             return '<span class="mathjax">' + markdownIt.utils.escapeHtml(tex) + '</span>';
         }
     }
-    postHtml(html, context) {
-        const dom = new jsdom_1.JSDOM(html);
+    postHtml(dom, context) {
         const document = dom.window.document;
         const bodyElement = document.getElementsByTagName('body')[0];
         if (!bodyElement.classList.contains('no-mathjax')) {
@@ -56,7 +54,7 @@ class MathJaxExtension {
         mjScriptElem.setAttribute('type', 'text/javascript');
         mjScriptElem.setAttribute('src', 'node_modules/mathjax-single-file/dist/TeXSVGTeX/MathJax.min.js'); // using SVG because TeXCommonHTMLTeX accesses cdn for fonts (NOT embedded?)
         headElement.appendChild(mjScriptElem);
-        return dom.serialize();
+        return dom;
     }
 }
 exports.MathJaxExtension = MathJaxExtension;

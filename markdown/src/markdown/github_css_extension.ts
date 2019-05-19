@@ -6,8 +6,7 @@ export class GithubCssExtension implements Extension {
         new TokenIdentifier('__UNUSED__githubcss', Type.BLOCK)
     ];
 
-    public postHtml(html: string, context: Map<string, any>): string {
-        const dom = new JSDOM(html);
+    public postHtml(dom: JSDOM, context: Map<string, any>): JSDOM {
         const document = dom.window.document;
     
     
@@ -22,7 +21,7 @@ export class GithubCssExtension implements Extension {
         const bodyElement = document.getElementsByTagName('body')[0];
         bodyElement.classList.add('markdown-body');
 
-        
-        return dom.serialize();
+
+        return dom;
     }
 }

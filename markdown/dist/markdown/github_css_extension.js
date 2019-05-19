@@ -1,15 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const extender_plugin_1 = require("./extender_plugin");
-const jsdom_1 = require("jsdom");
 class GithubCssExtension {
     constructor() {
         this.tokenIds = [
             new extender_plugin_1.TokenIdentifier('__UNUSED__githubcss', extender_plugin_1.Type.BLOCK)
         ];
     }
-    postHtml(html, context) {
-        const dom = new jsdom_1.JSDOM(html);
+    postHtml(dom, context) {
         const document = dom.window.document;
         const headElement = document.getElementsByTagName('head')[0];
         const linkCssElem = document.createElement('link');
@@ -18,7 +16,7 @@ class GithubCssExtension {
         headElement.appendChild(linkCssElem);
         const bodyElement = document.getElementsByTagName('body')[0];
         bodyElement.classList.add('markdown-body');
-        return dom.serialize();
+        return dom;
     }
 }
 exports.GithubCssExtension = GithubCssExtension;

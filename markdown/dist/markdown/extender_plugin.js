@@ -1,10 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsdom_1 = require("jsdom");
-const js_beautify_1 = __importDefault(require("js-beautify"));
 var Type;
 (function (Type) {
     Type["BLOCK"] = "block";
@@ -99,13 +95,16 @@ function invokePostProcessors(extenderConfig, markdownIt, tokens, context) {
         }
     }
 }
-function invokePostHtmls(extenderConfig, html, context) {
+function invokePostHtmls(extenderConfig, dom, context) {
     for (const extension of extenderConfig.extensions()) {
         if (extension.postHtml !== undefined) {
-            html = extension.postHtml(html, context);
+            const newDom = extension.postHtml(dom, context);
+            if (newDom !== undefined) {
+                dom = newDom;
+            }
         }
     }
-    return html;
+    return dom;
 }
 function addRenderersToMarkdown(extenderConfig, markdownIt, context) {
     for (const name of extenderConfig.names()) {
@@ -229,10 +228,9 @@ function extender(markdownIt, extenderConfig) {
           </head>
           <body>` + oldMdRender.apply(markdownIt, [src, env]) + `</body>
         </html>`;
-        html = new jsdom_1.JSDOM(html).serialize(); // clean up
-        html = invokePostHtmls(extenderConfig, html, context);
-        html = js_beautify_1.default.html_beautify(html); // format
-        return html;
+        let dom = new jsdom_1.JSDOM(html);
+        dom = invokePostHtmls(extenderConfig, dom, context);
+        return dom.serialize(); // JsBeautify.html_beautify(dom.serialize());
     };
     // Augment md's renderer to call our extension custom render functions when that extension's name is encountered
     // as a token's type.
