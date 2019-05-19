@@ -263,7 +263,14 @@ export function extender(markdownIt: MarkdownIt, extenderConfig: ExtenderConfig)
     // Augment md's render output to call our extension post renderers after executing
     const oldMdRender = markdownIt.render;
     markdownIt.render = function(src, env): string {
-        let html = '<html><head></head><body>' + oldMdRender.apply(markdownIt, [src, env]) + '</body></html>';
+        let html = `
+        <html>
+          <head>
+            <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+            <meta content="utf-8" http-equiv="encoding">
+          </head>
+          <body>` + oldMdRender.apply(markdownIt, [src, env]) + `</body>
+        </html>`;
         
         html = new JSDOM(html).serialize(); // clean up
         html = invokePostHtmls(extenderConfig, html, context);

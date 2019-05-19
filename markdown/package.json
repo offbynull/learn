@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/js-beautify": "^1.8.0",
     "@types/jsdom": "^12.2.3",
+    "github-markdown-css": "^3.0.1",
     "js-beautify": "^1.9.1",
     "jsdom": "^15.0.0",
     "markdown-it": "^8.4.2",
