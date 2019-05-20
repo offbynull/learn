@@ -5,6 +5,8 @@ import { Extension, TokenIdentifier, Type } from "./extender_plugin";
 // import Viz from 'viz.js';
 import { Module, render } from 'viz.js/full.render.js';
 
+const instance = Module(); // create only once -- if not, node will warn about memory leaks if too many get created
+
 export class DotExtension implements Extension {
     public readonly tokenIds: ReadonlyArray<TokenIdentifier> = [
         new TokenIdentifier('dot', Type.BLOCK)
@@ -16,7 +18,6 @@ export class DotExtension implements Extension {
         // creation), it's impossible to grab the value out of the promise -- there's no other way to get a non-async
         // interface to viz.js
         const data = tokens[tokenIdx].content;
-        const instance = Module();
         const output = render(instance, data,
             {
                 format: 'svg',

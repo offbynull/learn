@@ -3,6 +3,8 @@ import Token from 'markdown-it/lib/token';
 import { Extension, TokenIdentifier, Type } from "./extender_plugin";
 import { JSDOM } from 'jsdom';
 
+const MATHJAX_INSERTED = 'mathjax_inserted';
+
 export class MathJaxExtension implements Extension {
     public readonly tokenIds: ReadonlyArray<TokenIdentifier> = [
         new TokenIdentifier('mj', Type.BLOCK),
@@ -13,6 +15,7 @@ export class MathJaxExtension implements Extension {
         const token = tokens[tokenIdx];
         let tex = token.content;
 
+        context.set(MATHJAX_INSERTED, true);
         if (token.block === true) {
             tex = tex.replace(/\$\$/g, '\\$\\$'); // escape boundary markers that appear in text ($$ -> \$\$)
             tex = '$$' + tex + '$$'; // add boundary markers to front and end
@@ -25,6 +28,10 @@ export class MathJaxExtension implements Extension {
     }
 
     public postHtml(dom: JSDOM, context: Map<string, any>): JSDOM {
+        if (!context.has(MATHJAX_INSERTED)) {
+            return dom;
+        }
+    
         const document = dom.window.document;
     
     
