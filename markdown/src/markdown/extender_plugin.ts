@@ -2,7 +2,6 @@ import MarkdownIt, { RuleBlock, RuleInline } from 'markdown-it';
 import Token from 'markdown-it/lib/token';
 import StateCore from 'markdown-it/lib/rules_core/state_core';
 import { JSDOM } from 'jsdom';
-import JsBeautify from 'js-beautify';
 
 export enum Type {
     BLOCK = 'block',
@@ -154,7 +153,7 @@ function addRenderersToMarkdown(extenderConfig: ExtenderConfig, markdownIt: Mark
             } else if (token.block === false && obj.inline !== undefined && obj.inline.render !== undefined) {
                 return obj.inline.render(markdownIt, tokens, idx, context);
             }
-            throw 'Unrecognized render type'; // should never happen
+            return '';
         }
     }
 }
@@ -267,6 +266,7 @@ export function extender(markdownIt: MarkdownIt, extenderConfig: ExtenderConfig)
     const oldMdRender = markdownIt.render;
     markdownIt.render = function(src, env): string {
         let html = `
+        <!DOCTYPE html>
         <html>
           <head>
             <meta content="text/html;charset=utf-8" http-equiv="Content-Type">

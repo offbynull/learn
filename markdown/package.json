@@ -9,10 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/js-beautify": "^1.8.0",
-    "@types/jsdom": "^12.2.3",
     "github-markdown-css": "^3.0.1",
-    "js-beautify": "^1.9.1",
     "jsdom": "^15.0.0",
     "markdown-it": "^8.4.2",
     "mathjax-single-file": "github:pkra/MathJax-single-file#12.0.0",
@@ -22,6 +19,7 @@
   },
   "devDependencies": {
     "@types/markdown-it": "0.0.7",
+    "@types/jsdom": "^12.2.3",
     "@types/web-resource-inliner": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",

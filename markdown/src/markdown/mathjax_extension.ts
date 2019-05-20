@@ -60,7 +60,7 @@ export class MathJaxExtension implements Extension {
         // whenever this syntax is used).
         const mjScriptElem = document.createElement('script');
         mjScriptElem.setAttribute('type', 'text/javascript');
-        mjScriptElem.setAttribute('src', 'node_modules/mathjax-single-file/dist/TeXSVGTeX/MathJax.min.js'); // using SVG because TeXCommonHTMLTeX accesses cdn for fonts (NOT embedded?)
+        mjScriptElem.setAttribute('src', 'node_modules/mathjax-single-file/dist/TeXSVGTeX/MathJax.js'); // using SVG because TeXCommonHTMLTeX accesses cdn for fonts (NOT embedded?)
         headElement.appendChild(mjScriptElem);
 
 

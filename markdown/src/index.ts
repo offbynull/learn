@@ -21,6 +21,7 @@ WebResourceInliner.html(
             console.error(error);
             return;
         }
+
         FileSystem.writeFileSync('output.html', result as string);
     }
 );
