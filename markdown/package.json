@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "browser-sync": "^2.26.5",
     "github-markdown-css": "^3.0.1",
     "jsdom": "^15.0.0",
     "markdown-it": "^8.4.2",
@@ -18,8 +19,9 @@
     "web-resource-inliner": "^4.3.2"
   },
   "devDependencies": {
-    "@types/markdown-it": "0.0.7",
+    "@types/browser-sync": "0.0.43",
     "@types/jsdom": "^12.2.3",
+    "@types/markdown-it": "0.0.7",
     "@types/web-resource-inliner": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
