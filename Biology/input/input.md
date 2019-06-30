@@ -81,7 +81,7 @@ Examples of non-elements:
 * Water - Water can be further broken down to the elements hydrogen and oxygen.
 * Glucose - Glucose can be further broken down to the elements carbon, hydrogen, and oxygen.
 
-![Wikipedia: Atom Diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Atom_Diagram.svg/240px-Atom_Diagram.svg.png)
+![By AG Caesar - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67059219](240px-Atom_Diagram.svg.png)
 
 The building blocks of atoms are `{bm} protons`, `{bm} neutrons`, and `{bm} electrons`. Protons and neutrons form the nucleus of the atom while electrons jump around outside of the nucleus. Protons and electrons are attracted to each other -- protons are positively charged while electrons are negatively charged. Although, protons and electrons never fully meet (electrons are always buzzing/hovering around the outside of the nucleus where the protons are).
 
@@ -91,14 +91,79 @@ The number of protons are what defines the type of atom/element. For example, hy
 
 The periodic table below orders elements/atoms by the number of protons (also called the `{bm} atomic number`)...
 
-![Wikipedia: Periodic Table Chart](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Simple_Periodic_Table_Chart-en.svg/800px-Simple_Periodic_Table_Chart-en.svg.png)
+![By Offnfopt - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=62296883](800px-Simple_Periodic_Table_Chart-en.svg.png)
 
 ```{note}
 A different number of neutrons = different version of the same element. For example, Carbon-12 (6 neutrons) and Carbon-13 (7 neutrons).
 ```
 
-See [https://en.wikipedia.org/wiki/Periodic_table](Wikipedia) for more information on the periodic table.
+When atoms bind together, they form a `{bm} molecule`. Each molecule type has the same configuration of atoms -- same atoms in the same numbers, structured/shaped similarly. For example, a water molecule is made up of 2 hydrogen atoms and 1 oxygen atom binding together in a house-roof shape...
+
+![By Dan Craggs - Own workThis vector image includes elements that have been taken or adapted from this:  Water-2D-labelled.png., Public Domain, https://commons.wikimedia.org/w/index.php?curid=7916072](200px-H2O_2D_labelled.svg.png)
+
+```{note}
+As far as I can tell, the atoms will always bind in the same way. You can't ever have a molecule that has the same types of atoms in the same numbers but with a different structure.
+```
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+
+TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
 
 ## Carbohydrate Molecules
+
+`{bm} Carbohydrate`s (also called `{bm} Saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
+* being a source of energy
+* providing a structural role (for plants / certain plants).
+
+```{note}
+It was never explained what 'structural role' actually means.
+```
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
+TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+
 ## Protein Molecules
 ## Lipid Molecules
