@@ -97,7 +97,7 @@ The periodic table below orders elements/atoms by the number of protons (also ca
 A different number of neutrons = different version of the same element. For example, Carbon-12 (6 neutrons) and Carbon-13 (7 neutrons).
 ```
 
-When atoms bind together, they form a `{bm} molecule`. Each molecule type has the same configuration of atoms -- same atoms in the same numbers, structured/shaped similarly. For example, a water molecule is made up of 2 hydrogen atoms and 1 oxygen atom binding together in a house-roof shape...
+When atoms bind together, they form a `{bm} molecule`. Each type of molecule has the same configuration of atoms -- same atoms in the same numbers, structured/shaped similarly. For example, a water molecule is made up of 2 hydrogen atoms and 1 oxygen atom binding together in a house-roof shape...
 
 ![By Dan Craggs - Own workThis vector image includes elements that have been taken or adapted from this:  Water-2D-labelled.png., Public Domain, https://commons.wikimedia.org/w/index.php?curid=7916072](200px-H2O_2D_labelled.svg.png)
 
@@ -105,31 +105,28 @@ When atoms bind together, they form a `{bm} molecule`. Each molecule type has th
 As far as I can tell, the atoms will always bind in the same way. You can't ever have a molecule that has the same types of atoms in the same numbers but with a different structure.
 ```
 
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+A `{bm} monomer` is a special designation for atoms/molecules that are able to join with other monomers to create even larger molecules. The process of joining is called `{bm} polymerization` `{bm}|no_out polymerize` and the resulting molecule is called a `{bm} polymer`.
 
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+```{dot}
+digraph {
+  rankdir=LR;
+  "monomer"->"polymer" [taillabel="1..*", headlabel="1", arrowhead=none];
+}
+```
 
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+If the monomers that make up a polymer are all the same, the polymer is called a `{bm} homopolymer`. Otherwise, it's called a `{bm} heteropolymer` / `{bm} copolymer`.
 
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+For example, the glucose molecule is a monomer. It can combine with other glucose molecules to create the glycogen molecule, which is a polymer / homopolymer. Other examples of polymers (according to Wikipedia): amino acids and nucleotides (DNA).
 
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+```{note}
+There are probably special properties to monomers that allow them to chain up. The Wikipedia page talks about a feature of monomers being a "carbon double bond" which is what allows them to form polymers.
+```
 
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
-
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
-
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
-
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
-
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
-
-TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
+Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a very large number of atoms.
 
 ## Carbohydrate Molecules
 
-`{bm} Carbohydrate`s (also called `{bm} Saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
+`{bm} Carbohydrate`s (also called `{bm} saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
 * being a source of energy
 * providing a structural role (for plants / certain plants).
 
@@ -137,33 +134,47 @@ TODO: DEFINE MONOMER, POLYMER, AND MACROMOLECULE
 It was never explained what 'structural role' actually means.
 ```
 
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+The term `{bm} monosaccharide` is just means a carbohydrate that's a monomer (e.g. glucose). Similarly, the term `{bm} polysaccharide` means a carbohydrate built from other monosaccharides (e.g. glycogen is made of chained glucose).
 
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
-
-TODO: DEFINE MONOSACCHARIDE (monomer) AND POLYSACCHARIDE (polymer)
+```{dot}
+digraph {
+  rankdir=LR;
+  "monosaccharide"->"polysaccharide" [taillabel="1..*", headlabel="1", arrowhead=none];
+}
+```
 
 ## Protein Molecules
-## Lipid Molecules
+
+`{bm} Protein`s are molecules that consist of monomers called `{bm} amino acid`s. The amino acids get chained together into a polymer called a `{bm} polypeptide` chain, and one or more polypeptide chains fold to a 3D structure and combine to become a protein.
+
+```{dot}
+digraph {
+  rankdir=LR;
+  "amino acid"->"polypeptide" [taillabel="1..*", headlabel="1", arrowhead=none];
+  "polypeptide"->"protein" [taillabel="1..*", headlabel="1", arrowhead=none];
+}
+```
+
+```{note}
+The ribosome is what's responsible for folding? Not able to get a clear answer on this.
+```
+
+The 3D structure / shape of the protein is what gives it its abilities.
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+
+## Lipid Molecules;
