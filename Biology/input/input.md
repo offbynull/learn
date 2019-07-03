@@ -145,7 +145,9 @@ digraph {
 
 ## Protein Molecules
 
-`{bm} Protein`s are molecules that consist of monomers called `{bm} amino acid`s. The amino acids get chained together into a polymer called a `{bm} polypeptide` chain, and one or more polypeptide chains fold to a 3D structure and combine to become a protein.
+`{bm} Protein`s are molecules that consist of monomers called `{bm} amino acid`s. The amino acids get chained together into a polymer called a `{bm} polypeptide` chain, and one or more polypeptide chains fold to a 3D structure and combine to become a protein. The 3D structure / shape of the protein (how its folded) is what gives it its abilities.
+
+In biological systems, proteins are often associated with that facilitating some biological function. For example, the protein protease is responsible for breaking down food.
 
 ```{dot}
 digraph {
@@ -155,26 +157,24 @@ digraph {
 }
 ```
 
+![By No machine-readable author provided. DrKjaergaard assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=1967109](320px-Protein_folding.png)
+
 ```{note}
 The ribosome is what's responsible for folding? Not able to get a clear answer on this.
 ```
 
-The 3D structure / shape of the protein is what gives it its abilities.
+The basic structure of an amino acid is as follows. The R is a placeholder that, when set, defines what type of amino acid it is...
 
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+![By GYassineMrabetTalk✉This W3C-unspecified vector image was created with Inkscape. - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2551977](320px-AminoAcidball.svg.png)
 
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+## Lipid Molecules
 
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+`{bm} Lipids` are molecules that are somewhat not water soluble -- meaning that they have parts that resist water but maybe also parts that are attracted to water. In biological systems, lipids are often associated with...
+* energy storage (fats)
+* cellular membranes (phospholipids)
 
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
+![Public Domain, https://commons.wikimedia.org/w/index.php?curid=1019610](296px-Trimyristin-3D-vdW.png)
 
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
-
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
-
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
-
-TODO: LIST OUT THE DIFFERENT THINGS THAT A PROTEIN DOES
-
-## Lipid Molecules;
+```{note}
+Lipids are not always fats. All fats are lipids but not all lipids are fats.
+```
