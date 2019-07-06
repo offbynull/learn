@@ -179,7 +179,7 @@ The basic structure of an amino acid is as follows. The R is a placeholder that,
 Lipids are not always fats. All fats are lipids but not all lipids are fats.
 ```
 
-## Nucleic Acid
+## Nucleic Acid Molecules
 
 `{bm} Nucleic Acid` is a molecule (heteropolymer) often associated with information storage. It's built up from other molecules called `{bm} nucleotides` (monomers).
 
@@ -194,10 +194,10 @@ It's called nucleic acid because it's in the nucleus of a cell and it has some a
 `{bm} Water` is essential to life -- it has unique properties that almost all biological processes depend on.
 
 Recall that...
-1. water consists of 2 hydrogen atoms connected to a oxygen atom via `{bm} covalent bond`s -- a pair of electrons that both atoms share, thus bonding the atoms together.
-1. the position of an electron is based on a probability. Electrons aren't fixed in a certain position or neatly orbiting around a nucleus as certain diagrams show. Rather, depending on their environment, they may have a higher probability of being in a certain position vs other positions (they're buzzing around).
+1. a water molecule consists of 2 hydrogen atoms connected to an oxygen atom via covalent bonds. A `{bm} covalent bond` is a pair of electrons that both atoms share, thus bonding the atoms together.
+1. the position of an electron is based on probability. Electrons aren't fixed in a certain position or neatly orbiting around a nucleus as certain diagrams show. Rather, they're constantly buzzing/hopping around the nucleus. Depending on their environment, they may be more likely to be at certain locations vs other locations.
 
-Oxygen atoms are extremely `{bm} electronegative`, meaning that oxygen likes to keep the buzzing electrons more around itself than the atoms it's bound to. As such, in a water molecule, the electrons will spend more time solely around the oxygen atom than they do in a position that binds the hydrogen and oxygen together. This is what gives the oxygen atom in a water molecule a `{bm} weakly negative` charge (as indicated by δ-) while the hydrogen atoms have a `{bm} weakly positive` charge (as indicated by δ+).
+Oxygen atoms are extremely `{bm} electronegative`, meaning that oxygen has the propensity to pull the buzzing/hopping electrons more around itself than the atoms it's bound to. As such, in a water molecule, the electrons will spend more time solely around the oxygen atom than they do the hydrogen atom or a position that binds the hydrogen and oxygen together. This is what gives the oxygen atom in a water molecule a `{bm} weakly negative` charge (as indicated by δ-) while the hydrogen atoms have a `{bm} weakly positive` charge (as indicated by δ+). These types of charged molecules are called `{bm} polar molecule`s.
 
 ![By OpenStax College - Anatomy & Physiology, Connexions Web site. http://cnx.org/content/col11496/1.6/, Jun 19, 2013., CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=30131144](209_Polar_Covalent_Bonds_in_a_Water_Molecule.jpg)
 
@@ -205,23 +205,38 @@ Oxygen atoms are extremely `{bm} electronegative`, meaning that oxygen likes to 
 Notice the shape of the water molecule in the diagram(s) above. Electron pairs are repelled from each other. They're also responsible for binding. That's what gives molecules their shapes/structure.
 ```
 
-This weakly negative / weakly positive charge is what gives water several of the unique properties that biological properties depend on. Water molecules have a tendency to gravitate towards each other because the weakly negative oxygen atoms and the weakly positive hydrogen atoms of different water molecules attract. This attraction is called a `{bm} hydrogen bond`. Hydrogen bonds are weaker than covalent bonds in that the bonds aren't really solid -- water molecules can easily break off and go past each other. It's what gives water several of the properties that make it conducive for biological processes to operate:
-* its fluid behaviour in normal conditions (normal temperatures/pressures/etc..)
-* taking in heat and regulating temperature
-* acts as a universal solvent (it's called universal because it dissolves more things than any other liquid)
-* adhesion (attraction to molecules of a different kind -- as in not water)
-* cohesion (attraction to molecules of the same kind -- as in water).
-* etc...
+This weakly negative / weakly positive charge is what gives water several of the unique properties that biological properties depend on. Water molecules have a tendency to gravitate towards each other because the weakly negative oxygen atoms and the weakly positive hydrogen atoms of different water molecules attract. This attraction is called a `{bm} hydrogen bond`. Hydrogen bonds are weaker than covalent bonds in that the bonds aren't really solid -- water molecules can easily break off and go past each other.
 
 ![By User Qwerter at Czech wikipedia: Qwerter. Transferred from cs.wikipedia to Commons by sevela.p. Translated to english by by Michal Maňas (User:snek01). Vectorized by Magasjukur2 - File:3D model hydrogen bonds in water.jpg, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=14929959](242px-3D_model_hydrogen_bonds_in_water.svg.png)
 
 ```{note}
-Water is the only molecule that's liquid at room temperature? This can't be right -- see https://chemistry.stackexchange.com/q/76346. Why can't biological processes work in one of these other molecules just as they do in water? Maybe because they stay liquid at a shorter temperature range (e.g. 15-25C instead of 1-99C?
+The above paragraph is just giving the mechanics for how/why water is a liquid. Water is the only molecule that's liquid at room temperature? This can't be right -- see https://chemistry.stackexchange.com/q/76346. Why can't biological processes work in one of these other molecules just as they do in water? Maybe because they stay liquid at a shorter temperature range (e.g. 15-25C instead of 1-99C?
 ```
 
-Of the properties that make water conducive for biological processes to operate, being a `{bm} solvent` is one of the most important ones. So long as they're charged, other molecules can travel inside of water using the attraction from weakly negative / weakly positive charges -- they gravitate and float around water molecules just as other water molecules do. For example, the cytoplasm of a cell is a solvent (mostly water). It works because other molecules in the cytoplasm (e.g. cellular machinery) can float around / travel around using the weakly negative / weakly positive charges.
+The weak attraction between water molecules is also what makes water a `{bm} solvent`. So long as they're polar molecules, other molecules can travel inside of water using the same attraction from weakly negative / weakly positive charges -- they gravitate and float around water molecules just as other water molecules do. For example, the cytoplasm of a cell is a solvent (mostly water). It works because other molecules in the cytoplasm (e.g. cellular machinery) can float around / travel around using the weakly negative / weakly positive charges.
 
-* Molecules that are charged/polar are called `{bm} polar molecule`s.
-* Molecules that are charged/polar and mixed with a solvent are called `{bm} solute`s.
+Water is called a `{bm} universal solvent` because it can dissolve more molecules than other other liquid. Note that the term universal doesn't mean that it can dissolve everything, just that it can dissolve more things than the others.
+
+The properties that make water conducive for biological processes to operate:
+
+* Fluid under normal conditions - under normal temperatures, pressures, etc.. there's *cohesion* between other water molecules (fluid) / *adhesion* between water molecules and other polar molecules / ions (solvent).
+* Universal solvent - Water dissolves more things than any other liquid (more things doesn't mean everything).
+* High heat capacity - Because it takes a lot of energy to heat up water, its temperature can remain relatively stable as the environment around it changes (temperature regulation).
+* High heat of vaporization - As water evaporates, it traps heat from whatever its on (e.g. human body) and releases it into the environment (temperature regulation / cooling).
+* Less dense as a solid - As water freezes it forms crystals that space the molecules away from each other. As such, it becomes less dense than liquid water and ends up floats on top. This means bodies of water can freeze over but life can continue operating in the liquid underneath the frozen ice.
+
+Other terminology related to water:
+* Molecules that are charged are called polar molecules (e.g. the water molecule is a polar molecule because of its weakly positive / weakly negative charge).
+* Molecules / ions that are charged and mixed with a solvent are called `{bm} solute`s.
 * Molecules that are attracted to water are called `{bm} hydrophilic`.
 * Molecules that are repelled from water are called `{bm} hydrophobic`.
+
+# Other Terminology
+
+Terminology that's relevant but doesn't fit in any other section goes here.
+
+`{bm} Density` `{bm}|no_out dense` - The mass per unit volume of a substance.
+
+Specific `{bm} heat capacity` - The amount of heat needed to raise the temperature of one gram of a substance by one degree Celsius.
+
+`{bm} Heat of vaporization` - The amount of energy needed to change one gram of a liquid substance to a gas at constant temperature.
