@@ -133,6 +133,29 @@ Ions are always trying to lose their charge and become neutral, either by giving
 * negative ions are attracted to positive ions and repelled from negative ions.
 * positive ions are attracted to negative ions and repelled from positive ions.
 
+## pH
+
+`{bm} pH` stands for *potential of hydrogen* and it's the measure of positively charged hydrogen ions in a solution. The more...
+* the more `{bm}|no_out acid` `{bm}|no_out acidity` `{bm} acidic` something is, the more positively charged hydrogen ions it has.
+* the more `{bm}|no_out basicity` `{bm} basic` (`{bm} alkaline`) something is, the more reactive it is to positively charged hydrogen ions (it wants to give off electrons to those hydrogen ions).
+
+![By Heinrich-Boll-Stiftung - https://www.flickr.com/photos/boellstiftung/35805740223, CC BY-SA 2.0, https://commons.wikimedia.org/w/index.php?curid=66098876](800px-PH_Scale-_Acidic_vs._Basic_(Alkaline).png)
+
+pH is scaled logarithmically from 1 to 14. Each notch on the scale moves the acidity/basicity by a factory of 10. Going...
+* back a notch (-1) increases acidity / decreases basicity by a factor of 10.
+* forward a notch (+1) decreases acidity / increases basicity by a factory of 10.
+
+For example, going from  7 to 4 increases acidity by 1000x times / decreases basicity by 1000x.
+
+The closer to...
+* 1 something is, the more acidic it is (more positively charged hydrogen ions) and the more sour/sharp it tastes.
+* 14 something is, the more basic it is (more stuff that can react with positively charged hydrogen ions) and the more bitter it tastes.
+* 7 something is, the more neutral it is (not reactive).
+
+```{note}
+https://www.quora.com/Why-is-pure-water-considered-neutral -- Since pH is defined as the negative log of the hydrogen ion concentration, the pH of pure water is 7 or neutral. Pure water is neutral because the number of positive hydrogen ions produced is equal to the number of negative.
+```
+
 ## Carbohydrate Molecules
 
 `{bm} Carbohydrate`s (also called `{bm} saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
