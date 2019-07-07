@@ -124,6 +124,15 @@ There are probably special properties to monomers that allow them to chain up. T
 
 Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a very large number of atoms.
 
+An `{bm} ion` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
+* if protons > electrons (more protons), it's called a `{bm}|no_out positive charge` `{bm}|no_out positive-charge` `{bm}|no_out positively-charged` `{bm} positively charged` ion / `{bm} positive ion`.
+* if protons < electrons (more electrons), it's called a `{bm}|no_out negative charge` `{bm}|no_out negative-charge` `{bm}|no_out negatively-charged` `{bm} negatively charged` ion / `{bm} negative ion` / `{bm} ANION`.
+* if protons == electrons, it's a neutral (no charge).
+
+Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
+* negative ions are attracted to positive ions and repelled from negative ions.
+* positive ions are attracted to negative ions and repelled from positive ions.
+
 ## Carbohydrate Molecules
 
 `{bm} Carbohydrate`s (also called `{bm} saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
@@ -207,7 +216,8 @@ The order the appear in defines the genetic information/instructions of that org
 When counting the number of bases, it’s typical to use kilo, mega, giga, etc.. For example, 5000 bases would be referred to as 5 kilobases (e.g. 5Kb). Maybe the best way to think about this is that information in DNA is organized like memory on a computer, but your byte size is 2 bits instead of 8.
 ```
 
-The two nucleotides/molecules that make up a connection are called a `{bm} base pair`. The rules to base pairs are…
+The two nucleotides/molecules that make up a connection are called a `{bm} base pair`. The
+ rules to base pairs are…
 * A only ever binds to T (e.g. AT or TA)
 * G only ever binds to C (e.g. GC or CG)
 
