@@ -181,13 +181,35 @@ Lipids are not always fats. All fats are lipids but not all lipids are fats.
 
 ## Nucleic Acid Molecules
 
-`{bm} Nucleic Acid` is a molecule (heteropolymer) often associated with information storage. It's built up from other molecules called `{bm} nucleotides` (monomers).
+`{bm} Nucleic Acid` is a molecule (heteropolymer) often associated with information storage. It's built up from other molecules called {bm} nucleotides (monomers). It's called nucleic acid because it's in the nucleus of a cell and it has some acidic properties to it.
 
-`{bm} Deoxyribonucleic acid` (`{bm} DNA`) is the most common form of nucleic acid.
+`{bm} Deoxyribonucleic acid` (`{bm} DNA`) is the most common form of nucleic acid. DNA is a molecule that contains the instructions needed for the growth/functioning/maintenance of an organism. Depending on the type of organism, DNA is located either in the cell’s nucleus (for eukaryotic organisms -- animals and plants) or the cell’s cytoplasm (for prokaryotic organisms -- single-celled organism).
 
 ```{note}
-It's called nucleic acid because it's in the nucleus of a cell and it has some acidic properties to it.
+The book says that each cell can contain one or more “nearly identical” copies of the DNA -- because of mutations constantly happening?
 ```
+
+`{bm} Ribonucleic acid` (`{bm} RNA`) is another common form of nucleic acid. RNA is a molecule used as a transferring mechanism for copying over information from DNA to other cellular machinery. It's also used as information storage for (some?) viruses.
+
+The monomers that make up nucleic acid molecule are called `{bm} nucleotide`s, and the order they appear in defines the genetic information/instructions.
+
+![By Zephyris - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=15027555](492px-DNA_Structure+Key+Labelled.pn_NoBB.png)
+
+There are 5 different nucleotides: 
+* A (`{bm} adenine`)
+* C (`{bm} cytosine`)
+* G (`{bm} guanine`)
+* T (`{bm} thymine`) / U (`{bm} uracil`) - T in DNA, U in RNA
+
+The order the appear in defines the genetic information/instructions of that organism. Because they are the unit by which genetic information is encoded, each nucleotide is also called a `{bm} base`. For example, a string/sequence of DNA bases: ATATTTTCGATATCCACCA.
+
+```{note}
+When counting the number of bases, it’s typical to use kilo, mega, giga, etc.. For example, 5000 bases would be referred to as 5 kilobases (e.g. 5Kb). Maybe the best way to think about this is that information in DNA is organized like memory on a computer, but your byte size is 2 bits instead of 8.
+```
+
+The two nucleotides/molecules that make up a connection are called a `{bm} base pair`. The rules to base pairs are…
+* A only ever binds to T (e.g. AT or TA)
+* G only ever binds to C (e.g. GC or CG)
 
 ## Water Molecule
 
