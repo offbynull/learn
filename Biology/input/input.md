@@ -61,7 +61,7 @@ Other terminology around the scientific method...
 * `{bm} independent variable` - An independent variable is basically the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
 * `{bm} dependent variable` - A dependent variable is a response you measure after applying the treatment -- you can think of it as the output from your experiment. For example, in the skin cancer experiment, the dependent variable might be a measurement of how different the cells are functioning (e.g. a cell with damaged DNA may produce different kinds / amounts of tRNA molecules -- something you can measure).
 * **data** - This is exactly what you think it is -- measurements/observations made during the experiment.
-* `{bm}|no_out placebo` `{bm} placebo effect` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
+* `{bm} placebo:false` `{bm} placebo effect` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
 
 ```{note}
 You can have more than one independent variable if you follow specific guidelines and are experienced enough, but the general rule of thumb is to have only 1 independent variable just because it makes things much simpler to analyze/interpret.
@@ -105,7 +105,7 @@ When atoms bind together, they form a `{bm} molecule`. Each type of molecule has
 As far as I can tell, the atoms will always bind in the same way. You can't ever have a molecule that has the same types of atoms in the same numbers but with a different structure.
 ```
 
-A `{bm} monomer` is a special designation for atoms/molecules that are able to join with other monomers to create even larger molecules. The process of joining is called `{bm} polymerization` `{bm}|no_out polymerize` and the resulting molecule is called a `{bm} polymer`.
+A `{bm} monomer` is a special designation for atoms/molecules that are able to join with other monomers to create even larger molecules. The process of joining is called `{bm} polymerization` `{bm} polymerize:false` and the resulting molecule is called a `{bm} polymer`.
 
 ```{dot}
 digraph {
@@ -124,9 +124,9 @@ There are probably special properties to monomers that allow them to chain up. T
 
 Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a very large number of atoms.
 
-An `{bm} ion` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
-* if protons > electrons (more protons), it's called a `{bm}|no_out positive charge` `{bm}|no_out positive-charge` `{bm}|no_out positively-charged` `{bm} positively charged` ion / `{bm} positive ion`.
-* if protons < electrons (more electrons), it's called a `{bm}|no_out negative charge` `{bm}|no_out negative-charge` `{bm}|no_out negatively-charged` `{bm} negatively charged` ion / `{bm} negative ion` / `{bm} ANION`.
+An `{bm} ion:true:^$|^.*[\W]$:^[\WsS].*$|^$` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
+* if protons > electrons (more protons), it's called a `{bm} positive charge:false` `{bm} positive-charge:false` `{bm} positively-charged:false` `{bm} positively charged` ion / `{bm} positive ion`.
+* if protons < electrons (more electrons), it's called a `{bm} negative charge:false` `{bm} negative-charge:false` `{bm} negatively-charged:false` `{bm} negatively charged` ion / `{bm} negative ion` / `{bm} ANION`.
 * if protons == electrons, it's a neutral (no charge).
 
 Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
@@ -135,9 +135,9 @@ Ions are always trying to lose their charge and become neutral, either by giving
 
 ## pH
 
-`{bm} pH` stands for *potential of hydrogen* and it's the measure of positively charged hydrogen ions in a solution. The more...
-* the more `{bm}|no_out acid` `{bm}|no_out acidity` `{bm} acidic` something is, the more positively charged hydrogen ions it has.
-* the more `{bm}|no_out basicity` `{bm} basic` (`{bm} alkaline`) something is, the more reactive it is to positively charged hydrogen ions (it wants to give off electrons to those hydrogen ions).
+`{bm} pH:true:^$|^.*[\W]$:^[\W].*$|^$` stands for *potential of hydrogen* and it's the measure of positively charged hydrogen ions in a solution. The more...
+* the more `{bm} acid:false` `{bm} acidity:false` `{bm} acidic` something is, the more positively charged hydrogen ions it has.
+* the more `{bm} basicity:false` `{bm} basic` (`{bm} alkaline`) something is, the more reactive it is to positively charged hydrogen ions (it wants to give off electrons to those hydrogen ions).
 
 ![By Heinrich-Boll-Stiftung - https://www.flickr.com/photos/boellstiftung/35805740223, CC BY-SA 2.0, https://commons.wikimedia.org/w/index.php?curid=66098876](800px-PH_Scale-_Acidic_vs._Basic_(Alkaline).png)
 
@@ -290,7 +290,7 @@ Other terminology related to water:
 
 Terminology that's relevant but doesn't fit in any other section goes here.
 
-`{bm} Density` `{bm}|no_out dense` - The mass per unit volume of a substance.
+`{bm} Density` `{bm} dense:false` - The mass per unit volume of a substance.
 
 Specific `{bm} heat capacity` - The amount of heat needed to raise the temperature of one gram of a substance by one degree Celsius.
 
