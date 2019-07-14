@@ -61,7 +61,7 @@ Other terminology around the scientific method...
 * `{bm} independent variable` - An independent variable is basically the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
 * `{bm} dependent variable` - A dependent variable is a response you measure after applying the treatment -- you can think of it as the output from your experiment. For example, in the skin cancer experiment, the dependent variable might be a measurement of how different the cells are functioning (e.g. a cell with damaged DNA may produce different kinds / amounts of tRNA molecules -- something you can measure).
 * **data** - This is exactly what you think it is -- measurements/observations made during the experiment.
-* `{bm-a} placebo effect/(placebo effect|placebo)/i` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
+* `{bm} placebo effect/(placebo effect|placebo)/i` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
 
 ```{note}
 You can have more than one independent variable if you follow specific guidelines and are experienced enough, but the general rule of thumb is to have only 1 independent variable just because it makes things much simpler to analyze/interpret.
@@ -105,7 +105,7 @@ When atoms bind together, they form a `{bm} molecule`. Each type of molecule has
 As far as I can tell, the atoms will always bind in the same way. You can't ever have a molecule that has the same types of atoms in the same numbers but with a different structure.
 ```
 
-A `{bm} monomer` is a special designation for atoms/molecules that are able to join with other monomers to create even larger molecules. The process of joining is called `{bm-a} polymerization/(polymerization|polymerize)/i` and the resulting molecule is called a `{bm} polymer`.
+A `{bm} monomer` is a special designation for atoms/molecules that are able to join with other monomers to create even larger molecules. The process of joining is called `{bm} polymerization/(polymerization|polymerize)/i` and the resulting molecule is called a `{bm} polymer`.
 
 ```{dot}
 digraph {
@@ -124,9 +124,9 @@ There are probably special properties to monomers that allow them to chain up. T
 
 Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a very large number of atoms.
 
-An `{bm-a} ion/\b(ion)\b/i` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
-* if protons > electrons (more protons), it's called a `{bm-a} positively charged/(positive charge|positive-charge|positively-charged|positively charged)/i` ion / `{bm} positive ion`.
-* if protons < electrons (more electrons), it's called a `{bm-a} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} ANION`.
+An `{bm} ion/\b(ion)\b/i` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
+* if protons > electrons (more protons), it's called a `{bm} positively charged/(positive charge|positive-charge|positively-charged|positively charged)/i` ion / `{bm} positive ion`.
+* if protons < electrons (more electrons), it's called a `{bm} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} ANION`.
 * if protons == electrons, it's a neutral (no charge).
 
 Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
@@ -135,9 +135,9 @@ Ions are always trying to lose their charge and become neutral, either by giving
 
 ## pH
 
-`{bm-a} pH/\b(pH)\b/` stands for *potential of hydrogen* and it's the measure of positively charged hydrogen ions in a solution. The more...
-* the more `{bm-a} acidic/(acidity|acidic|acid)/i` something is, the more positively charged hydrogen ions it has.
-* the more `{bm-a} basic/(basicity|basic)/i` (`{bm} alkaline`) something is, the more reactive it is to positively charged hydrogen ions (it wants to give off electrons to those hydrogen ions).
+`{bm} pH/\b(pH)\b/` stands for *potential of hydrogen* and it's the measure of positively charged hydrogen ions in a solution. The more...
+* the more `{bm} acidic/(acidity|acidic|acid)/i` something is, the more positively charged hydrogen ions it has.
+* the more `{bm} basic/(basicity|basic)/i` `{bm} /(bases|base)_pH/i` (`{bm} alkaline`) something is, the more reactive it is to positively charged hydrogen ions (it wants to give off electrons to those hydrogen ions).
 
 ![By Heinrich-Boll-Stiftung - https://www.flickr.com/photos/boellstiftung/35805740223, CC BY-SA 2.0, https://commons.wikimedia.org/w/index.php?curid=66098876](800px-PH_Scale-_Acidic_vs._Basic_(Alkaline).png)
 
@@ -233,14 +233,13 @@ There are 5 different nucleotides:
 * G (`{bm} guanine`)
 * T (`{bm} thymine`) / U (`{bm} uracil`) - T in DNA, U in RNA
 
-The order the appear in defines the genetic information/instructions of that organism. Because they are the unit by which genetic information is encoded, each nucleotide is also called a `{bm} base`. For example, a string/sequence of DNA bases: ATATTTTCGATATCCACCA.
+The order the appear in defines the genetic information/instructions of that organism. Because they are the unit by which genetic information is encoded, each nucleotide is also called a `{bm} base/(bases|base)_nucleotide/i`. For example, a string/sequence of DNA bases_nucleotide: ATATTTTCGATATCCACCA.
 
 ```{note}
 When counting the number of bases, it’s typical to use kilo, mega, giga, etc.. For example, 5000 bases would be referred to as 5 kilobases (e.g. 5Kb). Maybe the best way to think about this is that information in DNA is organized like memory on a computer, but your byte size is 2 bits instead of 8.
 ```
 
-The two nucleotides/molecules that make up a connection are called a `{bm} base pair`. The
- rules to base pairs are…
+The two nucleotides/molecules that make up a connection are called a `{bm} base pair`. The rules to base pairs are…
 * A only ever binds to T (e.g. AT or TA)
 * G only ever binds to C (e.g. GC or CG)
 
@@ -290,8 +289,24 @@ Other terminology related to water:
 
 Terminology that's relevant but doesn't fit in any other section goes here.
 
-`{bm-a} Density/(density|dense)/i` - The mass per unit volume of a substance.
+`{bm} Density/(density|dense)/i` - The mass per unit volume of a substance.
 
-Specific `{bm} heat capacity` - The amount of heat needed to raise the temperature of one gram of a substance by one degree Celsius.
+`{bm} Specific heat capacity/(heat capacity|heat capacities)/i` - The amount of heat needed to raise the temperature of one gram of a substance by one degree Celsius.
 
 `{bm} Heat of vaporization` - The amount of energy needed to change one gram of a liquid substance to a gas at constant temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
