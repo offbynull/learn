@@ -7,7 +7,7 @@ Biology
 
 # Introduction
 
-Biology is defined as the study of life / living things. A living thing is defined as anything that converts energy from one form to another, while using that energy to grow, change, and reproduce.
+Biology is defined as the study of life / living things. A `{bm} living/\b(living|life)\b/i` thing is defined as anything that converts energy from one form to another, while using that energy to grow, change, and reproduce.
 
 # Scientific Method
 
@@ -273,7 +273,7 @@ Water is called a `{bm} universal solvent` because it can dissolve more molecule
 
 The properties that make water conducive for biological processes to operate:
 
-* Fluid under normal conditions - under normal temperatures, pressures, etc.. there's *cohesion* between other water molecules (fluid) / *adhesion* between water molecules and other polar molecules / ions (solvent).
+* Fluid under normal conditions - under normal temperatures, pressures, etc.. there's `{bm} cohesion` between other water molecules (fluid) / `{bm} adhesion` between water molecules and other polar molecules / ions (solvent).
 * Universal solvent - Water dissolves more things than any other liquid (more things doesn't mean everything).
 * High heat capacity - Because it takes a lot of energy to heat up water, its temperature can remain relatively stable as the environment around it changes (temperature regulation).
 * High heat of vaporization - As water evaporates, it traps heat from whatever its on (e.g. human body) and releases it into the environment (temperature regulation / cooling).
@@ -284,6 +284,64 @@ Other terminology related to water:
 * Molecules / ions that are charged and mixed with a solvent are called `{bm} solute`s.
 * Molecules that are attracted to water are called `{bm} hydrophilic`.
 * Molecules that are repelled from water are called `{bm} hydrophobic`.
+
+# Cells
+
+The first record of a cell was in 1665 when `{bm} Robert Hooke` published a book called The Micrographia. The book contains drawings of observations he made while looking at various dead organisms through a rudimentary microscope.
+
+A few years later, a Dutch lenscrafter by the name of `{bm} Antonie Van Leeuwenhoek/\b(Antonie Van Leeuwenhoek|Anthony Van Leeuwenhoek)\b/i` decided to use his expertise to craft a better microscope to better observe living cells / organisms. For example, he was able to observe sperm and Protists (unicellular organisms while he dubbed `{bm} animalcule`s).
+
+In the 1830s, `{bm} Matthias Schleiden` and `{bm} Theodore Schwann` began laying the groundwork for modern cell theory. They came up with the idea that...
+1. all life is composed of one or more cells.
+2. a cell is the `{bm-ri} basic` unit of life.
+
+They also suspected that cells come from other cells, but didn't know for sure if that was the only way they were produced. It was `{bm} Robert Remak` that in the mid-1800s established that...
+
+3. all cells come from other cells.
+
+`{bm} /\b(Rudolph Virchoi)\b/i`
+
+```{note}
+They credit for this sometimes goes to Rudolph Virchoi but it's been established that he was a plagiarist.
+```
+
+It's still an open question as to how the first / initial cell came to be. The current working theory is that, 3.5 billion years ago, phospholipids (the molecules that form the membrane of a cell) naturally form bilayers and connect in a circle. A membrane may have naturally encapsulated a set of arbitrary self-replication molecules (e.g. protein or RNA) and that's how the first cell began growing and splitting off.
+
+```{note}
+There are an estimated 37 trillion cells in the human body.
+```
+
+# Microscopy
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
+
+TODO FILL ME IN
 
 # Other Terminology
 
