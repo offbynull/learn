@@ -11,7 +11,7 @@ Biology is defined as the study of life / living things. A `{bm} living/\b(livin
 
 # Scientific Method
 
-The `{bm} scientific method` is the standard guideline for discovery and experimentation in the sciences (chemistry, physics, biology, etc..) The basic steps are...
+The `{bm} scientific method` is the standard guideline for discovery and experimentation in the sciences (chemistry, physics, biology, etc..) The `{bm-ri} basic` steps are...
 
 1. Observe.
 2. Ask a question about the observation.
@@ -58,7 +58,7 @@ Because things are so wishy-washy/not-exacty in biology, it's typical for an exp
 Other terminology around the scientific method...
 
 * `{bm} treatment` - The application of the test given to the experimental group(s) but not the control group.
-* `{bm} independent variable` - An independent variable is basically the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
+* `{bm} independent variable` - An independent variable is `{bm-ri} basically` the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
 * `{bm} dependent variable` - A dependent variable is a response you measure after applying the treatment -- you can think of it as the output from your experiment. For example, in the skin cancer experiment, the dependent variable might be a measurement of how different the cells are functioning (e.g. a cell with damaged DNA may produce different kinds / amounts of tRNA molecules -- something you can measure).
 * **data** - This is exactly what you think it is -- measurements/observations made during the experiment.
 * `{bm} placebo effect/(placebo effect|placebo)/i` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
@@ -195,7 +195,7 @@ digraph {
 The ribosome is what's responsible for folding? Not able to get a clear answer on this.
 ```
 
-The basic structure of an amino acid is as follows. The R is a placeholder that, when set, defines what type of amino acid it is...
+The `{bm-ri} basic` structure of an amino acid is as follows. The R is a placeholder that, when set, defines what type of amino acid it is...
 
 ![By GYassineMrabetTalk✉This W3C-unspecified vector image was created with Inkscape. - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2551977](320px-AminoAcidball.svg.png)
 
@@ -299,7 +299,7 @@ They also suspected that cells come from other cells, but didn't know for sure i
 
 3. all cells come from other cells.
 
-`{bm} /\b(Rudolph Virchoi)\b/i`
+`{bm} /\b(Rudolph Virchoi|Rudolph Virchow)\b/i`
 
 ```{note}
 They credit for this sometimes goes to Rudolph Virchoi but it's been established that he was a plagiarist.
@@ -313,35 +313,21 @@ There are an estimated 37 trillion cells in the human body.
 
 # Microscopy
 
-TODO FILL ME IN
+`{bm} Microscope`s are devices used to magnify (zoom in) on objects, such that you can see things that you normally would be too small to see on your own. The term microscope comes from the words...
+* micro, meaning small.
+* scope, meaning to look at.
 
-TODO FILL ME IN
+A picture taken through a microscope is called a `{bm} micrograph`. The distinguishing factors for most microscopes or the amount of magnification and the resolution of the output image.
 
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
+There are different types of microscopes:
+* `{bm} Simple microscope`s have just one lense (e.g. magnifying glass).
+* `{bm} Compound microscope`s have 2 ore more lenses (e.g. traditional microscopes used in labs).
+  * `{bm} Light microscope`s / `{bm} Brightfield microscope`s work by shining a light through the specimen (which can be alive) and into the lens system that eventually reaches your eye. They're the type of microscopes typically used in student labs.
+    * `{bm} Fluorescence microscope`s are microscopes that require the specimen being viewed is treated in some way to make it glow, allowing you to highlight parts of the specimen.
+    * `{bm} Confocal microscope`s are a special form of fluorescence microscopes that uses a laser to excite a sample and get it to glow fluorescent.
+* `{bm} Electron microscope`s use beams of electrons rather than beams of light. They produce very magnified very high resolutions images. But, unlike light microscopes, the specimens being observed are dead because electron microscopes operate in a vacuum.
+  * `{bm} scanning electron microscope`s (SEM) work by scanning a beam of electrons over the surface of the specimen to produce an image of the 3D surface.
+  * `{bm} transmission electron microscope`s (TEM) work by slicing up the specimen into ultra thin slices and and passing an electron bean through those slices to produce an image of the insides.
 
 # Other Terminology
 
