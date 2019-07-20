@@ -287,6 +287,46 @@ Other terminology related to water:
 
 # Cells
 
+`{bm} Cell`s are the basic unit of living things / the building blocks of life. They're tiny structures encapsulating information and machinery that allows them to reproduce and perform other important functions (e.g. appendages to move around).
+
+```{note}
+Viruses are not cells and they can also be considered living because they reproduce in a roundabout way (and also convert energy?).
+```
+
+There are 2 types of cells...
+
+* `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells (e.g. human): These cells are typically larger and have membrane-bound compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, the DNA for these types of cells is encapsulated in its own compartment called the nucleus.
+
+![By Mediran - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20664784](320px-Eukaryotic_Cell_(animal).jpg)
+
+* `{bm} Prokaryotic/(Prokaryote|Prokaryotic)/i` cells (e.g. bacteria): These cells are typically smaller and don't have organelles. For example, the DNA for these types of cells is free-floating in the cell -- it isn't isolated to a particular compartment.
+
+![By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821](Average_prokaryote_cell-_en.svg.png)
+
+## Compartments
+
+The following is the layout of a eukaryotic cell belonging to an animal...
+
+![By LadyofHats (Mariana Ruiz) - Own work using Adobe Illustrator. Image renamed from Image:Animal cell structure.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=4266142](Animal_cell_structure_en.svg.png)
+
+* `{bm} Cytoplasm` (required) - The insides/guts of a cell is called the cytoplasm. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
+
+* `{bm} Membrane` (required) - The thing encapsulating the cytoplasm is called the membrane. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
+
+* `{bm} Cell wall` (optional) - Stiff layer around the membrane meant for protection. *Not all cells have a cell wall*. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
+
+* `{bm} Ribosome` (required) - Tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
+
+* `{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` (optional) - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
+
+  Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
+
+* `{bm} Flagellum` (optional) - An appendage used by the cell to move around. Depending on the type of cell, it may have no flagellum or more than 1 flagellum.
+
+  Other types of cells have similar appendages. `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell, while `{bm} pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` are much larger leg-like appendages used to crawl.
+
+## History
+
 The first record of a cell was in 1665 when `{bm} Robert Hooke` published a book called The Micrographia. The book contains drawings of observations he made while looking at various dead organisms through a rudimentary microscope.
 
 A few years later, a Dutch lenscrafter by the name of `{bm} Antonie Van Leeuwenhoek/\b(Antonie Van Leeuwenhoek|Anthony Van Leeuwenhoek)\b/i` decided to use his expertise to craft a better microscope to better observe living cells / organisms. For example, he was able to observe sperm and Protists (unicellular organisms while he dubbed `{bm} animalcule`s).
