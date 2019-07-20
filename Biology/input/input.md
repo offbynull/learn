@@ -9,6 +9,10 @@ Biology
 
 Biology is defined as the study of life / living things. A `{bm} living/\b(living|life)\b/i` thing is defined as anything that converts energy from one form to another, while using that energy to grow, change, and reproduce.
 
+```{note}
+Primary source for these notes is Khan Academy's HS Biology course, with additional information from Wikipedia and other sources.
+```
+
 # Scientific Method
 
 The `{bm} scientific method` is the standard guideline for discovery and experimentation in the sciences (chemistry, physics, biology, etc..) The `{bm-ri} basic` steps are...
@@ -35,6 +39,7 @@ The material mentions that for a hypothesis to be testable, you should be able t
 ```{note}
 A hypothesis and a theory are different things. Hypothesis is a potential answer for a specific problem. A theory provides a potential framework for a much broader class of problems based on supporting evidence. The example given by the material: "The toaster won't toast because the electrical outlet is broken" is a hypothesis, whereas "Electrical appliances need a source of electricity in order to run" is closer to a theory.
 ```
+
 ## Experiment
 
 Once you have a hypothesis, you design an `{bm} experiment` to test it. In the case of our sun exposure leads to increased risk of skin cancer hypothesis, an experiment may be to expose skin cells to UV rays in amounts equivalent to that given off by the sun and then check to see if those cells have been damaged (compared to a control group of skin cells that you haven't exposed to UV rays).
@@ -201,7 +206,7 @@ The `{bm-ri} basic` structure of an amino acid is as follows. The R is a placeho
 
 ## Lipid Molecules
 
-`{bm} Lipids` are molecules that are somewhat not water soluble -- meaning that they have parts that resist water but maybe also parts that are attracted to water. In biological systems, lipids are often associated with...
+`{bm} Lipid`s are molecules that are somewhat not water soluble -- meaning that they have parts that resist water but maybe also parts that are attracted to water. In biological systems, lipids are often associated with...
 * energy storage (fats)
 * cellular membranes (phospholipids)
 
@@ -284,6 +289,7 @@ Other terminology related to water:
 * Molecules / ions that are charged and mixed with a solvent are called `{bm} solute`s.
 * Molecules that are attracted to water are called `{bm} hydrophilic`.
 * Molecules that are repelled from water are called `{bm} hydrophobic`.
+* Molecules that have parts that are hydrophilic as well as parts that are hydrophobic are called `{bm} amphipathic`
 
 # Cells
 
@@ -325,7 +331,58 @@ The following is the layout of a eukaryotic cell belonging to an animal...
 
   Other types of cells have similar appendages. `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell, while `{bm} pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` are much larger leg-like appendages used to crawl.
 
-## History
+## Fluid Mosaic Model
+
+The `{bm} fluid mosaic model` is the accepted model for how cell membranes work. The model says that a cell membrane is composed of a phospholipid bilayer with proteins, lipids, and carbohydrates floating around on either side or embedded in between.
+
+```{note}
+The description above is the rational for the name 'fluid mosaic model'. It's fluid and there's a mosaic of different things embedded or attached to it.
+```
+
+![By LadyofHats Mariana Ruiz - Own work. Image renamed from File:Cell membrane detailed diagram.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6027169](800px-Cell_membrane_detailed_diagram_en.svg.png)
+
+A `{bm} phospholipid` is a amphipathic lipid molecule that involves a phosphate group. The...
+* bulbus phosphate group at the top is hydrophilic -- it has a charge and as such is attracted to water (either the cytoplasm or the fluid outside the cell).
+* long fatty acid tails are hydrophobic -- they have no obvious charge and as such aren't attracted to water.
+
+```{note}
+For a referesher on how hydrophobic / hydrophilic molecules work, see the section on Water. Specifically: adhesion / weakly negative / weakly positive.
+```
+
+![By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=30131167](0301_Phospholipid_Structure.jpg)
+
+As such, phospholipids have a natural tendency to form as a `{bm} phospholipid bilayer` (2 layers attached together, called a `{bm} liposome`) or a ball (called a `{bm} micelle`). The hydrophilic heads are going to point towards the water causing the hydrophobic tails to point at each other.
+
+![By Mariana Ruiz Villarreal ,LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=3032610](Phospholipids_aqueous_solution_structures.svg.png)
+
+```{note}
+If the phospholipids have small tails, they may form a micelle (a small, single-layered sphere), while if they have bulkier tails, they may form a liposome.
+```
+
+How fluid a phospholipid bilayer is depends on the types of phospholipid molecules that make it up and the temperature. Phospholipid molecules have 2 fatty acid tails. The fatty acid tails can be either...
+
+* both saturated (straight tails)
+* one saturated (straight tail) and one unsaturated (bent tail).
+
+At cooler temperatures, phospholipids that have 2 saturated fatty acid tails (straight tails) tend to get more rigid / dense because they can more easily pack together. Phospholipids with unsaturated fatty acid tails (bent tails) don't end up getting as rigid / dense, allowing the membrane to stay fluid at lower temperatures. Cholestrol embedded in the phospholipid bilayer also helps it stay more fluid at lower temperatures.
+
+```{note}
+Phospholipid bilayers have the consistency of oil-based salad dressing. It may seem weak but it's strong enough to act as a separator between the environment inside and the environment outside. Water from one-side can move to the other but does so very rarely -- a single molecule may sneak through the layer every now and then. Aquaporins are proteins embedded in the phospholipid bilayer that allow water to rapidly pass (when needed).
+```
+
+Examples of molecules that can be embedded in or attached to the phospholipid bilayer include...
+
+* `{bm} Glycolipid`s / `{bm} Glycoprotein`s - These are lipids and proteins with carbohydrates attached to them and are typically found pointing outside of the cell. These carbohydrates are how a cell identifies if a neighbouring cell is foreign or not.
+* `{bm} Integral protein`s - Proteins that are partially hydrophobic. Either one end of the protein is anchored inside the membrane or the protein is fully going through the membrane.
+  * `{bm} Transmembrane protein`s - Proteins that have one end inside the cytoplasm and the other outside of the cell. Typical usecase for these types of proteins is moving substances from inside the cell (cytoplasm) to outside the cell and vice-versa.
+* `{bm} Peripheral protein`s - Proteins that are found on the surface of the protein (either on the cytoplasm side or the outside side). Unlike integral proteins, they don't have any portion going inside the membrane. As such, they more freely move around compared to integral proteins.
+* `{bm} Cholesterol` - Sits inside of the membrane to help ensure that the membrane doesn't become too stiff.
+
+```{note}
+See first diagram in this section for an example of each of the molecules listed above.
+```
+
+## History of Modern Cell Theory
 
 The first record of a cell was in 1665 when `{bm} Robert Hooke` published a book called The Micrographia. The book contains drawings of observations he made while looking at various dead organisms through a rudimentary microscope.
 
@@ -342,7 +399,7 @@ They also suspected that cells come from other cells, but didn't know for sure i
 `{bm} /\b(Rudolph Virchoi|Rudolph Virchow)\b/i`
 
 ```{note}
-They credit for this sometimes goes to Rudolph Virchoi but it's been established that he was a plagiarist.
+The credit for this sometimes goes to Rudolph Virchoi but it's been established that he was a plagiarist.
 ```
 
 It's still an open question as to how the first / initial cell came to be. The current working theory is that, 3.5 billion years ago, phospholipids (the molecules that form the membrane of a cell) naturally form bilayers and connect in a circle. A membrane may have naturally encapsulated a set of arbitrary self-replication molecules (e.g. protein or RNA) and that's how the first cell began growing and splitting off.
