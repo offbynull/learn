@@ -293,21 +293,43 @@ Other terminology related to water:
 
 # Cells
 
-`{bm} Cell`s are the basic unit of living things / the building blocks of life. They're tiny structures encapsulating information and machinery that allows them to reproduce and perform other important functions (e.g. appendages to move around).
+`{bm} Cell`s are the `{bm-ri} basic` unit of living things / the building blocks of life. They're tiny structures that encapsulate information and machinery that allows them to replicate/reproduce and perform other important functions (e.g. appendages to move around).
 
 ```{note}
-Viruses are not cells and they can also be considered living because they reproduce in a roundabout way (and also convert energy?).
+Viruses are not cells but they can also be considered living because they reproduce in a roundabout way (and also convert energy?).
 ```
 
 There are 2 types of cells...
 
-* `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells (e.g. human): These cells are typically larger and have membrane-bound sub-compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, the DNA for these types of cells is encapsulated in its own compartment called the nucleus.
+* `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells: These cells are typically larger and have membrane-bound sub-compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus.
 
-![By Mediran - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20664784](320px-Eukaryotic_Cell_(animal).jpg)
+  Eukaryotes have their DNA broken up into multiple strands. They can either be single-cellular organisms (e.g. amoeba) or multi-cellular organisms (e.g. human). Single-cellular organism that are eukaryotic are called `{bm} protist`s.
 
-* `{bm} Prokaryotic/(Prokaryote|Prokaryotic)/i` cells (e.g. bacteria): These cells are typically smaller and don't have organelles. For example, the DNA for these types of cells is free-floating in the cell -- it isn't isolated to a particular compartment.
+  ![By Mediran - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20664784](320px-Eukaryotic_Cell_(animal).jpg)
 
-![By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821](Average_prokaryote_cell-_en.svg.png)
+* `{bm} Prokaryotic/(Prokaryote|Prokaryotic)/i` cells: These cells are typically smaller and don't have organelles. For example, their DNA is free-floating in the cell (it's free floating but stays mostly in the center area called the  `{bm} nucleoid`).
+
+  Prokaryotes have a single circular-strand of DNA. They can only be single-cellular organisms (e.g. bacteria).
+
+  ![By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821](Average_prokaryote_cell-_en.svg.png)
+
+
+Comparison matrix between eukaryotes and prokaryotes ...
+
+```{csv}
+!!{ "firstLineHeader": true }
+, Eukaryotes, Prokaryotes
+Size, Larger, Smaller
+Complexity, More complex, More simple
+Sub-compartments (organelles), Yes, No
+DNA layout, Multiple stands, Single circular strand
+Single-cell organisms, Yes (e.g. amoeba), Yes (e.g. bacteria and archaea)
+Multi-cell organisms, Yes (e.g. animals and fungus), No
+```
+
+```{note}
+Archaea is an organism that looks like bacteria but they're totally different.
+```
 
 ## Organelles and Layout
 
@@ -319,9 +341,19 @@ The following is a diagram of an animal eukaryotic cell along with descriptions 
 
 * `{bm} Cytoplasm` (both eukaryotic and prokaryotic) - The insides/guts of a cell is called the cytoplasm. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
 
-* `{bm} Membrane` (both eukaryotic and prokaryotic) - The thing encapsulating the cytoplasm is called the membrane. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
+* `{bm} Plasma Membrane/(Plasma membrane|Membrane)/i` (both eukaryotic and prokaryotic) - The thing encapsulating the cytoplasm is called the plasma membrane. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
+
+  ```{note}
+  The term membrane can refer to either the plasma membrane or the membrane of an organelle. How you should interpret it depends on the context in which its used.
+  ```
 
 * `{bm} Cell wall` (both eukaryotic and prokaryotic) - Stiff layer around the membrane meant for protection. *Not all cells have a cell wall*. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
+
+  Almost all prokaryotes have cell walls. Only some eukaryotes have cell walls (e.g. fungi and plants).
+
+  ```{note}
+  The material says that cell walls are made up of a molecule called peptidoglycan, but that doesn't seem to be the case for every cell? For example, this link says that plant cells have cell walls made up of cellulose: https://www.quora.com/Do-Eukaryotes-have-cell-walls
+  ```
 
 * `{bm} Ribosome` (both eukaryotic and prokaryotic) - Tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
 
