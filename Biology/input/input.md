@@ -301,7 +301,7 @@ Viruses are not cells and they can also be considered living because they reprod
 
 There are 2 types of cells...
 
-* `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells (e.g. human): These cells are typically larger and have membrane-bound compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, the DNA for these types of cells is encapsulated in its own compartment called the nucleus.
+* `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells (e.g. human): These cells are typically larger and have membrane-bound sub-compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, the DNA for these types of cells is encapsulated in its own compartment called the nucleus.
 
 ![By Mediran - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20664784](320px-Eukaryotic_Cell_(animal).jpg)
 
@@ -309,27 +309,68 @@ There are 2 types of cells...
 
 ![By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821](Average_prokaryote_cell-_en.svg.png)
 
-## Compartments
+## Organelles and Layout
 
-The following is the layout of a eukaryotic cell belonging to an animal...
+Recall that eukaryotic cells are organized into membrane-bound sub-compartments called organelles. Prokaryotic cells don't have organelles -- everything is free-floating in their cytoplasm.
+
+The following is a diagram of an animal eukaryotic cell along with descriptions of certain organelles / features. While the diagram shown is for an eukaryotic cell, the descriptions below may apply to either prokaryotic cells or eukaryotic cells.
 
 ![By LadyofHats (Mariana Ruiz) - Own work using Adobe Illustrator. Image renamed from Image:Animal cell structure.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=4266142](Animal_cell_structure_en.svg.png)
 
-* `{bm} Cytoplasm` (required) - The insides/guts of a cell is called the cytoplasm. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
+* `{bm} Cytoplasm` (both eukaryotic and prokaryotic) - The insides/guts of a cell is called the cytoplasm. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
 
-* `{bm} Membrane` (required) - The thing encapsulating the cytoplasm is called the membrane. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
+* `{bm} Membrane` (both eukaryotic and prokaryotic) - The thing encapsulating the cytoplasm is called the membrane. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
 
-* `{bm} Cell wall` (optional) - Stiff layer around the membrane meant for protection. *Not all cells have a cell wall*. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
+* `{bm} Cell wall` (both eukaryotic and prokaryotic) - Stiff layer around the membrane meant for protection. *Not all cells have a cell wall*. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
 
-* `{bm} Ribosome` (required) - Tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
+* `{bm} Ribosome` (both eukaryotic and prokaryotic) - Tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
 
-* `{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` (optional) - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
+  Ribsomes can either be floating around in the cytoplasm (called `{bm} free ribosome`) or be embedded in the membrane of endoplasmic reticulum.
+
+* `{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` (eukaryotic organelle) - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
 
   Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
 
-* `{bm} Flagellum` (optional) - An appendage used by the cell to move around. Depending on the type of cell, it may have no flagellum or more than 1 flagellum.
+* `{bm} Endoplasmic Reticulum` (eukaryotic organelle) - Layered membrane that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
 
-  Other types of cells have similar appendages. `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell, while `{bm} pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` are much larger leg-like appendages used to crawl.
+  ```{note}
+  It's called rough endoplasmic reticulum because the ribosomes make the surface look rough.
+  ```
+
+  Recall that ribosomes are what translate mRNA to proteins. Since the endoplasmic reticulum is directly connected to the nucleus (via pores on the nucleus), it provides a fairly straight-forward path for protein generation: mRNA produced in the nucleus...
+  1. travels to the endoplasmic reticulum via the connected pores,
+  2. then travels to the membrane of the endoplasmic reticulum where it ends up hitting ribosomes embedded in the (thereby producing proteins).
+
+* `{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i` (eukaryotic organelle) - Layered membrane that looks similar to rough endoplasmic reticulum but isn't attached to the nucleus. Golgi package moleculues (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
+
+  They're also responsible for building lysosomes (cell digestion machines).
+
+  ```{note}
+  The terms golgi, golgi apparatus, golgi complex, and golgi body all refer to the same thing.
+  ```
+
+* `{bm} Mitochondria/(Mitochondria|Mitochondrion)/i` (eukaryotic organelle) - Where ATP (Adenosine triphosphate) is produced. ATP is a chemical that provides energy to drive various biological processes. As such, mitochondria are often referred to as "the power house of the cell."
+
+  Mitochondria have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbotic relationship with a larger cell by `{bm-ri} living` in it, eventually becaming part of the cell.
+
+  Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
+
+* `{bm} Chloroplast` (eukaryotic plant / algae organelle) - Responsible for photosynthesis. Only available in plant and algae cells, not animal cells.
+
+* `{bm} Vacuole` (eukaryotic organelle) - Compartments responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
+
+  Vacuoles are often responsible for a plant's shape. For example, a well watered plant will be upright and spry because its vacuoles are full. A plant that isn't as well watered may be sagging down or wilting because the vacuoles are less full. 
+
+* `{bm} Lysosomes` (eukaryotic organelle) - Compartments full of enzymes that help break down waste products and foreign substances. Lysosomes are similar to vacuoles but more often found in animals cells than plant and algae cells.
+
+  ```{note}
+  According to the material, the evidence that they've been found in plant cells is recent.
+  ```
+
+* `{bm} Flagellum` / `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` / `{bm} Pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` (0..*, both eukaryotic and prokaryotic) - One or more appendages used by the cell to move around.
+  * Flagellum are tails that extend from the cell (e.g. tail on a sperm cell). There can be more than 1 flagellum.
+  * Cilia are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell.
+  * Pseudopodia are much larger leg-like appendages used to crawl (e.g. amoeba cells).
 
 ## Fluid Mosaic Model
 
