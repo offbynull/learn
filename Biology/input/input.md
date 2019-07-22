@@ -319,7 +319,7 @@ Comparison matrix between eukaryotes and prokaryotes ...
 ```{csv}
 !!{ "firstLineHeader": true }
 , Eukaryotes, Prokaryotes
-Size, Larger, Smaller
+Size, 10 to 100 micrometers (μm), 0.1 to 5 micrometers (μm)
 Complexity, More complex, More simple
 Sub-compartments (organelles), Yes, No
 DNA layout, Multiple stands, Single circular strand
@@ -332,6 +332,52 @@ Archaea is an organism that looks like bacteria but they're totally different.
 ```
 
 ## Organelles and Layout
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+START BACK OFF ON peroxisomes AND ADD A DIAGRAM FOR A BACTERIA AS WELL BECAUSE THE DESCRIPTIONS ARE FOR BOTH EUK EYUK AND PROK CELLS.
+
+
+
 
 Recall that eukaryotic cells are organized into membrane-bound sub-compartments called organelles. Prokaryotic cells don't have organelles -- everything is free-floating in their cytoplasm.
 
@@ -349,10 +395,17 @@ The following is a diagram of an animal eukaryotic cell along with descriptions 
 
 * `{bm} Cell wall` (both eukaryotic and prokaryotic) - Stiff layer around the membrane meant for protection. *Not all cells have a cell wall*. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
 
-  Almost all prokaryotes have cell walls. Only some eukaryotes have cell walls (e.g. fungi and plants).
+  The material states that cell walls...
+  1. provide an extra layer of protection.
+  1. help maintain shape.
+  1. help prevent dehydration.
+
+  Almost all prokaryotes have cell walls. Only some eukaryotes have cell walls (e.g. fungi and plants). The material says that cell walls for most bacteria are made up of a molecule called `{bm} peptidoglycan`, but it can be different for other cells. For example, [this link](https://www.quora.com/Do-Eukaryotes-have-cell-walls) says that plant cells have cell walls made up of cellulose.
+
+* `{bm} Capsule` (prokaryotic) - The outermost layer of some types of cells (typically backteria cells). Made up of carbohydrates and there mainly to help the cell stick itself to the environment.
 
   ```{note}
-  The material says that cell walls are made up of a molecule called peptidoglycan, but that doesn't seem to be the case for every cell? For example, this link says that plant cells have cell walls made up of cellulose: https://www.quora.com/Do-Eukaryotes-have-cell-walls
+  Although eukaryotic cells don't have capsules, they do have carbohydrates on their outside. Those carbohydrates aren't organized as a capsule though: https://www.quora.com/Do-some-eukaryotic-cells-have-capsules-or-is-it-just-prokaryotes-Are-there-exceptions-of-eukaryotes-having-capsules. Is this talking about the same carbohydrates that are embedded in the membrane (glycolipids / glycoproteins).
   ```
 
 * `{bm} Ribosome` (both eukaryotic and prokaryotic) - Tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
@@ -399,9 +452,11 @@ The following is a diagram of an animal eukaryotic cell along with descriptions 
   According to the material, the evidence that they've been found in plant cells is recent.
   ```
 
-* `{bm} Flagellum` / `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` / `{bm} Pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` (0..*, both eukaryotic and prokaryotic) - One or more appendages used by the cell to move around.
+* `{bm} Flagellum` / `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` / `{bm} Fimbriae` / `{bm} Pili` / `{bm} Pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` (both eukaryotic and prokaryotic) - One or more appendages used by the cell to move around.
   * Flagellum are tails that extend from the cell (e.g. tail on a sperm cell). There can be more than 1 flagellum.
   * Cilia are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell.
+  * Fimbriae are much smaller hair-like appendages used to help attach to host cells and surfaces (e.g. bacteria cells).
+  * Pili are much smaller hair-like appendages used to help transfer DNA between cells and/or to help move (e.g. bacteria cells).
   * Pseudopodia are much larger leg-like appendages used to crawl (e.g. amoeba cells).
 
 ## Fluid Mosaic Model
