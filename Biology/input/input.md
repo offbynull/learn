@@ -327,58 +327,31 @@ Regardless of if they're prokaryotes or eukaryotes, different specified of cells
 
   Every cell has cytoplasm.
 
-
-```{img}
-Animal_cell_structure_en.svg.png
-Eukaryote with cytoplasm highlighted
-By LadyofHats (Mariana Ruiz) - Own work using Adobe Illustrator. Image renamed from Image:Animal cell structure.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=4266142
-scale 0.5 0.5
-highlight_color rgba(0, 1, 1, 1)
-arrow 1 0.5 0.8 0.5
-expand 2 1 0 0
-text 0.5 0.5 cytoplasm
-text 0.5 0.6 (everything inside)
-```
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
-
-ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
+  ```{img}
+  Anima_cell_notext.svg
+  Eukaryote with cell ribosomes highlighted
+  By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+  scale 0.5 0.5
+  arrow 1 0.5 0.7 0.5
+  expand 2 1 0 0
+  text 0.5 0.5 cytoplasm
+  text 0.5 0.6 (everything inside)
+  ```
 
 * `{bm} Plasma Membrane/(Plasma membrane|Membrane)/i` (both eukaryotic and prokaryotic) - The thing encapsulating the cytoplasm is called the plasma membrane. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
 
   Every cell has a membrane encapsulating its cytoplasm.
+
+  ```{img}
+  Anima_cell_notext.svg
+  Eukaryote with cell ribosomes highlighted
+  By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+  scale 0.5 0.5
+  arrow 1 0.5 0.81 0.6
+  expand 2 1 0 0
+  text 0.5 0.5 cell membrane
+  text 0.5 0.6 (holds everything in)
+  ```
 
   ```{note}
   The term membrane can refer to either the plasma membrane or the membrane of an organelle. How you should interpret it depends on the context in which its used.
@@ -392,8 +365,30 @@ ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
   1. help prevent dehydration.
 
   Almost all prokaryotes have cell walls. Only some eukaryotes have cell walls (e.g. fungi and plants). The material says that cell walls for most bacteria are made up of a molecule called `{bm} peptidoglycan`, but it can be different for other cells. For example, [this link](https://www.quora.com/Do-Eukaryotes-have-cell-walls) says that plant cells have cell walls made up of cellulose.
+  
+  ```{img}
+  Average_prokaryote_cell-_unlabled.svg
+  Prokaryotic with capsule highlighted
+  By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
+  scale 0.5 0.5
+  arrow 1 0.5 0.85 0.5
+  expand 2 1 0 0
+  text 0.5 0.5 cell wall
+  text 0.5 0.6 (middle layer)
+  ```
 
 * `{bm} Capsule` (prokaryotic) - The outermost layer of some types of cells (typically backteria cells). Made up of carbohydrates and there mainly to help the cell stick itself to the environment.
+
+  ```{img}
+  Average_prokaryote_cell-_unlabled.svg
+  Prokaryotic with capsule highlighted
+  By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
+  scale 0.5 0.5
+  arrow 1 0.5 0.9 0.5
+  expand 2 1 0 0
+  text 0.5 0.5 capsule
+  text 0.5 0.6 (outter-most layer)
+  ```
 
   ```{note}
   Although eukaryotic cells don't have capsules, they do have carbohydrates on their outside. Those carbohydrates aren't organized as a capsule though: https://www.quora.com/Do-some-eukaryotic-cells-have-capsules-or-is-it-just-prokaryotes-Are-there-exceptions-of-eukaryotes-having-capsules. Is this talking about the same carbohydrates that are embedded in the membrane (glycolipids / glycoproteins).
@@ -403,6 +398,17 @@ ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
 
   Ribsomes can either be floating around in the cytoplasm (called `{bm} free ribosome`) or be embedded in the membrane of endoplasmic reticulum.
 
+  ```{img}
+  Anima_cell_notext.svg
+  Eukaryote with cell ribosomes highlighted
+  By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+  crop 0.32 0.16 0.6 0.34
+  arrow 0.9 0.5 0.5 0.6
+  arrow 0.9 0.5 0.65 0.35
+  expand 1.3 1 0 0
+  text 0.7 0.5 ribosomes
+  text 0.7 0.65 (little blue dots)
+  ```
 
 * `{bm} Flagellum` / `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` / `{bm} Fimbriae` / `{bm} Pili` / `{bm} Pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` (both eukaryotic and prokaryotic) - One or more appendages used by the cell to move around.
   * Flagellum are tails that extend from the cell (e.g. tail on a sperm cell). There can be more than 1 flagellum.
@@ -411,21 +417,91 @@ ADD A LITTLE DIAGRAM LIKE THE ONE ABOVE FOR EACH OF THE REMAINING SECTIONS.
   * Pili are much smaller hair-like appendages used to help transfer DNA between cells and/or to help move (e.g. bacteria cells).
   * Pseudopodia are much larger leg-like appendages used to crawl (e.g. amoeba cells).
 
+  ```{img}
+  Anima_cell_notext.svg
+  Eukaryote with cell flagellum highlighted
+  By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+  scale 0.5 0.5
+  arrow 1 0.5 0.3 0.84
+  expand 2 1 0 0
+  text 0.5 0.5 flagellum
+  ```
+
 ## Eukaryotic Cells
 
 ![By Mediran - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20664784](320px-Eukaryotic_Cell_(animal).jpg)
+
+```{img}
+Animal_cell_structure_en.svg
+Eukaryotic cell
+By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821
+```
 
 `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells are typically larger and have membrane-bound sub-compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus.
 
 Eukaryotes have their DNA broken up into multiple strands. They can either be single-cellular organisms (e.g. amoeba) or multi-cellular organisms (e.g. human). Single-cellular organism that are eukaryotic are called `{bm} protist`s.
 
-The following is a diagram of an animal eukaryotic cell along with descriptions of certain organelles / features as well as descriptions for some of the shown organelles.
-
-![By LadyofHats (Mariana Ruiz) - Own work using Adobe Illustrator. Image renamed from Image:Animal cell structure.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=4266142](Animal_cell_structure_en.svg.png)
+The following are descriptions for some of the organelles shown in the diagram above.
 
 * `{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
 
   Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
+
+  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
 
 * `{bm} Endoplasmic Reticulum` - Layered membrane that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
 
@@ -465,7 +541,11 @@ The following is a diagram of an animal eukaryotic cell along with descriptions 
 
 ## Prokaryotic Cells
 
-![By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821](Average_prokaryote_cell-_en.svg.png)
+```{img}
+Average_prokaryote_cell-_en.svg
+Prokaryotic cell
+By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821
+```
 
 `{bm} Prokaryotic/(Prokaryote|Prokaryotic)/i` cells: These cells are typically smaller and don't have organelles. For example, their DNA is free-floating in the cell (it's free floating but stays mostly in the center area called the  `{bm} nucleoid`).
 
