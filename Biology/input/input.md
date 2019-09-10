@@ -321,7 +321,7 @@ Multi-cell organisms, Yes (e.g. animals and fungus), No
 Archaea is an organism that looks like bacteria but they're totally different.
 ```
 
-Regardless of if they're prokaryotes or eukaryotes, different specified of cells vary in features. The following is a list of common cell features (not exhaustive).
+Regardless of if they're prokaryotes or eukaryotes, different cell specifies vary in features. The following is a list of common cell features (not exhaustive).
 
 * `{bm} Cytoplasm` (both eukaryotic and prokaryotic) - The insides/guts of a cell is called the cytoplasm. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
 
