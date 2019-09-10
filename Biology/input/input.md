@@ -429,8 +429,6 @@ Regardless of if they're prokaryotes or eukaryotes, different specified of cells
 
 ## Eukaryotic Cells
 
-![By Mediran - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=20664784](320px-Eukaryotic_Cell_(animal).jpg)
-
 ```{img}
 Animal_cell_structure_en.svg
 Eukaryotic cell
