@@ -352,6 +352,17 @@ Regardless of if they're prokaryotes or eukaryotes, different cell specifies var
   text 0.5 0.5 cell membrane
   text 0.5 0.6 (holds everything in)
   ```
+  
+  ```{img}
+  Average_prokaryote_cell-_unlabled.svg
+  Prokaryotic with capsule highlighted
+  By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
+  scale 0.5 0.5
+  arrow 1 0.5 0.8 0.5
+  expand 2 1 0 0
+  text 0.5 0.5 cell membrane
+  text 0.5 0.6 (inner layer)
+  ```
 
   ```{note}
   The term membrane can refer to either the plasma membrane or the membrane of an organelle. How you should interpret it depends on the context in which its used.
@@ -431,8 +442,16 @@ Regardless of if they're prokaryotes or eukaryotes, different cell specifies var
 
 ```{img}
 Animal_cell_structure_en.svg
-Eukaryotic cell
+ANIMAL CELL
 By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821
+text 0.45 0.05 ANIMAL CELL
+```
+
+```{img}
+Plant_cell_structure-en.svg
+Eukaryotic plant cell
+By LadyofHats - Self-made using Adobe Illustrator. (The original edited was also made by me, LadyofHats), Public Domain, https://commons.wikimedia.org/w/index.php?curid=844682
+text 0.45 0.1 PLANT CELL
 ```
 
 `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells are typically larger and have membrane-bound sub-compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus.
@@ -444,62 +463,6 @@ The following are descriptions for some of the organelles shown in the diagram a
 * `{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
 
   Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
-
-  TODO: ADD DIAGRAM FOR EACH BULLETPOINT
 
 * `{bm} Endoplasmic Reticulum` - Layered membrane that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
 
@@ -525,17 +488,17 @@ The following are descriptions for some of the organelles shown in the diagram a
 
   Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
 
-* `{bm} Chloroplast` (eukaryotic plant / algae organelle) - Responsible for photosynthesis. Only available in plant and algae cells, not animal cells.
-
-* `{bm} Vacuole` (eukaryotic organelle) - Compartments responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
-
-  Vacuoles are often responsible for a plant's shape. For example, a well watered plant will be upright and spry because its vacuoles are full. A plant that isn't as well watered may be sagging down or wilting because the vacuoles are less full. 
-
-* `{bm} Lysosomes` (eukaryotic organelle) - Compartments full of enzymes that help break down waste products and foreign substances. Lysosomes are similar to vacuoles but more often found in animals cells than plant and algae cells.
+* `{bm} Lysosomes` - Compartments full of enzymes that help break down waste products and foreign substances. Lysosomes are similar to vacuoles but more often found in animals cells than plant and algae cells.
 
   ```{note}
   According to the material, the evidence that they've been found in plant cells is recent.
   ```
+
+* `{bm} Chloroplast` (plant / algae) - Responsible for photosynthesis. Only available in plant and algae cells, not animal cells.
+
+* `{bm} Vacuole` (mostyl plant / algae) - Compartments responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
+
+  Vacuoles are often responsible for a plant's shape. For example, a well watered plant will be upright and spry because its vacuoles are full. A plant that isn't as well watered may be sagging down or wilting because the vacuoles are less full. 
 
 ## Prokaryotic Cells
 
