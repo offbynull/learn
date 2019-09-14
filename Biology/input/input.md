@@ -445,6 +445,19 @@ Animal_cell_structure_en.svg
 ANIMAL CELL
 By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic cell, Chapter 4: Mutagenicity of alkyl N-acetoxybenzohydroxamates, Concept 1: Common Features of All Cells, Cells - Structure and Function), Public Domain, https://commons.wikimedia.org/w/index.php?curid=3648821
 text 0.45 0.05 ANIMAL CELL
+
+bg_color #00000000
+
+fg_color #ff00ffff
+rect 0.25 0.012 0.17 0.23
+fg_color #0000ffff
+rect 0.01 0.55 0.24 0.08
+fg_color #007f7fff
+rect 0.01 0.44 0.24 0.075
+fg_color #00ff00ff
+rect 0.81 0.355 0.18 0.04
+fg_color #7f7f00ff
+rect 0.81 0.285 0.18 0.04
 ```
 
 ```{img}
@@ -452,6 +465,23 @@ Plant_cell_structure-en.svg
 Eukaryotic plant cell
 By LadyofHats - Self-made using Adobe Illustrator. (The original edited was also made by me, LadyofHats), Public Domain, https://commons.wikimedia.org/w/index.php?curid=844682
 text 0.45 0.1 PLANT CELL
+
+bg_color #00000000
+
+fg_color #ff0000ff
+rect 0.01 0.25 0.2 0.135
+fg_color #800080ff
+rect 0.01 0.395 0.2 0.11
+fg_color #ff00ffff
+rect 0.79 0.75 0.17 0.16
+fg_color #0000ffff
+rect 0.46 0.87 0.13 0.11
+fg_color #0000ffff
+rect 0.86 0.34 0.135 0.11
+fg_color #00ff00ff
+rect 0.01 0.51 0.2 0.08
+fg_color #007f7fff
+rect 0.18 0.8 0.27 0.15
 ```
 
 `{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells are typically larger and have membrane-bound sub-compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus.
@@ -460,11 +490,11 @@ Eukaryotes have their DNA broken up into multiple strands. They can either be si
 
 The following are descriptions for some of the organelles shown in the diagram above.
 
-* `{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
+* <span style="color:#ff00ffff">`{bm} Nucleus/\b(Nucleus|Nuclei)\b/i`</span> - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
 
   Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
 
-* `{bm} Endoplasmic Reticulum` - Layered membrane that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
+* <span style="color:#0000ffff">`{bm} Endoplasmic Reticulum`</span> - Layered membrane that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
 
   ```{note}
   It's called rough endoplasmic reticulum because the ribosomes make the surface look rough.
@@ -474,7 +504,7 @@ The following are descriptions for some of the organelles shown in the diagram a
   1. travels to the endoplasmic reticulum via the connected pores,
   2. then travels to the membrane of the endoplasmic reticulum where it ends up hitting ribosomes embedded in the (thereby producing proteins).
 
-* `{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i` - Layered membrane that looks similar to rough endoplasmic reticulum but isn't attached to the nucleus. Golgi package moleculues (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
+* <span style="color:#007f7fff">`{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> - Layered membrane that looks similar to rough endoplasmic reticulum but isn't attached to the nucleus. Golgi package moleculues (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
 
   They're also responsible for building lysosomes (cell digestion machines).
 
@@ -482,21 +512,21 @@ The following are descriptions for some of the organelles shown in the diagram a
   The terms golgi, golgi apparatus, golgi complex, and golgi body all refer to the same thing.
   ```
 
-* `{bm} Mitochondria/(Mitochondria|Mitochondrion)/i` - Where ATP (Adenosine triphosphate) is produced. ATP is a chemical that provides energy to drive various biological processes. As such, mitochondria are often referred to as "the power house of the cell."
+* <span style="color:#00ff00ff">`{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> - Where ATP (Adenosine triphosphate) is produced. ATP is a chemical that provides energy to drive various biological processes. As such, mitochondria are often referred to as "the power house of the cell."
 
   Mitochondria have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbotic relationship with a larger cell by `{bm-ri} living` in it, eventually becaming part of the cell.
 
   Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
 
-* `{bm} Lysosomes` - Compartments full of enzymes that help break down waste products and foreign substances. Lysosomes are similar to vacuoles but more often found in animals cells than plant and algae cells.
+* <span style="color:#7f7f00ff">`{bm} Lysosomes`</span> - Compartments full of enzymes that help break down waste products and foreign substances. Lysosomes are similar to vacuoles but more often found in animals cells than plant and algae cells.
 
   ```{note}
   According to the material, the evidence that they've been found in plant cells is recent.
   ```
 
-* `{bm} Chloroplast` (plant / algae) - Responsible for photosynthesis. Only available in plant and algae cells, not animal cells.
+* <span style="color:#ff0000ff">`{bm} Chloroplast`</span> (plant / algae) - Responsible for photosynthesis. Only available in plant and algae cells, not animal cells.
 
-* `{bm} Vacuole` (mostyl plant / algae) - Compartments responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
+* <span style="color:#800080ff">`{bm} Vacuole`</span> (mostyl plant / algae) - Compartments responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
 
   Vacuoles are often responsible for a plant's shape. For example, a well watered plant will be upright and spry because its vacuoles are full. A plant that isn't as well watered may be sagging down or wilting because the vacuoles are less full. 
 
