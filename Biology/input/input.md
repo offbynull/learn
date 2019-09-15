@@ -458,6 +458,8 @@ fg_color #00ff00ff
 rect 0.81 0.355 0.18 0.04
 fg_color #7f7f00ff
 rect 0.81 0.285 0.18 0.04
+fg_color #000080ff
+rect 0.81 0.205 0.18 0.04
 ```
 
 ```{img}
@@ -480,6 +482,8 @@ fg_color #0000ffff
 rect 0.86 0.34 0.135 0.11
 fg_color #00ff00ff
 rect 0.01 0.51 0.2 0.08
+fg_color #0000ffff
+rect 0.01 0.6 0.2 0.06
 fg_color #007f7fff
 rect 0.18 0.8 0.27 0.15
 ```
@@ -518,10 +522,16 @@ The following are descriptions for some of the organelles shown in the diagram a
 
   Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
 
-* <span style="color:#7f7f00ff">`{bm} Lysosomes`</span> - Compartments full of enzymes that help break down waste products and foreign substances. Lysosomes are similar to vacuoles but more often found in animals cells than plant and algae cells.
+* <span style="color:#7f7f00ff">`{bm} Lysosome`</span> - Compartments that help break down waste products / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
 
   ```{note}
   According to the material, the evidence that they've been found in plant cells is recent.
+  ```
+
+* <span style="color:#0000ffff">`{bm} Peroxisome`</span> - Compartments that are similar to Lysosomes -- both are small organelles that break down unwanted substances. The difference is that peroxisomes have different types of enzymes that require oxygen (oxidative enzymes).
+
+  ```{note}
+  The material says that peroxisomes make hydrogen peroxide: Similarly, structures called peroxisomes carry out chemical reactions called oxidation reactions and produce hydrogen peroxide, both of which would damage the cell if they weren’t safely stored away in their own “room.”
   ```
 
 * <span style="color:#ff0000ff">`{bm} Chloroplast`</span> (plant / algae) - Responsible for photosynthesis. Only available in plant and algae cells, not animal cells.
