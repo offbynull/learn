@@ -226,7 +226,7 @@ Lipids are not always fats. All fats are lipids but not all lipids are fats.
 The book says that each cell can contain one or more “nearly identical” copies of the DNA -- because of mutations constantly happening?
 ```
 
-`{bm} Ribonucleic acid` (`{bm} RNA`) is another common form of nucleic acid. RNA is a molecule used as a transferring mechanism for copying over information from DNA to other cellular machinery. It's also used as information storage for (some?) viruses.
+`{bm} Ribonucleic acid` (`{bm} RNA/(RNA)/`) is another common form of nucleic acid. RNA is a molecule used as a transferring mechanism for copying over information from DNA to other cellular machinery. It's also used as information storage for (some?) viruses.
 
 The monomers that make up nucleic acid molecule are called `{bm} nucleotide`s, and the order they appear in defines the genetic information/instructions.
 
@@ -494,51 +494,172 @@ Eukaryotes have their DNA broken up into multiple strands. They can either be si
 
 The following are descriptions for some of the organelles shown in the diagram above.
 
-* <span style="color:#ff00ffff">`{bm} Nucleus/\b(Nucleus|Nuclei)\b/i`</span> - Compartment of the cell that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
+* <span style="color:#ff00ffff">**`{bm-ri} Nucleus`**</span> - See nucleus section.
+* <span style="color:#0000ffff">**`{bm-ri} Endoplasmic Reticulum`**</span> - See endoplasmic reticulum section.
+* <span style="color:#007f7fff">**`{bm-ri} Golgi`**</span> - See golgi section.
+* <span style="color:#00ff00ff">**`{bm-ri} Mitochondria`**</span> - See mitochondria section.
+* <span style="color:#7f7f00ff">**`{bm-ri} Lysosome`**</span> (mostly animal) - See lysosome section.
+* <span style="color:#0000ffff">**`{bm-ri} Peroxisome`**</span> - See peroxisome section. 
+* <span style="color:#ff0000ff">**`{bm-ri} Chloroplast`**</span> (plant / algae) - See chloroplast section.
+* <span style="color:#800080ff">**`{bm-ri} Vacuole`**</span> (mostly plant / algae) - See vacuole section. 
 
-  Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
+### Nucleus
 
-* <span style="color:#0000ffff">`{bm} Endoplasmic Reticulum`</span> - Layered membrane that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
+`{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` is an organelle that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
 
-  ```{note}
-  It's called rough endoplasmic reticulum because the ribosomes make the surface look rough.
-  ```
+```{img}
+Diagram_human_cell_nucleus.svg
+ comprehensive diagram of a human cell nucleus.
+By Mariana Ruiz LadyofHats - I did it myself with adobe ilustrator using the information found here [1], [2] ,[3], [4] and [5], Public Domain, https://commons.wikimedia.org/w/index.php?curid=736389
+scale 0.75 0.75
+```
 
-  Recall that ribosomes are what translate mRNA to proteins. Since the endoplasmic reticulum is directly connected to the nucleus (via pores on the nucleus), it provides a fairly straight-forward path for protein generation: mRNA produced in the nucleus...
-  1. travels to the endoplasmic reticulum via the connected pores,
-  2. then travels to the membrane of the endoplasmic reticulum where it ends up hitting ribosomes embedded in the (thereby producing proteins).
+Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
 
-* <span style="color:#007f7fff">`{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> - Layered membrane that looks similar to rough endoplasmic reticulum but isn't attached to the nucleus. Golgi package moleculues (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
+### Endoplasmic Reticulum
 
-  They're also responsible for building lysosomes (cell digestion machines).
+`{bm} Endoplasmic Reticulum` is layered membrane (organelle?) that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
 
-  ```{note}
-  The terms golgi, golgi apparatus, golgi complex, and golgi body all refer to the same thing.
-  ```
+```{note}
+It's called rough endoplasmic reticulum because the ribosomes make the surface look rough.
+```
 
-* <span style="color:#00ff00ff">`{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> - Where ATP (Adenosine triphosphate) is produced. ATP is a chemical that provides energy to drive various biological processes. As such, mitochondria are often referred to as "the power house of the cell."
+```{img}
+0313_Endoplasmic_Reticulum.jpg
+a) The ER is a winding network of thin membranous sacs found in close association with the cell nucleus. The smooth and rough endoplasmic reticula are very different in appearance and function (source: mouse tissue). (b) Rough ER is studded with numerous ribosomes, which are sites of protein synthesis (source: mouse tissue). EM × 110,000. (c) Smooth ER synthesizes phospholipids, steroid hormones, regulates the concentration of cellular Ca++, metabolizes some carbohydrates, and breaks down certain toxins (source: mouse tissue). EM × 110,510. (Micrographs provided by the Regents of University of Michigan Medical School © 2012)
+By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=30131197
+scale 0.5 0.5
+```
 
-  Mitochondria have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbotic relationship with a larger cell by `{bm-ri} living` in it, eventually becaming part of the cell.
+Recall that ribosomes are what translate mRNA to proteins. Since the endoplasmic reticulum is directly connected to the nucleus (via pores on the nucleus), it provides a fairly straight-forward path for protein generation: mRNA produced in the nucleus...
+1. travels to the endoplasmic reticulum via the connected pores,
+2. then travels to the membrane of the endoplasmic reticulum where it ends up hitting ribosomes embedded in the (thereby producing proteins).
 
-  Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
+### Golgi
 
-* <span style="color:#7f7f00ff">`{bm} Lysosome`</span> - Compartments that help break down waste products / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
+`{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> are layered membrane (organelle?) that look similar to rough endoplasmic reticulum but aren't attached to the nucleus. Golgi package moleculues (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
 
-  ```{note}
-  According to the material, the evidence that they've been found in plant cells is recent.
-  ```
+They're also responsible for building lysosomes (cell digestion machines).
 
-* <span style="color:#0000ffff">`{bm} Peroxisome`</span> - Compartments that are similar to Lysosomes -- both are small organelles that break down unwanted substances. The difference is that peroxisomes have different types of enzymes that require oxygen (oxidative enzymes).
+```{note}
+The terms golgi, golgi apparatus, golgi complex, and golgi body all refer to the same thing.
+```
 
-  ```{note}
-  The material says that peroxisomes make hydrogen peroxide: Similarly, structures called peroxisomes carry out chemical reactions called oxidation reactions and produce hydrogen peroxide, both of which would damage the cell if they weren’t safely stored away in their own “room.”
-  ```
+```{img}
+Golgi_apparatus_(borderless_version)-en.svg
+Golgi apparatus
+By Kelvinsong - Own work, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=23090802
+scale 0.15 0.15
+```
 
-* <span style="color:#ff0000ff">`{bm} Chloroplast`</span> (plant / algae) - Responsible for photosynthesis. Only available in plant and algae cells, not animal cells.
+### Mitochondria
+`{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> are organelles responsible for `{bm} cellular respiration`: the process of producing ATP from molecules such as sugars. `{bm} ATP/(ATP)/` (Adenosine triphosphate) is a chemical that provides energy to drive various biological processes (e.g. muscle contractions). As such, mitochondria are often referred to as "the power house of the cell."
 
-* <span style="color:#800080ff">`{bm} Vacuole`</span> (mostyl plant / algae) - Compartments responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
+```{img}
+Animal_mitochondrion_diagram_en.svg
+Mitochondria
+By Mariana Ruiz Villarreal LadyofHats - the diagram i made myself using adobe illustrator. as a source for the information i used the diagrams found here:[1], [2], [3], [4], [5], [6] and [7]., Public Domain, https://commons.wikimedia.org/w/index.php?curid=8152599
+scale 0.75 0.75
 
-  Vacuoles are often responsible for a plant's shape. For example, a well watered plant will be upright and spry because its vacuoles are full. A plant that isn't as well watered may be sagging down or wilting because the vacuoles are less full. 
+bg_color #00000000
+
+fg_color #ff00ffff
+rect 0.13 0.12 0.3 0.07
+fg_color #ff00ffff
+rect 0.7 0.75 0.3 0.12
+
+fg_color #008080ff
+rect 0.3 0.18 0.15 0.07
+
+fg_color #808000ff
+rect 0.13 0.35 0.13 0.07
+```
+
+The major parts of chloroplast are...
+
+ * <span style="color:#ff00ffff">`{bm} mitochondrial envelope`</span> - 2 membrane layers that have a gap between them. Holds the guts in.
+ * <span style="color:#008080ff">`{bm} matrix`</span> - Internal fluid of mitochondria. Contains the guts (ribosomes, mitochondrial DNA, and more).
+ * <span style="color:#808000ff">`{bm} cristae`</span> - Long caverns that encapsulate and connect different parts of the matrix.
+
+Mitochondria have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis).
+
+Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
+
+
+### Lysosome
+
+`{bm} Lysosome`s are organelles (animal cells only) that help break down waste products / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
+
+```{note}
+According to the material, the evidence that they've been found in plant cells is recent.
+```
+
+```{img}
+Lysosome.jpg
+Structure of Lysosome
+By lumoreno - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=17380475
+crop 0.05 0.05 0.9 0.9
+scale 0.5 0.5
+```
+
+### Peroxisome
+
+`{bm} Peroxisome`s are organelles that are similar to Lysosomes -- both are small organelles that break down unwanted substances. The difference is that peroxisomes have different types of enzymes that require oxygen (oxidative enzymes).
+
+```{note}
+The material says that peroxisomes make hydrogen peroxide: Similarly, structures called peroxisomes carry out chemical reactions called oxidation reactions and produce hydrogen peroxide, both of which would damage the cell if they weren’t safely stored away in their own “room.”
+```
+
+```{img}
+Peroxisome.svg
+Basic structure of a peroxisome, showing the crystalized enzyme core as found in rat liver cells.
+By Qef - Own work by uploader, based on the arrangement of a bitmap equivalent by Anthony Atkielski (Agateller), Public Domain, https://commons.wikimedia.org/w/index.php?curid=7072127
+scale 0.5 0.5
+```
+
+### Chloroplast
+
+`{bm} Chloroplast`s are organelle (only plant and algae cells) responsible for photosynthesis. `{bm} Photosynthesis` is the process of taking in light and using it to build sugars from carbon dioxide. Those sugars are then used by the mitochondria to produce energy in a process called cellular respiration.
+
+```{img}
+Chloroplast_structure.svg
+Ultrastructure of a chloroplast.
+By Kelvinsong - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=26147364
+scale 0.5 0.5
+
+bg_color #00000000
+
+fg_color #ff00ffff
+rect 0.025 0.13 0.3 0.15
+fg_color #808000ff
+rect 0.24 0.015 0.3 0.15
+fg_color #008080ff
+rect 0.85 0.2 0.15 0.07
+fg_color #ff0000ff
+rect 0.035 0.35 0.15 0.07
+```
+
+The major parts of chloroplast are...
+
+ * <span style="color:#ff00ffff">`{bm} chloroplast envelope`</span> - 2 membrane layers that have a gap between them. Holds the guts in.
+ * <span style="color:#008080ff">`{bm} stroma`</span> - Internal fluid of chloroplast (chloroplast's version of cytosol).
+ * <span style="color:#808000ff">`{bm} thylakoid`</span> - Membrane-bound discs. The membrane contains light-harvesting substances while the space inside (also called `{bm} lumen`) is hollow.
+ * <span style="color:#ff0000ff">`{bm} grana/(grana|granum)/i`</span> - Stack of thylakoids. These stacks are interconnected. The singular of grana is granum.
+
+ Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis).
+
+### Vacuole
+
+`{bm} Vacuole`s are organelle (mostly plant and algae cells) responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
+
+Vacuoles are often responsible for a plant's shape. For example, a well watered plant will be upright and spry because its vacuoles are full. A plant that isn't as well watered may be sagging down or wilting because the vacuoles are less full
+
+```{img}
+Turgor_pressure_on_plant_cells_diagram.svg
+By LadyofHats - did it myself based on [1], [2] ,[3] and [4]., Public Domain, https://commons.wikimedia.org/w/index.php?curid=1685428
+In biology, turgor pressure or turgidity is the pressure of the cell contents against the cell wall, in plant cells, determined by the water content of the vacuole, resulting from osmotic pressure. 
+scale 0.7 0.7
+```
 
 ## Prokaryotic Cells
 
@@ -657,7 +778,7 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 `{bm} Heat of vaporization` - The amount of energy needed to change one gram of a liquid substance to a gas at constant temperature.
 
-
+`{bm} endosymbiosis` - A form of symbosis where one organism lives inside of of the other (e.g. gut bacteria lives in our colon). The prefix *endo* means *within*.
 
 
 
