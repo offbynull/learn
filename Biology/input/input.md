@@ -296,7 +296,7 @@ Other terminology related to water:
 `{bm} Cell`s are the `{bm-ri} basic` unit of living things / the building blocks of life. They're tiny structures that encapsulate information and machinery that allows them to replicate/reproduce and perform other important functions (e.g. appendages to move around).
 
 ```{note}
-Viruses are not cells but they may also be considered living because they reproduce in a roundabout way.
+Viruses are not cells but they may also be considered living because they reproduce in a roundabout way: the require machinery in the host cell to reproduce.
 ```
 
 There are 2 types of cells: eukaryotic and prokaryotic. There main differences between them are that...
@@ -321,112 +321,126 @@ Multi-cell organisms, Yes (e.g. animals and fungus), No
 Archaea is an organism that looks like bacteria but they're totally different.
 ```
 
-Regardless of if they're prokaryotes or eukaryotes, different cell specifies vary in features. The following is a list of common cell features (not exhaustive).
+## Features
 
-* `{bm} Cytoplasm` (both eukaryotic and prokaryotic) - The insides/guts of a cell is called the cytoplasm. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
+Different cell species vary in features. The subsections below detail common cell features (not exhaustive).
 
-  Every cell has cytoplasm.
+Some features are only present in certain cell speicies (e.g. only some cells have a flagellum tail) while other features are present in all cells but in different amounts (e.g. every cell has cytosol but larger cells have more cytosol).
 
-  ```{img}
-  Anima_cell_notext.svg
-  Eukaryote with cell ribosomes highlighted
-  By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
-  scale 0.5 0.5
-  arrow 1 0.5 0.7 0.5
-  expand 2 1 0 0
-  text 0.5 0.5 cytoplasm
-  text 0.5 0.6 (everything inside)
-  ```
+### Cytoplasm
 
-* `{bm} Plasma Membrane/(Plasma membrane|Membrane)/i` (both eukaryotic and prokaryotic) - The thing encapsulating the cytoplasm is called the plasma membrane. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
+The `{bm} cytoplasm` (both eukaryotic and prokaryotic) is the insides/guts of a cell. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
 
-  Every cell has a membrane encapsulating its cytoplasm.
+Every cell has cytoplasm.
 
-  ```{img}
-  Anima_cell_notext.svg
-  Eukaryote with cell ribosomes highlighted
-  By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
-  scale 0.5 0.5
-  arrow 1 0.5 0.81 0.6
-  expand 2 1 0 0
-  text 0.5 0.5 cell membrane
-  text 0.5 0.6 (holds everything in)
-  ```
-  
-  ```{img}
-  Average_prokaryote_cell-_unlabled.svg
-  Prokaryotic with capsule highlighted
-  By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
-  scale 0.5 0.5
-  arrow 1 0.5 0.8 0.5
-  expand 2 1 0 0
-  text 0.5 0.5 cell membrane
-  text 0.5 0.6 (inner layer)
-  ```
+```{img}
+Anima_cell_notext.svg
+Eukaryote with cell ribosomes highlighted
+By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+scale 0.5 0.5
+arrow 1 0.5 0.7 0.5
+expand 2 1 0 0
+text 0.5 0.5 cytoplasm
+text 0.5 0.6 (everything inside)
+```
 
-  ```{note}
-  The term membrane can refer to either the plasma membrane or the membrane of an organelle. How you should interpret it depends on the context in which its used.
-  ```
+### Membrane
 
-* `{bm} Cell wall` (both eukaryotic and prokaryotic) - Stiff layer around the membrane meant for protection. *Not all cells have a cell wall*. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
+The `{bm} plasma membrane/(Plasma membrane|Membrane)/i` (present in both eukaryotic and prokaryotic cells) is the thing encapsulating the cytoplasm. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
 
-  The material states that cell walls...
-  1. provide an extra layer of protection.
-  1. help maintain shape.
-  1. help prevent dehydration.
+Every cell has a membrane encapsulating its cytoplasm. Membranes in general follow the fluid mosaic model.
 
-  Almost all prokaryotes have cell walls. Only some eukaryotes have cell walls (e.g. fungi and plants). The material says that cell walls for most bacteria are made up of a molecule called `{bm} peptidoglycan`, but it can be different for other cells. For example, [this link](https://www.quora.com/Do-Eukaryotes-have-cell-walls) says that plant cells have cell walls made up of cellulose.
-  
-  ```{img}
-  Average_prokaryote_cell-_unlabled.svg
-  Prokaryotic with capsule highlighted
-  By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
-  scale 0.5 0.5
-  arrow 1 0.5 0.85 0.5
-  expand 2 1 0 0
-  text 0.5 0.5 cell wall
-  text 0.5 0.6 (middle layer)
-  ```
+The term membrane can refer to either the plasma membrane or the membrane of a eukaryotic cell's organelle. How you should interpret it depends on the context in which its used.
 
-* `{bm} Capsule` (prokaryotic) - The outermost layer of some types of cells (typically backteria cells). Made up of carbohydrates and there mainly to help the cell stick itself to the environment.
+```{img}
+Anima_cell_notext.svg
+Eukaryote with cell ribosomes highlighted
+By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+scale 0.5 0.5
+arrow 1 0.5 0.81 0.6
+expand 2 1 0 0
+text 0.5 0.5 cell membrane
+text 0.5 0.6 (holds everything in)
+```
 
-  ```{img}
-  Average_prokaryote_cell-_unlabled.svg
-  Prokaryotic with capsule highlighted
-  By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
-  scale 0.5 0.5
-  arrow 1 0.5 0.9 0.5
-  expand 2 1 0 0
-  text 0.5 0.5 capsule
-  text 0.5 0.6 (outter-most layer)
-  ```
+```{img}
+Average_prokaryote_cell-_unlabled.svg
+Prokaryotic with capsule highlighted
+By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
+scale 0.5 0.5
+arrow 1 0.5 0.8 0.5
+expand 2 1 0 0
+text 0.5 0.5 cell membrane
+text 0.5 0.6 (inner layer)
+```
 
-  ```{note}
-  Although eukaryotic cells don't have capsules, they do have carbohydrates on their outside. Those carbohydrates aren't organized as a capsule though: https://www.quora.com/Do-some-eukaryotic-cells-have-capsules-or-is-it-just-prokaryotes-Are-there-exceptions-of-eukaryotes-having-capsules. Is this talking about the same carbohydrates that are embedded in the membrane (glycolipids / glycoproteins).
-  ```
+### Cell Wall
 
-* `{bm} Ribosome` (both eukaryotic and prokaryotic) - Tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
+The `{bm} cell wall` (present in both eukaryotic and prokaryotic cells) is a stiff layer around the membrane meant for protection. *Not all cells have a cell wall* -- for example, animal cells don't but plant cells do. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
 
-  Ribsomes can either be floating around in the cytoplasm (called `{bm} free ribosome`) or be embedded in the membrane of endoplasmic reticulum.
+The material states that cell walls...
+1. provide an extra layer of protection.
+1. help maintain shape.
+1. help prevent dehydration.
 
-  ```{img}
-  Anima_cell_notext.svg
-  Eukaryote with cell ribosomes highlighted
-  By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
-  crop 0.32 0.16 0.6 0.34
-  arrow 0.9 0.5 0.5 0.6
-  arrow 0.9 0.5 0.65 0.35
-  expand 1.3 1 0 0
-  text 0.7 0.5 ribosomes
-  text 0.7 0.65 (little blue dots)
-  ```
+Almost all prokaryotes have cell walls. Only some eukaryotes have cell walls (e.g. fungi and plants). The material says that cell walls for most bacteria are made up of a molecule called `{bm} peptidoglycan`, but it can be different for other cells. For example, [this link](https://www.quora.com/Do-Eukaryotes-have-cell-walls) says that plant cells have cell walls made up of cellulose.
 
-* `{bm} Flagellum` / `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` / `{bm} Fimbriae` / `{bm} Pili` / `{bm} Pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` (both eukaryotic and prokaryotic) - One or more appendages used by the cell to move around.
-  * Flagellum are tails that extend from the cell (e.g. tail on a sperm cell). There can be more than 1 flagellum.
-  * Cilia are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell.
-  * Fimbriae are much smaller hair-like appendages used to help attach to host cells and surfaces (e.g. bacteria cells).
-  * Pili are much smaller hair-like appendages used to help transfer DNA between cells and/or to help move (e.g. bacteria cells).
-  * Pseudopodia are much larger leg-like appendages used to crawl (e.g. amoeba cells).
+```{img}
+Average_prokaryote_cell-_unlabled.svg
+Prokaryotic with capsule highlighted
+By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
+scale 0.5 0.5
+arrow 1 0.5 0.85 0.5
+expand 2 1 0 0
+text 0.5 0.5 cell wall
+text 0.5 0.6 (middle layer)
+```
+
+### Capsule
+
+The `{bm} Capsule` (present in prokaryotic cell only) is the outermost layer of some types of cells (typically bacteria cells). Capsules are made up of carbohydrates and there mainly to help the cell stick itself to the environment.
+
+```{img}
+Average_prokaryote_cell-_unlabled.svg
+Prokaryotic with capsule highlighted
+By Mariana Ruiz Villarreal LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7356226
+scale 0.5 0.5
+arrow 1 0.5 0.9 0.5
+expand 2 1 0 0
+text 0.5 0.5 capsule
+text 0.5 0.6 (outter-most layer)
+```
+
+```{note}
+Although eukaryotic cells don't have capsules, they do have carbohydrates on their outside. Those carbohydrates aren't organized as a capsule though: https://www.quora.com/Do-some-eukaryotic-cells-have-capsules-or-is-it-just-prokaryotes-Are-there-exceptions-of-eukaryotes-having-capsules. Is this talking about the same carbohydrates that are embedded in the membrane (glycolipids / glycoproteins).
+```
+
+### Ribosome
+
+`{bm} Ribosome` (present in both eukaryotic and prokaryotic cells) are tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
+
+Ribosomes can either be floating around in the cytoplasm (called `{bm} free ribosome`) or be embedded in the membrane of endoplasmic reticulum.
+
+```{img}
+Anima_cell_notext.svg
+Eukaryote with cell ribosomes highlighted
+By No machine-readable author provided. Chb assumed (based on copyright claims). - No machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+crop 0.32 0.16 0.6 0.34
+arrow 0.9 0.5 0.5 0.6
+arrow 0.9 0.5 0.65 0.35
+expand 1.3 1 0 0
+text 0.7 0.5 ribosomes
+text 0.7 0.65 (little blue dots)
+```
+
+### Appendage
+
+Some cells have appendages that help them move (or stay put). There are different types of appendages...
+  * `{bm} Flagellum` are tails that extend from the cell (e.g. tail on a sperm cell). There can be more than 1 flagellum.
+  * `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell.
+  * `{bm} Fimbriae` are much smaller hair-like appendages used to help attach to host cells and surfaces (e.g. bacteria cells).
+  * `{bm} Pili` are much smaller hair-like appendages used to help transfer DNA between cells and/or to help move (e.g. bacteria cells).
+  * `{bm} Pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` are much larger leg-like appendages used to crawl (e.g. amoeba cells).
 
   ```{img}
   Anima_cell_notext.svg
