@@ -567,7 +567,7 @@ scale 0.15 0.15
 ```
 
 ### Mitochondria
-`{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> are organelles responsible for `{bm} cellular respiration`: the process of producing ATP from molecules such as sugars. `{bm} ATP/(ATP)/` (Adenosine triphosphate) is a chemical that provides energy to drive various biological processes (e.g. muscle contractions). As such, mitochondria are often referred to as "the power house of the cell."
+`{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> are organelles responsible for `{bm} cellular respiration`: the process of producing Adenosine Triphosphate (ATP) from molecules such as sugars. ATP is a chemical that provides energy to drive various biological processes (e.g. muscle contractions). As such, mitochondria are often referred to as "the power house of the cell."
 
 ```{img}
 Animal_mitochondrion_diagram_en.svg
@@ -763,6 +763,76 @@ It's still an open question as to how the first / initial cell came to be. The c
 ```{note}
 There are an estimated 37 trillion cells in the human body.
 ```
+
+# Metabolism
+
+`{bm} Metabolism` is the total sum of all the chemical reactions that take place inside of a cell. These reactions happen via enzymes: enzymes are used to break-down / build-up molecules in the cell. Input molecules into an enzyme are called `{bm} substrate`s while the output molecule(s) from an enzyme are called `{bm} metabolite`s.
+
+Metabolism can be broken down into 2 categories: anabolism (building-up) and catabolism (breaking-down).
+
+A `{bm} metabolic pathway` is a network/graph of enzymes that produces a final resulting molecule. Each enzyme produces molecules that feed into other enzymes in the pathway, eventually forming the final molecule. For example, the following graph is the metabolic pathway for gamma-hydroxybutyric acid...
+
+```{img}
+GHB_metabolic_pathway.svg
+By Anypodetos - Own work, vectorised version of File:GHB metab path.png by User:Meodipt, Public Domain, https://commons.wikimedia.org/w/index.php?curid=8988213
+Example metabolic pathway
+scale 0.5 0.5
+```
+
+## Anabolism
+
+The process that builds up a molecule from smaller molecules is called `{bm} anabolism/(anabolic|anabolism)/i`. An enzyme takes in the molecules and creates bonds between them via an `{bm} endergonic reaction`s: energy is stored as bonds between the smaller molecules thereby forming the larger molecule.
+
+```{note}
+A good way to remember the reaction types... In ENDergonic reactions, the energy ENDs up in a bond. In EXergonic reactions, the energy EXplodes out thereby breaking the bond.
+```
+
+```{img}
+Anabolism.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Anabolism process.
+scale 0.5 0.5
+```
+
+An example of anabolism is photosynthesis: plants will bond carbon dioxide gas (`{kt} CO_2`) with water (`{kt} H_2O`) using energy from the sun, creating sugar (`{kt} C_6H_{12}O_6`)
+
+`{kt} 6CO_2 + 6H_2O + energy \to C_6H_{12}O_6 + 6O_2`
+
+## Catabolism
+
+The process that breaks down a large molecule into smaller molecules is called `{bm} catabolism/(catabolic|catabolism)/i`. An enzyme takes in a larger molecule breaks up some of its bonds via `{bm} exergonic rection`s: energy used as bonds in the molecule are release thereby breaking it up into smaller molecules.
+
+```{note}
+A good way to remember the reaction types... In ENDergonic reactions, the energy ENDs up in a bond. In EXergonic reactions, the energy EXplodes out thereby breaking the bond.
+```
+
+```{img}
+Catabolism.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Catabolism process.
+scale 0.5 0.5
+```
+
+An example of catabolism is cellular respiration: cells will break down the bonds in glucose (`{kt} C_6H_{12}O_6 + 6O_2`) to release energy, splitting into carbon dioxide (`{kt} CO_2`) and water (`{kt} H_2O`)
+
+`{kt} C_6H_{12}O_6 + 6O_2 \to 6CO_2 + 6H_2O + energy`
+
+# Adenosine Triphosphate
+
+`{bm} /\b(ATP)\b/` `{bm} Adenosine Triphosphate` (ATP) is a molecule that provides energy to drive various biological processes (e.g. muscle contractions). The third phosphoral group at the very end has a high-energy bond. When broken, energy is released and the resulting molecules are the broken up phosphoral group and `{bm} /\b(ADP)\b/` `{bm} Adenosine Diphosphate` (ADP).
+
+```{note}
+High-energy bonds are actually a thing: A chemical bond whose hydrolysis results in the generation of 30kJ (7kcal) of energy or, if coupled to an energetically unfavourable reaction, can drive that reaction forward. (https://www.genscript.com/molecular-biology-glossary/1364/high-energy-bond)
+```
+
+```{img}
+ADP_ATP_cycle.png
+By Muessig - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=27614630
+ADP ATP cycle
+scale 0.25 0.25
+```
+
+ATP is produced in the mitochondria. Similar to how the mitochondria is refered to as the powerhouse of the cell, ATP is often referred to as the energy currency of the cell / energy store for the cell.
 
 # Microscopy
 
