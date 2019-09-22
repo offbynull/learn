@@ -57,7 +57,7 @@ There's always at least one control group in any experiment to provide a baselin
 ```
 
 ```{note}
-Because things are so wishy-washy/not-exacty in biology, it's typical for an experiments to be repeated multiple times and to have a large sample size -- the larger our sample sizes and the more times we conduct the experiment, the more we can be confident of our result. What do I mean by wishy-washy? Genetic variation between samples may result in different types/levels of responses. For example, people with a certain gene may respond quicker to certain drugs than people who don't produce that gene.
+Because things are so wishy-washy/not-exactly in biology, it's typical for an experiments to be repeated multiple times and to have a large sample size -- the larger our sample sizes and the more times we conduct the experiment, the more we can be confident of our result. What do I mean by wishy-washy? Genetic variation between samples may result in different types/levels of responses. For example, people with a certain gene may respond quicker to certain drugs than people who don't produce that gene.
 ```
 
 Other terminology around the scientific method...
@@ -440,7 +440,7 @@ Some cells have appendages that help them move (or stay put). There are differen
   * `{bm} Cilia/\b(Cil|Cils|Cilia)\b/i` are much smaller hair-like appendages used to help move the cell itself or things in the vicinity of the cell.
   * `{bm} Fimbriae` are much smaller hair-like appendages used to help attach to host cells and surfaces (e.g. bacteria cells).
   * `{bm} Pili` are much smaller hair-like appendages used to help transfer DNA between cells and/or to help move (e.g. bacteria cells).
-  * `{bm} Pseudopodia/\b(Pseudopod|Pseudopods|Pseudopodia)\b/i` are much larger leg-like appendages used to crawl (e.g. amoeba cells).
+  * `{bm} Pseudopodia/\b(Pseudopod|Pseudopodia)\b/i` are much larger leg-like appendages used to crawl (e.g. amoeba cells).
 
   ```{img}
   Anima_cell_notext.svg
@@ -551,7 +551,7 @@ Recall that ribosomes are what translate mRNA to proteins. Since the endoplasmic
 
 ### Golgi
 
-`{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> are layered membrane (organelle?) that look similar to rough endoplasmic reticulum but aren't attached to the nucleus. Golgi package moleculues (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
+`{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> are layered membrane (organelle?) that look similar to rough endoplasmic reticulum but aren't attached to the nucleus. Golgi package molecules (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
 
 They're also responsible for building lysosomes (cell digestion machines).
 
@@ -626,7 +626,7 @@ The material says that peroxisomes make hydrogen peroxide: Similarly, structures
 
 ```{img}
 Peroxisome.svg
-Basic structure of a peroxisome, showing the crystalized enzyme core as found in rat liver cells.
+Basic structure of a peroxisome, showing the crystallized enzyme core as found in rat liver cells.
 By Qef - Own work by uploader, based on the arrangement of a bitmap equivalent by Anthony Atkielski (Agateller), Public Domain, https://commons.wikimedia.org/w/index.php?curid=7072127
 scale 0.5 0.5
 ```
@@ -702,7 +702,7 @@ A `{bm} phospholipid` is a amphipathic lipid molecule that involves a phosphate 
 * long fatty acid tails are hydrophobic -- they have no obvious charge and as such aren't attracted to water.
 
 ```{note}
-For a referesher on how hydrophobic / hydrophilic molecules work, see the section on Water. Specifically: adhesion / weakly negative / weakly positive.
+For a refresher on how hydrophobic / hydrophilic molecules work, see the section on Water. Specifically: adhesion / weakly negative / weakly positive.
 ```
 
 ![By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=30131167](0301_Phospholipid_Structure.jpg)
@@ -847,7 +847,7 @@ An example of anabolism is photosynthesis: plants will bond carbon dioxide gas (
 
 Metabolism can be broken down into 2 categories: anabolism (building-up) and catabolism (breaking-down).
 
-The process that breaks down a large molecule into smaller molecules is called `{bm} catabolism/(catabolic|catabolism)/i`. An enzyme takes in a larger molecule breaks up some of its bonds via `{bm} exergonic rection`s: energy used as bonds in the molecule are release thereby breaking it up into smaller molecules.
+The process that breaks down a large molecule into smaller molecules is called `{bm} catabolism/(catabolic|catabolism)/i`. An enzyme takes in a larger molecule breaks up some of its bonds via `{bm} exergonic reaction`s: energy used as bonds in the molecule are release thereby breaking it up into smaller molecules.
 
 ```{note}
 A good way to remember the reaction types... In ENDergonic reactions, the energy ENDs up in a bond. In EXergonic reactions, the energy EXplodes out thereby breaking the bond.
@@ -879,7 +879,7 @@ ADP ATP cycle
 scale 0.25 0.25
 ```
 
-ATP is produced in the mitochondria. Similar to how the mitochondria is refered to as the powerhouse of the cell, ATP is often referred to as the energy currency of the cell / energy store for the cell.
+ATP is produced in the mitochondria. Similar to how the mitochondria is referred to as the powerhouse of the cell, ATP is often referred to as the energy currency of the cell / energy store for the cell.
 
 # Microscopy
 
@@ -909,7 +909,7 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 `{bm} Heat of vaporization` - The amount of energy needed to change one gram of a liquid substance to a gas at constant temperature.
 
-`{bm} endosymbiosis` - A form of symbosis where one organism lives inside of of the other (e.g. gut bacteria lives in our colon). The prefix *endo* means *within*.
+`{bm} endosymbiosis` - A form of symbiosis where one organism lives inside of of the other (e.g. gut bacteria lives in our colon). The prefix *endo* means *within*.
 
 
 
@@ -924,5 +924,5 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
-`{bm-ambiguous} Add the suffix _ENZYME if refering to the output of an enzyme/((?!byproduct)(?:product))/i`
-`{bm-ambiguous} Add the suffix _ENZYME if refering to the output of an enzyme/(intermediate)/i`
+`{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/((?!byproduct)(?:product))/i`
+`{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
