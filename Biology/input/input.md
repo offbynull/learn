@@ -890,6 +890,48 @@ scale 0.25 0.25
 
 ATP is produced in the mitochondria. Similar to how the mitochondria is referred to as the powerhouse of the cell, ATP is often referred to as the energy currency of the cell / energy store for the cell.
 
+# Transport
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+REWATCH CHAPTER AND DO THIS SECTION.
+
+
+There are 2 different types of mechanism used to transport molecules in and out of a cell: passive transport and active transport.
+
+`{bm} Passive transport` is when molecules naturally move towards some gradient (no explicit energy needed).
+ * A `{bm} concentration gradient` is when the concentration of a molecule evens out in a volume just by virtue of the molecules randomly bouncing around.
+ * An `{bm} electrical gradient` is when molecules event out in a volume because their electrical charges attract.
+ * An `{bm} electrochemical gradient`is a combonation of both a concentration gradient and an electrical gradient.
+
+`{bm} Active transport` is when moleculues use energy to move.
+
 # Microscopy
 
 `{bm} Microscope`s are devices used to magnify (zoom in) on objects, such that you can see things that you normally would be too small to see on your own. The term microscope comes from the words...
