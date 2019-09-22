@@ -602,7 +602,7 @@ Unlike how normal offspring DNA gets produced by mixing DNA from both parents, m
 
 ### Lysosome
 
-`{bm} Lysosome`s are organelles (animal cells only) that help break down waste products / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
+`{bm} Lysosome`s are organelles (animal cells only) that help break down waste `{bm-ri} products` / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
 
 ```{note}
 According to the material, the evidence that they've been found in plant cells is recent.
@@ -764,13 +764,56 @@ It's still an open question as to how the first / initial cell came to be. The c
 There are an estimated 37 trillion cells in the human body.
 ```
 
-# Metabolism
+# Enzymes
 
-`{bm} Metabolism` is the total sum of all the chemical reactions that take place inside of a cell. These reactions happen via enzymes: enzymes are used to break-down / build-up molecules in the cell. Input molecules into an enzyme are called `{bm} substrate`s while the output molecule(s) from an enzyme are called `{bm} metabolite`s.
+An `{bm} enzyme` is a molecule that takes in a specific set of input molecules and transforms them into a specific set of output molecules by putting those molecules in an environment that's favourable for chemical reactions to take place. The transformation takes the inputs and either ...
 
-Metabolism can be broken down into 2 categories: anabolism (building-up) and catabolism (breaking-down).
+ * assembles them into new larger molecules (N to 1).
+ * separates them into smaller molecules (1 to N).
+ * transfers fragments between them (N to N).
 
-A `{bm} metabolic pathway` is a network/graph of enzymes that produces a final resulting molecule. Each enzyme produces molecules that feed into other enzymes in the pathway, eventually forming the final molecule. For example, the following graph is the metabolic pathway for gamma-hydroxybutyric acid...
+An enzyme is almost always a protein molecule but can also be a RNA-like molecule called a `{bm} ribozyme`.
+
+The general terminology for enzymes are as follows:
+
+ * `{bm} Substrate` / `{bm} Reactant`s refers to the input molecules of an enzyme.
+ * `{bm} Product/(product)_ENZYME/i` refers to the output molecules of an enzyme.
+ * `{bm} Metabolite` refers to either a substrate or product_ENZYME.
+ * `{bm} Metabolism` is the total sum of all the chemical reactions that take place inside of a cell. These reactions happen via enzymes: enzymes are used to break-down / build-up molecules in the cell.
+ * `{bm} Active site`s are the physical locations that substrates float into on an enzyme.
+ * `{bm} Catalysis/(catalysis|catalyze)/i` is the term for increasing the rate / probability of a chemical reaction. Enzymes perform catalysis.
+ * `{bm} Catalyst`s are entities that speed up chemical reactions but aren't involved in the chemical reaction (they don't change). Enzymes are catalysts.
+
+Enzymes have a limited set of substrate types that they accept. A substrate will bind to the active site of the enzyme only if it fits into the active site. For example, the following diagram shows 2 substrates binding to an enzyme, the enzyme facilitating their their assembly, then releasing back out.
+
+```{img}
+Anabolism.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Anabolism process.
+scale 0.5 0.5
+```
+
+There was previously a thought that enzymes had a “lock-and-key” model, similar to how puzzle pieces fit together. Later on it was found out that an enzymes actually `{bm} induce fit/(induced fit|induce fit)/i` by changing shape slightly when they bind with substrates, such that they can better hold on to those substrates.
+
+Examples of enzymes and what they do:
+
+ * protease → breaks up protein molecules to smaller protein molecules.
+ * sucrase → breaks up sucrose molecules to simpler sugar molecules.
+ * RNA polymerase → scans over DNA... splitting it, generating mRNA, and stitching it back up.
+
+```{img}
+Label_RNA_pol_II.png
+RNA Polymerase II
+By JWSchmidt - http://www.rcsb.org/pdb/static.do?p=general_information/news_publications/newsletters/2003q2/mom.htmlhttps://en.wikiversity.org/wiki/File:Label_RNA_pol_II.png, Public Domain, https://commons.wikimedia.org/w/index.php?curid=32033313
+scale 0.5 0.5
+
+```
+
+## Metabolic Pathway
+
+A `{bm} metabolic pathway` is a network/graph of enzymes that produces a final resulting molecule. Each enzyme produces molecules that feed into other enzymes in the pathway, eventually forming the final molecule. The term `{bm} intermediate/(intermediate)_ENZYME/` refers to an output of one enzyme that’s used as an input by another.
+
+For example, the following graph is the metabolic pathway for gamma-hydroxybutyric acid...
 
 ```{img}
 GHB_metabolic_pathway.svg
@@ -780,6 +823,8 @@ scale 0.5 0.5
 ```
 
 ## Anabolism
+
+Metabolism can be broken down into 2 categories: anabolism (building-up) and catabolism (breaking-down).
 
 The process that builds up a molecule from smaller molecules is called `{bm} anabolism/(anabolic|anabolism)/i`. An enzyme takes in the molecules and creates bonds between them via an `{bm} endergonic reaction`s: energy is stored as bonds between the smaller molecules thereby forming the larger molecule.
 
@@ -799,6 +844,8 @@ An example of anabolism is photosynthesis: plants will bond carbon dioxide gas (
 `{kt} 6CO_2 + 6H_2O + energy \to C_6H_{12}O_6 + 6O_2`
 
 ## Catabolism
+
+Metabolism can be broken down into 2 categories: anabolism (building-up) and catabolism (breaking-down).
 
 The process that breaks down a large molecule into smaller molecules is called `{bm} catabolism/(catabolic|catabolism)/i`. An enzyme takes in a larger molecule breaks up some of its bonds via `{bm} exergonic rection`s: energy used as bonds in the molecule are release thereby breaking it up into smaller molecules.
 
@@ -877,3 +924,5 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
+`{bm-ambiguous} Add the suffix _ENZYME if refering to the output of an enzyme/((?!byproduct)(?:product))/i`
+`{bm-ambiguous} Add the suffix _ENZYME if refering to the output of an enzyme/(intermediate)/i`
