@@ -766,11 +766,20 @@ There are an estimated 37 trillion cells in the human body.
 
 # Enzymes
 
-An `{bm} enzyme` is a molecule that takes in a specific set of input molecules and transforms them into a specific set of output molecules by putting those molecules in an environment that's favourable for chemical reactions to take place. The transformation takes the inputs and either ...
-
+An `{bm} enzyme` is a molecule that takes in a specific set of input molecules and transforms them into a specific set of output molecules. The transformation takes the inputs and either ...
  * assembles them into new larger molecules (N to 1).
  * separates them into smaller molecules (1 to N).
  * transfers fragments between them (N to N).
+
+Enzymes facilitate these transformations by lowering the `{bm} activation energy` (`{kt} E_A`) required for the chemical reactions to take place.  Normally this excess energy would come in the form of heat, but enzymes use different mechanisms such as...
+* temporarily contorting input molecules
+* temporarily pulling away some charge from adjacent atoms of input molecules
+
+... such that other atoms can get close enough to bond.
+
+```{note}
+How does heat provide activation energy? More heat = more molecules moving faster = more things bumping into each other faster. 2 molecules may have atoms that want to bond but neighbouring atoms on those molecules may be repelling away with stronger force. Increased speed means the repelling is less effective. 
+```
 
 An enzyme is almost always a protein molecule but can also be a RNA-like molecule called a `{bm} ribozyme`.
 
@@ -779,10 +788,10 @@ The general terminology for enzymes are as follows:
  * `{bm} Substrate` / `{bm} Reactant`s refers to the input molecules of an enzyme.
  * `{bm} Product/(product)_ENZYME/i` refers to the output molecules of an enzyme.
  * `{bm} Metabolite` refers to either a substrate or product_ENZYME.
- * `{bm} Metabolism` is the total sum of all the chemical reactions that take place inside of a cell. These reactions happen via enzymes: enzymes are used to break-down / build-up molecules in the cell.
+ * `{bm} Metabolism` is the total sum of all the chemical reactions that take place inside of a cell. These reactions happen via enzymes.
  * `{bm} Active site`s are the physical locations that substrates float into on an enzyme.
- * `{bm} Catalysis/(catalysis|catalyze)/i` is the term for increasing the rate / probability of a chemical reaction. Enzymes perform catalysis.
- * `{bm} Catalyst`s are entities that speed up chemical reactions but aren't involved in the chemical reaction (they don't change). Enzymes are catalysts.
+ * `{bm} Catalysis` / `{bm} Catalyze` is the term for increasing the rate / probability of a chemical reaction. Enzymes perform catalysis.
+ * `{bm} Catalyst`s are entities that speed up chemical reactions but don't change in the process (reaction happens but catalyst remains). Enzymes are catalysts.
 
 Enzymes have a limited set of substrate types that they accept. A substrate will bind to the active site of the enzyme only if it fits into the active site. For example, the following diagram shows 2 substrates binding to an enzyme, the enzyme facilitating their their assembly, then releasing back out.
 
@@ -793,7 +802,7 @@ Anabolism process.
 scale 0.5 0.5
 ```
 
-There was previously a thought that enzymes had a “lock-and-key” model, similar to how puzzle pieces fit together. Later on it was found out that an enzymes actually `{bm} induce fit/(induced fit|induce fit)/i` by changing shape slightly when they bind with substrates, such that they can better hold on to those substrates.
+It was previously thought that enzymes had a “lock-and-key” model, similar to how puzzle pieces fit together. Later on it was found out that an enzymes actually `{bm} induce fit/(induced fit|induce fit)/i` by changing shape slightly when they bind with substrates, such that they can better hold on to those substrates.
 
 Examples of enzymes and what they do:
 
