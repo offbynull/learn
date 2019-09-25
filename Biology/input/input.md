@@ -892,45 +892,17 @@ ATP is produced in the mitochondria. Similar to how the mitochondria is referred
 
 # Transport
 
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-REWATCH CHAPTER AND DO THIS SECTION.
-
-
 There are 2 different types of mechanism used to transport molecules in and out of a cell: passive transport and active transport.
 
-`{bm} Passive transport` is when molecules naturally move towards some gradient (no explicit energy needed).
- * A `{bm} concentration gradient` is when the concentration of a molecule evens out in a volume just by virtue of the molecules randomly bouncing around.
- * An `{bm} electrical gradient` is when molecules event out in a volume because their electrical charges attract.
- * An `{bm} electrochemical gradient`is a combonation of both a concentration gradient and an electrical gradient.
+`{bm} Passive transport` is when molecules naturally move towards the gradient. In this context, gradient refers to the natural direction in which things are supposed to go -- no explicit energy is needed to move/push it along energy needed, it just moves in that direction by virtue of some implicit property.
 
-`{bm} Active transport` is when moleculues use energy to move.
+ * A `{bm} concentration gradient` is when the concentration of a molecule evens out in a volume just by virtue of the molecules randomly bouncing around. For example, gas pumped into a vacuum will end up filling the vacuum evenly (more-or-less) -- traveling from areas of high concentration to areas of low concentration.
+ * An `{bm} electrical gradient` is when molecules flow in some direction because their electrical charges attract. For example, a negatively charged molecule will gravitate towards a positively charged molecule. Similarly, a negative molecule will gravitate away from from other negative molecules / a positive molecule will gravitate away from other positive molecules.
+ * An `{bm} electrochemical gradient` is a combination of both a concentration gradient and an electrical gradient.
+
+`{bm} Active transport` is when molecules use energy to move against the gradient. It's the opposite of passive transport -- energy is explicitly used to drive a molecule to where it naturally / normally wouldn't go.
+
+An example of active transport is the sodium potassium pump.
 
 # Microscopy
 
