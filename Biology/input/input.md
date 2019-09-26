@@ -896,7 +896,7 @@ There are 2 different types of mechanism used to transport molecules in and out 
 
 `{bm} Passive transport` is when molecules naturally move towards the gradient. In this context, gradient refers to the natural direction in which things are supposed to go -- no explicit energy is needed to move/push it along energy needed, it just moves in that direction by virtue of some implicit property.
 
- * A `{bm} concentration gradient` is when the concentration of a molecule evens out in a volume just by virtue of the molecules randomly bouncing around. For example, gas pumped into a vacuum will end up filling the vacuum evenly (more-or-less) -- traveling from areas of high concentration to areas of low concentration.
+ * A `{bm} concentration gradient` is when the concentration of a molecule evens out in a volume just by virtue of the molecules randomly bouncing around (diffusion). For example, gas pumped into a vacuum will end up filling the vacuum evenly (more-or-less) -- traveling from areas of high concentration to areas of low concentration.
  * An `{bm} electrical gradient` is when molecules flow in some direction because their electrical charges attract. For example, a negatively charged molecule will gravitate towards a positively charged molecule. Similarly, a negative molecule will gravitate away from from other negative molecules / a positive molecule will gravitate away from other positive molecules.
  * An `{bm} electrochemical gradient` is a combination of both a concentration gradient and an electrical gradient.
 
@@ -932,8 +932,9 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 `{bm} Heat of vaporization` - The amount of energy needed to change one gram of a liquid substance to a gas at constant temperature.
 
-`{bm} endosymbiosis` - A form of symbiosis where one organism lives inside of of the other (e.g. gut bacteria lives in our colon). The prefix *endo* means *within*.
+`{bm} Endosymbiosis` - A form of symbiosis where one organism lives inside of of the other (e.g. gut bacteria lives in our colon). The prefix *endo* means *within*.
 
+`{bm} Diffusion/(diffusion|diffuse)/i` - A physical process where molecules of a material move from an area of high concentration (where there are many molecules) to an area of low concentration (where there are fewer molecules) until it has reached equilibrium (molecules evenly spread). [See more](https://simple.wikipedia.org/wiki/Diffusion).
 
 
 
