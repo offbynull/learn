@@ -931,9 +931,74 @@ There are 2 different types of mechanism used to transport molecules in and out 
 
 Note that the active transport in the example above is the opening/closing of the enzyme ends, not the exchange of sodium and potassium. Energy (ATP) is being used to shape-shift the enzyme to open/close (active transport) while the sodium and potassium are passively entering and exiting the gates (passive transport via facilitated diffusion).
 
+# Osmosis
+
+`{bm} Osmosis` is the passive transport of solvent molecules (typically water), across a semipermeable membrane, from areas where solutes are less concentrated to areas where solutes are more concentrated.
+
+This happens because the semipermeable membrane is either gated by ...
+
+* size, the solute molecules may be too large to pass through. 
+* charge, the solute molecules may not have the required charge to pass through.
+
+The higher the concentration of solute molecules, the less likely it is for the solvent molecules to reach a pore in the semipermeable membrane. The side with the lower concentration of solute molecules is more likely to have a solvent molecule reach a pore than the other way around.
+
+
+```{img}
+0307_Osmosis.jpg
+By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=30131189
+Osmosis is the diffusion of water through a semipermeable membrane down its concentration gradient. If a membrane is permeable to water, though not to a solute, water will equalize its own concentration by diffusing to the side of lower water concentration (and thus the side of higher solute concentration). In the beaker on the left, the solution on the right side of the membrane is hypertonic.
+scale 0.65 0.65
+```
+
+```{note}
+Another diagram that may make more sense conceptually: https://commons.wikimedia.org/wiki/File:Osmosis_diagram.svg
+```
+
+Another theory is that, depending on the charge of solvent and charge of solute, the solvent may be attracted to the solute. More solute = more chance that a solvent gets attracted to it instead of crossing a pore in the membrane. For example, if the solvent were water and the solute was sodium, the weakly negative charge of the oxygen atom in a water molecule may get attracted to the positive charge of the sodium ion.
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
+WRITE TONICITY SECTION
+
 # Sodium Potassium Pump
 
-The `{bm} sodium potassium pump` is an transmembrane enzyme that allows the exchange of sodium ions and potassium ions across the cell membrane by opening and closing its ends. Only 1 end of the enzyme is open at a time.
+The `{bm} sodium potassium pump` is an transmembrane enzyme that allows the exchange of sodium ions and potassium ions across the cell membrane by opening and closing its ends.
 
 ```{img}
 Scheme_sodium-potassium_pump-en.svg
@@ -941,7 +1006,7 @@ By LadyofHats Mariana Ruiz Villarreal - Own work. Image renamed from Image:Sodiu
 Example of primary active transport, where energy from hydrolysis of ATP is directly coupled to the movement of a specific substance across a membrane independent of any other species.
 ```
 
-When the...
+Only 1 end of the enzyme is open at a time. When the...
 
 * intracellular end is open, the enzyme has an affinity for 3 sodium ions followed by an affinity for ATP.
 * extracellular end is open, the enzyme has an affinity for 2 potassium ions.
@@ -986,11 +1051,13 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 `{bm} Equilibrium` - A state in which opposing forces / influences are balanced. In the context of a concentration gradient, it means the state at which a substance is equally distributed throughout the volume that it's in (roughly).
 
-`{bm} Permeability/(permeable|permeability|semipermeable)/i` - The state or quality of a material or membrane that causes it to allow liquids/gases to pass through it.
+`{bm} Permeability/(permeable|permeability)/i` - The state or quality of a material or membrane that causes it to allow liquids/gases to pass through it.
 
-`{bm} intracellular` - The fluid inside of the cell, which is technically on the inside of the cell membrane (cytoplasm).
+`{bm} Semipermeable/(semipermeable|selectively permeable)/i` - The state or quality of a material or membrane that causes it to allow certain types of molecules to pass through it.
 
-`{bm} extracellular` - The fluid outside of the cell.
+`{bm} Intracellular` - The fluid inside of the cell, which is technically on the inside of the cell membrane (cytoplasm).
+
+`{bm} Extracellular` - The fluid outside of the cell.
 
 ```{note}
 Technically unsure at which layer the extracellular region begins. Is it outside of the cell membrane? cell wall? cell capsule? I'm pretty sure any fluid outside of the cell membrane qualifies as extracellular, while any fluid inside of the cell membrane qualifies as intracellular (cytoplasm).
