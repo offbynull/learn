@@ -129,7 +129,7 @@ There are probably special properties to monomers that allow them to chain up. T
 
 Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a very large number of atoms.
 
-An `{bm} ion/\b(ion)\b/i` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
+An `{bm} ion/\b(ions|ion)\b/i` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
 * if protons > electrons (more protons), it's called a `{bm} positively charged/(positive charge|positive-charge|positively-charged|positively charged)/i` ion / `{bm} positive ion`.
 * if protons < electrons (more electrons), it's called a `{bm} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} ANION`.
 * if protons == electrons, it's a neutral (no charge).
@@ -373,6 +373,13 @@ expand 2 1 0 0
 text 0.5 0.5 cell membrane
 text 0.5 0.6 (inner layer)
 ```
+
+Facts about cell membranes:
+
+ * Membranes have other molecules embedded in them for identification, moving stuff in/out, etc.. (see fluid mosaic model).
+ * Membranes are semipermeable. Uncharged substances such as carbon dioxide and oxygen move across fine, while charged ions or large molecules require either
+   * membrane proteins such as a carrier protein or a channel protein (see fluid mosaic model).
+   * membrane wrapper (see golgi).
 
 ### Cell Wall
 
@@ -720,7 +727,7 @@ How fluid a phospholipid bilayer is depends on the types of phospholipid molecul
 * both saturated (straight tails)
 * one saturated (straight tail) and one unsaturated (bent tail).
 
-At cooler temperatures, phospholipids that have 2 saturated fatty acid tails (straight tails) tend to get more rigid / dense because they can more easily pack together. Phospholipids with unsaturated fatty acid tails (bent tails) don't end up getting as rigid / dense, allowing the membrane to stay fluid at lower temperatures. Cholestrol embedded in the phospholipid bilayer also helps it stay more fluid at lower temperatures.
+At cooler temperatures, phospholipids that have 2 saturated fatty acid tails (straight tails) tend to get more rigid / dense because they can more easily pack together. Phospholipids with unsaturated fatty acid tails (bent tails) don't end up getting as rigid / dense, allowing the membrane to stay fluid at lower temperatures. Cholesterol embedded in the phospholipid bilayer also helps it stay more fluid at lower temperatures.
 
 ```{note}
 Phospholipid bilayers have the consistency of oil-based salad dressing. It may seem weak but it's strong enough to act as a separator between the environment inside and the environment outside. Water from one-side can move to the other but does so very rarely -- a single molecule may sneak through the layer every now and then. Aquaporins are proteins embedded in the phospholipid bilayer that allow water to rapidly pass (when needed).
@@ -730,13 +737,15 @@ Examples of molecules that can be embedded in or attached to the phospholipid bi
 
 * `{bm} Glycolipid`s / `{bm} Glycoprotein`s - These are lipids and proteins with carbohydrates attached to them and are typically found pointing outside of the cell. These carbohydrates are how a cell identifies if a neighbouring cell is foreign or not.
 * `{bm} Integral protein`s - Proteins that are partially hydrophobic. Either one end of the protein is anchored inside the membrane or the protein is fully going through the membrane.
-  * `{bm} Transmembrane protein`s - Proteins that have one end inside the cytoplasm and the other outside of the cell. Typical usecase for these types of proteins is moving substances from inside the cell (cytoplasm) to outside the cell and vice-versa.
+  * `{bm} Transmembrane protein`s - Proteins that have one end inside the cytoplasm and the other outside of the cell. Typical use case for these types of proteins is moving substances from inside the cell (cytoplasm) to outside the cell and vice-versa: `{bm} channel protein`s and `{bm} carrier protein`s.
 * `{bm} Peripheral protein`s - Proteins that are found on the surface of the protein (either on the cytoplasm side or the outside side). Unlike integral proteins, they don't have any portion going inside the membrane. As such, they more freely move around compared to integral proteins.
 * `{bm} Cholesterol` - Sits inside of the membrane to help ensure that the membrane doesn't become too stiff.
 
 ```{note}
 See first diagram in this section for an example of each of the molecules listed above.
 ```
+
+The term `{bm} facilitated diffusion` refers to the movement of molecules across the membrane via proteins embedded in the membrane (e.g. channel proteins and/or carrier proteins). These molecules wouldn't be able to cross the membrane by themselves. For example, the sodium potassium pump (carrier protein) helps sodium and potassium ions move across the cell membrane by opening/closing its gates.
 
 ## History of Modern Cell Theory
 
@@ -918,7 +927,9 @@ There are 2 different types of mechanism used to transport molecules in and out 
 
  * An `{bm} electrochemical gradient` is a combination of both a concentration gradient and an electrical gradient.
 
-`{bm} Active transport` is when molecules use energy to move against the gradient. It's the opposite of passive transport -- energy is explicitly used to drive a molecule to where it naturally / normally wouldn't go. An example of active transport is the "sodium potassium pump" enzyme: ATP is used to force open/close the ends of the enzyme, allowing sodium and potassium to be exchanged across the cell membrane.
+`{bm} Active transport` is when molecules use energy (e.g. ATP) to move against the gradient. It's the opposite of passive transport -- energy is explicitly used to drive a molecule to where it naturally / normally wouldn't go. An example of active transport is the "sodium potassium pump" enzyme: ATP is used to force open/close the ends of the enzyme, which allow sodium and potassium to be exchanged across the cell membrane.
+
+Note that the active transport in the example above is the opening/closing of the enzyme ends, not the exchange of sodium and potassium. Energy (ATP) is being used to shape-shift the enzyme to open/close (active transport) while the sodium and potassium are passively entering and exiting the gates (passive transport via facilitated diffusion).
 
 # Microscopy
 
@@ -952,7 +963,9 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 `{bm} Diffusion/(diffusion|diffuse)/i` - A physical process where molecules of a material move from an area of high concentration (where there are many molecules) to an area of low concentration (where there are fewer molecules) until it has reached equilibrium (molecules evenly spread). [See more](https://simple.wikipedia.org/wiki/Diffusion).
 
+`{bm} Equilibrium` - A state in which opposing forces / influences are balanced. In the context of a concentration gradient, it means the state at which a substance is equally distributed throughout the volume that it's in (roughly).
 
+`{bm} Permeability/(permeable|permeability|semipermeable)/i` - The state or quality of a material or membrane that causes it to allow liquids/gases to pass through it.
 
 
 
