@@ -736,9 +736,9 @@ Phospholipid bilayers have the consistency of oil-based salad dressing. It may s
 Examples of molecules that can be embedded in or attached to the phospholipid bilayer include...
 
 * `{bm} Glycolipid`s / `{bm} Glycoprotein`s - These are lipids and proteins with carbohydrates attached to them and are typically found pointing outside of the cell. These carbohydrates are how a cell identifies if a neighbouring cell is foreign or not.
-* `{bm} Integral protein`s - Proteins that are partially hydrophobic. Either one end of the protein is anchored inside the membrane or the protein is fully going through the membrane.
-  * `{bm} Transmembrane protein`s - Proteins that have one end inside the cytoplasm and the other outside of the cell. Typical use case for these types of proteins is moving substances from inside the cell (cytoplasm) to outside the cell and vice-versa: `{bm} channel protein`s and `{bm} carrier protein`s.
-* `{bm} Peripheral protein`s - Proteins that are found on the surface of the protein (either on the cytoplasm side or the outside side). Unlike integral proteins, they don't have any portion going inside the membrane. As such, they more freely move around compared to integral proteins.
+* `{bm} Integral protein/(integral protein|integral enzyme)/i`s - Proteins that are partially hydrophobic. Either one end of the protein is anchored inside the membrane or the protein is fully going through the membrane.
+  * `{bm} Transmembrane protein/(transmembrane protein|transmembrane enzyme)/i`s - Proteins that have one end inside the cytoplasm and the other outside of the cell. Typical use case for these types of proteins is moving substances from inside the cell (cytoplasm) to outside the cell and vice-versa: `{bm} channel protein`s and `{bm} carrier protein`s.
+* `{bm} Peripheral protein/(peripheral protein|peripheral enzyme)/i`s - Proteins that are found on the surface of the protein (either on the cytoplasm side or the outside side). Unlike integral proteins, they don't have any portion going inside the membrane. As such, they more freely move around compared to integral proteins.
 * `{bm} Cholesterol` - Sits inside of the membrane to help ensure that the membrane doesn't become too stiff.
 
 ```{note}
@@ -931,6 +931,27 @@ There are 2 different types of mechanism used to transport molecules in and out 
 
 Note that the active transport in the example above is the opening/closing of the enzyme ends, not the exchange of sodium and potassium. Energy (ATP) is being used to shape-shift the enzyme to open/close (active transport) while the sodium and potassium are passively entering and exiting the gates (passive transport via facilitated diffusion).
 
+# Sodium Potassium Pump
+
+The `{bm} sodium potassium pump` is an transmembrane enzyme that allows the exchange of sodium ions and potassium ions across the cell membrane by opening and closing its ends. Only 1 end of the enzyme is open at a time.
+
+```{img}
+Scheme_sodium-potassium_pump-en.svg
+By LadyofHats Mariana Ruiz Villarreal - Own work. Image renamed from Image:Sodium-Potassium_pump.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=3981038
+Example of primary active transport, where energy from hydrolysis of ATP is directly coupled to the movement of a specific substance across a membrane independent of any other species.
+```
+
+When the...
+
+* intracellular end is open, the enzyme has an affinity for 3 sodium ions followed by an affinity for ATP.
+* extracellular end is open, the enzyme has an affinity for 2 potassium ions.
+
+Since both potassium and sodium have a positive charge and an an unequal number are being exchanged each cycle (3 sodium out vs 2 potassium in), the intracellular space will be more positive than the extracellular space.
+
+This charge difference is further reinforced by membrane channel proteins which allow potassium ions to flow across the membrane (potassium channels). Since there's a higher concentration of potassium ions inside the cell, those potassium ions have a higher chance of flowing through the channel to the outside. Some percentage may be impeded by the slightly more positive charge on the outside, but overall more will make it to the outside than stay on the inside.
+
+This charge difference is referred to as the `{bm} resting membrane potential` for a cell.
+
 # Microscopy
 
 `{bm} Microscope`s are devices used to magnify (zoom in) on objects, such that you can see things that you normally would be too small to see on your own. The term microscope comes from the words...
@@ -967,6 +988,13 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 `{bm} Permeability/(permeable|permeability|semipermeable)/i` - The state or quality of a material or membrane that causes it to allow liquids/gases to pass through it.
 
+`{bm} intracellular` - The fluid inside of the cell, which is technically on the inside of the cell membrane (cytoplasm).
+
+`{bm} extracellular` - The fluid outside of the cell.
+
+```{note}
+Technically unsure at which layer the extracellular region begins. Is it outside of the cell membrane? cell wall? cell capsule? I'm pretty sure any fluid outside of the cell membrane qualifies as extracellular, while any fluid inside of the cell membrane qualifies as intracellular (cytoplasm).
+```
 
 
 
