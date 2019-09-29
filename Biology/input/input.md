@@ -933,15 +933,14 @@ Note that the active transport in the example above is the opening/closing of th
 
 # Osmosis
 
-`{bm} Osmosis` is the passive transport of solvent molecules (typically water), across a semipermeable membrane, from areas where solutes are less concentrated to areas where solutes are more concentrated.
+`{bm} Osmosis/(osmosis|osmotic)/i` is the passive transport of solvent molecules (typically water), across a semipermeable membrane, from areas where solutes are less concentrated to areas where solutes are more concentrated.
 
-This happens because the semipermeable membrane is either gated by ...
+For example, imagine you have a semipermeabl membrane that allows water molecules (solvent) to pass but not sodium (solute). That membrane is separating 2 regions, where the ...
 
-* size, the solute molecules may be too large to pass through. 
-* charge, the solute molecules may not have the required charge to pass through.
+* left region is a solution of 25% sodium (solute) and 75% water (solvent).
+* right region is a solution of 75% sodium (solute) and 25% water (solvent).
 
-The higher the concentration of solute molecules, the less likely it is for the solvent molecules to reach a pore in the semipermeable membrane. The side with the lower concentration of solute molecules is more likely to have a solvent molecule reach a pore than the other way around.
-
+There'll be a net movement of some water molecules from the left region (lower solute concentration) to the right region (higher solute concentration).
 
 ```{img}
 0307_Osmosis.jpg
@@ -954,47 +953,51 @@ scale 0.65 0.65
 Another diagram that may make more sense conceptually: https://commons.wikimedia.org/wiki/File:Osmosis_diagram.svg
 ```
 
-Another theory is that, depending on the charge of solvent and charge of solute, the solvent may be attracted to the solute. More solute = more chance that a solvent gets attracted to it instead of crossing a pore in the membrane. For example, if the solvent were water and the solute was sodium, the weakly negative charge of the oxygen atom in a water molecule may get attracted to the positive charge of the sodium ion.
+There are 2 reasons why osmosis happens. The first is that the semipermeable membrane will only allow certain types of molecules to pass through. If the semipermeable membrane is gated by ...
 
-WRITE TONICITY SECTION
+* size, the solute molecules may be too large to pass through. 
+* charge, the solute molecules may not have the required charge to pass through.
 
-WRITE TONICITY SECTION
+The higher the concentration of solute molecules, the less likely it is for the solvent molecules to reach a pore in the semipermeable membrane. The side with the lower concentration of solute molecules is more likely to have a solvent molecule reach a pore than the other way around.
 
-WRITE TONICITY SECTION
+```{img}
+Semipermeable membrane gated by size.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Semipermeable membrane with pores big enough for water but not sodium.
+```
 
-WRITE TONICITY SECTION
+The second reason is that, depending on the charge of solvent and charge of solute, the solvent may be attracted to the solute. More solute = more chance that a solvent gets attracted to it instead of crossing a pore in the membrane. For example, if the solvent is water and the solute is sodium, the weakly negative charge of the oxygen atom in a water molecule may get attracted to the positive charge of the sodium ion.
 
-WRITE TONICITY SECTION
+```{img}
+Semipermeable membrane but solvent attracted to solute.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Semipermeable membrane but solvent attracted to solute.
+```
 
-WRITE TONICITY SECTION
+`{bm} Tonicity` is the amount of pressure applied to a semipermeable membrane due to osmosis. In other words, it's the amount of water that flows in or out of a cell due to the type of solution it's put in. A ...
 
-WRITE TONICITY SECTION
+* `{bm} hypertonic` solution is one that has more solutes than the cell, meaning the inside of the cell loses water (cell shrivels).
+* `{bm} hyptotonic` solution is one that has less solutes than the cell, meaning the inside of the cell gains water (cell swells).
+* `{bm} isotonic` solution is one that has a roughly equal amount of solutes, meaning the cell's water content remains the same.
 
-WRITE TONICITY SECTION
+```{img}
+Tonicity.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Different types of tonicity.
+```
 
-WRITE TONICITY SECTION
+```{note}
+The prefix is referring to the amount of solute in the solution relative to the cell. Hyper = more. Hypo = less. Iso = same.
+```
 
-WRITE TONICITY SECTION
+The following is a micrograph of the red blood cells in solutions of different tonicity. Notice how they shrivel in a hypertonic solution (lose water) and expand in a hypotonic solution (gain water).
 
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
-
-WRITE TONICITY SECTION
+```{img}
+Human_Erythrocytes_OsmoticPressure_PhaseContrast_Plain.svg
+By Zephyris - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=18401754
+Human erythrocytes (red blood cells) viewed by phase contrast light microscopy. Three conditions are shown: hypertonic conditions (where the erythrocytes contract and appear "spiky"), isotonic conditions (where the erythrocytes appear normal) and hypotonic conditions (where the etrythrocytes expand and become more round).
+scale 0.55 0.55
+```
 
 # Sodium Potassium Pump
 
