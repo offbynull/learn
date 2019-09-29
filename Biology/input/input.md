@@ -163,7 +163,7 @@ https://www.quora.com/Why-is-pure-water-considered-neutral -- Since pH is define
 
 ## Carbohydrate Molecules
 
-`{bm} Carbohydrate`s (also called `{bm} saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
+`{bm} Carbohydrate/(carbohydrate|sugar)/i`s (also called `{bm} saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
 * being a source of energy
 * providing a structural role (for plants / certain plants).
 
@@ -640,7 +640,7 @@ scale 0.5 0.5
 
 ### Chloroplast
 
-`{bm} Chloroplast`s are organelle (only plant and algae cells) responsible for photosynthesis. `{bm} Photosynthesis` is the process of taking in light and using it to build sugars from carbon dioxide. Those sugars are then used by the mitochondria to produce energy in a process called cellular respiration.
+`{bm} Chloroplast`s are organelle (only plant and algae cells) responsible for photosynthesis. Photosynthesis is the process of taking in light and using it to build sugars from water and carbon dioxide. Those sugars are then used by the mitochondria to produce energy in a process called cellular respiration.
 
 ```{img}
 Chloroplast_structure.svg
@@ -667,7 +667,9 @@ The major parts of chloroplast are...
  * <span style="color:#808000ff">`{bm} thylakoid`</span> - Membrane-bound discs. The membrane contains light-harvesting substances while the space inside (also called `{bm} lumen`) is hollow.
  * <span style="color:#ff0000ff">`{bm} grana/(grana|granum)/i`</span> - Stack of thylakoids. These stacks are interconnected. The singular of grana is granum.
 
- Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis).
+ `{bm} Chlorophyll` is a pigment / compound found in chloroplast that absorbs light and uses it to produce carbohydrates. It's found in the thylakoid membrane as well as the stroma, and it only absorbs red and blue light (while reflecting green).
+
+ Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis). A descendant of that organism may be `{bm} cyanobacterium/(cyanobacterium|cyanobacteria)/i`, which has a similar ability to generate sugars from light (see [Wikipedia](https://en.wikipedia.org/w/index.php?title=Chloroplast&oldid=918130624#Parent_group:_Cyanobacteria)).
 
 ### Vacuole
 
@@ -903,7 +905,7 @@ ATP is produced in the mitochondria. Similar to how the mitochondria is referred
 
 There are 2 different types of mechanism used to transport molecules in and out of a cell: passive transport and active transport.
 
-`{bm} Passive transport` is when molecules naturally move towards the gradient. In this context, gradient refers to the natural direction in which things are supposed to go -- no explicit energy is needed to move/push it along energy needed, it just moves in that direction by virtue of some implicit property.
+`{bm} Passive transport` is when molecules naturally move towards the gradient. In this context, gradient refers to the natural direction in which things are supposed to go -- no explicit energy is needed to move/push it along, it just moves in that direction by virtue of some implicit property.
 
  * A `{bm} concentration gradient` is when the concentration of a molecule evens out in a volume just by virtue of the molecules randomly bouncing around (diffusion). For example, gas pumped into a vacuum will end up filling the vacuum evenly (more-or-less) -- traveling from areas of high concentration to areas of low concentration.
  
@@ -927,7 +929,7 @@ There are 2 different types of mechanism used to transport molecules in and out 
 
  * An `{bm} electrochemical gradient` is a combination of both a concentration gradient and an electrical gradient.
 
-`{bm} Active transport` is when molecules use energy (e.g. ATP) to move against the gradient. It's the opposite of passive transport -- energy is explicitly used to drive a molecule to where it naturally / normally wouldn't go. An example of active transport is the "sodium potassium pump" enzyme: ATP is used to force open/close the ends of the enzyme, which allow sodium and potassium to be exchanged across the cell membrane.
+`{bm} Active transport` is when molecules use energy (e.g. ATP) to move against their gradient. It's the opposite of passive transport -- energy is explicitly used to drive a molecule to where it naturally / normally wouldn't go. An example of active transport is the "sodium potassium pump" enzyme: ATP is used to force open/close the ends of the enzyme, which allow sodium and potassium to be exchanged across the cell membrane.
 
 Note that the active transport in the example above is the opening/closing of the enzyme ends, not the exchange of sodium and potassium. Energy (ATP) is being used to shape-shift the enzyme to open/close (active transport) while the sodium and potassium are passively entering and exiting the gates (passive transport via facilitated diffusion).
 
@@ -940,7 +942,7 @@ For example, imagine you have a semipermeabl membrane that allows water molecule
 * left region is a solution of 25% sodium (solute) and 75% water (solvent).
 * right region is a solution of 75% sodium (solute) and 25% water (solvent).
 
-There'll be a net movement of some water molecules from the left region (lower solute concentration) to the right region (higher solute concentration).
+There will be a net movement of some water molecules from the left region (lower solute concentration) to the right region (higher solute concentration).
 
 ```{img}
 0307_Osmosis.jpg
@@ -977,7 +979,7 @@ Semipermeable membrane but solvent attracted to solute.
 `{bm} Tonicity` is the amount of pressure applied to a semipermeable membrane due to osmosis. In other words, it's the amount of water that flows in or out of a cell due to the type of solution it's put in. A ...
 
 * `{bm} hypertonic` solution is one that has more solutes than the cell, meaning the inside of the cell loses water (cell shrivels).
-* `{bm} hyptotonic` solution is one that has less solutes than the cell, meaning the inside of the cell gains water (cell swells).
+* `{bm} hypotonic` solution is one that has less solutes than the cell, meaning the inside of the cell gains water (cell swells).
 * `{bm} isotonic` solution is one that has a roughly equal amount of solutes, meaning the cell's water content remains the same.
 
 ```{img}
@@ -997,6 +999,91 @@ Human_Erythrocytes_OsmoticPressure_PhaseContrast_Plain.svg
 By Zephyris - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=18401754
 Human erythrocytes (red blood cells) viewed by phase contrast light microscopy. Three conditions are shown: hypertonic conditions (where the erythrocytes contract and appear "spiky"), isotonic conditions (where the erythrocytes appear normal) and hypotonic conditions (where the etrythrocytes expand and become more round).
 scale 0.55 0.55
+```
+
+# Photosynthesis
+
+`{bm} Photosynthesis` is the process by which certain organisms convert light energy (photons) to chemical energy (sugars). These organisms are called `{bm} Photoautotroph`s, and they include ...
+
+* plants and algae (eukaryotic), which perform photosynthesis via their chloroplast organelles.
+* cyanobacterium, which are bacteria that can generate their own food.
+
+```{note}
+Another way to think of photosynthesis is that it uses light energy (PHOTOsynthesis) to synthesize (photoSYNTHESIS) sugars.
+```
+
+```{note}
+Chloroplast and cyanobacterium share a similar structure. It's speculated that they have the same parent organism: that parent formed an endosymbiotic relationship with a larger cell and eventually became the chloroplast organelle.
+```
+
+The overall chemical reaction for is `{kt} 6CO_2 + 6H_2O + photons \to C_6H_{12}O_6 + 6O_2`. Carbon dioxide gas (`{kt} CO_2`) bonds with water (`{kt} H_2O`) using energy from the sun, creating sugar (`{kt} C_6H_{12}O_6`).
+
+This reaction happens in 2 steps:
+
+1. `{bm}Light-dependent reaction`s: Energy molecules are created from water and photos, with oxygen being a `{bm-ri}byproduct`.
+
+   This occurs in a thylakoid membrane.
+
+   ```{img}
+   Chloroplast_structure.svg
+   Ultrastructure of a chloroplast.
+   By Kelvinsong - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=26147364
+   scale 0.3 0.3
+ 
+   bg_color #00000000
+
+   fg_color #808000ff
+   rect 0.24 0.015 0.3 0.15
+   ```
+2. `{bm} Calvin cycle`: It's a cyclical process that requires multiple iterations (3?) to produce a single glucose molecule. Each cycle, ATP and NADPH are used for energy (producing ADP and NADP+ respectively), while the carbon dioxide (`{kt} CO_2`) is used as a source of carbons for the resulting glucose.
+
+   This occurs in the stroma. 
+
+   ```{img}
+   Chloroplast_structure.svg
+   Ultrastructure of a chloroplast.
+   By Kelvinsong - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=26147364
+   scale 0.3 0.3
+ 
+   bg_color #00000000
+
+   fg_color #008080ff
+   rect 0.85 0.2 0.15 0.07
+   ```
+
+The following workflow diagram provides a simplified high-level overview of the chemical reaction that take place. Note that this doesn't include cardinality. For example, the Calvin cycle requires multiple ATP and carbon dioxide molecules before being able to generate a single glucose molecule, but the diagram doesn't specify how many. 
+
+```{dot}
+digraph G {
+  compound=true;
+  Photon [label="Photons\n(sunlight)"]
+  H2O [label="H2O\n(water)"]
+  CO2 [label="CO2\n(carbon dioxide)"]
+  O2 [label="O2\n(oxygen)"]
+  ATP
+  NADPH
+  ADP
+  NADP_PLUS [label="NADP+"]
+  H [label="H+"]
+  LDR [label="Light-dependent reactions\n(happens in thylakoid membrane)", shape=box]
+  CALVIN [label="Calvin cycle\n(happens in stroma)", shape=box]
+  CARB [label="Glucose"]
+  Photon -> LDR
+  H2O ->  LDR
+  LDR -> ATP
+  LDR -> NADPH
+  LDR -> O2
+  ATP -> CALVIN
+  NADPH -> CALVIN
+  CO2 -> CALVIN
+  CALVIN -> CARB
+  CALVIN -> ADP
+  CALVIN -> NADP_PLUS
+  CALVIN -> H
+  ADP -> LDR
+  NADP_PLUS -> LDR
+  
+}
 ```
 
 # Sodium Potassium Pump
@@ -1048,7 +1135,7 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 
 `{bm} Heat of vaporization` - The amount of energy needed to change one gram of a liquid substance to a gas at constant temperature.
 
-`{bm} Endosymbiosis` - A form of symbiosis where one organism lives inside of of the other (e.g. gut bacteria lives in our colon). The prefix *endo* means *within*.
+`{bm} Endosymbiosis/(endosymbiosis|endosymbiotic)/i` - A form of symbiosis where one organism lives inside of of the other (e.g. gut bacteria lives in our colon). The prefix *endo* means *within*.
 
 `{bm} Diffusion/(diffusion|diffuse)/i` - A physical process where molecules of a material move from an area of high concentration (where there are many molecules) to an area of low concentration (where there are fewer molecules) until it has reached equilibrium (molecules evenly spread). [See more](https://simple.wikipedia.org/wiki/Diffusion).
 
@@ -1075,5 +1162,5 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 
 
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
-`{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/((?!byproduct)(?:product))/i`
+`{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(product)/i`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
