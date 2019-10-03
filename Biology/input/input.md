@@ -1020,7 +1020,7 @@ The overall chemical reaction for is `{kt} 6CO_2 + 6H_2O + photons \to C_6H_{12}
 
 This reaction happens in 2 steps:
 
-1. `{bm}Light-dependent reaction`s: Energy molecules are created from water and photos, with oxygen being a `{bm-ri}byproduct`.
+1. `{bm}Light-dependent reaction`s: Energy molecules are created from water and photos, with oxygen being a byproduct.
 
    This occurs in a thylakoid membrane.
 
@@ -1162,5 +1162,6 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 
 
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
+`{bm-ignore} byproduct`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(product)/i`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
