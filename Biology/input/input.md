@@ -779,6 +779,27 @@ It's still an open question as to how the first / initial cell came to be. The c
 There are an estimated 37 trillion cells in the human body.
 ```
 
+# Reproduction
+
+`{bm} Reproduction/(reproduce|reproduction)/i` is when an organism generates offspring. It comes in 2 forms: asexual and sexual.
+
+`{bm} Asexual` reproduction is when offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
+  * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
+  * `{bm} Mitosis` - Process of cloning a eukaryotic cell.
+  * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
+  * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
+  * `{bm} Parthenogenesis` - When an animal lays an `{bm-ri} egg` but that `{bm-ri} egg` already has all the genetic information needed to develop (it doesn't need to be fertilized).
+
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(egg)/i`
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(ova)/i` 
+
+`{bm} Sexual` reproduction is when offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a `{bm} gamete` cells merge to create the offspring. Gamete cells have half the genetic information from the original parent, and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
+
+```{note}
+In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
+```
+   
+
 # Enzymes
 
 An `{bm} enzyme` is a molecule that takes in a specific set of input molecules and transforms them into a specific set of output molecules. The transformation takes the inputs and either ...
@@ -1253,10 +1274,11 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 Technically unsure at which layer the extracellular region begins. Is it outside of the cell membrane? cell wall? cell capsule? I'm pretty sure any fluid outside of the cell membrane qualifies as extracellular, while any fluid inside of the cell membrane qualifies as intracellular (cytoplasm).
 ```
 
-`{bm} aerobic` - A biological process that requires oxygen.
+`{bm} Aerobic` - A biological process that requires oxygen.
 
-`{bm} anaerobic` - A biological process that doesn't require oxygen.
+`{bm} Anaerobic` - A biological process that doesn't require oxygen.
 
+`{bm} Fission` - The act of dividing or splitting something into two or more parts.
 
 
 
