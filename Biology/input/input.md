@@ -574,7 +574,7 @@ scale 0.15 0.15
 ```
 
 ### Mitochondria
-`{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> are organelles responsible for `{bm} cellular respiration`: the process of producing Adenosine Triphosphate (ATP) from molecules such as sugars. ATP is a chemical that provides energy to drive various biological processes (e.g. muscle contractions). As such, mitochondria are often referred to as "the power house of the cell."
+`{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> are organelles responsible for cellular respiration: the process of producing Adenosine Triphosphate (ATP) from molecules such as sugars. ATP is a chemical that provides energy to drive various biological processes (e.g. muscle contractions). As such, mitochondria are often referred to as "the power house of the cell."
 
 ```{img}
 Animal_mitochondrion_diagram_en.svg
@@ -594,6 +594,10 @@ rect 0.3 0.18 0.15 0.07
 
 fg_color #808000ff
 rect 0.13 0.35 0.13 0.07
+```
+
+```{note}
+Mitochondria exist in both animal and plant cells. 
 ```
 
 The major parts of chloroplast are...
@@ -886,7 +890,7 @@ An example of catabolism is cellular respiration: cells will break down the bond
 
 # Adenosine Triphosphate
 
-`{bm} /\b(ATP)\b/` `{bm} Adenosine Triphosphate` (ATP) is a molecule that provides energy to drive various biological processes (e.g. muscle contractions). The third phosphoral group at the very end has a high-energy bond. When broken, energy is released and the resulting molecules are the broken up phosphoral group and `{bm} /\b(ADP)\b/` `{bm} Adenosine Diphosphate` (ADP).
+`{bm} /\b(ATP)(?:s{0,1})\b/` `{bm} Adenosine Triphosphate` (ATP) is a molecule that provides energy to drive various biological processes (e.g. muscle contractions). The third phosphoral group at the very end has a high-energy bond. When broken, energy is released and the resulting molecules are the broken up phosphoral group and `{bm} /\b(ADP)(?:s{0,1})\b/` `{bm} Adenosine Diphosphate` (ADP).
 
 ```{note}
 High-energy bonds are actually a thing: A chemical bond whose hydrolysis results in the generation of 30kJ (7kcal) of energy or, if coupled to an energetically unfavourable reaction, can drive that reaction forward. (https://www.genscript.com/molecular-biology-glossary/1364/high-energy-bond)
@@ -1005,7 +1009,7 @@ scale 0.55 0.55
 
 `{bm} Photosynthesis` is the process by which certain organisms convert light energy (photons) to chemical energy (sugars). These organisms are called `{bm} Photoautotroph`s, and they include ...
 
-* plants and algae (eukaryotic), which perform photosynthesis via their chloroplast organelles.
+* plants and algae (eukaryotic), which perform photosynthesis via their chloroplast.
 * cyanobacterium, which are bacteria that can generate their own food.
 
 ```{note}
@@ -1016,7 +1020,7 @@ Another way to think of photosynthesis is that it uses light energy (PHOTOsynthe
 Chloroplast and cyanobacterium share a similar structure. It's speculated that they have the same parent organism: that parent formed an endosymbiotic relationship with a larger cell and eventually became the chloroplast organelle.
 ```
 
-The overall chemical reaction for is `{kt} 6CO_2 + 6H_2O + photons \to C_6H_{12}O_6 + 6O_2`. Carbon dioxide gas (`{kt} CO_2`) bonds with water (`{kt} H_2O`) using energy from the sun, creating sugar (`{kt} C_6H_{12}O_6`).
+The overall chemical reaction for this is `{kt} 6CO_2 + 6H_2O + energy \to C_6H_{12}O_6 + 6O_2`. Carbon dioxide gas (`{kt} CO_2`) bonds with water (`{kt} H_2O`) using energy from the sun (photons), creating glucose (`{kt} C_6H_{12}O_6`).
 
 This reaction happens in 2 steps:
 
@@ -1051,7 +1055,7 @@ This reaction happens in 2 steps:
    rect 0.85 0.2 0.15 0.07
    ```
 
-The following workflow diagram provides a simplified high-level overview of the chemical reaction that take place. Note that this doesn't include cardinality. For example, the Calvin cycle requires multiple ATP and carbon dioxide molecules before being able to generate a single glucose molecule, but the diagram doesn't specify how many. 
+The following workflow diagram provides a ultra-simple high-level overview of the processes that take place. Note that this doesn't specify how many of each molecule get input / output, nor does it provide a complete set of a input / output molecules for each reaction.
 
 ```{dot}
 digraph G {
@@ -1061,28 +1065,124 @@ digraph G {
   CO2 [label="CO2\n(carbon dioxide)"]
   O2 [label="O2\n(oxygen)"]
   ATP
-  NADPH
   ADP
-  NADP_PLUS [label="NADP+"]
-  H [label="H+"]
   LDR [label="Light-dependent reactions\n(happens in thylakoid membrane)", shape=box]
   CALVIN [label="Calvin cycle\n(happens in stroma)", shape=box]
   CARB [label="Glucose"]
   Photon -> LDR
   H2O ->  LDR
   LDR -> ATP
-  LDR -> NADPH
   LDR -> O2
   ATP -> CALVIN
-  NADPH -> CALVIN
   CO2 -> CALVIN
   CALVIN -> CARB
   CALVIN -> ADP
-  CALVIN -> NADP_PLUS
-  CALVIN -> H
-  ADP -> LDR
-  NADP_PLUS -> LDR
-  
+}
+```
+
+# Cellular Respiration
+
+`{bm} Cellular respiration` is the process by which certain organisms convert glucose (sugar) to energy. These organisms include ...
+
+* eukaryotic cells, which perform cellular respiration via their mitochondria.
+* bacteria which share their ancestry with mitochondria.
+
+``` {note}
+Remember that all eukaryotes have mitochondria -- both plant and animal cells. Unsure if all bacteria can perform cellular respiration?
+```
+
+The overall chemical reaction for this is `{kt} C_6H_{12}O_6 + 6O_2 \to 6CO_2 + 6H_2O + energy`. Glucose (`{kt} C_6H_{12}O_6`) and oxygen (`{kt} O_2`) break down into carbon dioxide gas (`{kt} CO_2`), water (`{kt} H_2O`), and energy (roughly 38 ATP molecules and some heat).
+
+```{note}
+The number of ATPs actually generated is variable and dependent on many factors, but 38 is the generally agreed upon number.
+```
+
+The reaction happens in 3 steps:
+
+1. `{bm} Glycolysis`: The carbon backbone of the glucose molecule is split, creating 2 `{bm} Pyruvate` molecules along with water and several other molecules. This is an anaerobic process (no oxygen needed) that nets 2 ATPs. This happens in the cytoplasm of cells.
+
+   ```{img}
+   Anima_cell_notext.svg
+   Eukaryote with cell ribosomes highlighted
+   By No machine-readable author provided. Chb assumed (based on copyright claims). - No  machine-readable source provided. Own work assumed (based on copyright claims)., Public Domain, https://commons.wikimedia.org/w/index.php?curid=688296
+   scale 0.5 0.5
+   arrow 1 0.5 0.7 0.5
+   expand 2 1 0 0
+   text 0.5 0.5 cytoplasm
+   text 0.5 0.6 (everything inside)
+   ```
+
+1. `{bm} Krebs cycle/(krebs cycle|citric acid cycle|tricarboxylic acid cycle)/i`: The pyruvate molecules get further sliced and diced with other molecules.  This is an aerobic process (requires oxygen) that nets 2 ATPs. This happens in the matrix of the mitochondria.
+
+   ```{img}
+   Animal_mitochondrion_diagram_en.svg
+   Mitochondria
+   By Mariana Ruiz Villarreal LadyofHats - the diagram i made myself using adobe illustrator. as a source for the information i used the diagrams found here:[1], [2], [3], [4], [5], [6] and [7]., Public Domain, https://commons.wikimedia.org/w/index.php?curid=8152599
+   
+   scale 0.52 0.52
+   
+   bg_color #00000000
+
+   fg_color #ff00ffff
+   rect 0.7 0.75 0.3 0.12 
+   ```
+
+1. `{bm} Oxidative phosphorylation`: Produces around 34 ATPs. This is an aerobic process (requires oxygen) that nets roughly 34 ATPs (bulk of conversions). This happens in the `{bm} electron transport chain` section of the mitochondria (inner membrane).
+
+   ```{img}
+   Animal_mitochondrion_diagram_en.svg
+   Mitochondria
+   By Mariana Ruiz Villarreal LadyofHats - the diagram i made myself using adobe illustrator. as a source for the information i used the diagrams found here:[1], [2], [3], [4], [5], [6] and [7]., Public Domain, https://commons.wikimedia.org/w/index.php?curid=8152599
+   
+   scale 0.55 0.55
+   
+   bg_color #00000000
+   
+   fg_color #008080ff
+   rect 0.3 0.18 0.15 0.07
+   ```
+
+```{note}
+The material says that, technically step 3 doesn't have to happen after step 2 but it usually does.
+```
+
+Because the Krebs cycle and the oxidative phosphorylation are aerobic processes (require oxygen), if no oxygen is present the output of glycolysis goes through a process called `{bm} fermentation/(ferment|fermentation)/i`. Fermentation is an anaerobic process (no oxygen required). Depending on the organism, it'll end up producing either...
+
+* `{bm} alcohol` via `{bm} alcohol fermentation` (e.g. yeast).
+* `{bm} lactic acid` via `{bm} lactic acid fermentation` (e.g. humans and mammals).
+
+Fermentation does produce ATP, but much less so than Kerbs cycle + oxidative phosphorylation. 
+
+For example, if a human is vigorously running, that human may not have enough oxygen available to trigger the Krebs cycle / oxidative phosphorylation (steps 2 and 3). As such, the output from glycolysis (step 1) will end up going through lactic acid fermentation instead.
+
+The following workflow diagram provides a ultra-simple high-level overview of the processes that take place. Note that this doesn't specify how many of each molecule get input / output, nor does it provide a complete set of a input / output molecules for each reaction.
+
+```{dot}
+digraph G {
+  compound=true;
+  O2 [label="O2\n(oxygen)"]
+  GLUCOSE [label="Glucose"]
+  PY [label="Pyruvate"]
+  ATP2 [label="ATP"]
+  ATP3 [label="ATP"]
+  ATP4 [label="ATP"]
+  UNKNOWN [label="?????"]
+  GLYC [label="Glycolysis\n(happens in cell cytoplasm)", shape=box]
+  KREBS [label="Krebs cycle\n(happens in mitochondria matrix)", shape=box]
+  OP [label="Oxidative Phosphorylation\n(happens in mitochondria inner membrane)", shape=box] 
+  FERM [label="Fermentation", shape=box]
+  FERM_RES [label="Lactic acid or alcohol\n(depends on the organism)"]
+  O2 -> GLYC
+  GLUCOSE -> GLYC
+  GLYC -> PY
+  GLYC -> ATP2
+  PY -> FERM [label="not enough oxygen available"]
+  PY -> KREBS [label="oxygen available"]
+  KREBS -> UNKNOWN
+  KREBS -> ATP3
+  UNKNOWN -> OP
+  OP -> ATP4
+  FERM -> FERM_RES
 }
 ```
 
@@ -1153,6 +1253,9 @@ Terminology that's relevant but doesn't fit in any other section goes here.
 Technically unsure at which layer the extracellular region begins. Is it outside of the cell membrane? cell wall? cell capsule? I'm pretty sure any fluid outside of the cell membrane qualifies as extracellular, while any fluid inside of the cell membrane qualifies as intracellular (cytoplasm).
 ```
 
+`{bm} aerobic` - A biological process that requires oxygen.
+
+`{bm} anaerobic` - A biological process that doesn't require oxygen.
 
 
 
