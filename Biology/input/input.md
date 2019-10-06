@@ -216,38 +216,6 @@ The `{bm-ri} basic` structure of an amino acid is as follows. The R is a placeho
 Lipids are not always fats. All fats are lipids but not all lipids are fats.
 ```
 
-## Nucleic Acid Molecules
-
-`{bm} Nucleic Acid` is a molecule (heteropolymer) often associated with information storage. It's built up from other molecules called {bm} nucleotides (monomers). It's called nucleic acid because it's in the nucleus of a cell and it has some acidic properties to it.
-
-`{bm} Deoxyribonucleic acid` (`{bm} DNA`) is the most common form of nucleic acid. DNA is a molecule that contains the instructions needed for the growth/functioning/maintenance of an organism. Depending on the type of organism, DNA is located either in the cell’s nucleus (for eukaryotic organisms -- animals and plants) or the cell’s cytoplasm (for prokaryotic organisms -- single-celled organism).
-
-```{note}
-The book says that each cell can contain one or more “nearly identical” copies of the DNA -- because of mutations constantly happening?
-```
-
-`{bm} Ribonucleic acid` (`{bm} RNA/(RNA)/`) is another common form of nucleic acid. RNA is a molecule used as a transferring mechanism for copying over information from DNA to other cellular machinery. It's also used as information storage for (some?) viruses.
-
-The monomers that make up nucleic acid molecule are called `{bm} nucleotide`s, and the order they appear in defines the genetic information/instructions.
-
-![By Zephyris - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=15027555](492px-DNA_Structure+Key+Labelled.pn_NoBB.png)
-
-There are 5 different nucleotides: 
-* A (`{bm} adenine`)
-* C (`{bm} cytosine`)
-* G (`{bm} guanine`)
-* T (`{bm} thymine`) / U (`{bm} uracil`) - T in DNA, U in RNA
-
-The order the appear in defines the genetic information/instructions of that organism. Because they are the unit by which genetic information is encoded, each nucleotide is also called a `{bm} base/(bases|base)_nucleotide/i`. For example, a string/sequence of DNA bases_nucleotide: ATATTTTCGATATCCACCA.
-
-```{note}
-When counting the number of bases, it’s typical to use kilo, mega, giga, etc.. For example, 5000 bases would be referred to as 5 kilobases (e.g. 5Kb). Maybe the best way to think about this is that information in DNA is organized like memory on a computer, but your byte size is 2 bits instead of 8.
-```
-
-The two nucleotides/molecules that make up a connection are called a `{bm} base pair`. The rules to base pairs are…
-* A only ever binds to T (e.g. AT or TA)
-* G only ever binds to C (e.g. GC or CG)
-
 ## Water Molecule
 
 `{bm} Water` is essential to life -- it has unique properties that almost all biological processes depend on.
@@ -778,26 +746,6 @@ It's still an open question as to how the first / initial cell came to be. The c
 ```{note}
 There are an estimated 37 trillion cells in the human body.
 ```
-
-# Reproduction
-
-`{bm} Reproduction/(reproduce|reproduction)/i` is when an organism generates offspring. It comes in 2 forms: asexual and sexual.
-
-`{bm} Asexual` reproduction is when offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
-  * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
-  * `{bm} Mitosis` - Process of cloning a eukaryotic cell.
-  * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
-  * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
-  * `{bm} Parthenogenesis` - When an animal lays an `{bm-ri} egg` but that `{bm-ri} egg` already has all the genetic information needed to develop (it doesn't need to be fertilized).
-
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(egg)/i`
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(ova)/i` 
-
-`{bm} Sexual` reproduction is when offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a `{bm} gamete` cells merge to create the offspring. Gamete cells have half the genetic information from the original parent, and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
-
-```{note}
-In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
-```
    
 
 # Enzymes
@@ -908,6 +856,250 @@ scale 0.5 0.5
 An example of catabolism is cellular respiration: cells will break down the bonds in glucose (`{kt} C_6H_{12}O_6 + 6O_2`) to release energy, splitting into carbon dioxide (`{kt} CO_2`) and water (`{kt} H_2O`)
 
 `{kt} C_6H_{12}O_6 + 6O_2 \to 6CO_2 + 6H_2O + energy`
+
+# Nucleotides
+
+`{bm} Nucleic Acid` is a molecule (heteropolymer) that's built up from other molecules called `{bm} nucleotide`s (monomers). Nucleic acid comes in 2 flavours: DNA and RNA. Each nucleotide consists of a sugar molecule (ribose in RNA / deoxyribose in DNA) attached to a phosphate group and a nitrogen-containing base_nucleotide.
+
+```{note}
+It's called nucleic acid because it has some acidic properties to it and DNA is found in the nucleus of a eukaryotic cell. But DNA also in prokaryotic cells and some organelles -- those don't have a nucleus.
+```
+
+```{img}
+0322_DNA_Nucleotides.jpg
+By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=30131206
+DNA Nucleotides
+scale 0.75 0.75
+```
+
+There are 5 `{bm} base/(bases|base)_nucleotide/i`.:
+ * A (`{bm} adenine`)
+ * C (`{bm} cytosine`)
+ * G (`{bm} guanine`)
+ * T (`{bm} thymine`) / U (`{bm} uracil`)
+
+```{note}
+T only appears in DNA. In RNA, T is replaced by U.
+```
+
+```{note}
+The base is what distinguishes the types of nucleotides from each other. The term nucleotide and base are often used interchangeably.
+```
+
+ Two nucleotides connected together are called a `{bm} base pair`. The rules to base pairs are:
+ * A only ever binds to T/U (e.g. AT or TA in DNA, AU or UA in RNA)
+ * G only ever binds to C (e.g. GC or CG)
+
+# DNA
+
+`{bm} Deoxyribonucleic acid` (`{bm} DNA`) is a nucleic acid molecule that contains the instructions needed for the growth/functioning/maintenance of an organism. Depending on the type of organism, DNA is located in different parts fo the cell.
+ * For prokaryotes, DNA is free-floating in the cytoplasm.
+ * For eukaryotes, DNA is isolated in the nucleus (`{bm} nuclear DNA`). Their mitochondria and chloroplast also have their own DNA.
+
+```{img}
+1032px-DNA_Structure+Key+Labelled.pn_NoBB.png
+By Zephyris - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=15027555
+DNA
+scale 0.3 0.3
+```
+
+DNA is composed of two strands of nucleotides that connect at various points in between. The order these nucleotides appear in defines the genetic information/instructions of the organism. For example, a string/sequence of DNA bases_nucleotide: ATATTTTCGATATCCACCA.
+
+DNA strands can be made up of 4 different nucleotide types (bases_nucleotide): 
+ * A (adenine)
+ * C (cytosine)
+ * G (guanine)
+ * T (thymine)
+
+The two nucleotides that make up a connection are called a base pair. In DNA, the rules to base pairs are...
+ * A only ever binds to T (e.g. AT or TA)
+ * G only ever binds to C (e.g. GC or CG)
+
+Terminology specific to DNA:
+ * `{bm} genome` - The entire set of DNA for an organism. For eukaryotes, this refers to nuclear DNA, not the independent DNA carried by organelles such as mitochondria.
+ * `{bm} gene/\b(genes|gene)\b/i` - A section of an organism's DNA that contains instructions for some functionality, typically for building some protein.
+
+# RNA
+
+`{bm} Ribonucleic acid` (`{bm} RNA/(RNA)/`) is a nucleic acid molecule used in various ways to facilitate building proteins. It can also act as an enzyme (ribozyme) or contain the genetic information for some viruses.
+
+RNA is commonly composed of a single strand that folds over onto itself.
+
+```{img}
+Pre-mRNA-1ysv-tubes.png
+By Vossman - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=7115139
+RNA
+scale 0.1 0.1
+```
+
+RNA strands can be made up of 4 different nucleotide types (bases_nucleotide): 
+* A (adenine)
+* C (cytosine)
+* G (guanine)
+* U (uracil)
+
+The two nucleotides that make up a connection are called a base pair. In RNA, the rules to base pairs are...
+ * A only ever binds to U (e.g. AU or UA)
+ * G only ever binds to C (e.g. GC or CG)
+
+```{note}
+The rules are similar to DNA, except T is replaced by U. DNA can't have U and RNA can't have T.
+```
+
+Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
+ * `{bm} mRNA/(mRNA)/` or `{bm} messenger RNA` - Carries information from DNA to the ribosomes detailing a protein to build. Ribosomes are the parts of cells that synthesize proteins.
+ * `{bm} tRNA/(tRNA)/` or `{bm} transfer RNA` - Brings to the ribosome the amino acids required to build the protein that the mRNA is requesting.
+ * `{bm} rRNA/(rRNA)/` or `{bm} ribosomal RNA` - Makes up a large portion of the ribosome (60%). The rest of the ribosome is protein.
+
+# Chromosome
+
+In eukaryotes, the genome of an organism is organized into linear stands of DNA called `{bm} chromosome`s. Each eukaryotic species has a set number of chromosomes. For example, humans have 46 chromosomes while dogs have 78 chromosomes.
+
+Most eukaryotic species are `{bm} diploid`, meaning that their chromosomes come in matching pairs where each pair contains different versions of the same set of genes (homologous pairs). When these organisms reproduce, they generate special cells known as `{bm} haploid` cells that only contain 1 strand from each pair. Two haploid cells mix their chromosomes to create a final diploid offspring (e.g. a sperm cell and an ova_GAMETE cell).
+
+```{img}
+DNA_human_male_chromosomes.gif
+By National Human Genome Research Institute, http://www.genome.gov/Images/EdKit/bio1c_large.gif, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2132905
+DNA, human male chromosomes
+scale 0.5 0.5
+crop 0 0 0.5 0.25
+```
+
+```{note}
+The chromosomes in the above diagram are tightly packed together with structural proteins: chromatin. Normally they wouldn't be like this -- they'd be free-floating in the nucleus and be to small to see what a normal light microscope.
+```
+
+```{note}
+Sperm cells and ova cells are known as haploid cells.
+```
+
+```{note}
+This isn't entirely true? Some eukaryote species can replicate by cloning themselves (some reptiles?). Their eggs don't need sperm.
+```
+
+Certain diploid eukaryotic species (certain mammals/snakes/insects/etc..) have an extra pair of chromosomes that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair of chromosomes are called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosomes/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
+
+The non-sex chromosome pairs are referred to as `{bm} autosome`s.
+
+```{img}
+DNA_human_male_chromosomes.gif
+By National Human Genome Research Institute, http://www.genome.gov/Images/EdKit/bio1c_large.gif, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2132905
+DNA, human male chromosomes
+scale 0.3 0.3
+
+fg_color #ff0000ff
+bg_color #00000000
+rect 0.85 0.78 0.14 0.215
+```
+
+```{note}
+An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
+```
+
+# Chromatin
+
+`{bm} Chromatin` is a complex of chromosome (DNA) and structural proteins. Those structural proteins help package the chromosome into a denser more compact shape, such that the chromosome doesn't get tangled and has less chance of getting damaged during replication. It also helps regular gene expression.
+
+```{note}
+The term complex is used in the context of chemistry, which essentially just means that it's combined. The DNA and structural proteins combine in some way. https://www.chemicool.com/definition/complex.html
+```
+The proteins used to coil up / shape strands are called `{bm} histone`s and `{bm} scaffold` proteins.
+
+```{img}
+Chromatin_Structures.png
+By Original uploader was Richard Wheeler at en.wikipedia - Transferred from en.wikipedia to Commons by sevela.p., CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=4017531
+The major chromatin structures.
+scale 0.5 0.5
+```
+
+When the chromatin is going through replication, it's referred to as `{bm} chromatid`. Once the replication finishes, it goes back to being called chromatin. At a high-level, the process of replication is:
+
+1. The chromosome is copied. Each instance is now referred to as a {bm} chromatid and is attached to the other (`{bm} sister chromatid`) via proteins called `{bm} cohesin`s.
+2. The sister chromatids condense and start to separate in an X shape. The section they remain connected at is a segment of DNA called the `{bm} centromere`.
+3. The sister chromatids are pulled apart. Each instance is now reverted back to being referred to as chromatin.
+
+```{note}
+The point is that it's only called a chromatid when it's in the process of splitting / it has a copy attached to it.
+```
+
+# Reproduction
+
+`{bm} Reproduction/(reproduce|reproduction)/i` is when an organism generates offspring. It comes in 2 forms: asexual and sexual.
+
+`{bm} Asexual` reproduction is when offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
+  * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
+  * `{bm} Mitosis` - Process of cloning a eukaryotic cell.
+  * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
+  * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
+  * `{bm} Parthenogenesis` - When an animal lays an `{bm-ri} egg` but that `{bm-ri} egg` already has all the genetic information needed to develop (it doesn't need to be fertilized).
+
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(egg)/i`
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(ova)/i` 
+
+`{bm} Sexual` reproduction is when offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a `{bm} gamete` cells merge to create the offspring. Gamete cells have half the genetic information from the original parent, and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
+
+```{note}
+In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
+```
+
+THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE THE Chromosomes, chromatids and chromatin VIDEO AGAIN
+
+THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE THE Chromosomes, chromatids and chromatin VIDEO AGAIN
+
+THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE THE Chromosomes, chromatids and chromatin VIDEO AGAIN
+
+THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE THE Chromosomes, chromatids and chromatin VIDEO AGAIN
+
+THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE THE Chromosomes, chromatids and chromatin VIDEO AGAIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
+CONTINUE FROM HERE INTO THE 'CELL CYCLE NAD MITOSIS SECTION'. ALSO DOUBLE CHECK PREVIOUS CHROMOSOME/CHROMATIN
+
 
 # Adenosine Triphosphate
 
@@ -1280,6 +1472,9 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 
 `{bm} Fission` - The act of dividing or splitting something into two or more parts.
 
+`{bm} Homologous/(Homologous|Homology|Homolog)/i` - Having the same relation, relative position, or structure. Particularly in biology, it s the existence of a shared ancestry between a pair of structures or genes.
+
+`{bm} Karyotype` - Micrograph image of diploid set of chromosomes, grouped in pairs.
 
 
 
