@@ -955,6 +955,10 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 In eukaryotes, the genome of an organism is organized into linear stands of DNA called `{bm} chromosome`s. Each eukaryotic species has a set number of chromosomes. For example, humans have 46 chromosomes while dogs have 78 chromosomes.
 
+```{note}
+There's some ambiguity as to what chromosome actually can refer to. See the bottom of this section for more info. 
+```
+
 Most eukaryotic species are `{bm} diploid`, meaning that their chromosomes come in matching pairs where each pair contains different versions of the same set of genes (homologous pairs). When these organisms reproduce, they generate special cells known as `{bm} haploid` cells that only contain 1 strand from each pair. Two haploid cells mix their chromosomes to create a final diploid offspring (e.g. a sperm cell and an ova_GAMETE cell).
 
 ```{img}
@@ -977,7 +981,7 @@ Sperm cells and ova cells are known as haploid cells.
 This isn't entirely true? Some eukaryote species can replicate by cloning themselves (some reptiles?). Their eggs don't need sperm.
 ```
 
-Certain diploid eukaryotic species (certain mammals/snakes/insects/etc..) have an extra pair of chromosomes that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair of chromosomes are called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosomes/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
+Certain diploid eukaryotic species (certain mammals/snakes/insects/etc..) have an extra pair of chromosomes that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair of chromosomes are called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosome/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`s, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
 
 The non-sex chromosome pairs are referred to as `{bm} autosome`s.
 
@@ -996,8 +1000,6 @@ rect 0.85 0.78 0.14 0.215
 An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
 ```
 
-# Chromatin
-
 `{bm} Chromatin` is a complex of chromosome (DNA) and structural proteins. Those structural proteins help package the chromosome into a denser more compact shape, such that the chromosome doesn't get tangled and has less chance of getting damaged during replication. It also helps regular gene expression.
 
 ```{note}
@@ -1014,13 +1016,20 @@ scale 0.5 0.5
 
 When the chromatin is going through replication, it's referred to as `{bm} chromatid`. Once the replication finishes, it goes back to being called chromatin. At a high-level, the process of replication is:
 
-1. The chromosome is copied. Each instance is now referred to as a {bm} chromatid and is attached to the other (`{bm} sister chromatid`) via proteins called `{bm} cohesin`s.
+1. The chromosome is copied. Each instance is now referred to as a chromatid and is attached to the other (`{bm} sister chromatid`) via proteins called `{bm} cohesin`s.
 2. The sister chromatids condense and start to separate in an X shape. The section they remain connected at is a segment of DNA called the `{bm} centromere`.
 3. The sister chromatids are pulled apart. Each instance is now reverted back to being referred to as chromatin.
 
 ```{note}
 The point is that it's only called a chromatid when it's in the process of splitting / it has a copy attached to it.
 ```
+
+There's some ambiguity as to the terminology and when to use what words. The term chromosome can refer to either...
+
+* just a single strand of DNA by self.
+* replicated pair that haven't been separated yet (sister chromatids).
+
+The exact meaning depends on the context it's used in.
 
 # Reproduction
 
@@ -1041,40 +1050,6 @@ The point is that it's only called a chromatid when it's in the process of split
 ```{note}
 In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
 ```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.```
-
-THE TERMINOLOGY FOR CHROMATIN CHROMATID AND CHROMOSOME NEEDS DIAGRAMS AND CLARIFICATION SEE. CHROMOSOME CAN REFER TO EITHER THE SINGLE CHROMOSOME STRAND, OR 2 CHROMOSOME COPIES CONNECTED BY THE CENTROMERE. COLLAPSE THE CHROMOSOME/CHROMATIN/CHOROMATID SECTIONS INTO ONE. SEE THE --THE Chromosomes, chromatids and chromatin VIDEO FOR A REFRESHER ON THE TERMINOLOGY.
 
 # Adenosine Triphosphate
 
@@ -1417,6 +1392,7 @@ There are different types of microscopes:
 
 Terminology that's relevant but doesn't fit in any other section goes here.
 
+`{bm-ignore} condense`
 `{bm} Density/(density|dense)/i` - The mass per unit volume of a substance.
 
 `{bm} Specific heat capacity/(heat capacity|heat capacities)/i` - The amount of heat needed to raise the temperature of one gram of a substance by one degree Celsius.
