@@ -967,7 +967,7 @@ scale 0.5 0.5
 ```
 
 ```{note}
-The terms chromatin, chromatid, and chromosome are often used in ambiguous ways. Depending on the context, the term chromosome may actually be referring to a chromatid, a pair of replicated chromatids that are attached together (sister chromatids), or a pair of replicated chromatids that are attached together (sister chromatids) while they're in their X shape.
+The terms chromatin, chromatid, and chromosome are often used in ambiguous ways. Depending on the context, the term chromosome may actually be referring to either a chromatin/chromatid, a pair of replicated chromatids that are attached together (sister chromatids), or a pair of replicated chromatids that are attached together (sister chromatids) while they're in their X shape.
 ```
 
 At a high-level, the process of DNA replication can be boiled down to 3 steps...
