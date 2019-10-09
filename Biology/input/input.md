@@ -1013,6 +1013,32 @@ rect 0.85 0.78 0.14 0.215
 An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
 ```
 
+# Replication
+
+The `{bm} cell cycle` is a series of steps a cell goes through to allow it to divide (clone itself).
+
+The cell cycle in eukaryotic cells is as follows:
+
+* Interphase
+  * G1: Cell growth
+  * S: DNA synthesis
+  * G2: Cell growth
+* Mitotic phase
+  * Mitosis
+  * Cytokinesis
+
+
+MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
+
+MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
+
+MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
+
+MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
+
+MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
+
+
 # Reproduction
 
 `{bm} Reproduction/(reproduce|reproduction)/i` is when an organism generates offspring. It comes in 2 forms: asexual and sexual.
