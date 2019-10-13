@@ -1013,7 +1013,7 @@ rect 0.85 0.78 0.14 0.215
 An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
 ```
 
-# Replication
+# Cell Cycle
 
 The `{bm} cell cycle` is the sequence of events a cell goes through from when it's created (divides off) up to when it divides itself. In eukaryotic cells, the cell cycle has 2 major phases:
 
@@ -1050,7 +1050,9 @@ crop 0 0 0.446 1
    scale 0.1 0.1
    ```
 
-   The cell grows. Prior to entering the next phase, the cell can go into the `{bm} G0 phase` / `{bm} resting phase`,  where it's essentially no longer dividing. This isn't permanent -- it can re-enter the G1 phase.
+   The cell grows.
+   
+   Prior to entering the next phase, the cell can go into the `{bm} G0 phase` / `{bm} resting phase`,  where it's essentially pausing division. One reason for this may be `{bm} contact inhibition`: when cells start touching up on other cells, it's a signal that it's becoming too crowded and that they should stop dividing. 
 
 1. `{bm} S phase` / `{bm} Synthesis phase`
   
@@ -1171,6 +1173,22 @@ MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. D
 ```{note}
 In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
 ```
+
+# Cancer
+
+`{bm} Cancer` refers to the uncontrolled division of cells (mitosis) in a multicellular organism, typically brought on by one or more mutations.
+
+Normally, a cell has internal and external cues / regulators that signal when it should stop dividing (e.g. contact inhibition). When a mutation occurs that causes one or more of these cues to be ignored, the cell goes through a form a programmed suicide called `{bm} apoptosis`. If the genetic mutations are so severe that apoptosis no longer occurs, that's when cancer occurs.
+
+A group of cells that have been dividing unimpeded is known as a `{bm} neoplasm` / `{bm} tumor`. If the cells...
+ * eventually stop dividing on their own, that mass of cells is called a `{bm} benign neoplasm` / `{bm} benign tumor`.
+ * continually divide without ever stopping, that mass of cells is called a `{bm} malignant neoplasm` / `{bm} malignant tumor`.
+
+Mutations of two types of cell cycle regulators can promote the development of cancer:
+ * Positive regulators, which normally promote cell growth, may become hyperactive (oncogenic).
+ * Negative regulators (tumor suppressors), which prevent the formation of tumors, may become inactivated.
+
+Tumor cells may continue to mutate at a more rapid pace than other cells. If one of those mutations results in tumor cells breaking off from the original mass of tumor cells and floating around the body, the cancer is said to have `{bm} metastasize`d. 
 
 # Adenosine Triphosphate
 
