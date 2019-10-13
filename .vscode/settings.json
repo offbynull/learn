@@ -1,25 +1,36 @@
 {
     "cSpell.checkLimit": 99999,
     "cSpell.maxNumberOfProblems": 99999999,
-    "cSpell.userWords": [
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 100,
+    "cSpell.words": [
         "Cils",
         "Faghihi",
         "Fimbriae",
+        "Glycolipid",
         "Kasra",
         "Lysosome",
+        "Microtubules",
+        "Photoautotroph",
+        "Transmembrane",
         "Triphosphate",
         "amphipathic",
         "bilayer",
+        "bilayers",
         "cristae",
+        "cyanobacterium",
         "cytosol",
         "diphosphate",
         "endergonic",
         "endosymbiosis",
+        "endosymbiotic",
         "exergonic",
         "favourable",
         "granum",
         "heteropolymer",
         "homopolymer",
+        "kinetochore",
+        "kinetochores",
         "neighbouring",
         "peroxisome",
         "peroxisomes",
@@ -28,16 +39,6 @@
         "stroma",
         "thylakoid",
         "thylakoids",
-        "unfavourable",
-        "Glycolipid"
-    ],
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 100,
-    "cSpell.words": [
-        "Photoautotroph",
-        "Transmembrane",
-        "bilayers",
-        "cyanobacterium",
-        "endosymbiotic"
+        "unfavourable"
     ]
 }

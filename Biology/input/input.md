@@ -741,7 +741,7 @@ They also suspected that cells come from other cells, but didn't know for sure i
 The credit for this sometimes goes to Rudolph Virchoi but it's been established that he was a plagiarist.
 ```
 
-It's still an open question as to how the first / initial cell came to be. The current working theory is that, 3.5 billion years ago, phospholipids (the molecules that form the membrane of a cell) naturally form bilayers and connect in a circle. A membrane may have naturally encapsulated a set of arbitrary self-replication molecules (e.g. protein or RNA) and that's how the first cell began growing and splitting off.
+It's still an open question as to how the first / initial cell came to be. The current working theory is that, 3.5 billion years ago, phospholipids (the molecules that form the membrane of a cell) naturally form bilayers and connect in a circle. A membrane may have naturally encapsulated a set of arbitrary self-replicating molecules (e.g. protein or RNA) and that's how the first cell began growing and splitting off.
 
 ```{note}
 There are an estimated 37 trillion cells in the human body.
@@ -1015,17 +1015,130 @@ An example straight from the material: As a real example, let's consider a gene 
 
 # Replication
 
-The `{bm} cell cycle` is a series of steps a cell goes through to allow it to divide (clone itself).
+The `{bm} cell cycle` is the sequence of events a cell goes through from when it's created (divides off) up to when it divides itself. In eukaryotic cells, the cell cycle has 2 major phases:
 
-The cell cycle in eukaryotic cells is as follows:
+ 1. Interphase: The majority of a cell's life is spent in interphase, where it's growing and going about its business.
+ 1. Mitotic phase: The portion of a cell's life where it divides into 2 new cells. 
 
-* Interphase
-  * G1: Cell growth
-  * S: DNA synthesis
-  * G2: Cell growth
-* Mitotic phase
-  * Mitosis
-  * Cytokinesis
+Each phase has a set of inner phases it goes through.
+
+```{img}
+Animal_cell_cycle-en_UNCLUTTERED.svg
+By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+Animal cell cycle
+scale 0.21 0.21
+```
+
+## Interphase
+
+The majority of a cell's life is spent in `{bm} interphase`, where it's growing and going about its business.
+
+```{img}
+Animal_cell_cycle-en_UNCLUTTERED.svg
+By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+Animal cell cycle
+scale 0.35 0.35
+crop 0 0 0.446 1
+```
+
+1. `{bm} G1 phase` / `{bm} Gap 1 phase` /  `{bm} Gap I phase`
+  
+   ```{img}
+   G1 Phase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   G1 phase showing the cell growing
+   scale 0.1 0.1
+   ```
+
+   The cell grows. Prior to entering the next phase, the cell can go into the `{bm} G0 phase` / `{bm} resting phase`,  where it's essentially no longer dividing. This isn't permanent -- it can re-enter the G1 phase.
+
+1. `{bm} S phase` / `{bm} Synthesis phase`
+  
+   ```{img}
+   S Phase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   S Phase showing chromatin and centrosome replication
+   scale 0.1 0.1
+   ```
+
+   The chromatin in the nucleus gets replicated to sister chromatids (2 copies that are attached). The centrosome also gets duplicated.
+
+1. `{bm} G2 phase` / `{bm} Gap 2 phase` /  `{bm} Gap II phase`
+
+   ```{img}
+   G2 Phase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   G2 phase showing the cell growing even more
+   scale 0.1 0.1
+   ```
+
+   The cell grows more.
+
+## Mitotic Phase
+
+The `{bm} mitotic phase/(Mitotic phase|Mitotic|Mitosis)/i` is portion of a cell's life where it divides into 2 new cells.
+
+```{img}
+Animal_cell_cycle-en_UNCLUTTERED.svg
+By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+Animal cell cycle
+scale 0.35 0.35
+crop 0.446 0 0.554 1
+```
+
+1. `{bm} Prophase` / `{bm} Prometaphase`
+
+   ```{img}
+   Prophase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Prophase showing the sister chromatid condensing and nucleus membrane breaking down
+   scale 0.1 0.1
+   ```
+
+   The sister chromatids start to condense into an X shape, where the only part they remain attached at is the  centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
+
+   Microtubules are attached from the centrosomes to the kinetochore of the sister chromatids. `{bm} Kinetochore`s are proteins located at the centromere of the sister chromatids.
+
+1. `{bm} Metaphase`
+
+   ```{img}
+   Metaphase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Metaphase showing the sister chromatid lining up
+   scale 0.1 0.1
+   ```
+
+   The sister chromatids line up in the middle of the cell.
+
+1. `{bm} Anaphase`
+
+   ```{img}
+   Anaphase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Anaphase showing the sister chromatid breaking apart
+   scale 0.1 0.1
+   ```
+
+   As the cell splits apart, the microtubules also split apart the sister chromatids. Once split, they're individually  referred to as chromatin again.
+
+   ```{note}
+   I believe the labeling on the above diagram to be incorrect. Once split, they're no longer referred to as sister chromatids / chromatids. They're referred to as chromatin.
+   ```
+
+1. `{bm} Telophase` and `{bm} Cytokinesis`
+
+   ```{img}
+   Telophase and Cytokinesis.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Telophase / cytokinesis showing nucleus membranes re-forming and cell finally splitting into 2
+   scale 0.1 0.1
+   ```
+
+   During telophase, nucleus membranes re-form around the newly split chromatin. The chromatin also start to un-condense.
+
+   During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells.
+  
+   Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
 
 
 MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
@@ -1045,7 +1158,7 @@ MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. D
 
 `{bm} Asexual` reproduction is when offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
   * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
-  * `{bm} Mitosis` - Process of cloning a eukaryotic cell.
+  * Mitosis - Process of cloning a eukaryotic cell.
   * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
   * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
   * `{bm} Parthenogenesis` - When an animal lays an `{bm-ri} egg` but that `{bm-ri} egg` already has all the genetic information needed to develop (it doesn't need to be fertilized).
@@ -1441,6 +1554,7 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 
 
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
+
 `{bm-ignore} byproduct`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(product)/i`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
