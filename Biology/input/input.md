@@ -259,7 +259,7 @@ Other terminology related to water:
 * Molecules that are repelled from water are called `{bm} hydrophobic`.
 * Molecules that have parts that are hydrophilic as well as parts that are hydrophobic are called `{bm} amphipathic`
 
-# Cells
+# Cell
 
 `{bm} Cell`s are the `{bm-ri} basic` unit of living things / the building blocks of life. They're tiny structures that encapsulate information and machinery that allows them to replicate/reproduce and perform other important functions (e.g. appendages to move around).
 
@@ -427,7 +427,86 @@ Some cells have appendages that help them move (or stay put). There are differen
   text 0.5 0.5 flagellum
   ```
 
-## Eukaryotic Cells
+## Fluid Mosaic Model
+
+The `{bm} fluid mosaic model` is the accepted model for how cell membranes work. The model says that a cell membrane is composed of a phospholipid bilayer with proteins, lipids, and carbohydrates floating around on either side or embedded in between.
+
+```{note}
+The description above is the rational for the name 'fluid mosaic model'. It's fluid and there's a mosaic of different things embedded or attached to it.
+```
+
+![By LadyofHats Mariana Ruiz - Own work. Image renamed from File:Cell membrane detailed diagram.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6027169](800px-Cell_membrane_detailed_diagram_en.svg.png)
+
+A `{bm} phospholipid` is a amphipathic lipid molecule that involves a phosphate group. The...
+* bulbus phosphate group at the top is hydrophilic -- it has a charge and as such is attracted to water (either the cytoplasm or the fluid outside the cell).
+* long fatty acid tails are hydrophobic -- they have no obvious charge and as such aren't attracted to water.
+
+```{note}
+For a refresher on how hydrophobic / hydrophilic molecules work, see the section on Water. Specifically: adhesion / weakly negative / weakly positive.
+```
+
+![By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=30131167](0301_Phospholipid_Structure.jpg)
+
+As such, phospholipids have a natural tendency to form as a `{bm} phospholipid bilayer` (2 layers attached together, called a `{bm} liposome`) or a ball (called a `{bm} micelle`). The hydrophilic heads are going to point towards the water causing the hydrophobic tails to point at each other.
+
+![By Mariana Ruiz Villarreal ,LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=3032610](Phospholipids_aqueous_solution_structures.svg.png)
+
+```{note}
+If the phospholipids have small tails, they may form a micelle (a small, single-layered sphere), while if they have bulkier tails, they may form a liposome.
+```
+
+How fluid a phospholipid bilayer is depends on the types of phospholipid molecules that make it up and the temperature. Phospholipid molecules have 2 fatty acid tails. The fatty acid tails can be either...
+
+* both saturated (straight tails)
+* one saturated (straight tail) and one unsaturated (bent tail).
+
+At cooler temperatures, phospholipids that have 2 saturated fatty acid tails (straight tails) tend to get more rigid / dense because they can more easily pack together. Phospholipids with unsaturated fatty acid tails (bent tails) don't end up getting as rigid / dense, allowing the membrane to stay fluid at lower temperatures. Cholesterol embedded in the phospholipid bilayer also helps it stay more fluid at lower temperatures.
+
+```{note}
+Phospholipid bilayers have the consistency of oil-based salad dressing. It may seem weak but it's strong enough to act as a separator between the environment inside and the environment outside. Water from one-side can move to the other but does so very rarely -- a single molecule may sneak through the layer every now and then. Aquaporins are proteins embedded in the phospholipid bilayer that allow water to rapidly pass (when needed).
+```
+
+Examples of molecules that can be embedded in or attached to the phospholipid bilayer include...
+
+* `{bm} Glycolipid`s / `{bm} Glycoprotein`s - These are lipids and proteins with carbohydrates attached to them and are typically found pointing outside of the cell. These carbohydrates are how a cell identifies if a neighbouring cell is foreign or not.
+* `{bm} Integral protein/(integral protein|integral enzyme)/i`s - Proteins that are partially hydrophobic. Either one end of the protein is anchored inside the membrane or the protein is fully going through the membrane.
+  * `{bm} Transmembrane protein/(transmembrane protein|transmembrane enzyme)/i`s - Proteins that have one end inside the cytoplasm and the other outside of the cell. Typical use case for these types of proteins is moving substances from inside the cell (cytoplasm) to outside the cell and vice-versa: `{bm} channel protein`s and `{bm} carrier protein`s.
+* `{bm} Peripheral protein/(peripheral protein|peripheral enzyme)/i`s - Proteins that are found on the surface of the protein (either on the cytoplasm side or the outside side). Unlike integral proteins, they don't have any portion going inside the membrane. As such, they more freely move around compared to integral proteins.
+* `{bm} Cholesterol` - Sits inside of the membrane to help ensure that the membrane doesn't become too stiff.
+
+```{note}
+See first diagram in this section for an example of each of the molecules listed above.
+```
+
+The term `{bm} facilitated diffusion` refers to the movement of molecules across the membrane via proteins embedded in the membrane (e.g. channel proteins and/or carrier proteins). These molecules wouldn't be able to cross the membrane by themselves. For example, the sodium potassium pump (carrier protein) helps sodium and potassium ions move across the cell membrane by opening/closing its gates.
+
+## History of Modern Cell Theory
+
+The first record of a cell was in 1665 when `{bm} Robert Hooke` published a book called The Micrographia. The book contains drawings of observations he made while looking at various dead organisms through a rudimentary microscope.
+
+A few years later, a Dutch lenscrafter by the name of `{bm} Antonie Van Leeuwenhoek/\b(Antonie Van Leeuwenhoek|Anthony Van Leeuwenhoek)\b/i` decided to use his expertise to craft a better microscope to better observe living cells / organisms. For example, he was able to observe sperm and Protists (unicellular organisms while he dubbed `{bm} animalcule`s).
+
+In the 1830s, `{bm} Matthias Schleiden` and `{bm} Theodore Schwann` began laying the groundwork for modern cell theory. They came up with the idea that...
+1. all life is composed of one or more cells.
+2. a cell is the `{bm-ri} basic` unit of life.
+
+They also suspected that cells come from other cells, but didn't know for sure if that was the only way they were produced. It was `{bm} Robert Remak` that in the mid-1800s established that...
+
+3. all cells come from other cells.
+
+`{bm} /\b(Rudolph Virchoi|Rudolph Virchow)\b/i`
+
+```{note}
+The credit for this sometimes goes to Rudolph Virchoi but it's been established that he was a plagiarist.
+```
+
+It's still an open question as to how the first / initial cell came to be. The current working theory is that, 3.5 billion years ago, phospholipids (the molecules that form the membrane of a cell) naturally form bilayers and connect in a circle. A membrane may have naturally encapsulated a set of arbitrary self-replicating molecules (e.g. protein or RNA) and that's how the first cell began growing and splitting off.
+
+```{note}
+There are an estimated 37 trillion cells in the human body.
+```
+
+# Eukaryotic Cell
 
 ```{img}
 Animal_cell_structure_en.svg
@@ -477,9 +556,9 @@ fg_color #007f7fff
 rect 0.18 0.8 0.27 0.15
 ```
 
-`{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells are typically larger and have membrane-bound sub-compartments, called `{bm} organelle`s, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus.
+`{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells are typically larger and have membrane-bound sub-compartments, called organelle, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus.
 
-Eukaryotes have their DNA broken up into multiple strands. They can either be single-cellular organisms (e.g. amoeba) or multi-cellular organisms (e.g. human). Single-cellular organism that are eukaryotic are called `{bm} protist`s.
+Eukaryotes have their DNA broken up into multiple strands called chromosomes. They can either be single-cellular organisms (e.g. amoeba) or multi-cellular organisms (e.g. human). Single-cellular organism that are eukaryotic are called `{bm} protist`s.
 
 The following are descriptions for some of the organelles shown in the diagram above.
 
@@ -491,6 +570,10 @@ The following are descriptions for some of the organelles shown in the diagram a
 * <span style="color:#0000ffff">**`{bm-ri} Peroxisome`**</span> - See peroxisome section. 
 * <span style="color:#ff0000ff">**`{bm-ri} Chloroplast`**</span> (plant / algae) - See chloroplast section.
 * <span style="color:#800080ff">**`{bm-ri} Vacuole`**</span> (mostly plant / algae) - See vacuole section. 
+
+## Organelle
+
+Eukaryotic cells have membrane-bound sub-compartments, called `{bm} organelle`s, that house different functional regions of the cell. The following subsections detail common organelles.
 
 ### Nucleus
 
@@ -656,7 +739,198 @@ In biology, turgor pressure or turgidity is the pressure of the cell contents ag
 scale 0.7 0.7
 ```
 
-## Prokaryotic Cells
+## Cell Cycle
+
+The `{bm} cell cycle` is the sequence of events a cell goes through from when it's created (divides off) up to when it divides itself. In eukaryotic cells, the cell cycle has 2 major phases:
+
+ 1. Interphase: The majority of a cell's life is spent in interphase, where it's growing and going about its business.
+ 1. Mitotic phase: The portion of a cell's life where it divides into 2 new cells. 
+
+Each phase has a set of inner phases it goes through.
+
+```{img}
+Animal_cell_cycle-en_UNCLUTTERED.svg
+By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+Animal cell cycle
+scale 0.21 0.21
+```
+
+### Interphase
+
+The majority of a cell's life is spent in `{bm} interphase`, where it's growing and going about its business.
+
+```{img}
+Animal_cell_cycle-en_UNCLUTTERED.svg
+By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+Animal cell cycle
+scale 0.35 0.35
+crop 0 0 0.446 1
+```
+
+1. `{bm} G1 phase` / `{bm} Gap 1 phase` /  `{bm} Gap I phase`
+  
+   ```{img}
+   G1 Phase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   G1 phase showing the cell growing
+   scale 0.1 0.1
+   ```
+
+   The cell grows.
+   
+   Prior to entering the next phase, the cell can go into the `{bm} G0 phase` / `{bm} resting phase`,  where it's essentially pausing division. One reason for this may be `{bm} contact inhibition`: when cells start touching up on other cells, it's a signal that it's becoming too crowded and that they should stop dividing. 
+
+1. `{bm} S phase` / `{bm} Synthesis phase`
+  
+   ```{img}
+   S Phase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   S Phase showing chromatin and centrosome replication
+   scale 0.1 0.1
+   ```
+
+   The chromatin in the nucleus gets replicated to sister chromatids (2 copies that are attached). The centrosome also gets duplicated.
+
+1. `{bm} G2 phase` / `{bm} Gap 2 phase` /  `{bm} Gap II phase`
+
+   ```{img}
+   G2 Phase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   G2 phase showing the cell growing even more
+   scale 0.1 0.1
+   ```
+
+   The cell grows more.
+
+### Mitotic Phase
+
+The `{bm} mitotic phase/(Mitotic phase|Mitotic|Mitosis)/i` is portion of a cell's life where it divides into 2 new cells.
+
+```{img}
+Animal_cell_cycle-en_UNCLUTTERED.svg
+By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+Animal cell cycle
+scale 0.35 0.35
+crop 0.446 0 0.554 1
+```
+
+1. `{bm} Prophase` / `{bm} Prometaphase`
+
+   ```{img}
+   Prophase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Prophase showing the sister chromatid condensing and nucleus membrane breaking down
+   scale 0.1 0.1
+   ```
+
+   The sister chromatids start to condense into an X shape, where the only part they remain attached at is the  centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
+
+   Microtubules are attached from the centrosomes to the kinetochore of the sister chromatids. `{bm} Kinetochore`s are proteins located at the centromere of the sister chromatids.
+
+1. `{bm} Metaphase`
+
+   ```{img}
+   Metaphase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Metaphase showing the sister chromatid lining up
+   scale 0.1 0.1
+   ```
+
+   The sister chromatids line up in the middle of the cell.
+
+1. `{bm} Anaphase`
+
+   ```{img}
+   Anaphase.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Anaphase showing the sister chromatid breaking apart
+   scale 0.1 0.1
+   ```
+
+   As the cell splits apart, the microtubules also split apart the sister chromatids. Once split, they're individually  referred to as chromatin again.
+
+   ```{note}
+   I believe the labeling on the above diagram to be incorrect. Once split, they're no longer referred to as sister chromatids / chromatids. They're referred to as chromatin.
+   ```
+
+1. `{bm} Telophase` and `{bm} Cytokinesis`
+
+   ```{img}
+   Telophase and Cytokinesis.svg
+   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
+   Telophase / cytokinesis showing nucleus membranes re-forming and cell finally splitting into 2
+   scale 0.1 0.1
+   ```
+
+   During telophase, nucleus membranes re-form around the newly split chromatin. The chromatin also start to un-condense.
+
+   During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells.
+  
+   Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
+
+## Cell Cycle
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+
+## Reproduction
+
+`{bm} Reproduction/(reproduce|reproduction)/i` is when an organism generates offspring. It comes in 2 forms: asexual and sexual.
+
+`{bm} Asexual` reproduction is when offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
+  * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
+  * Mitosis - Process of cloning a eukaryotic cell.
+  * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
+  * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
+  * `{bm} Parthenogenesis` - When an animal lays an `{bm-ri} egg` but that `{bm-ri} egg` already has all the genetic information needed to develop (it doesn't need to be fertilized).
+
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(egg)/i`
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(ova)/i` 
+
+`{bm} Sexual` reproduction is when offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a `{bm} gamete` cells merge to create the offspring. Gamete cells have half the genetic information from the original parent, and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
+
+```{note}
+In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
+```
+
+## Cancer
+
+`{bm} Cancer` refers to the uncontrolled division of cells (mitosis) in a multicellular organism, typically brought on by one or more mutations.
+
+Normally, a cell has internal and external cues / regulators that signal when it should stop dividing (e.g. contact inhibition). When a mutation occurs that causes one or more of these cues to be ignored, the cell goes through a form a programmed suicide called `{bm} apoptosis`. If the genetic mutations are so severe that apoptosis no longer occurs, that's when cancer occurs.
+
+A group of cells that have been dividing unimpeded is known as a `{bm} neoplasm` / `{bm} tumor`. If the cells...
+ * eventually stop dividing on their own, that mass of cells is called a `{bm} benign neoplasm` / `{bm} benign tumor`.
+ * continually divide without ever stopping, that mass of cells is called a `{bm} malignant neoplasm` / `{bm} malignant tumor`.
+
+Mutations of two types of cell cycle regulators can promote the development of cancer:
+ * Positive regulators, which normally promote cell growth, may become hyperactive (oncogenic).
+ * Negative regulators (tumor suppressors), which prevent the formation of tumors, may become inactivated.
+
+Tumor cells may continue to mutate at a more rapid pace than other cells. If one of those mutations results in tumor cells breaking off from the original mass of tumor cells and floating around the body, the cancer is said to have `{bm} metastasize`d. 
+
+# Prokaryotic Cell
 
 ```{img}
 Average_prokaryote_cell-_en.svg
@@ -668,87 +942,7 @@ By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic c
 
 Prokaryotes have a single circular-strand of DNA. They can only be single-cellular organisms (e.g. bacteria).
 
-## Fluid Mosaic Model
-
-The `{bm} fluid mosaic model` is the accepted model for how cell membranes work. The model says that a cell membrane is composed of a phospholipid bilayer with proteins, lipids, and carbohydrates floating around on either side or embedded in between.
-
-```{note}
-The description above is the rational for the name 'fluid mosaic model'. It's fluid and there's a mosaic of different things embedded or attached to it.
-```
-
-![By LadyofHats Mariana Ruiz - Own work. Image renamed from File:Cell membrane detailed diagram.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6027169](800px-Cell_membrane_detailed_diagram_en.svg.png)
-
-A `{bm} phospholipid` is a amphipathic lipid molecule that involves a phosphate group. The...
-* bulbus phosphate group at the top is hydrophilic -- it has a charge and as such is attracted to water (either the cytoplasm or the fluid outside the cell).
-* long fatty acid tails are hydrophobic -- they have no obvious charge and as such aren't attracted to water.
-
-```{note}
-For a refresher on how hydrophobic / hydrophilic molecules work, see the section on Water. Specifically: adhesion / weakly negative / weakly positive.
-```
-
-![By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=30131167](0301_Phospholipid_Structure.jpg)
-
-As such, phospholipids have a natural tendency to form as a `{bm} phospholipid bilayer` (2 layers attached together, called a `{bm} liposome`) or a ball (called a `{bm} micelle`). The hydrophilic heads are going to point towards the water causing the hydrophobic tails to point at each other.
-
-![By Mariana Ruiz Villarreal ,LadyofHats - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=3032610](Phospholipids_aqueous_solution_structures.svg.png)
-
-```{note}
-If the phospholipids have small tails, they may form a micelle (a small, single-layered sphere), while if they have bulkier tails, they may form a liposome.
-```
-
-How fluid a phospholipid bilayer is depends on the types of phospholipid molecules that make it up and the temperature. Phospholipid molecules have 2 fatty acid tails. The fatty acid tails can be either...
-
-* both saturated (straight tails)
-* one saturated (straight tail) and one unsaturated (bent tail).
-
-At cooler temperatures, phospholipids that have 2 saturated fatty acid tails (straight tails) tend to get more rigid / dense because they can more easily pack together. Phospholipids with unsaturated fatty acid tails (bent tails) don't end up getting as rigid / dense, allowing the membrane to stay fluid at lower temperatures. Cholesterol embedded in the phospholipid bilayer also helps it stay more fluid at lower temperatures.
-
-```{note}
-Phospholipid bilayers have the consistency of oil-based salad dressing. It may seem weak but it's strong enough to act as a separator between the environment inside and the environment outside. Water from one-side can move to the other but does so very rarely -- a single molecule may sneak through the layer every now and then. Aquaporins are proteins embedded in the phospholipid bilayer that allow water to rapidly pass (when needed).
-```
-
-Examples of molecules that can be embedded in or attached to the phospholipid bilayer include...
-
-* `{bm} Glycolipid`s / `{bm} Glycoprotein`s - These are lipids and proteins with carbohydrates attached to them and are typically found pointing outside of the cell. These carbohydrates are how a cell identifies if a neighbouring cell is foreign or not.
-* `{bm} Integral protein/(integral protein|integral enzyme)/i`s - Proteins that are partially hydrophobic. Either one end of the protein is anchored inside the membrane or the protein is fully going through the membrane.
-  * `{bm} Transmembrane protein/(transmembrane protein|transmembrane enzyme)/i`s - Proteins that have one end inside the cytoplasm and the other outside of the cell. Typical use case for these types of proteins is moving substances from inside the cell (cytoplasm) to outside the cell and vice-versa: `{bm} channel protein`s and `{bm} carrier protein`s.
-* `{bm} Peripheral protein/(peripheral protein|peripheral enzyme)/i`s - Proteins that are found on the surface of the protein (either on the cytoplasm side or the outside side). Unlike integral proteins, they don't have any portion going inside the membrane. As such, they more freely move around compared to integral proteins.
-* `{bm} Cholesterol` - Sits inside of the membrane to help ensure that the membrane doesn't become too stiff.
-
-```{note}
-See first diagram in this section for an example of each of the molecules listed above.
-```
-
-The term `{bm} facilitated diffusion` refers to the movement of molecules across the membrane via proteins embedded in the membrane (e.g. channel proteins and/or carrier proteins). These molecules wouldn't be able to cross the membrane by themselves. For example, the sodium potassium pump (carrier protein) helps sodium and potassium ions move across the cell membrane by opening/closing its gates.
-
-## History of Modern Cell Theory
-
-The first record of a cell was in 1665 when `{bm} Robert Hooke` published a book called The Micrographia. The book contains drawings of observations he made while looking at various dead organisms through a rudimentary microscope.
-
-A few years later, a Dutch lenscrafter by the name of `{bm} Antonie Van Leeuwenhoek/\b(Antonie Van Leeuwenhoek|Anthony Van Leeuwenhoek)\b/i` decided to use his expertise to craft a better microscope to better observe living cells / organisms. For example, he was able to observe sperm and Protists (unicellular organisms while he dubbed `{bm} animalcule`s).
-
-In the 1830s, `{bm} Matthias Schleiden` and `{bm} Theodore Schwann` began laying the groundwork for modern cell theory. They came up with the idea that...
-1. all life is composed of one or more cells.
-2. a cell is the `{bm-ri} basic` unit of life.
-
-They also suspected that cells come from other cells, but didn't know for sure if that was the only way they were produced. It was `{bm} Robert Remak` that in the mid-1800s established that...
-
-3. all cells come from other cells.
-
-`{bm} /\b(Rudolph Virchoi|Rudolph Virchow)\b/i`
-
-```{note}
-The credit for this sometimes goes to Rudolph Virchoi but it's been established that he was a plagiarist.
-```
-
-It's still an open question as to how the first / initial cell came to be. The current working theory is that, 3.5 billion years ago, phospholipids (the molecules that form the membrane of a cell) naturally form bilayers and connect in a circle. A membrane may have naturally encapsulated a set of arbitrary self-replicating molecules (e.g. protein or RNA) and that's how the first cell began growing and splitting off.
-
-```{note}
-There are an estimated 37 trillion cells in the human body.
-```
-   
-
-# Enzymes
+# Enzyme
 
 An `{bm} enzyme` is a molecule that takes in a specific set of input molecules and transforms them into a specific set of output molecules. The transformation takes the inputs and either ...
  * assembles them into new larger molecules (N to 1).
@@ -1012,183 +1206,6 @@ rect 0.85 0.78 0.14 0.215
 ```{note}
 An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
 ```
-
-# Cell Cycle
-
-The `{bm} cell cycle` is the sequence of events a cell goes through from when it's created (divides off) up to when it divides itself. In eukaryotic cells, the cell cycle has 2 major phases:
-
- 1. Interphase: The majority of a cell's life is spent in interphase, where it's growing and going about its business.
- 1. Mitotic phase: The portion of a cell's life where it divides into 2 new cells. 
-
-Each phase has a set of inner phases it goes through.
-
-```{img}
-Animal_cell_cycle-en_UNCLUTTERED.svg
-By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-Animal cell cycle
-scale 0.21 0.21
-```
-
-## Interphase
-
-The majority of a cell's life is spent in `{bm} interphase`, where it's growing and going about its business.
-
-```{img}
-Animal_cell_cycle-en_UNCLUTTERED.svg
-By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-Animal cell cycle
-scale 0.35 0.35
-crop 0 0 0.446 1
-```
-
-1. `{bm} G1 phase` / `{bm} Gap 1 phase` /  `{bm} Gap I phase`
-  
-   ```{img}
-   G1 Phase.svg
-   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-   G1 phase showing the cell growing
-   scale 0.1 0.1
-   ```
-
-   The cell grows.
-   
-   Prior to entering the next phase, the cell can go into the `{bm} G0 phase` / `{bm} resting phase`,  where it's essentially pausing division. One reason for this may be `{bm} contact inhibition`: when cells start touching up on other cells, it's a signal that it's becoming too crowded and that they should stop dividing. 
-
-1. `{bm} S phase` / `{bm} Synthesis phase`
-  
-   ```{img}
-   S Phase.svg
-   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-   S Phase showing chromatin and centrosome replication
-   scale 0.1 0.1
-   ```
-
-   The chromatin in the nucleus gets replicated to sister chromatids (2 copies that are attached). The centrosome also gets duplicated.
-
-1. `{bm} G2 phase` / `{bm} Gap 2 phase` /  `{bm} Gap II phase`
-
-   ```{img}
-   G2 Phase.svg
-   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-   G2 phase showing the cell growing even more
-   scale 0.1 0.1
-   ```
-
-   The cell grows more.
-
-## Mitotic Phase
-
-The `{bm} mitotic phase/(Mitotic phase|Mitotic|Mitosis)/i` is portion of a cell's life where it divides into 2 new cells.
-
-```{img}
-Animal_cell_cycle-en_UNCLUTTERED.svg
-By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-Animal cell cycle
-scale 0.35 0.35
-crop 0.446 0 0.554 1
-```
-
-1. `{bm} Prophase` / `{bm} Prometaphase`
-
-   ```{img}
-   Prophase.svg
-   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-   Prophase showing the sister chromatid condensing and nucleus membrane breaking down
-   scale 0.1 0.1
-   ```
-
-   The sister chromatids start to condense into an X shape, where the only part they remain attached at is the  centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
-
-   Microtubules are attached from the centrosomes to the kinetochore of the sister chromatids. `{bm} Kinetochore`s are proteins located at the centromere of the sister chromatids.
-
-1. `{bm} Metaphase`
-
-   ```{img}
-   Metaphase.svg
-   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-   Metaphase showing the sister chromatid lining up
-   scale 0.1 0.1
-   ```
-
-   The sister chromatids line up in the middle of the cell.
-
-1. `{bm} Anaphase`
-
-   ```{img}
-   Anaphase.svg
-   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-   Anaphase showing the sister chromatid breaking apart
-   scale 0.1 0.1
-   ```
-
-   As the cell splits apart, the microtubules also split apart the sister chromatids. Once split, they're individually  referred to as chromatin again.
-
-   ```{note}
-   I believe the labeling on the above diagram to be incorrect. Once split, they're no longer referred to as sister chromatids / chromatids. They're referred to as chromatin.
-   ```
-
-1. `{bm} Telophase` and `{bm} Cytokinesis`
-
-   ```{img}
-   Telophase and Cytokinesis.svg
-   By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
-   Telophase / cytokinesis showing nucleus membranes re-forming and cell finally splitting into 2
-   scale 0.1 0.1
-   ```
-
-   During telophase, nucleus membranes re-form around the newly split chromatin. The chromatin also start to un-condense.
-
-   During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells.
-  
-   Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
-
-
-MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
-
-MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
-
-MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
-
-MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
-
-MOVE REPRODUCTION NOTES FROM CHROMOSOME SECTION TO REPRODUCTION SECTION BELOW. DO THIS AFTER THE MEOSIS SECTION.
-
-
-# Reproduction
-
-`{bm} Reproduction/(reproduce|reproduction)/i` is when an organism generates offspring. It comes in 2 forms: asexual and sexual.
-
-`{bm} Asexual` reproduction is when offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
-  * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
-  * Mitosis - Process of cloning a eukaryotic cell.
-  * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
-  * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
-  * `{bm} Parthenogenesis` - When an animal lays an `{bm-ri} egg` but that `{bm-ri} egg` already has all the genetic information needed to develop (it doesn't need to be fertilized).
-
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(egg)/i`
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(ova)/i` 
-
-`{bm} Sexual` reproduction is when offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a `{bm} gamete` cells merge to create the offspring. Gamete cells have half the genetic information from the original parent, and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
-
-```{note}
-In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
-```
-
-# Cancer
-
-`{bm} Cancer` refers to the uncontrolled division of cells (mitosis) in a multicellular organism, typically brought on by one or more mutations.
-
-Normally, a cell has internal and external cues / regulators that signal when it should stop dividing (e.g. contact inhibition). When a mutation occurs that causes one or more of these cues to be ignored, the cell goes through a form a programmed suicide called `{bm} apoptosis`. If the genetic mutations are so severe that apoptosis no longer occurs, that's when cancer occurs.
-
-A group of cells that have been dividing unimpeded is known as a `{bm} neoplasm` / `{bm} tumor`. If the cells...
- * eventually stop dividing on their own, that mass of cells is called a `{bm} benign neoplasm` / `{bm} benign tumor`.
- * continually divide without ever stopping, that mass of cells is called a `{bm} malignant neoplasm` / `{bm} malignant tumor`.
-
-Mutations of two types of cell cycle regulators can promote the development of cancer:
- * Positive regulators, which normally promote cell growth, may become hyperactive (oncogenic).
- * Negative regulators (tumor suppressors), which prevent the formation of tumors, may become inactivated.
-
-Tumor cells may continue to mutate at a more rapid pace than other cells. If one of those mutations results in tumor cells breaking off from the original mass of tumor cells and floating around the body, the cancer is said to have `{bm} metastasize`d. 
 
 # Adenosine Triphosphate
 
