@@ -739,7 +739,7 @@ In biology, turgor pressure or turgidity is the pressure of the cell contents ag
 scale 0.7 0.7
 ```
 
-## Cell Cycle
+## Mitosis (Cell Cycle)
 
 The `{bm} cell cycle` is the sequence of events a cell goes through from when it's created (divides off) up to when it divides itself. In eukaryotic cells, the cell cycle has 2 major phases:
 
@@ -752,7 +752,7 @@ Each phase has a set of inner phases it goes through.
 Animal_cell_cycle-en_UNCLUTTERED.svg
 By Kelvinsong - Own work, CC0, https://commons.wikimedia.org/w/index.php?curid=22965076
 Animal cell cycle
-scale 0.21 0.21
+scale 0.35 0.35
 ```
 
 ### Interphase
@@ -868,51 +868,164 @@ crop 0.446 0 0.554 1
   
    Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
 
-## Cell Cycle
+## Meiosis
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(egg)/i`
+`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(ova)/i` 
+`{bm-ignore} egg_NORM`
+`{bm-ignore} ova_NORM`
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+`{bm} Meiosis` is a type of eukaryotic cell division that results in 4 daughter cells, where each daughter cell has half the number of chromosomes as the parent cell.
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+The source cell is known as a `{bm} germ` cell -- a cell that can either go through mitosis or meiosis. `{bm} Somatic` cells, on the other hand, are general body cells and can only go through mitosis.
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+The resulting daughter cells are known as `{bm} gamete` cells -- cells that have half the genetic information from the original parent (haploid -- only 1 chromosome of from each of the parent's homologous chromosome pairs), and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+Meiosis has 2 major phases:
+ 1. Meiosis I phase: Germ cell mixes genetic information in itself and splits into 2.
+ 1. Meiosis II phase: Each of the 2 cells created above get split again. But, this time instead of duplicating the chromosomes for each daughter cell, 1 chromosome strand from each original diploid pair gets taken by one of the daughter cells. The result is 4 haploid gamete cells. 
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+```{img}
+Meiosis_Stages.svg
+By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+Meiosis Stages
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+scale 0.35 0.35
+```
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
+### Meiosis I
 
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
-
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
-
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
-
-TODO: DO MEOSIS SECTION. TALK ABOUT GERM CELL VS SOMATIC CELL AND MAKE SIMILAR DIAGRAMS
-
-## Reproduction
-
-`{bm} Reproduction/(reproduce|reproduction)/i` is when an organism generates offspring. It comes in 2 forms: asexual and sexual.
-
-`{bm} Asexual` reproduction is when offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
-  * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
-  * Mitosis - Process of cloning a eukaryotic cell.
-  * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
-  * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
-  * `{bm} Parthenogenesis` - When an animal lays an `{bm-ri} egg` but that `{bm-ri} egg` already has all the genetic information needed to develop (it doesn't need to be fertilized).
-
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(egg)/i`
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells/\b(ova)/i` 
-
-`{bm} Sexual` reproduction is when offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a `{bm} gamete` cells merge to create the offspring. Gamete cells have half the genetic information from the original parent, and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
+During `{bm} meiosis I`, a germ cell divides in such a way that, rather than exactly duplicating each chromosome, it duplicates and mixes between each homologous chromosome pair. That is, chromosome pairs that are different versions of each other end up swapping segments (chromosomal crossover).
 
 ```{note}
-In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
+Remember that most cells have a diploid number of chromosomes (2n), where each chromosome is a different version of another chromosome in that same cell (homologous pairs -- e.g. code for different versions of the same gene). One comes from the mother and one comes from the father.
 ```
+
+```{img}
+Meiosis_Stages.svg
+By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+Meiosis Stages
+
+scale 0.35 0.35
+crop 0 0 0.5260 1.0
+```
+
+ 1. `{bm} Prophase I`
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0 0 0.15 1.0
+    ```
+
+    The sister chromatids start to condense into an X shape, where the only part they remain attached at is the centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell. Microtubules are attached from the centrosomes to the kinetochore of the sister chromatids.
+
+    While in their condensed form, each sister chromatid pair go through a process called `{bm} chromosomal crossover`: they swap segments with the other sister chromatid pair that's their homolog. The end result is that the sister chromatids are no longer exact copies of each other -- a single chromatid in each sister chromatid pair ends up with a partial result.
+
+    ```{img}
+    Chromosome Crossover.svg
+    This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+    Chromosome Crossover Diagram
+
+    scale 1.5 1.5
+    ```
+   
+    The point on this chromosome where this segment swap happens is called the `{bm} chiasma/(chiasmata|chiasma)/i`. The chiasma is a well defined point on the chromatids (it isn't random).
+ 
+ 1. `{bm} Metaphase I`
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0.15 0 0.1255 1.0
+    ```
+
+ 1. `{bm} Anaphase I` - Unlike mitosis, in meiosis the sister chromatids don't get pulled apart. They stay together. The sister pairs stay together -- it's the homologous pairs that get pulled apart
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0.265 0 0.1355 1.0
+    ```
+
+ 1. `{bm} Telophase I`
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0.4005 0 0.1255 1.0
+    ```
+
+End result here is that you have a haploid number of chromosomes.
+
+### Meiosis II
+
+```{img}
+Meiosis_Stages.svg
+By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+Meiosis Stages
+
+scale 0.35 0.35
+crop 0.5260 0 0.4740 1.0
+```
+
+Similar to how there's a rest period between mitosis where the cell grows (interphase), there may be a rest period between Meiosis I and Meiosis II called `{bm} Interphase II`.
+
+ 1. `{bm} Prophase II`
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0.5260 0 0.1255 1.0
+    ```
+
+ 1. `{bm} Metaphase II`
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0.6515 0 0.12 1.0
+    ```
+
+ 1. `{bm} Anaphase II`
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0.77 0 0.1 1.0
+    ```
+
+ 1. `{bm} Telophase II`
+
+    ```{img}
+    Meiosis_Stages.svg
+    By Ali Zifan - Own work; Used information from Campbell Biology (10th Edition) by: Jane B. Reece & Steven A. Wasserman., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=49630204
+    Meiosis Stages
+
+    scale 0.5 0.5
+    crop 0.8770 0 0.12 1.0
+    ```
 
 ## Cancer
 
@@ -1579,9 +1692,24 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 
 `{bm} Fission` - The act of dividing or splitting something into two or more parts.
 
+`{bm} Tetrad` - A group / set of 4.
+
 `{bm} Homologous/(Homologous|Homology|Homolog)/i` - Having the same relation, relative position, or structure. Particularly in biology, it s the existence of a shared ancestry between a pair of structures or genes.
 
 `{bm} Karyotype` - Micrograph image of diploid set of chromosomes, grouped in pairs.
+
+`{bm} Asexual` - When offspring is created using the genetic material from 1 parent. The offspring are essentially copies of the parent in terms of their genetic material (clone). Examples of asexual reproduction include:
+  * `{bm} Binary fission` - Process of cloning a prokaryotic cell and certain organelle inside of eukaryotic cell (e.g. mitochondria).
+  * Mitosis - Process of cloning a eukaryotic cell.
+  * `{bm} Budding` - When a growth on a plant or animal breaks off, that broken piece is the offspring.
+  * `{bm} Fragmentation` - When an organism breaks into two or more pieces, each fragment grows back into a whole.
+  * `{bm} Parthenogenesis` - When an animal lays an egg_GAMETE but that egg_GAMETE already has all the genetic information needed to develop (it doesn't need to be fertilized).
+
+`{bm} Sexual` - When offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a gamete cells merge to create the offspring.
+
+```{note}
+In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
+```
 
 
 
@@ -1590,6 +1718,6 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
 
-`{bm-ignore} byproduct`
+`{bm-ignore} byproduct|reproduction|reproduce`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(product)/i`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
