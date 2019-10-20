@@ -739,6 +739,68 @@ In biology, turgor pressure or turgidity is the pressure of the cell contents ag
 scale 0.7 0.7
 ```
 
+## Chromosome
+
+The genome of eukaryotes are split into linear strands of DNA. These linear DNA strands come in 3 forms...
+
+1. `{bm} Chromatin` is the normal state, where the DNA is loosely floating around with structural proteins called `{bm} histone`s.
+1. `{bm} Chromatid` is the packed form of chromatin, where the DNA is packed using even more structural proteins called  `{bm} scaffold protein`s while being replicated. The original chromatid instance and the new chromatid instance are attached together, and they're referred to as `{bm} sister chromatid`s.
+1. `{bm} Chromosome` is essentially the same thing as sister chromatids: the original chromatid instance and the new chromatid instance attached together.
+
+```{img}
+Chromatin_Structures.png
+By Original uploader was Richard Wheeler at en.wikipedia - Transferred from en.wikipedia to Commons by sevela.p., CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=4017531
+The major chromatin structures.
+scale 0.5 0.5
+```
+
+```{note}
+The terms chromatin, chromatid, and chromosome are often used in ambiguous ways. Depending on the context, the term chromosome may actually be referring to either a chromatin/chromatid, a pair of replicated chromatids that are attached together (sister chromatids), or a pair of replicated chromatids that are attached together (sister chromatids) while they're in their X shape.
+```
+
+At a high-level, the process of DNA replication can be boiled down to 3 steps...
+
+1. The chromatin is copied. Each instance is now referred to as a chromatid and is attached to the other (sister chromatid) via proteins called `{bm} cohesin`s.
+2. The sister chromatids condense and start to separate in an X shape. The section they remain connected at is a segment of DNA called the `{bm} centromere`.
+3. The sister chromatids are pulled apart. Each instance is now reverted back to being referred to as chromatin.
+
+```{note}
+Don't confuse DNA replication (above) for organism reproduction (below). Replication (above) is taking about how the DNA is being cloned. Reproduction (below) is talking about how species makes offspring.
+```
+
+Most eukaryotic species are `{bm} diploid`, meaning that their linear DNA strands come in matching pairs where each pair contains different versions of the same set of genes (homologous pairs). When these organisms reproduce, they generate special cells known as `{bm} haploid` cells that only contain 1 strand from each pair. Two haploid cells mix their DNA to create a final diploid offspring (e.g. a sperm cell and an ova_GAMETE cell).
+
+```{img}
+DNA_human_male_chromosomes.gif
+By National Human Genome Research Institute, http://www.genome.gov/Images/EdKit/bio1c_large.gif, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2132905
+DNA, human male chromosomes
+scale 0.5 0.5
+crop 0 0 0.5 0.25
+```
+
+```{note}
+This isn't entirely true? Some eukaryote species can replicate by cloning themselves (some reptiles?). Their eggs don't need sperm.
+```
+
+Certain diploid eukaryotic species (some mammals/snakes/insects/etc..) have an extra pair that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair are called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosome/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`s, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
+
+The non-sex chromosome pairs are referred to as `{bm} autosome`s.
+
+```{img}
+DNA_human_male_chromosomes.gif
+By National Human Genome Research Institute, http://www.genome.gov/Images/EdKit/bio1c_large.gif, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2132905
+DNA, human male chromosomes
+scale 0.3 0.3
+
+fg_color #ff0000ff
+bg_color #00000000
+rect 0.85 0.78 0.14 0.215
+```
+
+```{note}
+An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
+```
+
 ## Mitosis (Cell Cycle)
 
 The `{bm} cell cycle` is the sequence of events a cell goes through from when it's created (divides off) up to when it divides itself. In eukaryotic cells, the cell cycle has 2 major phases:
@@ -1257,68 +1319,6 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
  * `{bm} mRNA/(mRNA)/` or `{bm} messenger RNA` - Carries information from DNA to the ribosomes detailing a protein to build. Ribosomes are the parts of cells that synthesize proteins.
  * `{bm} tRNA/(tRNA)/` or `{bm} transfer RNA` - Brings to the ribosome the amino acids required to build the protein that the mRNA is requesting.
  * `{bm} rRNA/(rRNA)/` or `{bm} ribosomal RNA` - Makes up a large portion of the ribosome (60%). The rest of the ribosome is protein.
-
-# Chromosome
-
-The genome of eukaryotes are split into linear strands of DNA. These linear DNA strands come in 3 forms...
-
-1. `{bm} Chromatin` is the normal state, where the DNA is loosely floating around with structural proteins called `{bm} histone`s.
-1. `{bm} Chromatid` is the packed form of chromatin, where the DNA is packed using even more structural proteins called  `{bm} scaffold protein`s while being replicated. The original chromatid instance and the new chromatid instance are attached together, and they're referred to as `{bm} sister chromatid`s.
-1. `{bm} Chromosome` is essentially the same thing as sister chromatids: the original chromatid instance and the new chromatid instance attached together.
-
-```{img}
-Chromatin_Structures.png
-By Original uploader was Richard Wheeler at en.wikipedia - Transferred from en.wikipedia to Commons by sevela.p., CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=4017531
-The major chromatin structures.
-scale 0.5 0.5
-```
-
-```{note}
-The terms chromatin, chromatid, and chromosome are often used in ambiguous ways. Depending on the context, the term chromosome may actually be referring to either a chromatin/chromatid, a pair of replicated chromatids that are attached together (sister chromatids), or a pair of replicated chromatids that are attached together (sister chromatids) while they're in their X shape.
-```
-
-At a high-level, the process of DNA replication can be boiled down to 3 steps...
-
-1. The chromatin is copied. Each instance is now referred to as a chromatid and is attached to the other (sister chromatid) via proteins called `{bm} cohesin`s.
-2. The sister chromatids condense and start to separate in an X shape. The section they remain connected at is a segment of DNA called the `{bm} centromere`.
-3. The sister chromatids are pulled apart. Each instance is now reverted back to being referred to as chromatin.
-
-```{note}
-Don't confuse DNA replication (above) for organism reproduction (below). Replication (above) is taking about how the DNA is being cloned. Reproduction (below) is talking about how species makes offspring.
-```
-
-Most eukaryotic species are `{bm} diploid`, meaning that their linear DNA strands come in matching pairs where each pair contains different versions of the same set of genes (homologous pairs). When these organisms reproduce, they generate special cells known as `{bm} haploid` cells that only contain 1 strand from each pair. Two haploid cells mix their DNA to create a final diploid offspring (e.g. a sperm cell and an ova_GAMETE cell).
-
-```{img}
-DNA_human_male_chromosomes.gif
-By National Human Genome Research Institute, http://www.genome.gov/Images/EdKit/bio1c_large.gif, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2132905
-DNA, human male chromosomes
-scale 0.5 0.5
-crop 0 0 0.5 0.25
-```
-
-```{note}
-This isn't entirely true? Some eukaryote species can replicate by cloning themselves (some reptiles?). Their eggs don't need sperm.
-```
-
-Certain diploid eukaryotic species (some mammals/snakes/insects/etc..) have an extra pair that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair are called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosome/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`s, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
-
-The non-sex chromosome pairs are referred to as `{bm} autosome`s.
-
-```{img}
-DNA_human_male_chromosomes.gif
-By National Human Genome Research Institute, http://www.genome.gov/Images/EdKit/bio1c_large.gif, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2132905
-DNA, human male chromosomes
-scale 0.3 0.3
-
-fg_color #ff0000ff
-bg_color #00000000
-rect 0.85 0.78 0.14 0.215
-```
-
-```{note}
-An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
-```
 
 # Adenosine Triphosphate
 
