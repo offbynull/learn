@@ -757,21 +757,22 @@ The major chromatin structures.
 scale 0.5 0.5
 ```
 
-```{note}
-The terms chromatin, chromatid, and chromosome are often used in ambiguous ways. Depending on the context, the term chromosome may actually be referring to either a chromatin/chromatid, a pair of replicated chromatids that are attached together (sister chromatids), or a pair of replicated chromatids that are attached together (sister chromatids) while they're in their X shape.
-```
-
 At a high-level, the process of DNA replication can be boiled down to 3 steps...
 
 1. The chromatin is copied. Each instance is now referred to as a chromatid and is attached to the other (sister chromatid) via proteins called `{bm} cohesin`s.
 2. The sister chromatids condense and start to separate in an X shape. The section they remain connected at is a segment of DNA called the `{bm} centromere`.
 3. The sister chromatids are pulled apart. Each instance is now reverted back to being referred to as chromatin.
 
+A cell can have a number of chromosome copies:
+ * `{bm} diploid` cells carry 2n chromosomes (2 copies of each chromosome). 1 copy comes from the mother and the other comes from the father, and the copies aren't identical -- they code for different versions of the same genes. Each of the 2 copies are said to be a homologous pair. Examples include animal somatic cells and animal germ cells.
+ * `{bm} haploid` cells carry n chromosomes (1 copy of each chromosome). Examples include animal gamete cells and most unicellular eukaryotes.
+ * `{bm} polyploid` cells carry An chromosomes, where A > 2 (more than 2 copies of each chromosome). Examples include certain plant species (e.g. lotus plants) and some forms of human muscle tissue.
+
 ```{note}
-Don't confuse DNA replication (above) for organism reproduction (below). Replication (above) is taking about how the DNA is being cloned. Reproduction (below) is talking about how species makes offspring.
+An example straight from the material of diploid chromosomes working: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
 ```
 
-Most eukaryotic species are `{bm} diploid`, meaning that their linear DNA strands come in matching pairs where each pair contains different versions of the same set of genes (homologous pairs). When these organisms reproduce, they generate special cells known as `{bm} haploid` cells that only contain 1 strand from each pair. Two haploid cells mix their DNA to create a final diploid offspring (e.g. a sperm cell and an ova_GAMETE cell).
+The following diagram shows a karyotype of a human's diploid chromosome pairs 1 2 and 3:
 
 ```{img}
 DNA_human_male_chromosomes.gif
@@ -781,11 +782,7 @@ scale 0.5 0.5
 crop 0 0 0.5 0.25
 ```
 
-```{note}
-This isn't entirely true? Some eukaryote species can replicate by cloning themselves (some reptiles?). Their eggs don't need sperm.
-```
-
-Certain diploid eukaryotic species (some mammals/snakes/insects/etc..) have an extra pair that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair are called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosome/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`s, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
+Certain eukaryotic species (some mammals/snakes/insects/etc..) have an extra pair of chromosomes that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair is called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosome/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`s, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
 
 The non-sex chromosome pairs are referred to as `{bm} autosome`s.
 
@@ -798,10 +795,6 @@ scale 0.3 0.3
 fg_color #ff0000ff
 bg_color #00000000
 rect 0.85 0.78 0.14 0.215
-```
-
-```{note}
-An example straight from the material: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
 ```
 
 ## Mitosis (Cell Cycle)
