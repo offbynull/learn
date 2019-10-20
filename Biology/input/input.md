@@ -930,7 +930,7 @@ crop 0 0 0.5260 1.0
     This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
     Chromosome Crossover Diagram
 
-    scale 1.5 1.5
+    scale 1.45 1.45
     ```
    
     The point on this chromosome where this segment swap happens is called the `{bm} chiasma/(chiasmata|chiasma)/i`. The chiasma is a well defined point on the chromatids (it isn't random).
