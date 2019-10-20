@@ -741,11 +741,14 @@ scale 0.7 0.7
 
 ## Chromosome
 
-The genome of eukaryotes are split into linear strands of DNA. These linear DNA strands come in 3 forms...
+The genome of eukaryotes are split into linear strands of DNA. These linear DNA strands come in 2 forms...
 
 1. `{bm} Chromatin` is the normal state, where the DNA is loosely floating around with structural proteins called `{bm} histone`s.
-1. `{bm} Chromatid` is the packed form of chromatin, where the DNA is packed using even more structural proteins called  `{bm} scaffold protein`s while being replicated. The original chromatid instance and the new chromatid instance are attached together, and they're referred to as `{bm} sister chromatid`s.
-1. `{bm} Chromosome` is essentially the same thing as sister chromatids: the original chromatid instance and the new chromatid instance attached together.
+1. `{bm} Chromatid` is the state where it's going through replication. The DNA is packed using even more structural proteins called  `{bm} scaffold protein`s and the entire thing has a copy of itself attached. The original and the copy are individually referred to as `{bm} sister chromatid`s. Together they're referred to as a `{bm} sister chromatid pair`.
+
+Chromatin and chromatid are mutually exclusive. As long as it has a copy attached to it, it's referred to as chromatid. Otherwise, it's referred to as chromatin.
+
+The term `{bm} chromosome` can refer either to a chromatin or a sister chromatid pair, but never a single sister chromatid.
 
 ```{img}
 Chromatin_Structures.png
@@ -851,7 +854,7 @@ crop 0 0 0.446 1
    scale 0.1 0.1
    ```
 
-   The chromatin in the nucleus gets replicated to sister chromatids (2 copies that are attached). The centrosome also gets duplicated.
+   The chromatin in the nucleus gets replicated to become a sister chromatid pair (2 copies that are attached). The centrosome also gets duplicated.
 
 1. `{bm} G2 phase` / `{bm} Gap 2 phase` /  `{bm} Gap II phase`
 
@@ -866,7 +869,7 @@ crop 0 0 0.446 1
 
 ### Mitotic Phase
 
-The `{bm} mitotic phase/(Mitotic phase|Mitotic|Mitosis)/i` is portion of a cell's life where it divides into 2 new cells.
+The `{bm} mitotic phase/(Mitotic phase|Mitotic|Mitosis)/i` is portion of a cell's life where it divides into 2 new daughter cells.
 
 ```{img}
 Animal_cell_cycle-en_UNCLUTTERED.svg
@@ -885,9 +888,9 @@ crop 0.446 0 0.554 1
    scale 0.1 0.1
    ```
 
-   The sister chromatids start to condense into an X shape, where the only part they remain attached at is the  centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
+   The sister chromatid pairs start to condense into an X shape, where the only part they remain attached at is their centromeres. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
 
-   Microtubules are attached from the centrosomes to the kinetochore of the sister chromatids. `{bm} Kinetochore`s are proteins located at the centromere of the sister chromatids.
+   Microtubules are attached from the centrosomes to the kinetochore of the sister chromatid pairs. `{bm} Kinetochore`s are proteins located at the centromere of the sister chromatids.
 
 1. `{bm} Metaphase`
 
@@ -898,7 +901,7 @@ crop 0.446 0 0.554 1
    scale 0.1 0.1
    ```
 
-   The sister chromatids line up in the middle of the cell.
+   The sister chromatid pairs line up in the middle of the cell.
 
 1. `{bm} Anaphase`
 
@@ -909,7 +912,7 @@ crop 0.446 0 0.554 1
    scale 0.1 0.1
    ```
 
-   As the cell splits apart, the microtubules also split apart the sister chromatids. Once split, they're individually  referred to as chromatin again.
+   As the cell splits apart, the microtubules also split apart the sister chromatid pairs. Once split, they're individually referred to as chromatin again.
 
    ```{note}
    I believe the labeling on the above diagram to be incorrect. Once split, they're no longer referred to as sister chromatids / chromatids. They're referred to as chromatin.
@@ -926,9 +929,7 @@ crop 0.446 0 0.554 1
 
    During telophase, nucleus membranes re-form around the newly split chromatin. The chromatin also start to un-condense.
 
-   During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells.
-  
-   Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
+   During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
 
 ## Meiosis
 
@@ -943,9 +944,13 @@ The source cell is known as a `{bm} germ` cell -- a cell that can either go thro
 
 The resulting daughter cells are known as `{bm} gamete` cells -- cells that have half the genetic information from the original parent (haploid -- only 1 chromosome of from each of the parent's homologous chromosome pairs), and when they merge they mix that genetic material to create the new genetic material for the offspring. Male gamete cells are called `{bm} sperm`, while female gamete cells are called `{bm} ova/\b(ova)_GAMETE/i` or `{bm} egg/\b(egg)_GAMETE/i`s.
 
+```{note}
+Gamete cells no longer have the ability to divide (this is a terminal operation)
+```
+
 Meiosis has 2 major phases:
- 1. Meiosis I phase: Germ cell mixes genetic information in itself and splits into 2.
- 1. Meiosis II phase: Each of the 2 cells created above get split again. But, this time instead of duplicating the chromosomes for each daughter cell, 1 chromosome strand from each original diploid pair gets taken by one of the daughter cells. The result is 4 haploid gamete cells. 
+ 1. Meiosis I phase: Germ cell mixes genetic information in itself and divides into 2.
+ 1. Meiosis II phase: Each of the 2 cells created above get divided again. But, this time the resulting daughter cells only have half the generic information (gamete cells). 
 
 ```{img}
 Meiosis_Stages.svg
@@ -983,9 +988,15 @@ crop 0 0 0.5260 1.0
     crop 0 0 0.15 1.0
     ```
 
-    The sister chromatids start to condense into an X shape, where the only part they remain attached at is the centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell. Microtubules are attached from the centrosomes to the kinetochore of the sister chromatids.
+    Each chromatin duplicates to become a sister chromatid pair (2 chromatids that are attached to each other). Then, each sister chromatid pair condenses and forms an X shape where the only part that the sister chromatids remain attached at is their centromeres.
+    
+    The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell. Microtubules are attached from the centrosomes to the kinetochore of the sister chromatid pairs.
 
-    While in their condensed form, each sister chromatid pair go through a process called `{bm} chromosomal crossover`: they swap segments with the other sister chromatid pair that's their homolog. The end result is that the sister chromatids are no longer exact copies of each other -- a single chromatid in each sister chromatid pair ends up with a partial result.
+    While in their condensed form, sister chromatid pairs go through a process called `{bm} chromosomal crossover`: A chromatid from a sister chromatid pair swaps segments of itself with a chromatid from another sister chromatid pair. The sister chromatid pairs doing the swapping must be homologs of each other (contains alternative versions of the same genes).
+
+    ```{note}
+    Remember that the source cell comes with 2n chromosomes, where each chromosome has a sibling that has alternate versions of the same genes. One sibling came from the father and the other sibling came from the mother. The homolog refers to this sibling -- each sibling contains different versions of the same set of genes.
+    ```
 
     ```{img}
     Chromosome Crossover.svg
@@ -994,8 +1005,10 @@ crop 0 0 0.5260 1.0
 
     scale 1.45 1.45
     ```
+
+    The end result is that the sister chromatids are no longer exact copies of each other.
    
-    The point on this chromosome where this segment swap happens is called the `{bm} chiasma/(chiasmata|chiasma)/i`. The chiasma is a well defined point on the chromatids (it isn't random).
+    The point at which a segment swap happens is called the `{bm} chiasma/(chiasmata|chiasma)/i`. The chiasma is a well defined point on the chromatids (it isn't random).
  
  1. `{bm} Metaphase I`
 
@@ -1008,7 +1021,9 @@ crop 0 0 0.5260 1.0
     crop 0.15 0 0.1255 1.0
     ```
 
- 1. `{bm} Anaphase I` - Unlike mitosis, in meiosis the sister chromatids don't get pulled apart. They stay together. The sister pairs stay together -- it's the homologous pairs that get pulled apart
+    The sister chromatid pairs line up in the middle of the cell.
+
+ 1. `{bm} Anaphase I`
 
     ```{img}
     Meiosis_Stages.svg
@@ -1017,6 +1032,18 @@ crop 0 0 0.5260 1.0
 
     scale 0.5 0.5
     crop 0.265 0 0.1355 1.0
+    ```
+
+    As the cell splits apart, microtubules move apart the homologous pairs of sister chromatid pairs to opposite ends of the cell. Each side gets 1 of the of sister chromatid pairs.
+
+    The term _homologous pairs of sister chromatid pairs_ here is confusing:
+     * _sister chromatid_ means 1 of 2 chromatids that are attached to each other at their centromeres.
+     * _sister chromatid pair_ means 2 _sister chromatids_ that are attached to each other at their centromeres.
+     * _pair of sister chromatid pairs_ means 2 _sister chromatid pairs_.
+     * _homologous pair of sister chromatid pairs_ refers to a 2 _sister chromatid pairs_ that were derived from 2 homologous chromatin/chromosomes.
+
+    ```{note}
+    What does homologous chromatin mean? Remember that the source cell comes with 2n chromatin, where each chromatin has a sibling that has alternate versions of the same genes. One sibling came from the father and the other sibling came from the mother. Homologous chromatin/chromosomes refers to those 2 siblings.
     ```
 
  1. `{bm} Telophase I`
@@ -1030,9 +1057,15 @@ crop 0 0 0.5260 1.0
     crop 0.4005 0 0.1255 1.0
     ```
 
-End result here is that you have a haploid number of chromosomes.
+    Nucleus membranes re-form around the newly moved apart sister chromatid pairs. The sister chromatid pairs also start to un-condense but still remain attached at their centromeres. As such, the resulting daughter cells are said to have a haploid number of chromosomes -- each sister chromatid pair is technically considered to be 1 chromosome until it splits apart.
+
+    During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with telophase I (it isn't a part of telophase I), but it starts around the same time.
 
 ### Meiosis II
+
+During `{bm} meiosis II`, each daughter cell from meiosis I will divide again, but this time the sister chromatid pairs split and each resulting daughter cell keeps 1. In other words, each daughter cell from meiosis I will divide again to become 2 gamete cells.
+
+The steps in meiosis II are almost exactly the same as the steps in the miotic phase -- the sister chromatid pairs are essentially being split apart into 2 new cells. Similar to how there's a rest period between mitosis iterations (called interphase), there may be a rest period between meiosis I and meiosis II called `{bm} interphase II`.
 
 ```{img}
 Meiosis_Stages.svg
@@ -1042,8 +1075,6 @@ Meiosis Stages
 scale 0.35 0.35
 crop 0.5260 0 0.4740 1.0
 ```
-
-Similar to how there's a rest period between mitosis where the cell grows (interphase), there may be a rest period between Meiosis I and Meiosis II called `{bm} Interphase II`.
 
  1. `{bm} Prophase II`
 
@@ -1056,6 +1087,10 @@ Similar to how there's a rest period between mitosis where the cell grows (inter
     crop 0.5260 0 0.1255 1.0
     ```
 
+    The sister chromatid pairs start to condense into an X shape, where the only part they remain attached at is the centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
+
+    Microtubules are attached from the centrosomes to the kinetochore of the sister chromatid pairs.
+
  1. `{bm} Metaphase II`
 
     ```{img}
@@ -1066,6 +1101,8 @@ Similar to how there's a rest period between mitosis where the cell grows (inter
     scale 0.5 0.5
     crop 0.6515 0 0.12 1.0
     ```
+
+    The sister chromatid pairs line up in the middle of the cell.
 
  1. `{bm} Anaphase II`
 
@@ -1078,6 +1115,8 @@ Similar to how there's a rest period between mitosis where the cell grows (inter
     crop 0.77 0 0.1 1.0
     ```
 
+    As the cell splits apart, the microtubules also split apart the sister chromatid pairs. Once split, they're individually referred to as chromatin again.
+
  1. `{bm} Telophase II`
 
     ```{img}
@@ -1088,6 +1127,10 @@ Similar to how there's a rest period between mitosis where the cell grows (inter
     scale 0.5 0.5
     crop 0.8770 0 0.12 1.0
     ```
+
+    During telophase, nucleus membranes re-form around the newly split chromatin. The chromatin also start to un-condense. The resulting daughter cells are gametes at this point (e.g. sperm cells). They no longer divide. 
+
+    During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with telophase II (it isn't a part of telophase II), but it starts around the same time.
 
 ## Cancer
 
