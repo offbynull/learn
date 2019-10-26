@@ -1224,7 +1224,6 @@ By National institute on alcohol abuse and alcoholism (NIAAA) - File:Structural 
 scale 0.5 0.5
 ```
 
-
 # Prokaryotic Cell
 
 ```{img}
@@ -1439,6 +1438,30 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
  * `{bm} mRNA/(mRNA)/` or `{bm} messenger RNA` - Carries information from DNA to the ribosomes detailing a protein to build. Ribosomes are the parts of cells that synthesize proteins.
  * `{bm} tRNA/(tRNA)/` or `{bm} transfer RNA` - Brings to the ribosome the amino acids required to build the protein that the mRNA is requesting.
  * `{bm} rRNA/(rRNA)/` or `{bm} ribosomal RNA` - Makes up a large portion of the ribosome (60%). The rest of the ribosome is protein.
+
+# Classical Genetics
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
 
 # Adenosine Triphosphate
 
