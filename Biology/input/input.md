@@ -1129,7 +1129,7 @@ crop 0.5260 0 0.4740 1.0
 
 `{bm} Cancer` refers to the uncontrolled division of cells (mitosis) in a multicellular organism, typically brought on by one or more mutations.
 
-Normally, a cell has internal and external cues / regulators that signal when it should stop dividing (e.g. contact inhibition). When a mutation occurs that causes one or more of these cues to be ignored, the cell goes through a form a programmed suicide called `{bm} apoptosis`. If the genetic mutations are so severe that apoptosis no longer occurs, that's when cancer occurs.
+Normally, a cell has internal and external cues / regulators that signal when it should stop dividing (e.g. contact inhibition). When a mutation occurs that causes one or more of these cues to be ignored, the cell goes through a form a programmed suicide called apoptosis. If the genetic mutations are so severe that apoptosis no longer occurs, that's when cancer occurs.
 
 A group of cells that have been dividing unimpeded is known as a `{bm} neoplasm` / `{bm} tumor`. If the cells...
  * eventually stop dividing on their own, that mass of cells is called a `{bm} benign neoplasm` / `{bm} benign tumor`.
@@ -1140,6 +1140,90 @@ Mutations of two types of cell cycle regulators can promote the development of c
  * Negative regulators (tumor suppressors), which prevent the formation of tumors, may become inactivated.
 
 Tumor cells may continue to mutate at a more rapid pace than other cells. If one of those mutations results in tumor cells breaking off from the original mass of tumor cells and floating around the body, the cancer is said to have `{bm} metastasize`d. 
+
+## Fertilization
+
+`{bm} Fertilization/(fertilization|fertilize)/i` is the act of bringing together a male gamete (e.g. sperm) to a female gamete (e.g. egg_GAMETE) (cell types produced through meiosis). In humans, a fertilized egg_GAMETE is referred to as a ...
+
+ * `{bm} zygote` upon creation. At this point the male gamete and the female gamete have fused together to become a single cell, but their nuclei will still be separate (will eventually fuse).
+
+   ```{img}
+   Zygote1.jpg
+   Zygote with 2 separate nuclei
+   By Nina Sesina - https://commons.wikimedia.org/wiki/File:Zygote.tif, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67459911
+
+   scale 0.1 0.1
+   ```
+
+ * `{bm} morula` upon dividing to become 16 cells (around a few days).
+
+ * `{bm} blastocyst` upon dividing to become 200-300 cells (around 5 to 9 days). At this point the group of cells form a hollowed out sphere where a mass is growing on inner top portion.
+
+   ```{img}
+   Human_blastocyst.jpg
+   Blastocyst
+   By Mr. J. Conaghan - http://stemcells.nih.gov/info/scireport/pages/chapter3.aspx, Public Domain, https://commons.wikimedia.org/w/index.php?curid=32289210
+
+   scale 0.65 0.65
+   ```
+
+ * `{bm} embryo` after around 2 weeks. At this point the major internal organs and overall shape of the human are starting to emerge (e.g. the beginning of legs, arms, eyes, etc..).
+
+   ```{img}
+   Embryo_7_weeks_after_conception.jpg
+   Embryo
+   By Nina Sesina - https://commons.wikimedia.org/wiki/File:Zygote.tif, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67459911
+
+   scale 0.1 0.1
+   ```
+
+ * `{bm} fetus/(fetal|fetus|foetus|foeti)/i` after around 8-10 weeks. At this point the features formed in the embryonic stage grow and cells begin to differentiate for their actual function / purpose (e.g. neuron cells, kidney cells, liver cells, etc..).
+
+   ```{img}
+   Fetus_3_months.jpg
+   Fetus
+   By National Museum of Health and Medicine - http://nmhm.washingtondc.museum/exhibits/single_cell/imgs/14_Fetus_3_months.jpg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=9998241
+
+   scale 0.4 0.4
+   ```
+
+The table below is a visualization of the phases. Note that the table starts count from the `{bm} gestational age`: the point of last menstruation. The durations in the descriptions above are from the point of fertilization.
+
+```{img}
+Prenatal_development_table.svg
+Prenatal Development Table
+By Mikael Häggström.When using this image in external works, it may be cited as:Häggström, Mikael (2014). "Medical gallery of Mikael Häggström 2014". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.008. ISSN 2002-4436. Public Domain.orBy Mikael Häggström, used with permission. - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6843176
+
+scale 0.5 0.5
+```
+
+## Apoptosis
+
+`{bm} Apoptosis` is a form of programmed cell death in multicellular organisms. For example, apoptosis can be triggered by the cell...
+
+* detecting a faulty mutation within its own DNA, there by avoiding a potential problem (e.g. cancer).
+* to sculpt body parts as part of normal development (e.g. cells in feet die during embryonic / fetal development to create gaps between toes).
+
+In apoptosis, the membrane of the cell begins to shrink and pinch inward. It breaks up its DNA and organelle and encircles them into miniature components that eventually bud off from the cell and float away. Cells from the immune system will then come and ingest those buds and/or other cells can reuse the components in those buds for their own purposes without suffering any damage.
+
+```{img}
+Apoptotic_cell_disassembly.png
+Apoptotic Cell Disassembly
+By Aaron Smith, Michael AF Parkes, Georgia K Atkin-Smith, Rochelle Tixeira, Ivan KH Poon - Wikiversity:Draft:WikiJournal of Medicine/Cell disassembly during cell death, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59865845
+
+scale 0.5 0.5
+```
+
+In contrast, `{bm} necrosis` is a form of cell death that isn't programmed -- the cell swells up and explodes. It isn't desirable and often occurs in extreme cases (e.g. exposed to a chemical toxin, mechanical damage, etc..). The guts of the cell, rather than being neatly encircled and budding off, will burst outwards and potentially damage other cells in the vicinity. 
+
+```{img}
+Structural_changes_of_cells_undergoing_necrosis_or_apoptosis.png
+Apoptosis vs Necrosis
+By National institute on alcohol abuse and alcoholism (NIAAA) - File:Structural changes of cells undergoing necrosis or apoptosis.gif; (pubs.niaaa.nih.gov), Public Domain, https://commons.wikimedia.org/w/index.php?curid=24184862
+
+scale 0.5 0.5
+```
+
 
 # Prokaryotic Cell
 
