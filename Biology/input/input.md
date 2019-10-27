@@ -1406,6 +1406,7 @@ The two nucleotides that make up a connection are called a base pair. In DNA, th
 Terminology specific to DNA:
  * `{bm} genome` - The entire set of DNA for an organism. For eukaryotes, this refers to nuclear DNA, not the independent DNA carried by organelles such as mitochondria.
  * `{bm} gene/\b(genes|gene)\b/i` - A section of an organism's DNA that contains instructions for some functionality, typically for building some protein.
+ * `{bm} allele` - A version of a gene (different coding at the some position of DNA).
 
 # RNA
 
@@ -1441,7 +1442,108 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 # Classical Genetics
 
-FILL ME IN
+`{bm} Classical genetics` is an branch of genetics focused on determining the probability of observable traits getting passed down to offspring. It was started in the 1800s by a scientist monk named `{bm} Gregor Mendel/(Gregor Mendel|Gregor Johann Mendel)/` (prior to the discovery of DNA).
+
+An organism that sexual reproduces holds 2 alleles for each gene (2 versions of each gene). 1 allele is randomly chosen from the father and the other allele is randomly chosen from the mother. Depending on which allele combinations are present, different observable traits may be expressed. For example, imagine the color of a flower is determined by a single gene. If a flower had both a red allele and a white allele for that gene, the observable trait would be that it'd have a pink color.
+
+```{dot}
+digraph G {
+	subgraph clusterparent1 {
+		red1 [label="Red"];
+    red2 [label="Red"];
+		label = "Male parent color alleles";
+	}
+	subgraph clusterparent2 {
+		white1 [label="White"];
+    white2 [label="White"];
+		label = "Female parent color alleles";
+	}
+	subgraph clusterchild1 {
+		red3 [label="Red"];
+    white3 [label="White"];
+		label = "Child color alleles";
+	}
+
+  red1->red3 [label="randomly chosen from male parent"];
+  white2->white3 [label="randomly chosen from female parent"];
+}
+```
+
+The term...
+ * `{bm} genotype` refers to the alleles present for a set of one or more gene(s).
+ * `{bm} phenotype` refers to the observable trait(s) expressed by a genotype.
+
+For a gene, if an organism has...
+ * the same allele twice, it's said to be `{bm} homozygous`.
+ * two different alleles, it's said to be `{bm} heterozygous`.
+
+In the above example, the genotype for flower color is 1 red allele and 1 white allele (heterozygous) while the phenotype for flower color is pink.
+
+For each gene, offspring get a random allele from each parent. The odds of which alleles the offspring ends up with can be visualized using a `{bm} Punnett square` diagram: a table where the alleles for a gene are written across the top axis (male parent) and down the left axis (female parent), and each cell maps to the alleles in the top/left coordinate that it's in.
+
+For example, a gene that controls the color of a flower has 2 alleles: red and white. The male parent has 2 red alleles while the female parent has both a red allele and a white allele. The Punnett square describing the odds of the offspring:
+
+```{csv}
+ , R , R
+R, RR, RR
+W, RW, WR
+```
+
+The above diagram visualizes that the probability of the offspring having...
+ * 2 red alleles is `{kt} P(RR)=\frac{2}{4}`.
+ * 2 white alleles is `{kt} P(WW)=\frac{0}{4}`.
+ * a red allele and a white allele is `{kt} P(RW|WR)=\frac{2}{4}`.
+
+Punnett squares can be extended to cover multiple genes so long as those genes are independently assorted. That is, each gene in the list must be on a different chromosome. If they were on the same chromosome, the chance of you getting gene A would be dependent on you getting gene B.
+
+For example, a gene that controls...
+* the color of a flower has 2 alleles: red and white.
+* whether the flower has thorns has 2 alleles: true and false.
+
+Both parents have 1 red allele and 1 white allele for color, and 1 true allele and 1 false allele for thorns. The Punnett square describing the odds of the offspring:
+
+```{csv}
+      , [R][T]  , [R][F]  , [W][T]  , [W][F]
+[R][T], [RR][TT], [RR][RF], [RW][TT], [RW][TF]
+[R][F], [RR][FT], [RR][FF], [RW][FT], [RW][FF]
+[W][T], [WR][TT], [WR][TF], [WW][TT], [WW][TF]
+[W][F], [WR][FT], [WR][FF], [WW][FT], [WW][FF]
+```
+
+## Segregation
+
+The `{bm} law of segregation` (Gregor Mendel's first law) states that every organism contains 2 alleles for each gene, but when it comes time to reproduce only 1 allele is kept by the reproductive cell (gamete). As such, the resulting offspring gets 1 allele from its father and 1 allele from its mother.
+
+```{dot}
+digraph G {
+	subgraph clusterparent1 {
+		blue1 [label="Blue"];
+    brown1 [label="Brown"];
+		label = "Male parent eye color alleles";
+	}
+	subgraph clusterparent2 {
+		brown2 [label="Brown"];
+    brown3 [label="Brown"];
+		label = "Female parent eye color alleles";
+	}
+	subgraph clusterchild1 {
+		blue2 [label="Blue"];
+    brown4 [label="Brown"];
+		label = "Child eye color alleles";
+	}
+
+  blue1->blue2 [label="randomly chosen from male parent"];
+  brown3->brown4 [label="randomly chosen from female parent"];
+}
+```
+
+This law (as proposed by Gregor Mendel) matches up with the idea of chromosomes: many eyukaryotic species (e.g. humans) carry pairs of homologous chromosomes. That is, chromosomes come in pairs where each chromosome in the pair has the same set of genes as the other but different versions of those genes (alleles). One chromosome comes from the mother and the other from the father.
+
+During meiosis, each gamete cell gets 1 chromosome from each homologous pair. When gametes meet to form an offspring, the chromosomes from each gamete match up to to their homolog to create that offspring's set of homologous chromosome pairs.
+
+## Independent Assortment
+
+The `{bm} law of independent assortment` (Gregor Mendel's second law) states that 
 
 FILL ME IN
 
@@ -1462,6 +1564,97 @@ FILL ME IN
 FILL ME IN
 
 FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+
+## Dominance
+
+The `{bm} law of dominance` (Gregor Mendel's third law) states that in an organism that is heterozygous for some gene, one allele for that gene may take precedence over the other. That is, one allele will physically express itself while the other lies dormant. It turns out that this law isn't entirely correct -- it's only true for some cases. Details follow.
+
+Depending on the gene, some alleles may take precedence in expressing themselves over others. That is, an organism may have 2 alleles present for a gene but only one of the alleles expresses themselves while the other remains dormant (e.g. you'll only see the phenotype for that expressed allele).
+
+The phenotype for alleles that take precedence are called `{bm} dominant traits`, while the ones that don't are called `{bm} recessive traits`.
+
+For example, the gene that controls eye color in humans has multiple alleles: one for brown, one for blue, one for green, etc... The brown allele is the dominant one, meaning that as long as 1 brown allele is present, the eye color will be brown.
+
+```{dot}
+digraph G {
+	subgraph clusterparent1 {
+		blue1 [label="Blue"];
+    brown1 [label="Brown"];
+		label = "Male parent eye color alleles";
+	}
+	subgraph clusterparent2 {
+		brown2 [label="Brown"];
+    brown3 [label="Brown"];
+		label = "Female parent eye color alleles";
+	}
+	subgraph clusterchild1 {
+		blue2 [label="Blue"];
+    brown4 [label="Brown"];
+		label = "Child eye color alleles";
+	}
+
+  blue1->blue2 [label="randomly chosen from male parent"];
+  brown3->brown4 [label="randomly chosen from female parent"];
+}
+```
+
+For the organism to have blue eyes, the child needs both copies of a gene to be a blue eye color allele (recessive). This isn't a possible outcome in the example because both parents need to have at least 1 blue eye color allele and those blue eye color alleles need to be the ones randomly chosen for the child. In the example, only 1 parent has a blue eye color allele available. See Punnett square below.
+
+```{csv}
+ , B , b
+B, BB, bB
+B, BB, Bb
+```
+
+The probability of blue eyes is `{kt} P(bb)=\frac{0}{4}`.
+
+```{note}
+In the diagram above, B is shorthand for brown while b is shorthand for blue. If a gene has only 2 alleles, it's sometimes a convention to use the same letter to represent both -- upper case for dominant and lower case for recessive. 
+```
+
+There are cases where a gene has more than 1 allele that can express dominance/precedence over the others (called `{bm} incomplete dominance`). For example, blood can have the alleles A, B, and O. Both A and B take precedence over O, meaning that if the 2 alleles (genotype) present in a human are...
+ * A and B, their blood type (phenotype) is AB.
+ * 2 As, their blood type (phenotype) is A.
+ * 2 Bs, their blood type (phenotype) is B.
+ * A and O, their blood type (phenotype) is A.
+ * B and O, their blood type (phenotype) is B.
+ * 2 Os, their blood type (phenotype) is O.
+
+The only chance someone has of having O blood type would be for him/her to inherit an O allele from both parents.
+
+There are also cases where all alleles of a gene can express dominance/precedence (`{bm} co-dominance/(co-dominance|co-dominant)/i`). That is, both copies of a gene will express themselves, effectively blending together. For example, in the diagram below the offspring ends up with red color allele and a white color allele. Both have equal precedence. The resulting color of the flower will be pink because both the red and white alleles will be expressed.
+
+```{dot}
+digraph G {
+	subgraph clusterparent1 {
+		red1 [label="Red"];
+    red2 [label="Red"];
+		label = "Male parent color alleles";
+	}
+	subgraph clusterparent2 {
+		white1 [label="White"];
+    white2 [label="White"];
+		label = "Female parent color alleles";
+	}
+	subgraph clusterchild1 {
+		red3 [label="Red"];
+    white3 [label="White"];
+		label = "Child color alleles";
+	}
+
+  red1->red3 [label="randomly chosen from male parent"];
+  white2->white3 [label="randomly chosen from female parent"];
+}
+```
 
 # Adenosine Triphosphate
 
@@ -1854,6 +2047,8 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
 ```
 
+`{bm} Model system` - A system with a reduced set of parameters/complexity that makes it easy for a researcher to investigate a particular scientific question. For example, Gregor Mendel used pea pods to research the theory of classical genetics / inheritance (simple, grows and matures quickly, inbreeding okay)
+
 
 
 
@@ -1861,6 +2056,6 @@ In some cases, the genetic material being fused in sexual reproduction may be fr
 
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
 
-`{bm-ignore} byproduct|reproduction|reproduce`
+`{bm-ignore} byproduct|reproduction|reproduce|reproductive`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(product)/i`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
