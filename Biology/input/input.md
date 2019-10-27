@@ -1442,7 +1442,45 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 # Classical Genetics
 
-`{bm} Classical genetics` is an branch of genetics focused on determining the probability of observable traits getting passed down to offspring. It was started in the 1800s by a scientist monk named `{bm} Gregor Mendel/(Gregor Mendel|Gregor Johann Mendel)/` (prior to the discovery of DNA).
+`{bm} Classical genetics` is a branch of genetics focused on determining the probability of which observable traits get passed down to offspring. It was started in the 1800s by a scientist monk named `{bm} Gregor Mendel/(Gregor Mendel|Gregor Johann Mendel)/` (prior to the discovery of DNA) with his model called `{bm} Mendelian inheritance/(Mendelian inheritance|Mendelian genetics)/i`.
+
+```{note}
+Classical genetics isn't the same as the model developed by Gregor Mendel (Mendellian inheritance). Gregor Mendel wasn't aware of DNA and genes (it hadn't been discovered yet), and instead created his model based on some abstract idea of "inheritable characteristics." Classical genetics corrects and extends the model introduced by Gregor Mendel by taking DNA/chromosomes/genes/alleles/etc.. into account. 
+```
+
+```{note}
+Don't be fooled by the name classical genetics. The term classical doesn't mean that it's deprecated in favour of some other branch of genetics. 
+```
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
+
+DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
 
 An organism that sexual reproduces holds 2 alleles for each gene (2 versions of each gene). 1 allele is randomly chosen from the father and the other allele is randomly chosen from the mother. Depending on which allele combinations are present, different observable traits may be expressed. For example, imagine the color of a flower is determined by a single gene. If a flower had both a red allele and a white allele for that gene, the observable trait would be that it'd have a pink color.
 
