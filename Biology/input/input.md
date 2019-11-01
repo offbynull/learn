@@ -1371,7 +1371,7 @@ T only appears in DNA. In RNA, T is replaced by U.
 ```
 
 ```{note}
-The base is what distinguishes the types of nucleotides from each other. The term nucleotide and base are often used interchangeably.
+The base_nucleotide is what distinguishes the types of nucleotides from each other. The term nucleotide and base_nucleotide are often used interchangeably.
 ```
 
  Two nucleotides connected together are called a `{bm} base pair`. The rules to base pairs are:
@@ -1517,7 +1517,7 @@ For a gene, if an organism has...
 
 In the above example, the genotype for flower color is 1 red allele and 1 white allele (heterozygous) while the phenotype for flower color is pink.
 
-For each gene, offspring get a random allele from each parent. The odds of which alleles the offspring ends up with can be visualized using a `{bm} Punnett square` diagram: a table where the alleles for a gene are written across the top axis (male parent) and down the left axis (female parent), and each cell maps to the alleles in the top/left coordinate that it's in.
+For each gene, offspring get a random allele from each parent. The odds of which alleles the offspring ends up with can be visualized using a `{bm} Punnett square` diagram: a table where the alleles for a gene are written across the top axis (male parent) and down the left axis (female parent), and each `{bm-ri} cell` maps to the alleles in the top/left coordinate that it's in.
 
 For example, a gene that controls the color of a flower has 2 alleles: red and white. The male parent has 2 red alleles while the female parent has both a red allele and a white allele. The Punnett square describing the odds of the offspring:
 
@@ -2082,7 +2082,7 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 `{bm} Sexual` - When offspring is created by fusing genetic material from 2 parents. The offspring has a mixture of genetic material from both parents. An example of sexual reproduction is when a gamete cells merge to create the offspring.
 
 ```{note}
-In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant. polliation is the transfer of pollengrains from anther to stigma, further to reach ovary. in case of a bisexual flower, it is called self-pollination.when two different flowers pollinate it is cross pollination.
+In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant.
 ```
 
 `{bm} Model system` - A system with a reduced set of parameters/complexity that makes it easy for a researcher to investigate a particular scientific question. For example, Gregor Mendel used pea pods to research the theory of classical genetics / inheritance (simple, grows and matures quickly, inbreeding okay)
@@ -2091,7 +2091,7 @@ In some cases, the genetic material being fused in sexual reproduction may be fr
 
 
 
-
+`{bm-ignore} baseline`
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
 
 `{bm-ignore} byproduct|reproduction|reproduce|reproductive`
