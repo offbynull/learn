@@ -757,22 +757,32 @@ The major chromatin structures.
 scale 0.5 0.5
 ```
 
-At a high-level, the process of DNA replication can be boiled down to 3 steps...
+Each chromosome codes for the same set of genes. Since eukaryotes reproduce sexually (mother and father required), they contain genetic information from both the mother and father. The way this manifests itself is that most eukaryotes will come with multiple versions of the same chromosome. In...
 
-1. The chromatin is copied. Each instance is now referred to as a chromatid and is attached to the other (sister chromatid) via proteins called `{bm} cohesin`s.
-2. The sister chromatids condense and start to separate in an X shape. The section they remain connected at is a segment of DNA called the `{bm} centromere`.
-3. The sister chromatids are pulled apart. Each instance is now reverted back to being referred to as chromatin.
+ * humans, that's 2n chromosomes (2 chromosomes that are alternate versions of each other, called diploid).
+ * louts plants, that's >2n chromosomes (2 or more chromosomes that are alternate versions of each other, called polyploid).
 
-A cell can have a number of chromosome copies:
- * `{bm} diploid` cells carry 2n chromosomes (2 copies of each chromosome). 1 copy comes from the mother and the other comes from the father, and the copies aren't identical -- they code for different versions of the same genes. Each of the 2 copies are said to be a homologous pair. Examples include animal somatic cells and animal germ cells.
- * `{bm} haploid` cells carry n chromosomes (1 copy of each chromosome). Examples include animal gamete cells and most unicellular eukaryotes.
- * `{bm} polyploid` cells carry An chromosomes, where A > 2 (more than 2 copies of each chromosome). Examples include certain plant species (e.g. lotus plants) and some forms of human muscle tissue.
+These chromosomes are referred to as `{bm} homologous chromosomes/(homologous chromosome|homologous chromosome pair|homologous pair of chromosomes|chromosomes of a homologous pair)/i`: 2 or more chromosomes that code for the same set of genes but aren't exactly the same (different versions of the same genes). In other words, the chromosomes are homologous.
 
 ```{note}
-An example straight from the material of diploid chromosomes working: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
+An example straight from the material of homologous pair of chromosomes working: As a real example, let's consider a gene on chromosome 9 that determines blood type (A, B, AB, or O). It's possible for a person to have two identical copies of this gene, one on each homologous chromosome—for example, you may have a double dose of the gene version for type A. On the other hand, you may have two different gene versions on your two homologous chromosomes, such as one for type A and one for type B (giving AB blood).
+
+A different version of the same gene is called an allele.
 ```
 
-The following diagram shows a karyotype of a human's diploid chromosome pairs 1 2 and 3:
+When creating cells for reproduction (gamete cells), the cells only keep 1 copy from each each homologous chromosome pair. These cells are referred to as haploid cells because they only carrying n chromosomes.
+
+```{note}
+To see how gametes are formed, see the meiosis section.
+```
+
+To recap, a cell can have a number of chromosome copies:
+
+ * `{bm} diploid` cells carry 2n chromosomes (2 copies of each chromosome). 1 copy comes from the mother and the other comes from the father, and the copies aren't identical -- they code for different versions of the same genes. Each of the 2 copies are said to be a homologous chromosome pair. Examples include animal somatic cells and animal germ cells.
+ * `{bm} haploid` cells carry n chromosomes (1 copy of each chromosome). Examples include animal gamete cells and most unicellular eukaryotes.
+ * `{bm} polyploid` cells carry An chromosomes, where A > 2 (more than 2 copies of each chromosome). Examples include certain plant species (e.g. lotus plants).
+
+The following diagram shows a karyotype of a human's diploid homologous chromosome pairs 1 2 and 3:
 
 ```{img}
 DNA_human_male_chromosomes.gif
@@ -958,7 +968,7 @@ scale 0.35 0.35
 During `{bm} meiosis I`, a germ cell divides in such a way that, rather than exactly duplicating each chromosome, it duplicates and mixes between each homologous chromosome pair. That is, chromosome pairs that are different versions of each other end up swapping segments (chromosomal crossover).
 
 ```{note}
-Remember that most cells have a diploid number of chromosomes (2n), where each chromosome is a different version of another chromosome in that same cell (homologous pairs -- e.g. code for different versions of the same gene). One comes from the mother and one comes from the father.
+Remember that most cells have a diploid number of chromosomes (2n), where each chromosome is a different version of another chromosome in that same cell (homologous chromosome pairs -- e.g. code for different versions of the same gene). One comes from the mother and one comes from the father.
 ```
 
 ```{img}
@@ -1442,47 +1452,19 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 # Classical Genetics
 
-`{bm} Classical genetics` is a branch of genetics focused on determining the probability of which observable traits get passed down to offspring. It was started in the 1800s by a scientist monk named `{bm} Gregor Mendel/(Gregor Mendel|Gregor Johann Mendel)/` (prior to the discovery of DNA) with his model called `{bm} Mendelian inheritance/(Mendelian inheritance|Mendelian genetics)/i`.
+`{bm} Classical genetics` is study of the probability of which genes get passed down from parents to offspring and the probability of which genes express themselves into some physically observable trait(s). It's focused exclusively on sexually reproducing eyukarotic organisms. The term...
+ * `{bm} genotype` refers to the alleles present for a set of one or more genes.
+ * `{bm} phenotype` refers to the observable trait(s) expressed by a genotype.
+
+Essentially, classical genetics is the idea that the coding / alleles for a specific set of genes (genotype) results in some change in the organism that's observable (phenotype), and the probability that an organism can end up with a specific genotype/phenotype can be calculated from the genotype of its parents. For example, a certain set of alleles (genotype) may be responsible for blue eyes (phenotype).
 
 ```{note}
-Classical genetics isn't the same as the model developed by Gregor Mendel (Mendellian inheritance). Gregor Mendel wasn't aware of DNA and genes (it hadn't been discovered yet), and instead created his model based on some abstract idea of "inheritable characteristics." Classical genetics corrects and extends the model introduced by Gregor Mendel by taking DNA/chromosomes/genes/alleles/etc.. into account. 
+Don't be fooled by the name classical genetics. The term classical doesn't mean that it's deprecated. 
 ```
 
-```{note}
-Don't be fooled by the name classical genetics. The term classical doesn't mean that it's deprecated in favour of some other branch of genetics. 
-```
+Eyukaryotic organisms that sexually reproduce hold homologous pairs of chromosomes -- they have multiple copies of chromosomes, each of which codes for the same genes but different versions of those genes (alleles). In humans, the number of chromosomes that make up a single set of homologous chromosomes is 2 (diploid). That means that a human has 2 alleles for each gene -- 1 allele is randomly chosen from the father and the other allele is randomly chosen from the mother.
 
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-DESCRIBE HOW OBSERVABLE CHARACTERISTICS MAP TO GENES (GENOTYPE < - > PHENOTYPE). HOW AN ORGANISM HOLDS ON TO 2 ALLELES FOR EACH GENE. HOW THEY EXPRESS EACH OTHER
-
-An organism that sexual reproduces holds 2 alleles for each gene (2 versions of each gene). 1 allele is randomly chosen from the father and the other allele is randomly chosen from the mother. Depending on which allele combinations are present, different observable traits may be expressed. For example, imagine the color of a flower is determined by a single gene. If a flower had both a red allele and a white allele for that gene, the observable trait would be that it'd have a pink color.
+Depending on which allele combinations are present, different observable traits may be expressed. For example, imagine the color of a flower is determined by a single gene. If a flower had both a red allele and a white allele for that gene, the observable trait would be that it'd have a pink color.
 
 ```{dot}
 digraph G {
@@ -1507,19 +1489,18 @@ digraph G {
 }
 ```
 
-The term...
- * `{bm} genotype` refers to the alleles present for a set of one or more gene(s).
- * `{bm} phenotype` refers to the observable trait(s) expressed by a genotype.
+If an organism has...
+ * the same allele for each gene, it's said to be `{bm} homozygous`.
+ * different alleles for each gene, it's said to be `{bm} heterozygous`.
 
-For a gene, if an organism has...
- * the same allele twice, it's said to be `{bm} homozygous`.
- * two different alleles, it's said to be `{bm} heterozygous`.
-
-In the above example, the genotype for flower color is 1 red allele and 1 white allele (heterozygous) while the phenotype for flower color is pink.
+In the above example, the...
+ * male parents's genotype is 2 red alleles (homozygous) while the phenotype is red.
+ * female parents's genotype is 2 white alleles (homozygous) while the phenotype is white.
+ * child's genotype is 1 red allele and 1 white allele (heterozygous) while the phenotype is pink.
 
 For each gene, offspring get a random allele from each parent. The odds of which alleles the offspring ends up with can be visualized using a `{bm} Punnett square` diagram: a table where the alleles for a gene are written across the top axis (male parent) and down the left axis (female parent), and each `{bm-ri} cell` maps to the alleles in the top/left coordinate that it's in.
 
-For example, a gene that controls the color of a flower has 2 alleles: red and white. The male parent has 2 red alleles while the female parent has both a red allele and a white allele. The Punnett square describing the odds of the offspring:
+For example, a gene that controls the color of a flower has 2 alleles: red and white. The male parent has 2 red alleles while the female parent has both a red allele and a white allele. The Punnett square describing the probability offspring's alleles:
 
 ```{csv}
  , R , R
@@ -1548,9 +1529,27 @@ Both parents have 1 red allele and 1 white allele for color, and 1 true allele a
 [W][F], [WR][FT], [WR][FF], [WW][FT], [WW][FF]
 ```
 
+Classical genetics was started in the 1800s by a scientist monk named `{bm} Gregor Mendel/(Gregor Mendel|Gregor Johann Mendel)/` (prior to the discovery of DNA) with his model called `{bm} Mendelian inheritance/(Mendelian inheritance|Mendelian genetics)/i`. Gregor Mendel wasn't aware of DNA and genes (hadn't been discovered yet) and instead created his model based on some abstract idea of "inheritable characteristics." Classical genetics corrects and extends the model introduced by Gregor Mendel by taking DNA / chromosomes / genes / alleles / etc.. into account.
+
+Mendel originally had 3 laws:
+
+ 1. `{bm} law of segregation`
+ 2. `{bm} law of independent assortment`
+ 3. `{bm} law of dominance`
+
+The subsections below describe these laws in their modern / corrected form.
+
 ## Segregation
 
-The `{bm} law of segregation` (Gregor Mendel's first law) states that every organism contains 2 alleles for each gene, but when it comes time to reproduce only 1 allele is kept by the reproductive cell (gamete). As such, the resulting offspring gets 1 allele from its father and 1 allele from its mother.
+```{note}
+Segregation was originally discovered by Gregor Mendel as Mendelian inheritance's first law / law of segregation.
+```
+
+Segregation is the idea every sexually reproducing organism has 2 alleles for each gene, but when it comes time to reproduce only 1 allele is kept by the reproductive cell (gamete). As such, the resulting offspring gets 1 allele from its father and 1 allele from its mother.
+
+```{note}
+Unsure how this extends to organisms that are polyploid (have more than 2 homologous chromosomes / more than 2 alleles for each gene).
+```
 
 ```{dot}
 digraph G {
@@ -1575,101 +1574,55 @@ digraph G {
 }
 ```
 
-This law (as proposed by Gregor Mendel) matches up with the idea of chromosomes: many eyukaryotic species (e.g. humans) carry pairs of homologous chromosomes. That is, chromosomes come in pairs where each chromosome in the pair has the same set of genes as the other but different versions of those genes (alleles). One chromosome comes from the mother and the other from the father.
+The reason for this is that sexually reproducing eukaryotic species (e.g. humans) carry pairs of homologous chromosomes. That is, chromosomes come in pairs where each chromosome in the pair has the same set of genes as the other but different versions of those genes (alleles). One chromosome comes from the mother and the other from the father.
 
-During meiosis, each gamete cell gets 1 chromosome from each homologous pair. When gametes meet to form an offspring, the chromosomes from each gamete match up to to their homolog to create that offspring's set of homologous chromosome pairs.
+During meiosis, each gamete cell gets 1 chromosome from each homologous pair (1 set of alleles). When gametes meet to form an offspring, the chromosomes from each gamete match up to to their homolog to create that offspring's set of homologous chromosome pairs.
 
 ## Independent Assortment
 
-The `{bm} law of independent assortment` (Gregor Mendel's second law) states that 
+```{note}
+Independent assortment was originally discovered by Gregor Mendel as Mendelian inheritance's second law / law of independent assortment. It states that inherited attributes are passed down from parent to child independently of each other. For example, the odds that a baby ends up with green eyes isn't linked to the odds that it'll have dark hair. It turns out that this isn't entirely correctly.
+```
 
-FILL ME IN
+Sexually reproducing organism hold on to 2 alleles for each gene, one on each chromosome that makes up a homologous chromosome pair. 1 allele comes from the mother and one allele comes from the father. The high-level algorithm for which alleles a parent passes down is as follows:
+ 1. For each homologous chromosome pair, swap segments between chromosomes (chromosomal crossover).
+ 2. For each homologous chromosome pair, randomly pick 1 chromosome.
+ 3. combine picked chromosomes from parent A with picked chromosomes from parent B to form the homologous chromosome pairs of the child.
 
-FILL ME IN
+```{note}
+See section on meiosis for more in depth description of how these steps happen.
+```
 
-FILL ME IN
+As such, the allele that gets passed down for a gene isn't independently chosen. Rather, the alleles chosen for a set of genes are clustered together as a single unit based on which chromosome from a homologous chromosome pair was randomly chosen and how that homologous chromosome pair recombined (chromosomal crossover).
 
-FILL ME IN
+ ```{note}
+Unsure how this extends to organisms that are polyploid (have more than 2 homologous chromosomes / more than 2 alleles for each gene).
+```
 
-FILL ME IN
+Genes located close to each other are more likely to get grouped together as part of the same cluster. The diagram below shows the location of 3 genes on a chromosome. Because genes A and B are so close to each other, they're considered to be linked -- it's very unlikely that a chromosomal crossover boundary will be at a point which puts them into separate clusters.
 
-FILL ME IN
+```{img}
+Independent Assortment.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Independent assortment diagram
+```
 
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
+If the diagram above were for a chromosome from a plant, and gene A controlled height while gene B controlled color, there would likely be a correlation between the height and color across that plant species.
 
 ## Dominance
 
-The `{bm} law of dominance` (Gregor Mendel's third law) states that in an organism that is heterozygous for some gene, one allele for that gene may take precedence over the other. That is, one allele will physically express itself while the other lies dormant. It turns out that this law isn't entirely correct -- it's only true for some cases. Details follow.
-
-Depending on the gene, some alleles may take precedence in expressing themselves over others. That is, an organism may have 2 alleles present for a gene but only one of the alleles expresses themselves while the other remains dormant (e.g. you'll only see the phenotype for that expressed allele).
-
-The phenotype for alleles that take precedence are called `{bm} dominant traits`, while the ones that don't are called `{bm} recessive traits`.
-
-For example, the gene that controls eye color in humans has multiple alleles: one for brown, one for blue, one for green, etc... The brown allele is the dominant one, meaning that as long as 1 brown allele is present, the eye color will be brown.
-
-```{dot}
-digraph G {
-	subgraph clusterparent1 {
-		blue1 [label="Blue"];
-    brown1 [label="Brown"];
-		label = "Male parent eye color alleles";
-	}
-	subgraph clusterparent2 {
-		brown2 [label="Brown"];
-    brown3 [label="Brown"];
-		label = "Female parent eye color alleles";
-	}
-	subgraph clusterchild1 {
-		blue2 [label="Blue"];
-    brown4 [label="Brown"];
-		label = "Child eye color alleles";
-	}
-
-  blue1->blue2 [label="randomly chosen from male parent"];
-  brown3->brown4 [label="randomly chosen from female parent"];
-}
-```
-
-For the organism to have blue eyes, the child needs both copies of a gene to be a blue eye color allele (recessive). This isn't a possible outcome in the example because both parents need to have at least 1 blue eye color allele and those blue eye color alleles need to be the ones randomly chosen for the child. In the example, only 1 parent has a blue eye color allele available. See Punnett square below.
-
-```{csv}
- , B , b
-B, BB, bB
-B, BB, Bb
-```
-
-The probability of blue eyes is `{kt} P(bb)=\frac{0}{4}`.
-
 ```{note}
-In the diagram above, B is shorthand for brown while b is shorthand for blue. If a gene has only 2 alleles, it's sometimes a convention to use the same letter to represent both -- upper case for dominant and lower case for recessive. 
+Dominance was originally discovered by Gregor Mendel as Mendelian inheritance's third law / law of dominance. It states in a cross of parents that are pure for contrasting traits, only one form of the trait will appear in the next generation. Offspring that are hybrid for a trait will have only the `{bm} dominant trait` in the phenotype while the `{bm} recessive trait` remains dormant. It turns out that this isn't entirely correct (it's close) -- more scenarios have come up: incomplete dominance, co-dominance, etc..
 ```
 
-There are cases where a gene has more than 1 allele that can express dominance/precedence over the others (called `{bm} incomplete dominance`). For example, blood can have the alleles A, B, and O. Both A and B take precedence over O, meaning that if the 2 alleles (genotype) present in a human are...
- * A and B, their blood type (phenotype) is AB.
- * 2 As, their blood type (phenotype) is A.
- * 2 Bs, their blood type (phenotype) is B.
- * A and O, their blood type (phenotype) is A.
- * B and O, their blood type (phenotype) is B.
- * 2 Os, their blood type (phenotype) is O.
+In an organism that is heterozygous for some gene, some alleles may take precedence in expressing themselves over others. How these alleles are expressed define the type of dominance they have over other alleles.
 
-The only chance someone has of having O blood type would be for him/her to inherit an O allele from both parents.
+Given 2 alleles A and B, if the phenotype expressed by ...
+ * [AA] is the same as [AB]/[BA] but not [BB], A is said to have `{bm} complete dominance/(complete dominance|completely dominant)/i` -- when one allele hides the other.
+ * [AB]/[BA] is a blend of [AA] and [BB], it's said to have `{bm} incomplete dominance/(incomplete dominance|incompletely dominant)/i` -- more than one allele is dominant, resulting in a blended expression.
+ * [AB]/[BA] is the phenotype expressed by both [AA] and [BB], it's said to have `{bm} co-dominance/(co-dominance|co-dominant)/i` -- more than one allele is dominant, resulting in a both being expressed.
 
-There are also cases where all alleles of a gene can express dominance/precedence (`{bm} co-dominance/(co-dominance|co-dominant)/i`). That is, both copies of a gene will express themselves, effectively blending together. For example, in the diagram below the offspring ends up with red color allele and a white color allele. Both have equal precedence. The resulting color of the flower will be pink because both the red and white alleles will be expressed.
+For example, in the diagram below the offspring ends up with red color allele and a white color allele.
 
 ```{dot}
 digraph G {
@@ -1693,6 +1646,21 @@ digraph G {
   white2->white3 [label="randomly chosen from female parent"];
 }
 ```
+
+ * In a complete dominance scenario, the child's color may end up being totally red because the red allele is the only one that gets expressed.
+ * In a incomplete dominance scenario, the child's color may end up being pink because both the red and the white allele express together and blend.
+ * In a co-dominance scenario, the child may end up having blotches of red and white as its colors because both the red and the white allele express but are discrete.
+
+A real-life example of incomplete dominance is blood type. 3 alleles are present: A, B, and O. A and B have incomplete dominance while O is recessive. If the genotype for a person's blood type is...
+ * [AB]/[BA], their blood type (phenotype) is AB.
+ * [AA], their blood type (phenotype) is A.
+ * [BB], their blood type (phenotype) is B.
+ * [AO]/[OA], their blood type (phenotype) is A.
+ * [BO]/[OB], their blood type (phenotype) is B.
+ * [OO], their blood type (phenotype) is O.
+
+Note that blood type phenotype AB is a unique *blended* version. You can't mix together blood from a person with A blood type and a person with B blood type and give it to a person who has an AB blood type -- that person needs AB blood.
+
 
 # Adenosine Triphosphate
 
