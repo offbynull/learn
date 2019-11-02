@@ -1462,7 +1462,7 @@ Essentially, classical genetics is the idea that the coding / alleles for a spec
 Don't be fooled by the name classical genetics. The term classical doesn't mean that it's deprecated. 
 ```
 
-Eyukaryotic organisms that sexually reproduce hold homologous pairs of chromosomes -- they have multiple copies of chromosomes, each of which codes for the same genes but different versions of those genes (alleles). In humans, the number of chromosomes that make up a single set of homologous chromosomes is 2 (diploid). That means that a human has 2 alleles for each gene -- 1 allele is randomly chosen from the father and the other allele is randomly chosen from the mother.
+Eukaryotic organisms that sexually reproduce hold homologous pairs of chromosomes -- they have multiple copies of chromosomes, each of which codes for the same genes but different versions of those genes (alleles). In humans, the number of chromosomes that make up a single set of homologous chromosomes is 2 (diploid). That means that a human has 2 alleles for each gene -- 1 allele is randomly chosen from the father and the other allele is randomly chosen from the mother.
 
 Depending on which allele combinations are present, different observable traits may be expressed. For example, imagine the color of a flower is determined by a single gene. If a flower had both a red allele and a white allele for that gene, the observable trait would be that it'd have a pink color.
 
@@ -1584,16 +1584,52 @@ During meiosis, each gamete cell gets 1 chromosome from each homologous pair (1 
 Independent assortment was originally discovered by Gregor Mendel as Mendelian inheritance's second law / law of independent assortment. It states that inherited attributes are passed down from parent to child independently of each other. For example, the odds that a baby ends up with green eyes isn't linked to the odds that it'll have dark hair. It turns out that this isn't entirely correctly.
 ```
 
-Sexually reproducing organism hold on to 2 alleles for each gene, one on each chromosome that makes up a homologous chromosome pair. 1 allele comes from the mother and one allele comes from the father. The high-level algorithm for which alleles a parent passes down is as follows:
- 1. For each homologous chromosome pair, swap segments between chromosomes (chromosomal crossover).
+The high-level algorithm for how a parent passes down its genetic information is as follows:
+
+ 1. For each homologous chromosome pair, randomly swap segments between chromosomes (chromosomal crossover).
  2. For each homologous chromosome pair, randomly pick 1 chromosome.
- 3. combine picked chromosomes from parent A with picked chromosomes from parent B to form the homologous chromosome pairs of the child.
+ 
+The picked chromosomes from parent A combine with the picked chromosomes from parent B to form the homologous chromosome pairs of the new child.
+
+Essentially, the above description means that the single unit of genetic information being passed down is a segment of a chromosome -- a whole chromosome is being passed down for each homologous chromosome pair, but that chromosome has had segments of itself swapped with its homolog. Each swapped segment contains the alleles from the other chromosome 
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
+
+TODO: ADD DIAGRAM
 
 ```{note}
-See section on meiosis for more in depth description of how these steps happen.
+To re-iterate, it doesn't transmit the allele for each gene independently of the others. Alleles are grouped together for a set of genes as passed down as a single unit.
 ```
 
-As such, the allele that gets passed down for a gene isn't independently chosen. Rather, the alleles chosen for a set of genes are clustered together as a single unit based on which chromosome from a homologous chromosome pair was randomly chosen and how that homologous chromosome pair recombined (chromosomal crossover).
+```{note}
+See section on meiosis for more in depth description of how this steps happen.
+```
 
  ```{note}
 Unsure how this extends to organisms that are polyploid (have more than 2 homologous chromosomes / more than 2 alleles for each gene).
@@ -1609,6 +1645,8 @@ Independent assortment diagram
 
 If the diagram above were for a chromosome from a plant, and gene A controlled height while gene B controlled color, there would likely be a correlation between the height and color across that plant species.
 
+These genes are referred to as `{bm} linked genes`. The phenotypes they express are often referred to as `{bm} linked traits`.
+
 ## Dominance
 
 ```{note}
@@ -1618,9 +1656,9 @@ Dominance was originally discovered by Gregor Mendel as Mendelian inheritance's 
 In an organism that is heterozygous for some gene, some alleles may take precedence in expressing themselves over others. How these alleles are expressed define the type of dominance they have over other alleles.
 
 Given 2 alleles A and B, if the phenotype expressed by ...
- * [AA] is the same as [AB]/[BA] but not [BB], A is said to have `{bm} complete dominance/(complete dominance|completely dominant)/i` -- when one allele hides the other.
- * [AB]/[BA] is a blend of [AA] and [BB], it's said to have `{bm} incomplete dominance/(incomplete dominance|incompletely dominant)/i` -- more than one allele is dominant, resulting in a blended expression.
- * [AB]/[BA] is the phenotype expressed by both [AA] and [BB], it's said to have `{bm} co-dominance/(co-dominance|co-dominant)/i` -- more than one allele is dominant, resulting in a both being expressed.
+ * [AA] is the same as [AB]/[BA] but not [BB], A is said to have `{bm} complete dominance/(complete dominance|completely dominant)/i` -- one allele's phenotype is expressed while others are hidden.
+ * [AB]/[BA] is a blend of [AA] and [BB], it's said to have `{bm} incomplete dominance/(incomplete dominance|incompletely dominant)/i` -- more than one allele is dominant, resulting in a blended phenotype expression.
+ * [AB]/[BA] is the phenotype expressed by both [AA] and [BB], it's said to have `{bm} co-dominance/(co-dominance|co-dominant)/i` -- more than one allele is dominant, resulting in a both phenotypes being expressed.
 
 For example, in the diagram below the offspring ends up with red color allele and a white color allele.
 
@@ -1651,7 +1689,7 @@ digraph G {
  * In a incomplete dominance scenario, the child's color may end up being pink because both the red and the white allele express together and blend.
  * In a co-dominance scenario, the child may end up having blotches of red and white as its colors because both the red and the white allele express but are discrete.
 
-A real-life example of incomplete dominance is blood type. 3 alleles are present: A, B, and O. A and B have incomplete dominance while O is recessive. If the genotype for a person's blood type is...
+Rarely ever is there only 2 alleles for a gene. A real-life example of dominance is blood type. 3 alleles are present: A, B, and O. A and B have incomplete dominance while O is recessive. If the alleles for a person's blood type is...
  * [AB]/[BA], their blood type (phenotype) is AB.
  * [AA], their blood type (phenotype) is A.
  * [BB], their blood type (phenotype) is B.
