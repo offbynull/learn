@@ -1708,6 +1708,40 @@ If the alleles present for a gene are...
  * are both dominant, it's said to be `{bm} homozygous dominant`. In the example above, [AB]/[BA]/[AA]/[BB] are all homozygous dominant (both alleles are dominant alleles).
  * are both recessive, it's said to be `{bm} homozygous recessive`. In the example above, [OO] is heterozygous recessive (both alleles are recessive alleles).
 
+## Sex-linkage
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
+TODO write about traits when chromosomes are XY chromosomes instead of autosomes
+
 ## Lethality
 
 `{bm} Lethal allele/(lethal allele|lethal gene|\blethals\b)/i`s are alleles that cause the death of an organism that carries them. These alleles may cause death during development (e.g. gestation in the womb) or possibly after having fully matured.
