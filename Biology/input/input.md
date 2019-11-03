@@ -1460,6 +1460,8 @@ Essentially, classical genetics is the idea that the coding / alleles for a spec
 
 If a single gene is responsible for contributing to multiple unrelated phenotypes, it's referred to as `{bm} pleiotropy/(pleiotropy|pleiotropic)/i`. For example, a specific gene is responsible for generating melanin. If the allele for that gene has a specific mutation in it, melanin `{bm-ri} production` stops / is drastically reduced. A lack of melanin results in albinism: a condition that effects the color of eyes, hair, and skin (3 separate phenotypes).
 
+If multiple genes are responsible for contribution to a single phenotype, it's referred to as `{bm} polygene/(polygenic|polygene)/i`. For example, many genes are responsible for contributing to a person's height (around 400).
+
 ```{note}
 Don't be fooled by the name classical genetics. The term classical doesn't mean that it's deprecated. 
 ```
@@ -1496,8 +1498,8 @@ If an organism has...
  * different alleles for each gene, it's said to be `{bm} heterozygous`.
 
 In the above example, the...
- * male parents's genotype is 2 red alleles (homozygous) while the phenotype is red.
- * female parents's genotype is 2 white alleles (homozygous) while the phenotype is white.
+ * male parent's genotype is 2 red alleles (homozygous) while the phenotype is red.
+ * female parent's genotype is 2 white alleles (homozygous) while the phenotype is white.
  * child's genotype is 1 red allele and 1 white allele (heterozygous) while the phenotype is pink.
 
 For each gene, offspring get a random allele from each parent. The odds of which alleles the offspring ends up with can be visualized using a `{bm} Punnett square` diagram: a table where the alleles for a gene are written across the top axis (male parent) and down the left axis (female parent), and each `{bm-ri} cell` maps to the alleles in the top/left coordinate that it's in.
@@ -1511,7 +1513,7 @@ W, WR, WR
 ```
 
 ```{note}
-Unsure what the convention for Punnett squares is -- I'm always putting the allele on the left axis (femal parent) first.
+Unsure what the convention for Punnett squares is -- I'm always putting the allele on the left axis (female parent) first.
 ```
 
 The above diagram visualizes that the probability of the offspring having...
@@ -1519,7 +1521,7 @@ The above diagram visualizes that the probability of the offspring having...
  * 2 white alleles is `{kt} P(WW)=\frac{0}{4}`.
  * a red allele and a white allele is `{kt} P(RW|WR)=\frac{2}{4}`.
 
-Punnett squares can be extended to cover multiple genes so long as those genes are independently assorted. That is, each gene in the list must be on a different chromosome. If they were on the same chromosome, the chance of you getting gene A may be dependent on you getting gene B (see independent assortment subsection).
+Punnett squares can be extended to cover multiple genes so long as those genes are independently assorted. That is, each gene in the list must be on a different chromosome. If they were on the same chromosome, the chance of you getting gene A may be dependent on you getting gene B (see linked genes).
 
 For example, a gene that controls...
 * the color of a flower has 2 alleles: red and white.
@@ -1702,11 +1704,79 @@ Rarely ever is there only 2 alleles for a gene. A real-life example of dominance
  * [BO]/[OB], their blood type (phenotype) is B.
  * [OO], their blood type (phenotype) is O.
 
-Note that blood type phenotype AB is a unique *blended* version. You can't mix together blood from a person with A blood type and a person with B blood type and give it to a person who has an AB blood type -- that person needs AB blood.
-
 If the alleles present for a gene are...
  * are both dominant, it's said to be `{bm} homozygous dominant`. In the example above, [AB]/[BA]/[AA]/[BB] are all homozygous dominant (both alleles are dominant alleles).
  * are both recessive, it's said to be `{bm} homozygous recessive`. In the example above, [OO] is heterozygous recessive (both alleles are recessive alleles).
+
+## Lethality
+
+`{bm} Lethal allele/(lethal allele|lethal gene|\blethals\b)/i`s are alleles that cause the death of an organism that carries them. These alleles may cause death during development (e.g. gestation in the womb) or possibly after having fully matured.
+
+Lethal alleles may fall into one of many categories. A ...
+
+ * `{bm} recessive lethal allele/(recessive lethal|recessive lethal allele)/i` is a condition where 2 of 2 alleles for a gene need to be the lethal allele for it to cause death (needs to be homozygous). For example, Tay-Sachs disease appears and leads to death only if 2 copies of the lethal allele are present.
+
+   ```{note}
+   If only 1 copy of a recessive lethal allele is present, the organism doesn't die but may live on in a diseased form.
+   ```
+
+ * `{bm} dominant lethal allele/(dominant lethal|dominant lethal allele)/i` is a condition where only 1 of 2 alleles for a gene needs to be the lethal allele for it to cause death (can be heterozygous or homozygous). For example, Huntington's disease leads to death and only requires a single allele copy of an allele to be present.
+
+   ```{note}
+   If 2 copies of a dominant lethal allele are present, the organism still dies.
+   ```
+   
+ * `{bm} conditional lethal allele/(conditional lethal|conditional lethal allele)/i` is a condition where an allele can only be fatal in response to some environmental factor. For example, favism is a disease that causes the organism carrying it to die when fava beans are consumed.
+
+```{note}
+Don't get confused. Dominant lethals / recessive lethals have nothing to do with dominant alleles / recessive alleles. The only thing they state is how many copies of the allele are needed for it to be lethal (1 / heterozygous or 2 / homozygous). Whether that lethal allele is a dominant allele / recessive allele isn't a requirement.
+```
+
+## Expressivity
+
+`{bm} Expressivity` is the concept that, even if a known genotype is responsible for a phenotype, organisms having that genotype will show a variable expression of that phenotype. For example, in certain genetic disorders, the same genotype may result in stronger or weaker forms of that disorder (maybe even to the point of not developing at all).
+
+ * `{bm} Narrow expressivity/(narrow expressivity|narrow expression|narrowly expressed)/i` refers to low variability in the expression of the phenotype. That is, the phenotype is likely to be expressed to the same degrees across organisms.
+
+   Example of expression rates for narrow expressivity:
+
+   ```{csv}
+   0.99, 0.95, 0.98, 0.99
+   0.91, 0.94, 0.95, 0.93
+   ```
+
+ * `{bm} Variable expressivity/(variable expressivity|variable expression|variably expressed)/i` refers to high variability in the expression of the phenotype. That is, the phenotype is likely to be expressed to different degrees across organisms. 
+
+   Example of expression rates for variable expressivity:
+
+   ```{csv}
+   0.21, 0.55, 0.19, 0.78
+   0.91, 0.43, 0.67, 0.31
+   ```
+
+`{bm} Penetrance` is the concept that, even if a known genotype is responsible for a phenotype, organisms having that genotype may not express the related phenotype. or example, in certain genetic disorders, the same genotype may not result in the disorder.
+
+ * `{bm} Complete penetrance/(complete penetrance|completely penetrant)/i` refers to the phenotype always being expressed when the genotype is present.
+
+   Example of expression rates for complete penetrance:
+
+   ```{csv}
+   1.00, 1.00, 1.00, 1.00
+   1.00, 1.00, 1.00, 1.00
+   ```
+
+ * `{bm} Incomplete penetrance/(incomplete penetrance|incompletely penetrant)/i` refers to the phenotype maybe being expressed when the genotype is present.
+
+   Example of expression rates for incomplete penetrance:
+
+   ```{csv}
+   1.00, 0.00, 0.00, 1.00
+   1.00, 1.00, 1.00, 0.00
+   ```
+
+```{note}
+It was never really expressed why this happens. My only guess is environmental factors or maybe some type of intrinsic built-in genetic randomness (e.g. not enough of the specific allele for a disease randomly collided with whatever other molecule(s) were required to express the phenotype).
+```
 
 # Adenosine Triphosphate
 
