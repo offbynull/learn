@@ -1587,45 +1587,28 @@ Independent assortment was originally discovered by Gregor Mendel as Mendelian i
 The high-level algorithm for how a parent passes down its genetic information is as follows:
 
  1. For each homologous chromosome pair, randomly swap segments between chromosomes (chromosomal crossover).
+
+    ```{img}
+    Independent Assortment (chromosomal crossover).svg
+    This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+    Homologous chromosomes segment swap diagram
+    ```
+
  2. For each homologous chromosome pair, randomly pick 1 chromosome.
- 
-The picked chromosomes from parent A combine with the picked chromosomes from parent B to form the homologous chromosome pairs of the new child.
+ 3. The picked chromosomes from parent A combine with the picked chromosomes from parent B to form the homologous chromosome pairs of the new child.
 
-Essentially, the above description means that the single unit of genetic information being passed down is a segment of a chromosome -- a whole chromosome is being passed down for each homologous chromosome pair, but that chromosome has had segments of itself swapped with its homolog. Each swapped segment contains the alleles from the other chromosome 
+    ```{img}
+    Independent Assortment (chromosomal selection).svg
+    This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+    Diagram showing a random chromosome being selected (after segment swap) from each parent's homologous chromosome pair to make up the child's homologous chromosome pair.
+    ```
 
-TODO: ADD DIAGRAM
+Essentially, what the above says / shows is that alleles get passed down from parent to child in groups, where each group is a segment of one of the chromosomes. In the example above, the segments passed down are...
 
-TODO: ADD DIAGRAM
+ * CHILD_C1 = PARENT1_C2[1,3] + PARENT1_C1[4,28]
+ * CHILD_C2 = PARENT2_C2[1,5] + PARENT2_C1[6,20] + PARENT2_C2[21,28]
 
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-TODO: ADD DIAGRAM
-
-```{note}
-To re-iterate, it doesn't transmit the allele for each gene independently of the others. Alleles are grouped together for a set of genes as passed down as a single unit.
-```
+Genes located close to each other are more likely to get grouped together as part of the same segment being passed down -- it's very unlikely that a chromosomal crossover boundary will be at a point which splits them. These genes are referred to as `{bm} linked genes`. The phenotypes they express are often referred to as `{bm} linked traits`. For example, if diagram above were for a plant, and gene 11 controlled height while gene 12 controlled color, there would likely be a correlation between the height and color across that plant species.
 
 ```{note}
 See section on meiosis for more in depth description of how this steps happen.
@@ -1634,18 +1617,6 @@ See section on meiosis for more in depth description of how this steps happen.
  ```{note}
 Unsure how this extends to organisms that are polyploid (have more than 2 homologous chromosomes / more than 2 alleles for each gene).
 ```
-
-Genes located close to each other are more likely to get grouped together as part of the same cluster. The diagram below shows the location of 3 genes on a chromosome. Because genes A and B are so close to each other, they're considered to be linked -- it's very unlikely that a chromosomal crossover boundary will be at a point which puts them into separate clusters.
-
-```{img}
-Independent Assortment.svg
-This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
-Independent assortment diagram
-```
-
-If the diagram above were for a chromosome from a plant, and gene A controlled height while gene B controlled color, there would likely be a correlation between the height and color across that plant species.
-
-These genes are referred to as `{bm} linked genes`. The phenotypes they express are often referred to as `{bm} linked traits`.
 
 ## Dominance
 

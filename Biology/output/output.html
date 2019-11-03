@@ -958,31 +958,22 @@
 </div>
 <p>The high-level algorithm for how a parent passes down its genetic information is as follows:</p>
 <ol>
-<li>For each <a href="#BOOKMARK125">homologous chromosome</a> pair, randomly swap segments between <a href="#BOOKMARK124">chromosome</a>s (<a href="#BOOKMARK166">chromosomal crossover</a>).</li>
-<li>For each <a href="#BOOKMARK125">homologous chromosome</a> pair, randomly pick 1 <a href="#BOOKMARK124">chromosome</a>.</li>
-</ol>
+<li>
+<p>For each <a href="#BOOKMARK125">homologous chromosome</a> pair, randomly swap segments between <a href="#BOOKMARK124">chromosome</a>s (<a href="#BOOKMARK166">chromosomal crossover</a>).</p>
+<p><img src="/.datafile_83e7e01a3e8b775123923487d076fae0/data.svg" alt="This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License." title="Homologous chromosomes segment swap diagram"></p></li>
+<li>
+<p>For each <a href="#BOOKMARK125">homologous chromosome</a> pair, randomly pick 1 <a href="#BOOKMARK124">chromosome</a>.</p>
+</li>
+<li>
 <p>The picked <a href="#BOOKMARK124">chromosome</a>s from parent A combine with the picked <a href="#BOOKMARK124">chromosome</a>s from parent B to form the <a href="#BOOKMARK125">homologous chromosome</a> pairs of the new child.</p>
-<p>Essentially, the above description means that the single unit of genetic information being passed down is a segment of a <a href="#BOOKMARK124">chromosome</a> -- a whole <a href="#BOOKMARK124">chromosome</a> is being passed down for each <a href="#BOOKMARK125">homologous chromosome</a> pair, but that <a href="#BOOKMARK124">chromosome</a> has had segments of itself swapped with its <a href="#BOOKMARK313">homolog</a>. Each swapped segment contains the <a href="#BOOKMARK229">allele</a>s from the other <a href="#BOOKMARK124">chromosome</a></p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<p>TODO: ADD DIAGRAM</p>
-<div style="margin: 2em; background-color: #e0e0e0">
-<strong>
-⚠️NOTE️️️⚠️</strong>
-<p>To re-iterate, it doesn't transmit the <a href="#BOOKMARK229">allele</a> for each <a href="#BOOKMARK228">gene</a> independently of the others. <a href="#BOOKMARK229">Allele</a>s are grouped together for a set of <a href="#BOOKMARK228">genes</a> as passed down as a single unit.</p>
-</div>
+<p><img src="/.datafile_be39f58f53950f69fb7599f6a3d0fd3b/data.svg" alt="This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License." title="Diagram showing a random chromosome being selected (after segment swap) from each parent's homologous chromosome pair to make up the child's homologous chromosome pair."></p></li>
+</ol>
+<p>Essentially, what the above says / shows is that <a href="#BOOKMARK229">allele</a>s get passed down from parent to child in groups, where each group is a segment of one of the <a href="#BOOKMARK124">chromosome</a>s. In the example above, the segments passed down are...</p>
+<ul>
+<li>CHILD_C1 = PARENT1_C2[1,3] + PARENT1_C1[4,28]</li>
+<li>CHILD_C2 = PARENT2_C2[1,5] + PARENT2_C1[6,20] + PARENT2_C2[21,28]</li>
+</ul>
+<p><a href="#BOOKMARK228">Genes</a> located close to each other are more likely to get grouped together as part of the same segment being passed down -- it's very unlikely that a <a href="#BOOKMARK166">chromosomal crossover</a> boundary will be at a point which splits them. These <a href="#BOOKMARK228">genes</a> are referred to as <a name="BOOKMARK249"></a><strong>linked genes</strong>. The <a href="#BOOKMARK240">phenotype</a>s they express are often referred to as <a name="BOOKMARK250"></a><strong>linked traits</strong>. For example, if diagram above were for a plant, and <a href="#BOOKMARK228">gene</a> 11 controlled height while <a href="#BOOKMARK228">gene</a> 12 controlled color, there would likely be a correlation between the height and color across that plant species.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
@@ -993,9 +984,6 @@
 ⚠️NOTE️️️⚠️</strong>
 <p>Unsure how this extends to organisms that are <a href="#BOOKMARK128">polyploid</a> (have more than 2 <a href="#BOOKMARK125">homologous chromosome</a>s / more than 2 <a href="#BOOKMARK229">allele</a>s for each <a href="#BOOKMARK228">gene</a>).</p>
 </div>
-<p><a href="#BOOKMARK228">Genes</a> located close to each other are more likely to get grouped together as part of the same cluster. The diagram below shows the location of 3 <a href="#BOOKMARK228">genes</a> on a <a href="#BOOKMARK124">chromosome</a>. Because <a href="#BOOKMARK228">genes</a> A and B are so close to each other, they're considered to be linked -- it's very unlikely that a <a href="#BOOKMARK166">chromosomal crossover</a> boundary will be at a point which puts them into separate clusters.</p>
-<p><img src="/.datafile_4481837fbb9600ae1735649961715c29/data.svg" alt="This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License." title="Independent assortment diagram"></p><p>If the diagram above were for a <a href="#BOOKMARK124">chromosome</a> from a plant, and <a href="#BOOKMARK228">gene</a> A controlled height while <a href="#BOOKMARK228">gene</a> B controlled color, there would likely be a correlation between the height and color across that plant species.</p>
-<p>These <a href="#BOOKMARK228">genes</a> are referred to as <a name="BOOKMARK249"></a><strong>linked genes</strong>. The <a href="#BOOKMARK240">phenotype</a>s they express are often referred to as <a name="BOOKMARK250"></a><strong>linked traits</strong>.</p>
 <a name="HEADREF51"></a><h2>Dominance</h2>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
