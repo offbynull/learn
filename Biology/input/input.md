@@ -1458,6 +1458,8 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 Essentially, classical genetics is the idea that the coding / alleles for a specific set of genes (genotype) results in some change in the organism that's observable (phenotype), and the probability that an organism can end up with a specific genotype/phenotype can be calculated from the genotype of its parents. For example, a certain set of alleles (genotype) may be responsible for blue eyes (phenotype).
 
+If a single gene is responsible for contributing to multiple unrelated phenotypes, it's referred to as `{bm} pleiotropy/(pleiotropy|pleiotropic)/i`. For example, a specific gene is responsible for generating melanin. If the allele for that gene has a specific mutation in it, melanin `{bm-ri} production` stops / is drastically reduced. A lack of melanin results in albinism: a condition that effects the color of eyes, hair, and skin (3 separate phenotypes).
+
 ```{note}
 Don't be fooled by the name classical genetics. The term classical doesn't mean that it's deprecated. 
 ```
@@ -1505,7 +1507,11 @@ For example, a gene that controls the color of a flower has 2 alleles: red and w
 ```{csv}
  , R , R
 R, RR, RR
-W, RW, WR
+W, WR, WR
+```
+
+```{note}
+Unsure what the convention for Punnett squares is -- I'm always putting the allele on the left axis (femal parent) first.
 ```
 
 The above diagram visualizes that the probability of the offspring having...
@@ -1513,7 +1519,7 @@ The above diagram visualizes that the probability of the offspring having...
  * 2 white alleles is `{kt} P(WW)=\frac{0}{4}`.
  * a red allele and a white allele is `{kt} P(RW|WR)=\frac{2}{4}`.
 
-Punnett squares can be extended to cover multiple genes so long as those genes are independently assorted. That is, each gene in the list must be on a different chromosome. If they were on the same chromosome, the chance of you getting gene A would be dependent on you getting gene B.
+Punnett squares can be extended to cover multiple genes so long as those genes are independently assorted. That is, each gene in the list must be on a different chromosome. If they were on the same chromosome, the chance of you getting gene A may be dependent on you getting gene B (see independent assortment subsection).
 
 For example, a gene that controls...
 * the color of a flower has 2 alleles: red and white.
@@ -1608,7 +1614,7 @@ Essentially, what the above says / shows is that alleles get passed down from pa
  * CHILD_C1 = PARENT1_C2[1,3] + PARENT1_C1[4,28]
  * CHILD_C2 = PARENT2_C2[1,5] + PARENT2_C1[6,20] + PARENT2_C2[21,28]
 
-Genes located close to each other are more likely to get grouped together as part of the same segment being passed down -- it's very unlikely that a chromosomal crossover boundary will be at a point which splits them. These genes are referred to as `{bm} linked genes`. The phenotypes they express are often referred to as `{bm} linked traits`. For example, if diagram above were for a plant, and gene 11 controlled height while gene 12 controlled color, there would likely be a correlation between the height and color across that plant species.
+Genes located close to each other are more likely to get grouped together as part of the same segment being passed down -- it's very unlikely that a chromosomal crossover boundary will be at a point which splits them. These genes are referred to as `{bm} linked gene`s. The phenotypes they express are often referred to as `{bm} linked trait`s. For example, if diagram above were for a plant, and gene 11 controlled height while gene 12 controlled color, there would likely be a correlation between the height and color across that plant species.
 
 ```{note}
 See section on meiosis for more in depth description of how this steps happen.
@@ -1621,10 +1627,14 @@ Unsure how this extends to organisms that are polyploid (have more than 2 homolo
 ## Dominance
 
 ```{note}
-Dominance was originally discovered by Gregor Mendel as Mendelian inheritance's third law / law of dominance. It states in a cross of parents that are pure for contrasting traits, only one form of the trait will appear in the next generation. Offspring that are hybrid for a trait will have only the `{bm} dominant trait` in the phenotype while the `{bm} recessive trait` remains dormant. It turns out that this isn't entirely correct (it's close) -- more scenarios have come up: incomplete dominance, co-dominance, etc..
+Dominance was originally discovered by Gregor Mendel as Mendelian inheritance's third law / law of dominance. It states in a cross of parents that are pure for contrasting traits, only one form of the trait will appear in the next generation. Offspring that are hybrid for a trait will have only the dominant trait in the phenotype while the recessive trait remains dormant. It turns out that this isn't entirely correct (it's close) -- more scenarios have come up: incomplete dominance, co-dominance, etc..
 ```
 
 In an organism that is heterozygous for some gene, some alleles may take precedence in expressing themselves over others. How these alleles are expressed define the type of dominance they have over other alleles.
+
+Alleles that are...
+ * dominant are referred to as `{bm} dominant allele`s. The phenotypes they express are often referred to as `{bm} dominant trait`s.
+ * recessive are referred to as `{bm} recessive allele`s. The phenotypes they express are often referred to as `{bm} recessive trait`s.
 
 Given 2 alleles A and B, if the phenotype expressed by ...
  * [AA] is the same as [AB]/[BA] but not [BB], A is said to have `{bm} complete dominance/(complete dominance|completely dominant)/i` -- one allele's phenotype is expressed while others are hidden.
@@ -1657,8 +1667,32 @@ digraph G {
 ```
 
  * In a complete dominance scenario, the child's color may end up being totally red because the red allele is the only one that gets expressed.
+
+   ```{img}
+   Complete dominance.svg
+   This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+   Diagram showing a red flower offspring.
+   ```
+
  * In a incomplete dominance scenario, the child's color may end up being pink because both the red and the white allele express together and blend.
- * In a co-dominance scenario, the child may end up having blotches of red and white as its colors because both the red and the white allele express but are discrete.
+
+   ```{img}
+   Incomplete dominance.svg
+   This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+   Diagram showing a pink flower offspring.
+   ```
+
+ * In a co-dominance scenario, the child may end up having blotches of red / white as its colors because both the red and the white allele express but are discrete.
+
+   ```{img}
+   Co-dominance.svg
+   This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+   Diagram showing a blotchy flower offspring.
+   ```
+
+   ```{note}
+   Another likely scenario for co-dominance is that some petals will be red while others are white.
+   ```
 
 Rarely ever is there only 2 alleles for a gene. A real-life example of dominance is blood type. 3 alleles are present: A, B, and O. A and B have incomplete dominance while O is recessive. If the alleles for a person's blood type is...
  * [AB]/[BA], their blood type (phenotype) is AB.
@@ -1670,6 +1704,9 @@ Rarely ever is there only 2 alleles for a gene. A real-life example of dominance
 
 Note that blood type phenotype AB is a unique *blended* version. You can't mix together blood from a person with A blood type and a person with B blood type and give it to a person who has an AB blood type -- that person needs AB blood.
 
+If the alleles present for a gene are...
+ * are both dominant, it's said to be `{bm} homozygous dominant`. In the example above, [AB]/[BA]/[AA]/[BB] are all homozygous dominant (both alleles are dominant alleles).
+ * are both recessive, it's said to be `{bm} homozygous recessive`. In the example above, [OO] is heterozygous recessive (both alleles are recessive alleles).
 
 # Adenosine Triphosphate
 
