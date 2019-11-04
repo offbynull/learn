@@ -938,8 +938,8 @@ crop 0.446 0 0.554 1
 
 `{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(egg)/i`
 `{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(ova)/i` 
-`{bm-ignore} egg_NORM`
-`{bm-ignore} ova_NORM`
+`{bm-ignore} (egg)_NORM/i`
+`{bm-ignore} (ova)_NORM/i`
 
 `{bm} Meiosis` is a type of eukaryotic cell division that results in 4 daughter cells, where each daughter cell has half the number of chromosomes as the parent cell.
 
