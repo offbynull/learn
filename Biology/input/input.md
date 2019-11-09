@@ -782,6 +782,10 @@ To recap, a cell can have a number of chromosome copies:
  * `{bm} haploid` cells carry n chromosomes (1 copy of each chromosome). Examples include animal gamete cells and most unicellular eukaryotes.
  * `{bm} polyploid` cells carry An chromosomes, where A > 2 (more than 2 copies of each chromosome). Examples include certain plant species (e.g. lotus plants).
 
+```{note}
+An organism has an extra / missing copy of a chromosome (e.g. 2 expected but 3 present) is called aneuploid.
+```
+
 The following diagram shows a karyotype of a human's diploid homologous chromosome pairs 1 2 and 3:
 
 ```{img}
@@ -792,9 +796,9 @@ scale 0.5 0.5
 crop 0 0 0.5 0.25
 ```
 
-Certain eukaryotic species (some mammals/snakes/insects/etc..) have an extra pair of chromosomes that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair is called `{bm} sex chromosome/(sex chromosome)/i`s / `{bm} XY chromosome/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`s, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
+Certain eukaryotic species (some mammals/snakes/insects/etc..) have an extra pair of chromosomes that aren't alternate versions of each other but instead are totally different and used to determine the sex of the offspring. This extra pair is called `{bm} sex chromosome/(sex chromosome|sex determining chromosome|sex-determining chromosome)/i`s / `{bm} XY chromosome/(XY chromosome|X\/Y chromosome|X-Y chromosome)/i`s, and it determines the sex of the organism. The X and the Y refer to the chromosome types that can appear in the pair -- XX results in a female, while XY results in a male.
 
-The non-sex chromosome pairs are referred to as `{bm} autosome`s.
+The chromosomes that make up the homologous chromosomes are sometimes referred to as `{bm} autosome/(autosome|autosomal chromosome)/i`s while the ones that make up sex-determining chromosomes (non-homologous chromosomes) are called `{bm} allosome/(allosome|allosomal chromosome)/i`s. For example, in humans there are 44 autosomes (22 homologous chromosome pairs) and 2 allosomes (1 sex-determining chromosome pair).
 
 ```{img}
 DNA_human_male_chromosomes.gif
@@ -806,6 +810,9 @@ fg_color #ff0000ff
 bg_color #00000000
 rect 0.85 0.78 0.14 0.215
 ```
+
+An organism has an extra / missing copy of a chromosome (e.g. 2 expected but 3 present) is called `{bm} aneuploid`. Depending on the species and circumstances, aneuploidy may lead to death, disease, or possibly no adverse effects at all. For example, allosomal aneuploidy in certain female mammals rarely leads to adverse effects because of X-linked inactivation.
+
 
 ## Mitosis (Cell Cycle)
 
@@ -1468,6 +1475,10 @@ Don't be fooled by the name classical genetics. The term classical doesn't mean 
 
 Eukaryotic organisms that sexually reproduce hold homologous pairs of chromosomes -- they have multiple copies of chromosomes, each of which codes for the same genes but different versions of those genes (alleles). In humans, the number of chromosomes that make up a single set of homologous chromosomes is 2 (diploid). That means that a human has 2 alleles for each gene -- 1 allele is randomly chosen from the father and the other allele is randomly chosen from the mother.
 
+```{note}
+This isn't the case for XY chromosomes. See sex-linked genes section for more information on how XY chromosomes (which are not homologous chromosomes) are treated.
+```
+
 Depending on which allele combinations are present, different observable traits may be expressed. For example, imagine the color of a flower is determined by a single gene. If a flower had both a red allele and a white allele for that gene, the observable trait would be that it'd have a pink color.
 
 ```{dot}
@@ -1537,6 +1548,8 @@ Both parents have 1 red allele and 1 white allele for color, and 1 true allele a
 [W][F], [WR][FT], [WR][FF], [WW][FT], [WW][FF]
 ```
 
+## Laws
+
 Classical genetics was started in the 1800s by a scientist monk named `{bm} Gregor Mendel/(Gregor Mendel|Gregor Johann Mendel)/` (prior to the discovery of DNA) with his model called `{bm} Mendelian inheritance/(Mendelian inheritance|Mendelian genetics)/i`. Gregor Mendel wasn't aware of DNA and genes (hadn't been discovered yet) and instead created his model based on some abstract idea of "inheritable characteristics." Classical genetics corrects and extends the model introduced by Gregor Mendel by taking DNA / chromosomes / genes / alleles / etc.. into account.
 
 Mendel originally had 3 laws:
@@ -1547,7 +1560,7 @@ Mendel originally had 3 laws:
 
 The subsections below describe these laws in their modern / corrected form.
 
-## Segregation
+### Segregation
 
 ```{note}
 Segregation was originally discovered by Gregor Mendel as Mendelian inheritance's first law / law of segregation.
@@ -1586,7 +1599,11 @@ The reason for this is that sexually reproducing eukaryotic species (e.g. humans
 
 During meiosis, each gamete cell gets 1 chromosome from each homologous pair (1 set of alleles). When gametes meet to form an offspring, the chromosomes from each gamete match up to to their homolog to create that offspring's set of homologous chromosome pairs.
 
-## Independent Assortment
+```{note}
+There are cases where a gamete gets 2 chromosomes instead of 1. Depending on the chromosome, it may end up being fatal or cause disease (or be benign). See aneuploid section.
+```
+
+### Independent Assortment
 
 ```{note}
 Independent assortment was originally discovered by Gregor Mendel as Mendelian inheritance's second law / law of independent assortment. It states that inherited attributes are passed down from parent to child independently of each other. For example, the odds that a baby ends up with green eyes isn't linked to the odds that it'll have dark hair. It turns out that this isn't entirely correctly.
@@ -1626,7 +1643,7 @@ See section on meiosis for more in depth description of how this steps happen.
 Unsure how this extends to organisms that are polyploid (have more than 2 homologous chromosomes / more than 2 alleles for each gene).
 ```
 
-## Dominance
+### Dominance
 
 ```{note}
 Dominance was originally discovered by Gregor Mendel as Mendelian inheritance's third law / law of dominance. It states in a cross of parents that are pure for contrasting traits, only one form of the trait will appear in the next generation. Offspring that are hybrid for a trait will have only the dominant trait in the phenotype while the recessive trait remains dormant. It turns out that this isn't entirely correct (it's close) -- more scenarios have come up: incomplete dominance, co-dominance, etc..
@@ -1634,9 +1651,9 @@ Dominance was originally discovered by Gregor Mendel as Mendelian inheritance's 
 
 In an organism that is heterozygous for some gene, some alleles may take precedence in expressing themselves over others. How these alleles are expressed define the type of dominance they have over other alleles.
 
-Alleles that are...
- * dominant are referred to as `{bm} dominant allele`s. The phenotypes they express are often referred to as `{bm} dominant trait`s.
- * recessive are referred to as `{bm} recessive allele`s. The phenotypes they express are often referred to as `{bm} recessive trait`s.
+Alleles that ...
+ * take precedence over others are referred to as `{bm} dominant allele`s. The phenotypes they express are often referred to as `{bm} dominant trait`s.
+ * surrender precedence to others are referred to as `{bm} recessive allele`s. The phenotypes they express are often referred to as `{bm} recessive trait`s.
 
 Given 2 alleles A and B, if the phenotype expressed by ...
  * [AA] is the same as [AB]/[BA] but not [BB], A is said to have `{bm} complete dominance/(complete dominance|completely dominant)/i` -- one allele's phenotype is expressed while others are hidden.
@@ -1708,40 +1725,6 @@ If the alleles present for a gene are...
  * are both dominant, it's said to be `{bm} homozygous dominant`. In the example above, [AB]/[BA]/[AA]/[BB] are all homozygous dominant (both alleles are dominant alleles).
  * are both recessive, it's said to be `{bm} homozygous recessive`. In the example above, [OO] is heterozygous recessive (both alleles are recessive alleles).
 
-## Sex-linkage
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
-TODO write about traits when chromosomes are XY chromosomes instead of autosomes
-
 ## Lethality
 
 `{bm} Lethal allele/(lethal allele|lethal gene|\blethals\b)/i`s are alleles that cause the death of an organism that carries them. These alleles may cause death during development (e.g. gestation in the womb) or possibly after having fully matured.
@@ -1811,6 +1794,145 @@ Don't get confused. Dominant lethals / recessive lethals have nothing to do with
 ```{note}
 It was never really expressed why this happens. My only guess is environmental factors or maybe some type of intrinsic built-in genetic randomness (e.g. not enough of the specific allele for a disease randomly collided with whatever other molecule(s) were required to express the phenotype).
 ```
+
+## Sex-linkage
+
+In humans / mammals, sex is determined by the XY chromosomes. In...
+
+* females, the XY chromosome pair is a homologous chromosome pair -- X and X chromosomes.
+* males, the XY chromosome pair is NOT a homologous chromosome pair -- X and Y chromosomes.
+
+```{note}
+How different are the X and Y chromosomes? Each codes for a completely different set of genes.
+
+ * X chromosome codes for ~1500 genes.
+ * Y chromosome codes for ~78 genes.
+
+For example, the SRY gene contributes to development of testicles and is only found on the Y chromosome.
+```
+
+Genes on the XY chromosomes are called `{bm} sex-linked gene/(sex-linked disorder|sex-linked disease|sex-linked gene|sex-linked allele|sex-linked condition)/i`s.
+
+### X-linkage
+
+Since males only have a single copy of both X and Y chromosomes, standard dominant allele / recessive allele rules DO NOT apply to these chromosomes in males. For example, regardless of if an allele on the X chromosome is a dominant allele or recessive allele, it will always express in males. There is no second X chromosome to provide a second allele for that gene.
+
+`{bm} /(X-linked disorder|X-linked disease|X-linked gene|X-linked allele|X-linked condition)/i`Since a human / mammal must have at least a single X chromosome, ...
+ * recessive alleles on the X chromosome are called `{bm} X-linked recessive allele/(X-linked recessive allele|recessive X-linked allele)/i`s.
+ * recessive traits caused by alleles on the X chromosome are called `{bm} X-linked recessive trait/(X-linked recessive trait|recessive X-linked trait)/i`s.
+
+For example, hemophilia is caused by an x-linked recessive allele. If there's a 2nd X chromosome that has a dominant allele for that gene, it'll suppress the hemophilia allele from expressing. For...
+ * females (X and X), there IS a 2nd X chromosome. If that 2nd X chromosome contains the same recessive hemophilia allele (homozygous), the hemophilia phenotype will express.
+ * males (X and Y), there ISN'T a 2nd X chromosome. If the allele on the single X chromosome is the hemophilia allele, the hemophilia phenotype will express.
+
+If the probability of having the hemophilia allele on one X chromosome were `{kt} \frac{1}{7000}`, the probability of expressing the hemophilia phenotype / trait for...
+ * females would be `{kt} \frac{1}{7000} \cdot \frac{1}{7000} = \frac{1}{49000000}`.
+ 
+   ```{note}
+   Since there's 2 X chromosomes and it's a recessive allele, both chromosomes need that allele (homozygous).
+   ```
+
+ * males would be `{kt} \frac{1}{7000}`.
+ 
+   ```{note}
+   Since there's only 1 X chromosome, only that chromosome needs the allele.
+   ```
+
+As such, X-linked recessive traits are much more common in men than they are women -- women need 2 copies of the recessive allele(s) while men only need 1.
+
+```{note}
+To find out the exact mechanism around X-linked recessive traits, see the section on x-linked inactivation below.
+```
+
+### X-inactivation
+
+The reason why males can function with only 1 copy of an X chromosome is because of `{bm} X-linked inactivation/(x-linked inactivation|x-inactivation)/i`. A single X chromosome is all that's needed for a human / certain mammals to operate normally. If more than 1 copy of an X chromosome is present in a cell, the cell chooses 1 at random to use while the others are made inactive. Inactive X chromosomes are compacted into small dense structures called `{bm} Barr bodies/(Barr bodies|Barr body)/i` that prevent most of their genes from expressing.
+
+The above applies to both females (XX) and males/females with cases of allosomal aneuploidy (e.g. XXX or XXXY).
+
+```{note}
+How is it possible for there to be more than 2 X chromosomes? For example, the XX pair for a female may fail to separate during meiosis, meaning one of the egg_GAMETEs will contain 2 X chromosomes while the other will contain 0 X chromosomes.
+
+Because of x-linked inactivation, allosomal aneuploidy isn't fatal but may lead to mild forms of disease. For example, Klinefelter syndrome (XXY) leads to infertility and may lead to learning disabilities / low testosterone.
+```
+
+```{note}
+The process of X-linked inactivation is called `{bm} lyonization`.
+```
+
+How is it that x-linked recessive traits happen if only 1 X chromosome is ever active? Aren't 2 copies of the recessive allele needed for the phenotype to be expressed? It turns out that if some cells choose the X chromosome that contains the non recessive allele, those cells overpower the the cells with the recessive allele.
+
+For example, color blindness is an x-linked recessive trait. All copies of the X chromosome have to have the color-blind allele for human to be color blind. If one of the X chromosomes doesn't, some of the eye cells will be able to see color. The cells that do see color will relay color information back to the brain (the person will see color).
+
+### Punnett Squares Examples
+
+The following are examples showing the probability that offspring end up with the recessive X-linked disease known as hemophilia.
+
+
+----
+
+
+Given a hemophiliac mother and a hemophiliac father, the odds that ...
+
+```{csv}
+                , H (X chromosome), N/A (Y chromosome)
+H (X chromosome), H (X) H (X) ✓   , H (X) N/A (Y) ✓
+H (X chromosome), H (X) H (X) ✓   , H (X) N/A (Y) ✓
+```
+
+ * the child will have hemophilia are 100%.
+
+
+----
+
+
+Given a carrier mother and a hemophiliac father, the odds that ...
+
+```{csv}
+                , H (X chromosome), N/A (Y chromosome)
+H (X chromosome), H (X) H (X) ✓   , H (X) N/A (Y) ✓
+h (X chromosome), h (X) H (X)     , h (X) N/A (Y)
+```
+
+ * the child will be a female with hemophilia is 25%.
+ * the child will be a male with hemophilia is 25%.
+ * a daughter will have hemophilia is 50%.
+
+   ```{note}
+   In other words, out of all possible female children (XX) what are the chances of hemophilia. Punnett square below shows 2 female children, only one of which has HH (2 hemophilia alleles).
+   ```
+
+ * a son will have hemophilia is 50%.
+
+   ```{note}
+   In other words, out of all possible male children (XY) what are the chances of hemophilia. Punnett square below shows 2 male children, only one of which has HH (2 hemophilia alleles).
+   ```
+
+
+----
+
+
+Given a carrier mother and a non-hemophiliac father, the odds that ...
+
+```{csv}
+                , h (X chromosome), N/A (Y chromosome)
+H (X chromosome), H (X) h (X)     , H (X) N/A (Y) ✓
+h (X chromosome), h (X) H (X)     , h (X) N/A (Y)
+```
+
+ * the child will be a female with hemophilia is 0%.
+ * the child will be a male with hemophilia is 25%.
+ * a daughter will have hemophilia is 0%.
+
+   ```{note}
+   In other words, out of all possible female children (XX) what are the chances of hemophilia. Punnett square below shows 2 female children, none of which has HH (2 hemophilia alleles).
+   ```
+
+ * a son will have hemophilia is 50%.
+
+   ```{note}
+   In other words, out of all possible male children (XY) what are the chances of hemophilia. Punnett square below shows 2 male children, only one of which has H (1 hemophilia alleles).
+   ```
 
 # Adenosine Triphosphate
 
@@ -2147,7 +2269,7 @@ There are different types of microscopes:
     * `{bm} Confocal microscope`s are a special form of fluorescence microscopes that uses a laser to excite a sample and get it to glow fluorescent.
 * `{bm} Electron microscope`s use beams of electrons rather than beams of light. They produce very magnified very high resolutions images. But, unlike light microscopes, the specimens being observed are dead because electron microscopes operate in a vacuum.
   * `{bm} scanning electron microscope`s (SEM) work by scanning a beam of electrons over the surface of the specimen to produce an image of the 3D surface.
-  * `{bm} transmission electron microscope`s (TEM) work by slicing up the specimen into ultra thin slices and and passing an electron bean through those slices to produce an image of the insides.
+  * `{bm} transmission electron microscope`s (TEM) work by slicing up the specimen into ultra thin slices and passing an electron bean through those slices to produce an image of the insides.
 
 # Other Terminology
 
