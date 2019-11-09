@@ -1934,6 +1934,42 @@ h (X chromosome), h (X) H (X)     , h (X) N/A (Y)
    In other words, out of all possible male children (XY) what are the chances of hemophilia. Punnett square below shows 2 male children, only one of which has H (1 hemophilia alleles).
    ```
 
+## Pedigree
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
+TODO: FILL IN PEDIGREE SECTION
+
 # Adenosine Triphosphate
 
 `{bm} /\b(ATP)(?:s{0,1})\b/` `{bm} Adenosine Triphosphate` (ATP) is a molecule that provides energy to drive various biological processes (e.g. muscle contractions). The third phosphoral group at the very end has a high-energy bond. When broken, energy is released and the resulting molecules are the broken up phosphoral group and `{bm} /\b(ADP)(?:s{0,1})\b/` `{bm} Adenosine Diphosphate` (ADP).
