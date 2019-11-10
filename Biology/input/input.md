@@ -5,102 +5,91 @@ Biology
 ```{toc}
 ```
 
-# Introduction
-
-Biology is defined as the study of life / living things. A `{bm} living/\b(living|life)\b/i` thing is defined as anything that converts energy from one form to another, while using that energy to grow, change, and reproduce.
-
-```{note}
-Primary source for these notes is Khan Academy's HS Biology course, with additional information from Wikipedia and other sources.
-```
-
-# Scientific Method
-
-The `{bm} scientific method` is the standard guideline for discovery and experimentation in the sciences (chemistry, physics, biology, etc..) The `{bm-ri} basic` steps are...
-
-1. Observe.
-2. Ask a question about the observation.
-3. Make a guess that answers the question (hypothesis).
-4. Test the guess to see if it's correct (experiment).
-5. Refine and iterate.
-
-The last step (refine and iterate) just means that you do it all over again but make changes based on the things you learned from your experiment. For example, ...
-
-* do additional experiments to dig into some aspect deeper.
-* if the hypothesis wasn't supported by the experiment, maybe come up with a new hypothesis.
-
-## Hypothesis
-
-The scientific method revolves around making an observation and coming up with a testable explanation for that observation -- called a `{bm} hypothesis`. If the explanation isn't *testable*, you can't consider it a hypothesis. For example, a good hypothesis may be that increased sun exposure leads to an increased risk of skin cancer because it's something you can test. A bad explanation may be that exposure to centaurs increase the risk of skin cancer because centaurs don't exist (and as such the hypothesis can't be tested).
-
-```{note}
-The material mentions that for a hypothesis to be testable, you should be able to come up with an experiment that shows that its false -- it's falsifiable. How you word your hypothesis is typically what determines if it's testable/falsifiable -- when you read the hypothesis, what defines a failure?
-```
-
-```{note}
-A hypothesis and a theory are different things. Hypothesis is a potential answer for a specific problem. A theory provides a potential framework for a much broader class of problems based on supporting evidence. The example given by the material: "The toaster won't toast because the electrical outlet is broken" is a hypothesis, whereas "Electrical appliances need a source of electricity in order to run" is closer to a theory.
-```
-
-## Experiment
-
-Once you have a hypothesis, you design an `{bm} experiment` to test it. In the case of our sun exposure leads to increased risk of skin cancer hypothesis, an experiment may be to expose skin cells to UV rays in amounts equivalent to that given off by the sun and then check to see if those cells have been damaged (compared to a control group of skin cells that you haven't exposed to UV rays).
-
-What makes a good experiment?
-
-* `{bm} Control group` - A control group contains a set of entities that don't get treatment, but those entities are equal to the entities in the `{bm} experimental group` (as much as possible) and exposed to the same conditions as the entities in the experimental group (as much as possible). This helps eliminate outside factors/variables from tainting the results of an experiment -- it's a `{bm} controlled experiment` . For example, in the skin cancer example experiment described above, a control group may be a set of skin cells that sit along side the experimental group skin cells that get treated with UV rays -- the cells in the control group shouldn't show signs of damage while the cells in the experimental group should.
-* `{bm} Random selection` - The entities being used for an experiment must be randomly selected (both for the control group and the experimental group). Random selection helps minimize skewed results introduced from bias during the selection process. For example, the individual responsible for selecting candidates for drug trials may choose to disproportionately select people of a certain race (e.g. racism).
-* `{bm} Double blind` - The people conducting the experiment may implicitly/explicitly taint the experiment via their own bias. For example, if the experiment involves an interviewer asking a set of questions, the interviewer may subconsciously change the pronunciations of words if he/she knows that the interviewee is in the control group, there by effecting the answer given by the interviewee.
-* **Statistical significance** - The results between the control group and the experimental group needs to be large enough to support your hypothesis. A small difference could mean that outcome was due to variance in the selected groups (there's a branch of statistics that deals with this).
-* **Replicable** - Others should be able to repeat the same experiment and (hopefully) come to the same result. If they don't, it could be that something was wrong with your experiment or the entities being tested had some underlying difference that changed the result.
-
-```{note}
-There's always at least one control group in any experiment to provide a baseline. There's no limit to the number of experimental groups -- each group may have a slightly different type/amount of treatment applied.
-```
-
-```{note}
-Because things are so wishy-washy/not-exactly in biology, it's typical for an experiments to be repeated multiple times and to have a large sample size -- the larger our sample sizes and the more times we conduct the experiment, the more we can be confident of our result. What do I mean by wishy-washy? Genetic variation between samples may result in different types/levels of responses. For example, people with a certain gene may respond quicker to certain drugs than people who don't produce that gene.
-```
-
-Other terminology around the scientific method...
-
-* `{bm} treatment` - The application of the test given to the experimental group(s) but not the control group.
-* `{bm} independent variable` - An independent variable is `{bm-ri} basically` the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
-* `{bm} dependent variable` - A dependent variable is a response you measure after applying the treatment -- you can think of it as the output from your experiment. For example, in the skin cancer experiment, the dependent variable might be a measurement of how different the cells are functioning (e.g. a cell with damaged DNA may produce different kinds / amounts of tRNA molecules -- something you can measure).
-* **data** - This is exactly what you think it is -- measurements/observations made during the experiment.
-* `{bm} placebo effect/(placebo effect|placebo)/i` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
-
-```{note}
-You can have more than one independent variable if you follow specific guidelines and are experienced enough, but the general rule of thumb is to have only 1 independent variable just because it makes things much simpler to analyze/interpret.
-```
-
 # Chemistry
 
-An **element** is matter that cannot be broken down any further by chemical reaction -- it's a substance made entirely out of one type of `{bm} atom`. Each element/atom has a specific set of properties that defines how it acts/reacts (e.g. weight, colour, how light reflects, etc..).
+`{bm} Chemistry/(Chemistry|Chemical|Chemist)/i` is defined as the study of composition, structure, and properties of matter. `{bm} Matter` is defined as anything that takes up space and has a mass (e.g. hair, water, table, etc..).
 
-Examples of elements/atoms:
-* Gold - Yellow coloured, reflective, malleable, and corrosion-resistant.
-* Lead - Blue/white coloured, relatively soft, malleable.
-* Carbon Silver/gray coloured, reflective, easily oxidizes/corrodes.
+```{note}
+Primary source for these notes is Khan Academy's Chemistry course, with additional information from Wikipedia and other sources.
+```
 
-Examples of non-elements:
-* Salt water - Mixture of sodium and water.
-* Water - Water can be further broken down to the elements hydrogen and oxygen.
-* Glucose - Glucose can be further broken down to the elements carbon, hydrogen, and oxygen.
+## Atom
+
+An `{bm} element` is matter that cannot be broken down any further by chemical reaction -- it's a substance made entirely out of one type of `{bm} atom`. Each element/atom has a specific set of properties that defines how it acts/reacts (e.g. weight, colour, how light reflects, etc..).
+
+```{dot}
+graph {
+  rankdir="LR"
+  element -- atom [headlabel="1", taillabel="1..*"];
+}
+```
+
+Examples of matter made up of a single type of atom:
+ * Gold - Yellow coloured, reflective, malleable, and corrosion-resistant.
+ * Lead - Blue/white coloured, relatively soft, malleable.
+ * Carbon Silver/gray coloured, reflective, easily oxidizes/corrodes.
+
+```{note}
+As stated above, matter made up of a single type of atom is called an element.
+```
+
+Examples of matter made of multiple types of atoms:
+ * Salt water - Mixture of sodium and water.
+ * Water - Water can be further broken down to the elements hydrogen and oxygen.
+ * Glucose - Glucose can be further broken down to the elements carbon, hydrogen, and oxygen.
 
 ![By AG Caesar - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67059219](240px-Atom_Diagram.svg.png)
 
-The building blocks of atoms are `{bm} protons`, `{bm} neutrons`, and `{bm} electrons`. Protons and neutrons form the nucleus of the atom while electrons jump around outside of the nucleus. Protons and electrons are attracted to each other -- protons are positively charged while electrons are negatively charged. Although, protons and electrons never fully meet (electrons are always buzzing/hovering around the outside of the nucleus where the protons are).
+The building blocks of atoms are protons, neutrons, and electrons. Protons and neutrons form the nucleus of the atom while electrons jump around in orbit of the nucleus.
 
-The configuration of an atom (protons/neutrons/electrons) is what allows us to predicate how one element may react to another element. For example, certain elements may attract, repel, bond, swipe electrons, etc..
+For each atom, the number of ...
 
-The number of protons are what defines the type of atom/element. For example, hydrogen has 1 proton, helium as 2, lithium has 3, etc.. The number of neutrons and electrons can change without changing the type of element as long as the number of protons remain the same.
+ * `{bm} proton`s defines the type of atom. For example, hydrogen has 1 proton, helium as 2, lithium has 3, etc..
+ * `{bm} neutron`s defines the extra atomic mass of the atom. For example, carbon-12 and carbon-13 have the same number of protons but carbon-13 has 1 more neutron and thus a greater atomic mass.
+ * `{bm} electron`s defines the attraction to other atoms. For example, an atom is always looking to have electron count = proton count. It attracts to other atoms in an effort to steal / give away electrons.
 
-The periodic table below orders elements/atoms by the number of protons (also called the `{bm} atomic number`)...
+Atoms with the same number of protons (same type) but a different number of neutrons (different atomic mass) are called `{bm} isotope`s. For example, carbon-12 and carbon-13 are both isotopes of carbon -- they have the same chemical properties but different mass.
+
+Essentially, the configuration of an atom (number of protons/neutrons/electrons) is what predicts its properties and how it reacts to with other atoms.
+
+The periodic table below orders atoms by the number of protons (also called the `{bm} atomic number`)...
 
 ![By Offnfopt - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=62296883](800px-Simple_Periodic_Table_Chart-en.svg.png)
 
+### Atomic Mass
+
+`{bm} Atomic mass` is defined as the mass of the protons and neutrons that make up an atom, but not the electrons . 1 `{bm} atomic mass unit` (`{bm} amu/\b(amu\b)/i`) is `{kt} 1.66054 \cdot 10^{-24}` -- the mass of carbon-12 divided by 12.
+
+
 ```{note}
-A different number of neutrons = different version of the same element. For example, Carbon-12 (6 neutrons) and Carbon-13 (7 neutrons).
+Why not include electrons into mass calculations? Apparently they contribute little mass so they aren't counted. Also the number of electrons on an atom is transient (it changes easily).
+e
+Why carbon-12? it's the most abundant form of carbon on earth.
 ```
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+TODO: Define atomic weight
+
+## Molecule
 
 When atoms bind together, they form a `{bm} molecule`. Each type of molecule has the same configuration of atoms -- same atoms in the same numbers, structured/shaped similarly. For example, a water molecule is made up of 2 hydrogen atoms and 1 oxygen atom binding together in a house-roof shape...
 
@@ -128,6 +117,8 @@ There are probably special properties to monomers that allow them to chain up. T
 ```
 
 Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a very large number of atoms.
+
+## Ion
 
 An `{bm} ion/\b(ions|ion)\b/i` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
 * if protons > electrons (more protons), it's called a `{bm} positively charged/(positive charge|positive-charge|positively-charged|positively charged)/i` ion / `{bm} positive ion`.
@@ -161,7 +152,74 @@ The closer to...
 https://www.quora.com/Why-is-pure-water-considered-neutral -- Since pH is defined as the negative log of the hydrogen ion concentration, the pH of pure water is 7 or neutral. Pure water is neutral because the number of positive hydrogen ions produced is equal to the number of negative.
 ```
 
-## Carbohydrate Molecules
+# Biology
+
+`{bm} Biology/(Biology|Biological|Biologist)/i` is defined as the study of life / living things. A `{bm} living/\b(living|life)\b/i` thing is defined as anything that converts energy from one form to another, while using that energy to grow, change, and reproduce.
+
+```{note}
+Primary source for these notes is Khan Academy's HS Biology course, with additional information from Wikipedia and other sources.
+```
+
+## Scientific Method
+
+The `{bm} scientific method` is the standard guideline for discovery and experimentation in the sciences (chemistry, physics, biology, etc..) The `{bm-ri} basic` steps are...
+
+1. Observe.
+2. Ask a question about the observation.
+3. Make a guess that answers the question (hypothesis).
+4. Test the guess to see if it's correct (experiment).
+5. Refine and iterate.
+
+The last step (refine and iterate) just means that you do it all over again but make changes based on the things you learned from your experiment. For example, ...
+
+* do additional experiments to dig into some aspect deeper.
+* if the hypothesis wasn't supported by the experiment, maybe come up with a new hypothesis.
+
+### Hypothesis
+
+The scientific method revolves around making an observation and coming up with a testable explanation for that observation -- called a `{bm} hypothesis`. If the explanation isn't *testable*, you can't consider it a hypothesis. For example, a good hypothesis may be that increased sun exposure leads to an increased risk of skin cancer because it's something you can test. A bad explanation may be that exposure to centaurs increase the risk of skin cancer because centaurs don't exist (and as such the hypothesis can't be tested).
+
+```{note}
+The material mentions that for a hypothesis to be testable, you should be able to come up with an experiment that shows that its false -- it's falsifiable. How you word your hypothesis is typically what determines if it's testable/falsifiable -- when you read the hypothesis, what defines a failure?
+```
+
+```{note}
+A hypothesis and a theory are different things. Hypothesis is a potential answer for a specific problem. A theory provides a potential framework for a much broader class of problems based on supporting evidence. The example given by the material: "The toaster won't toast because the electrical outlet is broken" is a hypothesis, whereas "Electrical appliances need a source of electricity in order to run" is closer to a theory.
+```
+
+### Experiment
+
+Once you have a hypothesis, you design an `{bm} experiment` to test it. In the case of our sun exposure leads to increased risk of skin cancer hypothesis, an experiment may be to expose skin cells to UV rays in amounts equivalent to that given off by the sun and then check to see if those cells have been damaged (compared to a control group of skin cells that you haven't exposed to UV rays).
+
+What makes a good experiment?
+
+* `{bm} Control group` - A control group contains a set of entities that don't get treatment, but those entities are equal to the entities in the `{bm} experimental group` (as much as possible) and exposed to the same conditions as the entities in the experimental group (as much as possible). This helps eliminate outside factors/variables from tainting the results of an experiment -- it's a `{bm} controlled experiment` . For example, in the skin cancer example experiment described above, a control group may be a set of skin cells that sit along side the experimental group skin cells that get treated with UV rays -- the cells in the control group shouldn't show signs of damage while the cells in the experimental group should.
+* `{bm} Random selection` - The entities being used for an experiment must be randomly selected (both for the control group and the experimental group). Random selection helps minimize skewed results introduced from bias during the selection process. For example, the individual responsible for selecting candidates for drug trials may choose to disproportionately select people of a certain race (e.g. racism).
+* `{bm} Double blind` - The people conducting the experiment may implicitly/explicitly taint the experiment via their own bias. For example, if the experiment involves an interviewer asking a set of questions, the interviewer may subconsciously change the pronunciations of words if he/she knows that the interviewee is in the control group, there by effecting the answer given by the interviewee.
+* **Statistical significance** - The results between the control group and the experimental group needs to be large enough to support your hypothesis. A small difference could mean that outcome was due to variance in the selected groups (there's a branch of statistics that deals with this).
+* **Replicable** - Others should be able to repeat the same experiment and (hopefully) come to the same result. If they don't, it could be that something was wrong with your experiment or the entities being tested had some underlying difference that changed the result.
+
+```{note}
+There's always at least one control group in any experiment to provide a baseline. There's no limit to the number of experimental groups -- each group may have a slightly different type/amount of treatment applied.
+```
+
+```{note}
+Because things are so wishy-washy/not-exactly in biology, it's typical for an experiments to be repeated multiple times and to have a large sample size -- the larger our sample sizes and the more times we conduct the experiment, the more we can be confident of our result. What do I mean by wishy-washy? Genetic variation between samples may result in different types/levels of responses. For example, people with a certain gene may respond quicker to certain drugs than people who don't produce that gene.
+```
+
+Other terminology around the scientific method...
+
+* `{bm} treatment` - The application of the test given to the experimental group(s) but not the control group.
+* `{bm} independent variable` - An independent variable is `{bm-ri} basically` the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
+* `{bm} dependent variable` - A dependent variable is a response you measure after applying the treatment -- you can think of it as the output from your experiment. For example, in the skin cancer experiment, the dependent variable might be a measurement of how different the cells are functioning (e.g. a cell with damaged DNA may produce different kinds / amounts of tRNA molecules -- something you can measure).
+* **data** - This is exactly what you think it is -- measurements/observations made during the experiment.
+* `{bm} placebo effect/(placebo effect|placebo)/i` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
+
+```{note}
+You can have more than one independent variable if you follow specific guidelines and are experienced enough, but the general rule of thumb is to have only 1 independent variable just because it makes things much simpler to analyze/interpret.
+```
+
+## Carbohydrate Molecule
 
 `{bm} Carbohydrate/(carbohydrate|sugar)/i`s (also called `{bm} saccharide`s) are molecules that consist of a mix of carbon, hydrogen, and oxygen atoms. In biological systems, carbohydrates are often associated with...
 * being a source of energy
@@ -180,7 +238,7 @@ digraph {
 }
 ```
 
-## Protein Molecules
+## Protein Molecule
 
 `{bm} Protein`s are molecules that consist of monomers called `{bm} amino acid`s. The amino acids get chained together into a polymer called a `{bm} polypeptide` chain, and one or more polypeptide chains fold to a 3D structure and combine to become a protein. The 3D structure / shape of the protein (how its folded) is what gives it its abilities.
 
@@ -204,7 +262,7 @@ The `{bm-ri} basic` structure of an amino acid is as follows. The R is a placeho
 
 ![By GYassineMrabetTalk✉This W3C-unspecified vector image was created with Inkscape. - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2551977](320px-AminoAcidball.svg.png)
 
-## Lipid Molecules
+## Lipid Molecule
 
 `{bm} Lipid`s are molecules that are somewhat not water soluble -- meaning that they have parts that resist water but maybe also parts that are attracted to water. In biological systems, lipids are often associated with...
 * energy storage (fats)
@@ -259,7 +317,7 @@ Other terminology related to water:
 * Molecules that are repelled from water are called `{bm} hydrophobic`.
 * Molecules that have parts that are hydrophilic as well as parts that are hydrophobic are called `{bm} amphipathic`
 
-# Cell
+## Cell
 
 `{bm} Cell`s are the `{bm-ri} basic` unit of living things / the building blocks of life. They're tiny structures that encapsulate information and machinery that allows them to replicate/reproduce and perform other important functions (e.g. appendages to move around).
 
@@ -289,13 +347,13 @@ Multi-cell organisms, Yes (e.g. animals and fungus), No
 Archaea is an organism that looks like bacteria but they're totally different.
 ```
 
-## Features
+### Features
 
 Different cell species vary in features. The subsections below detail common cell features (not exhaustive).
 
 Some features are only present in certain cell speicies (e.g. only some cells have a flagellum tail) while other features are present in all cells but in different amounts (e.g. every cell has cytosol but larger cells have more cytosol).
 
-### Cytoplasm
+#### Cytoplasm
 
 The `{bm} cytoplasm` (both eukaryotic and prokaryotic) is the insides/guts of a cell. `{bm} Cytosol` refers to just the fluid, while cytoplasm refers to fluid as well as everything else inside the cell.
 
@@ -312,7 +370,7 @@ text 0.5 0.5 cytoplasm
 text 0.5 0.6 (everything inside)
 ```
 
-### Membrane
+#### Membrane
 
 The `{bm} plasma membrane/(Plasma membrane|Membrane)/i` (present in both eukaryotic and prokaryotic cells) is the thing encapsulating the cytoplasm. It's what keeps the guys of the cell inside and controls the movement of substances coming into / going out of the cytoplasm.
 
@@ -349,7 +407,7 @@ Facts about cell membranes:
    * membrane proteins such as a carrier protein or a channel protein (see fluid mosaic model).
    * membrane wrapper (see golgi).
 
-### Cell Wall
+#### Cell Wall
 
 The `{bm} cell wall` (present in both eukaryotic and prokaryotic cells) is a stiff layer around the membrane meant for protection. *Not all cells have a cell wall* -- for example, animal cells don't but plant cells do. Technically, the cell wall (if it exists) isn't considered to be part of the cell. The membrane and everything in it is.
 
@@ -371,7 +429,7 @@ text 0.5 0.5 cell wall
 text 0.5 0.6 (middle layer)
 ```
 
-### Capsule
+#### Capsule
 
 The `{bm} Capsule` (present in prokaryotic cell only) is the outermost layer of some types of cells (typically bacteria cells). Capsules are made up of carbohydrates and there mainly to help the cell stick itself to the environment.
 
@@ -390,7 +448,7 @@ text 0.5 0.6 (outter-most layer)
 Although eukaryotic cells don't have capsules, they do have carbohydrates on their outside. Those carbohydrates aren't organized as a capsule though: https://www.quora.com/Do-some-eukaryotic-cells-have-capsules-or-is-it-just-prokaryotes-Are-there-exceptions-of-eukaryotes-having-capsules. Is this talking about the same carbohydrates that are embedded in the membrane (glycolipids / glycoproteins).
 ```
 
-### Ribosome
+#### Ribosome
 
 `{bm} Ribosome` (present in both eukaryotic and prokaryotic cells) are tiny molecular machines inside the cytoplasm that take in mRNA molecules (portions of DNA that have been written out) and produce proteins. Ribosomes themselves are structures made of proteins and RNA.
 
@@ -408,7 +466,7 @@ text 0.7 0.5 ribosomes
 text 0.7 0.65 (little blue dots)
 ```
 
-### Appendage
+#### Appendage
 
 Some cells have appendages that help them move (or stay put). There are different types of appendages...
   * `{bm} Flagellum` are tails that extend from the cell (e.g. tail on a sperm cell). There can be more than 1 flagellum.
@@ -427,7 +485,7 @@ Some cells have appendages that help them move (or stay put). There are differen
   text 0.5 0.5 flagellum
   ```
 
-## Fluid Mosaic Model
+### Fluid Mosaic Model
 
 The `{bm} fluid mosaic model` is the accepted model for how cell membranes work. The model says that a cell membrane is composed of a phospholipid bilayer with proteins, lipids, and carbohydrates floating around on either side or embedded in between.
 
@@ -480,7 +538,7 @@ See first diagram in this section for an example of each of the molecules listed
 
 The term `{bm} facilitated diffusion` refers to the movement of molecules across the membrane via proteins embedded in the membrane (e.g. channel proteins and/or carrier proteins). These molecules wouldn't be able to cross the membrane by themselves. For example, the sodium potassium pump (carrier protein) helps sodium and potassium ions move across the cell membrane by opening/closing its gates.
 
-## History of Modern Cell Theory
+### History of Modern Cell Theory
 
 The first record of a cell was in 1665 when `{bm} Robert Hooke` published a book called The Micrographia. The book contains drawings of observations he made while looking at various dead organisms through a rudimentary microscope.
 
@@ -506,7 +564,7 @@ It's still an open question as to how the first / initial cell came to be. The c
 There are an estimated 37 trillion cells in the human body.
 ```
 
-# Eukaryotic Cell
+## Eukaryotic Cell
 
 ```{img}
 Animal_cell_structure_en.svg
@@ -571,11 +629,11 @@ The following are descriptions for some of the organelles shown in the diagram a
 * <span style="color:#ff0000ff">**`{bm-ri} Chloroplast`**</span> (plant / algae) - See chloroplast section.
 * <span style="color:#800080ff">**`{bm-ri} Vacuole`**</span> (mostly plant / algae) - See vacuole section. 
 
-## Organelle
+### Organelle
 
 Eukaryotic cells have membrane-bound sub-compartments, called `{bm} organelle`s, that house different functional regions of the cell. The following subsections detail common organelles.
 
-### Nucleus
+#### Nucleus
 
 `{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` is an organelle that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
 
@@ -588,7 +646,7 @@ scale 0.75 0.75
 
 Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
 
-### Endoplasmic Reticulum
+#### Endoplasmic Reticulum
 
 `{bm} Endoplasmic Reticulum` is layered membrane (organelle?) that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
 
@@ -607,7 +665,7 @@ Recall that ribosomes are what translate mRNA to proteins. Since the endoplasmic
 1. travels to the endoplasmic reticulum via the connected pores,
 2. then travels to the membrane of the endoplasmic reticulum where it ends up hitting ribosomes embedded in the (thereby producing proteins).
 
-### Golgi
+#### Golgi
 
 `{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> are layered membrane (organelle?) that look similar to rough endoplasmic reticulum but aren't attached to the nucleus. Golgi package molecules (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
 
@@ -624,7 +682,7 @@ By Kelvinsong - Own work, CC BY 3.0, https://commons.wikimedia.org/w/index.php?c
 scale 0.15 0.15
 ```
 
-### Mitochondria
+#### Mitochondria
 `{bm} Mitochondria/(Mitochondria|Mitochondrion)/i`</span> are organelles responsible for cellular respiration: the process of producing Adenosine Triphosphate (ATP) from molecules such as sugars. ATP is a chemical that provides energy to drive various biological processes (e.g. muscle contractions). As such, mitochondria are often referred to as "the power house of the cell."
 
 ```{img}
@@ -662,7 +720,7 @@ Mitochondria have their own independent DNA (different from the DNA in the nucle
 Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
 
 
-### Lysosome
+#### Lysosome
 
 `{bm} Lysosome`s are organelles (animal cells only) that help break down waste `{bm-ri} products` / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
 
@@ -678,7 +736,7 @@ crop 0.05 0.05 0.9 0.9
 scale 0.5 0.5
 ```
 
-### Peroxisome
+#### Peroxisome
 
 `{bm} Peroxisome`s are organelles that are similar to Lysosomes -- both are small organelles that break down unwanted substances. The difference is that peroxisomes have different types of enzymes that require oxygen (oxidative enzymes).
 
@@ -693,7 +751,7 @@ By Qef - Own work by uploader, based on the arrangement of a bitmap equivalent b
 scale 0.5 0.5
 ```
 
-### Chloroplast
+#### Chloroplast
 
 `{bm} Chloroplast`s are organelle (only plant and algae cells) responsible for photosynthesis. Photosynthesis is the process of taking in light and using it to build sugars from water and carbon dioxide. Those sugars are then used by the mitochondria to produce energy in a process called cellular respiration.
 
@@ -726,7 +784,7 @@ The major parts of chloroplast are...
 
  Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis). A descendant of that organism may be `{bm} cyanobacterium/(cyanobacterium|cyanobacteria)/i`, which has a similar ability to generate sugars from light (see [Wikipedia](https://en.wikipedia.org/w/index.php?title=Chloroplast&oldid=918130624#Parent_group:_Cyanobacteria)).
 
-### Vacuole
+#### Vacuole
 
 `{bm} Vacuole`s are organelle (mostly plant and algae cells) responsible for storage (water, food, waste?) and enzymes that help break things down. Vacuoles are typically found in plant and algae cells, but may also exist in animal cells. The ones in plants / algae tend to be much larger.
 
@@ -739,7 +797,7 @@ In biology, turgor pressure or turgidity is the pressure of the cell contents ag
 scale 0.7 0.7
 ```
 
-## Chromosome
+### Chromosome
 
 The genome of eukaryotes are split into linear strands of DNA. These linear DNA strands come in 2 forms...
 
@@ -814,7 +872,7 @@ rect 0.85 0.78 0.14 0.215
 An organism has an extra / missing copy of a chromosome (e.g. 2 expected but 3 present) is called `{bm} aneuploid`. Depending on the species and circumstances, aneuploidy may lead to death, disease, or possibly no adverse effects at all. For example, allosomal aneuploidy in certain female mammals rarely leads to adverse effects because of X-linked inactivation.
 
 
-## Mitosis (Cell Cycle)
+### Mitosis (Cell Cycle)
 
 The `{bm} cell cycle` is the sequence of events a cell goes through from when it's created (divides off) up to when it divides itself. In eukaryotic cells, the cell cycle has 2 major phases:
 
@@ -830,7 +888,7 @@ Animal cell cycle
 scale 0.35 0.35
 ```
 
-### Interphase
+#### Interphase
 
 The majority of a cell's life is spent in `{bm} interphase`, where it's growing and going about its business.
 
@@ -877,7 +935,7 @@ crop 0 0 0.446 1
 
    The cell grows more.
 
-### Mitotic Phase
+#### Mitotic Phase
 
 The `{bm} mitotic phase/(Mitotic phase|Mitotic|Mitosis)/i` is portion of a cell's life where it divides into 2 new daughter cells.
 
@@ -941,7 +999,7 @@ crop 0.446 0 0.554 1
 
    During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
 
-## Meiosis
+### Meiosis
 
 `{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(egg)/i`
 `{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(ova)/i` 
@@ -970,7 +1028,7 @@ Meiosis Stages
 scale 0.35 0.35
 ```
 
-### Meiosis I
+#### Meiosis I
 
 During `{bm} meiosis I`, a germ cell divides in such a way that, rather than exactly duplicating each chromosome, it duplicates and mixes between each homologous chromosome pair. That is, chromosome pairs that are different versions of each other end up swapping segments (chromosomal crossover).
 
@@ -1071,7 +1129,7 @@ crop 0 0 0.5260 1.0
 
     During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with telophase I (it isn't a part of telophase I), but it starts around the same time.
 
-### Meiosis II
+#### Meiosis II
 
 During `{bm} meiosis II`, each daughter cell from meiosis I will divide again, but this time the sister chromatid pairs split and each resulting daughter cell keeps 1. In other words, each daughter cell from meiosis I will divide again to become 2 gamete cells.
 
@@ -1142,7 +1200,7 @@ crop 0.5260 0 0.4740 1.0
 
     During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with telophase II (it isn't a part of telophase II), but it starts around the same time.
 
-## Cancer
+### Cancer
 
 `{bm} Cancer` refers to the uncontrolled division of cells (mitosis) in a multicellular organism, typically brought on by one or more mutations.
 
@@ -1158,7 +1216,7 @@ Mutations of two types of cell cycle regulators can promote the development of c
 
 Tumor cells may continue to mutate at a more rapid pace than other cells. If one of those mutations results in tumor cells breaking off from the original mass of tumor cells and floating around the body, the cancer is said to have `{bm} metastasize`d. 
 
-## Fertilization
+### Fertilization
 
 `{bm} Fertilization/(fertilization|fertilize)/i` is the act of bringing together a male gamete (e.g. sperm) to a female gamete (e.g. egg_GAMETE) (cell types produced through meiosis). In humans, a fertilized egg_GAMETE is referred to as a ...
 
@@ -1214,7 +1272,7 @@ By Mikael Häggström.When using this image in external works, it may be cited a
 scale 0.5 0.5
 ```
 
-## Apoptosis
+### Apoptosis
 
 `{bm} Apoptosis` is a form of programmed cell death in multicellular organisms. For example, apoptosis can be triggered by the cell...
 
@@ -1241,7 +1299,7 @@ By National institute on alcohol abuse and alcoholism (NIAAA) - File:Structural 
 scale 0.5 0.5
 ```
 
-# Prokaryotic Cell
+## Prokaryotic Cell
 
 ```{img}
 Average_prokaryote_cell-_en.svg
@@ -1253,7 +1311,7 @@ By Mariana Ruiz Villarreal, LadyofHats - Own work (Source: Typical prokaryotic c
 
 Prokaryotes have a single circular-strand of DNA. They can only be single-cellular organisms (e.g. bacteria).
 
-# Enzyme
+## Enzyme
 
 An `{bm} enzyme` is a molecule that takes in a specific set of input molecules and transforms them into a specific set of output molecules. The transformation takes the inputs and either ...
  * assembles them into new larger molecules (N to 1).
@@ -1307,7 +1365,7 @@ scale 0.5 0.5
 
 ```
 
-## Metabolic Pathway
+### Metabolic Pathway
 
 A `{bm} metabolic pathway` is a network/graph of enzymes that produces a final resulting molecule. Each enzyme produces molecules that feed into other enzymes in the pathway, eventually forming the final molecule. The term `{bm} intermediate/(intermediate)_ENZYME/` refers to an output of one enzyme that’s used as an input by another.
 
@@ -1320,7 +1378,7 @@ Example metabolic pathway
 scale 0.5 0.5
 ```
 
-## Anabolism
+### Anabolism
 
 Metabolism can be broken down into 2 categories: anabolism (building-up) and catabolism (breaking-down).
 
@@ -1341,7 +1399,7 @@ An example of anabolism is photosynthesis: plants will bond carbon dioxide gas (
 
 `{kt} 6CO_2 + 6H_2O + energy \to C_6H_{12}O_6 + 6O_2`
 
-## Catabolism
+### Catabolism
 
 Metabolism can be broken down into 2 categories: anabolism (building-up) and catabolism (breaking-down).
 
@@ -1362,7 +1420,7 @@ An example of catabolism is cellular respiration: cells will break down the bond
 
 `{kt} C_6H_{12}O_6 + 6O_2 \to 6CO_2 + 6H_2O + energy`
 
-# Nucleotides
+## Nucleotides
 
 `{bm} Nucleic Acid` is a molecule (heteropolymer) that's built up from other molecules called `{bm} nucleotide`s (monomers). Nucleic acid comes in 2 flavours: DNA and RNA. Each nucleotide consists of a sugar molecule (ribose in RNA / deoxyribose in DNA) attached to a phosphate group and a nitrogen-containing base_nucleotide.
 
@@ -1395,7 +1453,7 @@ The base_nucleotide is what distinguishes the types of nucleotides from each oth
  * A only ever binds to T/U (e.g. AT or TA in DNA, AU or UA in RNA)
  * G only ever binds to C (e.g. GC or CG)
 
-# DNA
+## DNA
 
 `{bm} Deoxyribonucleic acid` (`{bm} DNA`) is a nucleic acid molecule that contains the instructions needed for the growth/functioning/maintenance of an organism. Depending on the type of organism, DNA is located in different parts fo the cell.
  * For prokaryotes, DNA is free-floating in the cytoplasm.
@@ -1425,7 +1483,7 @@ Terminology specific to DNA:
  * `{bm} gene/\b(genes|gene)\b/i` - A section of an organism's DNA that contains instructions for some functionality, typically for building some protein.
  * `{bm} allele` - A version of a gene (different coding at the some position of DNA).
 
-# RNA
+## RNA
 
 `{bm} Ribonucleic acid` (`{bm} RNA/(RNA)/`) is a nucleic acid molecule used in various ways to facilitate building proteins. It can also act as an enzyme (ribozyme) or contain the genetic information for some viruses.
 
@@ -1457,7 +1515,7 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
  * `{bm} tRNA/(tRNA)/` or `{bm} transfer RNA` - Brings to the ribosome the amino acids required to build the protein that the mRNA is requesting.
  * `{bm} rRNA/(rRNA)/` or `{bm} ribosomal RNA` - Makes up a large portion of the ribosome (60%). The rest of the ribosome is protein.
 
-# Classical Genetics
+## Classical Genetics
 
 `{bm} Classical genetics` is study of the probability of which genes get passed down from parents to offspring and the probability of which genes express themselves into some physically observable trait(s). It's focused exclusively on sexually reproducing eyukarotic organisms. The term...
  * `{bm} genotype` refers to the alleles present for a set of one or more genes.
@@ -1548,7 +1606,7 @@ Both parents have 1 red allele and 1 white allele for color, and 1 true allele a
 [W][F], [WR][FT], [WR][FF], [WW][FT], [WW][FF]
 ```
 
-## Laws
+### Laws
 
 Classical genetics was started in the 1800s by a scientist monk named `{bm} Gregor Mendel/(Gregor Mendel|Gregor Johann Mendel)/` (prior to the discovery of DNA) with his model called `{bm} Mendelian inheritance/(Mendelian inheritance|Mendelian genetics)/i`. Gregor Mendel wasn't aware of DNA and genes (hadn't been discovered yet) and instead created his model based on some abstract idea of "inheritable characteristics." Classical genetics corrects and extends the model introduced by Gregor Mendel by taking DNA / chromosomes / genes / alleles / etc.. into account.
 
@@ -1560,7 +1618,7 @@ Mendel originally had 3 laws:
 
 The subsections below describe these laws in their modern / corrected form.
 
-### Segregation
+#### Segregation
 
 ```{note}
 Segregation was originally discovered by Gregor Mendel as Mendelian inheritance's first law / law of segregation.
@@ -1603,7 +1661,7 @@ During meiosis, each gamete cell gets 1 chromosome from each homologous pair (1 
 There are cases where a gamete gets 2 chromosomes instead of 1. Depending on the chromosome, it may end up being fatal or cause disease (or be benign). See aneuploid section.
 ```
 
-### Independent Assortment
+#### Independent Assortment
 
 ```{note}
 Independent assortment was originally discovered by Gregor Mendel as Mendelian inheritance's second law / law of independent assortment. It states that inherited attributes are passed down from parent to child independently of each other. For example, the odds that a baby ends up with green eyes isn't linked to the odds that it'll have dark hair. It turns out that this isn't entirely correctly.
@@ -1643,7 +1701,7 @@ See section on meiosis for more in depth description of how this steps happen.
 Unsure how this extends to organisms that are polyploid (have more than 2 homologous chromosomes / more than 2 alleles for each gene).
 ```
 
-### Dominance
+#### Dominance
 
 ```{note}
 Dominance was originally discovered by Gregor Mendel as Mendelian inheritance's third law / law of dominance. It states in a cross of parents that are pure for contrasting traits, only one form of the trait will appear in the next generation. Offspring that are hybrid for a trait will have only the dominant trait in the phenotype while the recessive trait remains dormant. It turns out that this isn't entirely correct (it's close) -- more scenarios have come up: incomplete dominance, co-dominance, etc..
@@ -1725,7 +1783,7 @@ If the alleles present for a gene are...
  * are both dominant, it's said to be `{bm} homozygous dominant`. In the example above, [AB]/[BA]/[AA]/[BB] are all homozygous dominant (both alleles are dominant alleles).
  * are both recessive, it's said to be `{bm} homozygous recessive`. In the example above, [OO] is heterozygous recessive (both alleles are recessive alleles).
 
-## Lethality
+### Lethality
 
 `{bm} Lethal allele/(lethal allele|lethal gene|\blethals\b)/i`s are alleles that cause the death of an organism that carries them. These alleles may cause death during development (e.g. gestation in the womb) or possibly after having fully matured.
 
@@ -1749,7 +1807,7 @@ Lethal alleles may fall into one of many categories. A ...
 Don't get confused. Dominant lethals / recessive lethals have nothing to do with dominant alleles / recessive alleles. The only thing they state is how many copies of the allele are needed for it to be lethal (1 / heterozygous or 2 / homozygous). Whether that lethal allele is a dominant allele / recessive allele isn't a requirement.
 ```
 
-## Expressivity
+### Expressivity
 
 `{bm} Expressivity` is the concept that, even if a known genotype is responsible for a phenotype, organisms having that genotype will show a variable expression of that phenotype. For example, in certain genetic disorders, the same genotype may result in stronger or weaker forms of that disorder (maybe even to the point of not developing at all).
 
@@ -1795,7 +1853,7 @@ Don't get confused. Dominant lethals / recessive lethals have nothing to do with
 It was never really expressed why this happens. My only guess is environmental factors or maybe some type of intrinsic built-in genetic randomness (e.g. not enough of the specific allele for a disease randomly collided with whatever other molecule(s) were required to express the phenotype).
 ```
 
-## Sex-linkage
+### Sex-linkage
 
 In humans / mammals, sex is determined by the XY chromosomes. In...
 
@@ -1813,7 +1871,7 @@ For example, the SRY gene contributes to development of testicles and is only fo
 
 Genes on the XY chromosomes are called `{bm} sex-linked gene/(sex-linked disorder|sex-linked disease|sex-linked gene|sex-linked allele|sex-linked condition)/i`s.
 
-### X-linkage
+#### X-linkage
 
 Since males only have a single copy of both X and Y chromosomes, standard dominant allele / recessive allele rules DO NOT apply to these chromosomes in males. For example, regardless of if an allele on the X chromosome is a dominant allele or recessive allele, it will always express in males. There is no second X chromosome to provide a second allele for that gene.
 
@@ -1844,7 +1902,7 @@ As such, X-linked recessive traits are much more common in men than they are wom
 To find out the exact mechanism around X-linked recessive traits, see the section on x-linked inactivation below.
 ```
 
-### X-inactivation
+#### X-inactivation
 
 The reason why males can function with only 1 copy of an X chromosome is because of `{bm} X-linked inactivation/(x-linked inactivation|x-inactivation)/i`. A single X chromosome is all that's needed for a human / certain mammals to operate normally. If more than 1 copy of an X chromosome is present in a cell, the cell chooses 1 at random to use while the others are made inactive. Inactive X chromosomes are compacted into small dense structures called `{bm} Barr bodies/(Barr bodies|Barr body)/i` that prevent most of their genes from expressing.
 
@@ -1864,7 +1922,7 @@ How is it that x-linked recessive traits happen if only 1 X chromosome is ever a
 
 For example, color blindness is an x-linked recessive trait. All copies of the X chromosome have to have the color-blind allele for human to be color blind. If one of the X chromosomes doesn't, some of the eye cells will be able to see color. The cells that do see color will relay color information back to the brain (the person will see color).
 
-### Punnett Squares Examples
+#### Punnett Squares Examples
 
 The following are examples showing the probability that offspring end up with the recessive X-linked disease known as hemophilia.
 
@@ -1934,7 +1992,7 @@ h (X chromosome), h (X) H (X)     , h (X) N/A (Y)
    In other words, out of all possible male children (XY) what are the chances of hemophilia. Punnett square below shows 2 male children, only one of which has H (1 hemophilia alleles).
    ```
 
-## Pedigree
+### Pedigree
 
 TODO: FILL IN PEDIGREE SECTION
 
@@ -1970,7 +2028,7 @@ TODO: FILL IN PEDIGREE SECTION
 
 TODO: FILL IN PEDIGREE SECTION
 
-# Adenosine Triphosphate
+## Adenosine Triphosphate
 
 `{bm} /\b(ATP)(?:s{0,1})\b/` `{bm} Adenosine Triphosphate` (ATP) is a molecule that provides energy to drive various biological processes (e.g. muscle contractions). The third phosphoral group at the very end has a high-energy bond. When broken, energy is released and the resulting molecules are the broken up phosphoral group and `{bm} /\b(ADP)(?:s{0,1})\b/` `{bm} Adenosine Diphosphate` (ADP).
 
@@ -1987,7 +2045,7 @@ scale 0.25 0.25
 
 ATP is produced in the mitochondria. Similar to how the mitochondria is referred to as the powerhouse of the cell, ATP is often referred to as the energy currency of the cell / energy store for the cell.
 
-# Transport
+## Transport
 
 There are 2 different types of mechanism used to transport molecules in and out of a cell: passive transport and active transport.
 
@@ -2019,7 +2077,7 @@ There are 2 different types of mechanism used to transport molecules in and out 
 
 Note that the active transport in the example above is the opening/closing of the enzyme ends, not the exchange of sodium and potassium. Energy (ATP) is being used to shape-shift the enzyme to open/close (active transport) while the sodium and potassium are passively entering and exiting the gates (passive transport via facilitated diffusion).
 
-# Osmosis
+## Osmosis
 
 `{bm} Osmosis/(osmosis|osmotic)/i` is the passive transport of solvent molecules (typically water), across a semipermeable membrane, from areas where solutes are less concentrated to areas where solutes are more concentrated.
 
@@ -2087,7 +2145,7 @@ Human erythrocytes (red blood cells) viewed by phase contrast light microscopy. 
 scale 0.55 0.55
 ```
 
-# Photosynthesis
+## Photosynthesis
 
 `{bm} Photosynthesis` is the process by which certain organisms convert light energy (photons) to chemical energy (sugars). These organisms are called `{bm} Photoautotroph`s, and they include ...
 
@@ -2162,7 +2220,7 @@ digraph G {
 }
 ```
 
-# Cellular Respiration
+## Cellular Respiration
 
 `{bm} Cellular respiration` is the process by which certain organisms convert glucose (sugar) to energy. These organisms include ...
 
@@ -2268,7 +2326,7 @@ digraph G {
 }
 ```
 
-# Sodium Potassium Pump
+## Sodium Potassium Pump
 
 The `{bm} sodium potassium pump` is an transmembrane enzyme that allows the exchange of sodium ions and potassium ions across the cell membrane by opening and closing its ends.
 
@@ -2289,7 +2347,7 @@ This charge difference is further reinforced by membrane channel proteins which 
 
 This charge difference is referred to as the `{bm} resting membrane potential` for a cell.
 
-# Microscopy
+## Microscopy
 
 `{bm} Microscope`s are devices used to magnify (zoom in) on objects, such that you can see things that you normally would be too small to see on your own. The term microscope comes from the words...
 * micro, meaning small.
