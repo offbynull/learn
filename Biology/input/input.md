@@ -2060,19 +2060,19 @@ rect 0 0.7 1 0.15
 text 0.3 0.5 sibling line
 ```
 
-Pedigree charts can be used to infer the odds that a child will end up with the specific phenotype that the chart is for. For example, if the phenotype is caused by a single allele (pleiotropic) and you know that the allele needs to be homozygous recessive for the phenotype to be expressed (recessive allele), you can infer the genotypes of the parents...
+Pedigree charts can be used to infer / deduce the odds that a child will end up with the specific phenotype that the chart is for. For example, if the phenotype is caused by a single allele (pleiotropic) and you know that the allele needs to be homozygous recessive for the phenotype to be expressed (recessive allele), you can infer the genotypes of the parents...
 
 ```{img}
 Pedigree with sex and phenotype labeling.svg
-Example pedigree chart close-up with highlighted marriage line, line of descent, and sibling line.
+Example pedigree chart mating pair close-up genotype possibilities.
 This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
 
 crop 0.35 0 0.18 0.2
-scale 3 3
+scale 2.5 2.5
 expand 1.5 1.5 0.25 0.5
 
 bg_color #00000000
-font_size 30
+font_size 25
 text 0.0 0.25 [TT] / [Tt]
 text 0.65 0.25 [tt]
 ```
@@ -2089,11 +2089,28 @@ t, tT, tT
 t, tT, tT
 ```
 
+0% chance that the child ends up with [tt] in this scenario, meaning the phenotype will never express in any of the children.
+
 ```{csv}
  , T , t
 t, tT, tt ✓
 t, tT, tt ✓
 ```
+
+50% chance that the child ends up with [tt] in this scenario, meaning the phenotype has a 50/50 chance of showing up in each child.
+
+In the example above, if the 2 parents already had a few children and those children were present in the pedigree chart, you may be able to narrow the male down to just one of the genotype possibilities...
+
+```{img}
+Pedigree with sex and phenotype labeling.svg
+Example pedigree chart mating pair and children close-up genotype possibilities.
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+
+crop 0.25 0 0.75 0.55
+scale 2.5 2.5
+```
+
+Since we can see children exhibiting the phenotype, we know that that the [TT] genotype of the male can't be the case. If it were, no children would end up with the phenotype. The only other option is the [Tt] genotype.
 
 ## Adenosine Triphosphate
 
