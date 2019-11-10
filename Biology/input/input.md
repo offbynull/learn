@@ -40,7 +40,7 @@ Examples of matter made of multiple types of atoms:
 
 ![By AG Caesar - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67059219](240px-Atom_Diagram.svg.png)
 
-The building blocks of atoms are protons, neutrons, and electrons. Protons and neutrons form the nucleus of the atom while electrons jump around in orbit of the nucleus.
+The building blocks of atoms are referred to as `{bm} sub-atomic particle`s: protons, neutrons, and electrons. Protons and neutrons form the nucleus_atom of the atom while electrons jump around in orbit of the`{bm} nucleus/\b(nucleus|nuclei)_atom\b/i`.
 
 For each atom, the number of ...
 
@@ -58,36 +58,32 @@ The periodic table below orders atoms by the number of protons (also called the 
 
 ### Atomic Mass
 
-`{bm} Atomic mass` is defined as the mass of the protons and neutrons that make up an atom, but not the electrons . 1 `{bm} atomic mass unit` (`{bm} amu/\b(amu\b)/i`) is `{kt} 1.66054 \cdot 10^{-24}` -- the mass of carbon-12 divided by 12.
-
-
 ```{note}
-Why not include electrons into mass calculations? Apparently they contribute little mass so they aren't counted. Also the number of electrons on an atom is transient (it changes easily).
-e
-Why carbon-12? it's the most abundant form of carbon on earth.
+The notion of atomic weight in chemistry is different from weight in physics -- read below.
 ```
 
-TODO: Define atomic weight
+The `{bm} atomic mass` of an atom is measured in `{bm} atomic mass unit`s (`{bm} amu/\b(amu|amus)\b/i`), where 1 amu is: `{kt} 1.66054 \cdot 10^{-24}` grams. Note that 1 amu is roughly equal to the mass of a single proton / neutron:
 
-TODO: Define atomic weight
+* 1 proton = `{kt} 1.6726231 \cdot 10^{-24}` gram
+* 1 neutron = `{kt} 1.674920 \cdot 10^{-24}` gram
+* 1 electron = `{kt} 9.1093897 \cdot 10^{-28}` gram
 
-TODO: Define atomic weight
+That's because the constant for 1 amu was derived by measuring the mass of carbon-12 and dividing it by 12. Carbon-12 has exactly 6 protons and 6 neutrons (12 total). Since protons and neutrons have roughly the same mass (and electrons have almost no mass), when carbon-12 is divided by 12 it roughly gives the mass of a single proton / neutron.
 
-TODO: Define atomic weight
+```{note}
+Carbon-12 was chosen because it's the most common carbon isotope on earth (99% abundance).
+```
 
-TODO: Define atomic weight
+The `{bm} atomic weight` / `{bm} relative atomic mass` of an atom is the weighted average of atomic mass across all its isotopes, where each isotope is weighted by how abundant it is. For example, there are 3 isotopes for the some imaginary atom type...
+ * Imaginary-12 - 3 amu and 10% abundance
+ * Imaginary-13 - 4 amu and 30% abundance
+ * Imaginary-14 - 5 amu and 60% abundance
 
-TODO: Define atomic weight
+Its atomic weight can be calculated as `{kt} 3 \cdot 0.1 + 4 \cdot 0.3 + 5 \cdot 0.6 = 4.6`.
 
-TODO: Define atomic weight
-
-TODO: Define atomic weight
-
-TODO: Define atomic weight
-
-TODO: Define atomic weight
-
-TODO: Define atomic weight
+```{note}
+How are abundances calculated? A chunk of the naturally occurring element is dug up and passed through a machine called a Gas Chromatograph-Mass Spectrometer. The machine isolates by weight and shows how abundant each weight is.
+```
 
 ## Molecule
 
@@ -280,7 +276,7 @@ Lipids are not always fats. All fats are lipids but not all lipids are fats.
 
 Recall that...
 1. a water molecule consists of 2 hydrogen atoms connected to an oxygen atom via covalent bonds. A `{bm} covalent bond` is a pair of electrons that both atoms share, thus bonding the atoms together.
-1. the position of an electron is based on probability. Electrons aren't fixed in a certain position or neatly orbiting around a nucleus as certain diagrams show. Rather, they're constantly buzzing/hopping around the nucleus. Depending on their environment, they may be more likely to be at certain locations vs other locations.
+1. the position of an electron is based on probability. Electrons aren't fixed in a certain position or neatly orbiting around a nucleus_atom as certain diagrams show. Rather, they're constantly buzzing/hopping around the nucleus_atom. Depending on their environment, they may be more likely to be at certain locations vs other locations.
 
 Oxygen atoms are extremely `{bm} electronegative`, meaning that oxygen has the propensity to pull the buzzing/hopping electrons more around itself than the atoms it's bound to. As such, in a water molecule, the electrons will spend more time solely around the oxygen atom than they do the hydrogen atom or a position that binds the hydrogen and oxygen together. This is what gives the oxygen atom in a water molecule a `{bm} weakly negative` charge (as indicated by δ-) while the hydrogen atoms have a `{bm} weakly positive` charge (as indicated by δ+). These types of charged molecules are called `{bm} polar molecule`s.
 
@@ -614,13 +610,13 @@ fg_color #007f7fff
 rect 0.18 0.8 0.27 0.15
 ```
 
-`{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells are typically larger and have membrane-bound sub-compartments, called organelle, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus.
+`{bm} Eukaryotic/(Eukaryote|Eukaryotic)/i` cells are typically larger and have membrane-bound sub-compartments, called organelle, that hold in the guts of different regions of the cell. For example, their DNA is encapsulated in a organelle called the nucleus_cell.
 
 Eukaryotes have their DNA broken up into multiple strands called chromosomes. They can either be single-cellular organisms (e.g. amoeba) or multi-cellular organisms (e.g. human). Single-cellular organism that are eukaryotic are called `{bm} protist`s.
 
 The following are descriptions for some of the organelles shown in the diagram above.
 
-* <span style="color:#ff00ffff">**`{bm-ri} Nucleus`**</span> - See nucleus section.
+* <span style="color:#ff00ffff">**`{bm-ri} Nucleus`**</span> - See nucleus_cell section.
 * <span style="color:#0000ffff">**`{bm-ri} Endoplasmic Reticulum`**</span> - See endoplasmic reticulum section.
 * <span style="color:#007f7fff">**`{bm-ri} Golgi`**</span> - See golgi section.
 * <span style="color:#00ff00ff">**`{bm-ri} Mitochondria`**</span> - See mitochondria section.
@@ -635,7 +631,7 @@ Eukaryotic cells have membrane-bound sub-compartments, called `{bm} organelle`s,
 
 #### Nucleus
 
-`{bm} Nucleus/\b(Nucleus|Nuclei)\b/i` is an organelle that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus.
+`{bm} Nucleus/\b(Nucleus|Nuclei)_cell\b/i` is an organelle that contains DNA (genetic information required for the functioning and replication). Both prokaryotic and eukaryotic cells have DNA, but only eukaryotic cells have a nucleus_cell. In prokaryotic cells, the DNA flows around freely instead of being encapsulated in a nucleus_cell.
 
 ```{img}
 Diagram_human_cell_nucleus.svg
@@ -644,11 +640,11 @@ By Mariana Ruiz LadyofHats - I did it myself with adobe ilustrator using the inf
 scale 0.75 0.75
 ```
 
-Most eukaryotic cells contain a single nucleus, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei, each containing different DNA (its DNA is fragmented across 2 nuclei).
+Most eukaryotic cells contain a single nucleus_cell, but some contain can have 0 and others can have more than one. An example of 0 is blood cells -- mature blood cells don't have any DNA, therefore no nucleus_cell. An example of more than 1 is the organism Oxytricha trifillax -- it contains 2 nuclei_cell, each containing different DNA (its DNA is fragmented across 2 nuclei_cell).
 
 #### Endoplasmic Reticulum
 
-`{bm} Endoplasmic Reticulum` is layered membrane (organelle?) that surrounds the nucleus and is directly connected to pores on the nucleus. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
+`{bm} Endoplasmic Reticulum` is layered membrane (organelle?) that surrounds the nucleus_cell and is directly connected to pores on the nucleus_cell. Large portions of the endoplasmic reticulum's membrane have ribosomes attached. The parts that have ribosomes attached are called `{bm} rough endoplasmic reticulum` while the parts that don't are called `{bm} smooth endoplasmic reticulum`.
 
 ```{note}
 It's called rough endoplasmic reticulum because the ribosomes make the surface look rough.
@@ -661,13 +657,13 @@ By OpenStax - https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface, CC BY 
 scale 0.5 0.5
 ```
 
-Recall that ribosomes are what translate mRNA to proteins. Since the endoplasmic reticulum is directly connected to the nucleus (via pores on the nucleus), it provides a fairly straight-forward path for protein generation: mRNA produced in the nucleus...
+Recall that ribosomes are what translate mRNA to proteins. Since the endoplasmic reticulum is directly connected to the nucleus_cell (via pores on the nucleus_cell), it provides a fairly straight-forward path for protein generation: mRNA produced in the nucleus_cell...
 1. travels to the endoplasmic reticulum via the connected pores,
 2. then travels to the membrane of the endoplasmic reticulum where it ends up hitting ribosomes embedded in the (thereby producing proteins).
 
 #### Golgi
 
-`{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> are layered membrane (organelle?) that look similar to rough endoplasmic reticulum but aren't attached to the nucleus. Golgi package molecules (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
+`{bm} Golgi/(Golgi Apparatus|Golgi Complex|Golgi Body|Golgi)/i`</span> are layered membrane (organelle?) that look similar to rough endoplasmic reticulum but aren't attached to the nucleus_cell. Golgi package molecules (e.g. proteins) for travel to either another part of the cell or outside of the cell. They do this by pinching off parts of their membrane to wrap around the molecule.
 
 They're also responsible for building lysosomes (cell digestion machines).
 
@@ -715,7 +711,7 @@ The major parts of chloroplast are...
  * <span style="color:#008080ff">`{bm} matrix`</span> - Internal fluid of mitochondria. Contains the guts (ribosomes, mitochondrial DNA, and more).
  * <span style="color:#808000ff">`{bm} cristae`</span> - Long caverns that encapsulate and connect different parts of the matrix.
 
-Mitochondria have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis).
+Mitochondria have their own independent DNA (different from the DNA in the nucleus_cell). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis).
 
 Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
 
@@ -782,7 +778,7 @@ The major parts of chloroplast are...
 
  `{bm} Chlorophyll` is a pigment / compound found in chloroplast that absorbs light and uses it to produce carbohydrates. It's found in the thylakoid membrane as well as the stroma, and it only absorbs red and blue light (while reflecting green).
 
- Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis). A descendant of that organism may be `{bm} cyanobacterium/(cyanobacterium|cyanobacteria)/i`, which has a similar ability to generate sugars from light (see [Wikipedia](https://en.wikipedia.org/w/index.php?title=Chloroplast&oldid=918130624#Parent_group:_Cyanobacteria)).
+ Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus_cell). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis). A descendant of that organism may be `{bm} cyanobacterium/(cyanobacterium|cyanobacteria)/i`, which has a similar ability to generate sugars from light (see [Wikipedia](https://en.wikipedia.org/w/index.php?title=Chloroplast&oldid=918130624#Parent_group:_Cyanobacteria)).
 
 #### Vacuole
 
@@ -922,7 +918,7 @@ crop 0 0 0.446 1
    scale 0.1 0.1
    ```
 
-   The chromatin in the nucleus gets replicated to become a sister chromatid pair (2 copies that are attached). The centrosome also gets duplicated.
+   The chromatin in the nucleus_cell gets replicated to become a sister chromatid pair (2 copies that are attached). The centrosome also gets duplicated.
 
 1. `{bm} G2 phase` / `{bm} Gap 2 phase` /  `{bm} Gap II phase`
 
@@ -956,7 +952,7 @@ crop 0.446 0 0.554 1
    scale 0.1 0.1
    ```
 
-   The sister chromatid pairs start to condense into an X shape, where the only part they remain attached at is their centromeres. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
+   The sister chromatid pairs start to condense into an X shape, where the only part they remain attached at is their centromeres. The membrane of the nucleus_cell goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
 
    Microtubules are attached from the centrosomes to the kinetochore of the sister chromatid pairs. `{bm} Kinetochore`s are proteins located at the centromere of the sister chromatids.
 
@@ -995,7 +991,7 @@ crop 0.446 0 0.554 1
    scale 0.1 0.1
    ```
 
-   During telophase, nucleus membranes re-form around the newly split chromatin. The chromatin also start to un-condense.
+   During telophase, nucleus_cell membranes re-form around the newly split chromatin. The chromatin also start to un-condense.
 
    During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with mitosis (it isn't a part of mitosis), but it starts near the end of mitosis (around telophase).
 
@@ -1058,7 +1054,7 @@ crop 0 0 0.5260 1.0
 
     Each chromatin duplicates to become a sister chromatid pair (2 chromatids that are attached to each other). Then, each sister chromatid pair condenses and forms an X shape where the only part that the sister chromatids remain attached at is their centromeres.
     
-    The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell. Microtubules are attached from the centrosomes to the kinetochore of the sister chromatid pairs.
+    The membrane of the nucleus_cell goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell. Microtubules are attached from the centrosomes to the kinetochore of the sister chromatid pairs.
 
     While in their condensed form, sister chromatid pairs go through a process called `{bm} chromosomal crossover`: A chromatid from a sister chromatid pair swaps segments of itself with a chromatid from another sister chromatid pair. The sister chromatid pairs doing the swapping must be homologs of each other (contains alternative versions of the same genes).
 
@@ -1125,7 +1121,7 @@ crop 0 0 0.5260 1.0
     crop 0.4005 0 0.1255 1.0
     ```
 
-    Nucleus membranes re-form around the newly moved apart sister chromatid pairs. The sister chromatid pairs also start to un-condense but still remain attached at their centromeres. As such, the resulting daughter cells are said to have a haploid number of chromosomes -- each sister chromatid pair is technically considered to be 1 chromosome until it splits apart.
+    Nucleus_cell membranes re-form around the newly moved apart sister chromatid pairs. The sister chromatid pairs also start to un-condense but still remain attached at their centromeres. As such, the resulting daughter cells are said to have a haploid number of chromosomes -- each sister chromatid pair is technically considered to be 1 chromosome until it splits apart.
 
     During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with telophase I (it isn't a part of telophase I), but it starts around the same time.
 
@@ -1155,7 +1151,7 @@ crop 0.5260 0 0.4740 1.0
     crop 0.5260 0 0.1255 1.0
     ```
 
-    The sister chromatid pairs start to condense into an X shape, where the only part they remain attached at is the centromere. The membrane of the nucleus goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
+    The sister chromatid pairs start to condense into an X shape, where the only part they remain attached at is the centromere. The membrane of the nucleus_cell goes away and the 2 centrosomes that were originally attached to that membrane get moved to opposite ends of the cell.
 
     Microtubules are attached from the centrosomes to the kinetochore of the sister chromatid pairs.
 
@@ -1196,7 +1192,7 @@ crop 0.5260 0 0.4740 1.0
     crop 0.8770 0 0.12 1.0
     ```
 
-    During telophase, nucleus membranes re-form around the newly split chromatin. The chromatin also start to un-condense. The resulting daughter cells are gametes at this point (e.g. sperm cells). They no longer divide. 
+    During telophase, nucleus_cell membranes re-form around the newly split chromatin. The chromatin also start to un-condense. The resulting daughter cells are gametes at this point (e.g. sperm cells). They no longer divide. 
 
     During cytokinesis, the middle of the cell starts to push together and pinch off, forming 2 separate cells. Cytokinesis technically happens in parallel with telophase II (it isn't a part of telophase II), but it starts around the same time.
 
@@ -1220,7 +1216,7 @@ Tumor cells may continue to mutate at a more rapid pace than other cells. If one
 
 `{bm} Fertilization/(fertilization|fertilize)/i` is the act of bringing together a male gamete (e.g. sperm) to a female gamete (e.g. egg_GAMETE) (cell types produced through meiosis). In humans, a fertilized egg_GAMETE is referred to as a ...
 
- * `{bm} zygote` upon creation. At this point the male gamete and the female gamete have fused together to become a single cell, but their nuclei will still be separate (will eventually fuse).
+ * `{bm} zygote` upon creation. At this point the male gamete and the female gamete have fused together to become a single cell, but their nuclei_cell will still be separate (will eventually fuse).
 
    ```{img}
    Zygote1.jpg
@@ -1465,7 +1461,7 @@ TODO: Fill me in after learning enough chemistry
 `{bm} Nucleic Acid` is a molecule (heteropolymer) that's built up from other molecules called `{bm} nucleotide`s (monomers). Nucleic acid comes in 2 flavours: DNA and RNA. Each nucleotide consists of a sugar molecule (ribose in RNA / deoxyribose in DNA) attached to a phosphate group and a nitrogen-containing base_nucleotide.
 
 ```{note}
-It's called nucleic acid because it has some acidic properties to it and DNA is found in the nucleus of a eukaryotic cell. But DNA also in prokaryotic cells and some organelles -- those don't have a nucleus.
+It's called nucleic acid because it has some acidic properties to it and DNA is found in the nucleus_cell of a eukaryotic cell. But DNA also in prokaryotic cells and some organelles -- those don't have a nucleus_cell.
 ```
 
 ```{img}
@@ -1497,7 +1493,7 @@ The base_nucleotide is what distinguishes the types of nucleotides from each oth
 
 `{bm} Deoxyribonucleic acid` (`{bm} DNA`) is a nucleic acid molecule that contains the instructions needed for the growth/functioning/maintenance of an organism. Depending on the type of organism, DNA is located in different parts fo the cell.
  * For prokaryotes, DNA is free-floating in the cytoplasm.
- * For eukaryotes, DNA is isolated in the nucleus (`{bm} nuclear DNA`). Their mitochondria and chloroplast also have their own DNA.
+ * For eukaryotes, DNA is isolated in the nucleus_cell (`{bm} nuclear DNA`). Their mitochondria and chloroplast also have their own DNA.
 
 ```{img}
 1032px-DNA_Structure+Key+Labelled.pn_NoBB.png
@@ -2555,3 +2551,5 @@ In some cases, the genetic material being fused in sexual reproduction may be fr
 `{bm-ignore} byproduct|reproduction|reproduce|reproductive`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(product)/i`
 `{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
+
+`{bm-ambiguous} Add the suffix _atom or _cell/\b(nucleus|nuclei)\b/i`
