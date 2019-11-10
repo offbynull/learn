@@ -1420,7 +1420,47 @@ An example of catabolism is cellular respiration: cells will break down the bond
 
 `{kt} C_6H_{12}O_6 + 6O_2 \to 6CO_2 + 6H_2O + energy`
 
-## Nucleotides
+## Molecular Genetics
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+TODO: Fill me in after learning enough chemistry
+
+### Nucleotides
 
 `{bm} Nucleic Acid` is a molecule (heteropolymer) that's built up from other molecules called `{bm} nucleotide`s (monomers). Nucleic acid comes in 2 flavours: DNA and RNA. Each nucleotide consists of a sugar molecule (ribose in RNA / deoxyribose in DNA) attached to a phosphate group and a nitrogen-containing base_nucleotide.
 
@@ -1453,7 +1493,7 @@ The base_nucleotide is what distinguishes the types of nucleotides from each oth
  * A only ever binds to T/U (e.g. AT or TA in DNA, AU or UA in RNA)
  * G only ever binds to C (e.g. GC or CG)
 
-## DNA
+### DNA
 
 `{bm} Deoxyribonucleic acid` (`{bm} DNA`) is a nucleic acid molecule that contains the instructions needed for the growth/functioning/maintenance of an organism. Depending on the type of organism, DNA is located in different parts fo the cell.
  * For prokaryotes, DNA is free-floating in the cytoplasm.
@@ -1483,7 +1523,7 @@ Terminology specific to DNA:
  * `{bm} gene/\b(genes|gene)\b/i` - A section of an organism's DNA that contains instructions for some functionality, typically for building some protein.
  * `{bm} allele` - A version of a gene (different coding at the some position of DNA).
 
-## RNA
+### RNA
 
 `{bm} Ribonucleic acid` (`{bm} RNA/(RNA)/`) is a nucleic acid molecule used in various ways to facilitate building proteins. It can also act as an enzyme (ribozyme) or contain the genetic information for some viruses.
 
