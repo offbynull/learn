@@ -1517,7 +1517,7 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 ## Classical Genetics
 
-`{bm} Classical genetics` is study of the probability of which genes get passed down from parents to offspring and the probability of which genes express themselves into some physically observable trait(s). It's focused exclusively on sexually reproducing eyukarotic organisms. The term...
+`{bm} Classical genetics` is study of the probability of which genes get passed down from parents to offspring and the probability of which genes express themselves into some physically observable trait(s). It's focused exclusively on sexually reproducing eukaryotic organisms. The term...
  * `{bm} genotype` refers to the alleles present for a set of one or more genes.
  * `{bm} phenotype` refers to the observable trait(s) expressed by a genotype.
 
@@ -1713,7 +1713,12 @@ Alleles that ...
  * take precedence over others are referred to as `{bm} dominant allele`s. The phenotypes they express are often referred to as `{bm} dominant trait`s.
  * surrender precedence to others are referred to as `{bm} recessive allele`s. The phenotypes they express are often referred to as `{bm} recessive trait`s.
 
-Given 2 alleles A and B, if the phenotype expressed by ...
+For example, given the dominant allele D and the recessive allele d, ...
+ * [Dd] results in the expression of the phenotype for D -- D takes precedence / d surrenders precedence.
+ * [DD] results in the expression of the phenotype for D -- no other types to contend with.
+ * [dd] results in the expression of the phenotype for d -- no other types to surrender to.
+
+In cases where both alleles are dominant alleles, there's several different ways phenotype may be expressed. For example, given the dominant alleles A and B, if the phenotype expressed by ...
  * [AA] is the same as [AB]/[BA] but not [BB], A is said to have `{bm} complete dominance/(complete dominance|completely dominant)/i` -- one allele's phenotype is expressed while others are hidden.
  * [AB]/[BA] is a blend of [AA] and [BB], it's said to have `{bm} incomplete dominance/(incomplete dominance|incompletely dominant)/i` -- more than one allele is dominant, resulting in a blended phenotype expression.
  * [AB]/[BA] is the phenotype expressed by both [AA] and [BB], it's said to have `{bm} co-dominance/(co-dominance|co-dominant)/i` -- more than one allele is dominant, resulting in a both phenotypes being expressed.
@@ -1922,7 +1927,7 @@ How is it that x-linked recessive traits happen if only 1 X chromosome is ever a
 
 For example, color blindness is an x-linked recessive trait. All copies of the X chromosome have to have the color-blind allele for human to be color blind. If one of the X chromosomes doesn't, some of the eye cells will be able to see color. The cells that do see color will relay color information back to the brain (the person will see color).
 
-#### Punnett Squares Examples
+#### Punnett Square Examples
 
 The following are examples showing the probability that offspring end up with the recessive X-linked disease known as hemophilia.
 
@@ -1994,39 +1999,101 @@ h (X chromosome), h (X) H (X)     , h (X) N/A (Y)
 
 ### Pedigree
 
-TODO: FILL IN PEDIGREE SECTION
+A `{bm} pedigree` chart is a hierarchy diagram that shows the appearance of a specific phenotype in an organism and its ancestors.
 
-TODO: FILL IN PEDIGREE SECTION
+```{img}
+Pedigree.svg
+Example pedigree chart.
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+```
 
-TODO: FILL IN PEDIGREE SECTION
+Each individual in the diagram is identified by a shape:
+ * Squares represent males.
+ * Circles represent females.
 
-TODO: FILL IN PEDIGREE SECTION
+The male (square) always comes first in a mating couple.
 
-TODO: FILL IN PEDIGREE SECTION
+```{note}
+Is a different shape necessary? The species that pedigree charts are used for (dogs, horses, humans, etc..) always have 2 sexes: male and female. Just starting off each mating couple with the same sex is enough to convey sex.
+```
 
-TODO: FILL IN PEDIGREE SECTION
+```{img}
+Pedigree with sex labeling.svg
+Example pedigree chart with explicitly labeled sexes.
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+```
 
-TODO: FILL IN PEDIGREE SECTION
+If the shape is filled in, it means that the specific phenotype was expressed in that organism.
 
-TODO: FILL IN PEDIGREE SECTION
+```{img}
+Pedigree with sex and phenotype labeling.svg
+Example pedigree chart with explicitly labeled sexes and phenotype expression.
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+```
 
-TODO: FILL IN PEDIGREE SECTION
+For each mating pair, the ...
+ * horizontal line connecting a male and a female is called a `{bm} marriage line/(marriage line|mating line)/i`.
+ * vertical line that goes down from the marriage line is known as the `{bm} line of descent`.
+ * horizontal line connected to the bottom of that line of descent is known as a `{bm} sibling line`.
 
-TODO: FILL IN PEDIGREE SECTION
+```{img}
+Pedigree with sex and phenotype labeling.svg
+Example pedigree chart close-up with highlighted marriage line, line of descent, and sibling line.
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
 
-TODO: FILL IN PEDIGREE SECTION
+crop 0.35 0 0.56 0.3
+scale 2 2
 
-TODO: FILL IN PEDIGREE SECTION
+bg_color #00000000
+stroke 4
 
-TODO: FILL IN PEDIGREE SECTION
+fg_color #ff0000
+rect 0.12 0.15 0.08 0.17
+text 0.3 0.2 marriage line
 
-TODO: FILL IN PEDIGREE SECTION
+fg_color #007f7f
+rect 0.15 0.15 0.03 0.7
+text 0.3 0.35 line of descent
 
-TODO: FILL IN PEDIGREE SECTION
+fg_color #ff00ff
+rect 0 0.7 1 0.15
+text 0.3 0.5 sibling line
+```
 
-TODO: FILL IN PEDIGREE SECTION
+Pedigree charts can be used to infer the odds that a child will end up with the specific phenotype that the chart is for. For example, if the phenotype is caused by a single allele (pleiotropic) and you know that the allele needs to be homozygous recessive for the phenotype to be expressed (recessive allele), you can infer the genotypes of the parents...
 
-TODO: FILL IN PEDIGREE SECTION
+```{img}
+Pedigree with sex and phenotype labeling.svg
+Example pedigree chart close-up with highlighted marriage line, line of descent, and sibling line.
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+
+crop 0.35 0 0.18 0.2
+scale 3 3
+expand 1.5 1.5 0.25 0.5
+
+bg_color #00000000
+font_size 30
+text 0.0 0.25 [TT] / [Tt]
+text 0.65 0.25 [tt]
+```
+
+```{note}
+Since it's a recessive allele, both alleles need to be that recessive allele for the phenotype to express. That's why we know the female is [tt] (expresses phenotype) and the male is either [TT] or [Tt] (doesn't express phenotype).
+```
+
+From there you can use Punnett squares to visualize child phenotype outcomes in the different scenarios...
+
+```{csv}
+ , T , T
+t, tT, tT
+t, tT, tT
+```
+
+```{csv}
+ , T , t
+t, tT, tt ✓
+t, tT, tt ✓
+```
 
 ## Adenosine Triphosphate
 
