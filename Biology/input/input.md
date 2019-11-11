@@ -79,11 +79,54 @@ The `{bm} atomic weight` / `{bm} relative atomic mass` of an atom is the weighte
  * Imaginary-13 - 4 amu and 30% abundance
  * Imaginary-14 - 5 amu and 60% abundance
 
-Its atomic weight can be calculated as `{kt} 3 \cdot 0.1 + 4 \cdot 0.3 + 5 \cdot 0.6 = 4.6`.
+Its atomic weight can be calculated as `{kt} 3 \cdot 0.1 + 4 \cdot 0.3 + 5 \cdot 0.6 = 4.6` amu.
 
 ```{note}
 How are abundances calculated? A chunk of the naturally occurring element is dug up and passed through a machine called a Gas Chromatograph-Mass Spectrometer. The machine isolates by weight and shows how abundant each weight is.
 ```
+
+### Atomic Count
+
+A `{bm} mole` is the unit used to measure the number/count of the particular particle making up a larger substance (e.g. proton, atom, molecule, etc..). 1 mole is `{kt} 6.02214076 \cdot 10^{23}` particles. For example, ...
+ * 1 mole of carbon-12 = `{kt} 6.02214076 \cdot 10^{23}` carbon-12 atoms = 12 grams of carbon-12 
+ * 1 mole of iron-56 = `{kt} 6.02214076 \cdot 10^{23}` iron-56 atoms = 56 grams of iron-56.
+ * 1 mole of water = `{kt} 6.02214076 \cdot 10^{23}` water molecules = 18.02 grams.
+
+The constant for mole is also know as the `{bm} Avogadro number/(Avogadro number|Avogadro's number)/i`. It's the number of carbon-12 atoms required to reach a mass of 12 grams.
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+
+TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
 
 ## Molecule
 
@@ -121,7 +164,7 @@ An `{bm} ion/\b(ions|ion)\b/i` is a charged atom or molecule. A charged atom/mol
 * if protons < electrons (more electrons), it's called a `{bm} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} ANION`.
 * if protons == electrons, it's a neutral (no charge).
 
-Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
+Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
 * negative ions are attracted to positive ions and repelled from negative ions.
 * positive ions are attracted to negative ions and repelled from positive ions.
 
@@ -1959,7 +2002,7 @@ Because of x-linked inactivation, allosomal aneuploidy isn't fatal but may lead 
 The process of X-linked inactivation is called `{bm} lyonization`.
 ```
 
-How is it that x-linked recessive traits happen if only 1 X chromosome is ever active? Aren't 2 copies of the recessive allele needed for the phenotype to be expressed? It turns out that if some cells choose the X chromosome that contains the non recessive allele, those cells overpower the the cells with the recessive allele.
+How is it that x-linked recessive traits happen if only 1 X chromosome is ever active? Aren't 2 copies of the recessive allele needed for the phenotype to be expressed? It turns out that if some cells choose the X chromosome that contains the non recessive allele, those cells overpower the cells with the recessive allele.
 
 For example, color blindness is an x-linked recessive trait. All copies of the X chromosome have to have the color-blind allele for human to be color blind. If one of the X chromosomes doesn't, some of the eye cells will be able to see color. The cells that do see color will relay color information back to the brain (the person will see color).
 
