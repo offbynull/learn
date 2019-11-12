@@ -99,16 +99,17 @@
 <li><a href="#HEADREF64">Punnett Square Examples</a></li>
 </ul>
 <li><a href="#HEADREF65">Pedigree</a></li>
+<li><a href="#HEADREF66">Software Model</a></li>
 </ul>
-<li><a href="#HEADREF66">Adenosine Triphosphate</a></li>
-<li><a href="#HEADREF67">Transport</a></li>
-<li><a href="#HEADREF68">Osmosis</a></li>
-<li><a href="#HEADREF69">Photosynthesis</a></li>
-<li><a href="#HEADREF70">Cellular Respiration</a></li>
-<li><a href="#HEADREF71">Sodium Potassium Pump</a></li>
-<li><a href="#HEADREF72">Microscopy</a></li>
+<li><a href="#HEADREF67">Adenosine Triphosphate</a></li>
+<li><a href="#HEADREF68">Transport</a></li>
+<li><a href="#HEADREF69">Osmosis</a></li>
+<li><a href="#HEADREF70">Photosynthesis</a></li>
+<li><a href="#HEADREF71">Cellular Respiration</a></li>
+<li><a href="#HEADREF72">Sodium Potassium Pump</a></li>
+<li><a href="#HEADREF73">Microscopy</a></li>
 </ul>
-<li><a href="#HEADREF73">Other Terminology</a></li>
+<li><a href="#HEADREF74">Other Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Chemistry</h1>
@@ -1394,7 +1395,18 @@
 <table><tbody><tr><td></td><td> T </td><td> t</td></tr><tr><td>t</td><td> tT</td><td> tt ✓</td></tr><tr><td>t</td><td> tT</td><td> tt ✓</td></tr></tbody></table><p>50% chance that the child ends up with [tt] in this scenario, meaning the <a href="#BOOKMARK256">phenotype</a> has a 50/50 chance of showing up in each child.</p>
 <p>In the example above, if the 2 parents already had a few children and those children were present in the <a href="#BOOKMARK295">pedigree</a> chart, you may be able to narrow the male down to just one of the <a href="#BOOKMARK255">genotype</a> possibilities...</p>
 <p><img src="/.datafile_ca1c17589b1bfcc0e1f162b9726c6bdc/data.svg" alt="Example pedigree chart mating pair and children close-up genotype possibilities." title="This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License."></p><p>Since we can see children exhibiting the <a href="#BOOKMARK256">phenotype</a>, we know that that the [TT] <a href="#BOOKMARK255">genotype</a> of the male can't be the case. If it were, no children would end up with the <a href="#BOOKMARK256">phenotype</a>. The only other option is the [Tt] <a href="#BOOKMARK255">genotype</a>.</p>
-<a name="HEADREF66"></a><h2>Adenosine Triphosphate</h2>
+<a name="HEADREF66"></a><h3>Software Model</h3>
+<p><img src="/.datafile_81ee9ed55d0138022dfb98db6f25acc8/diagram.svg" alt="PlantUML Diagram"></p><p>The above is a very <a href="#BOOKMARK34">basic</a> software model that represents the concepts around <a href="#BOOKMARK254">classical genetics</a>. It's not entirely correct but it lays down a good enough foundation to build out something more elaborate.</p>
+<p>The idea of <a href="#BOOKMARK269">dominant allele</a>s and <a href="#BOOKMARK271">recessive allele</a>s are handled by <code>Allele.dominance</code>. It's used to rank each <a href="#BOOKMARK245">allele</a> for a <a href="#BOOKMARK244">gene</a>.</p>
+<p>The idea of <a href="#BOOKMARK259">homozygous</a> and <a href="#BOOKMARK260">heterozygous</a> is handled by <code>HomologousChromosomePair</code>. The 2 <a href="#BOOKMARK138">chromosome</a>s it holds on to are <a href="#BOOKMARK356">homologous</a> (have the same set of <a href="#BOOKMARK244">genes</a>). As such, for each <a href="#BOOKMARK244">gene</a> you'll 2 <a href="#BOOKMARK245">allele</a>s -- 1 on each <a href="#BOOKMARK138">chromosome</a>. If the <a href="#BOOKMARK245">allele</a>s are the...</p>
+<ul>
+<li>same, they're <a href="#BOOKMARK259">homozygous</a>.</li>
+<li>different, they're <a href="#BOOKMARK260">heterozygous</a>.</li>
+</ul>
+<p>The <a href="#BOOKMARK264">law of segregation</a> is handled by <code>ChromosomePair.pickRandom()</code>.</p>
+<p>The <a href="#BOOKMARK266">law of dominance</a>, <a href="#BOOKMARK274">incomplete dominance</a>, and <a href="#BOOKMARK275">co-dominance</a> is codified using <code>EqualExpressionPattern</code>. That is, if 2 <a href="#BOOKMARK245">allele</a>s have the same <code>Allele.dominance</code>, any matching <a href="#BOOKMARK256">phenotype</a>s between them will be expressed using <code>Phenotype.EqualExpressionPattern</code>.</p>
+<p>The idea of <a href="#BOOKMARK267">linked gene</a>s is handled by <code>HomologousChromosomePair.chromosomalCrossover()</code>. It swaps segments of the 2 <a href="#BOOKMARK138">chromosome</a>s it holds on to.</p>
+<a name="HEADREF67"></a><h2>Adenosine Triphosphate</h2>
 <p><a name="BOOKMARK299"></a><strong></strong> <a name="BOOKMARK300"></a><strong>Adenosine Triphosphate</strong> (<a href="#BOOKMARK299">ATP</a>) is a <a href="#BOOKMARK18">molecule</a> that provides energy to drive various <a href="#BOOKMARK37">biological</a> processes (e.g. muscle contractions). The third phosphoral group at the very end has a high-energy bond. When broken, energy is released and the resulting <a href="#BOOKMARK18">molecule</a>s are the broken up phosphoral group and <a name="BOOKMARK301"></a><strong></strong> <a name="BOOKMARK302"></a><strong>Adenosine Diphosphate</strong> (<a href="#BOOKMARK301">ADP</a>).</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
@@ -1402,7 +1414,7 @@
 <p>High-energy bonds are actually a thing: A <a href="#BOOKMARK0">chemical</a> bond whose hydrolysis results in the generation of 30kJ (7kcal) of energy or, if coupled to an energetically unfavourable reaction, can drive that reaction forward. (https://www.genscript.com/<a href="#BOOKMARK16">mole</a>cular-<a href="#BOOKMARK37">biology</a>-glossary/1364/high-energy-bond)</p>
 </div>
 <p><img src="/.datafile_a3ea0e1ff55e5b118739d2f8eff34c54/data.svg" alt="By Muessig - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=27614630" title="ADP ATP cycle"></p><p><a href="#BOOKMARK299">ATP</a> is produced in the <a href="#BOOKMARK117">mitochondria</a>. Similar to how the <a href="#BOOKMARK117">mitochondria</a> is referred to as the powerhouse of the <a href="#BOOKMARK74">cell</a>, <a href="#BOOKMARK299">ATP</a> is often referred to as the energy currency of the <a href="#BOOKMARK74">cell</a> / energy store for the <a href="#BOOKMARK74">cell</a>.</p>
-<a name="HEADREF67"></a><h2>Transport</h2>
+<a name="HEADREF68"></a><h2>Transport</h2>
 <p>There are 2 different types of mechanism used to transport <a href="#BOOKMARK18">molecule</a>s in and out of a <a href="#BOOKMARK74">cell</a>: <a href="#BOOKMARK303">passive transport</a> and <a href="#BOOKMARK307">active transport</a>.</p>
 <p><a name="BOOKMARK303"></a><strong>Passive transport</strong> is when <a href="#BOOKMARK18">molecule</a>s naturally move towards the gradient. In this context, gradient refers to the natural direction in which things are supposed to go -- no explicit energy is needed to move/push it along, it just moves in that direction by virtue of some implicit property.</p>
 <ul>
@@ -1423,7 +1435,7 @@
 </ul>
 <p><a name="BOOKMARK307"></a><strong>Active transport</strong> is when <a href="#BOOKMARK18">molecule</a>s use energy (e.g. <a href="#BOOKMARK299">ATP</a>) to move against their gradient. It's the opposite of <a href="#BOOKMARK303">passive transport</a> -- energy is explicitly used to drive a <a href="#BOOKMARK18">molecule</a> to where it naturally / normally wouldn't go. An example of <a href="#BOOKMARK307">active transport</a> is the "<a href="#BOOKMARK328">sodium potassium pump</a>" <a href="#BOOKMARK212">enzyme</a>: <a href="#BOOKMARK299">ATP</a> is used to force open/close the ends of the <a href="#BOOKMARK212">enzyme</a>, which allow sodium and potassium to be exchanged across the <a href="#BOOKMARK74">cell</a> <a href="#BOOKMARK77">membrane</a>.</p>
 <p>Note that the <a href="#BOOKMARK307">active transport</a> in the example above is the opening/closing of the <a href="#BOOKMARK212">enzyme</a> ends, not the exchange of sodium and potassium. Energy (<a href="#BOOKMARK299">ATP</a>) is being used to shape-shift the <a href="#BOOKMARK212">enzyme</a> to open/close (<a href="#BOOKMARK307">active transport</a>) while the sodium and potassium are passively entering and exiting the gates (<a href="#BOOKMARK303">passive transport</a> via <a href="#BOOKMARK101">facilitated diffusion</a>).</p>
-<a name="HEADREF68"></a><h2>Osmosis</h2>
+<a name="HEADREF69"></a><h2>Osmosis</h2>
 <p><a name="BOOKMARK308"></a><strong>Osmosis</strong> is the <a href="#BOOKMARK303">passive transport</a> of <a href="#BOOKMARK66">solvent</a> <a href="#BOOKMARK18">molecule</a>s (typically <a href="#BOOKMARK59">water</a>), across a <a href="#BOOKMARK349">semipermeable</a> <a href="#BOOKMARK77">membrane</a>, from areas where <a href="#BOOKMARK70">solute</a>s are less concentrated to areas where <a href="#BOOKMARK70">solute</a>s are more concentrated.</p>
 <p>For example, imagine you have a semipermeabl <a href="#BOOKMARK77">membrane</a> that allows <a href="#BOOKMARK59">water</a> <a href="#BOOKMARK18">molecule</a>s (<a href="#BOOKMARK66">solvent</a>) to pass but not sodium (<a href="#BOOKMARK70">solute</a>). That <a href="#BOOKMARK77">membrane</a> is separating 2 regions, where the ...</p>
 <ul>
@@ -1455,7 +1467,7 @@
 <p>The prefix is referring to the amount of <a href="#BOOKMARK70">solute</a> in the solution relative to the <a href="#BOOKMARK74">cell</a>. Hyper = more. Hypo = less. Iso = same.</p>
 </div>
 <p>The following is a <a href="#BOOKMARK331">micrograph</a> of the red blood <a href="#BOOKMARK74">cell</a>s in solutions of different <a href="#BOOKMARK309">tonicity</a>. Notice how they shrivel in a <a href="#BOOKMARK310">hypertonic</a> solution (lose <a href="#BOOKMARK59">water</a>) and expand in a <a href="#BOOKMARK311">hypotonic</a> solution (gain <a href="#BOOKMARK59">water</a>).</p>
-<p><img src="/.datafile_00f295e405d0fef1cf9562aee48d0265/data.svg" alt="By Zephyris - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=18401754" title="Human erythrocytes (red blood cells) viewed by phase contrast light microscopy. Three conditions are shown: hypertonic conditions (where the erythrocytes contract and appear &quot;spiky&quot;), isotonic conditions (where the erythrocytes appear normal) and hypotonic conditions (where the etrythrocytes expand and become more round)."></p><a name="HEADREF69"></a><h2>Photosynthesis</h2>
+<p><img src="/.datafile_00f295e405d0fef1cf9562aee48d0265/data.svg" alt="By Zephyris - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=18401754" title="Human erythrocytes (red blood cells) viewed by phase contrast light microscopy. Three conditions are shown: hypertonic conditions (where the erythrocytes contract and appear &quot;spiky&quot;), isotonic conditions (where the erythrocytes appear normal) and hypotonic conditions (where the etrythrocytes expand and become more round)."></p><a name="HEADREF70"></a><h2>Photosynthesis</h2>
 <p><a name="BOOKMARK313"></a><strong>Photosynthesis</strong> is the process by which certain organisms convert light energy (photons) to <a href="#BOOKMARK0">chemical</a> energy (<a href="#BOOKMARK51">sugar</a>s). These organisms are called <a name="BOOKMARK314"></a><strong>Photoautotroph</strong>s, and they include ...</p>
 <ul>
 <li>plants and algae (<a href="#BOOKMARK109">eukaryotic</a>), which perform <a href="#BOOKMARK313">photosynthesis</a> via their <a href="#BOOKMARK123">chloroplast</a>.</li>
@@ -1484,7 +1496,7 @@
 <p><img src="/.datafile_bc7d0036db24b6aeaaeed50a84c9e75f/data.svg" alt="Ultrastructure of a chloroplast." title="By Kelvinsong - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=26147364"></p></li>
 </ol>
 <p>The following workflow diagram provides a ultra-simple high-level overview of the processes that take place. Note that this doesn't specify how many of each <a href="#BOOKMARK18">molecule</a> get input / output, nor does it provide a complete set of a input / output <a href="#BOOKMARK18">molecule</a>s for each reaction.</p>
-<p><img src="/.datafile_83a73c5e549372c452be2d9a0a674b6a/diagram.svg" alt="Graphviz Dot Diagram"></p><a name="HEADREF70"></a><h2>Cellular Respiration</h2>
+<p><img src="/.datafile_83a73c5e549372c452be2d9a0a674b6a/diagram.svg" alt="Graphviz Dot Diagram"></p><a name="HEADREF71"></a><h2>Cellular Respiration</h2>
 <p><a name="BOOKMARK317"></a><strong>Cellular respiration</strong> is the process by which certain organisms convert glucose (<a href="#BOOKMARK51">sugar</a>) to energy. These organisms include ...</p>
 <ul>
 <li><a href="#BOOKMARK109">eukaryotic</a> <a href="#BOOKMARK74">cell</a>s, which perform <a href="#BOOKMARK317">cellular respiration</a> via their <a href="#BOOKMARK117">mitochondria</a>.</li>
@@ -1526,7 +1538,7 @@
 <p><a href="#BOOKMARK323">Ferment</a>ation does produce <a href="#BOOKMARK299">ATP</a>, but much less so than Kerbs cycle + <a href="#BOOKMARK321">oxidative phosphorylation</a>.</p>
 <p>For example, if a human is vigorously running, that human may not have enough oxygen available to trigger the <a href="#BOOKMARK320">Krebs cycle</a> / <a href="#BOOKMARK321">oxidative phosphorylation</a> (steps 2 and 3). As such, the output from <a href="#BOOKMARK318">glycolysis</a> (step 1) will end up going through <a href="#BOOKMARK327">lactic acid fermentation</a> instead.</p>
 <p>The following workflow diagram provides a ultra-simple high-level overview of the processes that take place. Note that this doesn't specify how many of each <a href="#BOOKMARK18">molecule</a> get input / output, nor does it provide a complete set of a input / output <a href="#BOOKMARK18">molecule</a>s for each reaction.</p>
-<p><img src="/.datafile_2333bcb32f80bfd59f5b494cce7d8ad6/diagram.svg" alt="Graphviz Dot Diagram"></p><a name="HEADREF71"></a><h2>Sodium Potassium Pump</h2>
+<p><img src="/.datafile_2333bcb32f80bfd59f5b494cce7d8ad6/diagram.svg" alt="Graphviz Dot Diagram"></p><a name="HEADREF72"></a><h2>Sodium Potassium Pump</h2>
 <p>The <a name="BOOKMARK328"></a><strong>sodium potassium pump</strong> is an <a href="#BOOKMARK96">transmembrane enzyme</a> that allows the exchange of sodium <a href="#BOOKMARK26">ions</a> and potassium <a href="#BOOKMARK26">ions</a> across the <a href="#BOOKMARK74">cell</a> <a href="#BOOKMARK77">membrane</a> by opening and closing its ends.</p>
 <p><img src="/.datafile_a158f71086caaadf3bf5053437571adc/data.svg" alt="By LadyofHats Mariana Ruiz Villarreal - Own work. Image renamed from Image:Sodium-Potassium_pump.svg, Public Domain, https://commons.wikimedia.org/w/index.php?curid=3981038" title="Example of primary active transport, where energy from hydrolysis of ATP is directly coupled to the movement of a specific substance across a membrane independent of any other species."></p><p>Only 1 end of the <a href="#BOOKMARK212">enzyme</a> is open at a time. When the...</p>
 <ul>
@@ -1536,7 +1548,7 @@
 <p>Since both potassium and sodium have a <a href="#BOOKMARK27">positive charge</a> and an an unequal number are being exchanged each cycle (3 sodium out vs 2 potassium in), the <a href="#BOOKMARK350">intracellular</a> space will be more positive than the <a href="#BOOKMARK351">extracellular</a> space.</p>
 <p>This charge difference is further reinforced by <a href="#BOOKMARK77">membrane</a> <a href="#BOOKMARK97">channel protein</a>s which allow potassium <a href="#BOOKMARK26">ions</a> to flow across the <a href="#BOOKMARK77">membrane</a> (potassium channels). Since there's a higher concentration of potassium <a href="#BOOKMARK26">ions</a> inside the <a href="#BOOKMARK74">cell</a>, those potassium <a href="#BOOKMARK26">ions</a> have a higher chance of flowing through the channel to the outside. Some percentage may be impeded by the slightly more <a href="#BOOKMARK27">positive charge</a> on the outside, but overall more will make it to the outside than stay on the inside.</p>
 <p>This charge difference is referred to as the <a name="BOOKMARK329"></a><strong>resting membrane potential</strong> for a <a href="#BOOKMARK74">cell</a>.</p>
-<a name="HEADREF72"></a><h2>Microscopy</h2>
+<a name="HEADREF73"></a><h2>Microscopy</h2>
 <p><a name="BOOKMARK330"></a><strong>Microscope</strong>s are devices used to magnify (zoom in) on objects, such that you can see things that you normally would be too small to see on your own. The term <a href="#BOOKMARK330">microscope</a> comes from the words...</p>
 <ul>
 <li>micro, meaning small.</li>
@@ -1563,7 +1575,7 @@
 </ul>
 </li>
 </ul>
-<a name="HEADREF73"></a><h1>Other Terminology</h1>
+<a name="HEADREF74"></a><h1>Other Terminology</h1>
 <p>Terminology that's relevant but doesn't fit in any other section goes here.</p>
 <p>
 <a name="BOOKMARK342"></a><strong>Density</strong> - The mass per unit volume of a substance.</p>

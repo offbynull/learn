@@ -2191,6 +2191,76 @@ scale 2.5 2.5
 
 Since we can see children exhibiting the phenotype, we know that that the [TT] genotype of the male can't be the case. If it were, no children would end up with the phenotype. The only other option is the [Tt] genotype.
 
+### Software Model
+
+```{plantuml}
+@startuml
+
+interface ChromosomePair {
+  Chromosome getOne()
+  Chromosome getTwo()
+  Chromosome pickRandom()
+  List<Allele> getAllelesByGene(Gene gene)
+}
+
+class HomologousChromosomePair {
+  void chromosomalCrossover()
+}
+
+class SexChromosomePair {
+}
+
+interface Chromosome {
+  int getId()
+  Set<Allele> getAlleles()
+  Allele getAlleleByGene(Gene gene)
+  void setAllele(Allele allele)
+}
+
+class Allele {
+  Gene gene
+  int dominance
+  Set<PhenoType> phenotypes
+}
+
+interface Gene {
+  Set<Allele> getAlleles()
+}
+
+interface Phenotype {
+  EqualExpressionPattern getEqualExpressionPattern()
+}
+
+enum EqualExpressionPattern {
+  IncompleteDominance,
+  CoDominance
+}
+
+Phenotype -- "1" EqualExpressionPattern: how phenotype expresses if it meets another phenotype of same dominance
+Gene "1" -- "1..*" Allele: "one gene has multiple versions (alleles)"
+Allele "1" -- "0..*" Phenotype: "one allele can contributes to many phenotypes or none"
+Chromosome "1" -- "1..*" Allele: "each chromosome holds alleles for a set of genes"
+Chromosome "2" -- ChromosomePair 
+ChromosomePair <|-- HomologousChromosomePair
+ChromosomePair <|-- SexChromosomePair
+
+@enduml
+```
+
+The above is a very basic software model that represents the concepts around classical genetics. It's not entirely correct but it lays down a good enough foundation to build out something more elaborate.
+
+The idea of dominant alleles and recessive alleles are handled by `Allele.dominance`. It's used to rank each allele for a gene.
+
+The idea of homozygous and heterozygous is handled by `HomologousChromosomePair`. The 2 chromosomes it holds on to are homologous (have the same set of genes). As such, for each gene you'll 2 alleles -- 1 on each chromosome. If the alleles are the...
+ * same, they're homozygous.
+ * different, they're heterozygous.
+
+The law of segregation is handled by `ChromosomePair.pickRandom()`.
+
+The law of dominance, incomplete dominance, and co-dominance is codified using `EqualExpressionPattern`. That is, if 2 alleles have the same `Allele.dominance`, any matching phenotypes between them will be expressed using `Phenotype.EqualExpressionPattern`.
+
+The idea of linked genes is handled by `HomologousChromosomePair.chromosomalCrossover()`. It swaps segments of the 2 chromosomes it holds on to.
+
 ## Adenosine Triphosphate
 
 `{bm} /\b(ATP)(?:s{0,1})\b/` `{bm} Adenosine Triphosphate` (ATP) is a molecule that provides energy to drive various biological processes (e.g. muscle contractions). The third phosphoral group at the very end has a high-energy bond. When broken, energy is released and the resulting molecules are the broken up phosphoral group and `{bm} /\b(ADP)(?:s{0,1})\b/` `{bm} Adenosine Diphosphate` (ADP).
