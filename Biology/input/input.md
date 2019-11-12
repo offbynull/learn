@@ -2207,12 +2207,21 @@ class HomologousChromosomePair {
   void chromosomalCrossover()
 }
 
+note bottom of HomologousChromosomePair
+  chromosomes must have the same set
+  of genes in the same order.
+end note
+
 class SexChromosomePair {
 }
 
+note bottom of SexChromosomePair
+  chromosomes can have different genes
+end note
+
 interface Chromosome {
-  int getId()
-  Set<Allele> getAlleles()
+  List<Gene> getGenes()
+  List<Allele> getAlleles()
   Allele getAlleleByGene(Gene gene)
   void setAllele(Allele allele)
 }
@@ -2237,8 +2246,8 @@ enum EqualExpressionPattern {
 }
 
 Phenotype -- "1" EqualExpressionPattern: how phenotype expresses if it meets another phenotype of same dominance
-Gene "1" -- "1..*" Allele: "one gene has multiple versions (alleles)"
-Allele "1" -- "0..*" Phenotype: "one allele can contributes to many phenotypes or none"
+Gene "1" -- "1..*" Allele: "multiple versions (alleles) of a gene"
+Allele "1" -- "0..*" Phenotype: "one allele can contributes to many phenotypes"
 Chromosome "1" -- "1..*" Allele: "each chromosome holds alleles for a set of genes"
 Chromosome "2" -- ChromosomePair 
 ChromosomePair <|-- HomologousChromosomePair
