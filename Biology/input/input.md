@@ -24,10 +24,14 @@ graph {
 }
 ```
 
+```{note}
+The term element is often used to refer to the type of atom. For example, "water is made up of the elements hydrogen and oxygen."
+```
+
 Examples of matter made up of a single type of atom:
  * Gold - Yellow coloured, reflective, malleable, and corrosion-resistant.
  * Lead - Blue/white coloured, relatively soft, malleable.
- * Carbon Silver/gray coloured, reflective, easily oxidizes/corrodes.
+ * Carbon - Silver/gray coloured, reflective, easily oxidizes/corrodes.
 
 ```{note}
 As stated above, matter made up of a single type of atom is called an element.
@@ -40,21 +44,92 @@ Examples of matter made of multiple types of atoms:
 
 ![By AG Caesar - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67059219](240px-Atom_Diagram.svg.png)
 
-The building blocks of atoms are referred to as `{bm} sub-atomic particle`s: protons, neutrons, and electrons. Protons and neutrons form the nucleus_atom of the atom while electrons jump around in orbit of the`{bm} nucleus/\b(nucleus|nuclei)_atom\b/i`.
+The building blocks of atoms are referred to as `{bm} sub-atomic particle`s: protons, neutrons, and electrons. Protons and neutrons form the nucleus_atom of the atom while electrons jump around in orbit of the`{bm} nucleus/\b(nucleus|nuclei)_atom\b/i`. The configuration of an atom (number of protons/neutrons/electrons) is what defines its type and predicts how it reacts to other atoms.
 
 For each atom, the number of ...
 
- * `{bm} proton`s defines the type of atom. For example, hydrogen has 1 proton, helium as 2, lithium has 3, etc..
- * `{bm} neutron`s defines the extra atomic mass of the atom. For example, carbon-12 and carbon-13 have the same number of protons but carbon-13 has 1 more neutron and thus a greater atomic mass.
- * `{bm} electron`s defines the attraction to other atoms. For example, an atom is always looking to have electron count = proton count. It attracts to other atoms in an effort to steal / give away electrons.
+ * `{bm} proton`s defines the type of atom.
+   * if a.protons = 1, hydrogen.
+   * if a.protons = 2, helium.
+   * if a.protons = 3, lithium.
+   * ...
+ * `{bm} neutron`s defines the extra mass an atom has.
+   * if a.protons > b.protons && a.neutrons > b.neutrons, mass(a) > mass(b).
+   * if a.protons < b.protons && a.neutrons > b.neutrons, mass(a) < mass(b).
+ * `{bm} electron`s defines the attraction to other atoms.
+   * if protons == electrons, neutral charge.
+   * if protons > electrons, positively charged ion (looking to add electrons until ==).
+   * if protons < electrons, negatively charged ion (looking to remove electrons until ==).
 
-Atoms with the same number of protons (same type) but a different number of neutrons (different atomic mass) are called `{bm} isotope`s. For example, carbon-12 and carbon-13 are both isotopes of carbon -- they have the same chemical properties but different mass.
+Terminology around atoms and sub-atomic particles:
+ * `{bm} atomic number` (denoted as Z) - number of protons (type) that make up an atom.
+ * `{bm} mass number` (denoted as A) - number of protons and neutrons that make up an atom.
+ * ion - An atom where the number of protons and electrons are different.
+ * `{bm} isotope` - If two atoms have the same number of protons but a different number of neutrons, they're said to be different isotopes of the same type of atom. For example, carbon has multiple different isotopes, the most common of which has 6 neutrons (6 protons + 6 neutrons).
 
-Essentially, the configuration of an atom (number of protons/neutrons/electrons) is what predicts its properties and how it reacts to with other atoms.
-
-The periodic table below orders atoms by the number of protons (also called the `{bm} atomic number`)...
+The periodic table below orders atoms by the atomic number (number of protons)...
 
 ![By Offnfopt - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=62296883](800px-Simple_Periodic_Table_Chart-en.svg.png)
+
+### Notation
+
+Atoms can be written down in 2 different forms: hyphen notation and isotope notation.
+
+
+----
+
+
+`{bm} Hyphen notation` is a way of describing a type of atom. It's defined as...
+
+```
+name-A
+```
+
+where ...
+ * name is the name of the atom.
+ * A is the mass number (number of protons and neutrons).
+
+For example, carbon-13 is the hyphen notation for a carbon atom that's mass number is 13. Since we know that carbon has the atomic number 6 (protons=6) and the mass number of 13 (protons+neutrons=13), we know that the number of neutrons is 7 because 13-6=7.
+
+
+----
+
+
+`{bm} Isotope notation/(isotope notation|nuclear notation)/i` is a shorthand way of describing an atom. It's defined as...
+
+```{kt}
+_{Z}^{A}X^{C}
+```
+
+where ...
+ * X is the atomic symbol (e.g. H = hydrogen, Ag = gold, Fe = iron).
+ * A is the mass number (number of protons and neutrons).
+ * Z is the atomic number (number of protons).
+ * C is the charge.
+
+```{kt}
+_{\text{protons / atomic num}}^{\text{protons+neutrons / mass num}}X^{\text{charge / electron offset req for neutral charge}}
+```
+
+```{note}
+For C, the notation is to write the sign after the digits. For example, ...
+ * 3+ means that it has a positive charge of 3 (3 more protons than electrons).
+ * 4- means that it has a negative charge of 4 (4 more electrons than protons).
+ * 0 means that i has a neutral charge (equal number of protons and electrons).
+```
+
+For example, `{kt} _{7}^{13}N^{2-}` is an atom of nitrogen with a count of 7 protons, 9 electrons, and 6 neutrons. Since we know that...
+ * the atomic number is 7 (protons=7), we know that the number of electrons is 9 because a charge of 2- means that it has 2 more electrons than protons (7+2=9).
+ * the atomic number is 7 (protons=7) and the mass number is 13 (protons+neutrons=13), we know that the number of neutrons is 6 because 13-7=6.
+
+In certain cases, some parts of the notation may be left off:
+  1. Z is almost always left out (e.g. `{kt} _{7}^{13}N^{2-}` ⟶ `{kt} ^{13}N^{2-}`).
+  
+     Z is the number of protons (atomic number). Since the number of protons defines the type of atom, including it is redundant. The symbol already tells us what the type of atom is, which tells us what the number of protons is.
+
+  1. A C of 0 is left out entirely (e.g. `{kt} ^{13}N^{0}` ⟶ `{kt} ^{13}N`).
+  1. A C of -1 won't include the digit: (e.g. `{kt} ^{13}N^{1-}` ⟶ `{kt} ^{13}N^{-}`).
+  1. A C of +1 won't include the digit: (e.g. `{kt} ^{13}N^{1+}` ⟶ `{kt} ^{13}N^{+}`).
 
 ### Atomic Mass
 
@@ -85,48 +160,43 @@ Its atomic weight can be calculated as `{kt} 3 \cdot 0.1 + 4 \cdot 0.3 + 5 \cdot
 How are abundances calculated? A chunk of the naturally occurring element is dug up and passed through a machine called a Gas Chromatograph-Mass Spectrometer. The machine isolates by weight and shows how abundant each weight is.
 ```
 
-### Atomic Count
+### Mole
 
 A `{bm} mole` is the unit used to measure the number/count of the particular particle making up a larger substance (e.g. proton, atom, molecule, etc..). 1 mole is `{kt} 6.02214076 \cdot 10^{23}` particles. For example, ...
  * 1 mole of carbon-12 = `{kt} 6.02214076 \cdot 10^{23}` carbon-12 atoms = 12 grams of carbon-12 
  * 1 mole of iron-56 = `{kt} 6.02214076 \cdot 10^{23}` iron-56 atoms = 56 grams of iron-56.
+ * 1 mole of gold-107 = `{kt} 6.02214076 \cdot 10^{23}` gold-107 atoms = 107 grams of gold-107.
  * 1 mole of water = `{kt} 6.02214076 \cdot 10^{23}` water molecules = 18.02 grams.
 
 The constant for mole is also know as the `{bm} Avogadro number/(Avogadro number|Avogadro's number)/i`. It's the number of carbon-12 atoms required to reach a mass of 12 grams.
 
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+````{note}
+Notice that for each type of atom, the mass of 1 mole of name-x is equal to x grams.
 
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+Recall that...
+ * both amu and grams are used to measure mass.
+ * the mass of 1 proton or neutron = 1 amu.
+ * the mass of 1 atom = the mass of that atoms protons and neutrons.
 
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+So if we know that an atom of gold has 107 protons and neutrons, we know that its mass is 107 amu (and vice versa).
 
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+```{img}
+Atomic Mass.svg
+This work by Kasra Faghihi is licensed under a Creative Commons Attribution 4.0 International License.
+Diagram visually showing the number of protons/neutrons mapping to number of amus.
+```
 
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+Since we know carbon-12 has a mass of 12 amu (contains 12 protons/neutrons)...
+ * 12 amu * `{kt} 6.02214076 \cdot 10^{23}` = 12 grams.
 
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+As such, name-x has a mass of x amu (contains x protons/neutrons)...
+ * x amu * `{kt} 6.02214076 \cdot 10^{23}` = x grams.
 
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
-
-TODO: FIX TO EXPLAIN THE RELATIONSHIP BETWEEN ATOM AMU TO GRAMS (e.g. 1 mole of iron-56=56g, 1 mole of carbon-12=12g) 
+For example...
+ * hydrogen-1 --> 1 amu * `{kt} 6.02214076 \cdot 10^{23}` = 1 grams.
+ * carbon-12 --> 12 amu * `{kt} 6.02214076 \cdot 10^{23}` = 12 grams.
+ * silicon-28 --> 28 amu * `{kt} 6.02214076 \cdot 10^{23}` = 28 grams.
+````
 
 ## Molecule
 
@@ -162,7 +232,7 @@ Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a
 An `{bm} ion/\b(ions|ion)\b/i` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
 * if protons > electrons (more protons), it's called a `{bm} positively charged/(positive charge|positive-charge|positively-charged|positively charged)/i` ion / `{bm} positive ion`.
 * if protons < electrons (more electrons), it's called a `{bm} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} ANION`.
-* if protons == electrons, it's a neutral (no charge).
+* if protons == electrons, it's called a `{bm} neutral charge/(neutral charge|neutral atom)/i` (no charge).
 
 Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
 * negative ions are attracted to positive ions and repelled from negative ions.
