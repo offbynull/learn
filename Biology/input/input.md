@@ -166,7 +166,6 @@ A `{bm} mole` is the unit used to measure the number/count of the particular par
  * 1 mole of carbon-12 = `{kt} 6.02214076 \cdot 10^{23}` carbon-12 atoms = 12 grams of carbon-12 
  * 1 mole of iron-56 = `{kt} 6.02214076 \cdot 10^{23}` iron-56 atoms = 56 grams of iron-56.
  * 1 mole of gold-107 = `{kt} 6.02214076 \cdot 10^{23}` gold-107 atoms = 107 grams of gold-107.
- * 1 mole of water = `{kt} 6.02214076 \cdot 10^{23}` water molecules = 18.02 grams.
 
 The constant for mole is also know as the `{bm} Avogadro number/(Avogadro number|Avogadro's number)/i`. It's the number of carbon-12 atoms required to reach a mass of 12 grams.
 
@@ -207,6 +206,54 @@ When atoms bind together, they form a `{bm} molecule`. Each type of molecule has
 ```{note}
 As far as I can tell, the atoms will always bind in the same way. You can't ever have a molecule that has the same types of atoms in the same numbers but with a different structure.
 ```
+
+If a molecule is made up of different types of atoms, it's called a `{bm} compound`. For example...
+ * water is a compound because it's comprised of an oxygen atom bonded with 2 hydrogen atoms.
+ * hydrogen gas isn't a compound because it's comprised of 2 hydrogen atoms bonded together.
+
+Atoms bind to form molecules in 2 ways: covalent bonds and ionic bonds. In...
+ * covalent bonds, 2 atoms share a pair of electrons.
+ * ionic bonds, electrons move between atoms such that ions are formed.
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
+
+TODO: Flesh the bond types out more
 
 A `{bm} monomer` is a special designation for atoms/molecules that are able to join with other monomers to create even larger molecules. The process of joining is called `{bm} polymerization/(polymerization|polymerize)/i` and the resulting molecule is called a `{bm} polymer`.
 
