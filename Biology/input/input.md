@@ -230,8 +230,8 @@ Polymers are often referred to as `{bm} macromolecule`s -- molecules that have a
 ## Ion
 
 An `{bm} ion/\b(ions|ion)\b/i` is a charged atom or molecule. A charged atom/molecule just means that it has an unequal number of protons and electrons:
-* if protons > electrons (more protons), it's called a `{bm} positively charged/(positive charge|positive-charge|positively-charged|positively charged)/i` ion / `{bm} positive ion`.
-* if protons < electrons (more electrons), it's called a `{bm} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} ANION`.
+* if protons > electrons (more protons), it's called a `{bm} positively charged/(positive charge|positive-charge|positively-charged|positively charged)/i` ion / `{bm} positive ion` / `{bm} cation`.
+* if protons < electrons (more electrons), it's called a `{bm} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} anion`.
 * if protons == electrons, it's called a `{bm} neutral charge/(neutral charge|neutral atom)/i` (no charge).
 
 Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
