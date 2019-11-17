@@ -199,7 +199,7 @@ For example...
 
 ## Molecule
 
-When atoms bind together, they form a `{bm} molecule`. Each type of molecule has the same configuration of atoms -- same atoms in the same numbers, structured/shaped similarly. For example, a water molecule is made up of 2 hydrogen atoms and 1 oxygen atom binding together in a house-roof shape...
+When atoms bind together by sharing electrons, they form a `{bm} molecule/(molecule|molecular)/i`. Each type of molecule has the same configuration of atoms -- same atoms in the same numbers, structured/shaped similarly. For example, a water molecule is made up of 2 hydrogen atoms and 1 oxygen atom binding together in a house-roof shape...
 
 ![By Dan Craggs - Own workThis vector image includes elements that have been taken or adapted from this:  Water-2D-labelled.png., Public Domain, https://commons.wikimedia.org/w/index.php?curid=7916072](200px-H2O_2D_labelled.svg.png)
 
@@ -207,53 +207,26 @@ When atoms bind together, they form a `{bm} molecule`. Each type of molecule has
 As far as I can tell, the atoms will always bind in the same way. You can't ever have a molecule that has the same types of atoms in the same numbers but with a different structure.
 ```
 
-If a molecule is made up of different types of atoms, it's called a `{bm} compound`. For example...
+The type of bond that holds together atoms in a molecule is called `{bm} covalent bond` / `{bm} molecular bond`. In a covalent bond, 2 atoms share some or all of their electrons. The simplest example of this is hydrogen gas: 2 hydrogen atoms that are stuck together because each hydrogen atom is attracted to the other's electron.
+
+```{img}
+Covalent_bond_hydrogen.svg
+By Jacek FH - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2781099
+Covalent Bond Hydrogen
+
+scale 0.5 0.5
+```
+
+If only ...
+ * 1 pair of electrons are shared (2 electrons total), it's called a `{bm} single covalent bond`.
+ * 2 pairs of electrons are shared (4 electrons total), it's called a `{bm} double covalent bond`.
+ * 3 pairs of electrons are shared (6 electrons total), it's called a `{bm} triple covalent bond`. 
+
+If a molecule is made up of different types of atoms, it's called a `{bm} molecular compound`. For example...
  * water is a compound because it's comprised of an oxygen atom bonded with 2 hydrogen atoms.
  * hydrogen gas isn't a compound because it's comprised of 2 hydrogen atoms bonded together.
 
-Atoms bind to form molecules in 2 ways: covalent bonds and ionic bonds. In...
- * covalent bonds, 2 atoms share a pair of electrons.
- * ionic bonds, electrons move between atoms such that ions are formed.
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
-
-TODO: Flesh the bond types out more
+### Polymers
 
 A `{bm} monomer` is a special designation for atoms/molecules that are able to join with other monomers to create even larger molecules. The process of joining is called `{bm} polymerization/(polymerization|polymerize)/i` and the resulting molecule is called a `{bm} polymer`.
 
@@ -281,9 +254,152 @@ An `{bm} ion/\b(ions|ion)\b/i` is a charged atom or molecule. A charged atom/mol
 * if protons < electrons (more electrons), it's called a `{bm} negatively charged/(negative charge|negative-charge|negatively-charged|negatively charged)/i` ion / `{bm} negative ion` / `{bm} anion`.
 * if protons == electrons, it's called a `{bm} neutral charge/(neutral charge|neutral atom)/i` (no charge).
 
+When 2 atoms/molecules are said to be `{bm} oppositely charged/(opposite charge|opposite-charge|oppositely-charged|oppositely charged)/i`s, it means that one of them is positively charged while the other is negatively charged.
+
 Ions are always trying to lose their charge and become neutral, either by giving up an electrons or pulling in an electrons such that the number of protons and electrons become equal. As such, ions will attract towards oppositely charged ions and repel from similarly charged ions:
 * negative ions are attracted to positive ions and repelled from negative ions.
 * positive ions are attracted to negative ions and repelled from positive ions.
+
+## Ionic Compound
+
+In an `{bm} ionic compound`, 2 oppositely charged ions create a bond by virtue of their attraction to each other. That is, the ions bond together because the other has an opposite charge, but neither ion steals/gives electrons to the other. This form of bond is called a `{bm} ionic bond`.
+
+```{note}
+The ions aren't of the same type. If they were, it wouldn't be called a compound.
+```
+
+The process for how an ionic bond forms is as follows ...
+
+ 1. 2 neutral atoms come across each other.
+ 1. one of the atoms takes an electron from the other,
+
+The 2 atoms are now oppositely charged ions and as such are attracted to each other. No further electron swaps happen between them.
+
+Since the atoms that form an ionic compound are still charged, other ions may still attract to them and vice versa. That is, an atom that's in an ionic bond is still charged. As such, other charged atoms can attract to the atoms in an ionic bond to form their own ionic bonds, there by leading to a larger structure.
+
+For example, sodium and chlorine bind together via an ionic bond. However, even though they've bonded, other chlorine atoms atoms will attract the bonded sodium and other sodium atoms will attract to the bonded chlorine, forming chains...
+
+```{img}
+Blausen_0660_NaCl.png
+Sodium atoms and chlorine atoms in ionic bonds with each other (forming a crystal lattice structure). 
+By BruceBlaus - Own work, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=33041249
+scale 0.5 0.5
+```
+
+Structures like the one in the example above are called `{bm} crystal lattice`s. The smallest possible version of the above structure is referred to as a `{bm} formula unit`s. In the example above...
+ * chlorine and sodium ions are interleaved in ionic bonds to form the larger crystal lattice structure.
+ * the formula unit is a single sodium ion that's in an ionic bond with a chlorine ion.
+
+```{note}
+The structure in the example above is table salt.
+```
+
+## Chemical Formula
+
+`{bm} chemical formula/(chemical formula|molecular formula)/i`s are a way of representing molecules in text. In it's simplest form, it's a string of atomic symbols where each symbol is followed by a subscript of that atom's occurrence count in the molecule. For example, a molecule of ...
+
+ * water (2 hydrogen bonded to 1 oxygen): `{kt} H_2O`.
+ * hydrazine (2 nitrogen and 2 hydrogen): `{kt} N_2H_4`.
+
+```{note}
+In this basic definition of chemical formula notation, there are no set rules as to which atom type is written first. However, things quickly get more complex: see See https://chemistry.stackexchange.com/q/1239.
+```
+
+## Structural Formula
+
+`{bm} structural formula`s are a way of representing molecules as diagrams that somewhat expose their 3D structure. In it's simplest form, it consists of atomic symbols with straight lines between them that represent bonds. For example, `{kt} NH_3` can be diagramed as...
+
+```{chemfig}
+\chemfig[][scale=2]{N(-[5]H)(-[6]H)(-[7]H)}
+```
+
+Other information such as depth can be conveyed by using a `{bm} stereo structural formula`. For example, the same `{kt} NH_3` molecule above can be diagramed as...
+
+```{chemfig}
+% Hack to get straight dashed lines working: https://tex.stackexchange.com/a/364985
+\setcrambond*{1ex}{1pt}{1.5pt}
+\chemfig[][scale=2]{\lewis{2:,N}(-[5]H)(<[6]H)(>:[7]H)}
+```
+
+, where the...
+ * 2 dots on top of N indicate a lone electron pair.
+ * straight edge indicates that the 2 atoms connected are on the same plane as the screen.
+ * dash edge indicates that the atom connected is BEHIND the screen.
+ * wedge edge indicates that the atom connected is IN FRONT of the screen.
+
+```{note}
+In structural formulas, edges are only drawn when if bonds are covalent bonds. If there isn't a covalent bond, there is no line drawn.
+```
+
+A better way to represent the structure for a molecule may be to use actual 3D renderings. For example, the same molecule above (`{kt} NH_3`) can be rendered either as a...
+
+ * `{bm} stick-and-ball model/(stick-and-ball model|stick-and-ball diagram|ball-and-stick model|ball-and-stick diagram)/i`
+
+   ```{img}
+   Ammonia-3D-balls-A.png
+   Stick-and-ball model of ammonia
+   By Ben Mills - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=3958453
+   scale 0.15 0.15
+   ```
+
+   In this type of model, sticks represent bonds while balls represent atoms.
+
+ * `{bm} space-filling model/(space-filling model|space-filling diagram)/i`
+
+   ```{img}
+   Ammonia-3D-vdW.png
+   Space-filling model of ammonia
+   By Benjah-bmm27 - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=764396
+   scale 0.15 0.15
+   ```
+
+   In this type of model, each atom is represented by a ball and the relative sizes of atoms are represented.
+
+## Naming Convention
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
+
+TODO: FILL ME IN
 
 ## pH
 
@@ -435,7 +551,7 @@ Lipids are not always fats. All fats are lipids but not all lipids are fats.
 `{bm} Water` is essential to life -- it has unique properties that almost all biological processes depend on.
 
 Recall that...
-1. a water molecule consists of 2 hydrogen atoms connected to an oxygen atom via covalent bonds. A `{bm} covalent bond` is a pair of electrons that both atoms share, thus bonding the atoms together.
+1. a water molecule consists of 2 hydrogen atoms connected to an oxygen atom via covalent bonds. A covalent bond is a pair of electrons that both atoms share, thus bonding the atoms together.
 1. the position of an electron is based on probability. Electrons aren't fixed in a certain position or neatly orbiting around a nucleus_atom as certain diagrams show. Rather, they're constantly buzzing/hopping around the nucleus_atom. Depending on their environment, they may be more likely to be at certain locations vs other locations.
 
 Oxygen atoms are extremely `{bm} electronegative`, meaning that oxygen has the propensity to pull the buzzing/hopping electrons more around itself than the atoms it's bound to. As such, in a water molecule, the electrons will spend more time solely around the oxygen atom than they do the hydrogen atom or a position that binds the hydrogen and oxygen together. This is what gives the oxygen atom in a water molecule a `{bm} weakly negative` charge (as indicated by δ-) while the hydrogen atoms have a `{bm} weakly positive` charge (as indicated by δ+). These types of charged molecules are called `{bm} polar molecule`s.
@@ -2781,6 +2897,9 @@ In some cases, the genetic material being fused in sexual reproduction may be fr
 `{bm} Model system` - A system with a reduced set of parameters/complexity that makes it easy for a researcher to investigate a particular scientific question. For example, Gregor Mendel used pea pods to research the theory of classical genetics / inheritance (simple, grows and matures quickly, inbreeding okay)
 
 
+`{bm} Compound` - In the context of chemistry, a compound is a bond between atoms of different types. For example, hydrogen gas (`{kt}H_2`) is not a compound, but water (`{kt}H_2O`) is. See ...
+  * ionic compound.
+  * molecular compound.
 
 
 
