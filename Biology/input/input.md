@@ -61,15 +61,59 @@ For each atom, the number of ...
    * if protons > electrons, positively charged ion (looking to add electrons until ==).
    * if protons < electrons, negatively charged ion (looking to remove electrons until ==).
 
+```{note}
+If protons != electrons, the atom is referred to an ion.
+```
+
 Terminology around atoms and sub-atomic particles:
+
  * `{bm} atomic number` (denoted as Z) - number of protons (type) that make up an atom.
  * `{bm} mass number` (denoted as A) - number of protons and neutrons that make up an atom.
  * ion - An atom where the number of protons and electrons are different.
  * `{bm} isotope` - If two atoms have the same number of protons but a different number of neutrons, they're said to be different isotopes of the same type of atom. For example, carbon has multiple different isotopes, the most common of which has 6 neutrons (6 protons + 6 neutrons).
 
+Atoms may form bonds with one another to form larger structures known as molecules and ionic compounds.
+
 The periodic table below orders atoms by the atomic number (number of protons)...
 
 ![By Offnfopt - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=62296883](800px-Simple_Periodic_Table_Chart-en.svg.png)
+
+### Electron Shell
+
+`{bm} Electron shells` are distinct orbits/regions around the nucleus_ATOM that electrons are assigned to. There are 7 electron shells in total and each shell can hold onto a certain number of electrons. Ordered from closest to the nucleus_ATOM to farthest from from the nucleus_ATOM, these shells are...
+
+| # | Label | Max Electrons        |
+| - | ----- | -------------------- |
+| 1 | K     | `{kt} 2(1^2) = 2`    |
+| 2 | L     | `{kt} 2(2^2) = 8`    |
+| 3 | M     | `{kt} 2(3^2) = 18`   |
+| 4 | N     | `{kt} 2(4^2) = 32`   |
+| 5 | O     | `{kt} 2(5^2) = 50`   |
+| 6 | P     | `{kt} 2(6^2) = 72`   |
+| 7 | Q     | `{kt} 2(7^2) = 98`   |
+
+Each electron shell is made up of one or more `{bm} electron subshell`s. These electron subshells are...
+
+| # | Label | Max electrons | Owning electron shells |
+| - | ----- | ------------- | ---------------------- |
+| 0 | s     | 2             | 1,2,3,4,5,6,7 (all)    |
+| 1 | p     | 6             | 2,3,4,5,6,7            |
+| 2 | d     | 10            | 3,4,5,6,7              |
+| 3 | f     | 14            | 4,5,6,7                |
+| 4 | g     | 18            | 5,6,7 ???              |
+
+
+```{note}
+Wikipedia says that electron subshells past f or g are theoretical? Unsure exactly what this means.
+```
+
+The outer most electron shell is called the `{bm} valence shell` and electrons within it are called `{bm} valence electron`s. Since these electrons travel the farthest from the nucleus_ATOM, the nucleus_ATOM's pull on them is the weakest. As such, valence electrons are the electrons passed between atoms and / or used in the formation of bonds.
+
+2 atoms that have formed a bond by sharing some of their valence electrons are said to have a covalent bond.
+
+```{note}
+It's only called a valence shell if the atom isn't charged. If the atom is an ion, you can't call the outermost shell a valence shell.
+```
 
 ### Notation
 
@@ -357,7 +401,40 @@ A better way to represent the structure for a molecule may be to use actual 3D r
 
 ## Naming Convention
 
-TODO: FILL ME IN
+When an atom becomes charged (ion), its charge can be predicted based on where on the periodic table it sits. Elements in group ...
+
+* 1 of the periodic table charges to 1+ (cation).
+* 2 of the periodic table charges to 2+ (cation).
+* 13 of the periodic table charges to 3+ (cation).
+* 14 of the periodic table charges to either 4+ (cation) or 4- (anion).
+* 15 of the periodic table charges to 3- (anion).
+* 16 of the periodic table charges to 2- (anion).
+* 17 of the periodic table charges to 1- (anion).
+* 18 of the periodic table doesn't charge (they remain neutral).
+
+If the predicted charge is constant, the ion can just be called an ion. For example, aluminum sits in group 3 and as such is predicted to have a charge of 1+. Calling it an aluminum ion should implicitly convey that it's a aluminum cation with a net charge of 3.
+
+When the charge isn't predictable (polyvalent), more information needs to be specified to disambiguate. For example, the charge of chromium can be either 2+ or 3+. Since the charge is always positive, the term "chromium 2" / "chromium 3" can be used to refer to 2+/3+ respectively. Calling it "chromium plus-2"/"chromium plus-3" may also work but is redundant
+
+### Monatomic Anions
+
+When naming a negatively charged atom (anion), it's common to truncate the suffix (last syllable?) and replace it with -ide. For example...
+   * e.g. chlorine anion -> __chloride__
+   * e.g. tellurium anion -> __telluride__
+
+| Atom Name | Ion Name  | Ion Formula    |
+| --------- | --------- | -------------- |
+| Chlorine  | Chloride  | `{kt} Cl^-`    |
+| Tellurium | Telluride | `{kt} Te^{2-}` |
+| Carbon    | Carbide   | `{kt} C^{4-}`  |
+
+As stated above, when the charge is predictable, there's no point in specifying any extra information. For example, carbide is automatically assumed to have the predicted charge of 4- because
+ * carbon is predicted to have either a 4- or 4+ charge.
+ * the -ide suffix says that it's a negative charge (anion).
+
+### Ionic Compounds
+
+### Polyatomic Ions
 
 TODO: FILL ME IN
 
@@ -383,23 +460,6 @@ TODO: FILL ME IN
 
 TODO: FILL ME IN
 
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
 
 ## pH
 
