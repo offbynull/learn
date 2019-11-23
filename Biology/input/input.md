@@ -61,6 +61,13 @@ For each atom, the number of ...
    * if protons > electrons, positively charged ion (looking to add electrons until ==).
    * if protons < electrons, negatively charged ion (looking to remove electrons until ==).
 
+Protons are positively charged while electrons are negatively charged. Oppositely charged particles will attract while like charges repel. As such, ...
+ * electrons will be attracted to protons (and vice-versa).
+ * electrons will be repelled from other electrons.
+ * protons will be repelled from other protons.
+
+Neutrons may not have a charge, but they play a roll in spacing out proton atoms such that their repulsion from each other isn't strong enough to break up the nucleus_ATOM.
+
 ```{note}
 If protons != electrons, the atom is referred to an ion.
 ```
@@ -416,6 +423,59 @@ If the predicted charge is constant, the ion can just be called an ion. For exam
 
 When the charge isn't predictable (polyvalent), more information needs to be specified to disambiguate. For example, the charge of chromium can be either 2+ or 3+. Since the charge is always positive, the term "chromium 2" / "chromium 3" can be used to refer to 2+/3+ respectively. Calling it "chromium plus-2"/"chromium plus-3" may also work but is redundant
 
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+TODO WRITE CLEAR AND CONCRETE STEPS
+
+REMEMBER that polyatomic ions = charged molecules -- the tabl in subsection is for charged molecules
+
+REMEMBER that ionic compound can only consist of 2 entities, where entity = atom or molecule
+
+http://www.edu.pe.ca/threeoaks/teacherpages/higginbotham/Science%20421%20Webpage/resources/chemistry/mixednamingpractice/Naming%20compounds%20-%20mixed%20naming%20practice.htm
+
+Break up symbols into full names... NaCl = sodium + chlorine
+
+Make it so that the cations come first... sodium + chlorine (should be the case anyways in structural formulas)
+
+If anion is single atom and has a stable ion, strip last syllable and add -ide
+
+If anion is a group of atoms, use the group name
+
+If cation is a single atom and has a stable ion, use the name as-is
+
+If cation is a single atom and does NOT have a table ion, use the name as-is but add the charge in roman numerals wrapped in parenthesis
+
+If cation is a group of atoms (charged molecule), use the group name
+
+
 ### Monatomic Anions
 
 When naming a negatively charged atom (anion), it's common to truncate the suffix (last syllable?) and replace it with -ide. For example...
@@ -434,31 +494,70 @@ As stated above, when the charge is predictable, there's no point in specifying 
 
 ### Ionic Compounds
 
+When naming ionic compounds, the following rules apply:
+
+1. Cations always come before anions.
+1. Cations are named...
+   * as-is if they have a single charge (e.g. sodium)
+   * with charge as a roman numeral if they're polyvalent (e.g. iron (III)).
+1. Anions are named as their monatomic names (e.g. chlorine -> chloride)
+
+For example, an ionic compound made up of chlorine and sodium will be named sodium chloride because...
+ * sodium is the cation, so it comes first.
+ * sodium is the cation and it isn't polyvalent, so it doesn't include the charge.
+ * chlorine is the anion, so it uses its monatomic anion name: chloride.
+
+For example, an ionic compound made up of iron (III) and chlorine will be named iron (III) chloride because...
+ * iron is the cation, so it comes first.
+ * iron is the cation and it is polyvalent, so it includes the charge.
+ * chlorine is the anion, so it uses its monatomic anion name: chloride.
+
+```{note}
+The atom counts in the chemical formula for an ionic compound must be always be reduced. For example `{kt}Na_2Cl_2` must be represented as `{kt}NaCl`.
+```
+
 ### Polyatomic Ions
 
-TODO: FILL ME IN
+The following table lists the shorthand names / chemical formulas of many common polyatomic ions (charged molecules).
 
-TODO: FILL ME IN
+These shorthand names are typically used when naming larger molecules. When merging a polyatomic ion with ...
+ * a single atom, just add that atom on as-is.
+   * e.g. `{kt} Na` (sodium) + `{kt} NO_3^{-}` (nitrate) = `{kt} NaNO_3` (sodium nitrate)
+ * another polyatomic ion, wrap each polyatomic ion in parenthesis and treat as a single unit.
+   * e.g. `{kt} NH_4^{+}` (ammonium) + `{kt} CO_3^{2-}` (carbonate) = `{kt} {(NH_4)}_2(CO_3)` (ammonium carbonate)
 
-TODO: FILL ME IN
+```{note}
+Theres a 1+ charge on ammonium so you need 2 ammonium to equal out the charge from the carbonate. Since there's only 1 carbonate, it's okay to leave out its parenthesis: `{kt} {(NH_4)}_2CO_3`.
 
-TODO: FILL ME IN
+If you wanted to, you can simplify this by multiplying out: `{kt} N_2H_8CO_3`.
+```
 
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
-
-TODO: FILL ME IN
+| Chemical Formula    | Name                        | Informal/Common Names |
+| ------------------- | --------------------------- | --------------------- |
+| `{kt} NH_4^{+}`     | `{bm} Ammonium`             |                       |
+| `{kt} NO_2^{-}`     | `{bm} Nitrite`              |                       |
+| `{kt} NO_3^{-}`     | `{bm} Nitrate`              |                       |
+| `{kt} SO_3^{2-}`    | `{bm} Sulfite`              |                       |
+| `{kt} SO_4^{2-}`    | `{bm} Sulfate`              |                       |
+| `{kt} HSO_4^{-}`    | `{bm} Hydrogen sulfate`     | `{bm} Bisulfate`      |
+| `{kt} OH^{-}`       | `{bm} Hydroxide`            |                       |
+| `{kt} CN^{-}`       | `{bm} Cyanide`              |                       |
+| `{kt} PO_4^{3-}`    | `{bm} Phosphate`            |                       |
+| `{kt} HPO_4^{2-}`   | `{bm} Hydrogen phosphate`   |                       |
+| `{kt} H_2PO_4^{-}`  | `{bm} Dihydrogen phosphate` |                       |
+| `{kt} SCN^{-}`      | `{bm} Thiocyanate`          |                       |
+| `{kt} CO_3^{2-}`    | `{bm} Carbonate`            |                       |
+| `{kt} HCO_3^{-}`    | `{bm} Hydrogen carbonate`   | `{bm} Bicarbonate`    |
+| `{kt} ClO^{-}`      | `{bm} Hypochlorite`         |                       |
+| `{kt} ClO_2^{-}`    | `{bm} Chlorite`             |                       |
+| `{kt} ClO_3^{-}`    | `{bm} Chlorate`             |                       |
+| `{kt} ClO_4^{-}`    | `{bm} Perchlorate`          |                       |
+| `{kt} C_2H_3O_2^-` (`{kt} CH_3COO^-`) | `{bm} Acetate` |                  |
+| `{kt} MnO_4^-`      | `{bm} Permanganate`         |                       |
+| `{kt} Cr_2O_7^{2-}` | `{bm} Dichromate`           |                       |
+| `{kt} CrO_4^{2-}`   | `{bm} Chromate`             |                       |
+| `{kt} O_2^{2-}`     | `{bm} Peroxide`             |                       |
+| `{kt} C_2O_4^{2-}`  | `{bm} Oxalate`              |                       |
 
 
 ## pH
@@ -2956,6 +3055,9 @@ In some cases, the genetic material being fused in sexual reproduction may be fr
 
 `{bm} Model system` - A system with a reduced set of parameters/complexity that makes it easy for a researcher to investigate a particular scientific question. For example, Gregor Mendel used pea pods to research the theory of classical genetics / inheritance (simple, grows and matures quickly, inbreeding okay)
 
+`{bm} Monatomic` - Made up of a single atom.
+
+`{bm} Polyatomic` - Made up of > 1 atoms.
 
 `{bm} Compound` - In the context of chemistry, a compound is a bond between atoms of different types. For example, hydrogen gas (`{kt}H_2`) is not a compound, but water (`{kt}H_2O`) is. See ...
   * ionic compound.
