@@ -406,131 +406,485 @@ A better way to represent the structure for a molecule may be to use actual 3D r
 
    In this type of model, each atom is represented by a ball and the relative sizes of atoms are represented.
 
-## Naming Convention
+## Ionic Compound Naming
 
-When an atom becomes charged (ion), its charge can be predicted based on where on the periodic table it sits. Elements in group ...
+Recall that, in an ionic compound, ...
+1. Each ion can be either a single atom ion or a molecule ion.
+1. The overall charge of the ionic compound is neutral (the net charge of all the ions = 0).
 
-* 1 of the periodic table charges to 1+ (cation).
-* 2 of the periodic table charges to 2+ (cation).
-* 13 of the periodic table charges to 3+ (cation).
-* 14 of the periodic table charges to either 4+ (cation) or 4- (anion).
-* 15 of the periodic table charges to 3- (anion).
-* 16 of the periodic table charges to 2- (anion).
-* 17 of the periodic table charges to 1- (anion).
-* 18 of the periodic table doesn't charge (they remain neutral).
+The ions that make up an ionic compound are written in such a way that...
+1. cations go first.
+1. anions that are atoms have their last syllable replaced with "ide."
+1. ion counts / ratios aren't included.
+1. ion charges aren't included unless it's ambiguous.
 
-If the predicted charge is constant, the ion can just be called an ion. For example, aluminum sits in group 3 and as such is predicted to have a charge of 1+. Calling it an aluminum ion should implicitly convey that it's a aluminum cation with a net charge of 3.
-
-When the charge isn't predictable (polyvalent), more information needs to be specified to disambiguate. For example, the charge of chromium can be either 2+ or 3+. Since the charge is always positive, the term "chromium 2" / "chromium 3" can be used to refer to 2+/3+ respectively. Calling it "chromium plus-2"/"chromium plus-3" may also work but is redundant
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-TODO WRITE CLEAR AND CONCRETE STEPS
-
-REMEMBER that polyatomic ions = charged molecules -- the tabl in subsection is for charged molecules
-
-REMEMBER that ionic compound can only consist of 2 entities, where entity = atom or molecule
-
-http://www.edu.pe.ca/threeoaks/teacherpages/higginbotham/Science%20421%20Webpage/resources/chemistry/mixednamingpractice/Naming%20compounds%20-%20mixed%20naming%20practice.htm
-
-Break up symbols into full names... NaCl = sodium + chlorine
-
-Make it so that the cations come first... sodium + chlorine (should be the case anyways in structural formulas)
-
-If anion is single atom and has a stable ion, strip last syllable and add -ide
-
-If anion is a group of atoms, use the group name
-
-If cation is a single atom and has a stable ion, use the name as-is
-
-If cation is a single atom and does NOT have a table ion, use the name as-is but add the charge in roman numerals wrapped in parenthesis
-
-If cation is a group of atoms (charged molecule), use the group name
-
-
-### Monatomic Anions
-
-When naming a negatively charged atom (anion), it's common to truncate the suffix (last syllable?) and replace it with -ide. For example...
-   * e.g. chlorine anion -> __chloride__
-   * e.g. tellurium anion -> __telluride__
-
-| Atom Name | Ion Name  | Ion Formula    |
-| --------- | --------- | -------------- |
-| Chlorine  | Chloride  | `{kt} Cl^-`    |
-| Tellurium | Telluride | `{kt} Te^{2-}` |
-| Carbon    | Carbide   | `{kt} C^{4-}`  |
-
-As stated above, when the charge is predictable, there's no point in specifying any extra information. For example, carbide is automatically assumed to have the predicted charge of 4- because
- * carbon is predicted to have either a 4- or 4+ charge.
- * the -ide suffix says that it's a negative charge (anion).
-
-### Ionic Compounds
-
-When naming ionic compounds, the following rules apply:
-
-1. Cations always come before anions.
-1. Cations are named...
-   * as-is if they have a single charge (e.g. sodium)
-   * with charge as a roman numeral if they're polyvalent (e.g. iron (III)).
-1. Anions are named as their monatomic names (e.g. chlorine -> chloride)
-
-For example, an ionic compound made up of chlorine and sodium will be named sodium chloride because...
- * sodium is the cation, so it comes first.
- * sodium is the cation and it isn't polyvalent, so it doesn't include the charge.
- * chlorine is the anion, so it uses its monatomic anion name: chloride.
-
-For example, an ionic compound made up of iron (III) and chlorine will be named iron (III) chloride because...
- * iron is the cation, so it comes first.
- * iron is the cation and it is polyvalent, so it includes the charge.
- * chlorine is the anion, so it uses its monatomic anion name: chloride.
+For example... `{kt} Na_2S` = Sodium sulfide. Note that...
+* cation is listed first, followed by the anion.
+* anion has its last syllable stripped and replaced with "ide."
+* counts and charges aren't included.
 
 ```{note}
-The atom counts in the chemical formula for an ionic compound must be always be reduced. For example `{kt}Na_2Cl_2` must be represented as `{kt}NaCl`.
+Why aren't counts and charges not included? Just by seeing "sodium sulfide" we know that the...
+* net charge of the entire thing will be 0.
+* sodium ion has a predictable charge of 1+ (cation).
+* sulfur ion has a predictable charge of 2- (anion).
+
+To determine the actual counts, you just need to do some math. How many of the ion with the lower charge (sodium) do you need to neutralize 1 instance of the ion with higher charge?
+
+* 1x = -(-2)
+* 1x = 2
+* x = 2
+
+You need 2 sodium ions to neutralize 1 sulfur ion.
+
+What happens is x is not a whole number? multiply both counts by the coefficients required to get it to a whole number.
 ```
+
+### Chemical Formula to Name
+
+When converting a chemical formula to a name, use the flowchart shown below.
+
+```{plantuml}
+@startuml
+(*) --> "Determine cation and anion"
+
+if "cation type?" then
+    -> [molecule] "Write name&#8203;"
+    --> ===CAT_WRITE===
+else
+    -> [atom] "Write name&#8203;&#8203;"
+    if "predictable\ncharge?" then
+        --> [yes] ===CAT_WRITE===
+    else
+        --> [no] "Determine charge"
+        --> "Write charge"
+        --> ===CAT_WRITE===
+    endif
+endif
+
+if "anion type?" then
+    --> [atom] "Write name but replace last syllable with -ide"
+    --> (*)
+else
+    --> [molecule] "Write name&#8203;&#8203;&#8203;"
+    --> (*)
+endif
+
+@enduml
+```
+
+To determine the name of ...
+ * an atom, map its symbol to its name via the periodic table (e.g. `{kt} Fe` = iron).
+ * a molecule, map its formula to its common name via the table below (e.g. `{kt} CO_3^{2-}` = carbonate).
+
+To determine the charges of ...
+ * an atom, use the periodic table. When an atom becomes charged (ion), its charge can be predicted based on where on the periodic table it sits. Elements in group ...
+
+   * 1 of the periodic table charges to 1+ (cation).
+   * 2 of the periodic table charges to 2+ (cation).
+   * 13 of the periodic table charges to 3+ (cation).
+   * 14 of the periodic table charges to either 4+ (if cation) or 4- (if anion).
+   * 15 of the periodic table charges to 3- (anion).
+   * 16 of the periodic table charges to 2- (anion).
+   * 17 of the periodic table charges to 1- (anion).
+   * 18 of the periodic table doesn't charge (they remain neutral).
+
+   Elements outside these groups have more than 1 predictable charge. For example, an iron ion can be either 2+ or 3+. Since the charges of the 2 ions that make up an ionic compound have to cancel each other out, the other ion can be used to determine which charge to pick (see examples).
+ * a molecule, it'll always be a single known charge given by the formula (e.g. `{kt} CO_3^{2-}` has a 2- charge).
+
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
+
+----
+
+For example, `{kt} NaCl` is named sodium chloride:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=Na, charge=1+\nAnion=Cl, charge=1-" #00FF00
+
+-[#007F00]-> if "<color:#007F00> cation type?" then
+    -> [molecule] "Write name&#8203;"
+    --> ===CAT_WRITE===
+else
+    -[#007F00]> [<color:#007F00> atom] "Write name\n\nSodium" #00FF00
+    -[#007F00]-> if "<color:#007F00>predictable\n<color:#007F00>charge?" then
+        -[#007F00]-> [<color:#007F00>yes (1+)] ===CAT_WRITE===
+    else
+        --> [no] "Determine charge"
+        --> "Write charge"
+        --> ===CAT_WRITE===
+    endif
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    -[#007F00]-> [<color:#007F00>atom] "Write name but replace last syllable with -ide\n\nSodium Chloride" #00FF00
+    -[#007F00]-> (*)
+else
+    --> [molecule] "Write name&#8203;&#8203;&#8203;"
+    --> (*)
+endif
+
+@enduml
+```
+
+----
+
+For example, `{kt} FeCl_3` is named iron (III) chloride:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=Fe, charge=2+/3+\nAnion=Cl, charge=1-" #00FF00
+
+-[#007F00]-> if "<color:#007F00> cation type?" then
+    -> [molecule] "Write name&#8203;"
+    --> ===CAT_WRITE===
+else
+    -[#007F00]> [<color:#007F00> atom] "Write name\n\nIron" #00FF00
+    -[#007F00]-> if "<color:#007F00>predictable\n<color:#007F00>charge?" then
+        --> [yes] ===CAT_WRITE===
+    else
+        -[#007F00]-> [<color:#007F00>no (2+/3+)] "Determine charge" #00FF00
+        -[#007F00]-> [<color:#007F00>(3+)] "Write charge\n\nIron (III)" #00FF00
+        -[#007F00]-> ===CAT_WRITE===
+    endif
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    -[#007F00]-> [<color:#007F00>atom] "Write name but replace last syllable with -ide\n\nIron (III) Chloride" #00FF00
+    -[#007F00]-> (*)
+else
+    --> [molecule] "Write name&#8203;&#8203;&#8203;"
+    --> (*)
+endif
+
+@enduml
+```
+
+```{note}
+How was the charge of iron determined? We know that ...
+
+1. the cation is iron, which has a predictable charge of either 2+ or 3+.
+1. the anions are 3 chlorines. Chlorine has a charge of 1-.
+
+Since the 3 chlorine anions give a 3- charge and the overall net charge for a ionic compound must be 0, iron (III) is our only option.
+
+* -3 + x = 0
+* x = 3
+```
+
+----
+
+For example, `{kt} Na_2(CO_3)` is named sodium carbonate:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=Na, charge=1+\nAnion=CO<sub>3</sub>, charge=2-" #00FF00
+
+-[#007F00]-> if "<color:#007F00> cation type?" then
+    -> [molecule] "Write name&#8203;"
+    --> ===CAT_WRITE===
+else
+    -[#007F00]> [<color:#007F00> atom] "Write name\n\nSodium" #00FF00
+    -[#007F00]-> if "<color:#007F00>predictable\n<color:#007F00>charge?" then
+        -[#007F00]-> [<color:#007F00>yes (1+)] ===CAT_WRITE===
+    else
+        --> [no] "Determine charge"
+        --> "Write charge"
+        --> ===CAT_WRITE===
+    endif
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    --> [atom] "Write name but replace last syllable with -ide"
+    --> (*)
+else
+    -[#007F00]-> [<color:#007F00>molecule] "Write name\n\nSodium Carbonate" #00FF00
+    -[#007F00]-> (*)
+endif
+
+@enduml
+```
+
+----
+
+For example, `{kt} (NH_4)(NO_2)` is named ammonium nitrate:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=NH<sub>4</sub>, charge=1+\nAnion=NO<sub>2</sub>, charge=1-" #00FF00
+
+-[#007F00]-> if "<color:#007F00> cation type?" then
+    -[#007F00]> [<color:#007F00>molecule] "Write name\n\nAmmonium" #00FF00
+    -[#007F00]-> ===CAT_WRITE===
+else
+    -> [atom] "Write name"
+    --> if "predictable\ncharge?" then
+        --> ===CAT_WRITE===
+    else
+        --> [no] "Determine charge"
+        --> "Write charge"
+        --> ===CAT_WRITE===
+    endif
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    --> [atom] "Write name but replace last syllable with -ide"
+    --> (*)
+else
+    -[#007F00]-> [<color:#007F00>molecule] "Write name\n\nAmmonium Nitrate" #00FF00
+    -[#007F00]-> (*)
+endif
+
+@enduml
+```
+
+### Name to Chemical Formula
+
+When converting a chemical formula to a name, use the flowchart shown below.
+
+```{plantuml}
+@startuml
+(*) --> "Determine cation and anion"
+--> "Determine ratios"
+
+if "cation type?" then
+    --> [molecule] "Write formula\nin parenthesis"
+    --> ===CAT_WRITE===
+else
+    --> [atom] "Write symbol"
+    --> ===CAT_WRITE===
+endif
+
+if "ratio > 1?" then
+    --> [yes] "Write ratio"
+    --> ===CAT_WRITE_RATIO===
+else
+    --> [no] ===CAT_WRITE_RATIO===
+endif
+
+if "anion type?" then
+    --> [molecule] "Write formula\nin parenthesis&#8203;"
+    --> ===AN_WRITE===
+else
+    --> [atom] "Write symbol&#8203;"
+    --> ===AN_WRITE===
+endif
+
+if "ratio > 1?" then
+    --> [yes] "Write ratio&#8203;"
+    --> (*)
+else
+    --> [no] (*)
+endif
+
+@enduml
+```
+
+----
+
+For example, the chemical formula for sodium chloride is `{kt} NaCl`:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=Na, charge=1+\nAnion=Cl, charge=1-" #00FF00
+-[#007F00]-> "Determine ratios\n\n1:1" #00FF00
+
+-[#007F00]-> if "<color:#007F00>cation type?" then
+    --> [molecule] "Write formula\nin parenthesis"
+    --> ===CAT_WRITE===
+else
+    -[#007F00]-> [<color:#007F00>atom] "Write symbol\n\nNa" #00FF00
+    -[#007F00]-> ===CAT_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    --> [yes] "Write ratio"
+    --> ===CAT_WRITE_RATIO===
+else
+    -[#007F00]-> [<color:#007F00>no] ===CAT_WRITE_RATIO===
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    --> [molecule] "Write formula\nin parenthesis&#8203;"
+    --> ===AN_WRITE===
+else
+    -[#007F00]-> [<color:#007F00>atom] "Write symbol&#8203;\n\nNaCl" #00FF00
+    -[#007F00]-> ===AN_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    --> [yes] "Write ratio&#8203;"
+    --> (*)
+else
+    -[#007F00]-> [<color:#007F00>no] (*)
+endif
+
+@enduml
+```
+
+----
+
+For example, the chemical formula for iron (III) oxide is `{kt} FeCl_3`:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=Fe, charge=3+\nAnion=Cl, charge=1-" #00FF00
+-[#007F00]-> "Determine ratios\n\n1:3" #00FF00
+
+-[#007F00]-> if "<color:#007F00>cation type?" then
+    --> [molecule] "Write formula\nin parenthesis"
+    --> ===CAT_WRITE===
+else
+    -[#007F00]-> [<color:#007F00>atom] "Write symbol\n\nFe" #00FF00
+    -[#007F00]-> ===CAT_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    --> [yes] "Write ratio"
+    --> ===CAT_WRITE_RATIO===
+else
+    -[#007F00]-> [<color:#007F00>no] ===CAT_WRITE_RATIO===
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    --> [molecule] "Write formula\nin parenthesis&#8203;"
+    --> ===AN_WRITE===
+else
+    -[#007F00]-> [<color:#007F00>atom] "Write symbol&#8203;\n\nFeCl" #00FF00
+    -[#007F00]-> ===AN_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    -[#007F00]-> [<color:#007F00>yes] "Write ratio&#8203;\n\nFeCl<sub>3</sub>" #00FF00
+    -[#007F00]-> (*)
+else
+    --> [no] (*)
+endif
+
+@enduml
+```
+
+----
+
+For example, the chemical formula for sodium carbonate is `{kt} Na_2(CO_3)`:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=Na, charge=1+\nAnion=CO<sub>3</sub>, charge=2-" #00FF00
+-[#007F00]-> "Determine ratios\n\n2:1" #00FF00
+
+-[#007F00]-> if "<color:#007F00>cation type?" then
+    --> [molecule] "Write formula\nin parenthesis"
+    --> ===CAT_WRITE===
+else
+    -[#007F00]-> [<color:#007F00>atom] "Write symbol\n\nNa" #00FF00
+    -[#007F00]-> ===CAT_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    -[#007F00]-> [<color:#007F00>yes] "Write ratio\n\nNa<sub>2</sub>" #00FF00
+    -[#007F00]-> ===CAT_WRITE_RATIO===
+else
+    --> [no] ===CAT_WRITE_RATIO===
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    -[#007F00]-> [<color:#007F00>molecule] "Write formula\nin parenthesis&#8203;\n\nNa<sub>2</sub>(CO<sub>3</sub>)" #00FF00
+    -[#007F00]-> ===AN_WRITE===
+else
+    --> [atom] "Write symbol&#8203;"
+    --> ===AN_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    --> [<color:#007F00>yes] "Write ratio&#8203;"
+    --> (*)
+else
+    -[#007F00]-> [no] (*)
+endif
+
+@enduml
+```
+
+----
+
+For example, the chemical formula for ammonium nitrate is `{kt} (NH_4)(NO_2)`:
+
+```{plantuml}
+@startuml
+(*) -[#007F00]-> "Determine cation and anion\n\nCation=NH<sub>4</sub>, charge=1+\nAnion=CO<sub>3</sub>, charge=1-" #00FF00
+-[#007F00]-> "Determine ratios\n\n1:1" #00FF00
+
+-[#007F00]-> if "<color:#007F00>cation type?" then
+    -[#007F00]-> [<color:#007F00>molecule] "Write formula\nin parenthesis\n\n(NH<sub>4</sub>)" #00FF00
+    -[#007F00]-> ===CAT_WRITE===
+else
+    --> [atom] "Write symbol"
+    --> ===CAT_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    --> [yes] "Write ratio"
+    --> ===CAT_WRITE_RATIO===
+else
+    -[#007F00]-> [<color:#007F00>no] ===CAT_WRITE_RATIO===
+endif
+
+-[#007F00]-> if "<color:#007F00>anion type?" then
+    -[#007F00]-> [<color:#007F00>molecule] "Write formula\nin parenthesis&#8203;\n\n(NH<sub>4</sub>)(CO<sub>3</sub>)" #00FF00
+    -[#007F00]-> ===AN_WRITE===
+else
+    --> [atom] "Write symbol&#8203;"
+    --> ===AN_WRITE===
+endif
+
+-[#007F00]-> if "<color:#007F00>ratio > 1?" then
+    --> [<color:#007F00>yes] "Write ratio&#8203;"
+    --> (*)
+else
+    -[#007F00]-> [no] (*)
+endif
+
+@enduml
+```
+
+
+In cases like this where the ratio's 1:1, parenthesis can be omitted if desired: `{kt} NH_4NO_2`.
+
+In cases where the ratio isn't 1:1, parenthesis can be removed by multiplying out. For example, ammonium has a 1+ charge while carbonate has a 2- charge -- you need 2 ammonium to cancel the charge of 1 carbonate: `{kt} {(NH_4)}_2CO_3`. Multiplying the the components of the ammonium out by its subscript results in the simplified chemical formula: `{kt} N_2H_8CO_3`.
 
 ### Polyatomic Ions
 
 The following table lists the shorthand names / chemical formulas of many common polyatomic ions (charged molecules).
-
-These shorthand names are typically used when naming larger molecules. When merging a polyatomic ion with ...
- * a single atom, just add that atom on as-is.
-   * e.g. `{kt} Na` (sodium) + `{kt} NO_3^{-}` (nitrate) = `{kt} NaNO_3` (sodium nitrate)
- * another polyatomic ion, wrap each polyatomic ion in parenthesis and treat as a single unit.
-   * e.g. `{kt} NH_4^{+}` (ammonium) + `{kt} CO_3^{2-}` (carbonate) = `{kt} {(NH_4)}_2(CO_3)` (ammonium carbonate)
-
-```{note}
-Theres a 1+ charge on ammonium so you need 2 ammonium to equal out the charge from the carbonate. Since there's only 1 carbonate, it's okay to leave out its parenthesis: `{kt} {(NH_4)}_2CO_3`.
-
-If you wanted to, you can simplify this by multiplying out: `{kt} N_2H_8CO_3`.
-```
 
 | Chemical Formula    | Name                        | Informal/Common Names |
 | ------------------- | --------------------------- | --------------------- |
