@@ -974,6 +974,81 @@ The type of arrow used in a chemical equation determines the type of reaction it
 Don't get confused. It's called an irreversible reaction but it actually it's irreversible -- it's just means that it's very hard to reverse it.
 ```
 
+### Balancing
+
+Imagine a situation where you're watching a chemical reaction take place. You know the inputs (reactant_CHEMs) and outputs (product_CHEMs) of the reaction, but you're not sure how much of each input is being used to produce out much of each output.
+
+For example, imagine that the reactant_CHEMs are `{kt} Al` and `{kt} O_2` while the product_CHEM is `{kt} Al_2O_3`. How do we scale each of these such that they're in the correct amounts? If we were to write this out as a chemical equation it would be `{kt} XAl + YO_2 \rightarrow ZAl_2O_3` where X, Y, and Z are unknown coefficients.
+
+To begin with, count up the number of atoms on each side
+
+Inputs: Al=1 O=2
+Outputs: Al=2 O=3
+
+Determine how to scale each input atom to reach the element counts required by the output atoms
+
+Input: Al=2\*1=2 O=1.5\*2=3
+
+Are they all whole numbers (you can't have half an atom)? If not, scale output by 1 and try again
+
+Inputs: Al=1 O=2
+Outputs: Al=2\*2=4 O=2\*3=6
+
+Determine how to scale each input atom to reach the element counts required by the output atoms
+
+Inputs: Al=1\*4=4 O=2\*3=6
+
+Are they all whole numbers (you can't have half an atom)? Yes. You're done.
+
+X=4 Y=3 Z=2
+
+
+
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
+TODO: CLEAN THIS UP AND ADD CODE
+
 ## pH
 
 `{bm} pH/\b(pH)\b/` stands for *potential of hydrogen* and it's the measure of positively charged hydrogen ions in a solution. The more...
