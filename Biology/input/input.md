@@ -937,6 +937,43 @@ The following table lists the shorthand names / chemical formulas of many common
 | `{kt} C_2O_4^{2-}`  | `{bm} Oxalate`              |                       |
 
 
+## Chemical Equation
+
+A `{bm} chemical reaction` is when energy is used to make molecules and ionic compounds reorganize their atoms such that they form different molecules / ionic compounds. For example, 2 hydrogen pair molecules and a oxygen pair molecule may react such that they form 2 water molecules:
+
+```{chemfig}
+\parbox{5cm}{\centering \chemfig{H-[4]H} \\ \chemfig{H-[4]H} \\ \chemfig{O-[4]O}}
+```
+
+results in...
+
+```{chemfig}
+\chemfig{O(-[5]H)(-[7]H)}
+\chemfig{O(-[5]H)(-[7]H)}
+```
+
+The...
+
+* inputs of a chemical reaction are called `{bm} reactant/(reactant)_CHEM/i`s.
+* outputs of a chemical reaction are called `{bm} product/(product)_CHEM/i`s.
+
+For the example above, the reactant_CHEMs are `{kt} 2H_2` and `{kt} O_2` while the product_CHEM is `{kt} 2H_2O`.
+
+A chemical reaction that takes places can be written out as a `{bm} chemical equation`, where reactant_CHEMs are placed on one-side, product_CHEMs are placed on the other, and an arrow indicates which side the inputs are and which side the outputs are. For example, the chemical equation for the example above is `{kt} 2H_2 + O_2 \rightarrow 2H_2O`.
+
+The type of arrow used in a chemical equation determines the type of reaction it is:
+ * `{kt} \rightarrow` - An `{bm} irreversible reaction/(irreversible chemical reaction|irreversible reaction)/i` is a chemical reaction that it'll likely only ever occur one-way. It's a reaction that requires much more energy to reverse the reverse than it did to originally perform, so much so that it'll almost never occur naturally (without human intervention).
+
+   The example above is an irreversible reaction: `{kt} 2H_2 + O_2 \rightarrow 2H_2O`.
+
+  * `{kt} \rightleftharpoons` - A `{bm} reversible reaction/(reversible chemical reaction|reversible reaction)/i` is a chemical reaction that's likely to occur either way.
+  
+    An example of a reversible reaction: `{kt} HCO^-_3 + H^+ \rightleftharpoons H_2CO_3`.
+
+```{note}
+Don't get confused. It's called an irreversible reaction but it actually it's irreversible -- it's just means that it's very hard to reverse it.
+```
+
 ## pH
 
 `{bm} pH/\b(pH)\b/` stands for *potential of hydrogen* and it's the measure of positively charged hydrogen ions in a solution. The more...
@@ -2140,7 +2177,7 @@ An enzyme is almost always a protein molecule but can also be a RNA-like molecul
 
 The general terminology for enzymes are as follows:
 
- * `{bm} Substrate` / `{bm} Reactant`s refers to the input molecules of an enzyme.
+ * `{bm} Substrate` / `{bm} Reactant/(reactant)_ENZYME/i`s refers to the input molecules of an enzyme.
  * `{bm} Product/(product)_ENZYME/i` refers to the output molecules of an enzyme.
  * `{bm} Metabolite` refers to either a substrate or product_ENZYME.
  * `{bm} Metabolism` is the total sum of all the chemical reactions that take place inside of a cell. These reactions happen via enzymes.
@@ -3446,7 +3483,9 @@ In some cases, the genetic material being fused in sexual reproduction may be fr
 `{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
 
 `{bm-ignore} byproduct|reproduction|reproduce|reproductive`
-`{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(product)/i`
-`{bm-ambiguous} Add the suffix _ENZYME if referring to the output of an enzyme/(intermediate)/i`
+`{bm-ambiguous} Add the suffix _ENZYME for enzyme output or _CHEM for chem reaction output/(product)/i`
+`{bm-ambiguous} Add the suffix _ENZYME for enzyme output/(intermediate)/i`
+
+`{bm-ambiguous} Add the suffix _ENZYME for enzyme input or _CHEM for chem reaction input/(reactant)/i`
 
 `{bm-ambiguous} Add the suffix _atom or _cell/\b(nucleus|nuclei)\b/i`
