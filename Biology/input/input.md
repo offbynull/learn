@@ -406,7 +406,7 @@ A better way to represent the structure for a molecule may be to use actual 3D r
 
    In this type of model, each atom is represented by a ball and the relative sizes of atoms are represented.
 
-## Ionic Compound Naming
+## Binary Ionic Compound Naming
 
 Recall that, in an ionic compound, ...
 1. Each ion can be either a single atom ion or a molecule ion.
@@ -440,6 +440,25 @@ You need 2 sodium ions to neutralize 1 sulfur ion.
 What happens is x is not a whole number? multiply both counts by the coefficients required to get it to a whole number.
 ```
 
+To determine the name of ...
+ * an atom, map its symbol to its name via the periodic table (e.g. `{kt} Fe` = iron).
+ * a molecule, map its formula to its common name via the table in the common polyatomic ions subsection (e.g. `{kt} CO_3^{2-}` = carbonate).
+
+To determine the charges of ...
+ * an atom, use the periodic table. When an atom becomes charged (ion), its charge can be predicted based on where on the periodic table it sits. Elements in group ...
+
+   * 1 of the periodic table charges to 1+ (cation).
+   * 2 of the periodic table charges to 2+ (cation).
+   * 13 of the periodic table charges to 3+ (cation).
+   * 14 of the periodic table charges to either 4+ (if cation) or 4- (if anion).
+   * 15 of the periodic table charges to 3- (anion).
+   * 16 of the periodic table charges to 2- (anion).
+   * 17 of the periodic table charges to 1- (anion).
+   * 18 of the periodic table doesn't charge (they remain neutral).
+
+   Elements outside these groups have more than 1 predictable charge. For example, an iron ion can be either 2+ or 3+. Since the charges of the 2 ions that make up an ionic compound have to cancel each other out, the other ion can be used to determine which charge to pick (see examples).
+ * a molecule, it'll always be a single known charge given by the formula (e.g. `{kt} CO_3^{2-}` has a 2- charge).
+
 ### Chemical Formula to Name
 
 When converting a chemical formula to a name, use the flowchart shown below.
@@ -472,56 +491,6 @@ endif
 
 @enduml
 ```
-
-To determine the name of ...
- * an atom, map its symbol to its name via the periodic table (e.g. `{kt} Fe` = iron).
- * a molecule, map its formula to its common name via the table below (e.g. `{kt} CO_3^{2-}` = carbonate).
-
-To determine the charges of ...
- * an atom, use the periodic table. When an atom becomes charged (ion), its charge can be predicted based on where on the periodic table it sits. Elements in group ...
-
-   * 1 of the periodic table charges to 1+ (cation).
-   * 2 of the periodic table charges to 2+ (cation).
-   * 13 of the periodic table charges to 3+ (cation).
-   * 14 of the periodic table charges to either 4+ (if cation) or 4- (if anion).
-   * 15 of the periodic table charges to 3- (anion).
-   * 16 of the periodic table charges to 2- (anion).
-   * 17 of the periodic table charges to 1- (anion).
-   * 18 of the periodic table doesn't charge (they remain neutral).
-
-   Elements outside these groups have more than 1 predictable charge. For example, an iron ion can be either 2+ or 3+. Since the charges of the 2 ions that make up an ionic compound have to cancel each other out, the other ion can be used to determine which charge to pick (see examples).
- * a molecule, it'll always be a single known charge given by the formula (e.g. `{kt} CO_3^{2-}` has a 2- charge).
-
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
-
-TODO: All of this is still confusing. IT only works for 2 components. What happens if > 2 components? Try writing a basic solver and plugging it in.
 
 ----
 
@@ -675,6 +644,7 @@ When converting a chemical formula to a name, use the flowchart shown below.
 @startuml
 (*) --> "Determine cation and anion"
 --> "Determine ratios"
+note right: Confused as to what\nthis means? see note\nbelow.
 
 if "cation type?" then
     --> [molecule] "Write formula\nin parenthesis"
@@ -708,6 +678,59 @@ endif
 
 @enduml
 ```
+
+````{note}
+Ratio refers to the ratio of cations to anions needed to satisfy a neutral charge. In other words, the number of cations to anions needed to create 1 instance (formula unit?) of the ionic compound.
+
+```java
+x = 1 / cation.charge
+y = 1 / anion.charge
+if (!is_whole_number(x)) {
+  x = x * cation.charge
+  y = y * cation.charge
+}
+if (!is_whole_number(y)) {
+  x = x * anion.charge
+  y = y * anion.charge
+}
+```
+
+Ration will be x:y.
+
+For example, cation=3+ and anion=1-...
+
+```java
+x = 1 / cation.charge         //      x=1/3
+y = 1 / anion.charge          //      x=1/3 y=1/1
+if (!is_whole_number(x)) {    //true
+  x = x * cation.charge       //      x=3/3 y=1/1
+  y = y * cation.charge       //      x=3/3 y=3/1
+}                             //
+if (!is_whole_number(y)) {    //false
+  x = x * anion.charge
+  y = y * anion.charge
+}
+```
+
+The ratio here is 1:3 -- the compound requires 1 cations and 3 anions.
+
+For example, cation=2+ and anion=3-...
+
+```java
+x = 1 / cation.charge         //      x=1/2
+y = 1 / anion.charge          //      x=1/2 y=1/3
+if (!is_whole_number(x)) {    //true
+  x = x * cation.charge       //      x=2/2 y=1/3
+  y = y * cation.charge       //      x=2/2 y=2/3
+}                             //
+if (!is_whole_number(y)) {    //true
+  x = x * anion.charge        //      x=6/2 y=2/3
+  y = y * anion.charge        //      x=6/2 y=6/3
+}
+```
+
+The ratio here is 3:2 -- the compound requires 3 cations and 2 anions.
+````
 
 ----
 
@@ -882,7 +905,7 @@ In cases like this where the ratio's 1:1, parenthesis can be omitted if desired:
 
 In cases where the ratio isn't 1:1, parenthesis can be removed by multiplying out. For example, ammonium has a 1+ charge while carbonate has a 2- charge -- you need 2 ammonium to cancel the charge of 1 carbonate: `{kt} {(NH_4)}_2CO_3`. Multiplying the the components of the ammonium out by its subscript results in the simplified chemical formula: `{kt} N_2H_8CO_3`.
 
-### Polyatomic Ions
+### Common Polyatomic Ion Names
 
 The following table lists the shorthand names / chemical formulas of many common polyatomic ions (charged molecules).
 
