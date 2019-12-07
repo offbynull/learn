@@ -974,9 +974,9 @@ The type of arrow used in a chemical equation determines the type of reaction it
 Don't get confused. It's called an irreversible reaction but it actually it's irreversible -- it's just means that it's very hard to reverse it.
 ```
 
-### Balancing
+### Balance
 
-`{bm} Balancing a chemical equation/(balancing a chemical equation|balance chemical equation|balanced chemical equation|unbalanced chemical equation|chemical equation balancing)/i` means finding the ratios of reactant_CHEMs and product_CHEMs in a a chemical equation. In other words, how much of the reactant_CHEMs and product_CHEMs are needed to have an equal count of elements on both sides of the chemical equation.
+`{bm} Balancing a chemical equation/(balance the chemical equation|balance a chemical equation|balancing the chemical equation|balancing a chemical equation|balance chemical equation|balanced chemical equation|unbalanced chemical equation|chemical equation balancing)/i` means finding the ratios of reactant_CHEMs and product_CHEMs in a a chemical equation. In other words, how much of the reactant_CHEMs and product_CHEMs are needed to have an equal count of elements on both sides of the chemical equation.
 
 For example, the chemical equation `{kt} H_2 + O_2 \rightarrow H_2O` is unbalanced because the number of hydrogen and oxygen elements between the left-hand side and the right-hand side are NOT equal:
 * left-hand side has 2 hydrogen and 2 oxygen atoms.
@@ -1100,6 +1100,93 @@ results in...
 \chemfig{O(-[5]H)(-[7]H)}
 \chemfig{O(-[5]H)(-[7]H)}
 ```
+
+```{note}
+In most cases, it's totally fine to have the rations (fractions) rather than the counts (whole numbers).
+```
+
+### Stoichiometry
+
+`{bm} Stoichiometry` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. That is, given that you have the amounts of some reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the remaining reactant_CHEMs/product_CHEMs.
+
+For example, the reactant_CHEMs `{kt} O_2` and `{kt} H_2` react to produce the product_CHEM `{kt} H_2O`... `{kt} H_2 + O_2 \rightarrow H_2O`. If you had 3g of `{kt} O_2`, how much `{kt} H_2` would be needed and how much `{kt} H_2O` would get produced?
+
+1. Balance the chemical equation:
+
+   `{kt} 2H_2 + O_2 \rightarrow 2H_2O`
+   
+   The coefficients in the balanced chemical equation are called the `{bm} stoichiometric coefficient`s (also may be referred to as `{bm} mole ratio`, `{bm} stoichiometric factor`, or `{bm} stoichiometric ratio`). Think of it as the ratio 2:1:2 -- for every 2 instances of `{kt} H_2`, you'll need 1 instances of `{kt} O_2` and you'll get back 2 instances of `{kt} H_2O`.
+
+2. Convert the known quantities to moles:
+
+   ```{note}
+   Why moles? Recall that...
+   * Grams are a unit of mass.
+   * Moles are a unit of counts (e.g. the number of molecules).
+
+   We need to convert from grams to moles because we're dealing with counts when we balance a chemical equation, not mass.
+   ```
+
+   We have 3g of `{kt} O_2`. We know that 1mole of `{kt} O_2` = 4g.
+   
+   Therefore, 3g of `{kt} O_2` = 1.5 mole of `{kt} O_2`.
+  
+3. Use the stoichiometric ratio from step 1 to determine the quantities of other reactant_CHEMs and product_CHEMs:
+
+   `{kt} 2H_2 + O_2 \rightarrow 2H_2O` has the stoichiometric ratio 2:1:2.
+
+   Since the amount of `{kt} O_2` is 1.5 moles, we know that the amount of...
+   * `{kt} H_2` needs to be 2 times that... 3 moles of `{kt} H_2`.
+   * `{kt} H_2O` will be be 2 times that... 3 moles of `{kt} H_2O`.
+
+4. Convert quantities back to grams:
+
+   * Since 1 mole of `{kt} H_2` = 2 grams, 3 moles of `{kt} H_2` = 6 grams.
+   * Since 1 mole of `{kt} H_2O` = 18 grams, 3 moles of `{kt} H_2O` = 54 grams.
+
+----
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
+
+TODO: ADD MORE EXAMPLES
 
 ## pH
 
