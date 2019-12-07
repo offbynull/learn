@@ -976,78 +976,130 @@ Don't get confused. It's called an irreversible reaction but it actually it's ir
 
 ### Balancing
 
-Imagine a situation where you're watching a chemical reaction take place. You know the inputs (reactant_CHEMs) and outputs (product_CHEMs) of the reaction, but you're not sure how much of each input is being used to produce out much of each output.
+`{bm} Balancing a chemical equation/(balancing a chemical equation|balance chemical equation|balanced chemical equation|unbalanced chemical equation|chemical equation balancing)/i` means finding the ratios of reactant_CHEMs and product_CHEMs in a a chemical equation. In other words, how much of the reactant_CHEMs and product_CHEMs are needed to have an equal count of elements on both sides of the chemical equation.
 
-For example, imagine that the reactant_CHEMs are `{kt} Al` and `{kt} O_2` while the product_CHEM is `{kt} Al_2O_3`. How do we scale each of these such that they're in the correct amounts? If we were to write this out as a chemical equation it would be `{kt} XAl + YO_2 \rightarrow ZAl_2O_3` where X, Y, and Z are unknown coefficients.
+For example, the chemical equation `{kt} H_2 + O_2 \rightarrow H_2O` is unbalanced because the number of hydrogen and oxygen elements between the left-hand side and the right-hand side are NOT equal:
+* left-hand side has 2 hydrogen and 2 oxygen atoms.
+* right-hand side has 2 hydrogen but only 1 oxygen atom.
 
-To begin with, count up the number of atoms on each side
+To balance it, find the coefficients for each item in the chemical equation: `{kt} xH_2 + yO_2 = zH_2O` -- solve for x, y, and z.
 
-Inputs: Al=1 O=2
-Outputs: Al=2 O=3
+----
 
-Determine how to scale each input atom to reach the element counts required by the output atoms
+The first method is to use trial-and-error until the element counts match up between the sides. The high-level algorithm for this is to...
+1. pick a set of coefficients.
 
-Input: Al=2\*1=2 O=1.5\*2=3
+   x=1, y=1, z=1  →  `{kt} 1H_2 + 1O_2 = 1H_2O` 
+  
+1. for each item on the LHS, add up the number of elements.
 
-Are they all whole numbers (you can't have half an atom)? If not, scale output by 1 and try again
+   `{kt} 1H_2 + 1O_2` contains `{kt} 2H` and `{kt} 2O`.
 
-Inputs: Al=1 O=2
-Outputs: Al=2\*2=4 O=2\*3=6
+1. for each item on the RHS, add up the number of elements.
 
-Determine how to scale each input atom to reach the element counts required by the output atoms
+   `{kt} 1H_2O` contains `{kt} 2H` and `{kt} 1O`.
 
-Inputs: Al=1\*4=4 O=2\*3=6
+1. if the element counts between LHS and RHS don't match, go to 1 (new set of coefficients).
 
-Are they all whole numbers (you can't have half an atom)? Yes. You're done.
+   `{kt} 2H = 2H` -- ✔️ matches!
 
-X=4 Y=3 Z=2
+   `{kt} 2O \neq 1O` -- ❌ no match, try again with different coefficients
+   
 
+In the example above, when ...
+* ❌ x=1, y=1, z=1 → `{kt} 1H_2 + 1O_2 \neq 1H_2O` because `{kt} 2H = 2H` but `{kt} 2O \neq O`.
+* ❌ x=1, y=1, z=2 → `{kt} 1H_2 + 1O_2 \neq 2H_2O` because `{kt} 2H \neq 4H` but `{kt} O = O`.
+* ✔️ x=2, y=1, z=2 → `{kt} 2H_2 + 1O_2 = 2H_2O` because `{kt} 4H = 4H` and `{kt} O = O`.
 
+```{chemfig}
+\parbox{5cm}{\centering \chemfig{H-[4]H} \\ \chemfig{H-[4]H} \\ \chemfig{O-[4]O}}
+```
 
+results in...
 
-TODO: CLEAN THIS UP AND ADD CODE
+```{chemfig}
+\chemfig{O(-[5]H)(-[7]H)}
+\chemfig{O(-[5]H)(-[7]H)}
+```
 
-TODO: CLEAN THIS UP AND ADD CODE
+----
 
-TODO: CLEAN THIS UP AND ADD CODE
+The second method is to use algebra to figure out the ratios of each item to reach a balanced chemical equation. The high-level algorithm for this is to...
 
-TODO: CLEAN THIS UP AND ADD CODE
+1. determine all elements used in the equation
+   
+   `{kt} \{H, O\}`
 
-TODO: CLEAN THIS UP AND ADD CODE
+1. count up the elements for each item in the equation
 
-TODO: CLEAN THIS UP AND ADD CODE
+   `{kt} H_2` → 2 hydrogen
 
-TODO: CLEAN THIS UP AND ADD CODE
+   `{kt} O_2` → 2 oxygen
 
-TODO: CLEAN THIS UP AND ADD CODE
+   `{kt} H_2O` → 2 hydrogen 1 oxygen
 
-TODO: CLEAN THIS UP AND ADD CODE
+1. for each element, convert the equation so that each item maps to the count for that element
 
-TODO: CLEAN THIS UP AND ADD CODE
+   `{kt} H` → `{kt} x(2) + y(0) = z(2)`
 
-TODO: CLEAN THIS UP AND ADD CODE
+   `{kt} O` → `{kt} x(0) + y(2) = z(1)`
 
-TODO: CLEAN THIS UP AND ADD CODE
+   ```{note}
+   What's the point of doing this? It's essentially isolating the individual elements for each item in the equation. 
+   ```
 
-TODO: CLEAN THIS UP AND ADD CODE
+1. solve for each variables x/y/z
 
-TODO: CLEAN THIS UP AND ADD CODE
+   * isolate `{kt} x`
 
-TODO: CLEAN THIS UP AND ADD CODE
+     → `{kt} x(2) + y(0) = z(2)`
 
-TODO: CLEAN THIS UP AND ADD CODE
+     → `{kt} 2x = 2z`
 
-TODO: CLEAN THIS UP AND ADD CODE
+     → `{kt} x = z`
 
-TODO: CLEAN THIS UP AND ADD CODE
+   * isolate `{kt} y`
 
-TODO: CLEAN THIS UP AND ADD CODE
+     → `{kt} x(0) + y(2) = z(1)`
 
-TODO: CLEAN THIS UP AND ADD CODE
+     → `{kt} 2y = z`
 
-TODO: CLEAN THIS UP AND ADD CODE
+     → `{kt} y = \frac{z}{2}`
 
-TODO: CLEAN THIS UP AND ADD CODE
+   * set last variable (`{kt} z`) to 1
+
+     → `{kt} z = 1`
+
+     ```{note}
+     Why set this to 1 rather than isolate?
+     
+     The 1st reason is that we have 3 variables but only 2 equations (not enough equations to isolate 3 variables).
+     
+     The 2nd reason is that, since we're dealing with ratios here, we can arbitrarily set one of the variables to 1. The other variables will be ratios relative to a whole z (e.g. they'll be half of z or 1.5 times z).
+     ```
+  
+   * solve via substitution
+
+     z: `{kt} z = 1`
+
+     x: `{kt} x = z` → `{kt} x = 1`
+
+     y: `{kt} y = \frac{z}{2}` → `{kt} y = \frac{1}{2}`
+
+In the example above, the balanced chemical equation comes out to `{kt} 1H_2 + \frac{1}{2}O_2 = 1H_2O`. This is correct in that it provides the ratios of reactant_CHEMs and product_CHEMs needed, but not the overall counts of each. To get the overall counts, multiply each item by y's divisor (2):
+
+→ `{kt} 2H_2 + 1O_2 = 2H_2O` ✔️
+
+```{chemfig}
+\parbox{5cm}{\centering \chemfig{H-[4]H} \\ \chemfig{H-[4]H} \\ \chemfig{O-[4]O}}
+```
+
+results in...
+
+```{chemfig}
+\chemfig{O(-[5]H)(-[7]H)}
+\chemfig{O(-[5]H)(-[7]H)}
+```
 
 ## pH
 
