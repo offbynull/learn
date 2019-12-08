@@ -1,0 +1,17 @@
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/ElementIsotope.java
+/home/user/learn/Biology/input/chemeq/target/generated-sources/antlr4/com/offbynull/chemeq/parser/generated/ChemVisitor.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/parser/Bond.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/parser/ChemicalEquation.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/ElementLookup.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/parser/Parser.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/parser/DomChemVisitor.java
+/home/user/learn/Biology/input/chemeq/target/generated-sources/antlr4/com/offbynull/chemeq/parser/generated/ChemParser.java
+/home/user/learn/Biology/input/chemeq/target/generated-sources/antlr4/com/offbynull/chemeq/parser/generated/ChemLexer.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/Main.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/parser/ChemicalEquationSet.java
+/home/user/learn/Biology/input/chemeq/target/generated-sources/antlr4/com/offbynull/chemeq/parser/generated/ChemBaseVisitor.java
+/home/user/learn/Biology/input/chemeq/target/generated-sources/antlr4/com/offbynull/chemeq/parser/generated/ChemListener.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/parser/ChemicalEquationUnit.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/parser/BondUnit.java
+/home/user/learn/Biology/input/chemeq/src/main/java/com/offbynull/chemeq/Element.java
+/home/user/learn/Biology/input/chemeq/target/generated-sources/antlr4/com/offbynull/chemeq/parser/generated/ChemBaseListener.java
