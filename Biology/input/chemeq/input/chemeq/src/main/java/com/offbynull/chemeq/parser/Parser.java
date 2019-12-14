@@ -1,6 +1,6 @@
 package com.offbynull.chemeq.parser;
 
-import com.offbynull.chemeq.model.ChemicalEquation;
+import com.offbynull.chemeq.ChemicalEquation;
 import static com.offbynull.chemeq.parser.generated.ChemParser.VOCABULARY;
 import com.offbynull.chemeq.parser.generated.ChemLexer;
 import com.offbynull.chemeq.parser.generated.ChemParser;

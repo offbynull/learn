@@ -982,9 +982,14 @@ For example, the chemical equation `{kt} H_2 + O_2 \rightarrow H_2O` is unbalanc
 * left-hand side has 2 hydrogen and 2 oxygen atoms.
 * right-hand side has 2 hydrogen but only 1 oxygen atom.
 
-To balance it, find the coefficients for each item in the chemical equation: `{kt} xH_2 + yO_2 = zH_2O` -- solve for x, y, and z.
+To balance it, find the coefficients for each item in the chemical equation: `{kt} xH_2 + yO_2 = zH_2O` -- solve for x, y, and z. There are 2 ways do this...
 
-----
+* visual inspection / trial-and-error
+* algebra
+
+These methods are detailed in the sub-sections below.
+
+#### Inspection
 
 The first method is to use trial-and-error until the element counts match up between the sides. The high-level algorithm for this is to...
 1. pick a set of coefficients.
@@ -1022,7 +1027,7 @@ results in...
 \chemfig{O(-[5]H)(-[7]H)}
 ```
 
-----
+#### Algebra
 
 The second method is to use algebra to figure out the ratios of each item to reach a balanced chemical equation. The high-level algorithm for this is to...
 
@@ -1105,19 +1110,48 @@ results in...
 In most cases, it's totally fine to have the rations (fractions) rather than the counts (whole numbers).
 ```
 
+```{note}
+You will run into scenarios where there aren't enough equations for variables. If you're
+
+* 1 equation short, you can apply the method above where you set one of the variables to 1.
+* 2 equations short, you can add an equation to [balance on charge](http://www.chembuddy.com/?left=balancing-stoichiometry&right=algebraic-method) as well as setting one of the variables to 1.
+* 3+ equations short, the algebra method won't work.
+```
+
 ### Stoichiometry
 
-`{bm} Stoichiometry` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. That is, given that you have the amounts of some reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the remaining reactant_CHEMs/product_CHEMs.
+`{bm} Stoichiometry` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. That is, given that you have some known amounts of some reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the remaining reactant_CHEMs/product_CHEMs that you don't know.
 
-For example, the reactant_CHEMs `{kt} O_2` and `{kt} H_2` react to produce the product_CHEM `{kt} H_2O`... `{kt} H_2 + O_2 \rightarrow H_2O`. If you had 3g of `{kt} O_2`, how much `{kt} H_2` would be needed and how much `{kt} H_2O` would get produced?
+The high-level algorithm for this is...
+
+```{plantuml}
+@startuml
+(*) --> "Balance chemical equation"
+--> ===SOLVE===
+(*) --> "Convert known reactant/product\nquantities to moles (particle counts)\n\n(e.g. 6g of carbon = 0.5 moles)"
+--> ===SOLVE===
+--> "Determine moles for remaining reactants/products"
+--> "Convert counts (moles) back to original quantity"
+@enduml
+```
+
+```{note}
+Quantity type is almost always mass, but may be some other metric such as volume. If the quantity type is already a mole then there's no need to do the conversion steps.
+```
+
+For example, the reactant_CHEMs `{kt} O_2` and `{kt} H_2` react to produce the product_CHEM `{kt} H_2O`...
+
+`{kt} H_2 + O_2 \rightarrow H_2O`
+
+If you had 3g of `{kt} O_2`, how much `{kt} H_2` would be needed and how much `{kt} H_2O` would get produced?
 
 1. Balance the chemical equation:
 
    `{kt} 2H_2 + O_2 \rightarrow 2H_2O`
    
-   The coefficients in the balanced chemical equation are called the `{bm} stoichiometric coefficient`s (also may be referred to as `{bm} mole ratio`, `{bm} stoichiometric factor`, or `{bm} stoichiometric ratio`). Think of it as the ratio 2:1:2 -- for every 2 instances of `{kt} H_2`, you'll need 1 instances of `{kt} O_2` and you'll get back 2 instances of `{kt} H_2O`.
+   The coefficients in the balanced chemical equation are called the `{bm} stoichiometric coefficient`s (also may be referred to as `{bm} mole ratio`, `{bm} stoichiometric factor`, or `{bm} stoichiometric ratio`). Think of it as a ratio. For the example, the ratio is 2:1:2 -- for every 2 instances of `{kt} H_2`, you'll need 1 instances of `{kt} O_2` and you'll get back 2 instances of `{kt} H_2O`.
 
-2. Convert the known quantities to moles:
+2. Convert the known masses to moles:
 
    ```{note}
    Why moles? Recall that...
@@ -1131,7 +1165,7 @@ For example, the reactant_CHEMs `{kt} O_2` and `{kt} H_2` react to produce the p
    
    Therefore, 3g of `{kt} O_2` = 1.5 mole of `{kt} O_2`.
   
-3. Use the stoichiometric ratio from step 1 to determine the quantities of other reactant_CHEMs and product_CHEMs:
+3. Use the stoichiometric ratio from step 1 to determine the moles of other reactant_CHEMs and product_CHEMs:
 
    `{kt} 2H_2 + O_2 \rightarrow 2H_2O` has the stoichiometric ratio 2:1:2.
 
@@ -1143,50 +1177,6 @@ For example, the reactant_CHEMs `{kt} O_2` and `{kt} H_2` react to produce the p
 
    * Since 1 mole of `{kt} H_2` = 2 grams, 3 moles of `{kt} H_2` = 6 grams.
    * Since 1 mole of `{kt} H_2O` = 18 grams, 3 moles of `{kt} H_2O` = 54 grams.
-
-----
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
-
-TODO: ADD MORE EXAMPLES
 
 ## pH
 

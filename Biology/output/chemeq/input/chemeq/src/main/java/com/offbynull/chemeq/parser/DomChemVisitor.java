@@ -1,15 +1,15 @@
 package com.offbynull.chemeq.parser;
 
-import com.offbynull.chemeq.model.ChemicalEquationUnit;
-import com.offbynull.chemeq.model.Bond;
-import com.offbynull.chemeq.model.ChemicalEquation;
-import com.offbynull.chemeq.model.BondUnit;
-import com.offbynull.chemeq.model.ChemicalEquationSet;
+import com.offbynull.chemeq.ChemicalEquationUnit;
+import com.offbynull.chemeq.Bond;
+import com.offbynull.chemeq.ChemicalEquation;
+import com.offbynull.chemeq.BondUnit;
+import com.offbynull.chemeq.ChemicalEquationSet;
 import com.google.common.collect.ImmutableList;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import com.offbynull.chemeq.model.Element;
-import com.offbynull.chemeq.model.ElementLookup;
-import com.offbynull.chemeq.model.ChemicalEquation.ChemicalEquationDirection;
+import com.offbynull.chemeq.Element;
+import com.offbynull.chemeq.ElementLookup;
+import com.offbynull.chemeq.ChemicalEquation.ChemicalEquationDirection;
 import com.offbynull.chemeq.parser.generated.ChemBaseVisitor;
 import com.offbynull.chemeq.parser.generated.ChemParser;
 import static java.lang.Integer.parseInt;

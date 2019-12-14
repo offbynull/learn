@@ -1,6 +1,5 @@
 package com.offbynull.chemeq;
 
-import com.offbynull.chemeq.model.ChemicalEquation;
 import com.offbynull.chemeq.parser.Parser;
 
 public final class Main {
