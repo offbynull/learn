@@ -19,15 +19,23 @@ import org.ejml.simple.SimpleMatrix;
 
 public final class ChemicalEquationAtomCounter {
     public static void main(String[] args) throws Throwable {
-        ChemicalEquation ce = new Parser().parseChemicalEquation("C3H8 + O2 -> CO2 + H2O");
 //        ChemicalEquation ce = new Parser().parseChemicalEquation("H2 + O2 -> H2O");
+
+        ChemicalEquation ce = new Parser().parseChemicalEquation("C3H8 + O2 -> CO2 + H2O");
+        Bond knownQuantityBond = new Parser().parseBond("O2");
+        double knownQuantityMass = 2;
         
         try (PrintWriter pw = new PrintWriter(System.out, true)) {
-            balance(pw, ce);
+            ChemicalEquation balancedCe = balance(pw, ce);
+            calculateMasses(pw, balancedCe, knownQuantityBond, knownQuantityMass);
         }
     }
     
+    
+    
+    
     public static ChemicalEquation balance(Writer writer, ChemicalEquation ce) throws IOException {
+        Preconditions.checkNotNull(writer);
         Preconditions.checkNotNull(ce);
         
         
@@ -225,5 +233,46 @@ public final class ChemicalEquationAtomCounter {
             this.var = var;
             this.bond = bond;
         }
+    }
+
+
+
+
+    public static double[] calculateMasses(Writer writer, ChemicalEquation ce, Bond bond, double bondGrams) throws IOException {
+        Preconditions.checkNotNull(writer);
+        Preconditions.checkNotNull(ce);
+        
+        var bonds = Stream.concat(
+                ce.reactants.items.stream(),
+                ce.products.items.stream()
+        ).collect(toList());
+        int idx = IntStream.range(0, bonds.size())
+                .filter(i -> bonds.get(i).bond.equals(bond))
+                .findFirst().getAsInt();
+        
+        if (idx == -1) {
+            MarkdownHelper.bond(writer, bond);
+            writer.write(" not found\n\n");
+            return null;
+        }
+        
+        writer.write("Converting " + bondGrams + "g of ");
+        MarkdownHelper.bond(writer, bond);
+        writer.write(" to moles: \n\n");
+        double bondAtomicWeight = bond.items.stream().mapToDouble(bu -> bu.element.atomicWeight.lowerEndpoint()).sum();
+        writer.write(" * total atomic weight: " + bondAtomicWeight + "amu\n");
+        double bondGramsPerMole = bondAtomicWeight;
+        writer.write(" * " + bondGramsPerMole + "g = 1 mole\n");
+        double bondMoles = bondGrams / bondGramsPerMole;
+        writer.write(" * " + bondGrams + "g = " + bondMoles + " mole\n");
+        writer.write("\n\n");
+        
+        
+        writer.write("Applying to ratios in balanced chemical equation to calculate remaining moles:\n\n");
+        
+        
+        writer.write("Converting moles back to grams:\n\n");
+        
+        return null;
     }
 }

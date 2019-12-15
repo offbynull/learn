@@ -1,5 +1,6 @@
 package com.offbynull.chemeq.parser;
 
+import com.offbynull.chemeq.Bond;
 import com.offbynull.chemeq.ChemicalEquation;
 import static com.offbynull.chemeq.parser.generated.ChemParser.VOCABULARY;
 import com.offbynull.chemeq.parser.generated.ChemLexer;
@@ -26,6 +27,26 @@ public final class Parser {
         
         try {
             return (ChemicalEquation) visitor.visit(parser.chemEq());
+        } catch (ParseCancellationException pce) { // throws by BailErrorStrategy
+            RecognitionException re = (RecognitionException) pce.getCause();
+            throw new IllegalArgumentException(
+                    String.format("Parser syntax error: token [%s] but expected one of [%s] (line %d pos %d)",
+                            re.getOffendingToken() == null ? "" : VOCABULARY.getDisplayName(re.getOffendingToken().getType()),
+                            re.getExpectedTokens().toList().stream().map(i -> VOCABULARY.getDisplayName(i)).collect(joining(",")),
+                            re.getOffendingToken().getLine(),
+                            re.getOffendingToken().getCharPositionInLine()),
+                    re);
+        }
+    }
+
+    public Bond parseBond(String input) {
+        Validate.notNull(input);
+
+        ChemParser parser = initParser(input);
+        DomChemVisitor visitor = new DomChemVisitor();
+        
+        try {
+            return (Bond) visitor.visit(parser.bond());
         } catch (ParseCancellationException pce) { // throws by BailErrorStrategy
             RecognitionException re = (RecognitionException) pce.getCause();
             throw new IllegalArgumentException(
