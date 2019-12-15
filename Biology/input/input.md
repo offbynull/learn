@@ -1120,63 +1120,113 @@ You will run into scenarios where there aren't enough equations for variables. I
 
 ### Stoichiometry
 
-`{bm} Stoichiometry` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. That is, given that you have some known amounts of some reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the remaining reactant_CHEMs/product_CHEMs that you don't know.
+`{bm} Stoichiometry` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. In other words, given that you have some amount of a reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the other reactant_CHEMs/product_CHEMs.
+
+For example, imagine the balanced chemical equation is `{kt} 2H_2 + O_2 \rightarrow 2H_2O`. If you have 3g of the reactant_CHEM `{kt} O_2`, ...
+* how much of the other reactant_CHEMs (`{kt} H_2`) do you need?
+* how much of the product_CHEMs (`{kt} H_2O`) are produced?
 
 The high-level algorithm for this is...
 
 ```{plantuml}
 @startuml
-(*) --> "Balance chemical equation"
+(*) --> "Balance chemical equation\n\n(if not already done so)"
 --> ===SOLVE===
 (*) --> "Convert known reactant/product\nquantities to moles (particle counts)\n\n(e.g. 6g of carbon = 0.5 moles)"
 --> ===SOLVE===
 --> "Determine moles for remaining reactants/products"
---> "Convert counts (moles) back to original quantity"
+--> "Convert counts (moles) back to original quantity type"
 @enduml
 ```
 
 ```{note}
-Quantity type is almost always mass, but may be some other metric such as volume. If the quantity type is already a mole then there's no need to do the conversion steps.
+The quantity type doesn't have to be grams. It often is grams but it could be something else like volume. If it were moles, the conversion to/from wouldn't be necessary.
 ```
-
-For example, the reactant_CHEMs `{kt} O_2` and `{kt} H_2` react to produce the product_CHEM `{kt} H_2O`...
-
-`{kt} H_2 + O_2 \rightarrow H_2O`
-
-If you had 3g of `{kt} O_2`, how much `{kt} H_2` would be needed and how much `{kt} H_2O` would get produced?
 
 1. Balance the chemical equation:
 
    `{kt} 2H_2 + O_2 \rightarrow 2H_2O`
    
-   The coefficients in the balanced chemical equation are called the `{bm} stoichiometric coefficient`s (also may be referred to as `{bm} mole ratio`, `{bm} stoichiometric factor`, or `{bm} stoichiometric ratio`). Think of it as a ratio. For the example, the ratio is 2:1:2 -- for every 2 instances of `{kt} H_2`, you'll need 1 instances of `{kt} O_2` and you'll get back 2 instances of `{kt} H_2O`.
+   The coefficients in the balanced chemical equation are called the `{bm} stoichiometric coefficient`s. Think of it as a ratio. For the example, the ratio is 2:1:2 -- for every 2 instances of `{kt} H_2`, you'll need 1 instances of `{kt} O_2` and you'll get back 2 instances of `{kt} H_2O`.
 
-2. Convert the known masses to moles:
+   Stoichiometric coefficients may also be referred to as `{bm} mole ratio`, `{bm} stoichiometric factor`, or `{bm} stoichiometric ratio`.
+
+2. Convert known quantity (3g of `{kt} O_2`) to moles:
 
    ```{note}
    Why moles? Recall that...
    * Grams are a unit of mass.
    * Moles are a unit of counts (e.g. the number of molecules).
 
-   We need to convert from grams to moles because we're dealing with counts when we balance a chemical equation, not mass.
+   ----
+
+   atom_count(1 gram of oxygen) != atom_count(1 gram of hydrogen) -- they have different weights. We need to convert from grams to moles because we're dealing with counts when we balance a chemical equation, not mass. Moles are a unit of counts.
    ```
 
-   We have 3g of `{kt} O_2`. We know that 1mole of `{kt} O_2` = 4g.
+   We have 3g of `{kt} O_2`. We know that 1mole of `{kt} O_2` = 32g.
    
-   Therefore, 3g of `{kt} O_2` = 1.5 mole of `{kt} O_2`.
+   Therefore, 3g of `{kt} O_2` = 96g mole of `{kt} O_2`.
   
 3. Use the stoichiometric ratio from step 1 to determine the moles of other reactant_CHEMs and product_CHEMs:
 
    `{kt} 2H_2 + O_2 \rightarrow 2H_2O` has the stoichiometric ratio 2:1:2.
 
-   Since the amount of `{kt} O_2` is 1.5 moles, we know that the amount of...
-   * `{kt} H_2` needs to be 2 times that... 3 moles of `{kt} H_2`.
-   * `{kt} H_2O` will be be 2 times that... 3 moles of `{kt} H_2O`.
+   Since the amount of `{kt} O_2` is 96 moles, we know that the amount of...
+   * `{kt} H_2` needs to be 2 times that... 192 moles of `{kt} H_2`.
+   * `{kt} H_2O` will be be 2 times that... 192 moles of `{kt} H_2O`.
 
 4. Convert quantities back to grams:
 
-   * Since 1 mole of `{kt} H_2` = 2 grams, 3 moles of `{kt} H_2` = 6 grams.
-   * Since 1 mole of `{kt} H_2O` = 18 grams, 3 moles of `{kt} H_2O` = 54 grams.
+   * Since 1 mole of `{kt} H_2` = 2 grams, 192 moles of `{kt} H_2` = 2 / 192 = 96 grams.
+   * Since 1 mole of `{kt} H_2O` = 18 grams, 192 moles of `{kt} H_2O` = 18 / 192 = 10.666 grams.
+
+### Software Model
+
+The software model for balancing chemical equations and stoichiometry is straight-forward.
+
+ 1. Parse the chemical equation.
+
+    Parsing is performed using ANTLR's grammar syntax. An in-memory DOM model is constructed from the grammar. Each atomic element that gets parsed is directly mapped to a data structure that contains its details: symbols, names, atomic weights, atomic masses, isotopes, etc.. This data was extracted from from [CIAAW](https://ciaaw.org) using a browser plugin called [CopyTables](https://chrome.google.com/webstore/detail/copytables/ekdpkppgmlalfkphpibadldikjimijon?hl=en).
+
+ 2. Use the algebra method to balance the chemical equation.
+
+     Chemical equation balancing is done using the algebra method. The actual implementation of solving is delegated to the EJML library, where a matrix is populated with the coefficients and reduced row echelon form is used to solve. As noted in the section on balancing equations, the algebra method doesn't always work -- if there are more variables than there are equations that can be formed, solving via algebra isn't possible.
+
+     ```{note}
+     For most examples you come across, solving via algebra will work.
+     ```
+
+     ```{note}
+     TODO: The row echelon form stuff doesn't work all the time. Find a library with a simpler API. Or maybe continue writing your own substitution based solver.
+     ```
+
+ 3. Use the stoichiometry ratio from step2 to determine the amounts of reactant_CHEMs and product_CHEMs.
+
+    Stoichiometry is done using the extracted CIAAW data from step 1. The reactant_CHEM/product_CHEM that's known has its mass converted from grams to moles, the stoichiometry ratio is applied to find the moles fro the remaining reactant_CHEMs and product_CHEMs, then they're all converted back from moles to grams. 
+
+The following are invocations of this model's implementation.
+
+```{define-block}
+stoichiometry
+stoichiometry_macro/
+stoichiometry_code/
+```
+
+**Example 1**
+
+```{stoichiometry}
+H2 + O2 -> H2O
+O2
+3
+```
+
+**Example 2**
+
+```{stoichiometry}
+99C3H8 + 2O2 -> 15CO2 + 7H2O
+O2
+0.5
+```
 
 ## pH
 
