@@ -1188,6 +1188,30 @@ The software model for balancing chemical equations and stoichiometry is straigh
 
     Parsing is performed using ANTLR's grammar syntax. An in-memory DOM model is constructed from the grammar. Each atomic element that gets parsed is directly mapped to a data structure that contains its details: symbols, names, atomic weights, atomic masses, isotopes, etc.. This data was extracted from from [CIAAW](https://ciaaw.org) using a browser plugin called [CopyTables](https://chrome.google.com/webstore/detail/copytables/ekdpkppgmlalfkphpibadldikjimijon?hl=en).
 
+    Example of equation parsing...
+
+    ```{define-block}
+    ceparse
+    ceparse_macro/
+    cetools_code/
+    ```
+
+    ```{ceparse}
+    2H2 + O2 -> 2H2O
+    ```
+
+    Example of bond information lookup...
+
+    ```{define-block}
+    cebondinfo
+    cebondinfo_macro/
+    cetools_code/
+    ```
+
+    ```{cebondinfo}
+    H2O
+    ```
+
  2. Use the algebra method to balance the chemical equation.
 
      Chemical equation balancing is done using the algebra method. The actual implementation of solving is delegated to the EJML library, where a matrix is populated with the coefficients and reduced row echelon form is used to solve. As noted in the section on balancing equations, the algebra method doesn't always work -- if there are more variables than there are equations that can be formed, solving via algebra isn't possible.
@@ -1200,33 +1224,35 @@ The software model for balancing chemical equations and stoichiometry is straigh
      TODO: The row echelon form stuff doesn't work all the time. Find a library with a simpler API. Or maybe continue writing your own substitution based solver.
      ```
 
+     Example of balancing...
+
+     ```{define-block}
+     cebalance
+     cebalance_macro/
+     cetools_code/
+     ```
+
+     ```{cebalance}
+     C3H8 + O2 -> CO2 + H2O
+     ```
+
  3. Use the stoichiometry ratio from step2 to determine the amounts of reactant_CHEMs and product_CHEMs.
 
     Stoichiometry is done using the extracted CIAAW data from step 1. The reactant_CHEM/product_CHEM that's known has its mass converted from grams to moles, the stoichiometry ratio is applied to find the moles fro the remaining reactant_CHEMs and product_CHEMs, then they're all converted back from moles to grams. 
 
-The following are invocations of this model's implementation.
+    Example of stoichiometry...
 
-```{define-block}
-stoichiometry
-stoichiometry_macro/
-stoichiometry_code/
-```
+    ```{define-block}
+    cestoichiometry
+    cestoichiometry_macro/
+    cetools_code/
+    ```
 
-**Example 1**
-
-```{stoichiometry}
-H2 + O2 -> H2O
-O2
-3
-```
-
-**Example 2**
-
-```{stoichiometry}
-99C3H8 + 2O2 -> 15CO2 + 7H2O
-O2
-0.5
-```
+    ```{cestoichiometry}
+    C3H8 + 5O2 -> 3CO2 + 4H2O
+    O2
+    0.5
+    ```
 
 ## pH
 
