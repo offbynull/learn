@@ -127,7 +127,7 @@ public final class MainEquationBalance {
         
         
         // solve system of linear equations
-          // solving using matrix instead of substitution: https://www.youtube.com/watch?v=1i2nvMli0GY
+          // solving using matrix instead of substitution: https://chemistry.stackexchange.com/a/66805
         mdw.out("Solving system of linear equations: \n\n");
         double[][] matrixA = new double[varCount][varCount];
         int rowIdx = 0;

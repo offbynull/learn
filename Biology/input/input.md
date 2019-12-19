@@ -1029,71 +1029,67 @@ results in...
 
 #### Algebra
 
-The second method is to use algebra to figure out the ratios of each item to reach a balanced chemical equation. The high-level algorithm for this is to...
+The second method is to use algebra to figure out the element counts. That is, if enough relationships exist between the reactant_CHEMs and the product_CHEMs, those relationships can be mapped out as a system equations (solvable via algebra).
 
-1. determine all elements used in the equation
+`{kt} xH_2 + yO_2 \rightarrow zH_2O`.
+
+Write out all reactant_CHEM / product_CHEM properties that should be equal __if the chemical equation were balanced__. For example, the number of oxygen atoms should be equal between the reactant_CHEM side and the product_CHEM side if the equation were balanced.
+
+```{note}
+Another way to think about that last sentence: if the coefficients [x, y, z] were correct, the number of oxygen atoms will be equal.
+```
+
+|                         | `{kt} H_2` | `{kt} O_2` | `{kt} H_2O` | Equation                   |
+| ----------------------- | ---------- | ---------- | ----------- | -------------------------- |
+| atom count for `{kt} H` | 2          | 0          | 2           | `{kt} x(2) + y(0) = z(2)`  |
+| atom count for `{kt} O` | 0          | 2          | 1           | `{kt} x(0) + y(2) = z(1)`  |
+| atom count for all      | 2          | 2          | 3           | `{kt} x(2) + y(2) = z(3)`  |
+| charges                 | 0          | 0          | 0           | `{kt} x(0) + y(0) = z(0)`  |
+
+Of those relationships, how many are usable? In the example above, on closer inspection it becomes apparent that...
+
+ * the 3rd equation (atom count for all) isn't usable because it represents existing relationships.
+ 
+   This 3rd equation is just the first two equations added up. If you take the first two equations, add the left-hand sides together and the right-hand sides together, you'll end up with the 3rd equation.
+
+   `{kt} (x(2) + y(0)) + (x(0) + y(2)) = z(2) + z(1)` ⟶ `{kt} x(2) + y(2) = z(3)`
+
+   An equation representing relationships that are already expressed by other equations in the system is redundant -- it doesn't contribute to solving the system.
+
+ * the 4th equation (charges) isn't usable because it doesn't convey a relationship.
    
-   `{kt} \{H, O\}`
+   The sum of charges on the reactant_CHEMs side and the product_CHEMs side are equal. But, each of the reactant_CHEMs / product_CHEMs have a 0 charge. The equation simplifies to `{kt} 0 = 0` -- it isn't conveying a relationship between any of the variables [x, y, z].
 
-1. count up the elements for each item in the equation
+These non-usable equations are discarded.
 
-   `{kt} H_2` → 2 hydrogen
+Of the usable equations, if equations.length >= variables.length - 1, its solvable. The example above is solvable because the 3 variables ([x, y, z]) require at least 2 equations to solve -- 2 equations are available. Use the above equations to isolate 2 of the variables, then set the last variable to 1 and solve.
 
-   `{kt} O_2` → 2 oxygen
+Isolate `{kt} x` in equation 1:
+ * `{kt} x(2) + y(0) = z(2)`
+ * `{kt} 2x = 2z`
+ * `{kt} x = z`
 
-   `{kt} H_2O` → 2 hydrogen 1 oxygen
+Isolate `{kt} y` in equation 2:
+ * `{kt} x(0) + y(2) = z(1)`
+ * `{kt} 2y = z`
+ * `{kt} y = \frac{z}{2}`
 
-1. for each element, convert the equation so that each item maps to the count for that element
+Set `{kt} z` to 1 and solve via algebra:
+ * `{kt} x = z` ⟶ `{kt} x = 1`
+ * `{kt} y = \frac{z}{2}` ⟶ `{kt} y = \frac{1}{2}`
+ * `{kt} z = 1`
 
-   `{kt} H` → `{kt} x(2) + y(0) = z(2)`
-
-   `{kt} O` → `{kt} x(0) + y(2) = z(1)`
-
-   ```{note}
-   What's the point of doing this? It's essentially isolating the individual elements for each item in the equation. 
-   ```
-
-1. solve for each variables x/y/z
-
-   * isolate `{kt} x`
-
-     → `{kt} x(2) + y(0) = z(2)`
-
-     → `{kt} 2x = 2z`
-
-     → `{kt} x = z`
-
-   * isolate `{kt} y`
-
-     → `{kt} x(0) + y(2) = z(1)`
-
-     → `{kt} 2y = z`
-
-     → `{kt} y = \frac{z}{2}`
-
-   * set last variable (`{kt} z`) to 1
-
-     → `{kt} z = 1`
-
-     ```{note}
-     Why set this to 1 rather than isolate?
-     
-     The 1st reason is that we have 3 variables but only 2 equations (not enough equations to isolate 3 variables).
-     
-     The 2nd reason is that, since we're dealing with ratios here, we can arbitrarily set one of the variables to 1. The other variables will be ratios relative to a whole z (e.g. they'll be half of z or 1.5 times z).
-     ```
-  
-   * solve via substitution
-
-     z: `{kt} z = 1`
-
-     x: `{kt} x = z` → `{kt} x = 1`
-
-     y: `{kt} y = \frac{z}{2}` → `{kt} y = \frac{1}{2}`
+```{note}
+We can set the remaining variable to 1 because we're dealing with ratios. The ratios of rectant_CHEMs and product_CHEMs will all be relative to each other -- when we set a variable to 1, the other variables will get scaled accordingly.
+```
 
 In the example above, the balanced chemical equation comes out to `{kt} 1H_2 + \frac{1}{2}O_2 = 1H_2O`. This is correct in that it provides the ratios of reactant_CHEMs and product_CHEMs needed, but not the overall counts of each. To get the overall counts, multiply each item by y's divisor (2):
 
 → `{kt} 2H_2 + 1O_2 = 2H_2O` ✔️
+
+```{note}
+In most cases, it's totally fine to have the ratios (fractions) rather than the counts (whole numbers).
+```
 
 ```{chemfig}
 \parbox{5cm}{\centering \chemfig{H-[4]H} \\ \chemfig{H-[4]H} \\ \chemfig{O-[4]O}}
@@ -1106,17 +1102,44 @@ results in...
 \chemfig{O(-[5]H)(-[7]H)}
 ```
 
-```{note}
-In most cases, it's totally fine to have the rations (fractions) rather than the counts (whole numbers).
-```
+What happens if there aren't enough equations available to solve the system? It means that there isn't a single distinct solution. For example, there is no single solution for something like  `{kt} H_2 + O \rightarrow H_2O_2 + O_2`.
+
+|                         | `{kt} H_2` | `{kt} O` | `{kt} H_2O_2` | `{kt} O_2` | Equation                          |
+| ----------------------- | ---------- | -------- | ------------- | ---------- | --------------------------------- |
+| atom count for `{kt} H` | 2          | 0        | 2             | 0          | `{kt} w(2) + x(0) = y(2) + z(0)`  |
+| atom count for `{kt} O` | 0          | 1        | 2             | 2          | `{kt} w(0) + x(1) = y(2) + z(2)`  |
+| ~~atom count for all~~  | 2          | 1        | 4             | 2          | `{kt} w(2) + x(1) = y(4) + z(2)`  |
+| ~~charges~~             | 0          | 0        | 0             | 0          | `{kt} w(0) + x(0) = y(0) + z(0)`  |
 
 ```{note}
-You will run into scenarios where there aren't enough equations for variables. If you're
-
-* 1 equation short, you can apply the method above where you set one of the variables to 1.
-* 2 equations short, you can add an equation to [balance on charge](http://www.chembuddy.com/?left=balancing-stoichiometry&right=algebraic-method) as well as setting one of the variables to 1.
-* 3+ equations short, the algebra method won't work.
+Last 2 eq struck out because they're not usable / useful in solving the system. Reasoning for this is discussed earlier on in this section.
 ```
+
+There are 4 variables to solve but only 2 equations in the system -- at least 3 equations are needed. Attempting to solve without a 3rd equation results in...
+
+Isolate `{kt} w` in equation 1:
+ * `{kt} w(2) + x(0) = y(2) + z(0)`
+ * `{kt} w(2) = y(2)`
+ * `{kt} w = y`
+
+Isolate `{kt} x` in equation 2:
+ * `{kt} w(0) + x(1) = y(2) + z(2)`
+ * `{kt} x = 2y + 2z`
+
+Set `{kt} y` to 1 and solve as far as possible via algebra:
+ * `{kt} w = y` ⟶ `{kt} w = 1`
+ * `{kt} x = 2y + 2z` ⟶ `{kt} x = 2(1) + 2z` ⟶ `{kt} x = 2z + 2`
+ * `{kt} y = 1`
+
+There is no distinct solution...
+
+`{kt} 1H_2 + (2z + 2)O \rightarrow 1H_2O_2 + zO_2`
+
+Any of the following balanced chemical equations are possible...
+* `{kt} H_2 + 4O \rightarrow H_2O_2 + O_2` is a valid answer.
+* `{kt} H_2 + 6O \rightarrow H_2O_2 + 2O_2` is a valid answer.
+* `{kt} H_2 + 8O \rightarrow H_2O_2 + 3O_2` is a valid answer.
+* etc..
 
 ### Stoichiometry
 
