@@ -1,5 +1,6 @@
 package com.offbynull.cetools;
 
+import static com.google.common.base.Throwables.getStackTraceAsString;
 import com.offbynull.cetools.parser.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,13 +12,17 @@ public final class MainBondInformation {
                 PrintWriter pw = new PrintWriter(System.out, true);
                 MarkdownWriter mdw = new MarkdownWriter(pw)) {
             mdw.out("<div style=\"border:1px solid black;\">\n\n");
-            String input = s.nextLine();
-            
-            mdw.out("Pulling information for ").out(input).out("\n\n");
-            
-            Bond bond = new Parser().parseBond(input);
-            bond.items.forEach(bu -> mdw.out(" * ").out(bu.count).out(bu.element.name).out("\n"));
-            mdw.out(" * atomic weight ").out(bond.atomicWeight()).out("amu\n");
+            try {
+                String input = s.nextLine();
+
+                mdw.out("Pulling information for ").out(input).out("\n\n");
+
+                Bond bond = new Parser().parseBond(input);
+                bond.items.forEach(bu -> mdw.out(" * ").out(bu.count).out(bu.element.name).out("\n"));
+                mdw.out(" * atomic weight ").out(bond.atomicWeight()).out("amu\n");
+            } catch (Exception e) {
+                mdw.out(getStackTraceAsString(e));
+            }
             mdw.out("\n\n</div>\n\n");
         }
     }

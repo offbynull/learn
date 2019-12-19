@@ -4,6 +4,7 @@
 
 package com.offbynull.cetools;
 
+import static com.google.common.base.Throwables.getStackTraceAsString;
 import com.offbynull.cetools.parser.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,22 +20,26 @@ public final class MainEquationParse {
             
             mdw.out("Parsing ").out(input).out("\n\n");
             
-            ChemicalEquation ce = new Parser().parseChemicalEquation(input);
-            for (var r : ce.reactants.items) {
-                mdw.out(" * Input: ").out(r.count).out(" x ( ");
-                for (var bu : r.bond.items) {
-                    mdw.out(bu.count).out(bu.element.name).out(" ");
+            try {
+                ChemicalEquation ce = new Parser().parseChemicalEquation(input);
+                for (var r : ce.reactants.items) {
+                    mdw.out(" * Input: ").out(r.count).out(" x ( ");
+                    for (var bu : r.bond.items) {
+                        mdw.out(bu.count).out(bu.element.name).out(" ");
+                    }
+                    mdw.out(")\n");
                 }
-                mdw.out(")\n");
-            }
-            for (var r : ce.products.items) {
-                mdw.out(" * Output: ").out(r.count).out(" x ( ");
-                for (var bu : r.bond.items) {
-                    mdw.out(bu.count).out(bu.element.name).out(" ");
+                for (var r : ce.products.items) {
+                    mdw.out(" * Output: ").out(r.count).out(" x ( ");
+                    for (var bu : r.bond.items) {
+                        mdw.out(bu.count).out(bu.element.name).out(" ");
+                    }
+                    mdw.out(")\n");
                 }
-                mdw.out(")\n");
+                mdw.out(" * Direction: ").out(ce.direction).out("\n");
+            } catch (Exception e) {
+                mdw.out(getStackTraceAsString(e));
             }
-            mdw.out(" * Direction: ").out(ce.direction).out("\n");
             mdw.out("\n\n</div>\n\n");
         }
     }

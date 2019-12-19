@@ -1033,20 +1033,16 @@ The second method is to use algebra to figure out the element counts. That is, i
 
 `{kt} xH_2 + yO_2 \rightarrow zH_2O`.
 
-Write out all reactant_CHEM / product_CHEM properties that should be equal __if the chemical equation were balanced__. For example, the number of oxygen atoms should be equal between the reactant_CHEM side and the product_CHEM side if the equation were balanced.
+Write out all properties that should be equal __if the chemical equation were balanced__. For example, if the equation were balanced, the number of oxygen atoms should be equal between the reactant_CHEM side and the product_CHEM side.
 
-```{note}
-Another way to think about that last sentence: if the coefficients [x, y, z] were correct, the number of oxygen atoms will be equal.
-```
-
-|                         | `{kt} H_2` | `{kt} O_2` | `{kt} H_2O` | Equation                   |
+|                         | `{kt} H_2` | `{kt} O_2` | `{kt} H_2O` | Equation / Relationship    |
 | ----------------------- | ---------- | ---------- | ----------- | -------------------------- |
 | atom count for `{kt} H` | 2          | 0          | 2           | `{kt} x(2) + y(0) = z(2)`  |
 | atom count for `{kt} O` | 0          | 2          | 1           | `{kt} x(0) + y(2) = z(1)`  |
 | atom count for all      | 2          | 2          | 3           | `{kt} x(2) + y(2) = z(3)`  |
 | charges                 | 0          | 0          | 0           | `{kt} x(0) + y(0) = z(0)`  |
 
-Of those relationships, how many are usable? In the example above, on closer inspection it becomes apparent that...
+Of those relationships, how many are usable? For the above example, on closer inspection it becomes apparent that...
 
  * the 3rd equation (atom count for all) isn't usable because it represents existing relationships.
  
@@ -1080,7 +1076,7 @@ Set `{kt} z` to 1 and solve via algebra:
  * `{kt} z = 1`
 
 ```{note}
-We can set the remaining variable to 1 because we're dealing with ratios. The ratios of rectant_CHEMs and product_CHEMs will all be relative to each other -- when we set a variable to 1, the other variables will get scaled accordingly.
+We can set the remaining variable to 1 because we're dealing with ratios. The ratios of reactant_CHEMs and product_CHEMs will all be relative to each other -- when we set a variable to 1, the other variables will get scaled accordingly.
 ```
 
 In the example above, the balanced chemical equation comes out to `{kt} 1H_2 + \frac{1}{2}O_2 = 1H_2O`. This is correct in that it provides the ratios of reactant_CHEMs and product_CHEMs needed, but not the overall counts of each. To get the overall counts, multiply each item by y's divisor (2):
@@ -1104,7 +1100,7 @@ results in...
 
 What happens if there aren't enough equations available to solve the system? It means that there isn't a single distinct solution. For example, there is no single solution for something like  `{kt} H_2 + O \rightarrow H_2O_2 + O_2`.
 
-|                         | `{kt} H_2` | `{kt} O` | `{kt} H_2O_2` | `{kt} O_2` | Equation                          |
+|                         | `{kt} H_2` | `{kt} O` | `{kt} H_2O_2` | `{kt} O_2` | Equation / Relationship           |
 | ----------------------- | ---------- | -------- | ------------- | ---------- | --------------------------------- |
 | atom count for `{kt} H` | 2          | 0        | 2             | 0          | `{kt} w(2) + x(0) = y(2) + z(0)`  |
 | atom count for `{kt} O` | 0          | 1        | 2             | 2          | `{kt} w(0) + x(1) = y(2) + z(2)`  |
@@ -1237,14 +1233,10 @@ The software model for balancing chemical equations and stoichiometry is straigh
 
  2. Use the algebra method to balance the chemical equation.
 
-     Chemical equation balancing is done using the algebra method. The actual implementation of solving is delegated to the EJML library, where a matrix is populated with the coefficients and reduced row echelon form is used to solve. As noted in the section on balancing equations, the algebra method doesn't always work -- if there are more variables than there are equations that can be formed, solving via algebra isn't possible.
+     Chemical equation balancing is done using the algebra method. The actual implementation of solving is delegated to the EJML library, where a matrix is populated with the coefficients and solved. As noted in the section on balancing equations, the algebra method doesn't always work -- if there aren't enough equations then solving via algebra isn't possible.
 
      ```{note}
-     For most examples you come across, solving via algebra will work.
-     ```
-
-     ```{note}
-     TODO: The row echelon form stuff doesn't work all the time. Find a library with a simpler API. Or maybe continue writing your own substitution based solver.
+     Charges aren't supported. That is, this solver doesn't generate an equation based on charges. Charges aren't supported by the parsing / DOM model.
      ```
 
      Example of balancing...

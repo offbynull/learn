@@ -1,6 +1,7 @@
 package com.offbynull.cetools;
 
 import com.google.common.base.Preconditions;
+import static com.google.common.base.Throwables.getStackTraceAsString;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
@@ -14,7 +15,6 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import org.ejml.alg.dense.misc.RrefGaussJordanRowPivot;
 import org.ejml.simple.SimpleMatrix;
 
 public final class MainEquationBalance {
@@ -27,8 +27,12 @@ public final class MainEquationBalance {
             
             mdw.out("Balancing ").out(input).out("\n\n");
             
-            ChemicalEquation ce = new Parser().parseChemicalEquation(input);
-            balanceEquation(mdw, ce);
+            try {
+                ChemicalEquation ce = new Parser().parseChemicalEquation(input);
+                balanceEquation(mdw, ce);
+            } catch (Exception e) {
+                mdw.out(getStackTraceAsString(e));
+            }
             mdw.out("\n\n</div>\n\n");
         }
     }
@@ -129,40 +133,35 @@ public final class MainEquationBalance {
         // solve system of linear equations
           // solving using matrix instead of substitution: https://chemistry.stackexchange.com/a/66805
         mdw.out("Solving system of linear equations: \n\n");
+        if (eqCount != varCount - 1) {
+            mdw.out("Not enough equations to solve for variables.\n\n");
+            return null;
+        }
         double[][] matrixA = new double[varCount][varCount];
         int rowIdx = 0;
         for (var e : elementBag.elementSet()) {
             int colIdx = 0;
             for (var ceu : unbalancedCe.reactants.items) {
                 var bondElemCount = ceu.bond.items.stream().mapToInt(bu -> bu.element.equals(e) ? bu.count : 0).sum();
-                matrixA[rowIdx][colIdx] = bondElemCount;
+                matrixA[rowIdx][colIdx] = -bondElemCount;
                 colIdx++;
             }
             for (var ceu : unbalancedCe.products.items) {
                 var bondElemCount = ceu.bond.items.stream().mapToInt(bu -> bu.element.equals(e) ? bu.count : 0).sum();
-                matrixA[rowIdx][colIdx] = -bondElemCount;
+                matrixA[rowIdx][colIdx] = bondElemCount;
                 colIdx++;
             }
             rowIdx++;
         }
-        if (varCount <= eqCount) {
-            // do nothing, enough equations availabe for unknown vars
-        } else if (eqCount == varCount - 1) {
-            // missing 1 eq -- notify of strategy
-            mdw.out("There are " + eqCount + " equations but " + varCount + " variables. For the last equation, picking"
-                    + " the remaining variable and setting it to 1. We can do this because we're dealing with ratios -- the coefficients"
-                    + " are all relative to each other.\n\n");
-            matrixA[rowIdx][varCount - 1] = -1.0;
-        } else {
-            // missing more than 1 eq -- bail out
-            mdw.out("Unable to balance! Not enough equations for variables");
-            return null;
-        }
+        matrixA[varCount - 1][0] = 1.0;
         SimpleMatrix simpleMatrixA = new SimpleMatrix(matrixA);
-        new RrefGaussJordanRowPivot().reduce(simpleMatrixA.getMatrix(), varCount - 1);
+        double[][] matrixB = new double[varCount][1];
+        matrixB[varCount - 1][0] = 1.0;
+        SimpleMatrix simpleMatrixB = new SimpleMatrix(matrixB);
+        SimpleMatrix simpleMatrixRes = simpleMatrixA.solve(simpleMatrixB);
         double[] stoichiometricRatios = new double[varCount];
         for (var i = 0; i < varCount; i++) {
-            double stoichiometricCoefficient = -simpleMatrixA.get(i, varCount - 1);
+            double stoichiometricCoefficient = simpleMatrixRes.get(i, 0);
             stoichiometricRatios[i] = stoichiometricCoefficient;
             mdw.out(" * " + bondMapping.get(i).var + " (mapped to ");
             mdw.out(bondMapping.get(i).bond);

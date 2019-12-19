@@ -1,6 +1,7 @@
 package com.offbynull.cetools;
 
 import com.google.common.base.Preconditions;
+import static com.google.common.base.Throwables.getStackTraceAsString;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.offbynull.cetools.parser.Parser;
@@ -21,21 +22,25 @@ public final class MainStoichiometry {
                 PrintWriter pw = new PrintWriter(System.out, true);
                 MarkdownWriter mdw = new MarkdownWriter(pw)) {
             mdw.out("<div style=\"border:1px solid black;\">\n\n");
-            String inputCe = s.nextLine();
-            String inputKnownBond = s.nextLine();
-            double inputKnownBondMass = s.nextDouble();
-            
-            mdw.out("Stoichiometry for ").out(inputCe).out("\n\n");
-            
-            ChemicalEquation ce = new Parser().parseChemicalEquation(inputCe);
-            Bond knownBond = new Parser().parseBond(inputKnownBond);
-            double knownBondMass = inputKnownBondMass;
-            
-            mdw.out("My equation is ").out(ce)
-                    .out(". Given that I have ").out(knownBondMass).out("g of ").out(knownBond)
-                    .out(", how many grams of the remaining bonds will be required/produced?\n\n");
+            try {
+                String inputCe = s.nextLine();
+                String inputKnownBond = s.nextLine();
+                double inputKnownBondMass = s.nextDouble();
 
-            performStoichiometry(mdw, ce, knownBond, knownBondMass);
+                mdw.out("Stoichiometry for ").out(inputCe).out("\n\n");
+
+                ChemicalEquation ce = new Parser().parseChemicalEquation(inputCe);
+                Bond knownBond = new Parser().parseBond(inputKnownBond);
+                double knownBondMass = inputKnownBondMass;
+
+                mdw.out("My equation is ").out(ce)
+                        .out(". Given that I have ").out(knownBondMass).out("g of ").out(knownBond)
+                        .out(", how many grams of the remaining bonds will be required/produced?\n\n");
+
+                performStoichiometry(mdw, ce, knownBond, knownBondMass);
+            } catch (Exception e) {
+                mdw.out(getStackTraceAsString(e));
+            }
             mdw.out("\n\n</div>\n\n");
         }
     }
