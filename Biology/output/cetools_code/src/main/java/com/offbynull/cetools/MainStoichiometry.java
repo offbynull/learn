@@ -4,19 +4,19 @@ import com.google.common.base.Preconditions;
 import static com.google.common.base.Throwables.getStackTraceAsString;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import static com.google.common.collect.Streams.mapWithIndex;
 import com.offbynull.cetools.parser.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.util.Arrays.stream;
 import static java.util.Collections.nCopies;
 import java.util.Scanner;
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public final class MainStoichiometry {
+public final class MainStoichiometry {    
     public static void main(String[] args) throws Throwable {
         try (Scanner s = new Scanner(System.in);
                 PrintWriter pw = new PrintWriter(System.out, true);
@@ -48,7 +48,7 @@ public final class MainStoichiometry {
 
 
 
-    public static double[] performStoichiometry(MarkdownWriter mdw, ChemicalEquation ce, Bond knownBond, double knownBondMass) throws IOException {
+    public static double[] performStoichiometry(MarkdownWriter mdw, ChemicalEquation ce, Bond knownBond, double knownBondGrams) throws IOException {
         Preconditions.checkNotNull(mdw);
         Preconditions.checkNotNull(ce);
         
@@ -82,41 +82,40 @@ public final class MainStoichiometry {
         
         
         // write out ratios
-        mdw.out("Stoichiometric ratio for the balanced chemical equation is: ["
-                + stream(ratios).mapToObj(d -> "" + d).collect(joining(" : "))
-                + "]\n\n");
-        double[] scaledRatio = stream(ratios)
+        mdw.out("Stoichiometric ratio for the balanced chemical equation is: [");
+        mapWithIndex(stream(ratios), (d, i) -> new IndexedItem<>(d, i)).forEach(ii -> mdw.out(ii.item, 5).out(ii.idx < ratios.length - 1 ? " : " : ""));
+        mdw.out("]\n\n");
+        double[] scaledRatios = stream(ratios)
                 .map(r -> r / ratios[idx])
                 .toArray(); // scale all ratios against the ratio of the known bond (known ratio gets scaled to become 1 and all others get scaled relative to it).
         mdw.out("Scaling stoichiometric ratio so that ");
         mdw.out(knownBond);
-        mdw.out("'s entry is 1: ["
-                + stream(scaledRatio).mapToObj(d -> "" + d).collect(joining(" : "))
-                + "]\n\n");
+        mdw.out("'s entry is 1: [");
+        mapWithIndex(stream(scaledRatios), (d, i) -> new IndexedItem<>(d, i)).forEach(ii -> mdw.out(ii.item, 5).out(ii.idx < ratios.length - 1 ? " : " : ""));
+        mdw.out("]\n\n");
         
         
         // convert known bond's mass to moles
-        mdw.out("Converting " + knownBondMass + "g of ");
-        mdw.out(knownBond);
-        mdw.out(" to moles: \n");
+        mdw.out("Converting ").out(knownBondGrams, 5).out("g of ").out(knownBond).out(" to moles: \n");
         double knownBondAtomicWeight = knownBond.items.stream().mapToDouble(bu -> bu.element.atomicWeight.lowerEndpoint() * bu.count).sum();
         double knownBondGramsPerMole = knownBondAtomicWeight;
-        double knownBondMoles = knownBondMass * knownBondGramsPerMole;
-        mdw.out(" * atomic weight is " + knownBondAtomicWeight + "amu\n");
-        mdw.out(" * so, " + knownBondGramsPerMole + "g = 1 mole\n");
-        mdw.out(" * so, " + knownBondMass + "g = " + knownBondMass + "g * " + knownBondGramsPerMole + "g per mole = " + knownBondMoles + " mole\n");
+        double knownBondMoles = knownBondGrams / knownBondGramsPerMole;
+        mdw.out(" * atomic weight is ").out(knownBondAtomicWeight, 5).out(" amu\n");
+        mdw.out(" * so, ").out(knownBondGramsPerMole, 5).out("g = 1 mole\n");
+        mdw.out(" * so, ").out(knownBondGrams, 5).out("g = ").out(knownBondGrams, 5).out("g / ").out(knownBondGramsPerMole, 5).out("g per mole = ").out(knownBondMoles, 5).out(" mole\n");
         mdw.out("\n\n");
         
         
         // use that to figure out the unknown bonds' moles
         mdw.out("Multiplying by scaled stoichiometric ratio to get moles for other bonds:\n\n");
         double[] allBondMoles = IntStream.range(0, bonds.size())
-                .mapToDouble(i -> knownBondMoles * scaledRatio[i])
+                .mapToDouble(i -> knownBondMoles * scaledRatios[i])
                 .toArray(); // calculate the number of moles for all bonds based on the scaledRatios
         for (int i = 0; i < bonds.size(); i++) {
             mdw.out(" * ");
-            mdw.out(bonds.get(i).bond);
-            mdw.out(": " + knownBondMoles + " moles * " + scaledRatio[i] + " ratio = " + allBondMoles[i] + " moles\n");
+            mdw.out(bonds.get(i).bond).out(": ");
+            mdw.out(knownBondMoles, 5).out(" moles * ").out(scaledRatios[i], 5).out(" ratio = ").out(allBondMoles[i], 5).out(" moles");
+            mdw.out("\n");
         }
         mdw.out("\n\n");
         
@@ -126,10 +125,11 @@ public final class MainStoichiometry {
         for (int i = 0; i < bonds.size(); i++) {
             double bondAtomicWeight = bonds.get(i).bond.items.stream().mapToDouble(bu -> bu.element.atomicWeight.lowerEndpoint() * bu.count).sum();
             double bondGramsPerMole = bondAtomicWeight;
-            double bondGrams = allBondMoles[i] / bondGramsPerMole;
+            double bondGrams = allBondMoles[i] * bondGramsPerMole;
             mdw.out(" * ");
-            mdw.out(bonds.get(i).bond);
-            mdw.out(" (" + bondAtomicWeight + "amu): " + allBondMoles[i] + " moles / " + bondGramsPerMole + " grams per mole = " + bondGrams + "g\n");
+            mdw.out(bonds.get(i).bond).out(" (").out(bondAtomicWeight, 5).out(" amu): ");
+            mdw.out(allBondMoles[i], 5).out(" moles * ").out(bondGramsPerMole, 5).out("g per mole = ").out(bondGrams, 5).out("g");
+            mdw.out("\n");
             allBondGrams[i] = bondGrams;
         }
         
@@ -151,5 +151,15 @@ public final class MainStoichiometry {
                 .forEach(bu -> productElementBag.add(bu.element, bu.count));
         
         return reactantElementBag.equals(productElementBag);
+    }
+    
+    private static final class IndexedItem<T> {
+        private final T item;
+        private final long idx;
+
+        public IndexedItem(T item, long idx) {
+            this.item = item;
+            this.idx = idx;
+        }
     }
 }

@@ -1058,7 +1058,14 @@ Of those relationships, how many are usable? For the above example, on closer in
 
 These non-usable equations are discarded.
 
-Of the usable equations, if equations.length >= variables.length - 1, its solvable. The example above is solvable because the 3 variables ([x, y, z]) require at least 2 equations to solve -- 2 equations are available. Use the above equations to isolate 2 of the variables, then set the last variable to 1 and solve.
+|                         | `{kt} H_2` | `{kt} O_2` | `{kt} H_2O` | Equation / Relationship              |
+| ----------------------- | ---------- | ---------- | ----------- | ------------------------------------ |
+| atom count for `{kt} H` | 2          | 0          | 2           | `{kt} x(2) + y(0) = z(2)`            |
+| atom count for `{kt} O` | 0          | 2          | 1           | `{kt} x(0) + y(2) = z(1)`            |
+| ~~atom count for all~~  | ~~2~~      | ~~2~~      | ~~3~~       | `{kt} \xcancel{x(2) + y(2) = z(3)}`  |
+| ~~charges~~             | ~~0~~      | ~~0~~      | ~~0~~       | `{kt} \xcancel{x(0) + y(0) = z(0)}`  |
+
+Of the usable equations, if equations.length >= variables.length - 1, its solvable. The example above has 3 variables ([x, y, z]) and exactly 2 equations, so it's solvable. Isolate a variable in each of the equations, then set the last variable to 1 and solve.
 
 Isolate `{kt} x` in equation 1:
  * `{kt} x(2) + y(0) = z(2)`
@@ -1083,10 +1090,6 @@ In the example above, the balanced chemical equation comes out to `{kt} 1H_2 + \
 
 → `{kt} 2H_2 + 1O_2 = 2H_2O` ✔️
 
-```{note}
-In most cases, it's totally fine to have the ratios (fractions) rather than the counts (whole numbers).
-```
-
 ```{chemfig}
 \parbox{5cm}{\centering \chemfig{H-[4]H} \\ \chemfig{H-[4]H} \\ \chemfig{O-[4]O}}
 ```
@@ -1098,14 +1101,18 @@ results in...
 \chemfig{O(-[5]H)(-[7]H)}
 ```
 
+```{note}
+In most cases, it's totally fine to have the ratios (fractions) rather than the counts (whole numbers).
+```
+
 What happens if there aren't enough equations available to solve the system? It means that there isn't a single distinct solution. For example, there is no single solution for something like  `{kt} H_2 + O \rightarrow H_2O_2 + O_2`.
 
 |                         | `{kt} H_2` | `{kt} O` | `{kt} H_2O_2` | `{kt} O_2` | Equation / Relationship           |
 | ----------------------- | ---------- | -------- | ------------- | ---------- | --------------------------------- |
 | atom count for `{kt} H` | 2          | 0        | 2             | 0          | `{kt} w(2) + x(0) = y(2) + z(0)`  |
 | atom count for `{kt} O` | 0          | 1        | 2             | 2          | `{kt} w(0) + x(1) = y(2) + z(2)`  |
-| ~~atom count for all~~  | 2          | 1        | 4             | 2          | `{kt} w(2) + x(1) = y(4) + z(2)`  |
-| ~~charges~~             | 0          | 0        | 0             | 0          | `{kt} w(0) + x(0) = y(0) + z(0)`  |
+| ~~atom count for all~~  | ~~2~~      | ~~1~~    | ~~4~~         | ~~2~~      | `{kt} \xcancel{w(2) + x(1) = y(4) + z(2)}`  |
+| ~~charges~~             | ~~0~~      | ~~0~~    | ~~0~~         | ~~0~~      | `{kt} \xcancel{w(0) + x(0) = y(0) + z(0)}`  |
 
 ```{note}
 Last 2 eq struck out because they're not usable / useful in solving the system. Reasoning for this is discussed earlier on in this section.
@@ -1139,7 +1146,7 @@ Any of the following balanced chemical equations are possible...
 
 ### Stoichiometry
 
-`{bm} Stoichiometry` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. In other words, given that you have some amount of a reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the other reactant_CHEMs/product_CHEMs.
+`{bm} Stoichiometry/(stoichiometry|stoichiometric)/i` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. In other words, given that you have some amount of a reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the other reactant_CHEMs/product_CHEMs.
 
 For example, imagine the balanced chemical equation is `{kt} 2H_2 + O_2 \rightarrow 2H_2O`. If you have 3g of the reactant_CHEM `{kt} O_2`, ...
 * how much of the other reactant_CHEMs (`{kt} H_2`) do you need?
@@ -1196,8 +1203,84 @@ The quantity type doesn't have to be grams. It often is grams but it could be so
 
 4. Convert quantities back to grams:
 
-   * Since 1 mole of `{kt} H_2` = 2 grams, 192 moles of `{kt} H_2` = 2 / 192 = 96 grams.
-   * Since 1 mole of `{kt} H_2O` = 18 grams, 192 moles of `{kt} H_2O` = 18 / 192 = 10.666 grams.
+   * Since 1 mole of `{kt} H_2` = 2g, 192 moles of `{kt} H_2` = 2 / 192 = 96g.
+   * Since 1 mole of `{kt} H_2O` = 18g, 192 moles of `{kt} H_2O` = 18 / 192 = 10.666g.
+
+The example above was for the quantity of a single reactant_CHEM. Often times, more than 1 reactant_CHEM quantity is given. The reactant_CHEM(s) that ...
+ * gets used up entirely during the reaction are called the `{bm} limiting reactant/(limiting reactant|limiting reagent)/i`(s).
+ * have some amount remaining after the reaction are called `{bm} excess reactant/(excess reactant|excess reagent)/i`(s).
+
+For example, imagine the balanced chemical equation is `{kt} 2H_2 + O_2 \rightarrow 2H_2O`. If you have 3g of the reactant_CHEM `{kt} O_2` but also 50g of `{kt} H_2`, which reactant_CHEM would be the limiting reactant?
+
+The way to solve this problem is to perform stoichiometric calculations for both reactant_CHEM quantities to see which one runs out first. When you do the calculations for...
+
+ * 3g of `{kt} O_2`...
+
+| Quantity of reactant_CHEM | `{kt} H_2` | `{kt} O_2` | `{kt} H_2O` |
+| ------------------------- | ---------- | ---------- | ----------- |
+| 3g of `{kt} O_2`          | 0.37g      | 3g         | 3.37g       |
+| 50g of `{kt} H_2`         | 50g        | 396.86g    | 446.86g     |
+
+As such, the limiting reactant is `{kt} O_2` and the excess reactant is `{kt} H_2` -- the 3g of `{kt} O_2` will need only 0.37g out of 50g of `{kt} H_2` available, leaving 49.63g of `{kt} H_2` remaining.
+
+### Theoretical Yield
+
+The `{bm} theoretical yield` of a chemical reaction is a fancy way of saying the quantity of product_CHEMs produced. In the example above, the limiting reactant is `{kt} O_2`, so the theoretical yield is 3.37g of `{kt} H_2O`. However, in practice the actual amount of yield varies based on several factors (e.g. side reactions/etc..) FIX THIS AND CONTINUE ON FROM HERE
+
+FIX THIS AND CONTINUE ON FROM HERE
+
+FIX THIS AND CONTINUE ON FROM HERE
+
+FIX THIS AND CONTINUE ON FROM HERE
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
+TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+
 
 ### Software Model
 

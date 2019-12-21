@@ -3,14 +3,15 @@ package com.offbynull.cetools;
 import com.google.common.base.Preconditions;
 import static com.google.common.base.Throwables.getStackTraceAsString;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import com.google.common.collect.LinkedHashMultiset;
-import com.google.common.collect.Multiset;
 import com.google.common.collect.Streams;
+import static com.google.common.collect.Streams.mapWithIndex;
 import com.offbynull.cetools.parser.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.util.Arrays.stream;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.IntStream;
@@ -66,39 +67,38 @@ public final class MainEquationBalance {
         
         
         // get all elements used
-        mdw.out("Counting up elements: \n\n");
-        Multiset<Element> elementBag = LinkedHashMultiset.create();
+        mdw.out("Determining unique elements: [");
+        Set<Element> elements = new HashSet<>();
         unbalancedCe.reactants.items.stream()
                 .flatMap(i -> i.bond.items.stream())
-                .forEach(bu -> elementBag.add(bu.element, bu.count));
+                .forEach(bu -> elements.add(bu.element));
         unbalancedCe.products.items.stream()
                 .flatMap(i -> i.bond.items.stream())
-                .forEach(bu -> elementBag.add(bu.element, bu.count));
-        for (Multiset.Entry<Element> bagEntry : elementBag.entrySet()) {
-            mdw.out(" * " + bagEntry.getElement().symbol + " -> " + bagEntry.getCount() + "\n");
-        }
+                .forEach(bu -> elements.add(bu.element));
+        mdw.out(elements.stream().map(e -> e.symbol).collect(joining(", ")));
+        mdw.out("]\n");
 
-        int eqCount = elementBag.elementSet().size();
+        int eqCount = elements.size();
         mdw.out("\n\n");
         
         
         
         // list equations to solve
-        mdw.out("For each element, determining linear equations to solve: \n\n");
+        mdw.out("Determining equation for each element: \n\n");
         var bondMapping = Streams.zip(
                 Stream.concat(unbalancedCe.reactants.items.stream(), unbalancedCe.products.items.stream()),
                 IntStream.range('a', 'z').mapToObj(i -> i),
                 (a,b) -> new VariableToBond("" + ((char) b.intValue()), a.bond))
                 .sorted((a,b) -> a.var.compareTo(b.var))
                 .collect(toList());
-        for (var e : elementBag.elementSet()) {
+        for (var e : elements) {
             mdw.out(" * " + e.symbol + ": ");
             mdw.out("`{kt} ");
             int remainingReactants = unbalancedCe.reactants.items.size();
             for (var ceu : unbalancedCe.reactants.items) {
                 var bondElemCount = ceu.bond.items.stream().mapToInt(bu -> bu.element.equals(e) ? bu.count : 0).sum();
                 var bondVarName = bondMapping.stream().filter(bm -> bm.bond.equals(ceu.bond)).findFirst().get().var;
-                mdw.out(bondElemCount + bondVarName);
+                mdw.out(bondVarName + "(" + bondElemCount + ")");
                 remainingReactants--;
                 if (remainingReactants > 0) {
                     mdw.out(" + ");
@@ -109,7 +109,7 @@ public final class MainEquationBalance {
             for (var ceu : unbalancedCe.products.items) {
                 var bondElemCount = ceu.bond.items.stream().mapToInt(bu -> bu.element.equals(e) ? bu.count : 0).sum();
                 var bondVarName = bondMapping.stream().filter(bm -> bm.bond.equals(ceu.bond)).findFirst().get().var;
-                mdw.out(bondElemCount + bondVarName);
+                mdw.out(bondVarName + "(" + bondElemCount + ")");
                 remainingProducts--;
                 if (remainingProducts > 0) {
                     mdw.out(" + ");
@@ -139,7 +139,7 @@ public final class MainEquationBalance {
         }
         double[][] matrixA = new double[varCount][varCount];
         int rowIdx = 0;
-        for (var e : elementBag.elementSet()) {
+        for (var e : elements) {
             int colIdx = 0;
             for (var ceu : unbalancedCe.reactants.items) {
                 var bondElemCount = ceu.bond.items.stream().mapToInt(bu -> bu.element.equals(e) ? bu.count : 0).sum();
@@ -165,7 +165,7 @@ public final class MainEquationBalance {
             stoichiometricRatios[i] = stoichiometricCoefficient;
             mdw.out(" * " + bondMapping.get(i).var + " (mapped to ");
             mdw.out(bondMapping.get(i).bond);
-            mdw.out(") = " + stoichiometricCoefficient + "\n");
+            mdw.out(") = ").out(stoichiometricCoefficient, 5).out("\n");
         }
         mdw.out("\n\n");
         
@@ -181,9 +181,15 @@ public final class MainEquationBalance {
             }
             int finalI = i;
             newRatios = stream(stoichiometricRatios).map(d -> d * finalI).toArray();
-            mdw.out(" * Scaling by " + i + ": " + stream(newRatios).mapToObj(d -> "" + d).collect(joining(", ")) + "\n");
+            int newRatiosLen = newRatios.length;
+            mdw.out(" * Scaling by " + i + ": [");
+            mapWithIndex(stream(newRatios), (d, _i) -> new IndexedItem<>(d, _i)).forEach(ii -> mdw.out(ii.item, 5).out(ii.idx < newRatiosLen - 1 ? " : " : ""));
+            mdw.out("]\n");
         }
         stoichiometricRatios = newRatios;
+        if (newRatios == stoichiometricRatios) {
+            mdw.out("Already in whole numbers.\n");
+        }
         mdw.out("\n\n");
         boolean isWholeNums = stream(newRatios).allMatch(d -> isWholeNumber(d, 0.0001));
         if (!isWholeNums) {
@@ -230,6 +236,16 @@ public final class MainEquationBalance {
         public VariableToBond(String var, Bond bond) {
             this.var = var;
             this.bond = bond;
+        }
+    }
+    
+    private static final class IndexedItem<T> {
+        private final T item;
+        private final long idx;
+
+        public IndexedItem(T item, long idx) {
+            this.item = item;
+            this.idx = idx;
         }
     }
 }

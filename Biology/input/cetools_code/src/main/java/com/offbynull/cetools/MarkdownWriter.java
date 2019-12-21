@@ -4,6 +4,10 @@ import com.google.common.base.Preconditions;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.Writer;
+import static java.lang.String.format;
+import java.text.DecimalFormat;
+import static java.util.stream.Collectors.joining;
+import java.util.stream.IntStream;
 
 public final class MarkdownWriter implements Closeable {
     private final Writer writer;
@@ -29,6 +33,21 @@ public final class MarkdownWriter implements Closeable {
     
     public MarkdownWriter out(double d) {
         out("" + d);
+        return this;
+    }
+    
+    public MarkdownWriter out(double d, int maxDecimalPlaces) {
+        out(d, maxDecimalPlaces, false);
+        return this;
+    }
+    
+    public MarkdownWriter out(double d, int decimalPlaces, boolean trailingZeros) {
+        if (trailingZeros) {
+            out("" + format("%." + decimalPlaces + "f", d));
+        } else {
+            DecimalFormat df = new DecimalFormat("#." + IntStream.range(0, decimalPlaces).mapToObj(_d -> "#").collect(joining()));
+            out("" + df.format(d));
+        }
         return this;
     }
     
