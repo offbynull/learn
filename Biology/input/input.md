@@ -1187,6 +1187,8 @@ The quantity type doesn't have to be grams. It often is grams but it could be so
    ----
 
    atom_count(1 gram of oxygen) != atom_count(1 gram of hydrogen) -- they have different weights. We need to convert from grams to moles because we're dealing with counts when we balance a chemical equation, not mass. Moles are a unit of counts.
+   
+   1 instance of `{kt} O_2` binds with 2 instances of `{kt} H_2` to produce 2 instances `{kt} H_2O`. 
    ```
 
    We have 3g of `{kt} O_2`. We know that 1mole of `{kt} O_2` = 32g.
@@ -1206,7 +1208,10 @@ The quantity type doesn't have to be grams. It often is grams but it could be so
    * Since 1 mole of `{kt} H_2` = 2g, 192 moles of `{kt} H_2` = 2 / 192 = 96g.
    * Since 1 mole of `{kt} H_2O` = 18g, 192 moles of `{kt} H_2O` = 18 / 192 = 10.666g.
 
-The example above was for the quantity of a single reactant_CHEM. Often times, more than 1 reactant_CHEM quantity is given. The reactant_CHEM(s) that ...
+#### Limiting Reactant
+
+Often times, more than 1 reactant_CHEM quantity is given for a stoichiometric calculation. The reactant_CHEM(s) that ...
+
  * gets used up entirely during the reaction are called the `{bm} limiting reactant/(limiting reactant|limiting reagent)/i`(s).
  * have some amount remaining after the reaction are called `{bm} excess reactant/(excess reactant|excess reagent)/i`(s).
 
@@ -1214,73 +1219,127 @@ For example, imagine the balanced chemical equation is `{kt} 2H_2 + O_2 \rightar
 
 The way to solve this problem is to perform stoichiometric calculations for both reactant_CHEM quantities to see which one runs out first. When you do the calculations for...
 
- * 3g of `{kt} O_2`...
-
-| Quantity of reactant_CHEM | `{kt} H_2` | `{kt} O_2` | `{kt} H_2O` |
-| ------------------------- | ---------- | ---------- | ----------- |
-| 3g of `{kt} O_2`          | 0.37g      | 3g         | 3.37g       |
-| 50g of `{kt} H_2`         | 50g        | 396.86g    | 446.86g     |
+| Quantity of reactant_CHEM | `{kt} H_2`     | `{kt} O_2`      | `{kt} H_2O` |
+| ------------------------- | -------------- | --------------- | ----------- |
+| 3g of `{kt} O_2`          | 0.37g <= 50g ✔️ | 3g <= 3g ✔️      | 3.37g       |
+| 50g of `{kt} H_2`         | 50g <= 50g ✔️   | 396.86g <= 3g ❌ | 446.86g     |
 
 As such, the limiting reactant is `{kt} O_2` and the excess reactant is `{kt} H_2` -- the 3g of `{kt} O_2` will need only 0.37g out of 50g of `{kt} H_2` available, leaving 49.63g of `{kt} H_2` remaining.
 
-### Theoretical Yield
+#### Theoretical Yield
 
-The `{bm} theoretical yield` of a chemical reaction is a fancy way of saying the quantity of product_CHEMs produced. In the example above, the limiting reactant is `{kt} O_2`, so the theoretical yield is 3.37g of `{kt} H_2O`. However, in practice the actual amount of yield varies based on several factors (e.g. side reactions/etc..) FIX THIS AND CONTINUE ON FROM HERE
+The `{bm} theoretical yield` is the quantity of product_CHEMs produced if the reaction were to happen perfectly. For example, imagine the balanced chemical equation is `{kt} 2H_2 + O_2 \rightarrow 2H_2O`.  If you have 3g of the reactant_CHEM `{kt} O_2` but also 50g of `{kt} H_2`, the limiting reactant ends up being `{kt} O_2`...
 
-FIX THIS AND CONTINUE ON FROM HERE
+| Quantity of reactant_CHEM | `{kt} H_2`     | `{kt} O_2`      | `{kt} H_2O` |
+| ------------------------- | -------------- | --------------- | ----------- |
+| 3g of `{kt} O_2`          | 0.37g <= 50g ✔️ | 3g <= 3g ✔️      | 3.37g       |
+| 50g of `{kt} H_2`         | 50g <= 50g ✔️   | 396.86g <= 3g ❌ | 446.86g     |
 
-FIX THIS AND CONTINUE ON FROM HERE
+Since the limiting reactant is `{kt} O_2`, so the theoretical yield is 3.37g of `{kt} H_2O`. That is, if the reaction were to happen perfectly, 3.37g of `{kt} H_2O` would be produced.
 
-FIX THIS AND CONTINUE ON FROM HERE
+In reality, chemical reactions don't happen perfectly. The actual quantity of product_CHEMs varies based on several factors:
+ * stability of the reactant_CHEMs.
+ * purity of the reactant_CHEMs.
+ * environmental factors (e.g. humidity).
+ * `{bm} side reactions` -- reactant_CHEMs reacting in unpredictable ways that give unexpected product_CHEMs.
+ * etc...
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+The `{bm} percent yield` is the ratio of of actual yield vs theoretical yield, calculated as `{kt} \frac{\text{actual yield}}{\text{theoretical yield}} \cdot 100`. In the example above, if only 3g of `{kt} H_2O` were actually produced, the percent yield would be `{kt} \frac{3}{3.37} \cdot 100 = 89`.
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+### Gravimetry
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+`{bm} Gravimetric/(gravimetric|gravimetry)/i` analysis is the process of using...
+ 1. phase changes (e.g. solid, gas, etc..)
+ 2. changes in mass
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+... to measure the quantity / concentration of some substance in a solution. When performing gravimetry, the substance of interest is sometimes referred to as a `{bm} analyte`.
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+Gravimetry comes in 2 forms:
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+* `{bm} volatilization gravimetry/(volatilization gravimetry|volatilization gravimetric)/i` decomposes the analyte such that a parts of the analyte breaks off as a gas.
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  This only works if ...
+  * decomposition only happens on the analyte -- no substance in the solution other than analyte decomposes.
+  * decomposition is consistent -- specific parts must stay in solution while other parts escape as gas.
+  
+  Since we know the weight before and after decomposition, the stoichiometric ratio for the decomposition can be used to determine the particle counts for parts that escaped as gas. It then becomes trivial to figure out how much of the original analyte there was. For example, the analyte breaks into 4 pieces, 1 of which escape as a gas, the count of gas particles escaped is the count of the original analyte.
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  ```
+  Original analyte:
+   -----
+  |     |
+  |  a  |
+  |     |
+   -----
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  After heating decomposes analyte to 4 different substances:
+   ---    ---
+  | b |  | c |
+   ---    ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+   ---    ---
+  | d |  | e |
+   ---    ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  One of the 4 substances escapes as gas:
+         ---
+        | c | <-- escaped solution because its a gas
+         ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+   ---
+  | b |
+   ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+   ---    ---
+  | d |  | e |
+   ---    ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  Since we weighed the solution before and after, and we know the reaction taking place, stoichiometry lets us know
+  how many particles of c there were. The number of c particles is the number of a particles (the original analyte),
+  so we now know the concentration of the original analyte.
+  ```
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+* `{bm} precipitation gravimetry/(precipitation gravimetry|precipitation gravimetric)/i` separates analyte in a solution by incorporating it into a insoluble solid.
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  A reactant_CHEM (called the `{bm} precipitant` / `{bm} precipitating agent`) is added to the solution that will react with the analyte to produce a solid product_CHEM. The solid product_CHEM then gets filtered / collected (easy to do since it's a solid in a solution), dried, and measured. Since the balanced chemical equation for the reaction is known, stoichiometry can be used to determine the concentration of analyte.
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  ```
+  Original analyte:
+   ---    ---
+  | a |  | a |
+   ---    ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+   ---    ---
+  | a |  | a |
+   ---    ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  Add precipitant in excess:
+   ---    ---           ---    ---    ---
+  | a |  | a |         | p |  | p |  | p |
+   ---    ---           ---    ---    ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+   ---    ---           ---    ---    ---
+  | a |  | a |         | p |  | p |  | p |
+   ---    ---           ---    ---    ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  Reaction happens between analyte and precipitant to form a solid
+   ----    ----           ---
+  | ap |  | ap |         | p |
+   ----    ----           ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+   ----    ----           ---
+  | ap |  | ap |         | p |
+   ----    ----           ---
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
+  Since ap is solid, it can be collected, dried, and weighed. Since we know the reaction taking place between a and p
+  (reactant) along with the weight of ap (product), stoichiometry lets us know how many particles of ap there were.
+  The number of ap particles is the number of a particles (the original analyte), so we now know the concentration of
+  the original analyte.
+  ```
 
-TODO TALK ABOUT PERCENTAGE YIELD AND SIDE REACTIONS -- START BACK FROM https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome/limiting-reagent-stoichiometry/a/limiting-reagents-and-percent-yield
-
+```{note}
+This is a high-level overview of gravimetry. The Khan academy articles aren't doing a very good job of explaining the topic. I've explained as much as I've been able to understand but I think there are still large parts missing. This section needs cleanup and examples.
+```
 
 ### Software Model
 
