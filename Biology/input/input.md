@@ -391,6 +391,26 @@ Examples...
 In this basic definition of chemical formula notation, there are no set rules as to which atom type is written first. However, things quickly get more complex: see See https://chemistry.stackexchange.com/q/1239.
 ```
 
+The following parser uses ANTLR's grammar syntax to parse chemical formulas. An in-memory DOM model is constructed from the grammar. Each atomic element that gets parsed is directly mapped to a data structure that contains its details: symbols, names, atomic weights, atomic masses, isotopes, etc.. This data was extracted from from [CIAAW](https://ciaaw.org) using a browser plugin called [CopyTables](https://chrome.google.com/webstore/detail/copytables/ekdpkppgmlalfkphpibadldikjimijon?hl=en).
+
+```{define-block}
+cebondinfo
+cebondinfo_macro/
+cetools_code/
+```
+
+```{cebondinfo}
+H2O
+```
+
+```{cebondinfo}
+H2O (s)
+```
+
+```{cebondinfo}
+H^1- (g)
+```
+
 ## Structural Formula
 
 `{bm} structural formula`s are a way of representing molecules as diagrams that somewhat expose their 3D structure. In it's simplest form, it consists of atomic symbols with straight lines between them that represent bonds. For example, `{kt} NH_3` can be diagramed as...
@@ -1019,16 +1039,6 @@ cetools_code/
 
 ```{ceparse}
 2H2 + O2 -> 2H2O
-```
-
-```{define-block}
-cebondinfo
-cebondinfo_macro/
-cetools_code/
-```
-
-```{cebondinfo}
-H2O
 ```
 
 ### Balance

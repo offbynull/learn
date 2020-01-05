@@ -2,14 +2,14 @@ package com.offbynull.cetools;
 
 import com.google.common.base.Preconditions;
 import static com.google.common.base.Throwables.getStackTraceAsString;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 import static com.google.common.collect.Streams.mapWithIndex;
+import static com.offbynull.cetools.InternalUtils.isBalanced;
+import static com.offbynull.cetools.InternalUtils.isCharged;
+import static com.offbynull.cetools.InternalUtils.isPhasePresent;
 import com.offbynull.cetools.parser.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.util.Arrays.stream;
-import static java.util.Collections.nCopies;
 import java.util.Scanner;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.DoubleStream;
@@ -53,7 +53,17 @@ public final class MainStoichiometry {
         Preconditions.checkNotNull(ce);
         
         if (!isBalanced(ce)) {
-            mdw.out("Equation is unbalanced! Cannot perform!!\n\n");
+            mdw.out("Equation is unbalanced! Balance first!!\n\n");
+            return null;
+        }
+        
+        if (isCharged(ce)) {
+            mdw.out("Equation is charged! Ions not supported!!\n\n");
+            return null;
+        }
+        
+        if (isPhasePresent(ce)) {
+            mdw.out("Equation has phases present! Remove before using!!\n\n");
             return null;
         }
         
@@ -135,22 +145,6 @@ public final class MainStoichiometry {
         
         
         return allBondGrams;
-    }
-    
-    private static boolean isBalanced(ChemicalEquation ce) {
-        Multiset<Element> reactantElementBag = HashMultiset.create();
-        ce.reactants.items.stream()
-                .flatMap(i -> nCopies(i.count, i.bond.items).stream())
-                .flatMap(i -> i.stream())
-                .forEach(bu -> reactantElementBag.add(bu.element, bu.count));
-        
-        Multiset<Element> productElementBag = HashMultiset.create();
-        ce.products.items.stream()
-                .flatMap(i -> nCopies(i.count, i.bond.items).stream())
-                .flatMap(i -> i.stream())
-                .forEach(bu -> productElementBag.add(bu.element, bu.count));
-        
-        return reactantElementBag.equals(productElementBag);
     }
     
     private static final class IndexedItem<T> {

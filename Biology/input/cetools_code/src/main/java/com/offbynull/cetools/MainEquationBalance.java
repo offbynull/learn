@@ -5,6 +5,8 @@ import static com.google.common.base.Throwables.getStackTraceAsString;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.Streams;
 import static com.google.common.collect.Streams.mapWithIndex;
+import static com.offbynull.cetools.InternalUtils.isCharged;
+import static com.offbynull.cetools.InternalUtils.isPhasePresent;
 import com.offbynull.cetools.parser.Parser;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,6 +46,16 @@ public final class MainEquationBalance {
     public static ChemicalEquation balanceEquation(MarkdownWriter mdw, ChemicalEquation ce) throws IOException {
         Preconditions.checkNotNull(mdw);
         Preconditions.checkNotNull(ce);        
+        
+        if (isCharged(ce)) {
+            mdw.out("Equation is charged! Ions not supported!!\n\n");
+            return null;
+        }
+        
+        if (isPhasePresent(ce)) {
+            mdw.out("Equation has phases present! Remove before using!!\n\n");
+            return null;
+        }
         
         
         // unbalance

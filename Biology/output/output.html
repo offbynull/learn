@@ -579,6 +579,36 @@
 ⚠️NOTE️️️⚠️</strong>
 <p>In this <a href="#BOOKMARK111">basic</a> definition of <a href="#BOOKMARK52">chemical formula</a> notation, there are no set rules as to which <a href="#BOOKMARK3">atom</a> type is written first. However, things quickly get more complex: see See https://<a href="#BOOKMARK0">chemistry</a>.stackexchange.com/q/1239.</p>
 </div>
+<p>The following parser uses ANTLR's grammar syntax to parse <a href="#BOOKMARK52">chemical formula</a>s. An in-memory DOM model is constructed from the grammar. Each <a href="#BOOKMARK3">atom</a>ic <a href="#BOOKMARK2">element</a> that gets parsed is directly mapped to a data structure that contains its details: symbols, names, <a href="#BOOKMARK21">atomic weight</a>s, <a href="#BOOKMARK18">atomic mass</a>es, <a href="#BOOKMARK11">isotope</a>s, etc.. This data was extracted from from <a href="https://ciaaw.org">CIAAW</a> using a browser plugin called <a href="https://chrome.google.com/webstore/detail/copytables/ekdpkppgmlalfkphpibadldikjimijon?hl=en">CopyTables</a>.</p>
+<div style="border:1px solid black;">
+<p>Pulling information for H2O</p>
+<ul>
+<li>2hydrogen</li>
+<li>1oxygen</li>
+<li><a href="#BOOKMARK21">atomic weight</a> = [18.01471 <a href="#BOOKMARK20">amu</a>, 18.01599 <a href="#BOOKMARK20">amu</a>]</li>
+<li>charge = 0</li>
+<li>phase = null</li>
+</ul>
+</div>
+<div style="border:1px solid black;">
+<p>Pulling information for H2O (s)</p>
+<ul>
+<li>2hydrogen</li>
+<li>1oxygen</li>
+<li><a href="#BOOKMARK21">atomic weight</a> = [18.01471 <a href="#BOOKMARK20">amu</a>, 18.01599 <a href="#BOOKMARK20">amu</a>]</li>
+<li>charge = 0</li>
+<li>phase = SOLID</li>
+</ul>
+</div>
+<div style="border:1px solid black;">
+<p>Pulling information for H^1- (g)</p>
+<ul>
+<li>1hydrogen</li>
+<li><a href="#BOOKMARK21">atomic weight</a> = [1.00784 <a href="#BOOKMARK20">amu</a>, 1.00811 <a href="#BOOKMARK20">amu</a>]</li>
+<li>charge = -1</li>
+<li>phase = GAS</li>
+</ul>
+</div>
 <a name="HEADREF11"></a><h2>Structural Formula</h2>
 <p><a name="BOOKMARK56"></a><strong>structural formula</strong>s are a way of representing <a href="#BOOKMARK25">molecule</a>s as diagrams that somewhat expose their 3D structure. In it's simplest form, it consists of <a href="#BOOKMARK3">atom</a>ic symbols with straight lines between them that represent bonds. For example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><msub><mi>H</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">NH_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> can be diagramed as...</p>
 <p><img src="/.datafile_9279cad4b3762dc47cb10a0f86953eee/diagram.svg" alt="Generated image"></p><p>Other information such as depth can be conveyed by using a <a name="BOOKMARK57"></a><strong>stereo structural formula</strong>. For example, the same <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><msub><mi>H</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">NH_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> <a href="#BOOKMARK25">molecule</a> above can be diagramed as...</p>
@@ -913,14 +943,6 @@ y = <span class="hljs-number">1</span> / anion.charge          <span class="hljs
 <li>Input: 1 x ( 2oxygen )</li>
 <li>Output: 2 x ( 2hydrogen 1oxygen )</li>
 <li>Direction: UNIDIRECTIONAL</li>
-</ul>
-</div>
-<div style="border:1px solid black;">
-<p>Pulling information for H2O</p>
-<ul>
-<li>2hydrogen</li>
-<li>1oxygen</li>
-<li><a href="#BOOKMARK21">atomic weight</a> = [18.01471 <a href="#BOOKMARK20">amu</a>, 18.01599 <a href="#BOOKMARK20">amu</a>]</li>
 </ul>
 </div>
 <a name="HEADREF17"></a><h3>Balance</h3>

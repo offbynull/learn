@@ -11,9 +11,15 @@ import static java.util.stream.Collectors.summingInt;
 public final class Bond {
 
     public final ImmutableList<BondUnit> items;
+    public final int charge;
+    public final Phase phase;  // null means unknown/not specified
 
-    public Bond(ImmutableList<BondUnit> items) {
+    public Bond(ImmutableList<BondUnit> items, int charge, Phase phase) {
         Preconditions.checkNotNull(items);
+        // phase can be null
+        
+        this.charge = charge;
+        this.phase = phase;
         
         // consolidate repeated (e.g. FeOFeOO -> Fe2O3) + sort because consolidation will have swapped things around
         this.items = items.stream()

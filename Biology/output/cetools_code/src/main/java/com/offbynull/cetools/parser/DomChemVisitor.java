@@ -10,6 +10,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.offbynull.cetools.Element;
 import com.offbynull.cetools.ElementLookup;
 import com.offbynull.cetools.ChemicalEquation.ChemicalEquationDirection;
+import com.offbynull.cetools.Phase;
 import com.offbynull.cetools.parser.generated.ChemBaseVisitor;
 import com.offbynull.cetools.parser.generated.ChemParser;
 import static java.lang.Integer.parseInt;
@@ -56,7 +57,9 @@ public final class DomChemVisitor extends ChemBaseVisitor<Object> {
                 .map(bul -> (List<BondUnit>) visit(bul))
                 .flatMap(l -> l.stream())
                 .collect(toImmutableList());
-        return new Bond(bondUnits);
+        int charge = ctx.bondCharge() == null ? 0 : (Integer) visit(ctx.bondCharge());
+        Phase phase = ctx.bondPhase() == null ? null : (Phase) visit(ctx.bondPhase());
+        return new Bond(bondUnits, charge, phase);
     }
 
     @Override
@@ -75,4 +78,29 @@ public final class DomChemVisitor extends ChemBaseVisitor<Object> {
         int count = ctx.COUNT() == null ? 1 : parseInt(ctx.COUNT().getText());
         return List.of(new BondUnit(element, count));
     }
+
+    @Override
+    public Phase visitBondPhase(ChemParser.BondPhaseContext ctx) {
+        switch (ctx.PHASE().toString()) {
+            case "g":
+                return Phase.GAS;
+            case "l":
+                return Phase.LIQUID;
+            case "s":
+                return Phase.SOLID;
+            case "aq":
+                return Phase.AQUEOUS;
+            default:
+                throw new IllegalArgumentException("Unrecognized phase");
+        }
+    }
+
+    @Override
+    public Integer visitBondCharge(ChemParser.BondChargeContext ctx) {
+        int charge = ctx.COUNT() == null ? 1 : Integer.parseInt(ctx.COUNT().getText());
+        if (ctx.MINUS() != null) {
+            charge = -charge;
+        }
+        return charge;
+    }    
 }

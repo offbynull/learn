@@ -23,6 +23,8 @@ public final class MainBondInformation {
                 mdw.out(bond.atomicWeight().lowerEndpoint(), 5).out(" amu, ");
                 mdw.out(bond.atomicWeight().upperEndpoint(), 5).out(" amu");
                 mdw.out("]\n");
+                mdw.out(" * charge = ").out(bond.charge).out("\n");
+                mdw.out(" * phase = ").out(bond.phase + "").out("\n"); // bond.phase + "" because bond.phase can be null
             } catch (Exception e) {
                 mdw.out(getStackTraceAsString(e));
             }
