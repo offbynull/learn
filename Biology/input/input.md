@@ -376,7 +376,7 @@ Both molecular formulas and empirical formulas may...
   
  * include phases.
 
-   e.g. `{kt} 2H_2 (g) + O_2 (g) \rightarrow 2H_2O_2 (l)`, where g = gas / l = liquid / s = solid / aq = in aqueous solution
+   e.g. `{kt} 2H_2 (g)`, where g = gas / l = liquid / s = solid / aq = in aqueous solution
 
 Examples...
 
@@ -1009,6 +1009,28 @@ The type of arrow used in a chemical equation determines the type of reaction it
 Don't get confused. It's called an irreversible reaction but it actually it's irreversible -- it's just means that it's very hard to reverse it.
 ```
 
+The following parser uses ANTLR's grammar syntax to parse chemical equations. An in-memory DOM model is constructed from the grammar. Each atomic element that gets parsed is directly mapped to a data structure that contains its details: symbols, names, atomic weights, atomic masses, isotopes, etc.. This data was extracted from from [CIAAW](https://ciaaw.org) using a browser plugin called [CopyTables](https://chrome.google.com/webstore/detail/copytables/ekdpkppgmlalfkphpibadldikjimijon?hl=en).
+
+```{define-block}
+ceparse
+ceparse_macro/
+cetools_code/
+```
+
+```{ceparse}
+2H2 + O2 -> 2H2O
+```
+
+```{define-block}
+cebondinfo
+cebondinfo_macro/
+cetools_code/
+```
+
+```{cebondinfo}
+H2O
+```
+
 ### Balance
 
 `{bm} Balancing a chemical equation/(balance the chemical equation|balance a chemical equation|balancing the chemical equation|balancing a chemical equation|balance chemical equation|balanced chemical equation|unbalanced chemical equation|chemical equation balancing)/i` means finding the ratios of reactant_CHEMs and product_CHEMs in a a chemical equation. In other words, how much of the reactant_CHEMs and product_CHEMs are needed to have an equal count of elements on both sides of the chemical equation.
@@ -1179,6 +1201,22 @@ Any of the following balanced chemical equations are possible...
 * `{kt} H_2 + 8O \rightarrow H_2O_2 + 3O_2` is a valid answer.
 * etc..
 
+The following solver uses the algebra method to balance a chemical equation. The actual implementation of solving is delegated to the EJML library, where a matrix is populated with the coefficients and solved. As noted in the section on balancing equations, the algebra method doesn't always work -- if there aren't enough equations then solving via algebra isn't possible.
+
+```{note}
+Charges aren't supported. That is, this solver doesn't generate an equation based on charges. Charges aren't supported by the parsing / DOM model.
+```
+
+```{define-block}
+cebalance
+cebalance_macro/
+cetools_code/
+```
+
+```{cebalance}
+C3H8 + O2 -> CO2 + H2O
+```
+
 ### Stoichiometry
 
 `{bm} Stoichiometry/(stoichiometry|stoichiometric)/i` is the process of using the coefficients in a balanced chemical equation to calculate the quantities of reactant_CHEMs and product_CHEMs. In other words, given that you have some amount of a reactant_CHEMs/product_CHEMs, use the balanced chemical equation to determine the amounts of the other reactant_CHEMs/product_CHEMs.
@@ -1242,6 +1280,20 @@ The quantity type doesn't have to be grams. It often is grams but it could be so
 
    * Since 1 mole of `{kt} H_2` = 2g, 192 moles of `{kt} H_2` = 2 / 192 = 96g.
    * Since 1 mole of `{kt} H_2O` = 18g, 192 moles of `{kt} H_2O` = 18 / 192 = 10.666g.
+
+The following solver balances a chemical equation and uses its stoichiometric ratios to determine the amounts of reactant_CHEMs and product_CHEMs. Stoichiometry is done using the extracted from [CIAAW](https://ciaaw.org). The reactant_CHEM/product_CHEM that's known has its mass converted from grams to moles, the stoichiometry ratio is applied to find the moles for the remaining reactant_CHEMs and product_CHEMs, then they're all converted back from moles to grams. 
+
+```{define-block}
+cestoichiometry
+cestoichiometry_macro/
+cetools_code/
+```
+
+```{cestoichiometry}
+Zn + CuCl2 -> ZnCl2 + Cu
+CuCl2
+13
+```
 
 #### Limiting Reactant
 
@@ -1376,75 +1428,80 @@ Gravimetry comes in 2 forms:
 This is a high-level overview of gravimetry. The Khan academy articles aren't doing a very good job of explaining the topic. I've explained as much as I've been able to understand but I think there are still large parts missing. This section needs cleanup and examples.
 ```
 
-### Software Model
+### Redox Reactions
 
-The software model for balancing chemical equations and stoichiometry is straight-forward.
+FILL ME IN
 
- 1. Parse the chemical equation.
+FILL ME IN
 
-    Parsing is performed using ANTLR's grammar syntax. An in-memory DOM model is constructed from the grammar. Each atomic element that gets parsed is directly mapped to a data structure that contains its details: symbols, names, atomic weights, atomic masses, isotopes, etc.. This data was extracted from from [CIAAW](https://ciaaw.org) using a browser plugin called [CopyTables](https://chrome.google.com/webstore/detail/copytables/ekdpkppgmlalfkphpibadldikjimijon?hl=en).
+FILL ME IN
 
-    Example of equation parsing...
+FILL ME IN
 
-    ```{define-block}
-    ceparse
-    ceparse_macro/
-    cetools_code/
-    ```
+FILL ME IN
 
-    ```{ceparse}
-    2H2 + O2 -> 2H2O
-    ```
+FILL ME IN
 
-    Example of bond information lookup...
+FILL ME IN
 
-    ```{define-block}
-    cebondinfo
-    cebondinfo_macro/
-    cetools_code/
-    ```
+FILL ME IN
 
-    ```{cebondinfo}
-    H2O
-    ```
+FILL ME IN
 
- 2. Use the algebra method to balance the chemical equation.
+FILL ME IN
 
-     Chemical equation balancing is done using the algebra method. The actual implementation of solving is delegated to the EJML library, where a matrix is populated with the coefficients and solved. As noted in the section on balancing equations, the algebra method doesn't always work -- if there aren't enough equations then solving via algebra isn't possible.
+FILL ME IN
 
-     ```{note}
-     Charges aren't supported. That is, this solver doesn't generate an equation based on charges. Charges aren't supported by the parsing / DOM model.
-     ```
+FILL ME IN
 
-     Example of balancing...
+FILL ME IN
 
-     ```{define-block}
-     cebalance
-     cebalance_macro/
-     cetools_code/
-     ```
+FILL ME IN
 
-     ```{cebalance}
-     C3H8 + O2 -> CO2 + H2O
-     ```
+FILL ME IN
 
- 3. Use the stoichiometry ratio from step2 to determine the amounts of reactant_CHEMs and product_CHEMs.
+FILL ME IN
 
-    Stoichiometry is done using the extracted CIAAW data from step 1. The reactant_CHEM/product_CHEM that's known has its mass converted from grams to moles, the stoichiometry ratio is applied to find the moles fro the remaining reactant_CHEMs and product_CHEMs, then they're all converted back from moles to grams. 
+FILL ME IN
 
-    Example of stoichiometry...
+FILL ME IN
 
-    ```{define-block}
-    cestoichiometry
-    cestoichiometry_macro/
-    cetools_code/
-    ```
+FILL ME IN
 
-    ```{cestoichiometry}
-    Zn + CuCl2 -> ZnCl2 + Cu
-    CuCl2
-    13
-    ```
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
+FILL ME IN
+
 
 ## pH
 
@@ -1489,7 +1546,7 @@ The `{bm} scientific method` is the standard guideline for discovery and experim
 
 The last step (refine and iterate) just means that you do it all over again but make changes based on the things you learned from your experiment. For example, ...
 
-* do additional experiments to dig into some aspect deeper.
+* do addit/ional experiments to dig into some aspect deeper.
 * if the hypothesis wasn't supported by the experiment, maybe come up with a new hypothesis.
 
 ### Hypothesis
