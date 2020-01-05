@@ -347,10 +347,45 @@ The structure in the example above is table salt.
 
 ## Chemical Formula
 
-`{bm} chemical formula/(chemical formula|molecular formula)/i`s are a way of representing molecules in text. In it's simplest form, it's a string of atomic symbols where each symbol is followed by a subscript of that atom's occurrence count in the molecule. For example, a molecule of ...
+`{bm} Chemical formula`s are a way of representing molecules as text. They come in 2 forms
+ * molecular formula.
+ * condensed formula.
 
- * water (2 hydrogen bonded to 1 oxygen): `{kt} H_2O`.
- * hydrazine (2 nitrogen and 2 hydrogen): `{kt} N_2H_4`.
+```{note}
+When the chemical formula is given as text, it's almost always as a molecular formula.
+```
+
+A `{bm} molecular formula` is a string of atomic symbols where each symbol is followed by a subscript of that atom's occurrence count in the molecule. For example, a molecule of hydrazine (2 nitrogen and 4 hydrogen): `{kt} N_2H_4`.
+
+An `{bm} empirical formula` is similar to a molecular formula, except that the subscript represents ratios of elements. For example, a molecule of hydrazine (2 nitrogen and 4 hydrogen): `{kt} NH_2`.
+
+Both molecular formulas and empirical formulas may...
+ * avoid displaying the subscript if it's 1.
+   
+   e.g. `{kt} H_2O` is `{kt} H_2O_1`
+
+ * use distribution or repetition to better describe the physical structure (sometimes called the `{bm} condensed formula/(condensed formula|condensed chemical formula|condensed molecular formula|condensed empirical formula)/i`).
+ 
+   e.g. `{kt} Al_2(SO_4)_3` is `{kt} Al_2S_3O_{12}` (distribution)
+
+   e.g. `{kt} CH_3CH_3` is `{kt} C_2H_6` (repetition)
+
+ * include charges.
+ 
+   e.g. `{kt} C_6H_{11}O_6^-` needs 1 more H to be neutral
+  
+ * include phases.
+
+   e.g. `{kt} 2H_2 (g) + O_2 (g) \rightarrow 2H_2O_2 (l)`, where g = gas / l = liquid / s = solid / aq = in aqueous solution
+
+Examples...
+
+| Name      | Molecular Formula | Empirical Formula |
+| --------- | ----------------- | ----------------- |
+| Water     | `{kt} H_2O`       | `{kt} H_2O`       |
+| Hydrazine | `{kt} N_2H_4`     | `{kt} NH_2`       |
+| Butane    | `{kt} C_4H_{10}`  | `{kt} C_2H_5`     |
+| Octane    | `{kt} C_8H_{18}`  | `{kt} C_4H_9`     |
 
 ```{note}
 In this basic definition of chemical formula notation, there are no set rules as to which atom type is written first. However, things quickly get more complex: see See https://chemistry.stackexchange.com/q/1239.
@@ -695,7 +730,7 @@ if (!is_whole_number(y)) {
 }
 ```
 
-Ration will be x:y.
+Ratio will be x:y.
 
 For example, cation=3+ and anion=1-...
 
@@ -1406,9 +1441,9 @@ The software model for balancing chemical equations and stoichiometry is straigh
     ```
 
     ```{cestoichiometry}
-    C3H8 + 5O2 -> 3CO2 + 4H2O
-    O2
-    0.5
+    Zn + CuCl2 -> ZnCl2 + Cu
+    CuCl2
+    13
     ```
 
 ## pH
