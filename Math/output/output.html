@@ -8,15 +8,24 @@
 <li><a href="#HEADREF0">Place Value System</a></li>
 <li><a href="#HEADREF1">Order of Operations</a></li>
 <li><a href="#HEADREF2">Algebra Rules</a></li>
+<li><a href="#HEADREF3">OpenStax Prealgebra Problems</a></li>
+<ul>
+<li><a href="#HEADREF4">Chapter 1</a></li>
+</ul>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Place Value System</h1>
 <p>Modern number systems like the ones used today are called <a name="BOOKMARK0"></a><strong>place value system</strong>s. The idea is that a number is represented as a string of symbols, where...</p>
 <ul>
-<li>each symbol represents a value</li>
-<li>each index represents a value</li>
+<li>each symbol represents a value.</li>
+<li>each index represents a value.</li>
 </ul>
-<p>, and these symbol values and index values are combined using an algorithm to come up with the overall value of the string. For example, imagine a toy <a href="#BOOKMARK0">place value system</a> that uses the following 4 symbols...</p>
+<p>These symbol values and index values are combined using an algorithm to come up with the overall value of the string:</p>
+<pre><code>for (symbol_value, index_value) in input
+    for item in symbol_value
+        final_value = concat(final_value, index_value)
+</code></pre>
+<p>For example, imagine a toy <a href="#BOOKMARK0">place value system</a> that uses the following 4 symbols: ABCD. To calculate the value for string <code>DCADB</code>, begin by first determining the value for each symbol (<code>symbol_value</code>)...</p>
 <table>
 <thead>
 <tr>
@@ -43,7 +52,12 @@
 </tr>
 </tbody>
 </table>
-<p>The value of the string DCADB is determined by first calculating the values of each index of the string. The value for each index is ...</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>The value increments for each symbol.</p>
+</div>
+<p>Then, calculate the value for each index (<code>index_value</code>) ...</p>
 <pre><code>_ _ _ _ _
 | | | | |
 | | | |  - □
@@ -51,110 +65,137 @@
 | |  ----- □□□
 |  ------- □□□□
  --------- □□□□□
-
-Note how the value increments as the position goes from right-to-left.
 </code></pre>
-<p>Then, for each position, add the value of that position repeatedly n times, where n is the value of the symbol at that position. Starting from right-to-left, ...</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>The value increments as the index goes from right-to-left.</p>
+</div>
+<p>Now that the <code>symbol_value</code>s and <code>index_value</code>s are known, the algorithm can be run on the string. For each <code>(symbol_value, index_value)</code> in the string <code>DCADB</code>...</p>
 <ul>
 <li>
-<p>D - positional value is □□□□□ / symbol value = □□□.</p>
+<p><code>D _ _ _ _</code> (<code>symbol_value = □□□</code> / <code>index_value = □□□□□</code>)</p>
+<pre><code>for item in symbol_value
+    final_value = concat(final_value, index_value)
+</code></pre>
 <table>
 <thead>
 <tr>
-<th>Symbol Iteration</th>
-<th>Positional Value</th>
-<th>Symbol-position Value</th>
+<th>symbol_value</th>
+<th>index_value</th>
+<th>item</th>
+<th>final_value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>□</td>
+<td>□□□</td>
 <td>□□□□□</td>
+<td>□</td>
 <td>□□□□□</td>
 </tr>
 <tr>
-<td>□</td>
+<td>□□□</td>
 <td>□□□□□</td>
+<td>□</td>
 <td>□□□□□ □□□□□</td>
 </tr>
 <tr>
-<td>□</td>
+<td>□□□</td>
 <td>□□□□□</td>
+<td>□</td>
 <td>□□□□□ □□□□□ □□□□□</td>
 </tr>
 </tbody>
 </table>
-<p>Symbol-position value = □□□□□ □□□□□ □□□□□.</p>
 </li>
 <li>
-<p>C - positional value is □□□□ / symbol value = □□.</p>
+<p><code>_ C _ _ _</code> (<code>symbol_value = □□</code> / <code>index_value = □□□□</code>)</p>
+<pre><code>for item in symbol_value
+    final_value = concat(final_value, index_value)
+</code></pre>
 <table>
 <thead>
 <tr>
-<th>Symbol Iteration</th>
-<th>Positional Value</th>
-<th>Symbol-Position Value</th>
+<th>symbol_value</th>
+<th>index_value</th>
+<th>item</th>
+<th>final_value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>□</td>
+<td>□□</td>
 <td>□□□□</td>
+<td>□</td>
 <td>□□□□</td>
 </tr>
 <tr>
-<td>□</td>
+<td>□□</td>
 <td>□□□□</td>
+<td>□</td>
 <td>□□□□ □□□□</td>
 </tr>
 </tbody>
 </table>
-<p>Symbol-position value = □□□□ □□□□.</p>
 </li>
 <li>
-<p>A - positional value is □□□ / symbol value = {none}.</p>
+<p><code>_ _ A _ _</code> (<code>symbol_value = </code> / <code>index_value = □□□</code>)</p>
+<pre><code>for item in symbol_value
+    final_value = concat(final_value, index_value)
+</code></pre>
 <pre><code>no-op
 </code></pre>
 <p>Symbol-position value = {empty}.</p>
 </li>
 <li>
-<p>D - positional value is □□ / symbol value = □□□.</p>
+<p><code>_ _ _ D _</code> (<code>symbol value = □□□</code> / <code>index_value = □□</code>)</p>
+<pre><code>for item in symbol_value
+    final_value = concat(final_value, index_value)
+</code></pre>
 <table>
 <thead>
 <tr>
-<th>Symbol Iteration</th>
-<th>Positional Value</th>
-<th>Symbol-Position Value</th>
+<th>symbol_value</th>
+<th>index_value</th>
+<th>item</th>
+<th>final_value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>□</td>
+<td>□□□</td>
 <td>□□</td>
+<td>□</td>
 <td>□□</td>
 </tr>
 <tr>
-<td>□</td>
+<td>□□□</td>
 <td>□□</td>
+<td>□</td>
 <td>□□ □□</td>
 </tr>
 <tr>
-<td>□</td>
+<td>□□□</td>
 <td>□□</td>
+<td>□</td>
 <td>□□ □□ □□</td>
 </tr>
 </tbody>
 </table>
-<p>Symbol-position value = □□ □□ □□.</p>
 </li>
 <li>
-<p>B - positional value = □ / symbol value = □.</p>
+<p><code>_ _ _ _ B</code> (<code>symbol value = □</code> / <code>index_value = □</code>)</p>
+<pre><code>for item in symbol_value
+    final_value = concat(final_value, index_value)
+</code></pre>
 <table>
 <thead>
 <tr>
-<th>Symbol Iteration</th>
-<th>Positional Value</th>
-<th>Symbol-Position Value</th>
+<th>symbol_value</th>
+<th>index_value</th>
+<th>item</th>
+<th>final_value</th>
 </tr>
 </thead>
 <tbody>
@@ -162,13 +203,13 @@ Note how the value increments as the position goes from right-to-left.
 <td>□</td>
 <td>□</td>
 <td>□</td>
+<td>□</td>
 </tr>
 </tbody>
 </table>
-<p>Symbol-position value = □.</p>
 </li>
 </ul>
-<p>The final value is for the string is calculated by combining (adding) all the symbol-position values together:</p>
+<p>The value for the string is...</p>
 <pre><code>D C A D B
 | | | | |
 | | | |  - □
@@ -179,19 +220,6 @@ Note how the value increments as the position goes from right-to-left.
 
 DCADB = □□□□□ □□□□□ □□□□□ □□□□ □□□□ □□ □□ □□ □
 </code></pre>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
-<p>TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers</p>
 <a name="HEADREF1"></a><h1>Order of Operations</h1>
 <p>The <a name="BOOKMARK1"></a><strong>order of operations</strong> are as follows:</p>
 <ol>
@@ -242,5 +270,55 @@ ADD TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>⋅</mo><mi>a</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
 </ul>
+<a name="HEADREF3"></a><h1>OpenStax Prealgebra Problems</h1>
+<a name="HEADREF4"></a><h2>Chapter 1</h2>
+<p><strong>TRY IT 1.1</strong></p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> = {whole}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{2}{3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> = {}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> = {whole, counting}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9</mn></mrow><annotation encoding="application/x-tex">9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">9</span></span></span></span> = {whole, counting}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>11.8</mn></mrow><annotation encoding="application/x-tex">11.8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">.</span><span class="mord">8</span></span></span></span> = {}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>241</mn></mrow><annotation encoding="application/x-tex">241</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">4</span><span class="mord">1</span></span></span></span> = {whole, counting}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>376</mn></mrow><annotation encoding="application/x-tex">376</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">7</span><span class="mord">6</span></span></span></span> = {whole, counting}</li>
+</ul>
+<p><strong>TRY IT 1.2</strong></p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> = {whole}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>5</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{5}{3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> = {}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn></mrow><annotation encoding="application/x-tex">7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span></span></span></span> = {whole, counting}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8.8</mn></mrow><annotation encoding="application/x-tex">8.8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mord">.</span><span class="mord">8</span></span></span></span> = {}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>13</mn></mrow><annotation encoding="application/x-tex">13</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span></span></span></span> = {whole, counting}</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>201</mn></mrow><annotation encoding="application/x-tex">201</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">1</span></span></span></span> = {whole, counting}</li>
+</ul>
+<p><strong>TRY IT 1.3</strong></p>
+<p>176</p>
+<p><strong>TRY IT 1.4</strong></p>
+<p>237</p>
+<p><strong>TRY IT 1.5</strong></p>
+<ul>
+<li>a. ten millions place.</li>
+<li>b. tens place.</li>
+<li>c. hundred thousands place.</li>
+<li>d. millions place.</li>
+<li>e. ones place.</li>
+</ul>
+<p><strong>TRY IT 1.6</strong></p>
+<ul>
+<li>a. billions place.</li>
+<li>b. ten thousands place.</li>
+<li>c. tens place.</li>
+<li>d. hundred thousands place.</li>
+<li>e. hundred millions place.</li>
+</ul>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
+<p>https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)</p>
 
         </body></html>

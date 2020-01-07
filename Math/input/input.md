@@ -9,10 +9,18 @@ Mathematics
 
 Modern number systems like the ones used today are called `{bm} place value system`s. The idea is that a number is represented as a string of symbols, where...
 
-* each symbol represents a value
-* each index represents a value
+* each symbol represents a value.
+* each index represents a value.
 
-, and these symbol values and index values are combined using an algorithm to come up with the overall value of the string. For example, imagine a toy place value system that uses the following 4 symbols...
+These symbol values and index values are combined using an algorithm to come up with the overall value of the string:
+
+```
+for (symbol_value, index_value) in input
+    for item in symbol_value
+        final_value = concat(final_value, index_value)
+```
+
+For example, imagine a toy place value system that uses the following 4 symbols: ABCD. To calculate the value for string `DCADB`, begin by first determining the value for each symbol (`symbol_value`)...
 
 | Symbol | Value |
 | ------ | ----- |
@@ -21,7 +29,11 @@ Modern number systems like the ones used today are called `{bm} place value syst
 | C      | □□    |
 | D      | □□□   |
 
-The value of the string DCADB is determined by first calculating the values of each index of the string. The value for each index is ...
+```{note}
+The value increments for each symbol.
+```
+
+Then, calculate the value for each index (`index_value`) ...
 
 ```
 _ _ _ _ _
@@ -31,32 +43,45 @@ _ _ _ _ _
 | |  ----- □□□
 |  ------- □□□□
  --------- □□□□□
-
-Note how the value increments as the position goes from right-to-left.
 ```
 
-Then, for each position, add the value of that position repeatedly n times, where n is the value of the symbol at that position. Starting from right-to-left, ...
+```{note}
+The value increments as the index goes from right-to-left.
+```
 
- * D - positional value is □□□□□ / symbol value = □□□.
+Now that the `symbol_value`s and `index_value`s are known, the algorithm can be run on the string. For each `(symbol_value, index_value)` in the string `DCADB`...
 
-   | Symbol Iteration | Positional Value | Symbol-position Value |
-   | ---------------- | ---------------- | --------------------- |
-   | □                | □□□□□            | □□□□□                 |
-   | □                | □□□□□            | □□□□□ □□□□□           |
-   | □                | □□□□□            | □□□□□ □□□□□ □□□□□     |
+ * `D _ _ _ _` (`symbol_value = □□□` / `index_value = □□□□□`)
 
-   Symbol-position value = □□□□□ □□□□□ □□□□□.
+   ```
+   for item in symbol_value
+       final_value = concat(final_value, index_value)
+   ```
 
- * C - positional value is □□□□ / symbol value = □□.
+   | symbol_value | index_value | item | final_value       |
+   | ------------ | ----------- | ---- | ----------------- |
+   | □□□          | □□□□□       | □    | □□□□□             |
+   | □□□          | □□□□□       | □    | □□□□□ □□□□□       |
+   | □□□          | □□□□□       | □    | □□□□□ □□□□□ □□□□□ |
 
-   | Symbol Iteration | Positional Value | Symbol-Position Value |
-   | ---------------- | ---------------- | --------------------- |
-   | □                | □□□□             | □□□□                  |
-   | □                | □□□□             | □□□□ □□□□             |
+ * `_ C _ _ _` (`symbol_value = □□` / `index_value = □□□□`)
+   
+   ```
+   for item in symbol_value
+       final_value = concat(final_value, index_value)
+   ```
 
-   Symbol-position value = □□□□ □□□□.
+   | symbol_value | index_value | item | final_value       |
+   | ------------ | ----------- | ---- | ----------------- |
+   | □□           | □□□□        | □    | □□□□              |
+   | □□           | □□□□        | □    | □□□□ □□□□         |
 
- * A - positional value is □□□ / symbol value = {none}.
+ * `_ _ A _ _` (`symbol_value = ` / `index_value = □□□`)
+   
+   ```
+   for item in symbol_value
+       final_value = concat(final_value, index_value)
+   ```
    
    ```
    no-op
@@ -64,25 +89,31 @@ Then, for each position, add the value of that position repeatedly n times, wher
 
    Symbol-position value = {empty}.
  
- * D - positional value is □□ / symbol value = □□□.
+ * `_ _ _ D _` (`symbol value = □□□` / `index_value = □□`)
 
-   | Symbol Iteration | Positional Value | Symbol-Position Value |
-   | ---------------- | ---------------- | --------------------- |
-   | □                | □□               | □□                    |
-   | □                | □□               | □□ □□                 |
-   | □                | □□               | □□ □□ □□              |
+   ```
+   for item in symbol_value
+       final_value = concat(final_value, index_value)
+   ```
 
-   Symbol-position value = □□ □□ □□.
+   | symbol_value | index_value | item | final_value       |
+   | ------------ | ----------- | ---- | ----------------- |
+   | □□□          | □□          | □    | □□                |
+   | □□□          | □□          | □    | □□ □□             |
+   | □□□          | □□          | □    | □□ □□ □□          |
 
- * B - positional value = □ / symbol value = □.
+ * `_ _ _ _ B` (`symbol value = □` / `index_value = □`)
 
-   | Symbol Iteration | Positional Value | Symbol-Position Value |
-   | ---------------- | ---------------- | --------------------- |
-   | □                | □                | □                     |
+   ```
+   for item in symbol_value
+       final_value = concat(final_value, index_value)
+   ```
 
-   Symbol-position value = □.
+   | symbol_value | index_value | item | final_value       |
+   | ------------ | ----------- | ---- | ----------------- |
+   | □            | □           | □    | □                 |
 
-The final value is for the string is calculated by combining (adding) all the symbol-position values together:
+The value for the string is...
 
 ```
 D C A D B
@@ -95,32 +126,6 @@ D C A D B
 
 DCADB = □□□□□ □□□□□ □□□□□ □□□□ □□□□ □□ □□ □□ □
 ```
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
-
-TODO CONTINUE FROM https://cnx.org/contents/yqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers
 
 # Order of Operations
 
@@ -176,3 +181,68 @@ Additive Inverse Property
 Multiplicative Inverse / Multiplicative Reciprocal Property
 
 * `{kt} a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1`
+
+# OpenStax Prealgebra Problems
+
+## Chapter 1
+
+__TRY IT 1.1__
+
+* `{kt} 0` = {whole}
+* `{kt} \frac{2}{3}` = {}
+* `{kt} 2` = {whole, counting}
+* `{kt} 9` = {whole, counting}
+* `{kt} 11.8` = {}
+* `{kt} 241` = {whole, counting}
+* `{kt} 376` = {whole, counting}
+
+__TRY IT 1.2__
+
+* `{kt} 0` = {whole}
+* `{kt} \frac{5}{3}` = {}
+* `{kt} 7` = {whole, counting}
+* `{kt} 8.8` = {}
+* `{kt} 13` = {whole, counting}
+* `{kt} 201` = {whole, counting}
+
+__TRY IT 1.3__
+
+176
+
+__TRY IT 1.4__
+
+237
+
+__TRY IT 1.5__
+
+ * a. ten millions place.
+ * b. tens place.
+ * c. hundred thousands place.
+ * d. millions place.
+ * e. ones place.
+
+__TRY IT 1.6__
+
+ * a. billions place.
+ * b. ten thousands place.
+ * c. tens place.
+ * d. hundred thousands place.
+ * e. hundred millions place.
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
+
+https://cnx.org/contents/ayqV9q0HH@20.1:gUzCHLwU@17/1-1-Introduction-to-Whole-Numbers (CONTINUE FROM Use Place Value to Name Whole Numbers)
