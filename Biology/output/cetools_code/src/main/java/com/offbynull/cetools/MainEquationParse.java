@@ -15,12 +15,13 @@ public final class MainEquationParse {
         try (Scanner s = new Scanner(System.in);
                 PrintWriter pw = new PrintWriter(System.out, true);
                 MarkdownWriter mdw = new MarkdownWriter(pw)) {
+            mdw.out("`{bm-linker-off}`\n\n");
             mdw.out("<div style=\"border:1px solid black;\">\n\n");
-            String input = s.nextLine();
-            
-            mdw.out("Parsing ").out(input).out("\n\n");
-            
             try {
+                String input = s.nextLine();
+
+                mdw.out("Parsing ").out(input).out("\n\n");
+
                 ChemicalEquation ce = new Parser().parseChemicalEquation(input);
                 for (var r : ce.reactants.items) {
                     mdw.out(" * Input: ").out(r.count).out(" x ( ");
@@ -41,6 +42,7 @@ public final class MainEquationParse {
                 mdw.out(getStackTraceAsString(e));
             }
             mdw.out("\n\n</div>\n\n");
+            mdw.out("`{bm-linker-on}`\n\n");
         }
     }
 }
