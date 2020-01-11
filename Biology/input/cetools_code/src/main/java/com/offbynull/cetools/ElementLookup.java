@@ -7,12 +7,14 @@ import java.io.Reader;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.List;
+import java.util.Objects;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.IntStream;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
+import static org.apache.commons.lang3.math.NumberUtils.toDouble;
 
 public final class ElementLookup {
     public static ImmutableList<Element> ELEMENTS;
@@ -20,10 +22,7 @@ public final class ElementLookup {
     static {
         try {
             // Data extracted from https://ciaaw.org/
-            // Data extracted from https://ciaaw.org/
-            // Data extracted from https://ciaaw.org/
-            // Data extracted from https://ciaaw.org/
-            // Data extracted from https://ciaaw.org/
+            // Data extracted from https://en.wikipedia.org/w/index.php?title=Electronegativities_of_the_elements_(data_page)&oldid=931213836
             List<CSVRecord> isotopeMassRecs;
             try (Reader in = new FileReader("isotope_masses.csv")) {
                 isotopeMassRecs = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in).getRecords();
@@ -36,12 +35,24 @@ public final class ElementLookup {
             try (Reader in = new FileReader("weights.csv")) {
                 weightRecs = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in).getRecords();
             }
+            List<CSVRecord> electronegativityRecs;
+            try (Reader in = new FileReader("electronegativity.csv")) {
+                electronegativityRecs = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in).getRecords();
+            }
             
             ImmutableList.Builder<Element> elementsBuilder = ImmutableList.builder();
             for (CSVRecord weightRec : weightRecs) {
                 String zVal = weightRec.get("Z").replaceAll("[^\\d]", "");
                 String symbol = weightRec.get("Symbol");
                 String name = weightRec.get("Element");
+
+                Double electronegativity = electronegativityRecs.stream()
+                        .filter(e -> e.get("Symbol").equals(symbol))
+                        .limit(1L)
+                        .map(e -> e.get("use"))
+                        .map(n -> toDouble(n, Double.NaN))
+                        .filter(n -> !Double.isNaN(n))
+                        .findAny().orElse(null);
                 
                 int protonCount = parseInt(zVal);
                 Range<Double> atomicWeightRange = parseRange(weightRec.get("Standard Atomic Weight"));
@@ -83,7 +94,7 @@ public final class ElementLookup {
                 }
                 ImmutableList<ElementIsotope> isotopes = isotopesBuilder.build();
                 
-                Element element = new Element(name, symbol, protonCount, isotopes, atomicWeightRange);
+                Element element = new Element(name, symbol, protonCount, isotopes, atomicWeightRange, electronegativity);
                 elementsBuilder.add(element);
             }
             ELEMENTS = elementsBuilder.build();

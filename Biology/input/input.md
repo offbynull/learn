@@ -79,6 +79,12 @@ Terminology around atoms and sub-atomic particles:
  * ion - An atom where the number of protons and electrons are different.
  * `{bm} isotope` - If two atoms have the same number of protons but a different number of neutrons, they're said to be different isotopes of the same type of atom. For example, carbon has multiple different isotopes, the most common of which has 6 neutrons (6 protons + 6 neutrons).
 
+```{define-block}
+ceelementinfo
+ceelementinfo_macro/
+cetools_code/
+```
+
 Atoms may form bonds with one another to form larger structures known as molecules and ionic compounds.
 
 The periodic table below orders atoms by the atomic number (number of protons)...
@@ -1438,7 +1444,121 @@ Gravimetry comes in 2 forms:
 This is a high-level overview of gravimetry. The Khan academy articles aren't doing a very good job of explaining the topic. I've explained as much as I've been able to understand but I think there are still large parts missing. This section needs cleanup and examples.
 ```
 
-### Redox Reactions
+### Redox Reaction
+
+#### Oxidation Number
+
+`{bm} Electronegativity` is a constant that defines how likely an element is to attract electrons. For example, the electronegativity of ...
+The electronegativity of...
+* carbon is 2.55
+* hydrogen is 2.20
+
+... . If there were an electron sitting between a carbon ion and a hydrogen ion, that electron is more likely to gravitate towards the carbon because carbon is more electronegative that hydrogen.
+
+If an atom were bonded to other atoms, the `{bm} oxidation number/(oxidation number|oxidation state)/i` of each atom is the charge it would have if both it and its neighbours were thirsty for electrons. Some atoms in the bond may grab the electrons from their neighbours because they're more electronegative than their neighbours.
+
+For example, imagine the molecular compound `{kt} CH_4`...
+
+```{chemfig}
+\chemfig[]{C(-[0]H)(-[2]H)(-[4]H)(-[6]H)}
+```
+
+Since carbon is more electronegative than hydrogen (2.55 vs 2.20), electrons will move from the hydrogens to the carbon. The oxidation number of...
+* the carbon would be -4
+* each hydrogen would be +1
+
+```{chemfig}
+\chemfig[]{{C^{-4}}(-[0]{H^{+1}})(-[2]{H^{+1}})(-[4]{H^{+1}})(-[6]{H^{+1}})}
+```
+
+If the electronegativity of the atoms in a bond are equal, the electrons wouldn't move. As such, the oxidation number of each atom in the bond would be 0. For example, in the bond `{kt} H_2` each hydrogen would have a oxidation number of 0...
+
+```{chemfig}
+\chemfig[]{{H^0}(-[0]{H^0})}
+```
+
+If the atom isn't in a bond, it would have no neighbours to swap electrons with. As such, the oxidation number of the atom would be 0. For example, an `{kt} H` by itself would have an oxidation number of 0.
+
+When dealing with multiple bonds, the high-level algorithm seems to be to iterate over the atoms from least electronegative to most electronegative, where at each step the atom being iterated over gives up its electrons to the neighbour with the highest electronegativity. For example, `{kt} NH_4ClO_4` (ammonium perchlorate) has the the structure...
+
+```{chemfig}
+\chemfig[]{Cl(=[2]O)(=[4]O)(=[6]O)(-[0]O(-[0]N(-[2]H)(-[1]H)(-[6]H)(-[7]H)))}
+```
+
+The electronegativity of...
+* oxygen is 3.44
+* chlorine is 3.16
+* nitrogen is 3.04
+* hydrogen is 2.20
+
+Since hydrogen is the least electronegative, they give up first...
+
+```{chemfig}
+\chemfig[]{Cl(=[2]O)(=[4]O)(=[6]O)(-[0]O(-[0]{N^{-4}}(-[2]{H^{+1}})(-[1]{H^{+1}})(-[6]{H^{+1}})(-[7]{H^{+1}})))}
+```
+
+```{ceelementinfo}
+H
+```
+
+The 2nd least electronegative is nitrogen...
+
+```{chemfig}
+\chemfig[]{Cl(=[2]O)(=[4]O)(=[6]O)(-[0]{O^{-11}}(-[0]{N^{+7}}(-[2]{H^{+1}})(-[1]{H^{+1}})(-[6]{H^{+1}})(-[7]{H^{+1}})))}
+```
+
+```{ceelementinfo}
+N
+```
+
+The 3rd least electronegative is chlorine...
+
+```{chemfig}
+\chemfig[]{{Cl^{+17}}(=[2]O^{-4})(=[4]O^{-4})(=[6]O^{-4})(-[0]{O^{-16}}(-[0]{N^{+7}}(-[2]{H^{+1}})(-[1]{H^{+1}})(-[6]{H^{+1}})(-[7]{H^{+1}})))}
+```
+
+```{note}
+What happened here? Stable chlorine has 17 electrons and 4 neighbours it needs to distribute to. `{kt} \frac{17}{4} = 4.25`. Since we can't take a quarter of an electron, 3 of the oxygens take 4 electrons and the last oxygen takes 5 electrons.
+```
+
+```{ceelementinfo}
+Cl
+```
+
+The 4th least electronegative is oxygen, but there are no remaining bonds so the process ends. For `{kt} NH_4ClO_4` (ammonium perchlorate), the oxidation number of...
+* oxygen is not consistent (can be -4 or -17)
+* chlorine is +17
+* nitrogen is +7
+* hydrogen is +1
+
+
+Algorithm / heuristic for determining the oxidation number...
+
+```
+if (species.charge == 0 && species.elements.distinct().size == 1) {
+  oxidation_num = 0
+} else if (species.size == 1) { // is single atom?
+  oxidation_num = species.elements[0].charge
+} else {
+  species.elements.filter(e => e.name == 'hydrogen').map()
+}
+```
+
+species = H2O
+
+Atoms that are...
+* not charged have an oxidation number of 0.
+* charged have a oxidation number equal to their charge (e.g. charge of 2 = oxidation number of 2)
+* 
+
+```{note}
+Don't confuse this with the charge of an atom. For example, ...
+* `{kt} Fe^{2+}` / `{kt} Fe^{2}` is an atom of iron that has 2 more protons than electrons
+* `{kt} Fe^{2-}` is an atom of iron that has 2 less protons than electrons
+* `{kt} Fe^{+2}` is an atom of iron that has 2 electrons
+```
+
+`{bm} Redox` reactions are a 
 
 FILL ME IN
 

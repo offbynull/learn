@@ -12,8 +12,9 @@ public final class Element {
     public final int protonCount;
     public final ImmutableList<ElementIsotope> isotopes;
     public final Range<Double> atomicWeight; // aka relative atomic mass
+    public final Double electronegativity;
 
-    public Element(String name, String symbol, int protonCount, ImmutableList<ElementIsotope> isotopes, Range<Double> atomicWeight) {
+    public Element(String name, String symbol, int protonCount, ImmutableList<ElementIsotope> isotopes, Range<Double> atomicWeight, Double electronegativity) {
         Preconditions.checkNotNull(name);
         Preconditions.checkNotNull(symbol);
         Preconditions.checkNotNull(isotopes);
@@ -24,11 +25,15 @@ public final class Element {
             Preconditions.checkArgument(atomicWeight.lowerBoundType() == BoundType.CLOSED);
             Preconditions.checkArgument(atomicWeight.upperBoundType() == BoundType.CLOSED);
         }
+        if (electronegativity != null) {
+            Preconditions.checkArgument(electronegativity >= 0.0);
+        }
         this.name = name;
         this.symbol = symbol;
         this.protonCount = protonCount;
         this.isotopes = ImmutableList.copyOf(isotopes);
         this.atomicWeight = atomicWeight;
+        this.electronegativity = electronegativity;
     }
 
     public int atomicNumber() {
@@ -37,17 +42,18 @@ public final class Element {
 
     @Override
     public String toString() {
-        return "Element{" + "name=" + name + ", symbol=" + symbol + ", protonCount=" + protonCount + ", isotopes=" + isotopes + ", atomicWeight=" + atomicWeight + '}';
+        return "Element{" + "name=" + name + ", symbol=" + symbol + ", protonCount=" + protonCount + ", isotopes=" + isotopes + ", atomicWeight=" + atomicWeight + ", electronegativity=" + electronegativity + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Objects.hashCode(this.symbol);
-        hash = 79 * hash + this.protonCount;
-        hash = 79 * hash + Objects.hashCode(this.isotopes);
-        hash = 79 * hash + Objects.hashCode(this.atomicWeight);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.symbol);
+        hash = 59 * hash + this.protonCount;
+        hash = 59 * hash + Objects.hashCode(this.isotopes);
+        hash = 59 * hash + Objects.hashCode(this.atomicWeight);
+        hash = 59 * hash + Objects.hashCode(this.electronegativity);
         return hash;
     }
 
@@ -78,6 +84,10 @@ public final class Element {
         if (!Objects.equals(this.atomicWeight, other.atomicWeight)) {
             return false;
         }
+        if (!Objects.equals(this.electronegativity, other.electronegativity)) {
+            return false;
+        }
         return true;
     }
+
 }
