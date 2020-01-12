@@ -91,7 +91,56 @@ The periodic table below orders atoms by the atomic number (number of protons)..
 
 ![By Offnfopt - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=62296883](800px-Simple_Periodic_Table_Chart-en.svg.png)
 
-### Electron Shell
+### Structure
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+TODO: START BACK OFF FROM THE BEGINNING OF https://www.khanacademy.org/science/chemistry/electronic-structure-of-atoms
+
+Dalton theory
+
+* all matter is made up of atoms, which are indivisible (WRONG -- atoms are made up of subatomic particles)
+* all atoms of a given element are identicial in mass and properties (WRONG -- isotopes have different neutron count/mass)
+* compounds are a como of 2+ different types of atoms (elements) (RIGHT)
+* chemical reaction is a rearrangement of atoms (RIGHT kinda, electrons move around and sometimes energy is released/consumed?)
+
+law of conservation of mass -- matter isn't created or destroyed in a closed something
+
+law of constant composition -- the ratios in a compound will always be the same (e.g. no matter how much salt you have, it'll still always be composed 1:1 of Na and Cl)
+
+#### Electron Shell
 
 `{bm} Electron shells` are distinct orbits/regions around the nucleus_ATOM that electrons are assigned to. There are 7 electron shells in total and each shell can hold onto a certain number of electrons. Ordered from closest to the nucleus_ATOM to farthest from from the nucleus_ATOM, these shells are...
 
@@ -1444,14 +1493,81 @@ Gravimetry comes in 2 forms:
 This is a high-level overview of gravimetry. The Khan academy articles aren't doing a very good job of explaining the topic. I've explained as much as I've been able to understand but I think there are still large parts missing. This section needs cleanup and examples.
 ```
 
-### Redox Reaction
+## Redox Reaction
 
-`{bm} Redox` reaction
+An `{bm} oxidation-reduction (redox)/(oxidation-reduction|oxidation reduction|redox)/i` reaction is a form of chemical equation that focuses on the transfer of electrons between species / atoms in a species.
 
-reduction
-oxidation
+The way redox reactions are calculated is by calculating the oxidation numbers for each species in the reaction. The oxidation number of an atom is the charge that atom would have if both it and the neighbours its bonded with were thirsty for electrons. That is, because some elements do a better job of attracting electrons than others (electronegativity), the oxidation number of an atom would be the charge of that atom if it were to either...
 
-#### Oxidation Number
+* give up its electrons to a more thirsty (more electronegative) atom that its bonded to.
+* take the electrons from a less thirsty (less electronegative) atom that its bonded to.
+
+The term...
+* `{bm} oxidation` refers to losing electrons.
+* `{bm} reduction` refers to gaining electrons.
+
+The exact method of calculating oxidation numbers for some species is detailed in the subsection below.
+
+```{note}
+A handy mnemonic for remembering the above is OIL RIG.
+
+* OIL: Oxidation Is Loss
+* RIG: Reduction Is Gain
+
+Another version is LEO GER.
+
+* LEO: Loss of Electrons is Oxidation
+* GER: Gain of Electrons is Reduction
+```
+
+For example, the chemical for `{kt} CH_4 + 2O_2 \rightarrow CO_2 + 2H_2O` would have the following oxidation numbers...
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+
+
+### Oxidation Number
 
 Recall that `{bm} electronegativity` is a constant that defines how likely an element is to attract electrons. For example, the electronegativity of ...
 * carbon is 2.55.
@@ -1485,16 +1601,16 @@ There are 2 methods to calculate the oxidation state of a species:
 The subsections below detail each method.
 
 
-##### Bond Walking Algorithm
+#### Bond Walking Algorithm
 
 ```{note}
 I have no idea if the algorithm below is correct. I pieced it together in my head as I was reading through several different sources. At some point ask an expert to verify.
 ```
 
-To determine the oxidation number of every atom in a species, the high-level algorithm is as follows:
-1. break bonds where the both ends are the same element (e.g. break the bond if both sides of a bond are H)
-1. iterate over atoms from least to most electronegative.
-   1. atom being iterated over gives up its electrons to the bond with the highest electronegativity (unsure how to break ties???).
+To determine the oxidation number of every atom in a species, the structure of the species needs to be known before hand. The high-level algorithm is as follows:
+1. Break bonds where the both ends are the same element (e.g. remove the bond if both sides of a bond are H)
+1. Iterate over atoms from least to most electronegative.
+   1. Atom being iterated over gives up electrons to the bond with the highest electronegativity. The number of electrons given depends on the bond (single bond = 1, double bond = 2, etc...).
 
 If the electronegativity of the atoms in a bond are equal, the electrons wouldn't move. As such, the oxidation number of each atom in the bond would be 0. For example, in the bond `{kt} H_2` each hydrogen would have a oxidation number of 0...
 
@@ -1637,9 +1753,9 @@ The 2nd least electronegative is carbon, pass its electrons to the neighbour tha
 
 ```{chemfig}
 \chemfig[]{
-  {H^{+1}}(-[0]{O^{-7}}
-    (-[0]{C^{+6}}
-      (-[,,,,draw=none]{C^{+6}}(=[2]{O^{-6}})
+  {H^{+1}}(-[0]{O^{-2}}
+    (-[0]{C^{+1}}
+      (-[,,,,draw=none]{C^{+2}}(=[2]{O^{-2}})
         (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
           (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
             (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
@@ -1673,6 +1789,10 @@ The 2nd least electronegative is carbon, pass its electrons to the neighbour tha
 }
 ```
 
+```{note}
+Note that double bond between C to O -- because it's a double bond, 2 electrons are given up.
+```
+
 ```{ceelementinfo}
 C
 ```
@@ -1682,15 +1802,19 @@ The 3rd least electronegative is oxygen, but there are no remaining bonds so the
 * carbon is {+6, -2, -3}
 * hydrogen is +1
 
-As a chemical formula, it could be written as `{kt} {(H^{+1}O^{-7}C^{+6})}_1 {(C^{+6}O^{-6})}_1 {(H^{+1}C_2)}_{13} {(H^{+1}C^{-3}_3)}_1` -- the oxidation states are put in as superscript on each element just as if they were a charge.
+As a chemical formula, it could be written as `{kt} {(H^{+1} O^{-2} C^{+1})}_1  {(C^{+2} O^{-2})}_1  {(H^{+1}_2 C^{-2})}_{13}  {(H^{+1}_3C^{-3})}_1` -- the oxidation states are put in as superscript on each element just as if they were a charge.
 
 ```{note}
-The above chemical formula is written in a way to respect the structure in the final diagram. It can be condensed further...
+The above chemical formula is written in a way to respect the structure in the final diagram. It can be condensed/simplified further...
 
-`{kt} {(H^{+1}O^{-7}C^{+6}_2O^{-6})}_1 {(H^{+1}C_2)}_{13} {(H^{+1}C^{-3}_3)}_1`
+`{kt} H^{+1}_{30}  C^{+1}  C^{+2}  C^{-2}_{13}  C^{-3}  O^{-2}_2`
 ```
 
-##### Heuristic Algorithm
+A quick test to see if the oxidation numbers for a species is correct is to add them up. When added, it should equal the charge of the species. In the example above (myristic acid), the molecule was neutral (0 charge) -- when the oxidation numbers get added it also equals no charge:
+
+`{kt} (1 + -2 + 1) + (2  + -2) + (1 + -2 + 1)*13 + (1 + 1 + 1 + -3) = 0`
+
+#### Heuristic Algorithm
 
 IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
