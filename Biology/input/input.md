@@ -1446,30 +1446,55 @@ This is a high-level overview of gravimetry. The Khan academy articles aren't do
 
 ### Redox Reaction
 
+`{bm} Redox` reaction
+
+reduction
+oxidation
+
 #### Oxidation Number
 
-`{bm} Electronegativity` is a constant that defines how likely an element is to attract electrons. For example, the electronegativity of ...
-The electronegativity of...
-* carbon is 2.55
-* hydrogen is 2.20
+Recall that `{bm} electronegativity` is a constant that defines how likely an element is to attract electrons. For example, the electronegativity of ...
+* carbon is 2.55.
+* hydrogen is 2.20.
 
-... . If there were an electron sitting between a carbon ion and a hydrogen ion, that electron is more likely to gravitate towards the carbon because carbon is more electronegative that hydrogen.
+If there were an electron sitting between a carbon ion and a hydrogen ion, that electron is more likely to gravitate towards the carbon because carbon is more electronegative than hydrogen.
 
-If an atom were bonded to other atoms, the `{bm} oxidation number/(oxidation number|oxidation state)/i` of each atom is the charge it would have if both it and its neighbours were thirsty for electrons. Some atoms in the bond may grab the electrons from their neighbours because they're more electronegative than their neighbours.
-
-For example, imagine the molecular compound `{kt} CH_4`...
+The `{bm} oxidation number \/ oxidation state/(oxidation number|oxidation state)/i` of an atom is the charge it would have if both it and the neighbours its bonded to were thirsty for electrons. Atoms that are more electronegative than their neighours will end up taking their neighbour's electrons. For example, imagine the molecular compound `{kt} CH_4`...
 
 ```{chemfig}
 \chemfig[]{C(-[0]H)(-[2]H)(-[4]H)(-[6]H)}
 ```
 
-Since carbon is more electronegative than hydrogen (2.55 vs 2.20), electrons will move from the hydrogens to the carbon. The oxidation number of...
-* the carbon would be -4
-* each hydrogen would be +1
+Since carbon is more electronegative than hydrogen (2.55 vs 2.20), electrons will move from the hydrogens to the carbon...
 
 ```{chemfig}
 \chemfig[]{{C^{-4}}(-[0]{H^{+1}})(-[2]{H^{+1}})(-[4]{H^{+1}})(-[6]{H^{+1}})}
 ```
+
+The oxidation number of...
+* the carbon would be -4
+* each hydrogen would be +1
+
+..., and written as a chemical formula it would be `{kt} C^{-4}H^{+1}_4`.
+
+There are 2 methods to calculate the oxidation state of a species:
+
+* walk the bonds to determine the oxidation number of each atom.
+* apply a heuristic to guess the oxidation number of each atom (more common).
+
+The subsections below detail each method.
+
+
+##### Bond Walking Algorithm
+
+```{note}
+I have no idea if the algorithm below is correct. I pieced it together in my head as I was reading through several different sources. At some point ask an expert to verify.
+```
+
+To determine the oxidation number of every atom in a species, the high-level algorithm is as follows:
+1. break bonds where the both ends are the same element (e.g. break the bond if both sides of a bond are H)
+1. iterate over atoms from least to most electronegative.
+   1. atom being iterated over gives up its electrons to the bond with the highest electronegativity (unsure how to break ties???).
 
 If the electronegativity of the atoms in a bond are equal, the electrons wouldn't move. As such, the oxidation number of each atom in the bond would be 0. For example, in the bond `{kt} H_2` each hydrogen would have a oxidation number of 0...
 
@@ -1479,159 +1504,237 @@ If the electronegativity of the atoms in a bond are equal, the electrons wouldn'
 
 If the atom isn't in a bond, it would have no neighbours to swap electrons with. As such, the oxidation number of the atom would be 0. For example, an `{kt} H` by itself would have an oxidation number of 0.
 
-When dealing with multiple bonds, the high-level algorithm seems to be to iterate over the atoms from least electronegative to most electronegative, where at each step the atom being iterated over gives up its electrons to the neighbour with the highest electronegativity. For example, `{kt} NH_4ClO_4` (ammonium perchlorate) has the the structure...
+For example, `{kt} C_{14}H_{28}O_2` (myristic acid) has the the structure...
 
 ```{chemfig}
-\chemfig[]{Cl(=[2]O)(=[4]O)(=[6]O)(-[0]O(-[0]N(-[2]H)(-[1]H)(-[6]H)(-[7]H)))}
+\chemfig[]{
+  H(-[0]O
+    (-[0]C
+      (-[0]C(=[2]O)
+        (-[0]C(-[2]H)(-[6]H)
+          (-[0]C(-[2]H)(-[6]H)
+            (-[0]C(-[2]H)(-[6]H)
+              (-[0]C(-[2]H)(-[6]H)
+                (-[0]C(-[2]H)(-[6]H)
+                  (-[0]C(-[2]H)(-[6]H)
+                    (-[0]C(-[2]H)(-[6]H)
+                      (-[0]C(-[2]H)(-[6]H)
+                        (-[0]C(-[2]H)(-[6]H)
+                          (-[0]C(-[2]H)(-[6]H)
+                            (-[0]C(-[2]H)(-[6]H)
+                              (-[0]C(-[2]H)(-[6]H)
+                                (-[0]C(-[2]H)(-[6]H)
+                                  (-[0]C(-[2]H)(-[6]H)(-[0]H))
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+}
 ```
 
 The electronegativity of...
 * oxygen is 3.44
-* chlorine is 3.16
-* nitrogen is 3.04
+* carbon is 2.55
 * hydrogen is 2.20
 
-Since hydrogen is the least electronegative, they give up first...
+Break bonds where both ends are the same element...
 
 ```{chemfig}
-\chemfig[]{Cl(=[2]O)(=[4]O)(=[6]O)(-[0]O(-[0]{N^{-4}}(-[2]{H^{+1}})(-[1]{H^{+1}})(-[6]{H^{+1}})(-[7]{H^{+1}})))}
+\chemfig[]{
+  H(-[0]O
+    (-[0]C
+      (-[,,,,draw=none]C(=[2]O)
+        (-[,,,,draw=none]C(-[2]H)(-[6]H)
+          (-[,,,,draw=none]C(-[2]H)(-[6]H)
+            (-[,,,,draw=none]C(-[2]H)(-[6]H)
+              (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                  (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                    (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                      (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                        (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                          (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                            (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                              (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                                (-[,,,,draw=none]C(-[2]H)(-[6]H)
+                                  (-[,,,,draw=none]C(-[2]H)(-[6]H)(-[0]H))
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+}
+```
+
+Since hydrogen is the least electronegative, pass its electrons to the neighbour that's most electronegative...
+
+```{chemfig}
+\chemfig[]{
+  {H^{+1}}(-[0]{O^{-1}}
+    (-[0]C
+      (-[,,,,draw=none]C(=[2]O)
+        (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+          (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+            (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+              (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                  (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                    (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                      (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                        (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                          (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                            (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                              (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                                (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                                  (-[,,,,draw=none]{C^{-3}}(-[2]{H^{+1}})(-[6]{H^{+1}})(-[0]{H^{+1}}))
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+}
 ```
 
 ```{ceelementinfo}
 H
 ```
 
-The 2nd least electronegative is nitrogen...
+The 2nd least electronegative is carbon, pass its electrons to the neighbour that's most electronegative...
 
 ```{chemfig}
-\chemfig[]{Cl(=[2]O)(=[4]O)(=[6]O)(-[0]{O^{-11}}(-[0]{N^{+7}}(-[2]{H^{+1}})(-[1]{H^{+1}})(-[6]{H^{+1}})(-[7]{H^{+1}})))}
-```
-
-```{ceelementinfo}
-N
-```
-
-The 3rd least electronegative is chlorine...
-
-```{chemfig}
-\chemfig[]{{Cl^{+17}}(=[2]O^{-4})(=[4]O^{-4})(=[6]O^{-4})(-[0]{O^{-16}}(-[0]{N^{+7}}(-[2]{H^{+1}})(-[1]{H^{+1}})(-[6]{H^{+1}})(-[7]{H^{+1}})))}
-```
-
-```{note}
-What happened here? Stable chlorine has 17 electrons and 4 neighbours it needs to distribute to. `{kt} \frac{17}{4} = 4.25`. Since we can't take a quarter of an electron, 3 of the oxygens take 4 electrons and the last oxygen takes 5 electrons.
-```
-
-```{ceelementinfo}
-Cl
-```
-
-The 4th least electronegative is oxygen, but there are no remaining bonds so the process ends. For `{kt} NH_4ClO_4` (ammonium perchlorate), the oxidation number of...
-* oxygen is not consistent (can be -4 or -17)
-* chlorine is +17
-* nitrogen is +7
-* hydrogen is +1
-
-
-Algorithm / heuristic for determining the oxidation number...
-
-```
-if (species.charge == 0 && species.elements.distinct().size == 1) {
-  oxidation_num = 0
-} else if (species.size == 1) { // is single atom?
-  oxidation_num = species.elements[0].charge
-} else {
-  species.elements.filter(e => e.name == 'hydrogen').map()
+\chemfig[]{
+  {H^{+1}}(-[0]{O^{-7}}
+    (-[0]{C^{+6}}
+      (-[,,,,draw=none]{C^{+6}}(=[2]{O^{-6}})
+        (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+          (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+            (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+              (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                  (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                    (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                      (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                        (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                          (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                            (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                              (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                                (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
+                                  (-[,,,,draw=none]{C^{-3}}(-[2]{H^{+1}})(-[6]{H^{+1}})(-[0]{H^{+1}}))
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
 }
 ```
 
-species = H2O
-
-Atoms that are...
-* not charged have an oxidation number of 0.
-* charged have a oxidation number equal to their charge (e.g. charge of 2 = oxidation number of 2)
-* 
-
-```{note}
-Don't confuse this with the charge of an atom. For example, ...
-* `{kt} Fe^{2+}` / `{kt} Fe^{2}` is an atom of iron that has 2 more protons than electrons
-* `{kt} Fe^{2-}` is an atom of iron that has 2 less protons than electrons
-* `{kt} Fe^{+2}` is an atom of iron that has 2 electrons
+```{ceelementinfo}
+C
 ```
 
-`{bm} Redox` reactions are a 
+The 3rd least electronegative is oxygen, but there are no remaining bonds so the process ends. For `{kt} C_{14}H_{28}O_2` (myristic acid), the oxidation number of ...
+* oxygen is {-6, -7}
+* carbon is {+6, -2, -3}
+* hydrogen is +1
 
-FILL ME IN
+As a chemical formula, it could be written as `{kt} {(H^{+1}O^{-7}C^{+6})}_1 {(C^{+6}O^{-6})}_1 {(H^{+1}C_2)}_{13} {(H^{+1}C^{-3}_3)}_1` -- the oxidation states are put in as superscript on each element just as if they were a charge.
 
-FILL ME IN
+```{note}
+The above chemical formula is written in a way to respect the structure in the final diagram. It can be condensed further...
 
-FILL ME IN
+`{kt} {(H^{+1}O^{-7}C^{+6}_2O^{-6})}_1 {(H^{+1}C_2)}_{13} {(H^{+1}C^{-3}_3)}_1`
+```
 
-FILL ME IN
+##### Heuristic Algorithm
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
-FILL ME IN
-
+IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
 ## pH
 
