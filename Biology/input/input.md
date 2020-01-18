@@ -1495,77 +1495,72 @@ This is a high-level overview of gravimetry. The Khan academy articles aren't do
 
 ## Redox Reaction
 
-An `{bm} oxidation-reduction (redox)/(oxidation-reduction|oxidation reduction|redox)/i` reaction is a form of chemical equation that focuses on the transfer of electrons between species / atoms in a species.
+An `{bm} oxidation-reduction (redox)/(oxidation-reduction|oxidation reduction|redox)/i` reaction is any chemical reaction where electrons are transferred between atoms during the reaction. For example, an atom may start off in a reactant_CHEM as having a +1 charge but may end up in an product_CHEM as having a -2 charge.
 
-The way redox reactions are calculated is by calculating the oxidation numbers for each species in the reaction. The oxidation number of an atom is the charge that atom would have if both it and the neighbours its bonded with were thirsty for electrons. That is, because some elements do a better job of attracting electrons than others (electronegativity), the oxidation number of an atom would be the charge of that atom if it were to either...
+The charge of an atom in some larger reactant_CHEM / product_CHEM is called its oxidation number. To calculate the oxidation number for an atom, iterate over each of its bonds and assign the electron(s) for that bond to either it or its neighbour -- the atom with the higher electronegativity gets the electron(s) making up the bond.
 
-* give up its electrons to a more thirsty (more electronegative) atom that its bonded to.
-* take the electrons from a less thirsty (less electronegative) atom that its bonded to.
+For example, carbon is more electronegative than hydrogen, so the carbon gets assigned the shared electron that make up each bond...
+
+```{chemfig}
+\chemfig[]{C(-[0]H)(-[2]H)(-[4]H)(-[6]H)} \enspace \enspace ---------\textgreater \enspace \enspace \chemfig[]{{C^{-4}}(-[0]{H^{+1}})(-[2]{H^{+1}})(-[4]{H^{+1}})(-[6]{H^{+1}})}
+```
+
+The exact method of calculating oxidation numbers for some species is detailed in the oxidation number subsection below.
 
 The term...
-* `{bm} oxidation` refers to losing electrons.
-* `{bm} reduction` refers to gaining electrons.
-
-The exact method of calculating oxidation numbers for some species is detailed in the subsection below.
+ * `{bm} oxidation/(oxidation|oxidized|oxidize)/i` refers to losing electrons.
+ * `{bm} reduction/(reduction|reduced|reduce)_CHEM/i` refers to gaining electrons.
 
 ```{note}
 A handy mnemonic for remembering the above is OIL RIG.
 
 * OIL: Oxidation Is Loss
-* RIG: Reduction Is Gain
+* RIG: Reduction_CHEM Is Gain
 
 Another version is LEO GER.
 
 * LEO: Loss of Electrons is Oxidation
-* GER: Gain of Electrons is Reduction
+* GER: Gain of Electrons is Reduction_CHEM
 ```
 
-For example, the chemical for `{kt} CH_4 + 2O_2 \rightarrow CO_2 + 2H_2O` would have the following oxidation numbers...
+`{bm-ignore} (reduction|reduced|reduce)_NORM/i`
+`{bm-ambiguous} Add the suffix _CHEM or _NORM/(reduction|reduced|reduce)/i`
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+For example, `{kt} CH_4 + 2O_2 \rightarrow CO_2 + 2H_2O`...
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+Add oxidation numbers: `{kt} C^{-4}H^{+1}_4 + 2O^0_2 \rightarrow C^{+4}O^{-2}_2 + 2H^{+1}_2O^{-2}`.
+ * `{kt} C^{-4} - 8e \rightarrow C^{+4}` (8 electrons lost for carbon)
+ * `{kt} H^{+1} \rightarrow H^{+1}` (no electron change for hydrogen)
+ * `{kt} 4O^{0} + 8e \rightarrow 4O^{+2}` (8 electrons gained for oxygen)
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+We can say that...
+ * carbon was oxidized by oxygen.
+ * oxygen was reduced_CHEM by carbon.
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+For example, `{kt} 2H_2 + O_2 \rightarrow 2H_2O`...
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+Add oxidation numbers `{kt} H^0_2 + O^0_2 \rightarrow 2H^{+1}_2O^{-2}`.
+ * `{kt} 4H^0 - 4e \rightarrow 4H^{+1}` (4 electrons lost for hydrogen)
+ * `{kt} 2O^0 + 4e \rightarrow 2O^{+2}` (4 electrons gained for oxygen)
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+We can say that...
+ * hydrogen was oxidized by oxygen.
+ * oxygen was reduced_CHEM by hydrogen.
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+For example, `{kt} C_{14}H_{28}O_2 \rightarrow 14C + 14H_{2} + O_2`...
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+Add oxidation numbers `{kt} H^{+1}_{28} C^{+3}  C^{-2}_{12}  C^{-3}  2O^{-2}_2 \rightarrow 14C^0 + 2H^0_{14} + O^0_2`.
+ * `{kt} 28H^{+1} + 28e \rightarrow 28H^0` (28 electrons gained for hydrogen)
+ * `{kt} C^{+3} + 3e \rightarrow C^0` (3 electrons gained for 1 carbon)
+ * `{kt} C^{-3} - 3e \rightarrow C^0` (3 electrons lost for 1 carbon)
+ * `{kt} 12C^{-2} - 24e \rightarrow 12C^0` (24 electrons lost for 12 carbons)
+ * `{kt} 2O^{-2} - 4e \rightarrow 2O^0` (4 electrons lost for oxygen)
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
+We can say that hydrogen was reduced_CHEM and oxygen was oxidized, but it's unclear where the electrons are being redistributed to.
 
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
-TODO: CONTINUE SHOWING HOW THE KA VIDEO EXAMPLE WORKS
-
+```{note}
+The reaction in this last example isn't a real reaction -- it was made up to illustrate something more complex. To see how the oxidation numbers for the input molecule (`{kt} C_{14}H_{28}O_2`) are derived, see the example in the oxidation number section.
+```
 
 ### Oxidation Number
 
@@ -1575,13 +1570,17 @@ Recall that `{bm} electronegativity` is a constant that defines how likely an el
 
 If there were an electron sitting between a carbon ion and a hydrogen ion, that electron is more likely to gravitate towards the carbon because carbon is more electronegative than hydrogen.
 
-The `{bm} oxidation number \/ oxidation state/(oxidation number|oxidation state)/i` of an atom is the charge it would have if both it and the neighbours its bonded to were thirsty for electrons. Atoms that are more electronegative than their neighours will end up taking their neighbour's electrons. For example, imagine the molecular compound `{kt} CH_4`...
+The `{bm} oxidation number \/ oxidation state/(oxidation number|oxidation state)/i` of an atom is the charge it would have if both it and the neighbours its bonded to were thirsty for electrons. For each bond that an atom has, if the neighbour is ...
+ * more electronegative, the electrons making up the bond gets assigned to its neighbour.
+ * less electronegative, the electrons making up the bond gets assigned to itself.
+ 
+For example, imagine the molecular compound `{kt} CH_4`...
 
 ```{chemfig}
 \chemfig[]{C(-[0]H)(-[2]H)(-[4]H)(-[6]H)}
 ```
 
-Since carbon is more electronegative than hydrogen (2.55 vs 2.20), electrons will move from the hydrogens to the carbon...
+Since carbon is more electronegative than hydrogen (2.55 vs 2.20), the shared single electron that makes up each bond gets assigned to the carbon...
 
 ```{chemfig}
 \chemfig[]{{C^{-4}}(-[0]{H^{+1}})(-[2]{H^{+1}})(-[4]{H^{+1}})(-[6]{H^{+1}})}
@@ -1608,25 +1607,20 @@ I have no idea if the algorithm below is correct. I pieced it together in my hea
 ```
 
 To determine the oxidation number of every atom in a species, the structure of the species needs to be known before hand. The high-level algorithm is as follows:
-1. Break bonds where the both ends are the same element (e.g. remove the bond if both sides of a bond are H)
-1. Iterate over atoms from least to most electronegative.
-   1. Atom being iterated over gives up electrons to the bond with the highest electronegativity. The number of electrons given depends on the bond (single bond = 1, double bond = 2, etc...).
 
-If the electronegativity of the atoms in a bond are equal, the electrons wouldn't move. As such, the oxidation number of each atom in the bond would be 0. For example, in the bond `{kt} H_2` each hydrogen would have a oxidation number of 0...
-
-```{chemfig}
-\chemfig[]{{H^0}(-[0]{H^0})}
-```
-
-If the atom isn't in a bond, it would have no neighbours to swap electrons with. As such, the oxidation number of the atom would be 0. For example, an `{kt} H` by itself would have an oxidation number of 0.
+1. Break bonds where the both ends are the same element. The electronegativity of both atoms will be the same, so neither side really "owns" the shared electrons
+1. For each atom from least to most electronegative...
+   1. If the atom has no bonds, its oxidation number is 0.
+   1. If the atom does have bonds, for each bond on the atom...
+      1. If neighbour is more electronegative, hand over the electron(s) making up that bond to it. The number of electrons given depends on the bond (single bond = 1, double bond = 2) -- you lose that number of electrons and your neighbour gains that number of electrons. 
 
 For example, `{kt} C_{14}H_{28}O_2` (myristic acid) has the the structure...
 
 ```{chemfig}
 \chemfig[]{
   H(-[0]O
-    (-[0]C
-      (-[0]C(=[2]O)
+    (-[0]C(=[2]O)
+      (-[0]C(-[2]H)(-[6]H)
         (-[0]C(-[2]H)(-[6]H)
           (-[0]C(-[2]H)(-[6]H)
             (-[0]C(-[2]H)(-[6]H)
@@ -1638,11 +1632,7 @@ For example, `{kt} C_{14}H_{28}O_2` (myristic acid) has the the structure...
                         (-[0]C(-[2]H)(-[6]H)
                           (-[0]C(-[2]H)(-[6]H)
                             (-[0]C(-[2]H)(-[6]H)
-                              (-[0]C(-[2]H)(-[6]H)
-                                (-[0]C(-[2]H)(-[6]H)
-                                  (-[0]C(-[2]H)(-[6]H)(-[0]H))
-                                )
-                              )
+                              (-[0]C(-[2]H)(-[6]H)(-[0]H))
                             )
                           )
                         )
@@ -1670,8 +1660,8 @@ Break bonds where both ends are the same element...
 ```{chemfig}
 \chemfig[]{
   H(-[0]O
-    (-[0]C
-      (-[,,,,draw=none]C(=[2]O)
+    (-C(=[2]O)
+      (-[,,,,draw=none]C(-[2]H)(-[6]H)
         (-[,,,,draw=none]C(-[2]H)(-[6]H)
           (-[,,,,draw=none]C(-[2]H)(-[6]H)
             (-[,,,,draw=none]C(-[2]H)(-[6]H)
@@ -1683,11 +1673,7 @@ Break bonds where both ends are the same element...
                         (-[,,,,draw=none]C(-[2]H)(-[6]H)
                           (-[,,,,draw=none]C(-[2]H)(-[6]H)
                             (-[,,,,draw=none]C(-[2]H)(-[6]H)
-                              (-[,,,,draw=none]C(-[2]H)(-[6]H)
-                                (-[,,,,draw=none]C(-[2]H)(-[6]H)
-                                  (-[,,,,draw=none]C(-[2]H)(-[6]H)(-[0]H))
-                                )
-                              )
+                              (-[,,,,draw=none]C(-[2]H)(-[6]H)(-[0]H))
                             )
                           )
                         )
@@ -1705,13 +1691,13 @@ Break bonds where both ends are the same element...
 }
 ```
 
-Since hydrogen is the least electronegative, pass its electrons to the neighbour that's most electronegative...
+The least electronegative is hydrogen. For every bond that has a hydrogen on one end and a more electronegative element on the other end, pass the electron(s) for that bond to the more electronegative neighbour.
 
 ```{chemfig}
 \chemfig[]{
   {H^{+1}}(-[0]{O^{-1}}
-    (-[0]C
-      (-[,,,,draw=none]C(=[2]O)
+    (-C(=[2]O)
+      (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
         (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
           (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
             (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
@@ -1723,11 +1709,7 @@ Since hydrogen is the least electronegative, pass its electrons to the neighbour
                         (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
                           (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
                             (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
-                              (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
-                                (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
-                                  (-[,,,,draw=none]{C^{-3}}(-[2]{H^{+1}})(-[6]{H^{+1}})(-[0]{H^{+1}}))
-                                )
-                              )
+                              (-[,,,,draw=none]{C^{-3}}(-[2]{H^{+1}})(-[6]{H^{+1}})(-[0]{H^{+1}}))
                             )
                           )
                         )
@@ -1749,13 +1731,13 @@ Since hydrogen is the least electronegative, pass its electrons to the neighbour
 H
 ```
 
-The 2nd least electronegative is carbon, pass its electrons to the neighbour that's most electronegative...
+The 2nd least electronegative is carbon. For every bond that has a carbon on one end and a more electronegative element on the other end, pass the electron(s) for that bond to the more electronegative neighbour.
 
 ```{chemfig}
 \chemfig[]{
   {H^{+1}}(-[0]{O^{-2}}
-    (-[0]{C^{+1}}
-      (-[,,,,draw=none]{C^{+2}}(=[2]{O^{-2}})
+    (-{C^{+3}}(=[2]{O^{-2}})
+      (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
         (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
           (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
             (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
@@ -1767,11 +1749,7 @@ The 2nd least electronegative is carbon, pass its electrons to the neighbour tha
                         (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
                           (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
                             (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
-                              (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
-                                (-[,,,,draw=none]{C^{-2}}(-[2]{H^{+1}})(-[6]{H^{+1}})
-                                  (-[,,,,draw=none]{C^{-3}}(-[2]{H^{+1}})(-[6]{H^{+1}})(-[0]{H^{+1}}))
-                                )
-                              )
+                              (-[,,,,draw=none]{C^{-3}}(-[2]{H^{+1}})(-[6]{H^{+1}})(-[0]{H^{+1}}))
                             )
                           )
                         )
@@ -1790,75 +1768,122 @@ The 2nd least electronegative is carbon, pass its electrons to the neighbour tha
 ```
 
 ```{note}
-Note that double bond between C to O -- because it's a double bond, 2 electrons are given up.
+Note that double bond between C to O -- because it's a double bond, 2 electrons are passed up.
 ```
 
 ```{ceelementinfo}
 C
 ```
 
-The 3rd least electronegative is oxygen, but there are no remaining bonds so the process ends. For `{kt} C_{14}H_{28}O_2` (myristic acid), the oxidation number of ...
-* oxygen is {-6, -7}
-* carbon is {+6, -2, -3}
+The 3rd least electronegative is oxygen. There are no remaining bonds so the process ends. For `{kt} C_{14}H_{28}O_2` (myristic acid), the oxidation number of ...
+* oxygen is {-2}
+* carbon is {+3, -2, -3}
 * hydrogen is +1
 
-As a chemical formula, it could be written as `{kt} {(H^{+1} O^{-2} C^{+1})}_1  {(C^{+2} O^{-2})}_1  {(H^{+1}_2 C^{-2})}_{13}  {(H^{+1}_3C^{-3})}_1` -- the oxidation states are put in as superscript on each element just as if they were a charge.
+As a chemical formula, it could be written as `{kt} {(H^{+1} 2O^{-2} C^{+3})}_1  {(H^{+1}_2 C^{-2})}_{12}  {(H^{+1}_3C^{-3})}_1` -- the oxidation states are put in as superscript on each element just as if they were a charge.
 
 ```{note}
 The above chemical formula is written in a way to respect the structure in the final diagram. It can be condensed/simplified further...
 
-`{kt} H^{+1}_{30}  C^{+1}  C^{+2}  C^{-2}_{13}  C^{-3}  O^{-2}_2`
+`{kt} H^{+1}_{28} C^{+3}  C^{-2}_{12}  C^{-3}  2O^{-2}_2`
 ```
 
 A quick test to see if the oxidation numbers for a species is correct is to add them up. When added, it should equal the charge of the species. In the example above (myristic acid), the molecule was neutral (0 charge) -- when the oxidation numbers get added it also equals no charge:
 
-`{kt} (1 + -2 + 1) + (2  + -2) + (1 + -2 + 1)*13 + (1 + 1 + 1 + -3) = 0`
+`{kt} (1 + -2 + 3 + -2) + (1 + -2 + 1)*12 + (1 + 1 + 1 + -3) = 0`
 
 #### Heuristic Algorithm
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+The following psuedocode was derived from the ruleset provided by [OpenStax Analytical Chemistry book](https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State). It won't work in every case and it isn't guaranteed to be correct when it does work.
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+```typescript
+// Implementation of the OpenStax oxidation state ruleset found at
+//   https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+//
+// Rules for Assigning Oxidation States
+// The oxidation state (OS) of an element corresponds to the number of electrons, e-, that an atom loses, gains, or appears to use when joining with other atoms in compounds. In determining the oxidation state of an atom, there are seven guidelines to follow:
+//     1. The oxidation state of an individual atom is 0.
+//     2. The total oxidation state of all atoms in: a neutral species is 0 and in an ion is equal to the ion charge.
+//     3. Group 1 metals have an oxidation state of +1 and Group 2 an oxidation state of +2
+//     4. The oxidation state of fluorine is -1 in compounds
+//     5. Hydrogen generally has an oxidation state of +1 in compounds
+//     6. Oxygen generally has an oxidation state of -2 in compounds
+//     7. In binary metal compounds, Group 17 elements have an oxidation state of -1, Group 16 elements of -2, and Group 15 elements of -3.
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+// SPECIAL CASE rule #1
+if (species.atoms.size == 1) {
+  return species.charge;
+}
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+// SPECIAL CASE rule #7 combined with rule #2
+if (species.atoms.distinct().size == 2
+  && species.atoms.size === 2
+  && species.atoms.filter(a => a.element.isMetal())) {
+  
+  if (species.atoms[0].isMetal()) {
+    switch (species.atoms[1].group) {
+      case 15:
+        return [species.charge - -3, -3];
+      case 16:
+        return [species.charge - -2, -2];
+      case 17:
+        return [species.charge - -1, -1];
+    }
+  }
+  
+  if (species.atoms[1].isMetal()) {
+    switch (species.atoms[0].group) {
+      case 15:
+        return [species.charge - -3, -3];
+      case 16:
+        return [species.charge - -2, -2];
+      case 17:
+        return [species.charge - -1, -1];
+    }
+  }
+}
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+// ATTEMPT TO CALCULATE
+  // function that maps rules #3, #4, #5, #6
+function calc_oxidation_state_for_individual_atom(atoms, index) {
+  if (atoms[index].element.group === 1) {
+    return 1;
+  } else if (atoms[index].element.group === 2) {
+    return 2;
+  } else if (atoms.distinct().size > 1 && atoms[index].element.name === 'Flourine') {
+    return -1;
+  } else if (atoms[index].element.name === 'Hydrogen') {
+    return 1;
+  } else if (atoms[index].element.name === 'Oxygen') {
+    return -2;
+  }
+  return null;
+}
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+let oxidation_nums = new Array(species.atoms.size);
+for ([index, atom] of species.atoms.entries()) {
+  oxidation_nums[index] = calc_oxidation_state_for_individual_atom(atoms, index);
+}
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+// SPECIAL CASE rule #2
+if (oxidation_nums.filter(n => n === null).count() === 1) {
+  const missingIdx = oxidation_nums.indexOf(null);
+  const missingValue = species.charge - oxidation_nums.filter(n => n !== null).sum();
+  oxidation_nums[missingIdx] = missingValue;
+}
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+if (oxidation_nums.filter(n => n === null).count() > 0) {
+  throw 'Unable to derive oxidation numbers for every atom in species';
+}
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+  // use rule #2 to test results
+if (oxidation_nums.sum() !== species.charge) {
+  throw 'Sum of oxidation numbers not equal to species charge';
+}
 
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
-
-IMPLEMENT RULESET IN https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Supplemental_Modules_(Analytical_Chemistry)/Electrochemistry/Redox_Chemistry/Oxidation_State
+return oxidation_nums;
+```
 
 ## pH
 
@@ -3294,7 +3319,7 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 Essentially, classical genetics is the idea that the coding / alleles for a specific set of genes (genotype) results in some change in the organism that's observable (phenotype), and the probability that an organism can end up with a specific genotype/phenotype can be calculated from the genotype of its parents. For example, a certain set of alleles (genotype) may be responsible for blue eyes (phenotype).
 
-If a single gene is responsible for contributing to multiple unrelated phenotypes, it's referred to as `{bm} pleiotropy/(pleiotropy|pleiotropic)/i`. For example, a specific gene is responsible for generating melanin. If the allele for that gene has a specific mutation in it, melanin `{bm-ri} production` stops / is drastically reduced. A lack of melanin results in albinism: a condition that effects the color of eyes, hair, and skin (3 separate phenotypes).
+If a single gene is responsible for contributing to multiple unrelated phenotypes, it's referred to as `{bm} pleiotropy/(pleiotropy|pleiotropic)/i`. For example, a specific gene is responsible for generating melanin. If the allele for that gene has a specific mutation in it, melanin `{bm-ri} production` stops / is drastically reduced_NORM. A lack of melanin results in albinism: a condition that effects the color of eyes, hair, and skin (3 separate phenotypes).
 
 If multiple genes are responsible for contribution to a single phenotype, it's referred to as `{bm} polygene/(polygenic|polygene)/i`. For example, many genes are responsible for contributing to a person's height (around 400).
 
@@ -4353,7 +4378,7 @@ Technically unsure at which layer the extracellular region begins. Is it outside
 In some cases, the genetic material being fused in sexual reproduction may be from the same parent. Answer to a question on the site... it is still sexual, because sexual reproduction means fusion of male and female gametes, doesn't matter if they're from the same plant.
 ```
 
-`{bm} Model system` - A system with a reduced set of parameters/complexity that makes it easy for a researcher to investigate a particular scientific question. For example, Gregor Mendel used pea pods to research the theory of classical genetics / inheritance (simple, grows and matures quickly, inbreeding okay)
+`{bm} Model system` - A system with a reduced_NORM set of parameters/complexity that makes it easy for a researcher to investigate a particular scientific question. For example, Gregor Mendel used pea pods to research the theory of classical genetics / inheritance (simple, grows and matures quickly, inbreeding okay)
 
 `{bm} Monatomic` - Made up of a single atom.
 
