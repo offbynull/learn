@@ -177,6 +177,46 @@ For example...
 
 ## Division
 
+```
+`{kt}
+\begin{array}{l}
+\phantom{
+  {5\smash{)}}
+}{
+  047.9
+} \\
+{5}\overline{\smash{)}239.5} \\
+\phantom{{5\smash{)}}}\underline{0} \\
+\phantom{{5\smash{)}}}23 \\
+\phantom{{5\smash{)}}}\underline{20} \\
+\phantom{{5\smash{)}}}\phantom{0}39 \\
+\phantom{{5\smash{)}}}\phantom{0}\underline{35} \\
+\phantom{{5\smash{)}}}\phantom{00}4\phantom{.}5 \\
+\phantom{{5\smash{)}}}\phantom{00}\underline{4\phantom{.}5} \\
+\phantom{{5\smash{)}}}\phantom{004.}0 \\
+\end{array}
+`
+```
+
+`{kt}
+\begin{array}{l}
+\phantom{
+  {5\smash{)}}
+}{
+  047.9
+} \\
+{5}\overline{\smash{)}239.5} \\
+\phantom{{5\smash{)}}}\underline{0} \\
+\phantom{{5\smash{)}}}23 \\
+\phantom{{5\smash{)}}}\underline{20} \\
+\phantom{{5\smash{)}}}\phantom{0}39 \\
+\phantom{{5\smash{)}}}\phantom{0}\underline{35} \\
+\phantom{{5\smash{)}}}\phantom{00}4\phantom{.}5 \\
+\phantom{{5\smash{)}}}\phantom{00}\underline{4\phantom{.}5} \\
+\phantom{{5\smash{)}}}\phantom{004.}0 \\
+\end{array}
+`
+
 # Order of Operations
 
 The `{bm} order of operations` are as follows:
@@ -2135,6 +2175,219 @@ __EXERCISE__
 
 __TRY IT__
 
+1.77)
+
+* a) eight times seven
+* b) eighteen times eleven
+
+1.78)
+
+* a) thirteen times seven
+* b) five times sixteen
+
+1.79)
+
+```
+□□□□
+□□□□
+□□□□
+□□□□
+□□□□
+□□□□
+```
+
+1.80)
+
+```
+□□□□□
+□□□□□
+□□□□□
+□□□□□
+□□□□□
+□□□□□
+□□□□□
+```
+
+1.81)
+
+* a) 0 * 11 = 0
+* b) 39 * 0 = 0
+
+1.82)
+
+* a) 0 * 24 = 0
+* b) 57 * 0 = 0
+
+1.83)
+
+* a) 19 * 1 = 19
+* b) 1 * 39 = 39
+
+1.84)
+
+* a) 24 * 1 = 24
+* b) 1 * 57 = 57
+
+1.85)
+
+* a) 9*6=54
+* b) 6*9=54
+
+1.86)
+
+* a) 8*6=48
+* b) 6*8=48
+
+1.87)
+
+```
+ 3  <-- carry over
+ 64
+  8 *
+ --
+512
+```
+
+1.88)
+
+```
+ 4  <-- carry over
+ 57
+  6 *
+ --
+342
+```
+
+1.89)
+
+```
+ 23  <-- carry over
+ 347
+   5 *
+ ---
+1705
+```
+
+1.90)
+
+```
+ 41  <-- carry over
+ 462
+   7
+ ---
+3234   
+```
+
+1.91)
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 3}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 8}&  \enspace * \\
+\hline
+       {  }&  \enspace        { 3}&  \enspace        { 2}&  \enspace        { 4}&  \\
+       { 3}&  \enspace        { 0}&  \enspace        { 1}&  \enspace        { 0}&  \enspace + \\
+\hline
+       { 3}&  \enspace        { 3}&  \enspace        { 3}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.92)
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 3}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        { 6}&  \enspace        { 4}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 9}&  \enspace * \\
+\hline
+       {  }&  \enspace        { 5}&  \enspace        { 7}&  \enspace        { 6}&  \\
+       { 3}&  \enspace        { 2}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+       { 3}&  \enspace        { 7}&  \enspace        { 7}&  \enspace        { 6}& 
+\end{alignedat}
+`
+
+1.93)
+
+* a) `{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 7}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace * \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        { 0}&  \enspace        { 0}&  \\
+       {  }&  \enspace        { 4}&  \enspace        { 7}&  \enspace        { 0}&  \\
+\hline
+       {  }&  \enspace        { 4}&  \enspace        { 7}&  \enspace        { 0}&
+\end{alignedat}
+`
+
+* b) `{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 7}&  \\
+       {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 0}&  \enspace * \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        { 0}&  \enspace        { 0}&  \\
+       {  }&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \\
+       { 4}&  \enspace        { 7}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+       { 4}&  \enspace        { 7}&  \enspace        { 0}&  \enspace        { 0}&
+\end{alignedat}
+`
+
+1.94)
+
+* a) `{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 5}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace * \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        { 0}&  \enspace        { 0}&  \\
+       {  }&  \enspace        { 7}&  \enspace        { 5}&  \enspace        { 0}&  \\
+\hline
+       {  }&  \enspace        { 7}&  \enspace        { 5}&  \enspace        { 0}&
+\end{alignedat}
+`
+
+* b) `{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 5}&  \\
+       {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 0}&  \enspace * \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        { 0}&  \enspace        { 0}&  \\
+       {  }&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \\
+       { 7}&  \enspace        { 5}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+       { 7}&  \enspace        { 5}&  \enspace        { 0}&  \enspace        { 0}&
+\end{alignedat}
+`
+
+1.95)
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 8}&  \enspace        { 3}&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 6}&  \enspace        { 5}&  \enspace * \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 4}&  \enspace        { 1}&  \enspace        { 5}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 8}&  \enspace        { 9}&  \enspace        { 8}&  \enspace        { 0}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 9}&  \enspace        { 6}&  \enspace        { 6}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+       {  }&  \enspace        { 1}&  \enspace        { 2}&  \enspace        { 7}&  \enspace        { 9}&  \enspace        { 9}&  \enspace        { 5}& 
+\end{alignedat}
+`
+
+1.96)
+
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
@@ -2151,3 +2404,30 @@ START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
+
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
+\end{alignedat}
+`
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
+\end{alignedat}
+`
