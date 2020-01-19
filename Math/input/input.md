@@ -143,6 +143,36 @@ TODO: Chapter 1.2
 
 TODO: Chapter 1.3
 
+Pay special attention to exercise problem 1.3.204 / 1.3.205 when codifying.
+
+KaTeX vertical subtraction template. Wrap digit with \cancel to strike it (e.g. `\cancel{d}`).
+
+```
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace - \\
+\hline
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
+\end{alignedat}
+`
+```
+
+For example...
+
+`{kt}
+\begin{alignedat}{4}
+       { 7}&  \enspace        {10}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace \cancel{ 0}&  \enspace        {14}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace        {13}&  \\
+\cancel{ 8}&  \enspace \cancel{ 1}&  \enspace \cancel{ 5}&  \enspace \cancel{ 3}&  \\
+       { 3}&  \enspace        { 9}&  \enspace        { 7}&  \enspace        { 8}&  \enspace - \\
+\hline
+       { 4}&  \enspace        { 1}&  \enspace        { 7}&  \enspace        { 5}& 
+\end{alignedat}
+`
+
 ## Multiplication
 
 ## Division
@@ -1320,12 +1350,17 @@ b) twenty nine minus twelve
 
 1.61) subtract and check: 86-54
 
-```
-  86
-  54 -
-  --
-  32
+`{kt}
+\begin{alignedat}{3}
+       {}&   \enspace        {}& \\
+       {8}&  \enspace        {6}&  \\
+       {5}&  \enspace        {4}&  \enspace - \\
+\hline
+       {3}&  \enspace        {2}&     
+\end{alignedat}
+`
 
+```
   54
   32 +
   --
@@ -1334,12 +1369,17 @@ b) twenty nine minus twelve
 
 1.62) subtract and check: 99-74
 
-```
-  99
-  74-
-  --
-  25
+`{kt}
+\begin{alignedat}{3}
+       {}&   \enspace        {}& \\
+       {9}&  \enspace        {9}&  \\
+       {7}&  \enspace        {4}&  \enspace - \\
+\hline
+       {2}&  \enspace        {5}&     
+\end{alignedat}
+`
 
+```
   74
   25+
   --
@@ -1348,13 +1388,17 @@ b) twenty nine minus twelve
 
 1.63) subtract and check: 93-58
 
+`{kt}
+\begin{alignedat}{3}
+       {8}&  \enspace        {13}& \\
+\cancel{9}&  \enspace \cancel{3}&  \\
+       {5}&  \enspace        {8}&  \enspace - \\
+\hline
+       {3}&  \enspace        {5}&     
+\end{alignedat}
+`
+
 ```
-  8 13  <-- carry backward
-  9̵ 3̵
-  5 8 -
-  ---
-  3 5
-  
   1  <-- carry over
   58
   35 +
@@ -1364,13 +1408,17 @@ b) twenty nine minus twelve
 
 1.64) subtract and check: 81-39
 
-```
-  7 11  <-- carry backward
-  8̵ 1
-  3 9 -
-  ---
-  4 2
+`{kt}
+\begin{alignedat}{3}
+       {7}&  \enspace        {11}& \\
+\cancel{8}&  \enspace \cancel{1}&  \\
+       {3}&  \enspace        {9}&  \enspace - \\
+\hline
+       {4}&  \enspace        {2}&     
+\end{alignedat}
+`
 
+```
   1  <-- carry over
   39
   42 +
@@ -1380,13 +1428,17 @@ b) twenty nine minus twelve
 
 1.65) subtract and check: 439-52
 
-```
-  3 13    <-- carry backward
-  4̵ 3̵ 9
-    5 2 -
-  -----
-  3 8 7
+`{kt}
+\begin{alignedat}{3}
+       {3}&  \enspace        {13}& \enspace        {}&  \\
+\cancel{4}&  \enspace \cancel{3}&  \enspace        {9}& \\
+        {}&  \enspace        {5}&  \enspace        {2}& \enspace - \\
+\hline
+       {3}&  \enspace        {8}&  \enspace        {7}&     
+\end{alignedat}
+`
 
+```
   1   <-- carry over
    52
   387 +
@@ -1394,15 +1446,19 @@ b) twenty nine minus twelve
   439
 ```
 
-1.66) 318 - 75
+1.66) subtract and check: 318 - 75
+
+`{kt}
+\begin{alignedat}{3}
+       {2}&  \enspace        {11}& \enspace        {}& \\
+\cancel{3}&  \enspace \cancel{1}&  \enspace        {8}& \\
+       {}&   \enspace        {7}&  \enspace        {5}& \enspace - \\
+\hline
+       {2}&  \enspace        {4}&  \enspace        {3}&     
+\end{alignedat}
+`
 
 ```
-  2 11  <-- carry backward
-  3̵ 1̵ 8
-    7 5 -
-  -----
-  2 4 3
-
   1   <-- carry over
   243
    75 +
@@ -1410,7 +1466,674 @@ b) twenty nine minus twelve
   318
 ```
 
-1.67)
+1.67) subtract and check: 832 - 376
+
+`{kt}
+\begin{alignedat}{3}
+       {7}&  \enspace        {12}& \enspace        {}& \\
+       {}&   \enspace \cancel{2}&  \enspace        {12}& \\
+\cancel{8}&  \enspace \cancel{3}&  \enspace \cancel{2}& \\
+       {3}&  \enspace        {7}&  \enspace        {6}& \enspace - \\
+\hline
+       {4}&  \enspace        {5}&  \enspace        {6}&     
+\end{alignedat}
+`
+
+```
+  11  <-- carry over
+  376
+  456 +
+  ---
+  832
+```
+
+1.68) subtract and check: 847 - 578
+
+`{kt}
+\begin{alignedat}{3}
+        {7}&  \enspace        {13}& \enspace        {}& \\
+        {}&  \enspace \cancel{3}&  \enspace        {17}& \\
+\cancel{8}&  \enspace \cancel{4}&  \enspace \cancel{7}& \\
+       {5}&  \enspace        {7}&  \enspace        {8}& \enspace - \\
+\hline
+       {2}&  \enspace        {6}&  \enspace        {9}&     
+\end{alignedat}
+`
+
+```
+  11  <-- carry over
+  578
+  269 +
+  ---
+  847
+```
+
+1.69) subtract and check: 4585 - 697
+
+`{kt}
+\begin{alignedat}{3}
+       {}&   \enspace        {14}& \enspace        {17}& \enspace        {}& \\
+       {3}&  \enspace \cancel{4}&  \enspace \cancel{7}&  \enspace        {15}& \\
+\cancel{4}&  \enspace \cancel{5}&  \enspace \cancel{8}&  \enspace \cancel{5}& \\
+       {}&   \enspace        {6}&  \enspace        {9}&  \enspace        {7}& \enspace - \\
+\hline
+       {3}&  \enspace        {8}&  \enspace        {8}&  \enspace        {8}&     
+\end{alignedat}
+`
+
+```
+ 111  <-- carry over
+  697
+ 3888 +
+ ----
+ 4585
+```
+
+1.70) subtract and check: 5637 - 899
+
+`{kt}
+\begin{alignedat}{3}
+       {}&   \enspace        {15}& \enspace        {12}& \enspace        {}& \\ 
+       {4}&  \enspace \cancel{5}&  \enspace \cancel{2}&  \enspace        {17}& \\
+\cancel{5}&  \enspace \cancel{6}&  \enspace \cancel{3}&  \enspace \cancel{7}& \\
+       {}&  \enspace         {8}&  \enspace        {9}&  \enspace        {9}& \enspace - \\
+\hline
+       {4}&  \enspace        {7}&  \enspace        {3}&  \enspace        {8}&     
+\end{alignedat}
+`
+
+```
+  11  <-- carry over
+ 1899
+ 4738 +
+ ----
+ 5637
+```
+
+1.71)
+
+* a) 14-9=5
+* b) 37-21=16
+
+1.72)
+
+* a) 11-6=5
+* b) 67-18=49
+
+1.73) 77-58=19
+
+1.74) 90-73=17
+
+1.75) 648-499=149
+
+1.76) 285-149=136
+
+__EXERCISE__
+
+1.3.141) fifteen minus nine
+
+1.3.142) difference of eighteen and sixteen
+
+1.3.143) subtract thirty five from forty two
+
+1.3.144) sixty four less than forty three
+
+1.3.145) six hundred seventy five minus three hundred fifty
+
+1.3.146) difference between seven hundred ninety and five hundred twenty five
+
+1.3.147) model 5 - 2
+
+```
+□□□□□ 5
+
+    ┌────┐
+□□□ │ □□ │ 5-2
+    └────┘
+```
+
+1.3.148) model 8 - 4
+
+```
+□□□□□□□□ 8
+
+     ┌──────┐
+□□□□ │ □□□□ │ 8-4
+     └──────┘
+```
+
+1.3.149) model 6 - 3
+
+```
+□□□□□□ 6
+
+    ┌─────┐
+□□□ │ □□□ │ 6-3
+    └─────┘
+```
+
+1.3.150) model 7 - 5
+
+```
+□□□□□□□ 7
+
+   ┌───────┐
+□□ │ □□□□□ │ 7-5
+   └───────┘
+```
+
+1.3.151) model 18 - 5
+
+```
+□□□□□□□□□□
+□□□□□□□□   18
+
+
+□□□□□□□□□□
+    ┌───────┐
+□□□ │ □□□□□ │ 18-5
+    └───────┘
+```
+
+1.3.152) model 19 - 8
+
+```
+□□□□□□□□□□
+□□□□□□□□□  19
+
+
+□□□□□□□□□□
+  ┌──────────┐
+□ │ □□□□□□□□ │ 19-8
+  └──────────┘
+```
+
+1.3.153) model 17 - 8
+
+```
+□□□□□□□□□□
+□□□□□□□    17
+
+
+□□□□□□□□□ ┌───┐
+ ┌────────┘ □ │
+ │ □□□□□□□ ┌──┘ 17-8
+ └─────────┘
+```
+
+1.3.154) model 17 - 9
+
+```
+□□□□□□□□□□
+□□□□□□□    17
+
+
+□□□□□□□□ ┌────┐
+ ┌───────┘ □□ │
+ │ □□□□□□□ ┌──┘ 17-9
+ └─────────┘
+```
+
+1.3.155) model 35 - 13
+
+```
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□      35
+
+
+□□□□□□□□□□
+□□□□□□□□□□
+□□ ┌──────────┐
+ ┌─┘ □□□□□□□□ │
+ │ □□□□□ ┌────┘ 35-13
+ └───────┘
+```
+
+1.3.156) model 32 - 11
+
+```
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□         32
+
+
+□□□□□□□□□□
+□□□□□□□□□□
+□ ┌───────────┐
+┌─┘ □□□□□□□□□ │
+│ □ ┌─────────┘ 32-11
+└───┘
+```
+
+1.3.157) model 61 - 47
+
+```
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□          61
+
+□□□□□□□□□□
+□□□□ ┌────────┐
+┌────┘ □□□□□□ │
+│ □□□□□□□□□□ ┌┘
+│ □□□□□□□□□□ │
+│ □□□□□□□□□□ │
+│ □□□□□□□□□□ │
+│ □ ┌────────┘ 64-47
+└───┘
+```
+
+1.3.158) model 55 - 36
+
+```
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□        55
+
+□□□□□□□□□□
+□□□□□□□□□ ┌───┐
+┌─────────┘ □ │
+│ □□□□□□□□□□ ┌┘
+│ □□□□□□□□□□ │
+│ □□□□□□□□□□ │
+│ □□□□□ ┌────┘  55 - 36
+└───────┘
+```
+
+1.3.159) 9-4=5
+
+1.3.160) 9-3=6
+
+1.3.161) 8-0=8
+
+1.3.162) 2-0=2
+
+1.3.163)
+
+`{kt}
+\begin{alignedat}{3}
+       {3}&  \enspace        {8}& \\
+       {1}&  \enspace        {6}& \enspace - \\
+\hline
+       {2}&  \enspace        {2}&     
+\end{alignedat}
+`
+
+1.3.164)
+
+`{kt}
+\begin{alignedat}{3}
+       {4}&  \enspace        {5}& \\
+       {2}&  \enspace        {1}& \enspace - \\
+\hline
+       {2}&  \enspace        {4}&     
+\end{alignedat}
+`
+
+1.3.165)
+
+`{kt}
+\begin{alignedat}{3}
+       {8}&  \enspace        {5}& \\
+       {5}&  \enspace        {2}& \enspace - \\
+\hline
+       {3}&  \enspace        {3}&     
+\end{alignedat}
+`
+
+1.3.166)
+
+`{kt}
+\begin{alignedat}{3}
+       {9}&  \enspace        {9}& \\
+       {4}&  \enspace        {7}& \enspace - \\
+\hline
+       {5}&  \enspace        {2}&     
+\end{alignedat}
+`
+
+1.3.167)
+
+`{kt}
+\begin{alignedat}{3}
+       {4}&  \enspace        {9}&  \enspace        {3}& \\
+       {3}&  \enspace        {7}&  \enspace        {0}& \enspace - \\
+\hline
+       {1}&  \enspace        {2}&  \enspace        {3}&     
+\end{alignedat}
+`
+
+1.3.168)
+
+`{kt}
+\begin{alignedat}{3}
+       {2}&  \enspace        {6}&  \enspace        {8}& \\
+       {1}&  \enspace        {0}&  \enspace        {6}& \enspace - \\
+\hline
+       {1}&  \enspace        {6}&  \enspace        {2}&     
+\end{alignedat}
+`
+
+1.3.169)
+
+`{kt}
+\begin{alignedat}{4}
+       { 5}&  \enspace        { 9}&  \enspace        { 4}&  \enspace        { 6}&  \\
+       { 4}&  \enspace        { 6}&  \enspace        { 2}&  \enspace        { 5}&  \enspace - \\
+\hline
+       { 1}&  \enspace        { 3}&  \enspace        { 2}&  \enspace        { 1}& 
+\end{alignedat}
+`
+
+1.3.170)
+
+`{kt}
+\begin{alignedat}{4}
+       { 7}&  \enspace        { 7}&  \enspace        { 7}&  \enspace        { 5}&  \\
+       { 3}&  \enspace        { 2}&  \enspace        { 5}&  \enspace        { 1}&  \enspace - \\
+\hline
+       { 4}&  \enspace        { 5}&  \enspace        { 2}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.3.171)
+
+`{kt}
+\begin{alignedat}{3}
+       {6}&  \enspace       {15}& \\
+\cancel{7}&  \enspace \cancel{5}& \\
+       {4}&  \enspace        {7}& \enspace - \\
+\hline
+       {2}&  \enspace        {8}&     
+\end{alignedat}
+`
+
+1.3.172)
+
+`{kt}
+\begin{alignedat}{3}
+       {5}&  \enspace        {13}& \\
+\cancel{6}&  \enspace \cancel{3}& \\
+       {5}&  \enspace        {9}& \enspace - \\
+\hline
+       {0}&  \enspace        {4}&     
+\end{alignedat}
+`
+
+1.3.173)
+
+`{kt}
+\begin{alignedat}{3}
+       {}&   \enspace        {5}&  \enspace        {11}& \\
+       {4}&  \enspace \cancel{6}&  \enspace \cancel{1}& \\
+       {2}&  \enspace        {3}&  \enspace        {9}& \enspace - \\
+\hline
+       {2}&  \enspace        {2}&  \enspace        {2}&     
+\end{alignedat}
+`
+
+1.3.174)
+
+`{kt}
+\begin{alignedat}{3}
+       {}&   \enspace        {7}&  \enspace        {16}& \\
+       {4}&  \enspace \cancel{8}&  \enspace \cancel{6}& \\
+       {2}&  \enspace        {5}&  \enspace        {7}& \enspace - \\
+\hline
+       {2}&  \enspace        {2}&  \enspace        {9}&     
+\end{alignedat}
+`
+
+1.3.175)
+
+`{kt}
+\begin{alignedat}{3}
+       {4}&  \enspace        {11}& \enspace        {}& \\
+       { }&  \enspace \cancel{1}&  \enspace        {15}& \\
+\cancel{5}&  \enspace \cancel{2}&  \enspace \cancel{5}& \\
+       {1}&  \enspace        {7}&  \enspace        {9}& \enspace - \\
+\hline
+       {3}&  \enspace        {3}&  \enspace        {6}&     
+\end{alignedat}
+`
+
+1.3.176)
+
+`{kt}
+\begin{alignedat}{3}
+       {4}&  \enspace        {13}& \enspace        {}& \\
+       { }&  \enspace \cancel{3}&  \enspace        {12}& \\
+\cancel{5}&  \enspace \cancel{4}&  \enspace \cancel{2}& \\
+       {2}&  \enspace        {8}&  \enspace        {8}& \enspace - \\
+\hline
+       {2}&  \enspace        {5}&  \enspace        {4}&     
+\end{alignedat}
+`
+
+1.3.177)
+
+`{kt}
+\begin{alignedat}{4}
+       { 5}&  \enspace        {12}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace \cancel{ 2}&  \enspace        {10}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 0}&  \enspace        {18}&  \\
+\cancel{ 6}&  \enspace \cancel{ 3}&  \enspace \cancel{ 1}&  \enspace \cancel{ 8}&  \\
+       { 2}&  \enspace        { 7}&  \enspace        { 9}&  \enspace        { 9}&  \enspace - \\
+\hline
+       { 3}&  \enspace        { 5}&  \enspace        { 1}&  \enspace        { 9}& 
+\end{alignedat}
+`
+
+1.3.178)
+
+`{kt}
+\begin{alignedat}{4}
+       { 7}&  \enspace        {10}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace \cancel{ 0}&  \enspace        {14}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace        {13}&  \\
+\cancel{ 8}&  \enspace \cancel{ 1}&  \enspace \cancel{ 5}&  \enspace \cancel{ 3}&  \\
+       { 3}&  \enspace        { 9}&  \enspace        { 7}&  \enspace        { 8}&  \enspace - \\
+\hline
+       { 4}&  \enspace        { 1}&  \enspace        { 7}&  \enspace        { 5}& 
+\end{alignedat}
+`
+
+1.3.179)
+
+`{kt}
+\begin{alignedat}{4}
+       { 1}&  \enspace        {10}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace \cancel{ 0}&  \enspace        {14}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace        {10}&  \\
+\cancel{ 2}&  \enspace \cancel{ 1}&  \enspace \cancel{ 5}&  \enspace \cancel{ 0}&  \\
+       {  }&  \enspace        { 9}&  \enspace        { 6}&  \enspace        { 4}&  \enspace - \\
+\hline
+       { 1}&  \enspace        { 1}&  \enspace        { 8}&  \enspace        { 6}& 
+\end{alignedat}
+`
+
+1.3.180)
+
+`{kt}
+\begin{alignedat}{4}
+       { 3}&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {11}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace \cancel{ 1}&  \enspace        {13}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 3}&  \enspace        {15}&  \\
+\cancel{ 4}&  \enspace \cancel{ 2}&  \enspace \cancel{ 4}&  \enspace \cancel{ 5}&  \\
+       {  }&  \enspace        { 8}&  \enspace        { 9}&  \enspace        { 9}&  \enspace - \\
+\hline
+       { 3}&  \enspace        { 3}&  \enspace        {  }&  \enspace        { 6}& 
+\end{alignedat}
+`
+
+1.3.181)
+
+`{kt}
+\begin{alignedat}{5}
+       { 3}&  \enspace        {12}&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace \cancel{ 2}&  \enspace        {15}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 5}&  \enspace        {14}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace        {10}&  \\
+\cancel{ 4}&  \enspace \cancel{ 3}&  \enspace \cancel{ 6}&  \enspace \cancel{ 5}&  \enspace \cancel{ 0}&  \\
+       {  }&  \enspace        { 8}&  \enspace        { 9}&  \enspace        { 8}&  \enspace        { 2}&  \enspace - \\
+\hline
+       { 3}&  \enspace        { 4}&  \enspace        { 6}&  \enspace        { 6}&  \enspace        { 8}&
+\end{alignedat}
+`
+
+1.3.182)
+
+`{kt}
+\begin{alignedat}{5}
+       { 2}&  \enspace        {14}&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace \cancel{ 4}&  \enspace        {10}&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 0}&  \enspace        {15}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 5}&  \enspace        {12}&  \\
+\cancel{ 3}&  \enspace \cancel{ 5}&  \enspace \cancel{ 1}&  \enspace \cancel{ 6}&  \enspace \cancel{ 2}&  \\
+       {  }&  \enspace        { 7}&  \enspace        { 8}&  \enspace        { 8}&  \enspace        { 5}&  \enspace - \\
+\hline
+       { 2}&  \enspace        { 7}&  \enspace        { 2}&  \enspace        { 7}&  \enspace        { 7}&
+\end{alignedat}
+`
+
+1.3.183) 10-3 = 7
+
+1.3.184) 12 - 8 = 4
+
+1.3.185) 15 - 4 = 11
+
+1.3.186) 18 - 7 = 11
+
+1.3.187) 9 - 6 = 4
+
+1.3.188) 9 - 8 = 1
+
+1.3.189) 75 - 28 = 47
+
+1.3.190) 81 - 59 = 22
+
+1.3.191) 45-20=25
+
+1.3.192) 37-24=13
+
+1.3.193) 92-67=25
+
+1.3.194) 75-49=26
+
+1.3.195) 16-12=4
+
+1.3.196) 19-15=4
+
+1.3.197) 61-38=23
+
+1.3.198) 62-47=15
+
+1.3.199) 76-47=29
+
+1.3.200) 91-53=38
+
+1.3.201) 256-184=72
+
+1.3.202) 305-262=43
+
+1.3.203)
+
+```
+  1  <-- carry over
+ 719
+ 341+
+ ---
+1060
+```
+
+1.3.204)
+
+```
+  1  <-- carry over
+ 647
+ 528+
+ ---
+1175
+```
+
+1.3.205)
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        { 9}&  \enspace        {  }&  \enspace        {  }&  \\
+       { 1}&  \enspace \cancel{10}&  \enspace        {11}&  \enspace        {  }&  \\
+\cancel{ 2}&  \enspace \cancel{ 0}&  \enspace \cancel{ 1}&  \enspace        { 5}&  \\
+       { 1}&  \enspace        { 9}&  \enspace        { 9}&  \enspace        { 3}&  \enspace - \\
+\hline
+       { 0}&  \enspace        { 0}&  \enspace        { 2}&  \enspace        { 2}& 
+\end{alignedat}
+`
+
+1.3.206)
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+       {  }&  \enspace        { 9}&  \enspace        {  }&  \enspace        {  }&  \\
+       { 1}&  \enspace \cancel{10}&  \enspace        {11}&  \enspace        {  }&  \\
+       {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace        {10}&  \\
+\cancel{ 2}&  \enspace \cancel{ 0}&  \enspace \cancel{ 2}&  \enspace \cancel{ 0}&  \\
+       { 1}&  \enspace        { 9}&  \enspace        { 8}&  \enspace        { 4}&  \enspace - \\
+\hline
+       { 0}&  \enspace        { 0}&  \enspace        { 3}&  \enspace        { 6}& 
+\end{alignedat}
+`
+
+1.3.207) 35+75=110
+
+1.3.208) 33+60=93
+
+1.3.209) 41-13=28
+
+1.3.210) 36-28=8
+
+1.3.211) 100-76=24
+
+1.3.212) 1000-945=55
+
+1.3.213) 80-63=17
+
+1.3.214) 97-73=24
+
+1.3.215) 35-22=13
+
+1.3.216) 82-46=36
+
+1.3.217) 650-399=251
+
+1.3.218) 1600-755=845
+
+1.3.219) 840-685=155
+
+1.3.220) 1125-892=233
+
+1.3.221) 115+230=345 502-345=157
+
+1.3.222) 75+50+70+80=275 350-275=75
+
+1.3.223) one is the opposite of the other
+
+1.3.224) verification
+
+## Chapter 1 Section 1.4
+
+__TRY IT__
 
 START BACK UP HERE
 START BACK UP HERE
