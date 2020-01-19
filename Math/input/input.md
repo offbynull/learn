@@ -141,6 +141,8 @@ TODO: Chapter 1.2
 
 ## Subtraction
 
+TODO: Chapter 1.3
+
 ## Multiplication
 
 ## Division
@@ -1217,3 +1219,212 @@ b) 5+7=12
 1.1.139) Very confident
 
 1.1.140) Will codify model as software and embed into notes.
+
+## Chapter 1 Section 1.3
+
+__TRY IT__
+
+1.51)
+
+a) twelve minus four
+b) twenty nine minus eleven
+
+1.52)
+
+a) eleven minus two
+b) twenty nine minus twelve
+
+1.53) model 9 - 6
+
+```
+□□□□□□□□□ 9
+
+    ┌────────┐
+□□□ │ □□□□□□ │   remove 6 from 9
+ 3  └────────┘
+        6
+```
+
+1.54) model 6 - 1
+
+```
+□□□□□□ 6
+
+      ┌───┐
+□□□□□ │ □ │ remove 1 from 6
+  5   └───┘
+        1
+```
+
+1.55) model 12 - 7
+
+```
+□□□□□□□□□□□□ 12
+
+      ┌─────────┐
+□□□□□ │ □□□□□□□ │ remove 7 from 12
+  5   └─────────┘
+           7
+```
+
+1.56) model 14 - 8
+
+```
+□□□□□□□□□□□□□□ 14
+
+       ┌──────────┐
+□□□□□□ │ □□□□□□□□ │ remove 8 from 14
+   6   └──────────┘
+           8
+```
+
+1.57) model 42 - 27
+
+```
+□□□□□□□□□□ 42
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□
+
+□□□□□□□□□□ 15
+□□□□□ ┌───────┐
+ ┌────┘ □□□□□ │
+ │ □□□□□□□□□□ │ 27
+ │ □□□□□□□□□□ │
+ │ □□ ┌───────┘
+ └────┘
+```
+
+1.58) model 45 - 29
+
+```
+□□□□□□□□□□ 45
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□□□□□□
+□□□□□
+
+□□□□□□□□□□ 16
+□□□□□□ ┌──────┐
+ ┌─────┘ □□□□ │
+ │ □□□□□□□□□□ │ 29
+ │ □□□□□□□□□□ │
+ │ □□□□□ ┌────┘
+ └───────┘
+```
+
+1.59) 7-0=7, 7+0=7
+
+1.60) 6-2=4, 4+2=6
+
+1.61) subtract and check: 86-54
+
+```
+  86
+  54 -
+  --
+  32
+
+  54
+  32 +
+  --
+  86
+```
+
+1.62) subtract and check: 99-74
+
+```
+  99
+  74-
+  --
+  25
+
+  74
+  25+
+  --
+  99
+```
+
+1.63) subtract and check: 93-58
+
+```
+  8 13  <-- carry backward
+  9̵ 3̵
+  5 8 -
+  ---
+  3 5
+  
+  1  <-- carry over
+  58
+  35 +
+  --
+  93
+```
+
+1.64) subtract and check: 81-39
+
+```
+  7 11  <-- carry backward
+  8̵ 1
+  3 9 -
+  ---
+  4 2
+
+  1  <-- carry over
+  39
+  42 +
+  --
+  81
+```
+
+1.65) subtract and check: 439-52
+
+```
+  3 13    <-- carry backward
+  4̵ 3̵ 9
+    5 2 -
+  -----
+  3 8 7
+
+  1   <-- carry over
+   52
+  387 +
+  ---
+  439
+```
+
+1.66) 318 - 75
+
+```
+  2 11  <-- carry backward
+  3̵ 1̵ 8
+    7 5 -
+  -----
+  2 4 3
+
+  1   <-- carry over
+  243
+   75 +
+  ---
+  318
+```
+
+1.67)
+
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
+
+START BACK UP HERE
+START BACK UP HERE
+START BACK UP HERE
