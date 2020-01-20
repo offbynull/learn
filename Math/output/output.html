@@ -25,212 +25,151 @@
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Place Value System</h1>
-<p>Modern number systems like the ones used today are called <a name="BOOKMARK0"></a><strong>place value system</strong>s. The idea is that a number is represented as a string of symbols, where...</p>
+<p>The <a name="BOOKMARK0"></a><strong>place value system</strong> is the modern way numbers are presented. A number is represented as a string of symbols separated by a dot, where each index along with the symbol at that index represents a value. Everything to the...</p>
 <ul>
-<li>each symbol represents a value.</li>
-<li>each index represents a value.</li>
+<li>left of the dot represents whole values.</li>
+<li>right of the dot represents a partial value (less than a whole).</li>
 </ul>
-<p>These symbol values and index values are combined using an algorithm to come up with the overall value of the string:</p>
-<pre><code>for (symbol_value, index_value) in input
-    for item in symbol_value
-        final_value = concat(final_value, index_value)
+<p>All values from the string are combined to represent the final value for the number. For example, the number 43.5 represents the value...</p>
+<pre><code>●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●● ●●●   ◑
+    4       3  . 5
 </code></pre>
-<p>For example, imagine a toy <a href="#BOOKMARK0">place value system</a> that uses the following 4 symbols: ABCD. To calculate the value for string <code>DCADB</code>, begin by first determining the value for each symbol (<code>symbol_value</code>)...</p>
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td></td>
-</tr>
-<tr>
-<td>B</td>
-<td>□</td>
-</tr>
-<tr>
-<td>C</td>
-<td>□□</td>
-</tr>
-<tr>
-<td>D</td>
-<td>□□□</td>
-</tr>
-</tbody>
-</table>
-<div style="margin: 2em; background-color: #e0e0e0">
-<strong>
-⚠️NOTE️️️⚠️</strong>
-<p>The value increments for each symbol.</p>
-</div>
-<p>Then, calculate the value for each index (<code>index_value</code>) ...</p>
-<pre><code>_ _ _ _ _
-| | | | |
-| | | |  - □
-| | |  --- □□
-| |  ----- □□□
-|  ------- □□□□
- --------- □□□□□
-</code></pre>
-<div style="margin: 2em; background-color: #e0e0e0">
-<strong>
-⚠️NOTE️️️⚠️</strong>
-<p>The value increments as the index goes from right-to-left.</p>
-</div>
-<p>Now that the <code>symbol_value</code>s and <code>index_value</code>s are known, the algorithm can be run on the string. For each <code>(symbol_value, index_value)</code> in the string <code>DCADB</code>...</p>
-<ul>
-<li>
-<p><code>D _ _ _ _</code> (<code>symbol_value = □□□</code> / <code>index_value = □□□□□</code>)</p>
-<pre><code>for item in symbol_value
-    final_value = concat(final_value, index_value)
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>symbol_value</th>
-<th>index_value</th>
-<th>item</th>
-<th>final_value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>□□□</td>
-<td>□□□□□</td>
-<td>□</td>
-<td>□□□□□</td>
-</tr>
-<tr>
-<td>□□□</td>
-<td>□□□□□</td>
-<td>□</td>
-<td>□□□□□ □□□□□</td>
-</tr>
-<tr>
-<td>□□□</td>
-<td>□□□□□</td>
-<td>□</td>
-<td>□□□□□ □□□□□ □□□□□</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p><code>_ C _ _ _</code> (<code>symbol_value = □□</code> / <code>index_value = □□□□</code>)</p>
-<pre><code>for item in symbol_value
-    final_value = concat(final_value, index_value)
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>symbol_value</th>
-<th>index_value</th>
-<th>item</th>
-<th>final_value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>□□</td>
-<td>□□□□</td>
-<td>□</td>
-<td>□□□□</td>
-</tr>
-<tr>
-<td>□□</td>
-<td>□□□□</td>
-<td>□</td>
-<td>□□□□ □□□□</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p><code>_ _ A _ _</code> (<code>symbol_value = </code> / <code>index_value = □□□</code>)</p>
-<pre><code>for item in symbol_value
-    final_value = concat(final_value, index_value)
-</code></pre>
-<pre><code>no-op
-</code></pre>
-<p>Symbol-position value = {empty}.</p>
-</li>
-<li>
-<p><code>_ _ _ D _</code> (<code>symbol value = □□□</code> / <code>index_value = □□</code>)</p>
-<pre><code>for item in symbol_value
-    final_value = concat(final_value, index_value)
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>symbol_value</th>
-<th>index_value</th>
-<th>item</th>
-<th>final_value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>□□□</td>
-<td>□□</td>
-<td>□</td>
-<td>□□</td>
-</tr>
-<tr>
-<td>□□□</td>
-<td>□□</td>
-<td>□</td>
-<td>□□ □□</td>
-</tr>
-<tr>
-<td>□□□</td>
-<td>□□</td>
-<td>□</td>
-<td>□□ □□ □□</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p><code>_ _ _ _ B</code> (<code>symbol value = □</code> / <code>index_value = □</code>)</p>
-<pre><code>for item in symbol_value
-    final_value = concat(final_value, index_value)
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>symbol_value</th>
-<th>index_value</th>
-<th>item</th>
-<th>final_value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>□</td>
-<td>□</td>
-<td>□</td>
-<td>□</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
-<p>The value for the string is...</p>
-<pre><code>D C A D B
-| | | | |
-| | | |  - □
-| | |  --- □□ □□ □□
-| |  ----- 
-|  ------- □□□□ □□□□
- --------- □□□□□ □□□□□ □□□□□
+<p>The grammar for the <a href="#BOOKMARK0">place value system</a> is...</p>
+<pre><code class="language-antlr">number: sign? whole (DOT partial)?;
+sign: POSITIVE | NEGATIVE;
+whole: SYMBOL+;
+partial: SYMBOL+;
 
-DCADB = □□□□□ □□□□□ □□□□□ □□□□ □□□□ □□ □□ □□ □
+POSITIVE: '+';
+NEGATIVE: '-';
+DOT: '.';
+SYMBOL: [0123456789];
+</code></pre>
+<p>The entry point to the grammar is the number rule.</p>
+<p><strong>whole rule</strong></p>
+<pre><code>number: sign? whole ('.' partial)?;
+               │
+               └── sign: whole: SYMBOL+;
+</code></pre>
+<p>The whole rule is used to indicate how many whole values there are. For example, to process the string 572 for the whole rule, ...</p>
+<ol>
+<li>
+<p>begin by first determining the value each symbol represents...</p>
+<pre><code>0 = &lt;empty&gt;
+1 = ●
+2 = ●●
+3 = ●●●
+4 = ●●●●
+5 = ●●●●●
+6 = ●●●●●●
+7 = ●●●●●●●
+8 = ●●●●●●●●
+9 = ●●●●●●●●●
+</code></pre>
+</li>
+<li>
+<p>Then, calculate the value for each index of the string 572. The algorithm for determining the value of each index is...</p>
+<pre><code>index_values = []
+for (item in index) {
+  next_index_value = &lt;empty&gt;
+  if (index_values.isEmpty()) {
+    index_values.push(●)
+  } else {
+    last_index_value = index_value[-1]
+    for (inner_item in ●●●●●●●●●●) {   // the number of dots here should be 1 more than the value of the largest symbol
+      next_index_value.push(last_index_value)
+    }
+  }
+}
+index_values.reverse()
+</code></pre>
+<p>..., so for the string string 572, the index values would be...</p>
+<pre><code>_ _ _
+│ │ │
+│ │ └─ ● 
+│ └─── ●●●●●●●●●●
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+</code></pre>
+</li>
+<li>
+<p>Now that the symbol values and index values are known, the value of each (symbol, index) combination can be calculated. The algorithm for determining each (symbol, index) combination is...</p>
+<pre><code>final_value = &lt;empty&gt;
+for (symbol_value, index_value) in input
+  value = &lt;empty&gt;
+  for item in symbol_value
+    value.push() = concat(final_value, index_value)
+</code></pre>
+<p>... , so each (symbol, index) in the number 572 would be computed as...</p>
+<ul>
+<li>
+<p>symbol = 5, index = 1</p>
+<pre><code>●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+</code></pre>
+</li>
+<li>
+<p>symbol = 7, index = 2</p>
+<pre><code>●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●●
+</code></pre>
+</li>
+<li>
+<p>symbol = 2, index = 3</p>
+<pre><code>●
+●
+</code></pre>
+</li>
+</ul>
+<p>Those values combined together would be...</p>
+<pre><code>5 7 2
+│ │ │
+│ │ └─ ●
+│ │    ● 
+│ │
+│ └─── ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+</code></pre>
+</li>
+</ol>
+<p><strong>partial rule</strong></p>
+<pre><code>number: sign? whole ('.' partial)?;
+                            │
+                            └── sign: whole: SYMBOL+;
 </code></pre>
 <p>TODO: DISCUSS DECIMAL PLACE AND FRACTIONAL PORTION. ACCURATELY DISCUSS DIGITS.</p>
+<p><strong>sign rule</strong></p>
+<pre><code>number: sign? whole ('.' partial)?;
+         │
+         └── sign: POSITIVE | NEGATIVE;
+</code></pre>
+<p>The sign rule is used to indicate which side of the number line the number is on. If the sign is ...</p>
+<ul>
+<li>NEGATIVE, it means that it's on the left-side of the number line.</li>
+<li>POSITIVE, it means that it's on the right-side of the number line.</li>
+<li>not set, it's the same as POSITIVE.</li>
+</ul>
+<p>TODO: ADD DIAGRAMS</p>
 <a name="HEADREF1"></a><h2>Words</h2>
 <p>TODO: Discuss number to word transitions (2nd part of Chapter 1.1)</p>
 <p>21,055 is the same as saying twenty one thousand fifty five</p>
