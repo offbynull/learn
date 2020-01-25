@@ -7,127 +7,178 @@ Mathematics
 
 # Place Value System
 
-Modern number systems like the ones used today are called `{bm} place value system`s. The idea is that a number is represented as a string of symbols, where...
+The `{bm} place value system` is the modern way numbers are presented. A number is represented as a string of symbols separated by a dot, where each index along with the symbol at that index represents a value. Everything to the...
+* left of the dot represents whole values.
+* right of the dot represents a partial value (less than a whole).
 
-* each symbol represents a value.
-* each index represents a value.
-
-These symbol values and index values are combined using an algorithm to come up with the overall value of the string:
-
-```
-for (symbol_value, index_value) in input
-    for item in symbol_value
-        final_value = concat(final_value, index_value)
-```
-
-For example, imagine a toy place value system that uses the following 4 symbols: ABCD. To calculate the value for string `DCADB`, begin by first determining the value for each symbol (`symbol_value`)...
-
-| Symbol | Value |
-| ------ | ----- |
-| A      |       |
-| B      | □     |
-| C      | □□    |
-| D      | □□□   |
-
-```{note}
-The value increments for each symbol.
-```
-
-Then, calculate the value for each index (`index_value`) ...
+All values from the string are combined to represent the final value for the number. For example, the number 43.5 represents the value...
 
 ```
-_ _ _ _ _
-| | | | |
-| | | |  - □
-| | |  --- □□
-| |  ----- □□□
-|  ------- □□□□
- --------- □□□□□
+●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●●
+●●●●●●●●●● ●●●   ◑
+    4       3  . 5
 ```
 
-```{note}
-The value increments as the index goes from right-to-left.
+The grammar for the place value system is...
+
+```antlr
+number: sign? whole (DOT partial)?;
+sign: POSITIVE | NEGATIVE;
+whole: SYMBOL+;
+partial: SYMBOL+;
+
+POSITIVE: '+';
+NEGATIVE: '-';
+DOT: '.';
+SYMBOL: [0123456789];
 ```
 
-Now that the `symbol_value`s and `index_value`s are known, the algorithm can be run on the string. For each `(symbol_value, index_value)` in the string `DCADB`...
+The entry point to the grammar is the number rule.
 
- * `D _ _ _ _` (`symbol_value = □□□` / `index_value = □□□□□`)
-
-   ```
-   for item in symbol_value
-       final_value = concat(final_value, index_value)
-   ```
-
-   | symbol_value | index_value | item | final_value       |
-   | ------------ | ----------- | ---- | ----------------- |
-   | □□□          | □□□□□       | □    | □□□□□             |
-   | □□□          | □□□□□       | □    | □□□□□ □□□□□       |
-   | □□□          | □□□□□       | □    | □□□□□ □□□□□ □□□□□ |
-
- * `_ C _ _ _` (`symbol_value = □□` / `index_value = □□□□`)
-   
-   ```
-   for item in symbol_value
-       final_value = concat(final_value, index_value)
-   ```
-
-   | symbol_value | index_value | item | final_value       |
-   | ------------ | ----------- | ---- | ----------------- |
-   | □□           | □□□□        | □    | □□□□              |
-   | □□           | □□□□        | □    | □□□□ □□□□         |
-
- * `_ _ A _ _` (`symbol_value = ` / `index_value = □□□`)
-   
-   ```
-   for item in symbol_value
-       final_value = concat(final_value, index_value)
-   ```
-   
-   ```
-   no-op
-   ```
-
-   Symbol-position value = {empty}.
- 
- * `_ _ _ D _` (`symbol value = □□□` / `index_value = □□`)
-
-   ```
-   for item in symbol_value
-       final_value = concat(final_value, index_value)
-   ```
-
-   | symbol_value | index_value | item | final_value       |
-   | ------------ | ----------- | ---- | ----------------- |
-   | □□□          | □□          | □    | □□                |
-   | □□□          | □□          | □    | □□ □□             |
-   | □□□          | □□          | □    | □□ □□ □□          |
-
- * `_ _ _ _ B` (`symbol value = □` / `index_value = □`)
-
-   ```
-   for item in symbol_value
-       final_value = concat(final_value, index_value)
-   ```
-
-   | symbol_value | index_value | item | final_value       |
-   | ------------ | ----------- | ---- | ----------------- |
-   | □            | □           | □    | □                 |
-
-The value for the string is...
+**whole rule**
 
 ```
-D C A D B
-| | | | |
-| | | |  - □
-| | |  --- □□ □□ □□
-| |  ----- 
-|  ------- □□□□ □□□□
- --------- □□□□□ □□□□□ □□□□□
+number: sign? whole ('.' partial)?;
+               │
+               └── sign: whole: SYMBOL+;
+```
 
-DCADB = □□□□□ □□□□□ □□□□□ □□□□ □□□□ □□ □□ □□ □
+The whole rule is used to indicate how many whole values there are. For example, to process the string 572 for the whole rule, ...
+
+ 1. begin by first determining the value each symbol represents...
+
+    ```
+    0 = <empty>
+    1 = ●
+    2 = ●●
+    3 = ●●●
+    4 = ●●●●
+    5 = ●●●●●
+    6 = ●●●●●●
+    7 = ●●●●●●●
+    8 = ●●●●●●●●
+    9 = ●●●●●●●●●
+    ```
+
+
+ 2. Then, calculate the value for each index of the string 572. The algorithm for determining the value of each index is...
+
+    ```
+    index_values = []
+    for (item in index) {
+      next_index_value = <empty>
+      if (index_values.isEmpty()) {
+        index_values.push(●)
+      } else {
+        last_index_value = index_value[-1]
+        for (inner_item in ●●●●●●●●●●) {   // the number of dots here should be 1 more than the value of the largest symbol
+          next_index_value.push(last_index_value)
+        }
+      }
+    }
+    index_values.reverse()
+    ```
+
+    ..., so for the string string 572, the index values would be...
+
+    ```
+    _ _ _
+    │ │ │
+    │ │ └─ ● 
+    │ └─── ●●●●●●●●●●
+    └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+    ```
+
+ 3. Now that the symbol values and index values are known, the value of each (symbol, index) combination can be calculated. The algorithm for determining each (symbol, index) combination is...
+
+    ```
+    final_value = <empty>
+    for (symbol_value, index_value) in input
+      value = <empty>
+      for item in symbol_value
+        value.push() = concat(final_value, index_value)
+    ```
+
+    ... , so each (symbol, index) in the number 572 would be computed as...
+
+    * symbol = 5, index = 1
+
+      ```
+      ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+      ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+      ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+      ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+      ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+      ```
+
+    * symbol = 7, index = 2
+      
+      ```
+      ●●●●●●●●●●
+      ●●●●●●●●●●
+      ●●●●●●●●●●
+      ●●●●●●●●●●
+      ●●●●●●●●●●
+      ●●●●●●●●●●
+      ●●●●●●●●●●
+      ```
+
+    * symbol = 2, index = 3
+      
+      ```
+      ●
+      ●
+      ```
+
+    Those values combined together would be...
+
+    ```
+    5 7 2
+    │ │ │
+    │ │ └─ ●
+    │ │    ● 
+    │ │
+    │ └─── ●●●●●●●●●●
+    │      ●●●●●●●●●●
+    │      ●●●●●●●●●●
+    │      ●●●●●●●●●●
+    │      ●●●●●●●●●●
+    │      ●●●●●●●●●●
+    │      ●●●●●●●●●●
+    │
+    └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+    ```
+
+**partial rule**
+
+```
+number: sign? whole ('.' partial)?;
+                            │
+                            └── sign: whole: SYMBOL+;
 ```
 
 TODO: DISCUSS DECIMAL PLACE AND FRACTIONAL PORTION. ACCURATELY DISCUSS DIGITS.
+
+**sign rule**
+
+```
+number: sign? whole ('.' partial)?;
+         │
+         └── sign: POSITIVE | NEGATIVE;
+```
+
+The sign rule is used to indicate which side of the number line the number is on. If the sign is ...
+
+* NEGATIVE, it means that it's on the left-side of the number line.
+* POSITIVE, it means that it's on the right-side of the number line.
+* not set, it's the same as POSITIVE.
+
+TODO: ADD DIAGRAMS
 
 ## Words
 
