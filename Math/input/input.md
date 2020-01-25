@@ -7,9 +7,9 @@ Mathematics
 
 # Place Value System
 
-The `{bm} place value system` is the modern way numbers are presented. A number is represented as a string of symbols separated by a dot, where each index along with the symbol at that index represents a value. Everything to the...
-* left of the dot represents whole values.
-* right of the dot represents a partial value (less than a whole).
+A number in the `{bm} place value system/(place value system|place-value system|place value notation|place-value notation|positional numeral system)/i` consists of a string of symbols separated by a dot, where each index along with the symbol at that index represents a value. Everything to the...
+* left of the dot represents wholes.
+* right of the dot represents a partial (less than 1 whole).
 
 All values from the string are combined to represent the final value for the number. For example, the number 43.5 represents the value...
 
@@ -35,7 +35,15 @@ DOT: '.';
 SYMBOL: [0123456789];
 ```
 
-The entry point to the grammar is the number rule.
+The entry point to the grammar is the number rule. A number with...
+* no partial portion is called a `{bm} whole number` (e.g. 5, 10, 1395).
+* a negative sign (-) in front of it is called a `{bm} negative number` (e.g. -1, -999).
+
+The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / operations on numbers -- value is tracked by iteratively pushing blocks into arrays.
+
+```{note}
+Why do it this way? Using numbers to describe numbers is circular logic.
+```
 
 **whole rule**
 
@@ -81,7 +89,7 @@ The whole rule is used to indicate how many whole values there are. For example,
     index_values.reverse()
     ```
 
-    ..., so for the string string 572, the index values would be...
+    ..., so for the string 572, the index values would be...
 
     ```
     _ _ _
@@ -162,7 +170,105 @@ number: sign? whole ('.' partial)?;
                             └── sign: whole: SYMBOL+;
 ```
 
-TODO: DISCUSS DECIMAL PLACE AND FRACTIONAL PORTION. ACCURATELY DISCUSS DIGITS.
+```{define-block}
+pvspartrecurse
+pvspartrecurse_macro/
+pvshelper_code/
+```
+
+The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.
+
+```{note}
+It's expected that you fully understand the whole rule as whole numbers are required to understand the partial rule.
+```
+
+Conceptually, you can think of each digit in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...
+
+```{pvspartrecurse}
+3
+```
+
+, ... the second index picks out 5 equal parts out of the NEXT part of the whole ...
+
+```{pvspartrecurse}
+35
+```
+
+, ... the third index picks out 8 equal parts out of the NEXT part of the previous part ...
+
+```{pvspartrecurse}
+358
+```
+
+```{note}
+Trouble seeing this final partition? Open the above image up standalone and zoom in. It's an SVG.
+```
+
+. This is exactly the same as chopping up a whole into 1000 parts and picking 358 of those parts...
+
+```{define-block}
+pvspart
+pvspart_macro/
+pvshelper_code/
+```
+
+```{pvspart}
+358
+```
+
+The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...
+
+ 1. begin by determining the total number of parts there are. The algorithm to do this is as follows..
+
+    ```
+    total_parts = <empty>
+    for (item in index) {
+      if (total_parts == <empty>) {
+        total_parts.push(●●●●●●●●●●) // the number of dots here should be 1 more than the value of the largest symbol
+      } else {
+        new_total_parts = <empty>
+        for (inner_item in ●●●●●●●●●●) {  // the number of dots here should be 1 more than the value of the largest symbol
+          new_total_parts.push(total_parts)
+        }
+        total_parts = new_total_parts
+      }
+    }
+    ```
+
+    ..., so for the string 55, the total number of parts would be 100...
+
+    ```
+    ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+    ```
+
+    ```{note}
+    An easier way to do the same thing is...
+     1. add an extra index.
+     1. set the first index to 1.
+     1. set all other indexes to 0.
+     
+    So if the partial string has 2 digits (as 55 does), the total number of parts would be 100.
+
+    The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.
+    ```
+
+    ```{note}
+    An easier way to do the same thing is 10^partial.length.
+     
+    So if the partial string has 2 digits (as 55 does), the total number of parts would be 10^2=100.
+
+    The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.
+    ````
+
+ 2. The partial string is a selection out the total parts calculated in the step above. Out of 100 parts, 55 are selected.
+
+    ```
+    [●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●]●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+    ```
+
+    ```{pvspart}
+    55
+    ```
 
 **sign rule**
 
