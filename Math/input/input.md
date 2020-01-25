@@ -2657,6 +2657,721 @@ __EXERCISE__
 
 1.2.238)
 
+| x  | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |
+|----|----|----|----|----|----|----|----|----|----|----|
+| 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  |
+| 1  | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |
+| 2  | 0  | 2  | 4  | 6  | 8  | 10 | 12 | 14 | 16 | 18 |
+| 3  | 0  | 3  | 6  | 9  | 12 | 15 | 18 | 21 | 24 | 27 |
+| 4  | 0  | 4  | 8  | 12 | 16 | 20 | 24 | 28 | 32 | 36 |
+| 5  | 0  | 5  | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
+| 6  | 0  | 6  | 12 | 18 | 24 | 30 | 36 | 42 | 48 | 54 |
+| 7  | 0  | 7  | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
+| 8  | 0  | 8  | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
+| 9  | 0  | 9  | 18 | 27 | 36 | 45 | 56 | 63 | 72 | 81 |
+
+
+1.2.239)
+
+| x  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |
+|----|----|----|----|----|----|----|----|
+| 4  | 12 | 16 | 20 | 24 | 28 | 32 | 36 |
+| 5  | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
+| 6  | 18 | 24 | 30 | 36 | 42 | 48 | 54 |
+| 7  | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
+| 8  | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
+| 9  | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
+
+1.2.240)
+
+| x  | 4  | 5  | 6  | 7  | 8  | 9  |
+|----|----|----|----|----|----|----|
+| 3  | 12 | 15 | 18 | 21 | 24 | 27 |
+| 4  | 16 | 20 | 24 | 28 | 32 | 36 |
+| 5  | 20 | 25 | 30 | 35 | 40 | 45 |
+| 6  | 24 | 30 | 36 | 42 | 48 | 54 |
+| 7  | 28 | 35 | 42 | 49 | 56 | 63 |
+| 8  | 32 | 40 | 48 | 56 | 64 | 72 |
+| 9  | 36 | 45 | 54 | 63 | 72 | 81 |
+
+1.2.241)
+
+| x  | 4  | 5  | 6  | 7  | 8  | 9  |
+|----|----|----|----|----|----|----|
+| 6  | 24 | 30 | 36 | 42 | 48 | 54 |
+| 7  | 28 | 35 | 42 | 49 | 56 | 63 |
+| 8  | 32 | 40 | 48 | 56 | 64 | 72 |
+| 9  | 36 | 45 | 54 | 63 | 72 | 91 |
+
+1.2.242)
+
+| x  | 6  | 7  | 8  | 9  |
+|----|----|----|----|----|
+| 3  | 18 | 21 | 24 | 27 |
+| 4  | 24 | 28 | 32 | 36 |
+| 5  | 30 | 35 | 40 | 45 |
+| 6  | 36 | 42 | 48 | 54 |
+| 7  | 42 | 49 | 56 | 63 |
+| 8  | 68 | 56 | 64 | 72 |
+| 9  | 54 | 63 | 72 | 81 |
+
+1.2.243)
+
+| x  | 5  | 6  | 7  | 8  | 9  |
+|----|----|----|----|----|----|
+| 5  | 25 | 30 | 35 | 40 | 45 |
+| 6  | 30 | 36 | 42 | 48 | 54 |
+| 7  | 35 | 42 | 49 | 56 | 63 |
+| 8  | 40 | 48 | 56 | 64 | 72 |
+| 9  | 45 | 54 | 63 | 72 | 91 |
+
+1.2.244)
+
+| x  | 6  | 7  | 8  | 9  |
+|----|----|----|----|----|
+| 6  | 36 | 42 | 48 | 54 |
+| 7  | 42 | 49 | 56 | 63 |
+| 8  | 48 | 56 | 64 | 72 |
+| 9  | 54 | 63 | 72 | 91 |
+
+1.2.245) 0 * 15 = 15
+
+1.2.246) 0 * 41 = 0
+
+1.2.247) 99 * 0 = 0
+
+1.2.248) 77 * 0 = 0
+
+1.2.249) 1 * 43 = 43
+
+1.2.250) 1 * 34 = 34
+
+1.2.251) 28 * 1 = 1
+
+1.2.252) 65 * 1 = 1
+
+1.2.253) 1 * 240055 = 240055
+
+1.2.254) 1 * 189206 = 189206
+
+1.2.255) 
+
+* a) 7*6 = 42
+* b) 6*7 = 42
+
+1.2.256)
+
+* a) 8 * 9 = 72
+* b) 9 * 8 = 72
+
+1.2.257)
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        { 4}&  \enspace        {  }&  \\
+       {  }&  \enspace        { 7}&  \enspace        { 9}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace * \\
+\hline
+       { 3}&  \enspace        { 9}&  \enspace        { 5}&
+\end{alignedat}
+`
+
+1.2.258)
+
+`{kt}
+\begin{alignedat}{4}
+       {  }&  \enspace        { 3}&  \enspace        {  }&  \\
+       {  }&  \enspace        { 5}&  \enspace        { 8}&  \\
+       {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace * \\
+\hline
+       { 2}&  \enspace        { 3}&  \enspace        { 2}&
+\end{alignedat}
+`
+
+1.2.259)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        { 4}&  \enspace        { 3}&  \enspace        {  }&  \\
+        {  }&  \enspace        { 2}&  \enspace        { 7}&  \enspace        { 5}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 6}&  \enspace * \\
+\hline
+        { 1}&  \enspace        { 6}&  \enspace        { 5}&  \enspace        { 0}&
+\end{alignedat}
+`
+
+1.2.260)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        { 1}&  \enspace        { 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        { 6}&  \enspace        { 3}&  \enspace        { 8}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace * \\
+\hline
+        { 3}&  \enspace        { 1}&  \enspace        { 9}&  \enspace        { 0}&
+\end{alignedat}
+`
+
+1.2.261)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        { 2}&  \enspace        { 1}&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        { 3}&  \enspace        { 4}&  \enspace        { 2}&  \enspace        { 1}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace * \\
+\hline
+        { 2}&  \enspace        { 3}&  \enspace        { 9}&  \enspace        { 4}&  \enspace        { 7}&
+\end{alignedat}
+`
+
+1.2.262)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        { 9}&  \enspace        { 1}&  \enspace        { 4}&  \enspace        { 3}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace * \\
+\hline
+        { 2}&  \enspace        { 7}&  \enspace        { 4}&  \enspace        { 2}&  \enspace        { 9}&
+\end{alignedat}
+`
+
+1.2.263)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 2}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 8}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 4}&  \enspace        { 1}&  \enspace        { 6}&  \\
+        { 1}&  \enspace        { 5}&  \enspace        { 6}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 1}&  \enspace        { 9}&  \enspace        { 7}&  \enspace        { 6}& 
+\end{alignedat}
+`
+
+1.2.264)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 3}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 7}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 5}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 1}&  \enspace        { 8}&  \enspace        { 5}&  \\
+        { 1}&  \enspace        { 4}&  \enspace        { 8}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 1}&  \enspace        { 6}&  \enspace        { 6}&  \enspace        { 5}& 
+\end{alignedat}
+`
+
+1.2.265)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 9}&  \enspace        { 6}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 3}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 2}&  \enspace        { 8}&  \enspace        { 8}&  \\
+        { 6}&  \enspace        { 7}&  \enspace        { 2}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 7}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 8}& 
+\end{alignedat}
+`
+
+1.2.266)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 5}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 8}&  \enspace        { 9}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 6}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 4}&  \enspace        { 8}&  \enspace        { 4}&  \\
+        { 4}&  \enspace        { 4}&  \enspace        { 5}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 4}&  \enspace        { 9}&  \enspace        { 3}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.2.267)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 3}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 7}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 8}&  \enspace        { 5}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 1}&  \enspace        { 3}&  \enspace        { 5}&  \\
+        { 2}&  \enspace        { 1}&  \enspace        { 6}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 2}&  \enspace        { 2}&  \enspace        { 9}&  \enspace        { 5}& 
+\end{alignedat}
+`
+
+1.2.268)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 3}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 9}&  \enspace        { 8}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 4}&  \enspace        { 2}&  \enspace        { 4}&  \\
+        { 4}&  \enspace        { 7}&  \enspace        { 7}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 5}&  \enspace        { 1}&  \enspace        { 9}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.2.269) 23 * 10 = 230
+
+1.2.270) 19 * 10 = 190
+
+1.2.271) 100 * 36 = 3600
+
+1.2.272) 100 * 25 = 2500
+
+1.2.273) 1000 * 88 = 88000
+
+1.2.274) 1000 * 46 = 46000
+
+1.2.275) 50 * 1000000 = 50000000
+
+1.2.276) 30 * 1000000 = 30000000
+
+1.2.277)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 6}&  \enspace \cancel{ 6}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 4}&  \enspace        { 7}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 3}&  \enspace        { 9}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 2}&  \enspace        { 4}&  \enspace        { 2}&  \enspace        { 3}&  \\
+        {  }&  \enspace        { 7}&  \enspace        { 4}&  \enspace        { 1}&  \enspace        { 0}&  \\
+        { 2}&  \enspace        { 4}&  \enspace        { 7}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 3}&  \enspace        { 4}&  \enspace        { 5}&  \enspace        { 3}&  \enspace        { 3}& 
+\end{alignedat}
+`
+
+1.2.278)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace \cancel{ 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 5}&  \enspace        { 6}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 2}&  \enspace        { 8}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 1}&  \enspace        { 2}&  \enspace        { 4}&  \enspace        { 8}&  \\
+        {  }&  \enspace        { 3}&  \enspace        { 1}&  \enspace        { 2}&  \enspace        { 0}&  \\
+        { 4}&  \enspace        { 6}&  \enspace        { 8}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 5}&  \enspace        { 1}&  \enspace        { 1}&  \enspace        { 6}&  \enspace        { 8}& 
+\end{alignedat}
+`
+
+1.2.279)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 6}&  \enspace        { 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 8}&  \enspace        { 6}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 2}&  \enspace        { 1}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 8}&  \enspace        { 6}&  \\
+        {  }&  \enspace        { 1}&  \enspace        { 1}&  \enspace        { 7}&  \enspace        { 2}&  \enspace        { 0}&  \\
+        { 4}&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 2}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 4}&  \enspace        { 2}&  \enspace        { 2}&  \enspace        { 5}&  \enspace        { 0}&  \enspace        { 6}& 
+\end{alignedat}
+`
+
+1.2.280)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 3}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 3}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 7}&  \enspace        { 2}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 8}&  \enspace        { 5}&  \enspace        { 5}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 3}&  \enspace        { 6}&  \enspace        { 0}&  \\
+        {  }&  \enspace        { 2}&  \enspace        { 3}&  \enspace        { 6}&  \enspace        { 0}&  \enspace        { 0}&  \\
+        { 3}&  \enspace        { 2}&  \enspace        { 7}&  \enspace        { 6}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 3}&  \enspace        { 5}&  \enspace        { 3}&  \enspace        { 5}&  \enspace        { 6}&  \enspace        { 0}& 
+\end{alignedat}
+`
+
+1.2.281)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace \cancel{ 3}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace \cancel{ 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 9}&  \enspace        { 1}&  \enspace        { 5}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 8}&  \enspace        { 7}&  \enspace        { 9}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        { 8}&  \enspace        { 2}&  \enspace        { 3}&  \enspace        { 5}&  \\
+        {  }&  \enspace        { 6}&  \enspace        { 4}&  \enspace        { 0}&  \enspace        { 5}&  \enspace        { 0}&  \\
+        { 7}&  \enspace        { 3}&  \enspace        { 2}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 8}&  \enspace        { 0}&  \enspace        { 4}&  \enspace        { 2}&  \enspace        { 8}&  \enspace        { 5}& 
+\end{alignedat}
+`
+
+1.2.282)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 6}&  \enspace        { 7}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace \cancel{ 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 9}&  \enspace        { 6}&  \enspace        { 8}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 9}&  \enspace        { 2}&  \enspace        { 6}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 8}&  \enspace        { 0}&  \enspace        { 8}&  \\
+        {  }&  \enspace        { 1}&  \enspace        { 9}&  \enspace        { 3}&  \enspace        { 6}&  \enspace        { 0}&  \\
+        { 8}&  \enspace        { 7}&  \enspace        { 1}&  \enspace        { 2}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 8}&  \enspace        { 9}&  \enspace        { 6}&  \enspace        { 3}&  \enspace        { 6}&  \enspace        { 8}& 
+\end{alignedat}
+`
+
+1.2.283)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 5}&  \enspace        { 6}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 4}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 2}&  \enspace        { 4}&  \\
+        {  }&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \\
+        { 2}&  \enspace        { 5}&  \enspace        { 6}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 2}&  \enspace        { 6}&  \enspace        { 6}&  \enspace        { 2}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.2.284)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 9}&  \enspace        { 7}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 3}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 1}&  \enspace        { 4}&  \enspace        { 9}&  \enspace        { 1}&  \\
+        {  }&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \\
+        { 4}&  \enspace        { 9}&  \enspace        { 7}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 5}&  \enspace        { 1}&  \enspace        { 1}&  \enspace        { 9}&  \enspace        { 1}& 
+\end{alignedat}
+`
+
+1.2.285)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 5}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace \cancel{ 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 4}&  \enspace        { 8}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 0}&  \enspace        { 5}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 7}&  \enspace        { 4}&  \enspace        { 0}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \\
+        { 2}&  \enspace        { 4}&  \enspace        { 3}&  \enspace        { 6}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 2}&  \enspace        { 4}&  \enspace        { 5}&  \enspace        { 3}&  \enspace        { 4}&  \enspace        { 0}& 
+\end{alignedat}
+`
+
+1.2.286)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 3}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace \cancel{ 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 8}&  \enspace        { 5}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 6}&  \enspace        { 0}&  \enspace        { 2}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 9}&  \enspace        { 7}&  \enspace        { 0}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \\
+        { 2}&  \enspace        { 4}&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 2}&  \enspace        { 4}&  \enspace        { 1}&  \enspace        { 9}&  \enspace        { 7}&  \enspace        { 0}& 
+\end{alignedat}
+`
+
+1.2.287)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        {  }&  \enspace        { 4}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace        {  }&  \enspace \cancel{ 3}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 7}&  \enspace        { 1}&  \enspace        { 9}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 4}&  \enspace        { 3}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 8}&  \enspace        { 1}&  \enspace        { 5}&  \enspace        { 7}&  \\
+        {  }&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 8}&  \enspace        { 7}&  \enspace        { 6}&  \enspace        { 0}&  \\
+        { 1}&  \enspace        { 3}&  \enspace        { 5}&  \enspace        { 9}&  \enspace        { 5}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        {  1}&  \enspace        { 4}&  \enspace        { 7}&  \enspace        { 6}&  \enspace        { 3}&  \enspace        { 1}&  \enspace        { 7}& 
+\end{alignedat}
+`
+
+1.2.288)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 4}&  \enspace        { 5}&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 1}&  \enspace \cancel{ 1}&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace \cancel{ 3}&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 5}&  \enspace        { 8}&  \enspace        { 1}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 2}&  \enspace        { 4}&  \enspace * \\
+\hline
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        { 4}&  \enspace        { 3}&  \enspace        { 2}&  \enspace        { 4}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 1}&  \enspace        { 6}&  \enspace        { 2}&  \enspace        { 0}&  \\
+        { 2}&  \enspace        { 5}&  \enspace        { 0}&  \enspace        { 6}&  \enspace        { 7}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 2}&  \enspace        { 5}&  \enspace        { 9}&  \enspace        { 2}&  \enspace        { 6}&  \enspace        { 4}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.2.289) 18 * 33 = 540 + 54 = 594
+
+1.2.290) 15 * 22 = 300 + 30 = 330
+
+1.2.291) 51 * 67 = 3060 + 357 = 3417
+
+1.2.292) 48 * 71 = 3360 + 48 = 3408
+
+1.2.293) 2 * 249 = 498
+
+1.2.294) 2 * 589 = 1178
+
+1.2.295) 10 * 375 = 3750
+
+1.2.296) 10 * 255 = 2550
+
+1.2.297)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 5}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 8}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 3}&  \enspace        { 7}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 2}&  \enspace        { 6}&  \enspace        { 6}&  \\
+        { 1}&  \enspace        { 1}&  \enspace        { 4}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 1}&  \enspace        { 4}&  \enspace        { 0}&  \enspace        { 6}& 
+\end{alignedat}
+`
+
+1.2.298)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        { 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace \cancel{ 5}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 8}&  \enspace        { 6}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 9}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 7}&  \enspace        { 7}&  \enspace        { 4}&  \\
+        { 1}&  \enspace        { 7}&  \enspace        { 2}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 2}&  \enspace        { 4}&  \enspace        { 9}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.2.299)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {10}&  \enspace        {  }&  \\
+        { 3}&  \enspace \cancel{ 0}&  \enspace        {15}&  \\
+ \cancel{ 4}&  \enspace \cancel{ 1}&  \enspace \cancel{ 5}&  \\
+        { 2}&  \enspace        { 6}&  \enspace        { 7}&  \enspace - \\
+\hline
+        { 1}&  \enspace        { 4}&  \enspace        { 8}&  
+\end{alignedat}
+`
+
+1.2.300)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {13}&  \enspace        {  }&  \\
+        { 2}&  \enspace \cancel{ 3}&  \enspace        {11}&  \\
+ \cancel{ 3}&  \enspace \cancel{ 4}&  \enspace \cancel{ 1}&  \\
+        { 2}&  \enspace        { 8}&  \enspace        { 5}&  \enspace - \\
+\hline
+        { 0}&  \enspace        { 5}&  \enspace        { 6}&  
+\end{alignedat}
+`
+
+1.2.301)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        { 1}&  \enspace        { 1}&  \enspace        { 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        { 6}&  \enspace        { 2}&  \enspace        { 5}&  \enspace        { 1}&  \\
+        {  }&  \enspace        { 4}&  \enspace        { 7}&  \enspace        { 4}&  \enspace        { 9}&  \enspace + \\
+\hline
+        { 1}&  \enspace        { 1}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}& 
+\end{alignedat}
+`
+
+1.2.302)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        { 1}&  \enspace        { 1}&  \enspace        { 1}&  \enspace        {  }&  \\
+        {  }&  \enspace        { 3}&  \enspace        { 8}&  \enspace        { 1}&  \enspace        { 6}&  \\
+        {  }&  \enspace        { 8}&  \enspace        { 1}&  \enspace        { 8}&  \enspace        { 4}&  \enspace + \\
+\hline
+        { 1}&  \enspace        { 2}&  \enspace        { 0}&  \enspace        { 0}&  \enspace        { 0}& 
+\end{alignedat}
+`
+
+
+1.2.303)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace \cancel{ 2}&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        { 2}&  \enspace        { 0}&  \enspace        { 4}&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        { 5}&  \enspace        { 6}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 1}&  \enspace        { 2}&  \enspace        { 2}&  \enspace        { 4}&  \\
+        { 1}&  \enspace        { 0}&  \enspace        { 2}&  \enspace        { 0}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 1}&  \enspace        { 1}&  \enspace        { 4}&  \enspace        { 2}&  \enspace        { 4}& 
+\end{alignedat}
+`
+
+1.2.304)
+
+`{kt}
+\begin{alignedat}{4}
+        {  }&  \enspace        { 8}&  \enspace        { 0}&  \enspace        { 1}&  \\
+        {  }&  \enspace        {  }&  \enspace        { 7}&  \enspace        { 7}&  \enspace * \\
+\hline
+        {  }&  \enspace        { 8}&  \enspace        { 0}&  \enspace        { 7}&  \\
+        { 8}&  \enspace        { 0}&  \enspace        { 7}&  \enspace        { 0}&  \enspace + \\
+\hline
+        { 8}&  \enspace        { 8}&  \enspace        { 7}&  \enspace        { 7}& 
+\end{alignedat}
+`
+
+1.2.305) 947 * 0 = 0
+
+1.2.306) 947 + 0 = 947
+
+1.2.307) 15382 + 1 = 15383
+
+1.2.308) 15382 * 1 = 15383
+
+1.2.309) 50 - 18 = 32
+
+1.2.310) 90 - 66 = 24
+
+1.2.311) 2 * 35 = 70
+
+1.2.312) 2 * 140 = 280
+
+1.2.313) 2 * 980 = 1800 + 160 + 0 = 1960
+
+1.2.314) 325 + 65 = 390
+
+1.2.315) 875 * 12 = 8750 + 1750 = 10500 
+
+1.2.316) 905 * 15 = 9050 + 4525 = 13575
+
+1.2.317) 89 - 74 = 15
+
+1.2.318) 99 - 45 = 54
+
+1.2.319) 3075 + 950 = 4025
+
+1.2.320) 6308 + 724 = 7032
+
+1.2.321) 814 - 366 = 448
+
+1.2.322) 925 - 388 = 537
+
+1.2.323) 9 * 6 = 54
+
+1.2.324) 6 * 4 = 24
+
+1.2.325) 7 * 44 = 308
+
+1.2.326) 24 * 8 = 192
+
+1.2.327) 15 * 12 = 150 + 30 = 180
+
+1.2.328) 28 * 26 = 560 + 168 = 728
+
+1.2.329) 2 * 10 = 20
+
+1.2.330) 12 * 2 = 24
+
+1.2.331) 50 * 2 = 100
+
+1.2.332) 30 * 2 = 60
+
+1.2.333) 13 * 9 = 117
+
+1.2.334) 18 * 3 = 54
+
+1.2.335) 42 * 34 = 1428
+
+1.2.336) 23 * 28 = 644
+
+1.2.337) 94 * 50 = 4700
+
+1.2.338) 360 * 160 = 36660
+
+1.2.339) 300 * 12 = 3600
+
+1.2.340) 200 * 24 = 4800
+
+1.2.341) yes 
+
+1.2.342) verification
+
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
@@ -2677,30 +3392,33 @@ START BACK UP HERE
 
 `{kt}
 \begin{alignedat}{4}
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
 \hline
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
 \hline
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
 \end{alignedat}
 `
 
 `{kt}
 \begin{alignedat}{4}
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
 \hline
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
+        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
 \hline
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
+       {   }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
 \end{alignedat}
 `
