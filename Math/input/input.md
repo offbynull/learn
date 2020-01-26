@@ -7,18 +7,22 @@ Mathematics
 
 # Place Value System
 
-A number in the `{bm} place value system/(place value system|place-value system|place value notation|place-value notation|positional numeral system)/i` consists of a string of symbols separated by a dot, where each index along with the symbol at that index represents a value. Everything to the...
-* left of the dot represents wholes.
-* right of the dot represents a partial (less than 1 whole).
+The `{bm} place value system/(place value system|place-value system|place value notation|place-value notation|positional numeral system)/i` is the modern way in which numbers are represented. A number represented using the place value system is made up of a string of symbols separated by a dot, where each (index, symbol) combination in the string represents a value (i.e. `val[idx] = compute(idx, str[idx])`).
 
-All values from the string are combined to represent the final value for the number. For example, the number 43.5 represents the value...
+
+The symbols used to represent a number are called `{bm} digit`s. All digits to the...
+
+ * left of the dot represents wholes.
+ * right of the dot represents a partial (less than a whole).
+
+These wholes and partial are combined to represent the final value for the number. The exact grammar and algorithm for computing the final value is detailed below.
 
 ```
 ●●●●●●●●●●
 ●●●●●●●●●●
 ●●●●●●●●●●
-●●●●●●●●●● ●●●   ◑
-    4       3  . 5
+●●●●●●●●●●  ●●●     ◑
+    4        3   .  5
 ```
 
 The grammar for the place value system is...
@@ -26,23 +30,23 @@ The grammar for the place value system is...
 ```antlr
 number: sign? whole (DOT partial)?;
 sign: POSITIVE | NEGATIVE;
-whole: SYMBOL+;
-partial: SYMBOL+;
+whole: DIGIT+;
+partial: DIGIT+;
 
 POSITIVE: '+';
 NEGATIVE: '-';
 DOT: '.';
-SYMBOL: [0123456789];
+DIGIT: [0123456789];
 ```
 
-The entry point to the grammar is the number rule. A number with...
-* no partial portion is called a `{bm} whole number` (e.g. 5, 10, 1395).
-* a negative sign (-) in front of it is called a `{bm} negative number` (e.g. -1, -999).
+The entry point to the grammar is the number rule. Note that the partial and sign portions of the number rule are optional. A number with a missing ...
+ * partial portion is assumed to have a partial portion of 0 (e.g. 5 is the same as 5.0).
+ * sign portion is assumed to have a sign of + (e.g. 1.5 is the same as +1.5).
 
-The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / operations on numbers -- value is tracked by iteratively pushing blocks into arrays.
+The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / number operations -- value is tracked by iteratively pushing blocks into arrays.
 
 ```{note}
-Why do it this way? Using numbers to describe numbers is circular logic.
+Why create an algorithm without using numbers? Using numbers to describe numbers is circular logic.
 ```
 
 **whole rule**
@@ -50,12 +54,12 @@ Why do it this way? Using numbers to describe numbers is circular logic.
 ```
 number: sign? whole ('.' partial)?;
                │
-               └── sign: whole: SYMBOL+;
+               └── DIGIT+;
 ```
 
-The whole rule is used to indicate how many whole values there are. For example, to process the string 572 for the whole rule, ...
+The whole rule is used to express how many whole values there are. For example, to process the string 572 for the whole rule, ...
 
- 1. begin by first determining the value each symbol represents...
+ 1. begin by first determining the value each digit represents...
 
     ```
     0 = <empty>
@@ -99,19 +103,19 @@ The whole rule is used to indicate how many whole values there are. For example,
     └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
     ```
 
- 3. Now that the symbol values and index values are known, the value of each (symbol, index) combination can be calculated. The algorithm for determining each (symbol, index) combination is...
+ 3. Now that the digit values and index values are known, the value of each (digit, index) combination can be calculated. The algorithm for determining the value of each (digit, index) combination is...
 
     ```
     final_value = <empty>
-    for (symbol_value, index_value) in input
+    for (digit_value, index_value) in input
       value = <empty>
-      for item in symbol_value
-        value.push() = concat(final_value, index_value)
+      for item in digit_value
+        value.push(index_value)
     ```
 
-    ... , so each (symbol, index) in the number 572 would be computed as...
+    ... , so each (digit, index) in the number 572 would be computed as...
 
-    * symbol = 5, index = 1
+    * 5\_\_
 
       ```
       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
@@ -121,7 +125,7 @@ The whole rule is used to indicate how many whole values there are. For example,
       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
       ```
 
-    * symbol = 7, index = 2
+    * \_7\_
       
       ```
       ●●●●●●●●●●
@@ -133,7 +137,7 @@ The whole rule is used to indicate how many whole values there are. For example,
       ●●●●●●●●●●
       ```
 
-    * symbol = 2, index = 3
+    * \_\_2
       
       ```
       ●
@@ -167,7 +171,11 @@ The whole rule is used to indicate how many whole values there are. For example,
 ```
 number: sign? whole ('.' partial)?;
                             │
-                            └── sign: whole: SYMBOL+;
+                            └── DIGIT+;
+```
+
+```{note}
+It's expected that you fully understand the whole rule because whole numbers are used to explain the partial rule.
 ```
 
 ```{define-block}
@@ -178,9 +186,7 @@ pvshelper_code/
 
 The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.
 
-```{note}
-It's expected that you fully understand the whole rule as whole numbers are required to understand the partial rule.
-```
+If the partial rule is not set, it's assumed to be 0.
 
 Conceptually, you can think of each digit in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...
 
@@ -200,11 +206,13 @@ Conceptually, you can think of each digit in the partial string as a recursive s
 358
 ```
 
+.
+
 ```{note}
 Trouble seeing this final partition? Open the above image up standalone and zoom in. It's an SVG.
 ```
 
-. This is exactly the same as chopping up a whole into 1000 parts and picking 358 of those parts...
+This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...
 
 ```{define-block}
 pvspart
@@ -224,10 +232,10 @@ The algorithm for processing the partial rule is similar to the conceptual model
     total_parts = <empty>
     for (item in index) {
       if (total_parts == <empty>) {
-        total_parts.push(●●●●●●●●●●) // the number of dots here should be 1 more than the value of the largest symbol
+        total_parts.push(●●●●●●●●●●) // the number of dots here should be 1 more than the value of the largest digit
       } else {
         new_total_parts = <empty>
-        for (inner_item in ●●●●●●●●●●) {  // the number of dots here should be 1 more than the value of the largest symbol
+        for (inner_item in ●●●●●●●●●●) {  // the number of dots here should be 1 more than the value of the largest digit
           new_total_parts.push(total_parts)
         }
         total_parts = new_total_parts
@@ -278,11 +286,24 @@ number: sign? whole ('.' partial)?;
          └── sign: POSITIVE | NEGATIVE;
 ```
 
-The sign rule is used to indicate which side of the number line the number is on. If the sign is ...
+```{note}
+It's expected that you fully understand the whole rule and partial rule because these are required to explain the sign rule.
+```
 
-* NEGATIVE, it means that it's on the left-side of the number line.
-* POSITIVE, it means that it's on the right-side of the number line.
-* not set, it's the same as POSITIVE.
+The sign rule is used to express which category a number is in. Recall that the number 0 represents nothing / no value / empty values. If the sign is ...
+
+* NEGATIVE, it means that it's less than nothing.
+* POSITIVE, it means that it's more than nothing.
+
+If the sign is not set, it's assumed to be POSITIVE.
+
+Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).
+
+For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up .
+
+In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...
+ * negative number, it means that money is lost / owed.
+ * positive number, it means that money is gained / in possession.
 
 TODO: ADD DIAGRAMS
 

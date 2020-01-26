@@ -25,49 +25,50 @@
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Place Value System</h1>
-<p>A number in the <a name="BOOKMARK0"></a><strong>place value system</strong> consists of a string of symbols separated by a dot, where each index along with the symbol at that index represents a value. Everything to the...</p>
+<p>The <a name="BOOKMARK0"></a><strong>place value system</strong> is the modern way in which numbers are represented. A number represented using the <a href="#BOOKMARK0">place value system</a> is made up of a string of symbols separated by a dot, where each (index, symbol) combination in the string represents a value (i.e. <code>val[idx] = compute(idx, str[idx])</code>).</p>
+<p>The symbols used to represent a number are called <a name="BOOKMARK1"></a><strong>digit</strong>s. All <a href="#BOOKMARK1">digit</a>s to the...</p>
 <ul>
 <li>left of the dot represents wholes.</li>
-<li>right of the dot represents a partial (less than 1 whole).</li>
+<li>right of the dot represents a partial (less than a whole).</li>
 </ul>
-<p>All values from the string are combined to represent the final value for the number. For example, the number 43.5 represents the value...</p>
+<p>These wholes and partial are combined to represent the final value for the number. The exact grammar and algorithm for computing the final value is detailed below.</p>
 <pre><code>●●●●●●●●●●
 ●●●●●●●●●●
 ●●●●●●●●●●
-●●●●●●●●●● ●●●   ◑
-    4       3  . 5
+●●●●●●●●●●  ●●●     ◑
+    4        3   .  5
 </code></pre>
 <p>The grammar for the <a href="#BOOKMARK0">place value system</a> is...</p>
 <pre><code class="language-antlr">number: sign? whole (DOT partial)?;
 sign: POSITIVE | NEGATIVE;
-whole: SYMBOL+;
-partial: SYMBOL+;
+whole: DIGIT+;
+partial: DIGIT+;
 
 POSITIVE: '+';
 NEGATIVE: '-';
 DOT: '.';
-SYMBOL: [0123456789];
+DIGIT: [0123456789];
 </code></pre>
-<p>The entry point to the grammar is the number rule. A number with...</p>
+<p>The entry point to the grammar is the number rule. Note that the partial and sign portions of the number rule are optional. A number with a missing ...</p>
 <ul>
-<li>no partial portion is called a <a name="BOOKMARK1"></a><strong>whole number</strong> (e.g. 5, 10, 1395).</li>
-<li>a negative sign (-) in front of it is called a <a name="BOOKMARK2"></a><strong>negative number</strong> (e.g. -1, -999).</li>
+<li>partial portion is assumed to have a partial portion of 0 (e.g. 5 is the same as 5.0).</li>
+<li>sign portion is assumed to have a sign of + (e.g. 1.5 is the same as +1.5).</li>
 </ul>
-<p>The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / operations on numbers -- value is tracked by iteratively pushing blocks into arrays.</p>
+<p>The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / number operations -- value is tracked by iteratively pushing blocks into arrays.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
-<p>Why do it this way? Using numbers to describe numbers is circular logic.</p>
+<p>Why create an algorithm without using numbers? Using numbers to describe numbers is circular logic.</p>
 </div>
 <p><strong>whole rule</strong></p>
 <pre><code>number: sign? whole ('.' partial)?;
                │
-               └── sign: whole: SYMBOL+;
+               └── DIGIT+;
 </code></pre>
-<p>The whole rule is used to indicate how many whole values there are. For example, to process the string 572 for the whole rule, ...</p>
+<p>The whole rule is used to express how many whole values there are. For example, to process the string 572 for the whole rule, ...</p>
 <ol>
 <li>
-<p>begin by first determining the value each symbol represents...</p>
+<p>begin by first determining the value each <a href="#BOOKMARK1">digit</a> represents...</p>
 <pre><code>0 = &lt;empty&gt;
 1 = ●
 2 = ●●
@@ -105,17 +106,17 @@ index_values.reverse()
 </code></pre>
 </li>
 <li>
-<p>Now that the symbol values and index values are known, the value of each (symbol, index) combination can be calculated. The algorithm for determining each (symbol, index) combination is...</p>
+<p>Now that the <a href="#BOOKMARK1">digit</a> values and index values are known, the value of each (<a href="#BOOKMARK1">digit</a>, index) combination can be calculated. The algorithm for determining the value of each (<a href="#BOOKMARK1">digit</a>, index) combination is...</p>
 <pre><code>final_value = &lt;empty&gt;
-for (symbol_value, index_value) in input
+for (digit_value, index_value) in input
   value = &lt;empty&gt;
-  for item in symbol_value
-    value.push() = concat(final_value, index_value)
+  for item in digit_value
+    value.push(index_value)
 </code></pre>
-<p>... , so each (symbol, index) in the number 572 would be computed as...</p>
+<p>... , so each (<a href="#BOOKMARK1">digit</a>, index) in the number 572 would be computed as...</p>
 <ul>
 <li>
-<p>symbol = 5, index = 1</p>
+<p>5__</p>
 <pre><code>●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
@@ -124,7 +125,7 @@ for (symbol_value, index_value) in input
 </code></pre>
 </li>
 <li>
-<p>symbol = 7, index = 2</p>
+<p>_7_</p>
 <pre><code>●●●●●●●●●●
 ●●●●●●●●●●
 ●●●●●●●●●●
@@ -135,7 +136,7 @@ for (symbol_value, index_value) in input
 </code></pre>
 </li>
 <li>
-<p>symbol = 2, index = 3</p>
+<p>__2</p>
 <pre><code>●
 ●
 </code></pre>
@@ -165,26 +166,28 @@ for (symbol_value, index_value) in input
 <p><strong>partial rule</strong></p>
 <pre><code>number: sign? whole ('.' partial)?;
                             │
-                            └── sign: whole: SYMBOL+;
+                            └── DIGIT+;
 </code></pre>
-<p>The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
-<p>It's expected that you fully understand the whole rule as <a href="#BOOKMARK1">whole number</a>s are required to understand the partial rule.</p>
+<p>It's expected that you fully understand the whole rule because whole numbers are used to explain the partial rule.</p>
 </div>
-<p>Conceptually, you can think of each digit in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...</p>
+<p>The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.</p>
+<p>If the partial rule is not set, it's assumed to be 0.</p>
+<p>Conceptually, you can think of each <a href="#BOOKMARK1">digit</a> in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...</p>
 <p><img src="MainPartialConceptRecurseDraw6070402b.svg" alt="Concept diagram for partial rule 3"></p>
 <p>, ... the second index picks out 5 equal parts out of the NEXT part of the whole ...</p>
 <p><img src="MainPartialConceptRecurseDraw95f9ef21.svg" alt="Concept diagram for partial rule 35"></p>
 <p>, ... the third index picks out 8 equal parts out of the NEXT part of the previous part ...</p>
 <p><img src="MainPartialConceptRecurseDraw16863d9c.svg" alt="Concept diagram for partial rule 358"></p>
+<p>.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
 <p>Trouble seeing this final partition? Open the above image up standalone and zoom in. It's an SVG.</p>
 </div>
-<p>. This is exactly the same as chopping up a whole into 1000 parts and picking 358 of those parts...</p>
+<p>This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...</p>
 <p><img src="MainPartialConceptDrawecad84b7.svg" alt="Concept diagram for partial rule 358"></p>
 <p>The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...</p>
 <ol>
@@ -193,10 +196,10 @@ for (symbol_value, index_value) in input
 <pre><code>total_parts = &lt;empty&gt;
 for (item in index) {
   if (total_parts == &lt;empty&gt;) {
-    total_parts.push(●●●●●●●●●●) // the number of dots here should be 1 more than the value of the largest symbol
+    total_parts.push(●●●●●●●●●●) // the number of dots here should be 1 more than the value of the largest digit
   } else {
     new_total_parts = &lt;empty&gt;
-    for (inner_item in ●●●●●●●●●●) {  // the number of dots here should be 1 more than the value of the largest symbol
+    for (inner_item in ●●●●●●●●●●) {  // the number of dots here should be 1 more than the value of the largest digit
       new_total_parts.push(total_parts)
     }
     total_parts = new_total_parts
@@ -215,14 +218,14 @@ for (item in index) {
 <li>set the first index to 1.</li>
 <li>set all other indexes to 0.</li>
 </ol>
-<p>So if the partial string has 2 digits (as 55 does), the total number of parts would be 100.</p>
+<p>So if the partial string has 2 <a href="#BOOKMARK1">digit</a>s (as 55 does), the total number of parts would be 100.</p>
 <p>The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.</p>
 </div>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
 <p>An easier way to do the same thing is 10^partial.length.</p>
-<p>So if the partial string has 2 digits (as 55 does), the total number of parts would be 10^2=100.</p>
+<p>So if the partial string has 2 <a href="#BOOKMARK1">digit</a>s (as 55 does), the total number of parts would be 10^2=100.</p>
 <p>The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.</p>
 </div>
 </li>
@@ -238,11 +241,23 @@ for (item in index) {
          │
          └── sign: POSITIVE | NEGATIVE;
 </code></pre>
-<p>The sign rule is used to indicate which side of the number line the number is on. If the sign is ...</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>It's expected that you fully understand the whole rule and partial rule because these are required to explain the sign rule.</p>
+</div>
+<p>The sign rule is used to express which category a number is in. Recall that the number 0 represents nothing / no value / empty values. If the sign is ...</p>
 <ul>
-<li>NEGATIVE, it means that it's on the left-side of the number line.</li>
-<li>POSITIVE, it means that it's on the right-side of the number line.</li>
-<li>not set, it's the same as POSITIVE.</li>
+<li>NEGATIVE, it means that it's less than nothing.</li>
+<li>POSITIVE, it means that it's more than nothing.</li>
+</ul>
+<p>If the sign is not set, it's assumed to be POSITIVE.</p>
+<p>Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).</p>
+<p>For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up .</p>
+<p>In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...</p>
+<ul>
+<li>negative number, it means that money is lost / owed.</li>
+<li>positive number, it means that money is gained / in possession.</li>
 </ul>
 <p>TODO: ADD DIAGRAMS</p>
 <a name="HEADREF1"></a><h2>Words</h2>
@@ -253,7 +268,7 @@ for (item in index) {
 <a name="HEADREF3"></a><h2>Subtraction</h2>
 <p>TODO: Chapter 1.3</p>
 <p>Pay special attention to exercise problem 1.3.204 / 1.3.205 when codifying.</p>
-<p>KaTeX vertical subtraction template. Wrap digit with \cancel to strike it (e.g. <code>\cancel{d}</code>).</p>
+<p>KaTeX vertical subtraction template. Wrap <a href="#BOOKMARK1">digit</a> with \cancel to strike it (e.g. <code>\cancel{d}</code>).</p>
 <pre><code>`{kt}
 \begin{alignedat}{4}
        {  }&amp;  \enspace        {  }&amp;  \enspace        {  }&amp;  \enspace        {  }&amp;  \\
@@ -289,7 +304,7 @@ for (item in index) {
 </code></pre>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>047.9</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>5</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>239.5</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>0</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>23</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>20</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>0</mn></mphantom><mn>39</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>0</mn></mphantom><munder accentunder="true"><mn>35</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>00</mn></mphantom><mn>4</mn><mphantom><mi mathvariant="normal">.</mi></mphantom><mn>5</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>00</mn></mphantom><munder accentunder="true"><mrow><mn>4</mn><mphantom><mi mathvariant="normal">.</mi></mphantom><mn>5</mn></mrow><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>004.</mn></mphantom><mn>0</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l} \phantom{   {5\smash{)}} }{   047.9 } \\ {5}\overline{\smash{)}239.5} \\ \phantom{{5\smash{)}}}\underline{0} \\ \phantom{{5\smash{)}}}23 \\ \phantom{{5\smash{)}}}\underline{20} \\ \phantom{{5\smash{)}}}\phantom{0}39 \\ \phantom{{5\smash{)}}}\phantom{0}\underline{35} \\ \phantom{{5\smash{)}}}\phantom{00}4\phantom{.}5 \\ \phantom{{5\smash{)}}}\phantom{00}\underline{4\phantom{.}5} \\ \phantom{{5\smash{)}}}\phantom{004.}0 \\ \end{array} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:12.004439999999999em;vertical-align:-5.75222em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:6.2522199999999994em;"><span style="top:-8.412219999999998em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">4</span><span class="mord">7</span><span class="mord">.</span><span class="mord">9</span></span></span></span><span style="top:-7.20778em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">5</span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord">3</span><span class="mord">9</span><span class="mord">.</span><span class="mord">5</span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-6.0077799999999995em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-4.807779999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord">3</span></span></span><span style="top:-3.6077799999999987em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-2.4077799999999985em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord">3</span><span class="mord">9</span></span></span><span style="top:-1.2077799999999976em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span><span class="mord">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-0.007779999999998288em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">5</span></span></span><span style="top:1.192220000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:2.3922200000000005em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:5.75222em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
 <a name="HEADREF6"></a><h1>Order of Operations</h1>
-<p>The <a name="BOOKMARK3"></a><strong>order of operations</strong> are as follows:</p>
+<p>The <a name="BOOKMARK2"></a><strong>order of operations</strong> are as follows:</p>
 <ol>
 <li>Brackets</li>
 <li>Exponents</li>
@@ -298,8 +313,8 @@ for (item in index) {
 </ol>
 <p>These rules are often abbreviated as either...</p>
 <ul>
-<li><a name="BOOKMARK4"></a><strong>BEDMAS</strong> - Brackets / Exponents / Division and Multiplication / Addition and Subtraction</li>
-<li><a name="BOOKMARK5"></a><strong>PEMDAS</strong> - Parenthesis / Exponents / Multiplication and Division / Addition and Subtraction</li>
+<li><a name="BOOKMARK3"></a><strong>BEDMAS</strong> - Brackets / Exponents / Division and Multiplication / Addition and Subtraction</li>
+<li><a name="BOOKMARK4"></a><strong>PEMDAS</strong> - Parenthesis / Exponents / Multiplication and Division / Addition and Subtraction</li>
 </ul>
 <p>Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are evaluated left-to-right in the same step, it makes no difference.</p>
 <a name="HEADREF7"></a><h1>Algebra Rules</h1>
@@ -580,7 +595,7 @@ ADD TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <li>c) million -&gt; 150,000,000</li>
 </ul>
 <p>1.1.57)</p>
-<p>The difference between counting numbers and <a href="#BOOKMARK1">whole number</a>s is that counting numbers start at 1 while <a href="#BOOKMARK1">whole number</a>s start at 0. The reason is that counting numbers are used when you're counting something. You usually need to have 1 of something to start counting. For example, I can't count the number of apples if there are no apples. I need at least 1 apple to be able to count.</p>
+<p>The difference between counting numbers and whole numbers is that counting numbers start at 1 while whole numbers start at 0. The reason is that counting numbers are used when you're counting something. You usually need to have 1 of something to start counting. For example, I can't count the number of apples if there are no apples. I need at least 1 apple to be able to count.</p>
 <p>1.1.58)</p>
 <p>It's easier to say numbers that are rounded. For example...</p>
 <p>58,123 -&gt; fifty eight thousand one hundred twenty three
