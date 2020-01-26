@@ -299,13 +299,59 @@ If the sign is not set, it's assumed to be POSITIVE.
 
 Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).
 
-For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up .
+```{define-block}
+pvslinenum
+pvslinenum_macro/
+pvshelper_code/
+```
+
+```{pvslinenum}
+width 600
+- -3.5
+| -3
+| -2.5
+| -2
+| -1.5
+| -1
+| -0.5
+| 0
+| 0.5
+| 1
+| 1.5
+| 2
+| 2.5
+| 3
+- 3.5
+```
+
+For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up (and vice versa).
+
+```{pvslinenum}
+width 600
+- -5.5
+* -5
+| -4
+| -3
+| -2
+| -1
+| 0
+| 1
+| 2
+| 3
+| 4
+* 5
+- 5.5
+```
 
 In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...
  * negative number, it means that money is lost / owed.
  * positive number, it means that money is gained / in possession.
 
-TODO: ADD DIAGRAMS
+```{note}
+Remember that 0 means no value / nothing / empty. As such, there's no such thing as -0 or +0. There is just 0, and its used as a dividing point between the negatives and positives. If 0 has a sign, you can remove it.
+```
+
+There is no special algorithm for processing the sign rule -- set a flag to indicate if the number is negative or positive.
 
 ## Words
 

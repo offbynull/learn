@@ -176,11 +176,11 @@ for (digit_value, index_value) in input
 <p>The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.</p>
 <p>If the partial rule is not set, it's assumed to be 0.</p>
 <p>Conceptually, you can think of each <a href="#BOOKMARK1">digit</a> in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDraw6070402b.svg" alt="Concept diagram for partial rule 3"></p>
+<p><img src="MainPartialConceptRecurseDraw6fe1935a.svg" alt="Concept diagram for partial rule 3"></p>
 <p>, ... the second index picks out 5 equal parts out of the NEXT part of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDraw95f9ef21.svg" alt="Concept diagram for partial rule 35"></p>
+<p><img src="MainPartialConceptRecurseDraw3e122aef.svg" alt="Concept diagram for partial rule 35"></p>
 <p>, ... the third index picks out 8 equal parts out of the NEXT part of the previous part ...</p>
-<p><img src="MainPartialConceptRecurseDraw16863d9c.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptRecurseDraw3fdd0a7c.svg" alt="Concept diagram for partial rule 358"></p>
 <p>.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
@@ -188,7 +188,7 @@ for (digit_value, index_value) in input
 <p>Trouble seeing this final partition? Open the above image up standalone and zoom in. It's an SVG.</p>
 </div>
 <p>This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...</p>
-<p><img src="MainPartialConceptDrawecad84b7.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptDraw2638f500.svg" alt="Concept diagram for partial rule 358"></p>
 <p>The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...</p>
 <ol>
 <li>
@@ -233,7 +233,7 @@ for (item in index) {
 <p>The partial string is a selection out the total parts calculated in the step above. Out of 100 parts, 55 are selected.</p>
 <pre><code>[●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●]●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 </code></pre>
-<p><img src="MainPartialConceptDraw93274a91.svg" alt="Concept diagram for partial rule 55"></p>
+<p><img src="MainPartialConceptDrawe09deb4f.svg" alt="Concept diagram for partial rule 55"></p>
 </li>
 </ol>
 <p><strong>sign rule</strong></p>
@@ -253,13 +253,20 @@ for (item in index) {
 </ul>
 <p>If the sign is not set, it's assumed to be POSITIVE.</p>
 <p>Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).</p>
-<p>For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up .</p>
+<p><img src="MainNumberLineDrawf8434a3e.svg" alt="Concept diagram for line number -3.5 -3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3 3.5"></p>
+<p>For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up (and vice versa).</p>
+<p><img src="MainNumberLineDrawbc51abec.svg" alt="Concept diagram for line number -5.5 -5 -4 -3 -2 -1 0 1 2 3 4 5 5.5"></p>
 <p>In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...</p>
 <ul>
 <li>negative number, it means that money is lost / owed.</li>
 <li>positive number, it means that money is gained / in possession.</li>
 </ul>
-<p>TODO: ADD DIAGRAMS</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>Remember that 0 means no value / nothing / empty. As such, there's no such thing as -0 or +0. There is just 0, and its used as a dividing point between the negatives and positives. If 0 has a sign, you can remove it.</p>
+</div>
+<p>There is no special algorithm for processing the sign rule -- set a flag to indicate if the number is negative or positive.</p>
 <a name="HEADREF1"></a><h2>Words</h2>
 <p>TODO: Discuss number to word transitions (2nd part of Chapter 1.1)</p>
 <p>21,055 is the same as saying twenty one thousand fifty five</p>
