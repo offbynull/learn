@@ -353,13 +353,17 @@ Remember that 0 means no value / nothing / empty. As such, there's no such thing
 
 There is no special algorithm for processing the sign rule -- set a flag to indicate if the number is negative or positive.
 
-## Words
+# Number Naming
 
 TODO: Discuss number to word transitions (2nd part of Chapter 1.1)
 
 21,055 is the same as saying twenty one thousand fifty five
 
-## Addition
+# Fractions
+
+TODO: Chapter 4
+
+# Addition
 
 TODO: Chapter 1.2
 
@@ -377,7 +381,13 @@ kthelper_code/
 {4}{1}
 ```
 
-## Subtraction
+## Whole Numbers
+
+## Integer Numbers
+
+## Rational Numbers
+
+# Subtraction
 
 TODO: Chapter 1.3
 
@@ -425,7 +435,7 @@ For example...
 \end{alignedat}
 `
 
-## Multiplication
+# Multiplication
 
 `{bm} product` is the result of division.
 
@@ -446,7 +456,7 @@ kthelper_code/
 ```
 
 
-## Division
+# Division
 
 `{bm} quotient` is the result of division.
 
