@@ -363,11 +363,39 @@ TODO: Discuss number to word transitions (2nd part of Chapter 1.1)
 
 TODO: Chapter 1.2
 
+```{define-block}
+ktvertadd
+ktvertadd_macro/
+kthelper_code/
+```
+
+```{ktvertadd}
+{1}{ }
+{1}{9}
+{2}{2}
+------
+{4}{1}
+```
+
 ## Subtraction
 
 TODO: Chapter 1.3
 
 Pay special attention to exercise problem 1.3.204 / 1.3.205 when codifying.
+
+```{define-block}
+ktvertsub
+ktvertsub_macro/
+kthelper_code/
+```
+
+```{ktvertsub}
+{1}{10}
+{2}{0}
+{1}{1}
+------
+{0}{9}
+```
 
 KaTeX vertical subtraction template. Wrap digit with \cancel to strike it (e.g. `\cancel{d}`).
 
@@ -399,7 +427,82 @@ For example...
 
 ## Multiplication
 
+`{bm} product` is the result of division.
+
+```{define-block}
+ktvertmul
+ktvertmul_macro/
+kthelper_code/
+```
+
+```{ktvertmul}
+{ }{1}{1}
+{ }{1}{0}
+-----
+{ }{0}{0}
+{1}{0}{0}
+------
+{1}{0}{0}
+```
+
+
 ## Division
+
+`{bm} quotient` is the result of division.
+
+`{bm} dividend` is the number being divided.
+
+`{bm} divisor` is the number being divided by.
+
+`{kt} dividend \div divisor = quotient`
+
+`{kt} dividend / divisor = quotient`
+
+`{kt} \frac{dividend}{divisor} = quotient`
+
+`{kt}
+\begin{array}{l}
+\phantom{
+  {divisor\smash{)}}
+}{
+  quotient
+} \\
+{divisor}\overline{\smash{)}dividend} \\
+\end{array}
+`
+
+Why is division by 0 not possible (undefined)?
+
+If you think of division as iterative subtraction, how many times can you remove 0 from a number until it's less than 0? e.g. 24/0. You'll keep subtracting 0s forever (infinity).
+
+If you think of division as the inverse of multiplication... if 10/0=x, then x*0=10 -- but any number multiplied by 0 will still equal zero.
+
+```{define-block}
+ktlongdiv
+ktlongdiv_macro/
+kthelper_code/
+```
+
+```{ktlongdiv}
+{quotient}
+{divisor}{dividend}
+{line1}
+{line2}
+{line3}
+```
+
+```{ktlongdiv}
+{047.9}
+{5}{239.5}
+{\underline{0}}
+{23}
+{\underline{20}}
+{\phantom{0}39}
+{\phantom{0}\underline{35}}
+{\phantom{00}4\phantom{.}5}
+{\phantom{00}\underline{4\phantom{.}5}}
+{\phantom{004.}0}
+```
 
 ```
 `{kt}
@@ -3545,6 +3648,270 @@ __EXERCISE__
 
 1.2.342) verification
 
+## Chapter 1 Section 1.5
+
+__TRY IT__
+
+1.111)
+
+* a) eighty four divided by seven
+* b) eighteen divided by six
+* c) twenty four divided by eighty
+
+1.112)
+
+* a) seventy two divided by nine
+* b) twenty one divided by three
+* c) fifty four divided by six
+
+1.113)
+
+```
+□□□□□□ □□□□□□ □□□□□□ □□□□□□
+   6      6      6      6
+24 total
+```
+
+1.114)
+
+```
+□□□□□□□ □□□□□□□ □□□□□□□ □□□□□□□ □□□□□□□ □□□□□□□
+   7       7       7       7       7       7
+42 total
+```
+
+1.115)
+
+* a) 54 / 6 = 9, 6 * 9 = 54
+* b) 27 / 9 = 3, 3 * 9 = 27
+
+1.116)
+
+* a) 36/9=4, 9*4=36
+* b) 40/8=5, 8*5=40
+
+1.117)
+
+* a) 14/14=1, 14*14=14
+* b) 27/1=27, 1*27=27
+
+1.118)
+
+* a) 16/1=16, 16*1=16
+* b) 4/1=4, 4*1=4
+
+1.119)
+
+* a) 0/2=0, 0*2=0
+* b) 17/0=undefined, ?*0=0 (anything multipled by 0 is always 0, it will never result in 17)
+
+1.120)
+
+* a) 0/6=0, 0*6=0
+* b) 13/0=undefined, ?*0=0 (anything multipled by 0 is always 0, it will never result in 17)
+
+1.121)
+
+```{ktlongdiv}
+   {0659}
+{4}{2636}
+   {0}
+   {\underline{2}}
+   {26}
+   {\underline{24}}
+   {023}
+   {\underline{020}}
+   {0036}
+   {\underline{0036}}
+   {0000}
+```
+
+```{ktvertmul}
+{ }{2}{3}{ }
+{ }{6}{5}{9}
+{ }{ }{ }{4}
+------------
+{2}{6}{3}{6}
+```
+
+1.122)
+
+```{ktlongdiv}
+   {0679}
+{4}{2716}
+   {0}
+   {\underline{2}}
+   {27}
+   {\underline{24}}
+   {031}
+   {\underline{028}}
+   {0036}
+   {\underline{0036}}
+   {0000}
+```
+
+```{ktvertmul}
+{ }{3}{3}{ }
+{ }{6}{7}{9}
+{ }{ }{ }{4}
+------------
+{2}{7}{1}{6}
+```
+
+1.123)
+
+```{ktlongdiv}
+   {0861}
+{5}{4305}
+   {0}
+   {\underline{43}}
+   {40}
+   {030}
+   {\underline{030}}
+   {0005}
+```
+
+```{ktvertmul}
+{ }{3}{ }{ }
+{ }{8}{6}{1}
+{ }{ }{ }{5}
+------------
+{4}{3}{0}{5}
+```
+
+1.124)
+
+```{ktlongdiv}
+   {0651}
+{6}{3906}
+   {0}
+   {\underline{39}}
+   {36}
+   {030}
+   {\underline{030}}
+   {0006}
+   {\underline{0006}}
+   {0000}
+```
+
+```{ktvertmul}
+{ }{3}{ }{ }
+{ }{6}{5}{1}
+{ }{ }{ }{6}
+------------
+{3}{9}{0}{6}
+```
+
+1.125)
+
+```{ktlongdiv}
+   {0704}
+{7}{4928}
+   {0}
+   {\underline{49}}
+   {49}
+   {002}
+   {\underline{000}}
+   {0028}
+   {\underline{0028}}
+   {0000}
+```
+
+```{ktvertmul}
+{ }{ }{2}{ }
+{ }{7}{0}{4}
+{ }{ }{ }{7}
+------------
+{4}{9}{2}{8}
+```
+
+1.126)
+
+```{ktlongdiv}
+   {0809}
+{7}{5663}
+   {\underline{0}}
+   {56}
+   {\underline{56}}
+   {006}
+   {\underline{000}}
+   {0063}
+   {\underline{0063}}
+   {0000}
+```
+
+```{ktvertmul}
+{ }{ }{6}{ }
+{ }{8}{0}{9}
+{ }{ }{ }{7}
+------------
+{5}{6}{6}{3}
+```
+
+1.127)
+
+```{ktlongdiv}
+   {0476R4}
+{8}{3812}
+   {\underline{0}}
+   {38}
+   {32}
+   {\underline{061}}
+   {056}
+   {0052}
+   {\underline{0048}}
+   {0004}
+```
+
+```{ktvertmul}
+{ }{6}{4}{ }
+{ }{4}{7}{6}
+{ }{ }{ }{8}
+------------
+{3}{8}{0}{8}
+```
+
+```{ktvertadd}
+{ }{ }{1}{ }
+{3}{8}{0}{8}
+{ }{ }{ }{4}
+------------
+{3}{8}{1}{2}
+```
+
+1.128)
+
+```{ktlongdiv}
+   {0539R7}
+{8}{4319}
+   {\underline{0}}
+   {43}
+   {\underline{40}}
+   {031}
+   {\underline{024}}
+   {0079}
+   {\underline{0072}}
+   {0007}
+```
+
+```{ktvertmul}
+{ }{3}{7}{ }
+{ }{5}{3}{9}
+{ }{ }{ }{8}
+------------
+{4}{3}{1}{2}
+```
+
+```{ktvertmul}
+{ }{ }{ }{ }
+{4}{3}{1}{2}
+{ }{ }{ }{7}
+------------
+{4}{3}{1}{9}
+```
+
+1.129)
+
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
@@ -3561,37 +3928,3 @@ START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
-
-
-`{kt}
-\begin{alignedat}{4}
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
-\hline
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
-\hline
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
-\end{alignedat}
-`
-
-`{kt}
-\begin{alignedat}{4}
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace * \\
-\hline
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace + \\
-\hline
-       {   }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
-\end{alignedat}
-`
