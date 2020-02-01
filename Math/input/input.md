@@ -359,9 +359,45 @@ TODO: Discuss number to word transitions (2nd part of Chapter 1.1)
 
 21,055 is the same as saying twenty one thousand fifty five
 
-# Fractions
+# Whole Number Domain
+
+`{bm} whole number`s are numbers which have no partial/fractional portion. For example, 
+
+# Fraction
 
 TODO: Chapter 4
+
+`{bm} Fraction`s are a way of representing numbers as parts. The syntax for a fraction is as follows...
+
+`{kt} \frac{numerator}{denominator}`
+
+... where the...
+ * `{bm}numerator` (top) is an integer that represents the total number of parts.
+ * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
+
+For example, 4 parts out of 5 parts would be represented as `{kt} \frac{4}{5}`...
+
+```{define-block}
+diagramhelperfrac
+diagramhelperfrac_macro/
+diagramhelper_code/
+```
+
+```{diagramhelperfrac}
+radius 40
+4
+5
+```
+
+In some cases, the numerator may be greater than the denominator. That is, the total number of parts may be larger than the number of parts in a whole. For example, `{kt} \frac{11}{8}`...
+
+```{diagramhelperfrac}
+radius 40
+11
+8
+```
+
+In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a fraction: `{kt} 1 \frac{3}{8}`.
 
 # Addition
 
