@@ -179,9 +179,9 @@ It's expected that you fully understand the whole rule because whole numbers are
 ```
 
 ```{define-block}
-pvspartrecurse
-pvspartrecurse_macro/
-pvshelper_code/
+diagramhelperpartrecurse
+diagramhelperpartrecurse_macro/
+diagramhelper_code/
 ```
 
 The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.
@@ -190,19 +190,19 @@ If the partial rule is not set, it's assumed to be 0.
 
 Conceptually, you can think of each digit in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...
 
-```{pvspartrecurse}
+```{diagramhelperpartrecurse}
 3
 ```
 
 , ... the second index picks out 5 equal parts out of the NEXT part of the whole ...
 
-```{pvspartrecurse}
+```{diagramhelperpartrecurse}
 35
 ```
 
 , ... the third index picks out 8 equal parts out of the NEXT part of the previous part ...
 
-```{pvspartrecurse}
+```{diagramhelperpartrecurse}
 358
 ```
 
@@ -215,12 +215,12 @@ Trouble seeing this final partition? Open the above image up standalone and zoom
 This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...
 
 ```{define-block}
-pvspart
-pvspart_macro/
-pvshelper_code/
+diagramhelperpart
+diagramhelperpart_macro/
+diagramhelper_code/
 ```
 
-```{pvspart}
+```{diagramhelperpart}
 358
 ```
 
@@ -274,7 +274,7 @@ The algorithm for processing the partial rule is similar to the conceptual model
     [●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●]●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
     ```
 
-    ```{pvspart}
+    ```{diagramhelperpart}
     55
     ```
 
@@ -300,12 +300,12 @@ If the sign is not set, it's assumed to be POSITIVE.
 Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).
 
 ```{define-block}
-pvslinenum
-pvslinenum_macro/
-pvshelper_code/
+diagramhelperlinenum
+diagramhelperlinenum_macro/
+diagramhelper_code/
 ```
 
-```{pvslinenum}
+```{diagramhelperlinenum}
 width 600
 - -3.5
 | -3
@@ -326,7 +326,7 @@ width 600
 
 For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up (and vice versa).
 
-```{pvslinenum}
+```{diagramhelperlinenum}
 width 600
 - -5.5
 * -5

@@ -178,11 +178,11 @@ for (digit_value, index_value) in input
 <p>The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.</p>
 <p>If the partial rule is not set, it's assumed to be 0.</p>
 <p>Conceptually, you can think of each <a href="#BOOKMARK1">digit</a> in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDraw5b438715.svg" alt="Concept diagram for partial rule 3"></p>
+<p><img src="MainPartialConceptRecurseDraw6d7d4738.svg" alt="Concept diagram for partial rule 3"></p>
 <p>, ... the second index picks out 5 equal parts out of the NEXT part of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDraw1ccad8c7.svg" alt="Concept diagram for partial rule 35"></p>
+<p><img src="MainPartialConceptRecurseDraw20a9810f.svg" alt="Concept diagram for partial rule 35"></p>
 <p>, ... the third index picks out 8 equal parts out of the NEXT part of the previous part ...</p>
-<p><img src="MainPartialConceptRecurseDraw8a0aee7a.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptRecurseDraw2cfee1fd.svg" alt="Concept diagram for partial rule 358"></p>
 <p>.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
@@ -190,7 +190,7 @@ for (digit_value, index_value) in input
 <p>Trouble seeing this final partition? Open the above image up standalone and zoom in. It's an SVG.</p>
 </div>
 <p>This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...</p>
-<p><img src="MainPartialConceptDrawa037f430.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptDraw37cbd5c5.svg" alt="Concept diagram for partial rule 358"></p>
 <p>The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...</p>
 <ol>
 <li>
@@ -235,7 +235,7 @@ for (item in index) {
 <p>The partial string is a selection out the total parts calculated in the step above. Out of 100 parts, 55 are selected.</p>
 <pre><code>[●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●]●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 </code></pre>
-<p><img src="MainPartialConceptDraw38e9205a.svg" alt="Concept diagram for partial rule 55"></p>
+<p><img src="MainPartialConceptDrawdc29a8a4.svg" alt="Concept diagram for partial rule 55"></p>
 </li>
 </ol>
 <p><strong>sign rule</strong></p>
@@ -255,9 +255,9 @@ for (item in index) {
 </ul>
 <p>If the sign is not set, it's assumed to be POSITIVE.</p>
 <p>Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).</p>
-<p><img src="MainNumberLineDraw89814c79.svg" alt="Concept diagram for line number -3.5 -3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3 3.5"></p>
+<p><img src="MainNumberLineDrawbcd42dd9.svg" alt="Concept diagram for line number -3.5 -3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3 3.5"></p>
 <p>For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up (and vice versa).</p>
-<p><img src="MainNumberLineDraw2a19d73e.svg" alt="Concept diagram for line number -5.5 -5 -4 -3 -2 -1 0 1 2 3 4 5 5.5"></p>
+<p><img src="MainNumberLineDraw5fed5e25.svg" alt="Concept diagram for line number -5.5 -5 -4 -3 -2 -1 0 1 2 3 4 5 5.5"></p>
 <p>In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...</p>
 <ul>
 <li>negative number, it means that money is lost / owed.</li>
