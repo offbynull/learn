@@ -75,7 +75,7 @@ public final class MainFractionDraw {
                 }
 
                 String outputFileName = MainNumberLineDraw.class.getSimpleName()
-                        + Hashing.goodFastHash(32).hashString(input, UTF_8).toString() + ".svg";
+                        + Hashing.murmur3_128(32).hashString(input, UTF_8).toString() + ".svg";
                 writeSvg(g, Path.of("/output", outputFileName));
                 mdOut.write("![Concept diagram for fraction " + numerator + " / " + denominator + "](" + outputFileName + ")");
             } catch (Exception e) {

@@ -79,7 +79,7 @@ public class MainNumberLineDraw {
                 drawNumberLine(g, width, notches);
 
                 String outputFileName = MainNumberLineDraw.class.getSimpleName()
-                        + Hashing.goodFastHash(32).hashString(input, UTF_8).toString() + ".svg";
+                        + Hashing.murmur3_128(32).hashString(input, UTF_8).toString() + ".svg";
                 writeSvg(g, Path.of("/output", outputFileName));
                 mdOut.write("![Concept diagram for line number " + notches.stream().map(n -> n.x).map(DECIMAL_FORMAT::format).collect(joining(" ")) + "](" + outputFileName + ")");
             } catch (Exception e) {

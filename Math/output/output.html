@@ -181,11 +181,11 @@ for (digit_value, index_value) in input
 <p>The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.</p>
 <p>If the partial rule is not set, it's as<a href="#BOOKMARK10">sum</a>ed to be 0.</p>
 <p>Conceptually, you can think of each <a href="#BOOKMARK1">digit</a> in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDrawdf781b6a.svg" alt="Concept diagram for partial rule 3"></p>
+<p><img src="MainPartialConceptRecurseDrawcaf769d771100d261dfc5e52466cb8da.svg" alt="Concept diagram for partial rule 3"></p>
 <p>, ... the second index picks out 5 equal parts out of the NEXT part of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDrawe40a2026.svg" alt="Concept diagram for partial rule 35"></p>
+<p><img src="MainPartialConceptRecurseDrawe0df86ea9e2d52752acdf6400937ba01.svg" alt="Concept diagram for partial rule 35"></p>
 <p>, ... the third index picks out 8 equal parts out of the NEXT part of the previous part ...</p>
-<p><img src="MainPartialConceptRecurseDraw0f9b6e00.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptRecurseDraw56bacd259cb30799c32eb36fca49c964.svg" alt="Concept diagram for partial rule 358"></p>
 <p>.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
@@ -193,7 +193,7 @@ for (digit_value, index_value) in input
 <p>Trouble seeing this final partition? Open the above image up standalone and zoom in. It's an SVG.</p>
 </div>
 <p>This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...</p>
-<p><img src="MainPartialConceptDraw91062ebf.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptDraw56bacd259cb30799c32eb36fca49c964.svg" alt="Concept diagram for partial rule 358"></p>
 <p>The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...</p>
 <ol>
 <li>
@@ -238,7 +238,7 @@ for (item in index) {
 <p>The partial string is a selection out the <a href="#BOOKMARK13">total</a> parts calculated in the step above. Out of 100 parts, 55 are selected.</p>
 <pre><code>[●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●]●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 </code></pre>
-<p><img src="MainPartialConceptDraw7c40612d.svg" alt="Concept diagram for partial rule 55"></p>
+<p><img src="MainPartialConceptDrawd1a093eb8471682bfe40be9d23da3a08.svg" alt="Concept diagram for partial rule 55"></p>
 </li>
 </ol>
 <a name="HEADREF1"></a><h1>Number Naming</h1>
@@ -263,9 +263,9 @@ for (item in index) {
 </ul>
 <p>If the sign is not set, it's as<a href="#BOOKMARK10">sum</a>ed to be POSITIVE.</p>
 <p>Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).</p>
-<p><img src="MainNumberLineDraw88de5e0c.svg" alt="Concept diagram for line number -3.5 -3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3 3.5"></p>
+<p><img src="MainNumberLineDrawb868afb3e9a2b768b55c716570ed4207.svg" alt="Concept diagram for line number -3.5 -3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3 3.5"></p>
 <p>For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up (and vice versa).</p>
-<p><img src="MainNumberLineDraw63244988.svg" alt="Concept diagram for line number -5.5 -5 -4 -3 -2 -1 0 1 2 3 4 5 5.5"></p>
+<p><img src="MainNumberLineDrawbb87ab21cd541dc5fab3089fb24bec61.svg" alt="Concept diagram for line number -5.5 -5 -4 -3 -2 -1 0 1 2 3 4 5 5.5"></p>
 <p>In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...</p>
 <ul>
 <li>negative number, it means that money is lost / owed.</li>
@@ -287,9 +287,9 @@ for (item in index) {
 <li><a name="BOOKMARK6"></a><strong>denominator</strong> (bottom) is an integer that represents the number of parts in a whole.</li>
 </ul>
 <p>For example, 4 parts out of 5 parts would be represented as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>4</mn><mn>5</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{4}{5}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">5</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>...</p>
-<p><img src="MainNumberLineDraw4f875b59.svg" alt="Concept diagram for fraction 0 / 5"></p>
+<p><img src="MainNumberLineDraweb4fec2b184bb2e449070eee8149909c.svg" alt="Concept diagram for fraction 0 / 5"></p>
 <p>In some cases, the <a href="#BOOKMARK5">numerator</a> may be greater than the <a href="#BOOKMARK6">denominator</a>. That is, the <a href="#BOOKMARK13">total</a> number of parts may be larger than the number of parts in a whole. For example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>11</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{11}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>...</p>
-<p><img src="MainNumberLineDrawcb68d6ed.svg" alt="Concept diagram for fraction 0 / 8"></p>
+<p><img src="MainNumberLineDraw2d2fd31b5774a50976271bcf9cc54ebf.svg" alt="Concept diagram for fraction 0 / 8"></p>
 <p>In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a <a href="#BOOKMARK4">fraction</a>: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mfrac><mn>3</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">1 \frac{3}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">1</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
 <a name="HEADREF7"></a><h2>Irrational</h2>
 <a name="HEADREF8"></a><h1>Whole Number Addition</h1>
@@ -509,46 +509,66 @@ move those 100 items as 1 group of 100s
 <p>If 2 individual single <a href="#BOOKMARK1">digit</a> components combine together to results in an extra <a href="#BOOKMARK1">digit</a> (e.g. 5+8=13), the bleed over <a href="#BOOKMARK1">digit</a> is carried over to the next position (on the left). This is denoted by stacking the bleed over <a href="#BOOKMARK1">digit</a> on top of the next position -- it's being combined along with the other <a href="#BOOKMARK1">digit</a>s at that position. For example...</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left right left right left" columnspacing="0em" rowlines="none none solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>5</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>5</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>8</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mo>+</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>6</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>3</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>2</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{alignedat}{3}{1}&amp;  \enspace{ }&amp;  \enspace{ }&amp; \\{5}&amp;  \enspace{5}&amp;  \enspace{1}&amp; \\{ }&amp;  \enspace{8}&amp;  \enspace{1}&amp; \enspace + \\ \hline{6}&amp;  \enspace{3}&amp;  \enspace{2}&amp;\end{alignedat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6em;vertical-align:-2.7500000000000004em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.2499999999999996em;"><span style="top:-5.25em;"><span class="pstrut" style="height:5.25em;"></span><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">5</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">5</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">8</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">+</span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span><span style="top:-3.9999999999999996em;"><span class="pstrut" style="height:5.25em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span></span></p>
 <p>The way to perform this algorithm via code is as follows...</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
-<p>For example, <a href="#BOOKMARK8">add</a>ing 191 to 273...</p>
+<pre class="hljs"><code><span class="hljs-comment">// </span>
+<span class="hljs-comment">// Writes to STDOUT removed for clarity</span>
+<span class="hljs-comment">//</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[][][] DIGIT_ADD_CACHE = {
+        {{<span class="hljs-number">0</span>  },{<span class="hljs-number">1</span>  },{<span class="hljs-number">2</span>  },{<span class="hljs-number">3</span>  },{<span class="hljs-number">4</span>  },{<span class="hljs-number">5</span>  },{<span class="hljs-number">6</span>  },{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  }},
+        {{<span class="hljs-number">1</span>  },{<span class="hljs-number">2</span>  },{<span class="hljs-number">3</span>  },{<span class="hljs-number">4</span>  },{<span class="hljs-number">5</span>  },{<span class="hljs-number">6</span>  },{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>}},
+        {{<span class="hljs-number">2</span>  },{<span class="hljs-number">3</span>  },{<span class="hljs-number">4</span>  },{<span class="hljs-number">5</span>  },{<span class="hljs-number">6</span>  },{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>}},
+        {{<span class="hljs-number">3</span>  },{<span class="hljs-number">4</span>  },{<span class="hljs-number">5</span>  },{<span class="hljs-number">6</span>  },{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>}},
+        {{<span class="hljs-number">4</span>  },{<span class="hljs-number">5</span>  },{<span class="hljs-number">6</span>  },{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">3</span>}},
+        {{<span class="hljs-number">5</span>  },{<span class="hljs-number">6</span>  },{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">3</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">4</span>}},
+        {{<span class="hljs-number">6</span>  },{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">3</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">4</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">5</span>}},
+        {{<span class="hljs-number">7</span>  },{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">3</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">4</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">5</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">6</span>}},
+        {{<span class="hljs-number">8</span>  },{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">3</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">4</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">5</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">6</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">7</span>}},
+        {{<span class="hljs-number">9</span>  },{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">3</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">4</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">5</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">6</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">7</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">8</span>}}        
+    };
+    
+    <span class="hljs-keyword">int</span>[] add(<span class="hljs-keyword">int</span>[] num1Digits, <span class="hljs-keyword">int</span>[] num2Digits) <span class="hljs-keyword">throws</span> IOException {
+        
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">int</span> maxLen = Math.max(num1Digits.length, num2Digits.length);
+            num1Digits = padWithZeros(num1Digits, maxLen);
+            num2Digits = padWithZeros(num2Digits, maxLen);
+
+            <span class="hljs-keyword">int</span>[] result = IntStream.range(<span class="hljs-number">0</span>, maxLen).map(i -&gt; <span class="hljs-number">0</span>).toArray();
+            <span class="hljs-keyword">int</span>[] carryOverDigits = <span class="hljs-keyword">null</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = maxLen - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+                <span class="hljs-keyword">int</span> num1Digit = i &gt;= num1Digits.length ? <span class="hljs-number">0</span> : num1Digits[i];
+                <span class="hljs-keyword">int</span> num2Digit = i &gt;= num2Digits.length ? <span class="hljs-number">0</span> : num2Digits[i];
+                <span class="hljs-keyword">int</span>[] digitsAdded = DIGIT_ADD_CACHE[num1Digit][num2Digit];
+
+
+                <span class="hljs-keyword">if</span> (carryOverDigits != <span class="hljs-keyword">null</span>) {
+                    digitsAdded = add(carryOverDigits, digitsAdded);
+                    carryOverDigits = <span class="hljs-keyword">null</span>;
+                }
+
+                <span class="hljs-keyword">switch</span> (digitsAdded.length) {
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+                        result[i] = digitsAdded[<span class="hljs-number">0</span>];
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+                        result[i] = digitsAdded[<span class="hljs-number">1</span>];
+                        carryOverDigits = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[] { digitsAdded[<span class="hljs-number">0</span>] };
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">default</span>:
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(); <span class="hljs-comment">// should never happen</span>
+                }
+                
+            }
+
+            <span class="hljs-keyword">if</span> (carryOverDigits != <span class="hljs-keyword">null</span>) {
+                result = concat(stream(carryOverDigits), stream(result)).toArray();
+            }
+            
+
+            <span class="hljs-keyword">return</span> result;
+        } <span class="hljs-keyword">finally</span> {
+        }
+    }
+</code></pre><p>The code output above has writes removed. When the code actually runs, it outputs what logic takes place at each step. For example ...</p>
 <div style="border:1px solid black;">
 <p></p>
 <p>Adding 273 to 991</p>

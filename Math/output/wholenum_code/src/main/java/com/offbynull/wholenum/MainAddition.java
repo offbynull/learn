@@ -65,6 +65,7 @@ public class MainAddition {
         this.out = writer;
     }
     
+    //MARKDOWN_ISOLATE
     static final int[][][] DIGIT_ADD_CACHE = {
         {{0  },{1  },{2  },{3  },{4  },{5  },{6  },{7  },{8  },{9  }},
         {{1  },{2  },{3  },{4  },{5  },{6  },{7  },{8  },{9  },{1,0}},
@@ -79,7 +80,7 @@ public class MainAddition {
     };
     
     int[] add(int[] num1Digits, int[] num2Digits) throws IOException {
-        borderStart();
+        printBulletOpen();
         
         try {
             int maxLen = Math.max(num1Digits.length, num2Digits.length);
@@ -93,7 +94,7 @@ public class MainAddition {
                 int num2Digit = i >= num2Digits.length ? 0 : num2Digits[i];
                 int[] digitsAdded = DIGIT_ADD_CACHE[num1Digit][num2Digit];
 
-                borederReset();
+                printBulletNewLine();
                 println("pos ", maxLen - i, " -- adding ", isolate(num1Digit, i, maxLen), " and ", isolate(num2Digit, i, maxLen));
                 println("start state: ", "carry-over=",  carryOverDigits, ".");
                 println(num1Digit, " + ", num2Digit, " is ", digitsAdded, ".");
@@ -120,34 +121,35 @@ public class MainAddition {
                 println("end state: ", "result=", isolate(result, i), " / carry-over=",  carryOverDigits, ".");
             }
 
-            borederReset();
+            printBulletNewLine();
             if (carryOverDigits != null) {
                 result = concat(stream(carryOverDigits), stream(result)).toArray();
                 println("prepend remaining carry-over of ", carryOverDigits, ".");
                 println("end state: ", "result=", isolate(result, 0), ".");
             }
             
-            borederReset();
+            printBulletNewLine();
             println("result is ", result);
 
             return result;
         } finally {
-            borderStop();
+            printBulletClose();
         }
     }
+    //MARKDOWN_ISOLATE
     
     private int indent = -2;
     private boolean firstLine = true;
-    private void borderStart() {
+    private void printBulletOpen() {
         indent += 2;
         firstLine = true;
     }
     
-    private void borderStop() {
+    private void printBulletClose() {
         indent -= 2;
     }
     
-    private void borederReset() {
+    private void printBulletNewLine() {
         firstLine = true;
     }
     

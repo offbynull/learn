@@ -41,7 +41,7 @@ public final class MainPartialConceptRecurseDraw {
                 drawSlices(g, width, height, digits, 9, true);
 
                 String outputFileName = MainPartialConceptRecurseDraw.class.getSimpleName()
-                        + Hashing.goodFastHash(32).hashString(input, UTF_8).toString() + ".svg";
+                        + Hashing.murmur3_128(32).hashString(input, UTF_8).toString() + ".svg";
                 try (Writer writer = Files.newBufferedWriter(Path.of("/output", outputFileName))) {
                     g.stream(writer, false);
                 }
