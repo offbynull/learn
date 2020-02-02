@@ -28,20 +28,15 @@ These wholes and partial are combined to represent the final value for the numbe
 The grammar for the place value system is...
 
 ```antlr
-number: sign? whole (DOT partial)?;
-sign: POSITIVE | NEGATIVE;
+number: whole (DOT partial)?;
 whole: DIGIT+;
 partial: DIGIT+;
 
-POSITIVE: '+';
-NEGATIVE: '-';
 DOT: '.';
 DIGIT: [0123456789];
 ```
 
-The entry point to the grammar is the number rule. Note that the partial and sign portions of the number rule are optional. A number with a missing ...
- * partial portion is assumed to have a partial portion of 0 (e.g. 5 is the same as 5.0).
- * sign portion is assumed to have a sign of + (e.g. 1.5 is the same as +1.5).
+The entry point to the grammar is the number rule. Note that the partial portion of the number rule is optional -- a number with a missing partial portion is assumed to have a partial portion of 0 (e.g. 5 is the same as 5.0).
 
 The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / number operations -- value is tracked by iteratively pushing blocks into arrays.
 
@@ -52,9 +47,9 @@ Why create an algorithm without using numbers? Using numbers to describe numbers
 **whole rule**
 
 ```
-number: sign? whole ('.' partial)?;
-               │
-               └── DIGIT+;
+number: whole ('.' partial)?;
+         │
+         └── DIGIT+;
 ```
 
 The whole rule is used to express how many whole values there are. For example, to process the string 572 for the whole rule, ...
@@ -164,14 +159,15 @@ The whole rule is used to express how many whole values there are. For example, 
            ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
            ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
            ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
     ```
 
 **partial rule**
 
 ```
-number: sign? whole ('.' partial)?;
-                            │
-                            └── DIGIT+;
+number: whole ('.' partial)?;
+                      │
+                      └── DIGIT+;
 ```
 
 ```{note}
@@ -278,16 +274,86 @@ The algorithm for processing the partial rule is similar to the conceptual model
     55
     ```
 
-**sign rule**
+# Number Naming
+
+TODO: Discuss number to word transitions (2nd part of Chapter 1.1)
+
+21,055 is the same as saying twenty one thousand fifty five
+
+# Real Numbers
+
+```{plantuml}
+@startditaa(--no-separation)
++-----------------------------------------------------------------------+
+|                                                                       |
+|                                 Real cFFF                             |
+|                                                                       |
+|   +-+-+-+----------------------------+   +------------------------+   |
+|   | | | |                            |   |                        |   |
+|   | | | |   Natural (e.g. 1, 7, 291) |   |                        |   |
+|   | | | |   cFFF                     |   |                        |   |
+|   | | | +----------------------------+   |                        |   |
+|   | | |                              |   |                        |   |
+|   | | |   Whole (0)                  |   |                        |   |
+|   | | |   cFFF                       |   |                        |   |
+|   | | +------------------------------+   | Irrational (π, √2, √3) |   |
+|   | |                                |   | cFFF                   |   |
+|   | |   Integer (-7, -19, -471)      |   |                        |   |
+|   | |   cFFF                         |   |                        |   |
+|   | +--------------------------------+   |                        |   |
+|   |                                  |   |                        |   |
+|   |   Rational (⅓, -⅓, -⅑)           |   |                        |   |
+|   |   cFFF                           |   |                        |   |
+|   +----------------------------------+   +------------------------+   |
++-----------------------------------------------------------------------+
+@endditaa
+```
+
+TODO: write blurb here
+
+## Natural
+
+TODO: write blurb here
+
+## Whole
+
+```{plantuml}
+@startditaa(--no-separation)
++-----------------------------------------------------------------------+
+|                                                                       |
+|                                 Real cFFF                             |
+|                                                                       |
+|   +-+-+-+----------------------------+   +------------------------+   |
+|   | | | |                            |   |                        |   |
+|   | | | |   Natural (e.g. 1, 7, 291) |   |                        |   |
+|   | | | |   cCCF                     |   |                        |   |
+|   | | | +----------------------------+   |                        |   |
+|   | | |                              |   |                        |   |
+|   | | |   Whole (0)                  |   |                        |   |
+|   | | |   c88F                       |   |                        |   |
+|   | | +------------------------------+   | Irrational (π, √2, √3) |   |
+|   | |                                |   | cFFF                   |   |
+|   | |   Integer (-7, -19, -471)      |   |                        |   |
+|   | |   cFFF                         |   |                        |   |
+|   | +--------------------------------+   |                        |   |
+|   |                                  |   |                        |   |
+|   |   Rational (⅓, -⅓, -⅑)           |   |                        |   |
+|   |   cFFF                           |   |                        |   |
+|   +----------------------------------+   +------------------------+   |
++-----------------------------------------------------------------------+
+@endditaa
+```
+
+`{bm} Whole number`s are numbers which have no partial (fractional) portion -- they only consist of wholes. For example, 5, 104, and 27 are whole numbers while 4.2 is not. Whole numbers include all of the `{bm} natural number/(natural number|counting number)/i`s as well as 0.
+
+## Integer
+
+TODO: this was pulled out from the place-value system section -- fix it.
 
 ```
 number: sign? whole ('.' partial)?;
          │
          └── sign: POSITIVE | NEGATIVE;
-```
-
-```{note}
-It's expected that you fully understand the whole rule and partial rule because these are required to explain the sign rule.
 ```
 
 The sign rule is used to express which category a number is in. Recall that the number 0 represents nothing / no value / empty values. If the sign is ...
@@ -353,17 +419,7 @@ Remember that 0 means no value / nothing / empty. As such, there's no such thing
 
 There is no special algorithm for processing the sign rule -- set a flag to indicate if the number is negative or positive.
 
-# Number Naming
-
-TODO: Discuss number to word transitions (2nd part of Chapter 1.1)
-
-21,055 is the same as saying twenty one thousand fifty five
-
-# Whole Number Domain
-
-`{bm} whole number`s are numbers which have no partial/fractional portion. For example, 
-
-# Fraction
+## Rational
 
 TODO: Chapter 4
 
@@ -399,9 +455,232 @@ radius 40
 
 In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a fraction: `{kt} 1 \frac{3}{8}`.
 
-# Addition
+## Irrational
 
-TODO: Chapter 1.2
+# Whole Number Addition
+
+`{bm} Addition` is the concept of taking 2 numbers and combining their values together. For example, combining 3 items and 5 items together results in 7 items...
+
+```
+ [●●●]    [●●●●●]
+   3         5
+
+group values together
+
+   [●●●●●●●●]
+       7
+```
+
+Addition is typically represented using the infix operator +. The above example would be represented as 3+5.
+
+```{note}
+You can think of this as a function that takes in 2 arguments: add(3, 5).
+```
+
+When using words, addition is typically represented using the following syntax:
+
+* `{bm} add` -- e.g. add 3 and 5
+* `{bm} plus` -- e.g. 3 plus 5
+* `{bm} sum` -- e.g. sum of 3 and 5
+* `{bm} increase` -- e.g. 3 increased by 5
+* `{bm} more than` -- e.g. 3 more than 5
+* `{bm} total` -- e.g. total of 3 and 5
+
+Common properties of addition:
+
+ * commutative: order in which 2 numbers are added doesn't matter
+   
+   ```
+    [●●●]    [●●●●●] results in [●●●●●●●●]    (3+5 is 7)
+      3         5                    7
+   
+    [●●●●●]   [●●●]  results in [●●●●●●●●]    (5+3 is 7)
+      5         3                    7
+   ```
+
+ * identity: any number plus 0 results in the same number
+
+   ```
+   [●●●]    [] results in [●●●]    (3+0 is 3)
+     3       0              3
+
+   []    [●●●] results in [●●●]    (0+3 is 3)
+    0      3                3
+   ```
+
+## Vertical Addition Algorithm
+
+The algorithm used by humans to add large numbers together is called `{bm} vertical addition`. Vertical addition relies on two ideas...
+
+1. humans can easily add a single digit number to another single digit number without much effort. For example...
+
+   * 3+4 is 7
+   * 1+9 is 10
+   * 9+9 is 18
+
+   ... are all addition operations that don't take much effort / are already probably cached in person's memory.
+
+2. The second idea is that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+
+   ```
+   100
+   100
+   100
+   100
+   100            1
+   100            1
+   100     10     1
+   100     10     1
+   100     10     1
+   ---     --     -
+   900     30     5
+   
+   
+   
+   9 3 5
+   │ │ │
+   │ │ └─ ●
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │
+   │ └─── ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │
+   └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+   ```
+
+Since a number can be broken down into single digit components and adding a single digit to any number is easy, any two numbers can be added by adding their individual single digit components. For example, the number 53 and 21 are broken down as follows...
+
+```
+5 3                      2 1
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │
+│    ●                   └─── ●●●●●●●●●●
+│                             ●●●●●●●●●●
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+Add their individual single digit components together to get the sum. The ...
+ * 1s place combines the 3 items and 1 item together to get 4 items: 3 + 1 results in 4
+ * 10s place combines the 5 rows and 2 rows together to get 7 rows: 50 + 20 result in 70
+
+```
+7 4
+│ │
+│ └─ ●
+│    ● 
+│    ● 
+│    ● 
+│
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+In certain cases, the addition of two single digit components may bleed over to the next single digit component. For example, adding 93 and 21 can be broken down as follows...
+ * 1s place combines the 3 items and 1 item together to get 4 items: 3 + 1 results in 4
+ * 10s place combines the 9 rows and 2 rows together to get 7 rows: 90 + 20 result in 110
+
+Combining the 10s place resulted in a bleed over to the hundreds place. This extra 100s place bleed over digit can be carried over and combined into the hundreds place. This process is called carry-over -- you're carrying-over the extra bleed over digit to its correct place and combining it with whatever else is there.
+
+Conceptually, carrying-over is the idea of breaking out a group of 10 from the current place and moving them over to the next highest place (e.g. 10s place to 100s place). For example, when adding 93 to 21, adding the digits at the 10's place (90+20) results in 110...
+
+```
+9 3                      2 1
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │
+│    ●                   └─── ●●●●●●●●●●
+│                             ●●●●●●●●●●
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+
+results in 
+
+11 4
+│  │
+│  └─ ●
+│     ● 
+│     ● 
+│     ● 
+│
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+Since 11 is too many digits for the tens place (each place must only have 1 digit), break out 10 groups from the 10s place and move those over to the 100s place...
+
+```
+11 4
+│  │
+│  └─ ●
+│     ● 
+│     ● 
+│     ● 
+│
+└─── ●●●●●●●●●●
+    ┌──────────┐
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│ each group is 10 items and we grabbed 10 of them (that's 100 items total)
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    └──────────┘
+
+move those 100 items as 1 group of 100s
+
+1 1 4
+│ │ │
+│ │ └─ ●
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │
+│ └─── ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+```
+
+The digit in the 10s place is the result for the 10s place, while the digit in the 100s place gets combined in with the 100s place. In the above example, the 100s place was empty, so the carry-over remained as-is.
+
+The way to perform this algorithm in real-life is to stack the two numbers being added on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, add the individual single digit components together (from right-to-left). For example...
 
 ```{define-block}
 ktvertadd
@@ -410,18 +689,119 @@ kthelper_code/
 ```
 
 ```{ktvertadd}
-{1}{ }
-{1}{9}
-{2}{2}
-------
-{4}{1}
+{1}{5}{3}
+{ }{2}{1}
+---
+{1}{7}{4}
 ```
 
-## Whole Numbers
+```{note}
+The number 21 has nothing in its 100s place -- nothing is the same as 0. 21 is the same as 021.
+```
 
-## Integer Numbers
+If 2 individual single digit components combine together to results in an extra digit (e.g. 5+8=13), the bleed over digit is carried over to the next position (on the left). This is denoted by stacking the bleed over digit on top of the next position -- it's being combined along with the other digits at that position. For example...
 
-## Rational Numbers
+```{ktvertadd}
+{1}{ }{ }
+{5}{5}{1}
+{ }{8}{1}
+---
+{6}{3}{2}
+```
+
+The way to perform this algorithm via code is as follows...
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE
+
+
+
+For example, adding 191 to 273...
+
+```{define-block}
+wholenumadd
+wholenumadd_macro/
+wholenum_code/
+```
+
+```{wholenumadd}
+273 991
+```
 
 # Subtraction
 

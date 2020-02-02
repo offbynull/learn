@@ -7,27 +7,31 @@
 <ul>
 <li><a href="#HEADREF0">Place Value System</a></li>
 <li><a href="#HEADREF1">Number Naming</a></li>
-<li><a href="#HEADREF2">Whole Number Domain</a></li>
-<li><a href="#HEADREF3">Fraction</a></li>
-<li><a href="#HEADREF4">Addition</a></li>
+<li><a href="#HEADREF2">Real Numbers</a></li>
 <ul>
-<li><a href="#HEADREF5">Whole Numbers</a></li>
-<li><a href="#HEADREF6">Integer Numbers</a></li>
-<li><a href="#HEADREF7">Rational Numbers</a></li>
+<li><a href="#HEADREF3">Natural</a></li>
+<li><a href="#HEADREF4">Whole</a></li>
+<li><a href="#HEADREF5">Integer</a></li>
+<li><a href="#HEADREF6">Rational</a></li>
+<li><a href="#HEADREF7">Irrational</a></li>
 </ul>
-<li><a href="#HEADREF8">Subtraction</a></li>
-<li><a href="#HEADREF9">Multiplication</a></li>
-<li><a href="#HEADREF10">Division</a></li>
-<li><a href="#HEADREF11">Order of Operations</a></li>
-<li><a href="#HEADREF12">Algebra Rules</a></li>
-<li><a href="#HEADREF13">OpenStax Prealgebra Problems</a></li>
+<li><a href="#HEADREF8">Whole Number Addition</a></li>
 <ul>
-<li><a href="#HEADREF14">Chapter 1 Section 1.1</a></li>
-<li><a href="#HEADREF15">Chapter 1 Section 1.2</a></li>
-<li><a href="#HEADREF16">Chapter 1 Section 1.3</a></li>
-<li><a href="#HEADREF17">Chapter 1 Section 1.4</a></li>
-<li><a href="#HEADREF18">Chapter 1 Section 1.5</a></li>
-<li><a href="#HEADREF19">Chapter 2 Section 2.1</a></li>
+<li><a href="#HEADREF9">Vertical Addition Algorithm</a></li>
+</ul>
+<li><a href="#HEADREF10">Subtraction</a></li>
+<li><a href="#HEADREF11">Multiplication</a></li>
+<li><a href="#HEADREF12">Division</a></li>
+<li><a href="#HEADREF13">Order of Operations</a></li>
+<li><a href="#HEADREF14">Algebra Rules</a></li>
+<li><a href="#HEADREF15">OpenStax Prealgebra Problems</a></li>
+<ul>
+<li><a href="#HEADREF16">Chapter 1 Section 1.1</a></li>
+<li><a href="#HEADREF17">Chapter 1 Section 1.2</a></li>
+<li><a href="#HEADREF18">Chapter 1 Section 1.3</a></li>
+<li><a href="#HEADREF19">Chapter 1 Section 1.4</a></li>
+<li><a href="#HEADREF20">Chapter 1 Section 1.5</a></li>
+<li><a href="#HEADREF21">Chapter 2 Section 2.1</a></li>
 </ul>
 </ul>
 </div>
@@ -46,21 +50,14 @@
     4        3   .  5
 </code></pre>
 <p>The grammar for the <a href="#BOOKMARK0">place value system</a> is...</p>
-<pre><code class="language-antlr">number: sign? whole (DOT partial)?;
-sign: POSITIVE | NEGATIVE;
+<pre><code class="language-antlr">number: whole (DOT partial)?;
 whole: DIGIT+;
 partial: DIGIT+;
 
-POSITIVE: '+';
-NEGATIVE: '-';
 DOT: '.';
 DIGIT: [0123456789];
 </code></pre>
-<p>The entry point to the grammar is the number rule. Note that the partial and sign portions of the number rule are optional. A number with a missing ...</p>
-<ul>
-<li>partial portion is assumed to have a partial portion of 0 (e.g. 5 is the same as 5.0).</li>
-<li>sign portion is assumed to have a sign of + (e.g. 1.5 is the same as +1.5).</li>
-</ul>
+<p>The entry point to the grammar is the number rule. Note that the partial portion of the number rule is optional -- a number with a missing partial portion is as<a href="#BOOKMARK10">sum</a>ed to have a partial portion of 0 (e.g. 5 is the same as 5.0).</p>
 <p>The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / number operations -- value is tracked by iteratively pushing blocks into arrays.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
@@ -68,9 +65,9 @@ DIGIT: [0123456789];
 <p>Why create an algorithm without using numbers? Using numbers to describe numbers is circular logic.</p>
 </div>
 <p><strong>whole rule</strong></p>
-<pre><code>number: sign? whole ('.' partial)?;
-               │
-               └── DIGIT+;
+<pre><code>number: whole ('.' partial)?;
+         │
+         └── DIGIT+;
 </code></pre>
 <p>The whole rule is used to express how many whole values there are. For example, to process the string 572 for the whole rule, ...</p>
 <ol>
@@ -167,13 +164,14 @@ for (digit_value, index_value) in input
        ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
        ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
        ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 </code></pre>
 </li>
 </ol>
 <p><strong>partial rule</strong></p>
-<pre><code>number: sign? whole ('.' partial)?;
-                            │
-                            └── DIGIT+;
+<pre><code>number: whole ('.' partial)?;
+                      │
+                      └── DIGIT+;
 </code></pre>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
@@ -181,13 +179,13 @@ for (digit_value, index_value) in input
 <p>It's expected that you fully understand the whole rule because <a href="#BOOKMARK2">whole number</a>s are used to explain the partial rule.</p>
 </div>
 <p>The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.</p>
-<p>If the partial rule is not set, it's assumed to be 0.</p>
+<p>If the partial rule is not set, it's as<a href="#BOOKMARK10">sum</a>ed to be 0.</p>
 <p>Conceptually, you can think of each <a href="#BOOKMARK1">digit</a> in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDraw7b57743d.svg" alt="Concept diagram for partial rule 3"></p>
+<p><img src="MainPartialConceptRecurseDrawdf781b6a.svg" alt="Concept diagram for partial rule 3"></p>
 <p>, ... the second index picks out 5 equal parts out of the NEXT part of the whole ...</p>
-<p><img src="MainPartialConceptRecurseDraw6994cfb9.svg" alt="Concept diagram for partial rule 35"></p>
+<p><img src="MainPartialConceptRecurseDrawe40a2026.svg" alt="Concept diagram for partial rule 35"></p>
 <p>, ... the third index picks out 8 equal parts out of the NEXT part of the previous part ...</p>
-<p><img src="MainPartialConceptRecurseDrawf9b1466c.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptRecurseDraw0f9b6e00.svg" alt="Concept diagram for partial rule 358"></p>
 <p>.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
@@ -195,11 +193,11 @@ for (digit_value, index_value) in input
 <p>Trouble seeing this final partition? Open the above image up standalone and zoom in. It's an SVG.</p>
 </div>
 <p>This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...</p>
-<p><img src="MainPartialConceptDraw49c9a0f8.svg" alt="Concept diagram for partial rule 358"></p>
+<p><img src="MainPartialConceptDraw91062ebf.svg" alt="Concept diagram for partial rule 358"></p>
 <p>The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...</p>
 <ol>
 <li>
-<p>begin by determining the total number of parts there are. The algorithm to do this is as follows..</p>
+<p>begin by determining the <a href="#BOOKMARK13">total</a> number of parts there are. The algorithm to do this is as follows..</p>
 <pre><code>total_parts = &lt;empty&gt;
 for (item in index) {
   if (total_parts == &lt;empty&gt;) {
@@ -213,7 +211,7 @@ for (item in index) {
   }
 }
 </code></pre>
-<p>..., so for the string 55, the total number of parts would be 100...</p>
+<p>..., so for the string 55, the <a href="#BOOKMARK13">total</a> number of parts would be 100...</p>
 <pre><code>●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 </code></pre>
 <div style="margin: 2em; background-color: #e0e0e0">
@@ -221,48 +219,53 @@ for (item in index) {
 ⚠️NOTE️️️⚠️</strong>
 <p>An easier way to do the same thing is...</p>
 <ol>
-<li>add an extra index.</li>
+<li><a href="#BOOKMARK8">add</a> an extra index.</li>
 <li>set the first index to 1.</li>
 <li>set all other indexes to 0.</li>
 </ol>
-<p>So if the partial string has 2 <a href="#BOOKMARK1">digit</a>s (as 55 does), the total number of parts would be 100.</p>
+<p>So if the partial string has 2 <a href="#BOOKMARK1">digit</a>s (as 55 does), the <a href="#BOOKMARK13">total</a> number of parts would be 100.</p>
 <p>The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.</p>
 </div>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
 <p>An easier way to do the same thing is 10^partial.length.</p>
-<p>So if the partial string has 2 <a href="#BOOKMARK1">digit</a>s (as 55 does), the total number of parts would be 10^2=100.</p>
+<p>So if the partial string has 2 <a href="#BOOKMARK1">digit</a>s (as 55 does), the <a href="#BOOKMARK13">total</a> number of parts would be 10^2=100.</p>
 <p>The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.</p>
 </div>
 </li>
 <li>
-<p>The partial string is a selection out the total parts calculated in the step above. Out of 100 parts, 55 are selected.</p>
+<p>The partial string is a selection out the <a href="#BOOKMARK13">total</a> parts calculated in the step above. Out of 100 parts, 55 are selected.</p>
 <pre><code>[●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●]●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 </code></pre>
-<p><img src="MainPartialConceptDraw49a7aae1.svg" alt="Concept diagram for partial rule 55"></p>
+<p><img src="MainPartialConceptDraw7c40612d.svg" alt="Concept diagram for partial rule 55"></p>
 </li>
 </ol>
-<p><strong>sign rule</strong></p>
+<a name="HEADREF1"></a><h1>Number Naming</h1>
+<p>TODO: Discuss number to word transitions (2nd part of Chapter 1.1)</p>
+<p>21,055 is the same as saying twenty one thousand fifty five</p>
+<a name="HEADREF2"></a><h1>Real Numbers</h1>
+<p><img src="/.datafile_29458ded5784ac71cbf99d0985d5c023/diagram.svg" alt="Generated image"></p><p>TODO: write blurb here</p>
+<a name="HEADREF3"></a><h2>Natural</h2>
+<p>TODO: write blurb here</p>
+<a name="HEADREF4"></a><h2>Whole</h2>
+<p><img src="/.datafile_98bcce3c445a027c7feeef8c88ef64ac/diagram.svg" alt="Generated image"></p><p><a name="BOOKMARK2"></a><strong>Whole number</strong>s are numbers which have no partial (<a href="#BOOKMARK4">fraction</a>al) portion -- they only consist of wholes. For example, 5, 104, and 27 are <a href="#BOOKMARK2">whole number</a>s while 4.2 is not. <a href="#BOOKMARK2">Whole number</a>s include all of the <a name="BOOKMARK3"></a><strong>natural number</strong>s as well as 0.</p>
+<a name="HEADREF5"></a><h2>Integer</h2>
+<p>TODO: this was pulled out from the <a href="#BOOKMARK0">place-value system</a> section -- fix it.</p>
 <pre><code>number: sign? whole ('.' partial)?;
          │
          └── sign: POSITIVE | NEGATIVE;
 </code></pre>
-<div style="margin: 2em; background-color: #e0e0e0">
-<strong>
-⚠️NOTE️️️⚠️</strong>
-<p>It's expected that you fully understand the whole rule and partial rule because these are required to explain the sign rule.</p>
-</div>
 <p>The sign rule is used to express which category a number is in. Recall that the number 0 represents nothing / no value / empty values. If the sign is ...</p>
 <ul>
 <li>NEGATIVE, it means that it's less than nothing.</li>
-<li>POSITIVE, it means that it's more than nothing.</li>
+<li>POSITIVE, it means that it's <a href="#BOOKMARK12">more than</a> nothing.</li>
 </ul>
-<p>If the sign is not set, it's assumed to be POSITIVE.</p>
+<p>If the sign is not set, it's as<a href="#BOOKMARK10">sum</a>ed to be POSITIVE.</p>
 <p>Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).</p>
-<p><img src="MainNumberLineDraw911ad171.svg" alt="Concept diagram for line number -3.5 -3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3 3.5"></p>
+<p><img src="MainNumberLineDraw88de5e0c.svg" alt="Concept diagram for line number -3.5 -3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3 3.5"></p>
 <p>For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up (and vice versa).</p>
-<p><img src="MainNumberLineDrawaecd5f1c.svg" alt="Concept diagram for line number -5.5 -5 -4 -3 -2 -1 0 1 2 3 4 5 5.5"></p>
+<p><img src="MainNumberLineDraw63244988.svg" alt="Concept diagram for line number -5.5 -5 -4 -3 -2 -1 0 1 2 3 4 5 5.5"></p>
 <p>In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...</p>
 <ul>
 <li>negative number, it means that money is lost / owed.</li>
@@ -274,32 +277,330 @@ for (item in index) {
 <p>Remember that 0 means no value / nothing / empty. As such, there's no such thing as -0 or +0. There is just 0, and its used as a dividing point between the negatives and positives. If 0 has a sign, you can remove it.</p>
 </div>
 <p>There is no special algorithm for processing the sign rule -- set a flag to indicate if the number is negative or positive.</p>
-<a name="HEADREF1"></a><h1>Number Naming</h1>
-<p>TODO: Discuss number to word transitions (2nd part of Chapter 1.1)</p>
-<p>21,055 is the same as saying twenty one thousand fifty five</p>
-<a name="HEADREF2"></a><h1>Whole Number Domain</h1>
-<p><a name="BOOKMARK2"></a><strong>whole number</strong>s are numbers which have no partial/<a href="#BOOKMARK3">fraction</a>al portion. For example,</p>
-<a name="HEADREF3"></a><h1>Fraction</h1>
+<a name="HEADREF6"></a><h2>Rational</h2>
 <p>TODO: Chapter 4</p>
-<p><a name="BOOKMARK3"></a><strong>Fraction</strong>s are a way of representing numbers as parts. The syntax for a <a href="#BOOKMARK3">fraction</a> is as follows...</p>
+<p><a name="BOOKMARK4"></a><strong>Fraction</strong>s are a way of representing numbers as parts. The syntax for a <a href="#BOOKMARK4">fraction</a> is as follows...</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>n</mi><mi>u</mi><mi>m</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>t</mi><mi>o</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>e</mi><mi>n</mi><mi>o</mi><mi>m</mi><mi>i</mi><mi>n</mi><mi>a</mi><mi>t</mi><mi>o</mi><mi>r</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{numerator}{denominator}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.169556em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.824556em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>... where the...</p>
 <ul>
-<li><a name="BOOKMARK4"></a><strong>numerator</strong> (top) is an integer that represents the total number of parts.</li>
-<li><a name="BOOKMARK5"></a><strong>denominator</strong> (bottom) is an integer that represents the number of parts in a whole.</li>
+<li><a name="BOOKMARK5"></a><strong>numerator</strong> (top) is an integer that represents the <a href="#BOOKMARK13">total</a> number of parts.</li>
+<li><a name="BOOKMARK6"></a><strong>denominator</strong> (bottom) is an integer that represents the number of parts in a whole.</li>
 </ul>
 <p>For example, 4 parts out of 5 parts would be represented as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>4</mn><mn>5</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{4}{5}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">5</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>...</p>
-<p><img src="MainNumberLineDraw9fb7b128.svg" alt="Concept diagram for fraction 0 / 5"></p>
-<p>In some cases, the <a href="#BOOKMARK4">numerator</a> may be greater than the <a href="#BOOKMARK5">denominator</a>. That is, the total number of parts may be larger than the number of parts in a whole. For example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>11</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{11}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>...</p>
-<p><img src="MainNumberLineDraw04e1b366.svg" alt="Concept diagram for fraction 0 / 8"></p>
-<p>In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a <a href="#BOOKMARK3">fraction</a>: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mfrac><mn>3</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">1 \frac{3}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">1</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
-<a name="HEADREF4"></a><h1>Addition</h1>
-<p>TODO: Chapter 1.2</p>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left right left" columnspacing="0em" rowlines="none none solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>9</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>2</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>2</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mo>+</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>4</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{alignedat}{2}{1}&amp;  \enspace{ }&amp; \\{1}&amp;  \enspace{9}&amp; \\{2}&amp;  \enspace{2}&amp; \enspace + \\ \hline{4}&amp;  \enspace{1}&amp;\end{alignedat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6em;vertical-align:-2.7500000000000004em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.2499999999999996em;"><span style="top:-5.25em;"><span class="pstrut" style="height:5.25em;"></span><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">2</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">9</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">+</span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span><span style="top:-3.9999999999999996em;"><span class="pstrut" style="height:5.25em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span></span></p>
-<a name="HEADREF5"></a><h2>Whole Numbers</h2>
-<a name="HEADREF6"></a><h2>Integer Numbers</h2>
-<a name="HEADREF7"></a><h2>Rational Numbers</h2>
-<a name="HEADREF8"></a><h1>Subtraction</h1>
+<p><img src="MainNumberLineDraw4f875b59.svg" alt="Concept diagram for fraction 0 / 5"></p>
+<p>In some cases, the <a href="#BOOKMARK5">numerator</a> may be greater than the <a href="#BOOKMARK6">denominator</a>. That is, the <a href="#BOOKMARK13">total</a> number of parts may be larger than the number of parts in a whole. For example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>11</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{11}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>...</p>
+<p><img src="MainNumberLineDrawcb68d6ed.svg" alt="Concept diagram for fraction 0 / 8"></p>
+<p>In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a <a href="#BOOKMARK4">fraction</a>: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mfrac><mn>3</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">1 \frac{3}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">1</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
+<a name="HEADREF7"></a><h2>Irrational</h2>
+<a name="HEADREF8"></a><h1>Whole Number Addition</h1>
+<p><a name="BOOKMARK7"></a><strong>Addition</strong> is the concept of taking 2 numbers and combining their values together. For example, combining 3 items and 5 items together results in 7 items...</p>
+<pre><code> [●●●]    [●●●●●]
+   3         5
+
+group values together
+
+   [●●●●●●●●]
+       7
+</code></pre>
+<p><a href="#BOOKMARK7">Addition</a> is typically represented using the infix operator +. The above example would be represented as 3+5.</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>You can think of this as a function that takes in 2 arguments: <a href="#BOOKMARK8">add</a>(3, 5).</p>
+</div>
+<p>When using words, <a href="#BOOKMARK7">addition</a> is typically represented using the following syntax:</p>
+<ul>
+<li><a name="BOOKMARK8"></a><strong>add</strong> -- e.g. <a href="#BOOKMARK8">add</a> 3 and 5</li>
+<li><a name="BOOKMARK9"></a><strong>plus</strong> -- e.g. 3 <a href="#BOOKMARK9">plus</a> 5</li>
+<li><a name="BOOKMARK10"></a><strong>sum</strong> -- e.g. <a href="#BOOKMARK10">sum</a> of 3 and 5</li>
+<li><a name="BOOKMARK11"></a><strong>increase</strong> -- e.g. 3 <a href="#BOOKMARK11">increase</a>d by 5</li>
+<li><a name="BOOKMARK12"></a><strong>more than</strong> -- e.g. 3 <a href="#BOOKMARK12">more than</a> 5</li>
+<li><a name="BOOKMARK13"></a><strong>total</strong> -- e.g. <a href="#BOOKMARK13">total</a> of 3 and 5</li>
+</ul>
+<p>Common properties of <a href="#BOOKMARK7">addition</a>:</p>
+<ul>
+<li>
+<p>commutative: order in which 2 numbers are <a href="#BOOKMARK8">add</a>ed doesn't matter</p>
+<pre><code> [●●●]    [●●●●●] results in [●●●●●●●●]    (3+5 is 7)
+   3         5                    7
+
+ [●●●●●]   [●●●]  results in [●●●●●●●●]    (5+3 is 7)
+   5         3                    7
+</code></pre>
+</li>
+<li>
+<p>identity: any number <a href="#BOOKMARK9">plus</a> 0 results in the same number</p>
+<pre><code>[●●●]    [] results in [●●●]    (3+0 is 3)
+  3       0              3
+
+[]    [●●●] results in [●●●]    (0+3 is 3)
+ 0      3                3
+</code></pre>
+</li>
+</ul>
+<a name="HEADREF9"></a><h2>Vertical Addition Algorithm</h2>
+<p>The algorithm used by humans to <a href="#BOOKMARK8">add</a> large numbers together is called <a name="BOOKMARK14"></a><strong>vertical addition</strong>. <a href="#BOOKMARK14">Vertical addition</a> relies on two ideas...</p>
+<ol>
+<li>
+<p>humans can easily <a href="#BOOKMARK8">add</a> a single <a href="#BOOKMARK1">digit</a> number to another single <a href="#BOOKMARK1">digit</a> number without much effort. For example...</p>
+<ul>
+<li>3+4 is 7</li>
+<li>1+9 is 10</li>
+<li>9+9 is 18</li>
+</ul>
+<p>... are all <a href="#BOOKMARK7">addition</a> operations that don't take much effort / are already probably cached in person's memory.</p>
+</li>
+<li>
+<p>The second idea is that numbers represented in <a href="#BOOKMARK0">place-value notation</a> can be broken down into single <a href="#BOOKMARK1">digit</a> components -- the place of each <a href="#BOOKMARK1">digit</a> in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...</p>
+<pre><code>100
+100
+100
+100
+100            1
+100            1
+100     10     1
+100     10     1
+100     10     1
+---     --     -
+900     30     5
+
+
+
+9 3 5
+│ │ │
+│ │ └─ ●
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │
+│ └─── ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+</code></pre>
+</li>
+</ol>
+<p>Since a number can be broken down into single <a href="#BOOKMARK1">digit</a> components and <a href="#BOOKMARK8">add</a>ing a single <a href="#BOOKMARK1">digit</a> to any number is easy, any two numbers can be <a href="#BOOKMARK8">add</a>ed by <a href="#BOOKMARK8">add</a>ing their individual single <a href="#BOOKMARK1">digit</a> components. For example, the number 53 and 21 are broken down as follows...</p>
+<pre><code>5 3                      2 1
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │
+│    ●                   └─── ●●●●●●●●●●
+│                             ●●●●●●●●●●
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+</code></pre>
+<p><a href="#BOOKMARK8">Add</a> their individual single <a href="#BOOKMARK1">digit</a> components together to get the <a href="#BOOKMARK10">sum</a>. The ...</p>
+<ul>
+<li>1s place combines the 3 items and 1 item together to get 4 items: 3 + 1 results in 4</li>
+<li>10s place combines the 5 rows and 2 rows together to get 7 rows: 50 + 20 result in 70</li>
+</ul>
+<pre><code>7 4
+│ │
+│ └─ ●
+│    ● 
+│    ● 
+│    ● 
+│
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+</code></pre>
+<p>In certain cases, the <a href="#BOOKMARK7">addition</a> of two single <a href="#BOOKMARK1">digit</a> components may bleed over to the next single <a href="#BOOKMARK1">digit</a> component. For example, <a href="#BOOKMARK8">add</a>ing 93 and 21 can be broken down as follows...</p>
+<ul>
+<li>1s place combines the 3 items and 1 item together to get 4 items: 3 + 1 results in 4</li>
+<li>10s place combines the 9 rows and 2 rows together to get 7 rows: 90 + 20 result in 110</li>
+</ul>
+<p>Combining the 10s place resulted in a bleed over to the hundreds place. This extra 100s place bleed over <a href="#BOOKMARK1">digit</a> can be carried over and combined into the hundreds place. This process is called carry-over -- you're carrying-over the extra bleed over <a href="#BOOKMARK1">digit</a> to its correct place and combining it with whatever else is there.</p>
+<p>Conceptually, carrying-over is the idea of breaking out a group of 10 from the current place and moving them over to the next highest place (e.g. 10s place to 100s place). For example, when <a href="#BOOKMARK8">add</a>ing 93 to 21, <a href="#BOOKMARK8">add</a>ing the <a href="#BOOKMARK1">digit</a>s at the 10's place (90+20) results in 110...</p>
+<pre><code>9 3                      2 1
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │
+│    ●                   └─── ●●●●●●●●●●
+│                             ●●●●●●●●●●
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+
+results in 
+
+11 4
+│  │
+│  └─ ●
+│     ● 
+│     ● 
+│     ● 
+│
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+</code></pre>
+<p>Since 11 is too many <a href="#BOOKMARK1">digit</a>s for the tens place (each place must only have 1 <a href="#BOOKMARK1">digit</a>), break out 10 groups from the 10s place and move those over to the 100s place...</p>
+<pre><code>11 4
+│  │
+│  └─ ●
+│     ● 
+│     ● 
+│     ● 
+│
+└─── ●●●●●●●●●●
+    ┌──────────┐
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│ each group is 10 items and we grabbed 10 of them (that's 100 items total)
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    └──────────┘
+
+move those 100 items as 1 group of 100s
+
+1 1 4
+│ │ │
+│ │ └─ ●
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │
+│ └─── ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+</code></pre>
+<p>The <a href="#BOOKMARK1">digit</a> in the 10s place is the result for the 10s place, while the <a href="#BOOKMARK1">digit</a> in the 100s place gets combined in with the 100s place. In the above example, the 100s place was empty, so the carry-over remained as-is.</p>
+<p>The way to perform this algorithm in real-life is to stack the two numbers being <a href="#BOOKMARK8">add</a>ed on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, <a href="#BOOKMARK8">add</a> the individual single <a href="#BOOKMARK1">digit</a> components together (from right-to-left). For example...</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left right left right left" columnspacing="0em" rowlines="none solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>5</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>3</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>2</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mo>+</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>7</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>4</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{alignedat}{3}{1}&amp;  \enspace{5}&amp;  \enspace{3}&amp; \\{ }&amp;  \enspace{2}&amp;  \enspace{1}&amp; \enspace + \\ \hline{1}&amp;  \enspace{7}&amp;  \enspace{4}&amp;\end{alignedat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.500000000000002em;vertical-align:-2.000000000000001em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.500000000000001em;"><span style="top:-4.5em;"><span class="pstrut" style="height:4.5em;"></span><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">5</span></span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">7</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">3</span></span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">+</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span></span></span><span style="top:-4em;"><span class="pstrut" style="height:4.5em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span></span></span></span></p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>The number 21 has nothing in its 100s place -- nothing is the same as 0. 21 is the same as 021.</p>
+</div>
+<p>If 2 individual single <a href="#BOOKMARK1">digit</a> components combine together to results in an extra <a href="#BOOKMARK1">digit</a> (e.g. 5+8=13), the bleed over <a href="#BOOKMARK1">digit</a> is carried over to the next position (on the left). This is denoted by stacking the bleed over <a href="#BOOKMARK1">digit</a> on top of the next position -- it's being combined along with the other <a href="#BOOKMARK1">digit</a>s at that position. For example...</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left right left right left" columnspacing="0em" rowlines="none none solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>5</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>5</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>8</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mo>+</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>6</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>3</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>2</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{alignedat}{3}{1}&amp;  \enspace{ }&amp;  \enspace{ }&amp; \\{5}&amp;  \enspace{5}&amp;  \enspace{1}&amp; \\{ }&amp;  \enspace{8}&amp;  \enspace{1}&amp; \enspace + \\ \hline{6}&amp;  \enspace{3}&amp;  \enspace{2}&amp;\end{alignedat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6em;vertical-align:-2.7500000000000004em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.2499999999999996em;"><span style="top:-5.25em;"><span class="pstrut" style="height:5.25em;"></span><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">5</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">5</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">8</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">+</span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span><span style="top:-3.9999999999999996em;"><span class="pstrut" style="height:5.25em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span></span></p>
+<p>The way to perform this algorithm via code is as follows...</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>TODO: WRITE PLUGIN TO DUMP FILE AS CODE AND DUMP OUT THE CODE HERE</p>
+<p>For example, <a href="#BOOKMARK8">add</a>ing 191 to 273...</p>
+<div style="border:1px solid black;">
+<p></p>
+<p>Adding 273 to 991</p>
+<ul>
+<li>
+<p>pos 1 -- adding xx3 and xx1</p>
+<p>start state: carry-over=null.</p>
+<p>3 + 1 is 4.</p>
+<p>end state: result=xx4 / carry-over=null.</p>
+</li>
+<li>
+<p>pos 2 -- adding x7x and x9x</p>
+<p>start state: carry-over=null.</p>
+<p>7 + 9 is 16.</p>
+<p>end state: result=x6x / carry-over=1.</p>
+</li>
+<li>
+<p>pos 3 -- adding 2xx and 9xx</p>
+<p>start state: carry-over=1.</p>
+<p>2 + 9 is 11.</p>
+<p>carry-over of 1 exists, 11 + 1...</p>
+<ul>
+<li>
+<p>pos 1 -- adding x1 and x1</p>
+<p>start state: carry-over=null.</p>
+<p>1 + 1 is 2.</p>
+<p>end state: result=x2 / carry-over=null.</p>
+</li>
+<li>
+<p>pos 2 -- adding 0x and 1x</p>
+<p>start state: carry-over=null.</p>
+<p>0 + 1 is 1.</p>
+<p>end state: result=1x / carry-over=null.</p>
+</li>
+<li>
+<p>result is 12</p>
+</li>
+</ul>
+<p>... is 12 (carry-over reset).</p>
+<p>end state: result=2xx / carry-over=1.</p>
+</li>
+<li>
+<p>prepend remaining carry-over of 1.</p>
+<p>end state: result=1xxx.</p>
+</li>
+<li>
+<p>result is 1264</p>
+</li>
+</ul>
+<p></p>
+</div>
+<a name="HEADREF10"></a><h1>Subtraction</h1>
 <p>TODO: Chapter 1.3</p>
 <p>Pay special attention to exercise problem 1.3.204 / 1.3.205 when codifying.</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left right left" columnspacing="0em" rowlines="none none solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>10</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><menclose notation="updiagonalstrike"><mn>2</mn></menclose></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><menclose notation="updiagonalstrike"><mn>0</mn></menclose></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mo>−</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>9</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{alignedat}{2}{1}&amp;  \enspace{10}&amp; \\\cancel{2}&amp;  \enspace\cancel{0}&amp; \\{1}&amp;  \enspace{1}&amp; \enspace - \\ \hline{0}&amp;  \enspace{9}&amp;\end{alignedat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6em;vertical-align:-2.7500000000000004em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.2499999999999996em;"><span style="top:-5.25em;"><span class="pstrut" style="height:5.25em;"></span><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span><span class="mord">0</span></span></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">0</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">9</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.25em;"><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">−</span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span><span style="top:-3.9999999999999996em;"><span class="pstrut" style="height:5.25em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.7500000000000004em;"><span></span></span></span></span></span></span></span></span></p>
@@ -316,13 +617,13 @@ for (item in index) {
 </code></pre>
 <p>For example...</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left right left right left right left" columnspacing="0em" rowlines="none none none none solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>7</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>10</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><menclose notation="updiagonalstrike"><mn>0</mn></menclose></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>14</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mrow></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><menclose notation="updiagonalstrike"><mn>4</mn></menclose></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>13</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><menclose notation="updiagonalstrike"><mn>8</mn></menclose></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><menclose notation="updiagonalstrike"><mn>1</mn></menclose></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><menclose notation="updiagonalstrike"><mn>5</mn></menclose></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><menclose notation="updiagonalstrike"><mn>3</mn></menclose></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>3</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>9</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>7</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>8</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mo>−</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>4</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>7</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>5</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{alignedat}{4}        { 7}&amp;  \enspace        {10}&amp;  \enspace        {  }&amp;  \enspace        {  }&amp;  \\        {  }&amp;  \enspace \cancel{ 0}&amp;  \enspace        {14}&amp;  \enspace        {  }&amp;  \\        {  }&amp;  \enspace        {  }&amp;  \enspace \cancel{ 4}&amp;  \enspace        {13}&amp;  \\ \cancel{ 8}&amp;  \enspace \cancel{ 1}&amp;  \enspace \cancel{ 5}&amp;  \enspace \cancel{ 3}&amp;  \\        { 3}&amp;  \enspace        { 9}&amp;  \enspace        { 7}&amp;  \enspace        { 8}&amp;  \enspace - \\ \hline        { 4}&amp;  \enspace        { 1}&amp;  \enspace        { 7}&amp;  \enspace        { 5}&amp;  \end{alignedat} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:9.000000000000002em;vertical-align:-4.250000000000001em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4.750000000000001em;"><span style="top:-6.750000000000001em;"><span class="pstrut" style="height:6.750000000000001em;"></span><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4.750000000000001em;"><span style="top:-6.910000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">7</span></span></span></span><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-3.9099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">8</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">3</span></span></span></span><span style="top:0.5900000000000007em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:4.250000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4.750000000000001em;"><span style="top:-6.910000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span><span class="mord">0</span></span></span></span><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">0</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-3.9099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">1</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">9</span></span></span></span><span style="top:0.5900000000000007em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:4.250000000000001em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4.750000000000001em;"><span style="top:-6.910000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span><span class="mord">4</span></span></span></span><span style="top:-3.9099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">4</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">5</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">7</span></span></span></span><span style="top:0.5900000000000007em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">7</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:4.250000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4.750000000000001em;"><span style="top:-6.910000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"></span></span></span><span style="top:-3.9099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span><span class="mord">3</span></span></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord"><span class="mord">3</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">8</span></span></span></span><span style="top:0.5900000000000007em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:4.250000000000001em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4.750000000000001em;"><span style="top:-6.910000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-5.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.9099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-2.4099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-0.9099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">−</span></span></span><span style="top:0.5900000000000007em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:4.250000000000001em;"><span></span></span></span></span></span></span></span><span style="top:-4.000000000000001em;"><span class="pstrut" style="height:6.750000000000001em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:4.250000000000001em;"><span></span></span></span></span></span></span></span></span></p>
-<a name="HEADREF9"></a><h1>Multiplication</h1>
-<p><a name="BOOKMARK6"></a><strong>product</strong> is the result of division.</p>
+<a name="HEADREF11"></a><h1>Multiplication</h1>
+<p><a name="BOOKMARK15"></a><strong>product</strong> is the result of division.</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left right left right left" columnspacing="0em" rowlines="none solid none solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mo>∗</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mo>+</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mspace width="0.5em"></mspace><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mspace width="0.5em"></mspace><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{alignedat}{3}{ }&amp;  \enspace{1}&amp;  \enspace{1}&amp; \\{ }&amp;  \enspace{1}&amp;  \enspace{0}&amp; \enspace * \\ \hline{ }&amp;  \enspace{0}&amp;  \enspace{0}&amp; \\{1}&amp;  \enspace{0}&amp;  \enspace{0}&amp; \enspace + \\ \hline{1}&amp;  \enspace{0}&amp;  \enspace{0}&amp;\end{alignedat}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:7.500000000000002em;vertical-align:-3.5000000000000018em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4em;"><span style="top:-6em;"><span class="pstrut" style="height:6em;"></span><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4em;"><span style="top:-6.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-4.659999999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-3.1599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-1.6599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-0.15999999999999837em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.5000000000000018em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4em;"><span style="top:-6.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-4.659999999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-3.1599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span style="top:-1.6599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span style="top:-0.15999999999999837em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.5000000000000018em;"><span></span></span></span></span></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4em;"><span style="top:-6.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span style="top:-4.659999999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span style="top:-3.1599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span style="top:-1.6599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span style="top:-0.15999999999999837em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mspace" style="margin-right:0.5em;"></span><span class="mord"><span class="mord">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.5000000000000018em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:4em;"><span style="top:-6.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-4.659999999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">∗</span></span></span><span style="top:-3.1599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-1.6599999999999984em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.5em;"></span><span class="mord">+</span></span></span><span style="top:-0.15999999999999837em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.5000000000000018em;"><span></span></span></span></span></span></span></span><span style="top:-3.999999999999999em;"><span class="pstrut" style="height:6em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span><span style="top:-7em;"><span class="pstrut" style="height:6em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.5000000000000018em;"><span></span></span></span></span></span></span></span></span></p>
-<a name="HEADREF10"></a><h1>Division</h1>
-<p><a name="BOOKMARK7"></a><strong>quotient</strong> is the result of division.</p>
-<p><a name="BOOKMARK8"></a><strong>dividend</strong> is the number being divided.</p>
-<p><a name="BOOKMARK9"></a><strong>divisor</strong> is the number being divided by.</p>
+<a name="HEADREF12"></a><h1>Division</h1>
+<p><a name="BOOKMARK16"></a><strong>quotient</strong> is the result of division.</p>
+<p><a name="BOOKMARK17"></a><strong>dividend</strong> is the number being divided.</p>
+<p><a name="BOOKMARK18"></a><strong>divisor</strong> is the number being divided by.</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>v</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>d</mi><mo>÷</mo><mi>d</mi><mi>i</mi><mi>v</mi><mi>i</mi><mi>s</mi><mi>o</mi><mi>r</mi><mo>=</mo><mi>q</mi><mi>u</mi><mi>o</mi><mi>t</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">dividend \div divisor = quotient</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault">u</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span></p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>v</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>d</mi><mi mathvariant="normal">/</mi><mi>d</mi><mi>i</mi><mi>v</mi><mi>i</mi><mi>s</mi><mi>o</mi><mi>r</mi><mo>=</mo><mi>q</mi><mi>u</mi><mi>o</mi><mi>t</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">dividend / divisor = quotient</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord">/</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault">u</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span></p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>i</mi><mi>v</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>d</mi></mrow><mrow><mi>d</mi><mi>i</mi><mi>v</mi><mi>i</mi><mi>s</mi><mi>o</mi><mi>r</mi></mrow></mfrac><mo>=</mo><mi>q</mi><mi>u</mi><mi>o</mi><mi>t</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\frac{dividend}{divisor} = quotient</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">s</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">d</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault">u</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span></p>
@@ -352,28 +653,28 @@ for (item in index) {
 `
 </code></pre>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>047.9</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>5</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>239.5</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>0</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>23</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>20</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>0</mn></mphantom><mn>39</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>0</mn></mphantom><munder accentunder="true"><mn>35</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>00</mn></mphantom><mn>4</mn><mphantom><mi mathvariant="normal">.</mi></mphantom><mn>5</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>00</mn></mphantom><munder accentunder="true"><mrow><mn>4</mn><mphantom><mi mathvariant="normal">.</mi></mphantom><mn>5</mn></mrow><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>004.</mn></mphantom><mn>0</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l} \phantom{   {5\smash{)}} }{   047.9 } \\ {5}\overline{\smash{)}239.5} \\ \phantom{{5\smash{)}}}\underline{0} \\ \phantom{{5\smash{)}}}23 \\ \phantom{{5\smash{)}}}\underline{20} \\ \phantom{{5\smash{)}}}\phantom{0}39 \\ \phantom{{5\smash{)}}}\phantom{0}\underline{35} \\ \phantom{{5\smash{)}}}\phantom{00}4\phantom{.}5 \\ \phantom{{5\smash{)}}}\phantom{00}\underline{4\phantom{.}5} \\ \phantom{{5\smash{)}}}\phantom{004.}0 \\ \end{array} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:12.004439999999999em;vertical-align:-5.75222em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:6.2522199999999994em;"><span style="top:-8.412219999999998em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">4</span><span class="mord">7</span><span class="mord">.</span><span class="mord">9</span></span></span></span><span style="top:-7.20778em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">5</span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord">3</span><span class="mord">9</span><span class="mord">.</span><span class="mord">5</span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-6.0077799999999995em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-4.807779999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord">3</span></span></span><span style="top:-3.6077799999999987em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-2.4077799999999985em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord">3</span><span class="mord">9</span></span></span><span style="top:-1.2077799999999976em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span><span class="mord">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-0.007779999999998288em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">5</span></span></span><span style="top:1.192220000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:2.3922200000000005em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:5.75222em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
-<a name="HEADREF11"></a><h1>Order of Operations</h1>
-<p>The <a name="BOOKMARK10"></a><strong>order of operations</strong> are as follows:</p>
+<a name="HEADREF13"></a><h1>Order of Operations</h1>
+<p>The <a name="BOOKMARK19"></a><strong>order of operations</strong> are as follows:</p>
 <ol>
 <li>Brackets</li>
 <li>Exponents</li>
 <li>Division and Multiplication (evaluated left-to-right)</li>
-<li>Addition and Subtraction (evaluated left-to-right)</li>
+<li><a href="#BOOKMARK7">Addition</a> and Subtraction (evaluated left-to-right)</li>
 </ol>
 <p>These rules are often abbreviated as either...</p>
 <ul>
-<li><a name="BOOKMARK11"></a><strong>BEDMAS</strong> - Brackets / Exponents / Division and Multiplication / Addition and Subtraction</li>
-<li><a name="BOOKMARK12"></a><strong>PEMDAS</strong> - Parenthesis / Exponents / Multiplication and Division / Addition and Subtraction</li>
+<li><a name="BOOKMARK20"></a><strong>BEDMAS</strong> - Brackets / Exponents / Division and Multiplication / <a href="#BOOKMARK7">Addition</a> and Subtraction</li>
+<li><a name="BOOKMARK21"></a><strong>PEMDAS</strong> - Parenthesis / Exponents / Multiplication and Division / <a href="#BOOKMARK7">Addition</a> and Subtraction</li>
 </ul>
 <p>Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are evaluated left-to-right in the same step, it makes no difference.</p>
-<a name="HEADREF12"></a><h1>Algebra Rules</h1>
+<a name="HEADREF14"></a><h1>Algebra Rules</h1>
 <p>KEEP WORKING ON THESE:
-ADD <a href="#BOOKMARK3">FRACTION</a> ADDING AND MULTIPLICATION RULES (recipriocals, cross multiply, etc..)
-ADD REMAINING ALGEBRA RULES
+<a href="#BOOKMARK8">ADD</a> <a href="#BOOKMARK4">FRACTION</a> <a href="#BOOKMARK8">ADD</a>ING AND MULTIPLICATION RULES (recipriocals, cross multiply, etc..)
+<a href="#BOOKMARK8">ADD</a> REMAINING ALGEBRA RULES
 https://en.wikiversity.org/wiki/Algebraic_Properties_of_Equality
 https://en.wikiversity.org/wiki/Basic_Laws_of_Algebra
 http://www.themathpage.com/aPreCalc/algebraPre.htm (specifically 1, 6, and 7?)
-ADD TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
+<a href="#BOOKMARK8">ADD</a> TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <p>Commutative Property</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mi>b</mi><mo>=</mo><mi>b</mi><mo>⋅</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a \cdot b = b \cdot a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span></li>
@@ -394,7 +695,7 @@ ADD TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mn>1</mn><mo>=</mo><mn>1</mn><mo>⋅</mo><mi>a</mi><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a \cdot 1 = 1 \cdot a = a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span></li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>+</mo><mn>0</mn><mo>=</mo><mn>0</mn><mo>+</mo><mi>a</mi><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a + 0 = 0 + a = a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span></li>
 </ul>
-<p>Additive Inverse Property</p>
+<p><a href="#BOOKMARK8">Add</a>itive Inverse Property</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>a</mi><mo>+</mo><mi>a</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a + (-a) = -a + a = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></li>
 </ul>
@@ -402,8 +703,8 @@ ADD TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>⋅</mo><mi>a</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
 </ul>
-<a name="HEADREF13"></a><h1>OpenStax Prealgebra Problems</h1>
-<a name="HEADREF14"></a><h2>Chapter 1 Section 1.1</h2>
+<a name="HEADREF15"></a><h1>OpenStax Prealgebra Problems</h1>
+<a name="HEADREF16"></a><h2>Chapter 1 Section 1.1</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.1)</p>
 <ul>
@@ -644,23 +945,23 @@ ADD TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <li>c) million -&gt; 150,000,000</li>
 </ul>
 <p>1.1.57)</p>
-<p>The difference between counting numbers and <a href="#BOOKMARK2">whole number</a>s is that counting numbers start at 1 while <a href="#BOOKMARK2">whole number</a>s start at 0. The reason is that counting numbers are used when you're counting something. You usually need to have 1 of something to start counting. For example, I can't count the number of apples if there are no apples. I need at least 1 apple to be able to count.</p>
+<p>The difference between <a href="#BOOKMARK3">counting number</a>s and <a href="#BOOKMARK2">whole number</a>s is that <a href="#BOOKMARK3">counting number</a>s start at 1 while <a href="#BOOKMARK2">whole number</a>s start at 0. The reason is that <a href="#BOOKMARK3">counting number</a>s are used when you're counting something. You usually need to have 1 of something to start counting. For example, I can't count the number of apples if there are no apples. I need at least 1 apple to be able to count.</p>
 <p>1.1.58)</p>
 <p>It's easier to say numbers that are rounded. For example...</p>
 <p>58,123 -&gt; fifty eight thousand one hundred twenty three
 58,000 -&gt; fifty eight thousand</p>
 <p>Less words to speak while conveying approximately the same quantity.</p>
-<a name="HEADREF15"></a><h2>Chapter 1 Section 1.2</h2>
+<a name="HEADREF17"></a><h2>Chapter 1 Section 1.2</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.21) write out...</p>
 <ul>
-<li>a) 8+4 -&gt; eight plus four</li>
-<li>b) 18+11 -&gt; eighteen plus eleven</li>
+<li>a) 8+4 -&gt; eight <a href="#BOOKMARK9">plus</a> four</li>
+<li>b) 18+11 -&gt; eighteen <a href="#BOOKMARK9">plus</a> eleven</li>
 </ul>
 <p>1.22) write out...</p>
 <ul>
-<li>a) 8+4 -&gt; eight plus four</li>
-<li>b) 18+11 -&gt; eighteen plus eleven</li>
+<li>a) 8+4 -&gt; eight <a href="#BOOKMARK9">plus</a> four</li>
+<li>b) 18+11 -&gt; eighteen <a href="#BOOKMARK9">plus</a> eleven</li>
 </ul>
 <p>1.23) model 3 + 6...</p>
 <pre><code>□□□ □□□□□□
@@ -770,12 +1071,12 @@ b) 57+0=57</p>
 <p>1.49) 3+3+3+2+2+4+4+9=32</p>
 <p>1.50) 4+4+2+2+4+6+12+2=36</p>
 <p><strong>EXERCISE</strong></p>
-<p>1.2.59) five plus two</p>
-<p>1.2.60) six plus three</p>
-<p>1.2.61) thirteen plus eighteen</p>
-<p>1.2.62) fifteen plus sixteen</p>
-<p>1.2.63) two hundred fourteen plus six hundred forty two</p>
-<p>1.2.64) four hundred thirty eight plus one hundred thirteen</p>
+<p>1.2.59) five <a href="#BOOKMARK9">plus</a> two</p>
+<p>1.2.60) six <a href="#BOOKMARK9">plus</a> three</p>
+<p>1.2.61) thirteen <a href="#BOOKMARK9">plus</a> eighteen</p>
+<p>1.2.62) fifteen <a href="#BOOKMARK9">plus</a> sixteen</p>
+<p>1.2.63) two hundred fourteen <a href="#BOOKMARK9">plus</a> six hundred forty two</p>
+<p>1.2.64) four hundred thirty eight <a href="#BOOKMARK9">plus</a> one hundred thirteen</p>
 <p>1.2.65) model 2 + 4...</p>
 <pre><code>□□ □□□□
 2   4
@@ -1585,7 +1886,7 @@ b) 5+7=12</p>
 <p>1.1.138) 210+145+183+230+159+164=355+183+230+159+164=585+183+159+164=768+159+164=927+164=1091 -- yes, its below</p>
 <p>1.1.139) Very confident</p>
 <p>1.1.140) Will codify model as software and embed into notes.</p>
-<a name="HEADREF16"></a><h2>Chapter 1 Section 1.3</h2>
+<a name="HEADREF18"></a><h2>Chapter 1 Section 1.3</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.51)</p>
 <p>a) twelve minus four
@@ -1988,7 +2289,7 @@ b) twenty nine minus twelve</p>
 <p>1.3.222) 75+50+70+80=275 350-275=75</p>
 <p>1.3.223) one is the opposite of the other</p>
 <p>1.3.224) verification</p>
-<a name="HEADREF17"></a><h2>Chapter 1 Section 1.4</h2>
+<a name="HEADREF19"></a><h2>Chapter 1 Section 1.4</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.77)</p>
 <ul>
@@ -2124,9 +2425,9 @@ b) twenty nine minus twelve</p>
 <p>1.109) 8 * 50 = 40</p>
 <p>1.110) 45 * 20 = 900</p>
 <p><strong>EXERCISE</strong></p>
-<p>1.4.225) <a href="#BOOKMARK6">product</a> of four and seven</p>
+<p>1.4.225) <a href="#BOOKMARK15">product</a> of four and seven</p>
 <p>1.4.226) eight times six</p>
-<p>1.4.227) <a href="#BOOKMARK6">product</a> of five and twelve</p>
+<p>1.4.227) <a href="#BOOKMARK15">product</a> of five and twelve</p>
 <p>1.4.228) three times nine</p>
 <p>1.4.229) ten times twenty five</p>
 <p>1.4.230) twenty times fifteen</p>
@@ -2964,7 +3265,7 @@ b) twenty nine minus twelve</p>
 <p>1.2.340) 200 * 24 = 4800</p>
 <p>1.2.341) yes</p>
 <p>1.2.342) verification</p>
-<a name="HEADREF18"></a><h2>Chapter 1 Section 1.5</h2>
+<a name="HEADREF20"></a><h2>Chapter 1 Section 1.5</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.111)</p>
 <ul>
@@ -3065,14 +3366,14 @@ b) twenty nine minus twelve</p>
 <p>1.135) 135 / 9 = 15</p>
 <p>1.136) 36 / 4 = 9</p>
 <p><strong>EXERCISE</strong></p>
-<p>1.5.343) fifty four divided by nine, <a href="#BOOKMARK7">quotient</a> of fifty four and nine, nine divided into fifty four</p>
-<p>1.5.344) fifty six divided by seven, <a href="#BOOKMARK7">quotient</a> of fifty six and seven, seven divided into fifty six</p>
-<p>1.5.345) thirty two divided by eight, <a href="#BOOKMARK7">quotient</a> of thirty two and eight, eight divided into thirty two</p>
-<p>1.5.346) forty two divided by six, <a href="#BOOKMARK7">quotient</a> of forty two and six, six divided into forty two</p>
-<p>1.5.347) forty eight divided by six, <a href="#BOOKMARK7">quotient</a> of forty eight and six, six divided into forty eight</p>
-<p>1.5.348) sixty three divided by nine, <a href="#BOOKMARK7">quotient</a> of sixty three and nine, nine divided into sixty three</p>
-<p>1.5.349) sixty three divided by seven, <a href="#BOOKMARK7">quotient</a> of sixty three and seven, seven divided into sixty three</p>
-<p>1.5.350) seventy two divided by eight, <a href="#BOOKMARK7">quotient</a> of seventy two and eight, eight divided into seventy two</p>
+<p>1.5.343) fifty four divided by nine, <a href="#BOOKMARK16">quotient</a> of fifty four and nine, nine divided into fifty four</p>
+<p>1.5.344) fifty six divided by seven, <a href="#BOOKMARK16">quotient</a> of fifty six and seven, seven divided into fifty six</p>
+<p>1.5.345) thirty two divided by eight, <a href="#BOOKMARK16">quotient</a> of thirty two and eight, eight divided into thirty two</p>
+<p>1.5.346) forty two divided by six, <a href="#BOOKMARK16">quotient</a> of forty two and six, six divided into forty two</p>
+<p>1.5.347) forty eight divided by six, <a href="#BOOKMARK16">quotient</a> of forty eight and six, six divided into forty eight</p>
+<p>1.5.348) sixty three divided by nine, <a href="#BOOKMARK16">quotient</a> of sixty three and nine, nine divided into sixty three</p>
+<p>1.5.349) sixty three divided by seven, <a href="#BOOKMARK16">quotient</a> of sixty three and seven, seven divided into sixty three</p>
+<p>1.5.350) seventy two divided by eight, <a href="#BOOKMARK16">quotient</a> of seventy two and eight, eight divided into seventy two</p>
 <p>1.5.351)</p>
 <pre><code>□□□□□ □□□□□ □□□□□
   5     5     5
@@ -3296,14 +3597,14 @@ b) twenty nine minus twelve</p>
 <p>long division seems to be the inverse of vertical multiplication.</p>
 <ul>
 <li>in long division you're going from left to right and subtracting.</li>
-<li>in vertical multiplication you're going from right to left and adding.</li>
+<li>in vertical multiplication you're going from right to left and <a href="#BOOKMARK8">add</a>ing.</li>
 </ul>
-<p>1.5.450) multiple 8 by 37 and add 4, the result should be 800</p>
+<p>1.5.450) multiple 8 by 37 and <a href="#BOOKMARK8">add</a> 4, the result should be 800</p>
 <p>1.5.451)</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mn>026</mn><mi>R</mi><mn>1</mn></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>14</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>365</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>28</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>085</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>084</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>001</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l}\phantom{{{14}\smash{)}}}{{026R1}} \\{{14}}\overline{\smash{)}{365}} \\\phantom{{{14}\smash{)}}}{28} \\\phantom{{{14}\smash{)}}}{085} \\\phantom{{{14}\smash{)}}}{084} \\\phantom{{{14}\smash{)}}}{001} \\\end{array}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:7.20444em;vertical-align:-3.35222em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.8522200000000004em;"><span style="top:-6.01222em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord">0</span><span class="mord">2</span><span class="mord">6</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">1</span></span></span></span></span><span style="top:-4.80778em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord">1</span><span class="mord">4</span></span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord"><span class="mord">3</span><span class="mord">6</span><span class="mord">5</span></span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-3.6077800000000004em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">2</span><span class="mord">8</span></span></span></span><span style="top:-2.4077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">8</span><span class="mord">5</span></span></span></span><span style="top:-1.2077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">8</span><span class="mord">4</span></span></span></span><span style="top:-0.007780000000000065em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35222em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
 <p>1.5.452)</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mn>014</mn><mi>R</mi><mn>15</mn></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>25</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>365</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>25</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>115</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>100</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>015</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l}\phantom{{{25}\smash{)}}}{{014R15}} \\{{25}}\overline{\smash{)}{365}} \\\phantom{{{25}\smash{)}}}{25} \\\phantom{{{25}\smash{)}}}{115} \\\phantom{{{25}\smash{)}}}{100} \\\phantom{{{25}\smash{)}}}{015} \\\end{array}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:7.20444em;vertical-align:-3.35222em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.8522200000000004em;"><span style="top:-6.01222em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord">0</span><span class="mord">1</span><span class="mord">4</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">1</span><span class="mord">5</span></span></span></span></span><span style="top:-4.80778em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord">2</span><span class="mord">5</span></span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord"><span class="mord">3</span><span class="mord">6</span><span class="mord">5</span></span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-3.6077800000000004em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">2</span><span class="mord">5</span></span></span></span><span style="top:-2.4077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">1</span><span class="mord">1</span><span class="mord">5</span></span></span></span><span style="top:-1.2077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span></span></span></span><span style="top:-0.007780000000000065em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">1</span><span class="mord">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35222em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
-<a name="HEADREF19"></a><h2>Chapter 2 Section 2.1</h2>
+<a name="HEADREF21"></a><h2>Chapter 2 Section 2.1</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.1)</p>
 <p>START BACK UP HERE
