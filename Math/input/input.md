@@ -712,13 +712,9 @@ If 2 individual single digit components combine together to results in an extra 
 The way to perform this algorithm via code is as follows...
 
 ```{output}
-set_lang>java
-write>// 
-write>// Writes to STDOUT removed for clarity
-write>//
-set_file_isolate>//MARKDOWN_ISOLATE\s*\n(.+)\n\s*//MARKDOWN_ISOLATE
-set_file_strip>\n[ ]*(print[^\n]*)
-file>wholenum_code/src/main/java/com/offbynull/wholenum/MainAddition.java
+wholenum_code/src/main/java/com/offbynull/wholenum/MainAddition.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
 ```
 
 The code output above has writes removed. When the code actually runs, it outputs what logic takes place at each step. For example ...
