@@ -28,6 +28,46 @@
             <version>1.12</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>2.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                        <configuration>
+                            <platforms>
+                                <platform>unix</platform>
+                            </platforms>
+                            <programs>
+                                <program>
+                                    <mainClass>com.offbynull.diagramhelper.MainFractionDraw</mainClass>
+                                    <id>MainFractionDraw</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.diagramhelper.MainNumberLineDraw</mainClass>
+                                    <id>MainNumberLineDraw</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.diagramhelper.MainPartialConceptDraw</mainClass>
+                                    <id>MainPartialConceptDraw</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.diagramhelper.MainPartialConceptRecurseDraw</mainClass>
+                                    <id>MainPartialConceptRecurseDraw</id>
+                                </program>
+                            </programs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>10</maven.compiler.source>

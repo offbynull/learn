@@ -1,1 +1,1 @@
-FROM maven:3.6.3-jdk-13
+FROM adoptopenjdk:13.0.2_8-jdk-hotspot

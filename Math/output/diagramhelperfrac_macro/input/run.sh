@@ -1,7 +1,5 @@
 rm -rf /tmp/proj
 mkdir /tmp/proj
-cp -r /input/diagramhelper_code/* /tmp/proj/
+cp -r /input/diagramhelper_code/target/appassembler/* /tmp/proj/
 cd /tmp/proj
-
-# -Dexec.args="arg0 arg1 arg2"
-mvn clean install exec:java -q -Dexec.mainClass="com.offbynull.diagramhelper.MainFractionDraw"
+sh ./bin/MainFractionDraw

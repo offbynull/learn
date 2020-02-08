@@ -13,6 +13,46 @@
             <type>jar</type>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>2.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                        <configuration>
+                            <platforms>
+                                <platform>unix</platform>
+                            </platforms>
+                            <programs>
+                                <program>
+                                    <mainClass>com.offbynull.kthelper.MainLongDivision</mainClass>
+                                    <id>MainLongDivision</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.kthelper.MainVerticalAddition</mainClass>
+                                    <id>MainVerticalAddition</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.kthelper.MainVerticalMultiplication</mainClass>
+                                    <id>MainVerticalMultiplication</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.kthelper.MainVerticalSubtraction</mainClass>
+                                    <id>MainVerticalSubtraction</id>
+                                </program>
+                            </programs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>13</maven.compiler.source>
