@@ -177,7 +177,7 @@ It's expected that you fully understand the whole rule because whole numbers are
 ```{define-block}
 diagramhelperpartrecurse
 diagramhelperpartrecurse_macro/
-diagramhelper_code/
+diagramhelper_code/target/appassembler/
 ```
 
 The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.
@@ -213,7 +213,7 @@ This is exactly the same as chopping up a whole into 1000 equal parts and pickin
 ```{define-block}
 diagramhelperpart
 diagramhelperpart_macro/
-diagramhelper_code/
+diagramhelper_code/target/appassembler/
 ```
 
 ```{diagramhelperpart}
@@ -368,7 +368,7 @@ Conceptually, you can think of the sign rule as putting numbers onto different s
 ```{define-block}
 diagramhelperlinenum
 diagramhelperlinenum_macro/
-diagramhelper_code/
+diagramhelper_code/target/appassembler/
 ```
 
 ```{diagramhelperlinenum}
@@ -436,7 +436,7 @@ For example, 4 parts out of 5 parts would be represented as `{kt} \frac{4}{5}`..
 ```{define-block}
 diagramhelperfrac
 diagramhelperfrac_macro/
-diagramhelper_code/
+diagramhelper_code/target/appassembler/
 ```
 
 ```{diagramhelperfrac}
@@ -688,7 +688,7 @@ The way to perform this algorithm in real-life is to stack the two numbers being
 ```{define-block}
 ktvertadd
 ktvertadd_macro/
-kthelper_code/
+kthelper_code/target/appassembler/
 ```
 
 ```{ktvertadd}
@@ -725,7 +725,7 @@ The code output above has writes removed. When the code actually runs, it output
 ```{define-block}
 wholenumadd
 wholenumadd_macro/
-wholenum_code/
+wholenum_code/target/appassembler/
 ```
 
 ```{wholenumadd}
@@ -1044,7 +1044,7 @@ The way to perform this algorithm in real-life is to stack the two numbers being
 ```{define-block}
 ktvertsub
 ktvertsub_macro/
-kthelper_code/
+kthelper_code/target/appassembler/
 ```
 
 ```{ktvertsub}
@@ -1129,7 +1129,7 @@ The code output above has writes removed. When the code actually runs, it output
 ```{define-block}
 wholenumsub
 wholenumsub_macro/
-wholenum_code/
+wholenum_code/target/appassembler/
 ```
 
 ```{wholenumsub}
@@ -1143,7 +1143,7 @@ wholenum_code/
 ```{define-block}
 ktvertmul
 ktvertmul_macro/
-kthelper_code/
+kthelper_code/target/appassembler/
 ```
 
 ```{ktvertmul}
@@ -1191,7 +1191,7 @@ If you think of division as the inverse of multiplication... if 10/0=x, then x*0
 ```{define-block}
 ktlongdiv
 ktlongdiv_macro/
-kthelper_code/
+kthelper_code/target/appassembler/
 ```
 
 ```{ktlongdiv}

@@ -189,7 +189,9 @@ public class MainSubtraction {
             currNum1Digit = DIGIT_ADD_CACHE[10][currNum1Digit]; // add 10 to current position
             
             num1Digits[i-1] = nextNum1Digit;
-            num1Digits[i] = currNum1Digit;  
+            num1Digits[i] = currNum1Digit;
+            
+            println("completed borrowing ", isolate(num1Digits, i, i - 1));
         } finally {
             printBulletClose();
         }
@@ -233,6 +235,15 @@ public class MainSubtraction {
         String ret = "";
         for (int i = 0; i < digits.length; i++) {
             ret += i == idx ? " [" + digits[i] + "] " : " " + digits[i] + " ";
+        }
+        return ret;
+    }
+
+    private static String isolate(int[] digits, int... idxes) {
+        String ret = "";
+        for (int i = 0; i < digits.length; i++) {
+            int finalI = i;
+            ret += IntStream.of(idxes).anyMatch(idx -> finalI == idx) ? " [" + digits[i] + "] " : " " + digits[i] + " ";
         }
         return ret;
     }

@@ -1079,7 +1079,9 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
         currNum1Digit = DIGIT_ADD_CACHE[<span class="hljs-number">10</span>][currNum1Digit]; <span class="hljs-comment">// add 10 to current position</span>
         
         num1Digits[i-<span class="hljs-number">1</span>] = nextNum1Digit;
-        num1Digits[i] = currNum1Digit;  
+        num1Digits[i] = currNum1Digit;
+        
+        println(<span class="hljs-string">"completed borrowing "</span>, isolate(num1Digits, i, i - <span class="hljs-number">1</span>));
     } <span class="hljs-keyword">finally</span> {
         printBulletClose();
     }
@@ -1096,8 +1098,12 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <p>borrowing from next largest  1  [0]  0</p>
 <p>not possible -- attempting to borrow</p>
 <ul>
-<li>borrowing from next largest  [1]  0  0</li>
+<li>
+<p>borrowing from next largest  [1]  0  0</p>
+<p>completed borrowing  [0]  [10]  0</p>
+</li>
 </ul>
+<p>completed borrowing  0  [9]  [10]</p>
 </li>
 </ul>
 <p>trying again after borrow</p>
