@@ -508,8 +508,6 @@ Common properties of addition:
     0      3                3
    ```
 
-## Vertical Addition Algorithm
-
 The algorithm used by humans to add large numbers together is called `{bm} vertical addition`. Vertical addition relies on two ideas...
 
 1. humans can easily add a single digit number to another single digit number without much effort. For example...
@@ -617,6 +615,10 @@ Conceptually, carrying-over is the idea of breaking out a group of 10 from the c
      ●●●●●●●●●●
      ●●●●●●●●●●
      ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
 
 results in 
 
@@ -674,8 +676,9 @@ move those 100 items as 1 group of 100s
 │ │    ● 
 │ │
 │ └─── ●●●●●●●●●●
-│
-└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+│     ┌────────────────────────────────────────────────────────────────────────────────────────────────────┐
+└─────│●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●│
+      └────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 The digit in the 10s place is the result for the 10s place, while the digit in the 100s place gets combined in with the 100s place. In the above example, the 100s place was empty, so the carry-over remained as-is.
@@ -729,11 +732,314 @@ wholenum_code/
 273 991
 ```
 
-# Subtraction
+# Whole Number Subtraction
 
-TODO: Chapter 1.3
+`{bm} Subtraction` is the concept of removing the value of one number from another number. For example, removing 3 items from 5 items results in 2 items...
 
-Pay special attention to exercise problem 1.3.204 / 1.3.205 when codifying.
+```
+    [●●●●●]
+       5
+
+pick out 3 from the 5
+
+   [●●] [●●●]
+    2     3
+```
+
+Subtraction is typically represented using the infix operator -. The above example would be represented as 5-3.
+
+```{note}
+You can think of this as a function that takes in 2 arguments: subtract(5, 3).
+```
+
+When using words, subtraction is typically represented using the following syntax:
+
+* `{bm} minus` -- e.g. 5 minus 3
+* `{bm} difference of` -- e.g. difference of 5 and 3
+* `{bm} subtracted by` -- e.g. 5 subtracted by 3
+* `{bm} decreased by` -- e.g. 5 decreased by 3
+* `{bm} less than` -- e.g. 5 less than 3
+* `{bm} subtracted from` -- e.g. 3 subtracted from 5
+
+Common properties of subtraction:
+
+ * identity: any number subtracted by 0 results in the same number
+
+   ```
+   [●●●]    [] results in [●●●]    (3+0 is 3)
+     3       0              3
+   ```
+
+```{note}
+Unlike addition, subtraction is not commutative. 5-3 isn't the same as 3-5
+```
+
+The algorithm used by humans to subtract large numbers from each other is called `{bm} vertical subtraction`. Vertical subtraction relies on two ideas...
+
+1. humans can easily subtract a small 1 to 2 digit numbers (anything smaller than 20) from each other without much effort. For example...
+
+   * 4-3 is 1
+   * 10-1 is 9
+   * 15-3 is 13
+
+   ... are all subtraction operations that don't take much effort / are already probably cached in person's memory.
+
+2. The second idea is that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+
+   ```
+   100
+   100
+   100
+   100
+   100            1
+   100            1
+   100     10     1
+   100     10     1
+   100     10     1
+   ---     --     -
+   900     30     5
+   
+   
+   
+   9 3 5
+   │ │ │
+   │ │ └─ ●
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │
+   │ └─── ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │
+   └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+   ```
+
+Since a number can be broken down into single digit components and subtracting a single digit to any number is easy, any two numbers can be subtracted by subtracting their individual single digit components. For example, the number 53 and 21 are broken down as follows...
+
+```
+5 3                      2 1
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │
+│    ●                   └─── ●●●●●●●●●●
+│                             ●●●●●●●●●●
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+Subtract their individual single digit components from each other to get the difference. The ...
+ * 1s place removes 1 item from 3 items to get 2 items: 3 - 1 results in 2
+ * 10s place removes 2 rows from 5 rows together to get 3 rows: 50 - 20 result in 30
+
+```
+3 2
+│ │
+│ └─ ●
+│    ● 
+│
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+In certain cases, the subtraction of two single digit components may not be possible. For example, subtracting 91 and 23...
+
+```
+9 1                      2 3
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│                        │    ●
+└─── ●●●●●●●●●●          │    ●
+     ●●●●●●●●●●          │
+     ●●●●●●●●●●          └─── ●●●●●●●●●●
+     ●●●●●●●●●●               ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+The ...
+ * 1s place removes 3 items from 1 item to get ??? items: 1-3 is not possible 
+ * 10s place removes the 2 rows from 9 rows to get 7 rows: 90 - 20 result in 70
+
+The algorithm fails at the 1s place. It's impossible to remove 3 items from 1 item -- the most that can be removed from 1 item is 1 item. The way to handle this is to pick out 1 group from the 10s place and mover it over back to 1s place...
+
+```
+9 1                      2 3
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│                        │    ●
+└─── ●●●●●●●●●●          │    ●
+     ●●●●●●●●●●          │
+     ●●●●●●●●●●          └─── ●●●●●●●●●●
+     ●●●●●●●●●●               ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+    ┌──────────┐
+    │●●●●●●●●●●│ each group is 10 items and we grabbed 1 of them (that's 10 items total)
+    └──────────┘
+
+move those items back to the 1s place
+
+8 11                     2 3
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+|   ┌─┐                  │    ●
+│   │●│                  │    ●
+│   │●│                  │
+│   │●│                  └─── ●●●●●●●●●●
+│   │●│                       ●●●●●●●●●●
+│   │●│                  
+│   │●│
+│   │●│
+│   │●│
+│   │●│
+│   │●│
+│   └─┘
+│
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+Now it's possible to subtract. The ...
+ * 1s place removes 3 items from 11 item to get 8 items: 11-3 results in 8 
+ * 10s place removes the 2 rows from 8 rows to get 6 rows: 80 - 20 result in 60
+
+This process is called borrowing -- you're borrowing 1 group from the next largest position and moving those items back so that there's enough for subtraction to take place. In total, the value is still the same -- the total number of items (dots) doesn't change, but the items are being moved around so that the subtraction of a component can happen. 
+
+In certain cases, a group may need to be borrowed but the next largest position is 0. For example, subtracting 100 and 11...
+
+```
+1 0 0                      1 1
+│ │ │                      │ │
+│ │ └─ ●                   │ └─ ●
+│ │                        │
+│ └─── <empty>             └─── ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+```
+
+Borrow recursively to handle this case:
+
+* subtract 1s position: 0-1 not possible, borrow from 10s position
+
+  * borrow from 10s position: can't borrow 10s position is 0, borrow from 100s position
+
+    * borrow from 100s position: 100s position changes from 1 to 0
+
+      ```
+      1 0 0                      1 1
+      │ │ │                      │ │
+      │ │ └─ ●                   │ └─ ●
+      │ │                        │
+      │ └─── <empty>             └─── ●●●●●●●●●●
+      │     ┌────────────────────────────────────────────────────────────────────────────────────────────────────┐
+      └─────│●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●│
+            └────────────────────────────────────────────────────────────────────────────────────────────────────┘
+      
+      move those items back to the 10s place (1 group in 100s becomes 10 groups in the 10s)
+      
+      0 10 0                      1 1
+      │ │  │                      │ │
+      │ │  └─ ●                   │ └─ ●
+      │ │                         │
+      │ └───┌──────────┐          └─── ●●●●●●●●●●
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     │●●●●●●●●●●│
+      │     └──────────┘
+      │
+      └───── <empty>
+      ```
+
+  * borrow from 10s position: 10s position changes from 10 to 9
+
+    ```
+    0 10 0                      1 1
+    │ │  │                      │ │
+    │ │  └─ ●                   │ └─ ●
+    │ │                         │
+    │ └─── ●●●●●●●●●●           └─── ●●●●●●●●●●
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │     ┌──────────┐
+    |     │●●●●●●●●●●│
+    │     └──────────┘
+    │
+    └───── <empty>
+
+        move those items back to the 1s place (1 group in 10s becomes 10 items in the 1s)
+
+    0 9 10                     1 1
+    │ │ │                      │ │
+    │ │ └─┌─┐                  │ └─ ●
+    │ │   │●│                  │
+    │ │   │●│                  └─── ●●●●●●●●●●
+    │ │   │●│
+    │ │   │●│
+    │ │   │●│
+    │ │   │●│
+    │ │   │●│
+    │ │   │●│
+    │ │   │●│
+    │ │   │●│
+    │ │   └─┘
+    │ └─── ●●●●●●●●●●          
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●● 
+    │      ●●●●●●●●●●
+    │
+    └───── <empty>
+    ```
+
+* subtract 1s position: 10-1 results in 9
+
+* subtract 10s position: 9-1 results in 8
+
+* subtract 100s position: 0-0 results in 0 (why? because 11 is the same as 011)
+
+The way to perform this algorithm in real-life is to stack the two numbers being subtracted on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, subtract the individual single digit components together (from right-to-left). Everytime borrowing is needed, cross out the number being changed and put the place their new numbers above. For example, subtracting 100 and 11 ...
 
 ```{define-block}
 ktvertsub
@@ -742,40 +1048,93 @@ kthelper_code/
 ```
 
 ```{ktvertsub}
-{1}{10}
-{2}{0}
-{1}{1}
+{1}{0}{0}
+{ }{1}{1}
 ------
-{0}{9}
+{ }{ }{ }
 ```
 
-KaTeX vertical subtraction template. Wrap digit with \cancel to strike it (e.g. `\cancel{d}`).
+* subtract 1s position: 0-1 not possible, borrow from 10s position
 
+  * borrow from 10s position: can't borrow 10s position is 0, borrow from 100s position
+
+    * borrow from 100s position: 100s position subtracts 1 (goes from 1 to 0), 10s position adds 10 (goes from 0 to 10)
+
+      ```{ktvertsub}
+      {0}{10}{ }
+      {1}{ 0}{0}
+      { }{ 1}{1}
+      ------
+      { }{  }{ }
+      ```
+
+  * borrow from 10s position: 10s subtracts 1 (goes from 10 to 9), 1s position adds 10 (goes from 0 to 10)
+
+    ```{ktvertsub}
+    { }{ 9}{  }
+    {0}{10}{10}
+    {1}{ 0}{ 0}
+    { }{ 1}{ 1}
+    ------
+    { }{  }{  }
+    ```
+
+* subtract 1s position: 10-1 results in 9
+
+  ```{ktvertsub}
+  { }{ 9}{  }
+  {0}{10}{10}
+  {1}{ 0}{ 0}
+  { }{ 1}{ 1}
+  ------
+  { }{  }{ 9}
+  ```
+
+* subtract 10s position: 9-1 results in 8
+
+  ```{ktvertsub}
+  { }{ 9}{  }
+  {0}{10}{10}
+  {1}{ 0}{ 0}
+  { }{ 1}{ 1}
+  ------
+  { }{ 8}{ 9}
+  ```
+
+* subtract 100s position: 0-0 results in 0
+
+  ```{ktvertsub}
+  { }{ 9}{  }
+  {0}{10}{10}
+  {1}{ 0}{ 0}
+  { }{ 1}{ 1}
+  ------
+  {0}{ 8}{ 9}
+  ```
+
+  ```{note}
+  The number 11 has nothing in its 100s place -- nothing is the same as 0. 11 is the same as 011.
+  ```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+wholenum_code/src/main/java/com/offbynull/wholenum/MainSubtraction.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
 ```
-`{kt}
-\begin{alignedat}{4}
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }&  \enspace - \\
-\hline
-       {  }&  \enspace        {  }&  \enspace        {  }&  \enspace        {  }& 
-\end{alignedat}
-`
+
+The code output above has writes removed. When the code actually runs, it outputs what logic takes place at each step. For example ...
+
+```{define-block}
+wholenumsub
+wholenumsub_macro/
+wholenum_code/
 ```
 
-For example...
-
-`{kt}
-\begin{alignedat}{4}
-       { 7}&  \enspace        {10}&  \enspace        {  }&  \enspace        {  }&  \\
-       {  }&  \enspace \cancel{ 0}&  \enspace        {14}&  \enspace        {  }&  \\
-       {  }&  \enspace        {  }&  \enspace \cancel{ 4}&  \enspace        {13}&  \\
-\cancel{ 8}&  \enspace \cancel{ 1}&  \enspace \cancel{ 5}&  \enspace \cancel{ 3}&  \\
-       { 3}&  \enspace        { 9}&  \enspace        { 7}&  \enspace        { 8}&  \enspace - \\
-\hline
-       { 4}&  \enspace        { 1}&  \enspace        { 7}&  \enspace        { 5}& 
-\end{alignedat}
-`
+```{wholenumsub}
+100 11
+```
 
 # Multiplication
 

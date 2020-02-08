@@ -90,12 +90,12 @@ public class MainAddition {
             int[] result = IntStream.range(0, maxLen).map(i -> 0).toArray();
             int[] carryOverDigits = null;
             for (int i = maxLen - 1; i >= 0; i--) {
-                int num1Digit = i >= num1Digits.length ? 0 : num1Digits[i];
-                int num2Digit = i >= num2Digits.length ? 0 : num2Digits[i];
+                int num1Digit = num1Digits[i];
+                int num2Digit = num2Digits[i];
                 int[] digitsAdded = DIGIT_ADD_CACHE[num1Digit][num2Digit];
 
                 printBulletNewLine();
-                println("pos ", maxLen - i, " -- adding ", isolate(num1Digit, i, maxLen), " and ", isolate(num2Digit, i, maxLen));
+                println("pos ", maxLen - i, " -- adding ", isolate(num1Digits, i), " and ", isolate(num2Digits, i));
                 println("start state: ", "carry-over=",  carryOverDigits, ".");
                 println(num1Digit, " + ", num2Digit, " is ", digitsAdded, ".");
 
@@ -174,7 +174,7 @@ public class MainAddition {
     private static String isolate(int[] digits, int idx) {
         String ret = "";
         for (int i = 0; i < digits.length; i++) {
-            ret += i == idx ? "" + digits[i] : "x";
+            ret += i == idx ? " [" + digits[i] + "] " : " " + digits[i] + " ";
         }
         return ret;
     }
@@ -182,7 +182,7 @@ public class MainAddition {
     private static String isolate(int digit, int idx, int max) {
         String ret = "";
         for (int i = 0; i < max; i++) {
-            ret += i == idx ? "" + digit : "x";
+            ret += i == idx ? " [" + digit + "] " : " x ";
         }
         return ret;
     }
