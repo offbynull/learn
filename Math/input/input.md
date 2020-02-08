@@ -922,6 +922,8 @@ To `{bm} simplify` an expression is to perform all the math operations possible 
 
 To `{bm} evaluate` an expression is to (replace) set all of its variables to numbers and perform all the operations. In other words, set all variables to a number and simplify the expression.
 
+`{bm-ignore} terminology`
+
 In an expression, the word...
  * `{bm} term` means a constant or a product of a constant and one or more variables. For example, ...
    * x
@@ -937,7 +939,34 @@ In an expression, the word...
 The book states that the term 7 has a coefficient of 7, but this doesn't mesh with the description that the book gives for coefficients -- "The constant that multiplies the variable(s) in a term is called the coefficient." Other sources seem to corroborate that a constant by itself doesn't equality as a coefficient: https://www.youtube.com/watch?v=uiIg6ADVz8c.
 ```
 
+2 terms are considered `{bm} like term/(like term|like-term)/i`s if they either...
+ * have the same variable to the power of the same exponent.
+   * e.g. 7x and 10x  (x is the same as x^1)
+   * e.g. 55a^4 and a^4
+   * e.g. 2^(b+1) and 7^(b+1)
+ * are both constants.
+   * e.g. 5 and 7
+   * e.g. 6 and 909
+
+Like terms can be combined together by adding the coefficients. For example, 4x+2x can be simplified to 6x. The reason for this is that multiplication is just iterative addition -- it becomes apparent once 4x and 2x get broken down as addition in the expression ...
+
+```
+       4x         2x
+┌─────────────┐ ┌─────┐
+ x + x + x + x + x + x
+└─────────────────────┘
+          7x
+```
+
+```{note}
+If multiple additions are being chained together, often times its helpful to re-order it so that like terms are together -- it makes it easier to combine like terms. You can do this because of the commutative property of addition. For example..
+
+5x^2 + 3y + 4x^2 + 2y can be re-order as 5x^2 + 4x^2 + 3y + 2y
+```
+
 When 2 expressions evaluate to the same result, they can be written as an equation. An `{bm} equation` is denoted by a =, where the left-side is one expression and the right-side is another. For example, `{kt} 5x = 30`.
+
+TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than twice x = 2x-(9*5))
 
 
 
@@ -5894,8 +5923,239 @@ __TRY IT__
 
 2.36) 6x^2-4x-7 -- x=2, 6(2)^2-4(2)-7 = 6(4)-4(2)-7 = 24-8-7 = 23
 
-2.37)
+2.37) 4x + 3b + 2 has the terms...
 
+* 4x with a coefficient of 4
+* 3b with a coefficient of 3
+* 2 with a coefficient of 2 (this book says that a constant by itself is considered a coefficient but all other resources are saying that it isn't)
+
+2.38) 9a + 13a^2 + a^3 has the terms 9a, 13a^2, a^3
+
+* 9a with a coefficient of 9
+* 13a^2 with a coefficient of 13
+* a^3 with a coefficient of 3 (a^3 is the same as 1*a^3)
+
+2.39) like terms in 9, 2x^3, y^2, 8x^3, 15, 9y, 11y^2...
+
+* 9 and 15
+* 2x^3 and 8x^3
+* y^2 and 11y^2
+
+2.40) like terms in the expression 4x^3+8x^2+19+3x^2+24+6x^3 ...
+
+* 4x^3 and 6x^3
+* 8x^2 and 3x^2
+* 19 and 24
+
+2.41) 7x+9+9x+8 simplifies to 16x+17
+
+2.42) 5y+2+8y+4y+5 simplifies to 17y+7
+
+2.43) 3x^2+9x+x^2+5x simplifies to 4x^2+14x
+
+2.44) 11y^2+8y+y^2+7y simplifies to 12y^2+15y
+
+2.45)
+
+* a) 47-41
+* b) 5x/2
+
+2.46)
+
+* a) 17+19
+* b) 7x
+
+2.47)
+
+* a) x+11
+* b) 11a-14
+
+2.48)
+
+* a) j + 19
+* b) 2x - 21
+
+2.49)
+
+* a) 4(p+q)
+* b) 4p+q
+
+2.50)
+
+* a) 2x-8
+* b) 2*(x-8)
+
+2.51) l = w-5
+
+2.52) w = 2 + l
+
+2.53) d = 5q-7
+
+2.54) d = 8 + 4n
+
+__EXERCISE__
+
+2.2.69) 7(2)+8 = 14+8 = 22
+
+2.2.70) 9(3)+7 = 27+7 = 34
+
+2.2.71) 5(6)-4 = 30-4 = 26
+
+2.2.72) 8(7)-6 = 56-6 = 50
+
+2.2.73) 12^2 = 144
+
+2.2.74) 5^3 = 125
+
+2.2.75) 2^5 = 32
+
+2.2.76) 3^4 = 81
+
+2.2.77) 3^3 = 27
+
+2.2.78) 4^2 = 16
+
+2.2.79) 4^2 + 3*4 - 7 = 16 + 12 - 7 = 28 - 7 = 21
+
+2.2.80) 6^2 + 5*6 - 8 = 36 + 30 - 8 =  66 - 8 = 58
+
+2.2.81) 2\*7 + 4\*8 - 5 = 14 + 32 - 9 = 46 - 9 = 37
+
+2.2.82) 6\*6 + 3\*9 - 9 = 36 + 27 - 9 = 36 + 18 = 54
+
+2.2.83) (10-7)^2 = 3^2 = 9
+
+2.2.84) (6+9)^2 = 15^2 = 225
+
+2.2.85) 3^2 + 8^2 = 9 + 64 = 73
+
+2.2.86) 12^2 - 5^2 = 144 - 25 = 119
+
+2.2.87) 2(15) + 2(12) = 30 + 24 = 54
+
+2.2.88) 2(18) + 2(14) = 36 + 28 = 64
+
+2.2.89) 15x^2, 6x, 2
+
+2.2.90) 11x^2, 8x, 5
+
+2.2.91) 10y^3, y, 2
+
+2.2.92) 9y^3, y, 5
+
+2.2.93) 8
+
+2.2.94) 13
+
+2.2.95) 5
+
+2.2.96) 6
+
+2.2.97) {x^3, 8x^3}, {8x}, {14, 5}, {8y}
+
+2.2.98) {6z, 4z}, {3w^2, w^2}, {1}, {6z^2}
+
+2.2.99) {9a}, {a^2}, {16ab, 4ab}, {16b^2, 9b^2}
+
+2.2.100) {3}, {25r^2, 4r^2}, {10s, 3s}, {10r}
+
+2.2.101) 13x
+
+2.2.102) 19x
+
+2.2.103) 26a
+
+2.2.104) 27z
+
+2.2.105) 7c
+
+2.2.106) 11y
+
+2.2.107) 12x+8
+
+2.2.108) 13a+9
+
+2.2.109) 10u+3
+
+2.2.110) 10d+11
+
+2.2.111) 12p+10
+
+2.2.112) 12x-2
+
+2.2.113) 22a+1
+
+2.2.114) 22c+0=22c
+
+2.2.115) 17x^2+20x+16
+
+2.2.116) 7b^2+12b+6
+
+2.2.117) 8+12
+
+2.2.118) 9+1
+
+2.2.119) 14-9
+
+2.2.120) 19-8
+
+2.2.121) 9*7
+
+2.2.122) 8*7
+
+2.2.123) 36/9
+
+2.2.124) 42/7
+
+2.2.125) x-4
+
+2.2.126) x-3
+
+2.2.127) 6*y
+
+2.2.128) 9*y
+
+2.2.129) 8x+3x
+
+2.2.130) 13x+3x
+
+2.2.131) y/3
+
+2.2.132) y/8
+
+2.2.133) 8*(y-9)
+
+2.2.134) 7*(y-1)
+
+2.2.135) 5*(x+y)
+
+2.2.136) 2x-(9*5)
+
+2.2.137) s = b + 15
+
+2.2.138) r = 3 + c
+
+2.2.139) g = b - 4
+
+2.2.140) m = f - 6
+
+2.2.141) p = 2n-7
+
+2.2.142) f = 3+6t
+
+2.2.143) justin pays 750, insurance company pays 2100-750
+
+2.2.144) pam and armando pay 2500, insurance pays 19400-2500
+
+2.2.145) addition has commutative property, subtraction doesn't
+
+2.2.146) the operators in each expression are different -- 4(x+y) vs 4x+y
+
+## Chapter 2 Section 2.3
+
+__TRY IT__
+
+2.55)
 
 START BACK UP HERE
 START BACK UP HERE
