@@ -22,8 +22,10 @@
 <li><a href="#HEADREF10">Subtraction</a></li>
 <li><a href="#HEADREF11">Multiplication</a></li>
 <li><a href="#HEADREF12">Division</a></li>
-<li><a href="#HEADREF13">Order of Operations</a></li>
-<li><a href="#HEADREF14">Algebra Rules</a></li>
+<li><a href="#HEADREF13">Algebra</a></li>
+<ul>
+<li><a href="#HEADREF14">Order of Operations</a></li>
+</ul>
 <li><a href="#HEADREF15">OpenStax Prealgebra Problems</a></li>
 <ul>
 <li><a href="#HEADREF16">Chapter 1 Section 1.1</a></li>
@@ -32,6 +34,7 @@
 <li><a href="#HEADREF19">Chapter 1 Section 1.4</a></li>
 <li><a href="#HEADREF20">Chapter 1 Section 1.5</a></li>
 <li><a href="#HEADREF21">Chapter 2 Section 2.1</a></li>
+<li><a href="#HEADREF22">Chapter 2 Section 2.2</a></li>
 </ul>
 </ul>
 </div>
@@ -72,7 +75,7 @@ DIGIT: [0123456789];
 <p>The whole rule is used to express how many whole values there are. For example, to process the string 572 for the whole rule, ...</p>
 <ol>
 <li>
-<p>begin by first determining the value each <a href="#BOOKMARK1">digit</a> represents...</p>
+<p>begin by first de<a href="#BOOKMARK25">term</a>ining the value each <a href="#BOOKMARK1">digit</a> represents...</p>
 <pre><code>0 = &lt;empty&gt;
 1 = ●
 2 = ●●
@@ -86,7 +89,7 @@ DIGIT: [0123456789];
 </code></pre>
 </li>
 <li>
-<p>Then, calculate the value for each index of the string 572. The algorithm for determining the value of each index is...</p>
+<p>Then, calculate the value for each index of the string 572. The algorithm for de<a href="#BOOKMARK25">term</a>ining the value of each index is...</p>
 <pre><code>index_values = []
 for (item in index) {
   next_index_value = &lt;empty&gt;
@@ -110,7 +113,7 @@ index_values.reverse()
 </code></pre>
 </li>
 <li>
-<p>Now that the <a href="#BOOKMARK1">digit</a> values and index values are known, the value of each (<a href="#BOOKMARK1">digit</a>, index) combination can be calculated. The algorithm for determining the value of each (<a href="#BOOKMARK1">digit</a>, index) combination is...</p>
+<p>Now that the <a href="#BOOKMARK1">digit</a> values and index values are known, the value of each (<a href="#BOOKMARK1">digit</a>, index) combination can be calculated. The algorithm for de<a href="#BOOKMARK25">term</a>ining the value of each (<a href="#BOOKMARK1">digit</a>, index) combination is...</p>
 <pre><code>final_value = &lt;empty&gt;
 for (digit_value, index_value) in input
   value = &lt;empty&gt;
@@ -197,7 +200,7 @@ for (digit_value, index_value) in input
 <p>The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...</p>
 <ol>
 <li>
-<p>begin by determining the <a href="#BOOKMARK13">total</a> number of parts there are. The algorithm to do this is as follows..</p>
+<p>begin by de<a href="#BOOKMARK25">term</a>ining the <a href="#BOOKMARK13">total</a> number of parts there are. The algorithm to do this is as follows..</p>
 <pre><code>total_parts = &lt;empty&gt;
 for (item in index) {
   if (total_parts == &lt;empty&gt;) {
@@ -683,27 +686,100 @@ move those 100 items as 1 group of 100s
 `
 </code></pre>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>047.9</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>5</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>239.5</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>0</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>23</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>20</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>0</mn></mphantom><mn>39</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>0</mn></mphantom><munder accentunder="true"><mn>35</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>00</mn></mphantom><mn>4</mn><mphantom><mi mathvariant="normal">.</mi></mphantom><mn>5</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>00</mn></mphantom><munder accentunder="true"><mrow><mn>4</mn><mphantom><mi mathvariant="normal">.</mi></mphantom><mn>5</mn></mrow><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>5</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mphantom><mn>004.</mn></mphantom><mn>0</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l} \phantom{   {5\smash{)}} }{   047.9 } \\ {5}\overline{\smash{)}239.5} \\ \phantom{{5\smash{)}}}\underline{0} \\ \phantom{{5\smash{)}}}23 \\ \phantom{{5\smash{)}}}\underline{20} \\ \phantom{{5\smash{)}}}\phantom{0}39 \\ \phantom{{5\smash{)}}}\phantom{0}\underline{35} \\ \phantom{{5\smash{)}}}\phantom{00}4\phantom{.}5 \\ \phantom{{5\smash{)}}}\phantom{00}\underline{4\phantom{.}5} \\ \phantom{{5\smash{)}}}\phantom{004.}0 \\ \end{array} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:12.004439999999999em;vertical-align:-5.75222em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:6.2522199999999994em;"><span style="top:-8.412219999999998em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">4</span><span class="mord">7</span><span class="mord">.</span><span class="mord">9</span></span></span></span><span style="top:-7.20778em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord">5</span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord">3</span><span class="mord">9</span><span class="mord">.</span><span class="mord">5</span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-6.0077799999999995em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-4.807779999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord">3</span></span></span><span style="top:-3.6077799999999987em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-2.4077799999999985em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord">3</span><span class="mord">9</span></span></span><span style="top:-1.2077799999999976em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span><span class="mord">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:-0.007779999999998288em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">5</span></span></span><span style="top:1.192220000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span><span style="top:2.3922200000000005em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">5</span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">4</span><span class="mord" style="color:transparent;">.</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:5.75222em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
-<a name="HEADREF13"></a><h1>Order of Operations</h1>
-<p>The <a name="BOOKMARK19"></a><strong>order of operations</strong> are as follows:</p>
-<ol>
-<li>Brackets</li>
-<li>Exponents</li>
-<li>Division and Multiplication (evaluated left-to-right)</li>
-<li><a href="#BOOKMARK7">Addition</a> and Subtraction (evaluated left-to-right)</li>
-</ol>
-<p>These rules are often abbreviated as either...</p>
+<a name="HEADREF13"></a><h1>Algebra</h1>
+<p><a name="BOOKMARK19"></a><strong>Algebra</strong> is the study of mathematical operations and the rules for manipulating those operations.</p>
+<p>Common mathematical operations:</p>
 <ul>
-<li><a name="BOOKMARK20"></a><strong>BEDMAS</strong> - Brackets / Exponents / Division and Multiplication / <a href="#BOOKMARK7">Addition</a> and Subtraction</li>
-<li><a name="BOOKMARK21"></a><strong>PEMDAS</strong> - Parenthesis / Exponents / Multiplication and Division / <a href="#BOOKMARK7">Addition</a> and Subtraction</li>
+<li><a href="#BOOKMARK7">Addition</a> -- denoted by +, e.g. 5+4</li>
+<li>Subtraction -- denoted by -, e.g. 5-4</li>
+<li>Multiplication -- denoted by a center dot or brackets, e.g. 5(4), (4)5, or 4·5</li>
+<li>Division -- denoted by / or as a <a href="#BOOKMARK4">fraction</a>, e.g. ½ or <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>Exponent -- denoted by superscript, e.g. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>8</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">8^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">8</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></li>
 </ul>
-<p>Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are evaluated left-to-right in the same step, it makes no difference.</p>
-<a name="HEADREF14"></a><h1>Algebra Rules</h1>
+<p>These operations can typically be chained together. One or more operations combined together is called an <a name="BOOKMARK20"></a><strong>expression</strong>. For example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>+</mo><mn>3</mn><mo>∗</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">4 + 3 * 5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span> is an <a href="#BOOKMARK20">expression</a>.</p>
+<p>The operations in an <a href="#BOOKMARK20">expression</a> can make use of either <a href="#BOOKMARK22">constant</a>s or <a href="#BOOKMARK21">variable</a>s. A...</p>
+<ul>
+<li><a name="BOOKMARK21"></a><strong>variable</strong> is a placeholder that can be replaced with a number, typically represented as a letter.</li>
+<li><a name="BOOKMARK22"></a><strong>constant</strong> is a number.</li>
+</ul>
+<p>For example, the <a href="#BOOKMARK20">expression</a> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>+</mo><mn>3</mn><mo>∗</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">x + 3 * x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> has the <a href="#BOOKMARK22">constant</a> 3 and the <a href="#BOOKMARK21">variable</a> x. Note that the <a href="#BOOKMARK21">variable</a> x is used 2 times in the <a href="#BOOKMARK20">expression</a> -- when its set to a number, both instances of x in the <a href="#BOOKMARK20">expression</a> must change to that number. For example, if x were set to 5, the <a href="#BOOKMARK20">expression</a> would be <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>+</mo><mn>3</mn><mo>∗</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">5 + 3 * 5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span>.</p>
+<p>TODO: <a href="#BOOKMARK29">BEDMAS</a></p>
+<p>To <a name="BOOKMARK23"></a><strong>simplify</strong> an <a href="#BOOKMARK20">expression</a> is to perform all the math operations possible on the <a href="#BOOKMARK20">expression</a>. For example, in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>+</mo><mn>3</mn><mo>∗</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">5+3*5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span>, first the multiplication gets performed to make the <a href="#BOOKMARK20">expression</a> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>+</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">5+15</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">5</span></span></span></span>, then the <a href="#BOOKMARK7">addition</a> gets performed to make the <a href="#BOOKMARK20">expression</a> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn></mrow><annotation encoding="application/x-tex">20</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span></span></span></span>.</p>
+<p>To <a name="BOOKMARK24"></a><strong>evaluate</strong> an <a href="#BOOKMARK20">expression</a> is to (replace) set all of its <a href="#BOOKMARK21">variable</a>s to numbers and perform all the operations. In other words, set all <a href="#BOOKMARK21">variable</a>s to a number and <a href="#BOOKMARK23">simplify</a> the <a href="#BOOKMARK20">expression</a>.</p>
+<p>In an <a href="#BOOKMARK20">expression</a>, the word...</p>
+<ul>
+<li><a name="BOOKMARK25"></a><strong>term</strong> means a <a href="#BOOKMARK22">constant</a> or a <a href="#BOOKMARK15">product</a> of a <a href="#BOOKMARK22">constant</a> and one or more <a href="#BOOKMARK21">variable</a>s. For example, ...
+<ul>
+<li>x</li>
+<li>5x</li>
+<li>5xy</li>
+<li>5x^2</li>
+</ul>
+</li>
+<li><a name="BOOKMARK26"></a><strong>coefficient</strong> means a <a href="#BOOKMARK22">constant</a> that multiplies <a href="#BOOKMARK21">variable</a>s in a <a href="#BOOKMARK25">term</a>. For example, in the <a href="#BOOKMARK25">term</a>...
+<ul>
+<li>9a, 9 is the <a href="#BOOKMARK26">coefficient</a></li>
+<li>y, 1 is the <a href="#BOOKMARK26">coefficient</a> because 1 is implied (y = 1y)</li>
+<li>5x^2, 5 is the <a href="#BOOKMARK26">coefficient</a></li>
+</ul>
+</li>
+</ul>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>The book states that the <a href="#BOOKMARK25">term</a> 7 has a <a href="#BOOKMARK26">coefficient</a> of 7, but this doesn't mesh with the description that the book gives for <a href="#BOOKMARK26">coefficient</a>s -- "The <a href="#BOOKMARK22">constant</a> that multiplies the <a href="#BOOKMARK21">variable</a>(s) in a <a href="#BOOKMARK25">term</a> is called the <a href="#BOOKMARK26">coefficient</a>." Other sources seem to corroborate that a <a href="#BOOKMARK22">constant</a> by itself doesn't equality as a <a href="#BOOKMARK26">coefficient</a>: https://www.youtube.com/watch?v=uiIg6ADVz8c.</p>
+</div>
+<p>When 2 <a href="#BOOKMARK20">expression</a>s <a href="#BOOKMARK24">evaluate</a> to the same result, they can be written as an <a href="#BOOKMARK27">equation</a>. An <a name="BOOKMARK27"></a><strong>equation</strong> is denoted by a =, where the left-side is one <a href="#BOOKMARK20">expression</a> and the right-side is another. For example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mi>x</mi><mo>=</mo><mn>30</mn></mrow><annotation encoding="application/x-tex">5x = 30</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">0</span></span></span></span>.</p>
+<p><a href="#BOOKMARK19">Algebra</a>ic <a href="#BOOKMARK25">term</a>inology:</p>
+<ul>
+<li>A <a href="#BOOKMARK21">variable</a> is a placeholder that can be replaced with a number, typically represented as a letter.</li>
+<li>A <a href="#BOOKMARK22">constant</a> is a number.</li>
+<li>A <a href="#BOOKMARK20">expression</a> is a set of mathematical operations performed on <a href="#BOOKMARK22">constant</a>s and <a href="#BOOKMARK21">variable</a>s. For example, 5 + 3 * x is an <a href="#BOOKMARK20">expression</a>.</li>
+<li>A <a href="#BOOKMARK27">equation</a> is 2 <a href="#BOOKMARK20">expression</a>s that are equal to each other</li>
+</ul>
+<p><a href="#BOOKMARK19">Algebra</a>ic notation:</p>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a=b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> -- a equals b</p>
+<p>When both sides represent the same value, it's said that they're equal.</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo mathvariant="normal">≠</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \neq b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> - a NOT equals b</p>
+<p>When both sides represent different value, it's said that they're not equal.</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a &gt; b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> -- greater than</p>
+<p>When the value of left-side is <a href="#BOOKMARK12">more than</a> the right-side, the left is said to be greater than the right.</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>This is the same as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>&lt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">b &lt; a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>. Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.</p>
+</div>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a &lt; b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> -- less than</p>
+<p>When the value of left-side is less than the right-side, the left is said to be greater than the right.</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>This is the same as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>&gt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">b &gt; a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>.  Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.</p>
+</div>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>≥</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \geq b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> -- greater than or equal</p>
+<p>When the value of left-side is <a href="#BOOKMARK12">more than</a> OR equal to the right-side, the left is said to be greater than the right.</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>≤</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \leq b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> -- less than or equal</p>
+<p>When the value of left-side is less than OR equal to the right-side, the left is said to be greater than the right.</p>
+</li>
+</ul>
 <p>KEEP WORKING ON THESE:
 <a href="#BOOKMARK8">ADD</a> <a href="#BOOKMARK4">FRACTION</a> <a href="#BOOKMARK8">ADD</a>ING AND MULTIPLICATION RULES (recipriocals, cross multiply, etc..)
-<a href="#BOOKMARK8">ADD</a> REMAINING ALGEBRA RULES
-https://en.wikiversity.org/wiki/Algebraic_Properties_of_Equality
-https://en.wikiversity.org/wiki/Basic_Laws_of_Algebra
-http://www.themathpage.com/aPreCalc/algebraPre.htm (specifically 1, 6, and 7?)
+<a href="#BOOKMARK8">ADD</a> REMAINING <a href="#BOOKMARK19">ALGEBRA</a> RULES
+https://en.wikiversity.org/wiki/<a href="#BOOKMARK19">Algebra</a>ic_Properties_of_Equality
+https://en.wikiversity.org/wiki/Basic_Laws_of_<a href="#BOOKMARK19">Algebra</a>
+http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK19">algebra</a>Pre.htm (specifically 1, 6, and 7?)
 <a href="#BOOKMARK8">ADD</a> TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <p>Commutative Property</p>
 <ul>
@@ -733,6 +809,20 @@ http://www.themathpage.com/aPreCalc/algebraPre.htm (specifically 1, 6, and 7?)
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>⋅</mo><mi>a</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
 </ul>
+<a name="HEADREF14"></a><h2>Order of Operations</h2>
+<p>The <a name="BOOKMARK28"></a><strong>order of operations</strong> are as follows:</p>
+<ol>
+<li>Brackets</li>
+<li>Exponents</li>
+<li>Division and Multiplication (<a href="#BOOKMARK24">evaluate</a>d left-to-right)</li>
+<li><a href="#BOOKMARK7">Addition</a> and Subtraction (<a href="#BOOKMARK24">evaluate</a>d left-to-right)</li>
+</ol>
+<p>These rules are often abbreviated as either...</p>
+<ul>
+<li><a name="BOOKMARK29"></a><strong>BEDMAS</strong> - Brackets / Exponents / Division and Multiplication / <a href="#BOOKMARK7">Addition</a> and Subtraction</li>
+<li><a name="BOOKMARK30"></a><strong>PEMDAS</strong> - Parenthesis / Exponents / Multiplication and Division / <a href="#BOOKMARK7">Addition</a> and Subtraction (can be remembered as Please Excuse My Dear Aunt Sally)</li>
+</ul>
+<p>Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are <a href="#BOOKMARK24">evaluate</a>d left-to-right in the same step, it makes no difference.</p>
 <a name="HEADREF15"></a><h1>OpenStax Prealgebra Problems</h1>
 <a name="HEADREF16"></a><h2>Chapter 1 Section 1.1</h2>
 <p><strong>TRY IT</strong></p>
@@ -3637,6 +3727,215 @@ b) twenty nine minus twelve</p>
 <a name="HEADREF21"></a><h2>Chapter 2 Section 2.1</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.1)</p>
+<ul>
+<li>a) 18 <a href="#BOOKMARK9">plus</a> 11; the <a href="#BOOKMARK10">sum</a> of 18 and 11</li>
+<li>b) 27 times 9; the <a href="#BOOKMARK15">product</a> of 27 and 9</li>
+<li>c) 84 divided by 7; the <a href="#BOOKMARK16">quotient</a> of 84 and 7; 7 divided into 84</li>
+<li>d) p minus q; the difference of p and q; q subtracted from 9</li>
+</ul>
+<p>2.2)</p>
+<ul>
+<li>a) 47 minus 9; the difference of 47 and 9; 9 subtracted from 47</li>
+<li>b) 72 divided by 9; the <a href="#BOOKMARK16">quotient</a> of 72 and 9; 9 divided into 72</li>
+<li>c) m <a href="#BOOKMARK9">plus</a> n; the <a href="#BOOKMARK10">sum</a> of m and n</li>
+<li>d) 13 times 7; the <a href="#BOOKMARK15">product</a> of 7 and 9</li>
+</ul>
+<p>2.3)</p>
+<ul>
+<li>a) 14 is less than or equal to 27</li>
+<li>b) 19 minus 2 is not equal to 8</li>
+<li>c) 12 is greater than 4 divided by 2</li>
+<li>d) x minus 7 is less than 1</li>
+</ul>
+<p>2.4)</p>
+<ul>
+<li>a) 19 is greater than or equal to 15</li>
+<li>b) 7 is equal to 12 minus 5</li>
+<li>c) 15 divided by 3 is less than 8</li>
+<li>d) y minus 3 is greater than 6</li>
+</ul>
+<p>2.5)</p>
+<ul>
+<li>a) 48 &gt; 26</li>
+<li>b) 27 &lt; 28</li>
+</ul>
+<p>2.6)</p>
+<ul>
+<li>a) 27 &lt; 48</li>
+<li>b) 28 &gt; 27</li>
+</ul>
+<p>2.7)</p>
+<ul>
+<li>a) 23 + 6 = 29 -- <a href="#BOOKMARK27">equation</a></li>
+<li>b) 7 * 3 - 7 -- <a href="#BOOKMARK20">expression</a></li>
+</ul>
+<p>2.8)</p>
+<ul>
+<li>a) y/14 -- <a href="#BOOKMARK20">expression</a></li>
+<li>b) x - 6 = 21 -- <a href="#BOOKMARK27">equation</a></li>
+</ul>
+<p>2.9) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>41</mn><mn>5</mn></msup></mrow><annotation encoding="application/x-tex">{41}^5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.848448em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord">4</span><span class="mord">1</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.848448em;"><span style="top:-3.09734em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span></span></span></span></p>
+<p>2.10) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>7</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">{7}^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord">7</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span></p>
+<p>2.11)</p>
+<ul>
+<li>a) 4*4*4*4*4*4*4*4</li>
+<li>b) a*a*a*a*a*a*a</li>
+</ul>
+<p>2.12)</p>
+<ul>
+<li>a) 8*8*8*8*8*8*8*8</li>
+<li>b) b*b*b*b*b*b</li>
+</ul>
+<p>2.13)</p>
+<ul>
+<li>a) 5*5*5</li>
+<li>b) 1*1*1*1*1*1*1</li>
+</ul>
+<p>2.14)</p>
+<ul>
+<li>a) 7*7</li>
+<li>b) 0*0*0*0*0</li>
+</ul>
+<p>2.15)</p>
+<ul>
+<li>a) 12-5*2 = 12-10 = 2</li>
+<li>b) (12-5)*2 = 7*2 = 14</li>
+</ul>
+<p>2.16)</p>
+<ul>
+<li>a) 8+3*9 = 8+27 = 35</li>
+<li>b) (8+3)*9 = 11*9 = 99</li>
+</ul>
+<p>2.17) 42/7*3 = 6*3 = 18</p>
+<p>2.18) 12*3/4 = 36/4 = 9</p>
+<p>2.19) 30/5+10(3-2) = 30/5+10(1) = 30/5+10(1) = 6+10(1) = 6+10 = 16</p>
+<p>2.20) 70/10+4(6-2) = 70/10+4(4) = 7/1+4(4) = 7+4(4) = 7+16 = 23</p>
+<p>2.21) 9+5^3-(4(9+3)) = 9+5^3-(4(11)) = 9+5^3-(44) = 9+5^3-44 = 9+125-44 = 134-44 = 90</p>
+<p>2.22) 7^2-2(4(5+1)) = 7^2-2(4(6)) = 7^2-2(24) = 49-2(24) = 49-48 = 1</p>
+<p>2.23) 3^2 + 2^4 / 2 + 4^3 = 9+16/2+48 = 9+8+48 = 17+48 = 65</p>
+<p>2.24) 6^2 - 5^3 / 5 + 8^2 = 36 - 125 / 5 + 64 = 36-25+64 = 61+64 = 125</p>
+<p><strong>EXERCISE</strong></p>
+<p>2.1.1) 16 minus 9; difference of 16 and 9; subtract 9 from 16</p>
+<p>2.1.2) 25 minus 7; difference of 27 and 7; subtract 7 from 25</p>
+<p>2.1.3) 5 times 6; <a href="#BOOKMARK15">product</a> of 5 and 6; 5 multiplied by 6</p>
+<p>2.1.4) 3 times 9; <a href="#BOOKMARK15">product</a> of 3 and 9; 3 multiplied by 9</p>
+<p>2.1.5) 28 divided by 4; <a href="#BOOKMARK16">quotient</a> of 24 and 8; 24 divided by 8; 24 divided into 8</p>
+<p>2.1.6) 45 divided by 5; <a href="#BOOKMARK16">quotient</a> of 45 and 5; 45 divided bt 5; 5 divided into 45</p>
+<p>2.1.7) x <a href="#BOOKMARK9">plus</a> 8; <a href="#BOOKMARK10">sum</a> of x and 8</p>
+<p>2.1.8) x <a href="#BOOKMARK9">plus</a> 11; <a href="#BOOKMARK10">sum</a> of x and 11</p>
+<p>2.1.9) 2 times 7; <a href="#BOOKMARK15">product</a> of 2 and 7</p>
+<p>2.1.10) 4 times 8; <a href="#BOOKMARK15">product</a> of 4 and 8</p>
+<p>2.1.11) 14 is less than 21</p>
+<p>2.1.12) 17 is less than 35</p>
+<p>2.1.13) 36 is greater than or equal to 19</p>
+<p>2.1.14) 42 is greater than or equal to 27</p>
+<p>2.1.15) 3 times n is equal to 24</p>
+<p>2.1.16) 6 times n is equal to 36</p>
+<p>2.1.17) y minus 1 is greater than 6</p>
+<p>2.1.18) y minus 4 is greater than 8</p>
+<p>2.1.19) 2 is less than or equal to 18 divided by 6</p>
+<p>2.1.20) 3 is less than or equal to 20 divided by 4</p>
+<p>2.1.21) a is not equal to 7 times 4</p>
+<p>2.1.22) a is not equal to 1 times 12</p>
+<p>2.1.23) <a href="#BOOKMARK27">equation</a></p>
+<p>2.1.24) <a href="#BOOKMARK27">equation</a></p>
+<p>2.1.25) <a href="#BOOKMARK20">expression</a></p>
+<p>2.1.26) <a href="#BOOKMARK20">expression</a></p>
+<p>2.1.27) <a href="#BOOKMARK20">expression</a></p>
+<p>2.1.28) <a href="#BOOKMARK20">expression</a></p>
+<p>2.1.29) <a href="#BOOKMARK27">equation</a></p>
+<p>2.1.30) <a href="#BOOKMARK20">expression</a></p>
+<p>2.1.31) 3^7</p>
+<p>2.1.32) 4^6</p>
+<p>2.1.33) x^5</p>
+<p>2.1.34) y^6</p>
+<p>2.1.35) 5*5*5</p>
+<p>2.1.36) 8*8*8</p>
+<p>2.1.37) 2*2*2*2*2*2*2*2</p>
+<p>2.1.38) 10*10*10*10*10</p>
+<p>2.1.39)</p>
+<ul>
+<li>a) 3+8*5 = 3+40 = 43</li>
+<li>b) (3+8)*5 = 11*5 = 55</li>
+</ul>
+<p>2.1.40)</p>
+<ul>
+<li>a) 2+6*3 = 2+18 = 20</li>
+<li>b) (2+6)*3 = 8*3 = 24</li>
+</ul>
+<p>2.1.41) 2^3-12/(9-5) = 2^3-12/4 = 8-12/4 = 8-3 = 5</p>
+<p>2.1.42) 3^2-18/(11-5) = 3^2-18/6 = 9-18/6 = 9-3 = 6</p>
+<p>2.1.43) 3*8+5*2 = 3*8+10 = 3*8+10 = 24+10 = 34</p>
+<p>2.1.44) 4*7+3*5 = 28+3*5 = 28+15 = 43</p>
+<p>2.1.45) 2+8(6+1) = 2+8(7) = 2+56 = 58</p>
+<p>2.1.46) 4+6(3+6) = 4+6(9) = 4+54 = 58</p>
+<p>2.1.47) 4*12/8 = 48/8 = 6</p>
+<p>2.1.48) 2*36/6 = 2*6 = 12</p>
+<p>2.1.49) 6+10/2+2 = 6+5+2 = 13</p>
+<p>2.1.50) 9+12/3+4 = 9+4+4 = 17</p>
+<p>2.1.51) (6+10)/(2+2) = 16/4 = 4</p>
+<p>2.1.52) (9+12)/(3+4) = 21/7 = 3</p>
+<p>2.1.53) 20/4+6*5 = 5+30 = 35</p>
+<p>2.1.54) 33/3+8*2 = 11+16 = 27</p>
+<p>2.1.55) 20/(4+6)*5 = 20/10*5 = 2*5 = 10</p>
+<p>2.1.56) 33/(3+8)*2 = 33/11*2 = 3*2 = 6</p>
+<p>2.1.57) 4^2+5^2 = 16+25 = 41</p>
+<p>2.1.58) 3^2+7^2 = 9+49 = 58</p>
+<p>2.1.59) (4+5)^2 = 9^2 = 81</p>
+<p>2.1.60) (3+7)^2 = 10^2 = 100</p>
+<p>2.1.61) 3(1+9*6)-4^2 = 3(1+54)-4^2 = 3*55-4^2 = 3*55-16 = 165</p>
+<p>2.1.62) 5(2+8*4)-7^2 = 5(2+32)-7^2 = 5*34-7^2 = 5*34-49 = 170-49 = 121</p>
+<p>2.1.63) 2(1+3(10-2)) = 2(1+3(8)) = 2(1+24) = 2*25 = 50</p>
+<p>2.1.64) 5(2+4(3-2)) = 5(2+4(1)) = 5(2+4) = 5(6) = 40</p>
+<p>2.1.65)</p>
+<ul>
+<li>a) &gt;</li>
+<li>b) =</li>
+<li>c) &lt;</li>
+<li>d) &lt;</li>
+<li>e) &gt;</li>
+</ul>
+<p>2.1.66)</p>
+<ul>
+<li>a) &gt;</li>
+<li>b) &lt;</li>
+<li>c) &lt;</li>
+<li>d) &gt;</li>
+<li>e) &gt;</li>
+</ul>
+<p>2.1.67) <a href="#BOOKMARK20">expression</a> is a hierarchy of math operations, evaluation is the relationship between 2 <a href="#BOOKMARK20">expression</a>s</p>
+<p>2.1.68) it's so <a href="#BOOKMARK23">simplify</a>ing an <a href="#BOOKMARK20">expression</a> always results in the same answer</p>
+<a name="HEADREF22"></a><h2>Chapter 2 Section 2.2</h2>
+<p><strong>TRY IT</strong></p>
+<p>2.25) y+4</p>
+<ul>
+<li>a) y=6, 6+4=10</li>
+<li>b) y=15, 15+4=19</li>
+</ul>
+<p>2.26) a-5</p>
+<ul>
+<li>a) a=9, 9-5=4</li>
+<li>b) a=17, 17-5=12</li>
+</ul>
+<p>2.27) 8x-3</p>
+<ul>
+<li>a) x=2, 8(2)-3=13</li>
+<li>b) x=1, 8(1)-3=5</li>
+</ul>
+<p>2.28) 4y-4</p>
+<ul>
+<li>a) y=3, 4(3)-4=8</li>
+<li>b) y=5, 4(5)-4=16</li>
+</ul>
+<p>2.29) x^2 -- when x=8, 8^2=64</p>
+<p>2.30) x^3 -- when x = 6, 6^3=108</p>
+<p>2.31) 2^x -- when x = 6, 2^6=64</p>
+<p>2.32) 3^x -- when x = 4, 3^4=81</p>
+<p>2.33) 2x+5y-4 -- when x = 11 and y = 13, 2(11)+5(4)-4 = 22+20-4 = 22+16 = 38</p>
+<p>2.34) 5x-2y-9 -- when x = 7 and y = 8, 5(7)-2(8)-9 = 35-16-9 = 35-7 = 28</p>
+<p>2.35) 3x^2+4x+1 -- x=3, 3(3)^2+4(3)+1 = 3(9)+4(3)+1 = 27+12+1 = 27+13 = 40</p>
+<p>2.36) 6x^2-4x-7 -- x=2, 6(2)^2-4(2)-7 = 6(4)-4(2)-7 = 24-8-7 = 23</p>
+<p>2.37)</p>
 <p>START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE

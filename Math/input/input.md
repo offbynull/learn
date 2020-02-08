@@ -896,23 +896,93 @@ kthelper_code/
 \end{array}
 `
 
-# Order of Operations
+# Algebra
 
-The `{bm} order of operations` are as follows:
+`{bm} Algebra` is the study of mathematical operations and the rules for manipulating those operations.
 
-1. Brackets
-1. Exponents
-1. Division and Multiplication (evaluated left-to-right)
-1. Addition and Subtraction (evaluated left-to-right)
+Common mathematical operations:
 
-These rules are often abbreviated as either...
+* Addition -- denoted by +, e.g. 5+4
+* Subtraction -- denoted by -, e.g. 5-4
+* Multiplication -- denoted by a center dot or brackets, e.g. 5(4), (4)5, or 4·5
+* Division -- denoted by / or as a fraction, e.g. ½ or `{kt} \frac{1}{2}`
+* Exponent -- denoted by superscript, e.g. `{kt} 8^2`
 
-* `{bm} BEDMAS` - Brackets / Exponents / Division and Multiplication / Addition and Subtraction
-* `{bm} PEMDAS` - Parenthesis / Exponents / Multiplication and Division / Addition and Subtraction
+These operations can typically be chained together. One or more operations combined together is called an `{bm} expression`. For example, `{kt} 4 + 3 * 5` is an expression.
 
-Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are evaluated left-to-right in the same step, it makes no difference.
+The operations in an expression can make use of either constants or variables. A...
+ * `{bm} variable` is a placeholder that can be replaced with a number, typically represented as a letter.
+ * `{bm} constant` is a number.
 
-# Algebra Rules
+For example, the expression `{kt} x + 3 * x` has the constant 3 and the variable x. Note that the variable x is used 2 times in the expression -- when its set to a number, both instances of x in the expression must change to that number. For example, if x were set to 5, the expression would be `{kt} 5 + 3 * 5`.
+
+TODO: BEDMAS
+
+To `{bm} simplify` an expression is to perform all the math operations possible on the expression. For example, in `{kt} 5+3*5`, first the multiplication gets performed to make the expression `{kt} 5+15`, then the addition gets performed to make the expression `{kt} 20`.
+
+To `{bm} evaluate` an expression is to (replace) set all of its variables to numbers and perform all the operations. In other words, set all variables to a number and simplify the expression.
+
+In an expression, the word...
+ * `{bm} term` means a constant or a product of a constant and one or more variables. For example, ...
+   * x
+   * 5x
+   * 5xy
+   * 5x^2
+ * `{bm} coefficient` means a constant that multiplies variables in a term. For example, in the term...
+   * 9a, 9 is the coefficient
+   * y, 1 is the coefficient because 1 is implied (y = 1y)
+   * 5x^2, 5 is the coefficient
+
+```{note}
+The book states that the term 7 has a coefficient of 7, but this doesn't mesh with the description that the book gives for coefficients -- "The constant that multiplies the variable(s) in a term is called the coefficient." Other sources seem to corroborate that a constant by itself doesn't equality as a coefficient: https://www.youtube.com/watch?v=uiIg6ADVz8c.
+```
+
+When 2 expressions evaluate to the same result, they can be written as an equation. An `{bm} equation` is denoted by a =, where the left-side is one expression and the right-side is another. For example, `{kt} 5x = 30`.
+
+
+
+
+
+
+Algebraic terminology:
+
+ * A variable is a placeholder that can be replaced with a number, typically represented as a letter.
+ * A constant is a number.
+ * A expression is a set of mathematical operations performed on constants and variables. For example, 5 + 3 * x is an expression.
+ * A equation is 2 expressions that are equal to each other
+
+Algebraic notation:
+
+* `{kt} a=b` -- a equals b
+
+  When both sides represent the same value, it's said that they're equal.
+
+* `{kt} a \neq b` - a NOT equals b
+
+  When both sides represent different value, it's said that they're not equal.
+
+* `{kt} a > b` -- greater than
+
+  When the value of left-side is more than the right-side, the left is said to be greater than the right.
+
+  ```{note}
+  This is the same as `{kt} b < a`. Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.
+  ```
+* `{kt} a < b` -- less than
+
+  When the value of left-side is less than the right-side, the left is said to be greater than the right.
+
+  ```{note}
+  This is the same as `{kt} b > a`.  Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.
+  ```
+
+* `{kt} a \geq b` -- greater than or equal
+
+  When the value of left-side is more than OR equal to the right-side, the left is said to be greater than the right.
+
+* `{kt} a \leq b` -- less than or equal
+
+  When the value of left-side is less than OR equal to the right-side, the left is said to be greater than the right.
 
 KEEP WORKING ON THESE:
 ADD FRACTION ADDING AND MULTIPLICATION RULES (recipriocals, cross multiply, etc..)
@@ -950,6 +1020,22 @@ Additive Inverse Property
 Multiplicative Inverse / Multiplicative Reciprocal Property
 
 * `{kt} a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1`
+
+## Order of Operations
+
+The `{bm} order of operations` are as follows:
+
+1. Brackets
+1. Exponents
+1. Division and Multiplication (evaluated left-to-right)
+1. Addition and Subtraction (evaluated left-to-right)
+
+These rules are often abbreviated as either...
+
+* `{bm} BEDMAS` - Brackets / Exponents / Division and Multiplication / Addition and Subtraction
+* `{bm} PEMDAS` - Parenthesis / Exponents / Multiplication and Division / Addition and Subtraction (can be remembered as Please Excuse My Dear Aunt Sally)
+
+Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are evaluated left-to-right in the same step, it makes no difference.
 
 # OpenStax Prealgebra Problems
 
@@ -5515,6 +5601,301 @@ long division seems to be the inverse of vertical multiplication.
 __TRY IT__
 
 2.1)
+
+* a) 18 plus 11; the sum of 18 and 11
+* b) 27 times 9; the product of 27 and 9
+* c) 84 divided by 7; the quotient of 84 and 7; 7 divided into 84
+* d) p minus q; the difference of p and q; q subtracted from 9
+
+2.2)
+
+* a) 47 minus 9; the difference of 47 and 9; 9 subtracted from 47
+* b) 72 divided by 9; the quotient of 72 and 9; 9 divided into 72
+* c) m plus n; the sum of m and n
+* d) 13 times 7; the product of 7 and 9
+
+2.3)
+
+* a) 14 is less than or equal to 27
+* b) 19 minus 2 is not equal to 8
+* c) 12 is greater than 4 divided by 2
+* d) x minus 7 is less than 1
+
+2.4)
+
+* a) 19 is greater than or equal to 15
+* b) 7 is equal to 12 minus 5
+* c) 15 divided by 3 is less than 8
+* d) y minus 3 is greater than 6
+
+2.5)
+
+* a) 48 > 26
+* b) 27 < 28
+
+2.6)
+
+* a) 27 < 48
+* b) 28 > 27
+
+2.7)
+
+* a) 23 + 6 = 29 -- equation
+* b) 7 * 3 - 7 -- expression
+
+2.8)
+
+* a) y/14 -- expression
+* b) x - 6 = 21 -- equation
+
+2.9) `{kt} {41}^5`
+
+2.10) `{kt} {7}^9`
+
+2.11)
+
+* a) 4\*4\*4\*4\*4\*4\*4\*4
+* b) a\*a\*a\*a\*a\*a\*a
+
+2.12)
+
+* a) 8\*8\*8\*8\*8\*8\*8\*8
+* b) b\*b\*b\*b\*b\*b
+
+2.13)
+
+* a) 5\*5\*5
+* b) 1\*1\*1\*1\*1\*1\*1
+
+2.14)
+
+* a) 7\*7
+* b) 0\*0\*0\*0\*0
+
+2.15)
+
+* a) 12-5\*2 = 12-10 = 2
+* b) (12-5)\*2 = 7\*2 = 14
+
+2.16)
+
+* a) 8+3\*9 = 8+27 = 35
+* b) (8+3)\*9 = 11\*9 = 99
+
+2.17) 42/7\*3 = 6\*3 = 18
+
+2.18) 12\*3/4 = 36/4 = 9
+
+2.19) 30/5+10(3-2) = 30/5+10(1) = 30/5+10(1) = 6+10(1) = 6+10 = 16
+
+2.20) 70/10+4(6-2) = 70/10+4(4) = 7/1+4(4) = 7+4(4) = 7+16 = 23
+
+2.21) 9+5^3-(4(9+3)) = 9+5^3-(4(11)) = 9+5^3-(44) = 9+5^3-44 = 9+125-44 = 134-44 = 90
+
+2.22) 7^2-2(4(5+1)) = 7^2-2(4(6)) = 7^2-2(24) = 49-2(24) = 49-48 = 1
+
+2.23) 3^2 + 2^4 / 2 + 4^3 = 9+16/2+48 = 9+8+48 = 17+48 = 65
+
+2.24) 6^2 - 5^3 / 5 + 8^2 = 36 - 125 / 5 + 64 = 36-25+64 = 61+64 = 125
+
+__EXERCISE__
+
+2.1.1) 16 minus 9; difference of 16 and 9; subtract 9 from 16
+
+2.1.2) 25 minus 7; difference of 27 and 7; subtract 7 from 25
+
+2.1.3) 5 times 6; product of 5 and 6; 5 multiplied by 6
+
+2.1.4) 3 times 9; product of 3 and 9; 3 multiplied by 9
+
+2.1.5) 28 divided by 4; quotient of 24 and 8; 24 divided by 8; 24 divided into 8
+
+2.1.6) 45 divided by 5; quotient of 45 and 5; 45 divided bt 5; 5 divided into 45
+
+2.1.7) x plus 8; sum of x and 8
+
+2.1.8) x plus 11; sum of x and 11
+
+2.1.9) 2 times 7; product of 2 and 7
+
+2.1.10) 4 times 8; product of 4 and 8
+
+2.1.11) 14 is less than 21
+
+2.1.12) 17 is less than 35
+
+2.1.13) 36 is greater than or equal to 19
+
+2.1.14) 42 is greater than or equal to 27
+
+2.1.15) 3 times n is equal to 24
+
+2.1.16) 6 times n is equal to 36
+
+2.1.17) y minus 1 is greater than 6
+
+2.1.18) y minus 4 is greater than 8
+
+2.1.19) 2 is less than or equal to 18 divided by 6
+
+2.1.20) 3 is less than or equal to 20 divided by 4
+
+2.1.21) a is not equal to 7 times 4
+
+2.1.22) a is not equal to 1 times 12
+
+2.1.23) equation
+
+2.1.24) equation
+
+2.1.25) expression
+
+2.1.26) expression
+
+2.1.27) expression
+
+2.1.28) expression
+
+2.1.29) equation
+
+2.1.30) expression
+
+2.1.31) 3^7
+
+2.1.32) 4^6
+
+2.1.33) x^5
+
+2.1.34) y^6
+
+2.1.35) 5\*5\*5
+
+2.1.36) 8\*8\*8
+
+2.1.37) 2\*2\*2\*2\*2\*2\*2\*2
+
+2.1.38) 10\*10\*10\*10\*10
+
+2.1.39)
+
+* a) 3+8\*5 = 3+40 = 43
+* b) (3+8)\*5 = 11\*5 = 55
+
+2.1.40)
+
+* a) 2+6\*3 = 2+18 = 20
+* b) (2+6)\*3 = 8\*3 = 24
+
+2.1.41) 2^3-12/(9-5) = 2^3-12/4 = 8-12/4 = 8-3 = 5
+
+2.1.42) 3^2-18/(11-5) = 3^2-18/6 = 9-18/6 = 9-3 = 6
+
+2.1.43) 3\*8+5\*2 = 3\*8+10 = 3\*8+10 = 24+10 = 34
+
+2.1.44) 4\*7+3\*5 = 28+3\*5 = 28+15 = 43
+
+2.1.45) 2+8(6+1) = 2+8(7) = 2+56 = 58
+
+2.1.46) 4+6(3+6) = 4+6(9) = 4+54 = 58
+
+2.1.47) 4\*12/8 = 48/8 = 6
+
+2.1.48) 2\*36/6 = 2\*6 = 12
+
+2.1.49) 6+10/2+2 = 6+5+2 = 13
+
+2.1.50) 9+12/3+4 = 9+4+4 = 17
+
+2.1.51) (6+10)/(2+2) = 16/4 = 4
+
+2.1.52) (9+12)/(3+4) = 21/7 = 3
+
+2.1.53) 20/4+6\*5 = 5+30 = 35
+
+2.1.54) 33/3+8\*2 = 11+16 = 27
+
+2.1.55) 20/(4+6)\*5 = 20/10\*5 = 2\*5 = 10
+
+2.1.56) 33/(3+8)\*2 = 33/11\*2 = 3\*2 = 6
+
+2.1.57) 4^2+5^2 = 16+25 = 41
+
+2.1.58) 3^2+7^2 = 9+49 = 58
+
+2.1.59) (4+5)^2 = 9^2 = 81
+
+2.1.60) (3+7)^2 = 10^2 = 100
+
+2.1.61) 3(1+9\*6)-4^2 = 3(1+54)-4^2 = 3\*55-4^2 = 3\*55-16 = 165
+
+2.1.62) 5(2+8\*4)-7^2 = 5(2+32)-7^2 = 5\*34-7^2 = 5\*34-49 = 170-49 = 121
+
+2.1.63) 2(1+3(10-2)) = 2(1+3(8)) = 2(1+24) = 2\*25 = 50
+
+2.1.64) 5(2+4(3-2)) = 5(2+4(1)) = 5(2+4) = 5(6) = 40
+
+2.1.65)
+
+* a) >
+* b) =
+* c) <
+* d) <
+* e) >
+
+2.1.66)
+
+* a) >
+* b) <
+* c) <
+* d) >
+* e) >
+
+2.1.67) expression is a hierarchy of math operations, evaluation is the relationship between 2 expressions
+
+2.1.68) it's so simplifying an expression always results in the same answer
+
+## Chapter 2 Section 2.2
+
+__TRY IT__
+
+2.25) y+4
+
+* a) y=6, 6+4=10
+* b) y=15, 15+4=19
+
+2.26) a-5
+
+* a) a=9, 9-5=4
+* b) a=17, 17-5=12
+
+2.27) 8x-3
+
+* a) x=2, 8(2)-3=13
+* b) x=1, 8(1)-3=5
+
+2.28) 4y-4
+
+* a) y=3, 4(3)-4=8
+* b) y=5, 4(5)-4=16
+
+2.29) x^2 -- when x=8, 8^2=64
+
+2.30) x^3 -- when x = 6, 6^3=108
+
+2.31) 2^x -- when x = 6, 2^6=64
+
+2.32) 3^x -- when x = 4, 3^4=81
+
+2.33) 2x+5y-4 -- when x = 11 and y = 13, 2(11)+5(4)-4 = 22+20-4 = 22+16 = 38
+
+2.34) 5x-2y-9 -- when x = 7 and y = 8, 5(7)-2(8)-9 = 35-16-9 = 35-7 = 28
+
+2.35) 3x^2+4x+1 -- x=3, 3(3)^2+4(3)+1 = 3(9)+4(3)+1 = 27+12+1 = 27+13 = 40
+
+2.36) 6x^2-4x-7 -- x=2, 6(2)^2-4(2)-7 = 6(4)-4(2)-7 = 24-8-7 = 23
+
+2.37)
+
 
 START BACK UP HERE
 START BACK UP HERE
