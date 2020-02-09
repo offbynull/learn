@@ -1136,9 +1136,303 @@ wholenum_code/target/appassembler/
 100 11
 ```
 
-# Multiplication
+# Whole Number Multiplication
 
-`{bm} product` is the result of division.
+`{bm} Multiplication` is the concept of taking a number and iteratively adding it to itself a certain number of times. For example, 3 added to itself 5 times results is 15 items...
+
+```
+3+3+3+3+3=15
+
+ [●●●] 3
+ [●●●] 3
+ [●●●] 3
+ [●●●] 3
+ [●●●] 3
+```
+
+Multiplication is typically represented using the infix operator \*. The above example would be represented as 3\*5. When written in formal math notation, it may also be written as...
+ * `{kt} 3 \cdot 5`
+ * `{kt} 3(5)`
+ * `{kt} (3)5`
+
+```{note}
+Do not use x or a cross as a symbol for multiplication. It causes confusion for algebra expressions.
+```
+
+```{note}
+You can think of this as a function that takes in 2 arguments: mult(3, 5).
+```
+
+When using words, multiplication is typically represented using the following syntax:
+
+* `{bm} multiply` -- e.g. multiply 3 and 5
+* `{bm} multiplied` -- e.g. 3 multiplied by 5
+* `{bm} times` -- e.g. 3 times 5
+* `{bm} product` -- e.g. the product of 3 and 5
+
+```{note}
+There are certain special words that denote multiplication. For example, the word `{bm} twice` means 2 multiplied by something else -- e.g. twice 5 is the same thing as 2*5.
+
+Much less common is the word `{bm} thrice` -- it means 3 times something else. The pattern here seems to be the add "ice" to the end of the number? Unsure, but Google seems to give a definition for fourice.
+```
+
+Common properties of multiplication:
+
+ * commutative: order in which 2 numbers are multiplied doesn't matter
+   
+   ```
+    3*5       vs     5*3
+   ┌───┐            ┌┬┬┬┐
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   └───┘            └┴┴┴┘
+                     555
+
+   the number of dots is the same
+   ```
+
+ * identity: any number multiplied by 1 results in the same number
+
+   ```
+   3*3=3+3+3
+   3*2=3+3
+   3*1=3 -- 3 is just by itself, it isn't being added
+   ```
+
+The algorithm used by humans to multiply large numbers together is called `{bm} vertical multiplication`. Vertical multiplication relies on three ideas...
+
+1. humans have the ability to multiply a single digit number to another single digit number through memorization. For example...
+
+   * 3\*4 is 12 (3+3+3+3)
+   * 1\*9 is 9  (9)
+   * 9\*9 is 81 (9+9+9+9+9+9+9+9+9)
+
+   ... are all multiplication operations that can be done quickly if the person has cached the table below into their memory.
+
+   | *  | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |
+   |----|----|----|----|----|----|----|----|----|----|----|
+   | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  |
+   | 1  | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |
+   | 2  | 0  | 2  | 4  | 6  | 8  | 10 | 12 | 14 | 16 | 18 |
+   | 3  | 0  | 3  | 6  | 9  | 12 | 15 | 18 | 21 | 24 | 27 |
+   | 4  | 0  | 4  | 8  | 12 | 15 | 20 | 24 | 28 | 32 | 36 |
+   | 5  | 0  | 5  | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
+   | 6  | 0  | 6  | 12 | 18 | 24 | 30 | 36 | 42 | 48 | 54 |
+   | 7  | 0  | 7  | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
+   | 8  | 0  | 8  | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
+   | 9  | 0  | 9  | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
+
+2. The second idea is that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+
+   ```
+   100
+   100
+   100
+   100
+   100            1
+   100            1
+   100     10     1
+   100     10     1
+   100     10     1
+   ---     --     -
+   900     30     5
+   
+   
+   
+   9 3 5
+   │ │ │
+   │ │ └─ ●
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │
+   │ └─── ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │
+   └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+   ```
+
+3. The third idea is that if two numbers start with a single non-zero digit is followed by zero or more 0s, the result of their multiplication is equivalent to multiplying the single non-zero digits together and appending the 0s to the end. For example, ..
+
+   * 30 \* 2 is 60 -- 3 ends in 1 zero and 2 ends in no zeros, so the result has 1 zero
+
+     ```
+     ┌─┬─┬─┐
+     │●│●│●│
+     ├─┼─┼─┤  3*2, each box has 1 item and there's 6 boxes -- 6 total items
+     │●│●│●│       
+     └─┴─┴─┘
+  
+     ┌──────────┬──────────┬──────────┐
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     ├──────────┼──────────┼──────────┤ 30*2, each box has 10 items and there's 6 boxes -- 60 total items
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│       
+     └──────────┴──────────┴──────────┘
+     ```
+
+   * 3 \* 20 is 60 -- 3 ends in no zeros and 2 ends in 1 zero, so the result has 1 zero
+
+     ```
+     ┌─┬─┬─┐
+     │●│●│●│
+     ├─┼─┼─┤  3*2, each box has 1 item and there's 6 boxes -- 6 total items
+     │●│●│●│       
+     └─┴─┴─┘
+  
+     ┌─┬─┬─┐
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     ├─┼─┼─┤ 3 * 20, each box has 10 items and there's 6 boxes -- 60 total items
+     │●│●│●│         
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     │●│●│●│
+     └─┴─┴─┘
+     ```
+
+   * 30 \* 20 is 600 -- 30 ends in 1 zero and 20 ends in 1 zero, so the result has 2 zeros
+
+     ```
+     ┌─┬─┬─┐
+     │●│●│●│
+     ├─┼─┼─┤  3*2, each box has 1 item and there's 6 boxes -- 6 total items
+     │●│●│●│       
+     └─┴─┴─┘
+  
+     ┌──────────┬──────────┬──────────┐
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     ├──────────┼──────────┼──────────┤ 30 * 20, box has 100 items and there's 6 boxes -- 600 total items
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│           
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     │●●●●●●●●●●│●●●●●●●●●●│●●●●●●●●●●│
+     └──────────┴──────────┴──────────┘
+     ```
+
+Any two numbers can be multiplied by ...
+1. breaking down each number into its single digit components (idea 2 above),
+2. then multiplying each component from the first number by each components from the second number (idea 1 and 3 above),
+3. then adding the results of those multiplications.
+
+For example, the number 43 and 2 are broken down as follows...
+
+```
+4 3                      2
+│ │                      │
+│ └─ ●                   └─ ●
+│    ●                      ●         
+│    ●               
+│                        
+└─── ●●●●●●●●●●          
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+ * 43 is 40 + 3 (4 in the 10s place / 3 in the 1s place)
+ * 2 is 2 (2 in the 1s place)
+
+Multiply their individual single digit components together results in ... 
+
+ * 2\*3 results in 6 (see idea 1)
+ * 2\*40 results in 80, because 2\*4 is 8 (see idea 1) and the zeros from numbers multiplied are appended to the result (see idea 3)
+
+Add the results of the multiplications: 80 + 6 is 86. Note that 43 + 43 is also 86. Each multiplication above is giving back a portion of the final multiplication value, specifically a portion of a single digit component in the final multiplication value -- they need to be combined by adding.
+
+```
+8 6
+│ │ ┌─┐
+│ └─┤●│
+│   │●│ 3        
+│   │●│
+│   ├─┤
+│   │●│
+│   │●│ 3
+│   │●│
+│   └─┘
+│   ┌──────────┐
+└───┤●●●●●●●●●●│          
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│ 4
+    │●●●●●●●●●●│
+    ├──────────┤
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│
+    │●●●●●●●●●●│ 4
+    │●●●●●●●●●●│
+    └──────────┘
+```
+
+For another more complex example, the number 43 and 22 are broken down as follows...
+
+```
+4 3                      2 2
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │    ●         
+│    ●                   │              
+│                        └─── ●●●●●●●●●●
+└─── ●●●●●●●●●●               ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+ * 43 is 40 + 3 (4 in the 10s place / 3 in the 1s place)
+ * 22 is 20 + 2 (2 in the 10s place / 2 in the 1s place)
+
+Multiply their individual single digit components together results in ... 
+
+ * 2\*3 results in 6 (see idea 1)
+ * 2\*40 results in 80, because 2\*4 is 8 (see idea 1) and the zeros from numbers multiplied are appended to the result (see idea 3)
+ * 20\*3 results in 60, because 2\*3 is 6 (see idea 1) and the zeros from numbers multiplied are appended to the result (see idea 3)
+ * 20\*40 results in 800, because 2\*4 is 8 (see idea 1) and the zeros from numbers multiplied are appended to the result (see idea 3)
+
+Add the results of the multiplications: 800 + 60 + 80 + 6 is 946. Note that 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 + 43 is also 946. Each multiplication above is giving back a portion of the final multiplication value, specifically a portion of a single digit component in the final multiplication value -- they need to be combined by adding.
+
+The way to perform this algorithm in real-life is to stack the two numbers being multiplied on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). For example...
 
 ```{define-block}
 ktvertmul
@@ -1147,15 +1441,152 @@ kthelper_code/target/appassembler/
 ```
 
 ```{ktvertmul}
-{ }{1}{1}
-{ }{1}{0}
+{ }{4}{3}
+{ }{2}{2}
 -----
-{ }{0}{0}
-{1}{0}{0}
-------
-{1}{0}{0}
+{ }{ }{ }
 ```
 
+Then, for each component in the bottom number (from right-to-left), isolate to its single digit component and multiply by each component in the top number (from right-to-left). The answer for each digit of the bottom row is written underneath the answer prior to it. Starting from the first component of the bottom number...
+
+ * Isolate to 2 (bottom) and 3 (top), resulting in 6.
+
+   ```{ktvertmul}
+   { }        {4}        {\green{3}}
+   { }        {2}        {\green{2}}
+   -----
+   { }        { }        {\green{6}}
+   ```
+
+ * Isolate to 2 (bottom) and 40 (top), resulting in 80. Only the 8 needs to be written because this is effectively the same as doing 40\*2 (80) then adding the 6 from the 3\*2 prior --  80+6 is 86.
+
+   ```{ktvertmul}
+   { }        {4}        {\green{3}}
+   { }        {2}        {\green{2}}
+   -----
+   { }        { }        {\green{6}}
+   ```
+
+ * Isolate to 20 (bottom) and 3 (top), resulting in 60.
+
+   ```{ktvertmul}
+   { }        {4}        {\green{3}}
+   { }        {\green{2}}{2}
+   -----
+   { }        {8}        {6}
+   { }        {\green{6}}{\green{0}}
+   ```
+
+ * Isolate to 20 (bottom) and 40 (top), resulting in 800. Only the 8 needs to be written because this is effectively the same as doing 40\*20 (800) then adding the 60 from the 3\*20 prior --  800+60 is 860.
+
+   ```{ktvertmul}
+   { }        {\green{4}}{3}
+   { }        {\green{2}}{2}
+   -----
+   { }        {8}        {6}
+   {\green{8}}{6}        {0}
+   ```
+
+Then, add the the answers from each bottom iteration to get the final answer...
+
+```{ktvertmul}
+{ }        {4}        {3}
+{ }        {2}        {2}
+-----
+{ }        {8}        {6}
+{8}        {6}        {0}
+-----
+{\green{9}}{\green{4}}{\green{6}}
+```
+
+In certain cases, 2 individual single digit components combine together to results in an extra digit (e.g. 7\*7=49). If this happens, the bleed over digit is carried over to the next position (on the left). That is, the bleed over digit will get added to the result of the multiplication in the next position. This is denoted by stacking the bleed over digit on top of the next position -- it's being combined along with the other digits at that position. For example...
+
+```{ktvertmul}
+{ }{7}{7}
+{ }{7}{7}
+-----
+{ }{ }{ }
+```
+
+ * Isolate to 7 (bottom) and 7 (top), resulting in 49. The 9 is kept and 40 carries over to the next position.
+
+   ```{ktvertmul}
+   { }        {\green{4}}        { }
+   { }                {7}{\green{7}}
+   { }                {8}{\green{7}}
+   -----
+   { }                { }{\green{9}}
+   ```
+
+ * Isolate to 7 (bottom) and 70 (top), resulting in 490. Add the 40 from the carry-over to make it 530. Only the 53 needs to be written because this is effectively the same as doing 530 then adding the 9 from the 7\*7 prior --  530+9 is 539.
+
+   ```{ktvertmul}
+   { }        {\green{4}}        { }
+   { }        {\green{7}}        {7}
+   { }                {8}{\green{7}}
+   -----
+   {\green{5}}{\green{3}}        {9}
+   ```
+
+ * Isolate to 80 (bottom) and 7 (top), resulting in 560. The 60 is kept and 500 carries over to the next position.
+
+   ```{ktvertmul}
+   { }        {\green{5}}        { }
+   { }                {4}        { }
+   { }                {7}{\green{7}}
+   { }        {\green{8}}        {7}
+   -----
+   {5}        {3}        {9}
+   { }        {\green{6}}{\green{0}}
+   ```
+
+ * Isolate to 80 (bottom) and 70 (top), resulting in 5600. Add the 500 from the carry-over to make it 6100. Only the 61 needs to be written because this is effectively the same as doing 6100 then adding the 60 from the 80\*7 prior --  6100+60 is 6160.
+
+   ```{ktvertmul}
+   { }                { }{\green{5}}        { }
+   { }                { }        {4}        { }
+   { }                { }{\green{7}}        {7}
+   { }                { }{\green{8}}        {7}
+   -----
+   { }                {5}        {3}        {9}
+   {\green{6}}{\green{1}}        {6}        {0}
+   ```
+
+Then, add the the answers from each bottom iteration to get the final answer...
+
+   ```{ktvertmul}
+   { }                { }        {5}        { }
+   { }                { }        {4}        { }
+   { }                { }        {7}        {7}
+   { }                { }        {8}        {7}
+   -----
+   { }                {5}        {3}        {9}
+   {\green{6}}{\green{1}}        {6}        {0}
+   -----
+   {\green{6}}{\green{6}}{\green{9}}{\green{9}}
+   ```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+wholenum_code/src/main/java/com/offbynull/wholenum/MainAddition.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
+
+The code output above has writes removed. When the code actually runs, it outputs what logic takes place at each step. For example ...
+
+TODO: ADD THE CODE HERE
+
+``{define-block}
+wholenumadd
+wholenumadd_macro/
+wholenum_code/target/appassembler/
+```
+
+```{wholenumadd}
+273 991
+```
 
 # Division
 
