@@ -1,6 +1,7 @@
 package com.offbynull.wholenum;
 
 import static com.google.common.base.Throwables.getStackTraceAsString;
+import static com.offbynull.wholenum.Number.isolate;
 import java.io.IOException;
 import java.io.Writer;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -9,7 +10,6 @@ import java.nio.file.Path;
 import static java.util.Arrays.stream;
 import java.util.Scanner;
 import static java.util.stream.Collectors.joining;
-import java.util.stream.IntStream;
 import static java.util.stream.IntStream.concat;
 import static java.util.stream.IntStream.range;
 import static org.apache.commons.lang3.StringUtils.repeat;
@@ -21,15 +21,18 @@ public class MainSubtraction {
             writer.append("<div style=\"border:1px solid black;\">\n\n");
             writer.append("`{bm-linker-off}`\n\n");
             try (Scanner scanner = new Scanner(Files.newBufferedReader(Path.of("/input/input.data")))) {
-                String num1 = scanner.next("[0-9]+");
-                String num2 = scanner.next("[0-9]+");
+                String num1Str = scanner.next("[0-9]+");
+                String num2Str = scanner.next("[0-9]+");
 
-                int[] num1Digits = num1.chars().map(i -> i - '0').toArray();
-                int[] num2Digits = num2.chars().map(i -> i - '0').toArray();
+                int[] num1Digits = num1Str.chars().map(i -> i - '0').toArray();
+                int[] num2Digits = num2Str.chars().map(i -> i - '0').toArray();
+                
+                Number num1 = Number.createFromDigits(num1Digits);
+                Number num2 = Number.createFromDigits(num2Digits);
                 
                 writer.append("Subtracting " + num2 + " from " + num1 + "\n\n");
                 
-                new MainSubtraction(writer).subtract(num1Digits, num2Digits);
+                new MainSubtraction(writer).subtract(num1, num2);
             } catch (Exception e) {
                 writer.append(getStackTraceAsString(e));
             } finally {
@@ -37,46 +40,6 @@ public class MainSubtraction {
                 writer.append("</div>\n\n");
             }
         }
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
     }
     
     private final Writer out;
@@ -132,33 +95,33 @@ public class MainSubtraction {
         {19  ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null}
     };
     
-    int[] subtract(int[] num1Digits, int[] num2Digits) throws IOException {
+    Number subtract(Number num1, Number num2) throws IOException {
         printBulletOpen();
         
         try {
-            int maxLen = Math.max(num1Digits.length, num2Digits.length);
-            num1Digits = padWithZeros(num1Digits, maxLen);
-            num2Digits = padWithZeros(num2Digits, maxLen);
+            int maxLen = Math.max(num1.length(), num2.length());
+            num1.prependZerosIfShorterThan(maxLen);
+            num2.prependZerosIfShorterThan(maxLen);
 
-            int[] result = IntStream.range(0, maxLen).map(i -> 0).toArray();
-            for (int i = maxLen - 1; i >= 0; i--) {
-                int num1Digit = num1Digits[i];
-                int num2Digit = num2Digits[i];
+            Number result = Number.createFromDigits();
+            for (int i = 0; i < maxLen; i++) {
+                int num1Digit = num1.getDigit(i);
+                int num2Digit = num2.getDigit(i);
                 
                 printBulletNewLine();
-                println("pos ", maxLen - i, " -- subtracting ", isolate(num1Digits, i), " and ", isolate(num2Digits, i));
+                println("subtracting ", isolate(num1, i), " and ", isolate(num2, i));
                 
                 Integer resultDigit = DIGIT_SUB_CACHE[num1Digit][num2Digit];
                 if (resultDigit == null) {
                     println("not possible -- attempting to borrow");
-                    borrow(num1Digits, num2Digits, i);
+                    borrow(num1, num2, i);
                     println("trying again after borrow");
-                    i++;
+                    i--;
                     continue;
                 }
                 
                 println("result of ", num1Digit, "-", num2Digit, " is ", resultDigit);
-                result[i] = resultDigit;
+                result.prependDigits(resultDigit);
             }
             
             printBulletNewLine();
@@ -170,28 +133,28 @@ public class MainSubtraction {
         }
     }
     
-    void borrow(int[] num1Digits, int[] num2Digits, int i) throws IOException {
+    void borrow(Number num1, Number num2, int i) throws IOException {
         printBulletOpen();
         
         try {
-            Integer currNum1Digit = num1Digits[i];
-            Integer nextNum1Digit = num1Digits[i-1];
+            Integer currNum1Digit = num1.getDigit(i);
+            Integer nextNum1Digit = num1.getDigit(i+1);
 
             printBulletNewLine();
-            println("borrowing from next largest ", isolate(num1Digits, i - 1));
+            println("borrowing from next largest ", isolate(num1, i + 1));
 
             if (nextNum1Digit == 0) { // if the next digit is 0, it's impossible to borrow from it
                 println("not possible -- attempting to borrow");
-                borrow(num1Digits, num2Digits, i-1); // recursively borrow
-                nextNum1Digit = num1Digits[i-1]; // next largest position should be updated so that it's 10 or more after the borrow() above
+                borrow(num1, num2, i+1); // recursively borrow
+                nextNum1Digit = num1.getDigit(i+1); // next largest position should be updated so that it's 10 or more after the borrow() above
             }
             nextNum1Digit = DIGIT_SUB_CACHE[nextNum1Digit][1]; // subtract 1 from next largest position
             currNum1Digit = DIGIT_ADD_CACHE[10][currNum1Digit]; // add 10 to current position
             
-            num1Digits[i-1] = nextNum1Digit;
-            num1Digits[i] = currNum1Digit;
+            num1.setDigit(i+1, nextNum1Digit);
+            num1.setDigit(i, currNum1Digit);
             
-            println("completed borrowing ", isolate(num1Digits, i, i - 1));
+            println("completed borrowing ", isolate(num1, i, i + 1));
         } finally {
             printBulletClose();
         }
@@ -229,31 +192,6 @@ public class MainSubtraction {
             }
         }
         out.append("\n\n");
-    }
-    
-    private static String isolate(int[] digits, int idx) {
-        String ret = "";
-        for (int i = 0; i < digits.length; i++) {
-            ret += i == idx ? " [" + digits[i] + "] " : " " + digits[i] + " ";
-        }
-        return ret;
-    }
-
-    private static String isolate(int[] digits, int... idxes) {
-        String ret = "";
-        for (int i = 0; i < digits.length; i++) {
-            int finalI = i;
-            ret += IntStream.of(idxes).anyMatch(idx -> finalI == idx) ? " [" + digits[i] + "] " : " " + digits[i] + " ";
-        }
-        return ret;
-    }
-    
-    private static String isolate(int digit, int idx, int max) {
-        String ret = "";
-        for (int i = 0; i < max; i++) {
-            ret += i == idx ? " [" + digit + "] " : " x ";
-        }
-        return ret;
     }
     
     private static int[] padWithZeros(int[] digits, int len) {

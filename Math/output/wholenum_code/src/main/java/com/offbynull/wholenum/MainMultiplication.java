@@ -1,8 +1,11 @@
 package com.offbynull.wholenum;
 
 import static com.google.common.base.Throwables.getStackTraceAsString;
+import static com.offbynull.wholenum.Number.isolate;
+import static com.offbynull.wholenum.Number.isolateLast;
 import java.io.IOException;
 import java.io.Writer;
+import static java.io.Writer.nullWriter;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,9 +14,6 @@ import static java.util.Arrays.stream;
 import java.util.List;
 import java.util.Scanner;
 import static java.util.stream.Collectors.joining;
-import java.util.stream.IntStream;
-import static java.util.stream.IntStream.concat;
-import static java.util.stream.IntStream.range;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class MainMultiplication {
@@ -23,15 +23,21 @@ public class MainMultiplication {
             writer.append("<div style=\"border:1px solid black;\">\n\n");
             writer.append("`{bm-linker-off}`\n\n");
             try (Scanner scanner = new Scanner(Files.newBufferedReader(Path.of("/input/input.data")))) {
-                String num1 = scanner.next("[0-9]+");
-                String num2 = scanner.next("[0-9]+");
+                String num1Str = scanner.next("[0-9]+");
+                String num2Str = scanner.next("[0-9]+");
 
-                int[] num1Digits = num1.chars().map(i -> i - '0').toArray();
-                int[] num2Digits = num2.chars().map(i -> i - '0').toArray();
+                int[] num1Digits = num1Str.chars().map(i -> i - '0').toArray();
+                int[] num2Digits = num2Str.chars().map(i -> i - '0').toArray();
+                
+                int maxLen = Math.max(num1Digits.length, num2Digits.length);
+                Number num1 = Number.createFromDigits(num1Digits);
+                Number num2 = Number.createFromDigits(num2Digits);
+                num1.prependZerosIfShorterThan(maxLen);
+                num2.prependZerosIfShorterThan(maxLen);
                 
                 writer.append("Multiplying " + num1 + " and " + num2 + "\n\n");
                 
-                new MainMultiplication(writer).mult(num1Digits, num2Digits);
+                new MainMultiplication(writer).mult(num1, num2);
             } catch (Exception e) {
                 writer.append(getStackTraceAsString(e));
             } finally {
@@ -39,46 +45,6 @@ public class MainMultiplication {
                 writer.append("</div>\n\n");
             }
         }
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
-        
-//        int[] num1Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] num2Digits = "999".chars().map(i -> i - '0').toArray();
-//        int[] resDigits = add(num1Digits, num2Digits);
-//        System.out.println(Arrays.toString(resDigits));
     }
     
     private final Writer out;
@@ -101,77 +67,82 @@ public class MainMultiplication {
         {{0  },{9  },{1,8},{2,7},{3,6},{4,5},{5,4},{6,3},{7,2},{8,1}}        
     };
     
-    int[] mult(int[] topDigits, int[] bottomDigits) throws IOException {
+    Number mult(Number topNum, Number bottomNum) throws IOException {
         printBulletOpen();
         
         try {
-            int maxLen = Math.max(topDigits.length, bottomDigits.length);
-            topDigits = prependWithZeros(topDigits, maxLen);
-            bottomDigits = prependWithZeros(bottomDigits, maxLen);
+            int maxLen = Math.max(topNum.length(), bottomNum.length());
 
-            List<int[]> iterationResults = new ArrayList<>();
-            for (int i = maxLen - 1; i >= 0; i--) {
-                int bottomDigit = bottomDigits[i];
-                int[] carryOverDigits = null;
-                
+            List<Number> iterationResults = new ArrayList<>();
+            for (int i = 0; i < maxLen; i++) {
+                int bottomDigit = bottomNum.getDigit(i);
+                Number carryOverDigits = null;
+
                 printBulletNewLine();
-                println("isolating bottom to ", isolate(bottomDigits, i));
-
-                int[] iterationResult = IntStream.range(0, maxLen).map(x -> 0).toArray();                
-                for (int j = maxLen - 1; j >= 0; j--) {
+                println("isolating to ", isolate(bottomNum, i));
+                
+                Number iterationResult = Number.createAllZeros(i);
+                for (int j = 0; j < maxLen; j++) {
                     printBulletOpen();
-                    print("isolating top to ", isolate(topDigits, j));
-                    if (carryOverDigits != null) {
-                        print(" (carry-over is ",  carryOverDigits, ")");
-                    }
-                    println("");
+                    println("multiplying ", isolate(topNum, j), " and ", isolate(bottomNum, i));
+                    println("start state: ", "carry-over=",  carryOverDigits, ".");
                     
-                    int topDigit = topDigits[j];
-                    int[] digitsMultiplied = DIGIT_MULT_CACHE[bottomDigit][topDigit];
-                    print(bottomDigit, " (bottom) times ", topDigit, " (top) is ", digitsMultiplied);
+                    int topDigit = topNum.getDigit(j);
+                    Number digitsMultiplied = Number.createFromDigits(DIGIT_MULT_CACHE[bottomDigit][topDigit]);
 
+                    println(bottomDigit, " multiplied by ",  topDigit, " is ", digitsMultiplied);
+                    
                     if (carryOverDigits != null) {
-                        int[] newDigitsMultiplied = add(carryOverDigits, digitsMultiplied);
-                        print(", added carry-over of ", carryOverDigits, " to get ", newDigitsMultiplied);
+                        print("carry-over of ", carryOverDigits, " exists, ");
+                        Number newDigitsMultiplied = add(carryOverDigits, digitsMultiplied);
+                        print(digitsMultiplied, " + ", carryOverDigits, " results in ", newDigitsMultiplied, " ");
                         digitsMultiplied = newDigitsMultiplied;
                         carryOverDigits = null;
+                        println("(carry-over reset).");
                     }
-                    println("");
                     
-                    switch (digitsMultiplied.length) {
+                    switch (digitsMultiplied.length()) {
                         case 1:
-                            iterationResult[j] = digitsMultiplied[0];
+                            iterationResult.prependDigits(digitsMultiplied.getDigit(0));
                             break;
                         case 2:
-                            println("setting carry-over to ", digitsMultiplied[0], " and keeping ", digitsMultiplied[1]);
-                            iterationResult[j] = digitsMultiplied[1];
-                            carryOverDigits = new int[] { digitsMultiplied[0] };
+                            iterationResult.prependDigits(digitsMultiplied.getDigit(0));
+                            carryOverDigits = Number.createFromDigits(digitsMultiplied.getDigit(1));
                             break;
                         default:
                             throw new IllegalStateException(); // should never happen
                     }
+                    
+                    println("end state: ", "result=", isolateLast(iterationResult), " / carry-over=",  carryOverDigits, ".");
                     printBulletClose();
                 }
 
-                iterationResult = appendWithZeros(iterationResult, maxLen + (maxLen - 1 - i));
+                printBulletNewLine();
                 if (carryOverDigits != null) {
-                    iterationResult = concat(stream(carryOverDigits), stream(iterationResult)).toArray();
-                    println("prepend remaining carry-over of ", carryOverDigits, ": ", isolate(iterationResult, 0));
+                    printBulletOpen();
+                    iterationResult.prepend(carryOverDigits);
+                    println("prepend remaining carry-over of ", carryOverDigits, ".");
+                    println("end state: ", "result=", isolateLast(iterationResult), ".");
+                    printBulletClose();
                 }
-                println("done: ", iterationResult);
+
+                printBulletOpen();
+                println("result is ", iterationResult);
+                printBulletClose();
                 
                 iterationResults.add(iterationResult);
             }
 
             
             printBulletNewLine();
-            int[] finalResult = new int[] { 0 };
             println("adding intermediate results to get final result...");
-            for (int[] iterationResult : iterationResults) {
-                int[] newFinalResult = add(iterationResult, finalResult);
+            Number finalResult = Number.createAllZeros(1);
+            for (Number iterationResult : iterationResults) {
+                Number newFinalResult = add(iterationResult, finalResult);
                 println("adding ", iterationResult, " to ", finalResult, " to get ", newFinalResult);
                 finalResult = newFinalResult;
             }
+            printBulletNewLine();
             println("final result is ", finalResult);
 
             return finalResult;
@@ -181,8 +152,8 @@ public class MainMultiplication {
     }
     //MARKDOWN_ISOLATE
     
-    int[] add(int[] num1Digits, int[] num2Digits) throws IOException {
-        return new MainAddition(Writer.nullWriter()).add(num1Digits, num2Digits);
+    Number add(Number num1, Number num2) throws IOException {
+        return new MainAddition(nullWriter()).add(num1.copy(), num2.copy());
     }
     
     private int indent = -2;
@@ -222,29 +193,5 @@ public class MainMultiplication {
                 out.append(obj == null ? "null" : obj.toString());
             }
         }
-    }
-    
-    private static String isolate(int[] digits, int idx) {
-        String ret = "";
-        for (int i = 0; i < digits.length; i++) {
-            ret += i == idx ? " [" + digits[i] + "] " : " " + digits[i] + " ";
-        }
-        return ret;
-    }
-    
-    private static String isolate(int digit, int idx, int max) {
-        String ret = "";
-        for (int i = 0; i < max; i++) {
-            ret += i == idx ? " [" + digit + "] " : " x ";
-        }
-        return ret;
-    }
-    
-    private static int[] prependWithZeros(int[] digits, int len) {
-        return concat(range(digits.length, len).map(i -> 0), stream(digits)).toArray();
-    }
-    
-    private static int[] appendWithZeros(int[] digits, int len) {
-        return concat(stream(digits), range(digits.length, len).map(i -> 0)).toArray();
     }
 }

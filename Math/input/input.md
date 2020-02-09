@@ -1457,10 +1457,10 @@ Then, for each component in the bottom number (from right-to-left), isolate to i
  * Isolate to 2 (bottom) and 40 (top), resulting in 80. Only the 8 needs to be written because this is effectively the same as doing 40\*2 (80) then adding the 6 from the 3\*2 prior --  80+6 is 86.
 
    ```{ktvertmul}
-   { }        {4}        {\green{3}}
+   { }        {\green{4}}{3}
    { }        {2}        {\green{2}}
    -----
-   { }        { }        {\green{6}}
+   { }        {\green{8}}{6}
    ```
 
  * Isolate to 20 (bottom) and 3 (top), resulting in 60.
@@ -1495,7 +1495,7 @@ Then, add the the answers from each bottom iteration to get the final answer...
 {\green{9}}{\green{4}}{\green{6}}
 ```
 
-In certain cases, 2 individual single digit components combine together to results in an extra digit (e.g. 7\*7=49). If this happens, the bleed over digit is carried over to the next position (on the left). That is, the bleed over digit will get added to the result of the multiplication in the next position. This is denoted by stacking the bleed over digit on top of the next position -- it's being combined along with the other digits at that position. For example...
+In many cases, multiplying 2 individual single digit components results in an extra digit (e.g. 7\*7=49). If this happens, the bleed over digit is carried over to the next position (on the left). That is, the bleed over digit will get added to the result of the multiplication in the next position. This is denoted by stacking the bleed over digit on top of the next position. For example...
 
 ```{ktvertmul}
 { }{7}{7}
@@ -1514,7 +1514,7 @@ In certain cases, 2 individual single digit components combine together to resul
    { }                { }{\green{9}}
    ```
 
- * Isolate to 7 (bottom) and 70 (top), resulting in 490. Add the 40 from the carry-over to make it 530. Only the 53 needs to be written because this is effectively the same as doing 530 then adding the 9 from the 7\*7 prior --  530+9 is 539.
+ * Isolate to 7 (bottom) and 70 (top), resulting in 490. Add the 40 from the carry-over to make it 530. Only the 53 needs to be written because this is effectively the same as having 530 then adding the 9 from the 7\*7 prior --  530+9 is 539.
 
    ```{ktvertmul}
    { }        {\green{4}}        { }
@@ -1536,7 +1536,7 @@ In certain cases, 2 individual single digit components combine together to resul
    { }        {\green{6}}{\green{0}}
    ```
 
- * Isolate to 80 (bottom) and 70 (top), resulting in 5600. Add the 500 from the carry-over to make it 6100. Only the 61 needs to be written because this is effectively the same as doing 6100 then adding the 60 from the 80\*7 prior --  6100+60 is 6160.
+ * Isolate to 80 (bottom) and 70 (top), resulting in 5600. Add the 500 from the carry-over to make it 6100. Only the 61 needs to be written because this is effectively the same as having 6100 then adding the 60 from the 80\*7 prior --  6100+60 is 6160.
 
    ```{ktvertmul}
    { }                { }{\green{5}}        { }
