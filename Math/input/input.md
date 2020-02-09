@@ -720,8 +720,6 @@ java
 //MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
 ```
 
-The code output above has writes removed. When the code actually runs, it outputs what logic takes place at each step. For example ...
-
 ```{define-block}
 wholenumadd
 wholenumadd_macro/
@@ -1123,8 +1121,6 @@ wholenum_code/src/main/java/com/offbynull/wholenum/MainSubtraction.java
 java
 //MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
 ```
-
-The code output above has writes removed. When the code actually runs, it outputs what logic takes place at each step. For example ...
 
 ```{define-block}
 wholenumsub
@@ -1569,23 +1565,19 @@ Then, add the the answers from each bottom iteration to get the final answer...
 The way to perform this algorithm via code is as follows...
 
 ```{output}
-wholenum_code/src/main/java/com/offbynull/wholenum/MainAddition.java
+wholenum_code/src/main/java/com/offbynull/wholenum/MainMultiplication.java
 java
 //MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
 ```
 
-The code output above has writes removed. When the code actually runs, it outputs what logic takes place at each step. For example ...
-
-TODO: ADD THE CODE HERE
-
-``{define-block}
-wholenumadd
-wholenumadd_macro/
+```{define-block}
+wholenummul
+wholenummul_macro/
 wholenum_code/target/appassembler/
 ```
 
-```{wholenumadd}
-273 991
+```{wholenummul}
+77 87
 ```
 
 # Division

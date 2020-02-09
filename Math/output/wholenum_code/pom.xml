@@ -43,6 +43,10 @@
                                     <mainClass>com.offbynull.wholenum.MainSubtraction</mainClass>
                                     <id>MainSubtraction</id>
                                 </program>
+                                <program>
+                                    <mainClass>com.offbynull.wholenum.MainMultiplication</mainClass>
+                                    <id>MainMultiplication</id>
+                                </program>
                             </programs>
                         </configuration>
                     </execution>
