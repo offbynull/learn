@@ -1678,6 +1678,73 @@ kthelper_code/target/appassembler/
 \end{array}
 `
 
+# Factor
+
+TODO: starts at section 2.4
+
+A number is a `{bm} multiple` of another number if m*c=n number, where...
+* m is a counting number
+* c is a counting number
+* n is the multiple of m, also a counting number
+
+An easy way to think of this is that multiple is the result of a multiplication, with the conditions given above.
+
+Another way to say that a number is a multiple of another number is to say that it's `{bm} divisible`. Given all the same conditions above, if n/m=c, where c is a counting number, then n is divisible by m.
+
+TODO: Go over common divisibility section and point for each table below. Also add small algorithm to compute. Also add a note saying how multiples are shared between 2, 5, and 10 -- that is, a number can be a multiple of many numbers (e.g. 12 is a multiple of both 2 and 3 -- 2\*6=12, 3\*4=12)
+
+It's easy to recognize multiples of 2, 5, 10, and 3 just by looking...
+
+Multiplies of 2....
+|        |        |        |        |        |        |        |        |        |        |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+|   1    | **2**  |   3    | **4**  |   5    | **6**  |   7    | **8**  |   9    | **10** |
+|   11   | **12** |   13   | **14** |   15   | **16** |   17   | **18** |   19   | **20** |
+|   21   | **22** |   23   | **24** |   25   | **26** |   27   | **28** |   29   | **30** |
+|   31   | **32** |   33   | **34** |   35   | **36** |   37   | **38** |   39   | **40** |
+|   41   | **42** |   43   | **44** |   45   | **46** |   47   | **48** |   49   | **50** |
+
+Multiplies of 5....
+|        |        |        |        |        |        |        |        |        |        |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+|   1    |   2    |   3    |   4    | **5**  |   6    |   7    |   8    |   9    | **10** |
+|   11   |   12   |   13   |   14   | **15** |   16   |   17   |   18   |   19   | **20** |
+|   21   |   22   |   23   |   24   | **25** |   26   |   27   |   28   |   29   | **30** |
+|   31   |   32   |   33   |   34   | **35** |   36   |   37   |   38   |   39   | **40** |
+|   41   |   42   |   43   |   44   | **45** |   46   |   47   |   48   |   49   | **50** |
+
+Multiplies of 10....
+|        |        |        |        |        |        |        |        |        |        |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+|   1    |   2    |   3    |   4    |   5    |   6    |   7    |   8    |   9    | **10** |
+|   11   |   12   |   13   |   14   |   15   |   16   |   17   |   18   |   19   | **20** |
+|   21   |   22   |   23   |   24   |   25   |   26   |   27   |   28   |   29   | **30** |
+|   31   |   32   |   33   |   34   |   35   |   36   |   37   |   38   |   39   | **40** |
+|   41   |   42   |   43   |   44   |   45   |   46   |   47   |   48   |   49   | **50** |
+
+Multiplies of 3....
+|        |        |        |        |        |        |        |        |        |        |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+|   1    |   2    | **3**  |   4    |   5    | **6**  |   7    |   8    | **9**  |   10   |
+|   11   | **12** |   13   |   14   | **15** |   16   |   17   | **18** |   19   |   20   |
+| **21** |   22   |   23   | **24** |   25   |   26   | **27** |   28   |   29   | **30** |
+|   31   |   32   | **33** |   34   |   35   | **36** |   37   |   38   | **39** |   40   |
+|   41   | **42** |   43   |   44   | **45** |   46   |   47   | **48** |   49   |   50   |
+| **51** |   52   |   53   | **54** |   55   |   56   | **57** |   58   |   59   | **60** |
+
+```{note}
+The pattern to check if a number is a multiple of 3 is to sum up its digits and check if the sum is a multiple of 3. The process is recursive. For example...
+
+* 3+3 = 6
+  * 6 is a multiple of 3
+* 3*12121 = 36363,
+  * 3+6+3+6+3=21,
+    * 2+1=3
+      * 3 is a multiple of 3
+
+Just keep doing it until you get a 1 digit answer and check to see if that answer is either 3, 6, or 9.
+```
+
 # Algebra
 
 `{bm} Algebra` is the study of mathematical operations and the rules for manipulating those operations.
@@ -1748,6 +1815,14 @@ If multiple additions are being chained together, often times its helpful to re-
 
 When 2 expressions evaluate to the same result, they can be written as an equation. An `{bm} equation` is denoted by a =, where the left-side is one expression and the right-side is another. For example, `{kt} 5x = 30`.
 
+To `{bm} solve` an equation means to determine the values of the variables in the equation such that both sides evaluate to the same number. This is done by applying the various rules of the operations used in the expressions of the equation. For example, solving `{kt} 5x = 30`...
+* `{kt} 5x = 30`
+* `{kt} \frac{5x}{5} = \frac{30}{5}`
+* `{kt} 1x = 6`
+* `{kt} x = 6`
+
+ The set of variable to number mappings for an equation is called a `{bm} solution` -- `{kt} x=6` is the solution of the equation.
+
 TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than twice x = 2x-(9*5))
 
 
@@ -1804,6 +1879,28 @@ http://www.themathpage.com/aPreCalc/algebraPre.htm (specifically 1, 6, and 7?)
 ADD TRIVIAL AND NON-TRIVIAL EXAMPLES
 
 
+TODO: write section about converting expressions to phrases and vice versa
+
+## Order of Operations
+
+The `{bm} order of operations` are as follows:
+
+1. Brackets
+1. Exponents
+1. Division and Multiplication (evaluated left-to-right)
+1. Addition and Subtraction (evaluated left-to-right)
+
+These rules are often abbreviated as either...
+
+* `{bm} BEDMAS` - Brackets / Exponents / Division and Multiplication / Addition and Subtraction
+* `{bm} PEMDAS` - Parenthesis / Exponents / Multiplication and Division / Addition and Subtraction (can be remembered as Please Excuse My Dear Aunt Sally)
+
+Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are evaluated left-to-right in the same step, it makes no difference.
+
+## Operation Rules
+
+TODO: talk about inverse of an operation, properties such as commutatitive, etc.. and make sure to properly bookmark them so they can be referenced from the neighbouring equality rules section below. move the stuff below into its relevant subsections
+
 Commutative Property
 
 * `{kt} a \cdot b = b \cdot a`
@@ -1832,21 +1929,49 @@ Multiplicative Inverse / Multiplicative Reciprocal Property
 
 * `{kt} a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1`
 
-## Order of Operations
+### Addition
 
-The `{bm} order of operations` are as follows:
+inverse of addition is subtraction
 
-1. Brackets
-1. Exponents
-1. Division and Multiplication (evaluated left-to-right)
-1. Addition and Subtraction (evaluated left-to-right)
+### Subtraction
 
-These rules are often abbreviated as either...
+inverse of subtraction is addition
 
-* `{bm} BEDMAS` - Brackets / Exponents / Division and Multiplication / Addition and Subtraction
-* `{bm} PEMDAS` - Parenthesis / Exponents / Multiplication and Division / Addition and Subtraction (can be remembered as Please Excuse My Dear Aunt Sally)
+### Multiplication
 
-Note that these 2 are essentially the same. Division and multiplication are swapped, but since division and multiplication are evaluated left-to-right in the same step, it makes no difference.
+inverse of division
+
+### Division
+
+inverse of multiplication
+
+## Equality Rules
+
+TODO: talk about how you can subtract/add/multiply/divide anything so long as you do it to both sides... e.g. x=5 add y to both sides to get x+y=5+y, x+y=5+y subtract y from both sides to get
+
+using a balancing scale might be a good way to represent this -- if it's already balanced, adding 5 apples to one side means you have to add 5 apples to the other side to keep it balanced
+
+starts at section 2.3
+
+see subtraction property of equality
+
+see addition property of equality
+
+see division property of equality
+
+see multiplciation property of equality
+
+ALSO, section 2.3 talks about converting phrases to equations and viceversa -- implement this (see "Translate Word Phrases to Algebraic Equations" section)... words that map to equality...
+
+* `{bm} is equal to` -- e.g. x is equal to 1
+* `{bm} equals` -- e.g. x equals 1
+* `{bm} is the same as` -- e.g. x is the same as 1
+* `{bm} is` -- e.g. x is 1
+* `{bm} gives` -- e.g. ???
+* `{bm} was` -- e.g. x was 1
+* `{bm} will be` -- e.g. x will be 1
+
+some of the above are overkill and need to be pruned
 
 # OpenStax Prealgebra Problems
 
@@ -6938,6 +7063,494 @@ __EXERCISE__
 __TRY IT__
 
 2.55)
+
+* 4(3)-7 = 12-7 = 5
+* 5 != 16
+
+2.56)
+
+* 6(2)-2 = 12-2 = 10
+* 10 = 10
+
+2.57)
+
+* 9(3)-2 = 27-2 = 25
+* 8(3)=1 = 24+1 = 25
+* 25 = 25
+
+2.58)
+
+* 5(4)-3 = 20-3 = 17
+* 3(4)+5 = 12+5 = 17
+* 17 = 17
+
+2.59) x+1=7
+
+2.60) x+3=4
+
+2.61) 
+
+* x+6 = 19
+* x+6-6 = 19-6
+* x=13
+
+2.62)
+
+* x+9 = 14
+* x+9-9 = 14-9
+* x = 5
+
+2.63)
+
+* 95 = y+67
+* 95-67 = y+67-67
+* 28 = y
+
+2.64)
+
+* 91 = y+45
+* 91-45 = y+45-45
+* 46 = y
+
+2.65)
+
+* x-9 = 13
+* x-9+9 = 13+9
+* x = 22
+
+2.66)
+
+* y-1 = 3
+* y-1+1 = 3+1
+* y = 4
+
+2.67)
+
+* 19 = a-18
+* 19+18 = a-18+18
+* 37 = a
+
+2.68)
+
+* 27=n-14
+* 27+14=n-14+14
+* 41=n
+
+2.69) 7+6=13
+
+2.70) 8+6=14
+
+2.71) 6*9=54
+
+2.72) 21*3=63
+
+2.73) 2(x-5)=30
+
+2.74) 2(y-4)=16
+
+2.75)
+
+* 7+x = 37
+* 7+x-7 = 37-7
+* x = 30
+
+2.76)
+
+* 11+y = 28
+* 11+y-11 = 28-11
+* y = 17
+
+2.77)
+
+* z-7 = 37
+* z-7+7 = 37+7
+* z = 44
+
+2.78)
+
+* x-19 = 45
+* x-19+19 = 45+19
+* x = 64
+
+__EXERCISE__
+
+2.3.147) a
+
+2.3.148) a
+
+2.3.149) b
+
+2.3.150) b
+
+2.3.151) a
+
+2.3.152) a
+
+2.3.153) b
+
+2.3.154) b
+
+2.3.155) b
+
+2.3.156) b
+
+2.3.157) b
+
+2.3.158) b
+
+2.3.159) x+2=5
+
+2.3.160) 4+x=7
+
+2.3.161) 3+x=6
+
+2.3.162) 5+x=9
+
+2.3.163)
+
+* a+2=18
+* a+2-2=18-2
+* a=16
+
+2.3.164)
+
+* b+5=13
+* b+5-5=13-5
+* b=8
+
+2.3.165)
+
+* p+18=23
+* p+18-18=23-18
+* p=5
+
+2.3.166)
+
+* q+14=31
+* q+14-14=31-14
+* q=17
+
+2.3.167)
+
+* r+76=100
+* r+76-76=100-76
+* r=24
+
+2.3.168)
+
+* s+62=95
+* s+62-62=95-62
+* s=33
+
+2.3.169)
+
+* 16=x+9
+* 16-9=x+9-9
+* 7=x
+
+2.3.170)
+
+* 17=y+6
+* 17-6=y+6-6
+* 11=y
+
+2.3.171)
+
+* 93=p+24
+* 93-24=p+24-24
+* 69=p
+
+2.3.172)
+
+* 116=q+79
+* 116-79=q+79-79
+* 37=q
+
+2.3.173)
+
+* 465=d+398
+* 465-398=d+398-398
+* 67=d
+
+2.3.174)
+
+* 932=c+641
+* 932-641=c+641-641
+* 291=c
+
+2.3.175)
+
+* y-3=19
+* y-3+3=19+3
+* y=21
+
+2.3.176)
+
+* x-4=12
+* x-4+4=12+4
+* x=16
+
+2.3.177)
+
+* u-6=24
+* u-6+6=24+6
+* u=30
+
+2.3.178)
+
+* v-7=35
+* v-7+7=35+7
+* v=42
+
+2.3.179)
+
+* f-55=123
+* f-55+55=123+55
+* f=178
+
+2.3.180)
+
+* g-39=117
+* g-39+39=117+39
+* g=156
+
+2.3.181)
+
+* 19=n-13
+* 19+13=n-13+13
+* 32=n
+
+2.3.182)
+
+* 18=m-15
+* 18+15=m-15+15
+* 33=m
+
+2.3.183)
+
+* 10=p-38
+* 10+38=p-38+38
+* 48=p
+
+2.3.184)
+
+* 18=q-72
+* 18+72=q-72+72
+* 90=q
+
+2.3.185)
+
+* 268=y-199
+* 268+199=y-199+199
+* 467=y
+
+2.3.186)
+
+* 204=z-149
+* 204+149=z-149+149
+* 353=z
+
+2.3.187) 8+9=17
+
+2.3.188) 7+9=16
+
+2.3.189) 23-19=4
+
+2.3.190) 29-12=17
+
+2.3.191) 3*9=27
+
+2.3.192) 6*8=48
+
+2.3.193) 54/6=9
+
+2.3.194) 42/7=6
+
+2.3.195) 2(n-10)=52
+
+2.3.196) 2(m-14)=64
+
+2.3.197) (3y)+10=100
+
+2.3.198) (8x)+4=68
+
+2.3.199)
+
+* 5+p=21
+* 5+p-5=21-5
+* p=16
+
+2.3.200)
+
+* 9+q=40
+* 9+q-9=40-9
+* q=31
+
+2.3.201)
+
+* r+18=73
+* r+18-18=73-18
+* r=55
+
+2.3.202)
+
+* s+13=68
+* s+13-13=68-13
+* s=55
+
+2.3.203)
+
+* d-30=52
+* d-30+30=52+30
+* d=82
+
+2.3.204)
+
+* c-25=75
+* c-25+25=75+25
+* c=100
+
+2.3.205)
+
+* u-12=89
+* u-12+12=89+12
+* u=101
+
+2.3.206)
+
+* w-19=56
+* w-19+19=56+19
+* w=75
+
+2.3.207)
+
+* c-325=799
+* c-325+325=799+325
+* c=1124
+
+2.3.208)
+
+* d-299=850
+* d-299+299=850+299
+* d=1149
+
+2.3.209)
+
+* 500+p=1800
+* 500+p-500=1800-500
+* p=1300
+
+2.3.210)
+
+* d-750=5800
+* d-750+750=5800+750
+* d=6550
+
+2.3.211)
+
+* p-120=340
+* p-120+120=340+120
+* p=460
+
+2.3.212)
+
+* 1299+t=1409
+* 1299+t-1299=1409-1299
+* t=110
+
+2.3.213)
+
+* 8x-2=16-6x
+* 8x-6x-2=16-6x-6x
+* 2x-2=16
+* 2x-2+2=16+2
+* 2x=18
+
+no -- 2*1 != 18
+
+2.3.214)
+
+the difference of y and 5 is 21 -- NAME had paid 21 dollars in total for PRODUCT after receiving a 5 dollar discount. What was the original price of PRODUCT?
+
+## Chapter 2 Section 2.4
+
+__TRY IT__
+
+2.79)
+
+* a) is multiple of 2
+* b) is not multiple of 2
+
+2.80)
+
+* a) is not multiple of 2
+* b) is multiple of 2
+
+2.81)
+
+* a) is a multiple of 5
+* b) is not a multiple of 5
+
+2.82)
+
+* a) is not multiple of 5
+* b) is multiple of 5
+
+2.83)
+
+* a) is not multiple of 10
+* b) is multiple of 10
+
+2.84)
+
+* a) is multiple of 10
+* b) is not multiple of 10
+
+2.85)
+
+* a)
+  * 9+5+4=18
+  * 1+8=9
+  * 9 is a multiple of 3
+* b)
+  * 3+7+4+2=16
+  * 1+6=7
+  * 7 is not a multiple of 3
+
+2.86)
+
+* a)
+  * 6+4+3=13
+  * 1+3=4
+  * 4 is not a multiple of 3
+* b)
+  * 8+3+7+9=27
+  * 2+7=9
+  * 9 is a multiple of 3
+
+2.87) 6240
+ * divisible by 2: yes, last digit is 0
+ * divisible by 5: yes, last digit is 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 6+2+4+0=12, yes digits sum to multiple of 3
+
+2.88) 7248
+ * divisible by 2: yes, last digit is 8
+ * divisible by 5: no, last digit is not 5 or 0
+ * divisible by 10: no, last digit is not 0
+ * divisible by 3: 7+2+4+8=21, yes digits sum to multiple of 3
+
+2.89) 4962
+ * divisible by 2: yes, last digit is 2
+ * divisible by 5: no, last digit is not 5 or 0
+ * divisible by 10: no, last digit is not 0
+ * divisible by 3: 4+9+6+2=21, yes digits sum to multiple of 3
+
+2.89) 3765
+ * divisible by 2: no, last digit is not 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5
+ * divisible by 10: no, last digit is not 0
+ * divisible by 3: 3+7+6+5=21, yes digits sum to multiple of 3
 
 START BACK UP HERE
 START BACK UP HERE
