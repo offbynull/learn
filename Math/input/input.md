@@ -1678,71 +1678,234 @@ kthelper_code/target/appassembler/
 \end{array}
 `
 
-# Factor
+# Multiple
 
-TODO: starts at section 2.4
+To say that m is a `{bm} multiple` of n means that some integer exists such that when you multiply it by n you get m:- `{kt} n \cdot ? = m`. Typically both n and m are also integers.
 
-A number is a `{bm} multiple` of another number if m*c=n number, where...
-* m is a counting number
-* c is a counting number
-* n is the multiple of m, also a counting number
+For example, the multiples of 2 are...
 
-An easy way to think of this is that multiple is the result of a multiplication, with the conditions given above.
+* 2*0=2 -- 0 is a multiple of 2
 
-Another way to say that a number is a multiple of another number is to say that it's `{bm} divisible`. Given all the same conditions above, if n/m=c, where c is a counting number, then n is divisible by m.
+* 2*1=2 -- 2 is a multiple of 2
 
-TODO: Go over common divisibility section and point for each table below. Also add small algorithm to compute. Also add a note saying how multiples are shared between 2, 5, and 10 -- that is, a number can be a multiple of many numbers (e.g. 12 is a multiple of both 2 and 3 -- 2\*6=12, 3\*4=12)
+  ```
+  ┌──┐
+  │●●│ 2 can be grouped as 1 group of 2
+  └──┘
+  ```
 
-It's easy to recognize multiples of 2, 5, 10, and 3 just by looking...
+* 2*2=4 -- 4 is a multiple of 2
 
-Multiplies of 2....
-|        |        |        |        |        |        |        |        |        |        |
-| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-|   1    | **2**  |   3    | **4**  |   5    | **6**  |   7    | **8**  |   9    | **10** |
-|   11   | **12** |   13   | **14** |   15   | **16** |   17   | **18** |   19   | **20** |
-|   21   | **22** |   23   | **24** |   25   | **26** |   27   | **28** |   29   | **30** |
-|   31   | **32** |   33   | **34** |   35   | **36** |   37   | **38** |   39   | **40** |
-|   41   | **42** |   43   | **44** |   45   | **46** |   47   | **48** |   49   | **50** |
+  ```
+  ┌──┬──┐
+  │●●│●●│ 4 can be grouped as 2 groups of 2
+  └──┴──┘
+  ```
 
-Multiplies of 5....
-|        |        |        |        |        |        |        |        |        |        |
-| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-|   1    |   2    |   3    |   4    | **5**  |   6    |   7    |   8    |   9    | **10** |
-|   11   |   12   |   13   |   14   | **15** |   16   |   17   |   18   |   19   | **20** |
-|   21   |   22   |   23   |   24   | **25** |   26   |   27   |   28   |   29   | **30** |
-|   31   |   32   |   33   |   34   | **35** |   36   |   37   |   38   |   39   | **40** |
-|   41   |   42   |   43   |   44   | **45** |   46   |   47   |   48   |   49   | **50** |
+* 2*3=6 -- 6 is a multiple of 2
 
-Multiplies of 10....
-|        |        |        |        |        |        |        |        |        |        |
-| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-|   1    |   2    |   3    |   4    |   5    |   6    |   7    |   8    |   9    | **10** |
-|   11   |   12   |   13   |   14   |   15   |   16   |   17   |   18   |   19   | **20** |
-|   21   |   22   |   23   |   24   |   25   |   26   |   27   |   28   |   29   | **30** |
-|   31   |   32   |   33   |   34   |   35   |   36   |   37   |   38   |   39   | **40** |
-|   41   |   42   |   43   |   44   |   45   |   46   |   47   |   48   |   49   | **50** |
+  ```
+  ┌──┬──┬──┐
+  │●●│●●│●●│ 6 can be grouped as 3 groups of 2
+  └──┴──┴──┘
+  ```
 
-Multiplies of 3....
-|        |        |        |        |        |        |        |        |        |        |
-| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-|   1    |   2    | **3**  |   4    |   5    | **6**  |   7    |   8    | **9**  |   10   |
-|   11   | **12** |   13   |   14   | **15** |   16   |   17   | **18** |   19   |   20   |
-| **21** |   22   |   23   | **24** |   25   |   26   | **27** |   28   |   29   | **30** |
-|   31   |   32   | **33** |   34   |   35   | **36** |   37   |   38   | **39** |   40   |
-|   41   | **42** |   43   |   44   | **45** |   46   |   47   | **48** |   49   |   50   |
-| **51** |   52   |   53   | **54** |   55   |   56   | **57** |   58   |   59   | **60** |
+* 2*4=8 -- 8 is a multiple of 2
+
+  ```
+  ┌──┬──┬──┬──┐
+  │●●│●●│●●│●●│ 8 can be grouped as 4 groups of 2
+  └──┴──┴──┴──┘
+  ```
+
+* etc..
+
+A number like 7 wouldn't be a multiple of 2 because there is no integer that can be multiplied by 2 to get 7 -- 2\*3.5=7, but 3.5 isn't an integer.
+
+```
+┌──┬──┬──┬─┐
+│●●│●●│●●│●│ 7 can't be grouped as groups of 2 (last group only has 1)
+└──┴──┴──┴─┘
+```
 
 ```{note}
-The pattern to check if a number is a multiple of 3 is to sum up its digits and check if the sum is a multiple of 3. The process is recursive. For example...
+See divisible section.
+```
 
-* 3+3 = 6
-  * 6 is a multiple of 3
-* 3*12121 = 36363,
-  * 3+6+3+6+3=21,
-    * 2+1=3
-      * 3 is a multiple of 3
+# Divisible
 
-Just keep doing it until you get a 1 digit answer and check to see if that answer is either 3, 6, or 9.
+To say that m is `{bm} divisible` by n means that an integer results from dividing m by n: `{kt} m \div n = ?`. Typically both m and n are also integers, with the exception that n can't be 0 (can't divide by 0).
+
+For example, 8 is divisible by...
+
+* 8/1=8 -- 8 is divisible by 1
+
+  ```
+  ┌────────┐
+  │●●●●●●●●│ 8 can be grouped as 1 group of 8
+  └────────┘
+  ```
+
+* 8/2=4 -- 8 is divisible by 2
+
+  ```
+  ┌────┬────┐
+  │●●●●│●●●●│ 8 can be grouped as 2 groups of 4
+  └────┴────┘
+  ```
+
+* 8/4=2 -- 8 is divisible by 4
+
+  ```
+  ┌──┬──┬──┬──┐
+  │●●│●●│●●│●●│ 8 can be grouped as 4 groups of 2
+  └──┴──┴──┴──┘
+  ```
+
+* 8/8=1 -- 8 is divisible by 8
+
+  ```
+  ┌─┬─┬─┬─┬─┬─┬─┬─┐
+  │●│●│●│●│●│●│●│●│ 8 can be grouped as 8 groups of 1
+  └─┴─┴─┴─┴─┴─┴─┴─┘
+  ```
+
+In all of the above cases, the quotient is an integer -- it doesn't have a remainder. 8 wouldn't be divisible by a number like 3 because the result wouldn't be an integer. 8/3=2.6667, but 2.6667 isn't an integer.
+
+```
+┌───┬───┬──┐
+│●●●│●●●│●●│ 8 can't be grouped as groups of 3 (last group only has 2)
+└───┴───┴──┘
+```
+
+```{note}
+The phrases `{bm} evenly divisible`, `{bm} evenly divide`s and divisible all mean the same thing.
+
+The phrase `{bm} evenly divides into` is the same as `{bm} divides into` but that it doesn't have a remainder (whole). 4 divides into 8 (4/8=2), but 6 doesn't divide into 8 (6/8=0.75).
+```
+
+```{note}
+Divisible and multiple refer to the same idea. Saying that 275 is a multiple of 5 (`{kt} 5\cdot?=275`) is the same as saying 275 is divisible by 5 (`{kt} 275\div5=?`).
+```
+
+
+`{bm} Common divisibility test`s are simple tests you can do on a number to see if its divisible. To see if a number is divisible by...
+
+ * 2, check if the last digit is either 0, 2, 4, 6, or 8.
+
+   |        |        |        |        |        |        |        |        |        |        |
+   | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+   |   1    | **2**  |   3    | **4**  |   5    | **6**  |   7    | **8**  |   9    | **10** |
+   |   11   | **12** |   13   | **14** |   15   | **16** |   17   | **18** |   19   | **20** |
+   |   21   | **22** |   23   | **24** |   25   | **26** |   27   | **28** |   29   | **30** |
+   |   31   | **32** |   33   | **34** |   35   | **36** |   37   | **38** |   39   | **40** |
+   |   41   | **42** |   43   | **44** |   45   | **46** |   47   | **48** |   49   | **50** |
+
+ * 5, check if the last digit is either 5 or 0.
+
+   |        |        |        |        |        |        |        |        |        |        |
+   | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+   |   1    |   2    |   3    |   4    | **5**  |   6    |   7    |   8    |   9    | **10** |
+   |   11   |   12   |   13   |   14   | **15** |   16   |   17   |   18   |   19   | **20** |
+   |   21   |   22   |   23   |   24   | **25** |   26   |   27   |   28   |   29   | **30** |
+   |   31   |   32   |   33   |   34   | **35** |   36   |   37   |   38   |   39   | **40** |
+   |   41   |   42   |   43   |   44   | **45** |   46   |   47   |   48   |   49   | **50** |
+
+ * 10, check if the last digit is 0.
+
+   |        |        |        |        |        |        |        |        |        |        |
+   | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+   |   1    |   2    |   3    |   4    |   5    |   6    |   7    |   8    |   9    | **10** |
+   |   11   |   12   |   13   |   14   |   15   |   16   |   17   |   18   |   19   | **20** |
+   |   21   |   22   |   23   |   24   |   25   |   26   |   27   |   28   |   29   | **30** |
+   |   31   |   32   |   33   |   34   |   35   |   36   |   37   |   38   |   39   | **40** |
+   |   41   |   42   |   43   |   44   |   45   |   46   |   47   |   48   |   49   | **50** | 
+
+ * 3, sum up the individual digits and check if divisibly by 3.
+
+   This is a recursive operation. For example...
+   * 6
+     * 6 is a multiple of 3
+   * 36363,
+     * 3+6+3+6+3=21,
+       * 2+1=3
+         * 3 is a multiple of 3
+
+   Keep doing it until you get a 1 digit answer and check to see if that answer is either 3, 6, or 9.
+
+   |        |        |        |        |        |        |        |        |        |        |
+   | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+   |   1    |   2    | **3**  |   4    |   5    | **6**  |   7    |   8    | **9**  |   10   |
+   |   11   | **12** |   13   |   14   | **15** |   16   |   17   | **18** |   19   |   20   |
+   | **21** |   22   |   23   | **24** |   25   |   26   | **27** |   28   |   29   | **30** |
+   |   31   |   32   | **33** |   34   |   35   | **36** |   37   |   38   | **39** |   40   |
+   |   41   | **42** |   43   |   44   | **45** |   46   |   47   | **48** |   49   |   50   |
+   | **51** |   52   |   53   | **54** |   55   |   56   | **57** |   58   |   59   | **60** |
+
+ * 6, apply common divisibility tests for 2 and 3, they both must pass.
+
+   |        |        |        |        |        |        |        |        |        |        |
+   | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+   |   1    |   2    |   3    |   4    |   5    | **6**  |   7    |   8    |   9    |   10   |
+   |   11   | **12** |   13   |   14   |   15   |   16   |   17   | **18** |   19   |   20   |
+   |   21   |   22   |   23   | **24** |   25   |   26   |   27   |   28   |   29   | **30** |
+   |   31   |   32   |   33   |   34   |   35   | **36** |   37   |   38   |   39   |   40   |
+   |   41   | **42** |   43   |   44   |   45   |   46   |   47   | **48** |   49   |   50   |
+   |   51   |   52   |   53   | **54** |   55   |   56   |   57   |   58   |   59   | **60** |
+
+   ```{note}
+   The bold numbers in the table above are numbers that appear bold in both the table for 2s and the table for 3s -- they must be bold in both tables.
+   ```
+
+# Factor
+
+The `{bm} factor`s of a number are any counting numbers that when multiplied together result in that number. For example, the factors of 8 are...
+
+* 8=8\*1 -- 8 and 1 are factors
+* 8=4\*2 -- 4 and 2 are factors
+* 8=2\*4 -- 2 and 4 are factors
+* 8=1\*8 -- 1 and 8 are factors
+
+... 1, 2, 4, and 8.
+
+Another way to think of this is that the factors of a number are any counting numbers that it can divide into without producing a remainder. For example, the factors of 8 are ...
+
+* 8/1=8 -- 1 is a factor of 8
+* 8/2=4 -- 2 is a factor of 8
+* 8/3   -- skip, result is not a counting number
+* 8/4=2 -- 4 is a factor of 8
+* 8/5   -- skip, result is not a counting number
+* 8/6   -- skip, result is not a counting number
+* 8/7   -- skip, result is not a counting number
+* 8/8=1 -- 8 is a factor of 8
+
+A trivial implementation of finding factors...
+
+```
+for (int i = 1; i <= input; i++) {
+    if (input % i)
+}
+```
+
+Notice that the factor pairs are mirrors of each other. 8\*1 is the same as 1\*8.
+
+
+If the number were an integer, the factors would include negative numbers as well. For example, the factors of -8 are...
+
+* 8=8\*-1 -- 8 and -1 are factors
+* 8=4\*-2 -- 4 and -2 are factors
+* 8=2\*-4 -- 2 and -4 are factors
+* 8=1\*-8 -- 1 and -8 are factors
+
+... -8, -4, -2, -1, 1, 2, 4, 8.
+
+
+A number with only 2 factors is called a `{bm} prime` number. That is, if a number is only divisibly by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, and 19.
+
+A number with more than 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
+
+```{note}
+The number 1 is neither a prime number nor a composite number. 1's only factor is itself: 1\*1=1. Prime numbers need 2 factors and composite numbers need more than 2 factors.
 ```
 
 # Algebra
@@ -7546,11 +7709,679 @@ __TRY IT__
  * divisible by 10: no, last digit is not 0
  * divisible by 3: 4+9+6+2=21, yes digits sum to multiple of 3
 
-2.89) 3765
+2.90) 3765
  * divisible by 2: no, last digit is not 2,4,6, or 8
  * divisible by 5: yes, last digit is 5
  * divisible by 10: no, last digit is not 0
  * divisible by 3: 3+7+6+5=21, yes digits sum to multiple of 3
+
+2.91)
+
+* 96/1=96
+* 96/2=48
+* 96/3=23
+* 96/4=14
+* 96/5
+* 96/6=16
+* 96/7
+* 96/8=12
+* 96/9
+* 96/10
+* 96/11
+* 96/12=8 <-- quotient is less than divisor, stop here because it'll just mirror after this point
+
+2.92)
+
+* 80/1=80
+* 80/2=40
+* 80/3
+* 80/4=20
+* 80/5=16
+* 80/6
+* 80/7
+* 80/8=10
+* 80/9
+* 80/10=8 <-- quotitent is less than divisor, stop here
+
+2.93)
+
+* 91/1=91
+* 91/2=50.5
+* 91/3=30.333
+* 91/4=2.75
+* 91/5=18.2
+* 91/6=15.1666
+* 91/7=13 <-- stop here, it's composite because this will be the third factor (we know that 1 and 91 are factors already)
+
+2.94)
+
+* 137/1=137
+* 137/2=68.5
+* 137/3=45.666
+* 137/4=34.25
+* 137/5=27.4
+* 137/6=22.8333
+* 137/7=19.571
+* 137/8=17.125
+* 137/9=15.222
+* 137/10=13.7
+* 137/11=12.4545
+* 137/12=11.41
+
+__EXERCISE__
+
+2.4.215)
+
+1. 2
+1. 4
+1. 6
+1. 8
+1. 10
+1. 12
+1. 14
+1. 16
+1. 18
+1. 20
+1. 22
+1. 24
+1. 26
+1. 28
+1. 30
+1. 32
+1. 34
+1. 36
+1. 38
+1. 40
+1. 42
+1. 44
+1. 46
+1. 48
+
+2.4.216)
+
+1. 3
+1. 6
+1. 9
+1. 12
+1. 15
+1. 18
+1. 21
+1. 24
+1. 27
+1. 30
+1. 33
+1. 36
+1. 39
+1. 42
+1. 45
+1. 48
+
+2.4.217)
+
+1. 4
+1. 8
+1. 12
+1. 16
+1. 20
+1. 24
+1. 28
+1. 32
+1. 36
+1. 40
+1. 44
+1. 48
+
+2.4.218)
+
+1. 5
+1. 10
+1. 15
+1. 20
+1. 25
+1. 30
+1. 35
+1. 40
+1. 45
+
+2.4.219)
+
+1. 6
+1. 12
+1. 18
+1. 24
+1. 30
+1. 36
+1. 42
+1. 48
+
+2.4.220)
+
+1. 7
+1. 14
+1. 21
+1. 28
+1. 35
+1. 42
+1. 49
+
+2.4.221)
+
+1. 8
+1. 16
+1. 24
+1. 32
+1. 40
+1. 48
+
+2.4.222)
+
+1. 9
+1. 18
+1. 27
+1. 36
+1. 45
+
+2.4.223)
+
+1. 10
+1. 20
+1. 30
+1. 40
+
+2.4.224)
+
+1. 12
+1. 24
+1. 36
+1. 48
+
+2.4.225) 84
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: no, last digit is NOT 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 8+4=12, yes digits sum to multiple of 3
+ * divisible by 6: yes because divisible by both 2 and 3
+
+2.4.226) 96
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: no, last digit is NOT 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 9+6=15, yes digits sum to multiple of 3
+ * divisible by 6: yes because divisible by both 2 and 3
+
+2.4.227) 75
+
+ * divisible by 2: no, last digit is NOT 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 7+5=12, yes digits sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.228) 78
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: no, last digit is NOT 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 7+8=15, yes digits sum to multiple of 3
+ * divisible by 6: yes, divisible by both 2 and 3
+
+2.4.229) 168
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: no, last digit is NOT 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 1+6+8=15, yes digits sum to multiple of 3
+ * divisible by 6: yes, divisible by both 2 and 3
+
+2.4.230) 264
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: no, last digit is NOT 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 2+6+4=12, yes digits sum to multiple of 3
+ * divisible by 6: yes, divisible by both 2 and 3
+
+2.4.231) 900
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 9+0+0=9, yes digits sum to multiple of 3
+ * divisible by 6: yes, divisible by both 2 and 3
+
+2.4.232) 800
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 8+0+0=8, no digits DONT sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.233) 896
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: no, last digit is NOT 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 8+9+6=23, no digits DONT sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.234) 942
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: no, last digit is NOT 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 9+4+2=15, yes digits sum to multiple of 3
+ * divisible by 6: yes, divisible by both 2 and 3
+
+2.4.235) 375
+
+ * divisible by 2: no, last digit is NOT 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 3+7+5=15, yes digits sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.236) 750
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 7+5+0=12, yes digits sum to multiple of 3
+ * divisible by 6: yes, divisible by both 2 and 3
+
+2.4.237) 350
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 3+5+0=8, no digits DONT sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.238) 550
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 5+5+0=10, no digits DONT sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.239) 1430
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 1+4+3+0=8, no digits DONT sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.240) 1080
+
+ * divisible by 2: yes, last digit is 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: yes, last digit is 0
+ * divisible by 3: 1+0+8+0=9, yes digits sum to multiple of 3
+ * divisible by 6: yes, divisible by both 2 and 3
+
+2.4.241) 22335
+
+ * divisible by 2: no, last digit is NOT 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 2+2+3+3+5=15, yes digits sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.242) 39075
+
+ * divisible by 2: no, last digit is NOT 2,4,6, or 8
+ * divisible by 5: yes, last digit is 5 or 0
+ * divisible by 10: no, last digit is NOT 0
+ * divisible by 3: 3+9+0+7+5=24, yes digits sum to multiple of 3
+ * divisible by 6: no, NOT divisible by both 2 and 3
+
+2.4.243)
+
+ * 36/1=36 yes
+ * 36/2=18 yes
+ * 36/3=13 yes
+ * 36/4=9 yes
+ * 36/5=7.2 no
+ * 36/6=6 yes <-- stop here, quotient is <= divisor
+
+2.4.244)
+
+ * 42/1=42 yes
+ * 42/2=21 yes
+ * 42/3=14 yes 
+ * 42/4=10.5 no
+ * 42/5=8.4 no
+ * 42/6=7 yes
+ * 42/7=6 yes <-- stop here, quotient is <= divisor
+
+2.4.245)
+
+ * 60/1=60 yes
+ * 60/2=30 yes
+ * 60/3=20 yes
+ * 60/4=15 yes
+ * 60/5=12 yes
+ * 60/6=10 yes
+ * 60/7=8.571 no
+ * 60/8=7.5 no <-- stop here, quotient is <= divisor
+
+2.4.246)
+
+ * 48/1=48 yes
+ * 48/2=24 yes
+ * 48/3=16 yes
+ * 48/4=12 yes
+ * 48/5=9.6 no
+ * 48/6=8 yes
+ * 48/7=6.857 no <-- stop here, quotient is <= divisor
+
+2.4.247)
+
+ * 144/1=144 yes
+ * 144/2=72 yes
+ * 144/3=48 yes
+ * 144/4=36 yes
+ * 144/5=28.8 no
+ * 144/6=24 yes
+ * 144/7=20.571 no
+ * 144/8=18 yes
+ * 144/9=16 yes
+ * 144/10=14.4 no
+ * 144/11=13.090 no
+ * 144/12=12 yes <-- stop here, quotient is <= divisor
+
+2.4.248)
+
+ * 200/1=200 yes
+ * 200/2=100 yes
+ * 200/3=66.666 no
+ * 200/4=50 yes
+ * 200/5=40 yes
+ * 200/6=33.333 no
+ * 200/7=28.571 no
+ * 200/8=25 yes
+ * 200/9=22.222 no
+ * 200/10=20 yes
+ * 200/11=18.181 no
+ * 200/12=16.666 no
+ * 200/13=15.384 no
+ * 200/14=14.285 no
+ * 200/15=13.333 no <-- stop here, quotient is <= divisor
+
+2.4.249)
+
+ * 588/1=588 yes
+ * 588/2=294 yes
+ * 588/3=196 yes
+ * 588/4=147 yes
+ * 588/5=117.6 no
+ * 588/6=98 yes
+ * 588/7=84 yes
+ * 588/8=73.5 no
+ * 588/9=65.333 no
+ * 588/10=58.8 no
+ * 588/11=53.4545 no
+ * 588/12=49 yes
+ * 588/13=45.230 no
+ * 588/14=42 yes
+ * 588/15=39.2 no
+ * 588/16=36.75 no
+ * 588/17=34.588 no
+ * 588/18=32.666 no
+ * 588/19=30.947 no
+ * 588/20=29.4 no
+ * 588/21=28 yes
+ * 588/22=26.727 no
+ * 588/23=25.565 no
+ * 588/24=24.5 no
+ * 588/25=23.52 no
+
+2.4.250)
+
+ * 576/1=576 yes
+ * 576/2=288 yes
+ * 576/3=192 yes
+ * 576/4=144 yes
+ * 576/5=115.2 no
+ * 576/6=96 yes
+ * 576/7=82.285 no
+ * 576/8=72 yes
+ * 576/9=64 yes
+ * 576/10=57.6 no
+ * 576/11=52.363 no
+ * 576/12=48 yes
+ * 576/13=44.307 no
+ * 576/14=41.142 no
+ * 576/15=38.4 no
+ * 576/16=36 yes
+ * 576/17=33.882 no
+ * 576/18=32 yes
+ * 576/19=30.315 no
+ * 576/20=28.8 no
+ * 576/21=27.428 no
+ * 576/22=26.181 no
+ * 576/23=25.043 no
+ * 576/24=24 yes <-- stop here, quotient is <= divisor
+
+2.4.251)
+
+ * 43/1=43 yes
+ * 43/2 no -- fails common divisibility test
+ * 43/3 no -- fails common divisibility test
+ * 43/4=10.75 no
+ * 43/5 no -- fails common divisibilitiy test
+ * 43/6 no -- fails common divisibility test
+ * 43/7=6.142 no <-- stop here, quotient is <= divisor
+
+43 is prime, its only factors are 1 and itself
+
+2.4.252)
+
+ * 67/1=67 yes
+ * 67/2 no -- fails common divisibility test
+ * 67/3 no -- fails common divisibility test
+ * 67/4=16.75 no
+ * 67/5 no -- fails common divisibility test
+ * 67/6 no -- fails common divisibility test
+ * 67/7=9.571 no
+ * 67/8=8.375 no
+ * 67/9=7.444 no <-- stop here, quotient is <= divisor
+
+67 is prime, its only factors are 1 and itself
+
+2.4.253)
+
+39 is composite -- it's divisible by 3 (see common divisibility tests), which means it has over 2 factors(1, itself, 3, and maybe more)
+
+2.4.254)
+
+ * 53/1=53 yes
+ * 53/2 no -- fails common divisibility test
+ * 53/3 no -- fails common divisibility test
+ * 53/4=13.25 no
+ * 53/5 no -- fails common divisibility test
+ * 53/6 no -- fails common divisibility test
+ * 53/7=7.571 no
+ * 53/8=6.625 no <-- stop here, quotient is <= divisor
+
+53 is prime, its only factors are 1 and itself
+
+2.4.255)
+
+ * 71/1=71
+ * 71/2 no -- fails common divisibility test
+ * 71/3 no -- fails common divisibility test
+ * 53/4=17.75 no
+ * 71/5 no -- fails common divisibility test
+ * 71/6 no -- fails common divisibility test
+ * 71/7=10.142 no
+ * 71/8=8.875 no
+ * 71/9=7.888 no <-- stop here, quotient is <= divisor
+
+71 is prime, its only factors are 1 and itself
+
+2.4.256)
+
+ * 119/1=119
+ * 119/2 no -- fails common divisibility test
+ * 119/3 no -- fails common divisibility test
+ * 119/4=29.75 no
+ * 119/5 no -- fails common divisibility test
+ * 119/6 no -- fails common divisibility test
+ * 119/7 yes <-- stop her, it's divisible by 7 which means it has over 2 factors(1, itself, 7, and maybe more)
+
+119 is composite
+
+2.4.257)
+
+ * 481/1=481
+ * 481/2 no -- fails common divisibility test
+ * 481/3 no -- fails common divisibility test
+ * 481/4=120.25 no
+ * 481/5 no -- fails common divisibility test
+ * 481/6 no -- fails common divisibility test
+ * 481/7=68.714 no
+ * 481/8
+ * 481/9=53.444 no
+ * 481/10=48.1 no
+ * 481/11=43.727 no
+ * 481/13=37 <-- stop her, it's divisible by 13 which means it has over 2 factors(1, itself, 13, and maybe more)
+
+481 is composite
+
+2.4.258)
+
+ * 221/1=221
+ * 221/2 no -- fails common divisibility test
+ * 221/3 no -- fails common divisibility test
+ * 221/4=55.25 no
+ * 221/5 no -- fails common divisibility test
+ * 221/6 no -- fails common divisibility test
+ * 221/7=31.571 no
+ * 221/8=27.265 no
+ * 221/9=24.555 no
+ * 221/10=22.1 no
+ * 221/11=20.090 no
+ * 221/12=18.416 no
+ * 221/13=17 <-- stop her, it's divisible by 13 which means it has over 2 factors(1, itself, 13, and maybe more)
+
+221 is composite
+
+2.4.259)
+
+ * 209/1=209
+ * 209/2 no -- fails common divisibility test
+ * 209/3 no -- fails common divisibility test
+ * 209/4=52.25 no
+ * 209/5 no -- fails common divisibility test
+ * 209/6 no -- fails common divisibility test
+ * 209/7=29.857 no
+ * 209/8=26.125 no
+ * 209/9=23.222 no
+ * 209/10=20.9 no
+ * 209/11=19 <-- stop her, it's divisible by 11 which means it has over 2 factors(1, itself, 11, and maybe more)
+
+209 is composite
+
+2.4.260)
+
+ * 359/1=359
+ * 359/2 no -- fails common divisibility test
+ * 359/3 no -- fails common divisibility test
+ * 359/4=89.75 no
+ * 359/5 no -- fails common divisibility test
+ * 359/6 no -- fails common divisibility test
+ * 359/7=51.285 no
+ * 359/8=44.875
+ * 359/9=39.888 no
+ * 359/10=35.9 no
+ * 359/11=32.636 no
+ * 359/12=29.916 no
+ * 359/13=27.615 no
+ * 359/14=25.642 no
+ * 359/15=23.933 no
+ * 359/16 no
+ * 359/17=21.117 no
+ * 359/18 no
+ * 359/19 = 18.1784  <-- stop here, quotient is <= divisor
+
+359 is prime
+
+2.4.261)
+
+ * 667/1=667
+ * 667/2 no -- fails common divisibility test
+ * 667/3 no -- fails common divisibility test
+ * 667/4=116.75 no
+ * 667/5 no -- fails common divisibility test
+ * 667/6 no -- fails common divisibility test
+ * 667/7=94.285 no
+ * 667/8 no
+ * 667/9=74.111 no
+ * 667/10=66.7 no
+ * 667/11=60.636 no
+ * 667/12 no
+ * 667/13=51.307 no
+ * 667/14 no
+ * 667/15 no
+ * 667/16 no
+ * 667/17=39.235 no
+ * 667/18 no
+ * 667/19=35.105 no
+ * 667/20 no
+ * 667/21=31.761 no
+ * 667/22 no
+ * 667/23=29 <-- stop her, it's divisible by 29 which means it has over 2 factors(1, itself, 29, and maybe more)
+
+2.4.262)
+
+ * 1771/1=1771
+ * 1771/2 no -- fails common divisibility test
+ * 1771/3 no -- fails common divisibility test
+ * 1771/4=442.75 no
+ * 1771/5 no -- fails common divisibility test
+ * 1771/6 no -- fails common divisibility test
+ * 1771/7=253 <-- stop her, it's divisible by 7 which means it has over 2 factors(1, itself, 7, and maybe more)
+
+2.4.263)
+
+ * 200+(15*3)=145
+ * 200+(15*4)=160
+ * 200+(15*5)=175
+ * 200+(15*6)=190
+ * 200+(15*20)=500
+ * 200+(15\*x)=200+(15\*x)
+
+2.4.264)
+
+ * 75+(20*3)=135
+ * 75+(20*4)=155
+ * 75+(20*5)=175
+ * 75+(20*6)=195
+ * 75+(20*20)=475
+ * 75+(20\*x)=75+(20\*x)
+
+2.4.265)
+
+6 is a composite of 2 and 3, meaning that 6 has the factors 2 and 3 -- 6=2*3.
+
+Multiplying any number by 6 is the same as multiplying it by 2\*3. For example, 10\*6=60, 10\*2\*3=60. Since you're multiplying by both 2 and 3, the product is divisible by both 2 and 3.
+
+10\*2\*3=60 can be reordered as (10\*2)\*3=60, then simplified to 20\*3=60 -- meaning 60 is divisibly by 3
+
+10\*2\*3=60 can be reordered as (10\*3)\*2=60, then simplified to 30\*2=60 -- meaning 60 is divisibly by 3
+
+2.4.266)
+
+A prime number has 2 factors -- 1 and itself
+
+A composite number as more than 2 factors -- 1, itself, and others
+
+1 is neither a prime nor a composite since it only has 1 factor: itself.
 
 START BACK UP HERE
 START BACK UP HERE
