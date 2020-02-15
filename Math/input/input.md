@@ -1859,50 +1859,112 @@ Divisible and multiple refer to the same idea. Saying that 275 is a multiple of 
 
 # Factor
 
-The `{bm} factor`s of a number are any counting numbers that when multiplied together result in that number. For example, the factors of 8 are...
+The `{bm} factor`s of a number are any integers numbers that when multiplied together result in that number. In other words, in `m=a*b`, a and b are factors of m. For example, the factors of 32 are...
 
-* 8=8\*1 -- 8 and 1 are factors
-* 8=4\*2 -- 4 and 2 are factors
-* 8=2\*4 -- 2 and 4 are factors
-* 8=1\*8 -- 1 and 8 are factors
+* 32=32\*1 -- 32 and 1 are factors
+* 32=16\*2 -- 16 and 2 are factors
+* 32=8\*4 -- 8 and 4 are factors
+* 32=4\*8 -- 4 and 8 are factors
+* 32=2\*16 -- 2 and 16 are factors
+* 32=1\*32 -- 1 and 32 are factors
 
-... 1, 2, 4, and 8.
+... 1, 2, 4, 8, 16, and 32.
 
-Another way to think of this is that the factors of a number are any counting numbers that it can divide into without producing a remainder. For example, the factors of 8 are ...
+The algorithm for finding the factors of a number is as follows...
 
-* 8/1=8 -- 1 is a factor of 8
-* 8/2=4 -- 2 is a factor of 8
-* 8/3   -- skip, result is not a counting number
-* 8/4=2 -- 4 is a factor of 8
-* 8/5   -- skip, result is not a counting number
-* 8/6   -- skip, result is not a counting number
-* 8/7   -- skip, result is not a counting number
-* 8/8=1 -- 8 is a factor of 8
+TODO: Write trivial nested loop implementation
 
-A trivial implementation of finding factors...
+The algorithm can be optimized by testing for divisibility rather than exhaustively testing multiplication. For example, the factors of 32 are...
 
-```
-for (int i = 1; i <= input; i++) {
-    if (input % i)
-}
-```
+* 32/1=32 -- 32 and 1 are factors
+* 32/2=16 -- 16 and 2 are factors
+* 32/3=10.666 -- product not a counting number
+* 32/4=8 -- 8 and 4 are factors
+* 32/5=6.4 -- product not a counting number
+* 32/6=5.333 -- product not a counting number
+* 32/7=4.571 -- product not a counting number
+* 32/8=4 -- 4 and 8 are factors
+* 32/9=3.555 -- product not a counting number
+* 32/10=3.2 -- product not a counting number
+* 32/11=2.909 -- product not a counting number
+* 32/12=2.666 -- product not a counting number
+* 32/13=2.461 -- product not a counting number
+* 32/14=2.285 -- product not a counting number
+* 32/15=2.133 -- product not a counting number
+* 32/16=2 -- 16 and 2 are factors
+* 32/17=1.882 -- product not a counting number
+* 32/18=1.777 -- product not a counting number
+* 32/19=1.684 -- product not a counting number
+* 32/20=1.6 -- product not a counting number
+* 32/21=1.523 -- product not a counting number
+* 32/22=1.454 -- product not a counting number
+* 32/23=1.391 -- product not a counting number
+* 32/24=1.333 -- product not a counting number
+* 32/25=1.28 -- product not a counting number
+* 32/26=1.230 -- product not a counting number
+* 32/27=1.851 -- product not a counting number
+* 32/28=1.142 -- product not a counting number
+* 32/29=1.103 -- product not a counting number
+* 32/30=1.066 -- product not a counting number
+* 32/31=1.032 -- product not a counting number
+* 32/32=1 -- 32 and 1 are factors
 
-Notice that the factor pairs are mirrors of each other. 8\*1 is the same as 1\*8.
+TODO: Write single loop implementation
 
+The algorithm can be even further optimized by taking into account the fact that the factors repeat during calculation. For example, when calculating the factors of 32...
 
-If the number were an integer, the factors would include negative numbers as well. For example, the factors of -8 are...
+* 32=32\*1 -- 32 and 1 are factors
+* 32=16\*2 -- 16 and 2 are factors
+* 32=8\*4 -- 8 and 4 are factors <-- Last point before repeat
+* 32=4\*8 -- 4 and 8 are factors
+* 32=2\*16 -- 2 and 16 are factors
+* 32=1\*32 -- 1 and 32 are factors
 
-* 8=8\*-1 -- 8 and -1 are factors
-* 8=4\*-2 -- 4 and -2 are factors
-* 8=2\*-4 -- 2 and -4 are factors
-* 8=1\*-8 -- 1 and -8 are factors
+When the quotient becomes less than or equal to the divisor, there's no point in continuing any further. Any factors calculated past that point will just be repeats.
+
+* 32/1=32 -- 32 and 1 are factors
+* 32/2=16 -- 16 and 2 are factors
+* 32/3=10.666 -- product not a counting number
+* 32/4=8 -- 8 and 4 are factors
+* 32/5=6.4 -- product not a counting number
+* 32/6=5.333 -- product not a counting number  <-- Any factors calculated past this point will just be repeats.
+
+TODO: Write optimized single loop implementation
+
+The reasoning for this has to do with 2 points...
+1. the commutative property of multiplication
+2. factors must be whole numbers
+
+As the divisor increases, the quotient decreases. Once the quotient is less than or equal to the divisor, they're basically walking into domains the other was just in...
+
+* 32\*1 = 1\*32 = 32 -- 32 and 1 are factors.
+* 16\*2 = 2\*16 = 32 -- 16 and 2 are factors.
+* 8\*4 = 4\*8 = 32 -- 8 and 4 are factors.
+
+TODO: draw diagram
+
+There are special cases.
+
+The first is that all numbers are a factor of 0 (e.g. 0\*5=0, 0\*9999=9)
+
+The second is that if the number were an integer, the factors would include negative numbers as well. For example, the factors of -8 are...
+
+* -8=8\*-1 -- 8 and -1 are factors
+* -8=4\*-2 -- 4 and -2 are factors
+* -8=2\*-4 -- 2 and -4 are factors
+* -8=1\*-8 -- 1 and -8 are factors
+* -8=-1\*8 -- -1 and 8 are factors
+* -8=-2\*4 -- -2 and 4 are factors
+* -8=-4\*2 -- -4 and 2 are factors
+* -8=-8\*1 -- -8 and 1 are factors
 
 ... -8, -4, -2, -1, 1, 2, 4, 8.
 
+# Prime
 
-A number with only 2 factors is called a `{bm} prime` number. That is, if a number is only divisibly by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, and 19.
+A counting number with only 2 factors is called a `{bm} prime` number. That is, if a number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, and 19.
 
-A number with more than 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
+A counting number with more than 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
 
 ```{note}
 The number 1 is neither a prime number nor a composite number. 1's only factor is itself: 1\*1=1. Prime numbers need 2 factors and composite numbers need more than 2 factors.
@@ -8382,6 +8444,12 @@ A prime number has 2 factors -- 1 and itself
 A composite number as more than 2 factors -- 1, itself, and others
 
 1 is neither a prime nor a composite since it only has 1 factor: itself.
+
+## Chapter 2 Section 2.5
+
+__TRY IT__
+
+2.95)
 
 START BACK UP HERE
 START BACK UP HERE

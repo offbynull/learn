@@ -22,29 +22,31 @@
 <li><a href="#HEADREF12">Multiple</a></li>
 <li><a href="#HEADREF13">Divisible</a></li>
 <li><a href="#HEADREF14">Factor</a></li>
-<li><a href="#HEADREF15">Algebra</a></li>
+<li><a href="#HEADREF15">Prime</a></li>
+<li><a href="#HEADREF16">Algebra</a></li>
 <ul>
-<li><a href="#HEADREF16">Order of Operations</a></li>
-<li><a href="#HEADREF17">Operation Rules</a></li>
+<li><a href="#HEADREF17">Order of Operations</a></li>
+<li><a href="#HEADREF18">Operation Rules</a></li>
 <ul>
-<li><a href="#HEADREF18">Addition</a></li>
-<li><a href="#HEADREF19">Subtraction</a></li>
-<li><a href="#HEADREF20">Multiplication</a></li>
-<li><a href="#HEADREF21">Division</a></li>
+<li><a href="#HEADREF19">Addition</a></li>
+<li><a href="#HEADREF20">Subtraction</a></li>
+<li><a href="#HEADREF21">Multiplication</a></li>
+<li><a href="#HEADREF22">Division</a></li>
 </ul>
-<li><a href="#HEADREF22">Equality Rules</a></li>
+<li><a href="#HEADREF23">Equality Rules</a></li>
 </ul>
-<li><a href="#HEADREF23">OpenStax Prealgebra Problems</a></li>
+<li><a href="#HEADREF24">OpenStax Prealgebra Problems</a></li>
 <ul>
-<li><a href="#HEADREF24">Chapter 1 Section 1.1</a></li>
-<li><a href="#HEADREF25">Chapter 1 Section 1.2</a></li>
-<li><a href="#HEADREF26">Chapter 1 Section 1.3</a></li>
-<li><a href="#HEADREF27">Chapter 1 Section 1.4</a></li>
-<li><a href="#HEADREF28">Chapter 1 Section 1.5</a></li>
-<li><a href="#HEADREF29">Chapter 2 Section 2.1</a></li>
-<li><a href="#HEADREF30">Chapter 2 Section 2.2</a></li>
-<li><a href="#HEADREF31">Chapter 2 Section 2.3</a></li>
-<li><a href="#HEADREF32">Chapter 2 Section 2.4</a></li>
+<li><a href="#HEADREF25">Chapter 1 Section 1.1</a></li>
+<li><a href="#HEADREF26">Chapter 1 Section 1.2</a></li>
+<li><a href="#HEADREF27">Chapter 1 Section 1.3</a></li>
+<li><a href="#HEADREF28">Chapter 1 Section 1.4</a></li>
+<li><a href="#HEADREF29">Chapter 1 Section 1.5</a></li>
+<li><a href="#HEADREF30">Chapter 2 Section 2.1</a></li>
+<li><a href="#HEADREF31">Chapter 2 Section 2.2</a></li>
+<li><a href="#HEADREF32">Chapter 2 Section 2.3</a></li>
+<li><a href="#HEADREF33">Chapter 2 Section 2.4</a></li>
+<li><a href="#HEADREF34">Chapter 2 Section 2.5</a></li>
 </ul>
 </ul>
 </div>
@@ -2357,47 +2359,108 @@ the number of dots is the same
 </li>
 </ul>
 <a name="HEADREF14"></a><h1>Factor</h1>
-<p>The <a name="BOOKMARK41"></a><strong>factor</strong>s of a number are any <a href="#BOOKMARK3">counting number</a>s that when <a href="#BOOKMARK25">multiplied</a> together result in that number. For example, the <a href="#BOOKMARK41">factor</a>s of 8 are...</p>
+<p>The <a name="BOOKMARK41"></a><strong>factor</strong>s of a number are any integers numbers that when <a href="#BOOKMARK25">multiplied</a> together result in that number. In other words, in <code>m=a*b</code>, a and b are <a href="#BOOKMARK41">factor</a>s of m. For example, the <a href="#BOOKMARK41">factor</a>s of 32 are...</p>
 <ul>
-<li>8=8*1 -- 8 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>8=4*2 -- 4 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>8=2*4 -- 2 and 4 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>8=1*8 -- 1 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=32*1 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=16*2 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=8*4 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=4*8 -- 4 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=2*16 -- 2 and 16 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=1*32 -- 1 and 32 are <a href="#BOOKMARK41">factor</a>s</li>
 </ul>
-<p>... 1, 2, 4, and 8.</p>
-<p>Another way to think of th<a href="#BOOKMARK63">is</a> <a href="#BOOKMARK63">is</a> that the <a href="#BOOKMARK41">factor</a>s of a number are any <a href="#BOOKMARK3">counting number</a>s that it can divide into without producing a remainder. For example, the <a href="#BOOKMARK41">factor</a>s of 8 are ...</p>
+<p>... 1, 2, 4, 8, 16, and 32.</p>
+<p>The algorithm for finding the <a href="#BOOKMARK41">factor</a>s of a number <a href="#BOOKMARK63">is</a> as follows...</p>
+<p>TODO: Write trivial nested loop implementation</p>
+<p>The algorithm can be optimized by testing for div<a href="#BOOKMARK63">is</a>ibility rather than exhaustively testing <a href="#BOOKMARK23">multiplication</a>. For example, the <a href="#BOOKMARK41">factor</a>s of 32 are...</p>
 <ul>
-<li>8/1=8 -- 1 <a href="#BOOKMARK63">is</a> a <a href="#BOOKMARK41">factor</a> of 8</li>
-<li>8/2=4 -- 2 <a href="#BOOKMARK63">is</a> a <a href="#BOOKMARK41">factor</a> of 8</li>
-<li>8/3   -- skip, result <a href="#BOOKMARK63">is</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>8/4=2 -- 4 <a href="#BOOKMARK63">is</a> a <a href="#BOOKMARK41">factor</a> of 8</li>
-<li>8/5   -- skip, result <a href="#BOOKMARK63">is</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>8/6   -- skip, result <a href="#BOOKMARK63">is</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>8/7   -- skip, result <a href="#BOOKMARK63">is</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>8/8=1 -- 8 <a href="#BOOKMARK63">is</a> a <a href="#BOOKMARK41">factor</a> of 8</li>
+<li>32/1=32 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/2=16 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/3=10.666 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/4=8 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/5=6.4 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/6=5.333 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/7=4.571 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/8=4 -- 4 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/9=3.555 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/10=3.2 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/11=2.909 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/12=2.666 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/13=2.461 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/14=2.285 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/15=2.133 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/16=2 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/17=1.882 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/18=1.777 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/19=1.684 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/20=1.6 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/21=1.523 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/22=1.454 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/23=1.391 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/24=1.333 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/25=1.28 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/26=1.230 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/27=1.851 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/28=1.142 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/29=1.103 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/30=1.066 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/31=1.032 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/32=1 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
 </ul>
-<p>A trivial implementation of finding <a href="#BOOKMARK41">factor</a>s...</p>
-<pre><code>for (int i = 1; i &lt;= input; i++) {
-    if (input % i)
-}
-</code></pre>
-<p>Notice that the <a href="#BOOKMARK41">factor</a> pairs are mirrors of each other. 8*1 <a href="#BOOKMARK62">is the same as</a> 1*8.</p>
-<p>If the number were an integer, the <a href="#BOOKMARK41">factor</a>s would include negative numbers as well. For example, the <a href="#BOOKMARK41">factor</a>s of -8 are...</p>
+<p>TODO: Write single loop implementation</p>
+<p>The algorithm can be even further optimized by taking into account the fact that the <a href="#BOOKMARK41">factor</a>s repeat during calculation. For example, when calculating the <a href="#BOOKMARK41">factor</a>s of 32...</p>
 <ul>
-<li>8=8*-1 -- 8 and -1 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>8=4*-2 -- 4 and -2 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>8=2*-4 -- 2 and -4 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>8=1*-8 -- 1 and -8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=32*1 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=16*2 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=8*4 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s &lt;-- Last point before repeat</li>
+<li>32=4*8 -- 4 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=2*16 -- 2 and 16 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32=1*32 -- 1 and 32 are <a href="#BOOKMARK41">factor</a>s</li>
+</ul>
+<p>When the <a href="#BOOKMARK31">quotient</a> becomes <a href="#BOOKMARK20">less than</a> or equal to the <a href="#BOOKMARK33">divisor</a>, there's no point in continuing any further. Any <a href="#BOOKMARK41">factor</a>s calculated past that point will just be repeats.</p>
+<ul>
+<li>32/1=32 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/2=16 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/3=10.666 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/4=8 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/5=6.4 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
+<li>32/6=5.333 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a>  &lt;-- Any <a href="#BOOKMARK41">factor</a>s calculated past th<a href="#BOOKMARK63">is</a> point will just be repeats.</li>
+</ul>
+<p>TODO: Write optimized single loop implementation</p>
+<p>The reasoning for th<a href="#BOOKMARK63">is</a> has to do with 2 points...</p>
+<ol>
+<li>the commutative property of <a href="#BOOKMARK23">multiplication</a></li>
+<li><a href="#BOOKMARK41">factor</a>s must be <a href="#BOOKMARK2">whole number</a>s</li>
+</ol>
+<p>As the <a href="#BOOKMARK33">divisor</a> <a href="#BOOKMARK11">increase</a>s, the <a href="#BOOKMARK31">quotient</a> decreases. Once the <a href="#BOOKMARK31">quotient</a> <a href="#BOOKMARK63">is</a> <a href="#BOOKMARK20">less than</a> or equal to the <a href="#BOOKMARK33">divisor</a>, they're basically walking into domains the other <a href="#BOOKMARK65">was</a> just in...</p>
+<ul>
+<li>32*1 = 1*32 = 32 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s.</li>
+<li>16*2 = 2*16 = 32 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s.</li>
+<li>8*4 = 4*8 = 32 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s.</li>
+</ul>
+<p>TODO: draw diagram</p>
+<p>There are special cases.</p>
+<p>The first <a href="#BOOKMARK63">is</a> that all numbers are a <a href="#BOOKMARK41">factor</a> of 0 (e.g. 0*5=0, 0*9999=9)</p>
+<p>The second <a href="#BOOKMARK63">is</a> that if the number were an integer, the <a href="#BOOKMARK41">factor</a>s would include negative numbers as well. For example, the <a href="#BOOKMARK41">factor</a>s of -8 are...</p>
+<ul>
+<li>-8=8*-1 -- 8 and -1 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>-8=4*-2 -- 4 and -2 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>-8=2*-4 -- 2 and -4 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>-8=1*-8 -- 1 and -8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>-8=-1*8 -- -1 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>-8=-2*4 -- -2 and 4 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>-8=-4*2 -- -4 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>-8=-8*1 -- -8 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
 </ul>
 <p>... -8, -4, -2, -1, 1, 2, 4, 8.</p>
-<p>A number with only 2 <a href="#BOOKMARK41">factor</a>s <a href="#BOOKMARK63">is</a> called a <a name="BOOKMARK42"></a><strong>prime</strong> number. That <a href="#BOOKMARK63">is</a>, if a number <a href="#BOOKMARK63">is</a> only div<a href="#BOOKMARK63">is</a>ibly by 1 and it itself, it's a <a href="#BOOKMARK42">prime</a> number. Examples of <a href="#BOOKMARK42">prime</a> numbers: 2, 3, 5, 7, 11, 13, 17, and 19.</p>
-<p>A number with <a href="#BOOKMARK12">more than</a> 2 <a href="#BOOKMARK41">factor</a>s <a href="#BOOKMARK63">is</a> called a <a name="BOOKMARK43"></a><strong>composite</strong> number. Examples of <a href="#BOOKMARK43">composite</a> numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.</p>
+<a name="HEADREF15"></a><h1>Prime</h1>
+<p>A <a href="#BOOKMARK3">counting number</a> with only 2 <a href="#BOOKMARK41">factor</a>s <a href="#BOOKMARK63">is</a> called a <a name="BOOKMARK42"></a><strong>prime</strong> number. That <a href="#BOOKMARK63">is</a>, if a number <a href="#BOOKMARK63">is</a> only <a href="#BOOKMARK35">divisible</a> by 1 and it itself, it's a <a href="#BOOKMARK42">prime</a> number. Examples of <a href="#BOOKMARK42">prime</a> numbers: 2, 3, 5, 7, 11, 13, 17, and 19.</p>
+<p>A <a href="#BOOKMARK3">counting number</a> with <a href="#BOOKMARK12">more than</a> 2 <a href="#BOOKMARK41">factor</a>s <a href="#BOOKMARK63">is</a> called a <a name="BOOKMARK43"></a><strong>composite</strong> number. Examples of <a href="#BOOKMARK43">composite</a> numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.</p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
 <p>The number 1 <a href="#BOOKMARK63">is</a> neither a <a href="#BOOKMARK42">prime</a> number nor a <a href="#BOOKMARK43">composite</a> number. 1's only <a href="#BOOKMARK41">factor</a> <a href="#BOOKMARK63">is</a> itself: 1*1=1. <a href="#BOOKMARK42">Prime</a> numbers need 2 <a href="#BOOKMARK41">factor</a>s and <a href="#BOOKMARK43">composite</a> numbers need <a href="#BOOKMARK12">more than</a> 2 <a href="#BOOKMARK41">factor</a>s.</p>
 </div>
-<a name="HEADREF15"></a><h1>Algebra</h1>
+<a name="HEADREF16"></a><h1>Algebra</h1>
 <p><a name="BOOKMARK44"></a><strong>Algebra</strong> <a href="#BOOKMARK63">is</a> the study of mathematical operations and the rules for manipulating those operations.</p>
 <p>Common mathematical operations:</p>
 <ul>
@@ -2532,7 +2595,7 @@ https://en.wikiversity.org/wiki/Basic_Laws_of_<a href="#BOOKMARK44">Algebra</a>
 http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK44">algebra</a>Pre.htm (specifically 1, 6, and 7?)
 <a href="#BOOKMARK8">ADD</a> TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <p>TODO: write section about converting <a href="#BOOKMARK45">expression</a>s to phrases and vice versa</p>
-<a name="HEADREF16"></a><h2>Order of Operations</h2>
+<a name="HEADREF17"></a><h2>Order of Operations</h2>
 <p>The <a name="BOOKMARK57"></a><strong>order of operations</strong> are as follows:</p>
 <ol>
 <li>Brackets</li>
@@ -2546,7 +2609,7 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK44">algebra</a>Pre.htm (sp
 <li><a name="BOOKMARK59"></a><strong>PEMDAS</strong> - Parenthes<a href="#BOOKMARK63">is</a> / Exponents / <a href="#BOOKMARK23">Multiplication</a> and Div<a href="#BOOKMARK63">is</a>ion / <a href="#BOOKMARK7">Addition</a> and <a href="#BOOKMARK15">Subtraction</a> (can be remembered as Please Excuse My Dear Aunt Sally)</li>
 </ul>
 <p>Note that these 2 are essentially the same. Div<a href="#BOOKMARK63">is</a>ion and <a href="#BOOKMARK23">multiplication</a> are swapped, but since div<a href="#BOOKMARK63">is</a>ion and <a href="#BOOKMARK23">multiplication</a> are <a href="#BOOKMARK49">evaluate</a>d left-to-right in the same step, it makes no difference.</p>
-<a name="HEADREF17"></a><h2>Operation Rules</h2>
+<a name="HEADREF18"></a><h2>Operation Rules</h2>
 <p>TODO: talk about inverse of an operation, properties such as commutatitive, etc.. and make sure to properly bookmark them so they can be referenced from the neighbouring equality rules section below. move the stuff below into its relevant subsections</p>
 <p>Commutative Property</p>
 <ul>
@@ -2576,15 +2639,15 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK44">algebra</a>Pre.htm (sp
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>⋅</mo><mi>a</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
 </ul>
-<a name="HEADREF18"></a><h3>Addition</h3>
+<a name="HEADREF19"></a><h3>Addition</h3>
 <p>inverse of <a href="#BOOKMARK7">addition</a> <a href="#BOOKMARK63">is</a> <a href="#BOOKMARK15">subtraction</a></p>
-<a name="HEADREF19"></a><h3>Subtraction</h3>
+<a name="HEADREF20"></a><h3>Subtraction</h3>
 <p>inverse of <a href="#BOOKMARK15">subtraction</a> <a href="#BOOKMARK63">is</a> <a href="#BOOKMARK7">addition</a></p>
-<a name="HEADREF20"></a><h3>Multiplication</h3>
+<a name="HEADREF21"></a><h3>Multiplication</h3>
 <p>inverse of div<a href="#BOOKMARK63">is</a>ion</p>
-<a name="HEADREF21"></a><h3>Division</h3>
+<a name="HEADREF22"></a><h3>Division</h3>
 <p>inverse of <a href="#BOOKMARK23">multiplication</a></p>
-<a name="HEADREF22"></a><h2>Equality Rules</h2>
+<a name="HEADREF23"></a><h2>Equality Rules</h2>
 <p>TODO: talk about how you can subtract/<a href="#BOOKMARK8">add</a>/<a href="#BOOKMARK24">multiply</a>/divide anything so long as you do it to both sides... e.g. x=5 <a href="#BOOKMARK8">add</a> y to both sides to get x+y=5+y, x+y=5+y subtract y from both sides to get</p>
 <p>using a balancing scale might be a good way to represent th<a href="#BOOKMARK63">is</a> -- if it's already balanced, <a href="#BOOKMARK8">add</a>ing 5 apples to one side means you have to <a href="#BOOKMARK8">add</a> 5 apples to the other side to keep it balanced</p>
 <p>starts at section 2.3</p>
@@ -2603,8 +2666,8 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK44">algebra</a>Pre.htm (sp
 <li><a name="BOOKMARK66"></a><strong>will be</strong> -- e.g. x <a href="#BOOKMARK66">will be</a> 1</li>
 </ul>
 <p>some of the above are overkill and need to be pruned</p>
-<a name="HEADREF23"></a><h1>OpenStax Prealgebra Problems</h1>
-<a name="HEADREF24"></a><h2>Chapter 1 Section 1.1</h2>
+<a name="HEADREF24"></a><h1>OpenStax Prealgebra Problems</h1>
+<a name="HEADREF25"></a><h2>Chapter 1 Section 1.1</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.1)</p>
 <ul>
@@ -2851,7 +2914,7 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK44">algebra</a>Pre.htm (sp
 <p>58,123 -&gt; fifty eight thousand one hundred twenty three
 58,000 -&gt; fifty eight thousand</p>
 <p>Less words to speak while conveying approximately the same quantity.</p>
-<a name="HEADREF25"></a><h2>Chapter 1 Section 1.2</h2>
+<a name="HEADREF26"></a><h2>Chapter 1 Section 1.2</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.21) write out...</p>
 <ul>
@@ -3786,7 +3849,7 @@ b) 5+7=12</p>
 <p>1.1.138) 210+145+183+230+159+164=355+183+230+159+164=585+183+159+164=768+159+164=927+164=1091 -- yes, its below</p>
 <p>1.1.139) Very confident</p>
 <p>1.1.140) Will codify model as software and embed into notes.</p>
-<a name="HEADREF26"></a><h2>Chapter 1 Section 1.3</h2>
+<a name="HEADREF27"></a><h2>Chapter 1 Section 1.3</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.51)</p>
 <p>a) twelve <a href="#BOOKMARK16">minus</a> four
@@ -4189,7 +4252,7 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 <p>1.3.222) 75+50+70+80=275 350-275=75</p>
 <p>1.3.223) one <a href="#BOOKMARK63">is</a> the opposite of the other</p>
 <p>1.3.224) verification</p>
-<a name="HEADREF27"></a><h2>Chapter 1 Section 1.4</h2>
+<a name="HEADREF28"></a><h2>Chapter 1 Section 1.4</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.77)</p>
 <ul>
@@ -5165,7 +5228,7 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 <p>1.2.340) 200 * 24 = 4800</p>
 <p>1.2.341) yes</p>
 <p>1.2.342) verification</p>
-<a name="HEADREF28"></a><h2>Chapter 1 Section 1.5</h2>
+<a name="HEADREF29"></a><h2>Chapter 1 Section 1.5</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.111)</p>
 <ul>
@@ -5504,7 +5567,7 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mn>026</mn><mi>R</mi><mn>1</mn></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>14</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>365</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>28</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>085</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>084</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>14</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>001</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l}\phantom{{{14}\smash{)}}}{{026R1}} \\{{14}}\overline{\smash{)}{365}} \\\phantom{{{14}\smash{)}}}{28} \\\phantom{{{14}\smash{)}}}{085} \\\phantom{{{14}\smash{)}}}{084} \\\phantom{{{14}\smash{)}}}{001} \\\end{array}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:7.20444em;vertical-align:-3.35222em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.8522200000000004em;"><span style="top:-6.01222em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord">0</span><span class="mord">2</span><span class="mord">6</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">1</span></span></span></span></span><span style="top:-4.80778em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord">1</span><span class="mord">4</span></span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord"><span class="mord">3</span><span class="mord">6</span><span class="mord">5</span></span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-3.6077800000000004em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">2</span><span class="mord">8</span></span></span></span><span style="top:-2.4077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">8</span><span class="mord">5</span></span></span></span><span style="top:-1.2077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">8</span><span class="mord">4</span></span></span></span><span style="top:-0.007780000000000065em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">1</span><span class="mord" style="color:transparent;">4</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35222em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
 <p>1.5.452)</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mn>014</mn><mi>R</mi><mn>15</mn></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>25</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>365</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>25</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>115</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>100</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>25</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>015</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l}\phantom{{{25}\smash{)}}}{{014R15}} \\{{25}}\overline{\smash{)}{365}} \\\phantom{{{25}\smash{)}}}{25} \\\phantom{{{25}\smash{)}}}{115} \\\phantom{{{25}\smash{)}}}{100} \\\phantom{{{25}\smash{)}}}{015} \\\end{array}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:7.20444em;vertical-align:-3.35222em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.8522200000000004em;"><span style="top:-6.01222em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord">0</span><span class="mord">1</span><span class="mord">4</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">1</span><span class="mord">5</span></span></span></span></span><span style="top:-4.80778em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord">2</span><span class="mord">5</span></span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord"><span class="mord">3</span><span class="mord">6</span><span class="mord">5</span></span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-3.6077800000000004em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">2</span><span class="mord">5</span></span></span></span><span style="top:-2.4077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">1</span><span class="mord">1</span><span class="mord">5</span></span></span></span><span style="top:-1.2077800000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span></span></span></span><span style="top:-0.007780000000000065em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">2</span><span class="mord" style="color:transparent;">5</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">0</span><span class="mord">1</span><span class="mord">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35222em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
-<a name="HEADREF29"></a><h2>Chapter 2 Section 2.1</h2>
+<a name="HEADREF30"></a><h2>Chapter 2 Section 2.1</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.1)</p>
 <ul>
@@ -5685,7 +5748,7 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 </ul>
 <p>2.1.67) <a href="#BOOKMARK45">expression</a> <a href="#BOOKMARK63">is</a> a hierarchy of math operations, evaluation <a href="#BOOKMARK63">is</a> the relationship between 2 <a href="#BOOKMARK45">expression</a>s</p>
 <p>2.1.68) it's so <a href="#BOOKMARK48">simplify</a>ing an <a href="#BOOKMARK45">expression</a> always results in the same answer</p>
-<a name="HEADREF30"></a><h2>Chapter 2 Section 2.2</h2>
+<a name="HEADREF31"></a><h2>Chapter 2 Section 2.2</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.25) y+4</p>
 <ul>
@@ -5856,7 +5919,7 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 <p>2.2.144) pam and armando pay 2500, insurance pays 19400-2500</p>
 <p>2.2.145) <a href="#BOOKMARK7">addition</a> has commutative property, <a href="#BOOKMARK15">subtraction</a> doesn't</p>
 <p>2.2.146) the operators in each <a href="#BOOKMARK45">expression</a> are different -- 4(x+y) vs 4x+y</p>
-<a name="HEADREF31"></a><h2>Chapter 2 Section 2.3</h2>
+<a name="HEADREF32"></a><h2>Chapter 2 Section 2.3</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.55)</p>
 <ul>
@@ -6228,7 +6291,7 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 <p>no -- 2*1 != 18</p>
 <p>2.3.214)</p>
 <p>the <a href="#BOOKMARK17">difference of</a> y and 5 <a href="#BOOKMARK63">is</a> 21 -- NAME had paid 21 dollars in <a href="#BOOKMARK13">total</a> for <a href="#BOOKMARK27">PRODUCT</a> after receiving a 5 dollar d<a href="#BOOKMARK63">is</a>count. What <a href="#BOOKMARK65">was</a> the original price of <a href="#BOOKMARK27">PRODUCT</a>?</p>
-<a name="HEADREF32"></a><h2>Chapter 2 Section 2.4</h2>
+<a name="HEADREF33"></a><h2>Chapter 2 Section 2.4</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.79)</p>
 <ul>
@@ -6969,6 +7032,9 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 <p>A <a href="#BOOKMARK42">prime</a> number has 2 <a href="#BOOKMARK41">factor</a>s -- 1 and itself</p>
 <p>A <a href="#BOOKMARK43">composite</a> number as <a href="#BOOKMARK12">more than</a> 2 <a href="#BOOKMARK41">factor</a>s -- 1, itself, and others</p>
 <p>1 <a href="#BOOKMARK63">is</a> neither a <a href="#BOOKMARK42">prime</a> nor a <a href="#BOOKMARK43">composite</a> since it only has 1 <a href="#BOOKMARK41">factor</a>: itself.</p>
+<a name="HEADREF34"></a><h2>Chapter 2 Section 2.5</h2>
+<p><strong>TRY IT</strong></p>
+<p>2.95)</p>
 <p>START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
