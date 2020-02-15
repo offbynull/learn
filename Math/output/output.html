@@ -2359,7 +2359,15 @@ the number of dots is the same
 </li>
 </ul>
 <a name="HEADREF14"></a><h1>Factor</h1>
-<p>The <a name="BOOKMARK41"></a><strong>factor</strong>s of a number are any integers numbers that when <a href="#BOOKMARK25">multiplied</a> together result in that number. In other words, in <code>m=a*b</code>, a and b are <a href="#BOOKMARK41">factor</a>s of m. For example, the <a href="#BOOKMARK41">factor</a>s of 32 are...</p>
+<p>Given any integer number, the <a name="BOOKMARK41"></a><strong>factor</strong>s of that number are any integers that <a href="#BOOKMARK24">multiply</a> together to result in that number. In other words, ...</p>
+<pre class="hljs"><code><span class="hljs-keyword">int</span> myNumber = ...;
+<span class="hljs-keyword">int</span> factor1 = ...;
+<span class="hljs-keyword">int</span> factor2 = ...;
+<span class="hljs-keyword">if</span> (factor1 * factor2 == myNumber) {
+    System.out.println(factor1 + <span class="hljs-string">" and "</span> + factor2 + <span class="hljs-string">" are factors of "</span> + myNumber);
+} 
+</code></pre>
+<p>For example, the <a href="#BOOKMARK41">factor</a>s of 32 are...</p>
 <ul>
 <li>32=32*1 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
 <li>32=16*2 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
@@ -2369,78 +2377,80 @@ the number of dots is the same
 <li>32=1*32 -- 1 and 32 are <a href="#BOOKMARK41">factor</a>s</li>
 </ul>
 <p>... 1, 2, 4, 8, 16, and 32.</p>
-<p>The algorithm for finding the <a href="#BOOKMARK41">factor</a>s of a number <a href="#BOOKMARK63">is</a> as follows...</p>
-<p>TODO: Write trivial nested loop implementation</p>
-<p>The algorithm can be optimized by testing for div<a href="#BOOKMARK63">is</a>ibility rather than exhaustively testing <a href="#BOOKMARK23">multiplication</a>. For example, the <a href="#BOOKMARK41">factor</a>s of 32 are...</p>
+<p>The <a href="#BOOKMARK41">factor</a>s for any number will always be between 1 and that number (inclusive). A naive algorithm for finding the <a href="#BOOKMARK41">factor</a>s of any number would be to have a nested loop exhaustively check integers to see which are <a href="#BOOKMARK41">factor</a>s...</p>
+<pre class="hljs"><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor1 = <span class="hljs-number">1</span>; factor1 &lt;= testNum; factor1++) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor2 = <span class="hljs-number">1</span>; factor2 &lt;= testNum; factor2++) {
+        <span class="hljs-keyword">if</span> (factor1 * factor2 == testNum) {
+            writer.append(<span class="hljs-string">" * "</span> + factor1 + <span class="hljs-string">" and "</span> + factor2 + <span class="hljs-string">" are factors of "</span> + testNum + <span class="hljs-string">"\n"</span>);
+        }                 
+    }
+}</code></pre><div style="border:1px solid black;">
+<p></p>
 <ul>
-<li>32/1=32 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/2=16 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/3=10.666 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/4=8 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/5=6.4 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/6=5.333 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/7=4.571 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/8=4 -- 4 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/9=3.555 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/10=3.2 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/11=2.909 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/12=2.666 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/13=2.461 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/14=2.285 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/15=2.133 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/16=2 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/17=1.882 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/18=1.777 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/19=1.684 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/20=1.6 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/21=1.523 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/22=1.454 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/23=1.391 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/24=1.333 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/25=1.28 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/26=1.230 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/27=1.851 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/28=1.142 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/29=1.103 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/30=1.066 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/31=1.032 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/32=1 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>1 and 32 are factors of 32</li>
+<li>2 and 16 are factors of 32</li>
+<li>4 and 8 are factors of 32</li>
+<li>8 and 4 are factors of 32</li>
+<li>16 and 2 are factors of 32</li>
+<li>32 and 1 are factors of 32
+</li>
 </ul>
-<p>TODO: Write single loop implementation</p>
-<p>The algorithm can be even further optimized by taking into account the fact that the <a href="#BOOKMARK41">factor</a>s repeat during calculation. For example, when calculating the <a href="#BOOKMARK41">factor</a>s of 32...</p>
+</div>
+<p>We can take advantage of the fact that div<a href="#BOOKMARK63">is</a>ion <a href="#BOOKMARK63">is</a> the inverse of <a href="#BOOKMARK23">multiplication</a> to optimize the algorithm above. The code below loops over each possible <a href="#BOOKMARK41">factor</a> once, using it to calculate what the other <a href="#BOOKMARK41">factor</a> would be and then checking it to make sure it's valid...</p>
+<pre class="hljs"><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor1 = <span class="hljs-number">1</span>; factor1 &lt;= testNum; factor1++) {
+    <span class="hljs-keyword">int</span> factor2 = testNum / factor1;
+    <span class="hljs-keyword">boolean</span> divHadRemainder = testNum % factor1 &gt; <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (!divHadRemainder) {
+        writer.append(<span class="hljs-string">" * "</span> + factor1 + <span class="hljs-string">" and "</span> + factor2 + <span class="hljs-string">" are factors of "</span> + testNum + <span class="hljs-string">"\n"</span>);
+    }
+}</code></pre><div style="border:1px solid black;">
+<p></p>
 <ul>
-<li>32=32*1 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32=16*2 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32=8*4 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s &lt;-- Last point before repeat</li>
-<li>32=4*8 -- 4 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32=2*16 -- 2 and 16 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32=1*32 -- 1 and 32 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>1 and 32 are factors of 32</li>
+<li>2 and 16 are factors of 32</li>
+<li>4 and 8 are factors of 32</li>
+<li>8 and 4 are factors of 32</li>
+<li>16 and 2 are factors of 32</li>
+<li>32 and 1 are factors of 32
+</li>
 </ul>
-<p>When the <a href="#BOOKMARK31">quotient</a> becomes <a href="#BOOKMARK20">less than</a> or equal to the <a href="#BOOKMARK33">divisor</a>, there's no point in continuing any further. Any <a href="#BOOKMARK41">factor</a>s calculated past that point will just be repeats.</p>
+</div>
+<p>The optimized algorithm above can be even further optimized by making it skip over calculations that give back repeat <a href="#BOOKMARK41">factor</a>s. As <code>factor1</code> <a href="#BOOKMARK11">increase</a>s, <code>factor2</code> decreases. Once <code>factor1 =&gt; factor2</code>, each <a href="#BOOKMARK63">is</a> basically walking into domains the other <a href="#BOOKMARK65">was</a> just in. There's no point in continuing any further because the <a href="#BOOKMARK41">factor</a>s calculated past that point will just be duplicates of those prior. For example, when calculating the <a href="#BOOKMARK41">factor</a>s of 32...</p>
 <ul>
-<li>32/1=32 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/2=16 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/3=10.666 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/4=8 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s</li>
-<li>32/5=6.4 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a></li>
-<li>32/6=5.333 -- <a href="#BOOKMARK27">product</a> not a <a href="#BOOKMARK3">counting number</a>  &lt;-- Any <a href="#BOOKMARK41">factor</a>s calculated past th<a href="#BOOKMARK63">is</a> point will just be repeats.</li>
+<li>32/1=32 -- 1 and 32 are <a href="#BOOKMARK41">factor</a>s</li>
+<li>32/2=16 -- 2 and 16 are <a href="#BOOKMARK41">factor</a>s</li>
+<li><s>32/3=10.666</s></li>
+<li>32/4=8 -- 4 and 8 are <a href="#BOOKMARK41">factor</a>s</li>
+<li><s>32/5=6.4</s></li>
+<li><s>32/6=5.333</s> &lt;-- Stop here because 6 &gt;= 5.333</li>
 </ul>
-<p>TODO: Write optimized single loop implementation</p>
-<p>The reasoning for th<a href="#BOOKMARK63">is</a> has to do with 2 points...</p>
-<ol>
-<li>the commutative property of <a href="#BOOKMARK23">multiplication</a></li>
-<li><a href="#BOOKMARK41">factor</a>s must be <a href="#BOOKMARK2">whole number</a>s</li>
-</ol>
-<p>As the <a href="#BOOKMARK33">divisor</a> <a href="#BOOKMARK11">increase</a>s, the <a href="#BOOKMARK31">quotient</a> decreases. Once the <a href="#BOOKMARK31">quotient</a> <a href="#BOOKMARK63">is</a> <a href="#BOOKMARK20">less than</a> or equal to the <a href="#BOOKMARK33">divisor</a>, they're basically walking into domains the other <a href="#BOOKMARK65">was</a> just in...</p>
+<p>Any <a href="#BOOKMARK41">factor</a>s calculated past <code>factor1 =&gt; factor2</code> <a href="#BOOKMARK66">will be</a> duplicates of <a href="#BOOKMARK41">factor</a>s that were already walked over...</p>
 <ul>
 <li>32*1 = 1*32 = 32 -- 32 and 1 are <a href="#BOOKMARK41">factor</a>s.</li>
 <li>16*2 = 2*16 = 32 -- 16 and 2 are <a href="#BOOKMARK41">factor</a>s.</li>
 <li>8*4 = 4*8 = 32 -- 8 and 4 are <a href="#BOOKMARK41">factor</a>s.</li>
 </ul>
-<p>TODO: draw diagram</p>
-<p>There are special cases.</p>
-<p>The first <a href="#BOOKMARK63">is</a> that all numbers are a <a href="#BOOKMARK41">factor</a> of 0 (e.g. 0*5=0, 0*9999=9)</p>
-<p>The second <a href="#BOOKMARK63">is</a> that if the number were an integer, the <a href="#BOOKMARK41">factor</a>s would include negative numbers as well. For example, the <a href="#BOOKMARK41">factor</a>s of -8 are...</p>
+<pre class="hljs"><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor1 = <span class="hljs-number">1</span>; factor1 &lt;= testNum; factor1++) {
+    <span class="hljs-keyword">int</span> factor2 = testNum / factor1;
+    <span class="hljs-keyword">boolean</span> divHadRemainder = testNum % factor1 &gt; <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (!divHadRemainder) {
+        writer.append(<span class="hljs-string">" * "</span> + factor1 + <span class="hljs-string">" and "</span> + factor2 + <span class="hljs-string">" are factors of "</span> + testNum + <span class="hljs-string">"\n"</span>);
+    }
+    <span class="hljs-keyword">if</span> (factor2 &lt;= factor1) {
+        <span class="hljs-keyword">break</span>;
+    }
+}</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>1 and 32 are factors of 32</li>
+<li>2 and 16 are factors of 32</li>
+<li>4 and 8 are factors of 32
+</li>
+</ul>
+</div>
+<p>There are 2 special cases when dealing with <a href="#BOOKMARK41">factor</a>s...</p>
+<p>The first <a href="#BOOKMARK63">is</a> that all numbers are a <a href="#BOOKMARK41">factor</a> of 0 (e.g. 0*5=0, 0*9999=0).</p>
+<p>The second <a href="#BOOKMARK63">is</a> that if the number were a negative integer, the <a href="#BOOKMARK41">factor</a>s would include negative numbers as well. For example, the <a href="#BOOKMARK41">factor</a>s of -8 are...</p>
 <ul>
 <li>-8=8*-1 -- 8 and -1 are <a href="#BOOKMARK41">factor</a>s</li>
 <li>-8=4*-2 -- 4 and -2 are <a href="#BOOKMARK41">factor</a>s</li>

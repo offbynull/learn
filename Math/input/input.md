@@ -1859,7 +1859,18 @@ Divisible and multiple refer to the same idea. Saying that 275 is a multiple of 
 
 # Factor
 
-The `{bm} factor`s of a number are any integers numbers that when multiplied together result in that number. In other words, in `m=a*b`, a and b are factors of m. For example, the factors of 32 are...
+Given any integer number, the `{bm} factor`s of that number are any integers that multiply together to result in that number. In other words, ...
+
+```java
+int myNumber = ...;
+int factor1 = ...;
+int factor2 = ...;
+if (factor1 * factor2 == myNumber) {
+    System.out.println(factor1 + " and " + factor2 + " are factors of " + myNumber);
+} 
+```
+
+For example, the factors of 32 are...
 
 * 32=32\*1 -- 32 and 1 are factors
 * 32=16\*2 -- 16 and 2 are factors
@@ -1870,84 +1881,78 @@ The `{bm} factor`s of a number are any integers numbers that when multiplied tog
 
 ... 1, 2, 4, 8, 16, and 32.
 
-The algorithm for finding the factors of a number is as follows...
+The factors for any number will always be between 1 and that number (inclusive). A naive algorithm for finding the factors of any number would be to have a nested loop exhaustively check integers to see which are factors...
 
-TODO: Write trivial nested loop implementation
+```{output}
+factor_code/src/main/java/com/offbynull/factor/FactorNaive.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
 
-The algorithm can be optimized by testing for divisibility rather than exhaustively testing multiplication. For example, the factors of 32 are...
+```{define-block}
+factornaive
+factornaive_macro/
+factor_code/target/appassembler/
+```
 
-* 32/1=32 -- 32 and 1 are factors
-* 32/2=16 -- 16 and 2 are factors
-* 32/3=10.666 -- product not a counting number
-* 32/4=8 -- 8 and 4 are factors
-* 32/5=6.4 -- product not a counting number
-* 32/6=5.333 -- product not a counting number
-* 32/7=4.571 -- product not a counting number
-* 32/8=4 -- 4 and 8 are factors
-* 32/9=3.555 -- product not a counting number
-* 32/10=3.2 -- product not a counting number
-* 32/11=2.909 -- product not a counting number
-* 32/12=2.666 -- product not a counting number
-* 32/13=2.461 -- product not a counting number
-* 32/14=2.285 -- product not a counting number
-* 32/15=2.133 -- product not a counting number
-* 32/16=2 -- 16 and 2 are factors
-* 32/17=1.882 -- product not a counting number
-* 32/18=1.777 -- product not a counting number
-* 32/19=1.684 -- product not a counting number
-* 32/20=1.6 -- product not a counting number
-* 32/21=1.523 -- product not a counting number
-* 32/22=1.454 -- product not a counting number
-* 32/23=1.391 -- product not a counting number
-* 32/24=1.333 -- product not a counting number
-* 32/25=1.28 -- product not a counting number
-* 32/26=1.230 -- product not a counting number
-* 32/27=1.851 -- product not a counting number
-* 32/28=1.142 -- product not a counting number
-* 32/29=1.103 -- product not a counting number
-* 32/30=1.066 -- product not a counting number
-* 32/31=1.032 -- product not a counting number
-* 32/32=1 -- 32 and 1 are factors
+```{factornaive}
+32
+```
 
-TODO: Write single loop implementation
+We can take advantage of the fact that division is the inverse of multiplication to optimize the algorithm above. The code below loops over each possible factor once, using it to calculate what the other factor would be and then checking it to make sure it's valid...
 
-The algorithm can be even further optimized by taking into account the fact that the factors repeat during calculation. For example, when calculating the factors of 32...
+```{output}
+factor_code/src/main/java/com/offbynull/factor/FactorFast.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
 
-* 32=32\*1 -- 32 and 1 are factors
-* 32=16\*2 -- 16 and 2 are factors
-* 32=8\*4 -- 8 and 4 are factors <-- Last point before repeat
-* 32=4\*8 -- 4 and 8 are factors
-* 32=2\*16 -- 2 and 16 are factors
-* 32=1\*32 -- 1 and 32 are factors
+```{define-block}
+factorfast
+factorfast_macro/
+factor_code/target/appassembler/
+```
 
-When the quotient becomes less than or equal to the divisor, there's no point in continuing any further. Any factors calculated past that point will just be repeats.
+```{factorfast}
+32
+```
 
-* 32/1=32 -- 32 and 1 are factors
-* 32/2=16 -- 16 and 2 are factors
-* 32/3=10.666 -- product not a counting number
-* 32/4=8 -- 8 and 4 are factors
-* 32/5=6.4 -- product not a counting number
-* 32/6=5.333 -- product not a counting number  <-- Any factors calculated past this point will just be repeats.
+The optimized algorithm above can be even further optimized by making it skip over calculations that give back repeat factors. As `factor1` increases, `factor2` decreases. Once `factor1 => factor2`, each is basically walking into domains the other was just in. There's no point in continuing any further because the factors calculated past that point will just be duplicates of those prior. For example, when calculating the factors of 32...
 
-TODO: Write optimized single loop implementation
+* 32/1=32 -- 1 and 32 are factors
+* 32/2=16 -- 2 and 16 are factors
+* ~~32/3=10.666~~
+* 32/4=8 -- 4 and 8 are factors
+* ~~32/5=6.4~~
+* ~~32/6=5.333~~ <-- Stop here because 6 >= 5.333
 
-The reasoning for this has to do with 2 points...
-1. the commutative property of multiplication
-2. factors must be whole numbers
-
-As the divisor increases, the quotient decreases. Once the quotient is less than or equal to the divisor, they're basically walking into domains the other was just in...
+Any factors calculated past `factor1 => factor2` will be duplicates of factors that were already walked over... 
 
 * 32\*1 = 1\*32 = 32 -- 32 and 1 are factors.
 * 16\*2 = 2\*16 = 32 -- 16 and 2 are factors.
 * 8\*4 = 4\*8 = 32 -- 8 and 4 are factors.
 
-TODO: draw diagram
+```{output}
+factor_code/src/main/java/com/offbynull/factor/FactorFastest.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
 
-There are special cases.
+```{define-block}
+factorfastest
+factorfastest_macro/
+factor_code/target/appassembler/
+```
 
-The first is that all numbers are a factor of 0 (e.g. 0\*5=0, 0\*9999=9)
+```{factorfastest}
+32
+```
 
-The second is that if the number were an integer, the factors would include negative numbers as well. For example, the factors of -8 are...
+There are 2 special cases when dealing with factors...
+
+The first is that all numbers are a factor of 0 (e.g. 0\*5=0, 0\*9999=0).
+
+The second is that if the number were a negative integer, the factors would include negative numbers as well. For example, the factors of -8 are...
 
 * -8=8\*-1 -- 8 and -1 are factors
 * -8=4\*-2 -- 4 and -2 are factors
