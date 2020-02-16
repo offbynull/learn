@@ -60,18 +60,17 @@ public final class MainFractionDraw {
                 g.setStroke(new BasicStroke(0.2f));
 
                 
-                double widthOffset = 0;
                 double degreeOffset = 90;
                 double degreesPerSlice = 360.0 / denominator;
-                while (numerator > 0) {
-                    int consumed = Math.min(numerator, denominator);
-                    numerator -= consumed;
-                    
-                    g.translate(widthOffset, 0);
-                    drawSlices(g, radius, radius, consumed, denominator, degreesPerSlice, degreeOffset);
-                    g.translate(-widthOffset, 0);
-                    
-                    widthOffset += radius + 1;
+                if (numerator == 0) {
+                        drawSlices(g, radius, radius, 0, denominator, degreesPerSlice, degreeOffset);
+                } else {
+                    while (numerator > 0) {
+                        int consumed = Math.min(numerator, denominator);
+                        numerator -= consumed;
+
+                        drawSlices(g, radius, radius, consumed, denominator, degreesPerSlice, degreeOffset);
+                    }
                 }
 
                 String outputFileName = MainNumberLineDraw.class.getSimpleName()

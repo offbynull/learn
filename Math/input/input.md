@@ -486,9 +486,9 @@ When using words, addition is typically represented using the following syntax:
 * `{bm} more than` -- e.g. 3 more than 5
 * `{bm} total` -- e.g. total of 3 and 5
 
-Common properties of addition:
+Properties of addition:
 
- * commutative: order in which 2 numbers are added doesn't matter
+ * Order in which 2 numbers are added doesn't matter (commutative).
    
    ```
     [●●●]    [●●●●●] results in [●●●●●●●●]    (3+5 is 7)
@@ -498,7 +498,7 @@ Common properties of addition:
       5         3                    7
    ```
 
- * identity: any number plus 0 results in the same number
+ * Any number plus 0 results in the same number (identity).
 
    ```
    [●●●]    [] results in [●●●]    (3+0 is 3)
@@ -759,9 +759,9 @@ When using words, subtraction is typically represented using the following synta
 * `{bm} less than` -- e.g. 5 less than 3
 * `{bm} subtracted from` -- e.g. 3 subtracted from 5
 
-Common properties of subtraction:
+Properties of subtraction:
 
- * identity: any number subtracted by 0 results in the same number
+ * Any number subtracted by 0 results in the same number (identity).
 
    ```
    [●●●]    [] results in [●●●]    (3+0 is 3)
@@ -1134,7 +1134,7 @@ wholenum_code/target/appassembler/
 
 # Whole Number Multiplication
 
-`{bm} Multiplication` is the concept of taking a number and iteratively adding it to itself a certain number of times. For example, 3 added to itself 5 times results is 15 items...
+`{bm} Multiplication` is the concept of taking a number and iteratively adding it to itself a certain number of iterations. For example, 3 added to itself for 5 iterations results in 15 items...
 
 ```
 3+3+3+3+3=15
@@ -1155,6 +1155,12 @@ Multiplication is typically represented using the infix operator \*. The above e
 Do not use x or a cross as a symbol for multiplication. It causes confusion for algebra expressions.
 ```
 
+The output of a multiplication operation is called the `{bm} product`. In the example above, 15 is the product.
+
+The inputs into the multiplication operation are either...
+* called factors -- in the example above, 3 and 5 are the factors,
+* or the first input is called the `{bm} multiplier` and the second input is called the `{bm} multiplicand` -- in the example above, 3 is the multiplier and 5 is the multiplicand.
+
 ```{note}
 You can think of this as a function that takes in 2 arguments: mult(3, 5).
 ```
@@ -1164,7 +1170,7 @@ When using words, multiplication is typically represented using the following sy
 * `{bm} multiply` -- e.g. multiply 3 and 5
 * `{bm} multiplied` -- e.g. 3 multiplied by 5
 * `{bm} times` -- e.g. 3 times 5
-* `{bm} product` -- e.g. the product of 3 and 5
+* `{bm} product of` -- e.g. the product of 3 and 5
 
 ```{note}
 There are certain special words that denote multiplication. For example, the word `{bm} twice` means 2 multiplied by something else -- e.g. twice 5 is the same thing as 2*5.
@@ -1172,9 +1178,9 @@ There are certain special words that denote multiplication. For example, the wor
 Much less common is the word `{bm} thrice` -- it means 3 times something else. The pattern here seems to be the add "ice" to the end of the number? Unsure, but Google seems to give a definition for fourice.
 ```
 
-Common properties of multiplication:
+Properties of multiplication:
 
- * commutative: order in which 2 numbers are multiplied doesn't matter
+ * Order in which 2 numbers are multiplied doesn't matter (commutative).
    
    ```
     3*5       vs     5*3
@@ -1190,7 +1196,20 @@ Common properties of multiplication:
    the number of dots is the same
    ```
 
- * identity: any number multiplied by 1 results in the same number
+ * Any number multiplied by 0 is 0.
+
+   This makes sense if you think of multiplication as iterative addition...
+
+   ```{javascript}
+   var product = 0;
+   for (var i = 0; i < multiplicand; i++) {
+       product += multiplier;
+   }
+   ```
+
+   If you iterate 0 times, the product will be 0.
+
+ * Any number multiplied by 1 results in that same number (identity).
 
    ```
    3*3=3+3+3
@@ -1200,7 +1219,7 @@ Common properties of multiplication:
 
 The algorithm used by humans to multiply large numbers together is called `{bm} vertical multiplication`. Vertical multiplication relies on three ideas...
 
-1. humans have the ability to multiply a single digit number to another single digit number through memorization. For example...
+1. Humans have the ability to multiply a single digit number to another single digit number through memorization. For example...
 
    * 3\*4 is 12 (3+3+3+3)
    * 1\*9 is 9  (9)
@@ -1221,7 +1240,7 @@ The algorithm used by humans to multiply large numbers together is called `{bm} 
    | 8  | 0  | 8  | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
    | 9  | 0  | 9  | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
 
-2. The second idea is that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+2. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
 
    ```
    100
@@ -1261,7 +1280,7 @@ The algorithm used by humans to multiply large numbers together is called `{bm} 
           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
    ```
 
-3. The third idea is that if two numbers start with a single non-zero digit is followed by zero or more 0s, the result of their multiplication is equivalent to multiplying the single non-zero digits together and appending the 0s to the end. For example, ..
+3. If two numbers start with a single non-zero digit is followed by zero or more 0s, the result of their multiplication is equivalent to multiplying the single non-zero digits together and appending the 0s to the end. For example, ..
 
    * 30 \* 2 is 60 -- 3 ends in 1 zero and 2 ends in no zeros, so the result has 1 zero
 
@@ -1580,36 +1599,226 @@ wholenum_code/target/appassembler/
 77 87
 ```
 
-# Division
+# Whole Number Division
 
-`{bm} quotient` is the result of division.
+`{bm} Division` is the concept of taking a number and iteratively subtracting it by another number to find out how many iterations it can be subtracted. For example, 15 can be subtracted by 3 exactly 5 iterations before nothing's left...
 
-`{bm} dividend` is the number being divided.
+```
+ [●●●●●●●●●●●●●●●] start with 15
 
-`{bm} divisor` is the number being divided by.
+ [●●●●●●●●●●●●] 15-3 is 12 (iteration 1)
+ [●●●●●●●●●] 12-3 is 9 (iteration 2)
+ [●●●●●●] 9-3 is 6 (iteration 3)
+ [●●●] 6-3 is 3 (iteration 4)
+ [] 3-3 is 0 (iteration 5)
+```
 
-`{kt} dividend \div divisor = quotient`
+Another way of thinking about division is that it's chopping up a number. Imagine cutting up a pie into 15 pieces and eating 3 pieces at a time. The pie will be done after you've eaten 5 times.
 
-`{kt} dividend / divisor = quotient`
 
-`{kt} \frac{dividend}{divisor} = quotient`
+```{diagramhelperfrac}
+radius 40
+12
+15
+```
 
-`{kt}
-\begin{array}{l}
-\phantom{
-  {divisor\smash{)}}
-}{
-  quotient
-} \\
-{divisor}\overline{\smash{)}dividend} \\
-\end{array}
-`
+```{diagramhelperfrac}
+radius 40
+9
+15
+```
 
-Why is division by 0 not possible (undefined)?
+```{diagramhelperfrac}
+radius 40
+6
+15
+```
 
-If you think of division as iterative subtraction, how many times can you remove 0 from a number until it's less than 0? e.g. 24/0. You'll keep subtracting 0s forever (infinity).
+```{diagramhelperfrac}
+radius 40
+3
+15
+```
 
-If you think of division as the inverse of multiplication... if 10/0=x, then x*0=10 -- but any number multiplied by 0 will still equal zero.
+```{diagramhelperfrac}
+radius 40
+0
+15
+```
+
+In certain cases, division may result in some remaining value that isn't large enough for another subtraction iteration to take place. This remaining value is called the `{bm} remainder` For example, 16 can be subtracted by 3 for 5 iterations but will have a remainder of 1...
+
+```
+ [●●●●●●●●●●●●●●●●] start with 16
+
+ [●●●●●●●●●●●●●] 16-3 is 13 (iteration 1)
+ [●●●●●●●●●●] 13-3 is 10 (iteration 2)
+ [●●●●●●●] 10-3 is 7 (iteration 3)
+ [●●●●] 7-3 is 4 (iteration 4)
+ [●] 4-3 is 1 (iteration 5)
+
+ only 1 item left -- not enough for another subtraction iteration
+ 
+ 1 is the remainder
+```
+
+```{note}
+If a division operation results in no remainder, it's said to be divisible.
+```
+
+Division is typically represented using the infix operator / or ÷. The above example would be represented as 15/3 or 15÷3. It may also be written as `{kt} \frac{15}{3}`, which is just a fancier way of writing 15/3.
+
+The output of a division operation is called the `{bm} quotient`. In the example above, the quotient is 5 (it subtracts 5 times).
+
+The inputs into the division operation are called the `{bm} dividend` and `{bm} divisor`. In the example above, 15 is the dividend and 3 is the divisor.
+
+* `{kt} dividend \div divisor = quotient`
+* `{kt} dividend / divisor = quotient`
+* `{kt} \frac{dividend}{divisor} = quotient`
+
+```{note}
+One way to think of this is that the dividend (the number on the left / top) is the starting value, and the divisor is the number being iteratively subtracted.
+
+The quotient is the number of times you can subtract.
+```
+
+When using words, division is typically represented using the following syntax:
+
+* `{bm} divided by/(divided by|divide by)/i` -- e.g. 3 divided by 15
+* `{bm} divided into` -- e.g. 15 divided into 3
+* `{bm} quotient of` -- e.g. the quotient of 3 and 15
+
+```{note}
+There are certain special words that denote division. For example, the word ...
+* `{bm} half` means something divided by 2 -- e.g. half of 10 is the same as 10/2.
+* `{bm} quarter` means something divided by 4 -- e.g. a quarter of 10 is the same 10/4.
+```
+
+Properties of division:
+
+ * Any number divided by 1 results in the same number (identity).
+
+   ```
+   [●●●●●] start with 5
+  
+   [●●●●] 5-1 is 4 (iteration 1)
+   [●●●] 4-1 is 3 (iteration 2)
+   [●●] 3-1 is 2 (iteration 3)
+   [●] 2-1 is 1 (iteration 4)
+   [] 1-1 is 0 (iteration 5)
+  
+   5 iterations total
+   ```
+
+ * Any number divided by itself is 1.
+
+   ```
+   [●●●●●] start with 5
+  
+   [] 5-5 is 0 (iteration 1)
+  
+   1 iteration total
+   ```
+
+ * Any number dividided by 0 is infinity.
+
+   This makes sense if you think of division as iterative subtraction...
+
+   ```{javascript}
+   var quotient = 0;
+   while (dividend >= divisor) {
+       dividend -= divisor;
+       quotient += 1;
+   }
+   ```
+
+   This will iterate forever if the divisor is 0 because the dividend would never become less than the divisor -- the loop wouldn't terminate.
+
+   ```{note}
+   Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
+   ```
+
+The algorithm used by humans to divide large numbers is called `{bm} vertical division`. Vertical division relies on three ideas...
+
+1. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+
+   ```
+   100
+   100
+   100
+   100
+   100            1
+   100            1
+   100     10     1
+   100     10     1
+   100     10     1
+   ---     --     -
+   900     30     5
+   
+   
+   
+   9 3 5
+   │ │ │
+   │ │ └─ ●
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │
+   │ └─── ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │
+   └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+   ```
+
+2. If two numbers both end in one or more 0s, dividing them is essentially the same as dividing them without their common 0 suffix. For example...
+
+   * 45/5 = 9
+   * 450/50 = 9
+   * 45000/5000 = 9
+   * 45000/500 = 90
+   * 45000/50 = 900
+
+3. Humans have the ability to multiple numbers togethers through vertical multiplication. For example...
+
+   ```{ktvertmul}
+   { }{ }{5}{ }
+   { }{ }{4}{ }
+   { }{ }{7}{7}
+   { }{ }{8}{7}
+   -----
+   { }{5}{3}{9}
+   {6}{1}{6}{0}
+   -----
+   {6}{6}{9}{9}
+   ```
+
+A number can be divided by ...
+1. break down its divisor into single digit components (idea 1) above,
+2. then iteratively dividing each of those single digit components by the dividend, carrying over the remainder to the next division (ideas 2 and 3 above).
+
+For example, the divisor in 43212/12 can be broken down into the following single digit components:
+
+ * 40000
+ * 3000
+ * 200
+ * 10
+ * 2
+
+ 40000+3000+200+10+2=43212
+
+ From largest to the smallest component
+
+ TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE
 
 ```{define-block}
 ktlongdiv
@@ -1638,45 +1847,6 @@ kthelper_code/target/appassembler/
 {\phantom{004.}0}
 ```
 
-```
-`{kt}
-\begin{array}{l}
-\phantom{
-  {5\smash{)}}
-}{
-  047.9
-} \\
-{5}\overline{\smash{)}239.5} \\
-\phantom{{5\smash{)}}}\underline{0} \\
-\phantom{{5\smash{)}}}23 \\
-\phantom{{5\smash{)}}}\underline{20} \\
-\phantom{{5\smash{)}}}\phantom{0}39 \\
-\phantom{{5\smash{)}}}\phantom{0}\underline{35} \\
-\phantom{{5\smash{)}}}\phantom{00}4\phantom{.}5 \\
-\phantom{{5\smash{)}}}\phantom{00}\underline{4\phantom{.}5} \\
-\phantom{{5\smash{)}}}\phantom{004.}0 \\
-\end{array}
-`
-```
-
-`{kt}
-\begin{array}{l}
-\phantom{
-  {5\smash{)}}
-}{
-  047.9
-} \\
-{5}\overline{\smash{)}239.5} \\
-\phantom{{5\smash{)}}}\underline{0} \\
-\phantom{{5\smash{)}}}23 \\
-\phantom{{5\smash{)}}}\underline{20} \\
-\phantom{{5\smash{)}}}\phantom{0}39 \\
-\phantom{{5\smash{)}}}\phantom{0}\underline{35} \\
-\phantom{{5\smash{)}}}\phantom{00}4\phantom{.}5 \\
-\phantom{{5\smash{)}}}\phantom{00}\underline{4\phantom{.}5} \\
-\phantom{{5\smash{)}}}\phantom{004.}0 \\
-\end{array}
-`
 
 # Multiple
 
@@ -1859,7 +2029,7 @@ Divisible and multiple refer to the same idea. Saying that 275 is a multiple of 
 
 # Factor
 
-Given any integer number, the `{bm} factor`s of that number are any integers that multiply together to result in that number. In other words, ...
+Let's say you have an integer number. The `{bm} factor`s of that number are the integers you can multiply together to get that number...
 
 ```java
 int myNumber = ...;
@@ -1880,6 +2050,12 @@ For example, the factors of 32 are...
 * 32=1\*32 -- 1 and 32 are factors
 
 ... 1, 2, 4, 8, 16, and 32.
+
+```{note}
+Shouldn't negative integers also be a factor? e.g. 32=-1*-32. It turns out that for positive integers, negative factors aren't included? For negative integers, they are. Factoring negative integers is discussed further below in this section.
+
+See https://math.stackexchange.com/a/404789
+```
 
 The factors for any number will always be between 1 and that number (inclusive). A naive algorithm for finding the factors of any number would be to have a nested loop exhaustively check integers to see which are factors...
 
@@ -1917,7 +2093,7 @@ factor_code/target/appassembler/
 32
 ```
 
-The optimized algorithm above can be even further optimized by making it skip over calculations that give back repeat factors. As `factor1` increases, `factor2` decreases. Once `factor1 => factor2`, each is basically walking into domains the other was just in. There's no point in continuing any further because the factors calculated past that point will just be duplicates of those prior. For example, when calculating the factors of 32...
+The optimized algorithm above can be even further optimized by making it skip over calculations that give back repeat factors. As `factor1` increases, `factor2` decreases. Once `factor1 => factor2`, each is basically walking into domains the other was just in (they're each going to walk over integers the other already walked over). There's no point in continuing any further because the factors calculated past that point will just be duplicates of those prior. For example, when calculating the factors of 32...
 
 * 32/1=32 -- 1 and 32 are factors
 * 32/2=16 -- 2 and 16 are factors
@@ -1967,7 +2143,7 @@ The second is that if the number were a negative integer, the factors would incl
 
 # Prime
 
-A counting number with only 2 factors is called a `{bm} prime` number. That is, if a number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, and 19.
+A counting number with only 2 factors is called a `{bm} prime` number. That is, if a counting number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, and 19.
 
 A counting number with more than 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
 
