@@ -1684,6 +1684,7 @@ The quotient is the number of times you can subtract.
 
 When using words, division is typically represented using the following syntax:
 
+* `{bm} divide` -- e.g. divide 3 by 15
 * `{bm} divided by/(divided by|divide by)/i` -- e.g. 3 divided by 15
 * `{bm} divided into` -- e.g. 15 divided into 3
 * `{bm} quotient of` -- e.g. the quotient of 3 and 15
@@ -1720,7 +1721,7 @@ Properties of division:
    1 iteration total
    ```
 
- * Any number dividided by 0 is infinity.
+ * Any number divided by 0 is infinity.
 
    This makes sense if you think of division as iterative subtraction...
 
@@ -1738,7 +1739,7 @@ Properties of division:
    Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
    ```
 
-The algorithm used by humans to divide large numbers is called `{bm} vertical division`. Vertical division relies on three ideas...
+The algorithm used by humans to divide large numbers is called `{bm} long division`. Long division relies on three ideas...
 
 1. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
 
@@ -1780,27 +1781,100 @@ The algorithm used by humans to divide large numbers is called `{bm} vertical di
           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
    ```
 
-2. If two numbers both end in one or more 0s, dividing them is essentially the same as dividing them without their common 0 suffix. For example...
+2. If two numbers both end in the same number of 0s, dividing them is essentially the same as dividing them without their common 0 suffix. For example...
 
    * 45/5 = 9
    * 450/50 = 9
+   * 4500/500 = 9
    * 45000/5000 = 9
+
+   If both the dividend and the divisor end in 0s but the dividend has more 0s, dividing them is the essentially the same as dividing them without their 0 suffixes and then appending the difference of 0s to the suffix of the quotient. For example...
+
    * 45000/500 = 90
    * 45000/50 = 900
+   * 45000/5 = 9000
 
-3. Humans have the ability to multiple numbers togethers through vertical multiplication. For example...
+3. Humans have the ability to...
+   * add large numbers together via vertical addition.
+   * subtract large numbers from each other via vertical subtraction.
+   * multiply large numbers together via vertical multiplication.
 
-   ```{ktvertmul}
-   { }{ }{5}{ }
-   { }{ }{4}{ }
-   { }{ }{7}{7}
-   { }{ }{8}{7}
-   -----
-   { }{5}{3}{9}
-   {6}{1}{6}{0}
-   -----
-   {6}{6}{9}{9}
-   ```
+
+
+
+
+
+
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+
+
+
+The intuition behind dividing up a big number is that numbers can be broken down into their individual components (idea 1). The broken down values are easier to divide because components have trailing 0s (idea 2). For example, dividing the number 42 by 3.
+
+```
+42 = 40+2
+   = (4*10) + 2
+
+40: 4*10/3 --> 4/3*10 --> (1 R1)*10 --> 10 R10
+
+Add remainder to next component and do again...
+
+2: 10+2 --> 12/3 --> 4
+
+Add quotients for each component 10+4=14
+
+```
 
 A number can be divided by ...
 1. break down its divisor into single digit components (idea 1) above,
@@ -1814,9 +1888,65 @@ For example, the divisor in 43212/12 can be broken down into the following singl
  * 10
  * 2
 
- 40000+3000+200+10+2=43212
+40000+3000+200+10+2=43212
 
- From largest to the smallest component
+From largest to the smallest component, divide.
+
+40000 component
+* `{kt} \frac{40000}{12} = 3000R4000`
+* `{kt} \frac{4000}{12} = 300R400`
+* `{kt} \frac{400}{12} = 30R40`
+* `{kt} \frac{40}{12} = 3R4`
+* 3333
+
+3000 component
+* `{kt} \frac{3000}{12} = 200R600`
+* `{kt} \frac{600}{12} = 50R0`
+* 250
+
+200 component
+* `{kt} \frac{200}{12} = 10R80`
+* `{kt} \frac{80}{12} = 6R8`
+* 16
+
+10 component
+* `{kt} \frac{10}{12} = 0R10`
+* 0
+
+2 component
+* `{kt} \frac{2}{12} = 0R2`
+* 0
+
+Add up the quotients and the remainder value.
+* Quotient: 3333+250+16+0=3599
+* Remainder: 4+0+10+8+2=24
+
+The remainder isn't less than 12 (divisor), so do the entire process again on the remainder.
+
+24 can be broken down in to the following single digit components:
+
+ * 20
+ * 4
+
+20 component
+* `{kt} \frac{20}{12} = 1R8`
+* 1
+
+4 component
+* `{kt} \frac{4}{12} = 0R4`
+* 0
+
+Add up the quotients and the remainder value.
+* Quotient: 1+0=1
+* Remainder: 8+4=12
+
+The remainder the divisor, so add an extra notch ot the quotient and remove the remainder.
+* Quotient: 1
+* Remainder: 0
+
+Now, add up all the quotients to get the final quotient and take the last remainder to get the final remainder.
+
+Final quotient: 3599+1+1 = 3601 / Final remainder: 0.
 
  TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE
 
@@ -8416,7 +8546,7 @@ __EXERCISE__
  * 43/2 no -- fails common divisibility test
  * 43/3 no -- fails common divisibility test
  * 43/4=10.75 no
- * 43/5 no -- fails common divisibilitiy test
+ * 43/5 no -- fails common divisibility test
  * 43/6 no -- fails common divisibility test
  * 43/7=6.142 no <-- stop here, quotient is <= divisor
 
@@ -8614,9 +8744,9 @@ __EXERCISE__
 
 Multiplying any number by 6 is the same as multiplying it by 2\*3. For example, 10\*6=60, 10\*2\*3=60. Since you're multiplying by both 2 and 3, the product is divisible by both 2 and 3.
 
-10\*2\*3=60 can be reordered as (10\*2)\*3=60, then simplified to 20\*3=60 -- meaning 60 is divisibly by 3
+10\*2\*3=60 can be reordered as (10\*2)\*3=60, then simplified to 20\*3=60 -- meaning 60 is divisible by 3
 
-10\*2\*3=60 can be reordered as (10\*3)\*2=60, then simplified to 30\*2=60 -- meaning 60 is divisibly by 3
+10\*2\*3=60 can be reordered as (10\*3)\*2=60, then simplified to 30\*2=60 -- meaning 60 is divisible by 3
 
 2.4.266)
 
