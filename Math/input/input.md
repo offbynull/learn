@@ -2157,6 +2157,26 @@ Divisible and multiple refer to the same idea. Saying that 275 is a multiple of 
    The bold numbers in the table above are numbers that appear bold in both the table for 2s and the table for 3s -- they must be bold in both tables.
    ```
 
+The common divisibility test algorithm written as code is as follows:
+
+```{output}
+commdivtest_code/src/main/java/com/offbynull/cdt/CommonDivisibilityTest.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
+
+For example, the common divisibility tests for 18...
+
+```{define-block}
+commdivtest
+commdivtest_macro/
+commdivtest_code/target/appassembler/
+```
+
+```{commdivtest}
+18
+```
+
 # Factor
 
 Let's say you have an integer number. The `{bm} factor`s of that number are the integers you can multiply together to get that number...
@@ -2273,13 +2293,264 @@ The second is that if the number were a negative integer, the factors would incl
 
 # Prime
 
-A counting number with only 2 factors is called a `{bm} prime` number. That is, if a counting number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, and 19.
+A counting number with only 2 factors is called a `{bm} prime` number. That is, if a counting number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, and 47.
 
 A counting number with more than 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
 
 ```{note}
 The number 1 is neither a prime number nor a composite number. 1's only factor is itself: 1\*1=1. Prime numbers need 2 factors and composite numbers need more than 2 factors.
 ```
+
+The algorithm to identify primes vs composites is as follows...
+
+```{output}
+factor_code/src/main/java/com/offbynull/factor/PrimeTest.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
+
+```{define-block}
+primetest
+primetest_macro/
+factor_code/target/appassembler/
+```
+
+```{primetest}
+137
+```
+
+Every composite number can be written as a product of prime numbers. For example...
+
+* 12 = 3\*2\*2
+* 16 = 2\*2\*2\*2
+* 21 = 3\*3\*3
+
+The process of breaking down a composite number into a factor of primes is called `{bm} prime factorization/(prime factorization|prime factor|factor prime|factorize prime|factors of prime|factors of a prime)/i`. There are 2 algorithms that humans use to factorize primes:
+
+* factor tree method
+* ladder method
+
+The subsections below detail each algorithm.
+
+## Factor Tree
+
+The `{bm} factor tree/(factor tree method|factor tree)/i` method is an algorithm used by humans for prime factorization. The algorithm involves taking the input and recursively breaking it down into one of its factor pairs until all factors are prime.
+
+For example, to break down the number 54, choose one of its factor pairs...
+
+* 54
+  * 6
+  * 9
+
+Then, for each factor, break it down even further by choosing one of its factor pairs...
+
+* 54
+  * 9
+    * 3 <-- prime
+    * 3 <-- prime
+  * 6
+    * 2 <-- prime
+    * 3 <-- prime
+
+All factors are now prime -- 54 = 3\*3\*2\*3.
+
+```{note}
+Prime factors are typically written out from smallest to largest, so writing out the prime factors of the example above would be 54 = 2\*3\*3\*3.
+
+If you know exponents, the example above can be further condensed as `{kt} 54 = 2 \cdot 3^3`.
+```
+
+When choosing a factor pair, the pair can't include 1 or the number being factored itself. For example, if choosing a factor pair for 12..
+ 
+* ~~1*12=12~~ <-- can't choose this one
+* 2*6=12
+* 3*4=12
+* 4*3=12
+* 6*2=12
+* ~~12*1=12~~ <-- can't choose this one
+
+The reason why ...
+ * 1 can't be used is because 1 is neither a prime nor can it be factorized to primes.
+ * 12 (the number being factored itself) can't be used is because it effectively does nothing -- it finishes at the same place it started at.
+ 
+For example, trying to build a factor tree for 12 using one of the bad factor pairs...
+
+ * 12
+   * 12 <-- useless -- started at 12 and ended at 12
+   * 1 <-- invalid -- not a prime / can't be factored to primes
+ * 1  <-- invalid -- not a prime / can't be factored to primes
+
+Note that the prime factors for a number will always be the same regardless of which factor pairs are chosen (as long as its a valid factor pair). For example, in the initial example above, if 54 were factored to (2, 27) instead of (9, 6) ...
+
+* 54
+  * 27
+    * 3 <-- prime
+    * 9
+      * 3 <-- prime
+      * 3 <-- prime
+  * 2 <-- prime
+
+The prime factors would still be 54 = 2\*3\*3\*3. 
+
+The way to perform this algorithm as code is as follows...
+
+```{output}
+factor_code/src/main/java/com/offbynull/factor/FactorTree.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
+
+```{define-block}
+factortree
+factortree_macro/
+factor_code/target/appassembler/
+```
+
+```{factortree}
+1102
+```
+
+## Ladder
+
+The `{bm} ladder method` is an algorithm used by humans for prime factorization. The algorithm involves:
+1. Iteratively testing the input against primes to see if its divisible (no remainder).
+2. Once a divisible prime is found, repeat the process on the quotient unless the quotient itself is a prime.
+
+```{note}
+The ladder method is sometimes referred to as stacked division.
+```
+
+For example, to break down the number 54, start by iteratively dividing 54 by primes until its divisible (no remainder)...
+
+```
+54/2 = 27   <-- good
+
+  27
+2)5̅4̅
+```
+
+Dividing by 2 results in 27 -- no remainder. Iteratively divide 27 by primes until its divisible (no remainder)...
+
+```
+27/2 = 13R1 <-- can't use 2 because it isn't divisible (remainder of 1)
+27/3 = 9    <-- good
+
+   9
+3)2̅7̅
+2)5̅4̅
+```
+
+Dividing by 3 results in 9 -- no remainder. Iteratively divide 9 by primes until its divisible (no remainder).
+
+```
+9/2 = 4R1   <-- can't use 2 because it isn't divisible (remainder of 1)
+9/3 = 3     <-- good
+
+   3
+ 3)9̅
+3)2̅7̅
+2)5̅4̅
+```
+
+Dividing by 3 results in 3 -- no remainder. The process stops because 3 (the quotient) is a prime.
+
+All factors are now prime -- 54 = 2\*3\*3\*3.
+
+```{note}
+Prime factors are typically written out from smallest to largest, so writing out the prime factors of the example above would be 54 = 2\*3\*3\*3.
+
+If you know exponents, the example above can be further condensed as `{kt} 54 = 2 \cdot 3^3`.
+```
+
+Note that that factor tree method and the ladder method are effectively doing the same thing. The only difference is that the ladder method is forcing you to choose a factor pair with a prime in it -- it's testing testing primes to see if they're viable factor pairs.
+
+The ladder above is represented as the following factor tree...
+
+* 54
+  * 2 <-- prime
+  * 27
+    * 3 <-- prime
+    * 9
+      * 3 <-- prime
+      * 3 <-- prime
+
+The way to perform this algorithm as code is as follows...
+
+```{output}
+factor_code/src/main/java/com/offbynull/factor/Ladder.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
+
+```{define-block}
+ladder
+ladder_macro/
+factor_code/target/appassembler/
+```
+
+```{ladder}
+1102
+```
+
+```{note}
+The indentation in the output is messed up but you get the point.
+```
+
+# Least Common Multiple
+
+The `{bm} least common multiple` is the process of taking 2 numbers and finding the smallest multiple between them. That is, if you listed out their multiples starting from 1, the first match between them would be the least common multiple.
+
+There are 2 common algorithms used to find the least common multiple between 2 numbers.
+
+The first algorithm is called the  `{bm} listing multiples` method. It involves listing out the multiples for each number starting from 1 until there's a match. For example, finding the least common multiple between 4 and 6... 
+
+|       | 1 |   2    |   3    |   4    | 5  |   6    | 7  | 8  |   9    |
+|-------|---|--------|--------|--------|----|--------|----|----|--------|
+| **4** | 4 |   8    | **12** |   16   | 20 | **24** | 28 | 32 | **36** |
+| **6** | 6 | **12** |   18   | **24** | 30 | **36** |    |    |        |
+
+is 12 because 6\*2 is 12 and 4\*3 is 12.
+
+The second algorithm is called the prime factors method. It involves calculating the prime factors for each number and combining them to get the least common multiple. For example, finding the least common multiple between 4 and 6... 
+
+```{plantuml}
+@startditaa(--no-separation)
+ 4    2   2
+          |
+ 6    2   |   3
+      |   |   |
+      |   |   |
+      |   |   |
+      v   v   v
+12    2   2   3
+@endditaa
+```
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+
+TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
 
 # Algebra
 
@@ -8761,6 +9032,99 @@ A composite number as more than 2 factors -- 1, itself, and others
 __TRY IT__
 
 2.95)
+
+* 80
+  * 8
+    * 4
+      * 2 <-- prime
+      * 2 <-- prime
+    * 2 <-- prime
+  * 10
+    * 5 <-- prime
+    * 2 <-- prime
+
+80 = 2\*2\*2\*2\*5
+
+2.96)
+
+* 60
+  * 6
+    * 3 <-- prime
+    * 2 <-- prime
+  * 10
+    * 5 <-- prime
+    * 2 <-- prime
+
+60 = 2\*2\*3\*5
+
+2.97)
+
+* 126
+  * 63
+    * 3 <-- prime
+    * 21
+      * 7 <-- prime
+      * 3 <-- prime
+  * 2 <-- prime
+
+126 = 2\*3\*3\*7
+
+2.98)
+
+* 294
+  * 147
+    * 49
+      * 7 <-- prime
+      * 7 <-- prime
+    * 3 <-- prime
+  * 2 <-- prime
+
+294 = 2\*3\*7\*7
+
+2.99)
+
+```
+   5
+2)10
+2)20
+2)40
+2)80
+```
+
+80 = 2\*2\*2\*2\*5
+
+2.100)
+
+```
+   5
+3)15
+2)30
+2)60
+```
+
+60 = 2\*2\*3\*5
+
+2.101)
+
+```
+    3
+ 7)21
+ 3)63
+2)126
+```
+
+126 = 2\*3\*3\*7
+
+2.102)
+
+```
+    7
+ 7)49
+3)147
+2)294
+```
+
+294 = 2\*3\*7\*7
 
 START BACK UP HERE
 START BACK UP HERE

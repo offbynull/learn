@@ -17,6 +17,11 @@
             <artifactId>guava</artifactId>
             <version>28.1-jre</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-all</artifactId>
+            <version>1.12</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -46,6 +51,18 @@
                                 <program>
                                     <mainClass>com.offbynull.factor.FactorFastest</mainClass>
                                     <id>FactorFastest</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.factor.PrimeTest</mainClass>
+                                    <id>PrimeTest</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.factor.FactorTree</mainClass>
+                                    <id>FactorTree</id>
+                                </program>
+                                <program>
+                                    <mainClass>com.offbynull.factor.Ladder</mainClass>
+                                    <id>Ladder</id>
                                 </program>
                             </programs>
                         </configuration>
