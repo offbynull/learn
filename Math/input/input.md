@@ -1781,174 +1781,198 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
    ```
 
-2. If two numbers both end in the same number of 0s, dividing them is essentially the same as dividing them without their common 0 suffix. For example...
+2. Humans have the ability to...
 
-   * 45/5 = 9
-   * 450/50 = 9
-   * 4500/500 = 9
-   * 45000/5000 = 9
-
-   If both the dividend and the divisor end in 0s but the dividend has more 0s, dividing them is the essentially the same as dividing them without their 0 suffixes and then appending the difference of 0s to the suffix of the quotient. For example...
-
-   * 45000/500 = 90
-   * 45000/50 = 900
-   * 45000/5 = 9000
-
-3. Humans have the ability to...
    * add large numbers together via vertical addition.
    * subtract large numbers from each other via vertical subtraction.
    * multiply large numbers together via vertical multiplication.
 
+3. When dividing, if the number being divided (dividend) has trailing zeros, those trailing zeros can be removed prior to the divison and then put back on after the division. For example 4500 / 6...
+
+   ```{plantuml}
+   @startditaa(--no-separation)
+            remove trailing 0s from dividend
+        +-----------------------------------------+
+        |                                         |
+        |                                         v
+   +--+-++   +-+                                +---+
+   |45|00| / |6|                                |000|
+   ++-+--+   +++                                +-+-+
+    |         |                                   |
+    |      +--+                                   |
+    |      |                                      |
+    v      v                                      |
+   +--+   +-+                                     |
+   |45| / |6|                                     |
+   +-++   +++                                     |
+     |     |                                      |
+     v     v                                      |
+   +---------+                                    |
+   | divide  |                                    |
+   +--+---+--+                                    |
+      |   |                                       |
+      v   v                                       |
+     +-+ +-+                                      |
+     |7|R|3|                                      |
+     +++ +++                                      |
+      |   |                                       |
+      v   v                                       |
+   +---+ +---+                                    |
+   |700|R|300|                                    |
+   +---+ +---+                                    |
+     ^      ^                                     |
+     |      |                                     |
+     |      +-------------------------------------+
+     |                                            |
+     +--------------------------------------------+
+            append trailing 0s to answer
+   @endditaa
+   ```
+
+   ```{note}
+   It's easy to test if this is correct... 
+   * 700 \* 6 = 4200    (multiply by the quotient)
+   * 4200 + 300 = 4500  (add the remainder)
+   ```
+
+   ```{note}
+   If you know about expressions and order of operations and factoring, the reason why this works is...
+   
+    * 4500 / 7
+    * (45 * 100) / 7  <-- factor out 100 from the 4500
+    * 45 * 100 / 7 <-- remove parenthesis, associativity law, mult and div have same precedence so it doesn't matter which gets performed first
+    * 45 / 7 * 100 <-- swap, commutative law, mult and div have same precedence so it doesn't matter which gets performed first
+    * (45 / 7) * 100
+    * (7R3) * 100
+    * 700R300
+   ```
+
+The intuition behind dividing up a big number is that numbers can be broken down into their individual components (idea 1). The broken down values are easier to divide because components have trailing 0s (idea 3). For example, to divide 43212 by 12, ...
+
+ 1. begin by breaking up the divided into its single digit components (idea 1 above)...
+
+    ```
+    40000
+     3000
+      200
+       10
+        2
+    ```
+
+ 2. Then, iteratively dividing each of those single digit components by the dividend, carrying over the remainder to the next division. Because each dividend has trailing 0s, the division should be easy to do (idea  3 above).
+
+    * Divide component: 40000 / 12 
+      * 4 / 12 (0000 stripped off)
+      * 0R4
+      * 00000R40000 (0000 re-appended)
+      * 0R40000 (simplify)
+    * Add remainder to the largerst component: 3000 + 40000
+      * 43000
+    * Divide component: 43000 / 12 
+      * 43 / 12 (000 stripped off)
+      * 3R7
+      * 3000R7000 (000 re-appended)
+    * Add remainder to the next component: 200 + 7000
+      * 7200
+    * Divide next component: 7200 / 12
+      * 72 / 12 (00 stripped off)
+      * 6R0
+      * 600R000 (00 re-appended)
+      * 600R0 (simplify)
+    * Add remainder to the next component: 10 + 0
+      * 10
+    * Divide next component: 10 / 12
+      * 1 / 12 (0 stripped off)
+      * 0R1
+      * 00R10 (0 re-appended)
+      * 0R10 (simplify)
+    * Add remainder to the next component: 2 + 10
+      * 12
+    * Divide next component: 12 / 12
+      * 1
+
+3. Combine (add) the quotient from each of the component divisions above to get the quotient for the entire division. The remainder at the very end is the remainder for the entire division.
+
+    final quotient: 0 + 3000 + 600 + 0 + 1 = 3601
+
+    final remainder: 0
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
+
+What is the process above doing? It's effectively breaking up the dividend into parts that can be easily divided based on rule 3. Each part is divided by the divisor, and any remainder so it doesn't get lost.
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+Once each part has been divided, the divided up pieces are collected (added) to get the overall pieces for the original number. The final remainder is also the remainder for the original number.
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
+
+TODO: ADD CIRCLE DIAGRAMS HERE
 
 
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-TODO: THIS IS AN AWFUL EXPLAINATION AND NEEDS TO BE FIXED
-
-
-
-The intuition behind dividing up a big number is that numbers can be broken down into their individual components (idea 1). The broken down values are easier to divide because components have trailing 0s (idea 2). For example, dividing the number 42 by 3.
-
-```
-42 = 40+2
-   = (4*10) + 2
-
-40: 4*10/3 --> 4/3*10 --> (1 R1)*10 --> 10 R10
-
-Add remainder to next component and do again...
-
-2: 10+2 --> 12/3 --> 4
-
-Add quotients for each component 10+4=14
-
-```
-
-A number can be divided by ...
-1. break down its divisor into single digit components (idea 1) above,
-2. then iteratively dividing each of those single digit components by the dividend, carrying over the remainder to the next division (ideas 2 and 3 above).
-
-For example, the divisor in 43212/12 can be broken down into the following single digit components:
-
- * 40000
- * 3000
- * 200
- * 10
- * 2
-
-40000+3000+200+10+2=43212
-
-From largest to the smallest component, divide.
-
-40000 component
-* `{kt} \frac{40000}{12} = 3000R4000`
-* `{kt} \frac{4000}{12} = 300R400`
-* `{kt} \frac{400}{12} = 30R40`
-* `{kt} \frac{40}{12} = 3R4`
-* 3333
-
-3000 component
-* `{kt} \frac{3000}{12} = 200R600`
-* `{kt} \frac{600}{12} = 50R0`
-* 250
-
-200 component
-* `{kt} \frac{200}{12} = 10R80`
-* `{kt} \frac{80}{12} = 6R8`
-* 16
-
-10 component
-* `{kt} \frac{10}{12} = 0R10`
-* 0
-
-2 component
-* `{kt} \frac{2}{12} = 0R2`
-* 0
-
-Add up the quotients and the remainder value.
-* Quotient: 3333+250+16+0=3599
-* Remainder: 4+0+10+8+2=24
-
-The remainder isn't less than 12 (divisor), so do the entire process again on the remainder.
-
-24 can be broken down in to the following single digit components:
-
- * 20
- * 4
-
-20 component
-* `{kt} \frac{20}{12} = 1R8`
-* 1
-
-4 component
-* `{kt} \frac{4}{12} = 0R4`
-* 0
-
-Add up the quotients and the remainder value.
-* Quotient: 1+0=1
-* Remainder: 8+4=12
-
-The remainder the divisor, so add an extra notch ot the quotient and remove the remainder.
-* Quotient: 1
-* Remainder: 0
-
-Now, add up all the quotients to get the final quotient and take the last remainder to get the final remainder.
-
-Final quotient: 3599+1+1 = 3601 / Final remainder: 0.
-
- TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE
+TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
 
 ```{define-block}
 ktlongdiv
@@ -9851,6 +9875,12 @@ The LCM is 24.
 2.5.315) prefer factor tree because I don't have to think what the next prime is -- when I see it on a leaf node I usually know right away
 
 2.5.316) prime factors because listing multiples may go on for a long time.
+
+## Chapter 3 Section 3.1
+
+__TRY IT__
+
+3.1)
 
 START BACK UP HERE
 START BACK UP HERE
