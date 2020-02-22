@@ -2511,46 +2511,77 @@ The first algorithm is called the  `{bm} listing multiples` method. It involves 
 
 is 12 because 6\*2 is 12 and 4\*3 is 12.
 
-The second algorithm is called the prime factors method. It involves calculating the prime factors for each number and combining them to get the least common multiple. For example, finding the least common multiple between 4 and 6... 
+The way to perform this algorithm as code is as follows...
 
-```{plantuml}
-@startditaa(--no-separation)
- 4    2   2
-          |
- 6    2   |   3
-      |   |   |
-      |   |   |
-      |   |   |
-      v   v   v
-12    2   2   3
-@endditaa
+```{output}
+lcm_code/src/main/java/com/offbynull/lcm/ListMultiples.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
 ```
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+```{define-block}
+lcmlist
+lcmlist_macro/
+lcm_code/target/appassembler/
+```
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+```{lcmlist}
+12
+18
+```
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+The second algorithm is called the prime factors method. It involves calculating the prime factors for each number and merging them to get the least common multiple. For example, finding the least common multiple between 4 and 6... 
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+ * prime factors of 4: 4 = 2 \* 2
+ * prime factors of 6: 6 = 2 \* 2 \* 3
+ * merge the prime factors together to get 12 = 2 \* 2 \* 3
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+   ```{plantuml}
+   @startditaa(--no-separation)
+         +-+  +-+
+    4    |2|  |2|
+         +-+  +++
+               |
+         +-+   |   +-+
+    6    |2|   |   |3|
+         +++   |   +++
+          |    |    |
+          |    |    |
+          |    |    |
+          v    v    v
+         +-+  +-+  +-+
+   12    |2|  |2|  |3|
+         +-+  +-+  +-+
+   @endditaa
+   ```
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+   ```{note}
+   What's actually happening in the "merge" above is that the primes are being segmented by value and the segment with the highest occurrence count is being picked...
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+   * prime 2 = {4=[2, 2], 6=[2]}
+   * prime 3 = {4=[], 6=[3]}
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+   For prime 2, take from 4. From prime 3, take from 6.
+   ```
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+The way to perform this algorithm as code is as follows...
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+```{output}
+lcm_code/src/main/java/com/offbynull/lcm/PrimeFactorizeMultiples.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+```{define-block}
+lcmprimefactor
+lcmprimefactor_macro/
+lcm_code/target/appassembler/
+```
 
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
-
-TODO FIX DIAGRAM, FINISH DESCRIPTION, AND FINISH CODE
+```{lcmprimefactor}
+12
+18
+```
 
 # Algebra
 
@@ -9125,6 +9156,17 @@ __TRY IT__
 ```
 
 294 = 2\*3\*7\*7
+
+2.103)
+
+ * 9) 9, 18, 27, 36, 45, 54, 63, 72
+ * 12) 12, 24, 36, 48, 60, 72
+
+2.104)
+
+ * 18) 18, 36, 54, 72
+ * 24) 24, 48, 72
+
 
 START BACK UP HERE
 START BACK UP HERE

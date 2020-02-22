@@ -3083,20 +3083,90 @@ primeFactors.add(input);</code></pre><div style="border:1px solid black;">
 </tbody>
 </table>
 <p><a href="#BOOKMARK80">is</a> 12 because 6*2 <a href="#BOOKMARK80">is</a> 12 and 4*3 <a href="#BOOKMARK80">is</a> 12.</p>
-<p>The second algorithm <a href="#BOOKMARK80">is</a> called the <a href="#BOOKMARK56">prime factor</a>s method. It involves calculating the <a href="#BOOKMARK56">prime factor</a>s for each number and combining them to get the <a href="#BOOKMARK59">least common multiple</a>. For example, finding the <a href="#BOOKMARK59">least common multiple</a> between 4 and 6...</p>
-<p><img src="/.datafile_6de011a6e215589176dcb964cd43febc/diagram.svg" alt="Generated image"></p><p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
-<p>TODO FIX DIAGRAM, FIN<a href="#BOOKMARK80">IS</a>H DESCRIPTION, AND FIN<a href="#BOOKMARK80">IS</a>H CODE</p>
+<p>The way to perform th<a href="#BOOKMARK80">is</a> algorithm as code <a href="#BOOKMARK80">is</a> as follows...</p>
+<pre class="hljs"><code><span class="hljs-keyword">int</span> num1Counter = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">int</span> num2Counter = <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">int</span> num1Multiple = num1 * num1Counter;
+num1Multiples.add(num1Multiple);
+
+<span class="hljs-keyword">int</span> num2Multiple = num2 * num2Counter;
+num2Multiples.add(num2Multiple);
+
+<span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) {
+    <span class="hljs-keyword">if</span> (num1Multiple &lt; num2Multiple) {
+        <span class="hljs-comment">// num1Multiple is less than num2Multiple, increase it</span>
+        num1Counter++;
+        num1Multiple = num1 * num1Counter;
+        num1Multiples.add(num1Multiple);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (num1Multiple &gt; num2Multiple) {
+        <span class="hljs-comment">// num2Multiple is less than num1Multiple, increase it</span>
+        num2Counter++;
+        num2Multiple = num2 * num2Counter;
+        num2Multiples.add(num2Multiple);        
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// multiples match -- we're done.</span>
+        <span class="hljs-keyword">break</span>;
+    }
+}</code></pre><div style="border:1px solid black;">
+<p></p>
+<table><tbody><tr><td>multiples of 12</td><td>12</td><td>24</td><td>36</td></tr><tr><td>multiples of 18</td><td>18</td><td>36</td><td></td></tr></tbody></table>
+<p>least common multiple is 36</p>
+<p></p>
+</div>
+<p>The second algorithm <a href="#BOOKMARK80">is</a> called the <a href="#BOOKMARK56">prime factor</a>s method. It involves calculating the <a href="#BOOKMARK56">prime factor</a>s for each number and merging them to get the <a href="#BOOKMARK59">least common multiple</a>. For example, finding the <a href="#BOOKMARK59">least common multiple</a> between 4 and 6...</p>
+<ul>
+<li>
+<p><a href="#BOOKMARK56">prime factor</a>s of 4: 4 = 2 * 2</p>
+</li>
+<li>
+<p><a href="#BOOKMARK56">prime factor</a>s of 6: 6 = 2 * 2 * 3</p>
+</li>
+<li>
+<p>merge the <a href="#BOOKMARK56">prime factor</a>s together to get 12 = 2 * 2 * 3</p>
+<p><img src="/.datafile_4b7b83e65f21a7734daed8ef77f4da71/diagram.svg" alt="Generated image"></p><div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>What's actually happening in the "merge" above <a href="#BOOKMARK80">is</a> that the <a href="#BOOKMARK54">prime</a>s are being segmented by value and the segment with the highest occurrence count <a href="#BOOKMARK80">is</a> being picked...</p>
+<ul>
+<li><a href="#BOOKMARK54">prime</a> 2 = {4=[2, 2], 6=[2]}</li>
+<li><a href="#BOOKMARK54">prime</a> 3 = {4=[], 6=[3]}</li>
+</ul>
+<p>For <a href="#BOOKMARK54">prime</a> 2, take from 4. From <a href="#BOOKMARK54">prime</a> 3, take from 6.</p>
+</div>
+</li>
+</ul>
+<p>The way to perform th<a href="#BOOKMARK80">is</a> algorithm as code <a href="#BOOKMARK80">is</a> as follows...</p>
+<pre class="hljs"><code>SortedMultiset&lt;Integer&gt; num1Primes = calculatePrimeFactors(num1);
+SortedMultiset&lt;Integer&gt; num2Primes = calculatePrimeFactors(num2);
+
+SortedSet&lt;Integer&gt; distinctPrimes = <span class="hljs-keyword">new</span> TreeSet&lt;&gt;();
+distinctPrimes.addAll(num1Primes.elementSet());
+distinctPrimes.addAll(num2Primes.elementSet());
+
+<span class="hljs-keyword">int</span> leastCommonMultiple = <span class="hljs-number">1</span>;
+SortedMultiset&lt;Integer&gt; leastCommonMultiplePrimes = TreeMultiset.create();
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> prime : distinctPrimes) {
+    <span class="hljs-keyword">int</span> num1Count = num1Primes.count(prime);
+    <span class="hljs-keyword">int</span> num2Count = num2Primes.count(prime);
+    <span class="hljs-keyword">if</span> (num1Count &gt;= num2Count) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num1Count; i++) {
+            leastCommonMultiple *= prime;
+        }
+        leastCommonMultiplePrimes.add(prime, num1Count);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num2Count; i++) {
+            leastCommonMultiple *= prime;
+        }
+        leastCommonMultiplePrimes.add(prime, num2Count);
+    }
+}</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>prime factor occurence counts of 12 = [2 x 2, 3]</p>
+<p>prime factor occurence counts of 18 = [2, 3 x 2]</p>
+<p>least common multiple is 36 = [2 x 2, 3 x 2]</p>
+<p></p>
+</div>
 <a name="HEADREF19"></a><h1>Algebra</h1>
 <p><a name="BOOKMARK61"></a><strong>Algebra</strong> <a href="#BOOKMARK80">is</a> the study of mathematical operations and the rules for manipulating those operations.</p>
 <p>Common mathematical operations:</p>
@@ -7785,6 +7855,32 @@ b) twenty nine <a href="#BOOKMARK16">minus</a> twelve</p>
 2)294
 </code></pre>
 <p>294 = 2*3*7*7</p>
+<p>2.103)</p>
+<ul>
+<li>
+<ol start="9">
+<li>9, 18, 27, 36, 45, 54, 63, 72</li>
+</ol>
+</li>
+<li>
+<ol start="12">
+<li>12, 24, 36, 48, 60, 72</li>
+</ol>
+</li>
+</ul>
+<p>2.104)</p>
+<ul>
+<li>
+<ol start="18">
+<li>18, 36, 54, 72</li>
+</ol>
+</li>
+<li>
+<ol start="24">
+<li>24, 48, 72</li>
+</ol>
+</li>
+</ul>
 <p>START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
