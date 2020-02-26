@@ -119,10 +119,10 @@ fi
 
 exec "$JAVACMD" $JAVA_OPTS  \
   -classpath "$CLASSPATH" \
-  -Dapp.name="MainSubtraction" \
+  -Dapp.name="TrialAndErrorDivision" \
   -Dapp.pid="$$" \
   -Dapp.repo="$REPO" \
   -Dapp.home="$BASEDIR" \
   -Dbasedir="$BASEDIR" \
-  com.offbynull.wholenum.MainSubtraction \
+  com.offbynull.wholenum.TrialAndErrorDivision \
   "$@"

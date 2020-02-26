@@ -1,3 +1,12 @@
+```{define-block}
+svgbob
+svgbob_macro/
+```
+
+```{svgbob}
+----
+```
+
 ```{title}
 Mathematics
 ```
@@ -1745,7 +1754,201 @@ Properties of division:
    Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
    ```
 
-The algorithm used by humans to divide large numbers is called `{bm} long division`. Long division relies on three ideas...
+There are 2 algorithms used to divide numbers:
+
+ * trial-and-error division
+ * long division
+
+## Trial and Error
+
+`{bm} Trial-and-error division` is an algorithm used for dividing numbers. The core idea behind the algorithm is that multiplication is the inverse of division. That is, multiplication reverses / un-does division (and vice-versa). For example...
+
+* 3 * 4 is 12 -- If you have 3 groups of 4 items each, you'll have 12 items.
+* 12 / 3 is 4 -- If you have 12 items and you break them up into 3 groups, you'll have 4 items in each group.
+
+```{plantuml}
+@startditaa(--no-separation)
+
+3 x 4 is 12          12 / 3 is 4
+          
+  +----+          +----+----+----+
+  |●●●●| 4        |●●●●|●●●●|●●●●| 12
+  +----+          +----+----+----+
+  |●●●●| 4          4    4    4  
+  +----+  
+  |●●●●| 4
+  +----+  
+    12    
+
+
+
+        +----------+
+        |          |
+        |  +--+   +++    +-+
+        |  |12| / |3| is |4+---+
+        |  +-++   +-+    +-+   |
+        |    |                 |
+        |    +-----------+     |
+        |                |     |
+        |                v     |
+        |  +-+   +-+    +--+   |
+        +->|3| x |4| is |12|   |
+           +-+   +++    +--+   |
+                  ^            |
+                  |            |
+                  +------------+
+@endditaa
+```
+
+Knowing this, multiplication can be used to check if some number is the quotient. For example, to find the quotient for 20 / 5...
+
+```{plantuml}
+@startditaa(--no-separation)
++----------+
+|          |
+|  +--+   +++    +-+
+|  |20| / |5| is |?+---+
+|  +-++   +-+    +-+   |
+|    |                 |
+|    +-----------+     |
+|                |     |
+|                v     |
+|  +-+   +-+    +--+   |
++->|5| x |?| is |20|   |
+   +-+   +++    +--+   |
+          ^            |
+          |            |
+          +------------+
+@endditaa
+```
+
+* 5 * 1 is 5 <-- test 1, no
+* 5 * 2 is 10 <-- test 2, no
+* 5 * 3 is 15 <-- test 3, no
+* 5 * 4 is 20 <-- test 4, FOUND -- 20 / 5 is 4
+
+5 * 4 is 20 -- If you have 5 groups of 4 items each, you'll have 20 items.
+
+```{plantuml}
+@startditaa(--no-separation)
+5 x 4 is 20            20 / 5 is 4
+
+  +----+       +----+----+----+----+----+
+  |●●●●| 4     |●●●●|●●●●|●●●●|●●●●|●●●●| 20
+  +----+       +----+----+----+----+----+
+  |●●●●| 4       4    4    4    4    4   
+  +----+  
+  |●●●●| 4
+  +----+  
+  |●●●●| 4
+  +----+  
+  |●●●●| 4
+  +----+  
+    20    
+
+
+
+        +----------+
+        |          |
+        |  +--+   +++    +-+
+        |  |20| / |5| is |4+---+
+        |  +-++   +-+    +-+   |
+        |    |                 |
+        |    +-----------+     |
+        |                |     |
+        |                v     |
+        |  +-+   +-+    +--+   |
+        +->|5| x |4| is |20|   |
+           +-+   +++    +--+   |
+                  ^            |
+                  |            |
+                  +------------+
+@endditaa
+```
+
+Rather than testing each number one-by-one, it's faster to start with a number range and narrow / tweak it until you converge to the answer. That is, start with an arbitrary lower-bound and an upper-bound and test both. If the product is...
+
+* within the bound, narrow the number range by some amount.
+* above the bound, move the range down.
+* below the bound, move the range up.
+
+Repeat until the answer is found.
+
+For example, 2617 / 52...
+
+```{plantuml}
+@startditaa(--no-separation)
++------------+
+|            |
+|  +----+   ++-+    +-+
+|  |2617| / |52| is |?+---+
+|  +-+--+   +--+    +-+   |
+|    |                    |
+|    +-------------+      |
+|                  |      |
+|                  v      |
+|  +--+   +-+    +----+   |
++->|52| x |?| is |2617|   |
+   +--+   +++    +----+   |
+           ^              |
+           |              |
+           +--------------+
+@endditaa
+```
+
+Decide on a range and test...
+
+* ? = [10, 100]
+  * 10 * 52 = 520
+  * 100 * 52 = 5200
+
+2617 sits BETWEEN the range, so narrow...
+
+* ? = [20, 40]
+  * 20 * 52 = 1040
+  * 40 * 52 = 2080
+
+2617 sits BELOW the range, so move up...
+
+* ? = [40, 60]
+  * 40 * 52 = 2080
+  * 60 * 52 = 3120
+
+2617 sits between the range, so narrow...
+
+* ? = [50, 51]
+  * 50 * 52 = 2600
+  * 51 * 52 = 2652
+
+2617 sits between the range but doesn't make sense to narrow any further. The quotient is 50, the remainder is 17 (2617 - 2600).
+
+```{note}
+There's a specific algorithm for picking a starting range as well as how much to tweak that range in each iteration. You'll find those algorithms if you view the file for the code below (they aren't shown in the output).
+
+If you're doing this on paper you can just look and guess. If you're writing code you should probably use these algorithms or come up with something better.
+```
+
+The trial-and-error division algorithm written as code is as follows:
+
+```{output}
+wholenum_code/src/main/java/com/offbynull/wholenum/TrialAndErrorDivision.java
+java
+//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+```
+
+```{define-block}
+wholenumdivte
+wholenumdivte_macro/
+wholenum_code/target/appassembler/
+```
+
+```{wholenumdivte}
+98 3
+```
+
+## Long Division
+
+The algorithm used by humans to divide large numbers is called `{bm} long division`. In most cases, it can divide a number is less steps than trial-and-error division. Long division relies on three ideas...
 
 1. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
 
@@ -1787,13 +1990,9 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
    ```
 
-2. Humans have the ability to...
+2. Any number can be divided using trial-and-error division. 
 
-   * add large numbers together via vertical addition.
-   * subtract large numbers from each other via vertical subtraction.
-   * multiply large numbers together via vertical multiplication.
-
-3. When dividing, if the number being divided (dividend) has trailing zeros, those trailing zeros can be removed prior to the divison and then put back on after the division. For example 4500 / 6...
+3. When dividing, if the number being divided (dividend) has trailing zeros, those trailing zeros can be removed prior to the division and then put back on after the division. For example 4500 / 6...
 
    ```{plantuml}
    @startditaa(--no-separation)
@@ -1801,9 +2000,9 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
         +-----------------------------------------+
         |                                         |
         |                                         v
-   +--+-++   +-+                                +---+
-   |45|00| / |6|                                |000|
-   ++-+--+   +++                                +-+-+
+   +--+-++   +-+                                +--+
+   |45|00| / |6|                                |00|
+   ++-+--+   +++                                +-++
     |         |                                   |
     |      +--+                                   |
     |      |                                      |
@@ -1842,7 +2041,7 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
    ```
 
    ```{note}
-   If you know about expressions and order of operations and factoring, the reason why this works is...
+   If you know about expressions / order of operations / factoring, the reason why this works is...
    
     * 4500 / 7
     * (45 * 100) / 7  <-- factor out 100 from the 4500
@@ -1853,55 +2052,264 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
     * 700R300
    ```
 
-The intuition behind dividing up a big number is that numbers can be broken down into their individual components (idea 1). The broken down values are easier to divide because components have trailing 0s (idea 3). For example, to divide 43212 by 12, ...
+   When 4500 is broken up into groups of 6, this rule says that there willl be _at least_ 700 groups. 300 of the 4500 remain un-grouped, but the rule can be used again on these 300 items because 300 has trailing 0s.
 
- 1. begin by breaking up the divided into its single digit components (idea 1 above)...
+The basic algorithm for division is ...
+ 1. break it the dividend into its single digit components (rule 1).
+ 2. iteratively divide each component by the divisor (rule 3).
+ 3. combine (add) the quotients and the remainders.
+ 4. repeat the process again on the remainder if the remainder is greater than or equal to the divisor
 
-    ```
-    40000
-     3000
-      200
-       10
-        2
-    ```
+```{note}
+This isn't the exact algorithm for long division, but showing this algorithm will help with understanding why long division works. Long division is explained further on.
+```
 
- 2. Then, iteratively dividing each of those single digit components by the dividend, carrying over the remainder to the next division. Because each dividend has trailing 0s, the division should be easy to do (idea  3 above).
+For example, 752 / 3...
 
-    * Divide component: 40000 / 12 
-      * 4 / 12 (0000 stripped off)
-      * 0R4
-      * 00000R40000 (0000 re-appended)
-      * 0R40000 (simplify)
-    * Add remainder to the largerst component: 3000 + 40000
-      * 43000
-    * Divide component: 43000 / 12 
-      * 43 / 12 (000 stripped off)
-      * 3R7
-      * 3000R7000 (000 re-appended)
-    * Add remainder to the next component: 200 + 7000
-      * 7200
-    * Divide next component: 7200 / 12
-      * 72 / 12 (00 stripped off)
-      * 6R0
-      * 600R000 (00 re-appended)
-      * 600R0 (simplify)
-    * Add remainder to the next component: 10 + 0
-      * 10
-    * Divide next component: 10 / 12
-      * 1 / 12 (0 stripped off)
-      * 0R1
-      * 00R10 (0 re-appended)
-      * 0R10 (simplify)
-    * Add remainder to the next component: 2 + 10
-      * 12
-    * Divide next component: 12 / 12
-      * 1
+The dividend gets broken down to the following single digit components (rule 1)...
 
-3. Combine (add) the quotient from each of the component divisions above to get the quotient for the entire division. The remainder at the very end is the remainder for the entire division.
+```
+100
+100
+100     10      
+100     10      
+100     10      
+100     10     1
+100     10     1
+---     --     -
+700     50     2
 
-    final quotient: 0 + 3000 + 600 + 0 + 1 = 3601
 
-    final remainder: 0
+
+7 5 2
+│ │ │
+│ │ └─ ●
+│ │    ● 
+│ │
+│ └─── ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+```
+
+Divide each component by the divisor (rule 3)...
+
+ * 700 / 3 ...
+
+   ```{plantuml}
+   @startditaa(--no-separation)
+            remove trailing 0s from dividend
+       +------------------------------------------+
+       |                                          |
+       |                                          v
+   +-+-++   +-+                                 +--+
+   |7|00| / |3|                                 |00|
+   +++--+   +++                                 +-++
+    |        |                                    |
+    |     +--+                                    |
+    |     |                                       |
+    v     v                                       |
+   +-+   +-+                                      |
+   |7| / |3|                                      |
+   +++   +++                                      |
+    |     |                                       |
+    v     v                                       |
+   +---------+                                    |
+   | divide  |                                    |
+   +--+---+--+                                    |
+      |   |                                       |
+      v   v                                       |
+     +-+ +-+                                      |
+     |2|R|1|                                      |
+     +++ +++                                      |
+      |   |                                       |
+      v   v                                       |
+   +---+ +---+                                    |
+   |200|R|100|                                    |
+   +---+ +---+                                    |
+     ^      ^                                     |
+     |      |                                     |
+     |      +-------------------------------------+
+     |                                            |
+     +--------------------------------------------+
+            append trailing 0s to answer
+   @endditaa
+   ```
+   
+   The quotient is 200 and the remainder is 100. Repeat the process with the remainder...
+   
+   ```{plantuml}
+   @startditaa(--no-separation)
+            remove trailing 0s from dividend
+       +------------------------------------------+
+       |                                          |
+       |                                          v
+   +--+++   +-+                                  +-+
+   |10|0| / |3|                                  |0|
+   ++-+-+   +++                                  +++
+    |        |                                    |
+    |      +-+                                    |
+    |      |                                      |
+    v      v                                      |
+   +--+   +-+                                     |
+   |10| / |3|                                     |
+   ++-+   +++                                     |
+    |      |                                      |
+    v      v                                      |
+   +---------+                                    |
+   | divide  |                                    |
+   +--+---+--+                                    |
+      |   |                                       |
+      v   v                                       |
+     +-+ +-+                                      |
+     |3|R|1|                                      |
+     +++ +++                                      |
+      |   |                                       |
+      v   v                                       |
+    +--+ +--+                                     |
+    |30|R|10|                                     |
+    +--+ +--+                                     |
+     ^     ^                                      |
+     |     |                                      |
+     |     +--------------------------------------+
+     |                                            |
+     +--------------------------------------------+
+            append trailing 0s to answer
+   @endditaa
+   ```
+
+   The quotient is 30 and the remainder is 10. Repeat the process with the remainder...
+   
+   Rule 3 is no longer applicable but the division is small enough to do just by looking at it: 10 / 3 = 3R1.
+  
+   Quotient for 700 component: 200 + 30 + 3
+   
+   Remainder for 700 component: 1
+
+ * 50 / 3 ...
+
+   ```{plantuml}
+   @startditaa(--no-separation)
+            remove trailing 0s from dividend
+      +-------------------------------------------+
+      |                                           |
+      |                                           v
+   +-+++   +-+                                   +-+
+   |5|0| / |3|                                   |0|
+   +++-+   +++                                   +++
+    |       |                                     |
+    |     +-+                                     |
+    |     |                                       |
+    v     v                                       |
+   +-+   +-+                                      |
+   |5| / |3|                                      |
+   +++   +++                                      |
+    |     |                                       |
+    v     v                                       |
+   +---------+                                    |
+   | divide  |                                    |
+   +--+---+--+                                    |
+      |   |                                       |
+      v   v                                       |
+     +-+ +-+                                      |
+     |1|R|2|                                      |
+     +++ +++                                      |
+      |   |                                       |
+      v   v                                       |
+    +--+ +--+                                     |
+    |10|R|20|                                     |
+    +--+ +--+                                     |
+     ^     ^                                      |
+     |     |                                      |
+     |     +--------------------------------------+
+     |                                            |
+     +--------------------------------------------+
+            append trailing 0s to answer
+   @endditaa
+   ```
+
+   The quotient is 10 and the remainder is 20. Rule 3 is no longer applicable but the division is small enough to do just by virtue of    looking at it: 20 / 3 = 6R2.
+   
+   Quotient for 50 component: 10 + 6 = 16
+   
+   Remainder for 50 component: 2
+
+ * 2 / 3 ...
+
+   Quotient for the 2 component: 0
+
+   Remainder for the 2 component: 2
+
+Combined quotients: 200 + 30 + 3 + 16 is 249.
+
+Combined remainder:  1 + 2 + 2 is 5.
+
+The divisor (3) is less than the remainder (5), so repeat the process again from on the remainder. The remainder gets broken down to the following single digit components (rule 1)...
+
+```
+1
+1
+1 
+1
+1
+-
+5
+
+
+
+5
+│
+└─ ●
+   ● 
+   ● 
+   ● 
+   ● 
+```
+
+Divide each component by the divisor (rule 3)...
+
+ * 5 / 2 ...
+
+   Quotient for the 2 component: 1
+
+   Remainder for the 2 component: 2
+
+Combined quotients: 1.
+
+Combined remainder:  2.
+
+The divisor (3) is NOT less than the remainder (1), so the last remainder becomes the final remainder and the sum of all the quotients becomes the final quotient...
+
+Final quotient: 249 + 1 is 250.
+
+Final remainder: 2.
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
+
+TODO: NOW MOVE ON TO LONG DIVISION
 
 TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
 
@@ -10359,7 +10767,7 @@ __EXERCISE__
 
 3.1.61) temp today is -2 celcius (2 below 0)
 
-3.2.62) - is used for...
+3.1.62) - is used for...
  * subtraction 5-4
  * negative numbers -5
  * opposites -(-5) is 5   <-- this is confusing -- it's just multiplication -1\*(-5)
@@ -10369,6 +10777,172 @@ __EXERCISE__
 __TRY IT__
 
 3.27)
+
+```
+xx xxxx
+2   4
+```
+
+3.28)
+
+```
+xx xxxxx
+2    5
+```
+
+3.29)
+
+```
+oo oooo
+-2  -4
+```
+
+3.30)
+
+```
+oo ooooo
+-2   -5
+```
+
+3.31)
+
+```
+  xx 2
+oooo -4
+
+-2 remaining
+```
+
+3.32)
+
+```
+   xx 2
+ooooo -5
+
+-3 remaining
+```
+
+3.33)
+
+```
+xxxx 4
+oo   -2
+
+2 remaining
+```
+
+3.34)
+
+```
+xxxxx 5
+oo    -2
+
+3 remaining
+```
+
+3.35)
+
+* a)
+
+  ```
+  xxx xxxx
+   3   4
+
+  7 total
+  ```
+
+* b)
+
+  ```
+  xxxx 4
+     o -1
+
+  3 remaining
+  ```
+
+* c)
+
+  ```
+    xxxx 4
+  oooooo -6
+
+  -2 remaining
+  ```
+
+* d)
+
+  ```
+  oo oo
+  -2 -2
+
+  -4 total
+  ```
+
+3.36)
+
+* a)
+
+  ```
+  xxxxx x
+    5   1
+
+  6 total
+  ```
+
+* b)
+
+  ```
+  xxxxxxx 7
+      ooo -3
+
+  4 remaining
+  ```
+  
+* c)
+
+  ```
+        xx 2
+  oooooooo -8
+
+  6 remaining
+  ```
+  
+* d)
+
+  ```
+  ooo oooo
+   -3  -4
+  
+  -7 total
+  ```
+  
+3.37)
+
+ * a) 15 + (-32) = -17
+ * b) -19 + 76 = 57
+
+3.38)
+
+ * a) -55 + 9 = -46
+ * b) 43 + (-17) = 26
+
+3.39) -31 + (-19) = -50
+
+3.40) -42 + (-28) = -70
+
+3.41)
+ * -2 + 5(-4 + 7) 
+ * -2 + 5(3)
+ * -2 + 15
+ * 13
+
+3.42)
+ * -4 + 2(-3 + 5)
+ * -4 + 2(2)
+ * -4 + 4
+ * 0
+
+3.43)
 
 START BACK UP HERE
 START BACK UP HERE

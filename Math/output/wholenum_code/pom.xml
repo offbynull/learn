@@ -47,6 +47,10 @@
                                     <mainClass>com.offbynull.wholenum.MainMultiplication</mainClass>
                                     <id>MainMultiplication</id>
                                 </program>
+                                <program>
+                                    <mainClass>com.offbynull.wholenum.TrialAndErrorDivision</mainClass>
+                                    <id>TrialAndErrorDivision</id>
+                                </program>
                             </programs>
                         </configuration>
                     </execution>
