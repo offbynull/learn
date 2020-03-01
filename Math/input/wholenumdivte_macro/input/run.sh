@@ -1,5 +1,5 @@
 rm -rf /tmp/proj
 mkdir /tmp/proj
-cp -r /input/wholenum_code/target/appassembler/* /tmp/proj/
+cp -r /input/arithmetic_code/* /tmp/proj/
 cd /tmp/proj
-sh ./bin/TrialAndErrorDivision
+python WholeNumberDivTeLauncher.py < /input/input.data > /output/output.md

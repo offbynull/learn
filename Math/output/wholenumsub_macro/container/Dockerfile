@@ -1,1 +1,1 @@
-FROM adoptopenjdk:13.0.2_8-jdk-hotspot
+FROM python:3.7.6-alpine3.11

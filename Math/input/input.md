@@ -730,15 +730,15 @@ If 2 individual single digit components combine together to results in an extra 
 The way to perform this algorithm via code is as follows...
 
 ```{output}
-wholenum_code/src/main/java/com/offbynull/wholenum/MainAddition.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_ADD\s*\n([\s\S]+)\n\s*#MARKDOWN_ADD
 ```
 
 ```{define-block}
 wholenumadd
 wholenumadd_macro/
-wholenum_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{wholenumadd}
@@ -1132,15 +1132,15 @@ kthelper_code/target/appassembler/
 The way to perform this algorithm via code is as follows...
 
 ```{output}
-wholenum_code/src/main/java/com/offbynull/wholenum/MainSubtraction.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_SUB\s*\n([\s\S]+)\n\s*#MARKDOWN_SUB
 ```
 
 ```{define-block}
 wholenumsub
 wholenumsub_macro/
-wholenum_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{wholenumsub}
@@ -1599,15 +1599,15 @@ Then, add the the answers from each bottom iteration to get the final answer...
 The way to perform this algorithm via code is as follows...
 
 ```{output}
-wholenum_code/src/main/java/com/offbynull/wholenum/MainMultiplication.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_MUL\s*\n([\s\S]+)\n\s*#MARKDOWN_MUL
 ```
 
 ```{define-block}
 wholenummul
 wholenummul_macro/
-wholenum_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{wholenummul}
@@ -1931,15 +1931,15 @@ If you're doing this on paper you can just look and guess. If you're writing cod
 The trial-and-error division algorithm written as code is as follows:
 
 ```{output}
-wholenum_code/src/main/java/com/offbynull/wholenum/TrialAndErrorDivision.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_DIVTE\s*\n([\s\S]+)\n\s*#MARKDOWN_DIVTE
 ```
 
 ```{define-block}
 wholenumdivte
 wholenumdivte_macro/
-wholenum_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{wholenumdivte}
