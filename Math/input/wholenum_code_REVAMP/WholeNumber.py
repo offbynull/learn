@@ -60,7 +60,7 @@ class WholeNumber:
             return Digit(0)
         return self.digits[key]
 
-    def __setitem__(self: WholeNumber, key: int, value: Digit) -> None:
+    def __setitem__(self: WholeNumber, key: int, value: Union[Digit, int]) -> None:
         if key >= len(self.digits):
             excess = key - len(self.digits) + 1
             self.digits.extend([Digit(0)] * excess)
@@ -91,16 +91,16 @@ class WholeNumber:
     def _highlight(self: WholeNumber, *idxes: int) -> None:
         digits_copy = self.digits[:]
 
-        maxIdxes = max(idxes)
-        if maxIdxes >= len(digits_copy):
-            excess = maxIdxes - len(digits_copy) + 1
+        max_idxes = max(idxes)
+        if max_idxes >= len(digits_copy):
+            excess = max_idxes - len(digits_copy) + 1
             digits_copy.extend([Digit(0)] * excess)
 
-        output = ''
+        output_str = ''
         for i in range(0, len(digits_copy)):
             dout = str(digits_copy[i].value)
-            output = ('[' + dout + ']' if i in idxes else dout) + ' ' + output
-        return output
+            output_str = ('[' + dout + ']' if i in idxes else dout) + ' ' + output_str
+        return output_str
 
     def shift_left(self: WholeNumber, count: int) -> None:
         for i in range(0, count):
@@ -242,48 +242,48 @@ class WholeNumber:
         output_indent()
         try:
             sub_cache = [
-                [0   ,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-                [1   ,0   ,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-                [2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-                [3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-                [4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-                [5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-                [6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None,None,None,None],
-                [7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None,None,None],
-                [8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None,None],
-                [9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None,None],
-                [10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None,None],
-                [11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None,None],
-                [12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None,None],
-                [13  ,12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None,None],
-                [14  ,13  ,12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None,None],
-                [15  ,14  ,13  ,12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None,None],
-                [16  ,15  ,14  ,13  ,12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None,None],
-                [17  ,16  ,15  ,14  ,13  ,12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None,None],
-                [18  ,17  ,16  ,15  ,14  ,13  ,12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ,None],
-                [19  ,18  ,17  ,16  ,15  ,14  ,13  ,12  ,11  ,10  ,9   ,8   ,7   ,6   ,5   ,4   ,3   ,2   ,1   ,0   ]
+                [0,    None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None],
+                [1,    0,    None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None],
+                [2,    1,    0,    None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None],
+                [3,    2,    1,    0,    None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None],
+                [4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None, None, None, None, None, None, None, None],
+                [5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None, None, None, None, None, None, None],
+                [6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None, None, None, None, None, None],
+                [7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None, None, None, None, None],
+                [8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None, None, None, None],
+                [9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None, None, None],
+                [10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None, None],
+                [11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None, None],
+                [12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None, None],
+                [13,   12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None, None],
+                [14,   13,   12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None, None],
+                [15,   14,   13,   12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None, None],
+                [16,   15,   14,   13,   12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None, None],
+                [17,   16,   15,   14,   13,   12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None, None],
+                [18,   17,   16,   15,   14,   13,   12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0,    None],
+                [19,   18,   17,   16,   15,   14,   13,   12,   11,   10,   9,    8,    7,    6,    5,    4,    3,    2,    1,    0   ]
             ]
 
             # copy self because it may get modified during borrowing phase
-            self = self.copy()
+            self_copy = self.copy()
 
-            count = max(len(self.digits), len(other.digits))
+            count = max(len(self_copy.digits), len(other.digits))
 
             result = WholeNumber()
             for pos in range(0, count):  # from smallest to largest component
-                output(f'Targeting {self._highlight(pos)} and {other._highlight(pos)}')
+                output(f'Targeting {self_copy._highlight(pos)} and {other._highlight(pos)}')
                 output_indent()
 
-                digit1 = self[pos]
+                digit1 = self_copy[pos]
                 digit2 = other[pos]
                 result_digit = sub_cache[digit1.value][digit2.value]
                 if result_digit is not None:
                     output(f'Using cache for subtraction: {digit1} - {digit2} = {result_digit}')
                 else:
                     output('Not possible -- attempting to borrow')
-                    self._borrow_from_next(sub_cache, pos)
+                    self_copy._borrow_from_next(sub_cache, pos)
 
-                    digit1 = self[pos]
+                    digit1 = self_copy[pos]
                     digit2 = other[pos]
                     result_digit = sub_cache[digit1.value][digit2.value]
                     output(f'Using cache for subtraction: {digit1} - {digit2} = {result_digit}')
@@ -296,7 +296,7 @@ class WholeNumber:
         finally:
             output_unindent()
 
-    def _borrow_from_next(self: WholeNumber, sub_cache: List[List[int]], pos: WholeNumber) -> WholeNumber:
+    def _borrow_from_next(self: WholeNumber, sub_cache: List[List[int]], pos: int) -> None:
         output_indent()
         try:
             if pos >= len(self):
@@ -493,7 +493,7 @@ class WholeNumber:
             wn_range.max -= adjustment
 
     @staticmethod
-    def move_up_range(wn_range: WholeNumber) -> None:
+    def move_up_range(wn_range: WholeNumberRange) -> None:
         diff = wn_range.max - wn_range.min - WholeNumber(1)
         adjustment = WholeNumber('1' + ('0' * (len(diff) - 1)))
 
@@ -501,7 +501,7 @@ class WholeNumber:
         wn_range.max += adjustment
 
     @staticmethod
-    def move_down_range(wn_range: WholeNumber) -> None:
+    def move_down_range(wn_range: WholeNumberRange) -> None:
         diff = wn_range.max - wn_range.min - WholeNumber(1)
         adjustment = WholeNumber('1' + ('0' * (len(diff) - 1)))
 
