@@ -1866,7 +1866,7 @@ Knowing this, multiplication can be used to check if some number is the quotient
 @endditaa
 ```
 
-Rather than testing each number one-by-one, it's faster to start with a number range and narrow / tweak it until you converge to the answer. That is, start with an arbitrary lower-bound and an upper-bound and test both. If the product is...
+Rather than testing each number one-by-one, it's faster to start with a number range and narrow / tweak it until you converge to the answer. That is, start with an arbitrary lower-bound and upper-bound and test both. If the product is...
 
 * within the bound, narrow the number range by some amount.
 * above the bound, move the range down.
@@ -1990,12 +1990,37 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
           ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
    ```
 
-2. Any number can be divided using trial-and-error division. 
+2. Any number can be divided using trial-and-error division. For example, 20 / 5...
 
-3. When dividing, if the number being divided (dividend) has trailing zeros, those trailing zeros can be removed prior to the division and then put back on after the division. For example 4500 / 6...
+   ```{svgbob}
+   +----------+
+   |          |
+   |  +--+   +++    +-+
+   |  |20| / |5| is |?+---+
+   |  +-++   +-+    +-+   |
+   |    |                 |
+   |    +-----------+     |
+   |                |     |
+   |                v     |
+   |  +-+   +-+    +--+   |
+   +->|5| x |?| is |20|   |
+      +-+   +++    +--+   |
+             ^            |
+             |            |
+             +------------+
+   ```
 
-   ```{plantuml}
-   @startditaa(--no-separation)
+   * 5 * 1 is 5 <-- test 1, no
+   * 5 * 9 is 45 <-- test 9, no
+   * 5 * 2 is 10 <-- test 2, no
+   * 5 * 8 is 40 <-- test 8, no
+   * 5 * 3 is 15 <-- test 3, no
+   * 5 * 7 is 35 <-- test 7, no
+   * 5 * 4 is 20 <-- test 4, FOUND -- 20 / 5 is 4
+
+3. When dividing, if the number being divided (dividend) has trailing zeros, those trailing zeros can be removed prior to the division and then put back on after the division. For example, 4500 / 6...
+
+   ```{svgbob}
             remove trailing 0s from dividend
         +-----------------------------------------+
         |                                         |
@@ -2012,26 +2037,27 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
    +-++   +++                                     |
      |     |                                      |
      v     v                                      |
-   +---------+                                    |
-   | divide  |                                    |
-   +--+---+--+                                    |
+   +-----------+                                  |
+   | TE divide |                                  |
+   +--+---+----+                                  |
       |   |                                       |
       v   v                                       |
      +-+ +-+                                      |
      |7|R|3|                                      |
      +++ +++                                      |
       |   |                                       |
-      v   v                                       |
-   +---+ +---+                                    |
-   |700|R|300|                                    |
-   +---+ +---+                                    |
-     ^      ^                                     |
-     |      |                                     |
-     |      +-------------------------------------+
-     |                                            |
-     +--------------------------------------------+
+    +-+   ++                                      |
+    |      |                                      |
+    v      v                                      |
+   +-+--+ +-+--+                                  |
+   |7|00|R|3|00|                                  |
+   +-+--+ +-+--+                                  |
+       ^      ^                                   |
+       |      |                                   |
+       |      +-----------------------------------+
+       |                                          |
+       +------------------------------------------+
             append trailing 0s to answer
-   @endditaa
    ```
 
    ```{note}
@@ -2054,339 +2080,300 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
 
    When 4500 is broken up into groups of 6, this rule says that there willl be _at least_ 700 groups. 300 of the 4500 remain un-grouped, but the rule can be used again on these 300 items because 300 has trailing 0s.
 
-The basic algorithm for division is ...
- 1. break it the dividend into its single digit components (rule 1).
- 2. iteratively divide each component by the divisor (rule 3).
- 3. combine (add) the quotients and the remainders.
- 4. repeat the process again on the remainder if the remainder is greater than or equal to the divisor
+The idea behind long division is to break up the dividend into its individual single digit components results (rule 1) and divide each component by the divisor. For example, 752 / 3...
+
+```{svgbob}
+                              753                 
+                               |                  
+        +----------------------+-----------------+
+        |                      |                 |
+        v                      |                 |
+  +----------+                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 v                 |
+  |          |            +-----+                |
+  |          |            |     |                |
+  |          |            |     |                v
+  +----------+            +-----+               . .
+      700                   50                   2
+       |                     |                   |
+       |                     |                   |
+       v                     v                   v
+ how many groups      how many groups     how many groups
+ of 3 does 700        of 3 does 50        of 2 does 3
+ make? "700 / 3"      make? "50 / 3"      make? "2 / 3"
+```
+
+Because of (rule 3), each of the divisions are easily do-able using trial-and-error division (rule 2). The trialing zeros for each component are essentially ignored during trial-and-error division, meaning that the numbers being worked with are much smaller.
+
+```{svgbob}
+                              753                 
+                               |                  
+        +----------------------+-----------------+
+        |                      |                 |
+        v                      |                 |
+  +----------+                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 v                 |
+  |          |            +-----+                |
+  |          |            |     |                |
+  |          |            |     |                v
+  +----------+            +-----+               . .
+      700                   50                   2
+       |                     |                   |
+       v                     v                   v
+     +--+                  +--+                +--+   
+   +-|TE|-+              +-|TE|-+            +-|TE|-+ 
+   | +--+ |              | +--+ |            | +--+ | 
+   v      v              v      v            v      v 
+  200    R100           10     R20           0      R2
+                
+  atleast 200           atleast 10           atleast 0   
+  groups of 3           groups of 3          groups of 3   
+  with 100 items        with 20 items        with 2 items
+  unaccounted           unaccounted          unaccounted   
+  for                   for                  for            
+```
 
 ```{note}
-This isn't the exact algorithm for long division, but showing this algorithm will help with understanding why long division works. Long division is explained further on.
+The TE block is applying both rule 3 and rule 2. The trialing 0s are being stripped off, trial-and-error division is being performed, then the 0s are re-append to the quotient and the remainder.
 ```
 
-For example, 752 / 3...
-
-The dividend gets broken down to the following single digit components (rule 1)...
-
-```
-100
-100
-100     10      
-100     10      
-100     10      
-100     10     1
-100     10     1
----     --     -
-700     50     2
+After each division, the remainders need to be accounted for. That is, if the remaining items can be grouped by 3, they should be. Perform the process on the remainders until there aren't enough remaining items to form a group (until the remainder is less than the divisor).
 
 
-
-7 5 2
-│ │ │
-│ │ └─ ●
-│ │    ● 
-│ │
-│ └─── ●●●●●●●●●●
-│      ●●●●●●●●●●
-│      ●●●●●●●●●●
-│      ●●●●●●●●●●
-│      ●●●●●●●●●●
-│
-└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-```
-
-Divide each component by the divisor (rule 3)...
-
- * 700 / 3 ...
-
-   ```{plantuml}
-   @startditaa(--no-separation)
-            remove trailing 0s from dividend
-       +------------------------------------------+
-       |                                          |
-       |                                          v
-   +-+-++   +-+                                 +--+
-   |7|00| / |3|                                 |00|
-   +++--+   +++                                 +-++
-    |        |                                    |
-    |     +--+                                    |
-    |     |                                       |
-    v     v                                       |
-   +-+   +-+                                      |
-   |7| / |3|                                      |
-   +++   +++                                      |
-    |     |                                       |
-    v     v                                       |
-   +---------+                                    |
-   | divide  |                                    |
-   +--+---+--+                                    |
-      |   |                                       |
-      v   v                                       |
-     +-+ +-+                                      |
-     |2|R|1|                                      |
-     +++ +++                                      |
-      |   |                                       |
-      v   v                                       |
-   +---+ +---+                                    |
-   |200|R|100|                                    |
-   +---+ +---+                                    |
-     ^      ^                                     |
-     |      |                                     |
-     |      +-------------------------------------+
-     |                                            |
-     +--------------------------------------------+
-            append trailing 0s to answer
-   @endditaa
-   ```
-   
-   The quotient is 200 and the remainder is 100. Repeat the process with the remainder...
-   
-   ```{plantuml}
-   @startditaa(--no-separation)
-            remove trailing 0s from dividend
-       +------------------------------------------+
-       |                                          |
-       |                                          v
-   +--+++   +-+                                  +-+
-   |10|0| / |3|                                  |0|
-   ++-+-+   +++                                  +++
-    |        |                                    |
-    |      +-+                                    |
-    |      |                                      |
-    v      v                                      |
-   +--+   +-+                                     |
-   |10| / |3|                                     |
-   ++-+   +++                                     |
-    |      |                                      |
-    v      v                                      |
-   +---------+                                    |
-   | divide  |                                    |
-   +--+---+--+                                    |
-      |   |                                       |
-      v   v                                       |
-     +-+ +-+                                      |
-     |3|R|1|                                      |
-     +++ +++                                      |
-      |   |                                       |
-      v   v                                       |
-    +--+ +--+                                     |
-    |30|R|10|                                     |
-    +--+ +--+                                     |
-     ^     ^                                      |
-     |     |                                      |
-     |     +--------------------------------------+
-     |                                            |
-     +--------------------------------------------+
-            append trailing 0s to answer
-   @endditaa
-   ```
-
-   The quotient is 30 and the remainder is 10. Repeat the process with the remainder...
-   
-   Rule 3 is no longer applicable but the division is small enough to do just by looking at it: 10 / 3 = 3R1.
-  
-   Quotient for 700 component: 200 + 30 + 3
-   
-   Remainder for 700 component: 1
-
- * 50 / 3 ...
-
-   ```{plantuml}
-   @startditaa(--no-separation)
-            remove trailing 0s from dividend
-      +-------------------------------------------+
-      |                                           |
-      |                                           v
-   +-+++   +-+                                   +-+
-   |5|0| / |3|                                   |0|
-   +++-+   +++                                   +++
-    |       |                                     |
-    |     +-+                                     |
-    |     |                                       |
-    v     v                                       |
-   +-+   +-+                                      |
-   |5| / |3|                                      |
-   +++   +++                                      |
-    |     |                                       |
-    v     v                                       |
-   +---------+                                    |
-   | divide  |                                    |
-   +--+---+--+                                    |
-      |   |                                       |
-      v   v                                       |
-     +-+ +-+                                      |
-     |1|R|2|                                      |
-     +++ +++                                      |
-      |   |                                       |
-      v   v                                       |
-    +--+ +--+                                     |
-    |10|R|20|                                     |
-    +--+ +--+                                     |
-     ^     ^                                      |
-     |     |                                      |
-     |     +--------------------------------------+
-     |                                            |
-     +--------------------------------------------+
-            append trailing 0s to answer
-   @endditaa
-   ```
-
-   The quotient is 10 and the remainder is 20. Rule 3 is no longer applicable but the division is small enough to do just by virtue of    looking at it: 20 / 3 = 6R2.
-   
-   Quotient for 50 component: 10 + 6 = 16
-   
-   Remainder for 50 component: 2
-
- * 2 / 3 ...
-
-   Quotient for the 2 component: 0
-
-   Remainder for the 2 component: 2
-
-Combined quotients: 200 + 30 + 3 + 16 is 249.
-
-Combined remainder:  1 + 2 + 2 is 5.
-
-The divisor (3) is less than the remainder (5), so repeat the process again from on the remainder. The remainder gets broken down to the following single digit components (rule 1)...
-
-```
-1
-1
-1 
-1
-1
--
-5
-
-
-
-5
-│
-└─ ●
-   ● 
-   ● 
-   ● 
-   ● 
+```{svgbob}
+                              753                 
+                               |                  
+        +----------------------+-----------------+
+        |                      |                 |
+        v                      |                 |
+  +----------+                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 v                 |
+  |          |            +-----+                |
+  |          |            |     |                |
+  |          |            |     |                v
+  +----------+            +-----+               . .
+      700                   50                   2
+       |                     |                   |
+       v                     v                   v
+     +--+                  +--+                +--+   
+   +-|TE|-+              +-|TE|-+            +-|TE|-+ 
+   | +--+ |              | +--+ |            | +--+ | 
+   v      v              v      v            v      v 
+  200    R100           10     R20           0      R2  add quotients: "200+10+0=210"-+
+          |                    |                    |                                 |
+          +--------------------+--------------------+                                 |
+                               |                                                      |
+                               v                                                      |
+                             +---+                                                    |
+                             |ADD|                                                    |
+                             +-+-+                                                    |
+                               |                                                      |
+                               v                                                      |
+                              122                                                     |
+                               |                                                      |
+        +----------------------+-----------------+                                    |
+        |                      |                 |                                    |
+        v                      |                 |                                    |
+  +----------+                 v                 |                                    |
+  |          |            +-----+                |                                    |
+  |          |            |     |                v                                    |
+  +----------+            +-----+               . .                                   |
+      100                   20                   2                                    |
+       |                     |                   |                                    |
+       v                     v                   v                                    |
+     +--+                  +--+                +--+                                   |
+   +-|TE|-+              +-|TE|-+            +-|TE|-+                                 |
+   | +--+ |              | +--+ |            | +--+ |                                 |
+   v      v              v      v            v      v                                 |
+  30     R10             6     R2            0      R2  add quotients: "30+6+0=36"----+
+          |                    |                    |                                 |
+          +--------------------+--------------------+                                 |
+                               |                                                      |
+                               v                                                      |
+                             +---+                                                    |
+                             |ADD|                                                    |
+                             +-+-+                                                    |
+                               |                                                      |
+                               v                                                      |
+                               14                                                     |
+                               |                                                      |
+                               +-----------------+                                    |
+                               |                 |                                    |
+                               |                 |                                    |
+                               |                 |                                    |
+                               v                 |                                    |
+                          +-----+                v                                    |
+                          +-----+             . . . .                                 |
+                            10                   4                                    |
+                             |                   |                                    |
+                             v                   v                                    |
+                           +--+                +--+                                   |
+                         +-|TE|-+            +-|TE|-+                                 |
+                         | +--+ |            | +--+ |                                 |
+                         v      v            v      v                                 |
+                         3     R1            1      R1  add quotients: "3+1=4"--------+
+                               |                    |                                 |
+                               +--------------------+                                 |
+                               |                                                      |
+                               v                                                      v
+                             +---+                                                  +---+
+                             |ADD|                                                  |ADD|
+                             +-+-+                                                  +-+-+
+                               |                                                      |
+                               v                                                      v
+                               2                                                     250
+                        (final remainder)                                      (final quotient)
 ```
 
-Divide each component by the divisor (rule 3)...
+The answer to 752 / 3 is 250R2.
 
- * 5 / 2 ...
+```{note}
+You can confirm this by doing 250 * 3 then adding 2. The result shuold be 752.
+```
 
-   Quotient for the 2 component: 1
+The way humans perform long division is similar, but it focuses on one component at a time. Starting from the largest component to the smallest component, the remainder from each division gets rolled into the next. For example, 752 / 3...
 
-   Remainder for the 2 component: 2
-
-Combined quotients: 1.
-
-Combined remainder:  2.
-
-The divisor (3) is NOT less than the remainder (1), so the last remainder becomes the final remainder and the sum of all the quotients becomes the final quotient...
-
-Final quotient: 249 + 1 is 250.
-
-Final remainder: 2.
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: NOW MOVE ON TO LONG DIVISION
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-TODO: CHOOSE A SMALLER DIVISOR SO YOU CAN EASILY DIAGRAM
-
-What is the process above doing? It's effectively breaking up the dividend into parts that can be easily divided based on rule 3. Each part is divided by the divisor, and any remainder so it doesn't get lost.
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-Once each part has been divided, the divided up pieces are collected (added) to get the overall pieces for the original number. The final remainder is also the remainder for the original number.
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-TODO: ADD CIRCLE DIAGRAMS HERE
-
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
-
-TODO: CONTINUE HERE CONTINUE HERE CONTINUE HERE TO SHOW DIVISION USING LONG DIVISION FORMAT
+```{svgbob}
+                              753                 
+                               |                  
+        +----------------------+-----------------+
+        |                      |                 |
+        v                      |                 |
+  +----------+                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 |                 |
+  |          |                 v                 |
+  |          |            +-----+                |
+  |          |            |     |                |
+  |          |            |     |                v
+  +----------+            +-----+               . .
+      700                   50                   2
+       |                     |                   |
+       v                     |                   |
+     +--+                    |                   |
+   +-|TE|-+                  |                   |
+   | +--+ |                  |                   |
+   v      v                  |                   |
+  200    R100                v                   |
+   |      |                +---+                 |
+   |      +--------------->|ADD|                 |
+   |                       +---+                 |
+   |                         |                   |
+   |                         v                   |
+   |                        150                  |
+   |                         |                   |
+   |                         v                   |
+   |                       +--+                  |
+   |                     +-|TE|-+                |
+   |                     | +--+ |                |
+   |                     v      v                |
+   |                    50     R00               v
+   |                     |      |              +---+
+   +----------+----------+      +------------->|ADD|
+              |                                +---+
+              v                                  |
+            +---+                                v
+            |ADD|                                2
+            +---+                        (final remainder)
+              |
+              v
+             250
+        (final quotient)
+```
 
 ```{define-block}
 ktlongdiv
