@@ -153,7 +153,7 @@ tspan.head{
 </g>
 <g>
 <text x="17" y="716">
-atleast
+at
 </text>
 </g>
 <g>
@@ -174,6 +174,11 @@ unaccounted
 <g>
 <text x="17" y="780">
 for
+</text>
+</g>
+<g>
+<text x="41" y="716">
+least
 </text>
 </g>
 <g>
@@ -202,7 +207,7 @@ of
 </text>
 </g>
 <g>
-<text x="81" y="716">
+<text x="89" y="716">
 200
 </text>
 </g>
@@ -223,7 +228,7 @@ items
 </g>
 <g>
 <text x="193" y="716">
-atleast
+at
 </text>
 </g>
 <g>
@@ -244,6 +249,11 @@ unaccounted
 <g>
 <text x="193" y="780">
 for
+</text>
+</g>
+<g>
+<text x="217" y="716">
+least
 </text>
 </g>
 <g>
@@ -277,13 +287,13 @@ of
 </text>
 </g>
 <g>
-<text x="257" y="716">
-10
+<text x="257" y="748">
+items
 </text>
 </g>
 <g>
-<text x="257" y="748">
-items
+<text x="265" y="716">
+10
 </text>
 </g>
 <g>
@@ -298,7 +308,7 @@ items
 </g>
 <g>
 <text x="361" y="716">
-atleast
+at
 </text>
 </g>
 <g>
@@ -332,6 +342,11 @@ TE
 </text>
 </g>
 <g>
+<text x="385" y="716">
+least
+</text>
+</g>
+<g>
 <text x="393" y="572">
 2
 </text>
@@ -362,7 +377,7 @@ items
 </text>
 </g>
 <g>
-<text x="425" y="716">
+<text x="433" y="716">
 0
 </text>
 </g>
