@@ -204,7 +204,7 @@ tspan.head{
 </g>
 <g>
 <text x="17" y="284">
-trial-and-error
+trial
 </text>
 </g>
 <g>
@@ -253,6 +253,11 @@ R
 </text>
 </g>
 <g>
+<text x="65" y="284">
+and
+</text>
+</g>
+<g>
 <text x="65" y="492">
 3
 </text>
@@ -275,6 +280,11 @@ append
 <g>
 <text x="81" y="492">
 00
+</text>
+</g>
+<g>
+<text x="97" y="284">
+error
 </text>
 </g>
 <g>
