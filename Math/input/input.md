@@ -2166,7 +2166,7 @@ The algorithm used by humans to divide large numbers is called `{bm} long divisi
 The idea behind long division is to break up the dividend into its individual single digit components results (idea 1) and divide each component by the divisor. For example, 752 / 3...
 
 ```{svgbob}
-                              753                 
+                              752               
                                |                    
                                v                    
                            +-------+                
@@ -2186,7 +2186,7 @@ The idea behind long division is to break up the dividend into its individual si
 Each of the divisions are easy to perform because trialing 0s can be stripped-off prior to trial-and-error division (ideas 2 and 3). That is, the actual numbers being input into trial-and-error division are much smaller than they would normally be because trailing 0s are removed. Smaller numbers mean easier to perform.
 
 ```{svgbob}
-                              753                 
+                              752                 
                                |                    
                                v                    
                            +-------+                
@@ -2224,7 +2224,7 @@ The diagram is intended to be an intermediary step to reasoning about long divis
 
 
 ```{svgbob}
-                              753 (ITERATION 1)                 
+                              752 (ITERATION 1)                 
                                |                    
                                v                    
                            +-------+                
@@ -2325,10 +2325,10 @@ The answer to 752 / 3 is 250R2.
 You can confirm this by doing 250 * 3 then adding 2. The result shuold be 752.
 ```
 
-This proess can be made much simpler by focusing on one component at a time. Starting from the largest component to the smallest component, divide but then roll-in (add) the remainder into the next component. The thought process is exactly the same as above -- the division is being performed on a component and the remaining items from that division are being accounted for because they're being added next component (which gets divided next). For example, 752 / 3...
+This proess can be made much simpler by focusing on one component at a time. Starting from the largest component to the smallest component, divide but then roll-in (add) the remainder into the next component. The thought process is exactly the same as above -- the division is being performed on a component and the remaining items from that division are being accounted for because they're being added to the next component (which gets divided next). For example, 752 / 3...
 
 ```{svgbob}
-                              753                 
+                              752                 
                                |                    
                                v                    
                            +-------+                
@@ -2491,6 +2491,26 @@ Then, put the remainder under that... Note that this is subtraction -- 8-8=0
 {\phantom{004.}0}
 ```
 
+# Integer Number Addition
+
+TODO: conceptualize as number line
+
+TODO: conceptualize as cancelling opposite counters as defined in chapter 3.2 -- if there's a positive for a negative, cancel it out
+
+TODO: write algorithm that expands on WholeNumber code -- WholeNumber class is used to represent values
+
+# Integer Number Subtraction
+
+TODO: conceptualize as number line
+
+TODO: conceptualize as number line
+
+TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here is confusing and this entire concept may be better conceptualized as a number line
+
+
+# Integer Number Multiplication
+
+# Integer Number Division
 
 # Multiple
 
@@ -3192,7 +3212,7 @@ To `{bm} solve` an equation means to determine the values of the variables in th
 
  The set of variable to number mappings for an equation is called a `{bm} solution` -- `{kt} x=6` is the solution of the equation.
 
-TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than twice x = 2x-(9*5))
+TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than twice x = 2x-(9*5)). If you see a comma, treat it like you're putting parenthesis around everything before and then applying the stuff after -- e.g. sum of 4 and 1, increased by 8 = (4+1) + 8.
 
 
 
@@ -11001,6 +11021,368 @@ oo    -2
  * 0
 
 3.43)
+ * a) -3 + 5 = 2
+ * b) -17 + 5 = 12
+
+3.44)
+ * a) -5 + 7 = 2
+ * b) -8 + 7 = -1
+
+3.45)
+ * a) -8 + 2 = 6
+ * b) -(-8) + 2 = 8 + 2 = 10
+
+3.46)
+ * a) -9 + 8 = -1
+ * b) -(-9) + 8 = 9 + 8 = 17
+
+3.47)
+ * -19 + 2(14)
+ * -19 + 28
+ * 9
+
+3.48)
+ * 5(4) + -7
+ * 20 + -7
+ * 13
+
+3.49)
+ * (-18 + 24)^2
+ * (6)^2
+ * 36
+
+3.50)
+ * (-8 + 10)^2
+ * (2)^2
+ * 4
+
+3.51)
+ * -7 + 4
+ * -3
+
+3.52)
+ * -8 + -6
+ * -14
+
+3.53)
+ * (9 + -16) + 4
+ * -7
+
+3.54)
+ * (-8 + -12) + 7
+ * (-20) + 7
+ * -13
+
+3.55) -10 + 14 = 6
+
+3.56) -16 + -17 = -33
+
+3.57) 20 + -9 + 7 + -4 = 14
+
+3.58) 25 + 5 + -8 + 15 = 37
+
+__EXERCISE__
+
+3.2.63) 7 + 4 = 11
+
+```
+ppppppp pppp
+```
+
+3.2.64) 8 + 5 = 13
+
+```
+pppppppp ppppp
+```
+
+3.2.65) -6 + -5 = -11
+
+```
+nnnnnn nnnnn
+```
+
+3.2.66) -5 + -5 = -10
+
+```
+nnnnn nnnnn
+```
+
+3.2.67) -7 + 5 = -2
+
+```
+nnnnnnn
+ppppp
+```
+
+3.2.68) -9 + 6 = -3
+
+```
+nnnnnnnnn
+pppppp
+```
+
+3.2.69) 8 + -7 = 1
+
+```
+pppppppp
+nnnnnnn
+```
+
+3.2.70) 9 + -4 = 5
+
+```
+ppppppppp
+nnnn
+```
+
+3.2.71) -21 + -59 = -80
+
+3.2.72) -35 + -47 = -92
+
+3.2.73) 48 + -16 = 32
+
+3.2.74) 34 + 19 = 15
+
+3.2.75) -200 + 65 = 135
+
+3.2.76) -150 + 45 = 105
+
+3.2.77) 2 + -8 +  6 = 0
+
+3.2.78) 4 + -9 + 7 = 11
+
+3.2.79) -14 + -12 + 4 = -22
+
+3.2.80) -17 + -18 + 6 = -29
+
+3.2.81) 135 + -110 + 83 = 25 + 83 = 108
+
+3.2.82) 140 + -75 + 67 = 132
+
+3.2.83) -32 + 24 + -6 + 10 = -8 + 4 = 4
+
+3.2.84) -38 + 27 + -8 + 12 = 11 + 4 = 15
+
+3.2.85) 19 + 2(-3 + 8) = 19 + 2(5) = 19 + 10 = 29
+
+3.2.86) 24 + 3(-5 + 9) = 24 + 3(4) = 24 + 12 = 36
+
+3.2.87)
+ * a) -26 + 8 = -18
+ * b) -95 + 8 = -87
+
+3.2.88)
+ * a) -29 + 9 = -20
+ * b) -84 + 9 = -75
+
+3.2.89)
+ * a) -33 + -14 = -47
+ * b) 30 + -14 = 16
+
+3.2.90)
+ * a) -21 + -27 = -48
+ * b) 44 + -21 = 23
+
+3.2.91)
+ * a) -7 + 3 = -4
+ * b) -(-7) + 3 = 7 + 3 = 10
+
+3.2.92)
+ * a) -11 + 6 = -5
+ * b) -(-11) + 6 = 11 + 6 = 17
+
+3.2.93)
+ * a) -9 + -4 = -13
+ * b) -(-9) + -4 = 9 + -4 = 5
+
+3.2.94)
+ * a) -8 + -9 = -17
+ * b) -(-8) + -9 = 8 + -9 = -1
+
+3.2.95) -15 + 7 = 8
+
+3.2.96) -9 + 17 = 8
+
+3.2.97) 16 - 3(2) = 16 - 6 - 10
+
+3.2.98) 2(-6) + -5 = -6 + -6 + -5 = -17
+
+```{note}
+2(-6) is the same as -6 + -6
+```
+
+3.2.99) (-7 + 15)^2 = (8)^2 = 64
+
+3.2.100) (-5 + 14)^2 = (9)^2 = 81
+
+3.2.101) (-3 + 14)^2 = (11)^2 = 121
+
+3.2.102) (-3 + 15)^2 = (12)^2 = 144
+
+3.2.103) -14 + 5 = 9
+
+3.2.104) -22 + 9 = -13
+
+3.2.105) 8 + -2 = 6
+
+3.2.106) 5 + -1 = 4
+
+3.2.107) -10 + -15 = -25
+
+3.2.108) -6 + -20 = -26
+
+3.2.109) 6 + (-1 + -12) = -7
+
+3.2.110) 3 + (-2 + -8) = -7
+
+3.2.111) (10 + -19) + 4 = -5
+
+3.2.112) (12 + -15) + 1 = -2
+
+3.2.113) -19 + 26 = 7
+
+3.2.114) -15 + 28 = 13
+
+3.2.115) -73 + -45 = 118
+
+3.2.116) -212 + -105 = -317
+
+3.2.117) -3 + 2 + -1 = -2
+
+3.2.118) -5 + -3 + 2 + -1 = -7
+
+3.2.119) 35 + -12 + 8 + -6 = 25
+
+3.2.120) 20 + 15 + -3 + 6 = 38
+
+3.2.121) -90 + 110 = 20
+
+3.2.122) -168 + 140 = -28
+
+3.2.123) -504 + 142 + -449 + 410 + 369 = -32
+
+3.2.124) -201 + -16 + -23 + 172 + -34 = -102
+
+3.2.125) you can model it out
+
+ * -8 + 2 is ...
+   
+   ```
+   pp
+   nnnnnnnn
+   ```
+
+   there are 6 more negatives than there are positives, the answer is -6
+
+ * 8 + -2 is ...
+
+   ```
+   pppppppp
+   nn
+   ```
+
+   there are 6 more positives than there are negatives, the answer is 6
+
+3.2.126) technical diving -- when you're 100 feet under water and you go down another 10 feet.. -100 + -10
+
+## Chapter 3 Section 3.3
+
+__TRY IT__
+
+3.59)
+
+```
+pppppp 6
+
+   ┌──────┐
+pp │ pppp │ 6 - 4
+   └──────┘
+```
+
+3.60)
+
+```
+ppppppp 7
+
+    ┌──────┐
+ppp │ pppp │ 7 - 4
+    └──────┘
+```
+
+3.61)
+
+```
+nnnnnn 6
+
+   ┌──────┐
+nn │ nnnn │ 6 - 4
+   └──────┘
+```
+
+3.62)
+
+```
+nnnnnnn 7
+
+    ┌──────┐
+nnn │ nnnn │ 7 - 4
+    └──────┘
+```
+
+3.63)
+
+```
+nnnnnn -6
+pppp 4
+
+-6 - 4
+
+no ps to subtract from the ns, so add an n for each p..
+
+nnnnnn nnnn
+       pppp
+
+┌────────────┐
+│ nnnnnnnnnn │ -6 - 4 = -10
+└────────────┘
+```
+
+3.64)
+
+```
+nnnnnnn -7
+pppp 4
+
+-7 - 4
+
+no ps to subtract from the ns, so add an n for each p..
+
+nnnnnnn nnnn
+        pppp
+
+┌─────────────┐
+│ nnnnnnnnnnn │ -7 - 4 = -11
+└─────────────┘
+```
+
+3.65)
+
+```
+pppppp 6
+nnnn -4
+
+no ns to subtract from the ps, so add a p for each n..
+
+pppppp pppp
+       nnnn
+
+┌────────────┐
+│ pppppppppp │ 6 - -4 = 10
+└────────────┘
+```
+
+3.66)
+
 
 START BACK UP HERE
 START BACK UP HERE
