@@ -3,6 +3,12 @@ svgbob
 svgbob_macro/
 ```
 
+```{define-block}
+prereq
+prereq_macro/
+prereq_code/
+```
+
 ```{title}
 Mathematics
 ```
@@ -281,11 +287,19 @@ The algorithm for processing the partial rule is similar to the conceptual model
 
 # Number Naming
 
+```{prereq}
+Place value system
+```
+
 TODO: Discuss number to word transitions (2nd part of Chapter 1.1)
 
 21,055 is the same as saying twenty one thousand fifty five
 
 # Real Numbers
+
+```{prereq}
+Place value system
+```
 
 ```{svgbob}
 +----------------------------------------------------------------------------------+
@@ -326,6 +340,10 @@ TODO: write blurb here
 
 ## Whole
 
+```{prereq}
+Natural numbers
+```
+
 ```{svgbob}
 +-+------------------------------+ 
 | |                              | 
@@ -341,6 +359,10 @@ TODO: write blurb here
 `{bm} Whole number`s are numbers which have no partial (fractional) portion -- they only consist of wholes. For example, 5, 104, and 27 are whole numbers while 4.2 is not. Whole numbers include all of the `{bm} natural number/(natural number|counting number)/i`s as well as 0.
 
 ## Integer
+
+```{prereq}
+Whole numbers
+```
 
 ```{svgbob}
 +-+-+------------------------------+
@@ -437,6 +459,10 @@ TODO: 0 is neight a positive nor negative number -- 0 means nothing, it's used a
 
 ## Rational
 
+```{prereq}
+Integer numbers
+```
+
 TODO: Chapter 4
 
 `{bm} Fraction`s are a way of representing numbers as parts. The syntax for a fraction is as follows...
@@ -473,7 +499,15 @@ In cases such as the example above, the wholes may be written as a single number
 
 ## Irrational
 
+```{prereq}
+ARE THERE ANY PREREQUISTES FOR THIS?
+```
+
 # Whole Number Addition
+
+```{prereq}
+Place value system
+```
 
 `{bm} Addition` is the concept of taking 2 numbers and combining their values together. For example, combining 3 items and 5 items together results in 7 items...
 
@@ -747,6 +781,10 @@ arithmetic_code/
 ```
 
 # Whole Number Subtraction
+
+```{prereq}
+Place value system
+```
 
 `{bm} Subtraction` is the concept of removing the value of one number from another number. For example, removing 3 items from 5 items results in 2 items...
 
@@ -1149,6 +1187,10 @@ arithmetic_code/
 ```
 
 # Whole Number Multiplication
+
+```{prereq}
+Whole number addition
+```
 
 `{bm} Multiplication` is the concept of taking a number and iteratively adding it to itself a certain number of iterations. For example, 3 added to itself for 5 iterations results in 15 items...
 
@@ -1617,6 +1659,10 @@ arithmetic_code/
 
 # Whole Number Division
 
+```{prereq}
+Whole number subtraction
+```
+
 `{bm} Division` is the concept of taking a number and iteratively subtracting it by another number to find out how many iterations it can be subtracted. For example, 15 can be subtracted by 3 exactly 5 iterations before nothing's left...
 
 ```
@@ -1761,6 +1807,11 @@ There are 2 algorithms used to divide numbers:
  * long division
 
 ## Trial and Error
+
+```{prereq}
+Whole number subtraction
+Whole number multiplication
+```
 
 `{bm} Trial-and-error division` is an algorithm used for dividing numbers. The core idea behind the algorithm is that multiplication is the inverse of division. That is, multiplication reverses / un-does division (and vice-versa). For example...
 
@@ -1939,6 +1990,10 @@ arithmetic_code/
 ```
 
 ## Long Division
+
+```{prereq}
+Trial-and-error division
+```
 
 The algorithm used by humans to divide large numbers is called `{bm} long division`. In most cases, it can divide a number is less steps than trial-and-error division. Long division relies on three ideas...
 
@@ -2433,7 +2488,7 @@ Notice how the inputs to TE still have trailing 0s.
                                                    0     R2
     ```
 
- 4. The sum of the quotients becomes the final qutoient, and the last remainder becomes the final remainder...
+ 4. The sum of the quotients becomes the final quotient, and the last remainder becomes the final remainder...
 
     ```{svgbob}
                                   752                 
@@ -2644,6 +2699,11 @@ arithmetic_code/
 
 # Integer Number Addition
 
+```{prereq}
+Whole number addition
+Whole number subtraction
+```
+
 TODO: conceptualize as number line
 
 TODO: conceptualize as cancelling opposite counters as defined in chapter 3.2 -- if there's a positive for a negative, cancel it out
@@ -2651,6 +2711,11 @@ TODO: conceptualize as cancelling opposite counters as defined in chapter 3.2 --
 TODO: write algorithm that expands on WholeNumber code -- WholeNumber class is used to represent values
 
 # Integer Number Subtraction
+
+```{prereq}
+Whole number addition
+Whole number subtraction
+```
 
 TODO: conceptualize as number line
 
@@ -2660,9 +2725,21 @@ TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 --
 
 # Integer Number Multiplication
 
+```{prereq}
+Whole number multiplication
+```
+
 # Integer Number Division
 
+```{prereq}
+Whole number division
+```
+
 # Multiple
+
+```{prereq}
+Integer multiplication
+```
 
 To say that m is a `{bm} multiple` of n means that some integer exists such that when you multiply it by n you get m:- `{kt} n \cdot ? = m`. Typically both n and m are also integers.
 
@@ -2717,6 +2794,10 @@ See divisible section.
 ```
 
 # Divisible
+
+```{prereq}
+Integer division
+```
 
 To say that m is `{bm} divisible` by n means that an integer results from dividing m by n: `{kt} m \div n = ?`. Typically both m and n are also integers, with the exception that n can't be 0 (can't divide by 0).
 
@@ -2863,6 +2944,10 @@ commdivtest_code/target/appassembler/
 
 # Factor
 
+```{prereq}
+Integer multiplication
+```
+
 Let's say you have an integer number. The `{bm} factor`s of that number are the integers you can multiply together to get that number...
 
 ```java
@@ -2976,6 +3061,11 @@ The second is that if the number were a negative integer, the factors would incl
 ... -8, -4, -2, -1, 1, 2, 4, 8.
 
 # Prime
+
+```{prereq}
+Divisible
+Factors
+```
 
 A counting number with only 2 factors is called a `{bm} prime` number. That is, if a counting number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, and 47.
 
@@ -3201,6 +3291,10 @@ The indentation in the output is messed up but you get the point.
 
 # Least Common Multiple
 
+```{prereq}
+Prime numbers
+```
+
 The `{bm} least common multiple` `{bm} /(LCM|L\.C\.M\.)/` is the process of taking 2 numbers and finding the smallest multiple between them. That is, if you listed out their multiples starting from 1, the first match between them would be the least common multiple.
 
 There are 2 common algorithms used to find the least common multiple between 2 numbers.
@@ -3285,6 +3379,10 @@ lcm_code/target/appassembler/
 ```
 
 # Algebra
+
+```{prereq}
+Arithmetic
+```
 
 `{bm} Algebra` is the study of mathematical operations and the rules for manipulating those operations.
 
