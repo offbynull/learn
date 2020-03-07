@@ -2322,55 +2322,176 @@ The diagram is intended to be an intermediary step to reasoning about long divis
 The answer to 752 / 3 is 250R2.
 
 ```{note}
-You can confirm this by doing 250 * 3 then adding 2. The result shuold be 752.
+You can confirm this by doing 250 * 3 then adding 2. The result should be 752.
 ```
 
-This proess can be made much simpler by focusing on one component at a time. Starting from the largest component to the smallest component, divide but then roll-in (add) the remainder into the next component. The thought process is exactly the same as above -- the division is being performed on a component and the remaining items from that division are being accounted for because they're being added to the next component (which gets divided next). For example, 752 / 3...
+This process can be made much simpler by focusing on one component at a time. Starting from the largest component to the smallest component, divide (using idea 3) but then roll-in (add) the remainder into the next component. The thought process is exactly the same as above -- the division is being performed on a component and the remaining items from that division are being accounted for because they're being added to the next component (which gets divided next). For example, 752 / 3...
 
-```{svgbob}
-                              752                 
-                               |                    
-                               v                    
-                           +-------+                
-       +-------------------+ BREAK +---------------+
-       |                   +---+---+               |
-       |                       |                   |
-       v                       v                   v
-      700                     50                   2
-       |                       |                   |
-       v                       |                   |
-     +--+                      |                   |
-   +-|TE|-+                    |                   |
-   | +--+ |                    |                   |
-   v      v                    |                   |
-  200    R100                  v                   |
-   |      |                  +---+                 |
-   |      +----------------->|ADD|                 |
-   |                         +---+                 |
-   |                           |                   |
-   |                           v                   |
-   |                          150                  |
-   |                           |                   |
-   |                           v                   |
-   |                         +--+                  |
-   |                       +-|TE|-+                |
-   |                       | +--+ |                |
-   |                       v      v                |
-   |                      50     R00               v
-   |                       |      |              +---+
-   +----------+------------+      +------------->|ADD|
-              |                                  +---+
-              v                                    |
-            +---+                                  v
-            |ADD|                                  2
-            +---+                          (final remainder)
-              |
-              v
-             250
-        (final quotient)
+```{note}
+Notice how the inputs to TE still have trailing 0s.
 ```
 
-This is effictively long division -- for each component, divide and roll in the remainder to the next component.
+ 1. Divide the largest component (700)...
+
+    ```{svgbob}
+                                  752                 
+                                   |                    
+                                   v                    
+                               +-------+                
+           +-------------------+ BREAK +---------------+
+           |                   +---+---+               |
+           |                       |                   |
+           v                       v                   v
+          700                     50                   2
+           |      
+           v      
+         +--+     
+       +-|TE|-+   
+       | +--+ |   
+       v      v   
+      200    R100 
+    ```
+
+ 2. Roll in remainder to the second largest component (50) and divide...
+
+    ```{svgbob}
+                                  752                 
+                                   |                    
+                                   v                    
+                               +-------+                
+           +-------------------+ BREAK +---------------+
+           |                   +---+---+               |
+           |                       |                   |
+           v                       v                   v
+          700                     50                   2
+           |                       |    
+           v                       |    
+         +--+                      |    
+       +-|TE|-+                    |    
+       | +--+ |                    |    
+       v      v                    |    
+      200    R100                  v    
+              |                  +---+  
+              +----------------->|ADD|  
+                                 +---+  
+                                   |    
+                                   v    
+                                  150   
+                                   |    
+                                   v    
+                                 +--+   
+                               +-|TE|-+ 
+                               | +--+ | 
+                               v      v 
+                              50     R00
+    ```
+
+ 3. Roll in remainder to the third largest component (2) and divide...
+
+    ```{svgbob}
+                                  752                 
+                                   |                    
+                                   v                    
+                               +-------+                
+           +-------------------+ BREAK +---------------+
+           |                   +---+---+               |
+           |                       |                   |
+           v                       v                   v
+          700                     50                   2
+           |                       |                   |
+           v                       |                   |
+         +--+                      |                   |
+       +-|TE|-+                    |                   |
+       | +--+ |                    |                   |
+       v      v                    |                   |
+      200    R100                  v                   |
+              |                  +---+                 |
+              +----------------->|ADD|                 |
+                                 +---+                 |
+                                   |                   |
+                                   v                   |
+                                  150                  |
+                                   |                   |
+                                   v                   |
+                                 +--+                  |
+                               +-|TE|-+                |
+                               | +--+ |                |
+                               v      v                |
+                              50     R00               v
+                                      |              +---+
+                                      +------------->|ADD|
+                                                     +---+
+                                                       |
+                                                       v
+                                                       2
+                                                       |     
+                                                       v     
+                                                     +--+    
+                                                   +-|TE|-+  
+                                                   | +--+ |  
+                                                   v      v  
+                                                   0     R2
+    ```
+
+ 4. The sum of the quotients becomes the final qutoient, and the last remainder becomes the final remainder...
+
+    ```{svgbob}
+                                  752                 
+                                   |                    
+                                   v                    
+                               +-------+                
+           +-------------------+ BREAK +---------------+
+           |                   +---+---+               |
+           |                       |                   |
+           v                       v                   v
+          700                     50                   2
+           |                       |                   |
+           v                       |                   |
+         +--+                      |                   |
+       +-|TE|-+                    |                   |
+       | +--+ |                    |                   |
+       v      v                    |                   |
+      200    R100                  v                   |
+       |      |                  +---+                 |
+       |      +----------------->|ADD|                 |
+       |                         +---+                 |
+       |                           |                   |
+       |                           v                   |
+       |                          150                  |
+       |                           |                   |
+       |                           v                   |
+       |                         +--+                  |
+       |                       +-|TE|-+                |
+       |                       | +--+ |                |
+       |                       v      v                |
+       |                      50     R00               v
+       |                       |      |              +---+
+       |                       |      +------------->|ADD|
+       |                       |                     +---+
+       |                       |                       |
+       |                       |                       v
+       |                       |                       2
+       |                       |                       |     
+       |                       |                       v     
+       |                       |                     +--+    
+       |                       |                   +-|TE|-+  
+       |                       |                   | +--+ |  
+       |                       |                   v      v  
+       |                       |                   0     R2
+       |                       |                   |      |
+       +----------+------------+-------------------+      |
+                  |                                       |
+                  v                                       |
+                +---+                                     |
+                |ADD|                                     |
+                +---+                                     |
+                  |                                       |
+                  v                                       v
+                 250                                     R2
+            (final quotient)                     (final remainder)
+    ```
+
+This is effectively the algorithm that humans use for long division -- for each component, divide (using idea 3) and roll in the remainder to the next component. Repeat the process until there are no components remaining.
 
 The notation used by humans for long division is...
 
@@ -2385,111 +2506,125 @@ kthelper_code/target/appassembler/
 {divisor}{dividend}
 ```
 
-For example, 702 / 4 is written as...
+For example, long division notation for 752 / 3 is initially written as...
 
 ```{ktlongdiv}
    {}
-{4}{702}
+{3}{752}
 ```
 
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-TODO: FIGURE OUT A GOOD WAY TO EXPLAIN LONG DIVISON NOTATION AND WRITE ALGORITHM
-
-For each component in the dividend (from largest to smallest), figure out what number you need to multiply the divisor by to get that component. For example, the first component is 7 -- 4 \* ? = 7...
-
-* 4 \* 0 = <-- no, too small
-* 4 \* 1 = <-- no, too small
-* 4 \* 2 = <-- no, too large
-
-It's between 1 and 2. The quotient is 1, and the remainder is 7 - 4 = 3.
-
-The quotient goes up top...
-
-This is pretty much ideas 2 and 3 -- trial-and-error division with the 0s stripped off. Explain that this is the same thing as thing but illustrating it.
 
 
-To start, take the largest component (800) and divided it by divisor (4). This is essentially idea 3...
-1. strip the 0s off the component: 8
-2. divide via trial-and-error division: 8 / 4 = 2R0
-3. append the stripped 0s back on: 200R000
+Starting with the first component, divide (using idea 3) to get the quotient and remainder for that component: 200R100. Then, strip-off the trialing 0s and place the quotient on-top of the component and the remainder below the component...
 
-Take the quotient from step 2 (2) and put it on top of the 8...
+```{ktlongdiv}
+   {\green{2}}
+{3}{752}
+   {?}
+   {\green{1}}
+```
+
+A question mark is sandwiched between the component and remainder. The question mark should be set to the value of the divisor (3) multiplied by the quotient (200), with its trailing 0s stripped out. 3 \* 200 = 600, strip the trialing 0s to get 6...
 
 ```{ktlongdiv}
    {2}
-{4}{802}
+{3}{752}
+   {\underline{\green{6}}}
+   {1}
 ```
 
-Multiply the quotient from step 2 (2) by the divisor (4) and put it underneath the 8...
+````{note}
+The traditional way this is stated when being taught in school is "how many times can 7 go into 3?". Essentially, find the minimum number that the quotient can be without exceeding the component.
+
+* 3\*0 = 0
+* 3\*1 = 3
+* 3\*2 = 6
+* 3\*3 = 9 <-- too large, must be 7 or less, so pick the last one
 
 ```{ktlongdiv}
    {2}
-{4}{802}
-   {8}
+{3}{752}
 ```
 
-Then, put the remainder under that... Note that this is subtraction -- 8-8=0
+Put the answer to 3\*2 = 6 underneath the component, then subtract to get the remainder...
 
 ```{ktlongdiv}
    {2}
-{4}{802}
-   {8}
-   {0}
+{3}{702}
+   {\underline{6}}
+   {1}
 ```
+````
+
+Copy the next largest component down such that it's next the remainder...
 
 ```{ktlongdiv}
-{047.9}
-{5}{239.5}
-{\underline{0}}
-{23}
-{\underline{20}}
-{\phantom{0}39}
-{\phantom{0}\underline{35}}
-{\phantom{00}4\phantom{.}5}
-{\phantom{00}\underline{4\phantom{.}5}}
-{\phantom{004.}0}
+   {2}
+{3}{752}
+   {\underline{6}}
+   {1\green{5}}
 ```
+
+This is effectively the same as adding the remainder to the next component: 100 + 50 = 150. Trailing 0s aren't seen because they're implied in long division notation.
+
+````{note}
+The traditional way this is stated when being taught in school is "drag down the next component".
+````
+
+
+
+Repeat the process but target the 15 at the bottom. The 15 is the next component rolled into the remainder...
+
+```{ktlongdiv}
+   {2\green{5}}
+{3}{752}
+   {\underline{6}}
+   {15}
+   {\underline{\green{15}}}
+   {\phantom{0}\green{0}}
+```
+
+Copy the next largest component down such that it's next the remainder...
+
+```{ktlongdiv}
+   {25}
+{3}{752}
+   {6}
+   {15}
+   {15}
+   {\phantom{0}0\green{2}}
+```
+
+
+
+Repeat the entire process but target the 2 at the bottom. The 2 is the next component rolled into the remainder...
+
+```{ktlongdiv}
+   {25\green{0}}
+{3}{752}
+   {\underline{6}}
+   {15}
+   {\underline{15}}
+   {\phantom{0}02}
+   {\phantom{00}\underline{\green{0}}}
+   {\phantom{00}\green{2}}
+```
+
+
+The final reminder isn't 0, so place it next to the final quotient...
+
+```{ktlongdiv}
+   {250\green{R2}}
+{3}{752}
+   {\underline{6}}
+   {15}
+   {\underline{15}}
+   {\phantom{0}02}
+   {\phantom{00}\underline{0}}
+   {\phantom{00}2}
+```
+
+The way to perform this algorithm via code is as follows...
 
 # Integer Number Addition
 
