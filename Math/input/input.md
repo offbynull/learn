@@ -2550,7 +2550,7 @@ Put the answer to 3\*2 = 6 underneath the component, then subtract to get the re
 
 ```{ktlongdiv}
    {2}
-{3}{702}
+{3}{752}
    {\underline{6}}
    {1}
 ```
@@ -2626,6 +2626,22 @@ The final reminder isn't 0, so place it next to the final quotient...
 
 The way to perform this algorithm via code is as follows...
 
+```{output}
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
+```
+
+```{define-block}
+wholenumdiv
+wholenumdiv_macro/
+arithmetic_code/
+```
+
+```{wholenumdiv}
+752 3
+```
+
 # Integer Number Addition
 
 TODO: conceptualize as number line
@@ -2641,7 +2657,6 @@ TODO: conceptualize as number line
 TODO: conceptualize as number line
 
 TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here is confusing and this entire concept may be better conceptualized as a number line
-
 
 # Integer Number Multiplication
 

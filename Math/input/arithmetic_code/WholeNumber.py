@@ -75,6 +75,7 @@ class WholeNumber:
     def shift_left(self: WholeNumber, count: int) -> None:
         for i in range(0, count):
             self.digits.insert(0, Digit(0))
+        self._prune_unnecessary_0s()
 
     def _prune_unnecessary_0s(self: WholeNumber) -> None:
         trim_count = 0
@@ -151,10 +152,10 @@ class WholeNumber:
         return self > other or self == other
 
     #MARKDOWN_ADD
-    def __add__(self: WholeNumber, other: WholeNumber) -> WholeNumber:
+    def __add__(lhs: WholeNumber, rhs: WholeNumber) -> WholeNumber:
         log_indent()
         try:
-            log(f'Adding {self} and {other}...')
+            log(f'Adding {lhs} and {rhs}...')
             log_indent()
 
             cache = [
@@ -170,16 +171,16 @@ class WholeNumber:
                 [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
             ]
 
-            count = max(len(self.digits), len(other.digits))
+            count = max(len(lhs.digits), len(rhs.digits))
 
             carryover_digit = None
             result = WholeNumber()
             for pos in range(0, count):  # from smallest to largest component
-                log(f'Targeting {self._highlight(pos)} and {other._highlight(pos)}')
+                log(f'Targeting {lhs._highlight(pos)} and {rhs._highlight(pos)}')
                 log_indent()
 
-                digit1 = self[pos]
-                digit2 = other[pos]
+                digit1 = lhs[pos]
+                digit2 = rhs[pos]
 
                 added = WholeNumber(cache[digit1.value][digit2.value])
                 log(f'Using cache for initial add: {digit1} + {digit2} = {added}')
@@ -201,7 +202,7 @@ class WholeNumber:
                 log_unindent()
 
             if carryover_digit is not None:
-                log(f'Remaining carryover: {self._highlight(count)}  [{carryover_digit}]')
+                log(f'Remaining carryover: {lhs._highlight(count)}  [{carryover_digit}]')
                 result[count] = carryover_digit
                 log(f'Result: {result._highlight(count)}')
 
@@ -214,10 +215,10 @@ class WholeNumber:
     #MARKDOWN_ADD
 
     #MARKDOWN_SUB
-    def __sub__(self: WholeNumber, other: WholeNumber) -> WholeNumber:
+    def __sub__(lhs: WholeNumber, rhs: WholeNumber) -> WholeNumber:
         log_indent()
         try:
-            log(f'Subtracting {self} and {other}...')
+            log(f'Subtracting {lhs} and {rhs}...')
             log_indent()
 
             sub_cache = [
@@ -244,17 +245,17 @@ class WholeNumber:
             ]
 
             # copy self because it may get modified during borrowing phase
-            self_copy = self.copy()
+            self_copy = lhs.copy()
 
-            count = max(len(self_copy.digits), len(other.digits))
+            count = max(len(self_copy.digits), len(rhs.digits))
 
             result = WholeNumber()
             for pos in range(0, count):  # from smallest to largest component
-                log(f'Targeting {self_copy._highlight(pos)} and {other._highlight(pos)}')
+                log(f'Targeting {self_copy._highlight(pos)} and {rhs._highlight(pos)}')
                 log_indent()
 
                 digit1 = self_copy[pos]
-                digit2 = other[pos]
+                digit2 = rhs[pos]
                 result_digit = sub_cache[digit1.value][digit2.value]
                 if result_digit is not None:
                     log(f'Using cache for subtraction: {digit1} - {digit2} = {result_digit}')
@@ -263,7 +264,7 @@ class WholeNumber:
                     self_copy._borrow_from_next(sub_cache, pos)
 
                     digit1 = self_copy[pos]
-                    digit2 = other[pos]
+                    digit2 = rhs[pos]
                     result_digit = sub_cache[digit1.value][digit2.value]
                     log(f'Using cache for subtraction: {digit1} - {digit2} = {result_digit}')
 
@@ -310,24 +311,24 @@ class WholeNumber:
     #MARKDOWN_SUB
 
     #MARKDOWN_MUL
-    def __mul__(self: WholeNumber, other: WholeNumber) -> WholeNumber:
+    def __mul__(lhs: WholeNumber, rhs: WholeNumber) -> WholeNumber:
         log_indent()
         try:
-            log(f'Multiplying {self} and {other}...')
+            log(f'Multiplying {lhs} and {rhs}...')
             log_indent()
 
-            count = len(other.digits)
+            count = len(rhs.digits)
 
             res_list = []
             for pos in range(0, count):  # from smallest to largest component
-                log(f'Targeting {self} and {other._highlight(pos)}')
+                log(f'Targeting {lhs} and {rhs._highlight(pos)}')
                 log_indent()
 
-                self_copy = self.copy()    # create a copy
+                self_copy = lhs.copy()    # create a copy
                 self_copy.shift_left(pos)  # shift copy (add 0s) based on the digit we're on
-                log(f'Appending 0s to multiplicand based on position of multiplier (pos {pos}): {self_copy} {other._highlight(pos)}')
+                log(f'Appending 0s to multiplicand based on position of multiplier (pos {pos}): {self_copy} {rhs._highlight(pos)}')
 
-                res = self_copy._single_digit_mul(other[pos])  # multiply copy by that digit
+                res = self_copy._single_digit_mul(rhs[pos])  # multiply copy by that digit
                 log_unindent()
 
                 res_list.append(res)
@@ -403,6 +404,53 @@ class WholeNumber:
             log_unindent()
     #MARKDOWN_MUL
 
+    #MARKDOWN_DIV
+    def __truediv__(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
+        log_indent()
+        try:
+            log(f'Dividing {dividend} by {divisor}...')
+            log_indent()
+
+            count = len(dividend.digits)
+
+            quot = WholeNumber(0)
+            rem = WholeNumber(0)
+            for pos in reversed(range(0, count)):  # from largest to smallest component
+                log(f'Targeting dividend: {dividend._highlight(pos)}, Current quotient: {quot} / Current remainder: {rem}')
+                log_indent()
+
+                comp = dividend[pos]
+                if pos == count - 1:  # if this is the start component (largest component)...
+                    comp_dividend = WholeNumber(comp)
+                    log(f'Set dividend: component ({comp}): {comp_dividend}')
+                else:
+                    temp_rem = rem.copy()
+                    temp_rem.shift_left(1)
+                    comp_dividend = WholeNumber(comp) + temp_rem
+                    log(f'Set dividend: Combining prev remainder ({rem}) with component ({comp}): {comp_dividend}')
+
+                comp_quot, comp_rem = WholeNumber.trial_and_error_div(comp_dividend, divisor)
+                log(f'Trial-and-error division: {comp_dividend} / {divisor} = {comp_quot}R{comp_rem}')
+
+                new_quot = quot.copy()
+                new_quot.shift_left(1)
+                new_quot[0] = comp_quot[0]  # comp_quot will always be a single digit
+                log(f'New quotient: Combining existing quotient ({quot}) with ({comp_quot}): {new_quot}')
+                log(f'New remainder: {comp_rem}')
+                quot = new_quot
+                rem = comp_rem
+
+                log_unindent()
+
+            log_unindent()
+            log(f'Final Quotient: {quot}, Final Remainder: {rem}')
+
+            return quot, rem
+        finally:
+            log_unindent()
+
+    #MARKDOWN_DIV
+
     #MARKDOWN_DIVTE
     @staticmethod
     def trial_and_error_div(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
@@ -432,12 +480,12 @@ class WholeNumber:
                 # check if found
                 if min_test == dividend:  # found as min
                     quotient = wn_range.min
-                    remainder = 0
+                    remainder = WholeNumber(0)
                     break
 
                 if max_test == dividend:  # found as max
                     quotient = wn_range.max
-                    remainder = 0
+                    remainder = WholeNumber(0)
                     break
 
                 if min_test < dividend < max_test and wn_range.max - wn_range.min == 1:  # found between min and max
@@ -514,6 +562,6 @@ class WholeNumberRange:
 if __name__ == '__main__':
     # n3 = WholeNumber('1000') - WholeNumber('100')
     # print(n3)
-    log_whitelist(['trial_and_error_div'])
-    (q, r) = WholeNumber.trial_and_error_div(WholeNumber(98), WholeNumber(3))
+    log_whitelist(['__truediv__'])  # log_whitelist(['__truediv__', 'trial_and_error_div'])
+    (q, r) = WholeNumber(752) / WholeNumber(3)
     print(f'{q}R{r}')
