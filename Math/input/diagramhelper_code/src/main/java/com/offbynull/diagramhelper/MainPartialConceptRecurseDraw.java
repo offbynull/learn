@@ -47,9 +47,9 @@ public final class MainPartialConceptRecurseDraw {
                 }
                 mdOut.write("![Concept diagram for partial rule " + input + "](" + outputFileName + ")");
             } catch (Exception e) {
-                mdOut.append("`{bm-linker-off}`\n\n");
+                mdOut.append("`{bm-disable-all}`\n\n");
                 mdOut.append(getStackTraceAsString(e));
-                mdOut.append("`{bm-linker-on}`");
+                mdOut.append("`{bm-enable-all}`");
             }
         }
     }

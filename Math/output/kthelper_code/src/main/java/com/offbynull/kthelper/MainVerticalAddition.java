@@ -53,9 +53,9 @@ public final class MainVerticalAddition {
 
                 mdOut.write(output);
             } catch (Exception e) {
-                mdOut.append("`{bm-linker-off}`\n\n");
+                mdOut.append("`{bm-disable-all}`\n\n");
                 mdOut.append(getStackTraceAsString(e));
-                mdOut.append("`{bm-linker-on}`");
+                mdOut.append("`{bm-enable-all}`");
             }
         }
     }

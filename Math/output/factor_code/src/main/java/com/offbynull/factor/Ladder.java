@@ -18,7 +18,7 @@ public class Ladder {
     public static void main(String[] args) throws IOException {
         try (Writer writer = Files.newBufferedWriter(Path.of("/output/output.md"), UTF_8)) {
             writer.append("<div style=\"border:1px solid black;\">\n\n");
-            writer.append("`{bm-linker-off}`\n\n");
+            writer.append("`{bm-disable-all}`\n\n");
             try (Scanner scanner = new Scanner(Files.newBufferedReader(Path.of("/input/input.data")))) {
                 int num = scanner.nextInt();
                 
@@ -47,7 +47,7 @@ public class Ladder {
             } catch (Exception e) {
                 writer.append(getStackTraceAsString(e));
             } finally {
-                writer.append("`{bm-linker-on}`\n\n");
+                writer.append("`{bm-enable-all}`\n\n");
                 writer.append("</div>\n\n");
             }
         }

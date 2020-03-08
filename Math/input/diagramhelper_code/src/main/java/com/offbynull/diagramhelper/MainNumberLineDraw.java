@@ -83,9 +83,9 @@ public class MainNumberLineDraw {
                 writeSvg(g, Path.of("/output", outputFileName));
                 mdOut.write("![Concept diagram for line number " + notches.stream().map(n -> n.x).map(DECIMAL_FORMAT::format).collect(joining(" ")) + "](" + outputFileName + ")");
             } catch (Exception e) {
-                mdOut.append("`{bm-linker-off}`\n\n");
+                mdOut.append("`{bm-disable-all}`\n\n");
                 mdOut.append(getStackTraceAsString(e));
-                mdOut.append("`{bm-linker-on}`");
+                mdOut.append("`{bm-enable-all}`");
             }
         }
 
