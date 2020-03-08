@@ -1524,7 +1524,7 @@ Another version is LEO GER.
 ```
 
 `{bm-ignore} (reduction|reduced|reduce)_NORM/i`
-`{bm-ambiguous} Add the suffix _CHEM or _NORM/(reduction|reduced|reduce)/i`
+`{bm-error} Add the suffix _CHEM or _NORM/(reduction|reduced|reduce)/i`
 
 For example, `{kt} CH_4 + 2O_2 \rightarrow CO_2 + 2H_2O`...
 
@@ -1918,7 +1918,7 @@ Primary source for these notes is Khan Academy's HS Biology course, with additio
 
 ## Scientific Method
 
-The `{bm} scientific method` is the standard guideline for discovery and experimentation in the sciences (chemistry, physics, biology, etc..) The `{bm-ri} basic` steps are...
+The `{bm} scientific method` is the standard guideline for discovery and experimentation in the sciences (chemistry, physics, biology, etc..) The `{bm-skip} basic` steps are...
 
 1. Observe.
 2. Ask a question about the observation.
@@ -1966,7 +1966,7 @@ Because things are so wishy-washy/not-exactly in biology, it's typical for an ex
 Other terminology around the scientific method...
 
 * `{bm} treatment` - The application of the test given to the experimental group(s) but not the control group.
-* `{bm} independent variable` - An independent variable is `{bm-ri} basically` the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
+* `{bm} independent variable` - An independent variable is `{bm-skip} basically` the treatment you apply -- you can think of it as the input knob you control for your experiment. For example, in the skin cancer experiment, the independent variable would be the amount of artificial UV rays you apply to the skin cells.
 * `{bm} dependent variable` - A dependent variable is a response you measure after applying the treatment -- you can think of it as the output from your experiment. For example, in the skin cancer experiment, the dependent variable might be a measurement of how different the cells are functioning (e.g. a cell with damaged DNA may produce different kinds / amounts of tRNA molecules -- something you can measure).
 * **data** - This is exactly what you think it is -- measurements/observations made during the experiment.
 * `{bm} placebo effect/(placebo effect|placebo)/i` - When experimenting on people, there's a phenomenon called the placebo effect: if someone takes something that shouldn't help them but are under the impression it will help them, it often times will help them, just from the psychological effect alone.
@@ -2014,7 +2014,7 @@ digraph {
 The ribosome is what's responsible for folding? Not able to get a clear answer on this.
 ```
 
-The `{bm-ri} basic` structure of an amino acid is as follows. The R is a placeholder that, when set, defines what type of amino acid it is...
+The `{bm-skip} basic` structure of an amino acid is as follows. The R is a placeholder that, when set, defines what type of amino acid it is...
 
 ![By GYassineMrabetTalk✉This W3C-unspecified vector image was created with Inkscape. - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2551977](320px-AminoAcidball.svg.png)
 
@@ -2075,7 +2075,7 @@ Other terminology related to water:
 
 ## Cell
 
-`{bm} Cell`s are the `{bm-ri} basic` unit of living things / the building blocks of life. They're tiny structures that encapsulate information and machinery that allows them to replicate/reproduce and perform other important functions (e.g. appendages to move around).
+`{bm} Cell`s are the `{bm-skip} basic` unit of living things / the building blocks of life. They're tiny structures that encapsulate information and machinery that allows them to replicate/reproduce and perform other important functions (e.g. appendages to move around).
 
 ```{note}
 Viruses are not cells but they may also be considered living because they reproduce in a roundabout way: the require machinery in the host cell to reproduce.
@@ -2302,7 +2302,7 @@ A few years later, a Dutch lenscrafter by the name of `{bm} Antonie Van Leeuwenh
 
 In the 1830s, `{bm} Matthias Schleiden` and `{bm} Theodore Schwann` began laying the groundwork for modern cell theory. They came up with the idea that...
 1. all life is composed of one or more cells.
-2. a cell is the `{bm-ri} basic` unit of life.
+2. a cell is the `{bm-skip} basic` unit of life.
 
 They also suspected that cells come from other cells, but didn't know for sure if that was the only way they were produced. It was `{bm} Robert Remak` that in the mid-1800s established that...
 
@@ -2376,14 +2376,14 @@ Eukaryotes have their DNA broken up into multiple strands called chromosomes. Th
 
 The following are descriptions for some of the organelles shown in the diagram above.
 
-* <span style="color:#ff00ffff">**`{bm-ri} Nucleus`**</span> - See nucleus_cell section.
-* <span style="color:#0000ffff">**`{bm-ri} Endoplasmic Reticulum`**</span> - See endoplasmic reticulum section.
-* <span style="color:#007f7fff">**`{bm-ri} Golgi`**</span> - See golgi section.
-* <span style="color:#00ff00ff">**`{bm-ri} Mitochondria`**</span> - See mitochondria section.
-* <span style="color:#7f7f00ff">**`{bm-ri} Lysosome`**</span> (mostly animal) - See lysosome section.
-* <span style="color:#0000ffff">**`{bm-ri} Peroxisome`**</span> - See peroxisome section. 
-* <span style="color:#ff0000ff">**`{bm-ri} Chloroplast`**</span> (plant / algae) - See chloroplast section.
-* <span style="color:#800080ff">**`{bm-ri} Vacuole`**</span> (mostly plant / algae) - See vacuole section. 
+* <span style="color:#ff00ffff">**`{bm-skip} Nucleus`**</span> - See nucleus_cell section.
+* <span style="color:#0000ffff">**`{bm-skip} Endoplasmic Reticulum`**</span> - See endoplasmic reticulum section.
+* <span style="color:#007f7fff">**`{bm-skip} Golgi`**</span> - See golgi section.
+* <span style="color:#00ff00ff">**`{bm-skip} Mitochondria`**</span> - See mitochondria section.
+* <span style="color:#7f7f00ff">**`{bm-skip} Lysosome`**</span> (mostly animal) - See lysosome section.
+* <span style="color:#0000ffff">**`{bm-skip} Peroxisome`**</span> - See peroxisome section. 
+* <span style="color:#ff0000ff">**`{bm-skip} Chloroplast`**</span> (plant / algae) - See chloroplast section.
+* <span style="color:#800080ff">**`{bm-skip} Vacuole`**</span> (mostly plant / algae) - See vacuole section. 
 
 ### Organelle
 
@@ -2471,14 +2471,14 @@ The major parts of chloroplast are...
  * <span style="color:#008080ff">`{bm} matrix`</span> - Internal fluid of mitochondria. Contains the guts (ribosomes, mitochondrial DNA, and more).
  * <span style="color:#808000ff">`{bm} cristae`</span> - Long caverns that encapsulate and connect different parts of the matrix.
 
-Mitochondria have their own independent DNA (different from the DNA in the nucleus_cell). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis).
+Mitochondria have their own independent DNA (different from the DNA in the nucleus_cell). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-skip} living` in it, eventually becoming part of the cell (endosymbiosis).
 
 Unlike how normal offspring DNA gets produced by mixing DNA from both parents, mitochondrial DNA comes entirely from the mother's side.
 
 
 #### Lysosome
 
-`{bm} Lysosome`s are organelles (animal cells only) that help break down waste `{bm-ri} products` / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
+`{bm} Lysosome`s are organelles (animal cells only) that help break down waste `{bm-skip} products` / foreign substances by containing various enzymes and maintaining an acidic pH. Lysosomes are more often found in animals cells than plant and algae cells.
 
 ```{note}
 According to the material, the evidence that they've been found in plant cells is recent.
@@ -2538,7 +2538,7 @@ The major parts of chloroplast are...
 
  `{bm} Chlorophyll` is a pigment / compound found in chloroplast that absorbs light and uses it to produce carbohydrates. It's found in the thylakoid membrane as well as the stroma, and it only absorbs red and blue light (while reflecting green).
 
- Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus_cell). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-ri} living` in it, eventually becoming part of the cell (endosymbiosis). A descendant of that organism may be `{bm} cyanobacterium/(cyanobacterium|cyanobacteria)/i`, which has a similar ability to generate sugars from light (see [Wikipedia](https://en.wikipedia.org/w/index.php?title=Chloroplast&oldid=918130624#Parent_group:_Cyanobacteria)).
+ Like mitochondria, chloroplast have their own independent DNA (different from the DNA in the nucleus_cell). It's speculated that at some point in the past they may have been independent single-cell organisms that formed a symbiotic relationship with a larger cell by `{bm-skip} living` in it, eventually becoming part of the cell (endosymbiosis). A descendant of that organism may be `{bm} cyanobacterium/(cyanobacterium|cyanobacteria)/i`, which has a similar ability to generate sugars from light (see [Wikipedia](https://en.wikipedia.org/w/index.php?title=Chloroplast&oldid=918130624#Parent_group:_Cyanobacteria)).
 
 #### Vacuole
 
@@ -2757,8 +2757,8 @@ crop 0.446 0 0.554 1
 
 ### Meiosis
 
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(egg)/i`
-`{bm-ambiguous} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(ova)/i` 
+`{bm-error} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(egg)/i`
+`{bm-error} Add the suffix _GAMETE if referring to egg or ova cells, or _NORM/\b(ova)/i` 
 `{bm-ignore} (egg)_NORM/i`
 `{bm-ignore} (ova)_NORM/i`
 
@@ -3319,7 +3319,7 @@ Unlike DNA, RNA is transient (lasts for minutes) and comes in multiple flavours:
 
 Essentially, classical genetics is the idea that the coding / alleles for a specific set of genes (genotype) results in some change in the organism that's observable (phenotype), and the probability that an organism can end up with a specific genotype/phenotype can be calculated from the genotype of its parents. For example, a certain set of alleles (genotype) may be responsible for blue eyes (phenotype).
 
-If a single gene is responsible for contributing to multiple unrelated phenotypes, it's referred to as `{bm} pleiotropy/(pleiotropy|pleiotropic)/i`. For example, a specific gene is responsible for generating melanin. If the allele for that gene has a specific mutation in it, melanin `{bm-ri} production` stops / is drastically reduced_NORM. A lack of melanin results in albinism: a condition that effects the color of eyes, hair, and skin (3 separate phenotypes).
+If a single gene is responsible for contributing to multiple unrelated phenotypes, it's referred to as `{bm} pleiotropy/(pleiotropy|pleiotropic)/i`. For example, a specific gene is responsible for generating melanin. If the allele for that gene has a specific mutation in it, melanin `{bm-skip} production` stops / is drastically reduced_NORM. A lack of melanin results in albinism: a condition that effects the color of eyes, hair, and skin (3 separate phenotypes).
 
 If multiple genes are responsible for contribution to a single phenotype, it's referred to as `{bm} polygene/(polygenic|polygene)/i`. For example, many genes are responsible for contributing to a person's height (around 400).
 
@@ -3367,7 +3367,7 @@ In the above example, the...
  * female parent's genotype is 2 white alleles (homozygous) while the phenotype is white.
  * child's genotype is 1 red allele and 1 white allele (heterozygous) while the phenotype is pink.
 
-For each gene, offspring get a random allele from each parent. The odds of which alleles the offspring ends up with can be visualized using a `{bm} Punnett square` diagram: a table where the alleles for a gene are written across the top axis (male parent) and down the left axis (female parent), and each `{bm-ri} cell` maps to the alleles in the top/left coordinate that it's in.
+For each gene, offspring get a random allele from each parent. The odds of which alleles the offspring ends up with can be visualized using a `{bm} Punnett square` diagram: a table where the alleles for a gene are written across the top axis (male parent) and down the left axis (female parent), and each `{bm-skip} cell` maps to the alleles in the top/left coordinate that it's in.
 
 For example, a gene that controls the color of a flower has 2 alleles: red and white. The male parent has 2 red alleles while the female parent has both a red allele and a white allele. The Punnett square describing the probability offspring's alleles:
 
@@ -4391,12 +4391,12 @@ In some cases, the genetic material being fused in sexual reproduction may be fr
 
 
 `{bm-ignore} baseline`
-`{bm-ambiguous} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
+`{bm-error} Add the suffix _pH or _nucleotide/((?!based)(?:bases|base))/i`
 
 `{bm-ignore} byproduct|reproduction|reproduce|reproductive`
-`{bm-ambiguous} Add the suffix _ENZYME for enzyme output or _CHEM for chem reaction output/(product)/i`
-`{bm-ambiguous} Add the suffix _ENZYME for enzyme output/(intermediate)/i`
+`{bm-error} Add the suffix _ENZYME for enzyme output or _CHEM for chem reaction output/(product)/i`
+`{bm-error} Add the suffix _ENZYME for enzyme output/(intermediate)/i`
 
-`{bm-ambiguous} Add the suffix _ENZYME for enzyme input or _CHEM for chem reaction input/(reactant)/i`
+`{bm-error} Add the suffix _ENZYME for enzyme input or _CHEM for chem reaction input/(reactant)/i`
 
-`{bm-ambiguous} Add the suffix _atom or _cell/\b(nucleus|nuclei)\b/i`
+`{bm-error} Add the suffix _atom or _cell/\b(nucleus|nuclei)\b/i`

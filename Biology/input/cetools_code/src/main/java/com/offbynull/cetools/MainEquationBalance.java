@@ -25,7 +25,7 @@ public final class MainEquationBalance {
         try (Scanner s = new Scanner(System.in);
                 PrintWriter pw = new PrintWriter(System.out, true);
                 MarkdownWriter mdw = new MarkdownWriter(pw)) {
-            mdw.out("`{bm-linker-off}`\n\n");
+            mdw.out("`{bm-disable-all}`\n\n");
             mdw.out("<div style=\"border:1px solid black;\">\n\n");
             try {
                 String input = s.nextLine();
@@ -38,7 +38,7 @@ public final class MainEquationBalance {
                 mdw.out(getStackTraceAsString(e));
             }
             mdw.out("\n\n</div>\n\n");
-            mdw.out("`{bm-linker-on}`\n\n");
+            mdw.out("`{bm-enable-all}`\n\n");
         }
     }
     
