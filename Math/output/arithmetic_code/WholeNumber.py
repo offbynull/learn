@@ -17,6 +17,8 @@ class WholeNumber:
             self.digits = list(map(lambda i: Digit(int(i)), digits))
             self.digits.reverse()
         elif isinstance(digits, int):
+            if digits < 0:
+                raise Exception('Negative int not allowed')
             digits = str(digits)
             self.digits = list(map(lambda i: Digit(int(i)), digits))
             self.digits.reverse()
