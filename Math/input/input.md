@@ -2721,7 +2721,7 @@ TODO: conceptualize as number line
 
 TODO: conceptualize as number line
 
-TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here is confusing and this entire concept may be better conceptualized as a number line
+TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here is confusing and this entire concept may be better conceptualized as a number line (look at answers to TRY IT 3.69 and 3.70)
 
 # Integer Number Multiplication
 
@@ -3565,6 +3565,10 @@ Additive Inverse Property
 Multiplicative Inverse / Multiplicative Reciprocal Property
 
 * `{kt} a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1`
+
+Subtraction Property
+
+* `{kt} a - b = a + (-b)`
 
 ### Addition
 
@@ -11587,12 +11591,10 @@ pppp 4
 
 no ps to subtract from the ns, so add an n for each p..
 
-nnnnnn nnnn
+nnnnnn[nnnn]
        pppp
 
-┌────────────┐
-│ nnnnnnnnnn │ -6 - 4 = -10
-└────────────┘
+-10
 ```
 
 3.64)
@@ -11605,12 +11607,10 @@ pppp 4
 
 no ps to subtract from the ns, so add an n for each p..
 
-nnnnnnn nnnn
+nnnnnnn[nnnn]
         pppp
 
-┌─────────────┐
-│ nnnnnnnnnnn │ -7 - 4 = -11
-└─────────────┘
+-11
 ```
 
 3.65)
@@ -11621,16 +11621,167 @@ nnnn -4
 
 no ns to subtract from the ps, so add a p for each n..
 
-pppppp pppp
+pppppp[pppp]
        nnnn
 
-┌────────────┐
-│ pppppppppp │ 6 - -4 = 10
-└────────────┘
+10
 ```
 
 3.66)
 
+```
+ppppppp[pppp]
+        nnnn
+
+11
+```
+
+3.67)
+
+* a)
+
+  ```
+  ppppppp[pppppppp]
+          nnnnnnnn
+  15
+  ```
+
+* b)
+
+  ```
+  nn[] -2
+  nn   -2
+
+  0
+  ```
+
+* c)
+
+  ```
+  ppp[pppp] 7
+  ppp 3
+
+  4
+  ```
+
+* d)
+
+  ```
+  nnnnnn[pp]
+  nnnnnn nn
+
+  2
+  ```
+
+3.68)
+
+* a)
+
+  ```
+  pppp[pppppp]
+       nnnnnn
+  
+  10
+  ```
+
+* b)
+
+  ```
+  [nnnnnnn]n
+
+  -7
+  ```
+
+* c)
+
+  ```
+  [nnnnnnn]n
+
+  -7
+  ```
+
+* d)
+  
+  ```
+  nnnn[nn]
+       pp
+  
+  6
+  ```
+
+3.69)
+
+* a) 7 - 9
+
+  ```
+  ppppppp
+  nnnnnnnnn <-- neutralize by adding 9 negatives, we have more negatives that positives
+  
+  -2
+  ```
+
+* b) -5 - (-9)
+
+  ```
+  nnnnn
+  ppppppppp <-- neutralize by adding 10 positives, we have more positives than negatives
+ 
+  4
+  ```
+
+3.70)
+
+* a) 4 - 7
+
+  ```
+  pppp
+  nnnnnnn  <-- neutralize by adding 9 negatives, we have more negatives than positives
+
+  -3
+  ```
+
+* b) -7 - (-10)
+
+  ```
+  nnnnnnn
+  pppppppppp <-- neutralize by adding 10 positives, we have more positives than negatives 
+  
+  3
+  ```
+
+3.71)
+
+* a) 21 - 13 = 8, 21 + (-13) = 8
+* b) -11 - 7 = -18, -11 + (-7) = -18
+
+3.72)
+
+* a) 15 - 7 = 8, 15 + (-7) = 8
+* b) -14 - 8 = -22, -14 + (-8) = -22
+
+3.73)
+
+* a) 6 - (-13) = 19, 6 + 13 = 19
+* b) -5 - (-1) = -4, -5 + 1 = -4
+
+3.74)
+
+* a) 4 - (-19) = 23, 4 + 19 = 23
+* b) -4 - (-7) = 3, -4 + 7 = 3
+
+3.75) -67 - (-38) = 29
+
+3.76) -83 - (-57) = 26
+
+3.77) 8 - (-3 - 1) - 9 = 8 - (-4) - 9 = 12 - 9 = 3
+
+3.78) 12 - (-9 - 6) - 14 = 12 - (-15) - 14 = 27 - 14 = 13
+
+3.79) 6(2) - 9(1) - 8(9) = 12 - 9 - 72 = 3 - 72 = -69
+
+3.80) 2(5) - 3(7) - 4(9) = 10 - 21 - 36 = -11 - 36 = -47
+
+3.81)
 
 START BACK UP HERE
 START BACK UP HERE
