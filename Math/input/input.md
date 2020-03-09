@@ -2729,6 +2729,30 @@ TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 --
 Whole number multiplication
 ```
 
+See chapter 3.4
+
+When the right hand side is negative, think of it as subtraction instead of addition. Think of ...
+
+* 5 \* 3 as add 5, 3 times
+
+* -5 \* 3 as add -5, 3 times
+
+* 3 \* -5 as subtract 5, 3 times
+
+  conceptualize as subtraction with dots/counters. you're subtracting from 0, there are no positives to take away to you start counting "neutral pairs". see ch 3.4 around figure 3.20
+
+  (OR you could use the commutative property and swap this around to be -5 * 3 -- the same as the previous bullet point).
+
+* -5 \* -3 as subtract -5, 3 times
+
+  similarly to the bullet point above, you're subtracting from 0. there are no negatives to take away to you start counting "neutral pairs". see ch 3.4 around figure 3.20. you end up with 15 positives.
+
+  0 - (-5) = 5
+  5 - (-5) = 10
+  10 - (-5) = 15
+
+  OR you could think of the same thing but on a number line
+
 # Integer Number Division
 
 ```{prereq}
@@ -11782,6 +11806,346 @@ ppppppp[pppp]
 3.80) 2(5) - 3(7) - 4(9) = 10 - 21 - 36 = -11 - 36 = -47
 
 3.81)
+
+* a) 5 - 7 = -2
+* b) -8 - 7 = -15
+
+3.82)
+
+* a) 1 - 3 = -2
+* b) -4 - 3 = -7
+
+3.83)
+
+* a) 17 - 19 = -2
+* b) 17 - -19 = 36
+
+3.84)
+
+* a) -5 - 14 = -19
+* b) -5 - -14 = 9
+
+3.85)
+
+* a) 14 - -23 = 37
+* b) -17 - 21 = -38
+
+3.86)
+
+* a) 11 - -19 = 30
+* b) -11 - 18 = -29
+
+3.87) 15 - -30 = 45
+
+3.88) -5 - -16 = 11
+
+3.89) 10023 - -80 = 10103
+
+3.90) -340 - -573 = 233
+
+3.91)
+
+* a) 74 - 27 = 47
+* b) 47 - 50 = -3
+* c) -3 + 20 = 17
+
+3.92)
+
+* a) -78 + 24 = -54
+* b) -54 + 49 = -5
+
+__EXERCISE__
+
+3.3.127) 8 - 2 = 6
+
+```
+pppppppp
+nn
+
+6 ps remaining
+```
+
+3.3.128) 9 - 3 = 6
+
+```
+ppppppppp
+nnn
+
+3 more ps remaining
+```
+
+3.3.129) -5 - -1 = -4
+
+```
+nnnn[n]
+
+after removing 1 n, 4 ns remaining
+```
+
+3.3.130) -6 - -4
+
+```
+nn[nnnn]
+
+after removing 4 n, 2 ns remaining
+```
+
+3.3.131) -5 - 4
+
+```
+nnnnnnnnn
+     pppp
+
+no ps to subtract from the ns, so add an n for each p.. 9 ns
+```
+
+3.3.132) -7 - 2
+
+```
+nnnnnnnnn
+       pp
+
+no ps to subtract from the ns, so add an n for each p.. 9 ns
+```
+
+3.3.133) 8 - -4
+
+```
+pppppppppppp
+        nnnn
+
+no ns to subtract from the ps, so add a p for each n.. 12 ps
+```
+
+3.3.134) 7 - (-3)
+
+```
+pppppppppp
+       nnn
+
+no ns to subtract from the ps, so add a p for each n.. 10 ps
+```
+
+3.3.135)
+
+* a) 15 - 6 = 9
+* b) 15 + -6 = 9
+
+3.3.136)
+
+* a) 12 - 9 = 3
+* b) 12 + (-9) = 3
+
+3.3.137)
+
+* a) 44 - 28 = 16
+* b) 44 + (-28) = 16
+
+3.3.138)
+
+* a) 35 - 16 = 19
+* b) 35 + (-16) = 19
+
+3.3.139)
+
+* a) 8 - (-9) = 17
+* b) 8 + 9 = 17
+
+3.3.140)
+
+* a) 4 - (-4) = 8
+* b) 4 + 4 = 8
+
+3.3.141)
+
+* a) 27 - (-18) = 45
+* b) 27 + 18 = 45
+
+3.3.142)
+
+* a) 46 - (-37) = 83
+* b) 46 + 37 = 83
+
+3.3.143) 15 - (-12) = 27
+
+3.3.144) 14 - (-11) = 25
+
+3.3.145) 10 - (-19) = 29
+
+3.3.146) 11 - (-18) = 29
+
+3.3.147) 48 - 87 = -39
+
+3.3.148) 45 - 69 = -24
+
+3.3.149) 31 - 79 = -48
+
+3.3.150) 39 - 81 = -42
+
+3.3.151) -31 - 11 = -42
+
+3.3.152) -32 - 18 = -50
+
+3.3.153) -17 - 42 = -59
+
+3.3.154) -19 - 46 = -65
+
+3.3.155) -103 - (-52) = -51
+
+3.3.156) -105 - (-68) = -37
+
+3.3.157) -45 - (-54) = 9
+
+3.3.158) -58 - (-67) = -9
+
+3.3.159) 8 - 3 - 7 = 5 - 7 = -2
+
+3.3.160) 9 - 6 - 5 = 4 - 5 = -1
+
+3.3.161) -5 - 4 + 7 = -9 + 7 = -2
+
+3.3.162) -3 - 8 + 4 = -11 + 4 = -7
+
+3.3.163) -14 - (-27) + 9 = 13 + 9 = 22
+
+3.3.164) -15 - (-28) + 5 = 13  + 5 = 18
+
+3.3.165) 71 + (-10) - 8 = 61 - 8 = 53
+
+3.3.166) 64 + (-17) - 9 = 47 - 9 = 38
+
+3.3.167) -16 - (-4 + 1) - 7 = -16 - (-3) - 7 = -13 - 7 = -20
+
+3.3.168) -15 - (-6 + 4) - 3 = -15 - (-2) - 3 = -13 - 3 = -16
+
+3.3.169) (2 - 7) - (3 - 8) = -5 - -5 = 0
+
+3.3.170) (1 - 8) - (2 - 9) = -7 - -7 = 0
+
+3.3.171) -(6 - 8) - (2 - 4) = -(-2) - (-2) = 2 - -2 = 4
+
+3.3.172) -(4 - 5) - (7 - 8) = -(-1) - (-1) = 1 - (-1) = 2
+
+3.3.173) 25 - [10 - (3 - 12)] = 25 - [10 - -9] = 25 - 19 = 6
+
+3.3.174) 32 - [5 - (15 - 20)] = 32 - [5 - -5] = 32 - 10 = 42
+
+3.3.175) 6.3 - 4.3 - 7.2 = 2 - 7.2 = -5.2 --- WHY ASK THIS? THE BOOK HASN'T COVERED DECIMAL NUMBERS YET
+
+3.3.176) 5.7 - 8.2 - 4.9 = -2.5 - 4.9 = -7.4 --- WHY ASK THIS? THE BOOK HASN'T COVERED DECIMAL NUMBERS YET
+
+3.3.177) 5^2 - 6^2 = 25 - 36 = -11
+
+3.3.178) 6^2 - 7^2 = 36 - 49 = -13
+
+3.3.179)
+
+* a) 3 - 6 = -3
+* b) 3 - -3 = 6
+
+3.3.180)
+
+* a) 5 - 4 = 1
+* b) -5 - 4 = -9
+
+3.3.181)
+
+* a) 5 - 2 = 3
+* b) 5 - -2 = 7
+
+3.3.183) 4(3)^2 - 15(3) + 1 = 4(9) - 45 + 1 = 36 - 45 + 1 = -9 + 1 = -8
+
+3.3.184) 5(2)^2 - 14(2) + 7 = 5(4) - 28 + 7 = 20 - 28 + 7 = -8 + 7 = -1
+
+3.3.185) -12 - 5(6)^2 = -12 - 5(36) = -12 - 180 = -192
+
+3.3.186) -19 - 4(5)^2 = -19 - 4(25) = -19 - 100 = -119
+
+3.3.187)
+
+* a) 3 - -10 = 13
+* b) 45 - -20 = 65
+
+3.3.188)
+
+* a) 8 - -12 = 20
+* b) 50 - -13 = 63
+
+3.3.189)
+
+* a) -6 - 9 = -15
+* b) -16 - -12 = -4
+
+3.3.190)
+
+* a) -8 - 9 = -17
+* b) -19 - -15 = -4
+
+3.3.191)
+
+* a) -17 - 8 = -25
+* b) -24 - 37 = -61
+
+3.3.192)
+
+* a) -14 - 5 = -19
+* b) -13 - 42 = -55
+
+3.3.193)
+
+* a) 6 - 21 = -15
+* b) -19 - 31 = -50
+
+3.3.194)
+
+* a) 7 - 34 = -27
+* b) -50 - 29 = -79
+
+3.3.195) 28 - 38 = -10
+
+3.3.196) 22 - 35 = -13
+
+3.3.197) 84 - -12 = 96
+
+3.3.198) 89 - -31 = 120
+
+3.3.199) 30 + 2 - 7 - 4 = 21 
+
+3.3.200) 20 - 8 + 5 - 6 = 11
+
+3.3.201) 148 - 83 = 65
+
+3.3.202) 426 - 152 = 274 
+
+3.3.203) 210 - 250 = -40
+
+3.3.204) 94 - 110 = -16
+
+3.3.205) -14 + 40 = -26
+
+3.3.206) -23 + 80 = -57
+
+3.3.207) -20 - -7 = -13
+
+3.3.208) -100 - -45 = -55
+
+3.3.209) 9 to 0 is 9, 0 to -6 is 6 -- 9 + 6 is 15
+
+3.3.210) when you subtract a negative, you go right on the number line by that amount -- you also go right on the number line when you add some amount.
+
+## Chapter 3 Section 3.4
+
+__TRY IT__
+
+3.93) 
+
+* a) -6 * 8 = -48
+* b) -4 * -7 = 28
+* c) 9 * -7 = -63
+* d) 5 \* 12 = 60
+
+3.94)
+
 
 START BACK UP HERE
 START BACK UP HERE

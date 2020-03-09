@@ -22,6 +22,7 @@ class IntegerNumber:
         digits = list(map(lambda i: Digit(int(i)), digits))
         return IntegerNumber(sign, WholeNumber(digits))
 
+    # TODO: FIX THIS SO sign CAN BE None WHEN MAGNITUDE IS 0. 0 IS NEITHER POSITIVE OR NEGATIVE
     def __init__(self, sign: Sign, magnitude: WholeNumber):
         self.sign = sign
         self.magnitude = magnitude.copy()
@@ -42,6 +43,38 @@ class IntegerNumber:
             else:
                 return IntegerNumber(Sign.POSITIVE, rhs.magnitude - lhs.magnitude)
 
+    def __sub__(lhs: IntegerNumber, rhs: IntegerNumber) -> IntegerNumber:
+        if lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE:
+            if lhs.magnitude >= rhs.magnitude:
+                return IntegerNumber(Sign.POSITIVE, lhs.magnitude - rhs.magnitude)
+            elif lhs.magnitude < rhs.magnitude:
+                return IntegerNumber(Sign.NEGATIVE, rhs.magnitude - lhs.magnitude)
+        elif lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE:
+            if lhs.magnitude >= rhs.magnitude:
+                return IntegerNumber(Sign.NEGATIVE, lhs.magnitude - rhs.magnitude)
+            elif lhs.magnitude < rhs.magnitude:
+                return IntegerNumber(Sign.POSITIVE, rhs.magnitude - lhs.magnitude)
+        elif lhs.sign == Sign.POSITIVE and rhs.sign == Sign.NEGATIVE:
+            return IntegerNumber(Sign.POSITIVE, lhs.magnitude + rhs.magnitude)
+        elif lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.POSITIVE:
+            return IntegerNumber(Sign.NEGATIVE, lhs.magnitude + rhs.magnitude)
+
+    def __mul__(lhs: IntegerNumber, rhs: IntegerNumber) -> IntegerNumber:
+        if (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE):
+            return IntegerNumber(Sign.POSITIVE, lhs.magnitude * rhs.magnitude)
+        elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.NEGATIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.POSITIVE):
+            return IntegerNumber(Sign.NEGATIVE, lhs.magnitude * rhs.magnitude)
+
+    def __truediv__(lhs: IntegerNumber, rhs: IntegerNumber) -> IntegerNumber:
+        if (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE):
+            return IntegerNumber(Sign.POSITIVE, lhs.magnitude / rhs.magnitude)
+        elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.NEGATIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.POSITIVE):
+            return IntegerNumber(Sign.NEGATIVE, lhs.magnitude / rhs.magnitude)
+
     def __str__(self: WholeNumber) -> str:
         return ('-' if self.sign == Sign.NEGATIVE else '') + str(self.magnitude)
 
@@ -52,8 +85,8 @@ class Sign(Enum):
 
 
 if __name__ == '__main__':
-    print(f'{IntegerNumber.from_int(6) + IntegerNumber.from_int(4)}')
-    print(f'{IntegerNumber.from_int(6) + IntegerNumber.from_int(-4)}')
-    print(f'{IntegerNumber.from_int(-6) + IntegerNumber.from_int(4)}')
-    print(f'{IntegerNumber.from_int(-6) + IntegerNumber.from_int(-4)}')
-    print(f'{IntegerNumber.from_int(-4) + IntegerNumber.from_int(6)}')
+    print(f'{IntegerNumber.from_int(6) - IntegerNumber.from_int(4)}')
+    print(f'{IntegerNumber.from_int(6) - IntegerNumber.from_int(-4)}')
+    print(f'{IntegerNumber.from_int(-6) - IntegerNumber.from_int(4)}')
+    print(f'{IntegerNumber.from_int(-6) - IntegerNumber.from_int(-4)}')
+    print(f'{IntegerNumber.from_int(-4) - IntegerNumber.from_int(6)}')
