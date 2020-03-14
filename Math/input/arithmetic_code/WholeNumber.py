@@ -408,6 +408,9 @@ class WholeNumber:
 
     #MARKDOWN_DIV
     def __truediv__(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
+        if divisor == WholeNumber(0):
+            raise Exception('Cannot divide by 0')
+
         log_indent()
         try:
             log(f'Dividing {dividend} by {divisor}...')
@@ -456,6 +459,9 @@ class WholeNumber:
     #MARKDOWN_DIVTE
     @staticmethod
     def trial_and_error_div(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
+        if divisor == WholeNumber(0):
+            raise Exception('Cannot divide by 0')
+
         log_indent()
         try:
             log(f'Dividing {dividend} by {divisor}...')

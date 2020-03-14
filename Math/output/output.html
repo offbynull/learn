@@ -2033,6 +2033,9 @@ while (dividend &gt;= divisor) {
 <p>The <a href="#BOOKMARK45">trial-and-error division</a> algorithm written as code <a href="#BOOKMARK82">is</a> as follows:</p>
 <pre class="hljs"><code><span class="hljs-meta">@staticmethod</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trial_and_error_div</span><span class="hljs-params">(dividend: WholeNumber, divisor: WholeNumber)</span> -&gt; (WholeNumber, WholeNumber):</span>
+    <span class="hljs-keyword">if</span> divisor == WholeNumber(<span class="hljs-number">0</span>):
+        <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">'Cannot divide by 0'</span>)
+
     log_indent()
     <span class="hljs-keyword">try</span>:
         log(<span class="hljs-string">f'Dividing <span class="hljs-subst">{dividend}</span> by <span class="hljs-subst">{divisor}</span>...'</span>)
@@ -2392,6 +2395,9 @@ while (dividend &gt;= divisor) {
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>3</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mn>250</mn><mstyle mathcolor="#28ae7b"><mi>R</mi><mn>2</mn></mstyle></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>3</mn><mover accent="true"><mrow><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded><mn>752</mn></mrow><mo stretchy="true">‾</mo></mover></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>3</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>6</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>3</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mn>15</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>3</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><munder accentunder="true"><mn>15</mn><mo stretchy="true">‾</mo></munder></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>3</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mphantom><mn>0</mn></mphantom><mn>02</mn></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>3</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mphantom><mn>00</mn></mphantom><munder accentunder="true"><mn>0</mn><mo stretchy="true">‾</mo></munder></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mphantom><mrow><mn>3</mn><mpadded height="0px" depth="0px"><mo stretchy="false" lspace="0em" rspace="0em">)</mo></mpadded></mrow></mphantom><mrow><mphantom><mn>00</mn></mphantom><mn>2</mn></mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l}\phantom{{{3}\smash{)}}}{{250\green{R2}}} \\{{3}}\overline{\smash{)}{752}} \\\phantom{{{3}\smash{)}}}{\underline{6}} \\\phantom{{{3}\smash{)}}}{15} \\\phantom{{{3}\smash{)}}}{\underline{15}} \\\phantom{{{3}\smash{)}}}{\phantom{0}02} \\\phantom{{{3}\smash{)}}}{\phantom{00}\underline{0}} \\\phantom{{{3}\smash{)}}}{\phantom{00}2} \\\end{array}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:9.604440000000002em;vertical-align:-4.552220000000002em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:5.05222em;"><span style="top:-7.212220000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">3</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord">2</span><span class="mord">5</span><span class="mord">0</span><span class="mord mathdefault" style="margin-right:0.00773em;color:#28ae7b;">R</span><span class="mord" style="color:#28ae7b;">2</span></span></span></span></span><span style="top:-6.0077799999999995em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord">3</span></span></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8444400000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord"><span class="mclose">)</span></span></span></span></span></span></span></span><span class="mord"><span class="mord">7</span><span class="mord">5</span><span class="mord">2</span></span></span></span><span style="top:-3.76444em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span><span style="top:-4.807779999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">3</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.6077799999999987em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">3</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord">1</span><span class="mord">5</span></span></span></span><span style="top:-2.4077799999999985em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">3</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.2077799999999985em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">3</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord" style="color:transparent;">0</span><span class="mord">0</span><span class="mord">2</span></span></span></span><span style="top:-0.0077799999999974em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">3</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6444399999999999em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span></span><span style="top:1.1922200000000018em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;"><span class="mord" style="color:transparent;">3</span></span><span class="mord" style="color:transparent;"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mord" style="color:transparent;"><span class="mclose" style="color:transparent;">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord" style="color:transparent;">0</span><span class="mord" style="color:transparent;">0</span><span class="mord">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:4.552220000000002em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></p>
 <p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__truediv__</span><span class="hljs-params">(dividend: WholeNumber, divisor: WholeNumber)</span> -&gt; (WholeNumber, WholeNumber):</span>
+    <span class="hljs-keyword">if</span> divisor == WholeNumber(<span class="hljs-number">0</span>):
+        <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">'Cannot divide by 0'</span>)
+
     log_indent()
     <span class="hljs-keyword">try</span>:
         log(<span class="hljs-string">f'Dividing <span class="hljs-subst">{dividend}</span> by <span class="hljs-subst">{divisor}</span>...'</span>)
@@ -2481,20 +2487,36 @@ while (dividend &gt;= divisor) {
 <p>TODO: write algorithm that expands on WholeNumber code -- WholeNumber class <a href="#BOOKMARK82">is</a> used to represent values</p>
 <p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__add__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; IntegerNumber:</span>
+    <span class="hljs-keyword">if</span> lhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># 0 + a = a, why add this? it simplifies logic below because 0 has no sign</span>
+        <span class="hljs-keyword">return</span> rhs.copy()
+    <span class="hljs-keyword">if</span> rhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># a + 0 = a, why add this? it simplifies logic below because 0 has no sign</span>
+        <span class="hljs-keyword">return</span> lhs.copy()
+
     <span class="hljs-keyword">if</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude + rhs.magnitude)
+        sign = Sign.POSITIVE
+        magnitude = lhs.magnitude + rhs.magnitude
     <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude + rhs.magnitude)
+        sign = Sign.NEGATIVE
+        magnitude = lhs.magnitude + rhs.magnitude
     <span class="hljs-keyword">elif</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
         <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude - rhs.magnitude)
+            sign = Sign.POSITIVE
+            magnitude = lhs.magnitude - rhs.magnitude
         <span class="hljs-keyword">else</span>:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, rhs.magnitude - lhs.magnitude)
+            sign = Sign.NEGATIVE
+            magnitude = rhs.magnitude - lhs.magnitude
     <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
         <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude - rhs.magnitude)
+            sign = Sign.NEGATIVE
+            magnitude = lhs.magnitude - rhs.magnitude
         <span class="hljs-keyword">else</span>:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, rhs.magnitude - lhs.magnitude)</code></pre><div style="border:1px solid black;">
+            sign = Sign.POSITIVE
+            magnitude = rhs.magnitude - lhs.magnitude
+
+    <span class="hljs-keyword">if</span> magnitude == WholeNumber(<span class="hljs-number">0</span>):
+        sign = <span class="hljs-literal">None</span>
+
+    <span class="hljs-keyword">return</span> IntegerNumber(sign, magnitude)</code></pre><div style="border:1px solid black;">
 <p></p>
 </div>
 <p></p>
@@ -2511,20 +2533,41 @@ while (dividend &gt;= divisor) {
 <p>TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here <a href="#BOOKMARK82">is</a> confusing and th<a href="#BOOKMARK82">is</a> entire concept may be better conceptualized as a number line (look at answers to TRY IT 3.69 and 3.70)</p>
 <p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__sub__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; IntegerNumber:</span>
+    <span class="hljs-keyword">if</span> lhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># 0 - a = -a, why add this? it simplifies logic below because 0 has no sign</span>
+        new_sign = rhs.sign
+        <span class="hljs-keyword">if</span> new_sign == Sign.POSITIVE:
+            new_sign = Sign.NEGATIVE
+        <span class="hljs-keyword">elif</span> new_sign == Sign.NEGATIVE:
+            new_sign = Sign.POSITIVE
+        <span class="hljs-keyword">return</span> IntegerNumber(new_sign, rhs.magnitude)
+    <span class="hljs-keyword">if</span> rhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># a - 0 = a, why add this? it simplifies logic below because 0 has no sign</span>
+        <span class="hljs-keyword">return</span> lhs.copy()
+
     <span class="hljs-keyword">if</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
         <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude - rhs.magnitude)
+            sign = Sign.POSITIVE
+            magnitude = lhs.magnitude - rhs.magnitude
         <span class="hljs-keyword">elif</span> lhs.magnitude &lt; rhs.magnitude:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, rhs.magnitude - lhs.magnitude)
+            sign = Sign.NEGATIVE
+            magnitude = rhs.magnitude - lhs.magnitude
     <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
         <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude - rhs.magnitude)
+            sign = Sign.NEGATIVE
+            magnitude = lhs.magnitude - rhs.magnitude
         <span class="hljs-keyword">elif</span> lhs.magnitude &lt; rhs.magnitude:
-            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, rhs.magnitude - lhs.magnitude)
+            sign = Sign.POSITIVE
+            magnitude = rhs.magnitude - lhs.magnitude
     <span class="hljs-keyword">elif</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude + rhs.magnitude)
+        sign = Sign.POSITIVE
+        magnitude = lhs.magnitude + rhs.magnitude
     <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude + rhs.magnitude)</code></pre><div style="border:1px solid black;">
+        sign = Sign.NEGATIVE
+        magnitude = lhs.magnitude + rhs.magnitude
+
+    <span class="hljs-keyword">if</span> magnitude == WholeNumber(<span class="hljs-number">0</span>):
+        sign = <span class="hljs-literal">None</span>
+
+    <span class="hljs-keyword">return</span> IntegerNumber(sign, magnitude)</code></pre><div style="border:1px solid black;">
 <p></p>
 </div>
 <p></p>
@@ -2561,12 +2604,24 @@ while (dividend &gt;= divisor) {
 <p>-1 * n = -n (you get the opposite)</p>
 <p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__mul__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; IntegerNumber:</span>
+    <span class="hljs-keyword">if</span> lhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># 0 * a = 0, why add this? it simplifies logic below because 0 has no sign</span>
+        <span class="hljs-keyword">return</span> IntegerNumber.from_int(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">if</span> rhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># a * 0 = 0, why add this? it simplifies logic below because 0 has no sign</span>
+        <span class="hljs-keyword">return</span> IntegerNumber.from_int(<span class="hljs-number">0</span>)
+
     <span class="hljs-keyword">if</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE) \
             <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE):
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude * rhs.magnitude)
+        sign = Sign.POSITIVE
+        magnitude = lhs.magnitude * rhs.magnitude
     <span class="hljs-keyword">elif</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE) \
             <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE):
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude * rhs.magnitude)</code></pre><div style="border:1px solid black;">
+        sign = Sign.NEGATIVE
+        magnitude = lhs.magnitude * rhs.magnitude
+
+    <span class="hljs-keyword">if</span> magnitude == WholeNumber(<span class="hljs-number">0</span>):
+        sign = <span class="hljs-literal">None</span>
+
+    <span class="hljs-keyword">return</span> IntegerNumber(sign, magnitude)</code></pre><div style="border:1px solid black;">
 <p></p>
 </div>
 <p></p>
@@ -2581,14 +2636,28 @@ while (dividend &gt;= divisor) {
 <p>DO AN EXAMPLE WITH A <a href="#BOOKMARK35">REMAINDER</a></p>
 <p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__truediv__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; (IntegerNumber, IntegerNumber):</span>
+    <span class="hljs-keyword">if</span> lhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># 0 / a = 0, why add this? it simplifies logic below because 0 has no sign</span>
+        <span class="hljs-keyword">return</span> IntegerNumber.from_int(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">if</span> rhs.magnitude == WholeNumber(<span class="hljs-number">0</span>):  <span class="hljs-comment"># a / 0 = err, why add this? it simplifies logic below because 0 is err</span>
+        <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">'Cannot divide by 0'</span>)
+
     <span class="hljs-keyword">if</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE) \
             <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE):
         (magnitude, remainder) = lhs.magnitude / rhs.magnitude
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, magnitude), IntegerNumber(Sign.POSITIVE, remainder)
+        magnitude_sign = Sign.POSITIVE
+        remainder_sign = Sign.POSITIVE
     <span class="hljs-keyword">elif</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE) \
             <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE):
         (magnitude, remainder) = lhs.magnitude / rhs.magnitude
-        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, magnitude), IntegerNumber(Sign.NEGATIVE, remainder)</code></pre><div style="border:1px solid black;">
+        magnitude_sign = Sign.NEGATIVE
+        remainder_sign = Sign.NEGATIVE
+
+    <span class="hljs-keyword">if</span> magnitude == WholeNumber(<span class="hljs-number">0</span>):
+        magnitude_sign = <span class="hljs-literal">None</span>
+    <span class="hljs-keyword">if</span> remainder == WholeNumber(<span class="hljs-number">0</span>):
+        remainder_sign = <span class="hljs-literal">None</span>
+
+    <span class="hljs-keyword">return</span> IntegerNumber(magnitude_sign, magnitude), IntegerNumber(remainder_sign, remainder)</code></pre><div style="border:1px solid black;">
 <p></p>
 </div>
 <p></p>
