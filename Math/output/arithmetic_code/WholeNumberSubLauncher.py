@@ -1,8 +1,10 @@
+import inspect
+
 from Output import log_whitelist
 from WholeNumber import WholeNumber
 
 if __name__ == '__main__':
-    log_whitelist(['__sub__', '_borrow_from_next'])
+    log_whitelist([(inspect.getfile(WholeNumber), '__sub__'), (inspect.getfile(WholeNumber), '_borrow_from_next')])
 
     print("<div style=\"border:1px solid black;\">", end="\n\n")
     print("`{bm-disable-all}`", end="\n\n")

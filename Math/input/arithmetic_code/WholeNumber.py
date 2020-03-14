@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Union, List
+from typing import Union
 
 from Output import *
 from Digit import Digit
@@ -564,6 +564,8 @@ class WholeNumberRange:
 if __name__ == '__main__':
     # n3 = WholeNumber('1000') - WholeNumber('100')
     # print(n3)
-    log_whitelist(['__truediv__'])  # log_whitelist(['__truediv__', 'trial_and_error_div'])
+    import inspect
+
+    log_whitelist([(inspect.getfile(WholeNumber), '__truediv__')])  # log_whitelist(['__truediv__', 'trial_and_error_div'])
     (q, r) = WholeNumber(752) / WholeNumber(3)
     print(f'{q}R{r}')

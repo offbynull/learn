@@ -2710,6 +2710,24 @@ TODO: conceptualize as cancelling opposite counters as defined in chapter 3.2 --
 
 TODO: write algorithm that expands on WholeNumber code -- WholeNumber class is used to represent values
 
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
+```
+
+```{define-block}
+intnumadd
+intnumadd_macro/
+arithmetic_code/
+```
+
+```{intnumadd}
+-752 3
+```
+
 # Integer Number Subtraction
 
 ```{prereq}
@@ -2722,6 +2740,24 @@ TODO: conceptualize as number line
 TODO: conceptualize as number line
 
 TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here is confusing and this entire concept may be better conceptualized as a number line (look at answers to TRY IT 3.69 and 3.70)
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
+```
+
+```{define-block}
+intnumsub
+intnumsub_macro/
+arithmetic_code/
+```
+
+```{intnumsub}
+752 -3 
+```
 
 # Integer Number Multiplication
 
@@ -2757,6 +2793,24 @@ When the right hand side is negative, think of it as subtraction instead of addi
 
 -1 * n = -n (you get the opposite)
 
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
+```
+
+```{define-block}
+intnummul
+intnummul_macro/
+arithmetic_code/
+```
+
+```{intnummul}
+-6 -5
+```
+
 # Integer Number Division
 
 ```{prereq}
@@ -2766,6 +2820,24 @@ Whole number division
 division is the inverse of multiplication, so the same rules you used in whole number division apply here as well. trial-and-error division to find the value and/or take off the signs for long division and add a sign back on afterwards.
 
 DO AN EXAMPLE WITH A REMAINDER
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
+```
+
+```{define-block}
+intnumdiv
+intnumdiv_macro/
+arithmetic_code/
+```
+
+```{intnumdiv}
+-30 5
+```
 
 # Multiple
 

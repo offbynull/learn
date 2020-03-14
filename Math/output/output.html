@@ -2479,6 +2479,25 @@ while (dividend &gt;= divisor) {
 <p>TODO: conceptualize as number line</p>
 <p>TODO: conceptualize as cancelling opposite counters as defined in chapter 3.2 -- if there's a positive for a negative, cancel it out</p>
 <p>TODO: write algorithm that expands on WholeNumber code -- WholeNumber class <a href="#BOOKMARK82">is</a> used to represent values</p>
+<p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__add__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; IntegerNumber:</span>
+    <span class="hljs-keyword">if</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude + rhs.magnitude)
+    <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude + rhs.magnitude)
+    <span class="hljs-keyword">elif</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
+        <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude - rhs.magnitude)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, rhs.magnitude - lhs.magnitude)
+    <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
+        <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude - rhs.magnitude)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, rhs.magnitude - lhs.magnitude)</code></pre><div style="border:1px solid black;">
+<p></p>
+</div>
+<p></p>
 <a name="HEADREF15"></a><h1>Integer Number Subtraction</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK82">IS</a>ITES↩</strong></p>
@@ -2490,6 +2509,25 @@ while (dividend &gt;= divisor) {
 <p>TODO: conceptualize as number line</p>
 <p>TODO: conceptualize as number line</p>
 <p>TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here <a href="#BOOKMARK82">is</a> confusing and th<a href="#BOOKMARK82">is</a> entire concept may be better conceptualized as a number line (look at answers to TRY IT 3.69 and 3.70)</p>
+<p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__sub__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; IntegerNumber:</span>
+    <span class="hljs-keyword">if</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
+        <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude - rhs.magnitude)
+        <span class="hljs-keyword">elif</span> lhs.magnitude &lt; rhs.magnitude:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, rhs.magnitude - lhs.magnitude)
+    <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
+        <span class="hljs-keyword">if</span> lhs.magnitude &gt;= rhs.magnitude:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude - rhs.magnitude)
+        <span class="hljs-keyword">elif</span> lhs.magnitude &lt; rhs.magnitude:
+            <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, rhs.magnitude - lhs.magnitude)
+    <span class="hljs-keyword">elif</span> lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE:
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude + rhs.magnitude)
+    <span class="hljs-keyword">elif</span> lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE:
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude + rhs.magnitude)</code></pre><div style="border:1px solid black;">
+<p></p>
+</div>
+<p></p>
 <a name="HEADREF16"></a><h1>Integer Number Multiplication</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK82">IS</a>ITES↩</strong></p>
@@ -2521,6 +2559,17 @@ while (dividend &gt;= divisor) {
 </li>
 </ul>
 <p>-1 * n = -n (you get the opposite)</p>
+<p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__mul__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; IntegerNumber:</span>
+    <span class="hljs-keyword">if</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE) \
+            <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE):
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, lhs.magnitude * rhs.magnitude)
+    <span class="hljs-keyword">elif</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE) \
+            <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE):
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, lhs.magnitude * rhs.magnitude)</code></pre><div style="border:1px solid black;">
+<p></p>
+</div>
+<p></p>
 <a name="HEADREF17"></a><h1>Integer Number Division</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK82">IS</a>ITES↩</strong></p>
@@ -2530,6 +2579,19 @@ while (dividend &gt;= divisor) {
 </div>
 <p><a href="#BOOKMARK34">division</a> <a href="#BOOKMARK82">is</a> the inverse of <a href="#BOOKMARK23">multiplication</a>, so the same rules you used in <a href="#BOOKMARK2">whole number</a> <a href="#BOOKMARK34">division</a> apply here as well. <a href="#BOOKMARK45">trial-and-error division</a> to find the value and/or take off the signs for <a href="#BOOKMARK46">long division</a> and <a href="#BOOKMARK8">add</a> a sign back on afterwards.</p>
 <p>DO AN EXAMPLE WITH A <a href="#BOOKMARK35">REMAINDER</a></p>
+<p>The way to perform th<a href="#BOOKMARK82">is</a> algorithm via code <a href="#BOOKMARK82">is</a> as follows...</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__truediv__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; (IntegerNumber, IntegerNumber):</span>
+    <span class="hljs-keyword">if</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE) \
+            <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE):
+        (magnitude, remainder) = lhs.magnitude / rhs.magnitude
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.POSITIVE, magnitude), IntegerNumber(Sign.POSITIVE, remainder)
+    <span class="hljs-keyword">elif</span> (lhs.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.NEGATIVE) \
+            <span class="hljs-keyword">or</span> (lhs.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> rhs.sign == Sign.POSITIVE):
+        (magnitude, remainder) = lhs.magnitude / rhs.magnitude
+        <span class="hljs-keyword">return</span> IntegerNumber(Sign.NEGATIVE, magnitude), IntegerNumber(Sign.NEGATIVE, remainder)</code></pre><div style="border:1px solid black;">
+<p></p>
+</div>
+<p></p>
 <a name="HEADREF18"></a><h1>Multiple</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK82">IS</a>ITES↩</strong></p>

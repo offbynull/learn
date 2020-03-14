@@ -1,8 +1,10 @@
+import inspect
+
 from Output import log_whitelist
 from WholeNumber import WholeNumber
 
 if __name__ == '__main__':
-    log_whitelist(['trial_and_error_div'])
+    log_whitelist([(inspect.getfile(WholeNumber), 'trial_and_error_div')])
 
     print("<div style=\"border:1px solid black;\">", end="\n\n")
     print("`{bm-disable-all}`", end="\n\n")
