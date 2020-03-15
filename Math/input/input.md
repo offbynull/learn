@@ -328,20 +328,11 @@ Place value system
 
 TODO: write blurb here
 
-## Natural
-
-```{svgbob}
-+------------------------------+ 
-|                              | 
-|   "Natural (e.g. 1, 7, 291)" | 
-|                              | 
-+------------------------------+
-```
 
 ## Whole
 
 ```{prereq}
-Natural numbers
+Place-value system
 ```
 
 ```{svgbob}
@@ -356,7 +347,15 @@ Natural numbers
 +--------------------------------+ 
 ```
 
-`{bm} Whole number`s are numbers which have no partial (fractional) portion -- they only consist of wholes. For example, 5, 104, and 27 are whole numbers while 4.2 is not. Whole numbers include all of the `{bm} natural number/(natural number|counting number)/i`s as well as 0.
+`{bm} Whole number`s are numbers which have no partial portion -- they only consist of wholes. For example, 5, 0, 104, and 27 are whole numbers while 4.2 is not.
+
+```{svgbob}
++-+-+-+-+-+-+-+-+-->
+| | | | | | | | | 
+0 1 2 3 4 5 6 7 8
+```
+
+The difference between whole numbers and `{bm} natural \/ counting \/ cardnial number/(natural number|counting number|cardinal number)/i`s is that counting numbers don't include 0 (they start at 1). That is, counting numbers start where you start counting / where something exists. For example, if you're counting apples, you start counting at 1 -- there needs to be at least 1 apple to start.
 
 ## Integer
 
@@ -380,82 +379,61 @@ Whole numbers
 +----------------------------------+
 ```
 
-TODO: this was pulled out from the place-value system section -- fix it.
+`{bm} Integer number/(integer number|integer)/i`s are numbers that have no partial portion but are mirrored across 0. That is, think of integers as 2 sets of natural numbers separated by 0, where everything to the...
 
-```
-number: sign? whole ('.' partial)?;
-         │
-         └── sign: POSITIVE | NEGATIVE;
-```
+* right of 0 is called a `{bm} positive` number (signified by a + prefix)
+* left of 0 is called a `{bm} negative` number (signified by a - prefix)
 
-The sign rule is used to express which category a number is in. Recall that the number 0 represents nothing / no value / empty values. If the sign is ...
-
-* NEGATIVE, it means that it's less than nothing.
-* POSITIVE, it means that it's more than nothing.
-
-If the sign is not set, it's assumed to be POSITIVE.
-
-Conceptually, you can think of the sign rule as putting numbers onto different sides of a line, where 0 is the dividing point. The numbers on the negative side of the line are the opposites to the positive side of the line (and vice versa).
-
-```{define-block}
-diagramhelperlinenum
-diagramhelperlinenum_macro/
-diagramhelper_code/target/appassembler/
+```{svgbob}
+<--+----+----+----+----+----+----+----+----+-->
+   |    |    |    |    |    |    |    |    | 
+  -4   -3   -2   -1    0   +1   +2   +3   +4
 ```
 
-```{diagramhelperlinenum}
-width 600
-- -3.5
-| -3
-| -2.5
-| -2
-| -1.5
-| -1
-| -0.5
-| 0
-| 0.5
-| 1
-| 1.5
-| 2
-| 2.5
-| 3
-- 3.5
-```
-
-For example, if I used the number 5 to represent how many steps I moved up, the number -5 would represent how many steps I moved down. This is because down is the opposite of up (and vice versa).
-
-```{diagramhelperlinenum}
-width 600
-- -5.5
-* -5
-| -4
-| -3
-| -2
-| -1
-| 0
-| 1
-| 2
-| 3
-| 4
-* 5
-- 5.5
-```
-
-In certain cases negative numbers represent a loss in value. For example, if monetary value were represented using a...
- * negative number, it means that money is lost / owed.
- * positive number, it means that money is gained / in possession.
+The prefix that determines if a integer is positive or negative is usually referred to as the `{bm} sign`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
 
 ```{note}
-Remember that 0 means no value / nothing / empty. As such, there's no such thing as -0 or +0. There is just 0, and its used as a dividing point between the negatives and positives. If 0 has a sign, you can remove it.
+If a number is positive, the + sign is typically left out.
 ```
 
-There is no special algorithm for processing the sign rule -- set a flag to indicate if the number is negative or positive.
+Conceptually, you can think of 0 and the positives the same way you think about whole numbers. They represent some value. For each positive, there's a corresponding negative that represents the opposite of that positive value. For example, if...
 
-TODO: chapter 3.1 disambiguate subtraction from negative sign -- maybe do this in subtraction section instead / as well
+* positive integers represent steps forward, then negative integers would represent steps backward.
 
-TODO: chapter 3.1 word translation for negative integer (e.g. negative 5 = -5, positive 5 = 5, opposite of 5 = -5, opposite of -5 = 5, opposite of opposite of 5 = 5)
+  * walk 5 steps (go forward 5 steps)
+  * walk -5 steps (go backward 5 steps)
 
-TODO: 0 is neight a positive nor negative number -- 0 means nothing, it's used as a mirror point between the positives and negatives
+  ```{svgbob}
+  <--+-------------------------+-------------------------+-->
+     |                         |                         | 
+    -5                         0                        +5
+  5 feet backward         no movement         5 feet forward
+  ```
+
+* positive integers represent money gained, then negative integers would represent money owed.
+
+  * 5 dollars (gain $5)
+  * -5 dollars (spend $5, or be in debt $5)
+
+  ```{svgbob}
+  <--+-------------------------+-------------------------+-->
+     |                         |                         | 
+    -5                         0                        +5
+  5 dollar debt              broke           5 dollars gained
+  ```
+
+* positive integers represent depth below sea-level, then negative integers would represent elevation above sea-level.
+
+  * depth of 5 meters (5 meters below sea-level)
+  * depth of -5 meters (5 meters above sea-level)
+
+
+  ```{svgbob}
+  <--+-------------------------+-------------------------+-->
+     |                         |                         | 
+    -5                         0                        +5
+  5 meters in sea         sea-level       5 meters in the air
+  ```
 
 ## Rational
 
@@ -2704,13 +2682,67 @@ Whole number addition
 Whole number subtraction
 ```
 
-TODO: conceptualize as number line
+Conceptually, you can think of `{bm} integer addition/(integer addition|integer number addition)/i` as movement on a number line. If some integer is being added to a...
 
-TODO: conceptualize as cancelling opposite counters as defined in chapter 3.2 -- if there's a positive for a negative, cancel it out
+* positive integer, it's moving right on the number line.
 
-TODO: write algorithm that expands on WholeNumber code -- WholeNumber class is used to represent values
+  For example, 3 + 4 is 7...
 
-The way to perform this algorithm via code is as follows...
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+                                      |           ^
+                                      |           |
+                                      +-----------+
+                                            +4
+  ```
+
+  For example, -5 + 4 is -1...
+
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+              |           ^
+              |           |
+              +-----------+
+                    +4
+  ```
+
+  Notice that the result of this example's movement is exactly the same as subtracting magnitudes, then tacking on a negative sign to the result: 5 - 4 is 1, tack on a negative sign to get -1.
+
+* negative integer, it's moving left on the number line.
+
+  For example, -1 + -4 is -5...
+
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0  1  2  3  4  5  6  7  8
+              ^           |
+              |           |
+              +-----------+
+                   -4
+  ```
+
+  Notice that the result of this example's movement is exactly the same as adding magnitudes, then tacking on a negative sign to the result: 1 + 4 is 5, tack on a negative sign to get -5.
+
+  For example, 3 + -4 is -1...
+
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0  1  2  3  4  5  6  7  8
+                          ^           |
+                          |           |
+                          +-----------+
+                               -4
+  ```
+
+  Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a negative sign to the result: 4 - 3 is 1, tack on a negative sign: -1.
+
+The algorithm used by humans to add integer numbers together revolves around inspecting the sign and magnitude of each integer, then deiciding whether to perform whole number addition or whole number subtraction to get the result. The codification of this algorithm is as follows...
 
 ```{output}
 arithmetic_code/IntegerNumber.py
@@ -2733,15 +2765,84 @@ arithmetic_code/
 ```{prereq}
 Whole number addition
 Whole number subtraction
+Integer number addition
 ```
 
-TODO: conceptualize as number line
+Conceptually, you can think of `{bm} integer subtraction/(integer subtraction|integer number subtraction)/i` as movement on a number line (opposite movement to that of integer addition). If some integer that's subtracting (right-hand side) is a...
 
-TODO: conceptualize as number line
+* positive integer, it's moving left on the number line.
 
-TODO: conceptualize as cancelling opposite counters as defined in chapter 3.3 -- the logic here is confusing and this entire concept may be better conceptualized as a number line (look at answers to TRY IT 3.69 and 3.70)
+  For example, 5 - 4 is 1...
 
-The way to perform this algorithm via code is as follows...
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+                                ^           |
+                                |           |
+                                +-----------+
+                                      -4
+  ```
+
+  For example, -2 - 4 is -6...
+
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+           ^           |
+           |           |
+           +-----------+
+                 -4
+  ```
+
+  Notice that the result of this example's movement is exactly the same as adding magnitudes, then tacking on a negative sign to the result: 2 + 4 is 6, tack on a negative sign to get -6.
+
+  For example, 3 - 4 is -1...
+
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+                          ^           |
+                          |           |
+                          +-----------+
+                               -4
+  ```
+
+  Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a negative sign: 4 - 3 is 1, tack on a negative sign to get -1.
+
+* negative integer, it's moving right on the number line.
+
+  For example, 3 - -4 is 7...
+
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0  1  2  3  4  5  6  7  8
+                                      |           ^
+                                      |           |
+                                      +-----------+
+                                            +4
+  ```
+
+  Notice that the result of this movement is exactly the same as performing 3 + 4.
+
+  For example, -3 - -4 is 1...
+
+  ```{svgbob}
+  <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    -8 -7 -6 -5 -4 -3 -2 -1  0  1  2  3  4  5  6  7  8
+                    |           ^
+                    |           |
+                    +-----------+
+                          +4
+  ```
+
+  Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a positive sign to the result: 4 - 3 is 1, tack on a positive sign: 1.
+
+The algorithm used by humans to add integer numbers together revolves around inspecting the sign and magnitude of each integer, then deiciding whether to perform whole number addition or whole number subtraction to get the result. The codification of this algorithm is as follows...
 
 ```{output}
 arithmetic_code/IntegerNumber.py
@@ -2763,6 +2864,8 @@ arithmetic_code/
 
 ```{prereq}
 Whole number multiplication
+Integer numbe addition
+Integer number subtraction
 ```
 
 See chapter 3.4
