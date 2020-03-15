@@ -2561,7 +2561,7 @@ while (dividend &gt;= divisor) {
 <li><a href="#BOOKMARK51">Integer number addition</a></li>
 </ul>
 </div>
-<p>Conceptually, you can think of <a name="BOOKMARK52"></a><strong>integer subtraction</strong> as movement on a number line (opposite movement to that of <a href="#BOOKMARK51">integer addition</a>). If some <a href="#BOOKMARK4">integer</a> that's subtracting (right-hand side) <a href="#BOOKMARK88">is</a> a...</p>
+<p>Conceptually, you can think of <a name="BOOKMARK52"></a><strong>integer subtraction</strong> as movement on a number line (opposite movement to that of <a href="#BOOKMARK51">integer addition</a>). If the <a href="#BOOKMARK4">integer</a> being <a href="#BOOKMARK22">subtracted by</a> (right-hand side) <a href="#BOOKMARK88">is</a> a...</p>
 <ul>
 <li>
 <p><a href="#BOOKMARK5">positive</a> <a href="#BOOKMARK4">integer</a>, it's moving left on the number line.</p>
@@ -2584,7 +2584,7 @@ while (dividend &gt;= divisor) {
 <p>Notice that the result of th<a href="#BOOKMARK88">is</a> example's movement <a href="#BOOKMARK88">is</a> exactly the same as swapping, subtracting, then tacking on a <a href="#BOOKMARK5">positive</a> <a href="#BOOKMARK7">sign</a> to the result: 4 - 3 <a href="#BOOKMARK88">is</a> 1, tack on a <a href="#BOOKMARK5">positive</a> <a href="#BOOKMARK7">sign</a>: 1.</p>
 </li>
 </ul>
-<p>The algorithm used by humans to <a href="#BOOKMARK12">add</a> <a href="#BOOKMARK4">integer number</a>s together revolves around inspecting the <a href="#BOOKMARK7">sign</a> and magnitude of each <a href="#BOOKMARK4">integer</a>, then deiciding whether to perform <a href="#BOOKMARK2">whole number</a> <a href="#BOOKMARK11">addition</a> or <a href="#BOOKMARK2">whole number</a> <a href="#BOOKMARK19">subtraction</a> to get the result. The codification of th<a href="#BOOKMARK88">is</a> algorithm <a href="#BOOKMARK88">is</a> as follows...</p>
+<p>The algorithm used by humans to subtract <a href="#BOOKMARK4">integer number</a>s revolves around inspecting the <a href="#BOOKMARK7">sign</a> and magnitude of each <a href="#BOOKMARK4">integer</a>, then deciding whether to perform <a href="#BOOKMARK2">whole number</a> <a href="#BOOKMARK11">addition</a> or <a href="#BOOKMARK2">whole number</a> <a href="#BOOKMARK19">subtraction</a> to get the result. The codification of th<a href="#BOOKMARK88">is</a> algorithm <a href="#BOOKMARK88">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__sub__</span><span class="hljs-params">(lhs: IntegerNumber, rhs: IntegerNumber)</span> -&gt; IntegerNumber:</span>
     log_indent()
     <span class="hljs-keyword">try</span>:

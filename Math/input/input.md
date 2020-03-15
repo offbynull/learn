@@ -2768,7 +2768,7 @@ Whole number subtraction
 Integer number addition
 ```
 
-Conceptually, you can think of `{bm} integer subtraction/(integer subtraction|integer number subtraction)/i` as movement on a number line (opposite movement to that of integer addition). If some integer that's subtracting (right-hand side) is a...
+Conceptually, you can think of `{bm} integer subtraction/(integer subtraction|integer number subtraction)/i` as movement on a number line (opposite movement to that of integer addition). If the integer being subtracted by (right-hand side) is a...
 
 * positive integer, it's moving left on the number line.
 
@@ -2842,7 +2842,7 @@ Conceptually, you can think of `{bm} integer subtraction/(integer subtraction|in
 
   Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a positive sign to the result: 4 - 3 is 1, tack on a positive sign: 1.
 
-The algorithm used by humans to add integer numbers together revolves around inspecting the sign and magnitude of each integer, then deiciding whether to perform whole number addition or whole number subtraction to get the result. The codification of this algorithm is as follows...
+The algorithm used by humans to subtract integer numbers revolves around inspecting the sign and magnitude of each integer, then deciding whether to perform whole number addition or whole number subtraction to get the result. The codification of this algorithm is as follows...
 
 ```{output}
 arithmetic_code/IntegerNumber.py
