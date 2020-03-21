@@ -13297,6 +13297,36 @@ __TRY IT__
 
 4.1)
 
+* a) 3/8
+* b) 4/9
+
+4.2)
+
+* a) 3/5
+* b) 3/4
+
+4.3) 6 slices of the 8 would be shaded -- it isn't easy to draw using text
+
+4.4) 2 bars of the 5 would be shaded -- it isn't easy to draw using text
+
+4.5) can't do fraction circles because drawing circles isn't easy using text
+
+```
++-----+-----+-----+
+| 1/3 | 1/3 | 1/3 |
++-----+-----+-----+
+```
+
+4.6) can't do fraction circles because drawing circles isn't easy using text
+
+```
++-----+-----+-----+-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+-----+-----+-----+
+```
+
+4.7)
+
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
