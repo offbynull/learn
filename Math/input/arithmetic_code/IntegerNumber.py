@@ -3,6 +3,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Union
 
+import Sign
 from Output import log_indent, log_unindent, log
 from WholeNumber import WholeNumber
 
@@ -31,7 +32,6 @@ class IntegerNumber:
     def from_int(val: int) -> IntegerNumber:
         return IntegerNumber.from_str(str(val))
 
-    # TODO: FIX THIS SO sign CAN BE None WHEN MAGNITUDE IS 0. 0 IS NEITHER POSITIVE OR NEGATIVE
     def __init__(self, sign: Union[Sign, None], magnitude: WholeNumber):
         self.sign = sign
         self.magnitude = magnitude.copy()
@@ -245,11 +245,6 @@ class IntegerNumber:
             ret = ''
         ret += str(self.magnitude)
         return ret
-
-
-class Sign(Enum):
-    POSITIVE = 1
-    NEGATIVE = 2
 
 
 if __name__ == '__main__':
