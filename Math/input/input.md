@@ -435,10 +435,12 @@ Conceptually, you can think of 0 and the positives the same way you think about 
   5 meters in sea         sea-level       5 meters in the air
   ```
 
-## Rational
+## Rational (Fraction)
 
 ```{prereq}
 Integer numbers
+Integer number multiplication
+Integer number division
 ```
 
 TODO: Chapter 4
@@ -474,6 +476,63 @@ radius 40
 ```
 
 In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a fraction: `{kt} 1 \frac{3}{8}`.
+
+TODO: a mixed number is a whole number with a fraction, for example 2 1/2 is the same as writing 5/2.
+
+TODO: a improper fraction is one where the numerator is greater than or equal to the denominator, for example 5/2.
+
+TODO: a proper fraction is one where teh numerator is less than the denominator, for example 1/2.
+
+TODO: converting a fraction to a mixed number is division.
+
+11/6
+
+```
++-----------------+
+|                 |
+|                 v
+|                  
+|   01-------> 1 5/6
++-6)11            
+    0             ^
+    -             |
+    11            |
+     6            |
+    --            |
+     5 -----------+
+```
+
+TODO: show that 1/4 is the same as 2/8, 3/12, ... using fractional lines, and show how to get 1 fraction into the form of another using multiplication / division
+
+in other words, multiplying the numerator and denomator by the same number doesn't change the value of the fraction
+
+```
+1 * 2 = 2
+-----   -
+4 * 2 = 8
+```
+
+```
++-----------+-----------+-----------+-----------+
+|    1/4    |    1/4    |    1/4    |    1/4    |
++-----+-----+-----+-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+-----+-----+-----+
+```
+
+```
++--------------------+--------------------+--------------------+--------------------+
+|        1/4         |        1/4         |        1/4         |        1/4         |
++------+------+------+------+------+------+------+------+------+------+------+------+
+| 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 |
++------+------+------+------+------+------+------+------+------+------+------+------+
+```
+
+TODO: show number line with proper fractions, improper fractions, and mixed numbers 
+
+TODO: talk about negtive fractions, show an example on the number line -- it may be eaiser to do if you first converted it to a mixed number
+
+## Rational (Decimal)
 
 ## Irrational
 
@@ -2529,7 +2588,7 @@ This is effectively the algorithm that humans use for long division -- for each 
 The notation used by humans for long division is...
 
 ```{define-block}
-ktlongdiv
+div
 ktlongdiv_macro/
 kthelper_code/target/appassembler/
 ```
@@ -3821,6 +3880,12 @@ ALSO, section 2.3 talks about converting phrases to equations and viceversa -- i
 
 some of the above are overkill and need to be pruned
 
+## Inequality Rules
+
+TODO: discuss as if it were a scale
+
+TODO: discuss as on a number line -- if a is greater than b, a is to the right of b
+
 # Absolute Value
 
 TODO: write this up from section 3.1 of openstax prealg book
@@ -3829,7 +3894,7 @@ Absolute value has the same precedence as parenthesis when it comes to order of 
 
 # OpenStax Prealgebra Problems
 
-## Chapter 1 Section 1.1
+## Chapter 1 Section 1
 
 __TRY IT__
 
@@ -4145,7 +4210,7 @@ It's easier to say numbers that are rounded. For example...
 
 Less words to speak while conveying approximately the same quantity.
 
-## Chapter 1 Section 1.2
+## Chapter 1 Section 2
 
 __TRY IT__
 
@@ -4845,7 +4910,7 @@ b) 5+7=12
 
 1.1.140) Will codify model as software and embed into notes.
 
-## Chapter 1 Section 1.3
+## Chapter 1 Section 3
 
 __TRY IT__
 
@@ -5726,7 +5791,7 @@ __EXERCISE__
 
 1.3.224) verification
 
-## Chapter 1 Section 1.4
+## Chapter 1 Section 4
 
 __TRY IT__
 
@@ -6876,7 +6941,7 @@ __EXERCISE__
 
 1.2.342) verification
 
-## Chapter 1 Section 1.5
+## Chapter 1 Section 5
 
 __TRY IT__
 
@@ -8386,7 +8451,7 @@ long division seems to be the inverse of vertical multiplication.
     {015}
 ```
 
-## Chapter 2 Section 2.1
+## Chapter 2 Section 1
 
 __TRY IT__
 
@@ -8644,7 +8709,7 @@ __EXERCISE__
 
 2.1.68) it's so simplifying an expression always results in the same answer
 
-## Chapter 2 Section 2.2
+## Chapter 2 Section 2
 
 __TRY IT__
 
@@ -8912,7 +8977,7 @@ __EXERCISE__
 
 2.2.146) the operators in each expression are different -- 4(x+y) vs 4x+y
 
-## Chapter 2 Section 2.3
+## Chapter 2 Section 3
 
 __TRY IT__
 
@@ -9326,7 +9391,7 @@ no -- 2*1 != 18
 
 the difference of y and 5 is 21 -- NAME had paid 21 dollars in total for PRODUCT after receiving a 5 dollar discount. What was the original price of PRODUCT?
 
-## Chapter 2 Section 2.4
+## Chapter 2 Section 4
 
 __TRY IT__
 
@@ -10074,7 +10139,7 @@ A composite number as more than 2 factors -- 1, itself, and others
 
 1 is neither a prime nor a composite since it only has 1 factor: itself.
 
-## Chapter 2 Section 2.5
+## Chapter 2 Section 5
 
 __TRY IT__
 
@@ -10833,7 +10898,7 @@ The LCM is 24.
 
 2.5.316) prime factors because listing multiples may go on for a long time.
 
-## Chapter 3 Section 3.1
+## Chapter 3 Section 1
 
 __TRY IT__
 
@@ -11309,7 +11374,7 @@ __EXERCISE__
  * negative numbers -5
  * opposites -(-5) is 5   <-- this is confusing -- it's just multiplication -1\*(-5)
 
-## Chapter 3 Section 3.2
+## Chapter 3 Section 2
 
 __TRY IT__
 
@@ -11744,7 +11809,7 @@ nnnn
 
 3.2.126) technical diving -- when you're 100 feet under water and you go down another 10 feet.. -100 + -10
 
-## Chapter 3 Section 3.3
+## Chapter 3 Section 3
 
 __TRY IT__
 
@@ -12316,7 +12381,7 @@ no ns to subtract from the ps, so add a p for each n.. 10 ps
 
 3.3.210) when you subtract a negative, you go right on the number line by that amount -- you also go right on the number line when you add some amount.
 
-## Chapter 3 Section 3.4
+## Chapter 3 Section 4
 
 __TRY IT__
 
@@ -12771,7 +12836,7 @@ __EXERCISE__
 
 3.4.284) you have to evaluate the exponent before the sign, because you have to think about -4 as -1 * 4, so the entire thing is really -1 * 4^2 because you evaluate exponents before multiplication
 
-## Chapter 3 Section 3.5
+## Chapter 3 Section 5
 
 __TRY IT__
 
@@ -13291,7 +13356,7 @@ for the second one, 4 envelopes is the same as 12 dots
 
 3.5.352) 4y = 40, the multiple of 5 needs to be removed from teh y to isolate it -- subtracting 4 doesn't do that
 
-## Chapter 4 Section 4.1
+## Chapter 4 Section 1
 
 __TRY IT__
 
@@ -13325,7 +13390,515 @@ __TRY IT__
 +-----+-----+-----+-----+-----+-----+-----+-----+
 ```
 
-4.7)
+4.7) 1 2/3 (can't do fraction circles because drawing circles isn't easy using text)
+
+4.8) 1 1 1/2 (can't do fraction circles because drawing circles isn't easy using text)
+
+4.9) 5/3, 1 2/3
+
+4.10) 13/8, 1 5/8
+
+4.11)
+
+```
++-----+-----+-----+-----+-----+-----+  +-----+
+| 1/6 | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 |  | 1/6 |
++-----+-----+-----+-----+-----+-----+  +-----+
+```
+
+4.12)
+
+```
++-----+-----+-----+-----+-----+  +-----+
+| 1/5 | 1/5 | 1/5 | 1/5 | 1/5 |  | 1/5 |
++-----+-----+-----+-----+-----+  +-----+
+```
+
+4.13)
+
+```
++-----+-----+-----+-----+-----+-----+-----+  +-----+-----+
+| 1/7 | 1/7 | 1/7 | 1/7 | 1/7 | 1/7 | 1/7 |  | 1/7 | 1/7 |
++-----+-----+-----+-----+-----+-----+-----+  +-----+-----+
+```
+
+1 2/7
+
+4.14)
+
+```
++-----+-----+-----+-----+ +-----+-----+-----+
+| 1/4 | 1/4 | 1/4 | 1/4 | | 1/4 | 1/4 | 1/4 |
++-----+-----+-----+-----+ +-----+-----+-----+
+```
+
+1 3/4
+
+4.15) 11/8
+
+4.16) 11/6
+
+4.17) 1 6/7
+
+4.18) 1 5/9
+
+4.19) 3 2/7
+
+4.20) 4 4/11
+
+4.21) 26/7
+
+4.22) 23/8
+
+4.23) 50/11
+
+4.24) 34/3
+
+4.25)
+
+```
++-----------+-----------+-----------+-----------+
+|    1/4    |    1/4    |    1/4    |    1/4    |
++-----+-----+-----+-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+-----+-----+-----+
+```
+
+2/8 = 1/4
+
+4.26)
+
+```
++--------------------+--------------------+--------------------+--------------------+
+|        1/4         |        1/4         |        1/4         |        1/4         |
++------+------+------+------+------+------+------+------+------+------+------+------+
+| 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 |
++------+------+------+------+------+------+------+------+------+------+------+------+
+```
+
+3/12 = 1/4
+
+4.27)
+
+* 6/10
+* 9/15
+* 30/50
+
+4.28)
+
+* 40/50
+* 8/10
+* 20/25
+
+4.29) 18/21
+
+4.30) 30/100
+
+4.31) can't do this using text
+
+4.32) can't do this using text
+
+4.33) can't do this using text
+
+4.34) can't do this using text
+
+4.35) 
+* a) >
+* b) >
+* c) <
+* d) <
+
+4.36)
+* a) >
+* b) <
+* c) >
+* d) <
+
+__EXERCISE__
+
+4.1.1)
+
+* a) 1/4
+* b) 3/4
+* c) 3/8
+* d) 5/8
+
+4.1.2)
+
+* a) 7/12
+* b) 5/12
+* c) 4/9
+* d) 5/9
+
+4.1.3) 
+
+```
++--------+
+| filled |
++--------+
+|        |
++--------+
+```
+
+4.1.4)
+
+```
++--------+
+| filled |
++--------+
+|        |
++--------+
+|        |
++--------+
+```
+
+4.1.5)
+
+```
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+|        |
++--------+
+```
+
+4.1.6)
+
+```
++--------+
+| filled |
++--------+
+| filled |
++--------+
+|        |
++--------+
+|        |
++--------+
+|        |
++--------+
+```
+
+4.1.7)
+
+```
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+|        |
++--------+
+```
+
+4.1.8)
+
+```
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+|        |
++--------+
+```
+
+4.1.9)
+
+```
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+|        |
++--------+
+|        |
++--------+
+|        |
++--------+
+```
+
+4.1.10)
+
+```
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+| filled |
++--------+
+|        |
++--------+
+|        |
++--------+
+|        |
++--------+
+```
+
+4.1.11) 1 1/2 (can't draw circles easily in text)
+
+4.1.12) 1 (can't draw circles easily in text)
+
+4.1.13) 1 1/6 (can't draw circles easily in text)
+
+4.1.14) 1 1/3 (can't draw circles easily in text)
+
+4.1.15) 1 2/5 (can't draw circles easily in text)
+
+4.1.16) 1 3/4 (can't draw circles easily in text)
+
+4.1.17)
+
+* a) 5/4, 1 1/4
+* b) 7/4, 1 3/4
+* c) 11/8, 3/8
+
+4.1.18)
+
+* a) 9/8, 1 1/8
+* b) 5/4, 1 1/4
+* c) 11/9, 1 2/9
+
+4.1.19)
+
+* a) 11/4, 2 3/4
+* b) 19/8, 2 3/8
+
+4.1.20) 1 (can't draw circles easily in text)
+
+4.1.21) 1 (can't draw circles easily in text)
+
+4.1.22) 1 3/4 (can't draw circles easily in text)
+
+4.1.23) 1 2/3 (can't draw circles easily in text)
+
+4.1.24) 1 5/6 (can't draw circles easily in text)
+
+4.1.25) 1 5/8 (can't draw circles easily in text)
+
+4.1.26) 3 1/3 (can't draw circles easily in text)
+
+4.1.27) 2 1/4 (can't draw circles easily in text)
+
+4.1.28) 1 1/2
+
+4.1.29) 1 2/3
+
+4.1.30) 2 3/4
+
+4.1.31) 2 3/5
+
+4.1.32) 4 1/6
+
+4.1.33) 3 1/9
+
+4.1.34) 3 3/13
+
+4.1.35) 3 2/15
+
+4.1.36) 5/3
+
+4.1.37) 7/5
+
+4.1.38) 9/4
+
+4.1.39) 17/6
+
+4.1.40) 25/9
+
+4.1.41) 19/5
+
+4.1.42) 25/7
+
+4.1.43) 32/9
+
+4.1.44)
+
+```
++-----------+-----------+-----------+
+|    1/3    |    1/3    |    1/3    |
++-----+-----+-----+-----+-----+-----+
+| 1/6 | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 |
++-----+-----+-----+-----+-----+-----+
+```
+
+2/6
+
+4.1.45)
+
+```
++---------------------------+---------------------------+---------------------------+
+|            1/3            |            1/3            |            1/3            |
++------+------+------+------+------+------+------+------+------+------+------+------+
+| 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 |
++------+------+------+------+------+------+------+------+------+------+------+------+
+```
+
+4/12
+
+4.1.46)
+
+```
++-----------+-----------+-----------+-----------+
+|    1/4    |    1/4    |    1/4    |    1/4    |
++-----+-----+-----+-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+-----+-----+-----+
+```
+
+6/8
+
+4.1.47)
+
+```
++--------------------+--------------------+--------------------+--------------------+
+|        1/4         |        1/4         |        1/4         |        1/4         |
++------+------+------+------+------+------+------+------+------+------+------+------+
+| 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 |
++------+------+------+------+------+------+------+------+------+------+------+------+
+```
+
+9/12
+
+4.1.48)
+
+```
++-----------+-----------+-----------+
+|    1/2    |    1/2    |    1/2    |
++-----+-----+-----+-----+-----+-----+
+| 1/4 | 1/4 | 1/4 | 1/4 | 1/4 | 1/4 |
++-----+-----+-----+-----+-----+-----+
+```
+
+6/4
+
+4.1.49)
+
+```
++-----------------+-----------------+-----------------+
+|       1/2       |       1/2       |       1/2       |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+| 1/6 | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 |
++-----+-----+-----+-----+-----+-----+-----+-----+-----+
+```
+
+9/6
+
+4.1.50)
+* 1\*2 / 4\*2 = 2/8
+* 1\*10 / 4\*10 = 10/40
+* 1\*20 / 4\*20 = 20/80
+
+4.1.51)
+* 1\*2 / 3\*2 = 2/6
+* 1\*10 / 3\*10 = 10/30
+* 2\*20 / 3\*20 = 20/60
+
+4.1.52)
+* 3\*2 / 8\*2 = 6/16
+* 3\*10 / 8\*10 = 30/80
+* 3\*20 / 8\*20 = 60/160
+
+4.1.53)
+* 5\*2 / 6\*2 = 10/12
+* 5\*10 / 6\*10 = 50/60
+* 5\*20 / 6\*20 = 100/120
+
+4.1.54)
+* 2\*2 / 7\*2 = 4/14
+* 2\*10 / 7\*10 = 20/70
+* 2\*20 / 7\*20 = 40/140
+
+4.1.55)
+* 5\*2 / 9\*2 = 10/18
+* 5\*10 / 9\*10 = 50/90
+* 5\*20 / 9\*20 = 100/180
+
+4.1.56) can't do this using text
+
+4.1.57) can't do this using text
+
+4.1.58) can't do this using text
+
+4.1.59) can't do this using text
+
+4.1.60) can't do this using text
+
+4.1.61) can't do this using text
+
+4.1.62) can't do this using text
+
+4.1.63) can't do this using text
+
+4.1.64) -1 < -1/4
+
+4.1.65) -1 < -1/3
+
+4.1.66) -2 1/2 > -3
+
+4.1.67) -1 3/4 > -2
+
+4.1.68) -5/12 > -7/12
+
+4.1.69) -9/10 < -3/10
+
+4.1.70) -3 < -13/5
+
+4.1.71) -4 < -23/6
+
+4.1.72) 1/5 count has 5 steps in a count, 1/4 count has 4 steps in a count
+
+4.1.73)
+
+* a) 2 measures
+* b) 25/4, 6 1/4
+
+4.1.74)
+
+1/2 walnut per pan, 5 pans
+* a) 2 1/2
+* b) mixed number, because the baker probably has 1 cup and with mixed numbers its obvious how many whole cups are needed before going in for fractional portion
+
+4.1.75) baking cookies
+
+4.1.76) turn it into a mixed number, the dot dsits between the whole and the next number
+
+so 21/4 = 5 1/4, the dot sits between 5 and 6 -- just past 5, it's a quarter of the way between 5 and 6
 
 START BACK UP HERE
 START BACK UP HERE
