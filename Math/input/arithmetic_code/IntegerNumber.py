@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Union
 
-import Sign
+from Sign import Sign
 from Output import log_indent, log_unindent, log
 from WholeNumber import WholeNumber
 

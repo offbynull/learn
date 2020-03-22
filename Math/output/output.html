@@ -27,47 +27,51 @@
 <li><a href="#HEADREF15">Integer Number Subtraction</a></li>
 <li><a href="#HEADREF16">Integer Number Multiplication</a></li>
 <li><a href="#HEADREF17">Integer Number Division</a></li>
-<li><a href="#HEADREF18">Multiple</a></li>
-<li><a href="#HEADREF19">Divisible</a></li>
-<li><a href="#HEADREF20">Factor</a></li>
-<li><a href="#HEADREF21">Prime</a></li>
+<li><a href="#HEADREF18">Fraction Number Addition</a></li>
+<li><a href="#HEADREF19">Fraction Number Subtraction</a></li>
+<li><a href="#HEADREF20">Fraction Number Multiplication</a></li>
+<li><a href="#HEADREF21">Fraction Number Division</a></li>
+<li><a href="#HEADREF22">Multiple</a></li>
+<li><a href="#HEADREF23">Divisible</a></li>
+<li><a href="#HEADREF24">Factor</a></li>
+<li><a href="#HEADREF25">Prime</a></li>
 <ul>
-<li><a href="#HEADREF22">Factor Tree</a></li>
-<li><a href="#HEADREF23">Ladder</a></li>
+<li><a href="#HEADREF26">Factor Tree</a></li>
+<li><a href="#HEADREF27">Ladder</a></li>
 </ul>
-<li><a href="#HEADREF24">Least Common Multiple</a></li>
-<li><a href="#HEADREF25">Algebra</a></li>
+<li><a href="#HEADREF28">Least Common Multiple</a></li>
+<li><a href="#HEADREF29">Algebra</a></li>
 <ul>
-<li><a href="#HEADREF26">Order of Operations</a></li>
-<li><a href="#HEADREF27">Operation Rules</a></li>
+<li><a href="#HEADREF30">Order of Operations</a></li>
+<li><a href="#HEADREF31">Operation Rules</a></li>
 <ul>
-<li><a href="#HEADREF28">Addition</a></li>
-<li><a href="#HEADREF29">Subtraction</a></li>
-<li><a href="#HEADREF30">Multiplication</a></li>
-<li><a href="#HEADREF31">Division</a></li>
+<li><a href="#HEADREF32">Addition</a></li>
+<li><a href="#HEADREF33">Subtraction</a></li>
+<li><a href="#HEADREF34">Multiplication</a></li>
+<li><a href="#HEADREF35">Division</a></li>
 </ul>
-<li><a href="#HEADREF32">Equality Rules</a></li>
-<li><a href="#HEADREF33">Inequality Rules</a></li>
+<li><a href="#HEADREF36">Equality Rules</a></li>
+<li><a href="#HEADREF37">Inequality Rules</a></li>
 </ul>
-<li><a href="#HEADREF34">Absolute Value</a></li>
-<li><a href="#HEADREF35">OpenStax Prealgebra Problems</a></li>
+<li><a href="#HEADREF38">Absolute Value</a></li>
+<li><a href="#HEADREF39">OpenStax Prealgebra Problems</a></li>
 <ul>
-<li><a href="#HEADREF36">Chapter 1 Section 1</a></li>
-<li><a href="#HEADREF37">Chapter 1 Section 2</a></li>
-<li><a href="#HEADREF38">Chapter 1 Section 3</a></li>
-<li><a href="#HEADREF39">Chapter 1 Section 4</a></li>
-<li><a href="#HEADREF40">Chapter 1 Section 5</a></li>
-<li><a href="#HEADREF41">Chapter 2 Section 1</a></li>
-<li><a href="#HEADREF42">Chapter 2 Section 2</a></li>
-<li><a href="#HEADREF43">Chapter 2 Section 3</a></li>
-<li><a href="#HEADREF44">Chapter 2 Section 4</a></li>
-<li><a href="#HEADREF45">Chapter 2 Section 5</a></li>
-<li><a href="#HEADREF46">Chapter 3 Section 1</a></li>
-<li><a href="#HEADREF47">Chapter 3 Section 2</a></li>
-<li><a href="#HEADREF48">Chapter 3 Section 3</a></li>
-<li><a href="#HEADREF49">Chapter 3 Section 4</a></li>
-<li><a href="#HEADREF50">Chapter 3 Section 5</a></li>
-<li><a href="#HEADREF51">Chapter 4 Section 1</a></li>
+<li><a href="#HEADREF40">Chapter 1 Section 1</a></li>
+<li><a href="#HEADREF41">Chapter 1 Section 2</a></li>
+<li><a href="#HEADREF42">Chapter 1 Section 3</a></li>
+<li><a href="#HEADREF43">Chapter 1 Section 4</a></li>
+<li><a href="#HEADREF44">Chapter 1 Section 5</a></li>
+<li><a href="#HEADREF45">Chapter 2 Section 1</a></li>
+<li><a href="#HEADREF46">Chapter 2 Section 2</a></li>
+<li><a href="#HEADREF47">Chapter 2 Section 3</a></li>
+<li><a href="#HEADREF48">Chapter 2 Section 4</a></li>
+<li><a href="#HEADREF49">Chapter 2 Section 5</a></li>
+<li><a href="#HEADREF50">Chapter 3 Section 1</a></li>
+<li><a href="#HEADREF51">Chapter 3 Section 2</a></li>
+<li><a href="#HEADREF52">Chapter 3 Section 3</a></li>
+<li><a href="#HEADREF53">Chapter 3 Section 4</a></li>
+<li><a href="#HEADREF54">Chapter 3 Section 5</a></li>
+<li><a href="#HEADREF55">Chapter 4 Section 1</a></li>
 </ul>
 </ul>
 </div>
@@ -2848,7 +2852,103 @@ while (dividend &gt;= divisor) {
 </ul>
 </div>
 <p></p>
-<a name="HEADREF18"></a><h1>Multiple</h1>
+<a name="HEADREF18"></a><h1>Fraction Number Addition</h1>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__add__</span><span class="hljs-params">(lhs: FractionNumber, rhs: FractionNumber)</span> -&gt; FractionNumber:</span>
+    <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
+    log_indent()
+    <span class="hljs-keyword">try</span>:
+        log(<span class="hljs-string">f'Adding <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>'</span>)
+        <span class="hljs-keyword">if</span> lhs._denominator != rhs._denominator:
+            lhs_numerator = lhs._numerator * rhs._denominator
+            rhs_numerator = rhs._numerator * lhs._denominator
+            denominator = rhs._denominator * lhs._denominator
+        <span class="hljs-keyword">else</span>:
+            lhs_numerator = lhs._numerator
+            rhs_numerator = rhs._numerator
+            denominator = rhs._denominator
+
+        res = FractionNumber(lhs_numerator + rhs_numerator, denominator)
+        log(<span class="hljs-string">f'Result: <span class="hljs-subst">{res}</span>'</span>)
+
+        <span class="hljs-keyword">return</span> res
+    <span class="hljs-keyword">finally</span>:
+        log_unindent()</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>Adding -1/3 and -2/6</li>
+<li>Result: -12/18</li>
+</ul>
+</div>
+<p></p>
+<a name="HEADREF19"></a><h1>Fraction Number Subtraction</h1>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__sub__</span><span class="hljs-params">(lhs: FractionNumber, rhs: FractionNumber)</span> -&gt; FractionNumber:</span>
+    <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
+    log_indent()
+    <span class="hljs-keyword">try</span>:
+        log(<span class="hljs-string">f'Subtracting <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>'</span>)
+        <span class="hljs-keyword">if</span> lhs._denominator != rhs._denominator:
+            lhs_numerator = lhs._numerator * rhs._denominator
+            rhs_numerator = rhs._numerator * lhs._denominator
+            denominator = rhs._denominator * lhs._denominator
+        <span class="hljs-keyword">else</span>:
+            lhs_numerator = lhs._numerator
+            rhs_numerator = rhs._numerator
+            denominator = rhs._denominator
+
+        res = FractionNumber(lhs_numerator - rhs_numerator, denominator)
+        log(<span class="hljs-string">f'Result: <span class="hljs-subst">{res}</span>'</span>)
+
+        <span class="hljs-keyword">return</span> res
+    <span class="hljs-keyword">finally</span>:
+        log_unindent()</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>Subtracting -1/3 and -2/6</li>
+<li>Result: 0/1</li>
+</ul>
+</div>
+<p></p>
+<a name="HEADREF20"></a><h1>Fraction Number Multiplication</h1>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__mul__</span><span class="hljs-params">(lhs: FractionNumber, rhs: FractionNumber)</span> -&gt; FractionNumber:</span>
+    <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
+    log_indent()
+    <span class="hljs-keyword">try</span>:
+        log(<span class="hljs-string">f'Multiplying <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>'</span>)
+
+        res = FractionNumber(lhs._numerator * rhs._numerator, lhs._denominator * rhs._denominator)
+        log(<span class="hljs-string">f'Result: <span class="hljs-subst">{res}</span>'</span>)
+
+        <span class="hljs-keyword">return</span> res
+    <span class="hljs-keyword">finally</span>:
+        log_unindent()</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>Multiplying -1/3 and -2/6</li>
+<li>Result: +2/18</li>
+</ul>
+</div>
+<p></p>
+<a name="HEADREF21"></a><h1>Fraction Number Division</h1>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__truediv__</span><span class="hljs-params">(lhs: FractionNumber, rhs: FractionNumber)</span> -&gt; FractionNumber:</span>
+    <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
+    log_indent()
+    <span class="hljs-keyword">try</span>:
+        log(<span class="hljs-string">f'Dividing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>'</span>)
+
+        res = FractionNumber(lhs._numerator * rhs._denominator, lhs._denominator * rhs._numerator)
+        log(<span class="hljs-string">f'Result: <span class="hljs-subst">{res}</span>'</span>)
+
+        <span class="hljs-keyword">return</span> res
+    <span class="hljs-keyword">finally</span>:
+        log_unindent()</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>Dividing +1/3 and +1/4</li>
+<li>Result: +4/3</li>
+</ul>
+</div>
+<p></p>
+<a name="HEADREF22"></a><h1>Multiple</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK88">IS</a>ITES↩</strong></p>
 <ul>
@@ -2903,7 +3003,7 @@ while (dividend &gt;= divisor) {
 ⚠️NOTE️️️⚠️</strong>
 <p>See <a href="#BOOKMARK54">divisible</a> section.</p>
 </div>
-<a name="HEADREF19"></a><h1>Divisible</h1>
+<a name="HEADREF23"></a><h1>Divisible</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK88">IS</a>ITES↩</strong></p>
 <ul>
@@ -3476,7 +3576,7 @@ while (dividend &gt;= divisor) {
 </li>
 </ul>
 </div>
-<a name="HEADREF20"></a><h1>Factor</h1>
+<a name="HEADREF24"></a><h1>Factor</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK88">IS</a>ITES↩</strong></p>
 <ul>
@@ -3592,7 +3692,7 @@ while (dividend &gt;= divisor) {
 <li>-8=-8*1 -- -8 and 1 are <a href="#BOOKMARK60">factor</a>s</li>
 </ul>
 <p>... -8, -4, -2, -1, 1, 2, 4, 8.</p>
-<a name="HEADREF21"></a><h1>Prime</h1>
+<a name="HEADREF25"></a><h1>Prime</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK88">IS</a>ITES↩</strong></p>
 <ul>
@@ -3636,7 +3736,7 @@ writer.append(input + <span class="hljs-string">"'s factors are "</span> + facto
 <li><a href="#BOOKMARK65">ladder method</a></li>
 </ul>
 <p>The subsections below detail each algorithm.</p>
-<a name="HEADREF22"></a><h2>Factor Tree</h2>
+<a name="HEADREF26"></a><h2>Factor Tree</h2>
 <p>The <a name="BOOKMARK64"></a><strong>factor tree</strong> method <a href="#BOOKMARK88">is</a> an algorithm used by humans for <a href="#BOOKMARK63">prime factorization</a>. The algorithm involves taking the input and recursively breaking it down into one of its <a href="#BOOKMARK60">factor</a> pairs until all <a href="#BOOKMARK60">factor</a>s are <a href="#BOOKMARK61">prime</a>.</p>
 <p>For example, to break down the number 54, choose one of its <a href="#BOOKMARK60">factor</a> pairs...</p>
 <p><img src="svgbob_211b83d4a6ddadec3cd3c8c29e25b8deeb6c13d5.svg" alt="Kroki diagram output"></p>
@@ -3691,7 +3791,7 @@ writer.append(input + <span class="hljs-string">"'s factors are "</span> + facto
         <span class="hljs-keyword">return</span> node;
     }
 }</code></pre><p><img src="FactorTree4b9e6c6492d9d24dc0026b1525625153.svg" alt="Factore tree diagram for 1102"></p>
-<a name="HEADREF23"></a><h2>Ladder</h2>
+<a name="HEADREF27"></a><h2>Ladder</h2>
 <p>The <a name="BOOKMARK65"></a><strong>ladder method</strong> <a href="#BOOKMARK88">is</a> an algorithm used by humans for <a href="#BOOKMARK63">prime factorization</a>. The algorithm involves:</p>
 <ol>
 <li>Iteratively testing the input against <a href="#BOOKMARK61">prime</a>s to see if its <a href="#BOOKMARK54">divisible</a> (no <a href="#BOOKMARK39">remainder</a>).</li>
@@ -3759,7 +3859,7 @@ primeFactors.add(input);</code></pre><div style="border:1px solid black;">
 ⚠️NOTE️️️⚠️</strong>
 <p>The indentation in the output <a href="#BOOKMARK88">is</a> messed up but you get the point.</p>
 </div>
-<a name="HEADREF24"></a><h1>Least Common Multiple</h1>
+<a name="HEADREF28"></a><h1>Least Common Multiple</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK88">IS</a>ITES↩</strong></p>
 <ul>
@@ -3897,7 +3997,7 @@ SortedMultiset&lt;Integer&gt; leastCommonMultiplePrimes = TreeMultiset.create();
 <p>least common multiple is 36 = [2 x 2, 3 x 2]</p>
 <p></p>
 </div>
-<a name="HEADREF25"></a><h1>Algebra</h1>
+<a name="HEADREF29"></a><h1>Algebra</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK88">IS</a>ITES↩</strong></p>
 <ul>
@@ -4038,7 +4138,7 @@ https://en.wikiversity.org/wiki/Basic_Laws_of_<a href="#BOOKMARK69">Algebra</a>
 http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK69">algebra</a>Pre.htm (specifically 1, 6, and 7?)
 <a href="#BOOKMARK12">ADD</a> TRIVIAL AND NON-TRIVIAL EXAMPLES</p>
 <p>TODO: write section about converting <a href="#BOOKMARK70">expression</a>s to phrases and vice versa</p>
-<a name="HEADREF26"></a><h2>Order of Operations</h2>
+<a name="HEADREF30"></a><h2>Order of Operations</h2>
 <p>The <a name="BOOKMARK82"></a><strong>order of operations</strong> are as follows:</p>
 <ol>
 <li>Brackets</li>
@@ -4052,7 +4152,7 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK69">algebra</a>Pre.htm (sp
 <li><a name="BOOKMARK84"></a><strong>PEMDAS</strong> - Parenthes<a href="#BOOKMARK88">is</a> / Exponents / <a href="#BOOKMARK27">Multiplication</a> and <a href="#BOOKMARK38">Division</a> / <a href="#BOOKMARK11">Addition</a> and <a href="#BOOKMARK19">Subtraction</a> (can be remembered as Please Excuse My Dear Aunt Sally)</li>
 </ul>
 <p>Note that these 2 are essentially the same. <a href="#BOOKMARK38">Division</a> and <a href="#BOOKMARK27">multiplication</a> are swapped, but since <a href="#BOOKMARK38">division</a> and <a href="#BOOKMARK27">multiplication</a> are <a href="#BOOKMARK74">evaluate</a>d left-to-right in the same step, it makes no difference.</p>
-<a name="HEADREF27"></a><h2>Operation Rules</h2>
+<a name="HEADREF31"></a><h2>Operation Rules</h2>
 <p>TODO: talk about inverse of an operation, properties such as commutatitive, etc.. and make sure to properly bookmark them so they can be referenced from the neighbouring equality rules section below. move the stuff below into its relevant subsections</p>
 <p>Commutative Property</p>
 <ul>
@@ -4086,15 +4186,15 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK69">algebra</a>Pre.htm (sp
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>−</mo><mi>b</mi><mo>=</mo><mi>a</mi><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">a - b = a + (-b)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathdefault">b</span><span class="mclose">)</span></span></span></span></li>
 </ul>
-<a name="HEADREF28"></a><h3>Addition</h3>
+<a name="HEADREF32"></a><h3>Addition</h3>
 <p>inverse of <a href="#BOOKMARK11">addition</a> <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK19">subtraction</a></p>
-<a name="HEADREF29"></a><h3>Subtraction</h3>
+<a name="HEADREF33"></a><h3>Subtraction</h3>
 <p>inverse of <a href="#BOOKMARK19">subtraction</a> <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK11">addition</a></p>
-<a name="HEADREF30"></a><h3>Multiplication</h3>
+<a name="HEADREF34"></a><h3>Multiplication</h3>
 <p>inverse of <a href="#BOOKMARK38">division</a></p>
-<a name="HEADREF31"></a><h3>Division</h3>
+<a name="HEADREF35"></a><h3>Division</h3>
 <p>inverse of <a href="#BOOKMARK27">multiplication</a></p>
-<a name="HEADREF32"></a><h2>Equality Rules</h2>
+<a name="HEADREF36"></a><h2>Equality Rules</h2>
 <p>TODO: talk about how you can subtract/<a href="#BOOKMARK12">add</a>/<a href="#BOOKMARK31">multiply</a>/<a href="#BOOKMARK43">divide</a> anything so long as you do it to both sides... e.g. x=5 <a href="#BOOKMARK12">add</a> y to both sides to get x+y=5+y, x+y=5+y subtract y from both sides to get</p>
 <p>using a balancing scale might be a good way to represent th<a href="#BOOKMARK88">is</a> -- if it's already balanced, <a href="#BOOKMARK12">add</a>ing 5 apples to one side means you have to <a href="#BOOKMARK12">add</a> 5 apples to the other side to keep it balanced</p>
 <p>starts at section 2.3</p>
@@ -4113,14 +4213,14 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK69">algebra</a>Pre.htm (sp
 <li><a name="BOOKMARK91"></a><strong>will be</strong> -- e.g. x <a href="#BOOKMARK91">will be</a> 1</li>
 </ul>
 <p>some of the above are overkill and need to be pruned</p>
-<a name="HEADREF33"></a><h2>Inequality Rules</h2>
+<a name="HEADREF37"></a><h2>Inequality Rules</h2>
 <p>TODO: d<a href="#BOOKMARK88">is</a>cuss as if it were a scale</p>
 <p>TODO: d<a href="#BOOKMARK88">is</a>cuss as on a number line -- if a <a href="#BOOKMARK88">is</a> greater than b, a <a href="#BOOKMARK88">is</a> to the right of b</p>
-<a name="HEADREF34"></a><h1>Absolute Value</h1>
+<a name="HEADREF38"></a><h1>Absolute Value</h1>
 <p>TODO: write th<a href="#BOOKMARK88">is</a> up from section 3.1 of openstax prealg book</p>
 <p>Absolute value has the same precedence as parenthes<a href="#BOOKMARK88">is</a> when it comes to <a href="#BOOKMARK82">order of operations</a> --</p>
-<a name="HEADREF35"></a><h1>OpenStax Prealgebra Problems</h1>
-<a name="HEADREF36"></a><h2>Chapter 1 Section 1</h2>
+<a name="HEADREF39"></a><h1>OpenStax Prealgebra Problems</h1>
+<a name="HEADREF40"></a><h2>Chapter 1 Section 1</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.1)</p>
 <ul>
@@ -4367,7 +4467,7 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK69">algebra</a>Pre.htm (sp
 <p>58,123 -&gt; fifty eight thousand one hundred twenty three
 58,000 -&gt; fifty eight thousand</p>
 <p>Less words to speak while conveying approximately the same quantity.</p>
-<a name="HEADREF37"></a><h2>Chapter 1 Section 2</h2>
+<a name="HEADREF41"></a><h2>Chapter 1 Section 2</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.21) write out...</p>
 <ul>
@@ -5302,7 +5402,7 @@ b) 5+7=12</p>
 <p>1.1.138) 210+145+183+230+159+164=355+183+230+159+164=585+183+159+164=768+159+164=927+164=1091 -- yes, its below</p>
 <p>1.1.139) Very confident</p>
 <p>1.1.140) Will codify model as software and embed into notes.</p>
-<a name="HEADREF38"></a><h2>Chapter 1 Section 3</h2>
+<a name="HEADREF42"></a><h2>Chapter 1 Section 3</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.51)</p>
 <p>a) twelve <a href="#BOOKMARK20">minus</a> four
@@ -5705,7 +5805,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 <p>1.3.222) 75+50+70+80=275 350-275=75</p>
 <p>1.3.223) one <a href="#BOOKMARK88">is</a> the opposite of the other</p>
 <p>1.3.224) verification</p>
-<a name="HEADREF39"></a><h2>Chapter 1 Section 4</h2>
+<a name="HEADREF43"></a><h2>Chapter 1 Section 4</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.77)</p>
 <ul>
@@ -6681,7 +6781,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 <p>1.2.340) 200 * 24 = 4800</p>
 <p>1.2.341) yes</p>
 <p>1.2.342) verification</p>
-<a name="HEADREF40"></a><h2>Chapter 1 Section 5</h2>
+<a name="HEADREF44"></a><h2>Chapter 1 Section 5</h2>
 <p><strong>TRY IT</strong></p>
 <p>1.111)</p>
 <ul>
@@ -7462,7 +7562,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
     {100}
     {015}
 </code></pre>
-<a name="HEADREF41"></a><h2>Chapter 2 Section 1</h2>
+<a name="HEADREF45"></a><h2>Chapter 2 Section 1</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.1)</p>
 <ul>
@@ -7643,7 +7743,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 </ul>
 <p>2.1.67) <a href="#BOOKMARK70">expression</a> <a href="#BOOKMARK88">is</a> a hierarchy of math operations, evaluation <a href="#BOOKMARK88">is</a> the relationship between 2 <a href="#BOOKMARK70">expression</a>s</p>
 <p>2.1.68) it's so <a href="#BOOKMARK73">simplify</a>ing an <a href="#BOOKMARK70">expression</a> always results in the same answer</p>
-<a name="HEADREF42"></a><h2>Chapter 2 Section 2</h2>
+<a name="HEADREF46"></a><h2>Chapter 2 Section 2</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.25) y+4</p>
 <ul>
@@ -7814,7 +7914,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 <p>2.2.144) pam and armando pay 2500, insurance pays 19400-2500</p>
 <p>2.2.145) <a href="#BOOKMARK11">addition</a> has commutative property, <a href="#BOOKMARK19">subtraction</a> doesn't</p>
 <p>2.2.146) the operators in each <a href="#BOOKMARK70">expression</a> are different -- 4(x+y) vs 4x+y</p>
-<a name="HEADREF43"></a><h2>Chapter 2 Section 3</h2>
+<a name="HEADREF47"></a><h2>Chapter 2 Section 3</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.55)</p>
 <ul>
@@ -8186,7 +8286,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 <p>no -- 2*1 != 18</p>
 <p>2.3.214)</p>
 <p>the <a href="#BOOKMARK21">difference of</a> y and 5 <a href="#BOOKMARK88">is</a> 21 -- NAME had paid 21 dollars in <a href="#BOOKMARK17">total</a> for <a href="#BOOKMARK28">PRODUCT</a> after receiving a 5 dollar d<a href="#BOOKMARK88">is</a>count. What <a href="#BOOKMARK90">was</a> the original price of <a href="#BOOKMARK28">PRODUCT</a>?</p>
-<a name="HEADREF44"></a><h2>Chapter 2 Section 4</h2>
+<a name="HEADREF48"></a><h2>Chapter 2 Section 4</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.79)</p>
 <ul>
@@ -8927,7 +9027,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 <p>A <a href="#BOOKMARK61">prime</a> number has 2 <a href="#BOOKMARK60">factor</a>s -- 1 and itself</p>
 <p>A <a href="#BOOKMARK62">composite</a> number as <a href="#BOOKMARK16">more than</a> 2 <a href="#BOOKMARK60">factor</a>s -- 1, itself, and others</p>
 <p>1 <a href="#BOOKMARK88">is</a> neither a <a href="#BOOKMARK61">prime</a> nor a <a href="#BOOKMARK62">composite</a> since it only has 1 <a href="#BOOKMARK60">factor</a>: itself.</p>
-<a name="HEADREF45"></a><h2>Chapter 2 Section 5</h2>
+<a name="HEADREF49"></a><h2>Chapter 2 Section 5</h2>
 <p><strong>TRY IT</strong></p>
 <p>2.95)</p>
 <ul>
@@ -9975,7 +10075,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 <p>8cups per package * 3packages = 23cups</p>
 <p>2.5.315) prefer <a href="#BOOKMARK64">factor tree</a> because I don't have to think what the next <a href="#BOOKMARK61">prime</a> <a href="#BOOKMARK88">is</a> -- when I see it on a leaf node I usually know right away</p>
 <p>2.5.316) <a href="#BOOKMARK63">prime factor</a>s because <a href="#BOOKMARK68">listing multiples</a> may go on for a long time.</p>
-<a name="HEADREF46"></a><h2>Chapter 3 Section 1</h2>
+<a name="HEADREF50"></a><h2>Chapter 3 Section 1</h2>
 <p><strong>TRY IT</strong></p>
 <p>3.1)</p>
 <ul>
@@ -10459,7 +10559,7 @@ b) twenty nine <a href="#BOOKMARK20">minus</a> twelve</p>
 <li><a href="#BOOKMARK6">negative</a> numbers -5</li>
 <li>opposites -(-5) <a href="#BOOKMARK88">is</a> 5   &lt;-- th<a href="#BOOKMARK88">is</a> <a href="#BOOKMARK88">is</a> confusing -- it's just <a href="#BOOKMARK27">multiplication</a> -1*(-5)</li>
 </ul>
-<a name="HEADREF47"></a><h2>Chapter 3 Section 2</h2>
+<a name="HEADREF51"></a><h2>Chapter 3 Section 2</h2>
 <p><strong>TRY IT</strong></p>
 <p>3.27)</p>
 <pre><code>xx xxxx
@@ -10804,7 +10904,7 @@ nn
 </li>
 </ul>
 <p>3.2.126) technical diving -- when you're 100 feet under water and you go down another 10 feet.. -100 + -10</p>
-<a name="HEADREF48"></a><h2>Chapter 3 Section 3</h2>
+<a name="HEADREF52"></a><h2>Chapter 3 Section 3</h2>
 <p><strong>TRY IT</strong></p>
 <p>3.59)</p>
 <pre><code>pppppp 6
@@ -11251,7 +11351,7 @@ no ns to subtract from the ps, so add a p for each n.. 10 ps
 <p>3.3.208) -100 - -45 = -55</p>
 <p>3.3.209) 9 to 0 <a href="#BOOKMARK88">is</a> 9, 0 to -6 <a href="#BOOKMARK88">is</a> 6 -- 9 + 6 <a href="#BOOKMARK88">is</a> 15</p>
 <p>3.3.210) when you subtract a <a href="#BOOKMARK6">negative</a>, you go right on the number line by that amount -- you also go right on the number line when you <a href="#BOOKMARK12">add</a> some amount.</p>
-<a name="HEADREF49"></a><h2>Chapter 3 Section 4</h2>
+<a name="HEADREF53"></a><h2>Chapter 3 Section 4</h2>
 <p><strong>TRY IT</strong></p>
 <p>3.93)</p>
 <ul>
@@ -11656,7 +11756,7 @@ no ns to subtract from the ps, so add a p for each n.. 10 ps
 <p>3.4.282) if the <a href="#BOOKMARK7">sign</a>s are the same, the <a href="#BOOKMARK40">quotient</a> has a <a href="#BOOKMARK5">positive</a> <a href="#BOOKMARK7">sign</a>. otherw<a href="#BOOKMARK88">is</a>e, <a href="#BOOKMARK40">quotient</a> has <a href="#BOOKMARK6">negative</a> <a href="#BOOKMARK7">sign</a></p>
 <p>3.4.283) you have to <a href="#BOOKMARK74">evaluate</a> the exponent before the <a href="#BOOKMARK7">sign</a>, because you have to think about -2 as -1 * 2, so the entire thing <a href="#BOOKMARK88">is</a> really -1 * 2^4 because you <a href="#BOOKMARK74">evaluate</a> exponents before <a href="#BOOKMARK27">multiplication</a></p>
 <p>3.4.284) you have to <a href="#BOOKMARK74">evaluate</a> the exponent before the <a href="#BOOKMARK7">sign</a>, because you have to think about -4 as -1 * 4, so the entire thing <a href="#BOOKMARK88">is</a> really -1 * 4^2 because you <a href="#BOOKMARK74">evaluate</a> exponents before <a href="#BOOKMARK27">multiplication</a></p>
-<a name="HEADREF50"></a><h2>Chapter 3 Section 5</h2>
+<a name="HEADREF54"></a><h2>Chapter 3 Section 5</h2>
 <p><strong>TRY IT</strong></p>
 <p>3.119) 2x - 8 = -14</p>
 <ul>
@@ -12213,7 +12313,7 @@ no ns to subtract from the ps, so add a p for each n.. 10 ps
 <p>for the second one, 4 envelopes <a href="#BOOKMARK87">is the same as</a> 12 dots</p>
 <p>3.5.351) the <a href="#BOOKMARK53">multiple</a> of -3 needs to be removed from the the x to <a href="#BOOKMARK88">is</a>olate it -- <a href="#BOOKMARK12">add</a>ing 3 doesn't do that</p>
 <p>3.5.352) 4y = 40, the <a href="#BOOKMARK53">multiple</a> of 5 needs to be removed from teh y to <a href="#BOOKMARK88">is</a>olate it -- subtracting 4 doesn't do that</p>
-<a name="HEADREF51"></a><h2>Chapter 4 Section 1</h2>
+<a name="HEADREF55"></a><h2>Chapter 4 Section 1</h2>
 <p><strong>TRY IT</strong></p>
 <p>4.1)</p>
 <ul>

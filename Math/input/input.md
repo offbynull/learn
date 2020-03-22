@@ -3001,6 +3001,78 @@ arithmetic_code/
 -30 5
 ```
 
+# Fraction Number Addition
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
+```
+
+```{define-block}
+fracnumadd
+fracnumadd_macro/
+arithmetic_code/
+```
+
+```{fracnumadd}
+-1/3 -2/6
+```
+
+# Fraction Number Subtraction
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
+```
+
+```{define-block}
+fracnumsub
+fracnumsub_macro/
+arithmetic_code/
+```
+
+```{fracnumsub}
+-1/3 -2/6
+```
+
+# Fraction Number Multiplication
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
+```
+
+```{define-block}
+fracnummul
+fracnummul_macro/
+arithmetic_code/
+```
+
+```{fracnummul}
+-1/3 -2/6
+```
+
+# Fraction Number Division
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
+```
+
+```{define-block}
+fracnumdiv
+fracnumdiv_macro/
+arithmetic_code/
+```
+
+```{fracnumdiv}
+1/3 1/4
+```
+
 # Multiple
 
 ```{prereq}
