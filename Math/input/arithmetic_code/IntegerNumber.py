@@ -246,6 +246,9 @@ class IntegerNumber:
         ret += str(self.magnitude)
         return ret
 
+    def __repr__(self: IntegerNumber):
+        return self.__str__()
+
 
 if __name__ == '__main__':
     # mag, rem = IntegerNumber.from_int(-30) / IntegerNumber.from_int(-5)

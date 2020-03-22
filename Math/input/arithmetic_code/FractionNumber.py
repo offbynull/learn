@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, List, Set
 
 from Sign import Sign
 from Output import log_indent, log_unindent, log
@@ -150,6 +150,65 @@ class FractionNumber:
             log_unindent()
     #MARKDOWN_DIV
 
+    def reciprocal(self: FractionNumber) -> FractionNumber:
+        # Sign is on the numerator
+        log_indent()
+        try:
+            log(f'Getting reciprocal of {self}')
+
+            res = FractionNumber(self._denominator, self._numerator)
+            log(f'Result: {res}')
+
+            return res
+        finally:
+            log_unindent()
+
+    def simplify(self: FractionNumber) -> FractionNumber:
+        # Sign is on the numerator
+        log_indent()
+        try:
+            log(f'Simplifying {self}')
+
+            numerator_factors = FractionNumber._calculate_factors(self._numerator.magnitude)
+            log(f'Numerator factors: {numerator_factors}')
+            denominator_factors = FractionNumber._calculate_factors(self._denominator.magnitude)
+            log(f'Denominator factors: {numerator_factors}')
+
+            common_factors = [f for f in denominator_factors if f in numerator_factors] # intersection of values
+            log(f'Common factors: {common_factors}')
+            largest_common_factor = max(common_factors)
+            log(f'Largest common factors: {common_factors}')
+
+            largest_common_factor_as_intnum = IntegerNumber(Sign.POSITIVE, largest_common_factor)
+            divided_numerator, _ = self._numerator / largest_common_factor_as_intnum
+            divided_denominator, _ = self._denominator / largest_common_factor_as_intnum
+
+            res = FractionNumber(divided_numerator, divided_denominator)
+            log(f'Divide both numerator and denominator by largest common factor to get result: {res}')
+
+            return res
+        finally:
+            log_unindent()
+
+    @staticmethod
+    def _calculate_factors(test_num: WholeNumber) -> List[WholeNumber]:
+        factors: List[WholeNumber] = []
+
+        factor1 = WholeNumber(1)
+        while factor1 <= test_num:
+            (factor2, remainder) = test_num / factor1
+            div_had_remainder = remainder > WholeNumber(0)
+            if not div_had_remainder:
+                factors.append(factor1)
+                factors.append(factor2)
+
+            if factor2 <= factor1:
+                break
+
+            factor1 += WholeNumber(1)
+
+        return factors
+
     def __eq__(self: FractionNumber, other: FractionNumber) -> bool:
         # Sign is only kept on the numerator, not the denominator
         if self._denominator != other._denominator:
@@ -204,6 +263,9 @@ class FractionNumber:
             sign_str = ''
         return sign_str + str(self.numerator) + '/' + str(self.denominator)
 
+    def __repr__(self: FractionNumber):
+        return self.__str__()
+
 
 
 if __name__ == '__main__':
@@ -219,3 +281,7 @@ if __name__ == '__main__':
     print(f'{FractionNumber.from_str("2/5") > FractionNumber.from_str("3/10")}')
     print(f'{FractionNumber.from_str("1/5") < FractionNumber.from_str("3/10")}')
     print(f'{FractionNumber.from_str("2/5") < FractionNumber.from_str("3/10")}')
+
+    print(f'{FractionNumber._calculate_factors(WholeNumber(55))}')
+
+    print(f'{FractionNumber.from_str("3/12").simplify()}')

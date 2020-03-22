@@ -54,6 +54,9 @@ class WholeNumber:
             output += str(digit.value)
         return output
 
+    def __repr__(self: WholeNumber):
+        return self.__str__()
+
     def _as_int(self: WholeNumber) -> int:
         return int(str(self))
 
@@ -469,7 +472,7 @@ class WholeNumber:
 
             if dividend == 0:
                 log(f'Found: {dividend} / {divisor} = 0R0')
-                return WholeNumber(0)
+                return WholeNumber(0), WholeNumber(0)
 
             wn_range = WholeNumber.pick_start_range(dividend)
             log(f'Start range: [{wn_range.min}, {wn_range.max}]')
