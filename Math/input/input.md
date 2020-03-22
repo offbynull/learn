@@ -3114,6 +3114,8 @@ this is exactly the same as what we're doing with whole numbers... 12 / 3 = 4 ca
 
 it's broken up into 4 equal parts
 
+the algorithm for dividing by a fraction is to change it so that you're multiplying by its reciprocal
+
 ```{output}
 arithmetic_code/FractionNumber.py
 python
@@ -14273,6 +14275,64 @@ how many 1/6s are there in 1/3?
 ```
 
 4.65)
+
+* 2/5 / -2/3
+* 2/4 * -3/2
+* -6/8
+* -3/4
+
+4.66)
+
+* 2/3 /  -7/5
+* 2/3 * -5/7
+* -10/21
+
+4.67)
+
+* 3/5 / p/7
+* 3/5 * 7/p
+* 21/5p
+
+4.68)
+
+* 5/8 / q/3
+* 5/8 * 3/q
+* 15/8p
+
+4.69)
+
+* -2/3 / -5/6
+* -2/3 * -6/5
+* 12/15
+* 4/5
+
+4.70)
+
+* -5/6 / -2/3
+* -5/6 * -3/2
+* 15/12
+* 5/4
+
+4.71)
+
+* 7/27 / 35/36
+* 7/27 * 36/35
+* 252/945
+* 84/315
+* 28/105
+* 4/15
+
+4.72)
+
+* 5/14 / 15/28
+* 5/14 * 28/15
+* 140/210
+* 14/21
+* 2/3
+
+__EXERCISE__
+
+4.2.77)
 
 START BACK UP HERE
 START BACK UP HERE
