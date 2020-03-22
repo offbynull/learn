@@ -3039,6 +3039,27 @@ arithmetic_code/
 
 # Fraction Number Multiplication
 
+TODO: model out multiplication using fraction tiles... see the example in section 4.2 where they multiply 1/2 by 3/4
+
+```{svgbob}
+                    cut here
+                        |
+                        v
++---------------+---------------+---------------+
+|      1/5      |      1/5      |      1/5      |
++-------+-------+-------+-------+-------+-------+
+| 1/10  | 1/10  | 1/10  | 1/10  | 1/10  | 1/10  |
++-------+-------+-------+-------+-------+-------+
+```
+
+TODO: multiplication of reciprocals leads to 1.
+
+e.g. 1/2 * 2/1 is 2/2. 2/2 is 1.
+
+e.g. -1/2 * -2/1 is 2/2. 2/2 is 1.
+
+just make sure that that denominator doesn't end up being 0 -- e.g. the reciprocal of 0/2 will be undefined.
+
 ```{output}
 arithmetic_code/FractionNumber.py
 python
@@ -3057,6 +3078,42 @@ arithmetic_code/
 
 # Fraction Number Division
 
+TODO: model out division using fraction tiles... see example in section 4.2 where they divide 1/2 by 1/6.
+
+when dividing wholes, we're figuring out how many groups there are in some number...
+
+for example, 12 / 3 = 4 -- there are 4 groups of 3 in 12
+
+we do the same thing with fractions...
+
+1/3 / 1/6
+
+how many 1/6s are there in 1/3? (we don't say groups of 1/6 because 1/6 is less than a whole, but the idea is the same, we're breaking into equal parts and counting the number of parts)
+
+1/3 can be re-written as 2/6
+
+```
++---------------+
+|      1/3      |
++-------+-------+
+|  1/6  |  1/6  |
++-------+-------+
+```
+
+it's broken up into 2 equal parts
+
+this is exactly the same as what we're doing with whole numbers... 12 / 3 = 4 can be re-written as 12/1 / 3/1 = 4/1
+
+```
++-------------------------------+
+|              12               |
++-------+-------+-------+-------+
+|   3   |   3   |   3   |   3   |
++-------+-------+-------+-------+
+```
+
+it's broken up into 4 equal parts
+
 ```{output}
 arithmetic_code/FractionNumber.py
 python
@@ -3072,6 +3129,22 @@ arithmetic_code/
 ```{fracnumdiv}
 1/3 1/4
 ```
+
+# Fraction Simplification
+
+TODO: a simplified fraction is a fraction that has no common factors between the numerator and the denominator (other than 1). another word for thsi is simplified form.
+
+if the num and denom do have a common factor (other than 1), the fraction can be _reduced_ / _simplified_ by removing those common factors.
+
+to simplify a fraction, get the common factors for both its numerator and denominator -- divide each by the largets common factor
+
+OR
+
+get the prime factors and cancel out duplicates
+
+OR 
+
+try dividing by every increasing numbers until divisible, then divide and repeat
 
 # Multiple
 
@@ -13971,6 +14044,235 @@ __EXERCISE__
 4.1.76) turn it into a mixed number, the dot dsits between the whole and the next number
 
 so 21/4 = 5 1/4, the dot sits between 5 and 6 -- just past 5, it's a quarter of the way between 5 and 6
+
+## Chapter 4 Section 2
+
+__TRY IT__
+
+4.37)
+* 8/12
+* 4/6
+* 2/3
+
+4.38)
+* 12/16
+* 6/8
+* 3/4
+
+4.39)
+* -21/28
+* -7/9
+
+4.40)
+* -16/24
+* -4/6
+* -2/3
+
+4.41)
+* -54/42
+* -26/21
+
+4.42)
+* -81/45
+* -9/5
+
+4.43) 69 / 120
+
+* 69
+  * 3
+  * 23
+
+* 120
+  * 10
+    * 2
+    * 5
+  * 12
+    * 3
+    * 4
+
+23 / 40
+
+4.44) 120 / 192
+
+* 120
+  * 10
+    * 2
+    * 5
+  * 12
+    * 3
+    * 4
+
+* 192
+  * 2
+  * 96
+    * 53
+    * 2
+
+60 / 96
+
+4.45) 
+* 7x/7y
+* x/y
+
+4.46)
+* 9a/9b
+* a/b
+
+4.47)
+
+```
+                    cut here
+                        |
+                        v
++---------------+---------------+---------------+
+|      1/5      |      1/5      |      1/5      |
++-------+-------+-------+-------+-------+-------+
+| 1/10  | 1/10  | 1/10  | 1/10  | 1/10  | 1/10  |
++-------+-------+-------+-------+-------+-------+
+```
+
+3/10
+
+4.48)
+
+```
+                                    cut here
+                                        |
+                                        v
++---------------+---------------+---------------+---------------+---------------+
+|      1/6      |      1/6      |      1/6      |      1/6      |      1/6      |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1/12  | 1/12  | 1/12  | 1/12  | 1/12  | 1/12  | 1/12  | 1/12  | 1/12  | 1/12  |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+5/12
+
+4.49)
+* 1/3 \* 2/5
+* 1\*2/3\*5
+* 2/15
+
+4.50)
+* 3/5 \* 7/8
+* 3\*7/5\*8
+* 21/40
+
+4.51)
+* -4/7 \* -5/8
+* -4\*-5/7\*8
+* 20/56
+
+4.52)
+* -7/12 \* -8/9
+* -7\*-8/12\*9
+* 56/108
+
+4.53)
+* -10/28 \* 8/15
+* -10\*8/28\*15
+* -80/420
+
+4.54)
+* -9/20 \* 5/12
+* -9\*5/20\*12
+* -45/240
+
+4.55)
+* a)
+  * 1/8 \* 72/1
+  * 1\*72/8\*1
+  * 72/8
+* b)
+  * 11/3 \* -9a/1
+  * 11\*-9a/3\*1
+  * -99a/3
+
+4.56)
+* a)
+  * 3/8 \* 64/1
+  * 3\*64/8\*1
+  * 192/8
+* b)
+  * 16x/1 \* 11/12
+  * 16x\*11/1\*12
+  * 176x/12
+
+4.57)
+* a) 5/7 -> 7/5
+* b) -1/8 -> -8/1
+* c) -11/4 -> -4/11
+* d) 14 -> 1/14
+
+4.58)
+* a) 3/7 -> 7/3
+* b) -1/12 -> -12/1
+* c) -14/9 -> -9/14
+* d) 21/1 -> 1/21
+
+4.59)
+
+| Number | Opposite | Absolute Value | Reciprocal |
+| ------ | -------- | -------------- | ---------- |
+| -5/8   | 5/8      | 5/8            | -8/5       |
+| 1/4    | -1/4     | 1/4            | 4/1        |
+| 8/3    | -8/3     | 8/3            | 3/8        |
+| -8     | 8        | 8              | -1/8       |
+
+4.60)
+
+| Number | Opposite | Absolute Value | Reciprocal |
+| ------ | -------- | -------------- | ---------- |
+| -4/7   | 4/7      | 4/7            | -7/4       |
+| 1/8    | -1/8     | 1/8            | 8/1        |
+| 9/4    | -9/4     | 9/4            | 4/9        |
+| -1     | 1        | 1              | -1         |
+
+4.61) 1/3 / 1/6
+
+how many 1/6s are there in 1/3?
+
+1/3 can be re-written as 2/6
+
+```
++---------------+
+|      1/3      |
++-------+-------+
+|  1/6  |  1/6  |
++-------+-------+
+```
+
+4.62)
+
+```
++---------------+
+|      1/2      |
++-------+-------+
+|  1/4  |  1/4  |
++-------+-------+
+```
+
+4.63)
+
+```
++-----------------------------------------------+
+|                       2                       |
++-------+-------+-------+-------+-------+-------+
+|  1/3  |  1/3  |  1/3  |  1/3  |  1/3  |  1/3  |
++-------+-------+-------+-------+-------+-------+
+```
+
+4.64)
+
+```
++-----------------------------------------------+
+|                       3                       |
++-------+-------+-------+-------+-------+-------+
+|  1/2  |  1/2  |  1/2  |  1/2  |  1/2  |  1/2  |
++-------+-------+-------+-------+-------+-------+
+```
+
+4.65)
 
 START BACK UP HERE
 START BACK UP HERE
