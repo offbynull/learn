@@ -150,6 +150,7 @@ class FractionNumber:
             log_unindent()
     #MARKDOWN_DIV
 
+    #MARKDOWN_RECIP
     def reciprocal(self: FractionNumber) -> FractionNumber:
         # Sign is on the numerator
         log_indent()
@@ -162,7 +163,9 @@ class FractionNumber:
             return res
         finally:
             log_unindent()
+    #NARKDOWN_RECIP
 
+    #MARKDOWN_SIMP
     def simplify(self: FractionNumber) -> FractionNumber:
         # Sign is on the numerator
         log_indent()
@@ -189,6 +192,7 @@ class FractionNumber:
             return res
         finally:
             log_unindent()
+    # MARKDOWN_SIMP
 
     @staticmethod
     def _calculate_factors(test_num: WholeNumber) -> List[WholeNumber]:
