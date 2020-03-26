@@ -483,6 +483,8 @@ TODO: a improper fraction is one where the numerator is greater than or equal to
 
 TODO: a proper fraction is one where teh numerator is less than the denominator, for example 1/2.
 
+TODO: a complex fraction is a fraction in which the numerator or denominator contains a fraction. to simplify, remember that the fraction bar means division.
+
 TODO: converting a fraction to a mixed number is division.
 
 11/6
@@ -530,7 +532,11 @@ in other words, multiplying the numerator and denomator by the same number doesn
 
 TODO: show number line with proper fractions, improper fractions, and mixed numbers 
 
-TODO: talk about negtive fractions, show an example on the number line -- it may be eaiser to do if you first converted it to a mixed number
+TODO: talk about negtive fractions, show an example on the number line -- it may be eaiser to do if you first converted it to a mixed number. remember that fractions represent division -- the fraction itself is negative if either the numerator or denominator is negative. typically, the negative sign for a fraction will be before the fraction (instead of on the numerator or the denominator). if both the numerator and denominator are negative, the fraction is positive (dividing 2 negatives results in a positive)
+
+TODO: write code to convert mixed number to fraction and viceversa
+
+TODO: the words quotient and ratio often refer to fractions, but quotient may also refer to division as well -- fractions are a representation of division
 
 ## Rational (Decimal)
 
@@ -3998,6 +4004,8 @@ inverse of division
 ### Division
 
 inverse of multiplication
+
+TODO: fraction bars as as grouping -- treat the numerator as if it was in parenthesis and the denominator as if it were in parenthesis
 
 ## Equality Rules
 
@@ -14794,6 +14802,214 @@ there are 12 instances of 1/4 in 3
 * 8/7
 
 4.2.168)
+
+* a) 3/4 * 2/1 = 6/4 = 3/2 = 1 1/2
+* b)
+  
+  ```
+  +-----------------+
+  |       3/2       | 
+  +-----+-----+-----+
+  | 1/2 | 1/2 | 1/2 |
+  +-----+-----+-----+
+  ```
+
+  ```
+  +-----------------+
+  |       3/2       | 
+  +-----------+-----+
+  |     1     | 1/2 |
+  +-----------+-----+
+  ```
+
+4.2.169)
+
+4 pan, 2/3 cups of condensed milk each
+
+* a) 2/3 * 4/1 = 8/3 = 2 2/3
+* b)
+  
+  ```
+  +-----------------------------------------------+
+  |                      8/3                      | 
+  +-----+-----+-----+-----+-----+-----+-----+-----+
+  | 1/3 | 1/3 | 1/3 | 1/3 | 1/3 | 1/3 | 1/3 | 1/3 |
+  +-----+-----+-----+-----+-----+-----+-----+-----+
+  ```
+
+  ```
+  +-----------------------------------------------+
+  |                      8/3                      | 
+  +-----------------+-----------------+-----+-----+
+  |        1        |        1        | 1/3 | 1/3 |
+  +-----------------+-----------------+-----+-----+
+  ```
+
+4.2.170)
+
+* 5/1 / 1/4
+* 5/1 * 4/1
+* 20/1
+
+4.2.171)
+
+* 3/4 / 6/1
+* 3/4 * 1/6
+* 3/24
+* 1/8
+
+4.2.172) swap the num and denom
+
+4.2.173) swap the num and denom
+
+4.2.174) the number of slices doesn't matter as he would be getting the same amount of pizza either way
+
+4.2.175) you have half a meter of ribbon remaining and you want to make sure that you only use 2/3rds of it -- that would be 1/3 meter 
+
+## Chapter 4 Section 3
+
+__TRY IT__
+
+4.73)
+
+* 17/3 * 6/17
+* 102/51
+* 34/17
+
+4.74)
+
+* 3/7 * 21/4
+* 63/28
+* 9/4
+
+4.75)
+
+* 40/7 * -21/8
+* -840/56
+* -420/28
+
+4.76)
+
+* -17/5 * 25/6
+* -425/30
+* -85/6
+
+4.77)
+
+* 35/8 / 7/1
+* 35/8 * 1/7
+* 35/56
+* 5/8
+
+4.78)
+
+* 21/8 / 3/1
+* 21/8 * 1/3
+* 21/24
+* 7/8
+
+4.79)
+
+* 8/3 / 4/3
+* 8/3 * 3/4
+* 24/12
+* 2/1
+
+4.80)
+
+* 15/4 / 3/2
+* 15/4 * 2/3
+* 30/12
+* 5/2
+
+4.81) 9s/14
+
+4.82) 5y/6
+
+4.83) (a-b)/cd
+
+4.84) (p+q)/r
+
+4.85)
+
+* 2/3 / 5/6
+* 2/3 * 6/5
+* 12/30
+* 6/15
+* 2/5
+
+4.86)
+
+* 3/7 / 6/11
+* 3/7 * 11/6
+* 33/42
+* 11/14
+
+4.87)
+
+* -8/7 / 1/4
+* -8/7 * 4/1
+* -32/7
+
+4.88)
+
+* -3/1 / 9/10
+* -3/1 * 10/9
+* -30/9
+* -10/3
+
+4.89)
+
+* a/8 / ab/6
+* a/8 * 6/ab
+* 6a/8ab
+* 3a/4ab
+* 3/4b
+
+4.90)
+
+* p/2 / pq/8
+* p/2 * 8/pq
+* 8p/2pq
+* 4p/pq
+* 4/q
+
+4.91)
+
+* 5/7 / 12/5
+* 5/7 * 5/12
+* 25/84
+
+4.92)
+
+* 8/5 / 16/5
+* 8/5 * 5/16
+* 8/16
+* 1/2
+
+4.93) -(3/5), 3/-5
+
+4.94) -2/-7. 2/7
+
+4.95) 10/8 = 5/4
+
+4.96) -2/6 = -1/3
+
+4.97) -9/12 = -3/4
+
+4.98) -20/30 = -2/3
+
+4.99) 16/72 = 8/36 = 4/18 = 2/9
+
+4.100) 64/40 = 32/20 = 16/10 = 8/5
+
+4.101) -28/7 = -4/1
+
+4.102) -34/-17 = -2/1
+
+__EXERCISE__
+
+4.3.176)
 
 START BACK UP HERE
 START BACK UP HERE

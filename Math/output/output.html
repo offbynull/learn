@@ -74,6 +74,7 @@
 <li><a href="#HEADREF55">Chapter 3 Section 5</a></li>
 <li><a href="#HEADREF56">Chapter 4 Section 1</a></li>
 <li><a href="#HEADREF57">Chapter 4 Section 2</a></li>
+<li><a href="#HEADREF58">Chapter 4 Section 3</a></li>
 </ul>
 </ul>
 </div>
@@ -384,6 +385,7 @@ for (item in index) {
 <p>TODO: a mixed number <a href="#BOOKMARK88">is</a> a <a href="#BOOKMARK2">whole number</a> with a <a href="#BOOKMARK8">fraction</a>, for example 2 1/2 <a href="#BOOKMARK87">is the same as</a> writing 5/2.</p>
 <p>TODO: a improper <a href="#BOOKMARK8">fraction</a> <a href="#BOOKMARK88">is</a> one where the <a href="#BOOKMARK9">numerator</a> <a href="#BOOKMARK88">is</a> greater than or equal to the <a href="#BOOKMARK10">denominator</a>, for example 5/2.</p>
 <p>TODO: a proper <a href="#BOOKMARK8">fraction</a> <a href="#BOOKMARK88">is</a> one where teh <a href="#BOOKMARK9">numerator</a> <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK24">less than</a> the <a href="#BOOKMARK10">denominator</a>, for example 1/2.</p>
+<p>TODO: a complex <a href="#BOOKMARK8">fraction</a> <a href="#BOOKMARK88">is</a> a <a href="#BOOKMARK8">fraction</a> in which the <a href="#BOOKMARK9">numerator</a> or <a href="#BOOKMARK10">denominator</a> contains a <a href="#BOOKMARK8">fraction</a>. to <a href="#BOOKMARK73">simplify</a>, remember that the <a href="#BOOKMARK8">fraction</a> bar means <a href="#BOOKMARK38">division</a>.</p>
 <p>TODO: converting a <a href="#BOOKMARK8">fraction</a> to a mixed number <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK38">division</a>.</p>
 <p>11/6</p>
 <pre><code>+-----------------+
@@ -418,7 +420,9 @@ for (item in index) {
 +------+------+------+------+------+------+------+------+------+------+------+------+
 </code></pre>
 <p>TODO: show number line with proper <a href="#BOOKMARK8">fraction</a>s, improper <a href="#BOOKMARK8">fraction</a>s, and mixed numbers</p>
-<p>TODO: talk about negtive <a href="#BOOKMARK8">fraction</a>s, show an example on the number line -- it may be ea<a href="#BOOKMARK88">is</a>er to do if you first converted it to a mixed number</p>
+<p>TODO: talk about negtive <a href="#BOOKMARK8">fraction</a>s, show an example on the number line -- it may be ea<a href="#BOOKMARK88">is</a>er to do if you first converted it to a mixed number. remember that <a href="#BOOKMARK8">fraction</a>s represent <a href="#BOOKMARK38">division</a> -- the <a href="#BOOKMARK8">fraction</a> itself <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK6">negative</a> if either the <a href="#BOOKMARK9">numerator</a> or <a href="#BOOKMARK10">denominator</a> <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK6">negative</a>. typically, the <a href="#BOOKMARK6">negative</a> <a href="#BOOKMARK7">sign</a> for a <a href="#BOOKMARK8">fraction</a> <a href="#BOOKMARK91">will be</a> before the <a href="#BOOKMARK8">fraction</a> (instead of on the <a href="#BOOKMARK9">numerator</a> or the <a href="#BOOKMARK10">denominator</a>). if both the <a href="#BOOKMARK9">numerator</a> and <a href="#BOOKMARK10">denominator</a> are <a href="#BOOKMARK6">negative</a>, the <a href="#BOOKMARK8">fraction</a> <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK5">positive</a> (dividing 2 <a href="#BOOKMARK6">negative</a>s results in a <a href="#BOOKMARK5">positive</a>)</p>
+<p>TODO: write code to convert mixed number to <a href="#BOOKMARK8">fraction</a> and viceversa</p>
+<p>TODO: the words <a href="#BOOKMARK40">quotient</a> and ratio often refer to <a href="#BOOKMARK8">fraction</a>s, but <a href="#BOOKMARK40">quotient</a> may also refer to <a href="#BOOKMARK38">division</a> as well -- <a href="#BOOKMARK8">fraction</a>s are a representation of <a href="#BOOKMARK38">division</a></p>
 <a name="HEADREF6"></a><h2>Rational (Decimal)</h2>
 <a name="HEADREF7"></a><h2>Irrational</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
@@ -4233,6 +4237,7 @@ http://www.themathpage.com/aPreCalc/<a href="#BOOKMARK69">algebra</a>Pre.htm (sp
 <p>inverse of <a href="#BOOKMARK38">division</a></p>
 <a name="HEADREF36"></a><h3>Division</h3>
 <p>inverse of <a href="#BOOKMARK27">multiplication</a></p>
+<p>TODO: <a href="#BOOKMARK8">fraction</a> bars as as grouping -- treat the <a href="#BOOKMARK9">numerator</a> as if it <a href="#BOOKMARK90">was</a> in parenthes<a href="#BOOKMARK88">is</a> and the <a href="#BOOKMARK10">denominator</a> as if it were in parenthes<a href="#BOOKMARK88">is</a></p>
 <a name="HEADREF37"></a><h2>Equality Rules</h2>
 <p>TODO: talk about how you can subtract/<a href="#BOOKMARK12">add</a>/<a href="#BOOKMARK31">multiply</a>/<a href="#BOOKMARK43">divide</a> anything so long as you do it to both sides... e.g. x=5 <a href="#BOOKMARK12">add</a> y to both sides to get x+y=5+y, x+y=5+y subtract y from both sides to get</p>
 <p>using a balancing scale might be a good way to represent th<a href="#BOOKMARK88">is</a> -- if it's already balanced, <a href="#BOOKMARK12">add</a>ing 5 apples to one side means you have to <a href="#BOOKMARK12">add</a> 5 apples to the other side to keep it balanced</p>
@@ -13636,6 +13641,192 @@ no ns to subtract from the ps, so add a p for each n.. 10 ps
 <li>8/7</li>
 </ul>
 <p>4.2.168)</p>
+<ul>
+<li>
+<p>a) 3/4 * 2/1 = 6/4 = 3/2 = 1 1/2</p>
+</li>
+<li>
+<p>b)</p>
+<pre><code>+-----------------+
+|       3/2       | 
++-----+-----+-----+
+| 1/2 | 1/2 | 1/2 |
++-----+-----+-----+
+</code></pre>
+<pre><code>+-----------------+
+|       3/2       | 
++-----------+-----+
+|     1     | 1/2 |
++-----------+-----+
+</code></pre>
+</li>
+</ul>
+<p>4.2.169)</p>
+<p>4 pan, 2/3 cups of condensed milk each</p>
+<ul>
+<li>
+<p>a) 2/3 * 4/1 = 8/3 = 2 2/3</p>
+</li>
+<li>
+<p>b)</p>
+<pre><code>+-----------------------------------------------+
+|                      8/3                      | 
++-----+-----+-----+-----+-----+-----+-----+-----+
+| 1/3 | 1/3 | 1/3 | 1/3 | 1/3 | 1/3 | 1/3 | 1/3 |
++-----+-----+-----+-----+-----+-----+-----+-----+
+</code></pre>
+<pre><code>+-----------------------------------------------+
+|                      8/3                      | 
++-----------------+-----------------+-----+-----+
+|        1        |        1        | 1/3 | 1/3 |
++-----------------+-----------------+-----+-----+
+</code></pre>
+</li>
+</ul>
+<p>4.2.170)</p>
+<ul>
+<li>5/1 / 1/4</li>
+<li>5/1 * 4/1</li>
+<li>20/1</li>
+</ul>
+<p>4.2.171)</p>
+<ul>
+<li>3/4 / 6/1</li>
+<li>3/4 * 1/6</li>
+<li>3/24</li>
+<li>1/8</li>
+</ul>
+<p>4.2.172) swap the num and denom</p>
+<p>4.2.173) swap the num and denom</p>
+<p>4.2.174) the number of slices doesn't matter as he would be getting the same amount of pizza either way</p>
+<p>4.2.175) you have <a href="#BOOKMARK47">half</a> a meter of ribbon remaining and you want to make sure that you only use 2/3rds of it -- that would be 1/3 meter</p>
+<a name="HEADREF58"></a><h2>Chapter 4 Section 3</h2>
+<p><strong>TRY IT</strong></p>
+<p>4.73)</p>
+<ul>
+<li>17/3 * 6/17</li>
+<li>102/51</li>
+<li>34/17</li>
+</ul>
+<p>4.74)</p>
+<ul>
+<li>3/7 * 21/4</li>
+<li>63/28</li>
+<li>9/4</li>
+</ul>
+<p>4.75)</p>
+<ul>
+<li>40/7 * -21/8</li>
+<li>-840/56</li>
+<li>-420/28</li>
+</ul>
+<p>4.76)</p>
+<ul>
+<li>-17/5 * 25/6</li>
+<li>-425/30</li>
+<li>-85/6</li>
+</ul>
+<p>4.77)</p>
+<ul>
+<li>35/8 / 7/1</li>
+<li>35/8 * 1/7</li>
+<li>35/56</li>
+<li>5/8</li>
+</ul>
+<p>4.78)</p>
+<ul>
+<li>21/8 / 3/1</li>
+<li>21/8 * 1/3</li>
+<li>21/24</li>
+<li>7/8</li>
+</ul>
+<p>4.79)</p>
+<ul>
+<li>8/3 / 4/3</li>
+<li>8/3 * 3/4</li>
+<li>24/12</li>
+<li>2/1</li>
+</ul>
+<p>4.80)</p>
+<ul>
+<li>15/4 / 3/2</li>
+<li>15/4 * 2/3</li>
+<li>30/12</li>
+<li>5/2</li>
+</ul>
+<p>4.81) 9s/14</p>
+<p>4.82) 5y/6</p>
+<p>4.83) (a-b)/cd</p>
+<p>4.84) (p+q)/r</p>
+<p>4.85)</p>
+<ul>
+<li>2/3 / 5/6</li>
+<li>2/3 * 6/5</li>
+<li>12/30</li>
+<li>6/15</li>
+<li>2/5</li>
+</ul>
+<p>4.86)</p>
+<ul>
+<li>3/7 / 6/11</li>
+<li>3/7 * 11/6</li>
+<li>33/42</li>
+<li>11/14</li>
+</ul>
+<p>4.87)</p>
+<ul>
+<li>-8/7 / 1/4</li>
+<li>-8/7 * 4/1</li>
+<li>-32/7</li>
+</ul>
+<p>4.88)</p>
+<ul>
+<li>-3/1 / 9/10</li>
+<li>-3/1 * 10/9</li>
+<li>-30/9</li>
+<li>-10/3</li>
+</ul>
+<p>4.89)</p>
+<ul>
+<li>a/8 / ab/6</li>
+<li>a/8 * 6/ab</li>
+<li>6a/8ab</li>
+<li>3a/4ab</li>
+<li>3/4b</li>
+</ul>
+<p>4.90)</p>
+<ul>
+<li>p/2 / pq/8</li>
+<li>p/2 * 8/pq</li>
+<li>8p/2pq</li>
+<li>4p/pq</li>
+<li>4/q</li>
+</ul>
+<p>4.91)</p>
+<ul>
+<li>5/7 / 12/5</li>
+<li>5/7 * 5/12</li>
+<li>25/84</li>
+</ul>
+<p>4.92)</p>
+<ul>
+<li>8/5 / 16/5</li>
+<li>8/5 * 5/16</li>
+<li>8/16</li>
+<li>1/2</li>
+</ul>
+<p>4.93) -(3/5), 3/-5</p>
+<p>4.94) -2/-7. 2/7</p>
+<p>4.95) 10/8 = 5/4</p>
+<p>4.96) -2/6 = -1/3</p>
+<p>4.97) -9/12 = -3/4</p>
+<p>4.98) -20/30 = -2/3</p>
+<p>4.99) 16/72 = 8/36 = 4/18 = 2/9</p>
+<p>4.100) 64/40 = 32/20 = 16/10 = 8/5</p>
+<p>4.101) -28/7 = -4/1</p>
+<p>4.102) -34/-17 = -2/1</p>
+<p><strong>EXERC<a href="#BOOKMARK88">IS</a>E</strong></p>
+<p>4.3.176)</p>
 <p>START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
