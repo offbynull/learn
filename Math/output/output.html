@@ -75,6 +75,7 @@
 <li><a href="#HEADREF56">Chapter 4 Section 1</a></li>
 <li><a href="#HEADREF57">Chapter 4 Section 2</a></li>
 <li><a href="#HEADREF58">Chapter 4 Section 3</a></li>
+<li><a href="#HEADREF59">Chapter 4 Section 4</a></li>
 </ul>
 </ul>
 </div>
@@ -2860,6 +2861,7 @@ while (dividend &gt;= divisor) {
 </div>
 <p></p>
 <a name="HEADREF18"></a><h1>Fraction Number Addition</h1>
+<p>TODO: model with circles -- show why <a href="#BOOKMARK10">denominator</a>s must be the same prior to <a href="#BOOKMARK11">addition</a></p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__add__</span><span class="hljs-params">(lhs: FractionNumber, rhs: FractionNumber)</span> -&gt; FractionNumber:</span>
     <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
     log_indent()
@@ -2888,6 +2890,7 @@ while (dividend &gt;= divisor) {
 </div>
 <p></p>
 <a name="HEADREF19"></a><h1>Fraction Number Subtraction</h1>
+<p>TODO: model with circles -- show why <a href="#BOOKMARK10">denominator</a>s must be the same prior to <a href="#BOOKMARK11">addition</a></p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__sub__</span><span class="hljs-params">(lhs: FractionNumber, rhs: FractionNumber)</span> -&gt; FractionNumber:</span>
     <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
     log_indent()
@@ -2989,7 +2992,7 @@ while (dividend &gt;= divisor) {
 <p>if the num and denom do have a common <a href="#BOOKMARK60">factor</a> (other than 1), the <a href="#BOOKMARK8">fraction</a> can be <em>reduced</em> / <em>simplified</em> by removing those common <a href="#BOOKMARK60">factor</a>s.</p>
 <p>to <a href="#BOOKMARK73">simplify</a> a <a href="#BOOKMARK8">fraction</a>, get the common <a href="#BOOKMARK60">factor</a>s for both its <a href="#BOOKMARK9">numerator</a> and <a href="#BOOKMARK10">denominator</a> -- <a href="#BOOKMARK43">divide</a> each by the largets common <a href="#BOOKMARK60">factor</a></p>
 <p>OR</p>
-<p>get the <a href="#BOOKMARK63">prime factor</a>s and cancel out duplicates</p>
+<p>get the <a href="#BOOKMARK63">prime factor</a>s and cancel out duplicates -- if showing th<a href="#BOOKMARK88">is</a>, draw out all <a href="#BOOKMARK60">factor</a>s on top of each other and then cross out common ones (katex)</p>
 <p>OR</p>
 <p>try dividing by every increasing numbers until <a href="#BOOKMARK54">divisible</a>, then <a href="#BOOKMARK43">divide</a> and repeat</p>
 <a name="HEADREF23"></a><h1>Multiple</h1>
@@ -14218,6 +14221,207 @@ no ns to subtract from the ps, so add a p for each n.. 10 ps
 <p>4.3.251) most straight forward way <a href="#BOOKMARK88">is</a> to get both numbers as proper/improper <a href="#BOOKMARK8">fraction</a>s and <a href="#BOOKMARK31">multiply</a>.</p>
 <p>4.3.252) he's <a href="#BOOKMARK31">multiply</a>ing the wholes and then <a href="#BOOKMARK31">multiply</a>ing the <a href="#BOOKMARK8">fraction</a>s, which <a href="#BOOKMARK88">is</a> not what you should be doing. convert both numbers into <a href="#BOOKMARK8">fraction</a>s first and then <a href="#BOOKMARK31">multiply</a>.</p>
 <p>4.3.253) <a href="#BOOKMARK8">fraction</a>s represent <a href="#BOOKMARK38">division</a>, when only one of the operands into a <a href="#BOOKMARK38">division</a> operation <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK6">negative</a>, the result <a href="#BOOKMARK88">is</a> <a href="#BOOKMARK6">negative</a></p>
+<a name="HEADREF59"></a><h2>Chapter 4 Section 4</h2>
+<p><strong>TRY IT</strong></p>
+<p>4.103)</p>
+<pre><code>+-----+       +-----+-----+-----+-----+
+| 1/8 |       | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+       +-----+-----+-----+-----+
+
+combine to
+
++-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+
+</code></pre>
+<p>4.104)</p>
+<pre><code>+-----+       +-----+-----+-----+-----+
+| 1/6 |       | 1/6 | 1/6 | 1/6 | 1/6 |
++-----+       +-----+-----+-----+-----+
+
+combine to
+
++-----+-----+-----+-----+-----+
+| 1/6 | 1/6 | 1/6 | 1/6 | 1/6 |
++-----+-----+-----+-----+-----+
+</code></pre>
+<p>4.105) 5/6</p>
+<p>4.106) 10/10</p>
+<p>4.107) (x+3)/4</p>
+<p>4.108) (y+5)/8</p>
+<p>4.109) -15/d</p>
+<p>4.110) -15/m</p>
+<p>4.111) 9p/8</p>
+<p>4.112) 9q/5</p>
+<p>4.113) -10/15 = -2/3</p>
+<p>4.114) -14/21 = -2/3</p>
+<p>4.115) 3/8</p>
+<p>4.116) 1/6</p>
+<p>4.117) 12/28 = 6/14 = 3/7</p>
+<p>4.118) 16/32 = 1/2</p>
+<p>4.119) (x-2)/7</p>
+<p>4.120) (y-13)/14</p>
+<p>4.121) -2/x</p>
+<p>4.122) -12/a</p>
+<p>4.123) -5/5 = -1</p>
+<p>4.124) -6/9 = -2/3</p>
+<p><strong>EXERC<a href="#BOOKMARK88">IS</a>E</strong></p>
+<p>4.4.254)</p>
+<pre><code>+-----+-----+      +-----+
+| 1/5 | 1/5 |      | 1/5 |
++-----+-----+      +-----+
+
+combine to
+
++-----+-----+-----+
+| 1/5 | 1/5 | 1/5 |
++-----+-----+-----+
+</code></pre>
+<p>4.4.255)</p>
+<pre><code>+------+------+------+     +------+------+------+------+
+| 1/10 | 1/10 | 1/10 |     | 1/10 | 1/10 | 1/10 | 1/10 |
++------+------+------+     +------+------+------+------+
+
+combine to
+
++------+------+------+------+------+------+------+
+| 1/10 | 1/10 | 1/10 | 1/10 | 1/10 | 1/10 | 1/10 |
++------+------+------+------+------+------+------+
+</code></pre>
+<p>4.4.256)</p>
+<pre><code>+-----+     +-----+-----+-----+
+| 1/6 |     | 1/6 | 1/6 | 1/6 |
++-----+     +-----+-----+-----+
+
+combine to
+
++-----+-----+-----+-----+
+| 1/6 | 1/6 | 1/6 | 1/6 |
++-----+-----+-----+-----+
+</code></pre>
+<p>4.4.257)</p>
+<pre><code>+-----+-----+-----+     +-----+-----+-----+
+| 1/8 | 1/8 | 1/8 |     | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+     +-----+-----+-----+
+
+combine to
+
++-----+-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+-----+
+</code></pre>
+<p>4.4.258) 5/9</p>
+<p>4.4.259) 7/9</p>
+<p>4.4.260) 13/13</p>
+<p>4.4.261) 16/15</p>
+<p>4.4.262) (x+3)/4</p>
+<p>4.4.263) (y+2)/3</p>
+<p>4.4.264) 16/p</p>
+<p>4.4.265) 14/q</p>
+<p>4.4.266) 11b/9</p>
+<p>4.4.267) 9a/7</p>
+<p>4.4.268) -9y/8</p>
+<p>4.4.269) -4x/5</p>
+<p>4.4.270) -4/8</p>
+<p>4.4.271) -6/8</p>
+<p>4.4.272) -10/16</p>
+<p>4.4.273) -14/16</p>
+<p>4.4.274) 7/17</p>
+<p>4.4.275) 8/19</p>
+<p>4.4.276) -16/13</p>
+<p>4.4.277) -13/12</p>
+<p>4.4.278)</p>
+<pre><code>+-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+
+
+slice off 
+
++-----+-----+
+| 1/8 | 1/8 |
++-----+-----+
+
+to become
+
++-----+-----+-----+
+| 1/8 | 1/8 | 1/8 |
++-----+-----+-----+
+</code></pre>
+<p>4.4.279)</p>
+<pre><code>+-----+-----+-----+-----+-----+
+| 1/6 | 1/6 | 1/6 | 1/6 | 1/6 |
++-----+-----+-----+-----+-----+
+
+slice off 
+
++-----+-----+
+| 1/6 | 1/6 |
++-----+-----+
+
+to become
+
++-----+-----+-----+
+| 1/6 | 1/6 | 1/6 |
++-----+-----+-----+
+</code></pre>
+<p>4.4.280) 3/5</p>
+<p>4.4.281) 1/5</p>
+<p>4.4.282) 4/15</p>
+<p>4.4.283) 5/13</p>
+<p>4.4.284) 6/12</p>
+<p>4.4.285) 2/12</p>
+<p>4.4.286) -15/21</p>
+<p>4.4.287) -24/9</p>
+<p>4.4.288) (y-9)/17</p>
+<p>4.4.289) (x-8)/19</p>
+<p>4.4.290) (5y-7)/8</p>
+<p>4.4.291) (11z-8)/13</p>
+<p>4.4.292) -5/d</p>
+<p>4.4.293) -14/c</p>
+<p>4.4.294) -38/u</p>
+<p>4.4.295) -45/v</p>
+<p>4.4.296) c/7</p>
+<p>4.4.297) 3d/11</p>
+<p>4.4.298) -9r/13</p>
+<p>4.4.299) -14s/3</p>
+<p>4.4.300) 1/5</p>
+<p>4.4.301) 2/7</p>
+<p>4.4.302)-2/9</p>
+<p>4.4.303) -3/11</p>
+<p>4.4.304)</p>
+<ul>
+<li>-5/18 * 9/10</li>
+<li>-45/180</li>
+<li>-1/4</li>
+</ul>
+<p>4.4.305)</p>
+<ul>
+<li>-3/14 * 7/12</li>
+<li>-21/168</li>
+<li>-1/8</li>
+</ul>
+<p>4.4.306) (n-4)/5</p>
+<p>4.4.307) (6-s)/11</p>
+<p>4.4.308) -5/24</p>
+<p>4.4.309) -4/18 = -2/9</p>
+<p>4.4.310)</p>
+<ul>
+<li>8/15 * 5/12</li>
+<li>40/180</li>
+<li>4/18</li>
+<li>2/9</li>
+</ul>
+<p>4.4.311)</p>
+<ul>
+<li>7/12 * 28/9</li>
+<li>196/108</li>
+<li>98/54</li>
+<li>49/27</li>
+</ul>
+<p>4.4.312) 9/10</p>
+<p>4.4.313) 2/8</p>
+<p>4.4.314) 1/16, 1/8, 3/16, 1/4, 5/16, 8/8, 7/16, 1/2, 9/16, 5/8</p>
+<p>4.4.315) no -- the number of slices <a href="#BOOKMARK88">is</a> greater than 1 whole pizza</p>
 <p>START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
