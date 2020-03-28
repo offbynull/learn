@@ -483,6 +483,8 @@ TODO: a improper fraction is one where the numerator is greater than or equal to
 
 TODO: a proper fraction is one where teh numerator is less than the denominator, for example 1/2.
 
+TODO: add code to convert between mixed number adn fraction, add code to identify if fraction is proper or improper
+
 TODO: a complex fraction is a fraction in which the numerator or denominator contains a fraction. to simplify, remember that the fraction bar means division.
 
 TODO: converting a fraction to a mixed number is division.
@@ -15113,7 +15115,312 @@ __EXERCISE__
 * 75/15
 * 5/1
 
-4.3.192)
+4.3.192) 5u/11
+
+4.3.193) 7v/13
+
+4.3.194) p/q
+
+4.3.195) a/b
+
+4.3.196) r/s+10
+
+4.3.197) a/3-b
+
+4.3.198)
+
+* 2/3 * 9/8
+* 18/24
+* 9/12
+* 3/4
+
+4.3.199)
+
+* 4/5 * 15/8
+* 60/40
+* 6/4
+* 3/2
+
+4.3.200)
+
+* -9/10 * 1/3
+* -9/30
+* -3/10
+
+4.3.201)
+
+* -9/16 * 40/33
+* -360/108
+* -180/54
+* -90/27
+* -30/9
+* -10/3
+
+4.3.202)
+
+* -4/5 * 1/2
+* -4/10
+* -2/5
+
+4.3.203)
+
+* -9/10 * 1/3
+* -9/30
+* -3/10
+
+4.3.204)
+
+* 2/5 * 1/8
+* 2/40
+* 1/20
+
+4.3.205)
+
+* 5/3 * 1/10
+* 5/30
+* 1/8
+
+4.3.206)
+
+* m/3 * 2/n
+* 2m/3n
+
+4.3.207)
+
+* r/5 * 3/s
+* 3r/5s
+
+4.3.208)
+
+* x/6 * 9/8
+* 9x/48
+* 3x/16
+
+4.3.209)
+
+* 3/8 * 12/y
+* 36/8y
+* 18/4y
+* 9/2y
+
+4.3.210)
+
+* 14/5 * 10/1
+* 140/5
+* 28/1
+
+4.3.211)
+
+* 14/3 * 6/1
+* 84/3
+* 28/1
+
+4.3.212)
+
+* 7/9 * -5/14
+* -35/126
+* -5/18
+
+4.3.213)
+
+* 3/8 * -4/27
+* -12/216
+* -4/72
+* -2/34
+* -1/17
+
+4.3.214) (-5)/11, -5/11
+
+4.3.215) (-4)/9, -4/9
+
+4.3.216) (-11)/3, 11/(-3)
+
+4.3.217) 13/(-6), (-13)/6
+
+4.3.218) 15/8
+
+4.3.219) 12/7
+
+4.3.220) 25/10
+
+4.3.221) 15/6
+
+4.3.222)
+
+* 48/9
+* 19/3
+
+4.3.223)
+
+* 46/8
+* 23/4
+
+4.3.224) 0/12
+
+4.3.225)
+
+* -3/9
+* -1/3
+
+4.3.226)
+
+* 8/6
+* 4/3
+
+4.3.227)
+
+* 24/30
+* 12/15
+* 4/5
+
+4.3.228)
+
+* -40/10
+* -4/1
+
+4.3.229)
+
+* -12/24
+* -1/2
+
+4.3.230)
+
+* 12/12
+* 1/1
+
+4.3.231)
+
+* 36/18
+* 12/6
+* 2/1
+
+4.3.232)
+
+* 15/25
+* 3/5
+
+4.3.233)
+
+* 50/60
+* 5/6
+
+4.3.234)
+
+* 34/17
+* 2/1
+
+4.3.235)
+
+* 26/25
+
+4.3.236)
+
+* 50/20
+* 5/2
+
+4.3.237)
+
+* 99/54
+* 33/18
+* 11/6
+
+4.3.238)
+
+* 28/14
+* 2/1
+
+4.3.239)
+
+* 26/12
+* 13/6
+
+4.3.240)
+
+* -16/2
+* -8/1
+
+4.3.241)
+
+* -20/2
+* -10/1
+
+4.3.242)
+
+* -14/7
+* -2/1
+
+4.3.243)
+
+* 7+15/-11
+* -22/9
+
+4.3.244)
+
+* (7\*4-2(8-5))/(9.3-3.5)
+* (7\*4-2(8-5))/5.8
+* (7\*4-2(3))/5.8
+* (7\*4-6)/5.8
+* (28-6)/5.8
+* 22/5.8
+* 220/58
+* 110/29
+
+why include questions with decimal numbers if you haven't discussed decimal numbers at all?
+
+4.3.245)
+
+* (9\*7-3(12-8))/(8.7-6.6)
+* (9\*7-3(4))/2.1
+* (9\*7-12)/2.1
+* (63-12)/2.1
+* -51/2.1
+* -510/21
+* -170/7
+
+why include questions with decimal numbers if you haven't discussed decimal numbers at all?
+
+4.3.246)
+
+* 9(8-2) - 3(15-7) / 7(8-3) - 3(16-9)
+* 9(6) - 3(8) / 7(5) - 3(7)
+* 54 - 24 / 35 - 21
+* 30 / 14
+* 15 / 7
+
+4.3.247)
+
+* 8(9-2) - 4(14-9) / 7(8-3) - 3(16-9)
+* 8(7) - 4(5) / 7(5) - 3(7)
+* 56 - 20 / 35 - 21
+* 36 / 14
+* 18 / 7
+
+4.3.248)
+
+* a) 9/4 * 2/1 = 18/4 = 4 2/4 = 4 1/2
+* b) 
+
+  ```
+  +-----+-----+-----+-----+-----+-----+-----+-----+-----+
+  | 1/2 | 1/2 | 1/2 | 1/2 | 1/2 | 1/2 | 1/2 | 1/2 | 1/2 |
+  +-----+-----+-----+-----+-----+-----+-----+-----+-----+
+  |           1           |           1           | 1/2 |
+  +-----------------------+-----------------------+-----+
+  ```
+
+4.3.249)
+
+* a) 1/2 * 8/3 = 8/6 = 4/3 = 1 1/3
+* b) 10 * 8/3 = 80/3 = 26 2/3
+
+4.3.250) swap the numerator and denominator
+
+4.3.251) most straight forward way is to get both numbers as proper/improper fractions and multiply.
+
+4.3.252) he's multiplying the wholes and then multiplying the fractions, which is not what you should be doing. convert both numbers into fractions first and then multiply.
+
+4.3.253) fractions represent division, when only one of the operands into a division operation is negative, the result is negative
+
 
 START BACK UP HERE
 START BACK UP HERE
