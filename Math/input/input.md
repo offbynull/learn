@@ -477,6 +477,8 @@ radius 40
 
 In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a fraction: `{kt} 1 \frac{3}{8}`.
 
+TODO: talk about "equivalent fraction"s: e.g. 1/2 and 2/4 are equivalent
+
 TODO: a mixed number is a whole number with a fraction, for example 2 1/2 is the same as writing 5/2.
 
 TODO: a improper fraction is one where the numerator is greater than or equal to the denominator, for example 5/2.
@@ -3013,6 +3015,8 @@ arithmetic_code/
 
 TODO: model with circles -- show why denominators must be the same prior to addition
 
+TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+
 ```{output}
 arithmetic_code/FractionNumber.py
 python
@@ -3032,6 +3036,8 @@ arithmetic_code/
 # Fraction Number Subtraction
 
 TODO: model with circles -- show why denominators must be the same prior to addition
+
+TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
 
 ```{output}
 arithmetic_code/FractionNumber.py
@@ -3087,6 +3093,64 @@ arithmetic_code/
 ```{fracnummul}
 -1/3 -2/6
 ```
+
+# Fraction Number Reciprocal
+
+TODO: discuss how multiplying the reciprocal is 1
+
+# Fraction Number Least Common Denominator
+
+TODO: there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+
+e.g. find the lcd for 9/28 and 21/32
+
+* 28
+  * 2
+  * 14
+    * 2
+    * 7
+
+* 32
+  * 16
+    * 4
+      * 2
+      * 2
+    * 4
+      * 2
+      * 2
+  * 2
+
+```
+2 2       7
+2 2 2 2 2 |
+| | | | | |
+v v v v v v
+2 2 2 2 2 7 = 224
+```
+
+lcd is 224
+
+to get both fractions to equivalent fractions that have a denominotr of 224...
+
+28 * ? = 224, 224 / 28 = 8 <-- multiply 9/28 by 8/8 to get equivalent fraction with denom 224 (lcd)
+
+32 * ? = 224, 224 / 32 = 7 <-- multiply 21/232 by 7/7 to get equivalent fraction with denom 224 (lcd)
+
+another way of finding the number you need to multiply by is by pulling out the missing number numbers from each prime factorization. going back to the same example above...
+
+```
+      +-- 2*2*2 missing -- 8 was the multiplier for 9/28 (1st fraction)
+      |
+      v
+2 2       7
+2 2 2 2 2 
+          ^
+          |
+          +-- 7 missing -- 7 was the multiplier for the 21/32 (2nd fraction)
+```
+
+
+TODO: if you use lcd to get denoms the same, addition and subtraction won't require a simplification step
 
 # Fraction Number Division
 
@@ -15724,6 +15788,133 @@ to become
 4.4.314) 1/16, 1/8, 3/16, 1/4, 5/16, 8/8, 7/16, 1/2, 9/16, 5/8
 
 4.4.315) no -- the number of slices is greater than 1 whole pizza
+
+## Chapter 4 Section 5
+
+__TRY IT__
+
+4.125)
+
+* 12
+  * 3
+  * 4
+    * 2
+    * 2
+
+* 15
+  * 5
+  * 3
+
+```
+2 3 3
+| 3 | 5
+| | | |
+v v v v
+2 3 3 5 = 90
+```
+
+4.126)
+
+* 15
+  * 3
+  * 5
+
+* 5
+
+```
+3 5
+| 5
+| |
+v v
+3 5 = 15
+```
+
+4.127)
+
+* 24
+  * 4
+    * 2
+    * 2
+  * 6
+    * 3
+    * 2
+
+* 32
+  * 16
+    * 4
+      * 2
+      * 2
+    * 4
+      * 2
+      * 2
+  * 2
+
+```
+2 2 2     3
+2 2 2 2 2 |
+| | | | | |
+v v v v v v
+2 2 2 2 2 3 = 96
+```
+
+4.128)
+
+* 28
+  * 2
+  * 14
+    * 2
+    * 7
+
+* 32
+  * 16
+    * 4
+      * 2
+      * 2
+    * 4
+      * 2
+      * 2
+  * 2
+
+```
+2 2       7
+2 2 2 2 2 |
+| | | | | |
+v v v v v v
+2 2 2 2 2 7 = 224
+```
+
+4.129)
+
+* 12 / 4 = 3 (multiplier for 3/4)
+* 12 / 6 = 2 (multiplier for 5/6)
+
+9/12, 10,12
+
+4.130)
+
+* 60 / 12 = 5 (multiplier for -7/12)
+* 60 / 15 = 4 (multiplier for 11/15)
+
+-35/60, 44/60
+
+4.131) 
+
+* 96 / 24 = 4
+* 96 / 32 = 3
+
+52/96, 51/96
+
+4.132)
+
+* 224 / 28 = 8
+* 224 / 32 = 7
+
+72/224, 189/224
+
+4.133)
+
+
+__EXERCISE__
 
 START BACK UP HERE
 START BACK UP HERE
