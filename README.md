@@ -3,10 +3,6 @@ This repository contains notes created while learning different technologies. Th
 
 If you notice any errors, please create a ticket.
 
-* Pre-algebra / Chapter 1.3 <-- start at next section,  top of stack
-* Algebra & Trig
-* Calculus
-* Physics (all)
 * Chemistry
   * Verify Redox Reaction notes (revisit on Khan Academy, verify notes are correct)
     * Implement bond walking algorithm

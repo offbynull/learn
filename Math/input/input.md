@@ -285,272 +285,17 @@ The algorithm for processing the partial rule is similar to the conceptual model
     55
     ```
 
-# Number Naming
-
-```{prereq}
-Place value system
-```
+## Naming
 
 TODO: Discuss number to word transitions (2nd part of Chapter 1.1)
 
 21,055 is the same as saying twenty one thousand fifty five
 
-# Real Numbers
+# Arithmetic
 
-```{prereq}
-Place value system
-```
+TODO: discuss arithmetic -- it's the study of numbers and the traditional operations on them: addition, subtraction, multiplication and division
 
-```{svgbob}
-+----------------------------------------------------------------------------------+
-|                                                                                  |
-|                                      Real                                        |
-|                                                                                  |
-|   +-+-+-+------------------------------+   +---------------------------------+   |
-|   | | | |                              |   |                                 |   |
-|   | | | |   "Natural (e.g. 1, 7, 291)" |   |                                 |   |
-|   | | | |                              |   |                                 |   |
-|   | | | +------------------------------+   |                                 |   |
-|   | | |                                |   |                                 |   |
-|   | | |   "Whole (0)"                  |   |                                 |   |
-|   | | |                                |   |                                 |   |
-|   | | +--------------------------------+   | "Irrational (e.g. pi, sqrt(2))" |   |
-|   | |                                  |   |                                 |   |
-|   | |   "Integer (e.g. -7, -19, -471)" |   |                                 |   |
-|   | |                                  |   |                                 |   |
-|   | +----------------------------------+   |                                 |   |
-|   |                                    |   |                                 |   |
-|   |   "Rational (e.g. -0.5, 1/3, 1.2)" |   |                                 |   |
-|   |                                    |   |                                 |   |
-|   +------------------------------------+   +---------------------------------+   |
-+----------------------------------------------------------------------------------+
-```
-
-TODO: write blurb here
-
-
-## Whole
-
-```{prereq}
-Place-value system
-```
-
-```{svgbob}
-+-+------------------------------+ 
-| |                              | 
-| |   "Natural (e.g. 1, 7, 291)" | 
-| |                              | 
-| +------------------------------+ 
-|                                | 
-|   "Whole (0)"                  | 
-|                                | 
-+--------------------------------+ 
-```
-
-`{bm} Whole number`s are numbers which have no partial portion -- they only consist of wholes. For example, 5, 0, 104, and 27 are whole numbers while 4.2 is not.
-
-```{svgbob}
-+-+-+-+-+-+-+-+-+-->
-| | | | | | | | | 
-0 1 2 3 4 5 6 7 8
-```
-
-The difference between whole numbers and `{bm} natural \/ counting \/ cardnial number/(natural number|counting number|cardinal number)/i`s is that counting numbers don't include 0 (they start at 1). That is, counting numbers start where you start counting / where something exists. For example, if you're counting apples, you start counting at 1 -- there needs to be at least 1 apple to start.
-
-## Integer
-
-```{prereq}
-Whole numbers
-```
-
-```{svgbob}
-+-+-+------------------------------+
-| | |                              |
-| | |   "Natural (e.g. 1, 7, 291)" |
-| | |                              |
-| | +------------------------------+
-| |                                |
-| |   "Whole (0)"                  |
-| |                                |
-| +--------------------------------+
-|                                  |
-|   "Integer (e.g. -7, -19, -471)" |
-|                                  |
-+----------------------------------+
-```
-
-`{bm} Integer number/(integer number|integer)/i`s are numbers that have no partial portion but are mirrored across 0. That is, think of integers as 2 sets of natural numbers separated by 0, where everything to the...
-
-* right of 0 is called a `{bm} positive` number (signified by a + prefix)
-* left of 0 is called a `{bm} negative` number (signified by a - prefix)
-
-```{svgbob}
-<--+----+----+----+----+----+----+----+----+-->
-   |    |    |    |    |    |    |    |    | 
-  -4   -3   -2   -1    0   +1   +2   +3   +4
-```
-
-The prefix that determines if a integer is positive or negative is usually referred to as the `{bm} sign`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
-
-```{note}
-If a number is positive, the + sign is typically left out.
-```
-
-Conceptually, you can think of 0 and the positives the same way you think about whole numbers. They represent some value. For each positive, there's a corresponding negative that represents the opposite of that positive value. For example, if...
-
-* positive integers represent steps forward, then negative integers would represent steps backward.
-
-  * walk 5 steps (go forward 5 steps)
-  * walk -5 steps (go backward 5 steps)
-
-  ```{svgbob}
-  <--+-------------------------+-------------------------+-->
-     |                         |                         | 
-    -5                         0                        +5
-  5 feet backward         no movement         5 feet forward
-  ```
-
-* positive integers represent money gained, then negative integers would represent money owed.
-
-  * 5 dollars (gain $5)
-  * -5 dollars (spend $5, or be in debt $5)
-
-  ```{svgbob}
-  <--+-------------------------+-------------------------+-->
-     |                         |                         | 
-    -5                         0                        +5
-  5 dollar debt              broke           5 dollars gained
-  ```
-
-* positive integers represent depth below sea-level, then negative integers would represent elevation above sea-level.
-
-  * depth of 5 meters (5 meters below sea-level)
-  * depth of -5 meters (5 meters above sea-level)
-
-
-  ```{svgbob}
-  <--+-------------------------+-------------------------+-->
-     |                         |                         | 
-    -5                         0                        +5
-  5 meters in sea         sea-level       5 meters in the air
-  ```
-
-## Rational (Fraction)
-
-```{prereq}
-Integer numbers
-Integer number multiplication
-Integer number division
-```
-
-TODO: Chapter 4
-
-`{bm} Fraction`s are a way of representing numbers as parts. The syntax for a fraction is as follows...
-
-`{kt} \frac{numerator}{denominator}`
-
-... where the...
- * `{bm}numerator` (top) is an integer that represents the total number of parts.
- * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
-
-For example, 4 parts out of 5 parts would be represented as `{kt} \frac{4}{5}`...
-
-```{define-block}
-diagramhelperfrac
-diagramhelperfrac_macro/
-diagramhelper_code/target/appassembler/
-```
-
-```{diagramhelperfrac}
-radius 40
-4
-5
-```
-
-In some cases, the numerator may be greater than the denominator. That is, the total number of parts may be larger than the number of parts in a whole. For example, `{kt} \frac{11}{8}`...
-
-```{diagramhelperfrac}
-radius 40
-11
-8
-```
-
-In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a fraction: `{kt} 1 \frac{3}{8}`.
-
-TODO: talk about "equivalent fraction"s: e.g. 1/2 and 2/4 are equivalent
-
-TODO: a mixed number is a whole number with a fraction, for example 2 1/2 is the same as writing 5/2.
-
-TODO: a improper fraction is one where the numerator is greater than or equal to the denominator, for example 5/2.
-
-TODO: a proper fraction is one where teh numerator is less than the denominator, for example 1/2.
-
-TODO: add code to convert between mixed number adn fraction, add code to identify if fraction is proper or improper
-
-TODO: a complex fraction is a fraction in which the numerator or denominator contains a fraction. to simplify, remember that the fraction bar means division.
-
-TODO: converting a fraction to a mixed number is division.
-
-11/6
-
-```
-+-----------------+
-|                 |
-|                 v
-|                  
-|   01-------> 1 5/6
-+-6)11            
-    0             ^
-    -             |
-    11            |
-     6            |
-    --            |
-     5 -----------+
-```
-
-TODO: show that 1/4 is the same as 2/8, 3/12, ... using fractional lines, and show how to get 1 fraction into the form of another using multiplication / division
-
-in other words, multiplying the numerator and denomator by the same number doesn't change the value of the fraction
-
-```
-1 * 2 = 2
------   -
-4 * 2 = 8
-```
-
-```
-+-----------+-----------+-----------+-----------+
-|    1/4    |    1/4    |    1/4    |    1/4    |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-```
-
-```
-+--------------------+--------------------+--------------------+--------------------+
-|        1/4         |        1/4         |        1/4         |        1/4         |
-+------+------+------+------+------+------+------+------+------+------+------+------+
-| 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 |
-+------+------+------+------+------+------+------+------+------+------+------+------+
-```
-
-TODO: show number line with proper fractions, improper fractions, and mixed numbers 
-
-TODO: talk about negtive fractions, show an example on the number line -- it may be eaiser to do if you first converted it to a mixed number. remember that fractions represent division -- the fraction itself is negative if either the numerator or denominator is negative. typically, the negative sign for a fraction will be before the fraction (instead of on the numerator or the denominator). if both the numerator and denominator are negative, the fraction is positive (dividing 2 negatives results in a positive)
-
-TODO: write code to convert mixed number to fraction and viceversa
-
-TODO: the words quotient and ratio often refer to fractions, but quotient may also refer to division as well -- fractions are a representation of division
-
-## Rational (Decimal)
-
-## Irrational
-
-```{prereq}
-ARE THERE ANY PREREQUISTES FOR THIS?
-```
-
-# Whole Number Addition
+## Addition
 
 ```{prereq}
 Place value system
@@ -605,7 +350,324 @@ Properties of addition:
     0      3                3
    ```
 
-The algorithm used by humans to add large numbers together is called `{bm} vertical addition`. Vertical addition relies on two ideas...
+## Subtraction
+
+```{prereq}
+Place value system
+```
+
+`{bm} Subtraction` is the concept of removing the value of one number from another number. For example, removing 3 items from 5 items results in 2 items...
+
+```
+    [●●●●●]
+       5
+
+pick out 3 from the 5
+
+   [●●] [●●●]
+    2     3
+```
+
+Subtraction is typically represented using the infix operator -. The above example would be represented as 5-3.
+
+```{note}
+You can think of this as a function that takes in 2 arguments: subtract(5, 3).
+```
+
+When using words, subtraction is typically represented using the following syntax:
+
+* `{bm} minus` -- e.g. 5 minus 3
+* `{bm} difference of` -- e.g. difference of 5 and 3
+* `{bm} subtracted by` -- e.g. 5 subtracted by 3
+* `{bm} decreased by` -- e.g. 5 decreased by 3
+* `{bm} less than` -- e.g. 5 less than 3
+* `{bm} subtracted from` -- e.g. 3 subtracted from 5
+
+Properties of subtraction:
+
+ * Any number subtracted by 0 results in the same number (identity).
+
+   ```
+   [●●●]    [] results in [●●●]    (3+0 is 3)
+     3       0              3
+   ```
+
+```{note}
+Unlike addition, subtraction is not commutative. 5-3 isn't the same as 3-5
+```
+
+## Multiplication
+
+```{prereq}
+Place value system
+Addition
+```
+
+`{bm} Multiplication` is the concept of taking a number and iteratively adding it to itself a certain number of iterations. For example, 3 added to itself for 5 iterations results in 15 items...
+
+```
+3+3+3+3+3=15
+
+ [●●●] 3
+ [●●●] 3
+ [●●●] 3
+ [●●●] 3
+ [●●●] 3
+```
+
+Multiplication is typically represented using the infix operator \*. The above example would be represented as 3\*5. When written in formal math notation, it may also be written as...
+ * `{kt} 3 \cdot 5`
+ * `{kt} 3(5)`
+ * `{kt} (3)5`
+
+```{note}
+Do not use x or a cross as a symbol for multiplication. It causes confusion for algebra expressions.
+```
+
+The output of a multiplication operation is called the `{bm} product`. In the example above, 15 is the product.
+
+The inputs into the multiplication operation are either...
+* called factors -- in the example above, 3 and 5 are the factors,
+* or the first input is called the `{bm} multiplier` and the second input is called the `{bm} multiplicand` -- in the example above, 3 is the multiplier and 5 is the multiplicand.
+
+```{note}
+You can think of this as a function that takes in 2 arguments: mult(3, 5).
+```
+
+When using words, multiplication is typically represented using the following syntax:
+
+* `{bm} multiply` -- e.g. multiply 3 and 5
+* `{bm} multiplied` -- e.g. 3 multiplied by 5
+* `{bm} times` -- e.g. 3 times 5
+* `{bm} product of` -- e.g. the product of 3 and 5
+
+```{note}
+There are certain special words that denote multiplication. For example, the word `{bm} twice` means 2 multiplied by something else -- e.g. twice 5 is the same thing as 2*5.
+
+Much less common is the word `{bm} thrice` -- it means 3 times something else. The pattern here seems to be the add "ice" to the end of the number? Unsure, but Google seems to give a definition for fourice.
+```
+
+Properties of multiplication:
+
+ * Order in which 2 numbers are multiplied doesn't matter (commutative).
+   
+   ```
+    3*5       vs     5*3
+   ┌───┐            ┌┬┬┬┐
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   ├●●●┤3           │●●●│
+   └───┘            └┴┴┴┘
+                     555
+
+   the number of dots is the same
+   ```
+
+ * Any number multiplied by 0 is 0.
+
+   This makes sense if you think of multiplication as iterative addition...
+
+   ```{javascript}
+   var product = 0;
+   for (var i = 0; i < multiplicand; i++) {
+       product += multiplier;
+   }
+   ```
+
+   If you iterate 0 times, the product will be 0.
+
+ * Any number multiplied by 1 results in that same number (identity).
+
+   ```
+   3*3=3+3+3
+   3*2=3+3
+   3*1=3 -- 3 is just by itself, it isn't being added
+   ```
+
+## Division
+
+```{prereq}
+Place value system
+Subtraction
+```
+
+`{bm} Division` is the concept of taking a number and iteratively subtracting it by another number to find out how many iterations it can be subtracted. For example, 15 can be subtracted by 3 exactly 5 iterations before nothing's left...
+
+```
+ [●●●●●●●●●●●●●●●] start with 15
+
+ [●●●●●●●●●●●●] 15-3 is 12 (iteration 1)
+ [●●●●●●●●●] 12-3 is 9 (iteration 2)
+ [●●●●●●] 9-3 is 6 (iteration 3)
+ [●●●] 6-3 is 3 (iteration 4)
+ [] 3-3 is 0 (iteration 5)
+```
+
+Another way of thinking about division is that it's chopping up a number. Imagine cutting up a pie into 15 pieces and eating 3 pieces at a time. The pie will be done after you've eaten 5 times.
+
+
+```{diagramhelperfrac}
+radius 40
+12
+15
+```
+
+```{diagramhelperfrac}
+radius 40
+9
+15
+```
+
+```{diagramhelperfrac}
+radius 40
+6
+15
+```
+
+```{diagramhelperfrac}
+radius 40
+3
+15
+```
+
+```{diagramhelperfrac}
+radius 40
+0
+15
+```
+
+In certain cases, division may result in some remaining value that isn't large enough for another subtraction iteration to take place. This remaining value is called the `{bm} remainder` For example, 16 can be subtracted by 3 for 5 iterations but will have a remainder of 1...
+
+```
+ [●●●●●●●●●●●●●●●●] start with 16
+
+ [●●●●●●●●●●●●●] 16-3 is 13 (iteration 1)
+ [●●●●●●●●●●] 13-3 is 10 (iteration 2)
+ [●●●●●●●] 10-3 is 7 (iteration 3)
+ [●●●●] 7-3 is 4 (iteration 4)
+ [●] 4-3 is 1 (iteration 5)
+
+ only 1 item left -- not enough for another subtraction iteration
+ 
+ 1 is the remainder
+```
+
+```{note}
+If a division operation results in no remainder, it's said to be divisible.
+```
+
+Division is typically represented using the infix operator / or ÷. The above example would be represented as 15/3 or 15÷3. It may also be written as `{kt} \frac{15}{3}`, which is just a fancier way of writing 15/3.
+
+The output of a division operation is called the `{bm} quotient`. In the example above, the quotient is 5 (it subtracts 5 times).
+
+The inputs into the division operation are called the `{bm} dividend` and `{bm} divisor`. In the example above, 15 is the dividend and 3 is the divisor.
+
+* `{kt} dividend \div divisor = quotient`
+* `{kt} dividend / divisor = quotient`
+* `{kt} \frac{dividend}{divisor} = quotient`
+
+```{note}
+One way to think of this is that the dividend (the number on the left / top) is the starting value, and the divisor is the number being iteratively subtracted.
+
+The quotient is the number of times you can subtract.
+```
+
+When using words, division is typically represented using the following syntax:
+
+* `{bm} divide` -- e.g. divide 3 by 15
+* `{bm} divided by/(divided by|divide by)/i` -- e.g. 3 divided by 15
+* `{bm} divided into` -- e.g. 15 divided into 3
+* `{bm} quotient of` -- e.g. the quotient of 3 and 15
+
+```{note}
+There are certain special words that denote division. For example, the word ...
+* `{bm} half` means something divided by 2 -- e.g. half of 10 is the same as 10/2.
+* `{bm} quarter` means something divided by 4 -- e.g. a quarter of 10 is the same 10/4.
+```
+
+Properties of division:
+
+ * Any number divided by 1 results in the same number (identity).
+
+   ```
+   [●●●●●] start with 5
+  
+   [●●●●] 5-1 is 4 (iteration 1)
+   [●●●] 4-1 is 3 (iteration 2)
+   [●●] 3-1 is 2 (iteration 3)
+   [●] 2-1 is 1 (iteration 4)
+   [] 1-1 is 0 (iteration 5)
+  
+   5 iterations total
+   ```
+
+ * Any number divided by itself is 1.
+
+   ```
+   [●●●●●] start with 5
+  
+   [] 5-5 is 0 (iteration 1)
+  
+   1 iteration total
+   ```
+
+ * Any number divided by 0 is infinity.
+
+   This makes sense if you think of division as iterative subtraction...
+
+   ```{javascript}
+   var quotient = 0;
+   while (dividend >= divisor) {
+       dividend -= divisor;
+       quotient += 1;
+   }
+   ```
+
+   This will iterate forever if the divisor is 0 because the dividend would never become less than the divisor -- the loop wouldn't terminate.
+
+   ```{note}
+   Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
+   ```
+
+# Whole Number
+
+```{prereq}
+Place-value system
+```
+
+```{svgbob}
++-+------------------------------+ 
+| |                              | 
+| |   "Natural (e.g. 1, 7, 291)" | 
+| |                              | 
+| +------------------------------+ 
+|                                | 
+|   "Whole (0)"                  | 
+|                                | 
++--------------------------------+ 
+```
+
+`{bm} Whole number`s are numbers which have no partial portion -- they only consist of wholes. For example, 5, 0, 104, and 27 are whole numbers while 4.2 is not.
+
+```{svgbob}
++-+-+-+-+-+-+-+-+-->
+| | | | | | | | | 
+0 1 2 3 4 5 6 7 8
+```
+
+The difference between whole numbers and `{bm} natural \/ counting \/ cardnial number/(natural number|counting number|cardinal number)/i`s is that counting numbers don't include 0 (they start at 1). That is, counting numbers start where you start counting / where something exists. For example, if you're counting apples, you start counting at 1 -- there needs to be at least 1 apple to start.
+
+## Addition
+
+```{prereq}
+Addition
+```
+
+`{bm} /(whole number addition|add whole numbers|addition of whole numbers)/i`
+
+The algorithm used by humans to add large whole numbers together is called `{bm} vertical addition`. Vertical addition relies on two ideas...
 
 1. humans can easily add a single digit number to another single digit number without much effort. For example...
 
@@ -827,53 +889,15 @@ arithmetic_code/
 273 991
 ```
 
-# Whole Number Subtraction
+## Subtraction
 
 ```{prereq}
-Place value system
+Subtraction
 ```
 
-`{bm} Subtraction` is the concept of removing the value of one number from another number. For example, removing 3 items from 5 items results in 2 items...
+`{bm} /(whole number subtraction|subtract whole numbers)/i`
 
-```
-    [●●●●●]
-       5
-
-pick out 3 from the 5
-
-   [●●] [●●●]
-    2     3
-```
-
-Subtraction is typically represented using the infix operator -. The above example would be represented as 5-3.
-
-```{note}
-You can think of this as a function that takes in 2 arguments: subtract(5, 3).
-```
-
-When using words, subtraction is typically represented using the following syntax:
-
-* `{bm} minus` -- e.g. 5 minus 3
-* `{bm} difference of` -- e.g. difference of 5 and 3
-* `{bm} subtracted by` -- e.g. 5 subtracted by 3
-* `{bm} decreased by` -- e.g. 5 decreased by 3
-* `{bm} less than` -- e.g. 5 less than 3
-* `{bm} subtracted from` -- e.g. 3 subtracted from 5
-
-Properties of subtraction:
-
- * Any number subtracted by 0 results in the same number (identity).
-
-   ```
-   [●●●]    [] results in [●●●]    (3+0 is 3)
-     3       0              3
-   ```
-
-```{note}
-Unlike addition, subtraction is not commutative. 5-3 isn't the same as 3-5
-```
-
-The algorithm used by humans to subtract large numbers from each other is called `{bm} vertical subtraction`. Vertical subtraction relies on two ideas...
+The algorithm used by humans to subtract large whole numbers from each other is called `{bm} vertical subtraction`. Vertical subtraction relies on two ideas...
 
 1. humans can easily subtract a small 1 to 2 digit numbers (anything smaller than 20) from each other without much effort. For example...
 
@@ -1233,96 +1257,16 @@ arithmetic_code/
 100 11
 ```
 
-# Whole Number Multiplication
+## Multiplication
 
 ```{prereq}
+Multiplication
 Whole number addition
 ```
 
-`{bm} Multiplication` is the concept of taking a number and iteratively adding it to itself a certain number of iterations. For example, 3 added to itself for 5 iterations results in 15 items...
+`{bm} /(whole number multiplication|multiply whole numbers)/i`
 
-```
-3+3+3+3+3=15
-
- [●●●] 3
- [●●●] 3
- [●●●] 3
- [●●●] 3
- [●●●] 3
-```
-
-Multiplication is typically represented using the infix operator \*. The above example would be represented as 3\*5. When written in formal math notation, it may also be written as...
- * `{kt} 3 \cdot 5`
- * `{kt} 3(5)`
- * `{kt} (3)5`
-
-```{note}
-Do not use x or a cross as a symbol for multiplication. It causes confusion for algebra expressions.
-```
-
-The output of a multiplication operation is called the `{bm} product`. In the example above, 15 is the product.
-
-The inputs into the multiplication operation are either...
-* called factors -- in the example above, 3 and 5 are the factors,
-* or the first input is called the `{bm} multiplier` and the second input is called the `{bm} multiplicand` -- in the example above, 3 is the multiplier and 5 is the multiplicand.
-
-```{note}
-You can think of this as a function that takes in 2 arguments: mult(3, 5).
-```
-
-When using words, multiplication is typically represented using the following syntax:
-
-* `{bm} multiply` -- e.g. multiply 3 and 5
-* `{bm} multiplied` -- e.g. 3 multiplied by 5
-* `{bm} times` -- e.g. 3 times 5
-* `{bm} product of` -- e.g. the product of 3 and 5
-
-```{note}
-There are certain special words that denote multiplication. For example, the word `{bm} twice` means 2 multiplied by something else -- e.g. twice 5 is the same thing as 2*5.
-
-Much less common is the word `{bm} thrice` -- it means 3 times something else. The pattern here seems to be the add "ice" to the end of the number? Unsure, but Google seems to give a definition for fourice.
-```
-
-Properties of multiplication:
-
- * Order in which 2 numbers are multiplied doesn't matter (commutative).
-   
-   ```
-    3*5       vs     5*3
-   ┌───┐            ┌┬┬┬┐
-   ├●●●┤3           │●●●│
-   ├●●●┤3           │●●●│
-   ├●●●┤3           │●●●│
-   ├●●●┤3           │●●●│
-   ├●●●┤3           │●●●│
-   └───┘            └┴┴┴┘
-                     555
-
-   the number of dots is the same
-   ```
-
- * Any number multiplied by 0 is 0.
-
-   This makes sense if you think of multiplication as iterative addition...
-
-   ```{javascript}
-   var product = 0;
-   for (var i = 0; i < multiplicand; i++) {
-       product += multiplier;
-   }
-   ```
-
-   If you iterate 0 times, the product will be 0.
-
- * Any number multiplied by 1 results in that same number (identity).
-
-   ```
-   3*3=3+3+3
-   3*2=3+3
-   3*1=3 -- 3 is just by itself, it isn't being added
-   ```
-
-The algorithm used by humans to multiply large numbers together is called `{bm} vertical multiplication`. Vertical multiplication relies on three ideas...
+The algorithm used by humans to multiply large whole numbers together is called `{bm} vertical multiplication`. Vertical multiplication relies on three ideas...
 
 1. Humans have the ability to multiply a single digit number to another single digit number through memorization. For example...
 
@@ -1704,156 +1648,22 @@ arithmetic_code/
 77 87
 ```
 
-# Whole Number Division
+## Division
 
 ```{prereq}
-Whole number subtraction
+Division
 ```
 
-`{bm} Division` is the concept of taking a number and iteratively subtracting it by another number to find out how many iterations it can be subtracted. For example, 15 can be subtracted by 3 exactly 5 iterations before nothing's left...
+`{bm} /(whole number division|divide whole numbers)/i`
 
-```
- [●●●●●●●●●●●●●●●] start with 15
-
- [●●●●●●●●●●●●] 15-3 is 12 (iteration 1)
- [●●●●●●●●●] 12-3 is 9 (iteration 2)
- [●●●●●●] 9-3 is 6 (iteration 3)
- [●●●] 6-3 is 3 (iteration 4)
- [] 3-3 is 0 (iteration 5)
-```
-
-Another way of thinking about division is that it's chopping up a number. Imagine cutting up a pie into 15 pieces and eating 3 pieces at a time. The pie will be done after you've eaten 5 times.
-
-
-```{diagramhelperfrac}
-radius 40
-12
-15
-```
-
-```{diagramhelperfrac}
-radius 40
-9
-15
-```
-
-```{diagramhelperfrac}
-radius 40
-6
-15
-```
-
-```{diagramhelperfrac}
-radius 40
-3
-15
-```
-
-```{diagramhelperfrac}
-radius 40
-0
-15
-```
-
-In certain cases, division may result in some remaining value that isn't large enough for another subtraction iteration to take place. This remaining value is called the `{bm} remainder` For example, 16 can be subtracted by 3 for 5 iterations but will have a remainder of 1...
-
-```
- [●●●●●●●●●●●●●●●●] start with 16
-
- [●●●●●●●●●●●●●] 16-3 is 13 (iteration 1)
- [●●●●●●●●●●] 13-3 is 10 (iteration 2)
- [●●●●●●●] 10-3 is 7 (iteration 3)
- [●●●●] 7-3 is 4 (iteration 4)
- [●] 4-3 is 1 (iteration 5)
-
- only 1 item left -- not enough for another subtraction iteration
- 
- 1 is the remainder
-```
-
-```{note}
-If a division operation results in no remainder, it's said to be divisible.
-```
-
-Division is typically represented using the infix operator / or ÷. The above example would be represented as 15/3 or 15÷3. It may also be written as `{kt} \frac{15}{3}`, which is just a fancier way of writing 15/3.
-
-The output of a division operation is called the `{bm} quotient`. In the example above, the quotient is 5 (it subtracts 5 times).
-
-The inputs into the division operation are called the `{bm} dividend` and `{bm} divisor`. In the example above, 15 is the dividend and 3 is the divisor.
-
-* `{kt} dividend \div divisor = quotient`
-* `{kt} dividend / divisor = quotient`
-* `{kt} \frac{dividend}{divisor} = quotient`
-
-```{note}
-One way to think of this is that the dividend (the number on the left / top) is the starting value, and the divisor is the number being iteratively subtracted.
-
-The quotient is the number of times you can subtract.
-```
-
-When using words, division is typically represented using the following syntax:
-
-* `{bm} divide` -- e.g. divide 3 by 15
-* `{bm} divided by/(divided by|divide by)/i` -- e.g. 3 divided by 15
-* `{bm} divided into` -- e.g. 15 divided into 3
-* `{bm} quotient of` -- e.g. the quotient of 3 and 15
-
-```{note}
-There are certain special words that denote division. For example, the word ...
-* `{bm} half` means something divided by 2 -- e.g. half of 10 is the same as 10/2.
-* `{bm} quarter` means something divided by 4 -- e.g. a quarter of 10 is the same 10/4.
-```
-
-Properties of division:
-
- * Any number divided by 1 results in the same number (identity).
-
-   ```
-   [●●●●●] start with 5
-  
-   [●●●●] 5-1 is 4 (iteration 1)
-   [●●●] 4-1 is 3 (iteration 2)
-   [●●] 3-1 is 2 (iteration 3)
-   [●] 2-1 is 1 (iteration 4)
-   [] 1-1 is 0 (iteration 5)
-  
-   5 iterations total
-   ```
-
- * Any number divided by itself is 1.
-
-   ```
-   [●●●●●] start with 5
-  
-   [] 5-5 is 0 (iteration 1)
-  
-   1 iteration total
-   ```
-
- * Any number divided by 0 is infinity.
-
-   This makes sense if you think of division as iterative subtraction...
-
-   ```{javascript}
-   var quotient = 0;
-   while (dividend >= divisor) {
-       dividend -= divisor;
-       quotient += 1;
-   }
-   ```
-
-   This will iterate forever if the divisor is 0 because the dividend would never become less than the divisor -- the loop wouldn't terminate.
-
-   ```{note}
-   Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
-   ```
-
-There are 2 algorithms used to divide numbers:
+There are 2 algorithms used to divide large whole numbers:
 
  * trial-and-error division
- * long division
+ * long division (requires trial-and-error division)
 
-## Trial and Error
+These algorithms are detailed in the subsections below.
+
+### Trial and Error
 
 ```{prereq}
 Whole number subtraction
@@ -2036,13 +1846,14 @@ arithmetic_code/
 98 3
 ```
 
-## Long Division
+### Long Division
 
 ```{prereq}
 Trial-and-error division
+Whole number subtraction
 ```
 
-The algorithm used by humans to divide large numbers is called `{bm} long division`. In most cases, it can divide a number is less steps than trial-and-error division. Long division relies on three ideas...
+The algorithm used by humans to divide large whole numbers is called `{bm} long division`. In most cases, it can divide a number in less steps than trial-and-error division. Long division relies on three ideas...
 
 1. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
 
@@ -2744,14 +2555,92 @@ arithmetic_code/
 752 3
 ```
 
-# Integer Number Addition
+# Integer Number
+
+```{prereq}
+Whole numbers
+```
+
+```{svgbob}
++-+-+------------------------------+
+| | |                              |
+| | |   "Natural (e.g. 1, 7, 291)" |
+| | |                              |
+| | +------------------------------+
+| |                                |
+| |   "Whole (0)"                  |
+| |                                |
+| +--------------------------------+
+|                                  |
+|   "Integer (e.g. -7, -19, -471)" |
+|                                  |
++----------------------------------+
+```
+
+`{bm} Integer number/(integer number|integer)/i`s are numbers that have no partial portion but are mirrored across 0. That is, think of integers as 2 sets of natural numbers separated by 0, where everything to the...
+
+* right of 0 is called a `{bm} positive` number (signified by a + prefix)
+* left of 0 is called a `{bm} negative` number (signified by a - prefix)
+
+```{svgbob}
+<--+----+----+----+----+----+----+----+----+-->
+   |    |    |    |    |    |    |    |    | 
+  -4   -3   -2   -1    0   +1   +2   +3   +4
+```
+
+The prefix that determines if a integer is positive or negative is usually referred to as the `{bm} sign`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
+
+```{note}
+If a number is positive, the + sign is typically left out.
+```
+
+Conceptually, you can think of 0 and the positives the same way you think about whole numbers. They represent some value. For each positive, there's a corresponding negative that represents the opposite of that positive value. For example, if...
+
+* positive integers represent steps forward, then negative integers would represent steps backward.
+
+  * walk 5 steps (go forward 5 steps)
+  * walk -5 steps (go backward 5 steps)
+
+  ```{svgbob}
+  <--+-------------------------+-------------------------+-->
+     |                         |                         | 
+    -5                         0                        +5
+  5 feet backward         no movement         5 feet forward
+  ```
+
+* positive integers represent money gained, then negative integers would represent money owed.
+
+  * 5 dollars (gain $5)
+  * -5 dollars (spend $5, or be in debt $5)
+
+  ```{svgbob}
+  <--+-------------------------+-------------------------+-->
+     |                         |                         | 
+    -5                         0                        +5
+  5 dollar debt              broke           5 dollars gained
+  ```
+
+* positive integers represent depth below sea-level, then negative integers would represent elevation above sea-level.
+
+  * depth of 5 meters (5 meters below sea-level)
+  * depth of -5 meters (5 meters above sea-level)
+
+
+  ```{svgbob}
+  <--+-------------------------+-------------------------+-->
+     |                         |                         | 
+    -5                         0                        +5
+  5 meters in sea         sea-level       5 meters in the air
+  ```
+
+## Addition
 
 ```{prereq}
 Whole number addition
 Whole number subtraction
 ```
 
-Conceptually, you can think of `{bm} integer addition/(integer addition|integer number addition)/i` as movement on a number line. If some integer is being added to a...
+Conceptually, you can think of `{bm} integer addition/(integer number addition|integer addition|add integer numbers|add integers|addition of integer numbers|addition of integers)/i` as movement on a number line. If some integer is being added to a...
 
 * positive integer, it's moving right on the number line.
 
@@ -2829,15 +2718,15 @@ arithmetic_code/
 -752 3
 ```
 
-# Integer Number Subtraction
+## Subtraction
 
 ```{prereq}
 Whole number addition
 Whole number subtraction
-Integer number addition
+Integer addition
 ```
 
-Conceptually, you can think of `{bm} integer subtraction/(integer subtraction|integer number subtraction)/i` as movement on a number line (opposite movement to that of integer addition). If the integer being subtracted by (right-hand side) is a...
+Conceptually, you can think of `{bm} integer subtraction/(integer number subtraction|integer subtraction|subtract integer numbers|subtract integers|subtraction of integer numbers|subtraction of integers)/i` as movement on a number line (opposite movement to that of integer addition). If the integer being subtracted by (right-hand side) is a...
 
 * positive integer, it's moving left on the number line.
 
@@ -2929,17 +2818,15 @@ arithmetic_code/
 752 -3 
 ```
 
-# Integer Number Multiplication
+## Multiplication
 
 ```{prereq}
 Whole number multiplication
-Integer numbe addition
-Integer number subtraction
+Integer addition
+Integer subtraction
 ```
 
-See chapter 3.4
-
-When the right hand side is negative, think of it as subtraction instead of addition. Think of ...
+Conceptually, you can think of `{bm} integer multiplication/(integer number multiplication|integer multiplication|multiply integer numbers|multiply integers|multiplication of integer numbers|multiplication of integers)/i` as repetitive integer addition / integer subtraction. When the right hand side is negative, think of it as subtraction instead of addition. For example, think of ...
 
 * 5 \* 3 as add 5, 3 times
 
@@ -2983,7 +2870,7 @@ arithmetic_code/
 -6 -5
 ```
 
-# Integer Number Division
+## Division
 
 ```{prereq}
 Whole number division
@@ -3010,219 +2897,6 @@ arithmetic_code/
 ```{intnumdiv}
 -30 5
 ```
-
-# Fraction Number Addition
-
-TODO: model with circles -- show why denominators must be the same prior to addition
-
-TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
-
-```{output}
-arithmetic_code/FractionNumber.py
-python
-#MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
-```
-
-```{define-block}
-fracnumadd
-fracnumadd_macro/
-arithmetic_code/
-```
-
-```{fracnumadd}
--1/3 -2/6
-```
-
-# Fraction Number Subtraction
-
-TODO: model with circles -- show why denominators must be the same prior to addition
-
-TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
-
-```{output}
-arithmetic_code/FractionNumber.py
-python
-#MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
-```
-
-```{define-block}
-fracnumsub
-fracnumsub_macro/
-arithmetic_code/
-```
-
-```{fracnumsub}
--1/3 -2/6
-```
-
-# Fraction Number Multiplication
-
-TODO: model out multiplication using fraction tiles... see the example in section 4.2 where they multiply 1/2 by 3/4
-
-```{svgbob}
-                    cut here
-                        |
-                        v
-+---------------+---------------+---------------+
-|      1/5      |      1/5      |      1/5      |
-+-------+-------+-------+-------+-------+-------+
-| 1/10  | 1/10  | 1/10  | 1/10  | 1/10  | 1/10  |
-+-------+-------+-------+-------+-------+-------+
-```
-
-TODO: multiplication of reciprocals leads to 1.
-
-e.g. 1/2 * 2/1 is 2/2. 2/2 is 1.
-
-e.g. -1/2 * -2/1 is 2/2. 2/2 is 1.
-
-just make sure that that denominator doesn't end up being 0 -- e.g. the reciprocal of 0/2 will be undefined.
-
-```{output}
-arithmetic_code/FractionNumber.py
-python
-#MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
-```
-
-```{define-block}
-fracnummul
-fracnummul_macro/
-arithmetic_code/
-```
-
-```{fracnummul}
--1/3 -2/6
-```
-
-# Fraction Number Reciprocal
-
-TODO: discuss how multiplying the reciprocal is 1
-
-# Fraction Number Least Common Denominator
-
-TODO: there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
-
-e.g. find the lcd for 9/28 and 21/32
-
-* 28
-  * 2
-  * 14
-    * 2
-    * 7
-
-* 32
-  * 16
-    * 4
-      * 2
-      * 2
-    * 4
-      * 2
-      * 2
-  * 2
-
-```
-2 2       7
-2 2 2 2 2 |
-| | | | | |
-v v v v v v
-2 2 2 2 2 7 = 224
-```
-
-lcd is 224
-
-to get both fractions to equivalent fractions that have a denominotr of 224...
-
-28 * ? = 224, 224 / 28 = 8 <-- multiply 9/28 by 8/8 to get equivalent fraction with denom 224 (lcd)
-
-32 * ? = 224, 224 / 32 = 7 <-- multiply 21/232 by 7/7 to get equivalent fraction with denom 224 (lcd)
-
-another way of finding the number you need to multiply by is by pulling out the missing number numbers from each prime factorization. going back to the same example above...
-
-```
-      +-- 2*2*2 missing -- 8 was the multiplier for 9/28 (1st fraction)
-      |
-      v
-2 2       7
-2 2 2 2 2 
-          ^
-          |
-          +-- 7 missing -- 7 was the multiplier for the 21/32 (2nd fraction)
-```
-
-
-TODO: if you use lcd to get denoms the same, addition and subtraction won't require a simplification step
-
-# Fraction Number Division
-
-TODO: model out division using fraction tiles... see example in section 4.2 where they divide 1/2 by 1/6.
-
-when dividing wholes, we're figuring out how many groups there are in some number...
-
-for example, 12 / 3 = 4 -- there are 4 groups of 3 in 12
-
-we do the same thing with fractions...
-
-1/3 / 1/6
-
-how many 1/6s are there in 1/3? (we don't say groups of 1/6 because 1/6 is less than a whole, but the idea is the same, we're breaking into equal parts and counting the number of parts)
-
-1/3 can be re-written as 2/6
-
-```
-+---------------+
-|      1/3      |
-+-------+-------+
-|  1/6  |  1/6  |
-+-------+-------+
-```
-
-it's broken up into 2 equal parts
-
-this is exactly the same as what we're doing with whole numbers... 12 / 3 = 4 can be re-written as 12/1 / 3/1 = 4/1
-
-```
-+-------------------------------+
-|              12               |
-+-------+-------+-------+-------+
-|   3   |   3   |   3   |   3   |
-+-------+-------+-------+-------+
-```
-
-it's broken up into 4 equal parts
-
-the algorithm for dividing by a fraction is to change it so that you're multiplying by its reciprocal
-
-```{output}
-arithmetic_code/FractionNumber.py
-python
-#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
-```
-
-```{define-block}
-fracnumdiv
-fracnumdiv_macro/
-arithmetic_code/
-```
-
-```{fracnumdiv}
-1/3 1/4
-```
-
-# Fraction Simplification
-
-TODO: a simplified fraction is a fraction that has no common factors between the numerator and the denominator (other than 1). another word for thsi is simplified form.
-
-if the num and denom do have a common factor (other than 1), the fraction can be _reduced_ / _simplified_ by removing those common factors.
-
-to simplify a fraction, get the common factors for both its numerator and denominator -- divide each by the largets common factor
-
-OR
-
-get the prime factors and cancel out duplicates -- if showing this, draw out all factors on top of each other and then cross out common ones (katex)
-
-OR 
-
-try dividing by every increasing numbers until divisible, then divide and repeat
 
 # Multiple
 
@@ -3865,6 +3539,437 @@ lcm_code/target/appassembler/
 ```{lcmprimefactor}
 12
 18
+```
+
+# Fraction Number
+
+```{prereq}
+Integers
+Integer multiplication
+Integer division
+```
+
+```{svgbob}
++-+-+-+------------------------------+
+| | | |                              |
+| | | |   "Natural (e.g. 1, 7, 291)" |
+| | | |                              |
+| | | +------------------------------+
+| | |                                |
+| | |   "Whole (0)"                  |
+| | |                                |
+| | +--------------------------------+
+| |                                  |
+| |   "Integer (e.g. -7, -19, -471)" |
+| |                                  |
+| +----------------------------------+
+|                                    |
+|   "Rational (e.g. -0.5, 1/3, 1.2)" |
+|                                    |
++------------------------------------+
+```
+
+TODO: Chapter 4
+
+`{bm} Fraction`s are a way of representing numbers as parts. The syntax for a fraction is as follows...
+
+`{kt} \frac{numerator}{denominator}`
+
+... where the...
+ * `{bm}numerator` (top) is an integer that represents the total number of parts.
+ * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
+
+For example, 4 parts out of 5 parts would be represented as `{kt} \frac{4}{5}`...
+
+```{define-block}
+diagramhelperfrac
+diagramhelperfrac_macro/
+diagramhelper_code/target/appassembler/
+```
+
+```{diagramhelperfrac}
+radius 40
+4
+5
+```
+
+In some cases, the numerator may be greater than the denominator. That is, the total number of parts may be larger than the number of parts in a whole. For example, `{kt} \frac{11}{8}`...
+
+```{diagramhelperfrac}
+radius 40
+11
+8
+```
+
+In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a fraction: `{kt} 1 \frac{3}{8}`.
+
+TODO: talk about "equivalent fraction"s: e.g. 1/2 and 2/4 are equivalent
+
+TODO: a mixed number is a whole number with a fraction, for example 2 1/2 is the same as writing 5/2.
+
+TODO: a improper fraction is one where the numerator is greater than or equal to the denominator, for example 5/2.
+
+TODO: a proper fraction is one where teh numerator is less than the denominator, for example 1/2.
+
+TODO: add code to convert between mixed number adn fraction, add code to identify if fraction is proper or improper
+
+TODO: a complex fraction is a fraction in which the numerator or denominator contains a fraction. to simplify, remember that the fraction bar means division.
+
+TODO: converting a fraction to a mixed number is division.
+
+11/6
+
+```
++-----------------+
+|                 |
+|                 v
+|                  
+|   01-------> 1 5/6
++-6)11            
+    0             ^
+    -             |
+    11            |
+     6            |
+    --            |
+     5 -----------+
+```
+
+TODO: show that 1/4 is the same as 2/8, 3/12, ... using fractional lines, and show how to get 1 fraction into the form of another using multiplication / division
+
+in other words, multiplying the numerator and denomator by the same number doesn't change the value of the fraction
+
+```
+1 * 2 = 2
+-----   -
+4 * 2 = 8
+```
+
+```
++-----------+-----------+-----------+-----------+
+|    1/4    |    1/4    |    1/4    |    1/4    |
++-----+-----+-----+-----+-----+-----+-----+-----+
+| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
++-----+-----+-----+-----+-----+-----+-----+-----+
+```
+
+```
++--------------------+--------------------+--------------------+--------------------+
+|        1/4         |        1/4         |        1/4         |        1/4         |
++------+------+------+------+------+------+------+------+------+------+------+------+
+| 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 |
++------+------+------+------+------+------+------+------+------+------+------+------+
+```
+
+TODO: show number line with proper fractions, improper fractions, and mixed numbers 
+
+TODO: talk about negtive fractions, show an example on the number line -- it may be eaiser to do if you first converted it to a mixed number. remember that fractions represent division -- the fraction itself is negative if either the numerator or denominator is negative. typically, the negative sign for a fraction will be before the fraction (instead of on the numerator or the denominator). if both the numerator and denominator are negative, the fraction is positive (dividing 2 negatives results in a positive)
+
+TODO: write code to convert mixed number to fraction and viceversa
+
+TODO: the words quotient and ratio often refer to fractions, but quotient may also refer to division as well -- fractions are a representation of division
+
+## Simplification
+
+```{prereq}
+Integer division
+Prime factorization
+```
+
+TODO: a simplified fraction is a fraction that has no common factors between the numerator and the denominator (other than 1). another word for thsi is simplified form.
+
+if the num and denom do have a common factor (other than 1), the fraction can be _reduced_ / _simplified_ by removing those common factors.
+
+to simplify a fraction, get the common factors for both its numerator and denominator -- divide each by the largets common factor
+
+OR
+
+get the prime factors and cancel out duplicates -- if showing this, draw out all factors on top of each other and then cross out common ones (katex)
+
+OR 
+
+try dividing by every increasing numbers until divisible, then divide and repeat
+
+## Multiplication
+
+```{prereq}
+Integer multiplication
+```
+
+TODO: model out multiplication using fraction tiles... see the example in section 4.2 where they multiply 1/2 by 3/4
+
+```{svgbob}
+                    cut here
+                        |
+                        v
++---------------+---------------+---------------+
+|      1/5      |      1/5      |      1/5      |
++-------+-------+-------+-------+-------+-------+
+| 1/10  | 1/10  | 1/10  | 1/10  | 1/10  | 1/10  |
++-------+-------+-------+-------+-------+-------+
+```
+
+TODO: multiplication of reciprocals leads to 1.
+
+e.g. 1/2 * 2/1 is 2/2. 2/2 is 1.
+
+e.g. -1/2 * -2/1 is 2/2. 2/2 is 1.
+
+just make sure that that denominator doesn't end up being 0 -- e.g. the reciprocal of 0/2 will be undefined.
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
+```
+
+```{define-block}
+fracnummul
+fracnummul_macro/
+arithmetic_code/
+```
+
+```{fracnummul}
+-1/3 -2/6
+```
+
+## Reciprocal
+
+```{prereq}
+Fraction multiplication
+```
+
+TODO: discuss how multiplying the reciprocal is 1
+
+## Least Common Denominator
+
+```{prereq}
+Least common multiple
+Fraction multiplication
+```
+
+TODO: there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+
+e.g. find the lcd for 9/28 and 21/32
+
+* 28
+  * 2
+  * 14
+    * 2
+    * 7
+
+* 32
+  * 16
+    * 4
+      * 2
+      * 2
+    * 4
+      * 2
+      * 2
+  * 2
+
+```
+2 2       7
+2 2 2 2 2 |
+| | | | | |
+v v v v v v
+2 2 2 2 2 7 = 224
+```
+
+lcd is 224
+
+to get both fractions to equivalent fractions that have a denominotr of 224...
+
+28 * ? = 224, 224 / 28 = 8 <-- multiply 9/28 by 8/8 to get equivalent fraction with denom 224 (lcd)
+
+32 * ? = 224, 224 / 32 = 7 <-- multiply 21/232 by 7/7 to get equivalent fraction with denom 224 (lcd)
+
+another way of finding the number you need to multiply by is by pulling out the missing number numbers from each prime factorization. going back to the same example above...
+
+```
+      +-- 2*2*2 missing -- 8 was the multiplier for 9/28 (1st fraction)
+      |
+      v
+2 2       7
+2 2 2 2 2 
+          ^
+          |
+          +-- 7 missing -- 7 was the multiplier for the 21/32 (2nd fraction)
+```
+
+
+TODO: if you use lcd to get denoms the same, addition and subtraction won't require a simplification step
+
+## Division
+
+```{prereq}
+Reciprocal
+Fraction multiplication
+```
+
+TODO: model out division using fraction tiles... see example in section 4.2 where they divide 1/2 by 1/6.
+
+when dividing wholes, we're figuring out how many groups there are in some number...
+
+for example, 12 / 3 = 4 -- there are 4 groups of 3 in 12
+
+we do the same thing with fractions...
+
+1/3 / 1/6
+
+how many 1/6s are there in 1/3? (we don't say groups of 1/6 because 1/6 is less than a whole, but the idea is the same, we're breaking into equal parts and counting the number of parts)
+
+1/3 can be re-written as 2/6
+
+```
++---------------+
+|      1/3      |
++-------+-------+
+|  1/6  |  1/6  |
++-------+-------+
+```
+
+it's broken up into 2 equal parts
+
+this is exactly the same as what we're doing with whole numbers... 12 / 3 = 4 can be re-written as 12/1 / 3/1 = 4/1
+
+```
++-------------------------------+
+|              12               |
++-------+-------+-------+-------+
+|   3   |   3   |   3   |   3   |
++-------+-------+-------+-------+
+```
+
+it's broken up into 4 equal parts
+
+the algorithm for dividing by a fraction is to change it so that you're multiplying by its reciprocal
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
+```
+
+```{define-block}
+fracnumdiv
+fracnumdiv_macro/
+arithmetic_code/
+```
+
+```{fracnumdiv}
+1/3 1/4
+```
+
+## Addition
+
+```{prereq}
+Integer addition
+Least common denominator
+```
+
+TODO: model with circles -- show why denominators must be the same prior to addition
+
+TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
+```    
+
+```{define-block}
+fracnumadd
+fracnumadd_macro/
+arithmetic_code/
+```
+
+```{fracnumadd}
+-1/3 -2/6
+```
+
+## Subtraction
+
+```{prereq}
+Integer subtraction
+Least common denominator
+```
+
+TODO: model with circles -- show why denominators must be the same prior to addition
+
+TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
+```
+
+```{define-block}
+fracnumsub
+fracnumsub_macro/
+arithmetic_code/
+```
+
+```{fracnumsub}
+-1/3 -2/6
+```
+
+# Decimal Number
+
+```{prereq}
+Place value system
+Fraction number
+```
+
+```{svgbob}
++-+-+-+------------------------------+
+| | | |                              |
+| | | |   "Natural (e.g. 1, 7, 291)" |
+| | | |                              |
+| | | +------------------------------+
+| | |                                |
+| | |   "Whole (0)"                  |
+| | |                                |
+| | +--------------------------------+
+| |                                  |
+| |   "Integer (e.g. -7, -19, -471)" |
+| |                                  |
+| +----------------------------------+
+|                                    |
+|   "Rational (e.g. -0.5, 1/3, 1.2)" |
+|                                    |
++------------------------------------+
+```
+
+# Irrational Number
+
+```{prereq}
+ARE THERE ANY PREREQUISTES FOR THIS?
+```
+
+```{svgbob}
++----------------------------------------------------------------------------------+
+|                                                                                  |
+|                                      Real                                        |
+|                                                                                  |
+|   +-+-+-+------------------------------+   +---------------------------------+   |
+|   | | | |                              |   |                                 |   |
+|   | | | |   "Natural (e.g. 1, 7, 291)" |   |                                 |   |
+|   | | | |                              |   |                                 |   |
+|   | | | +------------------------------+   |                                 |   |
+|   | | |                                |   |                                 |   |
+|   | | |   "Whole (0)"                  |   |                                 |   |
+|   | | |                                |   |                                 |   |
+|   | | +--------------------------------+   | "Irrational (e.g. pi, sqrt(2))" |   |
+|   | |                                  |   |                                 |   |
+|   | |   "Integer (e.g. -7, -19, -471)" |   |                                 |   |
+|   | |                                  |   |                                 |   |
+|   | +----------------------------------+   |                                 |   |
+|   |                                    |   |                                 |   |
+|   |   "Rational (e.g. -0.5, 1/3, 1.2)" |   |                                 |   |
+|   |                                    |   |                                 |   |
+|   +------------------------------------+   +---------------------------------+   |
++----------------------------------------------------------------------------------+
 ```
 
 # Algebra
