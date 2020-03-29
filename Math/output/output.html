@@ -3412,64 +3412,81 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 </li>
 </ul>
 <p>The <a href="#BOOKMARK61">common divisibility test</a> algorithm written as code <a href="#BOOKMARK93">is</a> as follows:</p>
-<pre class="hljs"><code><span class="hljs-keyword">int</span> lastDigit = getLastDigit(input);
-
-<span class="hljs-comment">// is divisible by 2?</span>
-<span class="hljs-keyword">boolean</span> divisibleBy2 = <span class="hljs-keyword">false</span>;
-<span class="hljs-keyword">if</span> (lastDigit == <span class="hljs-number">0</span> || lastDigit == <span class="hljs-number">2</span> || lastDigit == <span class="hljs-number">4</span> || lastDigit == <span class="hljs-number">6</span> || lastDigit == <span class="hljs-number">8</span>) {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is divisibly by 2\n"</span>);
-    divisibleBy2 = <span class="hljs-keyword">true</span>;
-} <span class="hljs-keyword">else</span> {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is NOT divisibly by 2\n"</span>);
-}
-
-<span class="hljs-comment">// is divisible by 5?</span>
-<span class="hljs-keyword">if</span> (lastDigit == <span class="hljs-number">0</span> || lastDigit == <span class="hljs-number">5</span>) {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is divisibly by 5\n"</span>);
-} <span class="hljs-keyword">else</span> {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is NOT divisibly by 5\n"</span>);
-}
-
-<span class="hljs-comment">// is divisible by 10?</span>
-<span class="hljs-keyword">if</span> (lastDigit == <span class="hljs-number">0</span>) {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is divisibly by 10\n"</span>);
-} <span class="hljs-keyword">else</span> {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is NOT divisibly by 10\n"</span>);
-}
-
-<span class="hljs-comment">// is divisible by 3?</span>
-<span class="hljs-keyword">int</span> reducedInput = input;
-<span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) {
-    <span class="hljs-keyword">int</span>[] digits = toDigits(reducedInput);
-    <span class="hljs-keyword">if</span> (digits.length == <span class="hljs-number">1</span>) {
-        <span class="hljs-keyword">break</span>;
-    }
-    reducedInput = stream(digits).sum();
-}
-<span class="hljs-keyword">boolean</span> divisibleBy3 = <span class="hljs-keyword">false</span>;
-<span class="hljs-keyword">if</span> (reducedInput == <span class="hljs-number">3</span> || reducedInput == <span class="hljs-number">6</span> || reducedInput == <span class="hljs-number">9</span>) {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is divisibly by 3\n"</span>);
-    divisibleBy3 = <span class="hljs-keyword">true</span>;
-} <span class="hljs-keyword">else</span> {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is NOT divisibly by 3\n"</span>);
-}
-
-<span class="hljs-keyword">if</span> (divisibleBy2 &amp;&amp; divisibleBy3) {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is divisibly by 6\n"</span>);
-} <span class="hljs-keyword">else</span> {
-    writer.append(<span class="hljs-string">" * "</span> + input + <span class="hljs-string">" is NOT divisibly by 6\n"</span>);
-}</code></pre><p>For example, the <a href="#BOOKMARK61">common divisibility test</a>s for 18...</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">common_divisibility_test</span><span class="hljs-params">(num: WholeNumber)</span> -&gt; Set[WholeNumber]:</span>
+    log_indent()
+    <span class="hljs-keyword">try</span>:
+        ret: Set[WholeNumber] = set()
+    
+        last_digit: WholeNumber = WholeNumber(num.digits[<span class="hljs-number">0</span>])  <span class="hljs-comment"># last digit is always at 0 idx</span>
+    
+        log(<span class="hljs-string">f'Testing if <span class="hljs-subst">{num}</span> divisible by 2...'</span>)
+        <span class="hljs-keyword">if</span> last_digit == WholeNumber(<span class="hljs-number">0</span>) \
+                <span class="hljs-keyword">or</span> last_digit == WholeNumber(<span class="hljs-number">2</span>) \
+                <span class="hljs-keyword">or</span> last_digit == WholeNumber(<span class="hljs-number">4</span>) \
+                <span class="hljs-keyword">or</span> last_digit == WholeNumber(<span class="hljs-number">6</span>) \
+                <span class="hljs-keyword">or</span> last_digit == WholeNumber(<span class="hljs-number">8</span>):
+            log(<span class="hljs-string">f'Yes'</span>)
+            ret.add(WholeNumber(<span class="hljs-number">2</span>))
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'No'</span>)
+    
+        log(<span class="hljs-string">f'Testing if <span class="hljs-subst">{num}</span>  divisible by 5...'</span>)
+        <span class="hljs-keyword">if</span> last_digit == WholeNumber(<span class="hljs-number">0</span>) \
+                <span class="hljs-keyword">or</span> last_digit == WholeNumber(<span class="hljs-number">5</span>):
+            log(<span class="hljs-string">f'Yes'</span>);
+            ret.add(WholeNumber(<span class="hljs-number">5</span>))
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'No'</span>);
+    
+        log(<span class="hljs-string">f'Testing if <span class="hljs-subst">{num}</span>  divisible by 10...'</span>)
+        <span class="hljs-keyword">if</span> last_digit == WholeNumber(<span class="hljs-number">0</span>):
+            log(<span class="hljs-string">f'Yes'</span>);
+            ret.add(WholeNumber(<span class="hljs-number">10</span>))
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'No'</span>);
+    
+        log(<span class="hljs-string">f'Testing if <span class="hljs-subst">{num}</span> divisible by 3...'</span>)
+        reduced_num: WholeNumber = num.copy()
+        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+            digits = reduced_num.digits
+            <span class="hljs-keyword">if</span> len(digits) == <span class="hljs-number">1</span>:
+                <span class="hljs-keyword">break</span>
+            reduced_num = sum([WholeNumber(d) <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> digits], WholeNumber(<span class="hljs-number">0</span>))
+    
+        <span class="hljs-keyword">if</span> reduced_num == WholeNumber(<span class="hljs-number">3</span>) \
+                <span class="hljs-keyword">or</span> reduced_num == WholeNumber(<span class="hljs-number">6</span>) \
+                <span class="hljs-keyword">or</span> reduced_num == WholeNumber(<span class="hljs-number">9</span>):
+            log(<span class="hljs-string">f'Yes'</span>)
+            ret.add(WholeNumber(<span class="hljs-number">3</span>))
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'No'</span>)
+    
+        log(<span class="hljs-string">f'Testing if <span class="hljs-subst">{num}</span>  divisible by 6...'</span>)
+        <span class="hljs-keyword">if</span> WholeNumber(<span class="hljs-number">2</span>) <span class="hljs-keyword">in</span> ret <span class="hljs-keyword">and</span> WholeNumber(<span class="hljs-number">3</span>) <span class="hljs-keyword">in</span> ret:
+            log(<span class="hljs-string">f'Yes'</span>)
+            ret.add(WholeNumber(<span class="hljs-number">6</span>))
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'NO'</span>)
+    
+        <span class="hljs-keyword">return</span> ret
+    <span class="hljs-keyword">finally</span>:
+        log_unindent()</code></pre><p>For example, the <a href="#BOOKMARK61">common divisibility test</a>s for 18...</p>
 <div style="border:1px solid black;">
 <p></p>
 <ul>
-<li>18 is divisibly by 2</li>
-<li>18 is NOT divisibly by 5</li>
-<li>18 is NOT divisibly by 10</li>
-<li>18 is divisibly by 3</li>
-<li>18 is divisibly by 6
-</li>
+<li>Testing if 18 divisible by 2...</li>
+<li>Yes</li>
+<li>Testing if 18  divisible by 5...</li>
+<li>No</li>
+<li>Testing if 18  divisible by 10...</li>
+<li>No</li>
+<li>Testing if 18 divisible by 3...</li>
+<li>Yes</li>
+<li>Testing if 18  divisible by 6...</li>
+<li>Yes</li>
 </ul>
 </div>
+<p></p>
 <a name="HEADREF21"></a><h1>Factor</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK93">IS</a>ITES↩</strong></p>

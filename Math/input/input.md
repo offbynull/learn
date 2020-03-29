@@ -3088,9 +3088,9 @@ Divisible and multiple refer to the same idea. Saying that 275 is a multiple of 
 The common divisibility test algorithm written as code is as follows:
 
 ```{output}
-commdivtest_code/src/main/java/com/offbynull/cdt/CommonDivisibilityTest.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/CommonDivisibilityTest.py
+python
+#MARKDOWN_CDT\s*\n([\s\S]+)\n\s*#MARKDOWN_CDT
 ```
 
 For example, the common divisibility tests for 18...
@@ -3098,7 +3098,7 @@ For example, the common divisibility tests for 18...
 ```{define-block}
 commdivtest
 commdivtest_macro/
-commdivtest_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{commdivtest}
