@@ -17020,6 +17020,12 @@ v
 
 4.5.435) list out the prime factors in each denom -- the missing elements is what you need to multiply each denom by to get them both to equal the lcd 
 
+## Chapter 4 Section 5
+
+__TRY IT__
+
+4.161)
+
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
