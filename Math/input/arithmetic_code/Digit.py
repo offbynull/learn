@@ -36,6 +36,9 @@ class Digit:
     def __str__(self: Digit):
         return str(self.value)
 
+    def __hash__(self: Digit):
+        return hash(self.value)
+
 
 if __name__ == '__main__':
     Digit(10)  # should fail

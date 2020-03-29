@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Union
+from typing import Union, Optional
 
 from Output import *
 from Digit import Digit
@@ -56,6 +56,9 @@ class WholeNumber:
 
     def __repr__(self: WholeNumber):
         return self.__str__()
+
+    def __hash__(self):
+        return hash(tuple(self.digits))
 
     def _as_int(self: WholeNumber) -> int:
         return int(str(self))
@@ -560,6 +563,14 @@ class WholeNumber:
         wn_range.min -= adjustment
         wn_range.max -= adjustment
 
+    @staticmethod
+    def range(start: WholeNumber, end: WholeNumber, end_inclusive: bool = False) -> WholeNumber:
+        i = start.copy()
+        while i < end:
+            yield i
+            i += WholeNumber(1)
+        if end_inclusive:
+            yield i
 
 class WholeNumberRange:
     def __init__(self, min: WholeNumber, max: WholeNumber):
