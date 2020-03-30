@@ -3142,37 +3142,37 @@ See https://math.stackexchange.com/a/404789
 The factors for any number will always be between 1 and that number (inclusive). A naive algorithm for finding the factors of any number would be to have a nested loop exhaustively check integers to see which are factors...
 
 ```{output}
-factor_code/src/main/java/com/offbynull/factor/FactorNaive.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/Factor.py
+python
+#MARKDOWN_NAIVE\s*\n([\s\S]+)\n\s*#MARKDOWN_NAIVE
 ```
 
 ```{define-block}
 factornaive
 factornaive_macro/
-factor_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{factornaive}
-32
+4
 ```
 
 We can take advantage of the fact that division is the inverse of multiplication to optimize the algorithm above. The code below loops over each possible factor once, using it to calculate what the other factor would be and then checking it to make sure it's valid...
 
 ```{output}
-factor_code/src/main/java/com/offbynull/factor/FactorFast.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/Factor.py
+python
+#MARKDOWN_FAST\s*\n([\s\S]+)\n\s*#MARKDOWN_FAST
 ```
 
 ```{define-block}
 factorfast
 factorfast_macro/
-factor_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{factorfast}
-32
+16
 ```
 
 The optimized algorithm above can be even further optimized by making it skip over calculations that give back repeat factors. As `factor1` increases, `factor2` decreases. Once `factor1 => factor2`, each is basically walking into domains the other was just in (they're each going to walk over integers the other already walked over). There's no point in continuing any further because the factors calculated past that point will just be duplicates of those prior. For example, when calculating the factors of 32...
@@ -3191,19 +3191,19 @@ Any factors calculated past `factor1 => factor2` will be duplicates of factors t
 * 8\*4 = 4\*8 = 32 -- 8 and 4 are factors.
 
 ```{output}
-factor_code/src/main/java/com/offbynull/factor/FactorFastest.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/Factor.py
+python
+#MARKDOWN_FASTEST\s*\n([\s\S]+)\n\s*#MARKDOWN_FASTEST
 ```
 
 ```{define-block}
 factorfastest
 factorfastest_macro/
-factor_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{factorfastest}
-32
+16
 ```
 
 There are 2 special cases when dealing with factors...
@@ -3241,15 +3241,15 @@ The number 1 is neither a prime number nor a composite number. 1's only factor i
 The algorithm to identify primes vs composites is as follows...
 
 ```{output}
-factor_code/src/main/java/com/offbynull/factor/PrimeTest.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/Factor.py
+python
+#MARKDOWN_PRIMETEST\s*\n([\s\S]+)\n\s*#MARKDOWN_PRIMETEST
 ```
 
 ```{define-block}
 primetest
 primetest_macro/
-factor_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{primetest}

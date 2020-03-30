@@ -1,57 +1,103 @@
 from __future__ import annotations
 from typing import Set, Tuple, List, Optional
 
+from Output import log_indent, log_unindent, log, log_decorator
 from WholeNumber import WholeNumber
 
-
+#MARKDOWN_NAIVE
+@log_decorator
 def factor_naive(num: WholeNumber) -> Set[WholeNumber]:
-    ret: Set[WholeNumber] = set()
+    log(f'Factoring {num}...')
+    log_indent()
+
+    factors: Set[WholeNumber] = set()
     for factor1 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
         for factor2 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
+            log(f'Testing if {factor1} and {factor2} are factors...')
             if factor1 * factor2 == num:
-                ret.add(factor1)
-                ret.add(factor2)
-                print(f'{factor1} {factor2}')
-    return ret
+                factors.add(factor1)
+                factors.add(factor2)
+                log(f'Yes')
+            else:
+                log(f'No')
+
+    log_unindent()
+    log(f'{factors}')
+
+    return factors
+#MARKDOWN_NAIVE
 
 
+#MARKDOWN_FAST
+@log_decorator
 def factor_fast(num: WholeNumber) -> Set[WholeNumber]:
-    ret: Set[WholeNumber] = set()
+    log(f'Factoring {num}...')
+    log_indent()
+
+    factors: Set[WholeNumber] = set()
     for factor1 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
+        log(f'Test if {factor1} is a factor...')
         factor2, remainder = num / factor1
         if remainder == WholeNumber(0):
-            ret.add(factor1)
-            ret.add(factor2)
-            print(f'{factor1} {factor2}')
-    return ret
+            factors.add(factor1)
+            factors.add(factor2)
+            log(f'Yes: ({factor1} and {factor2} are factors)')
+        else:
+            log(f'No')
+
+    log_unindent()
+    log(f'{factors}')
+
+    return factors
+#MARKDOWN_FAST
 
 
+#MARKDOWN_FASTEST
+@log_decorator
 def factor_fastest(num: WholeNumber) -> Set[WholeNumber]:
-    ret: Set[WholeNumber] = set()
+    log(f'Factoring {num}...')
+    log_indent()
+
+    factors: Set[WholeNumber] = set()
     for factor1 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
+        log(f'Test if {factor1} is a factor...')
         factor2, remainder = num / factor1
         if remainder == WholeNumber(0):
-            ret.add(factor1)
-            ret.add(factor2)
-            print(f'{factor1} {factor2}')
+            factors.add(factor1)
+            factors.add(factor2)
+            log(f'Yes: ({factor1} and {factor2} are factors)')
+        else:
+            log(f'No')
+
         if factor2 <= factor1:
             break
-    return ret
+
+    log_unindent()
+    log(f'{factors}')
+
+    return factors
+#MARKDOWN_FASTEST
 
 
+#MARKDOWN_PRIMETEST
+@log_decorator
 def is_prime(num: WholeNumber) -> bool:
+    log(f'Test if {num} is prime...')
+    log_indent()
+
     num_factors = factor_fastest(num)
-    print(f'{num}\'s factors are {num_factors}')
 
     # At a minimum, all counting numbers have the factors 1 and the number itself (2 factors). If
     # there are more factore than that, it's a composite. Otherwise, it's a primse.
 
+    log_unindent()
     if len(num_factors) == 2:
-        print(f'{num} is a prime');
+        log(f'{num}\'s factors are {num_factors} -- it is a prime');
         return True
     else:
-        print(f'{num} is a composite');
+        log(f'{num}\'s factors are {num_factors} -- it is a composite');
         return False
+#MARKDOWN_PRIMETEST
 
 
 def factor_tree(num: WholeNumber) -> FactorTreeNode:

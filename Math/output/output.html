@@ -3519,43 +3519,158 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <p>See https://math.stackexchange.com/a/404789</p>
 </div>
 <p>The <a href="#BOOKMARK62">factor</a>s for any number will always be between 1 and that number (inclusive). A naive algorithm for finding the <a href="#BOOKMARK62">factor</a>s of any number would be to have a nested loop exhaustively check <a href="#BOOKMARK48">integer</a>s to see which are <a href="#BOOKMARK62">factor</a>s...</p>
-<pre class="hljs"><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor1 = <span class="hljs-number">1</span>; factor1 &lt;= testNum; factor1++) {
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor2 = <span class="hljs-number">1</span>; factor2 &lt;= testNum; factor2++) {
-        <span class="hljs-keyword">if</span> (factor1 * factor2 == testNum) {
-            writer.append(<span class="hljs-string">" * "</span> + factor1 + <span class="hljs-string">" and "</span> + factor2 + <span class="hljs-string">" are factors of "</span> + testNum + <span class="hljs-string">"\n"</span>);
-        }                 
-    }
-}</code></pre><div style="border:1px solid black;">
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factor_naive</span><span class="hljs-params">(num: WholeNumber)</span> -&gt; Set[WholeNumber]:</span>
+    log(<span class="hljs-string">f'Factoring <span class="hljs-subst">{num}</span>...'</span>)
+    log_indent()
+
+    factors: Set[WholeNumber] = set()
+    <span class="hljs-keyword">for</span> factor1 <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-number">1</span>), num, end_inclusive=<span class="hljs-literal">True</span>):
+        <span class="hljs-keyword">for</span> factor2 <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-number">1</span>), num, end_inclusive=<span class="hljs-literal">True</span>):
+            log(<span class="hljs-string">f'Testing if <span class="hljs-subst">{factor1}</span> and <span class="hljs-subst">{factor2}</span> are factors...'</span>)
+            <span class="hljs-keyword">if</span> factor1 * factor2 == num:
+                factors.add(factor1)
+                factors.add(factor2)
+                log(<span class="hljs-string">f'Yes'</span>)
+            <span class="hljs-keyword">else</span>:
+                log(<span class="hljs-string">f'No'</span>)
+
+    log_unindent()
+    log(<span class="hljs-string">f'<span class="hljs-subst">{factors}</span>'</span>)
+
+    <span class="hljs-keyword">return</span> factors</code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
-<li>1 and 32 are factors of 32</li>
-<li>2 and 16 are factors of 32</li>
-<li>4 and 8 are factors of 32</li>
-<li>8 and 4 are factors of 32</li>
-<li>16 and 2 are factors of 32</li>
-<li>32 and 1 are factors of 32
+<li>Factoring 4...
+<ul>
+<li>Testing if 1 and 1 are factors...</li>
+<li>No</li>
+<li>Testing if 1 and 2 are factors...</li>
+<li>No</li>
+<li>Testing if 1 and 3 are factors...</li>
+<li>No</li>
+<li>Testing if 1 and 4 are factors...</li>
+<li>Yes</li>
+<li>Testing if 2 and 1 are factors...</li>
+<li>No</li>
+<li>Testing if 2 and 2 are factors...</li>
+<li>Yes</li>
+<li>Testing if 2 and 3 are factors...</li>
+<li>No</li>
+<li>Testing if 2 and 4 are factors...</li>
+<li>No</li>
+<li>Testing if 3 and 1 are factors...</li>
+<li>No</li>
+<li>Testing if 3 and 2 are factors...</li>
+<li>No</li>
+<li>Testing if 3 and 3 are factors...</li>
+<li>No</li>
+<li>Testing if 3 and 4 are factors...</li>
+<li>No</li>
+<li>Testing if 4 and 1 are factors...</li>
+<li>Yes</li>
+<li>Testing if 4 and 2 are factors...</li>
+<li>No</li>
+<li>Testing if 4 and 3 are factors...</li>
+<li>No</li>
+<li>Testing if 4 and 4 are factors...</li>
+<li>No</li>
+</ul>
 </li>
+<li>{2, 1, 4}</li>
 </ul>
 </div>
+<p></p>
 <p>We can take advantage of the fact that <a href="#BOOKMARK26">division</a> <a href="#BOOKMARK93">is</a> the inverse of <a href="#BOOKMARK16">multiplication</a> to optimize the algorithm above. The code below loops over each possible <a href="#BOOKMARK62">factor</a> once, using it to calculate what the other <a href="#BOOKMARK62">factor</a> would be and then checking it to make sure it's valid...</p>
-<pre class="hljs"><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor1 = <span class="hljs-number">1</span>; factor1 &lt;= testNum; factor1++) {
-    <span class="hljs-keyword">int</span> factor2 = testNum / factor1;
-    <span class="hljs-keyword">boolean</span> divHadRemainder = testNum % factor1 &gt; <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">if</span> (!divHadRemainder) {
-        writer.append(<span class="hljs-string">" * "</span> + factor1 + <span class="hljs-string">" and "</span> + factor2 + <span class="hljs-string">" are factors of "</span> + testNum + <span class="hljs-string">"\n"</span>);
-    }
-}</code></pre><div style="border:1px solid black;">
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factor_fast</span><span class="hljs-params">(num: WholeNumber)</span> -&gt; Set[WholeNumber]:</span>
+    log(<span class="hljs-string">f'Factoring <span class="hljs-subst">{num}</span>...'</span>)
+    log_indent()
+
+    factors: Set[WholeNumber] = set()
+    <span class="hljs-keyword">for</span> factor1 <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-number">1</span>), num, end_inclusive=<span class="hljs-literal">True</span>):
+        log(<span class="hljs-string">f'Test if <span class="hljs-subst">{factor1}</span> is a factor...'</span>)
+        factor2, remainder = num / factor1
+        <span class="hljs-keyword">if</span> remainder == WholeNumber(<span class="hljs-number">0</span>):
+            factors.add(factor1)
+            factors.add(factor2)
+            log(<span class="hljs-string">f'Yes: (<span class="hljs-subst">{factor1}</span> and <span class="hljs-subst">{factor2}</span> are factors)'</span>)
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'No'</span>)
+
+    log_unindent()
+    log(<span class="hljs-string">f'<span class="hljs-subst">{factors}</span>'</span>)
+
+    <span class="hljs-keyword">return</span> factors
+<span class="hljs-comment">#MARKDOWN_FAST</span>
+
+
+<span class="hljs-comment">#MARKDOWN_FASTEST</span>
+<span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factor_fastest</span><span class="hljs-params">(num: WholeNumber)</span> -&gt; Set[WholeNumber]:</span>
+    log(<span class="hljs-string">f'Factoring <span class="hljs-subst">{num}</span>...'</span>)
+    log_indent()
+
+    factors: Set[WholeNumber] = set()
+    <span class="hljs-keyword">for</span> factor1 <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-number">1</span>), num, end_inclusive=<span class="hljs-literal">True</span>):
+        log(<span class="hljs-string">f'Test if <span class="hljs-subst">{factor1}</span> is a factor...'</span>)
+        factor2, remainder = num / factor1
+        <span class="hljs-keyword">if</span> remainder == WholeNumber(<span class="hljs-number">0</span>):
+            factors.add(factor1)
+            factors.add(factor2)
+            log(<span class="hljs-string">f'Yes: (<span class="hljs-subst">{factor1}</span> and <span class="hljs-subst">{factor2}</span> are factors)'</span>)
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'No'</span>)
+
+        <span class="hljs-keyword">if</span> factor2 &lt;= factor1:
+            <span class="hljs-keyword">break</span>
+
+    log_unindent()
+    log(<span class="hljs-string">f'<span class="hljs-subst">{factors}</span>'</span>)
+
+    <span class="hljs-keyword">return</span> factors</code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
-<li>1 and 32 are factors of 32</li>
-<li>2 and 16 are factors of 32</li>
-<li>4 and 8 are factors of 32</li>
-<li>8 and 4 are factors of 32</li>
-<li>16 and 2 are factors of 32</li>
-<li>32 and 1 are factors of 32
+<li>Factoring 16...
+<ul>
+<li>Test if 1 is a factor...</li>
+<li>Yes: (1 and 16 are factors)</li>
+<li>Test if 2 is a factor...</li>
+<li>Yes: (2 and 8 are factors)</li>
+<li>Test if 3 is a factor...</li>
+<li>No</li>
+<li>Test if 4 is a factor...</li>
+<li>Yes: (4 and 4 are factors)</li>
+<li>Test if 5 is a factor...</li>
+<li>No</li>
+<li>Test if 6 is a factor...</li>
+<li>No</li>
+<li>Test if 7 is a factor...</li>
+<li>No</li>
+<li>Test if 8 is a factor...</li>
+<li>Yes: (8 and 2 are factors)</li>
+<li>Test if 9 is a factor...</li>
+<li>No</li>
+<li>Test if 10 is a factor...</li>
+<li>No</li>
+<li>Test if 11 is a factor...</li>
+<li>No</li>
+<li>Test if 12 is a factor...</li>
+<li>No</li>
+<li>Test if 13 is a factor...</li>
+<li>No</li>
+<li>Test if 14 is a factor...</li>
+<li>No</li>
+<li>Test if 15 is a factor...</li>
+<li>No</li>
+<li>Test if 16 is a factor...</li>
+<li>Yes: (16 and 1 are factors)</li>
+</ul>
 </li>
+<li>{1, 2, 16, 8, 4}</li>
 </ul>
 </div>
+<p></p>
 <p>The optimized algorithm above can be even further optimized by making it skip over calculations that give back repeat <a href="#BOOKMARK62">factor</a>s. As <code>factor1</code> <a href="#BOOKMARK6">increase</a>s, <code>factor2</code> decreases. Once <code>factor1 =&gt; factor2</code>, each <a href="#BOOKMARK93">is</a> basically walking into domains the other <a href="#BOOKMARK95">was</a> just in (they're each going to walk over <a href="#BOOKMARK48">integer</a>s the other already walked over). There's no point in continuing any further because the <a href="#BOOKMARK62">factor</a>s calculated past that point will just be duplicates of those prior. For example, when calculating the <a href="#BOOKMARK62">factor</a>s of 32...</p>
 <ul>
 <li>32/1=32 -- 1 and 32 are <a href="#BOOKMARK62">factor</a>s</li>
@@ -3571,24 +3686,47 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <li>16*2 = 2*16 = 32 -- 16 and 2 are <a href="#BOOKMARK62">factor</a>s.</li>
 <li>8*4 = 4*8 = 32 -- 8 and 4 are <a href="#BOOKMARK62">factor</a>s.</li>
 </ul>
-<pre class="hljs"><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> factor1 = <span class="hljs-number">1</span>; factor1 &lt;= testNum; factor1++) {
-    <span class="hljs-keyword">int</span> factor2 = testNum / factor1;
-    <span class="hljs-keyword">boolean</span> divHadRemainder = testNum % factor1 &gt; <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">if</span> (!divHadRemainder) {
-        writer.append(<span class="hljs-string">" * "</span> + factor1 + <span class="hljs-string">" and "</span> + factor2 + <span class="hljs-string">" are factors of "</span> + testNum + <span class="hljs-string">"\n"</span>);
-    }
-    <span class="hljs-keyword">if</span> (factor2 &lt;= factor1) {
-        <span class="hljs-keyword">break</span>;
-    }
-}</code></pre><div style="border:1px solid black;">
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factor_fastest</span><span class="hljs-params">(num: WholeNumber)</span> -&gt; Set[WholeNumber]:</span>
+    log(<span class="hljs-string">f'Factoring <span class="hljs-subst">{num}</span>...'</span>)
+    log_indent()
+
+    factors: Set[WholeNumber] = set()
+    <span class="hljs-keyword">for</span> factor1 <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-number">1</span>), num, end_inclusive=<span class="hljs-literal">True</span>):
+        log(<span class="hljs-string">f'Test if <span class="hljs-subst">{factor1}</span> is a factor...'</span>)
+        factor2, remainder = num / factor1
+        <span class="hljs-keyword">if</span> remainder == WholeNumber(<span class="hljs-number">0</span>):
+            factors.add(factor1)
+            factors.add(factor2)
+            log(<span class="hljs-string">f'Yes: (<span class="hljs-subst">{factor1}</span> and <span class="hljs-subst">{factor2}</span> are factors)'</span>)
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'No'</span>)
+
+        <span class="hljs-keyword">if</span> factor2 &lt;= factor1:
+            <span class="hljs-keyword">break</span>
+
+    log_unindent()
+    log(<span class="hljs-string">f'<span class="hljs-subst">{factors}</span>'</span>)
+
+    <span class="hljs-keyword">return</span> factors</code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
-<li>1 and 32 are factors of 32</li>
-<li>2 and 16 are factors of 32</li>
-<li>4 and 8 are factors of 32
+<li>Factoring 16...
+<ul>
+<li>Test if 1 is a factor...</li>
+<li>Yes: (1 and 16 are factors)</li>
+<li>Test if 2 is a factor...</li>
+<li>Yes: (2 and 8 are factors)</li>
+<li>Test if 3 is a factor...</li>
+<li>No</li>
+<li>Test if 4 is a factor...</li>
+<li>Yes: (4 and 4 are factors)</li>
+</ul>
 </li>
+<li>{1, 2, 16, 8, 4}</li>
 </ul>
 </div>
+<p></p>
 <p>There are 2 special cases when dealing with <a href="#BOOKMARK62">factor</a>s...</p>
 <p>The first <a href="#BOOKMARK93">is</a> that all numbers are a <a href="#BOOKMARK62">factor</a> of 0 (e.g. 0*5=0, 0*9999=0).</p>
 <p>The second <a href="#BOOKMARK93">is</a> that if the number were a <a href="#BOOKMARK50">negative</a> <a href="#BOOKMARK48">integer</a>, the <a href="#BOOKMARK62">factor</a>s would include <a href="#BOOKMARK50">negative</a> numbers as well. For example, the <a href="#BOOKMARK62">factor</a>s of -8 are...</p>
@@ -3619,22 +3757,30 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <p>The number 1 <a href="#BOOKMARK93">is</a> neither a <a href="#BOOKMARK63">prime</a> number nor a <a href="#BOOKMARK64">composite</a> number. 1's only <a href="#BOOKMARK62">factor</a> <a href="#BOOKMARK93">is</a> itself: 1*1=1. <a href="#BOOKMARK63">Prime</a> numbers need 2 <a href="#BOOKMARK62">factor</a>s and <a href="#BOOKMARK64">composite</a> numbers need <a href="#BOOKMARK7">more than</a> 2 <a href="#BOOKMARK62">factor</a>s.</p>
 </div>
 <p>The algorithm to identify <a href="#BOOKMARK63">prime</a>s vs <a href="#BOOKMARK64">composite</a>s <a href="#BOOKMARK93">is</a> as follows...</p>
-<pre class="hljs"><code>Set&lt;Integer&gt; factors = getFactors(input);
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_prime</span><span class="hljs-params">(num: WholeNumber)</span> -&gt; bool:</span>
+    log(<span class="hljs-string">f'Test if <span class="hljs-subst">{num}</span> is prime...'</span>)
+    log_indent()
 
-writer.append(input + <span class="hljs-string">"'s factors are "</span> + factors + <span class="hljs-string">"\n\n"</span>);
+    num_factors = factor_fastest(num)
 
-<span class="hljs-comment">// At a minimum, all counting numbers have the factors 1 and the number itself (2 factors). If</span>
-<span class="hljs-comment">// there are more factore than that, it's a composite. Otherwise, it's a primse.</span>
-<span class="hljs-keyword">if</span> (factors.size() == <span class="hljs-number">2</span>) {
-    writer.append(input + <span class="hljs-string">" is a prime\n"</span>);
-} <span class="hljs-keyword">else</span> {
-    writer.append(input + <span class="hljs-string">" is a composite\n"</span>);
-}</code></pre><div style="border:1px solid black;">
+    <span class="hljs-comment"># At a minimum, all counting numbers have the factors 1 and the number itself (2 factors). If</span>
+    <span class="hljs-comment"># there are more factore than that, it's a composite. Otherwise, it's a primse.</span>
+
+    log_unindent()
+    <span class="hljs-keyword">if</span> len(num_factors) == <span class="hljs-number">2</span>:
+        log(<span class="hljs-string">f'<span class="hljs-subst">{num}</span>\'s factors are <span class="hljs-subst">{num_factors}</span> -- it is a prime'</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">else</span>:
+        log(<span class="hljs-string">f'<span class="hljs-subst">{num}</span>\'s factors are <span class="hljs-subst">{num_factors}</span> -- it is a composite'</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></code></pre><div style="border:1px solid black;">
 <p></p>
-<p>137's factors are [1, 137]</p>
-<p>137 is a prime
-</p>
+<ul>
+<li>Test if 137 is prime...</li>
+<li>137's factors are {137, 1} -- it is a prime</li>
+</ul>
 </div>
+<p></p>
 <p>Every <a href="#BOOKMARK64">composite</a> number can be written as a <a href="#BOOKMARK23">product of</a> <a href="#BOOKMARK63">prime</a> numbers. For example...</p>
 <ul>
 <li>12 = 3*2*2</li>
