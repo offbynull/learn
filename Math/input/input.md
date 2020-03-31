@@ -3253,7 +3253,7 @@ arithmetic_code/
 ```
 
 ```{primetest}
-137
+13
 ```
 
 Every composite number can be written as a product of prime numbers. For example...
@@ -3262,195 +3262,186 @@ Every composite number can be written as a product of prime numbers. For example
 * 16 = 2\*2\*2\*2
 * 21 = 3\*3\*3
 
-The process of breaking down a composite number into a factor of primes is called `{bm} prime factorization/(prime factorization|prime factor|factor prime|factorize prime|factors of prime|factors of a prime)/i`. There are 2 algorithms that humans use to factorize primes:
+The process of breaking down a composite number into a factor of primes is called `{bm} prime factorization/(prime factorization|prime factor|factor prime|factorize prime|factors of prime|factors of a prime)/i`. There are 2 algorithms that humans use to factorize primes: factor tree method and ladder method. Each method is described below.
 
-* factor tree method
-* ladder method
+ * Factor Tree
 
-The subsections below detail each algorithm.
+   The `{bm} factor tree/(factor tree method|factor tree)/i` method is an algorithm used by humans for prime factorization. The    algorithm involves taking the input and recursively breaking it down into one of its factor pairs until all factors are prime.
+   
+   For example, to break down the number 54, choose one of its factor pairs...
+   
+   ```{svgbob}
+   +----54----+
+   |          |
+   6          9
+   ```
+   
+   Then, for each factor, break it down even further by choosing one of its factor pairs...
+   
+   ```{svgbob}
+        +--------54--------+
+        |                  |
+   +----6----+        +----9----+
+   |         |        |         |
+   3         2        3         3
+   ```
+   
+   All factors are now prime -- 54 = 3\*2\*3\*3.
+   
+   ```{note}
+   Prime factors are typically written out from smallest to largest, so writing out the prime factors of the example above would be    54 = 2\*3\*3\*3.
+   
+   If you know exponents, the example above can be further condensed as `{kt} 54 = 2 \cdot 3^3`.
+   ```
+   
+   When choosing a factor pair, the pair can't include 1 or the number being factored itself. For example, if choosing a factor pair    for 12..
+    
+   * ~~1*12=12~~ <-- can't choose this one
+   * 2*6=12
+   * 3*4=12
+   * 4*3=12
+   * 6*2=12
+   * ~~12*1=12~~ <-- can't choose this one
+   
+   The reason why ...
+    * 1 can't be used is because 1 is neither a prime nor can it be factorized to primes.
+    * 12 (the number being factored itself) can't be used is because it effectively does nothing -- it finishes at the same place it    started at.
+    
+   For example, trying to build a factor tree for 12 using one of the bad factor pairs...
+   
+   ```{svgbob}
+        +--------12--------+
+        |                  |
+        1             +----12----+
+      (bad)           |          |
+                      1       +--12--+
+                    (bad)     |      |
+                              1      ...
+                            (bad)
+   ```
+   
+   Note that the prime factors for a number will always be the same regardless of which factor pairs are chosen (as long as its a    valid factor pair). For example, in the initial example above, if 54 were factored to (2, 27) instead of (9, 6) ...
+   
+   ```{svgbob}
+        +--------54--------+
+        |                  |
+        2             +----27---+
+                      |         |
+                      3     +---9---+
+                            |       |
+                            3       3
+   ```
+   
+   The prime factors would still be 54 = 2\*3\*3\*3. 
+   
+   The way to perform this algorithm as code is as follows...
+   
+   ```{output}
+   arithmetic_code/Factor.py
+   python
+   #MARKDOWN_FACTORTREE\s*\n([\s\S]+)\n\s*#MARKDOWN_FACTORTREE
+   ```
+   
+   ```{define-block}
+   factortree
+   factortree_macro/
+   arithmetic_code/
+   ```
+   
+   ```{factortree}
+   24
+   ```
 
-## Factor Tree
+ * Ladder
 
-The `{bm} factor tree/(factor tree method|factor tree)/i` method is an algorithm used by humans for prime factorization. The algorithm involves taking the input and recursively breaking it down into one of its factor pairs until all factors are prime.
-
-For example, to break down the number 54, choose one of its factor pairs...
-
-```{svgbob}
-+----54----+
-|          |
-6          9
-```
-
-Then, for each factor, break it down even further by choosing one of its factor pairs...
-
-```{svgbob}
-     +--------54--------+
-     |                  |
-+----6----+        +----9----+
-|         |        |         |
-3         2        3         3
-```
-
-All factors are now prime -- 54 = 3\*2\*3\*3.
-
-```{note}
-Prime factors are typically written out from smallest to largest, so writing out the prime factors of the example above would be 54 = 2\*3\*3\*3.
-
-If you know exponents, the example above can be further condensed as `{kt} 54 = 2 \cdot 3^3`.
-```
-
-When choosing a factor pair, the pair can't include 1 or the number being factored itself. For example, if choosing a factor pair for 12..
- 
-* ~~1*12=12~~ <-- can't choose this one
-* 2*6=12
-* 3*4=12
-* 4*3=12
-* 6*2=12
-* ~~12*1=12~~ <-- can't choose this one
-
-The reason why ...
- * 1 can't be used is because 1 is neither a prime nor can it be factorized to primes.
- * 12 (the number being factored itself) can't be used is because it effectively does nothing -- it finishes at the same place it started at.
- 
-For example, trying to build a factor tree for 12 using one of the bad factor pairs...
-
-```{svgbob}
-     +--------12--------+
-     |                  |
-     1             +----12----+
-   (bad)           |          |
-                   1       +--12--+
-                 (bad)     |      |
-                           1      ...
-                         (bad)
-```
-
-Note that the prime factors for a number will always be the same regardless of which factor pairs are chosen (as long as its a valid factor pair). For example, in the initial example above, if 54 were factored to (2, 27) instead of (9, 6) ...
-
-```{svgbob}
-     +--------54--------+
-     |                  |
-     2             +----27---+
-                   |         |
-                   3     +---9---+
-                         |       |
-                         3       3
-```
-
-The prime factors would still be 54 = 2\*3\*3\*3. 
-
-The way to perform this algorithm as code is as follows...
-
-```{output}
-factor_code/src/main/java/com/offbynull/factor/FactorTree.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
-```
-
-```{define-block}
-factortree
-factortree_macro/
-factor_code/target/appassembler/
-```
-
-```{factortree}
-1102
-```
-
-## Ladder
-
-The `{bm} ladder method` is an algorithm used by humans for prime factorization. The algorithm involves:
-1. Iteratively testing the input against primes to see if its divisible (no remainder).
-2. Once a divisible prime is found, repeat the process on the quotient unless the quotient itself is a prime.
-
-```{note}
-The ladder method is sometimes referred to as stacked division.
-```
-
-For example, to break down the number 54, start by iteratively dividing 54 by primes until its divisible (no remainder)...
-
- * 54/2 = 27R0 <-- good
-
-```{svgbob}
-  27
- ---
-2)54
-```
-
-Dividing by 2 results in 27 -- no remainder. Iteratively divide 27 by primes until its divisible (no remainder)...
-
-* 27/2 = 13R1 <-- can't use because it isn't divisible (remainder of 1)
-* 27/3 = 9R0  <-- good
-
-```{svgbob}
-   9
- ---
-3)27
- ---
-2)54
-```
-
-Dividing by 3 results in 9 -- no remainder. Iteratively divide 9 by 
-primes until its divisible (no remainder).
-
-* 9/2 = 4R1   <-- can't use because it isn't divisible (remainder of 1)
-* 9/3 = 3R0   <-- good
-
-```{svgbob}
-   3
-  --
- 3)9
- ---
-3)27
- ---
-2)54
-```
-
-Dividing by 3 results in 3 -- no remainder. The process stops because 3 (the quotient) is a prime.
-
-All factors are now prime -- 54 = 2\*3\*3\*3.
-
-```{note}
-Prime factors are typically written out from smallest to largest, so writing out the prime factors of the example above would be 54 = 2\*3\*3\*3.
-
-If you know exponents, the example above can be further condensed as `{kt} 54 = 2 \cdot 3^3`.
-```
-
-Note that that factor tree method and the ladder method are effectively doing the same thing. The only difference is that the ladder method is forcing you to choose a factor pair with a prime in it -- it's testing testing primes to see if they're viable factor pairs.
-
-The ladder above is represented as the following factor tree...
-
-```{svgbob}
-     +--------54--------+
-     |                  |
-     2             +----27---+
-                   |         |
-                   3     +---9---+
-                         |       |
-                         3       3
-```
-
-The way to perform this algorithm as code is as follows...
-
-```{output}
-factor_code/src/main/java/com/offbynull/factor/Ladder.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
-```
-
-```{define-block}
-ladder
-ladder_macro/
-factor_code/target/appassembler/
-```
-
-```{ladder}
-1102
-```
-
-```{note}
-The indentation in the output is messed up but you get the point.
-```
+   The `{bm} ladder method` is an algorithm used by humans for prime factorization. The algorithm involves:
+   1. Iteratively testing the input against primes to see if its divisible (no remainder).
+   2. Once a divisible prime is found, repeat the process on the quotient unless the quotient itself is a prime.
+   
+   ```{note}
+   The ladder method is sometimes referred to as stacked division.
+   ```
+   
+   For example, to break down the number 54, start by iteratively dividing 54 by primes until its divisible (no remainder)...
+   
+    * 54/2 = 27R0 <-- good
+   
+   ```{svgbob}
+     27
+    ---
+   2)54
+   ```
+   
+   Dividing by 2 results in 27 -- no remainder. Iteratively divide 27 by primes until its divisible (no remainder)...
+   
+   * 27/2 = 13R1 <-- can't use because it isn't divisible (remainder of 1)
+   * 27/3 = 9R0  <-- good
+   
+   ```{svgbob}
+      9
+    ---
+   3)27
+    ---
+   2)54
+   ```
+   
+   Dividing by 3 results in 9 -- no remainder. Iteratively divide 9 by 
+   primes until its divisible (no remainder).
+   
+   * 9/2 = 4R1   <-- can't use because it isn't divisible (remainder of 1)
+   * 9/3 = 3R0   <-- good
+   
+   ```{svgbob}
+      3
+     --
+    3)9
+    ---
+   3)27
+    ---
+   2)54
+   ```
+   
+   Dividing by 3 results in 3 -- no remainder. The process stops because 3 (the quotient) is a prime.
+   
+   All factors are now prime -- 54 = 2\*3\*3\*3.
+   
+   ```{note}
+   Prime factors are typically written out from smallest to largest, so writing out the prime factors of the example above would be    54 = 2\*3\*3\*3.
+   
+   If you know exponents, the example above can be further condensed as `{kt} 54 = 2 \cdot 3^3`.
+   ```
+   
+   Note that that factor tree method and the ladder method are effectively doing the same thing. The only difference is that the    ladder method is forcing you to choose a factor pair with a prime in it -- it's testing testing primes to see if they're viable    factor pairs.
+   
+   The ladder above is represented as the following factor tree...
+   
+   ```{svgbob}
+        +--------54--------+
+        |                  |
+        2             +----27---+
+                      |         |
+                      3     +---9---+
+                            |       |
+                            3       3
+   ```
+   
+   The way to perform this algorithm as code is as follows...
+   
+   ```{output}
+   arithmetic_code/Factor.py
+   python
+   #MARKDOWN_LADDER\s*\n([\s\S]+)\n\s*#MARKDOWN_LADDER
+   ```
+   
+   ```{define-block}
+   factorladder
+   factorladder_macro/
+   arithmetic_code/
+   ```
+   
+   ```{factorladder}
+   81
+   ```
 
 # Least Common Multiple
 

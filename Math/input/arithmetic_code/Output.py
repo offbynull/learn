@@ -37,7 +37,8 @@ def log_whitelist(allowed: List[Tuple[str, str]]):
 def log(data: str):
     global indent_offset, whitelist
 
-    if not (inspect.stack()[1].filename, inspect.stack()[1].function) in whitelist:
+    s = inspect.stack(0)[1]
+    if not (s.filename, s.function) in whitelist:
         return
 
     data = (' ' * indent_offset) + ' * ' + data

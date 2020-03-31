@@ -100,7 +100,11 @@ def is_prime(num: WholeNumber) -> bool:
 #MARKDOWN_PRIMETEST
 
 
+#MARKDOWN_FACTORTREE
+@log_decorator
 def factor_tree(num: WholeNumber) -> FactorTreeNode:
+    log(f'Creating factor tree for {num}...')
+
     factors = factor_fastest(num)
 
     # remove factor pairs that can't used in factor true: (1, num) or (num, 1)
@@ -109,13 +113,16 @@ def factor_tree(num: WholeNumber) -> FactorTreeNode:
     ret = FactorTreeNode()
     if len(factors) == 0:
         ret.value = num
+        log(f'Cannot factor {num} is prime -- resulting tree: {ret}')
     else:
         factor1 = next(iter(factors))
         factor2, _ = num / factor1
         ret.value = num
         ret.left = factor_tree(factor1)
         ret.right = factor_tree(factor2)
+        log(f'Factored {num} to {factor1} and {factor2} -- resulting tree: {ret}')
     return ret
+#MARKDOWN_FACTORTREE
 
 
 class FactorTreeNode:
@@ -141,23 +148,51 @@ class FactorTreeNode:
 
         return output_list
 
+    def __str__(self):
+        ret = str(self.value)
+        if self.left is not None and self.right is not None:
+            ret += '('
+            if self.left is not None:
+                ret += str(self.left)
+            ret += ','
+            if self.right is not None:
+                ret += str(self.right)
+            ret += ')'
+        return ret
 
+
+#MARKDOWN_LADDER
+@log_decorator
 def ladder(num: WholeNumber) -> Set[WholeNumber]:
     prime_factors: List[WholeNumber] = []
 
+    log(f'Testing primes (using ladder method) to see which is factor of {num}...')
+
+    log_indent()
     while not is_prime(num):
         prime_to_test = WholeNumber(2)
+
         while True:
+            log(f'Testing if {prime_to_test} is divisible by {num}...')
             (new_num, remainder) = num / prime_to_test
             if remainder == WholeNumber(0):
                 break
             prime_to_test = calculate_next_prime(prime_to_test)
+
+        log(f'Found! {prime_to_test} is a prime factor -- {new_num} * {prime_to_test} = {num}')
         prime_factors.append(prime_to_test)
         num = new_num
 
+        log(f'Testing primes to see which is factor of {num}...')
+
+    log(f'{num} itself is a prime!')
     prime_factors.append(num)
 
+    log_unindent()
+    log(f'Prime factors: {prime_factors}')
+
     return prime_factors
+#MARKDOWN_LADDER
 
 
 def calculate_next_prime(last_prime: WholeNumber) -> WholeNumber:
@@ -171,14 +206,12 @@ def calculate_next_prime(last_prime: WholeNumber) -> WholeNumber:
 
 
 
-
-
 if __name__ == '__main__':
     # factors = factor_naive(WholeNumber(24))
     # factors = factor_fast(WholeNumber(24))
     # factors = factor_fastest(WholeNumber(24))
     # print(f'{factors}')
     # print(f'{prime_test(WholeNumber(49))}')
-    # tree = factor_tree(WholeNumber(24))
-    # print(f'{tree}')
-    print(f'{ladder(WholeNumber(24))}')
+    tree = factor_tree(WholeNumber(24))
+    print(f'{tree}')
+    # print(f'{ladder(WholeNumber(24))}')

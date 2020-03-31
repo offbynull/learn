@@ -1,5 +1,5 @@
 rm -rf /tmp/proj
 mkdir /tmp/proj
-cp -r /input/factor_code/target/appassembler/* /tmp/proj/
+cp -r /input/arithmetic_code/* /tmp/proj/
 cd /tmp/proj
-sh ./bin/FactorTree
+python FactorTreeLauncher.py < /input/input.data > /output/output.md
