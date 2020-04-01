@@ -1,5 +1,6 @@
 rm -rf /tmp/proj
 mkdir /tmp/proj
-cp -r /input/lcm_code/target/appassembler/* /tmp/proj/
+cp -r /input/arithmetic_code/* /tmp/proj/
 cd /tmp/proj
-sh ./bin/PrimeFactorizeMultiples
+cat /input/input.data
+python LeastCommonMultiplePFLauncher.py < /input/input.data > /output/output.md

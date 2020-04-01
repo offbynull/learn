@@ -3465,20 +3465,19 @@ is 12 because 6\*2 is 12 and 4\*3 is 12.
 The way to perform this algorithm as code is as follows...
 
 ```{output}
-lcm_code/src/main/java/com/offbynull/lcm/ListMultiples.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/LeastCommonMultiple.py
+python
+#MARKDOWN_WALK\s*\n([\s\S]+)\n\s*#MARKDOWN_WALK
 ```
 
 ```{define-block}
 lcmlist
 lcmlist_macro/
-lcm_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{lcmlist}
-12
-18
+12 18
 ```
 
 The second algorithm is called the prime factors method. It involves calculating the prime factors for each number and merging them to get the least common multiple. For example, finding the least common multiple between 4 and 6... 
@@ -3516,20 +3515,19 @@ The second algorithm is called the prime factors method. It involves calculating
 The way to perform this algorithm as code is as follows...
 
 ```{output}
-lcm_code/src/main/java/com/offbynull/lcm/PrimeFactorizeMultiples.java
-java
-//MARKDOWN_ISOLATE\s*\n([\s\S]+)\n\s*//MARKDOWN_ISOLATE
+arithmetic_code/LeastCommonMultiple.py
+python
+#MARKDOWN_PF\s*\n([\s\S]+)\n\s*#MARKDOWN_PF
 ```
 
 ```{define-block}
 lcmprimefactor
 lcmprimefactor_macro/
-lcm_code/target/appassembler/
+arithmetic_code/
 ```
 
 ```{lcmprimefactor}
-12
-18
+12 18
 ```
 
 # Fraction Number

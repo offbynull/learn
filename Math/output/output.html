@@ -4020,36 +4020,56 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 </table>
 <p><a href="#BOOKMARK93">is</a> 12 because 6*2 <a href="#BOOKMARK93">is</a> 12 and 4*3 <a href="#BOOKMARK93">is</a> 12.</p>
 <p>The way to perform th<a href="#BOOKMARK93">is</a> algorithm as code <a href="#BOOKMARK93">is</a> as follows...</p>
-<pre class="hljs"><code><span class="hljs-keyword">int</span> num1Counter = <span class="hljs-number">1</span>;
-<span class="hljs-keyword">int</span> num2Counter = <span class="hljs-number">1</span>;
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lcm_walk</span><span class="hljs-params">(num1: WholeNumber, num2: WholeNumber)</span> -&gt; Tuple[List[WholeNumber], List[WholeNumber]]:</span>
+    num1_multiples: List[WholeNumber] = []
+    num2_multiples: List[WholeNumber] = []
 
-<span class="hljs-keyword">int</span> num1Multiple = num1 * num1Counter;
-num1Multiples.add(num1Multiple);
+    num1_counter = WholeNumber(<span class="hljs-number">1</span>)
+    num2_counter = WholeNumber(<span class="hljs-number">1</span>)
 
-<span class="hljs-keyword">int</span> num2Multiple = num2 * num2Counter;
-num2Multiples.add(num2Multiple);
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        log(<span class="hljs-string">f'Calculating <span class="hljs-subst">{num1_counter}</span> multiple of <span class="hljs-subst">{num1}</span>...'</span>)
+        num1_multiple = num1 * num1_counter
+        num1_multiples.append(num1_multiple)
 
-<span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) {
-    <span class="hljs-keyword">if</span> (num1Multiple &lt; num2Multiple) {
-        <span class="hljs-comment">// num1Multiple is less than num2Multiple, increase it</span>
-        num1Counter++;
-        num1Multiple = num1 * num1Counter;
-        num1Multiples.add(num1Multiple);
-    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (num1Multiple &gt; num2Multiple) {
-        <span class="hljs-comment">// num2Multiple is less than num1Multiple, increase it</span>
-        num2Counter++;
-        num2Multiple = num2 * num2Counter;
-        num2Multiples.add(num2Multiple);        
-    } <span class="hljs-keyword">else</span> {
-        <span class="hljs-comment">// multiples match -- we're done.</span>
-        <span class="hljs-keyword">break</span>;
-    }
-}</code></pre><div style="border:1px solid black;">
+        log(<span class="hljs-string">f'Calculating <span class="hljs-subst">{num2_counter}</span> multiple of <span class="hljs-subst">{num2}</span>...'</span>)
+        num2_multiple = num2 * num2_counter
+        num2_multiples.append(num2_multiple)
+
+        log(<span class="hljs-string">f'Testing <span class="hljs-subst">{num1_multiple}</span> vs <span class="hljs-subst">{num2_multiple}</span>'</span>)
+        <span class="hljs-keyword">if</span> num1_multiple == num2_multiple:
+            log(<span class="hljs-string">f'Matches! LCM is <span class="hljs-subst">{num1_multiple}</span>'</span>)
+            <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">elif</span> num1_multiple &lt; num2_multiple:
+            log(<span class="hljs-string">f'Increasing first multiple (multiple for <span class="hljs-subst">{num1}</span>)'</span>)
+            num1_counter += WholeNumber(<span class="hljs-number">1</span>)
+        <span class="hljs-keyword">elif</span> num1_multiple &gt; num2_multiple:
+            log(<span class="hljs-string">f'Increasing second multiple (multiple for <span class="hljs-subst">{num2}</span>)'</span>)
+            num2_counter += WholeNumber(<span class="hljs-number">1</span>)
+
+    <span class="hljs-keyword">return</span> num1_multiple</code></pre><div style="border:1px solid black;">
 <p></p>
-<table><tbody><tr><td>multiples of 12</td><td>12</td><td>24</td><td>36</td></tr><tr><td>multiples of 18</td><td>18</td><td>36</td><td></td></tr></tbody></table>
-<p>least common multiple is 36</p>
-<p></p>
+<ul>
+<li>Calculating 1 multiple of 12...</li>
+<li>Calculating 1 multiple of 18...</li>
+<li>Testing 12 vs 18</li>
+<li>Increasing first multiple (multiple for 12)</li>
+<li>Calculating 2 multiple of 12...</li>
+<li>Calculating 1 multiple of 18...</li>
+<li>Testing 24 vs 18</li>
+<li>Increasing second multiple (multiple for 18)</li>
+<li>Calculating 2 multiple of 12...</li>
+<li>Calculating 2 multiple of 18...</li>
+<li>Testing 24 vs 36</li>
+<li>Increasing first multiple (multiple for 12)</li>
+<li>Calculating 3 multiple of 12...</li>
+<li>Calculating 2 multiple of 18...</li>
+<li>Testing 36 vs 36</li>
+<li>Matches! LCM is 36</li>
+</ul>
 </div>
+<p></p>
 <p>The second algorithm <a href="#BOOKMARK93">is</a> called the <a href="#BOOKMARK65">prime factor</a>s method. It involves calculating the <a href="#BOOKMARK65">prime factor</a>s for each number and merging them to get the <a href="#BOOKMARK68">least common multiple</a>. For example, finding the <a href="#BOOKMARK68">least common multiple</a> between 4 and 6...</p>
 <ul>
 <li>
@@ -4074,36 +4094,48 @@ num2Multiples.add(num2Multiple);
 </li>
 </ul>
 <p>The way to perform th<a href="#BOOKMARK93">is</a> algorithm as code <a href="#BOOKMARK93">is</a> as follows...</p>
-<pre class="hljs"><code>SortedMultiset&lt;Integer&gt; num1Primes = calculatePrimeFactors(num1);
-SortedMultiset&lt;Integer&gt; num2Primes = calculatePrimeFactors(num2);
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lcm_prime_factorize</span><span class="hljs-params">(num1: WholeNumber, num2: WholeNumber)</span> -&gt; WholeNumber:</span>
+    log(<span class="hljs-string">f'Calculating prime factors for <span class="hljs-subst">{num1}</span>...'</span>)
+    num1_primes = sorted(factor_tree(num1).get_prime_factors())
+    log(<span class="hljs-string">f'<span class="hljs-subst">{num1_primes}</span>'</span>)
 
-SortedSet&lt;Integer&gt; distinctPrimes = <span class="hljs-keyword">new</span> TreeSet&lt;&gt;();
-distinctPrimes.addAll(num1Primes.elementSet());
-distinctPrimes.addAll(num2Primes.elementSet());
+    log(<span class="hljs-string">f'Calculating prime factors for <span class="hljs-subst">{num2}</span>...'</span>)
+    num2_primes = sorted(factor_tree(num2).get_prime_factors())
+    log(<span class="hljs-string">f'<span class="hljs-subst">{num2_primes}</span>'</span>)
 
-<span class="hljs-keyword">int</span> leastCommonMultiple = <span class="hljs-number">1</span>;
-SortedMultiset&lt;Integer&gt; leastCommonMultiplePrimes = TreeMultiset.create();
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> prime : distinctPrimes) {
-    <span class="hljs-keyword">int</span> num1Count = num1Primes.count(prime);
-    <span class="hljs-keyword">int</span> num2Count = num2Primes.count(prime);
-    <span class="hljs-keyword">if</span> (num1Count &gt;= num2Count) {
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num1Count; i++) {
-            leastCommonMultiple *= prime;
-        }
-        leastCommonMultiplePrimes.add(prime, num1Count);
-    } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num2Count; i++) {
-            leastCommonMultiple *= prime;
-        }
-        leastCommonMultiplePrimes.add(prime, num2Count);
-    }
-}</code></pre><div style="border:1px solid black;">
+    distinct_primes: Set[WholeNumber] = set()
+    [distinct_primes.add(p) <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> num1_primes]
+    [distinct_primes.add(p) <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> num2_primes]
+
+    log(<span class="hljs-string">f'Combining prime factors to get LCM...'</span>)
+    least_common_multiple = WholeNumber(<span class="hljs-number">1</span>)
+    least_common_multiple_primes = Counter()
+    <span class="hljs-keyword">for</span> prime <span class="hljs-keyword">in</span> sorted(list(distinct_primes)):
+        num1_count = num1_primes.count(prime)
+        num2_count = num2_primes.count(prime)
+        <span class="hljs-keyword">if</span> num1_count &gt;= num2_count:
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-number">0</span>), WholeNumber(num1_count)):
+                least_common_multiple = least_common_multiple * prime
+            least_common_multiple_primes[prime] += num1_count
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-number">0</span>), WholeNumber(num2_count)):
+                least_common_multiple = least_common_multiple * prime
+            least_common_multiple_primes[prime] += num2_count
+    log(<span class="hljs-string">f'LCM is <span class="hljs-subst">{least_common_multiple}</span>'</span>)
+
+    <span class="hljs-keyword">return</span> least_common_multiple</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>prime factor occurence counts of 12 = [2 x 2, 3]</p>
-<p>prime factor occurence counts of 18 = [2, 3 x 2]</p>
-<p>least common multiple is 36 = [2 x 2, 3 x 2]</p>
-<p></p>
+<ul>
+<li>Calculating prime factors for 12...</li>
+<li>[2, 2, 3]</li>
+<li>Calculating prime factors for 18...</li>
+<li>[2, 3, 3]</li>
+<li>Combining prime factors to get LCM...</li>
+<li>LCM is 36</li>
+</ul>
 </div>
+<p></p>
 <a name="HEADREF24"></a><h1>Fraction Number</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK93">IS</a>ITES↩</strong></p>
