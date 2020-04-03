@@ -3179,10 +3179,10 @@ The optimized algorithm above can be even further optimized by making it skip ov
 
 * 32/1=32 -- 1 and 32 are factors
 * 32/2=16 -- 2 and 16 are factors
-* ~~32/3=10.666~~
+* ~~32/3=10R2~~
 * 32/4=8 -- 4 and 8 are factors
-* ~~32/5=6.4~~
-* ~~32/6=5.333~~ <-- Stop here because 6 >= 5.333
+* ~~32/5=6R2~~
+* ~~32/6=5R2~~ <-- Stop here because 6 >= 5
 
 Any factors calculated past `factor1 => factor2` will be duplicates of factors that were already walked over... 
 
@@ -3906,6 +3906,32 @@ arithmetic_code/
 ```{fracnumsub}
 -1/3 -2/6
 ```
+
+## Mixed Number Operations
+
+TODO: talk about how mixed numbers are just fractions, and their operations are the same as fractions
+
+for example... 1 1/3 = 1 + 1/3 = 3/3 + 1/3 = 4/3
+
+for example... -1 1/3 = -(1 + 1/3) - -(3/3 + 1/4) = -4/3
+
+when adding/subtracting them together...
+
+1. do it on the whole number first
+1. do it on the fraction second
+   * if the whole number was negative, treat the fraction as negative when adding/subtracting
+   * in a mixed number, you should never encounter a case where the fraction is negative (see negative example above for reason as to why)
+1. check the sign on resulting whole and the fraction...
+   * are the signs both positive? keep as-is
+   * are the signs both negative? take the negative sign off the fraction
+     e.g. -1 + -1/2 
+   * are the signs different? perform the operation and convert the result back to a mixed number (whole + fraction = result, convert result back to a mixed number)
+1. is the fraction improper? move over as many wholes as you can from the fraction to the whole (make it into a proper fraction)
+1. simplify the fraction
+
+what's the point of this? why include a section on it? because it's useful for the decimal number section -- mixed numbers help think about decimal numbers
+
+maybe it doesn't make sense to ahve this -- not sure. maybe put it into the fraction addtion/subtraction sections
 
 # Decimal Number
 
@@ -17242,7 +17268,82 @@ __EXERCISE__
 
 4.6.436) 4 2/5 (too tedious to draw model in text)
 
-4.6.437)
+4.6.437) 3 2/3 (too tedious to draw model in text)
+
+4.6.438) 3 2/8 (too tedious to draw model in text)
+
+4.6.439) 3 4/6 (too tedious to draw model in text)
+
+4.6.440) 11 2/3
+
+4.6.441) 7 5/9
+
+4.6.442) 14
+
+4.6.443) 11
+
+4.6.444) 10 3/5
+
+4.6.445) 11
+
+4.6.446) 15 1/5
+
+4.6.447) 11 1/3
+
+4.6.448) 1/3 (too tedious to draw model in text)
+
+4.6.449) 1/2 (too tedious to draw model in text)
+
+4.6.450) 1 4/8
+
+4.6.451) 1 2/12
+
+4.6.452) 4 8/20
+
+4.6.453) 6 6/15
+
+4.6.454) 3 6/7
+
+4.6.455) 1 7/9
+
+4.6.456) 6/8
+
+4.6.457) 10/12
+
+4.6.458)
+
+* 9 7/12
+
+4.6.459)
+
+* 7 11/12
+
+4.6.460)
+
+* 6 1/8
+
+4.6.461)
+
+* 16 1/6
+
+4.6.462)
+
+* -7 11/6
+
+4.6.463)
+
+* 5 9/20
+
+4.6.464)
+
+* -1 1/6
+
+4.6.465)
+
+* -2 8/16
+* -2 1/2
+
+4.6.466)
 
 START BACK UP HERE
 START BACK UP HERE
