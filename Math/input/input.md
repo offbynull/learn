@@ -3675,9 +3675,7 @@ arithmetic_code/
 # Fraction Number
 
 ```{prereq}
-Integers
-Integer multiplication
-Integer division
+Integer numbers
 ```
 
 ```{svgbob}
@@ -3700,17 +3698,10 @@ Integer division
 +------------------------------------+
 ```
 
-TODO: Chapter 4
+`{bm} Fraction`s are a way of representing numbers as parts. The syntax for a fraction is `{kt} \frac{numerator}{denominator}`, where the...
 
-`{bm} Fraction`s are a way of representing numbers as parts. The syntax for a fraction is as follows...
-
-`{kt} \frac{numerator}{denominator}`
-
-... where the...
- * `{bm}numerator` (top) is an integer that represents the total number of parts.
+ * `{bm}numerator` (top) is an integer that represents the number of parts available.
  * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
-
-For example, 4 parts out of 5 parts would be represented as `{kt} \frac{4}{5}`...
 
 ```{define-block}
 diagramhelperfrac
@@ -3718,21 +3709,88 @@ diagramhelperfrac_macro/
 diagramhelper_code/target/appassembler/
 ```
 
+For example, if 4 parts make up a whole (denominator) and you have 9 of those parts (numerator), that's represented as `{kt} \frac{9}{4}`.
+ 
 ```{diagramhelperfrac}
 radius 40
+9
 4
-5
 ```
 
-In some cases, the numerator may be greater than the denominator. That is, the total number of parts may be larger than the number of parts in a whole. For example, `{kt} \frac{11}{8}`...
-
-```{diagramhelperfrac}
-radius 40
-11
-8
+```{svgbob}
+<--+----+----+----+----+----+----+----+----+----+----+--->
+   |    |    |    |    |    |    |    |    |    |    |
+                                                    +++
+                                                   /   \
+   0   1/4  2/4  3/4  4/4   1   5/4  6/4  7/4   2   9/4
 ```
 
-In cases such as the example above, the wholes may be written as a single number and the partial portion may be expressed as a fraction: `{kt} 1 \frac{3}{8}`.
+You can think of fractions as unresolved integer division operations. That is, rather than performing the division, the division is left as-is and the entire thing is treated as a value. In the example above, performing `{kt} 9 \div 4` results in 2R1, which is exactly the same value as represented by the fraction `{kt} \frac{9}{4}`. As the circle diagram above shows, 2 wholes are available and 1 remaining part.
+
+Since fractions represent integer divisions, the same rules as integer divisions apply:
+
+  1. Recall that with integer division, if the dividend and the divisor have different signs then the quotient comes out negative. The same division rules apply to fractions. For example, ...
+
+  * `{kt} \frac{9}{4}` is the same as `{kt} \frac{9}{4}`.
+  * `{kt} \frac{-9}{4}` is the same as `{kt} - \frac{9}{4}`.
+  * `{kt} \frac{9}{-4}` is the same as `{kt} - \frac{9}{4}`.
+  * `{kt} \frac{-9}{-4}` is the same as `{kt} \frac{9}{4}`.
+
+  1. Recall that with division, the divisor (number being divided by) can't be 0. The same rule applies to fractions. For example, ...
+
+  * `{kt} \frac{9}{0}` is undefined.
+
+Two fractions are called `{bm} equivalent fraction/(equivalent fraction|fractions that are equivalent|fractions are equivalent)/i`s if they represent the same value. That is, the number of pieces may be different, but the overall value represented by the fraction is the same. For example, `{kt} \frac{3}{2}`, `{kt} \frac{6}{4}`, and `{kt} \frac{12}{8}` are all considered equivalent fractions because they represent the same value:
+
+ * `{kt} \frac{3}{2}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   2
+   ```
+
+ * `{kt} \frac{6}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   6
+   4
+   ```
+
+ * `{kt} \frac{12}{8}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   12
+   8
+   ```
+
+Each fraction has a different sized pieces, but the overall value covered by those pieces (the gray region) is the same.
+
+If a fraction has ...
+
+ * at least 1 whole, it's refereed to as a `{bm} improper fraction`.
+
+   `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}` are improper fractions.
+
+ * less than 1 whole, it's referred to as a `{bm} proper fraction`.
+
+   `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}` are proper fractions.
+
+```{note}
+The term improper doesn't seem to mean anything bad? See http://mathforum.org/library/drmath/view/70437.html for reasoning as to why they're called proper vs improper.
+```
+
+```{note}
+I haven't seen it done a lot but the term quotient may be used to describe a fraction. Since a fraction is essentially an unresolved division operation, the fraction as a whole represents the quotient. As such, a fraction can be referred to as a quotient.
+```
+
+## Mixed Number
+
+Any fraction can be written out as a `{bm} mixed number`, where the wholes are written as a normal integer and the fraction is written as a remainder. For example, the fraction `{kt} \frac{15}{4}` can be written as `{kt} 3 \frac{2}{3}`.
+
+They're considered the same because they represent the same value -- the amount of gray is the same between all 3, even though each has a different number of pieces.
 
 TODO: talk about "equivalent fraction"s: e.g. 1/2 and 2/4 are equivalent
 
@@ -4074,6 +4132,11 @@ when adding/subtracting them together...
 what's the point of this? why include a section on it? because it's useful for the decimal number section -- mixed numbers help think about decimal numbers
 
 maybe it doesn't make sense to ahve this -- not sure. maybe put it into the fraction addtion/subtraction sections
+
+# Ratio
+TODO: Describe what a ratio is, either her or after the decimal sectoin
+
+ * `{bm} ratio` - Ratio is used to describe how many times one set of items contains another set of items. For example, a ratio of 3 apples to 2 oranges means that there are 3 apples available for every 2 oranges available. That same relationship can be expressed as a fraction is the fraction `{kt} \frac{2}{3}`.
 
 # Decimal Number
 

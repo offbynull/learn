@@ -5,7 +5,7 @@ import static com.google.common.base.Throwables.getStackTraceAsString;
 import com.google.common.hash.Hashing;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
@@ -16,9 +16,7 @@ import java.io.Writer;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static java.util.Arrays.stream;
 import java.util.Scanner;
-import static java.util.stream.Collectors.joining;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.bridge.BridgeContext;
 import org.apache.batik.bridge.DocumentLoader;
@@ -39,11 +37,11 @@ public final class MainFractionDraw {
             try {
                 String input = Files.readString(Path.of("/input/input.data"), UTF_8).trim();
                 
-                int radius = 500;
+                int diameter = 500;
                 Scanner scanner = new Scanner(input);
                 if (scanner.hasNext("radius")) {
                     scanner.next();
-                    radius = scanner.nextInt();
+                    diameter = scanner.nextInt();
                 }
                 
                 int numerator = scanner.nextInt();
@@ -63,13 +61,20 @@ public final class MainFractionDraw {
                 double degreeOffset = 90;
                 double degreesPerSlice = 360.0 / denominator;
                 if (numerator == 0) {
-                        drawSlices(g, radius, radius, 0, denominator, degreesPerSlice, degreeOffset);
+                        drawSlices(g, diameter, diameter, 0, denominator, degreesPerSlice, degreeOffset);
                 } else {
+                    int it = 0;
                     while (numerator > 0) {
                         int consumed = Math.min(numerator, denominator);
                         numerator -= consumed;
 
-                        drawSlices(g, radius, radius, consumed, denominator, degreesPerSlice, degreeOffset);
+                        double xOffset = (it * diameter) + (it * diameter * 0.1);
+                        AffineTransform t = new AffineTransform();
+                        t.translate(xOffset, 0.0);
+                        g.setTransform(t);
+
+                        drawSlices(g, diameter, diameter, consumed, denominator, degreesPerSlice, degreeOffset);
+                        it++;
                     }
                 }
 
