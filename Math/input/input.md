@@ -2577,7 +2577,7 @@ Whole numbers
 +----------------------------------+
 ```
 
-`{bm} Integer number/(integer number|integer)/i`s are numbers that have no partial portion but are mirrored across 0. That is, think of integers as 2 sets of natural numbers separated by 0, where everything to the...
+`{bm} Integer number/(integer number|integer)/i`s are place-value notation numbers that have no partial portion but are mirrored across 0. That is, think of integers as 2 sets of counting numbers separated by 0, where everything to the...
 
 * right of 0 is called a `{bm} positive` number (signified by a + prefix)
 * left of 0 is called a `{bm} negative` number (signified by a - prefix)
@@ -2588,13 +2588,19 @@ Whole numbers
   -4   -3   -2   -1    0   +1   +2   +3   +4
 ```
 
-The prefix that determines if a integer is positive or negative is usually referred to as the `{bm} sign`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
+The prefix that determines if a integer is positive or negative is referred to as the `{bm} sign`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
 
 ```{note}
-If a number is positive, the + sign is typically left out.
+If a number (other than 0) is positive, the + sign is typically left out. So, ... 
+* -5 is -5
++ +5 is +5
+* 5 is +5
+* 0 is 0
+* there is no such thing as -0 (0 never has a sign).
+* there is no such thing as +0 (0 never has a sign).
 ```
 
-Conceptually, you can think of 0 and the positives the same way you think about whole numbers. They represent some value. For each positive, there's a corresponding negative that represents the opposite of that positive value. For example, if...
+Conceptually, you can think of the positives the same way you think about natural numbers. They represent some value. For each positive, there's a corresponding negative that represents the opposite of that positive value. For example, if...
 
 * positive integers represent steps forward, then negative integers would represent steps backward.
 
@@ -2608,7 +2614,7 @@ Conceptually, you can think of 0 and the positives the same way you think about 
   5 feet backward         no movement         5 feet forward
   ```
 
-* positive integers represent money gained, then negative integers would represent money owed.
+* positive integers represent money gained, then negative integers would represent money owed or spent.
 
   * 5 dollars (gain $5)
   * -5 dollars (spend $5, or be in debt $5)
@@ -2627,10 +2633,19 @@ Conceptually, you can think of 0 and the positives the same way you think about 
 
 
   ```{svgbob}
-  <--+-------------------------+-------------------------+-->
-     |                         |                         | 
-    -5                         0                        +5
-  5 meters in sea         sea-level       5 meters in the air
+  ^
+  |
+  +- -5 meters deep (5 meters above sea-level)
+  |
+  |
+  |
+  +- 0, sea-level
+  |
+  |
+  |
+  +- 5 meters deep (5 meters below sea-level)
+  |
+  v
   ```
 
 ## Addition
@@ -2700,7 +2715,7 @@ Conceptually, you can think of `{bm} integer addition/(integer number addition|i
 
   Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a negative sign to the result: 4 - 3 is 1, tack on a negative sign: -1.
 
-The algorithm used by humans to add integer numbers together revolves around inspecting the sign and magnitude of each integer, then deiciding whether to perform whole number addition or whole number subtraction to get the result. The codification of this algorithm is as follows...
+The algorithm used by humans to add integer numbers together revolves around inspecting the sign and magnitude of each integer, then deciding whether to perform whole number addition or whole number subtraction to get the result. The codification of this algorithm is as follows...
 
 ```{output}
 arithmetic_code/IntegerNumber.py
@@ -2826,7 +2841,7 @@ Integer addition
 Integer subtraction
 ```
 
-Conceptually, you can think of `{bm} integer multiplication/(integer number multiplication|integer multiplication|multiply integer numbers|multiply integers|multiplication of integer numbers|multiplication of integers)/i` as repetitive integer addition / integer subtraction. When the right hand side is negative, think of it as subtraction instead of addition. For example, think of ...
+Conceptually, you can think of `{bm} integer multiplication/(integer number multiplication|multiply integer numbers|multiply integers|multiplication of integer numbers|multiplication of integers)/i` as repetitive integer addition / integer subtraction. When the right hand side is negative, think of it as subtraction instead of addition. For example, think of ...
 
 * 5 \* 3 as add 5, 3 times
 
@@ -2834,23 +2849,42 @@ Conceptually, you can think of `{bm} integer multiplication/(integer number mult
 
 * 3 \* -5 as subtract 5, 3 times
 
-  conceptualize as subtraction with dots/counters. you're subtracting from 0, there are no positives to take away to you start counting "neutral pairs". see ch 3.4 around figure 3.20
+  ```{note}
+  Subtraction starts from 0, so it'd be...
+  1. 0 - 5 is -5
+  2. -5 - 5 is -10
+  3. -10 - 5 is -15
 
-  (OR you could use the commutative property and swap this around to be -5 * 3 -- the same as the previous bullet point).
+  Or, you could use the commutative property of multiplication and swap the operands -- 3 \* -5 becomes -5 \* 3, exactly the same as the previous bullet point.
+  ```
 
 * -5 \* -3 as subtract -5, 3 times
 
-  similarly to the bullet point above, you're subtracting from 0. there are no negatives to take away to you start counting "neutral pairs". see ch 3.4 around figure 3.20. you end up with 15 positives.
+  ```{note}
+  Subtraction starts from 0, so it'd be...
+  1. 0 - -5 is 5
+  2. -5 - -5 is 10
+  3. -10 - -5 is 15
+  ```
 
-  0 - (-5) = 5
-  5 - (-5) = 10
-  10 - (-5) = 15
+One useful property of integer multiplication is that, multiplying any non-zero number by -1 will slip its sign. For example...
 
-  OR you could think of the same thing but on a number line
+* 5 \* -1 is -5
 
+  1. 0 - 5 is -5
 
+* -5 \* -1 is 5
 
--1 * n = -n (you get the opposite)
+  1. 0 - -5 is 5
+
+The algorithms humans use to perform integer multiplication is as follows:
+
+1. Ignoring the sign and multiply the numbers using whole number multiplication.
+1. If the signs are...
+   1. the same, make the result a positive.
+   1. different, make the result a negative.
+
+The result produced using the algorithm will be exactly the same as the result produced using repetitive addition/subtraction.
 
 The way to perform this algorithm via code is as follows...
 
@@ -2874,11 +2908,119 @@ arithmetic_code/
 
 ```{prereq}
 Whole number division
+Integer subtraction
+Integer addition
+Integer multiplication
 ```
 
-division is the inverse of multiplication, so the same rules you used in whole number division apply here as well. trial-and-error division to find the value and/or take off the signs for long division and add a sign back on afterwards.
+Conceptually, you can think of `{bm} integer division/(integer number division|divide integer numbers|divide integers|division of integer numbers|division of integers)/i` the same as whole number division: repetitive integer subtraction -- how many iterations can be subtracted until reaching 0. When both numbers being divided have the same sign, the process is nearly the same as whole number division. For example, ...
 
-DO AN EXAMPLE WITH A REMAINDER
+* 15 / 3 -- how many iterations og subtracting by 3 before 15 reaches 0
+
+  ```{svgbob}
+  <-+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+->
+    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   -2  -1   0  +1  +2  +3  +4  +5  +6  +7  +8  +9 +10 +11 +12 +13 +14 +15
+  
+                                                            <------------
+  ```
+
+  You need to subtract by 3 to get closer to 0...
+
+  1. 15 - 3 is -12
+  2. 12 - 3 is -9
+  3. 9 - 3 is -6
+  4. 6 - 3 is -3
+  5. 3 - 3 is 0
+
+  5 iterations of subtraction.
+
+* -15 / -3 -- how many iterations og subtracting by -3 before -15 reaches 0
+
+  ```{svgbob}
+  <-+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+->
+    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+  -15 -14 -13 -12 -10  -9  -8  -7  -6  -5  -4  -3  -2  -1   0  +1  +2  +3
+  
+    ------------>
+  ```
+
+  You need to subtract by -3 to get closer to 0...
+
+  1. -15 - -3 is -12
+  2. -12 - -3 is -9
+  3. -9 - -3 is -6
+  4. -6 - -3 is -3
+  5. -3 - -3 is 0
+
+  5 iterations of subtraction.
+
+When the signs are different, it becomes slightly more difficult to conceptualize. For example, using repetitive subtraction on -15 / 3 will get farther from 0 rather than closer:
+
+  1. -15 - 3 is -18
+  2. -18 - 3 is -21
+  3. -21 - 3 is -24
+  4. ...
+
+In cases such as this, the concept of negative iterations is needed. For example, when ...
+
+* subtracting by 5 iterations, you iteratively subtract for 5 iterations.
+* subtracting by -5 iterations, you iteratively add for 5 iterations.
+
+Why? The inverse (opposite) of subtraction is addition. Performing -5 iterations means doing the opposite for 5 iterations.
+
+```{note}
+Remember that for integer numbers, a negative integer is one that's the mirror opposite of the positive (and vice versa).
+```
+
+* -15 / 3 -- how many iterations of subtracting by 3 before -15 reaches 0
+
+  ```{svgbob}
+  <-+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+->
+    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+  -15 -14 -13 -12 -10  -9  -8  -7  -6  -5  -4  -3  -2  -1   0  +1  +2  +3
+  
+    ------------>
+  ```
+
+  You need to add by 3 to get closer to 0...
+
+  1. -15 + 3 is -12
+  2. -12 + 3 is -9
+  3. -9 + 3 is -6
+  4. -6 + 3 is -3
+  5. -3 + 3 is 0
+
+  -5 iterations of subtraction.
+
+* 15 / -3 -- how many iterations of subtracting by -3 before 15 reaches 0
+
+  ```{svgbob}
+  <-+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+->
+    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   -2  -1   0  +1  +2  +3  +4  +5  +6  +7  +8  +9 +10 +11 +12 +13 +14 +15
+  
+                                                            <------------
+  ```
+
+  You need to add by -3 to get closer to 0...
+
+  1. 15 + -3 is 12
+  2. 12 + -3 is 9
+  3. 9 + -3 is 6
+  4. 6 + -3 is 3
+  5. 3 + -3 is 0
+
+  -5 iterations of subtraction.
+
+The algorithms humans use to perform integer multiplication is as follows:
+
+1. Ignoring the sign and divide the numbers using whole number division.
+1. If the signs are...
+   1. the same, make the result a positive.
+   1. different, make the result a negative.
+
+The result produced using the algorithm will be exactly the same as the result produced using repetitive subtraction.
 
 The way to perform this algorithm via code is as follows...
 
@@ -3113,12 +3255,12 @@ Integer multiplication
 
 Let's say you have an integer number. The `{bm} factor`s of that number are the integers you can multiply together to get that number...
 
-```java
-int myNumber = ...;
-int factor1 = ...;
-int factor2 = ...;
-if (factor1 * factor2 == myNumber) {
-    System.out.println(factor1 + " and " + factor2 + " are factors of " + myNumber);
+```python
+my_number: int = ...;
+factor1: int = ...;
+factor2: int = ...;
+if (factor1 * factor2 == my_number) {
+    print(f'{factor1} and {factor2} are factors of {my_number});
 } 
 ```
 
