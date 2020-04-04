@@ -2409,7 +2409,7 @@ This is effectively the algorithm that humans use for long division -- for each 
 The notation used by humans for long division is...
 
 ```{define-block}
-div
+ktlongdiv
 ktlongdiv_macro/
 kthelper_code/target/appassembler/
 ```
