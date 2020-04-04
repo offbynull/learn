@@ -3766,7 +3766,7 @@ Two fractions are called `{bm} equivalent fraction/(equivalent fraction|fraction
    8
    ```
 
-Each fraction has a different sized pieces, but the overall value covered by those pieces (the gray region) is the same.
+Each fraction has different sized pieces, but the overall value covered by those pieces (the gray region) is the same.
 
 If a fraction has ...
 
@@ -3785,77 +3785,6 @@ The term improper doesn't seem to mean anything bad? See http://mathforum.org/li
 ```{note}
 I haven't seen it done a lot but the term quotient may be used to describe a fraction. Since a fraction is essentially an unresolved division operation, the fraction as a whole represents the quotient. As such, a fraction can be referred to as a quotient.
 ```
-
-## Mixed Number
-
-Any fraction can be written out as a `{bm} mixed number`, where the wholes are written as a normal integer and the fraction is written as a remainder. For example, the fraction `{kt} \frac{15}{4}` can be written as `{kt} 3 \frac{2}{3}`.
-
-They're considered the same because they represent the same value -- the amount of gray is the same between all 3, even though each has a different number of pieces.
-
-TODO: talk about "equivalent fraction"s: e.g. 1/2 and 2/4 are equivalent
-
-TODO: a mixed number is a whole number with a fraction, for example 2 1/2 is the same as writing 5/2.
-
-TODO: a improper fraction is one where the numerator is greater than or equal to the denominator, for example 5/2.
-
-TODO: a proper fraction is one where teh numerator is less than the denominator, for example 1/2.
-
-TODO: add code to convert between mixed number adn fraction, add code to identify if fraction is proper or improper
-
-TODO: a complex fraction is a fraction in which the numerator or denominator contains a fraction. to simplify, remember that the fraction bar means division.
-
-TODO: converting a fraction to a mixed number is division.
-
-11/6
-
-```
-+-----------------+
-|                 |
-|                 v
-|                  
-|   01-------> 1 5/6
-+-6)11            
-    0             ^
-    -             |
-    11            |
-     6            |
-    --            |
-     5 -----------+
-```
-
-TODO: show that 1/4 is the same as 2/8, 3/12, ... using fractional lines, and show how to get 1 fraction into the form of another using multiplication / division
-
-in other words, multiplying the numerator and denomator by the same number doesn't change the value of the fraction
-
-```
-1 * 2 = 2
------   -
-4 * 2 = 8
-```
-
-```
-+-----------+-----------+-----------+-----------+
-|    1/4    |    1/4    |    1/4    |    1/4    |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 | 1/8 |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-```
-
-```
-+--------------------+--------------------+--------------------+--------------------+
-|        1/4         |        1/4         |        1/4         |        1/4         |
-+------+------+------+------+------+------+------+------+------+------+------+------+
-| 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 | 1/12 |
-+------+------+------+------+------+------+------+------+------+------+------+------+
-```
-
-TODO: show number line with proper fractions, improper fractions, and mixed numbers 
-
-TODO: talk about negtive fractions, show an example on the number line -- it may be eaiser to do if you first converted it to a mixed number. remember that fractions represent division -- the fraction itself is negative if either the numerator or denominator is negative. typically, the negative sign for a fraction will be before the fraction (instead of on the numerator or the denominator). if both the numerator and denominator are negative, the fraction is positive (dividing 2 negatives results in a positive)
-
-TODO: write code to convert mixed number to fraction and viceversa
-
-TODO: the words quotient and ratio often refer to fractions, but quotient may also refer to division as well -- fractions are a representation of division
 
 ## Simplification
 
@@ -4107,7 +4036,43 @@ arithmetic_code/
 -1/3 -2/6
 ```
 
-## Mixed Number Operations
+## Mixed Number
+
+```{prereq}
+Integer division
+Fraction Multiplication
+Fraction Division
+Fraction Addition
+Fraction Subtraction
+```
+
+TODO: this section needs work.
+
+Any fraction can be written out as a `{bm} mixed number`, where the wholes are written as a normal integer and the remaining fraction is written as a fraction. For example, the fraction `{kt} \frac{15}{4}` can be written as `{kt} 3 \frac{3}{4}`. That is, it's essentially `{kt} \frac{4}{4} + \frac{4}{4} + \frac{4}{4} + \frac{3}{4}`.
+
+```{diagramhelperfrac}
+radius 40
+15
+4
+```
+
+```{note}
+Don't get confused -- `{kt} 3 \frac{3}{4}` means `{kt} 3 + \frac{3}{4}`, it does not mean multiplication.
+```
+
+To convert a...
+ * fraction to a mixed number, divide the numerator and the denominator using integer division.
+ 
+   For example, `{kt} \frac{15}{4}` is 3R3. 3R3 is the same as `{kt} 3 \frac{3}{4}`.
+
+ * mixed number to a fraction, convert the whole to a fraction and multiply using fraction multiplication, then add the remaining fraction using fraction addition.
+ 
+   For example `{kt} 3 \frac{3}{4}` is `{kt} 3  the whole by the denominator using integer multiplication, then add the numerator to the denominator.
+
+TODO: add code to convert between mixed number adn fraction, add code to identify if fraction is proper or improper
+
+TODO: write code to convert mixed number to fraction and viceversa
+
 
 TODO: talk about how mixed numbers are just fractions, and their operations are the same as fractions
 
@@ -4134,9 +4099,12 @@ what's the point of this? why include a section on it? because it's useful for t
 maybe it doesn't make sense to ahve this -- not sure. maybe put it into the fraction addtion/subtraction sections
 
 # Ratio
+
 TODO: Describe what a ratio is, either her or after the decimal sectoin
 
- * `{bm} ratio` - Ratio is used to describe how many times one set of items contains another set of items. For example, a ratio of 3 apples to 2 oranges means that there are 3 apples available for every 2 oranges available. That same relationship can be expressed as a fraction is the fraction `{kt} \frac{2}{3}`.
+`{bm} ratio` - Ratio is used to describe how many times one set of items contains another set of items. For example, a ratio of 3 apples to 2 oranges means that there are 3 apples available for every 2 oranges available. That same relationship can be expressed as a fraction is the fraction `{kt} \frac{2}{3}`.
+
+https://en.wikipedia.org/wiki/Ratio
 
 # Decimal Number
 
