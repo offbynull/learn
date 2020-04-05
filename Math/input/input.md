@@ -3698,7 +3698,7 @@ Integer numbers
 +------------------------------------+
 ```
 
-`{bm} Fraction`s are a way of representing numbers as parts. The syntax for a fraction is `{kt} \frac{numerator}{denominator}`, where the...
+`{bm} Fraction`s are a way of representing partial values. The syntax for a fraction is `{kt} \frac{numerator}{denominator}`, where the...
 
  * `{bm}numerator` (top) is an integer that represents the number of parts available.
  * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
@@ -3727,7 +3727,7 @@ radius 40
 
 You can think of fractions as unresolved integer division operations. That is, rather than performing the division, the division is left as-is and the entire thing is treated as a value. In the example above, performing `{kt} 9 \div 4` results in 2R1, which is exactly the same value as represented by the fraction `{kt} \frac{9}{4}`. As the circle diagram above shows, 2 wholes are available and 1 remaining part.
 
-Since fractions represent integer divisions, the same rules as integer divisions apply:
+Since a fraction represent integer division, the same rules as integer division apply:
 
   1. Recall that with integer division, if the dividend and the divisor have different signs then the quotient comes out negative. The same division rules apply to fractions. For example, ...
 
@@ -3770,13 +3770,8 @@ Each fraction has different sized pieces, but the overall value covered by those
 
 If a fraction has ...
 
- * at least 1 whole, it's refereed to as a `{bm} improper fraction`.
-
-   `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}` are improper fractions.
-
- * less than 1 whole, it's referred to as a `{bm} proper fraction`.
-
-   `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}` are proper fractions.
+ * at least 1 whole, it's refereed to as a `{bm} improper fraction` (e.g. `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}`).
+ * less than 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
 
 ```{note}
 The term improper doesn't seem to mean anything bad? See http://mathforum.org/library/drmath/view/70437.html for reasoning as to why they're called proper vs improper.
@@ -3784,6 +3779,8 @@ The term improper doesn't seem to mean anything bad? See http://mathforum.org/li
 
 ```{note}
 I haven't seen it done a lot but the term quotient may be used to describe a fraction. Since a fraction is essentially an unresolved division operation, the fraction as a whole represents the quotient. As such, a fraction can be referred to as a quotient.
+
+The term ratio may also be used to refer to a fraction.
 ```
 
 ## Simplification
@@ -3793,19 +3790,82 @@ Integer division
 Prime factorization
 ```
 
-TODO: a simplified fraction is a fraction that has no common factors between the numerator and the denominator (other than 1). another word for thsi is simplified form.
+Many fractions can have the same value (equivalent fractions). For example, both `{kt} \frac{4}{6}` and `{kt} \frac{8}{12}` represent the same value:
 
-if the num and denom do have a common factor (other than 1), the fraction can be _reduced_ / _simplified_ by removing those common factors.
+* `{kt} \frac{4}{6}`
 
-to simplify a fraction, get the common factors for both its numerator and denominator -- divide each by the largets common factor
+  ```{diagramhelperfrac}
+  radius 40
+  4
+  6
+  ```
+  
+* `{kt} \frac{8}{12}`
 
-OR
+  ```{diagramhelperfrac}
+  radius 40
+  8
+  12
+  ```
 
-get the prime factors and cancel out duplicates -- if showing this, draw out all factors on top of each other and then cross out common ones (katex)
+A `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the fraction|simplify a fraction|reduced fraction|reduce fraction|reduce a fraction|reduce the fraction|simplified form|simplified fraction form|simplified form of a fraction|simplified form of the fraction)/i` is a fraction that represents some value in the smallest number of pieces possible. For the example above, both fractions can be simplified to the equivalent fraction `{kt} \frac{2}{3}`:
 
-OR 
+* `{kt} \frac{2}{3}`:
 
-try dividing by every increasing numbers until divisible, then divide and repeat
+  ```{diagramhelperfrac}
+  radius 40
+  2
+  3
+  ```
+
+A fraction is considered a simplified fraction if has no common factors between its numerator and its denominator (other than 1). For example, for the fraction `{kt} \frac{12}{8}`, the
+
+ * numerator's (12) factors are 1, 2, 3, 4, 6, and 12.
+ * denominator's (8) factors are 1, 2, 4, and 8.
+
+The largest common factor (other than 1) between them is 4. As such, dividing both the numerator and denominator by 4 will give the simplified form of `{kt} \frac{2}{3}`.
+
+The algorithm typically used by humans to simplify a fraction is prime factorization:
+
+ 1. prime factorize the numerator and denominator
+
+    `{kt} \frac{3 \cdot 2 \cdot 2}{2 \cdot 2 \cdot 2}`
+
+ 1. remove all common factors
+
+    `{kt} \frac{3 \cdot \xcancel{2} \cdot \xcancel{2}}{2 \cdot \xcancel{2} \cdot \xcancel{2}}` ⟶ `{kt} \frac{2}{3}`
+
+This algorithm as code is as follows...
+   
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_SIMP\s*\n([\s\S]+?)\n\s*#MARKDOWN_SIMP
+```
+
+```{define-block}
+fracnumsimp
+fracnumsimp_macro/
+arithmetic_code/
+```
+
+```{fracnumsimp}
+-12/8
+```
+
+TODO: write section on greatest common divisor and REFERENCE IT HERE
+
+TODO: write section on greatest common divisor and REFERENCE IT HERE
+
+TODO: write section on greatest common divisor and REFERENCE IT HERE
+
+TODO: write section on greatest common divisor and REFERENCE IT HERE
+
+TODO: write section on greatest common divisor and REFERENCE IT HERE
+
+TODO: write section on greatest common divisor and REFERENCE IT HERE
+
+TODO: write section on greatest common divisor and REFERENCE IT HERE
 
 ## Multiplication
 

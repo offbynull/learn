@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+from collections import Counter
 from typing import Union, List, Set
 
+import Factor
+from Factor import factor_tree
 from Sign import Sign
 from Output import log_indent, log_unindent, log
 from IntegerNumber import IntegerNumber
@@ -167,51 +170,47 @@ class FractionNumber:
 
     #MARKDOWN_SIMP
     def simplify(self: FractionNumber) -> FractionNumber:
-        # Sign is on the numerator
         log_indent()
         try:
-            log(f'Simplifying {self}')
+            log(f'Simplifying {self}...')
+            log_indent()
 
-            numerator_factors = FractionNumber._calculate_factors(self._numerator.magnitude)
+            log(f'Calculating factors for numerator ({self._numerator.magnitude})...')
+            numerator_factors = factor_tree(self._numerator.magnitude).get_prime_factors()
             log(f'Numerator factors: {numerator_factors}')
-            denominator_factors = FractionNumber._calculate_factors(self._denominator.magnitude)
-            log(f'Denominator factors: {numerator_factors}')
 
-            common_factors = [f for f in denominator_factors if f in numerator_factors] # intersection of values
+            log(f'Calculating factors for denominator ({self._denominator.magnitude})...')
+            denominator_factors = factor_tree(self._denominator.magnitude).get_prime_factors()
+            log(f'Denominator factors: {denominator_factors}')
+
+            common_factors = list((Counter(numerator_factors) & Counter(denominator_factors)).elements())  # intersection
             log(f'Common factors: {common_factors}')
-            largest_common_factor = max(common_factors)
-            log(f'Largest common factors: {common_factors}')
 
-            largest_common_factor_as_intnum = IntegerNumber(Sign.POSITIVE, largest_common_factor)
-            divided_numerator, _ = self._numerator / largest_common_factor_as_intnum
-            divided_denominator, _ = self._denominator / largest_common_factor_as_intnum
+            divided_numerator = self._numerator.magnitude
+            divided_denominator = self._denominator.magnitude
+            for common_factor in common_factors:
+                log(f'Dividing out common factor of {common_factor}...')
+                divided_numerator, _ = divided_numerator / common_factor
+                divided_denominator, _ = divided_denominator / common_factor
+                log(f'Numerator: {divided_numerator}, Denominator: {divided_denominator}')
 
-            res = FractionNumber(divided_numerator, divided_denominator)
-            log(f'Divide both numerator and denominator by largest common factor to get result: {res}')
+            # Sign of fraction is on the numerator
+            if self.sign == Sign.NEGATIVE:  # if original was negative, so will the simplified
+                res = FractionNumber(
+                    IntegerNumber(Sign.NEGATIVE, divided_numerator),
+                    IntegerNumber(Sign.POSITIVE, divided_denominator))
+            else:  # if original was positive, so will the simplified
+                res = FractionNumber(
+                    IntegerNumber(Sign.POSITIVE, divided_numerator),
+                    IntegerNumber(Sign.POSITIVE, divided_denominator))
+
+            log_unindent()
+            log(f'{self} simplified to: {res}')
 
             return res
         finally:
             log_unindent()
-    # MARKDOWN_SIMP
-
-    @staticmethod
-    def _calculate_factors(test_num: WholeNumber) -> List[WholeNumber]:
-        factors: List[WholeNumber] = []
-
-        factor1 = WholeNumber(1)
-        while factor1 <= test_num:
-            (factor2, remainder) = test_num / factor1
-            div_had_remainder = remainder > WholeNumber(0)
-            if not div_had_remainder:
-                factors.append(factor1)
-                factors.append(factor2)
-
-            if factor2 <= factor1:
-                break
-
-            factor1 += WholeNumber(1)
-
-        return factors
+    #MARKDOWN_SIMP
 
     def __eq__(self: FractionNumber, other: FractionNumber) -> bool:
         # Sign is only kept on the numerator, not the denominator
