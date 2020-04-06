@@ -3676,28 +3676,59 @@ arithmetic_code/
 
 ```{prereq}
 Factors
+Primes
 ```
 
 The `{bm} greatest common divisor` `{bm} /(GCD|G\.C\.D.)/i` is the process of taking 2 numbers and finding the largest possible divisor between the two of them. That is, finding the greatest number that evenly divides both numbers.
 
 There are 3 common algorithms used to find the greatest common divisor between 2 numbers.
 
-The first algorithm is to test divisions on incrementally larger numbers until you reach the smaller of the 2 numbers. The largest tested number that was evenly divisible is the greatest common divisor.
+The first algorithm is to test divisions on incrementally larger numbers until you reach the smaller of the 2 numbers. The largest tested number that was evenly divisible is the greatest common divisor. For example, for the numbers 22 and 8...
+
+ * `{kt} 22 \div 1 = 22` and `{kt} 8 \div 1 = 1` (both divisible)
+ * `{kt} 22 \div 2 = 11` and `{kt} 8 \div 2 = 4` (both divisible)
+ * `{kt} 22 \div 3 = 7R1` and `{kt} 8 \div 3 = 2R2` (both NOT divisible)
+ * `{kt} 22 \div 4 = 5R2` and `{kt} 8 \div 4 = 2` (first NOT divisible)
+ * `{kt} 22 \div 5 = 4R2` and `{kt} 8 \div 5 = 1R3` (both NOT divisible)
+ * `{kt} 22 \div 6 = 3R4` and `{kt} 8 \div 6 = 1R2` (both NOT divisible)
+ * `{kt} 22 \div 7 = 3R1` and `{kt} 8 \div 7 = 1R1` (both NOT divisible)
+ * `{kt} 22 \div 8 = 2R6` and `{kt} 8 \div 8 = 1` (first NOT divisible)
+
+The greatest common divisor is 4.
 
 TODO: implement here
 
-The second algorithm is to factor both numbers and take the largest common factor between them. The largest common factor is the greatest common divisor.
+The second algorithm is to factor both numbers and take the largest common factor between them. The largest common factor is the greatest common divisor. For example, for the numbers 22 and 8, ...
+
+ * the factors of 22 are 1, 2, 11, and 22.
+ * the factors of 8 are 1, 2, 4 and 8.
+
+The greatest common factor between them is 2.
 
 TODO: implement here
 
-The third algorithm is to use `{bm} Euclid's algorithm` to compute the greatest common divisor.
+The third algorithm is to use `{bm} Euclid's algorithm` to compute the greatest common divisor. This is the algorithm most used by both humans and computers to calculate the greatest common divisor because it's less labour intensive than the other two methods.
+
+Imagine the numbers 8 and 22. The algorithm starts by sorting the numbers from largest to smallest and dividing them:
+
+ * `{kt} 22 \div 8 = 2R6`
+
+It then takes the divisor and the remainder, sorts them from largest to smallest, and divides them again:
+
+ * `{kt} 8 \div 6 = 1R2`
+
+It keeps repeating this process until the remainder reaches 0. For this example, it only needs to repeat the process one more time:
+
+ * `{kt} 6 \div 2 = 3R0`
+
+The greatest common factor is the divisor when the remainder is 0. In this example, it's 2.
 
 TODO: implement here
 
 ````{note}
-The following is my attempt at explaining Euclid's algorithm after reading several online resources.
+The following is my attempt at explaining Euclid's algorithm after reading several online resources. You need an understanding of geometry and algebra before continuing.
 
- * Simple geometric explanation
+ * Geometric explanation
 
    Conceptually, you can think of Euclid's algorithm as recursively breaking off square chunks out of a rectangular area until it finds the smallest possible chunk that can be evenly copied to recreate the original rectangle. For example, imagine the numbers 21 and 6...
    
@@ -3796,7 +3827,7 @@ The following is my attempt at explaining Euclid's algorithm after reading sever
       +----------+----------+----------+-----+
    ```
 
- * Simple algebraic explanation
+ * Algebraic explanation
 
    If 2 numbers are evenly divisible by some other number, then their sum/difference must also be divisible. For example, the numbers 21 and 6 are both divisible by 3:
    
@@ -18528,6 +18559,9 @@ __EXERCISE__
 
 unsure where the number 16 came from. maybe he accidentally divided by 2
 
+## Chapter 5 Section 1
+
+5.1)
 
 START BACK UP HERE
 START BACK UP HERE
