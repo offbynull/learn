@@ -4282,23 +4282,23 @@ factor2: int = ...;
 <li>
 <p>Geometric explanation</p>
 <p>Conceptually, you can think of <a href="#BOOKMARK74">Euclid's algorithm</a> as recursively breaking off square chunks out of a rectangular area until it finds the smallest possible chunk that can be evenly copied to recreate the original rectangle. For example, imagine the numbers 21 and 6...</p>
-<p><img src="svgbob_b98346994213815c096a7992a125c8fc07fc4618.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_d8de4e765e95411cfed47998ec82338179319898.svg" alt="Kroki diagram output"></p>
 <p>Since in 21x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off 6 from the 21 to get a 6x6 block...</p>
-<p><img src="svgbob_01aca62d8551039ad51437eaf8d699f9c0447ac2.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_6af1cf3d382810e66e673c496e397d54f5351896.svg" alt="Kroki diagram output"></p>
 <p>Since in 15x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off 6 from the 15 to get a 6x6 block...</p>
-<p><img src="svgbob_7c424aff4107484959c6489fd205842dc4766ae7.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_44df863e2349307aa8c07052582f619f4237027f.svg" alt="Kroki diagram output"></p>
 <p>Since in 9x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off 6 from the 9 to get a 6x6 block...</p>
-<p><img src="svgbob_01e3b9532f9200cb1507243b54033817e8c56ffa.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_9c7cfe4413a8ba39dcaf9ae76836a644454517bb.svg" alt="Kroki diagram output"></p>
 <p>Since in 3x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off 3 from the 6 to get a 3x3 block...</p>
-<p><img src="svgbob_f03765f5cbd16715739900fc1533f808a78f620a.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_4724b854408fd110e5fb185e0ad235f841820053.svg" alt="Kroki diagram output"></p>
 <p>The remaining block <a href="#BOOKMARK103">is</a> also 3x3 block. As such, the largest size that th<a href="#BOOKMARK103">is</a> entire rectangle can be constructed from <a href="#BOOKMARK103">is</a> 3x3. The <a href="#BOOKMARK72">greatest common divisor</a> <a href="#BOOKMARK103">is</a> 3.</p>
-<p><img src="svgbob_0661871ef5aae0b39667d78f05a3b2df59aff594.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_f8ef8f4899d0fdac7134860108295a330dac3f6e.svg" alt="Kroki diagram output"></p>
 <p>Notice how th<a href="#BOOKMARK103">is</a> <a href="#BOOKMARK103">is</a> subtracting from the larger side at each step. Since <a href="#BOOKMARK26">division</a> <a href="#BOOKMARK103">is</a> iterative <a href="#BOOKMARK9">subtraction</a>, th<a href="#BOOKMARK103">is</a> entire algorithm can be done using <a href="#BOOKMARK26">division</a>. Starting from the very beginning...</p>
-<p><img src="svgbob_b98346994213815c096a7992a125c8fc07fc4618.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_d8de4e765e95411cfed47998ec82338179319898.svg" alt="Kroki diagram output"></p>
 <p>Since in 21x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off as many blocks of 6 as possible from 21: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>21</mn><mo>÷</mo><mn>6</mn><mo>=</mo><mn>3</mn><mi>R</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">21 \div 6 = 3R3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">3</span></span></span></span> (3 blocks of 6x6, with 3 remaining)...</p>
-<p><img src="svgbob_01e3b9532f9200cb1507243b54033817e8c56ffa.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_9c7cfe4413a8ba39dcaf9ae76836a644454517bb.svg" alt="Kroki diagram output"></p>
 <p>Since in 3x6, 3 <a href="#BOOKMARK103">is</a> the smaller side, break off as many blocks of 3 as possible from 6: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>21</mn><mo>÷</mo><mn>6</mn><mo>=</mo><mn>2</mn><mi>R</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">21 \div 6 = 2R0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">0</span></span></span></span> (2 blocks of 3x3, with 0 remaining)...</p>
-<p><img src="svgbob_0661871ef5aae0b39667d78f05a3b2df59aff594.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_f8ef8f4899d0fdac7134860108295a330dac3f6e.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
 <p><a href="#BOOKMARK84">Algebra</a>ic explanation</p>

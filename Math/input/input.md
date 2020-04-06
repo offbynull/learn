@@ -3733,98 +3733,98 @@ The following is my attempt at explaining Euclid's algorithm after reading sever
    Conceptually, you can think of Euclid's algorithm as recursively breaking off square chunks out of a rectangular area until it finds the smallest possible chunk that can be evenly copied to recreate the original rectangle. For example, imagine the numbers 21 and 6...
    
    ```{svgbob}
-                         21
-      +--------------------------------------+
-      |                                      |
-      |                                      |
-      |                                      | 6
-      +--------------------------------------+
+                  21
+      +------------------------+
+      |                        |
+      |                        |
+      |                        | 6
+      +------------------------+
    ```
    
    Since in 21x6, 6 is the smaller side, break off 6 from the 21 to get a 6x6 block...
    
    ```{svgbob}
-                              15
-      +----------+---------------------------+
-      |          |                           |
-      |   6x6    |                           |
-      |          |                           | 6
-      +----------+---------------------------+
+                      15
+      +------+-----------------+
+      |      |                 |
+      | 6x6  |                 |
+      |      |                 | 6
+      +------+-----------------+
    ```
    
    Since in 15x6, 6 is the smaller side, break off 6 from the 15 to get a 6x6 block...
    
    ```{svgbob}
-                                     9
-      +----------+----------+----------------+
-      |          |          |                |
-      |   6x6    |   6x6    |                |
-      |          |          |                | 6
-      +----------+----------+----------------+
+                          9
+      +------+------+----------+
+      |      |      |          |
+      | 6x6  | 6x6  |          |
+      |      |      |          | 6
+      +------+------+----------+
    ```
    
    Since in 9x6, 6 is the smaller side, break off 6 from the 9 to get a 6x6 block...
    
    ```{svgbob}   
-                                          3
-      +----------+----------+----------+-----+
-      |          |          |          |     |
-      |   6x6    |   6x6    |   6x6    |     |
-      |          |          |          |     | 6
-      +----------+----------+----------+-----+
+                             3
+      +------+------+------+---+
+      |      |      |      |   |
+      | 6x6  | 6x6  | 6x6  |   |
+      |      |      |      |   | 6
+      +------+------+------+---+
    ```
    
    Since in 3x6, 6 is the smaller side, break off 3 from the 6 to get a 3x3 block...
    
    ```{svgbob}   
-      +----------+----------+----------+-----+
-      |          |          |          | 3x3 |
-      |   6x6    |   6x6    |   6x6    +-----+
-      |          |          |          |     | 3
-      +----------+----------+----------+-----+
-                                          3
+      +------+------+------+---+
+      |      |      |      |3x3|
+      | 6x6  | 6x6  | 6x6  +---+
+      |      |      |      |   | 3
+      +------+------+------+---+
+                             3
    ```
 
    The remaining block is also 3x3 block. As such, the largest size that this entire rectangle can be constructed from is 3x3. The greatest common divisor is 3.
    
    ```{svgbob}   
-      +----------+----------+----------+-----+
-      |          |          |          | 3x3 |
-      |   6x6    |   6x6    |   6x6    +-----+
-      |          |          |          | 3x3 |
-      +----------+----------+----------+-----+
+      +------+------+------+---+
+      |      |      |      |3x3|
+      | 6x6  | 6x6  | 6x6  +---+
+      |      |      |      |3x3|
+      +------+------+------+---+
    ```
 
    Notice how this is subtracting from the larger side at each step. Since division is iterative subtraction, this entire algorithm can be done using division. Starting from the very beginning...
 
    ```{svgbob}
-                         21
-      +--------------------------------------+
-      |                                      |
-      |                                      |
-      |                                      | 6
-      +--------------------------------------+
+                  21
+      +------------------------+
+      |                        |
+      |                        |
+      |                        | 6
+      +------------------------+
    ```
    
    Since in 21x6, 6 is the smaller side, break off as many blocks of 6 as possible from 21: `{kt} 21 \div 6 = 3R3` (3 blocks of 6x6, with 3 remaining)...
 
    ```{svgbob}   
-                                          3
-      +----------+----------+----------+-----+
-      |          |          |          |     |
-      |   6x6    |   6x6    |   6x6    |     |
-      |          |          |          |     | 6
-      +----------+----------+----------+-----+
+                             3
+      +------+------+------+---+
+      |      |      |      |   |
+      | 6x6  | 6x6  | 6x6  |   |
+      |      |      |      |   | 6
+      +------+------+------+---+
    ```
 
    Since in 3x6, 3 is the smaller side, break off as many blocks of 3 as possible from 6: `{kt} 21 \div 6 = 2R0` (2 blocks of 3x3, with 0 remaining)...
 
    ```{svgbob}   
-      +----------+----------+----------+-----+
-      |          |          |          | 3x3 |
-      |   6x6    |   6x6    |   6x6    +-----+
-      |          |          |          | 3x3 |
-      +----------+----------+----------+-----+
+      +------+------+------+---+
+      |      |      |      |3x3|
+      | 6x6  | 6x6  | 6x6  +---+
+      |      |      |      |3x3|
+      +------+------+------+---+
    ```
 
  * Algebraic explanation
