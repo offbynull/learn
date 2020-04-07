@@ -3803,7 +3803,7 @@ The following is my attempt at explaining Euclid's algorithm after reading sever
    ```
    
    Since in 3x6, 6 is the smaller side, break off 3 from the 6 to get a 3x3 block...
-   `
+   
    ```{svgbob}   
       +------+------+------+---+
       |      |      |      |3x3|
