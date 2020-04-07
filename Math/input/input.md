@@ -3694,9 +3694,23 @@ The first algorithm is to test divisions on incrementally larger numbers until y
  * `{kt} 22 \div 7 = 3R1` and `{kt} 8 \div 7 = 1R1` (both NOT divisible)
  * `{kt} 22 \div 8 = 2R6` and `{kt} 8 \div 8 = 1` (first NOT divisible)
 
-The greatest common divisor is 4.
+The greatest common divisor is 2.
 
-TODO: implement here
+```{output}
+arithmetic_code/GreatestCommonDivisor.py
+python
+#MARKDOWN_NAIVE\s*\n([\s\S]+)\n\s*#MARKDOWN_NAIVE
+```
+
+```{define-block}
+gcdnaive
+gcdnaive_macro/
+arithmetic_code/
+```
+
+```{gcdnaive}
+22 8
+```
 
 The second algorithm is to factor both numbers and take the largest common factor between them. The largest common factor is the greatest common divisor. For example, for the numbers 22 and 8, ...
 
@@ -3705,7 +3719,21 @@ The second algorithm is to factor both numbers and take the largest common facto
 
 The greatest common factor between them is 2.
 
-TODO: implement here
+```{output}
+arithmetic_code/GreatestCommonDivisor.py
+python
+#MARKDOWN_FACTOR\s*\n([\s\S]+)\n\s*#MARKDOWN_FACTOR
+```
+
+```{define-block}
+gcdfactor
+gcdfactor_macro/
+arithmetic_code/
+```
+
+```{gcdfactor}
+22 8
+```
 
 The third algorithm is to use `{bm} Euclid's algorithm` to compute the greatest common divisor. This is the algorithm most used by both humans and computers to calculate the greatest common divisor because it's less labour intensive than the other two methods.
 
@@ -3775,7 +3803,7 @@ The following is my attempt at explaining Euclid's algorithm after reading sever
    ```
    
    Since in 3x6, 6 is the smaller side, break off 3 from the 6 to get a 3x3 block...
-   
+   `
    ```{svgbob}   
       +------+------+------+---+
       |      |      |      |3x3|

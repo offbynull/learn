@@ -4250,15 +4250,106 @@ factor2: int = ...;
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>22</mn><mo>÷</mo><mn>7</mn><mo>=</mo><mn>3</mn><mi>R</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">22 \div 7 = 3R1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">1</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>÷</mo><mn>7</mn><mo>=</mo><mn>1</mn><mi>R</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">8 \div 7 = 1R1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">1</span></span></span></span> (both NOT <a href="#BOOKMARK57">divisible</a>)</li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>22</mn><mo>÷</mo><mn>8</mn><mo>=</mo><mn>2</mn><mi>R</mi><mn>6</mn></mrow><annotation encoding="application/x-tex">22 \div 8 = 2R6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">6</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>÷</mo><mn>8</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">8 \div 8 = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> (first NOT <a href="#BOOKMARK57">divisible</a>)</li>
 </ul>
-<p>The <a href="#BOOKMARK72">greatest common divisor</a> <a href="#BOOKMARK103">is</a> 4.</p>
-<p>TODO: implement here</p>
+<p>The <a href="#BOOKMARK72">greatest common divisor</a> <a href="#BOOKMARK103">is</a> 2.</p>
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gcd_naive</span><span class="hljs-params">(num1: WholeNumber, num2: WholeNumber)</span> -&gt; WholeNumber:</span>
+    log(<span class="hljs-string">f'Calculating gcd for <span class="hljs-subst">{num1}</span> and <span class="hljs-subst">{num2}</span>...'</span>)
+    log_indent()
+
+    log(<span class="hljs-string">f'Sorting to determine smaller input...'</span>)
+    min_num = min(num1, num2)
+
+    log(<span class="hljs-string">f'Testing up to smaller input (<span class="hljs-subst">{min_num}</span>)...'</span>)
+    log_indent()
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> WholeNumber.range(WholeNumber(<span class="hljs-string">'1'</span>), min_num, <span class="hljs-literal">True</span>):
+        log(<span class="hljs-string">f'Testing <span class="hljs-subst">{i}</span>...'</span>)
+        quotient1, remainder1 = num1 / i
+        quotient2, remainder2 = num2 / i
+        <span class="hljs-keyword">if</span> remainder1 == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> remainder2 == <span class="hljs-number">0</span>:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{num1}</span> and <span class="hljs-subst">{num2}</span> are both divisible by <span class="hljs-subst">{i}</span>...'</span>)
+            found = i
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{num1}</span> and <span class="hljs-subst">{num2}</span> are NOT both divisible by <span class="hljs-subst">{i}</span>...'</span>)
+    log_unindent()
+
+    log_unindent()
+    log(<span class="hljs-string">f'GCD is <span class="hljs-subst">{found}</span>'</span>)
+    <span class="hljs-keyword">return</span> found</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>Calculating gcd for 22 and 8...
+<ul>
+<li>Sorting to determine smaller input...</li>
+<li>Testing up to smaller input (8)...
+<ul>
+<li>Testing 1...</li>
+<li>22 and 8 are both divisible by 1...</li>
+<li>Testing 2...</li>
+<li>22 and 8 are both divisible by 2...</li>
+<li>Testing 3...</li>
+<li>22 and 8 are NOT both divisible by 3...</li>
+<li>Testing 4...</li>
+<li>22 and 8 are NOT both divisible by 4...</li>
+<li>Testing 5...</li>
+<li>22 and 8 are NOT both divisible by 5...</li>
+<li>Testing 6...</li>
+<li>22 and 8 are NOT both divisible by 6...</li>
+<li>Testing 7...</li>
+<li>22 and 8 are NOT both divisible by 7...</li>
+<li>Testing 8...</li>
+<li>22 and 8 are NOT both divisible by 8...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GCD is 2</li>
+</ul>
+</div>
+<p></p>
 <p>The second algorithm <a href="#BOOKMARK103">is</a> to <a href="#BOOKMARK63">factor</a> both numbers and take the largest common <a href="#BOOKMARK63">factor</a> between them. The largest common <a href="#BOOKMARK63">factor</a> <a href="#BOOKMARK103">is</a> the <a href="#BOOKMARK72">greatest common divisor</a>. For example, for the numbers 22 and 8, ...</p>
 <ul>
 <li>the <a href="#BOOKMARK63">factor</a>s of 22 are 1, 2, 11, and 22.</li>
 <li>the <a href="#BOOKMARK63">factor</a>s of 8 are 1, 2, 4 and 8.</li>
 </ul>
 <p>The greatest common <a href="#BOOKMARK63">factor</a> between them <a href="#BOOKMARK103">is</a> 2.</p>
-<p>TODO: implement here</p>
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gcd_factor</span><span class="hljs-params">(num1: WholeNumber, num2: WholeNumber)</span> -&gt; WholeNumber:</span>
+    log(<span class="hljs-string">f'Calculating gcd for <span class="hljs-subst">{num1}</span> and <span class="hljs-subst">{num2}</span>...'</span>)
+    log_indent()
+
+    log(<span class="hljs-string">f'Calculating factors for <span class="hljs-subst">{num1}</span>...'</span>)
+    factors1 = factor_fastest(num1)
+    log(<span class="hljs-string">f'Factors for <span class="hljs-subst">{num1}</span>: <span class="hljs-subst">{factors1}</span>'</span>)
+
+    log(<span class="hljs-string">f'Calculating factors for <span class="hljs-subst">{num2}</span>...'</span>)
+    factors2 = factor_fastest(num2)
+    log(<span class="hljs-string">f'Factors for <span class="hljs-subst">{num2}</span>: <span class="hljs-subst">{factors2}</span>'</span>)
+
+    log(<span class="hljs-string">f'Finding common factors...'</span>)
+    common_factors = factors1 &amp; factors2  <span class="hljs-comment"># set intersection</span>
+    log(<span class="hljs-string">f'Common factors for <span class="hljs-subst">{num1}</span> and <span class="hljs-subst">{num2}</span>: <span class="hljs-subst">{common_factors}</span>'</span>)
+
+    found = max(common_factors)
+
+    log_unindent()
+    log(<span class="hljs-string">f'GCD is <span class="hljs-subst">{found}</span>'</span>)
+    <span class="hljs-keyword">return</span> found</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>Calculating gcd for 22 and 8...
+<ul>
+<li>Calculating factors for 22...</li>
+<li>Factors for 22: {2, 11, 1, 22}</li>
+<li>Calculating factors for 8...</li>
+<li>Factors for 8: {2, 8, 1, 4}</li>
+<li>Finding common factors...</li>
+<li>Common factors for 22 and 8: {2, 1}</li>
+</ul>
+</li>
+<li>GCD is 2</li>
+</ul>
+</div>
+<p></p>
 <p>The third algorithm <a href="#BOOKMARK103">is</a> to use <a name="BOOKMARK74"></a><strong>Euclid's algorithm</strong> to compute the <a href="#BOOKMARK72">greatest common divisor</a>. Th<a href="#BOOKMARK103">is</a> <a href="#BOOKMARK103">is</a> the algorithm most used by both humans and computers to calculate the <a href="#BOOKMARK72">greatest common divisor</a> because it's less labour intensive than the other two methods.</p>
 <p>Imagine the numbers 8 and 22. The algorithm starts by sorting the numbers from largest to smallest and dividing them:</p>
 <ul>
@@ -4289,8 +4380,9 @@ factor2: int = ...;
 <p><img src="svgbob_44df863e2349307aa8c07052582f619f4237027f.svg" alt="Kroki diagram output"></p>
 <p>Since in 9x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off 6 from the 9 to get a 6x6 block...</p>
 <p><img src="svgbob_9c7cfe4413a8ba39dcaf9ae76836a644454517bb.svg" alt="Kroki diagram output"></p>
-<p>Since in 3x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off 3 from the 6 to get a 3x3 block...</p>
-<p><img src="svgbob_4724b854408fd110e5fb185e0ad235f841820053.svg" alt="Kroki diagram output"></p>
+<p>Since in 3x6, 6 <a href="#BOOKMARK103">is</a> the smaller side, break off 3 from the 6 to get a 3x3 block...
+`
+<code>{svgbob}       +------+------+------+---+    |      |      |      |3x3|    | 6x6  | 6x6  | 6x6  +---+    |      |      |      |   | 3    +------+------+------+---+                           3 </code></p>
 <p>The remaining block <a href="#BOOKMARK103">is</a> also 3x3 block. As such, the largest size that th<a href="#BOOKMARK103">is</a> entire rectangle can be constructed from <a href="#BOOKMARK103">is</a> 3x3. The <a href="#BOOKMARK72">greatest common divisor</a> <a href="#BOOKMARK103">is</a> 3.</p>
 <p><img src="svgbob_f8ef8f4899d0fdac7134860108295a330dac3f6e.svg" alt="Kroki diagram output"></p>
 <p>Notice how th<a href="#BOOKMARK103">is</a> <a href="#BOOKMARK103">is</a> subtracting from the larger side at each step. Since <a href="#BOOKMARK26">division</a> <a href="#BOOKMARK103">is</a> iterative <a href="#BOOKMARK9">subtraction</a>, th<a href="#BOOKMARK103">is</a> entire algorithm can be done using <a href="#BOOKMARK26">division</a>. Starting from the very beginning...</p>
