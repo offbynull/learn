@@ -5,6 +5,7 @@ from typing import Union, List, Set
 
 import Factor
 from Factor import factor_tree
+from GreatestCommonDivisor import gcd_euclid
 from Sign import Sign
 from Output import log_indent, log_unindent, log
 from IntegerNumber import IntegerNumber
@@ -175,34 +176,27 @@ class FractionNumber:
             log(f'Simplifying {self}...')
             log_indent()
 
-            log(f'Calculating factors for numerator ({self._numerator.magnitude})...')
-            numerator_factors = factor_tree(self._numerator.magnitude).get_prime_factors()
-            log(f'Numerator factors: {numerator_factors}')
+            log(f'Calculating GCD for ({self._numerator.magnitude}) and ({self._denominator.magnitude})...')
+            gcd = gcd_euclid(self._numerator.magnitude, self._denominator.magnitude)
+            log(f'GCD is {gcd}')
 
-            log(f'Calculating factors for denominator ({self._denominator.magnitude})...')
-            denominator_factors = factor_tree(self._denominator.magnitude).get_prime_factors()
-            log(f'Denominator factors: {denominator_factors}')
+            log(f'Dividing numerator ({self._numerator.magnitude}) by {gcd}...')
+            new_num, _ = self._numerator.magnitude / gcd
+            log(f'New numerator is {new_num}...')
 
-            common_factors = list((Counter(numerator_factors) & Counter(denominator_factors)).elements())  # intersection
-            log(f'Common factors: {common_factors}')
-
-            divided_numerator = self._numerator.magnitude
-            divided_denominator = self._denominator.magnitude
-            for common_factor in common_factors:
-                log(f'Dividing out common factor of {common_factor}...')
-                divided_numerator, _ = divided_numerator / common_factor
-                divided_denominator, _ = divided_denominator / common_factor
-                log(f'Numerator: {divided_numerator}, Denominator: {divided_denominator}')
+            log(f'Dividing denominator ({self._denominator.magnitude}) by {gcd}...')
+            new_den, _ = self._denominator.magnitude / gcd
+            log(f'New numerator is {new_den}...')
 
             # Sign of fraction is on the numerator
             if self.sign == Sign.NEGATIVE:  # if original was negative, so will the simplified
                 res = FractionNumber(
-                    IntegerNumber(Sign.NEGATIVE, divided_numerator),
-                    IntegerNumber(Sign.POSITIVE, divided_denominator))
+                    IntegerNumber(Sign.NEGATIVE, new_num),
+                    IntegerNumber(Sign.POSITIVE, new_den))
             else:  # if original was positive, so will the simplified
                 res = FractionNumber(
-                    IntegerNumber(Sign.POSITIVE, divided_numerator),
-                    IntegerNumber(Sign.POSITIVE, divided_denominator))
+                    IntegerNumber(Sign.POSITIVE, new_num),
+                    IntegerNumber(Sign.POSITIVE, new_den))
 
             log_unindent()
             log(f'{self} simplified to: {res}')

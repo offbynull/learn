@@ -4238,6 +4238,11 @@ factor2: int = ...;
 </ul>
 </div>
 <p>The <a name="BOOKMARK72"></a><strong>greatest common divisor</strong> <a name="BOOKMARK73"></a><strong></strong> <a href="#BOOKMARK103">is</a> the process of taking 2 numbers and finding the largest possible <a href="#BOOKMARK30">divisor</a> between the two of them. That <a href="#BOOKMARK103">is</a>, finding the greatest number that <a href="#BOOKMARK59">evenly divide</a>s both numbers.</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>Th<a href="#BOOKMARK103">is</a> <a href="#BOOKMARK103">is</a> also referred to as the <a href="#BOOKMARK72">highest common factor</a> -- you're finding the largest <a href="#BOOKMARK63">factor</a> that's common in both of them. Common <a href="#BOOKMARK63">factor</a>s between the numbers will <a href="#BOOKMARK59">evenly divide</a> both numbers.</p>
+</div>
 <p>There are 3 common algorithms used to find the <a href="#BOOKMARK72">greatest common divisor</a> between 2 numbers.</p>
 <p>The first algorithm <a href="#BOOKMARK103">is</a> to test <a href="#BOOKMARK26">division</a>s on incrementally larger numbers until you reach the smaller of the 2 numbers. The largest tested number that <a href="#BOOKMARK105">was</a> <a href="#BOOKMARK58">evenly divisible</a> <a href="#BOOKMARK103">is</a> the <a href="#BOOKMARK72">greatest common divisor</a>. For example, for the numbers 22 and 8...</p>
 <ul>
@@ -4311,7 +4316,17 @@ factor2: int = ...;
 <li>the <a href="#BOOKMARK63">factor</a>s of 22 are 1, 2, 11, and 22.</li>
 <li>the <a href="#BOOKMARK63">factor</a>s of 8 are 1, 2, 4 and 8.</li>
 </ul>
-<p>The greatest common <a href="#BOOKMARK63">factor</a> between them <a href="#BOOKMARK103">is</a> 2.</p>
+<p>The <a href="#BOOKMARK72">greatest common factor</a> between them <a href="#BOOKMARK103">is</a> 2.</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>You can also use <a href="#BOOKMARK66">prime factorization</a>. <a href="#BOOKMARK66">Prime factor</a>ize both numbers to their <a href="#BOOKMARK66">prime factor</a>s -- any <a href="#BOOKMARK63">factor</a>s contained in both are <a href="#BOOKMARK66">prime factor</a>s of the <a href="#BOOKMARK72">greatest common divisor</a>. For example...</p>
+<ul>
+<li><a href="#BOOKMARK64">prime</a><a href="#BOOKMARK63">Factor</a>ize(22) <a href="#BOOKMARK103">is</a> 2 * 11.</li>
+<li><a href="#BOOKMARK64">prime</a><a href="#BOOKMARK63">Factor</a>ize(8) <a href="#BOOKMARK103">is</a> 2 * 2 * 2.</li>
+</ul>
+<p><img src="svgbob_7b98ed66846c3ad4b66318571dfc06d595f45324.svg" alt="Kroki diagram output"></p>
+</div>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gcd_factor</span><span class="hljs-params">(num1: WholeNumber, num2: WholeNumber)</span> -&gt; WholeNumber:</span>
     log(<span class="hljs-string">f'Calculating gcd for <span class="hljs-subst">{num1}</span> and <span class="hljs-subst">{num2}</span>...'</span>)
@@ -4350,7 +4365,7 @@ factor2: int = ...;
 </ul>
 </div>
 <p></p>
-<p>The third algorithm <a href="#BOOKMARK103">is</a> to use <a name="BOOKMARK74"></a><strong>Euclid's algorithm</strong> to compute the <a href="#BOOKMARK72">greatest common divisor</a>. Th<a href="#BOOKMARK103">is</a> <a href="#BOOKMARK103">is</a> the algorithm most used by both humans and computers to calculate the <a href="#BOOKMARK72">greatest common divisor</a> because it's less labour intensive than the other two methods.</p>
+<p>The third algorithm <a href="#BOOKMARK103">is</a> to use <a name="BOOKMARK74"></a><strong>Euclid's algorithm</strong> to compute the <a href="#BOOKMARK72">greatest common divisor</a>. Th<a href="#BOOKMARK103">is</a> <a href="#BOOKMARK103">is</a> the algorithm most used by both humans and computers to calculate the <a href="#BOOKMARK72">greatest common divisor</a> because, for large numbers, it's less labour intensive than the other two methods.</p>
 <p>Imagine the numbers 8 and 22. The algorithm starts by sorting the numbers from largest to smallest and dividing them:</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>22</mn><mo>÷</mo><mn>8</mn><mo>=</mo><mn>2</mn><mi>R</mi><mn>6</mn></mrow><annotation encoding="application/x-tex">22 \div 8 = 2R6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">6</span></span></span></span></li>
@@ -4363,8 +4378,51 @@ factor2: int = ...;
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mo>÷</mo><mn>2</mn><mo>=</mo><mn>3</mn><mi>R</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">6 \div 2 = 3R0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">0</span></span></span></span></li>
 </ul>
-<p>The greatest common <a href="#BOOKMARK63">factor</a> <a href="#BOOKMARK103">is</a> the <a href="#BOOKMARK30">divisor</a> when the <a href="#BOOKMARK27">remainder</a> <a href="#BOOKMARK103">is</a> 0. In th<a href="#BOOKMARK103">is</a> example, it's 2.</p>
-<p>TODO: implement here</p>
+<p>The <a href="#BOOKMARK72">greatest common factor</a> <a href="#BOOKMARK103">is</a> the <a href="#BOOKMARK30">divisor</a> when the <a href="#BOOKMARK27">remainder</a> <a href="#BOOKMARK103">is</a> 0. In th<a href="#BOOKMARK103">is</a> example, it's 2.</p>
+<pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gcd_euclid</span><span class="hljs-params">(num1: WholeNumber, num2: WholeNumber)</span> -&gt; WholeNumber:</span>
+    log(<span class="hljs-string">f'Calculating gcd for <span class="hljs-subst">{num1}</span> and <span class="hljs-subst">{num2}</span>...'</span>)
+    log_indent()
+
+    next_nums = [num1, num2]
+
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        log(<span class="hljs-string">f'Sorting <span class="hljs-subst">{next_nums}</span>...'</span>)
+        next_nums.sort()  <span class="hljs-comment"># sort smallest to largest</span>
+        next_nums.reverse()  <span class="hljs-comment"># reverse it so that it's largest to largest</span>
+        log(<span class="hljs-string">f'Checking if finished (<span class="hljs-subst">{next_nums[<span class="hljs-number">1</span>]}</span> == 0?)...'</span>)
+        <span class="hljs-keyword">if</span> next_nums[<span class="hljs-number">1</span>] == WholeNumber(<span class="hljs-number">0</span>):
+            found = next_nums[<span class="hljs-number">0</span>]
+            <span class="hljs-keyword">break</span>
+
+        log(<span class="hljs-string">f'Dividing <span class="hljs-subst">{next_nums}</span> and grabbing the remainder for the next test...'</span>)
+        _, remainder = next_nums[<span class="hljs-number">0</span>] / next_nums[<span class="hljs-number">1</span>]
+        next_nums = [next_nums[<span class="hljs-number">1</span>], remainder]
+
+    log_unindent()
+    log(<span class="hljs-string">f'GCD is <span class="hljs-subst">{found}</span>'</span>)
+    <span class="hljs-keyword">return</span> found</code></pre><div style="border:1px solid black;">
+<p></p>
+<ul>
+<li>Calculating gcd for 22 and 8...
+<ul>
+<li>Sorting [22, 8]...</li>
+<li>Checking if finished (8 == 0?)...</li>
+<li>Dividing [22, 8] and grabbing the remainder for the next test...</li>
+<li>Sorting [8, 6]...</li>
+<li>Checking if finished (6 == 0?)...</li>
+<li>Dividing [8, 6] and grabbing the remainder for the next test...</li>
+<li>Sorting [6, 2]...</li>
+<li>Checking if finished (2 == 0?)...</li>
+<li>Dividing [6, 2] and grabbing the remainder for the next test...</li>
+<li>Sorting [2, 0]...</li>
+<li>Checking if finished (0 == 0?)...</li>
+</ul>
+</li>
+<li>GCD is 2</li>
+</ul>
+</div>
+<p></p>
 <div style="margin: 2em; background-color: #e0e0e0">
 <strong>
 ⚠️NOTE️️️⚠️</strong>
@@ -4455,7 +4513,7 @@ factor2: int = ...;
 </ul>
 <p>For example, if 4 parts make up a whole (<a href="#BOOKMARK77">denominator</a>) and you have 9 of those parts (<a href="#BOOKMARK76">numerator</a>), that's represented as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>9</mn><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{9}{4}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
 <p><img src="MainNumberLineDraw74b64723fbf3ccc3817103f32cb9a96b.svg" alt="Concept diagram for fraction 0 / 4"></p>
-<p><img src="svgbob_d8d7aae234f3517db9b321ce36e9d21a93d21818.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_40483782e0b14581572c568b66f50e88f170b962.svg" alt="Kroki diagram output"></p>
 <p>You can think of <a href="#BOOKMARK75">fraction</a>s as unre<a href="#BOOKMARK95">solve</a>d <a href="#BOOKMARK48">integer</a> <a href="#BOOKMARK26">division</a> ope<a href="#BOOKMARK83">ratio</a>ns. That <a href="#BOOKMARK103">is</a>, rather than performing the <a href="#BOOKMARK26">division</a>, the <a href="#BOOKMARK26">division</a> <a href="#BOOKMARK103">is</a> left as-<a href="#BOOKMARK103">is</a> and the entire thing <a href="#BOOKMARK103">is</a> treated as a value. In the example above, performing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9</mn><mo>÷</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">9 \div 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">9</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> results in 2R1, which <a href="#BOOKMARK103">is</a> exactly the same value as represented by the <a href="#BOOKMARK75">fraction</a> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>9</mn><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{9}{4}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>. As the circle diagram above shows, 2 wholes are available and 1 remaining part.</p>
 <p>Since a <a href="#BOOKMARK75">fraction</a> represent <a href="#BOOKMARK48">integer</a> <a href="#BOOKMARK26">division</a>, the same rules as <a href="#BOOKMARK48">integer</a> <a href="#BOOKMARK26">division</a> apply:</p>
 <ol>
@@ -4509,8 +4567,7 @@ factor2: int = ...;
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK103">IS</a>ITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK48">Integer</a> <a href="#BOOKMARK26">division</a></li>
-<li><a href="#BOOKMARK66">Prime factorization</a></li>
+<li><a href="#BOOKMARK72">Greatest common divisor</a></li>
 </ul>
 </div>
 <p>Many <a href="#BOOKMARK75">fraction</a>s can have the same value (<a href="#BOOKMARK78">equivalent fraction</a>s). For example, both <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>4</mn><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{4}{6}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>8</mn><mn>12</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{8}{12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> represent the same value:</p>
@@ -4531,58 +4588,44 @@ factor2: int = ...;
 <p><img src="MainNumberLineDraw3859ee5cf7493d10331c949379cd2cb1.svg" alt="Concept diagram for fraction 0 / 3"></p>
 </li>
 </ul>
-<p>A <a href="#BOOKMARK75">fraction</a> <a href="#BOOKMARK103">is</a> considered a <a href="#BOOKMARK81">simplified fraction</a> if has no common <a href="#BOOKMARK63">factor</a>s between its <a href="#BOOKMARK76">numerator</a> and its <a href="#BOOKMARK77">denominator</a> (other than 1). For example, for the <a href="#BOOKMARK75">fraction</a> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>12</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{12}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>, the</p>
+<p>A <a href="#BOOKMARK75">fraction</a> <a href="#BOOKMARK103">is</a> considered a <a href="#BOOKMARK81">simplified fraction</a> if has no common <a href="#BOOKMARK63">factor</a>s between its <a href="#BOOKMARK76">numerator</a> and its <a href="#BOOKMARK77">denominator</a> (other than 1). For example, for the <a href="#BOOKMARK75">fraction</a> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>8</mn><mn>12</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{8}{12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>, the</p>
 <ul>
-<li><a href="#BOOKMARK76">numerator</a>'s (12) <a href="#BOOKMARK63">factor</a>s are 1, 2, 3, 4, 6, and 12.</li>
-<li><a href="#BOOKMARK77">denominator</a>'s (8) <a href="#BOOKMARK63">factor</a>s are 1, 2, 4, and 8.</li>
+<li><a href="#BOOKMARK76">numerator</a>'s (8) <a href="#BOOKMARK63">factor</a>s are 1, 2, 4, and 8.</li>
+<li><a href="#BOOKMARK77">denominator</a>'s (12) <a href="#BOOKMARK63">factor</a>s are 1, 2, 3, 4, 6, and 12.</li>
 </ul>
-<p>The largest common <a href="#BOOKMARK63">factor</a> (other than 1) between them <a href="#BOOKMARK103">is</a> 4. As such, dividing both the <a href="#BOOKMARK76">numerator</a> and <a href="#BOOKMARK77">denominator</a> by 4 will give the <a href="#BOOKMARK81">simplified form</a> of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{2}{3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
-<p>The algorithm typically used by humans to <a href="#BOOKMARK81">simplify a fraction</a> <a href="#BOOKMARK103">is</a> <a href="#BOOKMARK66">prime factorization</a>:</p>
-<ol>
-<li>
-<p><a href="#BOOKMARK66">prime factor</a>ize the <a href="#BOOKMARK76">numerator</a> and <a href="#BOOKMARK77">denominator</a></p>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>3</mn><mo>⋅</mo><mn>2</mn><mo>⋅</mo><mn>2</mn></mrow><mrow><mn>2</mn><mo>⋅</mo><mn>2</mn><mo>⋅</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{3 \cdot 2 \cdot 2}{2 \cdot 2 \cdot 2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mbin mtight">⋅</span><span class="mord mtight">2</span><span class="mbin mtight">⋅</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mbin mtight">⋅</span><span class="mord mtight">2</span><span class="mbin mtight">⋅</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
-</li>
-<li>
-<p>remove all common <a href="#BOOKMARK63">factor</a>s</p>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>3</mn><mo>⋅</mo><menclose notation="updiagonalstrike downdiagonalstrike"><mn>2</mn></menclose><mo>⋅</mo><menclose notation="updiagonalstrike downdiagonalstrike"><mn>2</mn></menclose></mrow><mrow><mn>2</mn><mo>⋅</mo><menclose notation="updiagonalstrike downdiagonalstrike"><mn>2</mn></menclose><mo>⋅</mo><menclose notation="updiagonalstrike downdiagonalstrike"><mn>2</mn></menclose></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{3 \cdot \xcancel{2} \cdot \xcancel{2}}{2 \cdot \xcancel{2} \cdot \xcancel{2}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mbin mtight">⋅</span><span class="mord mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord mtight"><span class="mord mtight">2</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mtight" style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="0" x2="100%" y2="100%" stroke-width="0.046em"></line><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span><span class="mbin mtight">⋅</span><span class="mord mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord mtight"><span class="mord mtight">2</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mtight" style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="0" x2="100%" y2="100%" stroke-width="0.046em"></line><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mbin mtight">⋅</span><span class="mord mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord mtight"><span class="mord mtight">2</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mtight" style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="0" x2="100%" y2="100%" stroke-width="0.046em"></line><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span><span class="mbin mtight">⋅</span><span class="mord mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.84444em;"><span style="top:-3.04444em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mord mtight"><span class="mord mtight">2</span></span></span><span class="svg-align" style="top:-2.8444399999999996em;"><span class="pstrut" style="height:3.04444em;"></span><span class="mtight" style="height:1.04444em;"><svg width="100%" height="1.04444em"><line x1="0" y1="0" x2="100%" y2="100%" stroke-width="0.046em"></line><line x1="0" y1="100%" x2="100%" y2="0" stroke-width="0.046em"></line></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20000000000000007em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> ⟶ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{2}{3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
-</li>
-</ol>
-<p>Th<a href="#BOOKMARK103">is</a> algorithm as code <a href="#BOOKMARK103">is</a> as follows...</p>
+<p>If a <a href="#BOOKMARK75">fraction</a> <a href="#BOOKMARK103">is</a>n't simplified, dividing the <a href="#BOOKMARK76">numerator</a> and <a href="#BOOKMARK77">denominator</a> by the <a href="#BOOKMARK72">highest common factor</a> will make it simplified. In the example above, the <a href="#BOOKMARK72">highest common factor</a> <a href="#BOOKMARK103">is</a> 4. As such, dividing both the <a href="#BOOKMARK76">numerator</a> and <a href="#BOOKMARK77">denominator</a> by 4 will give the <a href="#BOOKMARK81">simplified fraction</a> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{2}{3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
+<div style="margin: 2em; background-color: #e0e0e0">
+<strong>
+⚠️NOTE️️️⚠️</strong>
+<p>The algorithm described above <a href="#BOOKMARK103">is</a> calculating the <a href="#BOOKMARK72">greatest common divisor</a>.</p>
+</div>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simplify</span><span class="hljs-params">(self: FractionNumber)</span> -&gt; FractionNumber:</span>
     log_indent()
     <span class="hljs-keyword">try</span>:
         log(<span class="hljs-string">f'Simplifying <span class="hljs-subst">{self}</span>...'</span>)
         log_indent()
 
-        log(<span class="hljs-string">f'Calculating factors for numerator (<span class="hljs-subst">{self._numerator.magnitude}</span>)...'</span>)
-        numerator_factors = factor_tree(self._numerator.magnitude).get_prime_factors()
-        log(<span class="hljs-string">f'Numerator factors: <span class="hljs-subst">{numerator_factors}</span>'</span>)
+        log(<span class="hljs-string">f'Calculating GCD for (<span class="hljs-subst">{self._numerator.magnitude}</span>) and (<span class="hljs-subst">{self._denominator.magnitude}</span>)...'</span>)
+        gcd = gcd_euclid(self._numerator.magnitude, self._denominator.magnitude)
+        log(<span class="hljs-string">f'GCD is <span class="hljs-subst">{gcd}</span>'</span>)
 
-        log(<span class="hljs-string">f'Calculating factors for denominator (<span class="hljs-subst">{self._denominator.magnitude}</span>)...'</span>)
-        denominator_factors = factor_tree(self._denominator.magnitude).get_prime_factors()
-        log(<span class="hljs-string">f'Denominator factors: <span class="hljs-subst">{denominator_factors}</span>'</span>)
+        log(<span class="hljs-string">f'Dividing numerator (<span class="hljs-subst">{self._numerator.magnitude}</span>) by <span class="hljs-subst">{gcd}</span>...'</span>)
+        new_num, _ = self._numerator.magnitude / gcd
+        log(<span class="hljs-string">f'New numerator is <span class="hljs-subst">{new_num}</span>...'</span>)
 
-        common_factors = list((Counter(numerator_factors) &amp; Counter(denominator_factors)).elements())  <span class="hljs-comment"># intersection</span>
-        log(<span class="hljs-string">f'Common factors: <span class="hljs-subst">{common_factors}</span>'</span>)
-
-        divided_numerator = self._numerator.magnitude
-        divided_denominator = self._denominator.magnitude
-        <span class="hljs-keyword">for</span> common_factor <span class="hljs-keyword">in</span> common_factors:
-            log(<span class="hljs-string">f'Dividing out common factor of <span class="hljs-subst">{common_factor}</span>...'</span>)
-            divided_numerator, _ = divided_numerator / common_factor
-            divided_denominator, _ = divided_denominator / common_factor
-            log(<span class="hljs-string">f'Numerator: <span class="hljs-subst">{divided_numerator}</span>, Denominator: <span class="hljs-subst">{divided_denominator}</span>'</span>)
+        log(<span class="hljs-string">f'Dividing denominator (<span class="hljs-subst">{self._denominator.magnitude}</span>) by <span class="hljs-subst">{gcd}</span>...'</span>)
+        new_den, _ = self._denominator.magnitude / gcd
+        log(<span class="hljs-string">f'New numerator is <span class="hljs-subst">{new_den}</span>...'</span>)
 
         <span class="hljs-comment"># Sign of fraction is on the numerator</span>
         <span class="hljs-keyword">if</span> self.sign == Sign.NEGATIVE:  <span class="hljs-comment"># if original was negative, so will the simplified</span>
             res = FractionNumber(
-                IntegerNumber(Sign.NEGATIVE, divided_numerator),
-                IntegerNumber(Sign.POSITIVE, divided_denominator))
+                IntegerNumber(Sign.NEGATIVE, new_num),
+                IntegerNumber(Sign.POSITIVE, new_den))
         <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># if original was positive, so will the simplified</span>
             res = FractionNumber(
-                IntegerNumber(Sign.POSITIVE, divided_numerator),
-                IntegerNumber(Sign.POSITIVE, divided_denominator))
+                IntegerNumber(Sign.POSITIVE, new_num),
+                IntegerNumber(Sign.POSITIVE, new_den))
 
         log_unindent()
         log(<span class="hljs-string">f'<span class="hljs-subst">{self}</span> simplified to: <span class="hljs-subst">{res}</span>'</span>)
@@ -4594,28 +4637,18 @@ factor2: int = ...;
 <ul>
 <li>Simplifying -12/8...
 <ul>
-<li>Calculating factors for numerator (12)...</li>
-<li>Numerator factors: [2, 2, 3]</li>
-<li>Calculating factors for denominator (8)...</li>
-<li>Denominator factors: [2, 2, 2]</li>
-<li>Common factors: [2, 2]</li>
-<li>Dividing out common factor of 2...</li>
-<li>Numerator: 6, Denominator: 4</li>
-<li>Dividing out common factor of 2...</li>
-<li>Numerator: 3, Denominator: 2</li>
+<li>Calculating GCD for (12) and (8)...</li>
+<li>GCD is 4</li>
+<li>Dividing numerator (12) by 4...</li>
+<li>New numerator is 3...</li>
+<li>Dividing denominator (8) by 4...</li>
+<li>New numerator is 2...</li>
 </ul>
 </li>
 <li>-12/8 simplified to: -3/2</li>
 </ul>
 </div>
 <p></p>
-<p>TODO: write section on <a href="#BOOKMARK72">greatest common divisor</a> and REFERENCE IT HERE some<a href="#BOOKMARK22">times</a> called greatst common <a href="#BOOKMARK77">denominator</a></p>
-<p>TODO: write section on <a href="#BOOKMARK72">greatest common divisor</a> and REFERENCE IT HERE some<a href="#BOOKMARK22">times</a> called greatst common <a href="#BOOKMARK77">denominator</a></p>
-<p>TODO: write section on <a href="#BOOKMARK72">greatest common divisor</a> and REFERENCE IT HERE some<a href="#BOOKMARK22">times</a> called greatst common <a href="#BOOKMARK77">denominator</a></p>
-<p>TODO: write section on <a href="#BOOKMARK72">greatest common divisor</a> and REFERENCE IT HERE some<a href="#BOOKMARK22">times</a> called greatst common <a href="#BOOKMARK77">denominator</a></p>
-<p>TODO: write section on <a href="#BOOKMARK72">greatest common divisor</a> and REFERENCE IT HERE some<a href="#BOOKMARK22">times</a> called greatst common <a href="#BOOKMARK77">denominator</a></p>
-<p>TODO: write section on <a href="#BOOKMARK72">greatest common divisor</a> and REFERENCE IT HERE some<a href="#BOOKMARK22">times</a> called greatst common <a href="#BOOKMARK77">denominator</a></p>
-<p>TODO: write section on <a href="#BOOKMARK72">greatest common divisor</a> and REFERENCE IT HERE some<a href="#BOOKMARK22">times</a> called greatst common <a href="#BOOKMARK77">denominator</a></p>
 <a name="HEADREF27"></a><h2>Multiplication</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK103">IS</a>ITES↩</strong></p>

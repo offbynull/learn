@@ -3679,7 +3679,11 @@ Factors
 Primes
 ```
 
-The `{bm} greatest common divisor` `{bm} /(GCD|G\.C\.D.)/i` is the process of taking 2 numbers and finding the largest possible divisor between the two of them. That is, finding the greatest number that evenly divides both numbers.
+The `{bm} greatest common divisor/(greatest common divisor|highest common divisor|largest common divisor|greatest common factor|highest common factor|largest common divisor)/i` `{bm} /(GCD|G\.C\.D.)/i` is the process of taking 2 numbers and finding the largest possible divisor between the two of them. That is, finding the greatest number that evenly divides both numbers.
+
+```{note}
+This is also referred to as the highest common factor -- you're finding the largest factor that's common in both of them. Common factors between the numbers will evenly divide both numbers.
+```
 
 There are 3 common algorithms used to find the greatest common divisor between 2 numbers.
 
@@ -3719,6 +3723,28 @@ The second algorithm is to factor both numbers and take the largest common facto
 
 The greatest common factor between them is 2.
 
+````{note}
+You can also use prime factorization. Prime factorize both numbers to their prime factors -- any factors contained in both are prime factors of the greatest common divisor. For example...
+
+* primeFactorize(22) is 2 \* 11.
+* primeFactorize(8) is 2 \* 2 \* 2.
+
+```{svgbob}
+        +--+                +--+
+22 "="  |2 |                |11|
+        ++-+                +--+
+         |
+        ++-+   +--+   +--+
+8  "="  |2 |   |2 |   |2 |
+        ++-+   +--+   +--+
+         |
+         v
+        +--+
+GCD "=" |2 |
+        +--+
+```
+````
+
 ```{output}
 arithmetic_code/GreatestCommonDivisor.py
 python
@@ -3735,7 +3761,7 @@ arithmetic_code/
 22 8
 ```
 
-The third algorithm is to use `{bm} Euclid's algorithm` to compute the greatest common divisor. This is the algorithm most used by both humans and computers to calculate the greatest common divisor because it's less labour intensive than the other two methods.
+The third algorithm is to use `{bm} Euclid's algorithm` to compute the greatest common divisor. This is the algorithm most used by both humans and computers to calculate the greatest common divisor because, for large numbers, it's less labour intensive than the other two methods.
 
 Imagine the numbers 8 and 22. The algorithm starts by sorting the numbers from largest to smallest and dividing them:
 
@@ -3751,7 +3777,21 @@ It keeps repeating this process until the remainder reaches 0. For this example,
 
 The greatest common factor is the divisor when the remainder is 0. In this example, it's 2.
 
-TODO: implement here
+```{output}
+arithmetic_code/GreatestCommonDivisor.py
+python
+#MARKDOWN_EUCLID\s*\n([\s\S]+)\n\s*#MARKDOWN_EUCLID
+```
+
+```{define-block}
+gcdeuclid
+gcdeuclid_macro/
+arithmetic_code/
+```
+
+```{gcdeuclid}
+22 8
+```
 
 ````{note}
 The following is my attempt at explaining Euclid's algorithm after reading several online resources. You need an understanding of geometry and algebra before continuing.
@@ -3998,11 +4038,11 @@ radius 40
 ```
 
 ```{svgbob}
-<--+----+----+----+----+----+----+----+----+----+----+--->
-   |    |    |    |    |    |    |    |    |    |    |
-                                                    +++
-                                                   /   \
-   0   1/4  2/4  3/4  4/4   1   5/4  6/4  7/4   2   9/4
+<--+----+----+----+----+----+----+----+----+----+--->
+   |    |    |    |    |    |    |    |    |    |
+                                                *
+
+   0   1/4  2/4  3/4   1   5/4  6/4  7/4   2   9/4
 ```
 
 You can think of fractions as unresolved integer division operations. That is, rather than performing the division, the division is left as-is and the entire thing is treated as a value. In the example above, performing `{kt} 9 \div 4` results in 2R1, which is exactly the same value as represented by the fraction `{kt} \frac{9}{4}`. As the circle diagram above shows, 2 wholes are available and 1 remaining part.
@@ -4066,8 +4106,7 @@ The term ratio may also be used to refer to a fraction.
 ## Simplification
 
 ```{prereq}
-Integer division
-Prime factorization
+Greatest common divisor
 ```
 
 Many fractions can have the same value (equivalent fractions). For example, both `{kt} \frac{4}{6}` and `{kt} \frac{8}{12}` represent the same value:
@@ -4098,24 +4137,16 @@ A `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the 
   3
   ```
 
-A fraction is considered a simplified fraction if has no common factors between its numerator and its denominator (other than 1). For example, for the fraction `{kt} \frac{12}{8}`, the
+A fraction is considered a simplified fraction if has no common factors between its numerator and its denominator (other than 1). For example, for the fraction `{kt} \frac{8}{12}`, the
 
- * numerator's (12) factors are 1, 2, 3, 4, 6, and 12.
- * denominator's (8) factors are 1, 2, 4, and 8.
+ * numerator's (8) factors are 1, 2, 4, and 8.
+ * denominator's (12) factors are 1, 2, 3, 4, 6, and 12.
 
-The largest common factor (other than 1) between them is 4. As such, dividing both the numerator and denominator by 4 will give the simplified form of `{kt} \frac{2}{3}`.
+If a fraction isn't simplified, dividing the numerator and denominator by the highest common factor will make it simplified. In the example above, the highest common factor is 4. As such, dividing both the numerator and denominator by 4 will give the simplified fraction `{kt} \frac{2}{3}`.
 
-The algorithm typically used by humans to simplify a fraction is prime factorization:
-
- 1. prime factorize the numerator and denominator
-
-    `{kt} \frac{3 \cdot 2 \cdot 2}{2 \cdot 2 \cdot 2}`
-
- 1. remove all common factors
-
-    `{kt} \frac{3 \cdot \xcancel{2} \cdot \xcancel{2}}{2 \cdot \xcancel{2} \cdot \xcancel{2}}` ⟶ `{kt} \frac{2}{3}`
-
-This algorithm as code is as follows...
+```{note}
+The algorithm described above is calculating the greatest common divisor.
+```
    
 ```{output}
 arithmetic_code/FractionNumber.py
@@ -4132,20 +4163,6 @@ arithmetic_code/
 ```{fracnumsimp}
 -12/8
 ```
-
-TODO: write section on greatest common divisor and REFERENCE IT HERE sometimes called greatst common denominator
-
-TODO: write section on greatest common divisor and REFERENCE IT HERE sometimes called greatst common denominator
-
-TODO: write section on greatest common divisor and REFERENCE IT HERE sometimes called greatst common denominator
-
-TODO: write section on greatest common divisor and REFERENCE IT HERE sometimes called greatst common denominator
-
-TODO: write section on greatest common divisor and REFERENCE IT HERE sometimes called greatst common denominator
-
-TODO: write section on greatest common divisor and REFERENCE IT HERE sometimes called greatst common denominator
-
-TODO: write section on greatest common divisor and REFERENCE IT HERE sometimes called greatst common denominator
 
 ## Multiplication
 
