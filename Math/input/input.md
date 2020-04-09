@@ -3700,6 +3700,8 @@ The first algorithm is to test divisions on incrementally larger numbers until y
 
 The greatest common divisor is 2.
 
+The way to perform this algorithm as code is as follows...
+
 ```{output}
 arithmetic_code/GreatestCommonDivisor.py
 python
@@ -3745,6 +3747,8 @@ GCD "=" |2 |
 ```
 ````
 
+The way to perform this algorithm as code is as follows...
+
 ```{output}
 arithmetic_code/GreatestCommonDivisor.py
 python
@@ -3776,6 +3780,8 @@ It keeps repeating this process until the remainder reaches 0. For this example,
  * `{kt} 6 \div 2 = 3R0`
 
 The greatest common factor is the divisor when the remainder is 0. In this example, it's 2.
+
+The way to perform this algorithm as code is as follows...
 
 ```{output}
 arithmetic_code/GreatestCommonDivisor.py
@@ -4127,6 +4133,10 @@ Many fractions can have the same value (equivalent fractions). For example, both
   12
   ```
 
+```{note}
+The number of slices is different but the amount of gray being taken up from the circle (the value) is the same.
+```
+
 A `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the fraction|simplify a fraction|reduced fraction|reduce fraction|reduce a fraction|reduce the fraction|simplified form|simplified fraction form|simplified form of a fraction|simplified form of the fraction)/i` is a fraction that represents some value in the smallest number of pieces possible. For the example above, both fractions can be simplified to the equivalent fraction `{kt} \frac{2}{3}`:
 
 * `{kt} \frac{2}{3}`:
@@ -4137,7 +4147,7 @@ A `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the 
   3
   ```
 
-A fraction is considered a simplified fraction if has no common factors between its numerator and its denominator (other than 1). For example, for the fraction `{kt} \frac{8}{12}`, the
+A fraction is considered a simplified fraction if has no common factors between its numerator and its denominator (other than 1). For example, for the fraction `{kt} \frac{8}{12}`, the...
 
  * numerator's (8) factors are 1, 2, 4, and 8.
  * denominator's (12) factors are 1, 2, 3, 4, 6, and 12.
@@ -4164,11 +4174,135 @@ arithmetic_code/
 -12/8
 ```
 
+## Addition
+
+```{prereq}
+Integer addition
+Least common denominator
+```
+
+Conceptually, you can think of `{bm} fraction addition` as adding together partial values. It's simple to do as long as the denominators are the same: add the numerators together and keep the denominators the same. For example adding `\frac{1}{4}` and `\frac{2}{4}` ...
+
+ * `{kt} \frac{1}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+ * `{kt} \frac{2}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   4
+   ```
+
+ * `{kt} \frac{1}{4} + \frac{2}{4}` is `{kt} \frac{3}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   4
+   ```
+
+Treat the sign of the fraction as if it were on the numerator. For example, adding `{kt} - \frac{1}{4}` and `{kt} \frac{2}{4}` results in `{kt} - \frac{1}{4}` -- `{kt} -1 + 2` results in `{kt} -1`, so the resulting fraction is `{kt} \frac{-1}{4}`.
+
+If the denominators aren't the same, you'll need to make them the same by finding equivalent fractions that have a matching denominator. For example, `{kt} \frac{1}{3}` and `{kt} \frac{1}{6}` need to be converted to equivalent fractions before adding...
+
+ * `{kt} \frac{1}{3}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   3
+   ```
+
+ * `{kt} \frac{1}{6}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   6
+   ```
+
+The easiest way to find equivalent fractions with matching denominators is, for each fraction, multiply the numerator and denominator by the denominator of the other fraction. So in the example above, the ...
+
+ * numerator and denominator of `{kt} \frac{1}{3}` gets multiplied 3 to get `{kt} \frac{6}{18}`.
+
+   ```{diagramhelperfrac}
+   radius 40
+   6
+   18
+   ```
+
+ * numerator and denominator of `{kt} \frac{1}{6}` gets multiplied 3 to get `{kt} \frac{3}{18}`.
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   18
+   ``` 
+
+Note that each is an equivalent fraction to the original because it has the same value as the original (same amount of gray taken up as the original in the diagrams). Now that the denominators are the same, you can add...
+
+ * `{kt} \frac{6}{18} + \frac{3}{18}` is `{kt} \frac{9}{18}`.
+
+TODO: model with circles -- show why denominators must be the same prior to addition
+
+TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
+```    
+
+```{define-block}
+fracnumadd
+fracnumadd_macro/
+arithmetic_code/
+```
+
+```{fracnumadd}
+-1/3 -2/6
+```
+
+## Subtraction
+
+```{prereq}
+Integer subtraction
+Least common denominator
+```
+
+TODO: model with circles -- show why denominators must be the same prior to addition
+
+TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
+```
+
+```{define-block}
+fracnumsub
+fracnumsub_macro/
+arithmetic_code/
+```
+
+```{fracnumsub}
+-1/3 -2/6
+```
+
 ## Multiplication
 
 ```{prereq}
 Integer multiplication
 ```
+
+The concept of multiplying a fraction is the same as multiplying an integer. You're taking some value and performing repetitive addition on it.
 
 TODO: model out multiplication using fraction tiles... see the example in section 4.2 where they multiply 1/2 by 3/4
 
@@ -4337,60 +4471,6 @@ arithmetic_code/
 
 ```{fracnumdiv}
 1/3 1/4
-```
-
-## Addition
-
-```{prereq}
-Integer addition
-Least common denominator
-```
-
-TODO: model with circles -- show why denominators must be the same prior to addition
-
-TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
-
-```{output}
-arithmetic_code/FractionNumber.py
-python
-#MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
-```    
-
-```{define-block}
-fracnumadd
-fracnumadd_macro/
-arithmetic_code/
-```
-
-```{fracnumadd}
--1/3 -2/6
-```
-
-## Subtraction
-
-```{prereq}
-Integer subtraction
-Least common denominator
-```
-
-TODO: model with circles -- show why denominators must be the same prior to addition
-
-TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
-
-```{output}
-arithmetic_code/FractionNumber.py
-python
-#MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
-```
-
-```{define-block}
-fracnumsub
-fracnumsub_macro/
-arithmetic_code/
-```
-
-```{fracnumsub}
--1/3 -2/6
 ```
 
 ## Mixed Number
