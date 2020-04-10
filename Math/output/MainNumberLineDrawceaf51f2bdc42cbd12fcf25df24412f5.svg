@@ -9,8 +9,8 @@
     /></g
     ><g fill="gray" stroke-width="0.2" stroke="gray"
     ><path d="M2.6795 10 A20 20 0 0 0 2.6795 30L 20 20 Z" stroke="none"
-      /><path d="M2.6795 30 A20 20 0 0 0 20 40L 20 20 Z" stroke="none"
-      /><path d="M20 40 A20 20 0 0 0 37.3205 30L 20 20 Z" stroke="none"
+      /><path fill="white" d="M2.6795 30 A20 20 0 0 0 20 40L 20 20 Z" stroke="none"
+      /><path fill="white" d="M20 40 A20 20 0 0 0 37.3205 30L 20 20 Z" stroke="none"
       /><path fill="white" d="M37.3205 30 A20 20 0 0 0 37.3205 10L 20 20 Z" stroke="none"
       /><path fill="white" d="M37.3205 10 A20 20 0 0 0 20 0L 20 20 Z" stroke="none"
       /><path fill="none" d="M20 0 A20 20 0 0 0 2.6795 10L 20 20 Z" stroke="black"

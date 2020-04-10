@@ -4066,6 +4066,23 @@ Since a fraction represent integer division, the same rules as integer division 
 
   * `{kt} \frac{9}{0}` is undefined.
 
+If a fraction has ...
+
+ * at least 1 whole, it's refereed to as a `{bm} improper fraction` (e.g. `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}`).
+ * less than 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
+
+```{note}
+The term improper doesn't seem to mean anything bad? See http://mathforum.org/library/drmath/view/70437.html for reasoning as to why they're called proper vs improper.
+```
+
+```{note}
+I haven't seen it done a lot but the term quotient may be used to describe a fraction. Since a fraction is essentially an unresolved division operation, the fraction as a whole represents the quotient. As such, a fraction can be referred to as a quotient.
+
+The term ratio may also be used to refer to a fraction.
+```
+
+## Equivalent Fraction
+
 Two fractions are called `{bm} equivalent fraction/(equivalent fraction|fractions that are equivalent|fractions are equivalent)/i`s if they represent the same value. That is, the number of pieces may be different, but the overall value represented by the fraction is the same. For example, `{kt} \frac{3}{2}`, `{kt} \frac{6}{4}`, and `{kt} \frac{12}{8}` are all considered equivalent fractions because they represent the same value:
 
  * `{kt} \frac{3}{2}`
@@ -4094,68 +4111,47 @@ Two fractions are called `{bm} equivalent fraction/(equivalent fraction|fraction
 
 Each fraction has different sized pieces, but the overall value covered by those pieces (the gray region) is the same.
 
-If a fraction has ...
-
- * at least 1 whole, it's refereed to as a `{bm} improper fraction` (e.g. `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}`).
- * less than 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
-
-```{note}
-The term improper doesn't seem to mean anything bad? See http://mathforum.org/library/drmath/view/70437.html for reasoning as to why they're called proper vs improper.
-```
-
-```{note}
-I haven't seen it done a lot but the term quotient may be used to describe a fraction. Since a fraction is essentially an unresolved division operation, the fraction as a whole represents the quotient. As such, a fraction can be referred to as a quotient.
-
-The term ratio may also be used to refer to a fraction.
-```
-
-## Simplification
+### Simplification
 
 ```{prereq}
-Greatest common divisor
+Greatest Common Divisor
 ```
 
-Many fractions can have the same value (equivalent fractions). For example, both `{kt} \frac{4}{6}` and `{kt} \frac{8}{12}` represent the same value:
+Of all the equivalent fractions that represent a value, one of those fractions represents that value in the smallest number of pieces possible. This fraction is called the `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the fraction|simplify a fraction|reduced fraction|reduce fraction|reduce a fraction|reduce the fraction|simplified form|simplified fraction form|simplified form of a fraction|simplified form of the fraction)/i`. For the example above, `{kt} \frac{3}{2}` is the simplified fraction for both `{kt} \frac{12}{8}` and `{kt} \frac{6}{4}`:
 
-* `{kt} \frac{4}{6}`
+ * `{kt} \frac{3}{2}`
 
-  ```{diagramhelperfrac}
-  radius 40
-  4
-  6
-  ```
-  
-* `{kt} \frac{8}{12}`
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   2
+   ```
 
-  ```{diagramhelperfrac}
-  radius 40
-  8
-  12
-  ```
+ * `{kt} \frac{6}{4}`
 
-```{note}
-The number of slices is different but the amount of gray being taken up from the circle (the value) is the same.
-```
+   ```{diagramhelperfrac}
+   radius 40
+   6
+   4
+   ```
 
-A `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the fraction|simplify a fraction|reduced fraction|reduce fraction|reduce a fraction|reduce the fraction|simplified form|simplified fraction form|simplified form of a fraction|simplified form of the fraction)/i` is a fraction that represents some value in the smallest number of pieces possible. For the example above, both fractions can be simplified to the equivalent fraction `{kt} \frac{2}{3}`:
+ * `{kt} \frac{12}{8}`
 
-* `{kt} \frac{2}{3}`:
+   ```{diagramhelperfrac}
+   radius 40
+   12
+   8
+   ```
 
-  ```{diagramhelperfrac}
-  radius 40
-  2
-  3
-  ```
+Algorithmically, a fraction is considered a simplified fraction if no common factors exist between its numerator and its denominator (other than 1). For example, for the fraction `{kt} \frac{12}{8}`, the...
 
-A fraction is considered a simplified fraction if has no common factors between its numerator and its denominator (other than 1). For example, for the fraction `{kt} \frac{8}{12}`, the...
+ * numerator's (12) factors are 1, 2, 3, 4, 6, and 12.
+ * denominator's (8) factors are 1, 2, 4, and 8.
 
- * numerator's (8) factors are 1, 2, 4, and 8.
- * denominator's (12) factors are 1, 2, 3, 4, 6, and 12.
-
-If a fraction isn't simplified, dividing the numerator and denominator by the highest common factor will make it simplified. In the example above, the highest common factor is 4. As such, dividing both the numerator and denominator by 4 will give the simplified fraction `{kt} \frac{2}{3}`.
+If a fraction isn't simplified, dividing the numerator and denominator by the highest common factor will make it simplified. In the example above, the highest common factor is 4. As such, dividing both the numerator and denominator by 4 will give the simplified fraction `{kt} \frac{3}{2}`.
 
 ```{note}
-The algorithm described above is calculating the greatest common divisor.
+The process described above is getting the greatest common divisor / highest common factor for the 2 denominators, then dividing both denominators by it.
 ```
    
 ```{output}
@@ -4173,6 +4169,129 @@ arithmetic_code/
 ```{fracnumsimp}
 -12/8
 ```
+
+### Common Denominator
+
+```{prereq}
+Least Common Multiple
+```
+
+Given a pair of fractions that have different denominators, you can find a pair of equivalent fractions that share a `{bm} common denominator`. For example, the fractions `{kt} \frac{1}{2}` and `{kt} \frac{1}{3}`...
+
+ * `{kt} \frac{1}{2}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   2
+   ```
+
+ * `{kt} \frac{1}{3}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   3
+   ```
+
+... have the following equivalent fractions that share a common denominator...
+
+ * `{kt} \frac{3}{6}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   6
+   ```
+
+ * `{kt} \frac{2}{6}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   6
+   ```
+
+For any 2 fractions, the easiest algorithm to find equivalent fractions with common denominators is to multiply the numerator and denominator of each fraction by the denominator of the other fraction. So in the example above, the ...
+
+ * numerator and denominator of `{kt} \frac{1}{2}` gets multiplied by 3 to get `{kt} \frac{3}{6}`.
+ * numerator and denominator of `{kt} \frac{1}{3}` gets multiplied by 2 to get `{kt} \frac{2}{6}`.
+
+```{note}
+If you already know fraction multiplication, you're effectively doing fraction multiplication here...
+
+* `{kt} \frac{1}{3} \cdot \frac{6}{6}` is `{kt} \frac{6}{18}`
+* `{kt} \frac{1}{6} \cdot \frac{3}{3}` is `{kt} \frac{3}{18}`
+```
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+
+The problem with the algorithm above is that it can result in fractions that have large numerators and denominators. For example, using the algorithm above to get the common denominator for `{kt} \frac{4}{15}` and `{kt} \frac{5}{10}` results in `{kt} \frac{40}{150}` and `{kt} \frac{75}{150}`.
+
+A better approach that often leads to smaller numerators and denominators is to first figure out what the least common multiple between the denominators is (`{bm} least common denominator`). By figuring out what the least common denominator is, you can then work backwards to find the equivalent fractions that have those denominators:
+
+ 1. Get the least common multiple of the denominators from both fractions.
+ 1. For the first fraction...
+    1. Divide the least common multiple by the denominator.
+    1. Multiply the numerator and denominator by the result of the previous step.
+ 1. For the second fraction...
+    1. Divide the least common multiple by the denominator.
+    1. Multiply the numerator and denominator by the result of the previous step.
+
+So for the example above, the least common denominator for 15 and 10 is 30...
+
+ * `{kt} 30 \div 15` is 2, so `{kt} \frac{4}{15}` becomes `{kt} \frac{8}{30}`.
+ * `{kt} 30 \div 10` is 3, so `{kt} \frac{5}{10}` becomes `{kt} \frac{15}{30}`.
+
+```{note}
+If you already know fraction multiplication, you're effectively doing fraction multiplication here...
+
+* `{kt} \frac{4}{15} \cdot \frac{2}{2}` is `{kt} \frac{8}{30}`
+* `{kt} \frac{5}{10} \cdot \frac{3}{3}` is `{kt} \frac{15}{30}`
+```
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+TODO: IMPLEMENT CODE HERE
+
+
 
 ## Addition
 
@@ -4226,28 +4345,6 @@ If the denominators aren't the same, you'll need to make them the same by findin
    1
    6
    ```
-
-The easiest way to find equivalent fractions with matching denominators is, for each fraction, multiply the numerator and denominator by the denominator of the other fraction. So in the example above, the ...
-
- * numerator and denominator of `{kt} \frac{1}{3}` gets multiplied 3 to get `{kt} \frac{6}{18}`.
-
-   ```{diagramhelperfrac}
-   radius 40
-   6
-   18
-   ```
-
- * numerator and denominator of `{kt} \frac{1}{6}` gets multiplied 3 to get `{kt} \frac{3}{18}`.
-
-   ```{diagramhelperfrac}
-   radius 40
-   3
-   18
-   ``` 
-
-Note that each is an equivalent fraction to the original because it has the same value as the original (same amount of gray taken up as the original in the diagrams). Now that the denominators are the same, you can add...
-
- * `{kt} \frac{6}{18} + \frac{3}{18}` is `{kt} \frac{9}{18}`.
 
 TODO: model with circles -- show why denominators must be the same prior to addition
 
