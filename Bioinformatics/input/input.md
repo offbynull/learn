@@ -7,6 +7,8 @@ Bioinformatics
 
 # Introduction
 
+
+
 # K-mers
 
 A `{bm} k-mer/(k-mer|kmer)/i` is a substring of length k within some larger biological string (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
