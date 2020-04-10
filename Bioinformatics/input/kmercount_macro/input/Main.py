@@ -1,4 +1,7 @@
-print(f'"hi')
+import sys
+
+data = sys.stdin.read() #having truoble reading stdin if run from conda run
+print('ggg ' + data)
 
 # dna_seq = data[0]
 # kmer = data[1]
