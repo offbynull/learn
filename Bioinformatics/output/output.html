@@ -56,7 +56,11 @@
 <li>find <a href="#BOOKMARK0">k-mer</a>s of interest in a sequence (e.g. repeating <a href="#BOOKMARK0">k-mer</a>s).</li>
 </ul>
 <p>A common use-case for <a href="#BOOKMARK0">k-mer</a> search is to find the <a name="BOOKMARK1"></a><strong>replication origin</strong> (<a name="BOOKMARK2"></a><strong>ori</strong>) of a prokaryotic organism's DNA. The <a href="#BOOKMARK1">replication origin</a> is a region within a prokaryotic cell's circular DNA where DNA replication starts. Within the <a href="#BOOKMARK2">ori</a> region, several smaller regions exist that contain DNA sequences known as <a name="BOOKMARK3"></a><strong>DnaA box</strong>es. These <a href="#BOOKMARK3">DnaA box</a>es are sequences that enzymes responsible for DNA strand replication (<a name="BOOKMARK4"></a><strong>DNA polymerase</strong>s) bind to to begin the process of replication.</p>
-<p><img src="/.datafile_979bd99a5e7807a25a766bea2933abab/diagram.svg" alt="Generated image"></p><p>Typically multiple <a href="#BOOKMARK3">DnaA box</a>es exist in the <a href="#BOOKMARK2">ori</a>.</p>
+<pre><code class="language-{dot}">digraph {
+  Ori -&gt; DnaA_box [taillabel="1..*", arrowhead=none]
+}
+</code></pre>
+<p>Typically multiple <a href="#BOOKMARK3">DnaA box</a>es exist in the <a href="#BOOKMARK2">ori</a>.</p>
 <pre><code>                     DnaA boxes within the ori
 
 +--------------------------------------------------------------------+
