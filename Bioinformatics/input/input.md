@@ -55,11 +55,6 @@ The DnaA boxes in an ori don't have to be exactly the same. The enzyme will stil
 
 Counting k-mers is essentially just sliding a window of size k over a string and seeing if the contents in that window match some k-mer.
 
-```{define-block}
-kmercount
-kmercount_macro/
-```
-
 ```{kmercount}
 ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT
 AC

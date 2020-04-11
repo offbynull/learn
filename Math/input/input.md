@@ -1,14 +1,3 @@
-```{define-block}
-svgbob
-svgbob_macro/
-```
-
-```{define-block}
-prereq
-prereq_macro/
-prereq_code/
-```
-
 ```{title}
 Mathematics
 ```
@@ -185,12 +174,6 @@ number: whole ('.' partial)?;
 It's expected that you fully understand the whole rule because whole numbers are used to explain the partial rule.
 ```
 
-```{define-block}
-diagramhelperpartrecurse
-diagramhelperpartrecurse_macro/
-diagramhelper_code/target/appassembler/
-```
-
 The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.
 
 If the partial rule is not set, it's assumed to be 0.
@@ -220,12 +203,6 @@ Trouble seeing this final partition? Open the above image up standalone and zoom
 ```
 
 This is exactly the same as chopping up a whole into 1000 equal parts and picking 358 of those parts...
-
-```{define-block}
-diagramhelperpart
-diagramhelperpart_macro/
-diagramhelper_code/target/appassembler/
-```
 
 ```{diagramhelperpart}
 358
@@ -844,12 +821,6 @@ The digit in the 10s place is the result for the 10s place, while the digit in t
 
 The way to perform this algorithm in real-life is to stack the two numbers being added on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, add the individual single digit components together (from right-to-left). For example...
 
-```{define-block}
-ktvertadd
-ktvertadd_macro/
-kthelper_code/target/appassembler/
-```
-
 ```{ktvertadd}
 {1}{5}{3}
 { }{2}{1}
@@ -877,12 +848,6 @@ The way to perform this algorithm via code is as follows...
 arithmetic_code/WholeNumber.py
 python
 #MARKDOWN_ADD\s*\n([\s\S]+)\n\s*#MARKDOWN_ADD
-```
-
-```{define-block}
-wholenumadd
-wholenumadd_macro/
-arithmetic_code/
 ```
 
 ```{wholenumadd}
@@ -1164,12 +1129,6 @@ Borrow recursively to handle this case:
 
 The way to perform this algorithm in real-life is to stack the two numbers being subtracted on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, subtract the individual single digit components together (from right-to-left). Everytime borrowing is needed, cross out the number being changed and put the place their new numbers above. For example, subtracting 100 and 11 ...
 
-```{define-block}
-ktvertsub
-ktvertsub_macro/
-kthelper_code/target/appassembler/
-```
-
 ```{ktvertsub}
 {1}{0}{0}
 { }{1}{1}
@@ -1245,12 +1204,6 @@ The way to perform this algorithm via code is as follows...
 arithmetic_code/WholeNumber.py
 python
 #MARKDOWN_SUB\s*\n([\s\S]+)\n\s*#MARKDOWN_SUB
-```
-
-```{define-block}
-wholenumsub
-wholenumsub_macro/
-arithmetic_code/
 ```
 
 ```{wholenumsub}
@@ -1498,12 +1451,6 @@ Add the results of the multiplications: 800 + 60 + 80 + 6 is 946. Note that 43 +
 
 The way to perform this algorithm in real-life is to stack the two numbers being multiplied on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). For example...
 
-```{define-block}
-ktvertmul
-ktvertmul_macro/
-kthelper_code/target/appassembler/
-```
-
 ```{ktvertmul}
 { }{4}{3}
 { }{2}{2}
@@ -1636,12 +1583,6 @@ The way to perform this algorithm via code is as follows...
 arithmetic_code/WholeNumber.py
 python
 #MARKDOWN_MUL\s*\n([\s\S]+)\n\s*#MARKDOWN_MUL
-```
-
-```{define-block}
-wholenummul
-wholenummul_macro/
-arithmetic_code/
 ```
 
 ```{wholenummul}
@@ -1834,12 +1775,6 @@ The trial-and-error division algorithm written as code is as follows:
 arithmetic_code/WholeNumber.py
 python
 #MARKDOWN_DIVTE\s*\n([\s\S]+)\n\s*#MARKDOWN_DIVTE
-```
-
-```{define-block}
-wholenumdivte
-wholenumdivte_macro/
-arithmetic_code/
 ```
 
 ```{wholenumdivte}
@@ -2408,12 +2343,6 @@ This is effectively the algorithm that humans use for long division -- for each 
 
 The notation used by humans for long division is...
 
-```{define-block}
-ktlongdiv
-ktlongdiv_macro/
-kthelper_code/target/appassembler/
-```
-
 ```{ktlongdiv}
 {quotient}
 {divisor}{dividend}
@@ -2543,12 +2472,6 @@ The way to perform this algorithm via code is as follows...
 arithmetic_code/WholeNumber.py
 python
 #MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
-```
-
-```{define-block}
-wholenumdiv
-wholenumdiv_macro/
-arithmetic_code/
 ```
 
 ```{wholenumdiv}
@@ -2723,12 +2646,6 @@ python
 #MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
 ```
 
-```{define-block}
-intnumadd
-intnumadd_macro/
-arithmetic_code/
-```
-
 ```{intnumadd}
 -752 3
 ```
@@ -2823,12 +2740,6 @@ python
 #MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
 ```
 
-```{define-block}
-intnumsub
-intnumsub_macro/
-arithmetic_code/
-```
-
 ```{intnumsub}
 752 -3 
 ```
@@ -2892,12 +2803,6 @@ The way to perform this algorithm via code is as follows...
 arithmetic_code/IntegerNumber.py
 python
 #MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
-```
-
-```{define-block}
-intnummul
-intnummul_macro/
-arithmetic_code/
 ```
 
 ```{intnummul}
@@ -3028,12 +2933,6 @@ The way to perform this algorithm via code is as follows...
 arithmetic_code/IntegerNumber.py
 python
 #MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
-```
-
-```{define-block}
-intnumdiv
-intnumdiv_macro/
-arithmetic_code/
 ```
 
 ```{intnumdiv}
@@ -3237,12 +3136,6 @@ python
 
 For example, the common divisibility tests for 18...
 
-```{define-block}
-commdivtest
-commdivtest_macro/
-arithmetic_code/
-```
-
 ```{commdivtest}
 18
 ```
@@ -3289,12 +3182,6 @@ python
 #MARKDOWN_NAIVE\s*\n([\s\S]+)\n\s*#MARKDOWN_NAIVE
 ```
 
-```{define-block}
-factornaive
-factornaive_macro/
-arithmetic_code/
-```
-
 ```{factornaive}
 4
 ```
@@ -3305,12 +3192,6 @@ We can take advantage of the fact that division is the inverse of multiplication
 arithmetic_code/Factor.py
 python
 #MARKDOWN_FAST\s*\n([\s\S]+)\n\s*#MARKDOWN_FAST
-```
-
-```{define-block}
-factorfast
-factorfast_macro/
-arithmetic_code/
 ```
 
 ```{factorfast}
@@ -3336,12 +3217,6 @@ Any factors calculated past `factor1 => factor2` will be duplicates of factors t
 arithmetic_code/Factor.py
 python
 #MARKDOWN_FASTEST\s*\n([\s\S]+)\n\s*#MARKDOWN_FASTEST
-```
-
-```{define-block}
-factorfastest
-factorfastest_macro/
-arithmetic_code/
 ```
 
 ```{factorfastest}
@@ -3386,12 +3261,6 @@ The algorithm to identify primes vs composites is as follows...
 arithmetic_code/Factor.py
 python
 #MARKDOWN_PRIMETEST\s*\n([\s\S]+)\n\s*#MARKDOWN_PRIMETEST
-```
-
-```{define-block}
-primetest
-primetest_macro/
-arithmetic_code/
 ```
 
 ```{primetest}
@@ -3484,12 +3353,6 @@ The process of breaking down a composite number into a factor of primes is calle
    #MARKDOWN_FACTORTREE\s*\n([\s\S]+)\n\s*#MARKDOWN_FACTORTREE
    ```
    
-   ```{define-block}
-   factortree
-   factortree_macro/
-   arithmetic_code/
-   ```
-   
    ```{factortree}
    24
    ```
@@ -3575,12 +3438,6 @@ The process of breaking down a composite number into a factor of primes is calle
    #MARKDOWN_LADDER\s*\n([\s\S]+)\n\s*#MARKDOWN_LADDER
    ```
    
-   ```{define-block}
-   factorladder
-   factorladder_macro/
-   arithmetic_code/
-   ```
-   
    ```{factorladder}
    81
    ```
@@ -3610,12 +3467,6 @@ The way to perform this algorithm as code is as follows...
 arithmetic_code/LeastCommonMultiple.py
 python
 #MARKDOWN_WALK\s*\n([\s\S]+)\n\s*#MARKDOWN_WALK
-```
-
-```{define-block}
-lcmlist
-lcmlist_macro/
-arithmetic_code/
 ```
 
 ```{lcmlist}
@@ -3662,12 +3513,6 @@ python
 #MARKDOWN_PF\s*\n([\s\S]+)\n\s*#MARKDOWN_PF
 ```
 
-```{define-block}
-lcmprimefactor
-lcmprimefactor_macro/
-arithmetic_code/
-```
-
 ```{lcmprimefactor}
 12 18
 ```
@@ -3706,12 +3551,6 @@ The way to perform this algorithm as code is as follows...
 arithmetic_code/GreatestCommonDivisor.py
 python
 #MARKDOWN_NAIVE\s*\n([\s\S]+)\n\s*#MARKDOWN_NAIVE
-```
-
-```{define-block}
-gcdnaive
-gcdnaive_macro/
-arithmetic_code/
 ```
 
 ```{gcdnaive}
@@ -3755,12 +3594,6 @@ python
 #MARKDOWN_FACTOR\s*\n([\s\S]+)\n\s*#MARKDOWN_FACTOR
 ```
 
-```{define-block}
-gcdfactor
-gcdfactor_macro/
-arithmetic_code/
-```
-
 ```{gcdfactor}
 22 8
 ```
@@ -3787,12 +3620,6 @@ The way to perform this algorithm as code is as follows...
 arithmetic_code/GreatestCommonDivisor.py
 python
 #MARKDOWN_EUCLID\s*\n([\s\S]+)\n\s*#MARKDOWN_EUCLID
-```
-
-```{define-block}
-gcdeuclid
-gcdeuclid_macro/
-arithmetic_code/
 ```
 
 ```{gcdeuclid}
@@ -4029,12 +3856,6 @@ Integer numbers
  * `{bm}numerator` (top) is an integer that represents the number of parts available.
  * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
 
-```{define-block}
-diagramhelperfrac
-diagramhelperfrac_macro/
-diagramhelper_code/target/appassembler/
-```
-
 For example, if 4 parts make up a whole (denominator) and you have 9 of those parts (numerator), that's represented as `{kt} \frac{9}{4}`.
  
 ```{diagramhelperfrac}
@@ -4158,12 +3979,6 @@ The process described above is getting the greatest common divisor / highest com
 arithmetic_code/FractionNumber.py
 python
 #MARKDOWN_SIMP\s*\n([\s\S]+?)\n\s*#MARKDOWN_SIMP
-```
-
-```{define-block}
-fracnumsimp
-fracnumsimp_macro/
-arithmetic_code/
 ```
 
 ```{fracnumsimp}
@@ -4354,12 +4169,6 @@ TODO: talk about least common denominator? start of chapter 4.5 or maybe just fo
 arithmetic_code/FractionNumber.py
 python
 #MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
-```    
-
-```{define-block}
-fracnumadd
-fracnumadd_macro/
-arithmetic_code/
 ```
 
 ```{fracnumadd}
@@ -4381,12 +4190,6 @@ TODO: talk about least common denominator? start of chapter 4.5 or maybe just fo
 arithmetic_code/FractionNumber.py
 python
 #MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
-```
-
-```{define-block}
-fracnumsub
-fracnumsub_macro/
-arithmetic_code/
 ```
 
 ```{fracnumsub}
@@ -4426,12 +4229,6 @@ just make sure that that denominator doesn't end up being 0 -- e.g. the reciproc
 arithmetic_code/FractionNumber.py
 python
 #MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
-```
-
-```{define-block}
-fracnummul
-fracnummul_macro/
-arithmetic_code/
 ```
 
 ```{fracnummul}
@@ -4558,12 +4355,6 @@ the algorithm for dividing by a fraction is to change it so that you're multiply
 arithmetic_code/FractionNumber.py
 python
 #MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
-```
-
-```{define-block}
-fracnumdiv
-fracnumdiv_macro/
-arithmetic_code/
 ```
 
 ```{fracnumdiv}
