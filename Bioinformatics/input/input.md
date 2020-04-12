@@ -82,25 +82,25 @@ Depending on the type of biological sequence, a k-mer may have one or more alter
 
 , ... the reverse complement of that k-mer may be just as valid as the original k-mer. For example, if an enzyme is known to bind to a specific DNA k-mer, it's possible that it might also bind to the reverse complement of that k-mer.
 
-## Find Where a K-mer Occurs
+## Find Locations of a Known K-mer
 
 Given a k-mer, find where that k-mer occurs in some larger sequence.
 
 ```{output}
-code_kmer/src/KmerFindLocations.py
+code_kmer/src/FindLocationsOfAKnownKmer.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{kmer}
-KmerFindLocations
+FindLocationsOfAKnownKmer
 ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT
 AC
 ```
 
 Imagine that you know of a specific k-mer pattern that serves some function in an organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that that k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 related types of bacteria as a DnaA box.
 
-## Find Where a K-mer Clusters
+## Find Clumps of a Known K-mer
 
 ```{prereq}
 K-mer Location
@@ -109,13 +109,13 @@ K-mer Location
 Given a k-mer, find where that k-mer clusters in some larger sequence.
 
 ```{output}
-code_kmer/src/KmerFindClusters.py
+code_kmer/src/FindClumpsOfAKnownKmer.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{kmer}
-KmerFindClusters
+FindClumpsOfAKnownKmer
 GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
 GGG
 3
@@ -131,13 +131,13 @@ For example, the DnaA box in bacteria can be found repeating multiple times in t
 Given a sequence, count how many times each unique k-mer in that sequence occurs.
 
 ```{output}
-code_kmer/src/KmerFrequency.py
+code_kmer/src/CountASequencesKmers.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{kmer}
-KmerFrequency
+CountASequencesKmers
 AAAACAAAAAGAAAAAAT
 4
 ```
@@ -152,16 +152,16 @@ Find Where a K-mer Clusters
 
 
 ```{output}
-code_kmer/src/KmerFindClusters.py
+code_kmer/src/FindASequencesKmerClusters.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{kmer}
-KmerFindClusters
+FindASequencesKmerClusters
 GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
-GGG
 3
+2
 13
 ```
 

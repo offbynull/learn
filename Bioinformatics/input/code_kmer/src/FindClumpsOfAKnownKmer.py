@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 from typing import List
-
-from KmerFindLocations import find_kmer_locations
+from FindLocationsOfAKnownKmer import find_kmer_locations
 
 
 # MARKDOWN

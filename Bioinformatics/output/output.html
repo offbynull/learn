@@ -9,8 +9,8 @@
 <li><a href="#HEADREF1">K-mers</a></li>
 <ul>
 <li><a href="#HEADREF2">K-mer Reverse Complement</a></li>
-<li><a href="#HEADREF3">Find Where a K-mer Occurs</a></li>
-<li><a href="#HEADREF4">Find Where a K-mer Clusters</a></li>
+<li><a href="#HEADREF3">Find Locations of a Known K-mer</a></li>
+<li><a href="#HEADREF4">Find Clumps of a Known K-mer</a></li>
 <li><a href="#HEADREF5">Count a Sequence's K-mers</a></li>
 <li><a href="#HEADREF6">Find a Sequence's K-mer Clusters</a></li>
 </ul>
@@ -100,7 +100,7 @@
 </ul>
 <p><img src="svgbob_c44b72fd8e03cfe92b63a0a3b83bfe37c5551666.svg" alt="Kroki diagram output"></p>
 <p>, ... the reverse complement of that <a href="#BOOKMARK0">k-mer</a> may be just as valid as the original <a href="#BOOKMARK0">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BOOKMARK0">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BOOKMARK0">k-mer</a>.</p>
-<a name="HEADREF3"></a><h2>Find Where a K-mer Occurs</h2>
+<a name="HEADREF3"></a><h2>Find Locations of a Known K-mer</h2>
 <p>Given a <a href="#BOOKMARK0">k-mer</a>, find where that <a href="#BOOKMARK0">k-mer</a> occurs in some larger sequence.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_locations</span><span class="hljs-params">(sequence: str, kmer: str)</span> -&gt; List[int]:</span>
     k = len(kmer)
@@ -114,7 +114,7 @@
 </div>
 <p></p>
 <p>Imagine that you know of a specific <a href="#BOOKMARK0">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK3">DnaA box</a>.</p>
-<a name="HEADREF4"></a><h2>Find Where a K-mer Clusters</h2>
+<a name="HEADREF4"></a><h2>Find Clumps of a Known K-mer</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -175,6 +175,26 @@
 <li>Find Where a <a href="#BOOKMARK0">K-mer</a> Clusters</li>
 </ul>
 </div>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_clustered_kmers</span><span class="hljs-params">(sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int)</span> -&gt; Dict[str, List[int]]:</span>
+    ret = {}
+
+    unique_kmers = kmer_frequency(sequence, k)
+    <span class="hljs-keyword">for</span> kmer <span class="hljs-keyword">in</span> unique_kmers:
+        idxes = find_kmer_clusters(sequence, kmer, min_occurrence_in_cluster, cluster_window_size)
+        <span class="hljs-keyword">if</span> len(idxes) &gt; <span class="hljs-number">0</span>:
+            ret[kmer] = idxes
+
+    <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Searching GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT for clusters of 3-mer where at least 2 occurrences exist in window of 13</p>
+<p>Found the following clusters:</p>
+<ul>
+<li>GGG: [20]</li>
+<li>CAA: [9]</li>
+<li>AAA: [10]</li>
+</ul>
+</div>
+<p></p>
 <p>Given a sequence, find clusters of unique <a href="#BOOKMARK0">k-mer</a>s within that sequence. In other words, for each unique <a href="#BOOKMARK0">k-mer</a> that exists in the sequence, see if it clusters in the sequence.</p>
 <p>An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BOOKMARK3">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK2">ori</a> region. If you don't know where the <a href="#BOOKMARK2">ori</a> is, searching for clusters can give a list of potential locations.</p>
