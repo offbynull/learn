@@ -61,7 +61,8 @@ python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmerrevcomp}
+```{kmer}
+KmerReverseComplement
 TAATCCG
 ```
 
@@ -72,31 +73,58 @@ Depending on the type of biological sequence, a k-mer may have one or more alter
    * C ⟷ G
 
 ```{svgbob}
--------------------------->
-"A" "C" "T" "T" "C" "G" "C"
-|   |   |   |   |   |   |
-"T" "G" "A" "A" "G" "C" "G"
-<--------------------------
+------------------------------>
+  "A" "C" "T" "T" "C" "G" "C"
+  |   |   |   |   |   |   |
+  "T" "G" "A" "A" "G" "C" "G"
+<------------------------------
 ```
 
 , ... the reverse complement of that k-mer may be just as valid as the original k-mer. For example, if an enzyme is known to bind to a specific DNA k-mer, it's possible that it might also bind to the reverse complement of that k-mer.
 
-## K-mer Count
+## K-mer Location
 
-Given a k-mer, count how many times it occurs in some larger sequence.
+Given a k-mer, find where that k-mer occurs in some larger sequence.
 
 ```{output}
-code_kmer/src/KmerOccurrence.py
+code_kmer/src/KmerFindLocations.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmeroccurrence}
+```{kmer}
+KmerFindLocations
 ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT
 AC
 ```
 
-Often times, you know that a specific k-mer pattern serves some some function in a specific organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that the k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 different types of bacteria as a DnaA box.
+Imagine that you know of a specific k-mer pattern that serves some function in an organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that that k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 related types of bacteria as a DnaA box.
+
+## K-mer Location Cluster
+
+```{prereq}
+K-mer Location
+```
+
+```{output}
+code_kmer/src/KmerFindClusters.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{kmer}
+KmerFindClusters
+GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
+GGG
+3
+13
+```
+
+Given a k-mer, find where that k-mer clusters in some larger sequence.
+
+An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
+
+For example, the DnaA box in bacteria can be found repeating multiple times in the ori region.
 
 ## K-mer Frequency
 
@@ -110,7 +138,8 @@ python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmerfrequency}
+```{kmer}
+KmerFrequency
 AAAACAAAAAGAAAAAAT
 4
 ```
