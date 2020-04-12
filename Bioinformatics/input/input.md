@@ -11,7 +11,7 @@ Bioinformatics
 
 # K-mers
 
-A `{bm} k-mer/(k-mer|kmer)/i` is a substring of length k within some larger biological string (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+A `{bm} k-mer/(k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
 | k | k-mers          |
 |---|-----------------|
@@ -38,12 +38,12 @@ digraph {
 
 Typically multiple DnaA boxes exist in the ori.
 
-```
+```{svgbob}
                      DnaA boxes within the ori
 
 +--------------------------------------------------------------------+
 |   :   :             :   :                            :   :         |
-+---+-+-+-------------+-+-+----------------------------+-+-+---------+
++-----+-----------------+--------------------------------+-----------+
       |                 |                                |           
   DnaA box          DnaA box                         DnaA box        
     
@@ -51,11 +51,68 @@ Typically multiple DnaA boxes exist in the ori.
 
 The DnaA boxes in an ori don't have to be exactly the same. The enzyme will still bind to them if they're slightly different.
 
-## Count K-mers
+## K-mer Reverse Complement
 
-Counting k-mers is essentially just sliding a window of size k over a string and seeing if the contents in that window match some k-mer.
+Given a DNA k-mer, calculate its reverse complement.
 
-```{kmercount}
+```{output}
+code_kmer/src/KmerReverseComplement.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{kmerrevcomp}
+TAATCCG
+```
+
+Depending on the type of biological sequence, a k-mer may have one or more alternatives. For DNA sequences specifically, a k-mer of interest may have an alternate form. Since DNA sequences come in 2 strands, where ...
+ * each strand's direction is opposite of the other,
+ * each strand position has a nucleotide that complements the nucleotide at that same position on the other stand:
+   * A ⟷ T
+   * C ⟷ G
+
+```{svgbob}
+-------------------------->
+"A" "C" "T" "T" "C" "G" "C"
+|   |   |   |   |   |   |
+"T" "G" "A" "A" "G" "C" "G"
+<--------------------------
+```
+
+, ... the reverse complement of that k-mer may be just as valid as the original k-mer. For example, if an enzyme is known to bind to a specific DNA k-mer, it's possible that it might also bind to the reverse complement of that k-mer.
+
+## K-mer Count
+
+Given a k-mer, count how many times it occurs in some larger sequence.
+
+```{output}
+code_kmer/src/KmerOccurrence.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{kmeroccurrence}
 ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT
 AC
 ```
+
+Often times, you know that a specific k-mer pattern serves some some function in a specific organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that the k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 different types of bacteria as a DnaA box.
+
+## K-mer Frequency
+
+Given a sequence, count how many times each unique k-mer occurs.
+
+The `{bm} most frequent k-mer` in a string is the k-mer that appears most often in that string.
+
+```{output}
+code_kmer/src/KmerFrequency.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{kmerfrequency}
+AAAACAAAAAGAAAAAAT
+4
+```
+
+From past experiments, you know that a specific region of genome clusters a certain pattern. The pattern is different for each organism, but you know that it's there.

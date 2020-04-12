@@ -8,13 +8,15 @@
 <li><a href="#HEADREF0">Introduction</a></li>
 <li><a href="#HEADREF1">K-mers</a></li>
 <ul>
-<li><a href="#HEADREF2">Count K-mers</a></li>
+<li><a href="#HEADREF2">K-mer Reverse Complement</a></li>
+<li><a href="#HEADREF3">K-mer Count</a></li>
+<li><a href="#HEADREF4">K-mer Frequency</a></li>
 </ul>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
 <a name="HEADREF1"></a><h1>K-mers</h1>
-<p>A <a name="BOOKMARK0"></a><strong>k-mer</strong> is a substring of length k within some larger biological string (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK0">k-mer</a>'s exist:</p>
+<p>A <a name="BOOKMARK0"></a><strong>k-mer</strong> is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK0">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
@@ -56,23 +58,84 @@
 <li>find <a href="#BOOKMARK0">k-mer</a>s of interest in a sequence (e.g. repeating <a href="#BOOKMARK0">k-mer</a>s).</li>
 </ul>
 <p>A common use-case for <a href="#BOOKMARK0">k-mer</a> search is to find the <a name="BOOKMARK1"></a><strong>replication origin</strong> (<a name="BOOKMARK2"></a><strong>ori</strong>) of a prokaryotic organism's DNA. The <a href="#BOOKMARK1">replication origin</a> is a region within a prokaryotic cell's circular DNA where DNA replication starts. Within the <a href="#BOOKMARK2">ori</a> region, several smaller regions exist that contain DNA sequences known as <a name="BOOKMARK3"></a><strong>DnaA box</strong>es. These <a href="#BOOKMARK3">DnaA box</a>es are sequences that enzymes responsible for DNA strand replication (<a name="BOOKMARK4"></a><strong>DNA polymerase</strong>s) bind to to begin the process of replication.</p>
-<pre><code class="language-{dot}">digraph {
-  Ori -&gt; DnaA_box [taillabel="1..*", arrowhead=none]
-}
-</code></pre>
+<p><img src="dot_d6657feb56cf0608d87e1b67b0cfae2c.svg" alt="Dot diagram"></p>
 <p>Typically multiple <a href="#BOOKMARK3">DnaA box</a>es exist in the <a href="#BOOKMARK2">ori</a>.</p>
-<pre><code>                     DnaA boxes within the ori
-
-+--------------------------------------------------------------------+
-|   :   :             :   :                            :   :         |
-+---+-+-+-------------+-+-+----------------------------+-+-+---------+
-      |                 |                                |           
-  DnaA box          DnaA box                         DnaA box        
-    
-</code></pre>
+<p><img src="svgbob_2e987bde02834003f50e0411181e8f8398712af3.svg" alt="Kroki diagram output"></p>
 <p>The <a href="#BOOKMARK3">DnaA box</a>es in an <a href="#BOOKMARK2">ori</a> don't have to be exactly the same. The enzyme will still bind to them if they're slightly different.</p>
-<a name="HEADREF2"></a><h2>Count K-mers</h2>
-<p>Counting <a href="#BOOKMARK0">k-mer</a>s is essentially just sliding a window of size k over a string and seeing if the contents in that window match some <a href="#BOOKMARK0">k-mer</a>.</p>
-<p>[0, 5, 10, 12]</p>
+<a name="HEADREF2"></a><h2>K-mer Reverse Complement</h2>
+<p>Given a DNA <a href="#BOOKMARK0">k-mer</a>, calculate its reverse complement.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_complement</span><span class="hljs-params">(strand: str)</span>:</span>
+    ret = <span class="hljs-string">''</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(strand)):
+        base = strand[i]
+        <span class="hljs-keyword">if</span> base == <span class="hljs-string">'A'</span> <span class="hljs-keyword">or</span> base == <span class="hljs-string">'a'</span>:
+            base = <span class="hljs-string">'T'</span>
+        <span class="hljs-keyword">elif</span> base == <span class="hljs-string">'T'</span> <span class="hljs-keyword">or</span> base == <span class="hljs-string">'t'</span>:
+            base = <span class="hljs-string">'A'</span>
+        <span class="hljs-keyword">elif</span> base == <span class="hljs-string">'C'</span> <span class="hljs-keyword">or</span> base == <span class="hljs-string">'c'</span>:
+            base = <span class="hljs-string">'G'</span>
+        <span class="hljs-keyword">elif</span> base == <span class="hljs-string">'G'</span> <span class="hljs-keyword">or</span> base == <span class="hljs-string">'g'</span>:
+            base = <span class="hljs-string">'C'</span>
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">'Unexpected base: '</span> + base)
+
+        ret += base
+    <span class="hljs-keyword">return</span> ret[::<span class="hljs-number">-1</span>]</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Original: TAATCCG</p>
+<p>Reverse Complement: CGGATTA</p>
+</div>
+<p></p>
+<p>Depending on the type of biological sequence, a <a href="#BOOKMARK0">k-mer</a> may have one or more alternatives. For DNA sequences specifically, a <a href="#BOOKMARK0">k-mer</a> of interest may have an alternate form. Since DNA sequences come in 2 strands, where ...</p>
+<ul>
+<li>each strand's direction is opposite of the other,</li>
+<li>each strand position has a nucleotide that complements the nucleotide at that same position on the other stand:
+<ul>
+<li>A ⟷ T</li>
+<li>C ⟷ G</li>
+</ul>
+</li>
+</ul>
+<p><img src="svgbob_b30eff16423390d679e5cf41cc35a4ca0361b441.svg" alt="Kroki diagram output"></p>
+<p>, ... the reverse complement of that <a href="#BOOKMARK0">k-mer</a> may be just as valid as the original <a href="#BOOKMARK0">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BOOKMARK0">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BOOKMARK0">k-mer</a>.</p>
+<a name="HEADREF3"></a><h2>K-mer Count</h2>
+<p>Given a <a href="#BOOKMARK0">k-mer</a>, count how many times it occurs in some larger sequence.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kmer_occurrence_count</span><span class="hljs-params">(sequence: str, kmer: str)</span> -&gt; List[int]:</span>
+    k = len(kmer)
+    idxes = []
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(seq) - k):
+        <span class="hljs-keyword">if</span> seq[i:i + k] == kmer:
+            idxes.append(i)
+    <span class="hljs-keyword">return</span> idxes</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Found AC in ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT at index [0, 5, 10, 12]</p>
+</div>
+<p></p>
+<p>Often times, you know that a specific <a href="#BOOKMARK0">k-mer</a> pattern serves some some function in a specific organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that the <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 different types of bacteria as a <a href="#BOOKMARK3">DnaA box</a>.</p>
+<a name="HEADREF4"></a><h2>K-mer Frequency</h2>
+<p>Given a sequence, count how many times each unique <a href="#BOOKMARK0">k-mer</a> occurs.</p>
+<p>The <a name="BOOKMARK5"></a><strong>most frequent k-mer</strong> in a string is the <a href="#BOOKMARK0">k-mer</a> that appears most often in that string.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kmer_frequency</span><span class="hljs-params">(data: str, k: int)</span> -&gt; Counter[str]:</span>
+    counter = Counter()
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(data) - k):
+        pattern = data[i:i+k]
+        counter[pattern] += <span class="hljs-number">1</span>
+    <span class="hljs-keyword">return</span> counter</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>4-mer frequencies for AAAACAAAAAGAAAAAAT:</p>
+<ul>
+<li>AAAA = 6</li>
+<li>AAAC = 1</li>
+<li>AACA = 1</li>
+<li>ACAA = 1</li>
+<li>CAAA = 1</li>
+<li>AAAG = 1</li>
+<li>AAGA = 1</li>
+<li>AGAA = 1</li>
+<li>GAAA = 1</li>
+</ul>
+</div>
+<p></p>
+<p>From past experiments, you know that a specific region of genome clusters a certain pattern. The pattern is different for each organism, but you know that it's there.</p>
 
         </body></html>
