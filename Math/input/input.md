@@ -3876,21 +3876,21 @@ You can think of fractions as unresolved integer division operations. That is, r
 
 Since a fraction represent integer division, the same rules as integer division apply:
 
-  1. Recall that with integer division, if the dividend and the divisor have different signs then the quotient comes out negative. The same division rules apply to fractions. For example, ...
+ 1. Recall that with integer division, if the dividend and the divisor have different signs then the quotient comes out negative. The same division rules apply to fractions. For example, ...
 
-  * `{kt} \frac{9}{4}` is the same as `{kt} \frac{9}{4}`.
-  * `{kt} \frac{-9}{4}` is the same as `{kt} - \frac{9}{4}`.
-  * `{kt} \frac{9}{-4}` is the same as `{kt} - \frac{9}{4}`.
-  * `{kt} \frac{-9}{-4}` is the same as `{kt} \frac{9}{4}`.
+    * `{kt} \frac{9}{4}` is the same as `{kt} \frac{9}{4}`.
+    * `{kt} \frac{-9}{4}` is the same as `{kt} - \frac{9}{4}`.
+    * `{kt} \frac{9}{-4}` is the same as `{kt} - \frac{9}{4}`.
+    * `{kt} \frac{-9}{-4}` is the same as `{kt} \frac{9}{4}`.
 
-  1. Recall that with division, the divisor (number being divided by) can't be 0. The same rule applies to fractions. For example, ...
+ 1. Recall that with division, the divisor (number being divided by) can't be 0. The same rule applies to fractions. For example, ...
 
-  * `{kt} \frac{9}{0}` is undefined.
+    * `{kt} \frac{9}{0}` is undefined.
 
 If a fraction has ...
 
- * at least 1 whole, it's refereed to as a `{bm} improper fraction` (e.g. `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}`).
  * less than 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
+ * at least 1 whole, it's refereed to as a `{bm} improper fraction` (e.g. `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}`).
 
 ```{note}
 The term improper doesn't seem to mean anything bad? See http://mathforum.org/library/drmath/view/70437.html for reasoning as to why they're called proper vs improper.
@@ -4039,24 +4039,15 @@ If you already know fraction multiplication, you're effectively doing fraction m
 * `{kt} \frac{1}{6} \cdot \frac{3}{3}` is `{kt} \frac{3}{18}`
 ```
 
-TODO: IMPLEMENT CODE HERE
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_COMMON_DENOMINATOR_NAIVE\s*\n([\s\S]+?)\n\s*#MARKDOWN_COMMON_DENOMINATOR_NAIVE
+```
 
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
+```{fracnumcommondenomnaive}
+1/2 1/6
+```
 
 The problem with the algorithm above is that it can result in fractions that have large numerators and denominators. For example, using the algorithm above to get the common denominator for `{kt} \frac{4}{15}` and `{kt} \frac{5}{10}` results in `{kt} \frac{40}{150}` and `{kt} \frac{75}{150}`.
 
@@ -4082,31 +4073,15 @@ If you already know fraction multiplication, you're effectively doing fraction m
 * `{kt} \frac{5}{10} \cdot \frac{3}{3}` is `{kt} \frac{15}{30}`
 ```
 
-TODO: IMPLEMENT CODE HERE
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_COMMON_DENOMINATOR_LCM\s*\n([\s\S]+?)\n\s*#MARKDOWN_COMMON_DENOMINATOR_LCM
+```
 
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-TODO: IMPLEMENT CODE HERE
-
-
+```{fracnumcommondenomlcm}
+4/15 5/10
+```
 
 ## Addition
 
