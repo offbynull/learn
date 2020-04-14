@@ -8,11 +8,16 @@
 <li><a href="#HEADREF0">Introduction</a></li>
 <li><a href="#HEADREF1">K-mers</a></li>
 <ul>
-<li><a href="#HEADREF2">K-mer Reverse Complement</a></li>
+<li><a href="#HEADREF2">Reverse Complement a DNA K-mer</a></li>
 <li><a href="#HEADREF3">Find Locations of a Known K-mer</a></li>
 <li><a href="#HEADREF4">Find Clumps of a Known K-mer</a></li>
 <li><a href="#HEADREF5">Count a Sequence's K-mers</a></li>
 <li><a href="#HEADREF6">Find a Sequence's K-mer Clusters</a></li>
+</ul>
+<li><a href="#HEADREF7">Use-Cases</a></li>
+<ul>
+<li><a href="#HEADREF8">Find the Replication Origin</a></li>
+<li><a href="#HEADREF9">Find the DnaA Box</a></li>
 </ul>
 </ul>
 </div>
@@ -59,12 +64,7 @@
 <li>search for an approximate <a href="#BOOKMARK0">k-mer</a> (fuzzy search).</li>
 <li>find <a href="#BOOKMARK0">k-mer</a>s of interest in a sequence (e.g. repeating <a href="#BOOKMARK0">k-mer</a>s).</li>
 </ul>
-<p>A common use-case for <a href="#BOOKMARK0">k-mer</a> search is to find the <a name="BOOKMARK1"></a><strong>replication origin</strong> (<a name="BOOKMARK2"></a><strong>ori</strong>) of a prokaryotic organism's DNA. The <a href="#BOOKMARK1">replication origin</a> is a region within a prokaryotic cell's circular DNA where DNA replication starts. Within the <a href="#BOOKMARK2">ori</a> region, several smaller regions exist that contain DNA sequences known as <a name="BOOKMARK3"></a><strong>DnaA box</strong>es. These <a href="#BOOKMARK3">DnaA box</a>es are sequences that enzymes responsible for DNA strand replication (<a name="BOOKMARK4"></a><strong>DNA polymerase</strong>s) bind to to begin the process of replication.</p>
-<p><img src="dot_d6657feb56cf0608d87e1b67b0cfae2c.svg" alt="Dot diagram"></p>
-<p>Typically multiple <a href="#BOOKMARK3">DnaA box</a>es exist in the <a href="#BOOKMARK2">ori</a>.</p>
-<p><img src="svgbob_2e987bde02834003f50e0411181e8f8398712af3.svg" alt="Kroki diagram output"></p>
-<p>The <a href="#BOOKMARK3">DnaA box</a>es in an <a href="#BOOKMARK2">ori</a> don't have to be exactly the same. The enzyme will still bind to them if they're slightly different.</p>
-<a name="HEADREF2"></a><h2>K-mer Reverse Complement</h2>
+<a name="HEADREF2"></a><h2>Reverse Complement a DNA K-mer</h2>
 <p>Given a DNA <a href="#BOOKMARK0">k-mer</a>, calculate its reverse complement.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_complement</span><span class="hljs-params">(strand: str)</span>:</span>
     ret = <span class="hljs-string">''</span>
@@ -113,7 +113,7 @@
 <p>Found AC in ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT at index [0, 5, 10, 12]</p>
 </div>
 <p></p>
-<p>Imagine that you know of a specific <a href="#BOOKMARK0">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK3">DnaA box</a>.</p>
+<p>Imagine that you know of a specific <a href="#BOOKMARK0">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK4">DnaA box</a>.</p>
 <a name="HEADREF4"></a><h2>Find Clumps of a Known K-mer</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -143,7 +143,7 @@
 </div>
 <p></p>
 <p>An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK3">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK2">ori</a> region.</p>
+<p>For example, the <a href="#BOOKMARK4">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK2">ori</a> region.</p>
 <a name="HEADREF5"></a><h2>Count a Sequence's K-mers</h2>
 <p>Given a sequence, count how many times each unique <a href="#BOOKMARK0">k-mer</a> in that sequence occurs.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kmer_frequency</span><span class="hljs-params">(data: str, k: int)</span> -&gt; Counter[str]:</span>
@@ -176,27 +176,65 @@
 </ul>
 </div>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_clustered_kmers</span><span class="hljs-params">(sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int)</span> -&gt; Dict[str, List[int]]:</span>
-    ret = {}
+    <span class="hljs-comment"># map kmer to indices</span>
+    indices_lookup = dict()
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(sequence) - k):
+        kmer = sequence[i:i + k]
+        <span class="hljs-keyword">if</span> kmer <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> indices_lookup:
+            indices_lookup[kmer] = []
+        indices_lookup[kmer].append(i)
 
-    unique_kmers = kmer_frequency(sequence, k)
-    <span class="hljs-keyword">for</span> kmer <span class="hljs-keyword">in</span> unique_kmers:
-        idxes = find_kmer_clusters(sequence, kmer, min_occurrence_in_cluster, cluster_window_size)
-        <span class="hljs-keyword">if</span> len(idxes) &gt; <span class="hljs-number">0</span>:
-            ret[kmer] = idxes
+    <span class="hljs-comment"># check to see if any remaining kmers sit within cluster_window_size</span>
+    clumped_kmers = dict()
+    <span class="hljs-keyword">for</span> (kmer, indices) <span class="hljs-keyword">in</span> indices_lookup.items():
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(indices) - min_occurrence_in_cluster + <span class="hljs-number">1</span>):
+            <span class="hljs-keyword">if</span> indices[i + min_occurrence_in_cluster - <span class="hljs-number">1</span>] - indices[i] &lt; cluster_window_size - k:
+                clumped_kmers[kmer] = indices
+                <span class="hljs-keyword">break</span>
 
-    <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
+    <span class="hljs-keyword">return</span> clumped_kmers</code></pre><div style="border:1px solid black;">
 <p></p>
 <p>Searching GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT for clusters of 3-mer where at least 2 occurrences exist in window of 13</p>
 <p>Found the following clusters:</p>
 <ul>
-<li>GGG: [20]</li>
-<li>CAA: [9]</li>
-<li>AAA: [10]</li>
+<li>GGG: [0, 20, 24, 30, 55]</li>
+<li>TGA: [5, 43, 46]</li>
+<li>AAC: [7, 11]</li>
+<li>ACA: [8, 12]</li>
+<li>CAA: [9, 13, 51]</li>
+<li>AAA: [10, 14, 35, 52]</li>
+<li>GAT: [41, 44, 47]</li>
+<li>ATG: [42, 45]</li>
 </ul>
 </div>
 <p></p>
 <p>Given a sequence, find clusters of unique <a href="#BOOKMARK0">k-mer</a>s within that sequence. In other words, for each unique <a href="#BOOKMARK0">k-mer</a> that exists in the sequence, see if it clusters in the sequence.</p>
 <p>An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK3">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK2">ori</a> region. If you don't know where the <a href="#BOOKMARK2">ori</a> is, searching for clusters can give a list of potential locations.</p>
+<p>For example, the <a href="#BOOKMARK4">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK2">ori</a> region. If you don't know where the <a href="#BOOKMARK2">ori</a> is, searching for clusters can give a list of potential locations.</p>
+<a name="HEADREF7"></a><h1>Use-Cases</h1>
+<a name="HEADREF8"></a><h2>Find the Replication Origin</h2>
+<p>Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the <a name="BOOKMARK1"></a><strong>replication origin</strong> (<a name="BOOKMARK2"></a><strong>ori</strong>) is the region of DNA where replication starts, while the <a name="BOOKMARK3"></a><strong>ter</strong> is where replication ends...</p>
+<p><img src="svgbob_a4325e8a745bbfd92ba5fb65211d12068d28be09.svg" alt="Kroki diagram output"></p>
+<p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
+<p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
+<p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
+<p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
+<p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
+<p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
+<p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
+<a name="HEADREF9"></a><h2>Find the DnaA Box</h2>
+<p>Within the <a href="#BOOKMARK2">ori</a> region, several smaller regions exist known as <a name="BOOKMARK4"></a><strong>DnaA box</strong>es -- sequences that are either the same as or very similar to each other....</p>
+<p><img src="svgbob_d3e7c213995dec8a967fa89f40ebae73ed6e53ac.svg" alt="Kroki diagram output"></p>
+<p>The DnaA protein binds to a <a href="#BOOKMARK4">DnaA box</a> to activate the process of DNA replication. The reason why multiple <a href="#BOOKMARK4">DnaA box</a> copies exist has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein doesn't bind to it, it can still bind to the other copies.</p>
+<p>Through experiments, biologists have determined that <a href="#BOOKMARK4">DnaA box</a>es are typical 9-mers. Given that you know the where the <a href="#BOOKMARK2">ori</a> of a specific bacterial organism is, you can search for 9-mer instances that may be similar to each other. Find a set of repeating 9-mers and group them if they're similar. Of the groups found, are any of them reverse complements of each other? If so, merge the groups together. These groups are are potential <a href="#BOOKMARK4">DnaA box</a> candidates.</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
 
         </body></html>

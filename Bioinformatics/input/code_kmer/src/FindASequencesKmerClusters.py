@@ -1,22 +1,28 @@
 from __future__ import annotations
 
 from typing import Dict, List
-
-from FindClumpsOfAKnownKmer import find_kmer_clusters
 from CountASequencesKmers import kmer_frequency
 
 
 # MARKDOWN
 def find_clustered_kmers(sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int) -> Dict[str, List[int]]:
-    ret = {}
+    # map kmer to indices
+    indices_lookup = dict()
+    for i in range(0, len(sequence) - k):
+        kmer = sequence[i:i + k]
+        if kmer not in indices_lookup:
+            indices_lookup[kmer] = []
+        indices_lookup[kmer].append(i)
 
-    unique_kmers = kmer_frequency(sequence, k)
-    for kmer in unique_kmers:
-        idxes = find_kmer_clusters(sequence, kmer, min_occurrence_in_cluster, cluster_window_size)
-        if len(idxes) > 0:
-            ret[kmer] = idxes
+    # check to see if any remaining kmers sit within cluster_window_size
+    clumped_kmers = dict()
+    for (kmer, indices) in indices_lookup.items():
+        for i in range(0, len(indices) - min_occurrence_in_cluster + 1):
+            if indices[i + min_occurrence_in_cluster - 1] - indices[i] < cluster_window_size - k:
+                clumped_kmers[kmer] = indices
+                break
 
-    return ret
+    return clumped_kmers
 # MARKDOWN
 
 

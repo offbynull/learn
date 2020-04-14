@@ -28,41 +28,18 @@ Often times we'll need to either...
 * search for an approximate k-mer (fuzzy search).
 * find k-mers of interest in a sequence (e.g. repeating k-mers).
 
-A common use-case for k-mer search is to find the `{bm} replication origin` (`{bm} ori/\b(ori)\b/i`) of a prokaryotic organism's DNA. The replication origin is a region within a prokaryotic cell's circular DNA where DNA replication starts. Within the ori region, several smaller regions exist that contain DNA sequences known as `{bm} DnaA box`es. These DnaA boxes are sequences that enzymes responsible for DNA strand replication (`{bm} DNA polymerase`s) bind to to begin the process of replication.
-
-```{dot}
-digraph {
-  Ori -> DnaA_box [taillabel="1..*", arrowhead=none]
-}
-```
-
-Typically multiple DnaA boxes exist in the ori.
-
-```{svgbob}
-                     DnaA boxes within the ori
-
-+--------------------------------------------------------------------+
-|   :   :             :   :                            :   :         |
-+-----+-----------------+--------------------------------+-----------+
-      |                 |                                |           
-  DnaA box          DnaA box                         DnaA box        
-    
-```
-
-The DnaA boxes in an ori don't have to be exactly the same. The enzyme will still bind to them if they're slightly different.
-
-## K-mer Reverse Complement
+## Reverse Complement a DNA K-mer
 
 Given a DNA k-mer, calculate its reverse complement.
 
 ```{output}
-code_kmer/src/KmerReverseComplement.py
+code_kmer/src/ReverseComplementADnaKmer.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{kmer}
-KmerReverseComplement
+ReverseComplementADnaKmer
 TAATCCG
 ```
 
@@ -170,3 +147,71 @@ Given a sequence, find clusters of unique k-mers within that sequence. In other 
 An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
 
 For example, the DnaA box in bacteria can be found repeating multiple times in the ori region. If you don't know where the ori is, searching for clusters can give a list of potential locations.
+
+# Use-Cases
+
+## Find the Replication Origin
+
+Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the `{bm} replication origin` (`{bm} ori/\b(ori)\b/i`) is the region of DNA where replication starts, while the `{bm} ter/\b(ter)\b/i` is where replication ends...
+
+```{svgbob}
+.------ ori ------.
+|                 |
+|                 |
+|                 |
+|                 |
+`------ ter ------`
+```
+
+
+TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+
+TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+
+TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+
+TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+
+TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+
+TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+
+TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+
+
+## Find the DnaA Box
+
+Within the ori region, several smaller regions exist known as `{bm} DnaA box`es -- sequences that are either the same as or very similar to each other....
+
+```{svgbob}
+                     DnaA boxes within the ori
+
++--------------------------------------------------------------------+
+|   :   :             :   :                            :   :         |
++-----+-----------------+--------------------------------+-----------+
+      |                 |                                |           
+  DnaA box          DnaA box                         DnaA box        
+```
+
+The DnaA protein binds to a DnaA box to activate the process of DNA replication. The reason why multiple DnaA box copies exist has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein doesn't bind to it, it can still bind to the other copies.
+
+Through experiments, biologists have determined that DnaA boxes are typical 9-mers. Given that you know the where the ori of a specific bacterial organism is, you can search for 9-mer instances that may be similar to each other. Find a set of repeating 9-mers and group them if they're similar. Of the groups found, are any of them reverse complements of each other? If so, merge the groups together. These groups are are potential DnaA box candidates.
+
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+
+TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
