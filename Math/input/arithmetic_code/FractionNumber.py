@@ -157,17 +157,16 @@ class FractionNumber:
         # Sign is only kept on the numerator, not the denominator
         log_indent()
         try:
-            log(f'Adding {lhs} and {rhs}')
-            if lhs._denominator != rhs._denominator:
-                lhs_numerator = lhs._numerator * rhs._denominator
-                rhs_numerator = rhs._numerator * lhs._denominator
-                denominator = rhs._denominator * lhs._denominator
-            else:
-                lhs_numerator = lhs._numerator
-                rhs_numerator = rhs._numerator
-                denominator = rhs._denominator
+            log(f'Adding {lhs} and {rhs}...')
+            log_indent()
 
-            res = FractionNumber(lhs_numerator + rhs_numerator, denominator)
+            log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
+            lhs, rhs = FractionNumber.common_denominator_lcm(lhs, rhs)
+            log(f'Equivalent fractions: {lhs} and {rhs}')
+            log(f'Adding numerators of {lhs} and {rhs}...')
+            res = FractionNumber(lhs._numerator + rhs._numerator, lhs._denominator)
+
+            log_unindent()
             log(f'Result: {res}')
 
             return res
@@ -180,17 +179,16 @@ class FractionNumber:
         # Sign is only kept on the numerator, not the denominator
         log_indent()
         try:
-            log(f'Subtracting {lhs} and {rhs}')
-            if lhs._denominator != rhs._denominator:
-                lhs_numerator = lhs._numerator * rhs._denominator
-                rhs_numerator = rhs._numerator * lhs._denominator
-                denominator = rhs._denominator * lhs._denominator
-            else:
-                lhs_numerator = lhs._numerator
-                rhs_numerator = rhs._numerator
-                denominator = rhs._denominator
+            log(f'Subtracting {lhs} and {rhs}...')
+            log_indent()
 
-            res = FractionNumber(lhs_numerator - rhs_numerator, denominator)
+            log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
+            lhs, rhs = FractionNumber.common_denominator_lcm(lhs, rhs)
+            log(f'Equivalent fractions: {lhs} and {rhs}')
+            log(f'Subtracting numerators of {lhs} and {rhs}...')
+            res = FractionNumber(lhs._numerator - rhs._numerator, lhs._denominator)
+
+            log_unindent()
             log(f'Result: {res}')
 
             return res

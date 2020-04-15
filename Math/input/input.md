@@ -4087,10 +4087,12 @@ python
 
 ```{prereq}
 Integer addition
-Least common denominator
+Common denominator
 ```
 
-Conceptually, you can think of `{bm} fraction addition` as adding together partial values. It's simple to do as long as the denominators are the same: add the numerators together and keep the denominators the same. For example adding `\frac{1}{4}` and `\frac{2}{4}` ...
+Conceptually, you can think of `{bm} fraction addition` as adding together pieces. That is, as long as the number of pieces used to represent a whole (denominator) is the same between both fractions, adding them together is simply adding together the individual pieces (numerators).
+
+For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can add them together by adding the numerators while keeping the denominator...
 
  * `{kt} \frac{1}{4}`
 
@@ -4118,17 +4120,23 @@ Conceptually, you can think of `{bm} fraction addition` as adding together parti
 
 Treat the sign of the fraction as if it were on the numerator. For example, adding `{kt} - \frac{1}{4}` and `{kt} \frac{2}{4}` results in `{kt} - \frac{1}{4}` -- `{kt} -1 + 2` results in `{kt} -1`, so the resulting fraction is `{kt} \frac{-1}{4}`.
 
-If the denominators aren't the same, you'll need to make them the same by finding equivalent fractions that have a matching denominator. For example, `{kt} \frac{1}{3}` and `{kt} \frac{1}{6}` need to be converted to equivalent fractions before adding...
+If the fraction being added don't have a common denominator, you'll need to find equivalent fractions that do. The best way to do this is to use the least common denominator method. For example, before being able to add `{kt} \frac{1}{4}` and `{kt} \frac{1}{6}`, they need to be converted to equivalent fractions that share a common denominator...
 
- * `{kt} \frac{1}{3}`
+ * `{kt} \frac{1}{4}` becomes `{kt} \frac{3}{12}`
 
    ```{diagramhelperfrac}
    radius 40
    1
-   3
+   4
    ```
 
- * `{kt} \frac{1}{6}`
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   12
+   ```
+
+ * `{kt} \frac{1}{6}` becomes `{kt} \frac{2}{12}`
 
    ```{diagramhelperfrac}
    radius 40
@@ -4136,9 +4144,19 @@ If the denominators aren't the same, you'll need to make them the same by findin
    6
    ```
 
-TODO: model with circles -- show why denominators must be the same prior to addition
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   12
+   ```
 
-TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+ * `{kt} \frac{3}{12} + \frac{2}{12}` is `{kt} \frac{5}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   5
+   12
+   ```
 
 ```{output}
 arithmetic_code/FractionNumber.py
@@ -4147,19 +4165,83 @@ python
 ```
 
 ```{fracnumadd}
--1/3 -2/6
+1/4 1/6
 ```
 
 ## Subtraction
 
 ```{prereq}
 Integer subtraction
-Least common denominator
+Common denominator
 ```
 
-TODO: model with circles -- show why denominators must be the same prior to addition
+Conceptually, you can think of `{bm} fraction subtracting` as subtracting pieces. That is, as long as the number of pieces used to represent a whole (denominator) is the same between both fractions, subtracting them is simply subtracting the individual pieces (numerators).
 
-TODO: talk about least common denominator? start of chapter 4.5 or maybe just focus on getting a common denominator and then simplifying? there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators.
+For example, the denominator for the fractions `{kt} \frac{2}{4}` and `{kt} \frac{1}{4}` is 4. Since the fractions have a common denominator, you can subtract them by subtracting the numerators while keeping the denominator...
+
+ * `{kt} \frac{2}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   4
+   ```
+
+ * `{kt} \frac{1}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+ * `{kt} \frac{2}{4} - \frac{1}{4}` is `{kt} \frac{1}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+Treat the sign of the fraction as if it were on the numerator. For example, subtracting `{kt} - \frac{1}{4}` and `{kt} \frac{2}{4}` results in `{kt} - \frac{3}{4}` -- `{kt} -1 - 2` results in `{kt} -3`, so the resulting fraction is `{kt} \frac{-3}{4}`.
+
+If the fraction being subtracted don't have a common denominator, you'll need to find equivalent fractions that do. The best way to do this is to use the least common denominator method. For example, before being able to subtract `{kt} \frac{1}{4}` and `{kt} \frac{1}{6}`, they need to be converted to equivalent fractions that share a common denominator...
+
+ * `{kt} \frac{1}{4}` becomes `{kt} \frac{3}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   12
+   ```
+
+ * `{kt} \frac{1}{6}` becomes `{kt} \frac{2}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   6
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   12
+   ```
+
+ * `{kt} \frac{3}{12} - \frac{2}{12}` is `{kt} \frac{1}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   12
+   ```
 
 ```{output}
 arithmetic_code/FractionNumber.py
@@ -4168,14 +4250,17 @@ python
 ```
 
 ```{fracnumsub}
--1/3 -2/6
+3/12 2/12
 ```
 
 ## Multiplication
 
 ```{prereq}
 Integer multiplication
+Fraction addition
 ```
+
+TODO: think abuot this like repetitive addition. to do repeatitive addition, you need to get teh denominators to be common denominators first -- multiplying the denominators does that. then you're adding the numerators n times, but is effectively multiplyication. so to multiply, multiply the numerator s together and the denominators together.
 
 The concept of multiplying a fraction is the same as multiplying an integer. You're taking some value and performing repetitive addition on it.
 
