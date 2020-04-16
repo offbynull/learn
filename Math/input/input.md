@@ -4090,7 +4090,7 @@ Integer addition
 Common denominator
 ```
 
-Conceptually, you can think of `{bm} fraction addition` as adding together pieces. That is, as long as the number of pieces used to represent a whole (denominator) is the same between both fractions, adding them together is simply adding together the individual pieces (numerators).
+Conceptually, you can think of `{bm} fraction addition` as adding together parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, adding them together is simply adding together the individual parts (numerators).
 
 For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can add them together by adding the numerators while keeping the denominator...
 
@@ -4175,7 +4175,7 @@ Integer subtraction
 Common denominator
 ```
 
-Conceptually, you can think of `{bm} fraction subtracting` as subtracting pieces. That is, as long as the number of pieces used to represent a whole (denominator) is the same between both fractions, subtracting them is simply subtracting the individual pieces (numerators).
+Conceptually, you can think of `{bm} fraction subtracting` as subtracting parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, subtracting them is simply subtracting the individual parts (numerators).
 
 For example, the denominator for the fractions `{kt} \frac{2}{4}` and `{kt} \frac{1}{4}` is 4. Since the fractions have a common denominator, you can subtract them by subtracting the numerators while keeping the denominator...
 
@@ -4259,6 +4259,66 @@ python
 Integer multiplication
 Fraction addition
 ```
+
+Recall that when you multiply by two integer numbers together, you're effectively doing repetitive addition. For example, performing...
+
+ * `{kt} 4 \cdot 3` is the same as `{kt} 4+4+4` -- product is 12.
+ * `{kt} 4 \cdot 2` is the same as `{kt} 4+4` -- product is 8.
+ * `{kt} 4 \cdot 1` is the same as `{kt} 4` -- product is 4.
+
+Notice that as the multiplier goes down to 1, the product decreases. By the time it reaches one, the product is the same as the number being multiplied. This same concept applies if a fraction is being multiplied by a whole number. For example, performing...
+
+ * `{kt} \frac{1}{2} \cdot 3` is the same as `{kt} \frac{1}{2}+\frac{1}{2}+\frac{1}{2}` -- product is `{kt} \frac{3}{2}`.
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   2
+   ```
+
+ * `{kt} \frac{1}{2} \cdot 2` is the same as `{kt} \frac{1}{2}+\frac{1}{2}` -- product is `{kt} \frac{2}{2}`.
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   2
+   ```
+
+ * `{kt} \frac{1}{2} \cdot 1` is the same as `{kt} \frac{1}{2}` -- product is `{kt} \frac{1}{2}`.
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   2
+   ```
+
+Where it gets confusing is when the multiplier is a fraction. As the multiplier goes up past 1, it grows. It only makes sense that if you go below 1, the product would shrink from the original. That is, t
+
+TODO:CONTINUE HERER
+
+TODO:CONTINUE HERER
+
+
+TODO:CONTINUE HERER
+
+
+TODO:CONTINUE HERER
+
+
+TODO:CONTINUE HERER
+
+
+TODO:CONTINUE HERER
+
+
+TODO:CONTINUE HERER
+
+
+if you have a fraction and you multiply it by another fraction, you're essentially further breaking up that fraction. for example, if you take 1/2 and you multiply it by 3/4, you're taking the half and chopping it up into 4 equal pieces. of those pieces, you're picking out 3.
+
+1/2 * 3/5 = 3/10
+
+5/10 * 6/10 = 30/100
 
 TODO: think abuot this like repetitive addition. to do repeatitive addition, you need to get teh denominators to be common denominators first -- multiplying the denominators does that. then you're adding the numerators n times, but is effectively multiplyication. so to multiply, multiply the numerator s together and the denominators together.
 
