@@ -4260,19 +4260,36 @@ Integer multiplication
 Fraction addition
 ```
 
-Recall that when you multiply by two integer numbers together, you're effectively doing repetitive addition. For example, performing...
+Recall that when you multiply by two integer numbers together, you're effectively doing repetitive addition -- you're copying the value a certain number of times and combining those copies together. For example, performing...
 
  * `{kt} 4 \cdot 3` is the same as `{kt} 4+4+4` -- product is 12.
+  
+   ```{svgbob}
+   **** **** ****
+    4    4    4
+   ```
+  
  * `{kt} 4 \cdot 2` is the same as `{kt} 4+4` -- product is 8.
+
+   ```{svgbob}
+   **** ****
+    4    4  
+   ```
+
  * `{kt} 4 \cdot 1` is the same as `{kt} 4` -- product is 4.
 
-Notice that as the multiplier goes down to 1, the product decreases. By the time it reaches one, the product is the same as the number being multiplied. This same concept applies if a fraction is being multiplied by a whole number. For example, performing...
+   ```{svgbob}
+   ****
+    4   
+   ```
+
+Notice that as the multiplier goes down to 1, the product decreases. By the time it reaches 1, the product is the same as the number being multiplied. This same concept applies if a fraction is being multiplied by a whole number. For example, performing...
 
  * `{kt} \frac{1}{2} \cdot 3` is the same as `{kt} \frac{1}{2}+\frac{1}{2}+\frac{1}{2}` -- product is `{kt} \frac{3}{2}`.
 
    ```{diagramhelperfrac}
    radius 40
-   1
+   3
    2
    ```
 
@@ -4288,62 +4305,53 @@ Notice that as the multiplier goes down to 1, the product decreases. By the time
 
    ```{diagramhelperfrac}
    radius 40
+   1
+   2
+   ```
+
+Where it gets confusing is when the multiplier becomes less than 1 (a proper fraction). Since, the product grows when the multiplier is above 1, it only makes sense that it shrinks if the multiplier is below 1. Conceptually you can think of it as "copying" a value less than once. Where as with whole numbers you're copying at least once, with proper fractions you're copying less than once -- you're taking some smaller piece of that original.  For example, ...
+
+ * `{kt} \frac{1}{2} \cdot 3` -- make 3 copies of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{3}{2}`.
+
+   ```{diagramhelperfrac}
+   radius 40
    3
    2
    ```
 
-Where it gets confusing is when the multiplier is a fraction. As the multiplier goes up past 1, it grows. It only makes sense that if you go below 1, the product would shrink from the original. That is, t
+ * `{kt} \frac{1}{2} \cdot 2` -- make 3 copies of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{2}{2}`.
 
-TODO:CONTINUE HERER
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   2
+   ```
 
-TODO:CONTINUE HERER
+ * `{kt} \frac{1}{2} \cdot 1` -- make 1 copy of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{1}{2}` (no change).
 
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   2
+   ```
 
-TODO:CONTINUE HERER
+ * `{kt} \frac{1}{2} \cdot \frac{1}{2}` -- make a copy of `{kt} \frac{1}{2}` of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{1}{4}`.
 
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
 
-TODO:CONTINUE HERER
+ * `{kt} \frac{1}{2} \cdot \frac{1}{3}` -- make a copy of `{kt} \frac{1}{3}` of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{1}{6}`.
 
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   6
+   ```
 
-TODO:CONTINUE HERER
-
-
-TODO:CONTINUE HERER
-
-
-TODO:CONTINUE HERER
-
-
-if you have a fraction and you multiply it by another fraction, you're essentially further breaking up that fraction. for example, if you take 1/2 and you multiply it by 3/4, you're taking the half and chopping it up into 4 equal pieces. of those pieces, you're picking out 3.
-
-1/2 * 3/5 = 3/10
-
-5/10 * 6/10 = 30/100
-
-TODO: think abuot this like repetitive addition. to do repeatitive addition, you need to get teh denominators to be common denominators first -- multiplying the denominators does that. then you're adding the numerators n times, but is effectively multiplyication. so to multiply, multiply the numerator s together and the denominators together.
-
-The concept of multiplying a fraction is the same as multiplying an integer. You're taking some value and performing repetitive addition on it.
-
-TODO: model out multiplication using fraction tiles... see the example in section 4.2 where they multiply 1/2 by 3/4
-
-```{svgbob}
-                    cut here
-                        |
-                        v
-+---------------+---------------+---------------+
-|      1/5      |      1/5      |      1/5      |
-+-------+-------+-------+-------+-------+-------+
-| 1/10  | 1/10  | 1/10  | 1/10  | 1/10  | 1/10  |
-+-------+-------+-------+-------+-------+-------+
-```
-
-TODO: multiplication of reciprocals leads to 1.
-
-e.g. 1/2 * 2/1 is 2/2. 2/2 is 1.
-
-e.g. -1/2 * -2/1 is 2/2. 2/2 is 1.
-
-just make sure that that denominator doesn't end up being 0 -- e.g. the reciprocal of 0/2 will be undefined.
+The algorithm to multiply any 2 fractions together is to multiply their numerators then multiply their denominators. It doesn't matter if the fractions are proper fractions or improper fractions. For example, `{kt} \frac{2}{4} \cdot \frac{3}{5}` is `{kt} \frac{6}{20}`.
 
 ```{output}
 arithmetic_code/FractionNumber.py

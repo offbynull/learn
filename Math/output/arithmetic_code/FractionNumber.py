@@ -180,7 +180,7 @@ class FractionNumber:
         log_indent()
         try:
             log(f'Subtracting {lhs} and {rhs}...')
-            log_indent()
+            log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
 
             log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
             lhs, rhs = FractionNumber.common_denominator_lcm(lhs, rhs)
@@ -202,8 +202,17 @@ class FractionNumber:
         log_indent()
         try:
             log(f'Multiplying {lhs} and {rhs}')
+            log_indent()
 
-            res = FractionNumber(lhs._numerator * rhs._numerator, lhs._denominator * rhs._denominator)
+            log(f'Multiplying numerators {lhs._numerator} and {rhs._numerator}...')
+            numerator = lhs._numerator * rhs._numerator
+
+            log(f'Multiplying denominators {lhs._denominator} and {rhs._denominator}...')
+            denominator = lhs._denominator * rhs._denominator
+
+            res = FractionNumber(numerator, denominator)
+
+            log_unindent()
             log(f'Result: {res}')
 
             return res
