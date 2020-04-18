@@ -14,11 +14,12 @@
 <li><a href="#HEADREF5">Count a Sequence's K-mers</a></li>
 <li><a href="#HEADREF6">Find a Sequence's K-mer Clusters</a></li>
 </ul>
-<li><a href="#HEADREF7">Use-Cases</a></li>
+<li><a href="#HEADREF7">Stories</a></li>
 <ul>
 <li><a href="#HEADREF8">Find the Replication Origin</a></li>
 <li><a href="#HEADREF9">Find the DnaA Box</a></li>
 </ul>
+<li><a href="#HEADREF10">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -113,7 +114,7 @@
 <p>Found AC in ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT at index [0, 5, 10, 12]</p>
 </div>
 <p></p>
-<p>Imagine that you know of a specific <a href="#BOOKMARK0">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK4">DnaA box</a>.</p>
+<p>Imagine that you know of a specific <a href="#BOOKMARK0">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK1">DnaA box</a>.</p>
 <a name="HEADREF4"></a><h2>Find Clumps of a Known K-mer</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -143,7 +144,7 @@
 </div>
 <p></p>
 <p>An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK4">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK2">ori</a> region.</p>
+<p>For example, the <a href="#BOOKMARK1">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK10">ori</a> region.</p>
 <a name="HEADREF5"></a><h2>Count a Sequence's K-mers</h2>
 <p>Given a sequence, count how many times each unique <a href="#BOOKMARK0">k-mer</a> in that sequence occurs.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kmer_frequency</span><span class="hljs-params">(data: str, k: int)</span> -&gt; Counter[str]:</span>
@@ -210,11 +211,25 @@
 <p></p>
 <p>Given a sequence, find clusters of unique <a href="#BOOKMARK0">k-mer</a>s within that sequence. In other words, for each unique <a href="#BOOKMARK0">k-mer</a> that exists in the sequence, see if it clusters in the sequence.</p>
 <p>An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK4">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK2">ori</a> region. If you don't know where the <a href="#BOOKMARK2">ori</a> is, searching for clusters can give a list of potential locations.</p>
-<a name="HEADREF7"></a><h1>Use-Cases</h1>
+<p>For example, the <a href="#BOOKMARK1">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK10">ori</a> region. If you don't know where the <a href="#BOOKMARK10">ori</a> is, searching for clusters can give a list of potential locations.</p>
+<a name="HEADREF7"></a><h1>Stories</h1>
 <a name="HEADREF8"></a><h2>Find the Replication Origin</h2>
-<p>Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the <a name="BOOKMARK1"></a><strong>replication origin</strong> (<a name="BOOKMARK2"></a><strong>ori</strong>) is the region of DNA where replication starts, while the <a name="BOOKMARK3"></a><strong>ter</strong> is where replication ends...</p>
-<p><img src="svgbob_a4325e8a745bbfd92ba5fb65211d12068d28be09.svg" alt="Kroki diagram output"></p>
+<p>Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the <a href="#BOOKMARK9">replication origin</a> (<a href="#BOOKMARK10">ori</a>) is the region of DNA where replication starts, while the <a href="#BOOKMARK11">replication terminus</a> (<a href="#BOOKMARK12">ter</a>) is where replication ends.</p>
+<p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
+<p>The replication process begins by a <a href="#BOOKMARK8">replication fork</a> opening at the <a href="#BOOKMARK10">ori</a>. As replication happens, that fork widens up until the point it reaches <a href="#BOOKMARK12">ter</a>.</p>
+<p><img src="svgbob_4df993b036e26d78288d477eec2885097ffae552.svg" alt="Kroki diagram output"></p>
+<p><a href="#BOOKMARK6">DNA polymerase</a>s attach on to the forked strands and synthesize a strand of DNA with complementing bases.</p>
+<p><img src="svgbob_1b3f80c88614cd2be952b19d29e7c529d9a41d0f.svg" alt="Kroki diagram output"></p>
+<p>The process of replication is different depending on the segment of DNA. That is, if you use <a href="#BOOKMARK10">ori</a> and <a href="#BOOKMARK12">ter</a> as cutting points, you'll have 4 different strands of DNA. Of those strands, if the directionality of the strand is going from ...</p>
+<ul>
+<li>from <a href="#BOOKMARK10">ori</a> to <a href="#BOOKMARK12">ter</a>, it's called a <a href="#BOOKMARK13">forward half-strand</a>.</li>
+<li>from <a href="#BOOKMARK12">ter</a> to <a href="#BOOKMARK10">ori</a>, it's called a <a href="#BOOKMARK14">reverse half-strand</a>.</li>
+</ul>
+<p><img src="svgbob_21c248a8b7b53c6a187ebd73f8525f23408bde10.svg" alt="Kroki diagram output"></p>
+<p>Since <a href="#BOOKMARK6">DNA polymerase</a> can only walk over DNA in the reverse direction (<a href="#BOOKMARK4">3'</a> to <a href="#BOOKMARK2">5'</a>), the 2 <a href="#BOOKMARK14">reverse half-strand</a>s will quickly get walked over in one shot. A <a href="#BOOKMARK7">primer</a> gets attached to the <a href="#BOOKMARK10">ori</a>, then a <a href="#BOOKMARK6">DNA polymerase</a> attaches to that <a href="#BOOKMARK7">primer</a> to begin synthesis of a new strand. Synthesis continues until the <a href="#BOOKMARK12">ter</a> is reached...</p>
+<p><img src="svgbob_0618f405154e4d839e269cf1ad7acdaec4075770.svg" alt="Kroki diagram output"></p>
+<p>For the <a href="#BOOKMARK13">forward half-strand</a>s, the process is much slower. Since <a href="#BOOKMARK6">DNA polymerase</a> can only walk DNA in the reverse direction, the foreword half-strands get replicated in small segments. That is, as the <a href="#BOOKMARK8">replication fork</a> continues to grow, every ~2000 nucleotides a new <a href="#BOOKMARK7">primer</a> attaches to the end of the fork on the forward strands. A new <a href="#BOOKMARK6">DNA polymerase</a> attaches to eacg <a href="#BOOKMARK7">primer</a> and walks in the reverse direction (towards the <a href="#BOOKMARK10">ori</a>) to synthesize a small segment of DNA. That small segment of DNA is called an Okazaki fragment...</p>
+<p><img src="svgbob_1f377a804d7443678632955a778658818cce7e09.svg" alt="Kroki diagram output"></p>
 <p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
 <p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
 <p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
@@ -223,10 +238,10 @@
 <p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
 <p>TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM</p>
 <a name="HEADREF9"></a><h2>Find the DnaA Box</h2>
-<p>Within the <a href="#BOOKMARK2">ori</a> region, several smaller regions exist known as <a name="BOOKMARK4"></a><strong>DnaA box</strong>es -- sequences that are either the same as or very similar to each other....</p>
+<p>Within the <a href="#BOOKMARK10">ori</a> region, several smaller regions exist known as <a name="BOOKMARK1"></a><strong>DnaA box</strong>es -- sequences that are either the same as or very similar to each other....</p>
 <p><img src="svgbob_d3e7c213995dec8a967fa89f40ebae73ed6e53ac.svg" alt="Kroki diagram output"></p>
-<p>The DnaA protein binds to a <a href="#BOOKMARK4">DnaA box</a> to activate the process of DNA replication. The reason why multiple <a href="#BOOKMARK4">DnaA box</a> copies exist has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein doesn't bind to it, it can still bind to the other copies.</p>
-<p>Through experiments, biologists have determined that <a href="#BOOKMARK4">DnaA box</a>es are typical 9-mers. Given that you know the where the <a href="#BOOKMARK2">ori</a> of a specific bacterial organism is, you can search for 9-mer instances that may be similar to each other. Find a set of repeating 9-mers and group them if they're similar. Of the groups found, are any of them reverse complements of each other? If so, merge the groups together. These groups are are potential <a href="#BOOKMARK4">DnaA box</a> candidates.</p>
+<p>The DnaA protein binds to a <a href="#BOOKMARK1">DnaA box</a> to activate the process of DNA replication. The reason why multiple <a href="#BOOKMARK1">DnaA box</a> copies exist has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein doesn't bind to it, it can still bind to the other copies.</p>
+<p>Through experiments, biologists have determined that <a href="#BOOKMARK1">DnaA box</a>es are typical 9-mers. Given that you know the where the <a href="#BOOKMARK10">ori</a> of a specific bacterial organism is, you can search for 9-mer instances that may be similar to each other. Find a set of repeating 9-mers and group them if they're similar. Of the groups found, are any of them reverse complements of each other? If so, merge the groups together. These groups are are potential <a href="#BOOKMARK1">DnaA box</a> candidates.</p>
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
@@ -236,5 +251,46 @@
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
+<a name="HEADREF10"></a><h1>Terminology</h1>
+<ul>
+<li>
+<p><a name="BOOKMARK2"></a><strong>5'</strong> (<a name="BOOKMARK3"></a><strong>5 prime</strong>) / <a name="BOOKMARK4"></a><strong>3'</strong> (<a name="BOOKMARK5"></a><strong>3 prime</strong>) - <a href="#BOOKMARK2">5'</a> (<a href="#BOOKMARK3">5 prime</a>) and <a href="#BOOKMARK4">3'</a> (<a href="#BOOKMARK5">3 prime</a>) describe the opposite ends of DNA. The chemical structure at each end is what defines if it's <a href="#BOOKMARK2">5'</a> or <a href="#BOOKMARK4">3'</a> -- each end is guaranteed to be different from the other. The forward direction on DNA is defined as <a href="#BOOKMARK2">5'</a> to <a href="#BOOKMARK4">3'</a>, while the backwards direction is <a href="#BOOKMARK4">3'</a> to <a href="#BOOKMARK2">5'</a>.</p>
+<p>Two complementing DNA strands will always be attached in opposite directions.</p>
+<p><img src="svgbob_a2c87a8f72a4ea21f474350dc6a429e386ae8222.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK6"></a><strong>DNA polymerase</strong> - An enzyme that replicates a strand of DNA. That is, <a href="#BOOKMARK6">DNA polymerase</a> walks over a single strand of DNA bases (not the strand of base pairs) and  generates a strand of complements. Before <a href="#BOOKMARK6">DNA polymerase</a> can attach itself and start replicating DNA, it requires a <a href="#BOOKMARK7">primer</a>.</p>
+<p><img src="svgbob_ed6e2562b21f94795683598ed7c2e229f80a9aca.svg" alt="Kroki diagram output"></p>
+<p><a href="#BOOKMARK6">DNA polymerase</a> is unidirectional, meaning that it can only walk a DNA strand in one direction. That direction is backwards (<a href="#BOOKMARK4">3'</a> to <a href="#BOOKMARK2">5'</a>)</p>
+</li>
+<li>
+<p><a name="BOOKMARK7"></a><strong>primer</strong> - A <a href="#BOOKMARK7">primer</a> is a short strand of RNA that binds to some larger strand of DNA (single bases, not a strand of base pairs) and allows DNA synthesis to  happen. That is, the <a href="#BOOKMARK7">primer</a> acts as the entry point for special enzymes <a href="#BOOKMARK6">DNA polymerase</a>s. <a href="#BOOKMARK6">DNA polymerase</a>s bind to the <a href="#BOOKMARK7">primer</a> to get access to the strand.</p>
+</li>
+<li>
+<p><a name="BOOKMARK8"></a><strong>replication fork</strong> - The process of DNA replication requires that DNA's 2 complementing strands be unwound and split open. The area where the DNA starts to  split is called the <a href="#BOOKMARK8">replication fork</a>. In bacteria, the <a href="#BOOKMARK8">replication fork</a> starts at the <a href="#BOOKMARK9">replication origin</a> and keeps expanding until it reaches the <a href="#BOOKMARK11">replication terminus</a>.  Special enzymes called <a href="#BOOKMARK6">DNA polymerase</a>s walk over each unwound strand and create complementing strands.</p>
+<p><img src="svgbob_4df993b036e26d78288d477eec2885097ffae552.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK9"></a><strong>replication origin</strong> (<a name="BOOKMARK10"></a><strong>ori</strong>) - The point in DNA at which replication starts.</p>
+</li>
+<li>
+<p><a name="BOOKMARK11"></a><strong>replication terminus</strong> (<a name="BOOKMARK12"></a><strong>ter</strong>) - The point in DNA at which replication ends.</p>
+</li>
+<li>
+<p><a name="BOOKMARK13"></a><strong>forward half-strand</strong> / <a name="BOOKMARK14"></a><strong>reverse half-strand</strong> - Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the <a href="#BOOKMARK9">replication origin</a> (<a href="#BOOKMARK10">ori</a>) is the region of DNA where replication starts, while the <a href="#BOOKMARK11">replication terminus</a> (<a href="#BOOKMARK12">ter</a>) is where replication ends.</p>
+<p><img src="svgbob_fb9438945a109c884df7ccc79d1d8051fd358a87.svg" alt="Kroki diagram output"></p>
+<p>If you split up the DNA based on <a href="#BOOKMARK10">ori</a> and <a href="#BOOKMARK12">ter</a> being cutting points, you end up with 4 distinct strands. Given that the direction of a strand is <a href="#BOOKMARK2">5'</a> to <a href="#BOOKMARK4">3'</a>, if the direction of the strand starts at...</p>
+<ul>
+<li>
+<p><a href="#BOOKMARK10">ori</a> and ends at <a href="#BOOKMARK12">ter</a>, it's called the <a href="#BOOKMARK13">forward half-strand</a>.</p>
+<p><img src="svgbob_d97cf1f12de4bd77dbaf9eca708b0e9120e50b33.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a href="#BOOKMARK12">ter</a> and ends at <a href="#BOOKMARK10">ori</a>, it's called the <a href="#BOOKMARK14">reverse half-strand</a>.</p>
+<p><img src="svgbob_0016146d0b3f1f6edf2724e9978d52de7057f5f4.svg" alt="Kroki diagram output"></p>
+</li>
+</ul>
+</li>
+</ul>
 
         </body></html>
