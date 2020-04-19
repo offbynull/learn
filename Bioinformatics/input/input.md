@@ -33,12 +33,12 @@ Often times we'll need to either...
 Given a DNA k-mer, calculate its reverse complement.
 
 ```{output}
-code_kmer/src/ReverseComplementADnaKmer.py
+ch1_code/src/ReverseComplementADnaKmer.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmer}
+```{ch1}
 ReverseComplementADnaKmer
 TAATCCG
 ```
@@ -64,12 +64,12 @@ Depending on the type of biological sequence, a k-mer may have one or more alter
 Given a k-mer, find where that k-mer occurs in some larger sequence.
 
 ```{output}
-code_kmer/src/FindLocationsOfAKnownKmer.py
+ch1_code/src/FindLocationsOfAKnownKmer.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmer}
+```{ch1}
 FindLocationsOfAKnownKmer
 ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT
 AC
@@ -86,12 +86,12 @@ K-mer Location
 Given a k-mer, find where that k-mer clusters in some larger sequence.
 
 ```{output}
-code_kmer/src/FindClumpsOfAKnownKmer.py
+ch1_code/src/FindClumpsOfAKnownKmer.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmer}
+```{ch1}
 FindClumpsOfAKnownKmer
 GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
 GGG
@@ -108,12 +108,12 @@ For example, the DnaA box in bacteria can be found repeating multiple times in t
 Given a sequence, count how many times each unique k-mer in that sequence occurs.
 
 ```{output}
-code_kmer/src/CountASequencesKmers.py
+ch1_code/src/CountASequencesKmers.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmer}
+```{ch1}
 CountASequencesKmers
 AAAACAAAAAGAAAAAAT
 4
@@ -129,12 +129,12 @@ Find Where a K-mer Clusters
 
 
 ```{output}
-code_kmer/src/FindASequencesKmerClusters.py
+ch1_code/src/FindASequencesKmerClusters.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-```{kmer}
+```{ch1}
 FindASequencesKmerClusters
 GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
 3
@@ -148,11 +148,26 @@ An enzyme may need to bind to a specific region of DNA to begin doing its job. T
 
 For example, the DnaA box in bacteria can be found repeating multiple times in the ori region. If you don't know where the ori is, searching for clusters can give a list of potential locations.
 
+# GC Skew
+
+```{output}
+ch1_code/src/GCSkew.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch1}
+GCSkew
+CATGGGCATCGGCCATACGCC
+```
+
+Given a large sequence of DNA, some segments within the sequence may have lower count of Gs vs Cs. Alternatively, other segments may have a higher count of Gs vs Cs. The exact reason for why this is has to do with how DNA replicates and mutations based on how long a segment of DNA sticks around as single-stranded DNA vs double-stranded DNA.
+
 # Stories
 
-## Find the Replication Origin
+## Bacteria Replication
 
-Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the replication origin (ori) is the region of DNA where replication starts, while the replication terminus (ter) is where replication ends.
+Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the replication origin (ori) is the region in which DNA replication starts, while the replication terminus (ter) is where it ends. The ori and ter and usually placed on opposite ends of each other.
 
 ```{svgbob}
         5' ----> 3'
@@ -168,25 +183,23 @@ Bacteria are known to have a single chromosome of circular / looping DNA. In thi
 `---------- ter ----------`
 ```
 
-The replication process begins by a replication fork opening at the ori. As replication happens, that fork widens up until the point it reaches ter.
+The replication process begins by a replication fork opening at the ori. As replication happens, that fork widens until the point it reaches ter...
 
 ```{svgbob}
-       replication origin
-                |
-                v
-        +-+-+-+-+-+-+-+-+
-       /  | | | | | | |  \
-+-+-+-+                   +-+-+-+
-| | | |                   | | | |
-+-+-+-+                   +-+-+-+
-       \  | | | | | | |  /
-        +-+-+-+-+-+-+-+-+
-                ^
-                |
-       replication origin
+              ori
+               |
+               v
+     .+----------------+.
+-----+                  +------
+| | |                    | | | 
+-----+                  +------
+     `+----------------+`
+               ^
+               |
+              ori
 ```
    
-DNA polymerases attach on to the forked strands and synthesize a strand of DNA with complementing bases.
+For each forked single-stranded DNA, DNA polymerases attach on and synthesize a new reverse complement strand so that it turns back into double-stranded DNA....
 
 ```{svgbob}
                         G <- C <- T <- T <- T <- T <- G <- . . .
@@ -195,16 +208,16 @@ DNA polymerases attach on to the forked strands and synthesize a strand of DNA w
 5' . . . A -> A -> A -> C -> C -> G -> A -> A -> A -> C -> . . . 3'
                      `--------------`                    
 
-                 "Direction of DNA:"  5' ----> 3'
-                 "DNA polymerases moves in the reverse direction"
+                 "Forward direction of DNA:"                       5' -----> 3'
+                 "DNA polymerases moves in the reverse direction:" 5' <----- 3'
 ```
 
-The process of replication is different depending on the segment of DNA. That is, if you use ori and ter as cutting points, you'll have 4 different strands of DNA. Of those strands, if the directionality of the strand is going from ...
+The process of synthesizing a reverse complement strand is different based on the section of DNA that DNA polymerase is operating on. For each single-stranded DNA, if the direction of that DNA strand is traveling from ...
 
- * from ori to ter, it's called a forward half-strand.
- * from ter to ori, it's called a reverse half-strand.
+ * ori to ter, it's called a forward half-strand.
+ * ter to ori, it's called a reverse half-strand.
 
- ```{svgbob}
+```{svgbob}
                               5' ----> 3'
                       .---------- ori ----------.
                       |   | | | | | | | | | |   |
@@ -235,6 +248,8 @@ The process of replication is different depending on the segment of DNA. That is
 Since DNA polymerase can only walk over DNA in the reverse direction (3' to 5'), the 2 reverse half-strands will quickly get walked over in one shot. A primer gets attached to the ori, then a DNA polymerase attaches to that primer to begin synthesis of a new strand. Synthesis continues until the ter is reached...
 
 ```{svgbob}
+                                              "DNA polymerase synthesizing the reverse half-strand"
+
     "A single DNA polymerase walks the reverse half-strand,"
     "from ori to ter, as the replication fork widens."
                                              
@@ -259,13 +274,15 @@ ter                                                                             
                                                                  ori
 ``` 
 
-For the forward half-strands, the process is much slower. Since DNA polymerase can only walk DNA in the reverse direction, the foreword half-strands get replicated in small segments. That is, as the replication fork continues to grow, every ~2000 nucleotides a new primer attaches to the end of the fork on the forward strands. A new DNA polymerase attaches to eacg primer and walks in the reverse direction (towards the ori) to synthesize a small segment of DNA. That small segment of DNA is called an Okazaki fragment...
+For the forward half-strands, the process is much slower. Since DNA polymerase can only walk DNA in the reverse direction, the forward half-strands get replicated in small segments. That is, as the replication fork continues to grow, every ~2000 nucleotides a new primer attaches to the end of the fork on the forward strands. A new DNA polymerase attaches to each primer and walks in the reverse direction (towards the ori) to synthesize a small segment of DNA. That small segment of DNA is called an Okazaki fragment...
 
 
 ```{svgbob}
-          "A DNA polymerase attaches to the tip of the replication fork at"
-          "the forward half-strand, roughly every 2000 nucleotide opening,"
-          "to produce a small segment of DNA called an Okazaki fragment."
+                                              "DNA polymerase synthesizing the forward half-strand"
+
+    "A DNA polymerase attaches to the tip of the replication fork at"
+    "the forward half-strand, roughly every 2000 nucleotide opening,"
+    "to produce a small segment of DNA called an Okazaki fragment."
 
                                                            ori                          
       
@@ -288,22 +305,150 @@ ter                                                                             
                                                            ori                             
 ``` 
 
-TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+The replication fork will keep widening until the original 2 strands split off. DNA polymerase will have made sure that for each separated strand, a newly synthesized reverse complement is paired to it. The end result is 2 daughter chromosome where each chromosome has gaps...
 
-TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+```{svgbob}
+                        "Two daughter chromosomes"
 
-TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+  "The end result is 2 daughter chromosomes, but the synthesized strand for each"
+  "forward strand is chopped up into pieces (Okazaki fragments)."
 
-TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+          5' ----> 3'                            5' ----> 3'        
+  .---------- ori ----------.            .---------- ori  - - - - -.
+  |   | | | | | | | | | |   |            |   | | | | | | | | | |   :
+  | -  ------ ori  - - -  - |            | -  ------ ori ------  - :
+  | - |   3' <---- 5'   : - |            | - |   3' <---- 5'   | - :
+  | - |                 : - |            | - |                 | - :
+  | - |                 : - |            | - |                 | - :
+  | - |                 : - |            | - |                 | - :
+  | -  ------ ter - - -   - |            | -  ------ ter ------  - :
+  |   | | | | | | | | | |   |            |   | | | | | | | | | |   :
+  `---------- ter ----------`            `---------- ter  - - - - -`
 
-TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+  "original strand is outside strand"    "original strand is inner strand"
+```
 
-TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+The Okazaki fragments synthesized on the forward strands end up getting sewn together by DNA ligase...
 
-TODO: FLESH THIS OUT BY TALKING ABOUT SKEW DIAGRAM
+```{svgbob}
+                        "Two daughter chromosomes"
 
+  "Totally complete once DNA ligase has sewn together the Okazaki fragments."
 
-## Find the DnaA Box
+          5' ----> 3'                            5' ----> 3'        
+  .---------- ori ----------.            .---------- ori ----------.
+  |   | | | | | | | | | |   |            |   | | | | | | | | | |   |
+  | -  ------ ori ------  - |            | -  ------ ori ------  - |
+  | - |   3' <---- 5'   | - |            | - |   3' <---- 5'   | - |
+  | - |                 | - |            | - |                 | - |
+  | - |                 | - |            | - |                 | - |
+  | - |                 | - |            | - |                 | - |
+  | -  ------ ter ------  - |            | -  ------ ter ------  - |
+  |   | | | | | | | | | |   |            |   | | | | | | | | | |   |
+  `---------- ter ----------`            `---------- ter ----------`
+```
+
+You now have two complete copies of the DNA.
+
+### Find Ori and Ter
+
+Since the forward half-strand gets its reverse complement synthesized at a much slower rate than the reverse half-strand, it stays single stranded for a much longer time. Single-stranded DNA is 100 times more susceptible to mutations than double-stranded DNA. Specifically, in single-stranded DNA, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.
+
+```{svgbob} 
+                             ori -->---->--.
+                                           |
+                                           v
+                                           |
+                                           v
+                                           |
+                                           v
+                                           |
+                                           |
+                             ter --<---<---`
+
+                                   |
+                                   | "synthesize reverse complement"
+                                   v
+
+                             ori -->---->--.       
+                                | | | |    |       
+                             ori --<---  - v       
+                                       | - |    
+"Reverse half-strand (synthesized)"    | - v    "Forward half-strand (original)"
+"less Gs / more As"                    ^ - |    "less Cs / more Ts"     
+                                       | - v       
+                             ter -->---  - |       
+                                | | | |    |       
+                             ter --<---<---`       
+
+"The forward half-strand ends up with less Cs and more Ts. As such, the"
+"reverse complement strand that gets synthesized for it by DNA polymerase"
+"will have less Gs and more As."
+```
+
+The reverse half-strand spends much less time as a single-stranded DNA. As such, it experiences much less C to T mutations.
+
+```{svgbob} 
+                                    .-->--->--- ori
+                                    |              
+                                    ^           
+                                    |              
+                                    ^              
+                                    |              
+                                    ^              
+                                    |           
+                                    |              
+                                    `--<---<--- ter
+       
+                                          |
+                                          | "synthesize reverse complement"
+                                          v
+       
+                                    .-->--->---- ori       
+                                    |   | | | | |          
+                                    ^ -  --<---- ori       
+                                    | - |              
+"Reverse half-strand (original)"    ^ - v    "Forward half-strand (synthesized)"
+"more normal G / A distribution"    | - |    "more normal C / more T distribution"     
+                                    ^ - |                 
+                                    | -  -->---- ter       
+                                    |   | | | | |             
+                                    `--<---<---- ter       
+
+"The reverse half-strands end up with a more normal G and A distribution. As such, the"
+"reverse complement strand that gets synthesized for it by DNA polymerase will have a"
+"more normal C and T distribution."
+```
+
+Ultimately, that means that a single strand will have a different nucleotide distribution between its forward half-strand vs its backward half-strand. If the half-strand being targeted for replication is the ...
+
+ * forward half-strand, some Cs get replaced with Ts. As such, its synthesized reverse half-strand will have less Gs.
+ * reverse half-strand, most Cs are kept. As such, its synthesized forward half-strand will keep its Gs.
+
+To simplify, the ...
+
+ * forward half-strand: loses Cs, keeps Gs.
+ * reverse half-strand: keeps Cs, loses Gs.
+
+```{prereq}
+GC Skew
+```
+
+You can use a GC skew diagram to help pinpoint where the ori and ter might be. The plot will typically form a peak where the ter is (more G vs C) and form a V where the ori is (less G vs C).
+
+TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
+
+TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
+
+TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
+
+TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
+
+TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
+
+TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
+
+### Find the DnaA Box
 
 Within the ori region, several smaller regions exist known as `{bm} DnaA box`es -- sequences that are either the same as or very similar to each other....
 
@@ -360,33 +505,34 @@ TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
  
  
    ```{svgbob}
-   T    G    G  
-             ^    
-       .---+ | +-----.  ----------> 
-   A    C    C    G    A    A    A    C  
-       `-------------` 
+                           G <- C <- T <- T <- T <- T <- G <- . . .
+                           |                            
+              <-------- .- | ----------.                    
+   5' . . . A -> A -> A -> C -> C -> G -> A -> A -> A -> C -> . . . 3'
+                        `--------------`                    
+   
+                    "Forward direction of DNA:"                       5' -----> 3'
+                    "DNA polymerases moves in the reverse direction:" 5' <----- 3'
    ```
  
-   DNA polymerase is unidirectional, meaning that it can only walk a DNA strand in one direction. That direction is backwards (3' to 5') 
+   DNA polymerase is unidirectional, meaning that it can only walk a DNA strand in one direction: reverse (3' to 5') 
  
  * `{bm} primer` - A primer is a short strand of RNA that binds to some larger strand of DNA (single bases, not a strand of base pairs) and allows DNA synthesis to  happen. That is, the primer acts as the entry point for special enzymes DNA polymerases. DNA polymerases bind to the primer to get access to the strand.
  
  * `{bm} replication fork` - The process of DNA replication requires that DNA's 2 complementing strands be unwound and split open. The area where the DNA starts to  split is called the replication fork. In bacteria, the replication fork starts at the replication origin and keeps expanding until it reaches the replication terminus.  Special enzymes called DNA polymerases walk over each unwound strand and create complementing strands.
  
    ```{svgbob}
-          replication origin
-                   |
-                   v
-           +-+-+-+-+-+-+-+-+
-          /  | | | | | | |  \
-   +-+-+-+                   +-+-+-+
-   | | | |                   | | | |
-   +-+-+-+                   +-+-+-+
-          \  | | | | | | |  /
-           +-+-+-+-+-+-+-+-+
-                   ^
-                   |
-          replication origin
+                 ori
+                  |
+                  v
+        .+----------------+.
+   -----+                  +------
+   | | |                    | | | 
+   -----+                  +------
+        `+----------------+`
+                  ^
+                  |
+                 ori
    ```
  
  * `{bm} replication origin` (`{bm} ori/\b(ori)\b/i`) - The point in DNA at which replication starts.
@@ -444,3 +590,38 @@ TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
      |                      
      `--<---<--- ter        
      ```
+
+   ```{note}
+   * Forward half-strand is the same as lagging half-strand.
+   * Reverse half-strand is the same as leading half-strand.
+   ```
+
+ * `{bm} leading half-strand` / `{bm} lagging half-strand` - Given the 2 strands tha make up a DNA molecule, the strand that goes in the...
+
+   * reverse direction (3' to 5') is called the leading half-strand.
+   * forward direction (5' to 3') is called the lagging half-strand.
+
+   This nomenclature has to do with DNA polymerase. Since DNA polymerase can only walk in the reverse direction (3' to 5'), it synthesizes the leading half-strand in one shot. For the lagging half-strand (5' to 3'), multiple DNA polymerases have to used to synthesize DNA, each binding to the lagging strand and walking backwards a small amount to generate a small fragment of DNA (Okazaki fragment). the process is much slower for the lagging half-strand, that's why it's called lagging.
+
+   ```{note}
+   * Leading half-strand is the same as reverse half-strand.
+   * Lagging half-strand is the same as forward half-strand.
+   ```
+
+ * `{bm} Okazaki fragment` - A small fragment of DNA generated by DNA polymerase for forward half-strands. DNA synthesis for the forward half-strands can only happen in small pieces. As the fork open ups every ~2000 nucleotides, DNA polymerase attaches to the end of the fork on the forward half-strand and walks in reverse to generate that small segment (DNA polymerase can only walk in the reverse direction).
+
+ * `{bm} DNA ligase` - An enzyme that sews together short segments of DNA called Okazaki fragments by binding the phosphate group on the end of one strand with the deoxyribose group on the other strand.
+
+ * `{bm} single stranded DNA/(single stranded DNA|single-stranded DNA)/i` - A single strand of DNA, not bound to a strand of its reverse complements.
+
+   ```{svgbob}
+   5' . . . A -> A -> A -> C -> C -> G -> A -> A -> A -> C -> . . . 3'
+   ```
+
+ * `{bm} double stranded DNA/(double stranded DNA|double-stranded DNA)/i` - Two strands of DNA bound together, where each strand is the reverse complement of the other.
+
+   ```{svgbob}
+   3' . . . T <- T <- T <- G <- C <- T <- T <- T <- T <- G <- . . . 5'
+            |    |    |    |    |    |    |    |    |    | 
+   5' . . . A -> A -> A -> C -> C -> G -> A -> A -> A -> C -> . . . 3'    
+   ```
