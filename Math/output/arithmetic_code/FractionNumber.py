@@ -248,7 +248,7 @@ class FractionNumber:
             return res
         finally:
             log_unindent()
-    #NARKDOWN_RECIP
+    #MARKDOWN_RECIP
 
     #MARKDOWN_SIMP
     def simplify(self: FractionNumber) -> FractionNumber:

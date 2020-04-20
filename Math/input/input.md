@@ -4260,7 +4260,8 @@ Integer multiplication
 Fraction addition
 ```
 
-Recall that when you multiply by two integer numbers together, you're effectively doing repetitive addition -- you're copying the value a certain number of times and combining those copies together. For example, performing...
+`{bm} /(Fraction multiplication)/i`
+Recall that when you multiply two integer numbers together, you're effectively doing repetitive addition -- you're copying the value a certain number of times and combining those copies together. For example, performing...
 
  * `{kt} 4 \cdot 3` is the same as `{kt} 4+4+4` -- product is 12.
   
@@ -4283,7 +4284,14 @@ Recall that when you multiply by two integer numbers together, you're effectivel
     4   
    ```
 
-Notice that as the multiplier goes down to 1, the product decreases. By the time it reaches 1, the product is the same as the number being multiplied. This same concept applies if a fraction is being multiplied by a whole number. For example, performing...
+ * `{kt} 4 \cdot 0` is nothing -- product is 0.
+
+   ```{svgbob}
+   
+    0   
+   ```
+
+Notice that as the multiplier goes down to 0, the product decreases. By the time it reaches 1, the product is the same as the number being multiplied. By the time it reaches 0, the product is 0. This same concept applies if a fraction is being multiplied by a whole number. For example, performing...
 
  * `{kt} \frac{1}{2} \cdot 3` is the same as `{kt} \frac{1}{2}+\frac{1}{2}+\frac{1}{2}` -- product is `{kt} \frac{3}{2}`.
 
@@ -4309,7 +4317,15 @@ Notice that as the multiplier goes down to 1, the product decreases. By the time
    2
    ```
 
-Where it gets confusing is when the multiplier becomes less than 1 (a proper fraction). Since, the product grows when the multiplier is above 1, it only makes sense that it shrinks if the multiplier is below 1. Conceptually you can think of it as "copying" a value less than once. Where as with whole numbers you're copying at least once, with proper fractions you're copying less than once -- you're taking some smaller piece of that original.  For example, ...
+ * `{kt} \frac{1}{2} \cdot 0` is nothing -- product is 0.
+
+   ```{diagramhelperfrac}
+   radius 40
+   0
+   2
+   ```
+
+Where it gets confusing is when the multiplier becomes less than 1 (a proper fraction). Since, the product grows as the multiplier is above 1, it only makes sense that it shrinks if the multiplier goes below 1. Conceptually you can think of it as "copying" a value less than once. Where as with whole numbers you're copying at least once, with proper fractions you're copying less than once -- you're copying some smaller piece of that original.  For example, ...
 
  * `{kt} \frac{1}{2} \cdot 3` -- make 3 copies of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{3}{2}`.
 
@@ -4351,7 +4367,14 @@ Where it gets confusing is when the multiplier becomes less than 1 (a proper fra
    6
    ```
 
-The algorithm to multiply any 2 fractions together is to multiply their numerators then multiply their denominators. It doesn't matter if the fractions are proper fractions or improper fractions. For example, `{kt} \frac{2}{4} \cdot \frac{3}{5}` is `{kt} \frac{6}{20}`.
+If you look closely at the examples above, you may have noticed a pattern: In each case, the product is just the product of the numerators and the product of the denominators. For example, in `{kt} \frac{1}{2} \cdot \frac{1}{3}`, the ...
+
+* numerator of the product is `{kt} 1 \cdot 1` (1),
+* denominator of the product is `{kt} 2 \cdot 3` (6),
+
+... resulting in the product `{kt} \frac{1}{6}`.
+
+This is the algorithm to multiply any 2 fractions together. The product of fractions is the product of their numerators over the product of their denominators. It doesn't matter if the fractions are proper fractions or improper fractions.
 
 ```{output}
 arithmetic_code/FractionNumber.py
@@ -4369,75 +4392,25 @@ python
 Fraction multiplication
 ```
 
-TODO: discuss how multiplying the reciprocal is 1
+`{bm} /(Fraction reciprocal)/i`
+The `{bm} reciprocal` of a fraction is when you take that fraction and flip its numerator and denominator. For example, the reciprocal of `{kt} -\frac{5}{6}` is `{kt} -\frac{6}{5}`.
 
-## Least Common Denominator
+When you multiply a fraction by its reciprocal, you will always end up with a whole. For example, `{kt} \frac{2}{7} \cdot \frac{7}{2}` is `{kt} \frac{14}{14}`.
 
-```{prereq}
-Least common multiple
-Fraction multiplication
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_RECIP\s*\n([\s\S]+?)\n\s*#MARKDOWN_RECIP
 ```
 
-TODO: there can be many common denominators -- the least common denominator is the smallest one. its the least common multiple of the two denominators. to see an example /explaination using fractional tiles, see the introduction of 4.5
-
-e.g. find the lcd for 9/28 and 21/32
-
-* 28
-  * 2
-  * 14
-    * 2
-    * 7
-
-* 32
-  * 16
-    * 4
-      * 2
-      * 2
-    * 4
-      * 2
-      * 2
-  * 2
-
+```{fracnumrecip}
+2/7
 ```
-2 2       7
-2 2 2 2 2 |
-| | | | | |
-v v v v v v
-2 2 2 2 2 7 = 224
-```
-
-lcd is 224
-
-to get both fractions to equivalent fractions that have a denominotr of 224...
-
-28 * ? = 224, 224 / 28 = 8 <-- multiply 9/28 by 8/8 to get equivalent fraction with denom 224 (lcd)
-
-32 * ? = 224, 224 / 32 = 7 <-- multiply 21/232 by 7/7 to get equivalent fraction with denom 224 (lcd)
-
-another way of finding the number you need to multiply by is by pulling out the missing number numbers from each prime factorization. going back to the same example above...
-
-```
-      +-- 2*2*2 missing -- 8 was the multiplier for 9/28 (1st fraction)
-      |
-      v
-2 2       7
-2 2 2 2 2 
-          ^
-          |
-          +-- 7 missing -- 7 was the multiplier for the 21/32 (2nd fraction)
-```
-
-
-TODO: if you use lcd to get denoms the same, addition and subtraction won't require a simplification step
-
-what's the point of using lcd? the lcd is the minimum value the denominator can be regardless of what the numerators are. that is, if you ignored the opreand numerators (if they were unknowns), you'd know that you can perform an addition/subtraction so long as the resulting denominator is AT LEAST the lcd
-
-this isn't the case when you just multiply the operands against each other
 
 ## Division
 
 ```{prereq}
-Reciprocal
+Fraction reciprocal
 Fraction multiplication
 ```
 
