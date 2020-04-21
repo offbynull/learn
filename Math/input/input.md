@@ -3938,6 +3938,7 @@ Each fraction has different sized pieces, but the overall value covered by those
 Greatest Common Divisor
 ```
 
+`{bm} /(Fraction simplification)/i`
 Of all the equivalent fractions that represent a value, one of those fractions represents that value in the smallest number of pieces possible. This fraction is called the `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the fraction|simplify a fraction|reduced fraction|reduce fraction|reduce a fraction|reduce the fraction|simplified form|simplified fraction form|simplified form of a fraction|simplified form of the fraction)/i`. For the example above, `{kt} \frac{3}{2}` is the simplified fraction for both `{kt} \frac{12}{8}` and `{kt} \frac{6}{4}`:
 
  * `{kt} \frac{3}{2}`
@@ -4266,21 +4267,21 @@ Recall that when you multiply two integer numbers together, you're effectively d
  * `{kt} 4 \cdot 3` is the same as `{kt} 4+4+4` -- product is 12.
   
    ```{svgbob}
-   **** **** ****
+   ●●●● ●●●● ●●●●
     4    4    4
    ```
   
  * `{kt} 4 \cdot 2` is the same as `{kt} 4+4` -- product is 8.
 
    ```{svgbob}
-   **** ****
+   ●●●● ●●●●
     4    4  
    ```
 
  * `{kt} 4 \cdot 1` is the same as `{kt} 4` -- product is 4.
 
    ```{svgbob}
-   ****
+   ●●●●
     4   
    ```
 
@@ -4412,7 +4413,54 @@ python
 ```{prereq}
 Fraction reciprocal
 Fraction multiplication
+Fraction simplification
 ```
+
+`{bm} /(Fraction division)/i`
+Recall that when you divide two integer numbers, you're effectively doing repetitive subtracting -- you're counting how many iterations you can remove the second value from the first. For example, performing...
+
+ * `{kt} 12 \div 3` is the same as `{kt} 12-3-3-3-3` -- quotient is 4.
+  
+   ```{svgbob}
+   ●●● ●●● ●●● ●●●
+    3   3   3   3
+   ```
+  
+ * `{kt} 12 \div 2` is the same as `{kt} 12-2-2-2-2-2-2` -- quotient is 6.
+
+   ```{svgbob}
+   ●● ●● ●● ●● ●● ●●
+   2  2  2  2  2  2
+   ```
+
+ * `{kt} 12 \div 1` is the same as `{kt} 12-1-1-1-1-1-1-1-1-1-1-1-1` -- quotient is 12.
+
+   ```{svgbob}
+   ● ● ● ● ● ● ● ● ● ● ● ●
+   1 1 1 1 1 1 1 1 1 1 1 1
+   ```
+
+ * `{kt} 12 \div 0` is undefined.
+
+Another way of thinking about this is that division tells you how many groups you'll get when you divide. For example, if you're performing `{kt} 12 \div 3`, you're determining how many 3s it takes to reach 12...
+
+```{svgbob}
+●●● ●●● ●●● ●●●
+ 3   3   3   3
+```
+
+This same concept applies when dealing with fractions: the quotient determines how many of the divisor it takes to reach the dividend. For example, in `{kt} \frac{1}{3} \div \frac{1}{6}`, you're determining how many `{kt} \frac{1}{6}`s it takes to reach `{kt} \frac{1}{3}`...
+
+```{svgbob}
++---------------+
+|      1/3      |
++-------+-------+
+|  1/6  |  1/6  |
++-------+-------+
+```
+
+You need 2 divisors (`{kt} \frac{1}{6}`) to reach the dividend (`{kt} \frac{1}{3}`) -- `{kt} \frac{1}{6} \cdot 2` is `{kt} \frac{2}{6}`, which simplifies to `{kt} \frac{1}{3}`.
+
 
 TODO: model out division using fraction tiles... see example in section 4.2 where they divide 1/2 by 1/6.
 
