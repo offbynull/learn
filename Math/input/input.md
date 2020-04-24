@@ -4326,7 +4326,7 @@ Notice that as the multiplier goes down to 0, the product decreases. By the time
    2
    ```
 
-Where it gets confusing is when the multiplier becomes less than 1 (a proper fraction). Since, the product grows as the multiplier is above 1, it only makes sense that it shrinks if the multiplier goes below 1. Conceptually you can think of it as "copying" a value less than once. Where as with whole numbers you're copying at least once, with proper fractions you're copying less than once -- you're copying some smaller piece of that original.  For example, ...
+Where it gets confusing is when the multiplier becomes less than 1 (a proper fraction). Since, the product grows as the multiplier goes above 1, it only makes sense that it shrinks if the multiplier goes below 1. Conceptually you can think of it as "copying" a value less than once. Where as with whole numbers you're copying at least once, with proper fractions you're copying less than once -- you're copying some smaller piece of that original.  For example, ...
 
  * `{kt} \frac{1}{2} \cdot 3` -- make 3 copies of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{3}{2}`.
 
@@ -4417,7 +4417,7 @@ Fraction simplification
 ```
 
 `{bm} /(Fraction division)/i`
-Recall that when you divide two integer numbers, you're effectively doing repetitive subtracting -- you're counting how many iterations you can remove the second value from the first. For example, performing...
+Recall that when you divide two integer numbers, you're effectively doing repetitive subtracting -- you're counting how many iterations you can subtract the second value from the first. For example, performing...
 
  * `{kt} 12 \div 3` is the same as `{kt} 12-3-3-3-3` -- quotient is 4.
   
@@ -4440,24 +4440,34 @@ Recall that when you divide two integer numbers, you're effectively doing repeti
    1 1 1 1 1 1 1 1 1 1 1 1
    ```
 
- * `{kt} 12 \div 0` is undefined.
-
-Another way of thinking about this is that division tells you how many groups you'll get when you divide. For example, if you're performing `{kt} 12 \div 3`, you're determining how many 3s it takes to reach 12...
+This same concept applies if the number being divided by is a fraction. For example, if starting with 12 and each iteration you subtract `{kt} \frac{1}{2}`, you would subtract for 24 iterations: `{kt} 12 \div \frac{1}{2}` is the same as `{kt} 12-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}` -- quotient is 24.
 
 ```{svgbob}
-●●● ●●● ●●● ●●●
- 3   3   3   3
+◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ 
 ```
 
-This same concept applies when dealing with fractions: the quotient determines how many of the divisor it takes to reach the dividend. For example, in `{kt} \frac{1}{3} \div \frac{1}{6}`, you're determining how many `{kt} \frac{1}{6}`s it takes to reach `{kt} \frac{1}{3}`...
+Again, this same concept applies if the number being divided and the number being divided by are both fractions. For example, if starting with `{kt} \frac{1}{2}` and each iteration you subtract `{kt} \frac{1}{4}`, you would subtract for 2 iterations: `{kt} \frac{1}{2} \div \frac{1}{4}` is the same as `{kt} \frac{1}{2}-\frac{1}{4}-\frac{1}{4}` -- quotient is 2.
 
 ```{svgbob}
-+---------------+
-|      1/3      |
-+-------+-------+
-|  1/6  |  1/6  |
-+-------+-------+
+◔ ◔ 
 ```
+
+```{svgbob}
++-----------+
+|    1/2    |
++-----+-----+
+| 1/4 | 1/4 |
++-----+-----+
+```
+
+Where it gets confusing is when the number being divided is less than the number being divided by. THINK OF A GOOD WAY TO DESCRIBE THIS IT BECOMES MULTIPLICATION e.g. 2/1 / 4/1  or 2 / 4
+
+
+
+
+
+
+
 
 You need 2 divisors (`{kt} \frac{1}{6}`) to reach the dividend (`{kt} \frac{1}{3}`) -- `{kt} \frac{1}{6} \cdot 2` is `{kt} \frac{2}{6}`, which simplifies to `{kt} \frac{1}{3}`.
 
