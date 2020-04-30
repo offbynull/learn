@@ -59,6 +59,25 @@ Depending on the type of biological sequence, a k-mer may have one or more alter
 
 , ... the reverse complement of that k-mer may be just as valid as the original k-mer. For example, if an enzyme is known to bind to a specific DNA k-mer, it's possible that it might also bind to the reverse complement of that k-mer.
 
+## Hamming Distance Between K-mers
+
+Given 2 k-mers, the hamming distance is the number of positional mismatches between them.
+
+```{output}
+ch1_code/src/HammingDistanceBetweenKmers.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch1}
+HammingDistanceBetweenKmers
+ACTTTGTT
+AGTTTCTT
+```
+
+Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. It may be that enzyme can bind to other k0mer patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.
+
+
 ## Find Locations of a Known K-mer
 
 Given a k-mer, find where that k-mer occurs in some larger sequence.
