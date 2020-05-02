@@ -7,7 +7,7 @@ from typing import List
 def find_kmer_locations(sequence: str, kmer: str) -> List[int]:
     k = len(kmer)
     idxes = []
-    for i in range(0, len(sequence) - k):
+    for i in range(0, len(sequence) - k + 1):
         if sequence[i:i + k] == kmer:
             idxes.append(i)
     return idxes

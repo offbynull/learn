@@ -8,7 +8,7 @@ from CountASequencesKmers import kmer_frequency
 def find_clustered_kmers(sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int) -> Dict[str, List[int]]:
     # map kmer to indices
     indices_lookup = dict()
-    for i in range(0, len(sequence) - k):
+    for i in range(0, len(sequence) - k + 1):
         kmer = sequence[i:i + k]
         if kmer not in indices_lookup:
             indices_lookup[kmer] = []

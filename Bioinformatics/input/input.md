@@ -75,8 +75,25 @@ ACTTTGTT
 AGTTTCTT
 ```
 
-Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. It may be that enzyme can bind to other k0mer patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.
+Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. It may be that enzyme can bind to other k-mer patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.
 
+## Find All K-mers Within Hamming Distance
+
+Given a source k-mer and a minimum hamming distance, find all k-mers such that when compared against the source k-mer they're within that hamming distance. In other words, find all k-mers such that `hamming_distance(source_kmer, kmer) <= min_distance`.
+
+```{output}
+ch1_code/src/FindAllDnaKmersWithinHammingDistance.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch1}
+FindAllDnaKmersWithinHammingDistance
+AAAA
+1
+```
+
+Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. It may be that enzyme can bind to other k-mer patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.
 
 ## Find Locations of a Known K-mer
 

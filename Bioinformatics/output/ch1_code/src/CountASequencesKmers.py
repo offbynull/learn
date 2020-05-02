@@ -6,7 +6,7 @@ from collections import Counter
 # MARKDOWN
 def kmer_frequency(data: str, k: int) -> Counter[str]:
     counter = Counter()
-    for i in range(0, len(data) - k):
+    for i in range(0, len(data) - k + 1):
         pattern = data[i:i+k]
         counter[pattern] += 1
     return counter
