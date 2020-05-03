@@ -28,22 +28,11 @@ Often times we'll need to either...
 * search for an approximate k-mer (fuzzy search).
 * find k-mers of interest in a sequence (e.g. repeating k-mers).
 
-## Reverse Complement a DNA K-mer
+## Reverse Complement of a DNA K-mer
 
-Given a DNA k-mer, calculate its reverse complement.
+**WHAT**: Given a DNA k-mer, calculate its reverse complement.
 
-```{output}
-ch1_code/src/ReverseComplementADnaKmer.py
-python
-# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
-```
-
-```{ch1}
-ReverseComplementADnaKmer
-TAATCCG
-```
-
-Depending on the type of biological sequence, a k-mer may have one or more alternatives. For DNA sequences specifically, a k-mer of interest may have an alternate form. Since DNA sequences come in 2 strands, where ...
+**WHY**: Depending on the type of biological sequence, a k-mer may have one or more alternatives. For DNA sequences specifically, a k-mer of interest may have an alternate form. Since the DNA molecule comes as 2 strands, where ...
  * each strand's direction is opposite of the other,
  * each strand position has a nucleotide that complements the nucleotide at that same position on the other stand:
    * A ⟷ T
@@ -59,9 +48,26 @@ Depending on the type of biological sequence, a k-mer may have one or more alter
 
 , ... the reverse complement of that k-mer may be just as valid as the original k-mer. For example, if an enzyme is known to bind to a specific DNA k-mer, it's possible that it might also bind to the reverse complement of that k-mer.
 
+**ALGORITHM**:
+
+```{output}
+ch1_code/src/ReverseComplementADnaKmer.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch1}
+ReverseComplementADnaKmer
+TAATCCG
+```
+
 ## Hamming Distance Between K-mers
 
-Given 2 k-mers, the hamming distance is the number of positional mismatches between them.
+**WHAT**: Given 2 k-mers, the hamming distance is the number of positional mismatches between them.
+
+**WHY**: Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other k-mer patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.
+
+**ALGORITHM**:
 
 ```{output}
 ch1_code/src/HammingDistanceBetweenKmers.py
@@ -75,11 +81,17 @@ ACTTTGTT
 AGTTTCTT
 ```
 
-Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. It may be that enzyme can bind to other k-mer patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.
+## Hamming Distance Neighbourhood of a DNA K-mer
 
-## Find All K-mers Within Hamming Distance
+```{prereq}
+Hamming Distance Between K-mers
+```
 
-Given a source k-mer and a minimum hamming distance, find all k-mers such that when compared against the source k-mer they're within that hamming distance. In other words, find all k-mers such that `hamming_distance(source_kmer, kmer) <= min_distance`.
+**WHAT**: Given a source k-mer and a minimum hamming distance, find all k-mers such within the hamming distance of the source k-mer. In other words, find all k-mers such that `hamming_distance(source_kmer, kmer) <= min_distance`.
+
+**WHY**: Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other k-mer patterns that are slight variations of the original. This algorithm finds all such variations.
+
+**ALGORITHM**:
 
 ```{output}
 ch1_code/src/FindAllDnaKmersWithinHammingDistance.py
@@ -93,33 +105,53 @@ AAAA
 1
 ```
 
-Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. It may be that enzyme can bind to other k-mer patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.
+# K-mer Search
 
-## Find Locations of a Known K-mer
+## Find Locations of a K-mer
 
-Given a k-mer, find where that k-mer occurs in some larger sequence.
+```{prereq}
+Hamming Distance Neighbourhood of a K-mer
+Reverse Complement a DNA K-mer
+```
+
+**WHAT**: Given a k-mer, find where that k-mer occurs in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
+
+**WHY**: Imagine that you know of a specific k-mer pattern that serves some function in an organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that that k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 related types of bacteria as a DnaA box.
+
+The enzyme that operates on that k-mer may also operate on its reverse complement as well as slight variations on that k-mer. For example, if an enzyme binds to AAAAAAAAA, it may also bind to its...
+* reverse complement: TTTTTTTTT
+* approximate variants: AAAAAAAAA, AAATAAAAA, AAAAAGAAA, ...
+* approximate variants of its reverse complements: TTTTTTTTT, TTTTTTATT, TTCTTTTTT, ...
+
+**ALGORITHM**:
 
 ```{output}
-ch1_code/src/FindLocationsOfAKnownKmer.py
+ch1_code/src/FindLocations.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch1}
-FindLocationsOfAKnownKmer
-ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT
-AC
+FindLocations
+AAAAGAACCTAATCTTAAAGGAGATGATGATTCTAA
+AAAA
+1
+True
 ```
 
-Imagine that you know of a specific k-mer pattern that serves some function in an organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that that k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 related types of bacteria as a DnaA box.
-
-## Find Clumps of a Known K-mer
+## Find Clumps of a K-mer
 
 ```{prereq}
-K-mer Location
+Find Locations of a K-mer
 ```
 
-Given a k-mer, find where that k-mer clusters in some larger sequence.
+**WHAT**: Given a k-mer, find where that k-mer clusters in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
+
+**WHY**: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
+
+For example, the DnaA box in bacteria can be found repeating multiple times in the ori region.
+
+**ALGORITHM**:
 
 ```{output}
 ch1_code/src/FindClumpsOfAKnownKmer.py
@@ -134,10 +166,6 @@ GGG
 3
 13
 ```
-
-An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
-
-For example, the DnaA box in bacteria can be found repeating multiple times in the ori region.
 
 ## Count a Sequence's K-mers
 
@@ -186,6 +214,26 @@ For example, the DnaA box in bacteria can be found repeating multiple times in t
 
 # GC Skew
 
+**WHAT**: Given a sequence, walk over it and ...
+* increment every time you spot a G.
+* decrement every time you spot a C.
+
+**WHY**: Given the DNA sequence of an organism, some segments may have lower count of Gs vs Cs.
+
+During replication, some segments of DNA stay single-stranded for a much longer time than other segments. Single-stranded DNA is 100 times more susceptible to mutations than double-stranded DNA. Specifically, in single-stranded DNA, C has a greater tendency to mutate to T. When that single-stranded DNA re-binds to a neighbouring strand, the positions of any nucleotides that mutated from C to T will change on the neighbouring strand from G to A.
+
+```{note}
+Recall that the reverse complements of ...
+ * C is G
+ * A is T
+
+It mutated from C to T. Since its now T, its complement is A.
+```
+
+Plotting the skew lets you know the rough location of segments that stayed single-stranded for a longer period of time. That information hints at special / useful locations in the organism's DNA sequence (replication origin / replication terminus).
+
+**ALGORITHM**:
+
 ```{output}
 ch1_code/src/GCSkew.py
 python
@@ -196,8 +244,6 @@ python
 GCSkew
 CATGGGCATCGGCCATACGCC
 ```
-
-Given a large sequence of DNA, some segments within the sequence may have lower count of Gs vs Cs. Alternatively, other segments may have a higher count of Gs vs Cs. The exact reason for why this is has to do with how DNA replicates and mutations based on how long a segment of DNA sticks around as single-stranded DNA vs double-stranded DNA.
 
 # Stories
 

@@ -8,24 +8,27 @@
 <li><a href="#HEADREF0">Introduction</a></li>
 <li><a href="#HEADREF1">K-mers</a></li>
 <ul>
-<li><a href="#HEADREF2">Reverse Complement a DNA K-mer</a></li>
+<li><a href="#HEADREF2">Reverse Complement of a DNA K-mer</a></li>
 <li><a href="#HEADREF3">Hamming Distance Between K-mers</a></li>
-<li><a href="#HEADREF4">Find All K-mers Within Hamming Distance</a></li>
-<li><a href="#HEADREF5">Find Locations of a Known K-mer</a></li>
-<li><a href="#HEADREF6">Find Clumps of a Known K-mer</a></li>
-<li><a href="#HEADREF7">Count a Sequence's K-mers</a></li>
-<li><a href="#HEADREF8">Find a Sequence's K-mer Clusters</a></li>
+<li><a href="#HEADREF4">Hamming Distance Neighbourhood of a DNA K-mer</a></li>
 </ul>
-<li><a href="#HEADREF9">GC Skew</a></li>
-<li><a href="#HEADREF10">Stories</a></li>
+<li><a href="#HEADREF5">K-mer Search</a></li>
 <ul>
-<li><a href="#HEADREF11">Bacteria Replication</a></li>
+<li><a href="#HEADREF6">Find Locations of a K-mer</a></li>
+<li><a href="#HEADREF7">Find Clumps of a K-mer</a></li>
+<li><a href="#HEADREF8">Count a Sequence's K-mers</a></li>
+<li><a href="#HEADREF9">Find a Sequence's K-mer Clusters</a></li>
+</ul>
+<li><a href="#HEADREF10">GC Skew</a></li>
+<li><a href="#HEADREF11">Stories</a></li>
 <ul>
-<li><a href="#HEADREF12">Find Ori and Ter</a></li>
-<li><a href="#HEADREF13">Find the DnaA Box</a></li>
+<li><a href="#HEADREF12">Bacteria Replication</a></li>
+<ul>
+<li><a href="#HEADREF13">Find Ori and Ter</a></li>
+<li><a href="#HEADREF14">Find the DnaA Box</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF14">Terminology</a></li>
+<li><a href="#HEADREF15">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -71,8 +74,21 @@
 <li>search for an approximate <a href="#BOOKMARK0">k-mer</a> (fuzzy search).</li>
 <li>find <a href="#BOOKMARK0">k-mer</a>s of interest in a sequence (e.g. repeating <a href="#BOOKMARK0">k-mer</a>s).</li>
 </ul>
-<a name="HEADREF2"></a><h2>Reverse Complement a DNA K-mer</h2>
-<p>Given a DNA <a href="#BOOKMARK0">k-mer</a>, calculate its reverse complement.</p>
+<a name="HEADREF2"></a><h2>Reverse Complement of a DNA K-mer</h2>
+<p><strong>WHAT</strong>: Given a DNA <a href="#BOOKMARK0">k-mer</a>, calculate its reverse complement.</p>
+<p><strong>WHY</strong>: Depending on the type of biological sequence, a <a href="#BOOKMARK0">k-mer</a> may have one or more alternatives. For DNA sequences specifically, a <a href="#BOOKMARK0">k-mer</a> of interest may have an alternate form. Since the DNA molecule comes as 2 strands, where ...</p>
+<ul>
+<li>each strand's direction is opposite of the other,</li>
+<li>each strand position has a nucleotide that complements the nucleotide at that same position on the other stand:
+<ul>
+<li>A ⟷ T</li>
+<li>C ⟷ G</li>
+</ul>
+</li>
+</ul>
+<p><img src="svgbob_c44b72fd8e03cfe92b63a0a3b83bfe37c5551666.svg" alt="Kroki diagram output"></p>
+<p>, ... the reverse complement of that <a href="#BOOKMARK0">k-mer</a> may be just as valid as the original <a href="#BOOKMARK0">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BOOKMARK0">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BOOKMARK0">k-mer</a>.</p>
+<p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_complement</span><span class="hljs-params">(strand: str)</span>:</span>
     ret = <span class="hljs-string">''</span>
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(strand)):
@@ -95,20 +111,10 @@
 <p>Reverse Complement: CGGATTA</p>
 </div>
 <p></p>
-<p>Depending on the type of biological sequence, a <a href="#BOOKMARK0">k-mer</a> may have one or more alternatives. For DNA sequences specifically, a <a href="#BOOKMARK0">k-mer</a> of interest may have an alternate form. Since DNA sequences come in 2 strands, where ...</p>
-<ul>
-<li>each strand's direction is opposite of the other,</li>
-<li>each strand position has a nucleotide that complements the nucleotide at that same position on the other stand:
-<ul>
-<li>A ⟷ T</li>
-<li>C ⟷ G</li>
-</ul>
-</li>
-</ul>
-<p><img src="svgbob_c44b72fd8e03cfe92b63a0a3b83bfe37c5551666.svg" alt="Kroki diagram output"></p>
-<p>, ... the reverse complement of that <a href="#BOOKMARK0">k-mer</a> may be just as valid as the original <a href="#BOOKMARK0">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BOOKMARK0">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BOOKMARK0">k-mer</a>.</p>
 <a name="HEADREF3"></a><h2>Hamming Distance Between K-mers</h2>
-<p>Given 2 <a href="#BOOKMARK0">k-mer</a>s, the hamming distance is the number of positional mismatches between them.</p>
+<p><strong>WHAT</strong>: Given 2 <a href="#BOOKMARK0">k-mer</a>s, the hamming distance is the number of positional mismatches between them.</p>
+<p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK0">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK0">k-mer</a> patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.</p>
+<p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hamming_distance</span><span class="hljs-params">(kmer1: str, kmer2: str)</span> -&gt; int:</span>
     mismatch = <span class="hljs-number">0</span>
 
@@ -123,9 +129,16 @@
 <p>Hamming Distance: 2</p>
 </div>
 <p></p>
-<p>Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK0">k-mer</a> pattern to bind to. It may be that enzyme can bind to other <a href="#BOOKMARK0">k-mer</a> patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.</p>
-<a name="HEADREF4"></a><h2>Find All K-mers Within Hamming Distance</h2>
-<p>Given a source <a href="#BOOKMARK0">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK0">k-mer</a>s such that when compared against the source <a href="#BOOKMARK0">k-mer</a> they're within that hamming distance. In other words, find all <a href="#BOOKMARK0">k-mer</a>s such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
+<a name="HEADREF4"></a><h2>Hamming Distance Neighbourhood of a DNA K-mer</h2>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li>Hamming Distance Between <a href="#BOOKMARK0">K-mer</a>s</li>
+</ul>
+</div>
+<p><strong>WHAT</strong>: Given a source <a href="#BOOKMARK0">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK0">k-mer</a>s such within the hamming distance of the source <a href="#BOOKMARK0">k-mer</a>. In other words, find all <a href="#BOOKMARK0">k-mer</a>s such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
+<p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK0">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK0">k-mer</a> patterns that are slight variations of the original. This algorithm finds all such variations.</p>
+<p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_all_dna_kmers_within_hamming_distance</span><span class="hljs-params">(kmer: str, hamming_dist: int)</span> -&gt; set[str]:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recurse</span><span class="hljs-params">(kmer: str, hamming_dist: int, output: set[str])</span> -&gt; <span class="hljs-keyword">None</span>:</span>
         <span class="hljs-keyword">if</span> hamming_dist == <span class="hljs-number">0</span>:
@@ -142,32 +155,63 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'CAAA', 'AAAA', 'GAAA', 'AACA', 'TAAA', 'ACAA', 'ATAA', 'AAGA', 'AAAT', 'AAAC', 'AAAG', 'AATA', 'AGAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAG', 'GAAA', 'AAAA', 'TAAA', 'AAGA', 'AAAC', 'AAAT', 'AACA', 'ATAA', 'ACAA', 'AATA', 'AGAA', 'CAAA'}</p>
 </div>
 <p></p>
-<p>Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK0">k-mer</a> pattern to bind to. It may be that enzyme can bind to other <a href="#BOOKMARK0">k-mer</a> patterns within that same neighbourhood. For example, an enzyme may be able to bind to both AAACTG and AAAGTG.</p>
-<a name="HEADREF5"></a><h2>Find Locations of a Known K-mer</h2>
-<p>Given a <a href="#BOOKMARK0">k-mer</a>, find where that <a href="#BOOKMARK0">k-mer</a> occurs in some larger sequence.</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_locations</span><span class="hljs-params">(sequence: str, kmer: str)</span> -&gt; List[int]:</span>
-    k = len(kmer)
-    idxes = []
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(sequence) - k + <span class="hljs-number">1</span>):
-        <span class="hljs-keyword">if</span> sequence[i:i + k] == kmer:
-            idxes.append(i)
-    <span class="hljs-keyword">return</span> idxes</code></pre><div style="border:1px solid black;">
-<p></p>
-<p>Found AC in ACTGAACCTTACACTTAAAGGAGATGATGATTCAAAT at index [0, 5, 10, 12]</p>
-</div>
-<p></p>
-<p>Imagine that you know of a specific <a href="#BOOKMARK0">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK1">DnaA box</a>.</p>
-<a name="HEADREF6"></a><h2>Find Clumps of a Known K-mer</h2>
+<a name="HEADREF5"></a><h1>K-mer Search</h1>
+<a name="HEADREF6"></a><h2>Find Locations of a K-mer</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK0">K-mer</a> Location</li>
+<li>Hamming Distance Neighbourhood of a <a href="#BOOKMARK0">K-mer</a></li>
+<li>Reverse Complement a DNA <a href="#BOOKMARK0">K-mer</a></li>
 </ul>
 </div>
-<p>Given a <a href="#BOOKMARK0">k-mer</a>, find where that <a href="#BOOKMARK0">k-mer</a> clusters in some larger sequence.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK0">k-mer</a>, find where that <a href="#BOOKMARK0">k-mer</a> occurs in some larger sequence. The search may potentially include the <a href="#BOOKMARK0">k-mer</a>'s variants (e.g. reverse complement).</p>
+<p><strong>WHY</strong>: Imagine that you know of a specific <a href="#BOOKMARK0">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK0">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK0">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK0">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK1">DnaA box</a>.</p>
+<p>The enzyme that operates on that <a href="#BOOKMARK0">k-mer</a> may also operate on its reverse complement as well as slight variations on that <a href="#BOOKMARK0">k-mer</a>. For example, if an enzyme binds to AAAAAAAAA, it may also bind to its...</p>
+<ul>
+<li>reverse complement: TTTTTTTTT</li>
+<li>approximate variants: AAAAAAAAA, AAATAAAAA, AAAAAGAAA, ...</li>
+<li>approximate variants of its reverse complements: TTTTTTTTT, TTTTTTATT, TTCTTTTTT, ...</li>
+</ul>
+<p><strong>ALGORITHM</strong>:</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Options</span><span class="hljs-params">(NamedTuple)</span>:</span>
+    hamming_distance: int = <span class="hljs-number">0</span>
+    reverse_complement: bool = <span class="hljs-literal">False</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_locations</span><span class="hljs-params">(sequence: str, kmer: str, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; List[int]:</span>
+    <span class="hljs-comment"># Construct test kmers</span>
+    test_kmers = set()
+    test_kmers.add(kmer)
+    [test_kmers.add(alt_kmer) <span class="hljs-keyword">for</span> alt_kmer <span class="hljs-keyword">in</span> find_all_dna_kmers_within_hamming_distance(kmer, options.hamming_distance)]
+    <span class="hljs-keyword">if</span> options.reverse_complement:
+        rc_kmer = reverse_complement(kmer)
+        [test_kmers.add(alt_rc_kmer) <span class="hljs-keyword">for</span> alt_rc_kmer <span class="hljs-keyword">in</span> find_all_dna_kmers_within_hamming_distance(rc_kmer, options.hamming_distance)]
+
+    <span class="hljs-comment"># Slide over the sequence's kmers and check for matches against test kmers</span>
+    k = len(kmer)
+    idxes = []
+    <span class="hljs-keyword">for</span> seq_kmer, i <span class="hljs-keyword">in</span> slide_window(sequence, k):
+        <span class="hljs-keyword">if</span> seq_kmer <span class="hljs-keyword">in</span> test_kmers:
+            idxes.append(i)
+    <span class="hljs-keyword">return</span> idxes</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Found AAAA in AAAAGAACCTAATCTTAAAGGAGATGATGATTCTAA at index [0, 1, 2, 3, 12, 15, 16, 30]</p>
+</div>
+<p></p>
+<a name="HEADREF7"></a><h2>Find Clumps of a K-mer</h2>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li>Find Locations of a <a href="#BOOKMARK0">K-mer</a></li>
+</ul>
+</div>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK0">k-mer</a>, find where that <a href="#BOOKMARK0">k-mer</a> clusters in some larger sequence. The search may potentially include the <a href="#BOOKMARK0">k-mer</a>'s variants (e.g. reverse complement).</p>
+<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
+<p>For example, the <a href="#BOOKMARK1">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK10">ori</a> region.</p>
+<p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_clusters</span><span class="hljs-params">(sequence: str, kmer: str, min_occurrence_in_cluster: int, cluster_window_size: int)</span> -&gt; List[int]:</span>
     cluster_locs = []
 
@@ -188,9 +232,7 @@
 <p>Found clusters of GGG (at least 3 occurrences in window of 13) in GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT at index [20]</p>
 </div>
 <p></p>
-<p>An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK1">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK10">ori</a> region.</p>
-<a name="HEADREF7"></a><h2>Count a Sequence's K-mers</h2>
+<a name="HEADREF8"></a><h2>Count a Sequence's K-mers</h2>
 <p>Given a sequence, count how many times each unique <a href="#BOOKMARK0">k-mer</a> in that sequence occurs.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kmer_frequency</span><span class="hljs-params">(data: str, k: int)</span> -&gt; Counter[str]:</span>
     counter = Counter()
@@ -215,7 +257,7 @@
 </div>
 <p></p>
 <p>From past experiments, you know that a specific region of genome clusters a certain pattern. The pattern is different for each organism, but you know that it's there.</p>
-<a name="HEADREF8"></a><h2>Find a Sequence's K-mer Clusters</h2>
+<a name="HEADREF9"></a><h2>Find a Sequence's K-mer Clusters</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -258,7 +300,25 @@
 <p>Given a sequence, find clusters of unique <a href="#BOOKMARK0">k-mer</a>s within that sequence. In other words, for each unique <a href="#BOOKMARK0">k-mer</a> that exists in the sequence, see if it clusters in the sequence.</p>
 <p>An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BOOKMARK1">DnaA box</a> in bacteria can be found repeating multiple times in the <a href="#BOOKMARK10">ori</a> region. If you don't know where the <a href="#BOOKMARK10">ori</a> is, searching for clusters can give a list of potential locations.</p>
-<a name="HEADREF9"></a><h1>GC Skew</h1>
+<a name="HEADREF10"></a><h1>GC Skew</h1>
+<p><strong>WHAT</strong>: Given a sequence, walk over it and ...</p>
+<ul>
+<li>increment every time you spot a G.</li>
+<li>decrement every time you spot a C.</li>
+</ul>
+<p><strong>WHY</strong>: Given the DNA sequence of an organism, some segments may have lower count of Gs vs Cs.</p>
+<p>During replication, some segments of DNA stay single-stranded for a much longer time than other segments. <a href="#BOOKMARK19">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BOOKMARK20">double-stranded DNA</a>. Specifically, in <a href="#BOOKMARK19">single-stranded DNA</a>, C has a greater tendency to mutate to T. When that <a href="#BOOKMARK19">single-stranded DNA</a> re-binds to a neighbouring strand, the positions of any nucleotides that mutated from C to T will change on the neighbouring strand from G to A.</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>Recall that the reverse complements of ...</p>
+<ul>
+<li>C is G</li>
+<li>A is T</li>
+</ul>
+<p>It mutated from C to T. Since its now T, its complement is A.</p>
+</div>
+<p>Plotting the skew lets you know the rough location of segments that stayed single-stranded for a longer period of time. That information hints at special / useful locations in the organism's DNA sequence (<a href="#BOOKMARK9">replication origin</a> / <a href="#BOOKMARK11">replication terminus</a>).</p>
+<p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gc_skew</span><span class="hljs-params">(seq: str)</span>:</span>
     counter = <span class="hljs-number">0</span>
     skew = [counter]
@@ -278,9 +338,8 @@
 <p><img src="skew_2b5d79a0a8336d0598f762a2893b2a5c.png" alt="GC Skew Plot"></p>
 </div>
 <p></p>
-<p>Given a large sequence of DNA, some segments within the sequence may have lower count of Gs vs Cs. Alternatively, other segments may have a higher count of Gs vs Cs. The exact reason for why this is has to do with how DNA replicates and mutations based on how long a segment of DNA sticks around as <a href="#BOOKMARK19">single-stranded DNA</a> vs <a href="#BOOKMARK20">double-stranded DNA</a>.</p>
-<a name="HEADREF10"></a><h1>Stories</h1>
-<a name="HEADREF11"></a><h2>Bacteria Replication</h2>
+<a name="HEADREF11"></a><h1>Stories</h1>
+<a name="HEADREF12"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK9">replication origin</a> (<a href="#BOOKMARK10">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK11">replication terminus</a> (<a href="#BOOKMARK12">ter</a>) is where it ends. The <a href="#BOOKMARK10">ori</a> and <a href="#BOOKMARK12">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK8">replication fork</a> opening at the <a href="#BOOKMARK10">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK12">ter</a>...</p>
@@ -302,7 +361,7 @@
 <p>The <a href="#BOOKMARK17">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK18">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>You now have two complete copies of the DNA.</p>
-<a name="HEADREF12"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF13"></a><h3>Find Ori and Ter</h3>
 <p>Since the <a href="#BOOKMARK13">forward half-strand</a> gets its reverse complement synthesized at a much slower rate than the <a href="#BOOKMARK14">reverse half-strand</a>, it stays single stranded for a much longer time. <a href="#BOOKMARK19">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BOOKMARK20">double-stranded DNA</a>. Specifically, in <a href="#BOOKMARK19">single-stranded DNA</a>, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.</p>
 <p><img src="svgbob_f52124bb3b29a8388ed6a1fc5f597b26a2514f42.svg" alt="Kroki diagram output"></p>
 <p>The <a href="#BOOKMARK14">reverse half-strand</a> spends much less time as a <a href="#BOOKMARK19">single-stranded DNA</a>. As such, it experiences much less C to T mutations.</p>
@@ -330,7 +389,7 @@
 <p>TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE</p>
 <p>TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE</p>
 <p>TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE</p>
-<a name="HEADREF13"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF14"></a><h3>Find the DnaA Box</h3>
 <p>Within the <a href="#BOOKMARK10">ori</a> region, several smaller regions exist known as <a name="BOOKMARK1"></a><strong>DnaA box</strong>es -- sequences that are either the same as or very similar to each other....</p>
 <p><img src="svgbob_d3e7c213995dec8a967fa89f40ebae73ed6e53ac.svg" alt="Kroki diagram output"></p>
 <p>The DnaA protein binds to a <a href="#BOOKMARK1">DnaA box</a> to activate the process of DNA replication. The reason why multiple <a href="#BOOKMARK1">DnaA box</a> copies exist has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein doesn't bind to it, it can still bind to the other copies.</p>
@@ -344,7 +403,7 @@
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
 <p>TODO: FLESH THIS OUT BY USING <a href="#BOOKMARK0">KMER</a> ALGORITHMS</p>
-<a name="HEADREF14"></a><h1>Terminology</h1>
+<a name="HEADREF15"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p><a name="BOOKMARK2"></a><strong>5'</strong> (<a name="BOOKMARK3"></a><strong>5 prime</strong>) / <a name="BOOKMARK4"></a><strong>3'</strong> (<a name="BOOKMARK5"></a><strong>3 prime</strong>) - <a href="#BOOKMARK2">5'</a> (<a href="#BOOKMARK3">5 prime</a>) and <a href="#BOOKMARK4">3'</a> (<a href="#BOOKMARK5">3 prime</a>) describe the opposite ends of DNA. The chemical structure at each end is what defines if it's <a href="#BOOKMARK2">5'</a> or <a href="#BOOKMARK4">3'</a> -- each end is guaranteed to be different from the other. The forward direction on DNA is defined as <a href="#BOOKMARK2">5'</a> to <a href="#BOOKMARK4">3'</a>, while the backwards direction is <a href="#BOOKMARK4">3'</a> to <a href="#BOOKMARK2">5'</a>.</p>
