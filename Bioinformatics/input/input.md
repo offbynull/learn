@@ -149,68 +149,58 @@ Find Locations of a K-mer
 
 **WHY**: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
 
-For example, the DnaA box in bacteria can be found repeating multiple times in the ori region.
+For example, the DnaA box is a special k-mer pattern used by enzymes during DNA replication. Since DNA is known to mutate, the DnaA box can be found repeating multiple times in the region of DNA known as the replication origin. Finding the DnaA box clustered in a small region is a good indicator that you've found the replication origin.
 
 **ALGORITHM**:
 
 ```{output}
-ch1_code/src/FindClumpsOfAKnownKmer.py
+ch1_code/src/FindClumps.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch1}
-FindClumpsOfAKnownKmer
+FindClumps
 GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
 GGG
 3
 13
+1
+True
 ```
 
-## Count a Sequence's K-mers
-
-Given a sequence, count how many times each unique k-mer in that sequence occurs.
-
-```{output}
-ch1_code/src/CountASequencesKmers.py
-python
-# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
-```
-
-```{ch1}
-CountASequencesKmers
-AAAACAAAAAGAAAAAAT
-4
-```
-
-From past experiments, you know that a specific region of genome clusters a certain pattern. The pattern is different for each organism, but you know that it's there.
-
-## Find a Sequence's K-mer Clusters
+## Find Repeating K-mers
 
 ```{prereq}
-Find Where a K-mer Clusters
+Hamming Distance Neighbourhood of a K-mer
+Reverse Complement a DNA K-mer
 ```
 
+**WHAT**: Given a sequence, find clusters of unique k-mers within that sequence. In other words, for each unique k-mer that exists in the sequence, see if it clusters in the sequence. The search may potentially include variants of k-mer variants (e.g. reverse complements of the k-mers).
+
+**WHY**: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
+
+For example, the DnaA box is a special k-mer pattern used by enzymes during DNA replication. Since DNA is known to mutate, the DnaA box can be found repeating multiple times in the region of DNA known as the replication origin. Given that you don't know the k-mer pattern for the DnaA box but you do know the replication origin, you can scan through the replication origin for repeating k-mer patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the k-mer pattern for the DnaA box.
+
+**ALGORITHM**:
 
 ```{output}
-ch1_code/src/FindASequencesKmerClusters.py
+ch1_code/src/TopRepeatingKmers.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch1}
-FindASequencesKmerClusters
+TopRepeatingKmers
 GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
-3
-2
-13
+5
+1
+True
 ```
 
-Given a sequence, find clusters of unique k-mers within that sequence. In other words, for each unique k-mer that exists in the sequence, see if it clusters in the sequence.
+## Find Clumps of Repeating K-mers
 
-An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
-
-For example, the DnaA box in bacteria can be found repeating multiple times in the ori region. If you don't know where the ori is, searching for clusters can give a list of potential locations.
+TODO fill me in
 
 # GC Skew
 
@@ -242,7 +232,7 @@ python
 
 ```{ch1}
 GCSkew
-CATGGGCATCGGCCATACGCC
+CACGGGTGGTTTTGGGGGCCCCCC
 ```
 
 # Stories

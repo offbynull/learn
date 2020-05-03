@@ -3,14 +3,14 @@ from __future__ import annotations
 from typing import List
 
 from FindLocations import Options
-from FindLocationsOfAKnownKmer import find_kmer_locations
+from FindLocations import find_kmer_locations
 
 
 # MARKDOWN
 def find_kmer_clusters(sequence: str, kmer: str, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options()) -> List[int]:
     cluster_locs = []
 
-    locs = find_kmer_locations(sequence, kmer)
+    locs = find_kmer_locations(sequence, kmer, options)
     start_i = 0
     occurrence_count = 1
     for end_i in range(1, len(locs)):
