@@ -17,7 +17,7 @@
 <li><a href="#HEADREF6">Find Locations of a K-mer</a></li>
 <li><a href="#HEADREF7">Find Clumps of a K-mer</a></li>
 <li><a href="#HEADREF8">Find Repeating K-mers</a></li>
-<li><a href="#HEADREF9">Find Clumps of Repeating K-mers</a></li>
+<li><a href="#HEADREF9">Find Repeating K-mers in Window</a></li>
 </ul>
 <li><a href="#HEADREF10">GC Skew</a></li>
 <li><a href="#HEADREF11">Stories</a></li>
@@ -155,7 +155,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAG', 'TAAA', 'AAGA', 'AAAC', 'AATA', 'ATAA', 'CAAA', 'AAAT', 'AACA', 'AGAA', 'ACAA', 'GAAA', 'AAAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'CAAA', 'AAAA', 'AAAT', 'GAAA', 'AGAA', 'AAGA', 'ACAA', 'TAAA', 'AAAG', 'AACA', 'AAAC', 'AATA', 'ATAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h1>K-mer Search</h1>
@@ -244,10 +244,12 @@
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BOOKMARK1">DnaA box</a> is a special <a href="#BOOKMARK0">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK1">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK9">replication origin</a>. Given that you don't know the <a href="#BOOKMARK0">k-mer</a> pattern for the <a href="#BOOKMARK1">DnaA box</a> but you do know the <a href="#BOOKMARK9">replication origin</a>, you can scan through the <a href="#BOOKMARK9">replication origin</a> for repeating <a href="#BOOKMARK0">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK0">k-mer</a> pattern for the <a href="#BOOKMARK1">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_kmers</span><span class="hljs-params">(data: str, k: int, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; Counter[str]:</span>
+<pre class="hljs"><code><span class="hljs-keyword">from</span> Utils <span class="hljs-keyword">import</span> slide_window
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_kmers</span><span class="hljs-params">(data: str, k: int, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; Counter[str]:</span>
     counter = Counter()
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(data) - k + <span class="hljs-number">1</span>):
-        kmer = data[i:i+k]
+    <span class="hljs-keyword">for</span> kmer, i <span class="hljs-keyword">in</span> slide_window(data, k):
         neighbourhood = find_all_dna_kmers_within_hamming_distance(kmer, options.hamming_distance)
         <span class="hljs-keyword">for</span> neighbouring_kmer <span class="hljs-keyword">in</span> neighbourhood:
             counter[neighbouring_kmer] += <span class="hljs-number">1</span>
@@ -275,16 +277,95 @@
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
 <li>TTAAA = 6 occurrences</li>
-<li>AAGGG = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
-<li>TGATC = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
 <li>GATCA = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
+<li>TGATC = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
-<a name="HEADREF9"></a><h2>Find Clumps of Repeating K-mers</h2>
-<p>TODO fill me in</p>
+<a name="HEADREF9"></a><h2>Find Repeating K-mers in Window</h2>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li>Find Repeating <a href="#BOOKMARK0">K-mer</a>s</li>
+</ul>
+</div>
+<p><strong>WHAT</strong>: Given a sequence, find regions within that sequence that contain clusters of unique <a href="#BOOKMARK0">k-mer</a>s. In other words, ...</p>
+<ul>
+<li>slide a window over the cluster.</li>
+<li>for each unique <a href="#BOOKMARK0">k-mer</a> that exists in the window, see if it clusters in the sequence.</li>
+</ul>
+<p>The search may potentially include variants of <a href="#BOOKMARK0">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK0">k-mer</a>s).</p>
+<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK0">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK0">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK0">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
+<p>For example, the <a href="#BOOKMARK1">DnaA box</a> is a special <a href="#BOOKMARK0">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK1">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK9">replication origin</a>. Given that you don't know the <a href="#BOOKMARK0">k-mer</a> pattern for the <a href="#BOOKMARK1">DnaA box</a> but you do know the <a href="#BOOKMARK9">replication origin</a>, you can scan through the <a href="#BOOKMARK9">replication origin</a> for repeating <a href="#BOOKMARK0">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK0">k-mer</a> pattern for the <a href="#BOOKMARK1">DnaA box</a>.</p>
+<p><strong>ALGORITHM</strong>:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_for_repeating_kmers_in_clusters</span><span class="hljs-params">(sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; Set[KmerCluster]:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">neighborhood</span><span class="hljs-params">(kmer: str)</span> -&gt; Set[str]:</span>
+        neighbourhood = find_all_dna_kmers_within_hamming_distance(kmer, options.hamming_distance)
+        <span class="hljs-keyword">if</span> options.reverse_complement:
+            kmer_rc = reverse_complement(kmer)
+            neighbourhood = find_all_dna_kmers_within_hamming_distance(kmer_rc, options.hamming_distance)
+        <span class="hljs-keyword">return</span> neighbourhood
+
+    kmer_counter = {}
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_kmer</span><span class="hljs-params">(kmer: str, loc: int)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        <span class="hljs-keyword">if</span> kmer <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> kmer_counter:
+            kmer_counter[kmer] = set()
+        kmer_counter[kmer].add(window_idx + kmer_idx)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove_kmer</span><span class="hljs-params">(kmer: str, loc: int)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        kmer_counter[kmer].remove(window_idx - <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">if</span> len(kmer_counter[kmer]) == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">del</span> kmer_counter[kmer]
+
+    clustered_kmers = set()
+
+    old_first_kmer = <span class="hljs-literal">None</span>
+    <span class="hljs-keyword">for</span> window, window_idx <span class="hljs-keyword">in</span> slide_window(sequence, cluster_window_size):
+        first_kmer = window[<span class="hljs-number">0</span>:k]
+        last_kmer = window[-k:]
+
+        <span class="hljs-comment"># If first iteration, add all kmers</span>
+        <span class="hljs-keyword">if</span> window_idx == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">for</span> kmer, kmer_idx <span class="hljs-keyword">in</span> slide_window(window, k):
+                <span class="hljs-keyword">for</span> alt_kmer <span class="hljs-keyword">in</span> neighborhood(kmer):
+                    add_kmer(alt_kmer, window_idx + kmer_idx)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-comment"># Add kmer that was walked in to</span>
+            <span class="hljs-keyword">for</span> new_last_kmer <span class="hljs-keyword">in</span> neighborhood(last_kmer):
+                add_kmer(new_last_kmer, window_idx + cluster_window_size - k)
+            <span class="hljs-comment"># Remove kmer that was walked out of</span>
+            <span class="hljs-keyword">if</span> old_first_kmer <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
+                <span class="hljs-keyword">for</span> alt_kmer <span class="hljs-keyword">in</span> neighborhood(old_first_kmer):
+                    remove_kmer(alt_kmer, window_idx - <span class="hljs-number">1</span>)
+
+        old_first_kmer = first_kmer
+
+        <span class="hljs-comment"># Find clusters within window -- tuple is k-mer, start_idx, occurrence_count</span>
+        [clustered_kmers.add(KmerCluster(k, min(v), len(v))) <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> kmer_counter.items() <span class="hljs-keyword">if</span> len(v) &gt;= min_occurrence_in_cluster]
+
+    <span class="hljs-keyword">return</span> clustered_kmers</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
+<ul>
+<li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
+<li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
+<li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
+</ul>
+</div>
+<p></p>
 <a name="HEADREF10"></a><h1>GC Skew</h1>
 <p><strong>WHAT</strong>: Given a sequence, walk over it and ...</p>
 <ul>

@@ -185,22 +185,52 @@ For example, the DnaA box is a special k-mer pattern used by enzymes during DNA 
 **ALGORITHM**:
 
 ```{output}
-ch1_code/src/TopRepeatingKmers.py
+ch1_code/src/FindRepeating.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch1}
-TopRepeatingKmers
+FindRepeating
 GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
 5
 1
 True
 ```
 
-## Find Clumps of Repeating K-mers
+## Find Repeating K-mers in Window
 
-TODO fill me in
+```{prereq}
+Find Repeating K-mers
+```
+
+**WHAT**: Given a sequence, find regions within that sequence that contain clusters of unique k-mers. In other words, ...
+ * slide a window over the cluster.
+ * for each unique k-mer that exists in the window, see if it clusters in the sequence.
+ 
+ The search may potentially include variants of k-mer variants (e.g. reverse complements of the k-mers).
+
+**WHY**: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific k-mer pattern to bind to, where that k-mer represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same k-mer pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.
+
+For example, the DnaA box is a special k-mer pattern used by enzymes during DNA replication. Since DNA is known to mutate, the DnaA box can be found repeating multiple times in the region of DNA known as the replication origin. Given that you don't know the k-mer pattern for the DnaA box but you do know the replication origin, you can scan through the replication origin for repeating k-mer patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the k-mer pattern for the DnaA box.
+
+**ALGORITHM**:
+
+```{output}
+ch1_code/src/FindRepeatingInWindow.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch1}
+FindRepeatingInWindow
+TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT
+9
+6
+20
+1
+True
+```
 
 # GC Skew
 

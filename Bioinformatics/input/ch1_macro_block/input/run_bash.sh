@@ -1,4 +1,4 @@
-NAME=$(find /input/ch1_code -type f -exec md5sum {} \; | md5sum | cut -d " " -f1)
+NAME=$(md5sum /input/ch1_code/src/conda_env.yml | cut -d " " -f1)
 ENV_NAMES=$(conda info --envs)
 
 if [[ $NAME != *$ENV_NAMES* ]]; then

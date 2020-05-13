@@ -3,18 +3,18 @@ from __future__ import annotations
 from collections import Counter
 from typing import Set
 
-from CountASequencesKmersWithMismatches import kmer_frequency_with_mismatches
 from FindAllDnaKmersWithinHammingDistance import find_all_dna_kmers_within_hamming_distance
 from FindLocations import Options
-from FindLocationsOfAKnownKmerWithMismatches import find_kmer_locations_with_mismatches
 from ReverseComplementADnaKmer import reverse_complement
 
 
 # MARKDOWN
+from Utils import slide_window
+
+
 def count_kmers(data: str, k: int, options: Options = Options()) -> Counter[str]:
     counter = Counter()
-    for i in range(0, len(data) - k + 1):
-        kmer = data[i:i+k]
+    for kmer, i in slide_window(data, k):
         neighbourhood = find_all_dna_kmers_within_hamming_distance(kmer, options.hamming_distance)
         for neighbouring_kmer in neighbourhood:
             counter[neighbouring_kmer] += 1
