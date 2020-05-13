@@ -11,7 +11,7 @@ Bioinformatics
 
 # K-mers
 
-A `{bm} k-mer/(k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+A k-mer/(k-mer|kmer) is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
 | k | k-mers          |
 |---|-----------------|
@@ -454,6 +454,10 @@ You now have two complete copies of the DNA.
 
 ### Find Ori and Ter
 
+```{prereq}
+GC Skew
+```
+
 Since the forward half-strand gets its reverse complement synthesized at a much slower rate than the reverse half-strand, it stays single stranded for a much longer time. Single-stranded DNA is 100 times more susceptible to mutations than double-stranded DNA. Specifically, in single-stranded DNA, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.
 
 ```{svgbob} 
@@ -532,27 +536,25 @@ To simplify, the ...
  * forward half-strand: loses Cs, keeps Gs.
  * reverse half-strand: keeps Cs, loses Gs.
 
-```{prereq}
-GC Skew
+You can use a GC skew diagram to help pinpoint where the ori and ter might be. The plot will typically form a peak where the ter is (more G vs C) and form a valley where the ori is (less G vs C). For example, the GC skew diagram for E. coli bacteria shows a distinct peak and distinct valley.
+
+```{ch1}
+GCSkew_File
+/input/ch1_code/src/GCA_000008865.2_ASM886v2_genomic.fna.xz
 ```
 
-You can use a GC skew diagram to help pinpoint where the ori and ter might be. The plot will typically form a peak where the ter is (more G vs C) and form a V where the ori is (less G vs C).
-
-TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
-
-TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
-
-TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
-
-TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
-
-TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
-
-TODO: ADD GENOMES AND CALL CH1_CODE/GCSKEW_FILE ON THEM TO GENERATE GRAPH HERE
+```{note}
+The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple ori / ter regions.
+```
 
 ### Find the DnaA Box
 
-Within the ori region, several smaller regions exist known as `{bm} DnaA box`es -- sequences that are either the same as or very similar to each other....
+```{prereq}
+Find Ori and Ter
+Find Repeating K-mers in Window
+```
+
+Within the ori region, there exists several copies of some k-mer pattern. These copies are referred to as `{bm} DnaA box`es.
 
 ```{svgbob}
                      DnaA boxes within the ori
@@ -564,30 +566,56 @@ Within the ori region, several smaller regions exist known as `{bm} DnaA box`es 
   DnaA box          DnaA box                         DnaA box        
 ```
 
-The DnaA protein binds to a DnaA box to activate the process of DNA replication. The reason why multiple DnaA box copies exist has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein doesn't bind to it, it can still bind to the other copies.
+The DnaA protein binds to a DnaA box to activate the process of DNA replication. Through experiments, biologists have determined that DnaA boxes are typical 9-mers.
 
-Through experiments, biologists have determined that DnaA boxes are typical 9-mers. Given that you know the where the ori of a specific bacterial organism is, you can search for 9-mer instances that may be similar to each other. Find a set of repeating 9-mers and group them if they're similar. Of the groups found, are any of them reverse complements of each other? If so, merge the groups together. These groups are are potential DnaA box candidates.
+```{note}
+The reason why multiple copies of the same k-mer exist (DnaA box) probably has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein no longer binds to it, it can still bind to the other copies.
+```
 
+For some bacterial organism, given that we've found the general vicinity of the ori for that organism, we can search that vicinity for repeating 9-mers instances. The 9-mers may not match exactly -- the DnaA protein may bind to ...
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+ * the 9-mer itself.
+ * slight variations of the 9-mer.
+ * the reverse complement of the 9-mer.
+ * slight variations of the reverse complement of the 9-mer.
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+The repeating k-mers found are potential DnaA box candidates.
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+For example, we know where the general vicinity of the ori is in E. coli given its GC skew. We can search the vicinity of the ori for repeating k-mers.
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+```{ch1}
+GCSkew_File
+/input/ch1_code/src/GCA_000008865.2_ASM886v2_genomic.fna.xz
+```
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
 
-TODO: FLESH THIS OUT BY USING KMER ALGORITHMS
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
+
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
+
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
+
+TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
 
 # Terminology
+
+ * A `{bm} k-mer/(k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+
+   | k | k-mers          |
+   |---|-----------------|
+   | 1 | G A A A T C     |
+   | 2 | GA AA AA AT TC  |
+   | 3 | GAA AAA AAT ATC |
+   | 4 | GAAA AAAT AATC  |
+   | 5 | GAAAT AAATC     |
+   | 6 | GAAATC          |
 
  * `{bm} 5'` (`{bm} 5 prime`) / `{bm} 3'` (`{bm} 3 prime`) - 5' (5 prime) and 3' (3 prime) describe the opposite ends of DNA. The chemical structure at each end is what defines if it's 5' or 3' -- each end is guaranteed to be different from the other. The forward direction on DNA is defined as 5' to 3', while the backwards direction is 3' to 5'.
 
