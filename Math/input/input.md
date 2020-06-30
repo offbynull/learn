@@ -4261,56 +4261,41 @@ Integer multiplication
 Fraction addition
 ```
 
-`{bm} /(Fraction multiplication)/i`
-Recall that when you multiply two integer numbers together, you're effectively doing repetitive addition -- you're copying the value a certain number of times and combining those copies together. For example, performing...
+The concept of `{bm} fraction multiplication` is an extension of integer multiplication. You're repetitively adding the same value just as you do in integer multiplication, but there may also be an extra step of adding a fraction.
 
- * `{kt} 4 \cdot 3` is the same as `{kt} 4+4+4` -- product is 12.
-  
-   ```{svgbob}
-   ●●●● ●●●● ●●●●
-    4    4    4
-   ```
-  
- * `{kt} 4 \cdot 2` is the same as `{kt} 4+4` -- product is 8.
+For example, `{kt} 4 \cdot \frac{5}{2}` is 10. Recall that `{kt} \frac{5}{2}` is just a way of representing `{kt} 5 \div 2` without actually performing the division. If you were to perform the division, `{kt} 5 \div 2` is `{kt} 2` with a remainder of `{kt} \frac{2}{4}`...
 
-   ```{svgbob}
-   ●●●● ●●●●
-    4    4  
-   ```
+```{note}
+`{kt} \frac{2}{4}` simplifies to `{kt} \frac{1}{2}`.
+```
 
- * `{kt} 4 \cdot 1` is the same as `{kt} 4` -- product is 4.
+```{diagramhelperfrac}
+radius 40
+5
+2
+```
 
-   ```{svgbob}
-   ●●●●
-    4   
-   ```
+... as such, 4 gets added for 2 iterations, then `{kt} \frac{1}{2}` of 4 gets added to that (`{kt} 4 \div 2` is 2): `{kt} 4 + 4 + 2` is 10.
 
- * `{kt} 4 \cdot 0` is nothing -- product is 0.
+The human understandable algorithm for fractional multiplication relies on two ideas...
 
-   ```{svgbob}
-   
-    0   
-   ```
+1. Any fraction can be broken down as repetitive fraction addition of a single piece. For example, the fraction `{kt} \frac{4}{6}` can be written as `{kt} \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6}`.
 
-Notice that as the multiplier goes down to 0, the product decreases. By the time it reaches 1, the product is the same as the number being multiplied. By the time it reaches 0, the product is 0. This same concept applies if a fraction is being multiplied by a whole number. For example, performing...
+   Since multiplication is repetitive addition, the above addition can be written as `{kt} 4 \cdot \frac{1}{6} = \frac{4}{6}`.
 
- * `{kt} \frac{1}{2} \cdot 3` is the same as `{kt} \frac{1}{2}+\frac{1}{2}+\frac{1}{2}` -- product is `{kt} \frac{3}{2}`.
+2. If you have two fractions that are both single pieces (both have 1 as their numerator), the algorithm for multiplying them together is to keep the 1 in the numerator spot but multiply the denominators together. For example, `{kt} \frac{1}{2} \cdot \frac{1}{3}` is `{kt} \frac{1}{6}`.
+
+   To understand why this is, visualize the fractions as the slicing of a whole:
+
+   Start with a whole...
 
    ```{diagramhelperfrac}
    radius 40
-   3
-   2
+   1
+   1
    ```
 
- * `{kt} \frac{1}{2} \cdot 2` is the same as `{kt} \frac{1}{2}+\frac{1}{2}` -- product is `{kt} \frac{2}{2}`.
-
-   ```{diagramhelperfrac}
-   radius 40
-   2
-   2
-   ```
-
- * `{kt} \frac{1}{2} \cdot 1` is the same as `{kt} \frac{1}{2}` -- product is `{kt} \frac{1}{2}`.
+   Take `{kt} \frac{1}{2}` of that whole...
 
    ```{diagramhelperfrac}
    radius 40
@@ -4318,49 +4303,7 @@ Notice that as the multiplier goes down to 0, the product decreases. By the time
    2
    ```
 
- * `{kt} \frac{1}{2} \cdot 0` is nothing -- product is 0.
-
-   ```{diagramhelperfrac}
-   radius 40
-   0
-   2
-   ```
-
-Where it gets confusing is when the multiplier becomes less than 1 (a proper fraction). Since, the product grows as the multiplier goes above 1, it only makes sense that it shrinks if the multiplier goes below 1. Conceptually you can think of it as "copying" a value less than once. Where as with whole numbers you're copying at least once, with proper fractions you're copying less than once -- you're copying some smaller piece of that original.  For example, ...
-
- * `{kt} \frac{1}{2} \cdot 3` -- make 3 copies of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{3}{2}`.
-
-   ```{diagramhelperfrac}
-   radius 40
-   3
-   2
-   ```
-
- * `{kt} \frac{1}{2} \cdot 2` -- make 3 copies of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{2}{2}`.
-
-   ```{diagramhelperfrac}
-   radius 40
-   2
-   2
-   ```
-
- * `{kt} \frac{1}{2} \cdot 1` -- make 1 copy of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{1}{2}` (no change).
-
-   ```{diagramhelperfrac}
-   radius 40
-   1
-   2
-   ```
-
- * `{kt} \frac{1}{2} \cdot \frac{1}{2}` -- make a copy of `{kt} \frac{1}{2}` of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{1}{4}`.
-
-   ```{diagramhelperfrac}
-   radius 40
-   1
-   4
-   ```
-
- * `{kt} \frac{1}{2} \cdot \frac{1}{3}` -- make a copy of `{kt} \frac{1}{3}` of `{kt} \frac{1}{2}`, resulting in `{kt} \frac{1}{6}`.
+   Take `{kt} \frac{1}{3}` of that `{kt} \frac{1}{2}`...
 
    ```{diagramhelperfrac}
    radius 40
@@ -4368,14 +4311,42 @@ Where it gets confusing is when the multiplier becomes less than 1 (a proper fra
    6
    ```
 
-If you look closely at the examples above, you may have noticed a pattern: In each case, the product is just the product of the numerators and the product of the denominators. For example, in `{kt} \frac{1}{2} \cdot \frac{1}{3}`, the ...
+   The result is 1 of 6 parts: `{kt} \frac{1}{6}`, exactly the same as what you would get if you were to perform the algorithm.
 
-* numerator of the product is `{kt} 1 \cdot 1` (1),
-* denominator of the product is `{kt} 2 \cdot 3` (6),
+Any two fractions can be multiplied together by...
+1. breaking each fraction into the multiplication of a single piece (idea 1 above)
+2. multiplying the integers together
+3. multiplying the single piece fractions together (idea 2 above)
+4. multiplying the result of step 2 with the result of step 3 (idea 1 above)
 
-... resulting in the product `{kt} \frac{1}{6}`.
+```{note}
+For the last step, the result of step 2 will always be a single piece fraction and the result of step 3 will always be an integer.
+```
 
-This is the algorithm to multiply any 2 fractions together. The product of fractions is the product of their numerators over the product of their denominators. It doesn't matter if the fractions are proper fractions or improper fractions.
+For example, to perform `{kt} \frac{2}{3} \cdot \frac{3}{4}`, begin by breaking down each fraction...
+
+`{kt} 2 \cdot \frac{1}{3} \cdot 3 \cdot \frac{1}{4}`.
+
+Multiply the integers together ...
+
+`{kt} \frac{1}{3} \cdot \frac{1}{4} \cdot 6`
+
+Multiply the single piece fractions together to get a single ...
+
+`{kt} \frac{1}{12} \cdot 6`
+
+Multiply the single piece fraction with the integer...
+
+`{kt} \frac{6}{12}`
+
+If you look closely at the example above, you may notice that the final product is just the product of the numerators and the product of the denominators. For example, in `{kt} \frac{2}{3} \cdot \frac{3}{4}`, the ...
+
+* numerator of the product is `{kt} 2 \cdot 3` (6),
+* denominator of the product is `{kt} 3 \cdot 4` (12),
+
+... resulting in the final product `{kt} \frac{6}{12}`.
+
+This is the accepted algorithm for multiplying any 2 fractions together. The product of fractions is the product of their numerators over the product of their denominators. It doesn't matter if the fractions are proper fractions or improper fractions.
 
 ```{output}
 arithmetic_code/FractionNumber.py
