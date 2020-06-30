@@ -33,7 +33,7 @@
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
 <a name="HEADREF1"></a><h1>K-mers</h1>
-<p>A <a href="#BOOKMARK1">k-mer</a>/(<a href="#BOOKMARK1">k-mer</a>|<a href="#BOOKMARK1">kmer</a>) is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK1">k-mer</a>'s exist:</p>
+<p>A <a href="#BOOKMARK1">k-mer</a> is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK1">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
@@ -155,7 +155,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAGA', 'AAAA', 'AAAT', 'AAAG', 'AAAC', 'TAAA', 'AACA', 'ATAA', 'ACAA', 'GAAA', 'CAAA', 'AGAA', 'AATA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAA', 'AAAG', 'AGAA', 'AACA', 'AAGA', 'AAAT', 'TAAA', 'AATA', 'ACAA', 'AAAC', 'GAAA', 'CAAA', 'ATAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h1>K-mer Search</h1>
@@ -276,12 +276,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>GATCA = 6 occurrences</li>
-<li>TGATC = 6 occurrences</li>
-<li>TTAAA = 6 occurrences</li>
 <li>CCCTT = 6 occurrences</li>
-<li>AAGGG = 6 occurrences</li>
 <li>TTTAA = 6 occurrences</li>
+<li>GATCA = 6 occurrences</li>
+<li>TTAAA = 6 occurrences</li>
+<li>TGATC = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -352,17 +352,17 @@
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
 <li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
+<li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -491,8 +491,71 @@
 <p>Calculating skew for: ...</p>
 <p>Result: [0, 0, 1, 0,...</p>
 <p><img src="skew_3b3ef8e0e7ef6297fdc10c525d5b0fbc.png" alt="GC Skew Plot"></p>
-<p>Min position (ori): 4719166</p>
-<p>Max position (ter): 2073768</p>
+<p>Ori vicinity (min pos): 4719166</p>
+<p>In the ori vicinity, found clusters of k=9 (at least 3 occurrences in window of 500) in ... at...</p>
+<ul>
+<li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCGGCGGTA', start_index=52, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
+<li>KmerCluster(kmer='ATCAGGCGG', start_index=163, occurrence_count=4)</li>
+<li>KmerCluster(kmer='CATCAGGCG', start_index=164, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTAAA', start_index=282, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTTTGATAC', start_index=427, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCTTTTGA', start_index=430, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TGGCTGGGG', start_index=460, occurrence_count=3)</li>
+<li>KmerCluster(kmer='ATCACCATT', start_index=500, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCCTTTTTA', start_index=513, occurrence_count=3)</li>
+<li>KmerCluster(kmer='ATCCTTTTT', start_index=514, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCATTCTCA', start_index=611, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCCCAGGTT', start_index=618, occurrence_count=3)</li>
+<li>KmerCluster(kmer='ACAGATCTT', start_index=644, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AAACAGATC', start_index=646, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCCAAATAA', start_index=653, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTATTGATC', start_index=730, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GTTGTTGAG', start_index=731, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGGATCAAC', start_index=769, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGATCAACC', start_index=836, occurrence_count=3)</li>
+</ul>
 </div>
 <p></p>
 <p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>

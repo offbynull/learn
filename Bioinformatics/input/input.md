@@ -11,7 +11,7 @@ Bioinformatics
 
 # K-mers
 
-A k-mer/(k-mer|kmer) is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+A k-mer is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
 | k | k-mers          |
 |---|-----------------|
@@ -584,7 +584,7 @@ The repeating k-mers found are potential DnaA box candidates.
 For example, we know where the general vicinity of the ori is in E. coli given its GC skew. We can search the vicinity of the ori for repeating k-mers.
 
 ```{ch1}
-GCSkew_File
+DnaABoxCandidateFinder
 /input/ch1_code/src/GCA_000008865.2_ASM886v2_genomic.fna.xz
 ```
 
