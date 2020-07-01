@@ -4259,15 +4259,14 @@ python
 ```{prereq}
 Integer multiplication
 Fraction addition
+Mixed number
 ```
 
-The concept of `{bm} fraction multiplication` is an extension of integer multiplication. You're repetitively adding the same value just as you do in integer multiplication, but there may also be an extra step of adding a fraction.
+Conceptually, you can think of `{bm} fraction multiplication` as an extension to integer multiplication. In integer multiplication, you're repeatedly adding the same value for a certain number of iterations. For example, in `{kt} 4 \cdot 2`, the number 4 is being added for 2 iterations: `{kt} 4 + 4`.
 
-For example, `{kt} 4 \cdot \frac{5}{2}` is 10. Recall that `{kt} \frac{5}{2}` is just a way of representing `{kt} 5 \div 2` without actually performing the division. If you were to perform the division, `{kt} 5 \div 2` is `{kt} 2` with a remainder of `{kt} \frac{2}{4}`...
+Fraction multiplication follows the same concept but also may involve the adding of a partial value. For example, imagine `{kt} 4 \cdot \frac{5}{2}`. Recall that fractions can be thought of as unresolved integer division -- the fraction `{kt} \frac{5}{2}` is just another way of saying `{kt} 5 \div 2`.
 
-```{note}
-`{kt} \frac{2}{4}` simplifies to `{kt} \frac{1}{2}`.
-```
+If you perform `{kt} 5 \div 2`, the quotient would be `{kt} 2R1`...
 
 ```{diagramhelperfrac}
 radius 40
@@ -4275,9 +4274,13 @@ radius 40
 2
 ```
 
-... as such, 4 gets added for 2 iterations, then `{kt} \frac{1}{2}` of 4 gets added to that (`{kt} 4 \div 2` is 2): `{kt} 4 + 4 + 2` is 10.
+As such, `{kt} 4 \cdot \frac{5}{2}` is just another way of saying 4 should be added for 2 and a half iterations: `{kt} 4 + 4 + 2`.
 
-The human understandable algorithm for fractional multiplication relies on two ideas...
+````{note}
+2 is half of 4. That's why there's a 2 as the last addition.
+````
+
+The human understandable algorithm for fraction multiplication relies on two ideas...
 
 1. Any fraction can be broken down as repetitive fraction addition of a single piece. For example, the fraction `{kt} \frac{4}{6}` can be written as `{kt} \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6}`.
 
@@ -4285,7 +4288,7 @@ The human understandable algorithm for fractional multiplication relies on two i
 
 2. If you have two fractions that are both single pieces (both have 1 as their numerator), the algorithm for multiplying them together is to keep the 1 in the numerator spot but multiply the denominators together. For example, `{kt} \frac{1}{2} \cdot \frac{1}{3}` is `{kt} \frac{1}{6}`.
 
-   To understand why this is, visualize the fractions as the slicing of a whole:
+   To understand why this works, visualize the fractions as the slicing of a whole:
 
    Start with a whole...
 
@@ -4311,38 +4314,44 @@ The human understandable algorithm for fractional multiplication relies on two i
    6
    ```
 
-   The result is 1 of 6 parts: `{kt} \frac{1}{6}`, exactly the same as what you would get if you were to perform the algorithm.
+   The result is 1 of 6 parts: `{kt} \frac{1}{6}`, exactly the same as what you would get if you were to keep the 1 in the numerator spot but multiply the denominators together (perform the algorithm).
 
 Any two fractions can be multiplied together by...
-1. breaking each fraction into the multiplication of a single piece (idea 1 above)
-2. multiplying the integers together
-3. multiplying the single piece fractions together (idea 2 above)
-4. multiplying the result of step 2 with the result of step 3 (idea 1 above)
+1. breaking each fraction into the multiplication of a single piece (idea 1 above).
+2. multiplying the integers together.
+3. multiplying the single piece fractions together (idea 2 above).
+4. multiplying the result of step 2 with the result of step 3 (idea 1 above).
 
-```{note}
-For the last step, the result of step 2 will always be a single piece fraction and the result of step 3 will always be an integer.
-```
+Idea 1 applies to step 4 because the result of step 2 will always be a single piece and the result of step 3 will always be an integer.
 
-For example, to perform `{kt} \frac{2}{3} \cdot \frac{3}{4}`, begin by breaking down each fraction...
+For example, to perform `{kt} \frac{2}{3} \cdot \frac{3}{4}`, begin by breaking each fraction (idea 1)...
 
 `{kt} 2 \cdot \frac{1}{3} \cdot 3 \cdot \frac{1}{4}`.
 
-Multiply the integers together ...
+Then, multiply the integers together...
 
 `{kt} \frac{1}{3} \cdot \frac{1}{4} \cdot 6`
 
-Multiply the single piece fractions together to get a single ...
+```{note}
+This is possible because multiplication is commutative -- numbers can be multiplied together in any order and the result will always be the same.
+```
+
+Then, multiply the single piece fractions together (idea 2)...
 
 `{kt} \frac{1}{12} \cdot 6`
 
-Multiply the single piece fraction with the integer...
+```{note}
+This is possible because multiplication is commutative -- numbers can be multiplied together in any order and the result will always be the same.
+```
+
+Finally, multiply the single piece fraction with the integer (idea 1)...
 
 `{kt} \frac{6}{12}`
 
-If you look closely at the example above, you may notice that the final product is just the product of the numerators and the product of the denominators. For example, in `{kt} \frac{2}{3} \cdot \frac{3}{4}`, the ...
+If you look closely at the example above, you may notice that the final product is the product of the numerators and the product of the denominators. For example, in `{kt} \frac{2}{3} \cdot \frac{3}{4}`, the ...
 
-* numerator of the product is `{kt} 2 \cdot 3` (6),
-* denominator of the product is `{kt} 3 \cdot 4` (12),
+* numerator of the product is `{kt} 2 \cdot 3` (product 6),
+* denominator of the product is `{kt} 3 \cdot 4` (product 12),
 
 ... resulting in the final product `{kt} \frac{6}{12}`.
 
@@ -4356,6 +4365,10 @@ python
 
 ```{fracnummul}
 -1/3 -2/6
+```
+
+```{note}
+If you understand algebra, the reasoning for why the above algorithm works is available at http://mathforum.org/library/drmath/view/63841.html. It uses the same concept of breaking down fractions into single pieces.
 ```
 
 ## Reciprocal
@@ -4494,16 +4507,14 @@ python
 ## Mixed Number
 
 ```{prereq}
-Integer division
+Integer Division
+Equivalent Fraction
 Fraction Multiplication
-Fraction Division
-Fraction Addition
-Fraction Subtraction
 ```
 
-TODO: this section needs work.
+Any fraction can be written out as a `{bm} mixed number`, where the wholes are written as a normal integer and the remaining portion is written as a fraction. Recall that fractions can be thought of as unresolved integer division. For example, the fraction `{kt} \frac{15}{4}` is equivalent to the division `{kt} 15 \div 4`.
 
-Any fraction can be written out as a `{bm} mixed number`, where the wholes are written as a normal integer and the remaining fraction is written as a fraction. For example, the fraction `{kt} \frac{15}{4}` can be written as `{kt} 3 \frac{3}{4}`. That is, it's essentially `{kt} \frac{4}{4} + \frac{4}{4} + \frac{4}{4} + \frac{3}{4}`.
+If you were to perform `{kt} 15 \div 4`, the quotient would be `{kt} 3R3` -- 3 wholes with 3 remaining pieces...
 
 ```{diagramhelperfrac}
 radius 40
@@ -4511,47 +4522,21 @@ radius 40
 4
 ```
 
+As such, `{kt} 15 \div 4` can be written as the mixed number `{kt} 3 \frac{3}{4}`.
+
 ```{note}
-Don't get confused -- `{kt} 3 \frac{3}{4}` means `{kt} 3 + \frac{3}{4}`, it does not mean multiplication.
+Don't get confused -- the mixed number `{kt} 3 \frac{3}{4}` means `{kt} 3 + \frac{3}{4}`, it does not mean `{kt} 3 \cdot \frac{3}{4}` (multiplication).
 ```
 
 To convert a...
+
  * fraction to a mixed number, divide the numerator and the denominator using integer division.
  
-   For example, `{kt} \frac{15}{4}` is 3R3. 3R3 is the same as `{kt} 3 \frac{3}{4}`.
+   `{kt} \frac{15}{4} \rightarrow 15 \div 4 \rightarrow 3R3 \rightarrow 3 \frac{3}{4}`.
 
- * mixed number to a fraction, convert the whole to a fraction and multiply using fraction multiplication, then add the remaining fraction using fraction addition.
+ * mixed number to a fraction, convert the wholes to a fraction then add the remaining fraction.
  
-   For example `{kt} 3 \frac{3}{4}` is `{kt} 3  the whole by the denominator using integer multiplication, then add the numerator to the denominator.
-
-TODO: add code to convert between mixed number adn fraction, add code to identify if fraction is proper or improper
-
-TODO: write code to convert mixed number to fraction and viceversa
-
-
-TODO: talk about how mixed numbers are just fractions, and their operations are the same as fractions
-
-for example... 1 1/3 = 1 + 1/3 = 3/3 + 1/3 = 4/3
-
-for example... -1 1/3 = -(1 + 1/3) - -(3/3 + 1/4) = -4/3
-
-when adding/subtracting them together...
-
-1. do it on the whole number first
-1. do it on the fraction second
-   * if the whole number was negative, treat the fraction as negative when adding/subtracting
-   * in a mixed number, you should never encounter a case where the fraction is negative (see negative example above for reason as to why)
-1. check the sign on resulting whole and the fraction...
-   * are the signs both positive? keep as-is
-   * are the signs both negative? take the negative sign off the fraction
-     e.g. -1 + -1/2 
-   * are the signs different? perform the operation and convert the result back to a mixed number (whole + fraction = result, convert result back to a mixed number)
-1. is the fraction improper? move over as many wholes as you can from the fraction to the whole (make it into a proper fraction)
-1. simplify the fraction
-
-what's the point of this? why include a section on it? because it's useful for the decimal number section -- mixed numbers help think about decimal numbers
-
-maybe it doesn't make sense to ahve this -- not sure. maybe put it into the fraction addtion/subtraction sections
+   `{kt} 3 \frac{3}{4} \rightarrow \frac{3}{1} + \frac{3}{4} \rightarrow \frac{12}{4} + \frac{3}{4} \rightarrow \frac{15}{4}`.
 
 # Ratio
 
