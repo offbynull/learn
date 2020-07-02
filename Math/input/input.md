@@ -4264,7 +4264,7 @@ Mixed number
 
 Conceptually, you can think of `{bm} fraction multiplication` as an extension to integer multiplication. In integer multiplication, you're repeatedly adding the same value for a certain number of iterations. For example, in `{kt} 4 \cdot 2`, the number 4 is being added for 2 iterations: `{kt} 4 + 4`.
 
-Fraction multiplication follows the same concept but also may involve the adding of a partial value. For example, imagine `{kt} 4 \cdot \frac{5}{2}`. Recall that fractions can be thought of as unresolved integer division -- the fraction `{kt} \frac{5}{2}` is just another way of saying `{kt} 5 \div 2`.
+Fraction multiplication follows the same concept but may also involve the adding of a partial value. For example, imagine `{kt} 4 \cdot \frac{5}{2}`. Recall that fractions can be thought of as unresolved integer division -- the fraction `{kt} \frac{5}{2}` is just another way of saying `{kt} 5 \div 2`.
 
 If you perform `{kt} 5 \div 2`, the quotient would be `{kt} 2R1`...
 
@@ -4284,7 +4284,7 @@ The human understandable algorithm for fraction multiplication relies on two ide
 
 1. Any fraction can be broken down as repetitive fraction addition of a single piece. For example, the fraction `{kt} \frac{4}{6}` can be written as `{kt} \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6}`.
 
-   Since multiplication is repetitive addition, the above addition can be written as `{kt} 4 \cdot \frac{1}{6} = \frac{4}{6}`.
+   Since multiplication is repetitive addition, the above addition can be written as `{kt} 4 \cdot \frac{1}{6}`.
 
 2. If you have two fractions that are both single pieces (both have 1 as their numerator), the algorithm for multiplying them together is to keep the 1 in the numerator spot but multiply the denominators together. For example, `{kt} \frac{1}{2} \cdot \frac{1}{3}` is `{kt} \frac{1}{6}`.
 
@@ -4314,9 +4314,10 @@ The human understandable algorithm for fraction multiplication relies on two ide
    6
    ```
 
-   The result is 1 of 6 parts: `{kt} \frac{1}{6}`, exactly the same as what you would get if you were to keep the 1 in the numerator spot but multiply the denominators together (perform the algorithm).
+   The result is 1 of 6 parts: `{kt} \frac{1}{6}`, exactly the same as what you would get if you were to keep the 1 in the numerator spot but multiply the denominators together (the algorithm).
 
 Any two fractions can be multiplied together by...
+
 1. breaking each fraction into the multiplication of a single piece (idea 1 above).
 2. multiplying the integers together.
 3. multiplying the single piece fractions together (idea 2 above).
@@ -4324,29 +4325,21 @@ Any two fractions can be multiplied together by...
 
 Idea 1 applies to step 4 because the result of step 2 will always be a single piece and the result of step 3 will always be an integer.
 
-For example, to perform `{kt} \frac{2}{3} \cdot \frac{3}{4}`, begin by breaking each fraction (idea 1)...
+For example, to perform `{kt} \frac{2}{3} \cdot \frac{3}{4}`, begin by breaking each fraction (idea 1): `{kt} 2 \cdot \frac{1}{3} \cdot 3 \cdot \frac{1}{4}`.
 
-`{kt} 2 \cdot \frac{1}{3} \cdot 3 \cdot \frac{1}{4}`.
-
-Then, multiply the integers together...
-
-`{kt} \frac{1}{3} \cdot \frac{1}{4} \cdot 6`
+Then, multiply the integers together: `{kt} \frac{1}{3} \cdot \frac{1}{4} \cdot 6`
 
 ```{note}
 This is possible because multiplication is commutative -- numbers can be multiplied together in any order and the result will always be the same.
 ```
 
-Then, multiply the single piece fractions together (idea 2)...
-
-`{kt} \frac{1}{12} \cdot 6`
+Then, multiply the single piece fractions together (idea 2): `{kt} \frac{1}{12} \cdot 6`
 
 ```{note}
 This is possible because multiplication is commutative -- numbers can be multiplied together in any order and the result will always be the same.
 ```
 
-Finally, multiply the single piece fraction with the integer (idea 1)...
-
-`{kt} \frac{6}{12}`
+Finally, multiply the single piece fraction with the integer (idea 1): `{kt} \frac{6}{12}`
 
 If you look closely at the example above, you may notice that the final product is the product of the numerators and the product of the denominators. For example, in `{kt} \frac{2}{3} \cdot \frac{3}{4}`, the ...
 
@@ -4355,7 +4348,7 @@ If you look closely at the example above, you may notice that the final product 
 
 ... resulting in the final product `{kt} \frac{6}{12}`.
 
-This is the accepted algorithm for multiplying any 2 fractions together. The product of fractions is the product of their numerators over the product of their denominators. It doesn't matter if the fractions are proper fractions or improper fractions.
+This is the accepted algorithm for multiplying any 2 fractions together. The product of fractions is the product of their numerators over the product of their denominators.
 
 ```{output}
 arithmetic_code/FractionNumber.py
@@ -4395,104 +4388,37 @@ python
 ## Division
 
 ```{prereq}
-Fraction reciprocal
+Integer multiplication
 Fraction multiplication
 Fraction simplification
+Fraction reciprocal
 ```
 
-`{bm} /(Fraction division)/i`
-Recall that when you divide two integer numbers, you're effectively doing repetitive subtracting -- you're counting how many iterations you can subtract the second value from the first. For example, performing...
+Conceptually, you can think of `{bm} fraction division` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2`.
 
- * `{kt} 12 \div 3` is the same as `{kt} 12-3-3-3-3` -- quotient is 4.
-  
-   ```{svgbob}
-   ●●● ●●● ●●● ●●●
-    3   3   3   3
-   ```
-  
- * `{kt} 12 \div 2` is the same as `{kt} 12-2-2-2-2-2-2` -- quotient is 6.
+Fraction division follows the same concept but may also involve the subtraction of a partial value. For example, imagine `{kt} 8 \div \frac{5}{2}`. You can successfully subtract `{kt} \frac{5}{2}` for 3 iterations before the value becomes smaller than `{kt} \frac{5}{2}` but larger than 0...
 
-   ```{svgbob}
-   ●● ●● ●● ●● ●● ●●
-   2  2  2  2  2  2
-   ```
+`{kt} 8 - \frac{5}{2} - \frac{5}{2} - \frac{5}{2}` is `{kt} \frac{1}{2}`.
 
- * `{kt} 12 \div 1` is the same as `{kt} 12-1-1-1-1-1-1-1-1-1-1-1-1` -- quotient is 12.
+In each of the iterations above, `{kt} \frac{5}{2}` is being subtracted in its entirety. For the final smaller value of `{kt} \frac{1}{2}`, you need to subtract by some smaller portion of `{kt} \frac{5}{2}`. That is, what fraction of `{kt} \frac{5}{2}` would be needed to get rid of the remaining value of `{kt} \frac{1}{2}`...
 
-   ```{svgbob}
-   ● ● ● ● ● ● ● ● ● ● ● ●
-   1 1 1 1 1 1 1 1 1 1 1 1
-   ```
+`{kt} \frac{?}{?} \cdot \frac{5}{2}` results in `{kt} \frac{1}{2}`.
 
-This same concept applies if the number being divided by is a fraction. For example, if starting with 12 and each iteration you subtract `{kt} \frac{1}{2}`, you would subtract for 24 iterations: `{kt} 12 \div \frac{1}{2}` is the same as `{kt} 12-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}-\frac{1}{2}` -- quotient is 24.
+You need `{kt} \frac{1}{5}` of `{kt} \frac{5}{2}` to get `{kt} \frac{1}{2}`...
 
-```{svgbob}
-◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ ◓ 
+`{kt} \frac{1}{5} \cdot \frac{5}{2}` results in `{kt} \frac{1}{2}`.
+
+As such, the number of iterations you need to subtract by `{kt} \frac{5}{2}` for 8 to reach 0 is 3 and `{kt} \frac{1}{5}`.
+
+The algorithm used for dividing fractions is to simply take the first fraction and multiply it by the reciprocal of the second fraction. For the example above, `{kt} \frac{8}{1} \div \frac{5}{2}` would be computed as `{kt} \frac{8}{1} \cdot \frac{2}{5}`.
+
+`{kt} \frac{8}{1} \cdot \frac{2}{5}` results in `{kt} \frac{16}{5}`, which is exactly the same as the 3 and `{kt} \frac{1}{5}` iterations that was reasoned above...
+
+```{diagramhelperfrac}
+radius 40
+16
+5
 ```
-
-Again, this same concept applies if the number being divided and the number being divided by are both fractions. For example, if starting with `{kt} \frac{1}{2}` and each iteration you subtract `{kt} \frac{1}{4}`, you would subtract for 2 iterations: `{kt} \frac{1}{2} \div \frac{1}{4}` is the same as `{kt} \frac{1}{2}-\frac{1}{4}-\frac{1}{4}` -- quotient is 2.
-
-```{svgbob}
-◔ ◔ 
-```
-
-```{svgbob}
-+-----------+
-|    1/2    |
-+-----+-----+
-| 1/4 | 1/4 |
-+-----+-----+
-```
-
-Where it gets confusing is when the number being divided is less than the number being divided by. THINK OF A GOOD WAY TO DESCRIBE THIS IT BECOMES MULTIPLICATION e.g. 2/1 / 4/1  or 2 / 4
-
-
-
-
-
-
-
-
-You need 2 divisors (`{kt} \frac{1}{6}`) to reach the dividend (`{kt} \frac{1}{3}`) -- `{kt} \frac{1}{6} \cdot 2` is `{kt} \frac{2}{6}`, which simplifies to `{kt} \frac{1}{3}`.
-
-
-TODO: model out division using fraction tiles... see example in section 4.2 where they divide 1/2 by 1/6.
-
-when dividing wholes, we're figuring out how many groups there are in some number...
-
-for example, 12 / 3 = 4 -- there are 4 groups of 3 in 12
-
-we do the same thing with fractions...
-
-1/3 / 1/6
-
-how many 1/6s are there in 1/3? (we don't say groups of 1/6 because 1/6 is less than a whole, but the idea is the same, we're breaking into equal parts and counting the number of parts)
-
-1/3 can be re-written as 2/6
-
-```
-+---------------+
-|      1/3      |
-+-------+-------+
-|  1/6  |  1/6  |
-+-------+-------+
-```
-
-it's broken up into 2 equal parts
-
-this is exactly the same as what we're doing with whole numbers... 12 / 3 = 4 can be re-written as 12/1 / 3/1 = 4/1
-
-```
-+-------------------------------+
-|              12               |
-+-------+-------+-------+-------+
-|   3   |   3   |   3   |   3   |
-+-------+-------+-------+-------+
-```
-
-it's broken up into 4 equal parts
-
-the algorithm for dividing by a fraction is to change it so that you're multiplying by its reciprocal
 
 ```{output}
 arithmetic_code/FractionNumber.py
@@ -4501,7 +4427,17 @@ python
 ```
 
 ```{fracnumdiv}
-1/3 1/4
+8/1 5/2
+```
+
+```{note}
+If you understand algebra, the reasoning for why the above algorithm works is available at https://math.stackexchange.com/a/71173...
+
+Write `{kt} \frac{a}{b} \div \frac{c}{d}` as `{kt} \frac{\frac{a}{b}}{\frac{c}{d}}`.
+
+Suppose you wanted to clear the denominator of this compound fraction. You could try multiplication by `{kt} \frac{d}{c}`, but you'll have to multiply the top and the bottom of the fraction to avoid changing it. So, you end up with
+
+`{kt} \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{\frac{a}{b}}{\frac{c}{d}} \cdot \frac{\frac{d}{c}}{\frac{d}{c}} = \frac{\frac{a}{b} \cdot \frac{d}{c}}{\frac{c}{d} \cdot \frac{d}{c}} = \frac{\frac{ad}{bc}}{1} = \frac{ad}{bc}.`
 ```
 
 ## Mixed Number
