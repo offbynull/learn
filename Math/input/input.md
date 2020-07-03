@@ -18634,7 +18634,81 @@ unsure where the number 16 came from. maybe he accidentally divided by 2
 
 ## Chapter 5 Section 1
 
+__TRY IT__
+
 5.1)
+
+* a) six and seven tenths
+* b) nineteen and fifty eight hundredths
+* c) eighteen thousandths
+* d) negative two and fifty three thousandths
+
+5.2)
+
+* a) five and eight tenths
+* b) three and fifty seven hundredths
+* c) five thousandths
+* d) negative thirteen and four hundred sixty one thousandths
+
+5.3) 13.68
+
+5.4) 5.894
+
+5.5) 0.058
+
+5.6) 0.067
+
+5.7)
+
+* a) 5 3/10    OR   53/10
+* b) 6 7/100   OR   607/1000
+* c) -234/1000
+
+5.8)
+
+* a) 8 7/10    OR   87/10
+* b) 1 3/100   OR   103/100
+* c) -24/1000
+
+5.9)
+
+```
+|---|---|---|---|---|---|---|---|---|---|
+0  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+                        ^
+```
+
+5.10)
+
+```
+|---|---|---|---|---|---|---|---|---|---|
+0  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+                                    ^
+```
+
+5.11)
+
+```
+|---|---|---|---|---|---|---|---|---|---|
+0  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+                         ^
+                        0.63
+```
+
+5.12)
+
+```
+|---|---|---|---|---|---|---|---|---|---|
+0  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+          ^
+         0.25
+```
+
+5.13)
 
 START BACK UP HERE
 START BACK UP HERE
