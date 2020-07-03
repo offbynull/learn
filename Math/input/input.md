@@ -4385,61 +4385,6 @@ python
 2/7
 ```
 
-## Division
-
-```{prereq}
-Integer multiplication
-Fraction multiplication
-Fraction simplification
-Fraction reciprocal
-```
-
-Conceptually, you can think of `{bm} fraction division` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2`.
-
-Fraction division follows the same concept but may also involve the subtraction of a partial value. For example, imagine `{kt} 8 \div \frac{5}{2}`. You can successfully subtract `{kt} \frac{5}{2}` for 3 iterations before the value becomes smaller than `{kt} \frac{5}{2}` but larger than 0...
-
-`{kt} 8 - \frac{5}{2} - \frac{5}{2} - \frac{5}{2}` is `{kt} \frac{1}{2}`.
-
-In each of the iterations above, `{kt} \frac{5}{2}` is being subtracted in its entirety. For the final smaller value of `{kt} \frac{1}{2}`, you need to subtract by some smaller portion of `{kt} \frac{5}{2}`. That is, what fraction of `{kt} \frac{5}{2}` would be needed to get rid of the remaining value of `{kt} \frac{1}{2}`...
-
-`{kt} \frac{?}{?} \cdot \frac{5}{2}` results in `{kt} \frac{1}{2}`.
-
-You need `{kt} \frac{1}{5}` of `{kt} \frac{5}{2}` to get `{kt} \frac{1}{2}`...
-
-`{kt} \frac{1}{5} \cdot \frac{5}{2}` results in `{kt} \frac{1}{2}`.
-
-As such, the number of iterations you need to subtract by `{kt} \frac{5}{2}` for 8 to reach 0 is 3 and `{kt} \frac{1}{5}`.
-
-The algorithm used for dividing fractions is to simply take the first fraction and multiply it by the reciprocal of the second fraction. For the example above, `{kt} \frac{8}{1} \div \frac{5}{2}` would be computed as `{kt} \frac{8}{1} \cdot \frac{2}{5}`.
-
-`{kt} \frac{8}{1} \cdot \frac{2}{5}` results in `{kt} \frac{16}{5}`, which is exactly the same as the 3 and `{kt} \frac{1}{5}` iterations that was reasoned above...
-
-```{diagramhelperfrac}
-radius 40
-16
-5
-```
-
-```{output}
-arithmetic_code/FractionNumber.py
-python
-#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
-```
-
-```{fracnumdiv}
-8/1 5/2
-```
-
-```{note}
-If you understand algebra, the reasoning for why the above algorithm works is available at https://math.stackexchange.com/a/71173...
-
-Write `{kt} \frac{a}{b} \div \frac{c}{d}` as `{kt} \frac{\frac{a}{b}}{\frac{c}{d}}`.
-
-Suppose you wanted to clear the denominator of this compound fraction. You could try multiplication by `{kt} \frac{d}{c}`, but you'll have to multiply the top and the bottom of the fraction to avoid changing it. So, you end up with
-
-`{kt} \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{\frac{a}{b}}{\frac{c}{d}} \cdot \frac{\frac{d}{c}}{\frac{d}{c}} = \frac{\frac{a}{b} \cdot \frac{d}{c}}{\frac{c}{d} \cdot \frac{d}{c}} = \frac{\frac{ad}{bc}}{1} = \frac{ad}{bc}.`
-```
-
 ## Mixed Number
 
 ```{prereq}
@@ -4474,13 +4419,77 @@ To convert a...
  
    `{kt} 3 \frac{3}{4} \rightarrow \frac{3}{1} + \frac{3}{4} \rightarrow \frac{12}{4} + \frac{3}{4} \rightarrow \frac{15}{4}`.
 
-# Ratio
+## Division
 
-TODO: Describe what a ratio is, either her or after the decimal sectoin
+```{prereq}
+Integer multiplication
+Fraction multiplication
+Fraction simplification
+Fraction reciprocal
+Mixed number
+```
 
-`{bm} ratio` - Ratio is used to describe how many times one set of items contains another set of items. For example, a ratio of 3 apples to 2 oranges means that there are 3 apples available for every 2 oranges available. That same relationship can be expressed as a fraction is the fraction `{kt} \frac{2}{3}`.
+Conceptually, you can think of `{bm} fraction division` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2` is 0.
 
-https://en.wikipedia.org/wiki/Ratio
+Fraction division follows the same concept but may also involve the subtraction of a partial value. For example, imagine `{kt} 8 \div \frac{3}{2}`. You can successfully subtract `{kt} \frac{3}{2}` for 5 iterations before the value becomes smaller than `{kt} \frac{3}{2}` but larger than 0...
+
+`{kt} 8 - \frac{3}{2} - \frac{3}{2} - \frac{3}{2} - \frac{3}{2} - \frac{3}{2}` is `{kt} \frac{1}{2}`.
+
+In each of the iterations above, `{kt} \frac{3}{2}` is being subtracted in its entirety. For the final smaller value of `{kt} \frac{1}{2}`, you need to subtract by some smaller portion of `{kt} \frac{3}{2}`. That is, what fraction of `{kt} \frac{3}{2}` would be needed to get rid of the remaining value of `{kt} \frac{1}{2}`...
+
+`{kt} \frac{?}{?} \cdot \frac{3}{2}` results in `{kt} \frac{1}{2}`.
+
+```{diagramhelperfrac}
+radius 40
+3
+2
+```
+
+You need `{kt} \frac{1}{3}` of `{kt} \frac{3}{2}` to get `{kt} \frac{1}{2}`...
+
+```{diagramhelperfrac}
+radius 40
+1
+2
+```
+
+`{kt} \frac{1}{3} \cdot \frac{3}{2}` results in `{kt} \frac{3}{6}`, which simplifies to `{kt} \frac{1}{2}`.
+
+As such, the number of iterations you need to subtract by `{kt} \frac{3}{2}` for 8 to reach 0 is `{kt} 5 \frac{1}{3}`.
+
+```{note}
+The `{kt} 5 \frac{1}{3}` above is a mixed number, not multiplication.
+```
+
+The algorithm used for dividing fractions is to simply take the first fraction and multiply it by the reciprocal of the second fraction. For the example above, `{kt} \frac{8}{1} \div \frac{3}{2}` would be computed as `{kt} \frac{8}{1} \cdot \frac{2}{3}`.
+
+`{kt} \frac{8}{1} \cdot \frac{2}{3}` results in `{kt} \frac{16}{3}`, which is exactly the same as the `{kt} 5 \frac{1}{3}` iterations that was reasoned above...
+
+```{diagramhelperfrac}
+radius 40
+16
+3
+```
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
+```
+
+```{fracnumdiv}
+8/1 5/2
+```
+
+```{note}
+If you understand algebra, the reasoning for why the above algorithm works is available at https://math.stackexchange.com/a/71173...
+
+Write `{kt} \frac{a}{b} \div \frac{c}{d}` as `{kt} \frac{\frac{a}{b}}{\frac{c}{d}}`.
+
+Suppose you wanted to clear the denominator of this compound fraction. You could try multiplication by `{kt} \frac{d}{c}`, but you'll have to multiply the top and the bottom of the fraction to avoid changing it. So, you end up with
+
+`{kt} \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{\frac{a}{b}}{\frac{c}{d}} \cdot \frac{\frac{d}{c}}{\frac{d}{c}} = \frac{\frac{a}{b} \cdot \frac{d}{c}}{\frac{c}{d} \cdot \frac{d}{c}} = \frac{\frac{ad}{bc}}{1} = \frac{ad}{bc}.`
+```
 
 # Decimal Number
 
