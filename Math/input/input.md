@@ -4522,6 +4522,42 @@ TODO: think of decimals as fraction e.g 51.2 51/1 + 2/10
 
 TODO: think of decimals as mixed numbers e.g. 51.
 
+TODO: just like how pre 0s are meaningless for the whole number portions, post 0s are meaningless for the partial portion... these are called equivalent decimals e.g. 0.31 and 0.310 -- use fractions to conceptualize... writing 0s at the end doesn't change the value
+
+TODO: talk about terminating vs non-terminating decimals
+
+## Round
+
+TODO: chapter 5.1 -- e.g. round to the nearest tenth, round to the nearest hundredth, round to the tens, round to the hundreds
+
+## Addition
+
+TODO: show by converting to fractions
+
+TODO: show by using mixed numbers
+
+TODO: show using standard algorithm
+
+## Subtraction
+
+TODO: show by converting to fractions
+
+TODO: show by using mixed numbers
+
+TODO: show using standard algorithm
+
+## Multiplication
+
+TODO: show by converting to fractions
+
+TODO: show using standard algorithm
+
+## Division
+
+TODO: show by converting to fractions
+
+TODO: show using standard long division algorithm (only works if denominator is an integer) -- if not need to scale up e.g. 10/5.2 needs to be scaled to equiv frac of 100/52 and then perform using the standard long division algo
+
 # Irrational Number
 
 ```{prereq}
@@ -18709,6 +18745,310 @@ __TRY IT__
 ```
 
 5.13)
+
+* a) 0.42 > 0.4
+* b) 0.76 > 0.706
+
+5.14)
+
+* a) 0.1 < 0.18
+* b) 0.305 < 0.35
+
+5.15) -0.3 > -0.5
+
+5.16) -0.6 > -0.7
+
+5.17) 1.05
+
+5.18) 9.17
+
+5.19)
+
+* a) 6.58
+* b) 6.6
+* c) 7
+
+5.20)
+
+* a) 15.216
+* b) 15.22
+* c) 15.2
+
+__EXERCISE__
+
+5.1.1) five and five tenths
+
+5.1.2) seven and eight tenths
+
+5.1.3) five and one hundredths
+
+5.1.4) fourteen and two hundredths
+
+5.1.5) eight and seventy one hundredths
+
+5.1.6) two and sixty four hundredths
+
+5.1.7) two thousandths
+
+5.1.8) five hundredths
+
+5.1.9) three hundred eighty one thousandths
+
+5.1.10) four hundred seventy nine thousandths
+
+5.1.11) negative seventeen and nine tenths
+
+5.1.12) negative thirty one and four tenths
+
+5.1.13) 8.03
+
+5.1.14) 9.07
+
+5.1.15) 29.81
+
+5.1.16) 61.74
+
+5.1.17) 0.7
+
+5.1.18) 0.6
+
+5.1.19) 0.001
+
+5.1.20) 0.009
+
+5.1.21) 0.029
+
+5.1.22) 0.035
+
+5.1.23) -11.0009
+
+5.1.24) -59.0002
+
+5.1.25) 13.0395
+
+5.1.26) 30.279
+
+5.1.27) 1 99/100
+
+5.1.28) 5 83/100
+
+5.1.29) 15 7/10
+
+5.1.30) 18 1/10
+
+5.1.31) 239/1000
+
+5.1.32) 373/1000
+
+5.1.33) 13/100
+
+5.1.34) 19/100
+
+5.1.35) 11/1000
+
+5.1.36) 49/1000
+
+5.1.37) -7/100000
+
+5.1.38) -3/100000
+
+5.1.39) 64/10 or 6 4/10
+
+5.1.40) 52/10 or 5 2/10
+
+5.1.41) 705/100 or 7 5/100
+
+5.1.42) 904/100 or 9 4/100
+
+5.1.43) 4 6/1000
+
+5.1.44) 2 8/1000
+
+5.1.45) 10 25/100
+
+5.1.46) 12 75/100
+
+5.1.47) 1 324/1000
+
+5.1.48) 2 482/1000
+
+5.1.49) 12 125/1000
+
+5.1.50) 20 375/1000
+
+5.1.51)
+
+```
+|---|---|---|---|---|---|---|---|---|---|
+0  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+                                ^
+```
+
+5.1.52)
+
+```
+|---|---|---|---|---|---|---|---|---|---|
+0  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+            ^
+```
+
+5.1.53)
+
+```
+  |----|----|----|----|----|----|----|----|----|----|
+-1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1  -0
+
+                                          ^
+```
+
+5.1.54)
+
+```
+  |----|----|----|----|----|----|----|----|----|----|
+-1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1  -0
+
+       ^
+```
+
+5.1.55)
+
+```
+...--|---|---|---|---|---|---|---|---|---|---|
+    3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0
+
+         ^
+```
+
+5.1.56)
+
+```
+...|---|---|---|---|---|---|---|---|---|---|---|---|---|
+  2.7 2.8 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0
+
+   ^
+```
+
+5.1.57)
+
+```
+  |----|----|----|----|----|----|----|----|----|----|
+-3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0
+
+                           ^
+```
+
+5.1.58)
+
+```
+  |----|----|----|----|----|----|----|----|----|----|
+-2.0 -1.9 -1.8 -1.7 -1.6 -1.5 -1.4 -1.3 -1.2 -1.1 -1.0
+
+                      ^
+```
+
+5.1.59) 0.9 > 0.6
+
+5.1.60) 0.7 < 0.8
+
+5.1.61) 0.37 < 0.63
+
+5.1.62) 0.86 > 0.69
+
+5.1.63) 0.6 > 0.59
+
+5.1.64) 0.27 < 0.3
+
+5.1.65) 0.91 > 0.901
+
+5.1.66) 0.415 > 0.41
+
+5.1.67) 0.5 > −0.3
+
+5.1.68) −0.1 > −0.4
+
+5.1.69) −0.62 < −0.619
+
+5.1.70) −7.31 < −7.3
+
+5.1.71) 0.7
+
+5.1.72) 0.5
+
+5.1.73) 2.8
+
+5.1.74) 4.6
+
+5.1.75) 0.85
+
+5.1.76) 0.76
+
+5.1.77) 5.79
+
+5.1.78) 3.63
+
+5.1.79) 0.30 (can trim trialing 0)
+
+5.1.80) 0.70 (can trim trialing 0)
+
+5.1.81) 4.10 (can trim trialing 0)
+
+5.1.82) 7.10 (can trim trialing 0)
+
+5.1.83)
+
+* a) 5.78
+* b) 5.8
+* c) 6
+
+5.1.84) 
+
+* a) 1.64
+* b) 1.6
+* c) 2
+
+5.1.85) 
+
+* a) 63.48
+* b) 63.5
+* c) 63
+
+5.1.86) 
+
+* a) 84.28
+* b) 84.3
+* c) 85
+
+5.1.87)
+
+* a) 58966
+* b) 59000
+* c) 60000
+
+5.1.88)
+
+* a) 23796
+* b) 24000
+* c) 20000
+
+5.1.89)
+
+* a) 142.19
+* b) 142
+
+5.1.90)
+
+* a) 67.53
+* b) 68
+
+5.1.91) money is an application of decimals 
+
+5.1.92) the and is the decimal point, stuff to the left is the whole while stuff to the right is the partial.hundredths indicates that the partial is a fraction that's some value over 100 (e.g. 9/100)
+
+5.1.93) tim. he was faster because he took LESS time 
+
+5.1.94) what they're probably getting at is that if you wanted to buy just 1 postcard, it'd cost you 0.099 cents, but cents only go to the hundredths position. so if you were going to buy just 1 it'd likely be rounded up to 10 cents/
 
 START BACK UP HERE
 START BACK UP HERE
