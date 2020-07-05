@@ -15,6 +15,13 @@ from WholeNumber import WholeNumber
 
 class FractionNumber:
     @staticmethod
+    def from_whole(numerator: WholeNumber, denominator: WholeNumber) -> FractionNumber:
+        return FractionNumber(
+            IntegerNumber(None if numerator == WholeNumber.from_int(0) else Sign.POSITIVE, numerator),
+            IntegerNumber(None if denominator == WholeNumber.from_int(0) else Sign.POSITIVE, denominator)
+        )
+
+    @staticmethod
     def from_int(numerator: int, denominator: int) -> FractionNumber:
         return FractionNumber(
             IntegerNumber.from_int(numerator),
@@ -360,6 +367,6 @@ if __name__ == '__main__':
     print(f'{FractionNumber.from_str("1/5") < FractionNumber.from_str("3/10")}')
     print(f'{FractionNumber.from_str("2/5") < FractionNumber.from_str("3/10")}')
 
-    print(f'{FractionNumber._calculate_factors(WholeNumber(55))}')
+    print(f'{FractionNumber._calculate_factors(WholeNumber.from_int(55))}')
 
     print(f'{FractionNumber.from_str("3/12").simplify()}')

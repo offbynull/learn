@@ -11,8 +11,8 @@ def factor_naive(num: WholeNumber) -> Set[WholeNumber]:
     log_indent()
 
     factors: Set[WholeNumber] = set()
-    for factor1 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
-        for factor2 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
+    for factor1 in WholeNumber.range(WholeNumber.from_int(1), num, end_inclusive=True):
+        for factor2 in WholeNumber.range(WholeNumber.from_int(1), num, end_inclusive=True):
             log(f'Testing if {factor1} and {factor2} are factors...')
             if factor1 * factor2 == num:
                 factors.add(factor1)
@@ -35,10 +35,10 @@ def factor_fast(num: WholeNumber) -> Set[WholeNumber]:
     log_indent()
 
     factors: Set[WholeNumber] = set()
-    for factor1 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
+    for factor1 in WholeNumber.range(WholeNumber.from_int(1), num, end_inclusive=True):
         log(f'Test if {factor1} is a factor...')
         factor2, remainder = num / factor1
-        if remainder == WholeNumber(0):
+        if remainder == WholeNumber.from_int(0):
             factors.add(factor1)
             factors.add(factor2)
             log(f'Yes: ({factor1} and {factor2} are factors)')
@@ -59,10 +59,10 @@ def factor_fastest(num: WholeNumber) -> Set[WholeNumber]:
     log_indent()
 
     factors: Set[WholeNumber] = set()
-    for factor1 in WholeNumber.range(WholeNumber(1), num, end_inclusive=True):
+    for factor1 in WholeNumber.range(WholeNumber.from_int(1), num, end_inclusive=True):
         log(f'Test if {factor1} is a factor...')
         factor2, remainder = num / factor1
-        if remainder == WholeNumber(0):
+        if remainder == WholeNumber.from_int(0):
             factors.add(factor1)
             factors.add(factor2)
             log(f'Yes: ({factor1} and {factor2} are factors)')
@@ -108,7 +108,7 @@ def factor_tree(num: WholeNumber) -> FactorTreeNode:
     factors = factor_fastest(num)
 
     # remove factor pairs that can't used in factor true: (1, num) or (num, 1)
-    factors = set([f for f in factors if f != WholeNumber(1) and f != num])
+    factors = set([f for f in factors if f != WholeNumber.from_int(1) and f != num])
 
     ret = FactorTreeNode()
     if len(factors) == 0:
@@ -170,12 +170,12 @@ def ladder(num: WholeNumber) -> Set[WholeNumber]:
 
     log_indent()
     while not is_prime(num):
-        prime_to_test = WholeNumber(2)
+        prime_to_test = WholeNumber.from_int(2)
 
         while True:
             log(f'Testing if {prime_to_test} is divisible by {num}...')
             (new_num, remainder) = num / prime_to_test
-            if remainder == WholeNumber(0):
+            if remainder == WholeNumber.from_int(0):
                 break
             prime_to_test = calculate_next_prime(prime_to_test)
 
@@ -196,12 +196,12 @@ def ladder(num: WholeNumber) -> Set[WholeNumber]:
 
 
 def calculate_next_prime(last_prime: WholeNumber) -> WholeNumber:
-    next_possible_prime = last_prime + WholeNumber(1)
+    next_possible_prime = last_prime + WholeNumber.from_int(1)
     while True:
         if is_prime(next_possible_prime):
             return next_possible_prime
         else:
-            next_possible_prime += WholeNumber(1)
+            next_possible_prime += WholeNumber.from_int(1)
 
 
 
@@ -212,6 +212,6 @@ if __name__ == '__main__':
     # factors = factor_fastest(WholeNumber(24))
     # print(f'{factors}')
     # print(f'{prime_test(WholeNumber(49))}')
-    tree = factor_tree(WholeNumber(24))
+    tree = factor_tree(WholeNumber.from_int(24))
     print(f'{tree}')
     # print(f'{ladder(WholeNumber(24))}')

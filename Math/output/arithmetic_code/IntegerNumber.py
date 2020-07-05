@@ -21,9 +21,9 @@ class IntegerNumber:
             sign = Sign.POSITIVE
             digits = val
 
-        magnitude = WholeNumber(digits)
+        magnitude = WholeNumber.from_str(digits)
 
-        if magnitude == WholeNumber(0):
+        if magnitude == WholeNumber.from_int(0):
             sign = None
 
         return IntegerNumber(sign, magnitude)
@@ -36,7 +36,7 @@ class IntegerNumber:
         self.sign = sign
         self.magnitude = magnitude.copy()
 
-        if magnitude == WholeNumber(0) and sign is not None:
+        if magnitude == WholeNumber.from_int(0) and sign is not None:
             raise Exception('Magnitude of 0 cannot have a sign')
 
     def copy(self: IntegerNumber):
@@ -49,7 +49,7 @@ class IntegerNumber:
             log(f'Adding {lhs} and {rhs}')
 
             def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber(0):
+                if magnitude == WholeNumber.from_int(0):
                     return None
                 else:
                     return default_sign
@@ -85,7 +85,7 @@ class IntegerNumber:
             log(f'Subtracting {lhs} and {rhs}')
 
             def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber(0):
+                if magnitude == WholeNumber.from_int(0):
                     return None
                 else:
                     return default_sign
@@ -127,17 +127,17 @@ class IntegerNumber:
             log(f'Multiplying {lhs} and {rhs}')
 
             def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber(0):
+                if magnitude == WholeNumber.from_int(0):
                     return None
                 else:
                     return default_sign
 
             if lhs.sign is None:  # when sign isn't set, magnitude is always 0 -- 0 * a = 0
                 sign = None
-                magnitude = WholeNumber(0)
+                magnitude = WholeNumber.from_int(0)
             elif rhs.sign is None:  # when sign isn't set, magnitude is always 0 -- a * 0 = 0
                 sign = None
-                magnitude = WholeNumber(0)
+                magnitude = WholeNumber.from_int(0)
             elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE) \
                     or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE):
                 magnitude = lhs.magnitude * rhs.magnitude
@@ -161,7 +161,7 @@ class IntegerNumber:
             log(f'Dividing {lhs} and {rhs}')
 
             def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber(0):
+                if magnitude == WholeNumber.from_int(0):
                     return None
                 else:
                     return default_sign

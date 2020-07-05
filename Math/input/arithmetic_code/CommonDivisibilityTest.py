@@ -12,31 +12,31 @@ def common_divisibility_test(num: WholeNumber) -> Set[WholeNumber]:
     try:
         ret: Set[WholeNumber] = set()
     
-        last_digit: WholeNumber = WholeNumber(num.digits[0])  # last digit is always at 0 idx
+        last_digit: WholeNumber = WholeNumber.from_digit(num.digits[0])  # last digit is always at 0 idx
     
         log(f'Testing if {num} divisible by 2...')
-        if last_digit == WholeNumber(0) \
-                or last_digit == WholeNumber(2) \
-                or last_digit == WholeNumber(4) \
-                or last_digit == WholeNumber(6) \
-                or last_digit == WholeNumber(8):
+        if last_digit == WholeNumber.from_int(0) \
+                or last_digit == WholeNumber.from_int(2) \
+                or last_digit == WholeNumber.from_int(4) \
+                or last_digit == WholeNumber.from_int(6) \
+                or last_digit == WholeNumber.from_int(8):
             log(f'Yes')
-            ret.add(WholeNumber(2))
+            ret.add(WholeNumber.from_int(2))
         else:
             log(f'No')
     
         log(f'Testing if {num}  divisible by 5...')
-        if last_digit == WholeNumber(0) \
-                or last_digit == WholeNumber(5):
+        if last_digit == WholeNumber.from_int(0) \
+                or last_digit == WholeNumber.from_int(5):
             log(f'Yes');
-            ret.add(WholeNumber(5))
+            ret.add(WholeNumber.from_int(5))
         else:
             log(f'No');
     
         log(f'Testing if {num}  divisible by 10...')
-        if last_digit == WholeNumber(0):
+        if last_digit == WholeNumber.from_int(0):
             log(f'Yes');
-            ret.add(WholeNumber(10))
+            ret.add(WholeNumber.from_int(10))
         else:
             log(f'No');
     
@@ -46,20 +46,20 @@ def common_divisibility_test(num: WholeNumber) -> Set[WholeNumber]:
             digits = reduced_num.digits
             if len(digits) == 1:
                 break
-            reduced_num = sum([WholeNumber(d) for d in digits], WholeNumber(0))
+            reduced_num = sum([WholeNumber.from_int(d) for d in digits], WholeNumber.from_int(0))
     
-        if reduced_num == WholeNumber(3) \
-                or reduced_num == WholeNumber(6) \
-                or reduced_num == WholeNumber(9):
+        if reduced_num == WholeNumber.from_int(3) \
+                or reduced_num == WholeNumber.from_int(6) \
+                or reduced_num == WholeNumber.from_int(9):
             log(f'Yes')
-            ret.add(WholeNumber(3))
+            ret.add(WholeNumber.from_int(3))
         else:
             log(f'No')
     
         log(f'Testing if {num}  divisible by 6...')
-        if WholeNumber(2) in ret and WholeNumber(3) in ret:
+        if WholeNumber.from_int(2) in ret and WholeNumber.from_int(3) in ret:
             log(f'Yes')
-            ret.add(WholeNumber(6))
+            ret.add(WholeNumber.from_int(6))
         else:
             log(f'NO')
     
@@ -70,4 +70,4 @@ def common_divisibility_test(num: WholeNumber) -> Set[WholeNumber]:
 
 
 if __name__ == '__main__':
-    print(f'{common_divisibility_test(WholeNumber(15))}')
+    print(f'{common_divisibility_test(WholeNumber.from_int(15))}')

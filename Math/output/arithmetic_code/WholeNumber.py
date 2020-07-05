@@ -6,7 +6,37 @@ from Digit import Digit
 
 
 class WholeNumber:
-    def __init__(self, digits: Union[List[Digit], str, int, Digit, None] = None):
+
+    @staticmethod
+    def from_str(digits: str):
+        digits = list(map(lambda i: Digit(int(i)), digits))
+        digits.reverse()
+        return WholeNumber(digits)
+
+    @staticmethod
+    def from_int(value: int):
+        if value < 0:
+            raise Exception('Negative int not allowed')
+        digits = str(value)
+        digits = list(map(lambda i: Digit(int(i)), digits))
+        digits.reverse()
+        return WholeNumber(digits)
+
+
+    @staticmethod
+    def from_digit(digit: Digit):
+        return WholeNumber.from_digit_list([digit])
+
+    @staticmethod
+    def from_digit_list(digits: List[Digit]):
+        return WholeNumber(digits)
+
+    @staticmethod
+    def from_int_list(digits: List[int]):
+        digits = list(map(lambda i: Digit(i), digits))
+        return WholeNumber(digits)
+
+    def __init__(self, digits: List[Digit]):
         if digits is None:
             self.digits = [Digit(0)]
         elif isinstance(digits, Digit):
@@ -106,9 +136,9 @@ class WholeNumber:
 
     def __eq__(self: WholeNumber, other: WholeNumber) -> bool:
         if isinstance(other, int):
-            other = WholeNumber(other)
+            other = WholeNumber.from_int(other)
         elif isinstance(other, str):
-            other = WholeNumber(other)
+            other = WholeNumber.from_str(other)
 
         if not isinstance(other, WholeNumber):
             raise Exception()
@@ -117,9 +147,9 @@ class WholeNumber:
 
     def __lt__(self: WholeNumber, other: WholeNumber) -> bool:
         if isinstance(other, int):
-            other = WholeNumber(other)
+            other = WholeNumber.from_int(other)
         elif isinstance(other, str):
-            other = WholeNumber(other)
+            other = WholeNumber.from_str(other)
 
         if not isinstance(other, WholeNumber):
             raise Exception()
@@ -139,9 +169,9 @@ class WholeNumber:
 
     def __gt__(self: WholeNumber, other: WholeNumber) -> bool:
         if isinstance(other, int):
-            other = WholeNumber(other)
+            other = WholeNumber.from_int(other)
         elif isinstance(other, str):
-            other = WholeNumber(other)
+            other = WholeNumber.from_str(other)
 
         if not isinstance(other, WholeNumber):
             raise Exception()
@@ -182,7 +212,7 @@ class WholeNumber:
             count = max(len(lhs.digits), len(rhs.digits))
 
             carryover_digit = None
-            result = WholeNumber()
+            result = WholeNumber.from_int(0)
             for pos in range(0, count):  # from smallest to largest component
                 log(f'Targeting {lhs._highlight(pos)} and {rhs._highlight(pos)}')
                 log_indent()
@@ -190,12 +220,12 @@ class WholeNumber:
                 digit1 = lhs[pos]
                 digit2 = rhs[pos]
 
-                added = WholeNumber(cache[digit1.value][digit2.value])
+                added = WholeNumber.from_int(cache[digit1.value][digit2.value])
                 log(f'Using cache for initial add: {digit1} + {digit2} = {added}')
 
                 if carryover_digit is not None:
                     log(f'Using recursion for carryover add: {added} + {carryover_digit} = ...')
-                    added = added + WholeNumber(carryover_digit)  # recurse -- this called __add__()
+                    added = added + WholeNumber.from_digit(carryover_digit)  # recurse -- this called __add__()
                     carryover_digit = None
 
                 if len(added) == 1:
@@ -257,7 +287,7 @@ class WholeNumber:
 
             count = max(len(self_copy.digits), len(rhs.digits))
 
-            result = WholeNumber()
+            result = WholeNumber.from_int(0)
             for pos in range(0, count):  # from smallest to largest component
                 log(f'Targeting {self_copy._highlight(pos)} and {rhs._highlight(pos)}')
                 log_indent()
@@ -304,7 +334,7 @@ class WholeNumber:
                 next_digit = self[pos + 1]  # updated because of borrow call above
 
             next_digit = sub_cache[next_digit.value][1]                             # sub 1 from next largest position
-            curr_digit = (WholeNumber(10) + WholeNumber(curr_digit))._as_digit()    # add 10 to current position
+            curr_digit = (WholeNumber.from_int(10) + WholeNumber.from_digit(curr_digit))._as_digit()    # add 10 to current position
 
             # curr_digit is no longer an actual digit -- it's beyond the value of 9 (a digit is 0..9). We're using a
             # hack to get a out-of-bounds value as a digit because we need to subtract from it later on -- this is
@@ -343,7 +373,7 @@ class WholeNumber:
 
             log(f'Summing intermediate results to get final result...')
             log_indent()
-            final_res = WholeNumber()
+            final_res = WholeNumber.from_int(0)
             for res in res_list:
                 log(f'Adding {res} to {final_res}')
                 final_res += res
@@ -375,18 +405,18 @@ class WholeNumber:
             count = len(self.digits)
 
             carryover_digit = None
-            result = WholeNumber()
+            result = WholeNumber.from_int(0)
             for pos in range(0, count):  # from smallest to largest component
                 log(f'Targeting {self._highlight(pos)} and {digit}')
                 log_indent()
 
                 digit1 = self[pos]
 
-                multed = WholeNumber(cache[digit1.value][digit.value])
+                multed = WholeNumber.from_int(cache[digit1.value][digit.value])
                 log(f'Using cache for initial mul: {digit1} * {digit} = {multed}')
 
                 if carryover_digit is not None:
-                    adjusted_multed = multed + WholeNumber(carryover_digit)
+                    adjusted_multed = multed + WholeNumber.from_digit(carryover_digit)
                     log(f'Adding carryover: {multed} + {carryover_digit} = {adjusted_multed}')
                     carryover_digit = None
                     multed = adjusted_multed
@@ -414,7 +444,7 @@ class WholeNumber:
 
     #MARKDOWN_DIV
     def __truediv__(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
-        if divisor == WholeNumber(0):
+        if divisor == WholeNumber.from_int(0):
             raise Exception('Cannot divide by 0')
 
         log_indent()
@@ -424,20 +454,20 @@ class WholeNumber:
 
             count = len(dividend.digits)
 
-            quot = WholeNumber(0)
-            rem = WholeNumber(0)
+            quot = WholeNumber.from_int(0)
+            rem = WholeNumber.from_int(0)
             for pos in reversed(range(0, count)):  # from largest to smallest component
                 log(f'Targeting dividend: {dividend._highlight(pos)}, Current quotient: {quot} / Current remainder: {rem}')
                 log_indent()
 
                 comp = dividend[pos]
                 if pos == count - 1:  # if this is the start component (largest component)...
-                    comp_dividend = WholeNumber(comp)
+                    comp_dividend = WholeNumber.from_digit(comp)
                     log(f'Set dividend: component ({comp}): {comp_dividend}')
                 else:
                     temp_rem = rem.copy()
                     temp_rem.shift_left(1)
-                    comp_dividend = WholeNumber(comp) + temp_rem
+                    comp_dividend = WholeNumber.from_digit(comp) + temp_rem
                     log(f'Set dividend: Combining prev remainder ({rem}) with component ({comp}): {comp_dividend}')
 
                 comp_quot, comp_rem = WholeNumber.trial_and_error_div(comp_dividend, divisor)
@@ -465,7 +495,7 @@ class WholeNumber:
     #MARKDOWN_DIVTE
     @staticmethod
     def trial_and_error_div(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
-        if divisor == WholeNumber(0):
+        if divisor == WholeNumber.from_int(0):
             raise Exception('Cannot divide by 0')
 
         log_indent()
@@ -475,7 +505,7 @@ class WholeNumber:
 
             if dividend == 0:
                 log(f'Found: {dividend} / {divisor} = 0R0')
-                return WholeNumber(0), WholeNumber(0)
+                return WholeNumber.from_int(0), WholeNumber.from_int(0)
 
             wn_range = WholeNumber.pick_start_range(dividend)
             log(f'Start range: [{wn_range.min}, {wn_range.max}]')
@@ -494,12 +524,12 @@ class WholeNumber:
                 # check if found
                 if min_test == dividend:  # found as min
                     quotient = wn_range.min
-                    remainder = WholeNumber(0)
+                    remainder = WholeNumber.from_int(0)
                     break
 
                 if max_test == dividend:  # found as max
                     quotient = wn_range.max
-                    remainder = WholeNumber(0)
+                    remainder = WholeNumber.from_int(0)
                     break
 
                 if min_test < dividend < max_test and wn_range.max - wn_range.min == 1:  # found between min and max
@@ -530,14 +560,14 @@ class WholeNumber:
     @staticmethod
     def pick_start_range(dividend: WholeNumber) -> WholeNumberRange:
         return WholeNumberRange(
-            WholeNumber('1' + '0' * (len(dividend) - 1)),
-            WholeNumber('1' + '0' * len(dividend))
+            WholeNumber.from_str('1' + '0' * (len(dividend) - 1)),
+            WholeNumber.from_str('1' + '0' * len(dividend))
         )
 
     @staticmethod
     def narrow_range(dividend: WholeNumber, divisor: WholeNumber, wn_range: WholeNumberRange) -> None:
-        diff = wn_range.max - wn_range.min - WholeNumber(1)
-        adjustment = WholeNumber('1' + ('0' * (len(diff) - 1)))
+        diff = wn_range.max - wn_range.min - WholeNumber.from_int(1)
+        adjustment = WholeNumber.from_str('1' + ('0' * (len(diff) - 1)))
 
         min_test = divisor * wn_range.min
         max_test = divisor * wn_range.max
@@ -549,16 +579,16 @@ class WholeNumber:
 
     @staticmethod
     def move_up_range(wn_range: WholeNumberRange) -> None:
-        diff = wn_range.max - wn_range.min - WholeNumber(1)
-        adjustment = WholeNumber('1' + ('0' * (len(diff) - 1)))
+        diff = wn_range.max - wn_range.min - WholeNumber.from_int(1)
+        adjustment = WholeNumber.from_str('1' + ('0' * (len(diff) - 1)))
 
         wn_range.min += adjustment
         wn_range.max += adjustment
 
     @staticmethod
     def move_down_range(wn_range: WholeNumberRange) -> None:
-        diff = wn_range.max - wn_range.min - WholeNumber(1)
-        adjustment = WholeNumber('1' + ('0' * (len(diff) - 1)))
+        diff = wn_range.max - wn_range.min - WholeNumber.from_int(1)
+        adjustment = WholeNumber.from_str('1' + ('0' * (len(diff) - 1)))
 
         wn_range.min -= adjustment
         wn_range.max -= adjustment
@@ -568,9 +598,10 @@ class WholeNumber:
         i = start.copy()
         while i < end:
             yield i
-            i += WholeNumber(1)
+            i += WholeNumber.from_int(1)
         if end_inclusive:
             yield i
+
 
 class WholeNumberRange:
     def __init__(self, min: WholeNumber, max: WholeNumber):
@@ -587,5 +618,5 @@ if __name__ == '__main__':
     import inspect
 
     log_whitelist([(inspect.getfile(WholeNumber), '__truediv__')])  # log_whitelist(['__truediv__', 'trial_and_error_div'])
-    (q, r) = WholeNumber(752) / WholeNumber(3)
+    (q, r) = WholeNumber.from_int(752) / WholeNumber.from_int(3)
     print(f'{q}R{r}')

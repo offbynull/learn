@@ -16,7 +16,7 @@ def gcd_naive(num1: WholeNumber, num2: WholeNumber) -> WholeNumber:
 
     log(f'Testing up to smaller input ({min_num})...')
     log_indent()
-    for i in WholeNumber.range(WholeNumber('1'), min_num, True):
+    for i in WholeNumber.range(WholeNumber.from_str('1'), min_num, True):
         log(f'Testing {i}...')
         quotient1, remainder1 = num1 / i
         quotient2, remainder2 = num2 / i
@@ -72,7 +72,7 @@ def gcd_euclid(num1: WholeNumber, num2: WholeNumber) -> WholeNumber:
         next_nums.sort()  # sort smallest to largest
         next_nums.reverse()  # reverse it so that it's largest to largest
         log(f'Checking if finished ({next_nums[1]} == 0?)...')
-        if next_nums[1] == WholeNumber(0):
+        if next_nums[1] == WholeNumber.from_int(0):
             found = next_nums[0]
             break
 
@@ -87,4 +87,4 @@ def gcd_euclid(num1: WholeNumber, num2: WholeNumber) -> WholeNumber:
 
 
 if __name__ == '__main__':
-    print(f'{gcd_euclid(WholeNumber("22"), WholeNumber("8"))}')
+    print(f'{gcd_euclid(WholeNumber.from_str("22"), WholeNumber.from_str("8"))}')

@@ -12,7 +12,7 @@ if __name__ == '__main__':
     print("`{bm-disable-all}`", end="\n\n")
     try:
         args = input().split()  # read from stdin
-        input1 = WholeNumber(args[0])
+        input1 = WholeNumber.from_str(args[0])
         res = common_divisibility_test(input1)
     finally:
         print("</div>", end="\n\n")
