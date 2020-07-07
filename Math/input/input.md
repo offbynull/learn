@@ -4523,7 +4523,85 @@ A `{bm} decimal number` is another way of representing a mixed number where the 
 * `{kt} 2 \frac{9}{10}` ↔ 2.9
 * `{kt} 7 \frac{9}{100}` ↔ 2.09
 * `{kt} 2 \frac{9}{1000}` ↔ 2.009
-* `{kt} 2` (`{kt} 2 \frac{0}{10}`) ↔ 2
+* `{kt} 2` ↔ 2.0 (2 is equivalent to `{kt} 2 \frac{0}{10}`)
+
+To convert a mixed number with a qualifying denominator into a decimal number is ...
+
+1. subtract the number of 0s in the denominator from the number of digits in the numerator, prepend that many 0s to the numerator.
+2. remove the denominator and place a period between the whole portion and the numerator.
+
+`{kt} 2 \frac{9}{1000}` ⟶ 2.009
+
+The period placed in step step 2 is refereed to as a `{bm} decimal point`.
+
+If a mixed number doesn't have a qualifying denominator, it may need to be converted to an equivalent fraction that does. In certain cases, this may not be possible.
+
+```{note}
+See fraction conversion subsections for more in-depth discussion on how to conversions.
+```
+
+To convert a decimal number to a mixed number...
+
+1. count the number of digits after the decimal point, add a denominator to these digits that starts with 1 followed by that many 0s.
+2. remove the decimal point.
+
+2.009 ⟶ `{kt} 2 \frac{9}{1000}`
+
+## Round
+
+`{bm} decimal rounding`
+
+TODO: chapter 5.1 -- e.g. round to the nearest tenth, round to the nearest hundredth, round to the tens, round to the hundreds
+
+## Addition
+
+`{bm} decimal addition`
+
+TODO: show by converting to fractions
+
+TODO: show by using mixed numbers
+
+TODO: show using standard algorithm
+
+## Subtraction
+
+`{bm} decimal subtraction`
+
+TODO: show by converting to fractions
+
+TODO: show by using mixed numbers
+
+TODO: show using standard algorithm
+
+## Multiplication
+
+`{bm} decimal multiplication`
+
+TODO: show by converting to fractions
+
+TODO: show using standard algorithm
+
+## Division
+
+`{bm} decimal division`
+
+TODO: show by converting to fractions
+
+TODO: show using standard long division algorithm (only works if denominator is an integer) -- if not need to scale up e.g. 10/5.2 needs to be scaled to equiv frac of 100/52 and then perform using the standard long division algo
+
+# Conversion from Fraction
+
+```{prereq}
+Decimal rounding
+Decimal division
+```
+
+Recall that a decimal number is another way of representing a mixed number where the denominator is 1 followed by trailing 0s. For example, ...
+
+* `{kt} 2 \frac{9}{10}` ↔ 2.9
+* `{kt} 7 \frac{9}{100}` ↔ 2.09
+* `{kt} 2 \frac{9}{1000}` ↔ 2.009
+* `{kt} 2` ↔ 2.0 (2 is equivalent to `{kt} 2 \frac{0}{10}`)
 
 If a mixed number doesn't have a denominator that qualifies, it may still be convertible to a decimal number so long as an equivalent fraction exists where the denominator does qualify. That is, an equivalent fraction exists where the denominator is 1 followed by trailing 0s. For example, ...
 
@@ -4568,38 +4646,44 @@ python
 10/20
 ```
 
-To write a mixed number as a decimal number, ...
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-1. ensure the denominator start with 1 and end with one or more 0s -- convert to equivalent fraction if it doesn't.
-2. subtract the number of 0s in the denominator from the number of digits in the numerator, prepend that many 0s to the numerator.
-3. place a period between the whole portion and the fractional portion, then remove the denominator.
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-The period placed in step 3 is referred to as a `{bm} decimal point`.
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-For example, to convert the mixed number `{kt} 22 \frac{9}{500}` to a decimal number, begin by checking if the denominator of the fraction portion starts with 1 and end with one or more 0s. In this example it doesn't, so it needs to be converted to an equivalent fraction that does...
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-`{kt} 22 \frac{9}{500} \cdot \frac{2}{2}` is `{kt} 22 \frac{18}{1000}`.
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-Then, get the difference between number of 0s in the denominator and the number of digits in the numerator...
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-* number of 0s in 1000 is 3.
-* number of digits in 18 is 2.
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-`{kt} 3 - 2` is 1, so add 1 extra 0 to the numerator: `{kt} 22 \frac{018}{1000}`.
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-Then, place the decimal point between the whole portion and the fractional portion, and remove the denominator...
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-`{kt} 22.018`
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-```{output}
-arithmetic_code/DecimalNumber.py
-python
-#MARKDOWN_FROM_FRAC\s*\n([\s\S]+?)\n\s*#MARKDOWN_FROM_FRAC
-```
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
 
-```{decnumfromfrac}
-11009/500
-```
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+
+## Conversion to Fraction
+
+Recall that a decimal number is another way of representing a mixed number where the denominator is 1 followed by trailing 0s. For example, ...
+
+* `{kt} 2 \frac{9}{10}` ↔ 2.9
+* `{kt} 7 \frac{9}{100}` ↔ 2.09
+* `{kt} 2 \frac{9}{1000}` ↔ 2.009
+* `{kt} 2` ↔ 2.0 (2 is equivalent to `{kt} 2 \frac{0}{10}`)
 
 To write a decimal number as a mixed number, ...
 
@@ -4637,43 +4721,6 @@ Examples of mixed number and decimal number equivalents...
 * `{kt} 2 \frac{9}{1000}` ↔ 2.009
 * `{kt} 7 \frac{9}{100}` ↔ 7.09
 * `{kt} 5 \frac{9}{10}` ↔ 5.9
-
-
-TODO: just like how pre 0s are meaningless for the whole number portions, post 0s are meaningless for the partial portion... these are called equivalent decimals e.g. 0.31 and 0.310 -- use fractions to conceptualize... writing 0s at the end doesn't change the value
-
-TODO: talk about terminating vs non-terminating decimals
-
-## Round
-
-TODO: chapter 5.1 -- e.g. round to the nearest tenth, round to the nearest hundredth, round to the tens, round to the hundreds
-
-## Addition
-
-TODO: show by converting to fractions
-
-TODO: show by using mixed numbers
-
-TODO: show using standard algorithm
-
-## Subtraction
-
-TODO: show by converting to fractions
-
-TODO: show by using mixed numbers
-
-TODO: show using standard algorithm
-
-## Multiplication
-
-TODO: show by converting to fractions
-
-TODO: show using standard algorithm
-
-## Division
-
-TODO: show by converting to fractions
-
-TODO: show using standard long division algorithm (only works if denominator is an integer) -- if not need to scale up e.g. 10/5.2 needs to be scaled to equiv frac of 100/52 and then perform using the standard long division algo
 
 # Irrational Number
 

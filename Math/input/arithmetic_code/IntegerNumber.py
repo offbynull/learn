@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Union
 
 from Sign import Sign
-from Output import log_indent, log_unindent, log
+from Output import log_indent, log_unindent, log, log_decorator
 from WholeNumber import WholeNumber
 
 
@@ -43,152 +43,148 @@ class IntegerNumber:
         return IntegerNumber(self.sign, self.magnitude)
 
     #MARKDOWN_ADD
+    @log_decorator
     def __add__(lhs: IntegerNumber, rhs: IntegerNumber) -> IntegerNumber:
+        log(f'Adding {lhs} and {rhs}')
         log_indent()
-        try:
-            log(f'Adding {lhs} and {rhs}')
 
-            def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber.from_int(0):
-                    return None
-                else:
-                    return default_sign
+        def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
+            if magnitude == WholeNumber.from_int(0):
+                return None
+            else:
+                return default_sign
 
-            if lhs.sign is None:  # sign of None is only when magnitude is 0,  0 + a = a
-                sign = rhs.sign
-                magnitude = rhs.magnitude
-            elif rhs.sign is None:  # sign of None is only when magnitude is 0,  a + 0 = a
-                sign = lhs.sign
-                magnitude = lhs.magnitude
-            elif lhs.sign == rhs.sign:
-                magnitude = lhs.magnitude + rhs.magnitude
+        if lhs.sign is None:  # sign of None is only when magnitude is 0,  0 + a = a
+            sign = rhs.sign
+            magnitude = rhs.magnitude
+        elif rhs.sign is None:  # sign of None is only when magnitude is 0,  a + 0 = a
+            sign = lhs.sign
+            magnitude = lhs.magnitude
+        elif lhs.sign == rhs.sign:
+            magnitude = lhs.magnitude + rhs.magnitude
+            sign = determine_sign(magnitude, lhs.sign)
+        elif lhs.sign != rhs.sign:
+            if rhs.magnitude >= lhs.magnitude:
+                magnitude = rhs.magnitude - lhs.magnitude
+                sign = determine_sign(magnitude, rhs.sign)
+            else:
+                magnitude = lhs.magnitude - rhs.magnitude
                 sign = determine_sign(magnitude, lhs.sign)
-            elif lhs.sign != rhs.sign:
-                if rhs.magnitude >= lhs.magnitude:
-                    magnitude = rhs.magnitude - lhs.magnitude
-                    sign = determine_sign(magnitude, rhs.sign)
-                else:
-                    magnitude = lhs.magnitude - rhs.magnitude
-                    sign = determine_sign(magnitude, lhs.sign)
 
-            log(f'sign: {sign}, magnitude: {magnitude}')
+        log_unindent()
+        log(f'sign: {sign}, magnitude: {magnitude}')
 
-            return IntegerNumber(sign, magnitude)
-        finally:
-            log_unindent()
+        return IntegerNumber(sign, magnitude)
     #MARKDOWN_ADD
 
     #MARKDOWN_SUB
+    @log_decorator
     def __sub__(lhs: IntegerNumber, rhs: IntegerNumber) -> IntegerNumber:
+        log(f'Subtracting {lhs} and {rhs}')
         log_indent()
-        try:
-            log(f'Subtracting {lhs} and {rhs}')
 
-            def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber.from_int(0):
-                    return None
-                else:
-                    return default_sign
+        def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
+            if magnitude == WholeNumber.from_int(0):
+                return None
+            else:
+                return default_sign
 
-            def flip_sign(sign: Sign) -> Sign:
-                if sign == Sign.POSITIVE:
-                    return Sign.NEGATIVE
-                elif sign == Sign.NEGATIVE:
-                    return Sign.POSITIVE
+        def flip_sign(sign: Sign) -> Sign:
+            if sign == Sign.POSITIVE:
+                return Sign.NEGATIVE
+            elif sign == Sign.NEGATIVE:
+                return Sign.POSITIVE
 
-            if lhs.sign is None:  # sign of None is only when magnitude is 0,  0 - a = -a
-                sign = flip_sign(rhs.sign)
-                magnitude = rhs.magnitude
-            elif rhs.sign is None:  # sign of None is only when magnitude is 0,  a - 0 = a
-                sign = lhs.sign
-                magnitude = lhs.magnitude
-            elif lhs.sign == rhs.sign:
-                if rhs.magnitude >= lhs.magnitude:
-                    magnitude = rhs.magnitude - lhs.magnitude
-                    sign = determine_sign(magnitude, flip_sign(lhs.sign))
-                else:
-                    magnitude = lhs.magnitude - rhs.magnitude
-                    sign = determine_sign(magnitude, lhs.sign)
-            elif lhs.sign != rhs.sign:
-                magnitude = lhs.magnitude + rhs.magnitude
+        if lhs.sign is None:  # sign of None is only when magnitude is 0,  0 - a = -a
+            sign = flip_sign(rhs.sign)
+            magnitude = rhs.magnitude
+        elif rhs.sign is None:  # sign of None is only when magnitude is 0,  a - 0 = a
+            sign = lhs.sign
+            magnitude = lhs.magnitude
+        elif lhs.sign == rhs.sign:
+            if rhs.magnitude >= lhs.magnitude:
+                magnitude = rhs.magnitude - lhs.magnitude
+                sign = determine_sign(magnitude, flip_sign(lhs.sign))
+            else:
+                magnitude = lhs.magnitude - rhs.magnitude
                 sign = determine_sign(magnitude, lhs.sign)
+        elif lhs.sign != rhs.sign:
+            magnitude = lhs.magnitude + rhs.magnitude
+            sign = determine_sign(magnitude, lhs.sign)
 
-            log(f'sign: {sign}, magnitude: {magnitude}')
+        log_unindent()
+        log(f'sign: {sign}, magnitude: {magnitude}')
 
-            return IntegerNumber(sign, magnitude)
-        finally:
-            log_unindent()
+        return IntegerNumber(sign, magnitude)
     #MARKDOWN_SUB
 
     #MARKDOWN_MUL
+    @log_decorator
     def __mul__(lhs: IntegerNumber, rhs: IntegerNumber) -> IntegerNumber:
+        log(f'Multiplying {lhs} and {rhs}')
         log_indent()
-        try:
-            log(f'Multiplying {lhs} and {rhs}')
 
-            def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber.from_int(0):
-                    return None
-                else:
-                    return default_sign
+        def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
+            if magnitude == WholeNumber.from_int(0):
+                return None
+            else:
+                return default_sign
 
-            if lhs.sign is None:  # when sign isn't set, magnitude is always 0 -- 0 * a = 0
-                sign = None
-                magnitude = WholeNumber.from_int(0)
-            elif rhs.sign is None:  # when sign isn't set, magnitude is always 0 -- a * 0 = 0
-                sign = None
-                magnitude = WholeNumber.from_int(0)
-            elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE) \
-                    or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE):
-                magnitude = lhs.magnitude * rhs.magnitude
-                sign = determine_sign(magnitude, Sign.POSITIVE)
-            elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.NEGATIVE) \
-                    or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.POSITIVE):
-                magnitude = lhs.magnitude * rhs.magnitude
-                sign = determine_sign(magnitude, Sign.NEGATIVE)
+        if lhs.sign is None:  # when sign isn't set, magnitude is always 0 -- 0 * a = 0
+            sign = None
+            magnitude = WholeNumber.from_int(0)
+        elif rhs.sign is None:  # when sign isn't set, magnitude is always 0 -- a * 0 = 0
+            sign = None
+            magnitude = WholeNumber.from_int(0)
+        elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE):
+            magnitude = lhs.magnitude * rhs.magnitude
+            sign = determine_sign(magnitude, Sign.POSITIVE)
+        elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.NEGATIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.POSITIVE):
+            magnitude = lhs.magnitude * rhs.magnitude
+            sign = determine_sign(magnitude, Sign.NEGATIVE)
 
-            log(f'sign: {sign}, magnitude: {magnitude}')
+        log_unindent()
+        log(f'sign: {sign}, magnitude: {magnitude}')
 
-            return IntegerNumber(sign, magnitude)
-        finally:
-            log_unindent()
+        return IntegerNumber(sign, magnitude)
     #MARKDOWN_MUL
 
     #MARKDOWN_DIV
+    @log_decorator
     def __truediv__(lhs: IntegerNumber, rhs: IntegerNumber) -> (IntegerNumber, IntegerNumber):
+        log(f'Dividing {lhs} and {rhs}')
         log_indent()
-        try:
-            log(f'Dividing {lhs} and {rhs}')
 
-            def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
-                if magnitude == WholeNumber.from_int(0):
-                    return None
-                else:
-                    return default_sign
+        def determine_sign(magnitude: WholeNumber, default_sign: Sign) -> Sign:
+            if magnitude == WholeNumber.from_int(0):
+                return None
+            else:
+                return default_sign
 
-            if lhs.sign is None:  # when sign isn't set, magnitude is always 0 -- 0 / a = 0
-                (quotient_magnitude, remainder_magnitude) = lhs.magnitude / rhs.magnitude
-                quotient_sign = None
-                remainder_sign = None
-            elif rhs.sign is None:  # when sign isn't set, magnitude is always 0 -- a / 0 = err
-                raise Exception('Cannot divide by 0')
-            elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE) \
-                    or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE):
-                (quotient_magnitude, remainder_magnitude) = lhs.magnitude / rhs.magnitude
-                quotient_sign = determine_sign(quotient_magnitude, Sign.POSITIVE)
-                remainder_sign = determine_sign(remainder_magnitude, Sign.POSITIVE)
-            elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.NEGATIVE) \
-                    or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.POSITIVE):
-                (quotient_magnitude, remainder_magnitude) = lhs.magnitude / rhs.magnitude
-                quotient_sign = determine_sign(quotient_magnitude, Sign.NEGATIVE)
-                remainder_sign = determine_sign(remainder_magnitude, Sign.NEGATIVE)
+        if lhs.sign is None:  # when sign isn't set, magnitude is always 0 -- 0 / a = 0
+            (quotient_magnitude, remainder_magnitude) = lhs.magnitude / rhs.magnitude
+            quotient_sign = None
+            remainder_sign = None
+        elif rhs.sign is None:  # when sign isn't set, magnitude is always 0 -- a / 0 = err
+            raise Exception('Cannot divide by 0')
+        elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.POSITIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.NEGATIVE):
+            (quotient_magnitude, remainder_magnitude) = lhs.magnitude / rhs.magnitude
+            quotient_sign = determine_sign(quotient_magnitude, Sign.POSITIVE)
+            remainder_sign = determine_sign(remainder_magnitude, Sign.POSITIVE)
+        elif (lhs.sign == Sign.POSITIVE and rhs.sign == Sign.NEGATIVE) \
+                or (lhs.sign == Sign.NEGATIVE and rhs.sign == Sign.POSITIVE):
+            (quotient_magnitude, remainder_magnitude) = lhs.magnitude / rhs.magnitude
+            quotient_sign = determine_sign(quotient_magnitude, Sign.NEGATIVE)
+            remainder_sign = determine_sign(remainder_magnitude, Sign.NEGATIVE)
 
-            log(f'QUOTIENT: sign: {quotient_sign}, magnitude: {quotient_magnitude}')
-            log(f'REMAINDER: sign: {remainder_sign}, magnitude: {remainder_magnitude}')
+        log_unindent()
+        log(f'QUOTIENT: sign: {quotient_sign}, magnitude: {quotient_magnitude}')
+        log(f'REMAINDER: sign: {remainder_sign}, magnitude: {remainder_magnitude}')
 
-            return IntegerNumber(quotient_sign, quotient_magnitude), IntegerNumber(remainder_sign, remainder_magnitude)
-        finally:
-            log_unindent()
+        return IntegerNumber(quotient_sign, quotient_magnitude), IntegerNumber(remainder_sign, remainder_magnitude)
     #MARKDOWN_DIV
 
     def __eq__(self: IntegerNumber, other: IntegerNumber) -> bool:

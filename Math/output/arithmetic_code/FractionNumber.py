@@ -8,7 +8,7 @@ from Factor import factor_tree
 from GreatestCommonDivisor import gcd_euclid
 from LeastCommonMultiple import lcm_prime_factorize
 from Sign import Sign
-from Output import log_indent, log_unindent, log
+from Output import log_indent, log_unindent, log, log_decorator
 from IntegerNumber import IntegerNumber
 from WholeNumber import WholeNumber
 
@@ -88,210 +88,187 @@ class FractionNumber:
 
     #MARKDOWN_COMMON_DENOMINATOR_NAIVE
     @staticmethod
+    @log_decorator
     def common_denominator_naive(lhs: FractionNumber, rhs: FractionNumber) -> (FractionNumber, FractionNumber):
         # Sign is only kept on the numerator, not the denominator
-        log_indent()
-        try:
-            log(f'Getting {lhs} and {rhs} to common denominator equivalent fractions')
-            if lhs._denominator != rhs._denominator:
-                log_indent()
+        log(f'Getting {lhs} and {rhs} to common denominator equivalent fractions')
+        if lhs._denominator != rhs._denominator:
+            log_indent()
 
-                log(f'Calculating common denominator...')
-                common_denominator = rhs._denominator * lhs._denominator
-                log(f'{common_denominator}')
+            log(f'Calculating common denominator...')
+            common_denominator = rhs._denominator * lhs._denominator
+            log(f'{common_denominator}')
 
-                log(f'Calculating numerator for LHS ({lhs})...')
-                lhs_numerator = lhs._numerator * rhs._denominator
-                log(f'{lhs_numerator}')
+            log(f'Calculating numerator for LHS ({lhs})...')
+            lhs_numerator = lhs._numerator * rhs._denominator
+            log(f'{lhs_numerator}')
 
-                log(f'Calculating numerator for RHS ({rhs})...')
-                rhs_numerator = rhs._numerator * lhs._denominator
-                log(f'{rhs_numerator}')
+            log(f'Calculating numerator for RHS ({rhs})...')
+            rhs_numerator = rhs._numerator * lhs._denominator
+            log(f'{rhs_numerator}')
 
-                log_unindent()
-
-                lhs_equiv = FractionNumber(lhs_numerator, common_denominator)
-                rhs_equiv = FractionNumber(rhs_numerator, common_denominator)
-                log(f'Result: {lhs} -> {lhs_equiv}, {rhs} -> {rhs_equiv}')
-                return lhs_equiv, rhs_equiv
-            else:
-                log(f'Fractions already have a common denominator')
-                return lhs, rhs
-        finally:
             log_unindent()
+
+            lhs_equiv = FractionNumber(lhs_numerator, common_denominator)
+            rhs_equiv = FractionNumber(rhs_numerator, common_denominator)
+            log(f'Result: {lhs} -> {lhs_equiv}, {rhs} -> {rhs_equiv}')
+            return lhs_equiv, rhs_equiv
+        else:
+            log(f'Fractions already have a common denominator')
+            return lhs, rhs
     #MARKDOWN_COMMON_DENOMINATOR_NAIVE
 
     #MARKDOWN_COMMON_DENOMINATOR_LCM
     @staticmethod
+    @log_decorator
     def common_denominator_lcm(lhs: FractionNumber, rhs: FractionNumber) -> (FractionNumber, FractionNumber):
         # Sign is only kept on the numerator, not the denominator
-        log_indent()
-        try:
-            log(f'Getting {lhs} and {rhs} to common denominator equivalent fractions')
-            if lhs._denominator != rhs._denominator:
-                log_indent()
+        log(f'Getting {lhs} and {rhs} to common denominator equivalent fractions')
+        if lhs._denominator != rhs._denominator:
+            log_indent()
 
-                log(f'Calculating common denominator...')
-                common_denominator = lcm_prime_factorize(rhs._denominator.magnitude, lhs._denominator.magnitude)
-                common_denominator = IntegerNumber(Sign.POSITIVE, common_denominator)
-                log(f'{common_denominator}')
+            log(f'Calculating common denominator...')
+            common_denominator = lcm_prime_factorize(rhs._denominator.magnitude, lhs._denominator.magnitude)
+            common_denominator = IntegerNumber(Sign.POSITIVE, common_denominator)
+            log(f'{common_denominator}')
 
-                log(f'Calculating numerator for LHS ({lhs})...')
-                multiple, _ = common_denominator / lhs._denominator
-                lhs_numerator = lhs._numerator * multiple
-                log(f'{lhs_numerator}')
+            log(f'Calculating numerator for LHS ({lhs})...')
+            multiple, _ = common_denominator / lhs._denominator
+            lhs_numerator = lhs._numerator * multiple
+            log(f'{lhs_numerator}')
 
-                log(f'Calculating numerator for RHS ({rhs})...')
-                multiple, _ = common_denominator / rhs._denominator
-                rhs_numerator = rhs._numerator * multiple
-                log(f'{rhs_numerator}')
+            log(f'Calculating numerator for RHS ({rhs})...')
+            multiple, _ = common_denominator / rhs._denominator
+            rhs_numerator = rhs._numerator * multiple
+            log(f'{rhs_numerator}')
 
-                log_unindent()
-
-                lhs_equiv = FractionNumber(lhs_numerator, common_denominator)
-                rhs_equiv = FractionNumber(rhs_numerator, common_denominator)
-                log(f'Result: {lhs} -> {lhs_equiv}, {rhs} -> {rhs_equiv}')
-                return lhs_equiv, rhs_equiv
-            else:
-                log(f'Fractions already have a common denominator')
-                return lhs, rhs
-        finally:
             log_unindent()
+
+            lhs_equiv = FractionNumber(lhs_numerator, common_denominator)
+            rhs_equiv = FractionNumber(rhs_numerator, common_denominator)
+            log(f'Result: {lhs} -> {lhs_equiv}, {rhs} -> {rhs_equiv}')
+            return lhs_equiv, rhs_equiv
+        else:
+            log(f'Fractions already have a common denominator')
+            return lhs, rhs
     #MARKDOWN_COMMON_DENOMINATOR_LCM
 
     #MARKDOWN_ADD
+    @log_decorator
     def __add__(lhs: FractionNumber, rhs: FractionNumber) -> FractionNumber:
         # Sign is only kept on the numerator, not the denominator
+        log(f'Adding {lhs} and {rhs}...')
         log_indent()
-        try:
-            log(f'Adding {lhs} and {rhs}...')
-            log_indent()
 
-            log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
-            lhs, rhs = FractionNumber.common_denominator_lcm(lhs, rhs)
-            log(f'Equivalent fractions: {lhs} and {rhs}')
-            log(f'Adding numerators of {lhs} and {rhs}...')
-            res = FractionNumber(lhs._numerator + rhs._numerator, lhs._denominator)
+        log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
+        lhs, rhs = FractionNumber.common_denominator_lcm(lhs, rhs)
+        log(f'Equivalent fractions: {lhs} and {rhs}')
+        log(f'Adding numerators of {lhs} and {rhs}...')
+        res = FractionNumber(lhs._numerator + rhs._numerator, lhs._denominator)
 
-            log_unindent()
-            log(f'Result: {res}')
+        log_unindent()
+        log(f'Result: {res}')
 
-            return res
-        finally:
-            log_unindent()
+        return res
     #MARKDOWN_ADD
 
     #MARKDOWN_SUB
+    @log_decorator
     def __sub__(lhs: FractionNumber, rhs: FractionNumber) -> FractionNumber:
         # Sign is only kept on the numerator, not the denominator
-        log_indent()
-        try:
-            log(f'Subtracting {lhs} and {rhs}...')
-            log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
+        log(f'Subtracting {lhs} and {rhs}...')
+        log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
 
-            log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
-            lhs, rhs = FractionNumber.common_denominator_lcm(lhs, rhs)
-            log(f'Equivalent fractions: {lhs} and {rhs}')
-            log(f'Subtracting numerators of {lhs} and {rhs}...')
-            res = FractionNumber(lhs._numerator - rhs._numerator, lhs._denominator)
+        log(f'Converting {lhs} and {rhs} to equivalent fractions with least common denominator...')
+        lhs, rhs = FractionNumber.common_denominator_lcm(lhs, rhs)
+        log(f'Equivalent fractions: {lhs} and {rhs}')
+        log(f'Subtracting numerators of {lhs} and {rhs}...')
+        res = FractionNumber(lhs._numerator - rhs._numerator, lhs._denominator)
 
-            log_unindent()
-            log(f'Result: {res}')
+        log_unindent()
+        log(f'Result: {res}')
 
-            return res
-        finally:
-            log_unindent()
+        return res
     #MARKDOWN_SUB
 
     #MARKDOWN_MUL
+    @log_decorator
     def __mul__(lhs: FractionNumber, rhs: FractionNumber) -> FractionNumber:
         # Sign is only kept on the numerator, not the denominator
+        log(f'Multiplying {lhs} and {rhs}')
         log_indent()
-        try:
-            log(f'Multiplying {lhs} and {rhs}')
-            log_indent()
 
-            log(f'Multiplying numerators {lhs._numerator} and {rhs._numerator}...')
-            numerator = lhs._numerator * rhs._numerator
+        log(f'Multiplying numerators {lhs._numerator} and {rhs._numerator}...')
+        numerator = lhs._numerator * rhs._numerator
 
-            log(f'Multiplying denominators {lhs._denominator} and {rhs._denominator}...')
-            denominator = lhs._denominator * rhs._denominator
+        log(f'Multiplying denominators {lhs._denominator} and {rhs._denominator}...')
+        denominator = lhs._denominator * rhs._denominator
 
-            res = FractionNumber(numerator, denominator)
+        res = FractionNumber(numerator, denominator)
 
-            log_unindent()
-            log(f'Result: {res}')
+        log_unindent()
+        log(f'Result: {res}')
 
-            return res
-        finally:
-            log_unindent()
+        return res
     #MARKDOWN_MUL
 
     #MARKDOWN_DIV
+    @log_decorator
     def __truediv__(lhs: FractionNumber, rhs: FractionNumber) -> FractionNumber:
         # Sign is only kept on the numerator, not the denominator
-        log_indent()
-        try:
-            log(f'Dividing {lhs} and {rhs}')
+        log(f'Dividing {lhs} and {rhs}')
 
-            res = FractionNumber(lhs._numerator * rhs._denominator, lhs._denominator * rhs._numerator)
-            log(f'Result: {res}')
+        res = FractionNumber(lhs._numerator * rhs._denominator, lhs._denominator * rhs._numerator)
+        log(f'Result: {res}')
 
-            return res
-        finally:
-            log_unindent()
+        return res
     #MARKDOWN_DIV
 
     #MARKDOWN_RECIP
+    @log_decorator
     def reciprocal(self: FractionNumber) -> FractionNumber:
         # Sign is on the numerator
-        log_indent()
-        try:
-            log(f'Getting reciprocal of {self}')
+        log(f'Getting reciprocal of {self}')
 
-            res = FractionNumber(self._denominator, self._numerator)
-            log(f'Result: {res}')
+        res = FractionNumber(self._denominator, self._numerator)
+        log(f'Result: {res}')
 
-            return res
-        finally:
-            log_unindent()
+        return res
     #MARKDOWN_RECIP
 
     #MARKDOWN_SIMP
+    @log_decorator
     def simplify(self: FractionNumber) -> FractionNumber:
+        # Sign is on the numerator
+        log(f'Simplifying {self}...')
         log_indent()
-        try:
-            log(f'Simplifying {self}...')
-            log_indent()
 
-            log(f'Calculating GCD for ({self._numerator.magnitude}) and ({self._denominator.magnitude})...')
-            gcd = gcd_euclid(self._numerator.magnitude, self._denominator.magnitude)
-            log(f'GCD is {gcd}')
+        log(f'Calculating GCD for ({self._numerator.magnitude}) and ({self._denominator.magnitude})...')
+        gcd = gcd_euclid(self._numerator.magnitude, self._denominator.magnitude)
+        log(f'GCD is {gcd}')
 
-            log(f'Dividing numerator ({self._numerator.magnitude}) by {gcd}...')
-            new_num, _ = self._numerator.magnitude / gcd
-            log(f'New numerator is {new_num}...')
+        log(f'Dividing numerator ({self._numerator.magnitude}) by {gcd}...')
+        new_num, _ = self._numerator.magnitude / gcd
+        log(f'New numerator is {new_num}...')
 
-            log(f'Dividing denominator ({self._denominator.magnitude}) by {gcd}...')
-            new_den, _ = self._denominator.magnitude / gcd
-            log(f'New numerator is {new_den}...')
+        log(f'Dividing denominator ({self._denominator.magnitude}) by {gcd}...')
+        new_den, _ = self._denominator.magnitude / gcd
+        log(f'New numerator is {new_den}...')
 
-            # Sign of fraction is on the numerator
-            if self.sign == Sign.NEGATIVE:  # if original was negative, so will the simplified
-                res = FractionNumber(
-                    IntegerNumber(Sign.NEGATIVE, new_num),
-                    IntegerNumber(Sign.POSITIVE, new_den))
-            else:  # if original was positive, so will the simplified
-                res = FractionNumber(
-                    IntegerNumber(Sign.POSITIVE, new_num),
-                    IntegerNumber(Sign.POSITIVE, new_den))
+        # Sign of fraction is on the numerator
+        if self.sign == Sign.NEGATIVE:  # if original was negative, so will the simplified
+            res = FractionNumber(
+                IntegerNumber(Sign.NEGATIVE, new_num),
+                IntegerNumber(Sign.POSITIVE, new_den))
+        else:  # if original was positive, so will the simplified
+            res = FractionNumber(
+                IntegerNumber(Sign.POSITIVE, new_num),
+                IntegerNumber(Sign.POSITIVE, new_den))
 
-            log_unindent()
-            log(f'{self} simplified to: {res}')
+        log_unindent()
+        log(f'{self} simplified to: {res}')
 
-            return res
-        finally:
-            log_unindent()
+        return res
     #MARKDOWN_SIMP
 
     def __eq__(self: FractionNumber, other: FractionNumber) -> bool:
