@@ -1,5 +1,8 @@
 from __future__ import annotations
-from typing import Union, Optional
+
+from bisect import bisect_left
+from collections import OrderedDict
+from typing import Union, Optional, Dict
 
 from Output import *
 from Digit import Digit
@@ -557,6 +560,86 @@ class WholeNumber:
 
     #MARKDOWN_DIVTE
 
+    #MARKDOWN_POWIT
+    def iterative_pow(base: WholeNumber, exponent: WholeNumber) -> WholeNumber:
+        log_indent()
+        try:
+            log(f'Computing the power of {base} raised to {exponent} ({base}^{exponent})...')
+            log_indent()
+
+            power = WholeNumber.from_str('1')
+            while exponent > WholeNumber.from_str('0'):
+                log(f'Multiplying {power} by {base}...')
+                power = power * base
+                exponent -= WholeNumber.from_str('1')  # decrement exponent
+
+            log_unindent()
+            log(f'Power: {power}')
+
+            return power
+        finally:
+            log_unindent()
+    #MARKDOWN_POWIT
+
+    #MARKDOWN_POW
+    def __pow__(base: WholeNumber, exponent: WholeNumber, modulo=None):
+        log_indent()
+        try:
+            log(f'Computing the power of {base} raised to {exponent} ({base}^{exponent})...')
+            log_indent()
+
+            cache: OrderedDict[WholeNumber, WholeNumber] = OrderedDict()
+            cache[WholeNumber.from_str('0')] = WholeNumber.from_str('1')
+            cache[WholeNumber.from_str('1')] = base
+
+            def get_closest_lt_or_eq_cached_exp(e):
+                key_list = list(cache.keys())
+                pos = bisect_left(key_list, e)
+                if pos == 0:
+                    return key_list[0]
+                if pos == len(cache):
+                    return key_list[-1]
+                if key_list[pos] == e:
+                    return e
+                else:
+                    return key_list[pos - 1]
+
+            mult_str = '1'
+            power = WholeNumber.from_str('1')
+            current_exponent = WholeNumber.from_str('0')
+            remaining_exponent = exponent
+            while remaining_exponent > WholeNumber.from_str('0'):
+                log(f'Step...')
+                log_indent()
+
+                log(f'Remaining Exponent: {remaining_exponent} / Power Cache: {[f"{base}^{k}={v}" for k, v in cache.items()]}')
+
+                cached_exponent = get_closest_lt_or_eq_cached_exp(remaining_exponent)
+                cached_power = cache[cached_exponent]
+
+                log(f'Next {cached_exponent} of {remaining_exponent} multiplications can be pulled from cache: {base}^{cached_exponent}={cached_power}')
+
+                power *= cached_power
+                current_exponent += cached_exponent
+                remaining_exponent -= cached_exponent
+
+                mult_str += f'\*{cached_power}'
+                log(f'{base}^{current_exponent}={mult_str}={power}')
+
+                cache[current_exponent] = power
+                log(f'{base}^{current_exponent}={power} inserted into cache')
+
+                log_unindent()
+
+            log_unindent()
+            log(f'Power: {power}')
+
+            return power
+        finally:
+            log_unindent()
+    #MARKDOWN_POW
+
+
     @staticmethod
     def pick_start_range(dividend: WholeNumber) -> WholeNumberRange:
         return WholeNumberRange(
@@ -617,6 +700,15 @@ if __name__ == '__main__':
     # print(n3)
     import inspect
 
-    log_whitelist([(inspect.getfile(WholeNumber), '__truediv__')])  # log_whitelist(['__truediv__', 'trial_and_error_div'])
-    (q, r) = WholeNumber.from_int(752) / WholeNumber.from_int(3)
-    print(f'{q}R{r}')
+    log_whitelist([(inspect.getfile(WholeNumber), '__pow__')])
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(0)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(1)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(2)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(3)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(4)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(5)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(6)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(7)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(8)}')
+    # print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(9)}')
+    print(f'{WholeNumber.from_int(2) ** WholeNumber.from_int(20)}')

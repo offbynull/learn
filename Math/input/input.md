@@ -398,7 +398,7 @@ Multiplication is typically represented using the infix operator \*. The above e
  * `{kt} (3)5`
 
 ```{note}
-Do not use x or a cross as a symbol for multiplication. It causes confusion for algebra expressions.
+Know algebra? Do not use x or a cross as a symbol for multiplication. It causes confusion for algebra expressions because x can also be a variable.
 ```
 
 The output of a multiplication operation is called the `{bm} product`. In the example above, 15 is the product.
@@ -607,6 +607,255 @@ Properties of division:
    ```{note}
    Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
    ```
+
+## Powers
+
+```{prereq}
+Place value system
+Multiplication
+```
+
+Taking the power of a number is the concept of taking a number and iteratively multiplying it to itself a certain number of iterations. For example, 2 to the exponent of 4 iterations results in 16 items...
+
+```{note}
+This operation is also less frequently referred to as `{bm} exponentiation`.
+```
+
+```
+2*2*2*2=16  <-- 2 to the exponent of 4
+
+ [●●]   [●●]   (2*2=4)
+    \   /
+     \ /
+    [●●●●]     [●●]   (4*2=8)
+        \       /
+         \     /
+          \   /
+           \ /
+       [●●●●●●●●]        [●●]   (8*2=16)
+             \           /
+              \         /
+               \       /
+                \     /
+                 \   /
+                  \ /
+          [●●●●●●●●●●●●●●●●]
+```
+
+Exponentiation is typically represented using either a caret or superscript. The above example could be represented as either...
+ * `{kt} 2^4` (exponent written as superscript)
+ * 2^4  (exponent written after caret)
+
+The output of a exponentiation is called the `{bm} power`. In the example above, 16 is the 4th power of 2.
+
+The inputs into the multiplication operation are ...
+ * `{bm} base` -- the number being iteratively multiplied, 2 in the example above.
+ * `{bm} exponent` -- the number of iterations, 4 in the example above.
+
+```{svgbob}
+exponent ----+
+             |
+             v
+
+           2^4 is 16  <--- power
+
+           ^
+           |
+   base ---+
+```
+
+```{note}
+You can think of this as a function that takes in 2 arguments: power(2, 4).
+```
+
+When using words, exponentiation is typically represented using the following syntax:
+
+ * `{bm} power/(\d+(?:st|nd|rd|th)\s+power)/i` -- e.g. 2 to the 4th power / find the 4th power of 2.
+ * `{bm} power of` -- e.g. 2 to the power of 4.
+ * `{bm} exponent of` -- e.g. 2 to the exponent of 4.
+ * `{bm} raised to` -- e.g. 2 raised to the 4th power / 2 raised to power 4.
+
+```{note}
+Does the terminology here seem confusing?
+
+* The term power can either refer to the result or the entire operation (e.g. 2 to the power of 4).
+* The term exponent can either refer to the exponent or the entire operation (e.g. 2 to the exponent of 4)
+
+See [http://mathforum.org/library/drmath/view/64570.html] for more information on why this is.
+```
+
+Special cases to be aware of for exponentiation:
+
+* Any base to the power of 0 is 1...
+
+  ```
+  0^0 = 1
+  1^0 = 1
+  2^0 = 1
+  ...
+  ```
+
+  ```{note}
+  If you know about algebra and multiplication rules, this is because the identify property of multiplication is 1. That is, any number multiplied by 1 is itself. So you can consider...
+  
+   * 2^2 = 1 * 2 * 2 = 4
+   * 2^1 = 1 * 2 = 2
+   * 2^0 = 1 = 1
+  ```
+
+* 0 raised to any power _other than 1_ is 0
+
+  ```
+  0^0 = 1 <-- see prior special case -- any base raised to the 0th power is 1
+  0^1 = 0
+  0^2 = 0
+  0^3 = 0
+  ...
+  ```
+
+  ```{note}
+  If you know about algebra and multiplication rules, this is because the identify property of multiplication is 1. That is, any number multiplied by 1 is itself. So you can consider...
+  
+   * 0^2 = 1 * 0 * 0 = 0
+   * 0^1 = 1 * 0 = 0
+   * 0^0 = 1 = 1
+  ```
+
+## Roots
+
+```{prereq}
+Place value system
+Powers
+```
+
+A `{bm} root` operation is the concept of finding the base of a power operation. That is, given the exponent and power (result of exponentiation operation), that exponentiation operation is reversed back to find the original base. For example, an exponent of 2 and a power of 25, the found base would be 5...
+
+```
+Find a base such that when raised to the 2nd power, the result is 25.
+
+?^2=25
+
+0^2=0  --  no,  0 != 25
+1^2=1  --  no,  1 != 25
+2^2=4  --  no,  2 != 25
+3^2=9  --  no,  9 != 25
+4^2=16 --  no, 16 != 25
+5^2=25 -- yes, 25  = 25
+```
+
+```{note}
+Confused about roots vs logarithms?
+
+Calculating the root is finding the base: e.g. ?^2=25
+Calculating the logarithm is finding the exponent: e.g. 5^?=25
+```
+
+````{note}
+Why the word root? Think of a tree (nature). The result of exponentiation is the tree with all of its branches, but you're trying to find the root of that tree -- the original number that sprouted to produce that tree with all of its branches.
+
+For example, in 2^4=16, 16 is the tree and 2 is the root. 2 is what sprouted to 16 -- `{kt} 2^4=2*2*2*2=16`...
+
+```{svgbob}
+ 2  2   2  2  <-- result (power)
+ |  |   |  |
+ `--+-+-+--'
+      |
+      |
+      2  <-- root (base)
+```
+````
+
+A root operation is typically written as a check mark, where on the...
+* right of check mark is the exponent as a superscript (can be omitted if exponent is 2).
+* left of the check mark is the result (power) with a line over it.
+
+`{kt} \sqrt[exp]{power} = base`
+
+In the above example, the 2nd root of 25 would be represented as either `{kt} \sqrt[2]{25}` or `{kt} \sqrt{25}`.
+
+When using words, a root operation is typically represented using the following syntax:
+
+* `{bm} ? root/(\d+(?:st|nd|rd|th)[\s\-]root)/i` -- e.g. 2nd root of 25 is 5
+
+````{note}
+Instead of numbers, special words can be used instead:
+
+* `{bm} square root` is equivalent to 2nd root
+* `{bm} cube root` is equivalent to 3rd root
+
+If you know geometry, the terms square and cube are taken from geometry. Specifically, the area of a ...
+
+* square is technically defined ?^2. For example, the area of a 5 by 5 square is 5^2...
+
+  ```{svgbob}
+  +-------+
+  |       |
+  |       | 5
+  |       |
+  +-------+
+      5
+  ```
+
+* cube is technically defined ?^3. For example, the area of a 5 by 5 by 5 square is 5^3...
+
+  ```{svgbob}
+      +-------+
+   5 /       /|
+    +-------+ |
+    |       | |
+  5 |       | +
+    |       |/
+    +-------+
+       5
+  ```
+````
+
+## Logarithms
+
+```{prereq}
+Place value system
+Powers
+```
+
+A `{bm} logarithm` operation is the concept of finding the exponent of a power operation. That is, given the base and power (result of exponentiation operation), that exponentiation operation is reversed back to find the original exponent. For example, a base of 5 and a power of 125, the found base would be 3...
+
+```{note}
+This operation is also frequently abbreviated as `{bm} log`.
+```
+
+```
+Find an exponent such that when 5 is raised to some power, the result is 125.
+
+5^?=125
+
+5^0=1   --  no,  1  != 125
+5^1=5   --  no,  5  != 125
+5^2=25  --  no,  25 != 125
+5^3=125 -- yes, 125  = 125
+```
+
+```{note}
+Confused about roots vs logarithms?
+
+Calculating the root is finding the base: e.g. ?^2=25
+Calculating the logarithm is finding the exponent: e.g. 5^?=25
+```
+
+```{note}
+Why the word logarithm? See [http://mathforum.org/library/drmath/view/55579.html].
+```
+
+A logarithm operation is typically written using the word log immediately followed by the...
+* base written as a subscript (can be omitted if 10).
+* power (may be encapsulated in parenthesis).
+
+`{kt} \log_{base}{power} = exp`
+
+In the above example, the log of 125 would be represented as either `{kt} \log_{5}{125}` or `{kt} \log_{5}{(125)}`.
+
+Special cases to be aware of for logarithms:
+
+* The log of 0 for any base is undefined.
 
 # Whole Number
 
@@ -2476,6 +2725,240 @@ python
 
 ```{wholenumdiv}
 752 3
+```
+
+## Exponentiation
+
+```{prereq}
+Whole number multiplication
+Exponentiation
+```
+
+There are 2 algorithms used by humans to calculate powers. The first algorithm is the simplest and most used: multiply base to itself for exponent iterations. For example, to calculate `{kt} 2^5`...
+
+```{svgbob}
+2*2*2*2*2=32
+
+2-+
+  v
+  2*2=4-+
+        v
+        4*2=8-+
+              v
+              8*2=16-+
+                     v
+                     16*2=32
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_POWIT\s*\n([\s\S]+?)\n\s*#MARKDOWN_POWIT
+```
+
+```{wholenumpowit}
+2 5
+```
+
+The second algorithm involves keeping a cache to reduce the number multiplications required for exponentiation. That is, it takes advantage of the fact that how you go about multiplying the chain of numbers together doesn't matter -- the product (result) will always be the same.
+
+For example, when calculating `{kt}2^5`, the result will be 32 regardless of the order in which multiplication operations happen...
+
+```{svgbob}
+chain forward           chain random           subgroup forward        subgroup backward       subgroup random
+2 * 2 * 2 * 2 * 2       2 * 2 * 2 * 2 * 2      2 * 2 * 2 * 2 * 2       2 * 2 * 2 * 2 * 2       2 * 2 * 2 * 2 * 2
+|   |   |   |   |       |   |   |   |   |      |   |   |   |   |       |   |   |   |   |       |   |   |   |   |
++-+-+   |   |   |       |   |   +-+-+   |      +-+-+   +-+-+   |       |   +-+-+   +-+-+       +-+-+   |   +-+-+
+  v     |   |   |       |   |     v     |        v       v     |       |     v       v           v     |     v  
+  4     |   |   |       |   |     4     |        4       4     |       |     4       4           4     |     4  
+  |     |   |   |       |   |     |     |        |       |     |       |     |       |           |     |     |  
+  +--+--+   |   |       |   +--+--+     |        +---+---+     |       |     +---+---+           +--+--+     |  
+     v      |   |       |      v        |            v         |       |         v                  v        |  
+     8      |   |       |      8        |           16         |       |        16                  8        |  
+     |      |   |       |      |        |            |         |       |         |                  |        |  
+     +--+---+   |       |      +----+---+            +----+----+       +----+----+                  +----+---+  
+        v       |       |           v                     v                 v                            v      
+       16       |       |          16                    32                32                           32      
+        |       |       |           |    
+        +---+---+       +-----+-----+    
+            v                 v          
+           32                32          
+```
+
+```{note}
+If you know algebra, the above diagram is showing the commutative and associative properties of multiplication.
+```
+
+Notice how in the subgroup diagrams above, the numbers are being grouped together and recursively multiplied. If a subgroup has already been calculated once, its result can be cached such that if another subgroup with the same number of multiplications appears that result can be reused. For example, once...
+ * 2\*2 appears, the result is calculated and cached so it can be reused if 2\*2 appears again.
+ * 2\*2\*2\*2 (4\*2) appears, the result is calculated and cached so it can be reused if 2\*2\*2\*2 appears again.
+ * 2\*2\*2\*2\*2 (16\*2) appears, the result is calculated and cached so it can be reused if 2\*2\*2\*2\*2 appears again.
+
+If applied to the example above, the caching mechanism doesn't seem much more efficient...
+
+```{svgbob}
+"PRIME CACHE WITH BASE VALUE: 2"
+                     2 * 2 * 2 * 2 * 2
+                     |
+         cache       |
+         2^1=2 <-----+
+
+"ITERATION 1: 2^4 remaining, but the largest already calculated cached item is 2^1"
+      +------------------+
+      |                  v
+      |                  -
+      |              2 * 2 * 2 * 2 * 2
+      |              |   |
+      |  cache       +-+-+
+      +- 2^1=2         v
+         2^2=4 <-------4
+
+"ITERATION 2: 2^3 remaining, but the largest already calculated cached item is 2^2"
+    +--------------------------+
+    |                          v
+    |                        ----- 
+    |                2 * 2 * 2 * 2 * 2
+    |                |   |   -----
+    |    cache       +-+-+     |
+    |    2^1=2         v       v
+    +--- 2^2=4         4       4
+                       |       |
+                       +---+---+
+                           v
+         2^4=16 <---------16
+
+"ITERATION 3: 2^1 remaining, pull in cached item for 2^1"
+  +----------------------------------+
+  |                                  v 
+  |                          -----   -
+  |                  2 * 2 * 2 * 2 * 2
+  |                  |   |   -----   -
+  |      cache       +-+-+     |     |
+  +----- 2^1=2         v       v     |
+         2^2=4         4       4     |
+                       |       |     |
+                       +---+---+     |
+                           v         v
+         2^4=16           16         2
+                           |         |
+                           +----+----+
+                                v       
+         2^5=32 <--------------32
+```
+
+
+However, for larger exponents it is much more efficient. For example. calculating `{kt} 2^{20}` using the caching algorithm described above requires only 5 iterations (as opposed to 20 iterations if the first algorithm were used)....
+
+```{svgbob}
+"PRIME CACHE WITH BASE VALUE: 2"
+                     2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+                     |
+         cache       |
+         2^1=2 <-----+
+
+"ITERATION 1: 2^19 remaining, but the largest already calculated cached item is 2^1"
+      +------------------+
+      |                  v
+      |                  -
+      |              2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+      |              |   |
+      |  cache       +-+-+
+      +- 2^1=2         v
+         2^2=4 <-------4
+
+"ITERATION 2: 2^18 remaining, but the largest already calculated cached item is 2^2"
+    +--------------------------+
+    |                          v
+    |                        ----- 
+    |                2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+    |                |   |   -----
+    |    cache       +-+-+     |
+    |    2^1=2         v       v
+    +--- 2^2=4         4       4
+                       |       |
+                       +---+---+
+                           v
+         2^4=16 <---------16
+
+"ITERATION 3: 2^16 remaining, but the largest already calculated cached item is 2^4"
+  +----------------------------------------+
+  |                                        v 
+  |                          -----   -------------
+  |                  2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+  |                  |   |   -----   -------------
+  |      cache       +-+-+     |           |
+  |      2^1=2         v       v           |
+  |      2^2=4         4       4           |
+  |                    |       |           |
+  |                    +---+---+           |
+  |                        v               v
+  +----- 2^4=16           16              16
+                           |               |
+                           +--------+------+
+                                    v       
+         2^8=256 <-----------------256      
+
+"ITERATION 4: 2^12 remaining, but the largest already calculated cached item is 2^8"
++------------------------------------------------------------------+
+|                                                                  v              
+|                        -   -----   -------------   -----------------------------
+|                    2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+|                    |   |   -----   -------------   -----------------------------
+|        cache       +-+-+     |           |                       |              
+|        2^1=2         v       v           |                       |              
+|        2^2=4         4       4           |                       |              
+|                      |       |           |                       |              
+|                      +---+---+           |                       |              
+|                          v               v                       |              
+|        2^4=16           16              16                       |              
+|                          |               |                       |              
+|                          +--------+------+                       |              
+|                                   v                              v              
++------- 2^8=256                   256                            256             
+                                    |                              |              
+                                    +---------------+--------------+              
+                                                    v                             
+         2^16=65536 <-----------------------------65536                           
+
+"ITERATION 5: 2^4 remaining, pull in cached item for 2^4"
++------------------------------------------------------------------------------------------+
+|                                                                                          v              
+|                        -   -----   -------------   -----------------------------   -------------
+|                    2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+|                    |   |   -----   -------------   -----------------------------   -------------
+|        cache       +-+-+     |           |                       |                       |
+|        2^1=2         v       v           |                       |                       |
+|        2^2=4         4       4           |                       |                       |
+|                      |       |           |                       |                       |
+|                      +---+---+           |                       |                       |
+|                          v               v                       |                       |
++------- 2^4=16           16              16                       |                       |
+                           |               |                       |                       |
+                           +--------+------+                       |                       |
+                                    v                              v                       |
+         2^8=256                   256                            256                      |
+                                    |                              |                       |
+                                    +---------------+--------------+                       |
+                                                    v                                      v
+         2^16=65536                               65536                                   16
+                                                    |                                      |
+                                                    +-------------------+------------------+
+                                                                        v
+         2^20=1048576 <----------------------------------------------1048576
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_POW\s*\n([\s\S]+?)\n\s*#MARKDOWN_POW
+```
+
+```{wholenumpow}
+2 20
 ```
 
 # Integer Number
