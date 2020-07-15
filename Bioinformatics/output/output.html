@@ -18,17 +18,18 @@
 <li><a href="#HEADREF7">Find Clumps of a K-mer</a></li>
 <li><a href="#HEADREF8">Find Repeating K-mers</a></li>
 <li><a href="#HEADREF9">Find Repeating K-mers in Window</a></li>
+<li><a href="#HEADREF10">Probability of K-mer's Appearance</a></li>
 </ul>
-<li><a href="#HEADREF10">GC Skew</a></li>
-<li><a href="#HEADREF11">Stories</a></li>
+<li><a href="#HEADREF11">GC Skew</a></li>
+<li><a href="#HEADREF12">Stories</a></li>
 <ul>
-<li><a href="#HEADREF12">Bacteria Replication</a></li>
+<li><a href="#HEADREF13">Bacteria Replication</a></li>
 <ul>
-<li><a href="#HEADREF13">Find Ori and Ter</a></li>
-<li><a href="#HEADREF14">Find the DnaA Box</a></li>
+<li><a href="#HEADREF14">Find Ori and Ter</a></li>
+<li><a href="#HEADREF15">Find the DnaA Box</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF15">Terminology</a></li>
+<li><a href="#HEADREF16">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -89,7 +90,7 @@
 <p><img src="svgbob_c44b72fd8e03cfe92b63a0a3b83bfe37c5551666.svg" alt="Kroki diagram output"></p>
 <p>, ... the reverse complement of that <a href="#BOOKMARK1">k-mer</a> may be just as valid as the original <a href="#BOOKMARK1">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BOOKMARK1">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BOOKMARK1">k-mer</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_complement</span><span class="hljs-params">(strand: str)</span>:</span>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_complement</span>(<span class="hljs-params">strand: str</span>):</span>
     ret = <span class="hljs-string">''</span>
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(strand)):
         base = strand[i]
@@ -115,7 +116,7 @@
 <p><strong>WHAT</strong>: Given 2 <a href="#BOOKMARK1">k-mer</a>s, the hamming distance is the number of positional mismatches between them.</p>
 <p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK1">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK1">k-mer</a> patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hamming_distance</span><span class="hljs-params">(kmer1: str, kmer2: str)</span> -&gt; int:</span>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hamming_distance</span>(<span class="hljs-params">kmer1: str, kmer2: str</span>) -&gt; int:</span>
     mismatch = <span class="hljs-number">0</span>
 
     <span class="hljs-keyword">for</span> ch1, ch2 <span class="hljs-keyword">in</span> zip(kmer1, kmer2):
@@ -139,8 +140,8 @@
 <p><strong>WHAT</strong>: Given a source <a href="#BOOKMARK1">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK1">k-mer</a>s such within the hamming distance of the source <a href="#BOOKMARK1">k-mer</a>. In other words, find all <a href="#BOOKMARK1">k-mer</a>s such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
 <p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK1">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK1">k-mer</a> patterns that are slight variations of the original. This algorithm finds all such variations.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_all_dna_kmers_within_hamming_distance</span><span class="hljs-params">(kmer: str, hamming_dist: int)</span> -&gt; set[str]:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recurse</span><span class="hljs-params">(kmer: str, hamming_dist: int, output: set[str])</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_all_dna_kmers_within_hamming_distance</span>(<span class="hljs-params">kmer: str, hamming_dist: int</span>) -&gt; set[str]:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recurse</span>(<span class="hljs-params">kmer: str, hamming_dist: int, output: set[str]</span>) -&gt; <span class="hljs-keyword">None</span>:</span>
         <span class="hljs-keyword">if</span> hamming_dist == <span class="hljs-number">0</span>:
             output.add(kmer)
             <span class="hljs-keyword">return</span>
@@ -155,7 +156,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAA', 'AAAG', 'AGAA', 'AACA', 'AAGA', 'AAAT', 'TAAA', 'AATA', 'ACAA', 'AAAC', 'GAAA', 'CAAA', 'ATAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'ATAA', 'AGAA', 'TAAA', 'AACA', 'GAAA', 'AATA', 'AAAT', 'AAAG', 'AAAC', 'CAAA', 'AAAA', 'AAGA', 'ACAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h1>K-mer Search</h1>
@@ -176,12 +177,12 @@
 <li>approximate variants of its reverse complements: TTTTTTTTT, TTTTTTATT, TTCTTTTTT, ...</li>
 </ul>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Options</span><span class="hljs-params">(NamedTuple)</span>:</span>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Options</span>(<span class="hljs-params">NamedTuple</span>):</span>
     hamming_distance: int = <span class="hljs-number">0</span>
     reverse_complement: bool = <span class="hljs-literal">False</span>
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_locations</span><span class="hljs-params">(sequence: str, kmer: str, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; List[int]:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_locations</span>(<span class="hljs-params">sequence: str, kmer: str, options: Options = Options(<span class="hljs-params"></span>)</span>) -&gt; List[int]:</span>
     <span class="hljs-comment"># Construct test kmers</span>
     test_kmers = set()
     test_kmers.add(kmer)
@@ -212,7 +213,7 @@
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK1">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK1">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK1">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BOOKMARK0">DnaA box</a> is a special <a href="#BOOKMARK1">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK0">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK9">replication origin</a>. Finding the <a href="#BOOKMARK0">DnaA box</a> clustered in a small region is a good indicator that you've found the <a href="#BOOKMARK9">replication origin</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_clusters</span><span class="hljs-params">(sequence: str, kmer: str, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; List[int]:</span>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_clusters</span>(<span class="hljs-params">sequence: str, kmer: str, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options(<span class="hljs-params"></span>)</span>) -&gt; List[int]:</span>
     cluster_locs = []
 
     locs = find_kmer_locations(sequence, kmer, options)
@@ -247,7 +248,7 @@
 <pre class="hljs"><code><span class="hljs-keyword">from</span> Utils <span class="hljs-keyword">import</span> slide_window
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_kmers</span><span class="hljs-params">(data: str, k: int, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; Counter[str]:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_kmers</span>(<span class="hljs-params">data: str, k: int, options: Options = Options(<span class="hljs-params"></span>)</span>) -&gt; Counter[str]:</span>
     counter = Counter()
     <span class="hljs-keyword">for</span> kmer, i <span class="hljs-keyword">in</span> slide_window(data, k):
         neighbourhood = find_all_dna_kmers_within_hamming_distance(kmer, options.hamming_distance)
@@ -263,7 +264,7 @@
     <span class="hljs-keyword">return</span> counter
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">top_repeating_kmers</span><span class="hljs-params">(data: str, k: int, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; Set[str]:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">top_repeating_kmers</span>(<span class="hljs-params">data: str, k: int, options: Options = Options(<span class="hljs-params"></span>)</span>) -&gt; Set[str]:</span>
     counts = count_kmers(data, k, options)
 
     _, top_count = counts.most_common(<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>]
@@ -277,10 +278,10 @@
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
 <li>CCCTT = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
-<li>GATCA = 6 occurrences</li>
 <li>TTAAA = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
 <li>TGATC = 6 occurrences</li>
+<li>GATCA = 6 occurrences</li>
 <li>AAGGG = 6 occurrences</li>
 </ul>
 </div>
@@ -301,8 +302,8 @@
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK1">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK1">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK1">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BOOKMARK0">DnaA box</a> is a special <a href="#BOOKMARK1">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK0">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK9">replication origin</a>. Given that you don't know the <a href="#BOOKMARK1">k-mer</a> pattern for the <a href="#BOOKMARK0">DnaA box</a> but you do know the <a href="#BOOKMARK9">replication origin</a>, you can scan through the <a href="#BOOKMARK9">replication origin</a> for repeating <a href="#BOOKMARK1">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK1">k-mer</a> pattern for the <a href="#BOOKMARK0">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_for_repeating_kmers_in_clusters</span><span class="hljs-params">(sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options<span class="hljs-params">()</span>)</span> -&gt; Set[KmerCluster]:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">neighborhood</span><span class="hljs-params">(kmer: str)</span> -&gt; Set[str]:</span>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_for_repeating_kmers_in_clusters</span>(<span class="hljs-params">sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options(<span class="hljs-params"></span>)</span>) -&gt; Set[KmerCluster]:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">neighborhood</span>(<span class="hljs-params">kmer: str</span>) -&gt; Set[str]:</span>
         neighbourhood = find_all_dna_kmers_within_hamming_distance(kmer, options.hamming_distance)
         <span class="hljs-keyword">if</span> options.reverse_complement:
             kmer_rc = reverse_complement(kmer)
@@ -311,12 +312,12 @@
 
     kmer_counter = {}
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_kmer</span><span class="hljs-params">(kmer: str, loc: int)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_kmer</span>(<span class="hljs-params">kmer: str, loc: int</span>) -&gt; <span class="hljs-keyword">None</span>:</span>
         <span class="hljs-keyword">if</span> kmer <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> kmer_counter:
             kmer_counter[kmer] = set()
         kmer_counter[kmer].add(window_idx + kmer_idx)
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove_kmer</span><span class="hljs-params">(kmer: str, loc: int)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove_kmer</span>(<span class="hljs-params">kmer: str, loc: int</span>) -&gt; <span class="hljs-keyword">None</span>:</span>
         kmer_counter[kmer].remove(window_idx - <span class="hljs-number">1</span>)
         <span class="hljs-keyword">if</span> len(kmer_counter[kmer]) == <span class="hljs-number">0</span>:
             <span class="hljs-keyword">del</span> kmer_counter[kmer]
@@ -351,22 +352,171 @@
 <p></p>
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
-<a name="HEADREF10"></a><h1>GC Skew</h1>
+<a name="HEADREF10"></a><h2>Probability of K-mer's Appearance</h2>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li>Find Locations of a <a href="#BOOKMARK1">K-mer</a></li>
+</ul>
+</div>
+<p><strong>WHAT</strong>: Given ...</p>
+<ul>
+<li>the length of a sequence (n)</li>
+<li>a <a href="#BOOKMARK1">k-mer</a></li>
+<li>a count (c)</li>
+</ul>
+<p>... find the probability of that <a href="#BOOKMARK1">k-mer</a> appearing at least c times within an arbitrary sequence of length n. For example, the probability that the 2-mer AA appears at least 2 times in a sequence of length 4:</p>
+<ul>
+<li>AAAA - yes</li>
+<li>AAAT - yes</li>
+<li>AAAC - yes</li>
+<li>AAAG - yes</li>
+<li>AATA - no</li>
+<li>AATT - no</li>
+<li>AATC - no</li>
+<li>AATG - no</li>
+<li>...</li>
+<li>TAAA - yes</li>
+<li>...</li>
+<li>CAAA - yes</li>
+<li>...</li>
+<li>GAAA - yes</li>
+<li>...</li>
+<li>GGGA - no</li>
+<li>GGGT - no</li>
+<li>GGGC - no</li>
+<li>GGGG - no</li>
+</ul>
+<p>The probability is 7/256.</p>
+<p>This isn't trivial to accurately compute because the occurrences of a <a href="#BOOKMARK1">k-mer</a> within a sequence may overlap. For example, the number of times AA appears in AAAA is 3 while in CAAA it's 2.</p>
+<p><strong>WHY</strong>: When a <a href="#BOOKMARK1">k-mer</a> is found within a sequence, knowing the probability of that <a href="#BOOKMARK1">k-mer</a> being found within an arbitrary sequence of the same length hints at the significance of the find. For example, if some 10-mer has a 0.2 chance of appearing in an arbitrary sequence of length 50, that's too high of a chance to consider it a significant find -- 0.2 means 1 in 5 chance that the 10-mer just randomly happens to appear.</p>
+<p><strong>ALGORITHM</strong>:</p>
+<p>The following algorithm uses brute-force to determine the probability...</p>
+<pre class="hljs"><code><span class="hljs-comment"># This implementation tries every possible combination of sequence to find the probability. It falls over once the</span>
+<span class="hljs-comment"># length of the sequence extends into the double digits -- it's a toy implementation to help conceptualize what's</span>
+<span class="hljs-comment"># going on.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Of the X sequence combinations tried, Y had the k-mer. The probability is Y/X.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bruteforce_probability</span>(<span class="hljs-params">searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int</span>) -&gt; (int, int):</span>
+    found = <span class="hljs-number">0</span>
+    found_max = searchspace_symbol_count ** searchspace_len
+
+    str_to_search = [<span class="hljs-number">0</span>] * searchspace_len
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_instances</span>():</span>
+        ret = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, searchspace_len - len(search_for) + <span class="hljs-number">1</span>):
+            <span class="hljs-keyword">if</span> str_to_search[i:i + len(search_for)] == search_for:
+                ret += <span class="hljs-number">1</span>
+        <span class="hljs-keyword">return</span> ret
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk</span>(<span class="hljs-params">idx: int</span>):</span>
+        <span class="hljs-keyword">nonlocal</span> found
+
+        <span class="hljs-keyword">if</span> idx == searchspace_len:
+            count = count_instances()
+            <span class="hljs-keyword">if</span> count &gt;= min_occurrence:
+                found += <span class="hljs-number">1</span>
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, searchspace_symbol_count):
+                walk(idx + <span class="hljs-number">1</span>)
+                str_to_search[idx] += <span class="hljs-number">1</span>
+            str_to_search[idx] = <span class="hljs-number">0</span>
+
+    walk(<span class="hljs-number">0</span>)
+
+    <span class="hljs-keyword">return</span> found, found_max</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Brute-forcing probability of ACTG in arbitrary sequence of length 8</p>
+<p>Probability: 0.0195159912109375 (1279/65536)</p>
+</div>
+<p></p>
+<p>The following algorithm estimates the probability by ignoring the fact that <a href="#BOOKMARK1">k-mer</a> occurrences may overlap within the sequence, which allows for much more faster algorithm...</p>
+<pre class="hljs"><code><span class="hljs-comment"># The explanation in the comments below are a bastardization of "1.13 Detour: Probabilities of Patterns in a String"</span>
+<span class="hljs-comment"># in the Pevzner book...</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># This implementation tries estimating the probability by ignoring the fact that the occurrences of a k-mer in a</span>
+<span class="hljs-comment"># sequence may overlap. For example, searching for the 2-mer AA in the sequence AAAT yields 2 instances of AA:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># * [AA]AT</span>
+<span class="hljs-comment"># * A[AA]T</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># If we go ahead and ignore overlaps, we can think of the k-mers occurring in a string as insertions. For example,</span>
+<span class="hljs-comment"># imagine a sequence of length 7 and the 2-mer AA. If we were to inject 2 instances of AA into the sequence to get it</span>
+<span class="hljs-comment"># to reach length 7, how would that look?</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># 2 instances of a 2-mer is 4 characters has a length of 5. To get the sequence to end up with a length of 7 after the</span>
+<span class="hljs-comment"># insertions, the sequence needs to start with a length of 3:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># SSS</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Given that we're changing reality to say that the instances WON'T overlap in the sequence, we can treat each</span>
+<span class="hljs-comment"># instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted</span>
+<span class="hljs-comment"># into the sequence is 10:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># I = insertion of AA, S = arbitrary sequence character</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># IISSS  ISISS  ISSIS  ISSSI</span>
+<span class="hljs-comment"># SIISS  SISIS  SISSI</span>
+<span class="hljs-comment"># SSIIS  SSISI</span>
+<span class="hljs-comment"># SSSII</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Another way to think of the above insertions is that they aren't insertions. Rather, we have 5 items in total and</span>
+<span class="hljs-comment"># we're selecting 2 of them. How many ways can we select 2 of those 5 items? 10.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># The number of ways to insert can be counted via the "bionomial coefficient": bc(m, k) = m!/(k!(m-k)!), where m is the</span>
+<span class="hljs-comment"># total number of items (5 in the example above) and k is the number of selections (2 in the example above). For the</span>
+<span class="hljs-comment"># example above:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># bc(5, 2) = 5!/(2!(5-2)!) = 10</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Since the SSS can be any arbitrary nucleotide sequence of 3, we count the number of different representations that are</span>
+<span class="hljs-comment"># possible for SSS: 4^3 = 4*4*4 = 64 (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In</span>
+<span class="hljs-comment"># each of these representations, the 2-mer AA can be inserted in 10 different ways:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># 64*10 = 640</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Since the total length of the sequence is 7, we count the number of different representations that are possible:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># 4^7 = 4*4*4*4*4*4*4 = 16384</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># The estimated probability is 640/16384. For non-overlapping k-mers the estimation will actually be "relatively</span>
+<span class="hljs-comment"># accurate", while for overlapping k-mers not so much. Maybe try training a deep learning model to see if it can provide</span>
+<span class="hljs-comment"># better estimates?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">estimate_probability</span>(<span class="hljs-params">searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int</span>) -&gt; float:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factorial</span>(<span class="hljs-params">num</span>):</span>
+        <span class="hljs-keyword">if</span> num == <span class="hljs-number">1</span>:
+            <span class="hljs-keyword">return</span> num
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">return</span> num * factorial(num - <span class="hljs-number">1</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bc</span>(<span class="hljs-params">m, k</span>):</span>
+        <span class="hljs-keyword">return</span> factorial(m) / (factorial(k) * factorial(m - k))
+
+    k = len(search_for)
+    n = (searchspace_len - min_occurrence * k)
+    <span class="hljs-keyword">return</span> bc(n + min_occurrence, min_occurrence) * (searchspace_symbol_count ** n) / searchspace_symbol_count ** searchspace_len</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Estimating probability of ACTG in arbitrary sequence of length 8</p>
+<p>Probability: 0.01953125</p>
+</div>
+<p></p>
+<a name="HEADREF11"></a><h1>GC Skew</h1>
 <p><strong>WHAT</strong>: Given a sequence, walk over it and ...</p>
 <ul>
 <li>increment every time you spot a G.</li>
@@ -385,7 +535,7 @@
 </div>
 <p>Plotting the skew lets you know the rough location of segments that stayed single-stranded for a longer period of time. That information hints at special / useful locations in the organism's DNA sequence (<a href="#BOOKMARK9">replication origin</a> / <a href="#BOOKMARK11">replication terminus</a>).</p>
 <p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gc_skew</span><span class="hljs-params">(seq: str)</span>:</span>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gc_skew</span>(<span class="hljs-params">seq: str</span>):</span>
     counter = <span class="hljs-number">0</span>
     skew = [counter]
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(seq)):
@@ -404,8 +554,8 @@
 <p><img src="skew_babf857bad6dd935f0d1ddbbb8b5005f.png" alt="GC Skew Plot"></p>
 </div>
 <p></p>
-<a name="HEADREF11"></a><h1>Stories</h1>
-<a name="HEADREF12"></a><h2>Bacteria Replication</h2>
+<a name="HEADREF12"></a><h1>Stories</h1>
+<a name="HEADREF13"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK9">replication origin</a> (<a href="#BOOKMARK10">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK11">replication terminus</a> (<a href="#BOOKMARK12">ter</a>) is where it ends. The <a href="#BOOKMARK10">ori</a> and <a href="#BOOKMARK12">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK8">replication fork</a> opening at the <a href="#BOOKMARK10">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK12">ter</a>...</p>
@@ -427,7 +577,7 @@
 <p>The <a href="#BOOKMARK17">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK18">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>You now have two complete copies of the DNA.</p>
-<a name="HEADREF13"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF14"></a><h3>Find Ori and Ter</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -462,7 +612,7 @@
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK10">ori</a> / <a href="#BOOKMARK12">ter</a> regions.</p>
 </div>
-<a name="HEADREF14"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF15"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -501,31 +651,31 @@
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=163, occurrence_count=4)</li>
 <li>KmerCluster(kmer='CATCAGGCG', start_index=164, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTAAA', start_index=282, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTTTGATAC', start_index=427, occurrence_count=3)</li>
@@ -537,12 +687,12 @@
 <li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>
@@ -566,7 +716,7 @@
 <p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
 <p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
 <p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<a name="HEADREF15"></a><h1>Terminology</h1>
+<a name="HEADREF16"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p>A <a name="BOOKMARK1"></a><strong>k-mer</strong> is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK1">k-mer</a>'s exist:</p>

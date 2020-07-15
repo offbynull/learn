@@ -232,6 +232,76 @@ TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT
 True
 ```
 
+## Probability of K-mer's Appearance
+
+```{prereq}
+Find Locations of a K-mer
+```
+
+**WHAT**: Given ...
+
+* the length of a sequence (n)
+* a k-mer
+* a count (c)
+
+... find the probability of that k-mer appearing at least c times within an arbitrary sequence of length n. For example, the probability that the 2-mer AA appears at least 2 times in a sequence of length 4:
+
+* AAAA - yes
+* AAAT - yes
+* AAAC - yes
+* AAAG - yes
+* AATA - no
+* AATT - no
+* AATC - no
+* AATG - no
+* ...
+* TAAA - yes
+* ...
+* CAAA - yes
+* ...
+* GAAA - yes
+* ...
+* GGGA - no
+* GGGT - no
+* GGGC - no
+* GGGG - no
+
+The probability is 7/256.
+
+This isn't trivial to accurately compute because the occurrences of a k-mer within a sequence may overlap. For example, the number of times AA appears in AAAA is 3 while in CAAA it's 2.
+
+**WHY**: When a k-mer is found within a sequence, knowing the probability of that k-mer being found within an arbitrary sequence of the same length hints at the significance of the find. For example, if some 10-mer has a 0.2 chance of appearing in an arbitrary sequence of length 50, that's too high of a chance to consider it a significant find -- 0.2 means 1 in 5 chance that the 10-mer just randomly happens to appear.
+
+**ALGORITHM**:
+
+The following algorithm uses brute-force to determine the probability...
+
+```{output}
+ch1_code/src/BruteforceProbabilityOfKmerInArbitrarySequence.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch1}
+BruteforceProbabilityOfKmerInArbitrarySequence
+ACTG
+8
+```
+
+The following algorithm estimates the probability by ignoring the fact that k-mer occurrences may overlap within the sequence, which allows for much more faster algorithm...
+
+```{output}
+ch1_code/src/EstimateProbabilityOfKmerInArbitrarySequence.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch1}
+EstimateProbabilityOfKmerInArbitrarySequence
+ACTG
+8
+```
+
 # GC Skew
 
 **WHAT**: Given a sequence, walk over it and ...
