@@ -843,15 +843,49 @@ DnaABoxCandidateFinder
                "(gene product)"
    ```
 
- * `{bm} regulatory gene` / `{bm} regulatory protein` - TODO
+ * `{bm} regulatory gene` / `{bm} regulatory protein` - The proteins encoded by these genes effect gene expression for certain other genes. That is, a regulatory protein can cause certain other genes to be expressed more (promote gene expression) or less (repress gene expression).
 
- * `{bm} negative feedback loop` - TODO
+   Regulatory genes are often controlled by external factors (e.g. sunlight, nutrients, temperature, etc..)
 
- * `{bm} circadian clock` - TODO
+ * `{bm} feedback loop` / `{bm} negative feedback loop` / `{bm} positive feedback loop` - A feedback loop is a system where the output (or some part of the output) is fed back into the system to either promote or repress further outputs.
 
- * `{bm} transcription factor` - TODO
+   ```{svgbob}
+          +--------+
+   IN --->|        |
+          | SYSTEM +--+-----> OUT 
+      +-->|        |  |
+      |   +--------+  v
+      |               |
+      +--<------<-----+
+             OUT
+   ```
 
- * `{bm} regulatory motif` / `{bm} transcription factor binding site` - TODO
+   A positive feedback loop amplifies the output while a negative feedback loop regulates the output. Negative feedback loops in particular are important in biology because they allow organisms to maintain homeostasis / equilibrium (keep a consistent internal state). For example, the system that regulates core temperatures in a human is a negative feedback loop. If a human's core temperature gets too...
+   * low, they shiver to drive the temperature up.
+   * high, they sweat to drive the temperature down.
+
+   In the example above, the output is the core temperature. The body monitors its core temperature and employs mechanisms to bring it back to normal if it goes out of range (e.g. sweat, shiver). The outside temperature is influencing the body's core temperature as well as the internal shivering / sweating mechanisms the body employs.
+
+   ```{svgbob}
+                      +--------+
+   "OUTSIDE HEAT" --->|        |
+                      |  BODY  +--+-----> "CORE HEAT"
+                  +-->|        |  |
+                  |   +--------+  v
+                  |               |
+                  +--<------<-----+
+                     "CORE HEAT"
+   ```
+
+ * `{bm} circadian clock` / `{bm} circadian oscillator` - A biological clock that synchronizes roughly around the earth's day-night cycle. This internal clock helps many species regulate their physical and behavioural attributes. For example, hunt during the night vs sleep during the day (e.g. nocturnal owls).
+
+ * `{bm} transcription factor` - A regulatory protein that controls the rate of transcription for some gene that it has influence over (the copying of DNA to mRNA). The protein binds to a specific sequence in the gene's upstream region.
+
+ * `{bm} regulatory motif` / `{bm} transcription factor binding site` - The binding site of a transcription factor. A gene that's regulated by a transcription factor needs a sequence located in its upstream region that the transcription factor can bind to. This sequence can take one of many forms, all of which are similar to each other but not exact. For example, the sequence being bound to could be either AAAACCCCT, AAAACCCCG, AAATCCCCT, etc..
+
+   ```{note}
+   A gene's upstream region is the 600 to 1000 nucleotides preceding the start of the gene.
+   ```
 
  * `{bm} cDNA/(cDNA)/` - A single strand of DNA generated from mRNA. The enzyme reverse transcriptase scans over the mRNA and creates the complementing single DNA strand.
 
@@ -861,7 +895,7 @@ DnaABoxCandidateFinder
    5' . . . A -> A -> A -> C -> G -> G -> A -> A -> A -> C -> . . . 3'   cDNA  
    ```
 
-   The mRNA portion then breaks off, leaving the single-stranded DNA.
+   The mRNA portion breaks off, leaving the single-stranded DNA.
 
    ```{svgbob}
    5' . . . A -> A -> A -> C -> G -> G -> A -> A -> A -> C -> . . . 3'   cDNA  
@@ -892,4 +926,4 @@ DnaABoxCandidateFinder
    +---+---+---+---+---+---+---+
    ```
    
-   The idea is that once the experimental cDNA is introduced to that region, it should bind to the control cDNA that's been printed to form double-stranded DNA. The color emitted in a region should correspond to the amount of gene expression for the gene that cDNA represents. For example, if a region on the sheet is fully yellow, it means that the gene expression for that gene is roughly equal (red mixed with green is yellow). On the other hand, if it's fully red, it means the amount of gene expression for that gene in the experimental sample was nothing.
+   The idea is that once the experimental cDNA is introduced to that region, it should bind to the control cDNA that's been printed to form double-stranded DNA. The color emitted in a region should correspond to the amount of gene expression for the gene that region represents. For example, if a region on the sheet is fully yellow, it means that the gene expression for that gene is roughly equal (red mixed with green is yellow). On the other hand, if it's fully red, it means the amount of gene expression for that gene in the experimental sample was nothing.
