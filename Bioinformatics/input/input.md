@@ -658,22 +658,6 @@ DnaABoxCandidateFinder
 /input/ch1_code/src/GCA_000008865.2_ASM886v2_genomic.fna.xz
 ```
 
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
-TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
-
 # Terminology
 
  * A `{bm} k-mer/(k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
@@ -708,7 +692,7 @@ TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
                            G <- C <- T <- T <- T <- T <- G <- . . .
                            |                            
               <-------- .- | ----------.                    
-   5' . . . A -> A -> A -> C -> C -> G -> A -> A -> A -> C -> . . . 3'
+   5' . . . A -> A -> A -> C -> G -> A -> A -> A -> A -> C -> . . . 3'
                         `--------------`                    
    
                     "Forward direction of DNA:"                       5' -----> 3'
@@ -823,7 +807,7 @@ TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
    ```{svgbob}
    3' . . . T <- T <- T <- G <- C <- T <- T <- T <- T <- G <- . . . 5'
             |    |    |    |    |    |    |    |    |    | 
-   5' . . . A -> A -> A -> C -> C -> G -> A -> A -> A -> C -> . . . 3'    
+   5' . . . A -> A -> A -> C -> G -> A -> A -> A -> A -> C -> . . . 3'    
    ```
 
  * `{bm} gene/(\bgenes\b|\bgene\b)/i` - A segment of DNA that contains the instructions for either a protein or functional RNA.
@@ -869,10 +853,43 @@ TODO: RUN CODE TO LIST OUT THE KMERS IN THE ORI
 
  * `{bm} regulatory motif` / `{bm} transcription factor binding site` - TODO
 
- * `{bm} DNA microarray/(DNA microarray|DNA array)/i` - A device used to compare gene expression. This works by capturing the mRNA from 2 different samples: a control sample and an experimental sample. The samples could be from...
+ * `{bm} cDNA/(cDNA)/` - A single strand of DNA generated from mRNA. The enzyme reverse transcriptase scans over the mRNA and creates the complementing single DNA strand.
+
+   ```{svgbob}
+   3' . . . U <- U <- U <- G <- C <- U <- U <- U <- U <- G <- . . . 5'   mRNA  
+            |    |    |    |    |    |    |    |    |    | 
+   5' . . . A -> A -> A -> C -> G -> G -> A -> A -> A -> C -> . . . 3'   cDNA  
+   ```
+
+   The mRNA portion then breaks off, leaving the single-stranded DNA.
+
+   ```{svgbob}
+   5' . . . A -> A -> A -> C -> G -> G -> A -> A -> A -> C -> . . . 3'   cDNA  
+   ```
+
+ * `{bm} DNA microarray` / `{bm} DNA array` - A device used to compare gene expression. This works by measuring 2 mRNA samples against each other: a control sample and an experimental sample. The samples could be from...
  
-   * the same organism but at different times
-   * a diseased vs a healthy version of the same organism
+   * the same organism but at different times.
+   * diseased and healthy versions of the same organism.
    * etc..
+
+   Both mRNA samples are converted to cDNA and are given fluorescent dyes. The control sample gets dyed green while the experimental sample gets dyed red.
+
+   ```{svgbob}
+   "control mRNA"      -> cDNA -> "cDNA dyed red"
+   "experimental mRNA" -> cDNA -> "cDNA dyed green"
+   ```
    
-   Both samples are converted to complementary DNA (cDNA) and are given flourescent dyes. The first sample gets a green dye and the second sample gets a red dye
+   A sheet is broken up into multiple regions, where each region has the cDNA for one specific gene from the control sample printed.
+
+   ```{svgbob}
+   +---+---+---+---+---+---+---+
+   |c1 |c4 |c7 |c10|c13|c16|c19|
+   +---+---+---+---+---+---+---+
+   |c2 |c5 |c8 |c11|c14|c17|c20|
+   +---+---+---+---+---+---+---+
+   |c3 |c6 |c9 |c12|c15|c18|c21|
+   +---+---+---+---+---+---+---+
+   ```
+   
+   The idea is that once the experimental cDNA is introduced to that region, it should bind to the control cDNA that's been printed to form double-stranded DNA. The color emitted in a region should correspond to the amount of gene expression for the gene that cDNA represents. For example, if a region on the sheet is fully yellow, it means that the gene expression for that gene is roughly equal (red mixed with green is yellow). On the other hand, if it's fully red, it means the amount of gene expression for that gene in the experimental sample was nothing.

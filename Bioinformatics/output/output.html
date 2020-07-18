@@ -156,7 +156,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'ATAA', 'AGAA', 'TAAA', 'AACA', 'GAAA', 'AATA', 'AAAT', 'AAAG', 'AAAC', 'CAAA', 'AAAA', 'AAGA', 'ACAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAA', 'ACAA', 'AATA', 'AAAT', 'AAAG', 'ATAA', 'AAGA', 'TAAA', 'AAAC', 'CAAA', 'GAAA', 'AACA', 'AGAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h1>K-mer Search</h1>
@@ -278,10 +278,10 @@
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
 <li>CCCTT = 6 occurrences</li>
-<li>TTAAA = 6 occurrences</li>
+<li>GATCA = 6 occurrences</li>
 <li>TTTAA = 6 occurrences</li>
 <li>TGATC = 6 occurrences</li>
-<li>GATCA = 6 occurrences</li>
+<li>TTAAA = 6 occurrences</li>
 <li>AAGGG = 6 occurrences</li>
 </ul>
 </div>
@@ -353,17 +353,17 @@
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -644,15 +644,15 @@
 <p>Ori vicinity (min pos): 4719166</p>
 <p>In the ori vicinity, found clusters of k=9 (at least 3 occurrences in window of 500) in ... at...</p>
 <ul>
-<li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCGGCGGTA', start_index=52, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=163, occurrence_count=4)</li>
@@ -660,22 +660,22 @@
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTAAA', start_index=282, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTTTGATAC', start_index=427, occurrence_count=3)</li>
@@ -689,10 +689,10 @@
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>
@@ -708,14 +708,6 @@
 </ul>
 </div>
 <p></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
-<p>TODO: RUN CODE TO LIST OUT THE <a href="#BOOKMARK1">KMER</a>S IN THE <a href="#BOOKMARK10">ORI</a></p>
 <a name="HEADREF16"></a><h1>Terminology</h1>
 <ul>
 <li>
@@ -762,7 +754,7 @@
 </li>
 <li>
 <p><a name="BOOKMARK6"></a><strong>DNA polymerase</strong> - An enzyme that replicates a strand of DNA. That is, <a href="#BOOKMARK6">DNA polymerase</a> walks over a single strand of DNA bases (not the strand of base pairs) and  generates a strand of complements. Before <a href="#BOOKMARK6">DNA polymerase</a> can attach itself and start replicating DNA, it requires a <a href="#BOOKMARK7">primer</a>.</p>
-<p><img src="svgbob_971abfeff166ada9787cd484db9bfbe43120973a.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_ac1f3f5c9441e395290e542abbc9256bed49302f.svg" alt="Kroki diagram output"></p>
 <p><a href="#BOOKMARK6">DNA polymerase</a> is unidirectional, meaning that it can only walk a DNA strand in one direction: reverse (<a href="#BOOKMARK4">3'</a> to <a href="#BOOKMARK2">5'</a>)</p>
 </li>
 <li>
@@ -827,7 +819,7 @@
 </li>
 <li>
 <p><a name="BOOKMARK20"></a><strong>double stranded DNA</strong> - Two strands of DNA bound together, where each strand is the reverse complement of the other.</p>
-<p><img src="svgbob_804f85f6da997959a08fd48d0e4d8356c8d476dd.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_b05df825cb791aaf67d96b4e629e42c02b75f509.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
 <p><a name="BOOKMARK21"></a><strong>gene</strong> - A segment of DNA that contains the instructions for either a protein or functional RNA.</p>
@@ -867,13 +859,23 @@
 <p><a name="BOOKMARK31"></a><strong>regulatory motif</strong> / <a name="BOOKMARK32"></a><strong>transcription factor binding site</strong> - TODO</p>
 </li>
 <li>
-<p><a name="BOOKMARK33"></a><strong>DNA microarray</strong> - A device used to compare <a href="#BOOKMARK25">gene expression</a>. This works by capturing the mRNA from 2 different samples: a control sample and an experimental sample. The samples could be from...</p>
+<p><a name="BOOKMARK33"></a><strong>cDNA</strong> - A single strand of DNA generated from mRNA. The enzyme reverse transcriptase scans over the mRNA and creates the complementing single DNA strand.</p>
+<p><img src="svgbob_97c5d076bf0a1cd98b75bbb88b72fc29c3b1b93d.svg" alt="Kroki diagram output"></p>
+<p>The mRNA portion then breaks off, leaving the <a href="#BOOKMARK19">single-stranded DNA</a>.</p>
+<p><img src="svgbob_97e71090d31bdaa40278b0e705aef4e3555be8e3.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK34"></a><strong>DNA microarray</strong> / <a name="BOOKMARK35"></a><strong>DNA array</strong> - A device used to compare <a href="#BOOKMARK25">gene expression</a>. This works by measuring 2 mRNA samples against each other: a control sample and an experimental sample. The samples could be from...</p>
 <ul>
-<li>the same organism but at different times</li>
-<li>a diseased vs a healthy version of the same organism</li>
+<li>the same organism but at different times.</li>
+<li>diseased and healthy versions of the same organism.</li>
 <li>etc..</li>
 </ul>
-<p>Both samples are converted to complementary DNA (cDNA) and are given flourescent dyes. The first sample gets a green dye and the second sample gets a red dye</p>
+<p>Both mRNA samples are converted to <a href="#BOOKMARK33">cDNA</a> and are given fluorescent dyes. The control sample gets dyed green while the experimental sample gets dyed red.</p>
+<p><img src="svgbob_6ce607591d81d0fd6c7507408e97fb8146e83baf.svg" alt="Kroki diagram output"></p>
+<p>A sheet is broken up into multiple regions, where each region has the <a href="#BOOKMARK33">cDNA</a> for one specific <a href="#BOOKMARK21">gene</a> from the control sample printed.</p>
+<p><img src="svgbob_421210658cf3b4d0040b4815e879948ebfd7ccc5.svg" alt="Kroki diagram output"></p>
+<p>The idea is that once the experimental <a href="#BOOKMARK33">cDNA</a> is introduced to that region, it should bind to the control <a href="#BOOKMARK33">cDNA</a> that's been printed to form <a href="#BOOKMARK20">double-stranded DNA</a>. The color emitted in a region should correspond to the amount of <a href="#BOOKMARK25">gene expression</a> for the <a href="#BOOKMARK21">gene</a> that <a href="#BOOKMARK33">cDNA</a> represents. For example, if a region on the sheet is fully yellow, it means that the <a href="#BOOKMARK25">gene expression</a> for that <a href="#BOOKMARK21">gene</a> is roughly equal (red mixed with green is yellow). On the other hand, if it's fully red, it means the amount of <a href="#BOOKMARK25">gene expression</a> for that <a href="#BOOKMARK21">gene</a> in the experimental sample was nothing.</p>
 </li>
 </ul>
 
