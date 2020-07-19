@@ -2468,6 +2468,126 @@ python
 752 3
 ```
 
+## Word Conversion
+
+`{bm} Whole number word conversion` is the process of taking a number and converting it to words. To convert a whole number to words, break up the number into groups of 3 from least-significant digit to most-significant digit (right-to-left). For example, the number 9876543210 gets broken up as follows...
+
+```{svgbob}
++---+---+---+---+
+|  9|876|543|210|
++---+---+---+---+
+```
+
+For each group, use the following algorithm to construct the words to represent that group...
+
+ * if first number exists...
+    * 0 =
+    * 1 = one hundred
+    * 2 = two hundred
+    * 3 = three hundred
+    * 4 = four hundred
+    * 5 = five hundred
+    * 6 = six hundred
+    * 7 = seven hundred
+    * 8 = eight hundred
+    * 9 = nine hundred
+ * if middle number exists...
+    * if middle number is 1...
+      * 10 = ten
+      * 11 = eleven
+      * 12 = twelve
+      * 13 = thirteen
+      * 14 = fourteen
+      * 15 = fifteen
+      * 16 = sixteen
+      * 17 = seventeen
+      * 18 = eighteen
+      * 19 = nineteen
+    * if the middle number isn't 1...
+      * 0 =
+      * 2 = twenty
+      * 3 = thirty
+      * 4 = forty
+      * 5 = fifty
+      * 6 = sixty
+      * 7 = seventy
+      * 8 = eighty
+      * 9 = ninety
+ * if last number exists...
+    * 0 =
+    * 1 = one
+    * 2 = two
+    * 3 = three
+    * 4 = four
+    * 5 = five
+    * 6 = six
+    * 7 = seven
+    * 8 = eight
+    * 9 = nine
+
+In the example above, each group would get converted as follows...
+
+```{svgbob}
++---+---+---+---+
+|  9|876|543|210|
++-+-+-+-+-+-+-+-+
+  |   |   |   |
+  |   |   |   +-- "two hundred ten"
+  |   |   |
+  |   |   +-- "five hundred forty three"
+  |   |
+  |   +-- "eight seventy six"
+  |
+  +-- "nine"
+```
+
+The words for each group get a special suffix. For each group from right-to-left, ...
+
+ 1. 
+ 2. thousand
+ 3. million
+ 4. billion
+ 5. trillion
+ 6. ...
+
+In the example above, each group would get its corresponding suffix added...
+
+```{svgbob}
++---+---+---+---+
+|  9|876|543|210|
++-+-+-+-+-+-+-+-+
+  |   |   |   |
+  |   |   |   +-- "two hundred ten"
+  |   |   |
+  |   |   +-- "five hundred forty three thousand"
+  |   |
+  |   +-- "eight seventy six million"
+  |
+  +-- "nine billion"
+```
+
+There is one special case with number to word conversions: if the number being converted is 0, the output should be zero.
+
+```{svgbob}
++---+
+|  0|
++-+-+
+  |
+  +-- "zero"
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
+```
+
+```{wholenumtowords}
+9876543210
+```
+
 # Integer Number
 
 ```{prereq}
