@@ -2470,7 +2470,7 @@ python
 
 ## Word Conversion
 
-`{bm} Whole number word conversion` is the process of taking a number and converting it to words. To convert a whole number to words, break up the number into groups of 3 from least-significant digit to most-significant digit (right-to-left). For example, the number 9876543210 gets broken up as follows...
+`{bm} Whole number word conversion` is the process of taking a whole number and converting it to words. To convert a whole number to words, break up the number into groups of 3 from least-significant digit to most-significant digit (right-to-left). For example, the number 9876543210 gets broken up as follows...
 
 ```{svgbob}
 +---+---+---+---+
@@ -3047,6 +3047,45 @@ python
 
 ```{intnumdiv}
 -30 5
+```
+
+## Word Conversion
+
+```{prereq}
+Whole Number Word Conversion
+```
+
+`{bm} Integer number word conversion` is the process of taking an integer number and converting it to words. To convert an integer number to words, begin by converting the sign to a word. If the sign is ...
+
+ * negative, use the word "negative".
+ * zero or positive, ignore.
+
+Then, write out the actual number as you would during whole number word conversion.
+
+For example, the number...
+
+ * -9 ⟶ negative nine
+ * 9 ⟶ nine
+ * -55139 ⟶ negative fifty five thousand one hundred thirty nine
+ * 0 ⟶ zero
+
+```{note}
+There are a few tweaks to the above algorithm that may be applied:
+
+1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
+2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce amguity if the words are being used in the context of subtraction because minus also means subtraction.
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
+```
+
+```{intnumtowords}
+-1234
 ```
 
 # Multiple

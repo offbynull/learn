@@ -187,6 +187,22 @@ class IntegerNumber:
         return IntegerNumber(quotient_sign, quotient_magnitude), IntegerNumber(remainder_sign, remainder_magnitude)
     #MARKDOWN_DIV
 
+    #MARKDOWN_TO_WORDS
+    @log_decorator
+    def to_words(self):
+        log(f'Converting {self}...')
+
+        output = ''
+        if self.sign == Sign.NEGATIVE:
+            output += 'negative '
+        output += self.magnitude.to_words()
+
+        log_unindent()
+        log(f'{output}')
+
+        return output.lstrip()
+    #MARKDOWN_TO_WORDS
+
     def __eq__(self: IntegerNumber, other: IntegerNumber) -> bool:
         return self.sign == other.sign and self.magnitude == other.magnitude
 
@@ -252,12 +268,14 @@ if __name__ == '__main__':
 
     # print(f'{IntegerNumber.from_int(30) * IntegerNumber.from_int(5)}')
 
-    print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(1)}')
-    print(f'{IntegerNumber.from_int(-2) - IntegerNumber.from_int(-1)}')
-    print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(-1)}')
-    print(f'{IntegerNumber.from_int(-2) - IntegerNumber.from_int(1)}')
-    print(f'{IntegerNumber.from_int(0) - IntegerNumber.from_int(2)}')
-    print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(0)}')
-    print(f'{IntegerNumber.from_int(0) - IntegerNumber.from_int(0)}')
-    print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(2)}')
-    print(f'{IntegerNumber.from_int(-2) - IntegerNumber.from_int(-2)}')
+    # print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(1)}')
+    # print(f'{IntegerNumber.from_int(-2) - IntegerNumber.from_int(-1)}')
+    # print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(-1)}')
+    # print(f'{IntegerNumber.from_int(-2) - IntegerNumber.from_int(1)}')
+    # print(f'{IntegerNumber.from_int(0) - IntegerNumber.from_int(2)}')
+    # print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(0)}')
+    # print(f'{IntegerNumber.from_int(0) - IntegerNumber.from_int(0)}')
+    # print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(2)}')
+    # print(f'{IntegerNumber.from_int(-2) - IntegerNumber.from_int(-2)}')
+
+    print(f'{IntegerNumber.from_int(-2249).to_words()}')
