@@ -29,6 +29,10 @@ class IntegerNumber:
         return IntegerNumber(sign, magnitude)
 
     @staticmethod
+    def from_whole(val: WholeNumber) -> IntegerNumber:
+        return IntegerNumber(None if val == WholeNumber.from_int(0) else Sign.POSITIVE, val)
+
+    @staticmethod
     def from_int(val: int) -> IntegerNumber:
         return IntegerNumber.from_str(str(val))
 

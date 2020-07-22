@@ -15,17 +15,24 @@ from WholeNumber import WholeNumber
 
 class FractionNumber:
     @staticmethod
-    def from_whole(numerator: WholeNumber, denominator: WholeNumber) -> FractionNumber:
+    def from_whole(numerator: WholeNumber) -> FractionNumber:
         return FractionNumber(
-            IntegerNumber(None if numerator == WholeNumber.from_int(0) else Sign.POSITIVE, numerator),
-            IntegerNumber(None if denominator == WholeNumber.from_int(0) else Sign.POSITIVE, denominator)
+            IntegerNumber.from_whole(numerator),
+            IntegerNumber.from_whole(WholeNumber.from_str('1'))
         )
 
     @staticmethod
-    def from_int(numerator: int, denominator: int) -> FractionNumber:
+    def from_integer(numerator: IntegerNumber) -> FractionNumber:
+        return FractionNumber(
+            numerator,
+            IntegerNumber.from_whole(WholeNumber.from_str('1'))
+        )
+
+    @staticmethod
+    def from_int(numerator: int) -> FractionNumber:
         return FractionNumber(
             IntegerNumber.from_int(numerator),
-            IntegerNumber.from_int(denominator)
+            IntegerNumber.from_int(1)
         )
 
     @staticmethod
@@ -33,7 +40,7 @@ class FractionNumber:
         inputs = val.split('/', 2)
         return FractionNumber(
             IntegerNumber.from_str(inputs[0].strip()),
-            IntegerNumber.from_int(inputs[1].strip())
+            IntegerNumber.from_str(inputs[1].strip())
         )
 
     def __init__(self, numerator: IntegerNumber, denominator: IntegerNumber):
@@ -271,6 +278,24 @@ class FractionNumber:
         return res
     #MARKDOWN_SIMP
 
+    #MARKDOWN_TO_WORDS
+    @log_decorator
+    def to_words(self):
+        log(f'Converting {self}...')
+
+        output = ''
+        if self.sign == Sign.NEGATIVE:
+            output += 'negative '
+        output += self.numerator.to_words()
+        output += ' over '
+        output += self.denominator.to_words()
+
+        log_unindent()
+        log(f'{output}')
+
+        return output.lstrip()
+    #MARKDOWN_TO_WORDS
+
     def __eq__(self: FractionNumber, other: FractionNumber) -> bool:
         # Sign is only kept on the numerator, not the denominator
         if self._denominator != other._denominator:
@@ -331,19 +356,20 @@ class FractionNumber:
 
 
 if __name__ == '__main__':
-    print(f'{FractionNumber.from_str("-3/5") + FractionNumber.from_str("1/5")} ')
-    print(f'{FractionNumber.from_str("-1/5") + FractionNumber.from_str("3/5")} ')
-    print(f'{FractionNumber.from_str("1/5") + FractionNumber.from_str("3/10")} ')
-    print(f'{FractionNumber.from_str("1/5") * FractionNumber.from_str("3/10")} ')
-    print(f'{FractionNumber.from_str("1/5") / FractionNumber.from_str("3/10")} ')
-
-    print(f'{FractionNumber.from_str("2/5") == FractionNumber.from_str("4/10")}')
-    print(f'{FractionNumber.from_str("2/5") != FractionNumber.from_str("4/10")}')
-    print(f'{FractionNumber.from_str("1/5") > FractionNumber.from_str("3/10")}')
-    print(f'{FractionNumber.from_str("2/5") > FractionNumber.from_str("3/10")}')
-    print(f'{FractionNumber.from_str("1/5") < FractionNumber.from_str("3/10")}')
-    print(f'{FractionNumber.from_str("2/5") < FractionNumber.from_str("3/10")}')
-
-    print(f'{FractionNumber._calculate_factors(WholeNumber.from_int(55))}')
-
-    print(f'{FractionNumber.from_str("3/12").simplify()}')
+    # print(f'{FractionNumber.from_str("-3/5") + FractionNumber.from_str("1/5")} ')
+    # print(f'{FractionNumber.from_str("-1/5") + FractionNumber.from_str("3/5")} ')
+    # print(f'{FractionNumber.from_str("1/5") + FractionNumber.from_str("3/10")} ')
+    # print(f'{FractionNumber.from_str("1/5") * FractionNumber.from_str("3/10")} ')
+    # print(f'{FractionNumber.from_str("1/5") / FractionNumber.from_str("3/10")} ')
+    #
+    # print(f'{FractionNumber.from_str("2/5") == FractionNumber.from_str("4/10")}')
+    # print(f'{FractionNumber.from_str("2/5") != FractionNumber.from_str("4/10")}')
+    # print(f'{FractionNumber.from_str("1/5") > FractionNumber.from_str("3/10")}')
+    # print(f'{FractionNumber.from_str("2/5") > FractionNumber.from_str("3/10")}')
+    # print(f'{FractionNumber.from_str("1/5") < FractionNumber.from_str("3/10")}')
+    # print(f'{FractionNumber.from_str("2/5") < FractionNumber.from_str("3/10")}')
+    #
+    # print(f'{FractionNumber._calculate_factors(WholeNumber.from_int(55))}')
+    #
+    # print(f'{FractionNumber.from_str("3/12").simplify()}')
+    print(f'{FractionNumber.from_str("-0/12").to_words()}')

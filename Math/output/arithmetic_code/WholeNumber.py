@@ -788,7 +788,7 @@ class WholeNumber:
         log_unindent()
         log(f'{output}')
 
-        return output.lstrip()
+        return output.strip()
     #MARKDOWN_TO_WORDS
 
 class WholeNumberRange:

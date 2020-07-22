@@ -12,18 +12,58 @@ class DecimalNumber:
 
     @staticmethod
     def from_str(val: str) -> DecimalNumber:
-        if val.startswith('-'):
-            sign = Sign.NEGATIVE
-        else:
-            sign = Sign.POSITIVE
-
-        values = val[1:].split('.')
+        values = val.split('.')
         if len(values) == 1 and len(values[0]) > 0:
-            return DecimalNumber(sign, values[0], '0')
-        if len(values) == 2:
-            return DecimalNumber(sign, values[0], values[1])
+            wholes = FractionNumber.from_integer(
+                IntegerNumber.from_str(values[0])
+            )
+            return DecimalNumber(wholes)
+        elif len(values) == 2:
+            wholes = FractionNumber(
+                IntegerNumber.from_str(values[0]),
+                IntegerNumber.from_str('1')
+            )
+            partial = FractionNumber(
+                IntegerNumber.from_whole(
+                    WholeNumber.from_str(values[1])
+                ),
+                IntegerNumber.from_whole(
+                    WholeNumber.from_str('1' + ('0' * len(values[1])))
+                )
+            )
+            return DecimalNumber(wholes + partial)
         else:
             raise Exception(f'Bad format: {val}')
+
+    @staticmethod
+    def from_whole(value: WholeNumber):
+        return DecimalNumber.from_fraction(FractionNumber.from_whole(value))
+
+    @staticmethod
+    def from_integer(value: IntegerNumber):
+        return DecimalNumber.from_fraction(FractionNumber.from_integer(value))
+
+    @staticmethod
+    def from_int(value: int):
+        return DecimalNumber.from_fraction(FractionNumber.from_int(value))
+
+    #MARKDOWN_FROM_FRAC
+    @staticmethod
+    @log_decorator
+    def from_fraction(value: FractionNumber) -> DecimalNumber:
+        log(f'Converting {value} to a decimal number...')
+        log_indent()
+
+        log(f'Converting {value} to suitable fraction...')
+        value = DecimalNumber.to_suitable_fraction(value)
+        log(f'{value}')
+
+        log_unindent()
+
+        ret = DecimalNumber(value)
+        log(f'Decimal number: {ret}')
+        return ret
+    #MARKDOWN_FROM_FRAC
 
     #MARKDOWN_TO_SUITABLE_FRAC
     @staticmethod
@@ -34,7 +74,7 @@ class DecimalNumber:
 
         denom = value.denominator
 
-        if str(denom)[0] == '1' and set(str(denom)[1:]) == {'0'}:
+        if str(denom)[0] == '1' and set(str(denom)[1:]) == set() or set(str(denom)[1:]) == set('0'):
             log(f'Already power of 10')
         else:
             log(f'No')
@@ -59,7 +99,10 @@ class DecimalNumber:
             log(f'{scale_by}')
 
             log(f'Scaling {value} by {scale_by}...')
-            value = value * FractionNumber.from_whole(scale_by, scale_by)
+            value = value * FractionNumber(
+                IntegerNumber.from_whole(scale_by),
+                IntegerNumber.from_whole(scale_by)
+            )
             log(f'{value}')
 
         log_unindent()
@@ -68,54 +111,33 @@ class DecimalNumber:
         return value
     #MARKDOWN_TO_SUITABLE_FRAC
 
-    #MARKDOWN_FROM_FRAC
-    @staticmethod
-    @log_decorator
-    def from_fraction(value: FractionNumber) -> DecimalNumber:
-        log(f'Converting {value} to a decimal number...')
-        log_indent()
+    def __init__(self, value: FractionNumber):
+        num = value.numerator
+        denom = value.denominator
+        if not str(denom).startswith('1'):
+            raise Exception('Denominator must be power of 10')
+        elif not set(str(denom)[1:]) == set('0') and not set(str(denom)[1:]) == set():
+            raise Exception('Denominator must be power of 10')
 
-        log(f'Converting {value} to suitable fraction...')
-        value = DecimalNumber.to_suitable_fraction(value)
-        log(f'{value}')
+        self.value = value
 
-        log(f'Converting {value} to mixed number...')
-        sign = value.sign
-        wholes, _ = value.numerator / value.denominator
-        fraction = FractionNumber.from_whole(
-            value.numerator - (value.denominator * wholes),
-            value.denominator)
-        log(f'{sign} {wholes} {fraction}')
+        num_digits_in_num = len(str(num))
+        num_0s_in_den = len(str(denom)[1:])
+        prepend_0s_to_num = num_0s_in_den - num_digits_in_num
 
-        log(f'Prepending 0s on to {value.numerator} (numer) based on 0 count in {value.denominator} (denom)...')
-        num_digits_in_num = len(str(fraction.numerator))
-        num_0s_in_den = len(str(fraction.denominator)[1:])
-        prepend_0s_to_num =  num_0s_in_den - num_digits_in_num
-
-        wholes_str = str(wholes)
-        partial_str = '0' * prepend_0s_to_num + str(fraction.numerator)
-
-        log_unindent()
-
-        ret = DecimalNumber(sign, wholes_str, partial_str)
-        log(f'Decimal number: {ret}')
-        return ret
-    #MARKDOWN_FROM_FRAC
-
-    def __init__(self, sign: Sign, wholes: str, partial: str):
-        self.sign = sign
-        self.wholes = wholes.lstrip('0')
-        self.partial = partial.rstrip('0')
+        wholes, remaining = num / denom
+        self.cached_wholes_str = str(wholes)
+        self.cached_partial_str = '0' * prepend_0s_to_num + str(remaining)
 
     def __str__(self):
-        if self.sign == Sign.POSITIVE:
+        if self.value.sign == Sign.POSITIVE:
             ret = '+'
-        elif self.sign == Sign.NEGATIVE:
+        elif self.value.sign == Sign.NEGATIVE:
             ret = '-'
         else:
             ret = ''
 
-        ret += str(self.wholes) + '.' + str(self.partial)
+        ret += self.cached_wholes_str + '.' + self.cached_partial_str
 
         return ret
 
@@ -123,7 +145,7 @@ class DecimalNumber:
         return self.__str__()
 
     def __hash__(self):
-        return hash(tuple([self.sign, self.wholes, self.partial]))
+        return hash(tuple([self.value]))
 
     #MARKDOWN_AS_FRAC
     @log_decorator
@@ -131,16 +153,16 @@ class DecimalNumber:
         log(f'Converting {self} to fraction number...')
         log_indent()
 
-        log(f'Determining denominator based on length of partial portion ({self.partial})...')
-        denom = WholeNumber.from_str('1' + '0' * len(self.partial))
+        log(f'Determining denominator based on length of partial portion ({self.cached_partial_str})...')
+        denom = WholeNumber.from_str('1' + '0' * len(self.cached_partial_str))
         log(f'{denom}')
 
         log(f'Determining numerator based on denominator ({denom})...')
-        num = WholeNumber.from_str(self.wholes) * denom + WholeNumber.from_str(self.partial)
+        num = WholeNumber.from_str(self.cached_wholes_str) * denom + WholeNumber.from_str(self.cached_partial_str)
         log(f'{num}')
 
         ret = FractionNumber(
-            IntegerNumber(self.sign, num),
+            IntegerNumber(self.value.sign, num),
             IntegerNumber(Sign.POSITIVE, denom))
 
         log_unindent()
@@ -172,19 +194,21 @@ if __name__ == '__main__':
     #
     # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-1/30"))}')  # this should fail
 
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("5/10")).as_fraction()}')
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-5/10")).as_fraction()}')
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("15/10")).as_fraction()}')
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-15/10")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("5/10")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-5/10")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("15/10")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-15/10")).as_fraction()}')
+    #
+    # print('---')
+    #
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("1/2")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-1/2")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("3/2")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-3/2")).as_fraction()}')
+    #
+    # print('---')
+    #
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-1/20")).as_fraction()}')
+    # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-10/200")).as_fraction()}')
 
-    print('---')
-
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("1/2")).as_fraction()}')
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-1/2")).as_fraction()}')
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("3/2")).as_fraction()}')
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-3/2")).as_fraction()}')
-
-    print('---')
-
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-1/20")).as_fraction()}')
     print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-10/200")).as_fraction()}')

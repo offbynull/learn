@@ -3055,7 +3055,7 @@ python
 Whole Number Word Conversion
 ```
 
-`{bm} Integer number word conversion` is the process of taking an integer number and converting it to words. To convert an integer number to words, begin by converting the sign to a word. If the sign is ...
+`{bm} Integer number word conversion` is the process of taking an integer number and converting it to words. To convert an integer number to words, begin by converting the sign to a word. If the number is ...
 
  * negative, use the word "negative".
  * zero or positive, ignore.
@@ -3073,7 +3073,7 @@ For example, the number...
 There are a few tweaks to the above algorithm that may be applied:
 
 1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
-2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce amguity if the words are being used in the context of subtraction because minus also means subtraction.
+2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
 ```
 
 The way to perform this algorithm via code is as follows...
@@ -4637,6 +4637,79 @@ Write `{kt} \frac{a}{b} \div \frac{c}{d}` as `{kt} \frac{\frac{a}{b}}{\frac{c}{d
 Suppose you wanted to clear the denominator of this compound fraction. You could try multiplication by `{kt} \frac{d}{c}`, but you'll have to multiply the top and the bottom of the fraction to avoid changing it. So, you end up with
 
 `{kt} \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{\frac{a}{b}}{\frac{c}{d}} \cdot \frac{\frac{d}{c}}{\frac{d}{c}} = \frac{\frac{a}{b} \cdot \frac{d}{c}}{\frac{c}{d} \cdot \frac{d}{c}} = \frac{\frac{ad}{bc}}{1} = \frac{ad}{bc}.`
+```
+
+## Word Conversion
+
+```{prereq}
+Integer Number Word Conversion
+```
+
+`{bm} Fraction number word conversion` is the process of taking a fraction number and converting it to words. There are a few ways to convert a fraction number.
+
+ * The first way.
+ 
+   Begin by converting the sign to a word. If the number is ...
+   
+   * negative, use the word "negative".
+   * zero or positive, ignore.
+   
+   Then, ...
+   
+   1. write out the numerator as you would during whole number word conversion,
+   2. write out the word "over",
+   3. write out the denominator as you would during whole number word conversion.
+   
+   For example, the number...
+   
+   * -2/9 ⟶ negative two over nine
+   * 2/9 ⟶ two over nine
+   * -1255/7 ⟶ negative one thousand two hundred fifty five over seven
+   * 0/1 ⟶ zero over one
+
+ * The second way.
+ 
+   Begin by writing out the words "quotient of" or "ratio of". Then, if the number ...
+   
+   * negative, use the word "negative".
+   * zero or positive, ignore.
+
+   Then, ...
+   
+   1. write out the numerator as you would during whole number word conversion,
+   2. write out the word "and",
+   3. write out the denominator as you would during whole number word conversion.
+
+   For example, the number...
+   
+   * -2/9 ⟶ quotient of negative two and nine
+   * 2/9 ⟶ quotient of two and nine
+   * -1255/7 ⟶ quotient of negative one thousand two hundred fifty five and seven
+   * 0/1 ⟶ quotient of zero over one
+
+   ```{note}
+   Recall that "quotient of" is also used to represent a division operation. This is fine because recall that a fraction number is technically an unresolved integer division operation.
+   ```
+
+```{note}
+As withe integer number word conversion, there are a few tweaks to the above algorithm that may be applied.
+
+In terms of sign:
+
+1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
+2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
+```
+
+```{fracnumtowords}
+-1234/12
 ```
 
 # Decimal Number
