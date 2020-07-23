@@ -4645,9 +4645,9 @@ Suppose you wanted to clear the denominator of this compound fraction. You could
 Integer Number Word Conversion
 ```
 
-`{bm} Fraction number word conversion` is the process of taking a fraction number and converting it to words. There are a few ways to convert a fraction number.
+`{bm} Fraction number word conversion` is the process of taking a fraction number and converting it to words. There are two ways to convert a fraction number to words:
 
- * The first way.
+1. The first way.
  
    Begin by converting the sign to a word. If the number is ...
    
@@ -4667,7 +4667,7 @@ Integer Number Word Conversion
    * -1255/7 ⟶ negative one thousand two hundred fifty five over seven
    * 0/1 ⟶ zero over one
 
- * The second way.
+2. The second way.
  
    Begin by writing out the words "quotient of" or "ratio of". Then, if the number ...
    
@@ -4767,6 +4767,150 @@ To convert a decimal number to a mixed number...
 2. remove the decimal point.
 
 2.009 ⟶ `{kt} 2 \frac{9}{1000}`
+
+## Word Conversion
+
+```{prereq}
+Fraction Number Word Conversion
+```
+
+`{bm} Decimal number word conversion` is the process of taking a decimal number and converting it to words. The algorithm used by humans to convert a decimal number to words is as follows:
+
+Begin by converting the sign to a word. If the number is ...
+
+* negative, use the word "negative".
+* positive, ignore.
+* 0.0, use the word "zero" and stop.
+
+```{svgbob}
+        +-----------> "negative"
+        | "number.sign == Negative"
+--------+
+if      |
+        +------------> 
+        | "number.sign == Positive"
+        |
+        +------------> zero
+          "number == 0.0"
+```
+
+```{note}
+In certain cases, humans may apply tweaks to the above algorithm:
+
+1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
+2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
+```
+
+Then, if the number isn't 0.0, ...
+
+1. write out the wholes as you would during whole number word conversion and stop.
+2. if the partial isn't 0, ...
+   1. write out the word "and",
+   2. write out the partial as you would during whole number word conversion.
+
+```{svgbob}
+                                                                        +--------> and ---------> "[write partial]"
+                                                                        | "number.partial != 0"
+        +-----------> "negative" ------+------> "[write wholes]" -------+
+        | "number.sign == Negative"    |                            if  |
+--------+                              |                                +-------->
+if      |                              |                                  "number.partial == 0"
+        +-----------> -----------------+ 
+        | "number.sign == Positive"     
+        |                               
+        +-----------> zero        
+          "number == 0.0"                        
+          
+```
+
+Then, count the number of digits in the partial and write out the matching word...
+
+| Count | Word                  |
+|-------|-----------------------|
+| 1     | tenth                 |
+| 2     | hundredth             |
+| 3     | thousandth            |
+| 4     | ten-thousandth        |
+| 5     | hundred-thousandth    |
+| 6     | millionth             |
+| 7     | ten-millionth         |
+| 8     | hundred-millionth     |
+| ...   | ...                   |
+
+If the partial is more than 1 piece, append the letter s to the number being written out. For example, ...
+
+* 01 ⟶ `{kt} \frac{1}{100}` ⟶ one hundredth
+* 02 ⟶ `{kt} \frac{2}{100}` ⟶ two hundredths
+* 03 ⟶ `{kt} \frac{3}{100}` ⟶ three hundredths
+
+```{svgbob}
+                                                                        +--------> and ---------> "[write partial]" ---+
+                                                                        | "number.partial != 0"                        |
+        +-----------> "negative" ------+------> "[write wholes]" -------+                                              |
+        | "number.sign == Negative"    |                            if  |                                              |
+--------+                              |                                +-------->                                     |
+if      |                              |                                  "number.partial == 0"                        |
+        +-----------> -----------------+                                                                               |
+        | "number.sign == Positive"                                                                                    |
+        |                                                                                                              |
+        +-----------> zero                                                                                             |
+          "number == 0.0"                                                                                              |
+                                                                                                                       |
+                                                                                                                       |
++----------------------------------------------------------------------------------------------------------------------+
+|
+|
+|         
++-------+------------------------------>
+   if   | "number.partial == 0"
+        |
+        +------------------------------> tenths
+        | "len(number.partial) == 1"
+        |
+        +------------------------------> hundredths
+        | "len(number.partial) == 2"
+        |
+        +------------------------------> thousandths
+        | "len(number.partial) == 3"
+        |
+        +------------------------------> "ten-thousandths"
+        | "len(number.partial) == 4"
+        |
+        +------------------------------> "hundred-thousandths"
+        | "len(number.partial) == 5"
+        |
+        +------------------------------> "millionths"
+        | "len(number.partial) == 6"
+        |
+        +------------------------------> "ten-millionths"
+        | "len(number.partial) == 7"
+        |
+        +------------------------------> "hundred-millionths"
+        | "len(number.partial) == 8"
+        |
+        +------------------------------> "..."
+          "..."
+```
+
+For example, the number...
+
+* -0.2 ⟶ `{kt} - \frac{2}{10}` ⟶ negative two tenths
+* 0.25 ⟶ `{kt} \frac{25}{100}` ⟶ twenty five hundredths
+* -33.125 ⟶ `{kt} - 33 \frac{125}{1000}` ⟶ negative thirty three and one hundred twenty five thousandths
+* 2.0 ⟶  `{kt} 2 \frac{0}{10}` ⟶ two
+* 0.0 ⟶ `{kt} \frac{0}{10}` ⟶ zero
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
+```
+
+```{fracnumtowords}
+-1234/12
+```
 
 ## Round
 

@@ -74,7 +74,7 @@ class DecimalNumber:
 
         denom = value.denominator
 
-        if str(denom)[0] == '1' and set(str(denom)[1:]) == set() or set(str(denom)[1:]) == set('0'):
+        if str(denom)[0] == '1' and (set(str(denom)[1:]) == set() or set(str(denom)[1:]) == set('0')):
             log(f'Already power of 10')
         else:
             log(f'No')
@@ -171,6 +171,70 @@ class DecimalNumber:
         return ret
     #MARKDOWN_AS_FRAC
 
+    #MARKDOWN_TO_WORDS
+    @log_decorator
+    def to_words(self):
+        partials_len_to_suffixes = {
+            1: 'tenth',
+            2: 'hundredth',
+            3: 'thousandth',
+            4: 'ten-thousandth',
+            5: 'hundred-thousandth',
+            6: 'millionth',
+            7: 'ten-millionth',
+            8: 'hundred-millionth',
+            9: 'billionth',
+            10: 'ten-billionth',
+            11: 'hundred-billionth',
+            12: 'trillionth',
+            13: 'ten-trillionth',
+            14: 'hundred-trillionth',
+            15: 'quadrillionth',
+            16: 'ten-quadrillionth',
+            17: 'hundred-quadillionth',
+            18: 'quintillionth',
+            19: 'ten-quintillionth',
+            20: 'hundred-quintillionth',
+        }
+
+        log(f'Converting {self}...')
+        log_indent()
+
+        wholes = WholeNumber.from_str(self.cached_wholes_str)
+        partials = WholeNumber.from_str(self.cached_partial_str)
+
+        log(f'Converting wholes portion to words...')
+        wholes_words = wholes.to_words()
+        log(f'Wholes as words: {wholes_words}')
+
+        log(f'Converting partial portion to words...')
+        partial_words = partials.to_words()
+        log(f'Partial as words: {partial_words}')
+
+        output = ''
+
+        if wholes != WholeNumber.from_str('0'):
+            output = wholes_words
+
+        if wholes != WholeNumber.from_str('0') and partials != WholeNumber.from_str('0'):
+            output += ' and '
+
+        if partials != WholeNumber.from_str('0'):
+            output += partial_words
+            suffix = partials_len_to_suffixes[len(self.cached_partial_str)]
+            if suffix is None:
+                raise Exception('Partial too large')
+            log(f'Partial suffix: {suffix}')
+            if partials > WholeNumber.from_str('1'):  # pluralize suffix if more than 1
+                suffix += 's'
+            output += ' ' + suffix
+
+        log_unindent()
+        log(f'{output}')
+
+        return output.strip()
+    #MARKDOWN_TO_WORDS
+
 
 if __name__ == '__main__':
     # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("5/10"))}')
@@ -211,4 +275,4 @@ if __name__ == '__main__':
     # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-1/20")).as_fraction()}')
     # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-10/200")).as_fraction()}')
 
-    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-10/200")).as_fraction()}')
+    print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("-10/200")).to_words()}')
