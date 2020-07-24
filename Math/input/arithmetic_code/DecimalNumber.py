@@ -200,6 +200,10 @@ class DecimalNumber:
         log(f'Converting {self}...')
         log_indent()
 
+        output = ''
+        if self.value.sign == Sign.NEGATIVE:
+            output += 'negative '
+
         wholes = WholeNumber.from_str(self.cached_wholes_str)
         partials = WholeNumber.from_str(self.cached_partial_str)
 
@@ -210,8 +214,6 @@ class DecimalNumber:
         log(f'Converting partial portion to words...')
         partial_words = partials.to_words()
         log(f'Partial as words: {partial_words}')
-
-        output = ''
 
         if wholes != WholeNumber.from_str('0'):
             output = wholes_words

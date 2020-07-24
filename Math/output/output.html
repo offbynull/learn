@@ -2427,79 +2427,258 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <a name="HEADREF12"></a><h2>Word Conversion</h2>
 <p><a name="BOOKMARK48"></a><strong>Whole number word conversion</strong> <a href="#BOOKMARK136">is</a> the process of taking a <a href="#BOOKMARK37">whole number</a> and converting it to words. To convert a <a href="#BOOKMARK37">whole number</a> to words, break up the number into groups of 3 from least-<a href="#BOOKMARK52">sign</a>ificant <a href="#BOOKMARK1">digit</a> to most-<a href="#BOOKMARK52">sign</a>ificant <a href="#BOOKMARK1">digit</a> (right-to-left). For example, the number 9876543210 gets broken up as follows...</p>
 <p><img src="svgbob_55c38901fb4f4ce6085f8b627f47151b69ab9552.svg" alt="Kroki diagram output"></p>
-<p>For each group, use the following algorithm to construct the words to represent that group...</p>
+<p>For each group, use the following algorithm to construct the words to represent that group:</p>
 <ul>
-<li>if first number ex<a href="#BOOKMARK136">is</a>ts...
-<ul>
-<li>0 =</li>
-<li>1 = one hundred</li>
-<li>2 = two hundred</li>
-<li>3 = three hundred</li>
-<li>4 = four hundred</li>
-<li>5 = five hundred</li>
-<li>6 = six hundred</li>
-<li>7 = seven hundred</li>
-<li>8 = eight hundred</li>
-<li>9 = nine hundred</li>
-</ul>
+<li>
+<p>If top <a href="#BOOKMARK1">digit</a> ex<a href="#BOOKMARK136">is</a>ts, use the following mapping:</p>
+<table>
+<thead>
+<tr>
+<th><a href="#BOOKMARK1">Digit</a></th>
+<th>Word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>one hundred</td>
+</tr>
+<tr>
+<td>2</td>
+<td>two hundred</td>
+</tr>
+<tr>
+<td>3</td>
+<td>three hundred</td>
+</tr>
+<tr>
+<td>4</td>
+<td>four hundred</td>
+</tr>
+<tr>
+<td>5</td>
+<td>five hundred</td>
+</tr>
+<tr>
+<td>6</td>
+<td>six hundred</td>
+</tr>
+<tr>
+<td>7</td>
+<td>seven hundred</td>
+</tr>
+<tr>
+<td>8</td>
+<td>eight hundred</td>
+</tr>
+<tr>
+<td>9</td>
+<td>nine hundred</td>
+</tr>
+</tbody>
+</table>
+<p><img src="svgbob_0cf8627b377f3a021010d62966844505a35cce9f.svg" alt="Kroki diagram output"></p>
 </li>
-<li>if middle number ex<a href="#BOOKMARK136">is</a>ts...
-<ul>
-<li>if middle number <a href="#BOOKMARK136">is</a> 1...
-<ul>
-<li>10 = ten</li>
-<li>11 = eleven</li>
-<li>12 = twelve</li>
-<li>13 = thirteen</li>
-<li>14 = fourteen</li>
-<li>15 = fifteen</li>
-<li>16 = sixteen</li>
-<li>17 = seventeen</li>
-<li>18 = eighteen</li>
-<li>19 = nineteen</li>
-</ul>
+<li>
+<p>If middle <a href="#BOOKMARK1">digit</a> <a href="#BOOKMARK136">is</a> 1, combine in with the bottom <a href="#BOOKMARK1">digit</a> and use the following mapping:</p>
+<table>
+<thead>
+<tr>
+<th><a href="#BOOKMARK1">Digit</a>s</th>
+<th>Word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>ten</td>
+</tr>
+<tr>
+<td>11</td>
+<td>eleven</td>
+</tr>
+<tr>
+<td>12</td>
+<td>twelve</td>
+</tr>
+<tr>
+<td>13</td>
+<td>thirteen</td>
+</tr>
+<tr>
+<td>14</td>
+<td>fourteen</td>
+</tr>
+<tr>
+<td>15</td>
+<td>fifteen</td>
+</tr>
+<tr>
+<td>16</td>
+<td>sixteen</td>
+</tr>
+<tr>
+<td>17</td>
+<td>seventeen</td>
+</tr>
+<tr>
+<td>18</td>
+<td>eighteen</td>
+</tr>
+<tr>
+<td>19</td>
+<td>nineteen</td>
+</tr>
+</tbody>
+</table>
+<p><img src="svgbob_aff341feae7ebe1cfa6514c10ee787ff56eeb4f0.svg" alt="Kroki diagram output"></p>
 </li>
-<li>if the middle number <a href="#BOOKMARK136">is</a>n't 1...
-<ul>
-<li>0 =</li>
-<li>2 = twenty</li>
-<li>3 = thirty</li>
-<li>4 = forty</li>
-<li>5 = fifty</li>
-<li>6 = sixty</li>
-<li>7 = seventy</li>
-<li>8 = eighty</li>
-<li>9 = ninety</li>
-</ul>
+<li>
+<p>If the middle <a href="#BOOKMARK1">digit</a> <a href="#BOOKMARK136">is</a>n't 1, use the following mapping:</p>
+<table>
+<thead>
+<tr>
+<th><a href="#BOOKMARK1">Digit</a></th>
+<th>Word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>twenty</td>
+</tr>
+<tr>
+<td>3</td>
+<td>thirty</td>
+</tr>
+<tr>
+<td>4</td>
+<td>forty</td>
+</tr>
+<tr>
+<td>5</td>
+<td>fifty</td>
+</tr>
+<tr>
+<td>6</td>
+<td>sixty</td>
+</tr>
+<tr>
+<td>7</td>
+<td>seventy</td>
+</tr>
+<tr>
+<td>8</td>
+<td>eighty</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ninety</td>
+</tr>
+</tbody>
+</table>
+<p><img src="svgbob_ff51c95c7f6a8b4283c31ab167e214dceca77b99.svg" alt="Kroki diagram output"></p>
 </li>
-</ul>
-</li>
-<li>if last number ex<a href="#BOOKMARK136">is</a>ts...
-<ul>
-<li>0 =</li>
-<li>1 = one</li>
-<li>2 = two</li>
-<li>3 = three</li>
-<li>4 = four</li>
-<li>5 = five</li>
-<li>6 = six</li>
-<li>7 = seven</li>
-<li>8 = eight</li>
-<li>9 = nine</li>
-</ul>
+<li>
+<p>If the middle <a href="#BOOKMARK1">digit</a> <a href="#BOOKMARK138">was</a>n't 1, use the following mapping for the bottom <a href="#BOOKMARK1">digit</a>:</p>
+<table>
+<thead>
+<tr>
+<th><a href="#BOOKMARK1">Digit</a></th>
+<th>Word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>one</td>
+</tr>
+<tr>
+<td>2</td>
+<td>two</td>
+</tr>
+<tr>
+<td>3</td>
+<td>three</td>
+</tr>
+<tr>
+<td>4</td>
+<td>four</td>
+</tr>
+<tr>
+<td>5</td>
+<td>five</td>
+</tr>
+<tr>
+<td>6</td>
+<td>six</td>
+</tr>
+<tr>
+<td>7</td>
+<td>seven</td>
+</tr>
+<tr>
+<td>8</td>
+<td>eight</td>
+</tr>
+<tr>
+<td>9</td>
+<td>nine</td>
+</tr>
+</tbody>
+</table>
+<p><img src="svgbob_928255e0c952bf2d07744f02b665cc58c18774d5.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
 <p>In the example above, each group would get converted as follows...</p>
 <p><img src="svgbob_e25e35f1f306908cbb5d17bbccfde00f01a38481.svg" alt="Kroki diagram output"></p>
 <p>The words for each group get a special suffix. For each group from right-to-left, ...</p>
-<ol>
-<li></li>
-<li>thousand</li>
-<li>million</li>
-<li>billion</li>
-<li>trillion</li>
-<li>...</li>
-</ol>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>thousand</td>
+</tr>
+<tr>
+<td>3</td>
+<td>million</td>
+</tr>
+<tr>
+<td>4</td>
+<td>billion</td>
+</tr>
+<tr>
+<td>5</td>
+<td>trillion</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
 <p>In the example above, each group would get its corresponding suffix <a href="#BOOKMARK3">add</a>ed...</p>
 <p><img src="svgbob_7da122c2225ec4dbe78c36a0901fe5e31cdfb208.svg" alt="Kroki diagram output"></p>
 <p>There <a href="#BOOKMARK136">is</a> one special case with number to word conversions: if the number being converted <a href="#BOOKMARK136">is</a> 0, the output should be zero.</p>
@@ -3126,12 +3305,22 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <li><a href="#BOOKMARK48">Whole Number Word Conversion</a></li>
 </ul>
 </div>
-<p><a name="BOOKMARK57"></a><strong>Integer number word conversion</strong> <a href="#BOOKMARK136">is</a> the process of taking an <a href="#BOOKMARK49">integer number</a> and converting it to words. To convert an <a href="#BOOKMARK49">integer number</a> to words, begin by converting the <a href="#BOOKMARK52">sign</a> to a word. If the number <a href="#BOOKMARK136">is</a> ...</p>
+<p><a name="BOOKMARK57"></a><strong>Integer number word conversion</strong> <a href="#BOOKMARK136">is</a> the process of taking an <a href="#BOOKMARK49">integer number</a> and converting it to words. The algorithm used by humans to convert an <a href="#BOOKMARK49">integer number</a> to words <a href="#BOOKMARK136">is</a> as follows:</p>
+<p>Begin by converting the <a href="#BOOKMARK52">sign</a> to a word. If the number <a href="#BOOKMARK136">is</a> ...</p>
 <ul>
 <li><a href="#BOOKMARK51">negative</a>, use the word "<a href="#BOOKMARK51">negative</a>".</li>
-<li>zero or <a href="#BOOKMARK50">positive</a>, ignore.</li>
+<li>0 or <a href="#BOOKMARK50">positive</a>, ignore.</li>
 </ul>
+<p><img src="svgbob_69309f6e54aea5f0f44963a70a83008f2320e473.svg" alt="Kroki diagram output"></p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<ol>
+<li>It's acceptable to use the word "<a href="#BOOKMARK50">positive</a>" when the <a href="#BOOKMARK52">sign</a> <a href="#BOOKMARK136">is</a> <a href="#BOOKMARK50">positive</a> (recall 0 <a href="#BOOKMARK136">is</a> neither <a href="#BOOKMARK50">positive</a> nor <a href="#BOOKMARK51">negative</a>).</li>
+<li>It's acceptable to use the word "<a href="#BOOKMARK10">minus</a>" instead of "<a href="#BOOKMARK51">negative</a>." However, doing so may introduce ambiguity if the words are being used in the context of <a href="#BOOKMARK9">subtraction</a> because <a href="#BOOKMARK10">minus</a> also means <a href="#BOOKMARK9">subtraction</a>.</li>
+</ol>
+</div>
 <p>Then, write out the actual number as you would during <a href="#BOOKMARK48">whole number word conversion</a>.</p>
+<p><img src="svgbob_d759fda340279b2c2e5c3e49d4dbb92b687ee0a3.svg" alt="Kroki diagram output"></p>
 <p>For example, the number...</p>
 <ul>
 <li>-9 ⟶ <a href="#BOOKMARK51">negative</a> nine</li>
@@ -3139,14 +3328,6 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <li>-55139 ⟶ <a href="#BOOKMARK51">negative</a> fifty five thousand one hundred thirty nine</li>
 <li>0 ⟶ zero</li>
 </ul>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>There are a few tweaks to the above algorithm that may be applied:</p>
-<ol>
-<li>It's acceptable to use the word "<a href="#BOOKMARK50">positive</a>" when the <a href="#BOOKMARK52">sign</a> <a href="#BOOKMARK136">is</a> <a href="#BOOKMARK50">positive</a> (recall 0 <a href="#BOOKMARK136">is</a> neither <a href="#BOOKMARK50">positive</a> nor <a href="#BOOKMARK51">negative</a>).</li>
-<li>It's acceptable to use the word "<a href="#BOOKMARK10">minus</a>" instead of "<a href="#BOOKMARK51">negative</a>." However, doing so may introduce ambiguity if the words are being used in the context of <a href="#BOOKMARK9">subtraction</a> because <a href="#BOOKMARK10">minus</a> also means <a href="#BOOKMARK9">subtraction</a>.</li>
-</ol>
-</div>
 <p>The way to perform th<a href="#BOOKMARK136">is</a> algorithm via code <a href="#BOOKMARK136">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self</span>):</span>
@@ -5384,21 +5565,27 @@ The <a name="BOOKMARK91"></a><strong>reciprocal</strong> of a <a href="#BOOKMARK
 <li><a href="#BOOKMARK57">Integer Number Word Conversion</a></li>
 </ul>
 </div>
-<p><a name="BOOKMARK94"></a><strong>Fraction number word conversion</strong> <a href="#BOOKMARK136">is</a> the process of taking a <a href="#BOOKMARK77">fraction</a> number and converting it to words. There are two ways to convert a <a href="#BOOKMARK77">fraction</a> number to words:</p>
-<ol>
-<li>
-<p>The first way.</p>
+<p><a name="BOOKMARK94"></a><strong>Fraction number word conversion</strong> <a href="#BOOKMARK136">is</a> the process of taking a <a href="#BOOKMARK77">fraction</a> number and converting it to words. The algorithm used by humans to convert a <a href="#BOOKMARK77">fraction</a> number to words <a href="#BOOKMARK136">is</a> as follows:</p>
 <p>Begin by converting the <a href="#BOOKMARK52">sign</a> to a word. If the number <a href="#BOOKMARK136">is</a> ...</p>
 <ul>
 <li><a href="#BOOKMARK51">negative</a>, use the word "<a href="#BOOKMARK51">negative</a>".</li>
-<li>zero or <a href="#BOOKMARK50">positive</a>, ignore.</li>
+<li>0 or <a href="#BOOKMARK50">positive</a>, ignore.</li>
 </ul>
+<p><img src="svgbob_69309f6e54aea5f0f44963a70a83008f2320e473.svg" alt="Kroki diagram output"></p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<ol>
+<li>It's acceptable to use the word "<a href="#BOOKMARK50">positive</a>" when the <a href="#BOOKMARK52">sign</a> <a href="#BOOKMARK136">is</a> <a href="#BOOKMARK50">positive</a> (recall 0 <a href="#BOOKMARK136">is</a> neither <a href="#BOOKMARK50">positive</a> nor <a href="#BOOKMARK51">negative</a>).</li>
+<li>It's acceptable to use the word "<a href="#BOOKMARK10">minus</a>" instead of "<a href="#BOOKMARK51">negative</a>." However, doing so may introduce ambiguity if the words are being used in the context of <a href="#BOOKMARK9">subtraction</a> because <a href="#BOOKMARK10">minus</a> also means <a href="#BOOKMARK9">subtraction</a>.</li>
+</ol>
+</div>
 <p>Then, ...</p>
 <ol>
 <li>write out the <a href="#BOOKMARK78">numerator</a> as you would during <a href="#BOOKMARK48">whole number word conversion</a>,</li>
 <li>write out the word "over",</li>
 <li>write out the <a href="#BOOKMARK79">denominator</a> as you would during <a href="#BOOKMARK48">whole number word conversion</a>.</li>
 </ol>
+<p><img src="svgbob_0708a6b998f35dd95066359cf07d8a066cbb529c.svg" alt="Kroki diagram output"></p>
 <p>For example, the number...</p>
 <ul>
 <li>-2/9 ⟶ <a href="#BOOKMARK51">negative</a> two over nine</li>
@@ -5406,42 +5593,6 @@ The <a name="BOOKMARK91"></a><strong>reciprocal</strong> of a <a href="#BOOKMARK
 <li>-1255/7 ⟶ <a href="#BOOKMARK51">negative</a> one thousand two hundred fifty five over seven</li>
 <li>0/1 ⟶ zero over one</li>
 </ul>
-</li>
-<li>
-<p>The second way.</p>
-<p>Begin by writing out the words "<a href="#BOOKMARK34">quotient of</a>" or "ratio of". Then, if the number ...</p>
-<ul>
-<li><a href="#BOOKMARK51">negative</a>, use the word "<a href="#BOOKMARK51">negative</a>".</li>
-<li>zero or <a href="#BOOKMARK50">positive</a>, ignore.</li>
-</ul>
-<p>Then, ...</p>
-<ol>
-<li>write out the <a href="#BOOKMARK78">numerator</a> as you would during <a href="#BOOKMARK48">whole number word conversion</a>,</li>
-<li>write out the word "and",</li>
-<li>write out the <a href="#BOOKMARK79">denominator</a> as you would during <a href="#BOOKMARK48">whole number word conversion</a>.</li>
-</ol>
-<p>For example, the number...</p>
-<ul>
-<li>-2/9 ⟶ <a href="#BOOKMARK34">quotient of</a> <a href="#BOOKMARK51">negative</a> two and nine</li>
-<li>2/9 ⟶ <a href="#BOOKMARK34">quotient of</a> two and nine</li>
-<li>-1255/7 ⟶ <a href="#BOOKMARK34">quotient of</a> <a href="#BOOKMARK51">negative</a> one thousand two hundred fifty five and seven</li>
-<li>0/1 ⟶ <a href="#BOOKMARK34">quotient of</a> zero over one</li>
-</ul>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Recall that "<a href="#BOOKMARK34">quotient of</a>" <a href="#BOOKMARK136">is</a> also used to represent a <a href="#BOOKMARK26">division</a> operation. Th<a href="#BOOKMARK136">is</a> <a href="#BOOKMARK136">is</a> fine because recall that a <a href="#BOOKMARK77">fraction</a> number <a href="#BOOKMARK136">is</a> technically an unre<a href="#BOOKMARK128">solve</a>d <a href="#BOOKMARK49">integer</a> <a href="#BOOKMARK26">division</a> operation.</p>
-</div>
-</li>
-</ol>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>As withe <a href="#BOOKMARK57">integer number word conversion</a>, there are a few tweaks to the above algorithm that may be applied.</p>
-<p>In <a href="#BOOKMARK124">term</a>s of <a href="#BOOKMARK52">sign</a>:</p>
-<ol>
-<li>It's acceptable to use the word "<a href="#BOOKMARK50">positive</a>" when the <a href="#BOOKMARK52">sign</a> <a href="#BOOKMARK136">is</a> <a href="#BOOKMARK50">positive</a> (recall 0 <a href="#BOOKMARK136">is</a> neither <a href="#BOOKMARK50">positive</a> nor <a href="#BOOKMARK51">negative</a>).</li>
-<li>It's acceptable to use the word "<a href="#BOOKMARK10">minus</a>" instead of "<a href="#BOOKMARK51">negative</a>." However, doing so may introduce ambiguity if the words are being used in the context of <a href="#BOOKMARK9">subtraction</a> because <a href="#BOOKMARK10">minus</a> also means <a href="#BOOKMARK9">subtraction</a>.</li>
-</ol>
-</div>
 <p>The way to perform th<a href="#BOOKMARK136">is</a> algorithm via code <a href="#BOOKMARK136">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self</span>):</span>
@@ -5465,6 +5616,38 @@ The <a name="BOOKMARK91"></a><strong>reciprocal</strong> of a <a href="#BOOKMARK
 </ul>
 </div>
 <p></p>
+<p>There's a slightly varied form of the algorithm above that's also acceptable:</p>
+<p>Begin by writing out the words "<a href="#BOOKMARK34">quotient of</a>" or "ratio of". Then, if the number ...</p>
+<ul>
+<li><a href="#BOOKMARK51">negative</a>, use the word "<a href="#BOOKMARK51">negative</a>".</li>
+<li>0 or <a href="#BOOKMARK50">positive</a>, ignore.</li>
+</ul>
+<p><img src="svgbob_ea7a45b032826762e07ef35c5b72621bb85ae47b.svg" alt="Kroki diagram output"></p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<ol>
+<li>It's acceptable to use the word "<a href="#BOOKMARK50">positive</a>" when the <a href="#BOOKMARK52">sign</a> <a href="#BOOKMARK136">is</a> <a href="#BOOKMARK50">positive</a> (recall 0 <a href="#BOOKMARK136">is</a> neither <a href="#BOOKMARK50">positive</a> nor <a href="#BOOKMARK51">negative</a>).</li>
+<li>It's acceptable to use the word "<a href="#BOOKMARK10">minus</a>" instead of "<a href="#BOOKMARK51">negative</a>." However, doing so may introduce ambiguity if the words are being used in the context of <a href="#BOOKMARK9">subtraction</a> because <a href="#BOOKMARK10">minus</a> also means <a href="#BOOKMARK9">subtraction</a>.</li>
+</ol>
+</div>
+<p>Then, ...</p>
+<ol>
+<li>write out the <a href="#BOOKMARK78">numerator</a> as you would during <a href="#BOOKMARK48">whole number word conversion</a>,</li>
+<li>write out the word "and",</li>
+<li>write out the <a href="#BOOKMARK79">denominator</a> as you would during <a href="#BOOKMARK48">whole number word conversion</a>.</li>
+</ol>
+<p><img src="svgbob_6ddb3f3d9401d43fb09c8385213129d101d68322.svg" alt="Kroki diagram output"></p>
+<p>For example, the number...</p>
+<ul>
+<li>-2/9 ⟶ <a href="#BOOKMARK34">quotient of</a> <a href="#BOOKMARK51">negative</a> two and nine</li>
+<li>2/9 ⟶ <a href="#BOOKMARK34">quotient of</a> two and nine</li>
+<li>-1255/7 ⟶ <a href="#BOOKMARK34">quotient of</a> <a href="#BOOKMARK51">negative</a> one thousand two hundred fifty five and seven</li>
+<li>0/1 ⟶ <a href="#BOOKMARK34">quotient of</a> zero over one</li>
+</ul>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>Recall that "<a href="#BOOKMARK34">quotient of</a>" <a href="#BOOKMARK136">is</a> also used to represent a <a href="#BOOKMARK26">division</a> operation. Th<a href="#BOOKMARK136">is</a> <a href="#BOOKMARK136">is</a> fine because recall that a <a href="#BOOKMARK77">fraction</a> number <a href="#BOOKMARK136">is</a> technically an unre<a href="#BOOKMARK128">solve</a>d <a href="#BOOKMARK49">integer</a> <a href="#BOOKMARK26">division</a> operation.</p>
+</div>
 <a name="HEADREF36"></a><h1>Decimal Number</h1>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQU<a href="#BOOKMARK136">IS</a>ITES↩</strong></p>
@@ -5516,7 +5699,6 @@ The <a name="BOOKMARK91"></a><strong>reciprocal</strong> of a <a href="#BOOKMARK
 <p><img src="svgbob_e2e7bc1eb9c7596ebbb75fb595d03bba3310ee4e.svg" alt="Kroki diagram output"></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>In certain cases, humans may apply tweaks to the above algorithm:</p>
 <ol>
 <li>It's acceptable to use the word "<a href="#BOOKMARK50">positive</a>" when the <a href="#BOOKMARK52">sign</a> <a href="#BOOKMARK136">is</a> <a href="#BOOKMARK50">positive</a> (recall 0 <a href="#BOOKMARK136">is</a> neither <a href="#BOOKMARK50">positive</a> nor <a href="#BOOKMARK51">negative</a>).</li>
 <li>It's acceptable to use the word "<a href="#BOOKMARK10">minus</a>" instead of "<a href="#BOOKMARK51">negative</a>." However, doing so may introduce ambiguity if the words are being used in the context of <a href="#BOOKMARK9">subtraction</a> because <a href="#BOOKMARK10">minus</a> also means <a href="#BOOKMARK9">subtraction</a>.</li>
@@ -5586,7 +5768,7 @@ The <a name="BOOKMARK91"></a><strong>reciprocal</strong> of a <a href="#BOOKMARK
 <li>02 ⟶ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>2</mn><mn>100</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{2}{100}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> ⟶ two hundredths</li>
 <li>03 ⟶ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>3</mn><mn>100</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{3}{100}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> ⟶ three hundredths</li>
 </ul>
-<p><img src="svgbob_ffd75d644e2cd16720c7800673fef1c578e56447.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_1e3d04899629646f4cbfb20d74c0b1e8c205ee4e.svg" alt="Kroki diagram output"></p>
 <p>For example, the number...</p>
 <ul>
 <li>-0.2 ⟶ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mfrac><mn>2</mn><mn>10</mn></mfrac></mrow><annotation encoding="application/x-tex">- \frac{2}{10}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> ⟶ <a href="#BOOKMARK51">negative</a> two tenths</li>
@@ -5598,23 +5780,79 @@ The <a name="BOOKMARK91"></a><strong>reciprocal</strong> of a <a href="#BOOKMARK
 <p>The way to perform th<a href="#BOOKMARK136">is</a> algorithm via code <a href="#BOOKMARK136">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self</span>):</span>
+    partials_len_to_suffixes = {
+        <span class="hljs-number">1</span>: <span class="hljs-string">'tenth'</span>,
+        <span class="hljs-number">2</span>: <span class="hljs-string">'hundredth'</span>,
+        <span class="hljs-number">3</span>: <span class="hljs-string">'thousandth'</span>,
+        <span class="hljs-number">4</span>: <span class="hljs-string">'ten-thousandth'</span>,
+        <span class="hljs-number">5</span>: <span class="hljs-string">'hundred-thousandth'</span>,
+        <span class="hljs-number">6</span>: <span class="hljs-string">'millionth'</span>,
+        <span class="hljs-number">7</span>: <span class="hljs-string">'ten-millionth'</span>,
+        <span class="hljs-number">8</span>: <span class="hljs-string">'hundred-millionth'</span>,
+        <span class="hljs-number">9</span>: <span class="hljs-string">'billionth'</span>,
+        <span class="hljs-number">10</span>: <span class="hljs-string">'ten-billionth'</span>,
+        <span class="hljs-number">11</span>: <span class="hljs-string">'hundred-billionth'</span>,
+        <span class="hljs-number">12</span>: <span class="hljs-string">'trillionth'</span>,
+        <span class="hljs-number">13</span>: <span class="hljs-string">'ten-trillionth'</span>,
+        <span class="hljs-number">14</span>: <span class="hljs-string">'hundred-trillionth'</span>,
+        <span class="hljs-number">15</span>: <span class="hljs-string">'quadrillionth'</span>,
+        <span class="hljs-number">16</span>: <span class="hljs-string">'ten-quadrillionth'</span>,
+        <span class="hljs-number">17</span>: <span class="hljs-string">'hundred-quadillionth'</span>,
+        <span class="hljs-number">18</span>: <span class="hljs-string">'quintillionth'</span>,
+        <span class="hljs-number">19</span>: <span class="hljs-string">'ten-quintillionth'</span>,
+        <span class="hljs-number">20</span>: <span class="hljs-string">'hundred-quintillionth'</span>,
+    }
+
     log(<span class="hljs-string">f'Converting <span class="hljs-subst">{self}</span>...'</span>)
+    log_indent()
 
     output = <span class="hljs-string">''</span>
-    <span class="hljs-keyword">if</span> self.sign == Sign.NEGATIVE:
+    <span class="hljs-keyword">if</span> self.value.sign == Sign.NEGATIVE:
         output += <span class="hljs-string">'negative '</span>
-    output += self.numerator.to_words()
-    output += <span class="hljs-string">' over '</span>
-    output += self.denominator.to_words()
+
+    wholes = WholeNumber.from_str(self.cached_wholes_str)
+    partials = WholeNumber.from_str(self.cached_partial_str)
+
+    log(<span class="hljs-string">f'Converting wholes portion to words...'</span>)
+    wholes_words = wholes.to_words()
+    log(<span class="hljs-string">f'Wholes as words: <span class="hljs-subst">{wholes_words}</span>'</span>)
+
+    log(<span class="hljs-string">f'Converting partial portion to words...'</span>)
+    partial_words = partials.to_words()
+    log(<span class="hljs-string">f'Partial as words: <span class="hljs-subst">{partial_words}</span>'</span>)
+
+    <span class="hljs-keyword">if</span> wholes != WholeNumber.from_str(<span class="hljs-string">'0'</span>):
+        output = wholes_words
+
+    <span class="hljs-keyword">if</span> wholes != WholeNumber.from_str(<span class="hljs-string">'0'</span>) <span class="hljs-keyword">and</span> partials != WholeNumber.from_str(<span class="hljs-string">'0'</span>):
+        output += <span class="hljs-string">' and '</span>
+
+    <span class="hljs-keyword">if</span> partials != WholeNumber.from_str(<span class="hljs-string">'0'</span>):
+        output += partial_words
+        suffix = partials_len_to_suffixes[len(self.cached_partial_str)]
+        <span class="hljs-keyword">if</span> suffix <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">'Partial too large'</span>)
+        log(<span class="hljs-string">f'Partial suffix: <span class="hljs-subst">{suffix}</span>'</span>)
+        <span class="hljs-keyword">if</span> partials &gt; WholeNumber.from_str(<span class="hljs-string">'1'</span>):  <span class="hljs-comment"># pluralize suffix if more than 1</span>
+            suffix += <span class="hljs-string">'s'</span>
+        output += <span class="hljs-string">' '</span> + suffix
 
     log_unindent()
     log(<span class="hljs-string">f'<span class="hljs-subst">{output}</span>'</span>)
 
-    <span class="hljs-keyword">return</span> output.lstrip()</code></pre><div style="border:1px solid black;">
+    <span class="hljs-keyword">return</span> output.strip()</code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
-<li>Converting -1234/12...</li>
-<li>negative one thousand two hundred thirty four over twelve</li>
+<li>Converting -32.875...
+<ul>
+<li>Converting wholes portion to words...</li>
+<li>Wholes as words: thirty two</li>
+<li>Converting partial portion to words...</li>
+<li>Partial as words: eight hundred seventy five</li>
+<li>Partial suffix: thousandth</li>
+</ul>
+</li>
+<li>thirty two and eight hundred seventy five thousandths</li>
 </ul>
 </div>
 <p></p>

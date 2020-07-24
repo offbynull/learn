@@ -2478,52 +2478,274 @@ python
 +---+---+---+---+
 ```
 
-For each group, use the following algorithm to construct the words to represent that group...
+For each group, use the following algorithm to construct the words to represent that group:
 
- * if first number exists...
-    * 0 =
-    * 1 = one hundred
-    * 2 = two hundred
-    * 3 = three hundred
-    * 4 = four hundred
-    * 5 = five hundred
-    * 6 = six hundred
-    * 7 = seven hundred
-    * 8 = eight hundred
-    * 9 = nine hundred
- * if middle number exists...
-    * if middle number is 1...
-      * 10 = ten
-      * 11 = eleven
-      * 12 = twelve
-      * 13 = thirteen
-      * 14 = fourteen
-      * 15 = fifteen
-      * 16 = sixteen
-      * 17 = seventeen
-      * 18 = eighteen
-      * 19 = nineteen
-    * if the middle number isn't 1...
-      * 0 =
-      * 2 = twenty
-      * 3 = thirty
-      * 4 = forty
-      * 5 = fifty
-      * 6 = sixty
-      * 7 = seventy
-      * 8 = eighty
-      * 9 = ninety
- * if last number exists...
-    * 0 =
-    * 1 = one
-    * 2 = two
-    * 3 = three
-    * 4 = four
-    * 5 = five
-    * 6 = six
-    * 7 = seven
-    * 8 = eight
-    * 9 = nine
+ * If top digit exists, use the following mapping:
+
+   | Digit | Word                  |
+   |-------|-----------------------|
+   | 0     |                       |
+   | 1     | one hundred           |
+   | 2     | two hundred           |
+   | 3     | three hundred         |
+   | 4     | four hundred          |
+   | 5     | five hundred          |
+   | 6     | six hundred           |
+   | 7     | seven hundred         |
+   | 8     | eight hundred         |
+   | 9     | nine hundred          |
+
+   ```{svgbob}
+   +-------+--------------------->
+      if   | "digits[0] == 0"
+           |
+           +---------------------> "one hundred"
+           | "digits[0] == 1"
+           |
+           +---------------------> "two hundred"
+           | "digits[0] == 2"
+           |
+           +---------------------> "three hundred"
+           | "digits[0] == 3"
+           |
+           +---------------------> "four hundred"
+           | "digits[0] == 4"
+           |
+           +---------------------> "five hundred"
+           | "digits[0] == 5"
+           |
+           +---------------------> "six hundred"
+           | "digits[0] == 6"
+           |
+           +---------------------> "seven hundred"
+           | "digits[0] == 7"
+           |
+           +---------------------> "eight hundred"
+           | "digits[0] == 8"
+           |
+           +---------------------> "nine hundred"
+             "digits[0] == 9"
+   ```
+
+ * If middle digit is 1, combine in with the bottom digit and use the following mapping:
+
+   | Digits | Word                  |
+   |--------|-----------------------|
+   | 10     | ten                   |
+   | 11     | eleven                |
+   | 12     | twelve                |
+   | 13     | thirteen              |
+   | 14     | fourteen              |
+   | 15     | fifteen               |
+   | 16     | sixteen               |
+   | 17     | seventeen             |
+   | 18     | eighteen              |
+   | 19     | nineteen              |
+
+   ```{svgbob}
+   +-------+---------------------> -----------------+-------+
+      if   | "digits[0] == 0"                       |   if  |
+           |                                        |       +-----------------+
+           +---------------------> "one hundred" ---+        "digits[1] == 1" |
+           | "digits[0] == 1"                       |                         +----+
+           |                                        |                           if |
+           +---------------------> "two hundred" ---+                              +---------------------> "ten"
+           | "digits[0] == 2"                       |                              | "digits[1:2] == 10"              
+           |                                        |                              |                                  
+           +---------------------> "three hundred" -+                              +---------------------> "eleven"
+           | "digits[0] == 3"                       |                              | "digits[1:2] == 11"              
+           |                                        |                              |                                  
+           +---------------------> "four hundred" --+                              +---------------------> "twelve"
+           | "digits[0] == 4"                       |                              | "digits[1:2] == 12"              
+           |                                        |                              |                                  
+           +---------------------> "five hundred" --+                              +---------------------> "thirteen" 
+           | "digits[0] == 5"                       |                              | "digits[1:2] == 13"              
+           |                                        |                              |                                  
+           +---------------------> "six hundred" ---+                              +---------------------> "fourteen" 
+           | "digits[0] == 6"                       |                              | "digits[1:2] == 14"              
+           |                                        |                              |                                  
+           +---------------------> "seven hundred" -+                              +---------------------> "fifteen"
+           | "digits[0] == 7"                       |                              | "digits[1:2] == 15"              
+           |                                        |                              |                                  
+           +---------------------> "eight hundred" -+                              +---------------------> "sixteen"
+           | "digits[0] == 8"                       |                              | "digits[1:2] == 16"              
+           |                                        |                              |                                  
+           +---------------------> "nine hundred" --+                              +---------------------> "seventeen"
+             "digits[0] == 9"                                                      | "digits[1:2] == 17"              
+                                                                                   |                                  
+                                                                                   +---------------------> "eighteen" 
+                                                                                   | "digits[1:2] == 18"              
+                                                                                   |                                  
+                                                                                   +---------------------> "nineteen"
+                                                                                     "digits[1:2] == 19" 
+   ```
+
+ * If the middle digit isn't 1, use the following mapping:
+
+   | Digit | Word                  |
+   |-------|-----------------------|
+   | 0     |                       |
+   | 2     | twenty                |
+   | 3     | thirty                |
+   | 4     | forty                 |
+   | 5     | fifty                 |
+   | 6     | sixty                 |
+   | 7     | seventy               |
+   | 8     | eighty                |
+   | 9     | ninety                |
+
+   ```{svgbob}
+                                                                                    +---------------------> 
+                                                                                    | "digits[1] == 0"
+                                                                                    |
+                                                                                    +---------------------> "twenty"
+                                                                                    | "digits[1] == 2"
+                                                                                    |
+                                                                                    +---------------------> "thirty"
+                                                                                    | "digits[1] == 3"
+                                                                                    |
+                                                                                    +---------------------> "forty"
+                                                                                    | "digits[1] == 4"
+                                                                                    |
+                                                                                    +---------------------> "fifty"
+                                                                                    | "digits[1] == 5"
+                                                                                    |
+                                                                                    +---------------------> "sixty"
+                                                                                    | "digits[1] == 6"
+                                                                                    |
+                                                                                    +---------------------> "seventy"
+                                                                                    | "digits[1] == 7"
+                                                                                    |
+                                                                                    +---------------------> "eighty"
+                                                                                    | "digits[1] == 8"
+                                                                                    |
+                                                                                    +---------------------> "ninety"
+                                                                                    | "digits[1] == 9"
+                                                                               +----+
+                                                                               | if
+                                                            +------------------+
+                                                            | "digits[1] != 1"
+   +-------+---------------------> -----------------+-------+
+      if   | "digits[0] == 0"                       |   if  |
+           |                                        |       +-----------------+
+           +---------------------> "one hundred" ---+        "digits[1] == 1" |
+           | "digits[0] == 1"                       |                         +----+
+           |                                        |                           if |
+           +---------------------> "two hundred" ---+                              +---------------------> "ten"
+           | "digits[0] == 2"                       |                              | "digits[1:2] == 10"              
+           |                                        |                              |                                  
+           +---------------------> "three hundred" -+                              +---------------------> "eleven"
+           | "digits[0] == 3"                       |                              | "digits[1:2] == 11"              
+           |                                        |                              |                                  
+           +---------------------> "four hundred" --+                              +---------------------> "twelve"
+           | "digits[0] == 4"                       |                              | "digits[1:2] == 12"              
+           |                                        |                              |                                  
+           +---------------------> "five hundred" --+                              +---------------------> "thirteen" 
+           | "digits[0] == 5"                       |                              | "digits[1:2] == 13"              
+           |                                        |                              |                                  
+           +---------------------> "six hundred" ---+                              +---------------------> "fourteen" 
+           | "digits[0] == 6"                       |                              | "digits[1:2] == 14"              
+           |                                        |                              |                                  
+           +---------------------> "seven hundred" -+                              +---------------------> "fifteen"
+           | "digits[0] == 7"                       |                              | "digits[1:2] == 15"              
+           |                                        |                              |                                  
+           +---------------------> "eight hundred" -+                              +---------------------> "sixteen"
+           | "digits[0] == 8"                       |                              | "digits[1:2] == 16"              
+           |                                        |                              |                                  
+           +---------------------> "nine hundred" --+                              +---------------------> "seventeen"
+             "digits[0] == 9"                                                      | "digits[1:2] == 17"              
+                                                                                   |                                  
+                                                                                   +---------------------> "eighteen" 
+                                                                                   | "digits[1:2] == 18"              
+                                                                                   |                                  
+                                                                                   +---------------------> "nineteen"
+                                                                                     "digits[1:2] == 19" 
+   ```
+
+ * If the middle digit wasn't 1, use the following mapping for the bottom digit:
+
+   | Digit | Word                  |
+   |-------|-----------------------|
+   | 0     |                       |
+   | 1     | one                   |
+   | 2     | two                   |
+   | 3     | three                 |
+   | 4     | four                  |
+   | 5     | five                  |
+   | 6     | six                   |
+   | 7     | seven                 |
+   | 8     | eight                 |
+   | 9     | nine                  |
+
+   ```{svgbob}
+                        <-----------------+----------------------------------------------------------------------------+
+                          "digits[2] == 0"|                                                                            |
+                                          |                                         +---------------------> -----------+
+                "one"   <-----------------+                                         | "digits[1] == 0"                 |
+                          "digits[2] == 1"|                                         |                                  |
+                                          |                                         +---------------------> "twenty" --+
+                "two"   <-----------------+                                         | "digits[1] == 2"                 |
+                          "digits[2] == 2"|                                         |                                  |
+                                          |                                         +---------------------> "thirty" --+
+                "three" <-----------------+                                         | "digits[1] == 3"                 |
+                          "digits[2] == 3"|                                         |                                  |
+                                          |                                         +---------------------> "forty" ---+
+                "four"  <-----------------+                                         | "digits[1] == 4"                 |
+                          "digits[2] == 4"|                                         |                                  |
+                                          |                                         +---------------------> "fifty" ---+
+                "five"  <-----------------+                                         | "digits[1] == 5"                 |
+                          "digits[2] == 5"|                                         |                                  |
+                                          |                                         +---------------------> "sixty" ---+
+                "six"   <-----------------+                                         | "digits[1] == 6"                 |
+                          "digits[2] == 6"|                                         |                                  |
+                                          |                                         +---------------------> "seventy" -+
+                "seven" <-----------------+                                         | "digits[1] == 7"                 |
+                          "digits[2] == 7"|                                         |                                  |
+                                          |                                         +---------------------> "eighty" --+
+                "eight" <-----------------+                                         | "digits[1] == 8"                 |
+                          "digits[2] == 8"|                                         |                                  |
+                                          |                                         +---------------------> "ninety" --+
+                "nine"  <-----------------+                                         | "digits[1] == 9"
+                          "digits[2] == 9"                                     +----+
+                                                                               | if
+                                                            +------------------+
+                                                            | "digits[1] != 1"
+   +-------+---------------------> -----------------+-------+
+      if   | "digits[0] == 0"                       |   if  |
+           |                                        |       +-----------------+
+           +---------------------> "one hundred" ---+        "digits[1] == 1" |
+           | "digits[0] == 1"                       |                         +----+
+           |                                        |                           if |
+           +---------------------> "two hundred" ---+                              +---------------------> "ten"
+           | "digits[0] == 2"                       |                              | "digits[1:2] == 10"              
+           |                                        |                              |                                  
+           +---------------------> "three hundred" -+                              +---------------------> "eleven"
+           | "digits[0] == 3"                       |                              | "digits[1:2] == 11"              
+           |                                        |                              |                                  
+           +---------------------> "four hundred" --+                              +---------------------> "twelve"
+           | "digits[0] == 4"                       |                              | "digits[1:2] == 12"              
+           |                                        |                              |                                  
+           +---------------------> "five hundred" --+                              +---------------------> "thirteen" 
+           | "digits[0] == 5"                       |                              | "digits[1:2] == 13"              
+           |                                        |                              |                                  
+           +---------------------> "six hundred" ---+                              +---------------------> "fourteen" 
+           | "digits[0] == 6"                       |                              | "digits[1:2] == 14"              
+           |                                        |                              |                                  
+           +---------------------> "seven hundred" -+                              +---------------------> "fifteen"
+           | "digits[0] == 7"                       |                              | "digits[1:2] == 15"              
+           |                                        |                              |                                  
+           +---------------------> "eight hundred" -+                              +---------------------> "sixteen"
+           | "digits[0] == 8"                       |                              | "digits[1:2] == 16"              
+           |                                        |                              |                                  
+           +---------------------> "nine hundred" --+                              +---------------------> "seventeen"
+             "digits[0] == 9"                                                      | "digits[1:2] == 17"              
+                                                                                   |                                  
+                                                                                   +---------------------> "eighteen" 
+                                                                                   | "digits[1:2] == 18"              
+                                                                                   |                                  
+                                                                                   +---------------------> "nineteen"
+                                                                                     "digits[1:2] == 19" 
+   ```
 
 In the example above, each group would get converted as follows...
 
@@ -2543,12 +2765,14 @@ In the example above, each group would get converted as follows...
 
 The words for each group get a special suffix. For each group from right-to-left, ...
 
- 1. 
- 2. thousand
- 3. million
- 4. billion
- 5. trillion
- 6. ...
+| Group | Word                  |
+|-------|-----------------------|
+| 1     |                       |
+| 2     | thousand              |
+| 3     | million               |
+| 4     | billion               |
+| 5     | trillion              |
+| ...   | ...                   |
 
 In the example above, each group would get its corresponding suffix added...
 
@@ -3055,12 +3279,37 @@ python
 Whole Number Word Conversion
 ```
 
-`{bm} Integer number word conversion` is the process of taking an integer number and converting it to words. To convert an integer number to words, begin by converting the sign to a word. If the number is ...
+`{bm} Integer number word conversion` is the process of taking an integer number and converting it to words. The algorithm used by humans to convert an integer number to words is as follows:
+
+Begin by converting the sign to a word. If the number is ...
 
  * negative, use the word "negative".
- * zero or positive, ignore.
+ * 0 or positive, ignore.
+
+```{svgbob}
+        +-----------> "negative"
+        | "number.sign == Negative"
+--------+
+if      |
+        +------------> 
+          "number == 0 or number.sign == Positive"
+```
+
+```{note}
+1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
+2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
+```
 
 Then, write out the actual number as you would during whole number word conversion.
+
+```{svgbob}
+        +-----------> "negative" ---------------+
+        | "number.sign == Negative"             |
+--------+                                       +------------> "[write number]"
+if      |                                       |
+        +------------> -------------------------+
+          "number == 0 or number.sign == Positive"
+```
 
 For example, the number...
 
@@ -3068,13 +3317,6 @@ For example, the number...
  * 9 ⟶ nine
  * -55139 ⟶ negative fifty five thousand one hundred thirty nine
  * 0 ⟶ zero
-
-```{note}
-There are a few tweaks to the above algorithm that may be applied:
-
-1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
-2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
-```
 
 The way to perform this algorithm via code is as follows...
 
@@ -4645,60 +4887,48 @@ Suppose you wanted to clear the denominator of this compound fraction. You could
 Integer Number Word Conversion
 ```
 
-`{bm} Fraction number word conversion` is the process of taking a fraction number and converting it to words. There are two ways to convert a fraction number to words:
+`{bm} Fraction number word conversion` is the process of taking a fraction number and converting it to words. The algorithm used by humans to convert a fraction number to words is as follows:
 
-1. The first way.
- 
-   Begin by converting the sign to a word. If the number is ...
-   
-   * negative, use the word "negative".
-   * zero or positive, ignore.
-   
-   Then, ...
-   
-   1. write out the numerator as you would during whole number word conversion,
-   2. write out the word "over",
-   3. write out the denominator as you would during whole number word conversion.
-   
-   For example, the number...
-   
-   * -2/9 ⟶ negative two over nine
-   * 2/9 ⟶ two over nine
-   * -1255/7 ⟶ negative one thousand two hundred fifty five over seven
-   * 0/1 ⟶ zero over one
+Begin by converting the sign to a word. If the number is ...
 
-2. The second way.
- 
-   Begin by writing out the words "quotient of" or "ratio of". Then, if the number ...
-   
-   * negative, use the word "negative".
-   * zero or positive, ignore.
+* negative, use the word "negative".
+* 0 or positive, ignore.
 
-   Then, ...
-   
-   1. write out the numerator as you would during whole number word conversion,
-   2. write out the word "and",
-   3. write out the denominator as you would during whole number word conversion.
-
-   For example, the number...
-   
-   * -2/9 ⟶ quotient of negative two and nine
-   * 2/9 ⟶ quotient of two and nine
-   * -1255/7 ⟶ quotient of negative one thousand two hundred fifty five and seven
-   * 0/1 ⟶ quotient of zero over one
-
-   ```{note}
-   Recall that "quotient of" is also used to represent a division operation. This is fine because recall that a fraction number is technically an unresolved integer division operation.
-   ```
+```{svgbob}
+        +-----------> "negative"
+        | "number.sign == Negative"
+--------+
+if      |
+        +------------> 
+          "number == 0 or number.sign == Positive"
+```
 
 ```{note}
-As withe integer number word conversion, there are a few tweaks to the above algorithm that may be applied.
-
-In terms of sign:
-
 1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
 2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
 ```
+
+Then, ...
+   
+1. write out the numerator as you would during whole number word conversion,
+2. write out the word "over",
+3. write out the denominator as you would during whole number word conversion.
+
+```{svgbob}
+        +-----------> "negative" -----------------------+                                                              
+        | "number.sign == Negative"                     |                                                              
+--------+                                               +----> "[write numerator]" ---> "over" ---> "[write denominator]"
+if      |                                               |                                                              
+        +------------> ---------------------------------+                                                              
+          "number == 0 or number.sign == Positive"
+```
+
+For example, the number...
+
+* -2/9 ⟶ negative two over nine
+* 2/9 ⟶ two over nine
+* -1255/7 ⟶ negative one thousand two hundred fifty five over seven
+* 0/1 ⟶ zero over one
 
 The way to perform this algorithm via code is as follows...
 
@@ -4710,6 +4940,53 @@ python
 
 ```{fracnumtowords}
 -1234/12
+```
+
+There's a slightly varied form of the algorithm above that's also acceptable:
+
+Begin by writing out the words "quotient of" or "ratio of". Then, if the number ...
+
+* negative, use the word "negative".
+* 0 or positive, ignore.
+
+```{svgbob}
+   +---> "quotient of" ---+        +-----------> "negative"
+   |                      |        | "number.sign == Negative"
+---+                      +--------+
+   |                      |  if    |
+   +---> "ratio of" ------+        +------------> 
+                                      "number == 0 or number.sign == Positive"
+```
+
+```{note}
+1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
+2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
+```
+
+Then, ...
+
+1. write out the numerator as you would during whole number word conversion,
+2. write out the word "and",
+3. write out the denominator as you would during whole number word conversion.
+
+```{svgbob}
+   +---> "quotient of" ---+        +-----------> "negative" ---------------------+                                                              
+   |                      |        | "number.sign == Negative"                   |
+---+                      +--------+                                             +----> "[write numerator]" ---> "and" ---> "[write denominator]"
+   |                      |  if    |                                             |
+   +---> "ratio of" ------+        +------------> -------------------------------+                                                              
+                                      "number == 0 or number.sign == Positive"
+```
+
+For example, the number...
+
+* -2/9 ⟶ quotient of negative two and nine
+* 2/9 ⟶ quotient of two and nine
+* -1255/7 ⟶ quotient of negative one thousand two hundred fifty five and seven
+* 0/1 ⟶ quotient of zero over one
+
+```{note}
+Recall that "quotient of" is also used to represent a division operation. This is fine because recall that a fraction number is technically an unresolved integer division operation.
 ```
 
 # Decimal Number
@@ -4795,8 +5072,6 @@ if      |
 ```
 
 ```{note}
-In certain cases, humans may apply tweaks to the above algorithm:
-
 1. It's acceptable to use the word "positive" when the sign is positive (recall 0 is neither positive nor negative).
 2. It's acceptable to use the word "minus" instead of "negative." However, doing so may introduce ambiguity if the words are being used in the context of subtraction because minus also means subtraction.
 ```
@@ -4849,7 +5124,7 @@ If the partial is more than 1 piece, append the letter s to the number being wri
         +-----------> "negative" ------+------> "[write wholes]" -------+                                              |
         | "number.sign == Negative"    |                            if  |                                              |
 --------+                              |                                +-------->                                     |
-if      |                              |                                  "number.partial == 0"                        |
+   if   |                              |                                  "number.partial == 0"                        |
         +-----------> -----------------+                                                                               |
         | "number.sign == Positive"                                                                                    |
         |                                                                                                              |
@@ -4862,33 +5137,33 @@ if      |                              |                                  "numbe
 |
 |         
 +-------+------------------------------>
-   if   | "number.partial == 0"
-        |
-        +------------------------------> tenths
-        | "len(number.partial) == 1"
-        |
-        +------------------------------> hundredths
-        | "len(number.partial) == 2"
-        |
-        +------------------------------> thousandths
-        | "len(number.partial) == 3"
-        |
-        +------------------------------> "ten-thousandths"
-        | "len(number.partial) == 4"
-        |
-        +------------------------------> "hundred-thousandths"
-        | "len(number.partial) == 5"
-        |
-        +------------------------------> "millionths"
-        | "len(number.partial) == 6"
-        |
-        +------------------------------> "ten-millionths"
-        | "len(number.partial) == 7"
-        |
-        +------------------------------> "hundred-millionths"
-        | "len(number.partial) == 8"
-        |
-        +------------------------------> "..."
+   if   | "number.partial == 0"                                         +-----------> s
+        |                                                               | "number.partial > 1"
+        +------------------------------> "tenths" ---------------+------+
+        | "len(number.partial) == 1"                             |  if  |
+        |                                                        |      +----------->
+        +------------------------------> "hundredths" -----------+        "number.partial <= 1"
+        | "len(number.partial) == 2"                             |
+        |                                                        |
+        +------------------------------> "thousandths" ----------+
+        | "len(number.partial) == 3"                             |
+        |                                                        |
+        +------------------------------> "ten-thousandths" ------+
+        | "len(number.partial) == 4"                             |
+        |                                                        |
+        +------------------------------> "hundred-thousandths" --+
+        | "len(number.partial) == 5"                             |
+        |                                                        |
+        +------------------------------> "millionths" -----------+
+        | "len(number.partial) == 6"                             |
+        |                                                        |
+        +------------------------------> "ten-millionths" -------+
+        | "len(number.partial) == 7"                             |
+        |                                                        |
+        +------------------------------> "hundred-millionths" ---+
+        | "len(number.partial) == 8"                             |
+        |                                                        |
+        +------------------------------> "..." ------------------+
           "..."
 ```
 
@@ -4903,13 +5178,13 @@ For example, the number...
 The way to perform this algorithm via code is as follows...
 
 ```{output}
-arithmetic_code/FractionNumber.py
+arithmetic_code/DecimalNumber.py
 python
 #MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
 ```
 
-```{fracnumtowords}
--1234/12
+```{decnumtowords}
+-33.125
 ```
 
 ## Round
