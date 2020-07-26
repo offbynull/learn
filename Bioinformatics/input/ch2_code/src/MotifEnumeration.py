@@ -1,34 +1,8 @@
 from typing import Set, List
 
+from FindAllDnaKmersWithinHammingDistance import find_all_dna_kmers_within_hamming_distance
+from HammingDistanceBetweenKmers import hamming_distance
 from Utils import slide_window
-
-
-def find_all_dna_kmers_within_hamming_distance(kmer: str, hamming_dist: int) -> Set[str]:
-    def recurse(kmer: str, hamming_dist: int, output: Set[str]) -> None:
-        if hamming_dist == 0:
-            output.add(kmer)
-            return
-
-        for i in range(0, len(kmer)):
-            for ch in 'ACTG':
-                neighbouring_kmer = kmer[:i] + ch + kmer[i + 1:]
-                recurse(neighbouring_kmer, hamming_dist - 1, output)
-
-    output = set()
-    recurse(kmer, hamming_dist, output)
-
-    return output
-
-
-def hamming_distance(kmer1: str, kmer2: str) -> int:
-    mismatch = 0
-
-    for ch1, ch2 in zip(kmer1, kmer2):
-        if ch1 != ch2:
-            mismatch += 1
-
-    return mismatch
-
 
 # Don't get confused by this method. It enumerates every possible kmer that COULD be the motif. That is, every possible
 # kmer that has a matching kmer in each string in dnas[]. "Matching kmer" in this case means matching within some
