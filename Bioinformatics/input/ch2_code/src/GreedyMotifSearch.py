@@ -5,11 +5,7 @@ from MotifMatrixProfile import motif_matrix_profile
 from ScoreMotif import score_motif
 from Utils import slide_window
 
-STOP STOP STOP! TODO:
-Go into the stepik comment section for this code challenge and the algorithm explanation before it. Add a comment
-clarifying the explanation because both the pseudo code and explanation are extremely poorly written. Do this before
-moving forward and maybe add the comment here as well to clarify what's going on. Also add a greedy algorithm section
-in the terminology section of the document
+
 def greedy_motif_search(k: int, dnas: List[str]):
     best_motif_matrix = [dna[0:k] for dna in dnas]
 
