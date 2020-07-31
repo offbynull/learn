@@ -207,10 +207,33 @@ class IntegerNumber:
         return output.lstrip()
     #MARKDOWN_TO_WORDS
 
+    #MARKDOWN_EQ
+    @log_decorator
     def __eq__(self: IntegerNumber, other: IntegerNumber) -> bool:
-        return self.sign == other.sign and self.magnitude == other.magnitude
+        log(f'Equality testing {self} and {other}...')
+        log_indent()
 
+        log(f'Testing sign equality ({self.sign} vs {other.sign})...')
+        sign_eq = self.sign == other.sign
+        log(f'{sign_eq}')
+
+        log(f'Testing magnitude equality ({self.magnitude} vs {other.magnitude})...')
+        mag_eq = self.magnitude == other.magnitude
+        log(f'{mag_eq}')
+
+        log_unindent()
+        ret = sign_eq and mag_eq
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_EQ
+
+    #MARKDOWN_LT
+    @log_decorator
     def __lt__(self: IntegerNumber, other: IntegerNumber) -> bool:
+        log(f'Less than testing {self} and {other}...')
+        log_indent()
+
         self_sign = self.sign
         if self_sign is None:  # assume 0 is a positive -- it simplifies logic below
             self_sign = Sign.POSITIVE
@@ -220,18 +243,34 @@ class IntegerNumber:
             other_sign = Sign.POSITIVE
 
         if self_sign == Sign.POSITIVE and other_sign == Sign.POSITIVE:
-            return self.magnitude < other.magnitude
+            log(f'{self.sign} < {other.sign}: Applying whole number less than...')
+            ret = self.magnitude < other.magnitude
         elif self_sign == Sign.NEGATIVE and other_sign == Sign.NEGATIVE:
-            return self.magnitude > other.magnitude
+            log(f'{self.sign} < {other.sign}: Turning positive and applying whole number greater than...')
+            ret = self.magnitude > other.magnitude
         elif self_sign == Sign.POSITIVE and other_sign == Sign.NEGATIVE:
-            return False
+            log(f'{self.sign} < {other.sign}:: Different signs -- number being tested is positive...')
+            ret = False
         elif self_sign == Sign.NEGATIVE and other_sign == Sign.POSITIVE:
-            return True
+            log(f'{self.sign} < {other.sign}: Different signs -- number being tested is negative...')
+            ret = True
+        log(f'{ret}')
+
+        log_unindent()
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_LT
 
     def __le__(self: IntegerNumber, other: IntegerNumber) -> bool:
         return self < other or self == other
 
+    #MARKDOWN_GT
+    @log_decorator
     def __gt__(self: IntegerNumber, other: IntegerNumber) -> bool:
+        log(f'Greater than testing {self} and {other}...')
+        log_indent()
+
         self_sign = self.sign
         if self_sign is None:  # assume 0 is a positive -- it simplifies logic below
             self_sign = Sign.POSITIVE
@@ -241,13 +280,24 @@ class IntegerNumber:
             other_sign = Sign.POSITIVE
 
         if self_sign == Sign.POSITIVE and other_sign == Sign.POSITIVE:
-            return self.magnitude > other.magnitude
+            log(f'{self.sign} > {other.sign}: Applying whole number less than...')
+            ret = self.magnitude > other.magnitude
         elif self_sign == Sign.NEGATIVE and other_sign == Sign.NEGATIVE:
-            return self.magnitude < other.magnitude
+            log(f'{self.sign} > {other.sign}: Turning positive and applying whole number greater than...')
+            ret = self.magnitude < other.magnitude
         elif self_sign == Sign.POSITIVE and other_sign == Sign.NEGATIVE:
-            return True
+            log(f'{self.sign} > {other.sign}:: Different signs -- number being tested is positive...')
+            ret = True
         elif self_sign == Sign.NEGATIVE and other_sign == Sign.POSITIVE:
-            return False
+            log(f'{self.sign} > {other.sign}: Different signs -- number being tested is negative...')
+            ret = False
+        log(f'{ret}')
+
+        log_unindent()
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_GT
 
     def __ge__(self: IntegerNumber, other: IntegerNumber) -> bool:
         return self > other or self == other
@@ -282,4 +332,6 @@ if __name__ == '__main__':
     # print(f'{IntegerNumber.from_int(2) - IntegerNumber.from_int(2)}')
     # print(f'{IntegerNumber.from_int(-2) - IntegerNumber.from_int(-2)}')
 
-    print(f'{IntegerNumber.from_int(-2249).to_words()}')
+    print(f'{IntegerNumber.from_int(-2249) == IntegerNumber.from_int(-2249)}')
+    print(f'{IntegerNumber.from_int(-2249) == IntegerNumber.from_int(2249)}')
+    print(f'{IntegerNumber.from_int(-2249) == IntegerNumber.from_int(0)}')

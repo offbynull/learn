@@ -135,8 +135,8 @@ class WholeNumber:
     def copy(self: WholeNumber) -> WholeNumber:
         return WholeNumber(self.digits)
 
-
-
+    #MARKDOWN_EQ
+    @log_decorator
     def __eq__(self: WholeNumber, other: WholeNumber) -> bool:
         if isinstance(other, int):
             other = WholeNumber.from_int(other)
@@ -146,8 +146,19 @@ class WholeNumber:
         if not isinstance(other, WholeNumber):
             raise Exception()
 
-        return self.digits == other.digits
+        log(f'Equality testing {self} and {other}...')
+        log_indent()
 
+        ret = self.digits == other.digits
+
+        log_unindent()
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_EQ
+
+    #MARKDOWN_LT
+    @log_decorator
     def __lt__(self: WholeNumber, other: WholeNumber) -> bool:
         if isinstance(other, int):
             other = WholeNumber.from_int(other)
@@ -157,19 +168,30 @@ class WholeNumber:
         if not isinstance(other, WholeNumber):
             raise Exception()
 
+        log(f'Less than testing {self} and {other}...')
+        log_indent()
+
         count = max(len(self.digits), len(other.digits))
         for pos in reversed(range(0, count)):  # from smallest to largest component
+            log(f'Test digits {self[pos]} and {other[pos]}...')
             if self[pos] > other[pos]:
+                log(f'{self[pos]} > {other[pos]} -- {self} is NOT less than {other}, it is greater than')
                 return False
             elif self[pos] < other[pos]:
+                log(f'{self[pos]} < {other[pos]} -- {self} is less than {other}')
                 return True
             else:
-                pass
+                log(f'{self[pos]} == {other[pos]} -- continuing testing')
+
+        log(f'No more digits to test -- {self} is NOT less than {other}, it is equal')
         return False
+    #MARKDOWN_LT
 
     def __le__(self: WholeNumber, other: WholeNumber) -> bool:
         return self < other or self == other
 
+    #MARKDOWN_GT
+    @log_decorator
     def __gt__(self: WholeNumber, other: WholeNumber) -> bool:
         if isinstance(other, int):
             other = WholeNumber.from_int(other)
@@ -179,15 +201,24 @@ class WholeNumber:
         if not isinstance(other, WholeNumber):
             raise Exception()
 
+        log(f'Greater than testing {self} and {other}...')
+        log_indent()
+
         count = max(len(self.digits), len(other.digits))
         for pos in reversed(range(0, count)):  # from smallest to largest component
+            log(f'Test digits {self[pos]} and {other[pos]}...')
             if self[pos] > other[pos]:
+                log(f'{self[pos]} > {other[pos]} -- {self} is greater than {other}')
                 return True
             elif self[pos] < other[pos]:
+                log(f'{self[pos]} < {other[pos]} -- {self} is NOT greater than {other}, it is less than')
                 return False
             else:
-                pass
+                log(f'{self[pos]} == {other[pos]} -- continuing testing')
+
+        log(f'No more digits to test -- {self} is NOT greater than {other}, it is equal')
         return False
+    #MARKDOWN_GT
 
     def __ge__(self: WholeNumber, other: WholeNumber) -> bool:
         return self > other or self == other

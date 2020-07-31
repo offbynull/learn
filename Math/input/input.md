@@ -13,7 +13,7 @@ The `{bm} place value system/(place value system|place-value system|place value 
 The symbols used to represent a number are called `{bm} digit`s. All digits to the...
 
  * left of the dot represents wholes.
- * right of the dot represents a partial (less than a whole).
+ * right of the dot represents a partial (less than_REL a whole).
 
 These wholes and partial are combined to represent the final value for the number. The exact grammar and algorithm for computing the final value is detailed below.
 
@@ -174,7 +174,7 @@ number: whole ('.' partial)?;
 It's expected that you fully understand the whole rule because whole numbers are used to explain the partial rule.
 ```
 
-The partial rule is used to express a portion of a whole. In other words, some value that is less than a whole.
+The partial rule is used to express a portion of a whole. In other words, some value that is less than_REL a whole.
 
 If the partial rule is not set, it's assumed to be 0.
 
@@ -262,13 +262,245 @@ The algorithm for processing the partial rule is similar to the conceptual model
     55
     ```
 
-# Addition
+# Number Line
 
 ```{prereq}
 Place value system
 ```
 
-`{bm} Addition` is the concept of taking 2 numbers and combining their values together. For example, combining 3 items and 5 items together results in 7 items...
+A `{bm} number line/(number line|number-line|numberline)/i` is a way to visualize the value that a number represents. It consists of a straight horizontal line with equidistant vertical notches spliced through out, where each notch is labelled with incrementally larger numbers from left-to-right...
+
+```{svgbob}
+|---|---|---|---|---|---|---|---|---|
+0   1   2   3   4   5   6   7   8   9
+```
+
+The number being represented is marked on the line. For example, to represent the number 5...
+
+```{svgbob}
+                    5
+                    |
+                    v
+|---|---|---|---|---|---|---|---|---|
+0   1   2   3   4   5   6   7   8   9
+```
+
+Numbers with partial portions may also be marked on the line. Move the marker to the whole portion of the number, then determine the amount of space that the partial portion consumes and move over that much towards the next notch. For example, to represent the number 5.5...
+
+```{diagramhelperfrac}
+radius 40
+11
+2
+```
+
+First, move the marker over to the whole: 5...
+
+```{svgbob}
+                    5
+                    |
+                    v
+|---|---|---|---|---|---|---|---|---|
+0   1   2   3   4   5   6   7   8   9
+```
+
+Then, determine how much space in the partial portion was consumed. 5.5's partial portion takes up half a circle, so it gets moved half way towards the next notch...
+
+```{svgbob}
+                     5.5
+                      |
+                      v
+|---|---|---|---|---|---|---|---|---|
+0   1   2   3   4   5   6   7   8   9
+```
+
+# Equality
+
+```{prereq}
+Place value system
+Number line
+```
+
+`{bm} Equality` is the concept of checking if one number to see if it has the same value as another number. In other words, checking if both numbers are the same. For example, the numbers 5 and 5 are the same number, so they're said to be equal.
+
+If you were to visualize both numbers on a number line, they would both sit at the same position...
+
+```{svgbob}
+5       vs 5
+[●●●●●] vs [●●●●●]
+                    5
+                    |
+                    v
+|---|---|---|---|---|---|---|---|---|
+0   1   2   3   4   5   6   7   8   9
+                    ^
+                    |
+                    5
+```
+
+Equality is typically represented using the infix operator = or ==. The above example would be represented as 5=5.
+
+The output of an equality operation is either true or false: true when the numbers are the same and false when they aren't. For example, ...
+* 5 = 5 is true because the numbers are the same.
+* 5 = 7 is false because the numbers aren't the same.
+
+When using words, equality is typically represented using the following syntax:
+
+* `{bm} equal` -- e.g. 5 equals 5
+* `{bm} is/(\bis\b)/i` -- e.g. 5 is 5
+* `{bm} was` -- e.g. 5 was 5
+* `{bm} will be` -- e.g. 5 will be 5
+* `{bm} the same` -- e.g. 5 and 5 are the same
+* `{bm} gives` -- e.g. performing the operation gives 5
+
+```{note}
+If you know algebra, the word "gives" is applicable more so to algebra and beyond. For example: the addition of x and 1 gives 5 means x+1 = 5.
+```
+
+The opposite of equality is `{bm} not equality`. That is, not equality is the concept of checking if one number has a different number of items than another number. For example, the numbers 5 and 6 are different, so they're said to be not equal.
+
+Not equality is typically represented using the infix operator ≠ or !=. The above example would be represented as 5≠6.
+
+The output of a not equality operation is either true or false: true when the numbers are different and false when they're the same. For example, ...
+* 5 ≠ 7 is true because the numbers are different.
+* 5 ≠ 5 is false because the numbers are the same.
+
+When using words, not equality is typically represented using the following syntax:
+
+* `{bm} not equal/(not equal|isn't equal)/i` -- e.g. 6 is not equal to 5
+* `{bm} is not/(isn't|is not)/i` -- e.g. 6 is not 5
+* `{bm} was not/(wasn't|was not)/i` -- e.g. 6 was not 5
+* `{bm} won't be` -- e.g. 6 won't be 5
+* `{bm} not the same/(not the same|isn't the same)/i` -- e.g. 6 and 5 are not the same
+* `{bm} does not give/(does not give|doesn't give)/i` -- e.g. performing the operation does not give 5
+
+```{note}
+Sometimes you may see the word `{bm} inequality`. This refers to operations that compare two numbers for something other than equality: greater than_REL (>), less than_REL (<), not equality (≠), and potentially others.
+```
+
+# Greater Than
+
+```{prereq}
+Place value system
+Number line
+Equality
+```
+
+`{bm} Greater than/(greater than)_REL/i` is the concept of checking if one number represents more items than another number. For example, the number 8 has more items than the number 5, so 8 is said to be greater than_REL 5.
+
+If you were to visualize both numbers on a number line, the number 8 would be ahead of 5...
+
+```{svgbob}
+8          vs 5
+[●●●●●●●●] vs [●●●●●]
+
+                                8
+                                |
+                                v
+|---|---|---|---|---|---|---|---|---|
+0   1   2   3   4   5   6   7   8   9
+                    ^
+                    |
+                    5
+```
+
+Greater than_REL is typically represented using the infix operator >. The above example would be represented as 8>5.
+
+The output of a greater than_REL operation is either true or false: true when the first number has more items and false when it doesn't. For example, ...
+* 8 > 5 is true because the first number (8) has more items.
+* 5 > 5 is false because the first number (5) doesn't have more items.
+
+When using words, greater than_REL is typically represented using the following syntax:
+
+* greater than_REL -- e.g. 8 is greater than_REL 5
+* `{bm} larger than/(larger than)_REL/i` -- e.g. 8 is larger than_REL 5
+* `{bm} more than/(more than)_REL/i` -- e.g. 8 is more than_REL 5
+
+`{bm} Greater than or equal` is common shorthand to compare if a number is greater than_REL or equal to some other number. It's typically represented using the infix operator ≥ or >=. For example...
+
+* 8 ≥ 5 is true because the first number (8) has more items.
+* 5 ≥ 5 is true because the first number (5) has equal items.
+* 4 ≥ 5 is false because the first number (4) has less items.
+
+When using words, greater than or equal is typically represented using the following syntax:
+
+* greater than or equal -- e.g. 8 is greater than or equal 5
+* `{bm} larger than or equal` -- e.g. 8 is larger than or equal 5
+* `{bm} more than or equal` -- e.g. 8 is more than or equal 5
+* `{bm} at least` -- e.g. 8 is at least 5
+
+```{note}
+Think of at least as "not less than_REL" -- 8 is not less than_REL 5.  If you can follow the logic...
+
+* not(8 < 5)
+* 8 ≥ 5
+```
+
+# Less Than
+
+```{prereq}
+Place value system
+Number line
+Equality
+```
+
+`{bm} Less than/(less than)_REL/i` is the concept of checking if one number has fewer items than another number. For example, the number 5 has fewer items than the number 8, so 5 is said to be less than_REL 8.
+
+If you were to visualize both numbers on a number line, the number 5 would be behind of 8...
+
+```{svgbob}
+5       vs 8
+[●●●●●] vs [●●●●●●●●]
+
+                    5
+                    |
+                    v
+|---|---|---|---|---|---|---|---|---|
+0   1   2   3   4   5   6   7   8   9
+                                ^
+                                |
+                                8
+```
+
+Less than_REL is typically represented using the infix operator <. The above example would be represented as 5<8.
+
+The output of a less than_REL operation is either true or false: true when the first number has fewer items and false when it doesn't. For example, ...
+* 5 < 8 is true because the first number (5) has fewer items.
+* 5 > 5 is false because the first number (5) doesn't have fewer items.
+
+When using words, less than_REL is typically represented using the following syntax:
+
+* less than_REL -- e.g. 5 is less than_REL 8
+* `{bm} smaller than/(smaller than)_REL/i` -- e.g. 5 is smaller than_REL 8
+* `{bm} fewer than/(fewer than)_REL/i` -- e.g. 5 is fewer than_REL 8
+
+`{bm} Less than or equal` is common shorthand to compare if a number is less than_REL or equal to some other number. It's typically represented using the infix operator ≤ or <=. For example...
+
+* 5 ≤ 8 is true because the first number (5) has less items.
+* 5 ≤ 5 is true because the first number (5) has equal items.
+* 5 ≤ 4 is false because the first number (5) has more items.
+
+When using words, less than or equal is typically represented using the following syntax:
+
+* less than or equal -- e.g. 8 is less than or equal 5
+* `{bm} smaller than or equal` -- e.g. 8 is smaller than or equal 5
+* `{bm} fewer than or equal` -- e.g. 8 is less than or equal 5
+* `{bm} at most` -- e.g. 5 is at most 8
+
+```{note}
+Think of at most as "not more than_REL" -- 5 is not more than_REL 8. If you can follow the logic...
+
+* not(5 > 8)
+* 5 ≤ 8
+```
+
+# Addition
+
+```{prereq}
+Place value system
+Equality
+```
+
+`{bm} Addition` is the concept of taking two numbers and combining their values together. For example, combining 3 items and 5 items together results in 7 items...
 
 ```
  [●●●]    [●●●●●]
@@ -282,17 +514,16 @@ group values together
 
 Addition is typically represented using the infix operator +. The above example would be represented as 3+5.
 
-```{note}
-You can think of this as a function that takes in 2 arguments: add(3, 5).
-```
-
 When using words, addition is typically represented using the following syntax:
 
+* addition -- e.g. the addition of 3 and 5
 * `{bm} add` -- e.g. add 3 and 5
 * `{bm} plus` -- e.g. 3 plus 5
 * `{bm} sum` -- e.g. sum of 3 and 5
 * `{bm} increase` -- e.g. 3 increased by 5
-* `{bm} more than` -- e.g. 3 more than 5
+* `{bm} more than/(more than)_ADD/i` -- e.g. 3 more than_ADD 5
+* `{bm} larger than/(larger than)_ADD/i` -- e.g. 3 larger than_ADD 5
+* `{bm} greater than/(greater than)_ADD/i` -- e.g. 3 greater than_ADD 5
 * `{bm} total` -- e.g. total of 3 and 5
 
 Properties of addition:
@@ -321,6 +552,7 @@ Properties of addition:
 
 ```{prereq}
 Place value system
+Equality
 ```
 
 `{bm} Subtraction` is the concept of removing the value of one number from another number. For example, removing 3 items from 5 items results in 2 items...
@@ -337,17 +569,16 @@ pick out 3 from the 5
 
 Subtraction is typically represented using the infix operator -. The above example would be represented as 5-3.
 
-```{note}
-You can think of this as a function that takes in 2 arguments: subtract(5, 3).
-```
-
 When using words, subtraction is typically represented using the following syntax:
 
+* subtraction -- e.g. the subtraction of 3 and 5
 * `{bm} minus` -- e.g. 5 minus 3
 * `{bm} difference of` -- e.g. difference of 5 and 3
 * `{bm} subtracted by` -- e.g. 5 subtracted by 3
 * `{bm} decreased by` -- e.g. 5 decreased by 3
-* `{bm} less than` -- e.g. 5 less than 3
+* `{bm} less than/(less than)_SUB/i` -- e.g. 3 less than_SUB 5
+* `{bm} fewer than/(fewer than)_SUB/i` -- e.g. 3 fewer than_SUB 5
+* `{bm} smaller than/(smaller than)_SUB/i` -- e.g. 3 smaller than_SUB 5
 * `{bm} subtracted from` -- e.g. 3 subtracted from 5
 
 Properties of subtraction:
@@ -367,6 +598,7 @@ Unlike addition, subtraction is not commutative. 5-3 isn't the same as 3-5
 
 ```{prereq}
 Place value system
+Equality
 Addition
 ```
 
@@ -397,12 +629,9 @@ The inputs into the multiplication operation are either...
 * called factors -- in the example above, 3 and 5 are the factors,
 * or the first input is called the `{bm} multiplier` and the second input is called the `{bm} multiplicand` -- in the example above, 3 is the multiplier and 5 is the multiplicand.
 
-```{note}
-You can think of this as a function that takes in 2 arguments: mult(3, 5).
-```
-
 When using words, multiplication is typically represented using the following syntax:
 
+* multiplication -- e.g. the multiplication of 3 and 5
 * `{bm} multiply` -- e.g. multiply 3 and 5
 * `{bm} multiplied` -- e.g. 3 multiplied by 5
 * `{bm} times` -- e.g. 3 times 5
@@ -457,6 +686,9 @@ Properties of multiplication:
 
 ```{prereq}
 Place value system
+Equality
+Less Than_REL
+Greater Than_REL
 Subtraction
 ```
 
@@ -543,6 +775,7 @@ The quotient is the number of times you can subtract.
 
 When using words, division is typically represented using the following syntax:
 
+* division -- e.g. the division of 3 and 15
 * `{bm} divide` -- e.g. divide 3 by 15
 * `{bm} divided by/(divided by|divide by)/i` -- e.g. 3 divided by 15
 * `{bm} divided into` -- e.g. 15 divided into 3
@@ -592,7 +825,7 @@ Properties of division:
    }
    ```
 
-   This will iterate forever if the divisor is 0 because the dividend would never become less than the divisor -- the loop wouldn't terminate.
+   This will iterate forever if the divisor is 0 because the dividend would never become less than_REL the divisor -- the loop wouldn't terminate.
 
    ```{note}
    Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
@@ -624,19 +857,282 @@ Place-value system
 0 1 2 3 4 5 6 7 8
 ```
 
-The difference between whole numbers and `{bm} natural \/ counting \/ cardnial number/(natural number|counting number|cardinal number)/i`s is that counting numbers don't include 0 (they start at 1). That is, counting numbers start where you start counting / where something exists. For example, if you're counting apples, you start counting at 1 -- there needs to be at least 1 apple to start.
+The difference between whole numbers and `{bm} natural \/ counting \/ cardinal number/(natural number|counting number|cardinal number)/i`s is that counting numbers don't include 0 (they start at 1). That is, counting numbers start where you start counting / where something exists. For example, if you're counting apples, you start counting at 1 -- there needs to be at least 1 apple to start.
+
+## Equality
+
+```{prereq}
+Equality
+```
+
+The algorithm used by humans to test for `{bm} whole number equality` relies on two idea...
+
+1. If two whole numbers are equal then they must have the same number of digits. For example, 55 and 9123456 aren't equal because the number of digits between them isn't the same -- 55 has 2 digits while 9123456 has 7 digits.
+
+   ```{note}
+   This assumes that any prepended 0 digits have been removed. Recall that 07, 007, 0007, ... all represent the same value: 7.
+   ```
+
+2. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+
+   ```
+   100
+   100
+   100
+   100
+   100            1
+   100            1
+   100     10     1
+   100     10     1
+   100     10     1
+   ---     --     -
+   900     30     5
+   
+   
+   
+   9 3 5
+   │ │ │
+   │ │ └─ ●
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │    ● 
+   │ │
+   │ └─── ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │      ●●●●●●●●●●
+   │
+   └───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+          ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+   ```
+
+Since the numbers being tested for equality must have the same number of digits between them, the first test to see if they _may_ be equal is to a ensure that the number of digits are equal (idea 1). For example, 55 has 2 digits while 9123456 has 7 digits -- there's no point in going any further because if the number of digits aren't the same then there's no way for the actual numbers to be the same.
+
+If it turns out that the number of digits are the same, then each place's digit is tested for equality (idea 2). If all the digits are equal, then the numbers are equal. For example, the numbers 195 and 195 are equal...
+
+```
+1 9 5
+| | |
+1 9 5
+```
+
+... while the numbers 175 and 195 are not equal...
+
+```
+1 7 5
+| x |
+1 9 5
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
+```
+
+```{note}
+The code is making use of python lists to do the 2 tests above. Python's list equality already applies ideas 1 and 2 internally to determine if the contents of the list are equal.
+```
+
+```{wholenumeq}
+195 195
+```
+
+## Less Than
+
+```{prereq}
+Equality
+Less than_REL
+Greater than_REL
+```
+
+The algorithm used by humans to test for `{bm} whole number less than` relies on the idea that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+
+```
+100
+100
+100
+100
+100            1
+100            1
+100     10     1
+100     10     1
+100     10     1
+---     --     -
+900     30     5
+
+
+
+9 3 5
+│ │ │
+│ │ └─ ●
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │
+│ └─── ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+```
+
+Since a number can be broken down into single digit components, each single digit component from the numbers being compared can individually tested from most significant to least significant (left-to-right). If a digit from the number being tested is...
+
+* less than_REL the corresponding digit from the number being tested against, the number being tested is less than_REL (algorithm ends).
+* greater than_REL the corresponding digit from the number being tested against, the number being tested is greater than_REL (algorithm ends).
+* equal to the corresponding digit from the number being tested against, continue to testing the next digit.
+
+If no more digits are remaining for testing, the number being tested is equal.
+
+For example, imagine testing the number 23 and 21...
+
+```
+2 3                      2 1
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │
+│    ●                   └─── ●●●●●●●●●●
+│                             ●●●●●●●●●●
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+The first digits are equal (2 == 2), so move to the next digit. The next digit is larger than_REL the other digit (3 > 1), so 23 is not less than_REL 21.
+
+```{note}
+What happens when the number of digits aren't the same between the numbers being tested (e.g. 55 and 12345)? Recall how place-value notation works. 0 can be used when a corresponding digit doesn't exist at some position.
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
+```
+
+```{wholenumlt}
+190 195
+```
+
+## Greater Than
+
+```{prereq}
+Equality
+Less than_REL
+Greater than_REL
+```
+
+The algorithm used by humans to test for `{bm} whole number greater than` relies on the idea that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+
+```
+100
+100
+100
+100
+100            1
+100            1
+100     10     1
+100     10     1
+100     10     1
+---     --     -
+900     30     5
+
+
+
+9 3 5
+│ │ │
+│ │ └─ ●
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │    ● 
+│ │
+│ └─── ●●●●●●●●●●
+│      ●●●●●●●●●●
+│      ●●●●●●●●●●
+│
+└───── ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+       ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+```
+
+Since a number can be broken down into single digit components, each single digit component from the numbers being compared can individually tested from most significant to least significant (left-to-right). If a digit from the number being tested is...
+
+* less than_REL the corresponding digit from the number being tested against, the number being tested is less than_REL (algorithm ends).
+* greater than_REL the corresponding digit from the number being tested against, the number being tested is greater than_REL (algorithm ends).
+* equal to the corresponding digit from the number being tested against, continue to testing the next digit.
+
+If no more digits are remaining for testing, the number being tested is equal.
+
+For example, imagine testing the number 23 and 21...
+
+```
+2 3                      2 1
+│ │                      │ │
+│ └─ ●                   │ └─ ●
+│    ●                   │
+│    ●                   └─── ●●●●●●●●●●
+│                             ●●●●●●●●●●
+└─── ●●●●●●●●●●
+     ●●●●●●●●●●
+```
+
+The first digits are equal (2 == 2), so move to the next digit. The next digit is larger than_REL the other digit (3 > 1), so 23 is greater than_REL than 21.
+
+```{note}
+What happens when the number of digits aren't the same between the numbers being tested (e.g. 55 and 12345)? Recall how place-value notation works. 0 can be used when a corresponding digit doesn't exist at some position.
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/WholeNumber.py
+python
+#MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
+```
+
+```{wholenumgt}
+195 190
+```
 
 ## Addition
 
 ```{prereq}
 Addition
+Whole number equality
 ```
 
 `{bm} /(whole number addition|add whole numbers|addition of whole numbers)/i`
 
 The algorithm used by humans to add large whole numbers together is called `{bm} vertical addition`. Vertical addition relies on two ideas...
 
-1. humans can easily add a single digit number to another single digit number without much effort. For example...
+1. Humans can easily add a single digit number to another single digit number without much effort. For example...
 
    * 3+4 is 7
    * 1+9 is 10
@@ -644,7 +1140,7 @@ The algorithm used by humans to add large whole numbers together is called `{bm}
 
    ... are all addition operations that don't take much effort / are already probably cached in person's memory.
 
-2. The second idea is that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+2. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
 
    ```
    100
@@ -848,13 +1344,14 @@ python
 
 ```{prereq}
 Subtraction
+Whole number equality
 ```
 
 `{bm} /(whole number subtraction|subtract whole numbers)/i`
 
 The algorithm used by humans to subtract large whole numbers from each other is called `{bm} vertical subtraction`. Vertical subtraction relies on two ideas...
 
-1. humans can easily subtract a small 1 to 2 digit numbers (anything smaller than 20) from each other without much effort. For example...
+1. Humans can easily subtract a small 1 to 2 digit numbers (anything smaller than_REL 20) from each other without much effort. For example...
 
    * 4-3 is 1
    * 10-1 is 9
@@ -862,7 +1359,7 @@ The algorithm used by humans to subtract large whole numbers from each other is 
 
    ... are all subtraction operations that don't take much effort / are already probably cached in person's memory.
 
-2. The second idea is that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
+2. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
 
    ```
    100
@@ -1204,6 +1701,7 @@ python
 
 ```{prereq}
 Multiplication
+Whole number equality
 Whole number addition
 ```
 
@@ -1597,6 +2095,7 @@ These algorithms are detailed in the subsections below.
 ### Trial and Error
 
 ```{prereq}
+Whole number equality
 Whole number subtraction
 Whole number multiplication
 ```
@@ -1774,6 +2273,7 @@ python
 ### Long Division
 
 ```{prereq}
+Whole number equality
 Trial-and-error division
 Whole number subtraction
 ```
@@ -2021,7 +2521,7 @@ The idea behind long division is to break up the dividend into its individual si
  make? "700 / 3"        make? "50 / 3"      make? "2 / 3"
 ```
 
-Each of the divisions are easy to perform because trialing 0s can be stripped-off prior to trial-and-error division (ideas 2 and 3). That is, the actual numbers being input into trial-and-error division are much smaller than they would normally be because trailing 0s are removed. Smaller numbers mean easier to perform.
+Each of the divisions are easy to perform because trialing 0s can be stripped-off prior to trial-and-error division (ideas 2 and 3). That is, the actual numbers being input into trial-and-error division are much smaller than_REL they would normally be because trailing 0s are removed. Smaller numbers mean easier to perform.
 
 ```{svgbob}
                               752                 
@@ -2052,7 +2552,7 @@ Each of the divisions are easy to perform because trialing 0s can be stripped-of
 The TE block is applying idea 3. The trialing 0s are being stripped off, trial-and-error division is being performed, then the 0s are re-append to the quotient and the remainder.
 ```
 
-The remainders need to be accounted for. That is, if there are enough remaining items to form a group, they should be grouped. The process is repeated on the remaining items until there aren't enough to form a group (until the remainder is less than the divisor). Once there aren't enough remaining items to form a group, the sum of the quotients becomes the final quotient (final number of groups) and the remainder becomes the final remainder...
+The remainders need to be accounted for. That is, if there are enough remaining items to form a group, they should be grouped. The process is repeated on the remaining items until there aren't enough to form a group (until the remainder is less than_REL the divisor). Once there aren't enough remaining items to form a group, the sum of the quotients becomes the final quotient (final number of groups) and the remainder becomes the final remainder...
 
 ```{note}
 The diagram below looks daunting but it's just 3 copies of the diagrams above stacked on top of each other -- 1 for each iteration. The remainders from each iteration are being combined and used as the input for the next iteration. The quotients from each iteration are being combined to get the total quotient (total number of groups).
@@ -2845,6 +3345,13 @@ Whole numbers
   -4   -3   -2   -1    0   +1   +2   +3   +4
 ```
 
+```{note}
+The word ...
+
+* `{bm} non-positive` means 0 or negative.
+* `{bm} non-negative` means 0 or positive.
+```
+
 The prefix that determines if a integer is positive or negative is referred to as the `{bm} sign`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
 
 ```{note}
@@ -2905,11 +3412,251 @@ Conceptually, you can think of the positives the same way you think about natura
   v
   ```
 
+## Equality
+
+```{prereq}
+Whole number equality
+```
+
+`{bm} Integer equality/(integer number equality|integer equality)/i` is an extension of whole number equality. In whole number equality, the digit at each position must match between the numbers being compared. Integer equality adds an extra stipulation: the signs of the number must match as well.
+
+For example, the numbers -195 and 195 are not equal...
+
+```
+- 1 9 5
+x | | |
++ 1 9 5
+```
+
+... while the numbers -195 and -195 are equal...
+
+```
+- 1 9 5
+| | | |
+- 1 9 5
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
+```
+
+```{intnumeq}
+-195 -195
+```
+
+## Less Than
+
+```{prereq}
+Number line
+Whole number less than
+Whole number greater than
+```
+
+`{bm} Integer less than/(integer number less than|integer less than)/i` follows the same core concept as whole number less than: if marked on a number line, the number being tested must be to the left of the other number. For example, -4 < 2 is true because -4 is to the left of 2 on the number line...
+
+```{svgbob}
+        -4
+         |
+         v
+<--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+                           ^
+                           |
+                          +2
+```
+
+However, the number line for integers is more complex than the number line for whole numbers. The negatives and positives mirror at 0 and they grow in opposite directions:
+
+```{svgbob}
+"larger negatives as"             "larger positives as"
+"you move left"                   "you move right"
+<--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  -8 -7 -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+```
+
+* positive numbers grow as you move right-ward (e.g. 1, 2, 3, ...).
+* negative numbers grow as you move left-ward (e.g. ..., -3, -2, -1).
+
+The algorithm for integer number less than applies different logic depending on the sign of each number. Specifically, if the numbers are...
+
+* both non-negative, apply the whole number less than algorithm. For example, 2 < 5 would be processed just as if it were a whole number...
+
+  ```{svgbob}
+       +2
+        |
+        v
+  +--+--+--+--+--+--+-->
+  |  |  |  |  |  |  |
+  0 +1 +2 +3 +4 +5 +6
+                 ^
+                 |
+                +5
+  ```
+
+  ```{note}
+  Non-negative includes both 0 and positive numbers.
+  ```
+
+* both non-positive, switch the negative signs to positive signs and apply the whole number greater than algorithm. For example, -5 < -2 would become 5 > 2...
+
+  ```{svgbob}
+       -5                    |                    +5
+        |                    |                     |
+        v                    |                     v
+  <--+--+--+--+--+--+--+     |      +--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |     |      |  |  |  |  |  |  |
+    -6 -5 -4 -3 -2 -1  0     |      0 +1 +2 +3 +4 +5 +6
+                 ^           |            ^
+                 |           |            |
+                -2           |           +2
+  ```
+
+  After switching signs, the number being tested (5) is to the right of the other number (2). 5 > 2 would be processed just as if it were a whole number.
+
+  ```{note}
+  Non-positive includes both 0 and negative numbers.
+  ```
+
+* negative and positive, return true only if the negative number is the one being tested. For example, 2 < -4 is false because 2 (the number being tested) isn't negative...
+
+  ```{svgbob}
+                         +2
+                          |
+                          v
+  <--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |
+    -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5
+        ^
+        |
+       -4
+  ```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
+```
+
+```{intnumlt}
+-195 -194
+```
+
+## Greater Than
+
+```{prereq}
+Number line
+Whole number less than
+Whole number greater than
+```
+
+`{bm} Integer greater than/(integer number greater than|integer greater than)/i` follows the same core concept as whole number greater than: if marked on a number line, the number being tested must be to the right of the other number. For example, 2 > -4 is true because 2 to the right of -4 on the number line...
+
+```{svgbob}
+                          +2
+                           |
+                           v
+<--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+         ^
+         |
+        -4
+```
+
+However, the number line for integers is more complex than the number line for whole numbers. The negatives and positives mirror at 0 and they grow in opposite directions:
+
+```{svgbob}
+"larger negatives as"             "larger positives as"
+"you move left"                   "you move right"
+<--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
+   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  -8 -7 -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
+```
+
+* positive numbers grow as you move right-ward (e.g. 1, 2, 3, ...).
+* negative numbers grow as you move left-ward (e.g. ..., -3, -2, -1).
+
+The algorithm for integer number greater than applies different logic depending on the sign of each number. Specifically, if the numbers are...
+
+* both non-negative, apply the whole number greater than algorithm. For example, 5 > 2 would be processed just as if it were a whole number...
+
+  ```{svgbob}
+                +5
+                 |
+                 v
+  +--+--+--+--+--+--+-->
+  |  |  |  |  |  |  |
+  0 +1 +2 +3 +4 +5 +6
+        ^
+        |
+       +2
+  ```
+
+  ```{note}
+  Non-negative includes both 0 and positive numbers.
+  ```
+
+* both non-positive, switch the negative signs to positive signs and apply the whole number less than algorithm. For example, -2 > -5 would become 2 < 5...
+
+  ```{svgbob}
+                -2           |            +2
+                 |           |             |
+                 v           |             v
+  <--+--+--+--+--+--+--+     |       +--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |     |       |  |  |  |  |  |  |
+    -6 -5 -4 -3 -2 -1  0     |       0 +1 +2 +3 +4 +5 +6
+        ^                    |                      ^
+        |                    |                      |
+       -5                    |                     +5
+  ```
+
+  After switching signs, the number being tested (2) is to the left of the other number (5). 2 < 5 would be processed just as if it were a whole number.
+
+  ```{note}
+  Non-positive includes both 0 and negative numbers.
+  ```
+
+* negative and positive, return true only if the positive number is the one being tested. For example, 2 > -4 is true because 2 (the number being tested) is positive...
+
+  ```{svgbob}
+                         +2
+                          |
+                          v
+  <--+--+--+--+--+--+--+--+--+--+--+-->
+     |  |  |  |  |  |  |  |  |  |  |
+    -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5
+        ^
+        |
+       -4
+  ```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/IntegerNumber.py
+python
+#MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
+```
+
+```{intnumlt}
+-194 -195
+```
+
 ## Addition
 
 ```{prereq}
+Number line
 Whole number addition
 Whole number subtraction
+Integer equality
 ```
 
 Conceptually, you can think of `{bm} integer addition/(integer number addition|integer addition|add integer numbers|add integers|addition of integer numbers|addition of integers)/i` as movement on a number line. If some integer is being added to a...
@@ -2987,8 +3734,10 @@ python
 ## Subtraction
 
 ```{prereq}
+Number line
 Whole number addition
 Whole number subtraction
+Integer equality
 Integer addition
 ```
 
@@ -3082,6 +3831,7 @@ python
 
 ```{prereq}
 Whole number multiplication
+Integer equality
 Integer addition
 Integer subtraction
 ```
@@ -3147,6 +3897,7 @@ python
 
 ```{prereq}
 Whole number division
+Integer equality
 Integer subtraction
 Integer addition
 Integer multiplication
@@ -3174,7 +3925,7 @@ Conceptually, you can think of `{bm} integer division/(integer number division|d
 
   5 iterations of subtraction.
 
-* -15 / -3 -- how many iterations og subtracting by -3 before -15 reaches 0
+* -15 / -3 -- how many iterations of subtracting by -3 before -15 reaches 0
 
   ```{svgbob}
   <-+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+->
@@ -3639,10 +4390,10 @@ Factors
 
 A counting number with only 2 factors is called a `{bm} prime` number. That is, if a counting number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, and 47.
 
-A counting number with more than 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
+A counting number with more than_REL 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
 
 ```{note}
-The number 1 is neither a prime number nor a composite number. 1's only factor is itself: 1\*1=1. Prime numbers need 2 factors and composite numbers need more than 2 factors.
+The number 1 is neither a prime number nor a composite number. 1's only factor is itself: 1\*1=1. Prime numbers need 2 factors and composite numbers need more than_REL 2 factors.
 ```
 
 The algorithm to identify primes vs composites is as follows...
@@ -4279,7 +5030,7 @@ Since a fraction represent integer division, the same rules as integer division 
 
 If a fraction has ...
 
- * less than 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
+ * less than_REL 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
  * at least 1 whole, it's refereed to as a `{bm} improper fraction` (e.g. `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}`).
 
 ```{note}
@@ -4821,7 +5572,7 @@ Mixed number
 
 Conceptually, you can think of `{bm} fraction division` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2` is 0.
 
-Fraction division follows the same concept but may also involve the subtraction of a partial value. For example, imagine `{kt} 8 \div \frac{3}{2}`. You can successfully subtract `{kt} \frac{3}{2}` for 5 iterations before the value becomes smaller than `{kt} \frac{3}{2}` but larger than 0...
+Fraction division follows the same concept but may also involve the subtraction of a partial value. For example, imagine `{kt} 8 \div \frac{3}{2}`. You can successfully subtract `{kt} \frac{3}{2}` for 5 iterations before the value becomes smaller than_REL `{kt} \frac{3}{2}` but larger than_REL 0...
 
 `{kt} 8 - \frac{3}{2} - \frac{3}{2} - \frac{3}{2} - \frac{3}{2} - \frac{3}{2}` is `{kt} \frac{1}{2}`.
 
@@ -5112,7 +5863,7 @@ Then, count the number of digits in the partial and write out the matching word.
 | 8     | hundred-millionth     |
 | ...   | ...                   |
 
-If the partial is more than 1 piece, append the letter s to the number being written out. For example, ...
+If the partial is more than_REL 1 piece, append the letter s to the number being written out. For example, ...
 
 * 01 ⟶ `{kt} \frac{1}{100}` ⟶ one hundredth
 * 02 ⟶ `{kt} \frac{2}{100}` ⟶ two hundredths
@@ -6040,7 +6791,7 @@ To `{bm} solve` an equation means to determine the values of the variables in th
 
  The set of variable to number mappings for an equation is called a `{bm} solution` -- `{kt} x=6` is the solution of the equation.
 
-TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than twice x = 2x-(9*5)). If you see a comma, treat it like you're putting parenthesis around everything before and then applying the stuff after -- e.g. sum of 4 and 1, increased by 8 = (4+1) + 8.
+TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than_REL twice x = 2x-(9*5)). If you see a comma, treat it like you're putting parenthesis around everything before and then applying the stuff after -- e.g. sum of 4 and 1, increased by 8 = (4+1) + 8.
 
 
 
@@ -6064,28 +6815,28 @@ Algebraic notation:
 
   When both sides represent different value, it's said that they're not equal.
 
-* `{kt} a > b` -- greater than
+* `{kt} a > b` -- greater than_REL
 
-  When the value of left-side is more than the right-side, the left is said to be greater than the right.
+  When the value of left-side is more than_REL the right-side, the left is said to be greater than_REL the right.
 
   ```{note}
   This is the same as `{kt} b < a`. Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.
   ```
-* `{kt} a < b` -- less than
+* `{kt} a < b` -- less than_REL
 
-  When the value of left-side is less than the right-side, the left is said to be greater than the right.
+  When the value of left-side is less than_REL the right-side, the left is said to be greater than_REL the right.
 
   ```{note}
   This is the same as `{kt} b > a`.  Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.
   ```
 
-* `{kt} a \geq b` -- greater than or equal
+* `{kt} a \geq b` -- greater than_REL or equal
 
-  When the value of left-side is more than OR equal to the right-side, the left is said to be greater than the right.
+  When the value of left-side is more than_REL OR equal to the right-side, the left is said to be greater than_REL the right.
 
-* `{kt} a \leq b` -- less than or equal
+* `{kt} a \leq b` -- less than_REL or equal
 
-  When the value of left-side is less than OR equal to the right-side, the left is said to be greater than the right.
+  When the value of left-side is less than_REL OR equal to the right-side, the left is said to be greater than_REL the right.
 
 KEEP WORKING ON THESE:
 ADD FRACTION ADDING AND MULTIPLICATION RULES (recipriocals, cross multiply, etc..)
@@ -6186,13 +6937,13 @@ see multiplciation property of equality
 
 ALSO, section 2.3 talks about converting phrases to equations and viceversa -- implement this (see "Translate Word Phrases to Algebraic Equations" section)... words that map to equality...
 
-* `{bm} is equal to` -- e.g. x is equal to 1
-* `{bm} equals` -- e.g. x equals 1
-* `{bm} is the same as` -- e.g. x is the same as 1
-* `{bm} is` -- e.g. x is 1
-* `{bm} gives` -- e.g. ???
-* `{bm} was` -- e.g. x was 1
-* `{bm} will be` -- e.g. x will be 1
+* `!{bm} is equal to` -- e.g. x is equal to 1
+* `!{bm} equals` -- e.g. x equals 1
+* `!{bm} is the same as` -- e.g. x is the same as 1
+* `!{bm} is` -- e.g. x is 1
+* `!{bm} gives` -- e.g. ???
+* `!{bm} was` -- e.g. x was 1
+* `!{bm} will be` -- e.g. x will be 1
 
 some of the above are overkill and need to be pruned
 
@@ -6200,7 +6951,7 @@ some of the above are overkill and need to be pruned
 
 TODO: discuss as if it were a scale
 
-TODO: discuss as on a number line -- if a is greater than b, a is to the right of b
+TODO: discuss as on a number line -- if a is greater than_REL b, a is to the right of b
 
 # Absolute Value
 
@@ -6211,6 +6962,8 @@ Absolute value has the same precedence as parenthesis when it comes to order of 
 # OpenStax Prealgebra Problems
 
 ## Chapter 1 Section 1
+
+`{bm-disable-all}`
 
 __TRY IT__
 
@@ -20435,3 +21188,23 @@ START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
 START BACK UP HERE
+
+`{bm-enable-all}`
+
+
+
+
+
+
+
+
+
+
+
+`{bm-error} Add the suffix _REL or _ADD/(more than)/i`
+`{bm-error} Add the suffix _REL or _ADD/(larger than)/i`
+`{bm-error} Add the suffix _REL or _ADD/(greater than)/i`
+
+`{bm-error} Add the suffix _REL or _SUB/(less than)/i`
+`{bm-error} Add the suffix _REL or _SUB/(smaller than)/i`
+`{bm-error} Add the suffix _REL or _SUB/(fewer than)/i`
