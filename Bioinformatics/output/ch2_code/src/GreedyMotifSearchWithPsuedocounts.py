@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 from FindMostProbableKmerUsingProfileMatrix import find_most_probable_kmer_using_profile_matrix
 from MotifMatrixCount import motif_matrix_count
@@ -7,12 +7,20 @@ from ScoreMotif import score_motif
 from Utils import slide_window
 
 
-def greedy_motif_search(k: int, dnas: List[str]):
+def increment_counts(count: Dict[str, List[int]]):
+    ret = {}
+    for elem, counts in count.items():
+        ret[elem] = [c + 1 for c in counts]
+    return ret
+
+
+def greedy_motif_search_with_psuedocounts(k: int, dnas: List[str]):
     best_motif_matrix = [dna[0:k] for dna in dnas]
 
     for motif, _ in slide_window(dnas[0], k):
         motif_matrix = [motif]
         counts = motif_matrix_count(motif_matrix)
+        counts = increment_counts(counts)
         profile = motif_matrix_profile(counts)
 
         for dna in dnas[1:]:
@@ -20,6 +28,7 @@ def greedy_motif_search(k: int, dnas: List[str]):
             # pop in closest kmer as a motif and recompute profile for the next iteration
             motif_matrix.append(next_motif)
             counts = motif_matrix_count(motif_matrix)
+            counts = increment_counts(counts)
             profile = motif_matrix_profile(counts)
 
         if score_motif(motif_matrix) < score_motif(best_motif_matrix):
@@ -29,7 +38,7 @@ def greedy_motif_search(k: int, dnas: List[str]):
 
 
 if __name__ == '__main__':
-    found_motif_matrix = greedy_motif_search(
+    found_motif_matrix = greedy_motif_search_with_psuedocounts(
         3,
         [
             'GGCGTTCAGGCA',
