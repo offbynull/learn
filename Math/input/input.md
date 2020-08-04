@@ -3456,21 +3456,7 @@ Whole number less than
 Whole number greater than
 ```
 
-`{bm} Integer less than/(integer number less than|integer less than)/i` follows the same core concept as whole number less than: if marked on a number line, the number being tested must be to the left of the other number. For example, -4 < 2 is true because -4 is to the left of 2 on the number line...
-
-```{svgbob}
-        -4
-         |
-         v
-<--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
-   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-  -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
-                           ^
-                           |
-                          +2
-```
-
-However, the number line for integers is more complex than the number line for whole numbers. The negatives and positives mirror at 0 and they grow in opposite directions:
+Recall that the number line for integers is more complex than the number line for whole numbers. The negatives and positives mirror at 0 and they grow in opposite directions:
 
 ```{svgbob}
 "larger negatives as"             "larger positives as"
@@ -3483,7 +3469,7 @@ However, the number line for integers is more complex than the number line for w
 * positive numbers grow as you move right-ward (e.g. 1, 2, 3, ...).
 * negative numbers grow as you move left-ward (e.g. ..., -3, -2, -1).
 
-The algorithm for integer number less than applies different logic depending on the sign of each number. Specifically, if the numbers are...
+The algorithm for `{bm} integer less than/(integer number less than|integer less than)/i` applies different logic depending on the sign of each number. Specifically, if the numbers are...
 
 * both non-negative, apply the whole number less than algorithm. For example, 2 < 5 would be processed just as if it were a whole number...
 
@@ -3557,21 +3543,7 @@ Whole number less than
 Whole number greater than
 ```
 
-`{bm} Integer greater than/(integer number greater than|integer greater than)/i` follows the same core concept as whole number greater than: if marked on a number line, the number being tested must be to the right of the other number. For example, 2 > -4 is true because 2 to the right of -4 on the number line...
-
-```{svgbob}
-                          +2
-                           |
-                           v
-<--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
-   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-  -6 -5 -4 -3 -2 -1  0 +1 +2 +3 +4 +5 +6 +7 +8
-         ^
-         |
-        -4
-```
-
-However, the number line for integers is more complex than the number line for whole numbers. The negatives and positives mirror at 0 and they grow in opposite directions:
+Recall that the number line for integers is more complex than the number line for whole numbers. The negatives and positives mirror at 0 and they grow in opposite directions:
 
 ```{svgbob}
 "larger negatives as"             "larger positives as"
@@ -3584,7 +3556,7 @@ However, the number line for integers is more complex than the number line for w
 * positive numbers grow as you move right-ward (e.g. 1, 2, 3, ...).
 * negative numbers grow as you move left-ward (e.g. ..., -3, -2, -1).
 
-The algorithm for integer number greater than applies different logic depending on the sign of each number. Specifically, if the numbers are...
+The algorithm for `{bm} integer greater than/(integer number greater than|integer greater than)/i` applies different logic depending on the sign of each number. Specifically, if the numbers are...
 
 * both non-negative, apply the whole number greater than algorithm. For example, 5 > 2 would be processed just as if it were a whole number...
 
@@ -3646,7 +3618,7 @@ python
 #MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
 ```
 
-```{intnumlt}
+```{intnumgt}
 -194 -195
 ```
 
@@ -4030,7 +4002,7 @@ python
 Whole Number Word Conversion
 ```
 
-`{bm} Integer number word conversion` is the process of taking an integer number and converting it to words. The algorithm used by humans to convert an integer number to words is as follows:
+`{bm} Integer word conversion/(integer word conversion|integer number word conversion)/i` is the process of taking an integer number and converting it to words. The algorithm used by humans to convert an integer number to words is as follows:
 
 Begin by converting the sign to a word. If the number is ...
 
@@ -5225,11 +5197,231 @@ python
 4/15 5/10
 ```
 
+## Equality
+
+```{prereq}
+Integer equality
+Common denominator
+```
+
+Conceptually, you can think of `{bm} fraction equality` as comparing two fractions with similar sized parts to see if they have the same number of parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see if the fractions are equal is simply testing to see if the individual parts (numerators) are equal.
+
+For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can test if they're equal by applying integer equality to the numerators...
+
+ * `{kt} \frac{1}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+ * `{kt} \frac{2}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   4
+   ```
+
+`{kt} \frac{1}{4} = \frac{2}{4}` is computed as `{kt} 1 = 2` (false).
+
+If the fractions being compared don't have a common denominator, you'll need to find equivalent fractions that do. The best way to do this is to use the least common denominator method. For example, before being able to compare `{kt} \frac{1}{2}` and `{kt} \frac{2}{3}`, they need to be converted to equivalent fractions that share a common denominator...
+
+ * `{kt} \frac{1}{2}` becomes `{kt} \frac{3}{6}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   2
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   6
+   ```
+
+ * `{kt} \frac{2}{3}` becomes `{kt} \frac{4}{6}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   3
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   4
+   6
+   ```
+
+`{kt} \frac{3}{6} = \frac{4}{6}` is computed as `{kt} 3 = 4` (false).
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
+```
+
+```{fracnumeq}
+1/4 2/8
+```
+
+## Less Than
+
+```{prereq}
+Integer less than
+Common denominator
+```
+
+Conceptually, you can think of `{bm} fraction less than` as comparing two fractions with similar sized parts to see which has less parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see which fraction is less is simply testing to see which has less individual parts (numerators).
+
+For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can test to see which is less by applying integer less than to the numerators...
+
+ * `{kt} \frac{1}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+ * `{kt} \frac{2}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   4
+   ```
+
+`{kt} \frac{1}{4} < \frac{2}{4}` is computed as `{kt} 1 < 2` (true).
+
+If the fractions being compared don't have a common denominator, you'll need to find equivalent fractions that do. The best way to do this is to use the least common denominator method. For example, before being able to compare `{kt} \frac{1}{4}` and `{kt} \frac{1}{6}`, they need to be converted to equivalent fractions that share a common denominator...
+
+ * `{kt} \frac{1}{4}` becomes `{kt} \frac{3}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   12
+   ```
+
+ * `{kt} \frac{1}{6}` becomes `{kt} \frac{2}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   6
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   12
+   ```
+
+`{kt} \frac{3}{12} < \frac{2}{12}` is computed as `{kt} 3 < 2` (false).
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
+```
+
+```{fracnumlt}
+1/4 3/8
+```
+
+## Greater Than
+
+```{prereq}
+Integer greater than
+Common denominator
+```
+
+Conceptually, you can think of `{bm} fraction greater than` as comparing two fractions with similar sized parts to see which has more parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see which fraction is more is simply testing to see which has more individual parts (numerators).
+
+For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can test to see which is more by applying integer less than to the numerators...
+
+ * `{kt} \frac{1}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+ * `{kt} \frac{2}{4}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   4
+   ```
+
+`{kt} \frac{1}{4} > \frac{2}{4}` is computed as `{kt} 1 > 2` (false).
+
+If the fractions being compared don't have a common denominator, you'll need to find equivalent fractions that do. The best way to do this is to use the least common denominator method. For example, before being able to compare `{kt} \frac{1}{4}` and `{kt} \frac{1}{6}`, they need to be converted to equivalent fractions that share a common denominator...
+
+ * `{kt} \frac{1}{4}` becomes `{kt} \frac{3}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   4
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   3
+   12
+   ```
+
+ * `{kt} \frac{1}{6}` becomes `{kt} \frac{2}{12}`
+
+   ```{diagramhelperfrac}
+   radius 40
+   1
+   6
+   ```
+
+   ```{diagramhelperfrac}
+   radius 40
+   2
+   12
+   ```
+
+`{kt} \frac{3}{12} > \frac{2}{12}` is computed as `{kt} 3 > 2` (true).
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/FractionNumber.py
+python
+#MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
+```
+
+```{fracnumgt}
+3/4 2/8
+```
+
 ## Addition
 
 ```{prereq}
 Integer addition
 Common denominator
+Fraction equality
 ```
 
 Conceptually, you can think of `{bm} fraction addition` as adding together parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, adding them together is simply adding together the individual parts (numerators).
@@ -5315,6 +5507,7 @@ python
 ```{prereq}
 Integer subtraction
 Common denominator
+Fraction equality
 ```
 
 Conceptually, you can think of `{bm} fraction subtracting` as subtracting parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, subtracting them is simply subtracting the individual parts (numerators).
@@ -5401,6 +5594,7 @@ python
 Integer multiplication
 Fraction addition
 Mixed number
+Fraction equality
 ```
 
 Conceptually, you can think of `{bm} fraction multiplication` as an extension to integer multiplication. In integer multiplication, you're repeatedly adding the same value for a certain number of iterations. For example, in `{kt} 4 \cdot 2`, the number 4 is being added for 2 iterations: `{kt} 4 + 4`.
@@ -5568,6 +5762,7 @@ Fraction multiplication
 Fraction simplification
 Fraction reciprocal
 Mixed number
+Fraction equality
 ```
 
 Conceptually, you can think of `{bm} fraction division` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2` is 0.
@@ -5635,10 +5830,10 @@ Suppose you wanted to clear the denominator of this compound fraction. You could
 ## Word Conversion
 
 ```{prereq}
-Integer Number Word Conversion
+Integer word conversion
 ```
 
-`{bm} Fraction number word conversion` is the process of taking a fraction number and converting it to words. The algorithm used by humans to convert a fraction number to words is as follows:
+`{bm} Fraction word conversion` is the process of taking a fraction number and converting it to words. The algorithm used by humans to convert a fraction number to words is as follows:
 
 Begin by converting the sign to a word. If the number is ...
 
@@ -5799,7 +5994,7 @@ To convert a decimal number to a mixed number...
 ## Word Conversion
 
 ```{prereq}
-Fraction Number Word Conversion
+Fraction word conversion
 ```
 
 `{bm} Decimal number word conversion` is the process of taking a decimal number and converting it to words. The algorithm used by humans to convert a decimal number to words is as follows:

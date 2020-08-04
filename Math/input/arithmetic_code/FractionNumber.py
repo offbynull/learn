@@ -296,47 +296,122 @@ class FractionNumber:
         return output.lstrip()
     #MARKDOWN_TO_WORDS
 
+    #MARKDOWN_EQ
+    @log_decorator
     def __eq__(self: FractionNumber, other: FractionNumber) -> bool:
+        log(f'Equality testing {self} and {other}...')
+        log_indent()
+
         # Sign is only kept on the numerator, not the denominator
+        log(f'Checking if denominators are the same...')
         if self._denominator != other._denominator:
-            lhs_numerator = self._numerator * other._denominator
-            rhs_numerator = other._numerator * self._denominator
+            log(f'Not same -- finding equivalent fractions with common denominator...')
+            log_indent()
+
+            log(f'Calculating common denominator...')
             denominator = other._denominator * self._denominator
+            log(f'{denominator}')
+
+            log(f'Scaling numerator for {self} so denominator becomes {denominator}...')
+            lhs_numerator = self._numerator * other._denominator
+            log(f'Numerator: {lhs_numerator} Denominator: {denominator}')
+
+            log(f'Scaling numerator for {other} so denominator becomes {denominator}...')
+            rhs_numerator = other._numerator * self._denominator
+            log(f'Numerator: {rhs_numerator} Denominator: {denominator}')
+
+            log_unindent()
         else:
+            log(f'Same')
             lhs_numerator = self._numerator
             rhs_numerator = other._numerator
             denominator = other._denominator
 
-        return lhs_numerator == rhs_numerator
+        log(f'Testing {lhs_numerator} == {rhs_numerator}...')
+        ret = lhs_numerator == rhs_numerator
+        log(f'{ret}')
 
+        return ret
+    #MARKDOWN_EQ
+
+    #MARKDOWN_LT
+    @log_decorator
     def __lt__(self: FractionNumber, other: FractionNumber) -> bool:
+        log(f'Less than testing {self} and {other}...')
+        log_indent()
+
         # Sign is only kept on the numerator, not the denominator
+        log(f'Checking if denominators are the same...')
         if self._denominator != other._denominator:
-            lhs_numerator = self._numerator * other._denominator
-            rhs_numerator = other._numerator * self._denominator
+            log(f'Not same -- finding equivalent fractions with common denominator...')
+            log_indent()
+
+            log(f'Calculating common denominator...')
             denominator = other._denominator * self._denominator
+            log(f'{denominator}')
+
+            log(f'Scaling numerator for {self} so denominator becomes {denominator}...')
+            lhs_numerator = self._numerator * other._denominator
+            log(f'Numerator: {lhs_numerator} Denominator: {denominator}')
+
+            log(f'Scaling numerator for {other} so denominator becomes {denominator}...')
+            rhs_numerator = other._numerator * self._denominator
+            log(f'Numerator: {rhs_numerator} Denominator: {denominator}')
+
+            log_unindent()
         else:
+            log(f'Same')
             lhs_numerator = self._numerator
             rhs_numerator = other._numerator
             denominator = other._denominator
 
-        return lhs_numerator < rhs_numerator
+        log(f'Testing {lhs_numerator} < {rhs_numerator}...')
+        ret = lhs_numerator < rhs_numerator
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_LT
 
     def __le__(self: FractionNumber, other: FractionNumber) -> bool:
         return self < other or self == other
 
+    #MARKDOWN_GT
+    @log_decorator
     def __gt__(self: FractionNumber, other: FractionNumber) -> bool:
+        log(f'Greater than testing {self} and {other}...')
+        log_indent()
+
         # Sign is only kept on the numerator, not the denominator
+        log(f'Checking if denominators are the same...')
         if self._denominator != other._denominator:
-            lhs_numerator = self._numerator * other._denominator
-            rhs_numerator = other._numerator * self._denominator
+            log(f'Not same -- finding equivalent fractions with common denominator...')
+            log_indent()
+
+            log(f'Calculating common denominator...')
             denominator = other._denominator * self._denominator
+            log(f'{denominator}')
+
+            log(f'Scaling numerator for {self} so denominator becomes {denominator}...')
+            lhs_numerator = self._numerator * other._denominator
+            log(f'Numerator: {lhs_numerator} Denominator: {denominator}')
+
+            log(f'Scaling numerator for {other} so denominator becomes {denominator}...')
+            rhs_numerator = other._numerator * self._denominator
+            log(f'Numerator: {rhs_numerator} Denominator: {denominator}')
+
+            log_unindent()
         else:
+            log(f'Same')
             lhs_numerator = self._numerator
             rhs_numerator = other._numerator
             denominator = other._denominator
 
-        return lhs_numerator > rhs_numerator
+        log(f'Testing {lhs_numerator} > {rhs_numerator}...')
+        ret = lhs_numerator > rhs_numerator
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_GT
 
     def __ge__(self: FractionNumber, other: FractionNumber) -> bool:
         return self > other or self == other
