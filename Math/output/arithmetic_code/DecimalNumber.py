@@ -237,6 +237,113 @@ class DecimalNumber:
         return output.strip()
     #MARKDOWN_TO_WORDS
 
+    #MARKDOWN_EQ
+    @log_decorator
+    def __eq__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        log(f'Equality testing {self} and {other}...')
+        log_indent()
+
+        log(f'Checking wholes portion...')
+        lhs_wholes = IntegerNumber(self.value.sign, WholeNumber.from_str(self.cached_wholes_str))
+        rhs_wholes = IntegerNumber(other.value.sign, WholeNumber.from_str(other.cached_wholes_str))
+        wholes_equal = lhs_wholes == rhs_wholes
+        log(f'{wholes_equal}')
+
+        # 0.4 -> 1400
+        # 0.04 -> 1004
+        log(f'Checking partials portion...')
+        partial_size = max(len(self.cached_partial_str), len(other.cached_partial_str))
+        self_adjusted_partial_str = ('0' * (partial_size - len(self.cached_partial_str))) + self.cached_partial_str
+        other_adjusted_partial_str = ('0' * (partial_size - len(other.cached_partial_str))) + other.cached_partial_str
+        lhs_partials = IntegerNumber.from_str(self.cached_partial_str)
+        rhs_partials = IntegerNumber.from_str(other.cached_partial_str)
+        partials_equal = lhs_partials == rhs_partials
+        log(f'{partials_equal}')
+
+        log_unindent()
+        ret = wholes_equal and partials_equal
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_EQ
+
+    #MARKDOWN_LT
+    @log_decorator
+    def __lt__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        log(f'Less than testing {self} and {other}...')
+        log_indent()
+
+        log(f'Checking wholes portion...')
+        lhs_wholes = IntegerNumber(self.value.sign, WholeNumber.from_str(self.cached_wholes_str))
+        rhs_wholes = IntegerNumber(other.value.sign, WholeNumber.from_str(other.cached_wholes_str))
+        if lhs_wholes >= rhs_wholes:
+            log(f'{lhs_wholes} >= {rhs_wholes} -- {self} is NOT less than {other}')
+            return False
+        else:
+            log(f'{lhs_wholes} < {rhs_wholes} -- continuing testing')
+
+        # 0.4 -> 40
+        # 0.34 -> 04
+        count = max(len(self.cached_partial_str), len(other.cached_partial_str))
+        for pos in reversed(range(0, count)):  # from smallest to largest component
+            log(f'Test digits {self[pos]} and {other[pos]}...')
+            if self[pos] > other[pos]:
+                log(f'{self[pos]} > {other[pos]} -- {self} is NOT less than {other}, it is greater than')
+                return False
+            elif self[pos] < other[pos]:
+                log(f'{self[pos]} < {other[pos]} -- {self} is less than {other}')
+                return True
+            else:
+                log(f'{self[pos]} == {other[pos]} -- continuing testing')
+
+        log(f'No more digits to test -- {self} is NOT less than {other}, it is equal')
+        return False
+    #MARKDOWN_LT
+
+    def __le__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        return self < other or self == other
+
+    #MARKDOWN_GT
+    @log_decorator
+    def __gt__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        log(f'Greater than testing {self} and {other}...')
+        log_indent()
+
+        # Sign is only kept on the numerator, not the denominator
+        log(f'Checking if denominators are the same...')
+        if self._denominator != other._denominator:
+            log(f'Not same -- finding equivalent fractions with common denominator...')
+            log_indent()
+
+            log(f'Calculating common denominator...')
+            denominator = other._denominator * self._denominator
+            log(f'{denominator}')
+
+            log(f'Scaling numerator for {self} so denominator becomes {denominator}...')
+            lhs_numerator = self._numerator * other._denominator
+            log(f'Numerator: {lhs_numerator} Denominator: {denominator}')
+
+            log(f'Scaling numerator for {other} so denominator becomes {denominator}...')
+            rhs_numerator = other._numerator * self._denominator
+            log(f'Numerator: {rhs_numerator} Denominator: {denominator}')
+
+            log_unindent()
+        else:
+            log(f'Same')
+            lhs_numerator = self._numerator
+            rhs_numerator = other._numerator
+            denominator = other._denominator
+
+        log(f'Testing {lhs_numerator} > {rhs_numerator}...')
+        ret = lhs_numerator > rhs_numerator
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_GT
+
+    def __ge__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        return self > other or self == other
+
 
 if __name__ == '__main__':
     # print(f'{DecimalNumber.from_fraction(FractionNumber.from_str("5/10"))}')

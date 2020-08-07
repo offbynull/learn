@@ -4964,7 +4964,7 @@ Integer numbers
 +------------------------------------+
 ```
 
-`{bm} Fraction`s are a way of representing partial values. The syntax for a fraction is `{kt} \frac{numerator}{denominator}`, where the...
+`{bm} Fraction/(fraction number|fraction)/i`s are a way of representing partial values. The syntax for a fraction is `{kt} \frac{numerator}{denominator}`, where the...
 
  * `{bm}numerator` (top) is an integer that represents the number of parts available.
  * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
@@ -5048,10 +5048,10 @@ Each fraction has different sized pieces, but the overall value covered by those
 ### Simplification
 
 ```{prereq}
-Greatest Common Divisor
+Greatest common divisor
 ```
 
-`{bm} /(Fraction simplification)/i`
+`{bm} /(fraction simplification|fraction number simplification)/i`
 Of all the equivalent fractions that represent a value, one of those fractions represents that value in the smallest number of pieces possible. This fraction is called the `{bm} simplified fraction/(simplified fraction|simplify fraction|simplify the fraction|simplify a fraction|reduced fraction|reduce fraction|reduce a fraction|reduce the fraction|simplified form|simplified fraction form|simplified form of a fraction|simplified form of the fraction)/i`. For the example above, `{kt} \frac{3}{2}` is the simplified fraction for both `{kt} \frac{12}{8}` and `{kt} \frac{6}{4}`:
 
  * `{kt} \frac{3}{2}`
@@ -5204,7 +5204,7 @@ Integer equality
 Common denominator
 ```
 
-Conceptually, you can think of `{bm} fraction equality` as comparing two fractions with similar sized parts to see if they have the same number of parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see if the fractions are equal is simply testing to see if the individual parts (numerators) are equal.
+Conceptually, you can think of `{bm} fraction equality/(fraction number equality|fraction equality)/i` as comparing two fractions with similar sized parts to see if they have the same number of parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see if the fractions are equal is simply testing to see if the individual parts (numerators) are equal.
 
 For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can test if they're equal by applying integer equality to the numerators...
 
@@ -5277,7 +5277,7 @@ Integer less than
 Common denominator
 ```
 
-Conceptually, you can think of `{bm} fraction less than` as comparing two fractions with similar sized parts to see which has less parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see which fraction is less is simply testing to see which has less individual parts (numerators).
+Conceptually, you can think of `{bm} fraction less than/(fraction number less than|fraction less than)/i` as comparing two fractions with similar sized parts to see which has less parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see which fraction is less is simply testing to see which has less individual parts (numerators).
 
 For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can test to see which is less by applying integer less than to the numerators...
 
@@ -5350,7 +5350,7 @@ Integer greater than
 Common denominator
 ```
 
-Conceptually, you can think of `{bm} fraction greater than` as comparing two fractions with similar sized parts to see which has more parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see which fraction is more is simply testing to see which has more individual parts (numerators).
+Conceptually, you can think of `{bm} fraction greater than/(fraction number greater than|fraction greater than)/i` as comparing two fractions with similar sized parts to see which has more parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, testing to see which fraction is more is simply testing to see which has more individual parts (numerators).
 
 For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can test to see which is more by applying integer less than to the numerators...
 
@@ -5424,7 +5424,7 @@ Common denominator
 Fraction equality
 ```
 
-Conceptually, you can think of `{bm} fraction addition` as adding together parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, adding them together is simply adding together the individual parts (numerators).
+Conceptually, you can think of `{bm} fraction addition/(fraction number addition|fraction addition)/i` as adding together parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, adding them together is simply adding together the individual parts (numerators).
 
 For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \frac{2}{4}` is 4. Since the fractions have a common denominator, you can add them together by adding the numerators while keeping the denominator...
 
@@ -5510,7 +5510,7 @@ Common denominator
 Fraction equality
 ```
 
-Conceptually, you can think of `{bm} fraction subtracting` as subtracting parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, subtracting them is simply subtracting the individual parts (numerators).
+Conceptually, you can think of `{bm} fraction subtraction/(fraction number subtraction|fraction subtraction)/i` as subtracting parts. That is, as long as the number of parts used to represent a whole (denominator) is the same between both fractions, subtracting them is simply subtracting the individual parts (numerators).
 
 For example, the denominator for the fractions `{kt} \frac{2}{4}` and `{kt} \frac{1}{4}` is 4. Since the fractions have a common denominator, you can subtract them by subtracting the numerators while keeping the denominator...
 
@@ -5597,7 +5597,7 @@ Mixed number
 Fraction equality
 ```
 
-Conceptually, you can think of `{bm} fraction multiplication` as an extension to integer multiplication. In integer multiplication, you're repeatedly adding the same value for a certain number of iterations. For example, in `{kt} 4 \cdot 2`, the number 4 is being added for 2 iterations: `{kt} 4 + 4`.
+Conceptually, you can think of `{bm} fraction multiplication/(fraction number multiplication|fraction multiplication)/i` as an extension to integer multiplication. In integer multiplication, you're repeatedly adding the same value for a certain number of iterations. For example, in `{kt} 4 \cdot 2`, the number 4 is being added for 2 iterations: `{kt} 4 + 4`.
 
 Fraction multiplication follows the same concept but may also involve the adding of a partial value. For example, imagine `{kt} 4 \cdot \frac{5}{2}`. Recall that fractions can be thought of as unresolved integer division -- the fraction `{kt} \frac{5}{2}` is just another way of saying `{kt} 5 \div 2`.
 
@@ -5705,7 +5705,7 @@ If you understand algebra, the reasoning for why the above algorithm works is av
 Fraction multiplication
 ```
 
-`{bm} /(Fraction reciprocal)/i`
+`{bm} /(fraction number reciprocal|fraction reciprocal)/i`
 The `{bm} reciprocal` of a fraction is when you take that fraction and flip its numerator and denominator. For example, the reciprocal of `{kt} -\frac{5}{6}` is `{kt} -\frac{6}{5}`.
 
 When you multiply a fraction by its reciprocal, you will always end up with a whole. For example, `{kt} \frac{2}{7} \cdot \frac{7}{2}` is `{kt} \frac{14}{14}`.
@@ -5765,7 +5765,7 @@ Mixed number
 Fraction equality
 ```
 
-Conceptually, you can think of `{bm} fraction division` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2` is 0.
+Conceptually, you can think of `{bm} fraction division/(fraction number division|fraction division)/i` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2` is 0.
 
 Fraction division follows the same concept but may also involve the subtraction of a partial value. For example, imagine `{kt} 8 \div \frac{3}{2}`. You can successfully subtract `{kt} \frac{3}{2}` for 5 iterations before the value becomes smaller than_REL `{kt} \frac{3}{2}` but larger than_REL 0...
 
@@ -5833,7 +5833,7 @@ Suppose you wanted to clear the denominator of this compound fraction. You could
 Integer word conversion
 ```
 
-`{bm} Fraction word conversion` is the process of taking a fraction number and converting it to words. The algorithm used by humans to convert a fraction number to words is as follows:
+`{bm} Fraction word conversion/(fraction number word conversion|fraction word conversion)/i` is the process of taking a fraction number and converting it to words. The algorithm used by humans to convert a fraction number to words is as follows:
 
 Begin by converting the sign to a word. If the number is ...
 
@@ -5997,7 +5997,7 @@ To convert a decimal number to a mixed number...
 Fraction word conversion
 ```
 
-`{bm} Decimal number word conversion` is the process of taking a decimal number and converting it to words. The algorithm used by humans to convert a decimal number to words is as follows:
+`{bm} Decimal number word conversion/(decimal number word conversion|decimal word conversion)/i` is the process of taking a decimal number and converting it to words. The algorithm used by humans to convert a decimal number to words is as follows:
 
 Begin by converting the sign to a word. If the number is ...
 
@@ -6135,13 +6135,13 @@ python
 
 ## Round
 
-`{bm} decimal rounding`
+`{bm} Decimal rounding/(decimal number rounding|decimal rounding)/i`
 
 TODO: chapter 5.1 -- e.g. round to the nearest tenth, round to the nearest hundredth, round to the tens, round to the hundreds
 
 ## Addition
 
-`{bm} decimal addition`
+`{bm} Decimal addition/(decimal number addition|decimal addition)/i`
 
 TODO: show by converting to fractions
 
@@ -6151,7 +6151,7 @@ TODO: show using standard algorithm
 
 ## Subtraction
 
-`{bm} decimal subtraction`
+`{bm} Decimal subtraction/(decimal number subtraction|decimal subtraction)/i`
 
 TODO: show by converting to fractions
 
@@ -6161,7 +6161,7 @@ TODO: show using standard algorithm
 
 ## Multiplication
 
-`{bm} decimal multiplication`
+`{bm} Decimal multiplication/(decimal number multiplication|decimal multiplication)/i`
 
 TODO: show by converting to fractions
 
@@ -6169,7 +6169,7 @@ TODO: show using standard algorithm
 
 ## Division
 
-`{bm} decimal division`
+`{bm} Decimal division/(decimal number division|decimal division)/i`
 
 TODO: show by converting to fractions
 

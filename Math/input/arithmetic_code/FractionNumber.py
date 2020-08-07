@@ -54,14 +54,13 @@ class FractionNumber:
     def _normalize_sign(self):
         # Normalize so that sign is on the numerator and the denominator is always positive
         if self._numerator.sign is None:  # sign of None means magnitude of 0
-            self._numerator = IntegerNumber.from_int(0)
-            self._denominator = IntegerNumber.from_int(1)
+            pass  # if num's sign is None, the only value it can be is 0, so skip
         elif self._numerator.sign != self._denominator.sign:
             self._numerator = IntegerNumber(Sign.NEGATIVE, self._numerator.magnitude)
-            self._denominator = IntegerNumber(Sign.POSITIVE, self._denominator.magnitude)
         elif self._numerator.sign == self._numerator.sign:
             self._numerator = IntegerNumber(Sign.POSITIVE, self._numerator.magnitude)
-            self._denominator = IntegerNumber(Sign.POSITIVE, self._denominator.magnitude)
+
+        self._denominator = IntegerNumber(Sign.POSITIVE, self._denominator.magnitude)
 
     def copy(self: FractionNumber):
         return FractionNumber(self._numerator, self.denominator)
@@ -447,4 +446,6 @@ if __name__ == '__main__':
     # print(f'{FractionNumber._calculate_factors(WholeNumber.from_int(55))}')
     #
     # print(f'{FractionNumber.from_str("3/12").simplify()}')
-    print(f'{FractionNumber.from_str("-0/12").to_words()}')
+    # print(f'{FractionNumber.from_str("-0/12").to_words()}')
+
+    print(f'{FractionNumber.from_str("0/1") + FractionNumber.from_str("1/10")}')

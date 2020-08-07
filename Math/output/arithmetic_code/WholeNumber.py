@@ -836,5 +836,5 @@ if __name__ == '__main__':
     # print(n3)
     import inspect
 
-    log_whitelist([(inspect.getfile(WholeNumber), 'to_words')])
-    print(f'{WholeNumber.from_str("9876543210").to_words()}')
+    log_whitelist([(inspect.getfile(WholeNumber), '__lt__')])
+    print(f'{WholeNumber.from_str("4") < WholeNumber.from_str("40")}')
