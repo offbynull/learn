@@ -9,7 +9,9 @@ Bioinformatics
 
 
 
-# K-mers
+# K-mer
+
+`{bm} /(\/K-mer)_TOPIC/`
 
 A k-mer is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
@@ -28,7 +30,9 @@ Often times we'll need to either...
 * search for an approximate k-mer (fuzzy search).
 * find k-mers of interest in a sequence (e.g. repeating k-mers).
 
-## Reverse Complement of a DNA K-mer
+## Reverse Complement
+
+`{bm} /(\/K-mer\/Reverse Complement)_TOPIC/`
 
 **WHAT**: Given a DNA k-mer, calculate its reverse complement.
 
@@ -61,7 +65,9 @@ ReverseComplementADnaKmer
 TAATCCG
 ```
 
-## Hamming Distance Between K-mers
+## Hamming Distance
+
+`{bm} /(\/K-mer\/Hamming Distance)_TOPIC/`
 
 **WHAT**: Given 2 k-mers, the hamming distance is the number of positional mismatches between them.
 
@@ -81,10 +87,12 @@ ACTTTGTT
 AGTTTCTT
 ```
 
-## Hamming Distance Neighbourhood of a DNA K-mer
+## Hamming Distance Neighbourhood
+
+`{bm} /(\/K-mer\/Hamming Distance Neighbourhood)_TOPIC/`
 
 ```{prereq}
-Hamming Distance Between K-mers
+/K-mer/Hamming Distance_TOPIC
 ```
 
 **WHAT**: Given a source k-mer and a minimum hamming distance, find all k-mers such within the hamming distance of the source k-mer. In other words, find all k-mers such that `hamming_distance(source_kmer, kmer) <= min_distance`.
@@ -105,13 +113,13 @@ AAAA
 1
 ```
 
-# K-mer Search
+## Find Locations
 
-## Find Locations of a K-mer
+`{bm} /(\/K-mer\/Find Locations)_TOPIC/`
 
 ```{prereq}
-Hamming Distance Neighbourhood of a K-mer
-Reverse Complement a DNA K-mer
+/K-mer/Hamming Distance_TOPIC
+/K-mer/Reverse Complement_TOPIC
 ```
 
 **WHAT**: Given a k-mer, find where that k-mer occurs in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
@@ -139,10 +147,12 @@ AAAA
 True
 ```
 
-## Find Clumps of a K-mer
+## Find Clumps
+
+`{bm} /(\/K-mer\/Find Clumps)_TOPIC/`
 
 ```{prereq}
-Find Locations of a K-mer
+/K-mer/Find Locations_TOPIC
 ```
 
 **WHAT**: Given a k-mer, find where that k-mer clusters in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
@@ -169,11 +179,13 @@ GGG
 True
 ```
 
-## Find Repeating K-mers
+## Find Repeating
+
+`{bm} /(\/K-mer\/Find Repeating)_TOPIC/`
 
 ```{prereq}
-Hamming Distance Neighbourhood of a K-mer
-Reverse Complement a DNA K-mer
+/K-mer/Reverse Complement_TOPIC
+/K-mer/Hamming Distance Neighbourhood_TOPIC
 ```
 
 **WHAT**: Given a sequence, find clusters of unique k-mers within that sequence. In other words, for each unique k-mer that exists in the sequence, see if it clusters in the sequence. The search may potentially include variants of k-mer variants (e.g. reverse complements of the k-mers).
@@ -198,10 +210,12 @@ GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
 True
 ```
 
-## Find Repeating K-mers in Window
+## Find Repeating in Window
+
+`{bm} /(\/K-mer\/Find Repeating in Window)_TOPIC/`
 
 ```{prereq}
-Find Repeating K-mers
+/K-mer/Find Repeating_TOPIC
 ```
 
 **WHAT**: Given a sequence, find regions within that sequence that contain clusters of unique k-mers. In other words, ...
@@ -232,10 +246,12 @@ TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT
 True
 ```
 
-## Probability of K-mer's Appearance
+## Probability of Appearance
+
+`{bm} /(\/K-mer\/Probability of Appearance)_TOPIC/`
 
 ```{prereq}
-Find Locations of a K-mer
+/K-mer/Find Locations_TOPIC
 ```
 
 **WHAT**: Given ...
@@ -334,6 +350,108 @@ python
 GCSkew
 CACGGGTGGTTTTGGGGGCCCCCC
 ```
+
+# Motif
+
+`{bm} /(\/Motif)_TOPIC/`
+
+```{prereq}
+/K-mer_TOPIC
+```
+
+A motif is a pattern that matches many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
+
+Often times we'll have identified a set of biological sequences where each sequence, we suspect, contains a k-mer that matches some motif. We'll need to find the k-mers and the motif they match. For example, each of the following sequences contains a k-mer that matches some motif:
+
+| Sequences                 |
+|---------------------------|
+| ATTGTTACCATAACCTTATTGCTAG |
+| ATTCCTTTAGGACCACCCCAAACCC |
+| CCCCAGGAGGGAACCTTTGCACACA |
+| TATATATTTCCCACCCCAAGGGGGG |
+
+The motif is the one described above (`[AT]TT[GC]C`):
+
+| Sequences                     |
+|-------------------------------|
+| ATTGTTACCATAACCTT**ATTGC**TAG |
+| **ATTCC**TTTAGGACCACCCCAAACCC |
+| CCCCAGGAGGGAACC**TTTGC**ACACA |
+| TATATA**TTTCC**CACCCCAAGGGGGG |
+
+A motif matrix is what we call a set of k-mers that we suspect to be members of a motif. In the example above, the motif matrix would be:
+
+|0|1|2|3|4|
+|-|-|-|-|-|
+|A|T|T|G|C|
+|A|T|T|C|C|
+|T|T|T|G|C|
+|T|T|T|C|C|
+
+## Consensus String
+
+`{bm} /(\/Motif\/Consensus String)_TOPIC/`
+
+**WHAT**: Given a motif matrix, generate a k-mer where each position is the nucleotide most abundant at that column of the matrix.
+
+**WHY**: Given a set of k-mers that we suspect match a motif, the k-mer generated by selecting the most abundant column at each index is the "ideal" k-mer for the motif. That is, it's a concise way of describing the motif, especially if the columns in the motif matrix are highly conserved.
+
+**ALGORITHM**:
+
+```{output}
+ch2_code/src/ConsensusString.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+ConsensusString
+ATTGC
+ATTCC
+TTTGC
+TTTCC
+TTTCA
+```
+
+## Enumerative Motif Finding
+
+`{bm} /(\/Motif\/Enumerative Motif Finding)_TOPIC/`
+
+```{prereq}
+/K-mer/Hamming Distance Neighbourhood_TOPIC
+```
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+
+TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
 
 # Stories
 
@@ -660,7 +778,7 @@ DnaABoxCandidateFinder
 
 # Terminology
 
- * A `{bm} k-mer/(k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+ * A `{bm} k-mer/(k-mer|kmer)s?\b/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
    | k | k-mers          |
    |---|-----------------|
@@ -881,7 +999,18 @@ DnaABoxCandidateFinder
 
  * `{bm} transcription factor` - A regulatory protein that controls the rate of transcription for some gene that it has influence over (the copying of DNA to mRNA). The protein binds to a specific sequence in the gene's upstream region.
 
- * `{bm} regulatory motif` / `{bm} transcription factor binding site` - The binding site of a transcription factor. A gene that's regulated by a transcription factor needs a sequence located in its upstream region that the transcription factor can bind to. This sequence can take one of many forms, all of which are similar to each other but not exact. For example, the sequence being bound to could be either AAAACCCCT, AAAACCCCG, AAATCCCCT, etc..
+ * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
+
+ * `{bm} motif matrix` - A set of k-mers that form a motif. For example, the motif `[AT]TT[GC]C` has the following matrix:
+
+   |0|1|2|3|4|
+   |-|-|-|-|-|
+   |A|T|T|G|C|
+   |A|T|T|C|C|
+   |T|T|T|G|C|
+   |T|T|T|C|C|
+
+ * `{bm} regulatory motif` / `{bm} transcription factor binding site` - The binding site of a transcription factor. A gene that's regulated by a transcription factor needs a sequence located in its upstream region that the transcription factor can bind to. This sequence can take one of many forms, all of which are similar to each other but not exact (motif). For example, the sequence being bound to could be either AAAACCCCT, AAAACCCCG, AAATCCCCT, etc..
 
    ```{note}
    A gene's upstream region is the 600 to 1000 nucleotides preceding the start of the gene.
