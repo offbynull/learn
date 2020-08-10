@@ -837,4 +837,4 @@ if __name__ == '__main__':
     import inspect
 
     log_whitelist([(inspect.getfile(WholeNumber), '__lt__')])
-    print(f'{WholeNumber.from_str("4") < WholeNumber.from_str("40")}')
+    print(f'{WholeNumber.from_str("44") < WholeNumber.from_str("4")}')

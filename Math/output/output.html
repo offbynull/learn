@@ -6817,36 +6817,36 @@ The <a name="BOOKMARK136"></a><strong>reciprocal</strong> of a <a href="#BOOKMAR
     log(<span class="hljs-string">f'Converting <span class="hljs-subst">{self}</span>...'</span>)
     log_indent()
 
-    output = <span class="hljs-string">''</span>
-    <span class="hljs-keyword">if</span> self.value.sign == Sign.NEGATIVE:
-        output += <span class="hljs-string">'negative '</span>
-
-    wholes = WholeNumber.from_str(self.cached_wholes_str)
-    partials = WholeNumber.from_str(self.cached_partial_str)
-
     log(<span class="hljs-string">f'Converting wholes portion to words...'</span>)
-    wholes_words = wholes.to_words()
+    wholes_words = self.wholes.to_words()
     log(<span class="hljs-string">f'Wholes as words: <span class="hljs-subst">{wholes_words}</span>'</span>)
 
     log(<span class="hljs-string">f'Converting partial portion to words...'</span>)
-    partial_words = partials.to_words()
+    partial_words = WholeNumber.from_str(str(self.partial)).to_words()
     log(<span class="hljs-string">f'Partial as words: <span class="hljs-subst">{partial_words}</span>'</span>)
 
-    <span class="hljs-keyword">if</span> wholes != WholeNumber.from_str(<span class="hljs-string">'0'</span>):
-        output = wholes_words
+    output = <span class="hljs-string">''</span>
+    <span class="hljs-keyword">if</span> self.wholes == WholeNumber.from_str(<span class="hljs-string">'0'</span>) <span class="hljs-keyword">and</span> self.partial == PartialNumber.from_str(<span class="hljs-string">'0'</span>):
+        output += <span class="hljs-string">'zero'</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">if</span> self.sign == Sign.NEGATIVE:
+            output += <span class="hljs-string">'negative '</span>
 
-    <span class="hljs-keyword">if</span> wholes != WholeNumber.from_str(<span class="hljs-string">'0'</span>) <span class="hljs-keyword">and</span> partials != WholeNumber.from_str(<span class="hljs-string">'0'</span>):
-        output += <span class="hljs-string">' and '</span>
+        <span class="hljs-keyword">if</span> self.wholes != WholeNumber.from_str(<span class="hljs-string">'0'</span>):
+            output += wholes_words
 
-    <span class="hljs-keyword">if</span> partials != WholeNumber.from_str(<span class="hljs-string">'0'</span>):
-        output += partial_words
-        suffix = partials_len_to_suffixes[len(self.cached_partial_str)]
-        <span class="hljs-keyword">if</span> suffix <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
-            <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">'Partial too large'</span>)
-        log(<span class="hljs-string">f'Partial suffix: <span class="hljs-subst">{suffix}</span>'</span>)
-        <span class="hljs-keyword">if</span> partials &gt; WholeNumber.from_str(<span class="hljs-string">'1'</span>):  <span class="hljs-comment"># pluralize suffix if more than 1</span>
-            suffix += <span class="hljs-string">'s'</span>
-        output += <span class="hljs-string">' '</span> + suffix
+        <span class="hljs-keyword">if</span> self.wholes != WholeNumber.from_str(<span class="hljs-string">'0'</span>) <span class="hljs-keyword">and</span> self.partial != PartialNumber.from_str(<span class="hljs-string">'0'</span>):
+            output += <span class="hljs-string">' and '</span>
+
+        <span class="hljs-keyword">if</span> self.partial != PartialNumber.from_str(<span class="hljs-string">'0'</span>):
+            output += partial_words
+            suffix = partials_len_to_suffixes[len(self.partial.digits)]
+            <span class="hljs-keyword">if</span> suffix <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+                <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">'Partial too large'</span>)
+            log(<span class="hljs-string">f'Partial suffix: <span class="hljs-subst">{suffix}</span>'</span>)
+            <span class="hljs-keyword">if</span> self.partial != PartialNumber.from_str(<span class="hljs-string">'0'</span>):  <span class="hljs-comment"># pluralize suffix if more than 1</span>
+                suffix += <span class="hljs-string">'s'</span>
+            output += <span class="hljs-string">' '</span> + suffix
 
     log_unindent()
     log(<span class="hljs-string">f'<span class="hljs-subst">{output}</span>'</span>)
@@ -6854,16 +6854,16 @@ The <a name="BOOKMARK136"></a><strong>reciprocal</strong> of a <a href="#BOOKMAR
     <span class="hljs-keyword">return</span> output.strip()</code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
-<li>Converting -32.875...
+<li>Converting -33.125...
 <ul>
 <li>Converting wholes portion to words...</li>
-<li>Wholes as words: thirty two</li>
+<li>Wholes as words: thirty three</li>
 <li>Converting partial portion to words...</li>
-<li>Partial as words: eight hundred seventy five</li>
+<li>Partial as words: one hundred twenty five</li>
 <li>Partial suffix: thousandth</li>
 </ul>
 </li>
-<li>thirty two and eight hundred seventy five thousandths</li>
+<li>negative thirty three and one hundred twenty five thousandths</li>
 </ul>
 </div>
 <p></p>
@@ -7026,23 +7026,47 @@ The <a name="BOOKMARK136"></a><strong>reciprocal</strong> of a <a href="#BOOKMAR
     log(<span class="hljs-string">f'Converting <span class="hljs-subst">{self}</span> to fraction number...'</span>)
     log_indent()
 
-    log(<span class="hljs-string">f'Determining denominator based on length of partial portion (<span class="hljs-subst">{self.cached_partial_str}</span>)...'</span>)
-    denom = WholeNumber.from_str(<span class="hljs-string">'1'</span> + <span class="hljs-string">'0'</span> * len(self.cached_partial_str))
+    log(<span class="hljs-string">f'Determining denominator based on length of partial portion (<span class="hljs-subst">{self.partial}</span>)...'</span>)
+    denom = IntegerNumber.from_str(<span class="hljs-string">'1'</span> + <span class="hljs-string">'0'</span> * len(self.partial.digits))
     log(<span class="hljs-string">f'<span class="hljs-subst">{denom}</span>'</span>)
 
-    log(<span class="hljs-string">f'Determining numerator based on denominator (<span class="hljs-subst">{denom}</span>)...'</span>)
-    num = WholeNumber.from_str(self.cached_wholes_str) * denom + WholeNumber.from_str(self.cached_partial_str)
-    log(<span class="hljs-string">f'<span class="hljs-subst">{num}</span>'</span>)
+    log(<span class="hljs-string">f'Converting partial portion (<span class="hljs-subst">{self.partial}</span> to fraction...'</span>)
+    partial_fraction = FractionNumber(
+        IntegerNumber.from_str(str(self.partial)),
+        denom
+    )
+    log(<span class="hljs-string">f'<span class="hljs-subst">{partial_fraction}</span>'</span>)
 
-    ret = FractionNumber(
-        IntegerNumber(self.value.sign, num),
-        IntegerNumber(Sign.POSITIVE, denom))
+    log(<span class="hljs-string">f'Converting whole portion (<span class="hljs-subst">{self.wholes}</span>) to fraction...'</span>)
+    wholes_fraction = FractionNumber.from_whole(self.wholes)
+    log(<span class="hljs-string">f'<span class="hljs-subst">{wholes_fraction}</span>'</span>)
+
+    log(<span class="hljs-string">f'Adding (<span class="hljs-subst">{wholes_fraction}</span>) to (<span class="hljs-subst">{partial_fraction}</span>)...'</span>)
+    fraction = wholes_fraction + partial_fraction
+    log(<span class="hljs-string">f'<span class="hljs-subst">{fraction}</span>'</span>)
+
+    log(<span class="hljs-string">f'Applying sign of (<span class="hljs-subst">{self.sign}</span>) to <span class="hljs-subst">{fraction}</span>...'</span>)
+    <span class="hljs-keyword">if</span> self.sign == Sign.NEGATIVE:
+        fraction = fraction * FractionNumber.from_str(<span class="hljs-string">"-1/1"</span>)  <span class="hljs-comment"># make sign negative</span>
+    log(<span class="hljs-string">f'<span class="hljs-subst">{fraction}</span>'</span>)
 
     log_unindent()
 
-    log(<span class="hljs-string">f'<span class="hljs-subst">{ret}</span>'</span>)
-    <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
+    <span class="hljs-keyword">return</span> fraction</code></pre><div style="border:1px solid black;">
 <p></p>
+<ul>
+<li>Converting +22018/1000 to a decimal number...
+<ul>
+<li>Converting +22018/1000 to suitable fraction...</li>
+<li>+22018/1000</li>
+<li>Resolving fraction +22018/1000...</li>
+<li>22 wholes and 18 remaining</li>
+<li>Converting 18 of 1000 to partial value...</li>
+<li>018</li>
+</ul>
+</li>
+<li>Decimal number: +22.018</li>
+</ul>
 </div>
 <p></p>
 <p>Examples of <a href="#BOOKMARK137">mixed number</a> and <a href="#BOOKMARK140">decimal number</a> equivalents...</p>
