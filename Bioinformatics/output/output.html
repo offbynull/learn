@@ -16,22 +16,31 @@
 <li><a href="#HEADREF7">Find Repeating</a></li>
 <li><a href="#HEADREF8">Find Repeating in Window</a></li>
 <li><a href="#HEADREF9">Probability of Appearance</a></li>
-</ul>
-<li><a href="#HEADREF10">GC Skew</a></li>
-<li><a href="#HEADREF11">Motif</a></li>
 <ul>
-<li><a href="#HEADREF12">Consensus String</a></li>
-<li><a href="#HEADREF13">Enumerative Motif Finding</a></li>
+<li><a href="#HEADREF10">Bruteforce Algorithm</a></li>
+<li><a href="#HEADREF11">Selection Estimate Algorithm</a></li>
 </ul>
-<li><a href="#HEADREF14">Stories</a></li>
+</ul>
+<li><a href="#HEADREF12">GC Skew</a></li>
+<li><a href="#HEADREF13">Motif</a></li>
 <ul>
-<li><a href="#HEADREF15">Bacteria Replication</a></li>
+<li><a href="#HEADREF14">Consensus String</a></li>
+<li><a href="#HEADREF15">Find Motif</a></li>
 <ul>
-<li><a href="#HEADREF16">Find Ori and Ter</a></li>
-<li><a href="#HEADREF17">Find the DnaA Box</a></li>
+<li><a href="#HEADREF16">Bruteforce Algorithm</a></li>
+<li><a href="#HEADREF17">Randomized Search Algorithm</a></li>
+<li><a href="#HEADREF18">Gibbs Sampling Search Algorithm</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF18">Terminology</a></li>
+<li><a href="#HEADREF19">Stories</a></li>
+<ul>
+<li><a href="#HEADREF20">Bacteria Replication</a></li>
+<ul>
+<li><a href="#HEADREF21">Find Ori and Ter</a></li>
+<li><a href="#HEADREF22">Find the DnaA Box</a></li>
+</ul>
+</ul>
+<li><a href="#HEADREF23">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -42,7 +51,7 @@
 <thead>
 <tr>
 <th>k</th>
-<th><a href="#BOOKMARK13">k-mer</a></th>
+<th><a href="#BOOKMARK13">k-mer</a>s</th>
 </tr>
 </thead>
 <tbody>
@@ -76,7 +85,7 @@
 <ul>
 <li>search for an exact <a href="#BOOKMARK13">k-mer</a>.</li>
 <li>search for an approximate <a href="#BOOKMARK13">k-mer</a> (fuzzy search).</li>
-<li>find <a href="#BOOKMARK13">k-mer</a> of interest in a sequence (e.g. repeating <a href="#BOOKMARK13">k-mer</a>).</li>
+<li>find <a href="#BOOKMARK13">k-mer</a>s of interest in a sequence (e.g. repeating <a href="#BOOKMARK13">k-mer</a>s).</li>
 </ul>
 <a name="HEADREF2"></a><h2>Reverse Complement</h2>
 <p><a name="BOOKMARK1"></a><strong></strong></p>
@@ -118,7 +127,7 @@
 <p></p>
 <a name="HEADREF3"></a><h2>Hamming Distance</h2>
 <p><a name="BOOKMARK2"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given 2 <a href="#BOOKMARK13">k-mer</a>, the hamming distance is the number of positional mismatches between them.</p>
+<p><strong>WHAT</strong>: Given 2 <a href="#BOOKMARK13">k-mer</a>s, the hamming distance is the number of positional mismatches between them.</p>
 <p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK13">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK13">k-mer</a> patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hamming_distance</span>(<span class="hljs-params">kmer1: str, kmer2: str</span>) -&gt; int:</span>
@@ -143,7 +152,7 @@
 <li><a href="#BOOKMARK2">K-mer/Hamming Distance</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a source <a href="#BOOKMARK13">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK13">k-mer</a> such within the hamming distance of the source <a href="#BOOKMARK13">k-mer</a>. In other words, find all <a href="#BOOKMARK13">k-mer</a> such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
+<p><strong>WHAT</strong>: Given a source <a href="#BOOKMARK13">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK13">k-mer</a>s such within the hamming distance of the source <a href="#BOOKMARK13">k-mer</a>. In other words, find all <a href="#BOOKMARK13">k-mer</a>s such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
 <p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK13">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK13">k-mer</a> patterns that are slight variations of the original. This algorithm finds all such variations.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_all_dna_kmers_within_hamming_distance</span>(<span class="hljs-params">kmer: str, hamming_dist: int</span>) -&gt; set[str]:</span>
@@ -249,7 +258,7 @@
 <li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a sequence, find clusters of unique <a href="#BOOKMARK13">k-mer</a> within that sequence. In other words, for each unique <a href="#BOOKMARK13">k-mer</a> that exists in the sequence, see if it clusters in the sequence. The search may potentially include variants of <a href="#BOOKMARK13">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK13">k-mer</a>).</p>
+<p><strong>WHAT</strong>: Given a sequence, find clusters of unique <a href="#BOOKMARK13">k-mer</a>s within that sequence. In other words, for each unique <a href="#BOOKMARK13">k-mer</a> that exists in the sequence, see if it clusters in the sequence. The search may potentially include variants of <a href="#BOOKMARK13">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK13">k-mer</a>s).</p>
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK13">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK13">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK13">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BOOKMARK12">DnaA box</a> is a special <a href="#BOOKMARK13">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK12">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK21">replication origin</a>. Given that you don't know the <a href="#BOOKMARK13">k-mer</a> pattern for the <a href="#BOOKMARK12">DnaA box</a> but you do know the <a href="#BOOKMARK21">replication origin</a>, you can scan through the <a href="#BOOKMARK21">replication origin</a> for repeating <a href="#BOOKMARK13">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK13">k-mer</a> pattern for the <a href="#BOOKMARK12">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
@@ -302,12 +311,12 @@
 <li><a href="#BOOKMARK6">K-mer/Find Repeating</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a sequence, find regions within that sequence that contain clusters of unique <a href="#BOOKMARK13">k-mer</a>. In other words, ...</p>
+<p><strong>WHAT</strong>: Given a sequence, find regions within that sequence that contain clusters of unique <a href="#BOOKMARK13">k-mer</a>s. In other words, ...</p>
 <ul>
 <li>slide a window over the cluster.</li>
 <li>for each unique <a href="#BOOKMARK13">k-mer</a> that exists in the window, see if it clusters in the sequence.</li>
 </ul>
-<p>The search may potentially include variants of <a href="#BOOKMARK13">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK13">k-mer</a>).</p>
+<p>The search may potentially include variants of <a href="#BOOKMARK13">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK13">k-mer</a>s).</p>
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK13">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK13">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK13">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BOOKMARK12">DnaA box</a> is a special <a href="#BOOKMARK13">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK12">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK21">replication origin</a>. Given that you don't know the <a href="#BOOKMARK13">k-mer</a> pattern for the <a href="#BOOKMARK12">DnaA box</a> but you do know the <a href="#BOOKMARK21">replication origin</a>, you can scan through the <a href="#BOOKMARK21">replication origin</a> for repeating <a href="#BOOKMARK13">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK13">k-mer</a> pattern for the <a href="#BOOKMARK12">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
@@ -415,6 +424,7 @@
 <p>The probability is 7/256.</p>
 <p>This isn't trivial to accurately compute because the occurrences of a <a href="#BOOKMARK13">k-mer</a> within a sequence may overlap. For example, the number of times AA appears in AAAA is 3 while in CAAA it's 2.</p>
 <p><strong>WHY</strong>: When a <a href="#BOOKMARK13">k-mer</a> is found within a sequence, knowing the probability of that <a href="#BOOKMARK13">k-mer</a> being found within an arbitrary sequence of the same length hints at the significance of the find. For example, if some 10-mer has a 0.2 chance of appearing in an arbitrary sequence of length 50, that's too high of a chance to consider it a significant find -- 0.2 means 1 in 5 chance that the 10-mer just randomly happens to appear.</p>
+<a name="HEADREF10"></a><h3>Bruteforce Algorithm</h3>
 <p><strong>ALGORITHM</strong>:</p>
 <p>The following algorithm uses brute-force to determine the probability...</p>
 <pre class="hljs"><code><span class="hljs-comment"># This implementation tries every possible combination of sequence to find the probability. It falls over once the</span>
@@ -456,6 +466,8 @@
 <p>Probability: 0.0195159912109375 (1279/65536)</p>
 </div>
 <p></p>
+<a name="HEADREF11"></a><h3>Selection Estimate Algorithm</h3>
+<p><strong>ALGORITHM</strong>:</p>
 <p>The following algorithm estimates the probability by ignoring the fact that <a href="#BOOKMARK13">k-mer</a> occurrences may overlap within the sequence, which allows for much more faster algorithm...</p>
 <pre class="hljs"><code><span class="hljs-comment"># The explanation in the comments below are a bastardization of "1.13 Detour: Probabilities of Patterns in a String"</span>
 <span class="hljs-comment"># in the Pevzner book...</span>
@@ -526,7 +538,7 @@
 <p>Probability: 0.01953125</p>
 </div>
 <p></p>
-<a name="HEADREF10"></a><h1>GC Skew</h1>
+<a name="HEADREF12"></a><h1>GC Skew</h1>
 <p><strong>WHAT</strong>: Given a sequence, walk over it and ...</p>
 <ul>
 <li>increment every time you spot a G.</li>
@@ -564,7 +576,7 @@
 <p><img src="skew_babf857bad6dd935f0d1ddbbb8b5005f.png" alt="GC Skew Plot"></p>
 </div>
 <p></p>
-<a name="HEADREF11"></a><h1>Motif</h1>
+<a name="HEADREF13"></a><h1>Motif</h1>
 <p><a name="BOOKMARK9"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -572,8 +584,8 @@
 <li><a href="#BOOKMARK0">K-mer</a></li>
 </ul>
 </div>
-<p>A <a href="#BOOKMARK46">motif</a> is a pattern that matches many different <a href="#BOOKMARK13">k-mer</a>, where those matched <a href="#BOOKMARK13">k-mer</a> have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK46">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
-<p>Often times we'll have identified a set of biological sequences where each sequence, we suspect, contains a <a href="#BOOKMARK13">k-mer</a> that matches some <a href="#BOOKMARK46">motif</a>. We'll need to find the <a href="#BOOKMARK13">k-mer</a> and the <a href="#BOOKMARK46">motif</a> they match. For example, each of the following sequences contains a <a href="#BOOKMARK13">k-mer</a> that matches some <a href="#BOOKMARK46">motif</a>:</p>
+<p>A <a href="#BOOKMARK46">motif</a> is a pattern that matches many different <a href="#BOOKMARK13">k-mer</a>s, where those matched <a href="#BOOKMARK13">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK46">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
+<p>Often times we'll have identified a set of biological sequences where each sequence, we suspect, contains a <a href="#BOOKMARK13">k-mer</a> that matches some <a href="#BOOKMARK46">motif</a>. We'll need to find the <a href="#BOOKMARK13">k-mer</a>s and the <a href="#BOOKMARK46">motif</a> they match. For example, each of the following sequences contains a <a href="#BOOKMARK13">k-mer</a> that matches some <a href="#BOOKMARK46">motif</a>:</p>
 <table>
 <thead>
 <tr>
@@ -617,7 +629,7 @@
 </tr>
 </tbody>
 </table>
-<p>A <a href="#BOOKMARK47">motif matrix</a> is what we call a set of <a href="#BOOKMARK13">k-mer</a> that we suspect to be members of a <a href="#BOOKMARK46">motif</a>. In the example above, the <a href="#BOOKMARK47">motif matrix</a> would be:</p>
+<p>A <a href="#BOOKMARK47">motif matrix</a> is a matrix of <a href="#BOOKMARK13">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK46">motif</a>. In the example sequences above, the <a href="#BOOKMARK47">motif matrix</a> would be:</p>
 <table>
 <thead>
 <tr>
@@ -659,10 +671,10 @@
 </tr>
 </tbody>
 </table>
-<a name="HEADREF12"></a><h2>Consensus String</h2>
+<a name="HEADREF14"></a><h2>Consensus String</h2>
 <p><a name="BOOKMARK10"></a><strong></strong></p>
 <p><strong>WHAT</strong>: Given a <a href="#BOOKMARK47">motif matrix</a>, generate a <a href="#BOOKMARK13">k-mer</a> where each position is the nucleotide most abundant at that column of the matrix.</p>
-<p><strong>WHY</strong>: Given a set of <a href="#BOOKMARK13">k-mer</a> that we suspect match a <a href="#BOOKMARK46">motif</a>, the <a href="#BOOKMARK13">k-mer</a> generated by selecting the most abundant column at each index is the "ideal" <a href="#BOOKMARK13">k-mer</a> for the <a href="#BOOKMARK46">motif</a>. That is, it's a concise way of describing the <a href="#BOOKMARK46">motif</a>, especially if the columns in the <a href="#BOOKMARK47">motif matrix</a> are highly conserved.</p>
+<p><strong>WHY</strong>: Given a set of <a href="#BOOKMARK13">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK46">motif</a> (<a href="#BOOKMARK47">motif matrix</a>), the <a href="#BOOKMARK13">k-mer</a> generated by selecting the most abundant column at each index is the "ideal" <a href="#BOOKMARK13">k-mer</a> for the <a href="#BOOKMARK46">motif</a>. That is, it's a concise way of describing the <a href="#BOOKMARK46">motif</a>, especially if the columns in the <a href="#BOOKMARK47">motif matrix</a> are highly conserved.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_consensus_string</span>(<span class="hljs-params">kmers: List[str]</span>) -&gt; str:</span>
     count = len(kmers[<span class="hljs-number">0</span>]);
@@ -678,7 +690,7 @@
 <p>Consensus is TTTCC in <br><br> ATTGC<br>ATTCC<br>TTTGC<br>TTTCC<br>TTTCA</p>
 </div>
 <p></p>
-<a name="HEADREF13"></a><h2>Enumerative Motif Finding</h2>
+<a name="HEADREF15"></a><h2>Find Motif</h2>
 <p><a name="BOOKMARK11"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -686,6 +698,23 @@
 <li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
 </ul>
 </div>
+<p><strong>WHAT</strong>: Given a set of sequences, identify <a href="#BOOKMARK13">k-mer</a>s in those sequences that may be members of the same <a href="#BOOKMARK46">motif</a>.</p>
+<p><strong>WHY</strong>: A <a href="#BOOKMARK45">transcription factor</a> is an enzyme that regulates the <a href="#BOOKMARK35">transcription</a> of a <a href="#BOOKMARK33">gene</a> by either increasing or decreasing the rate of <a href="#BOOKMARK35">transcription</a>. It does so by binding to a specific part of the <a href="#BOOKMARK33">gene</a>'s upstream region. This part is called the <a href="#BOOKMARK49">transcription factor binding site</a>, and it contains a <a href="#BOOKMARK13">k-mer</a> that matches a <a href="#BOOKMARK46">motif</a> expected by the <a href="#BOOKMARK45">transcription factor</a> called a <a href="#BOOKMARK48">regulatory motif</a>.</p>
+<p>A single <a href="#BOOKMARK45">transcription factor</a> may operate on many different <a href="#BOOKMARK33">genes</a>. Often times a scientist will identify a set of <a href="#BOOKMARK33">genes</a> that are suspected to be regulated by a single <a href="#BOOKMARK45">transcription factor</a>, but that scientist won't know ...</p>
+<ul>
+<li>what the <a href="#BOOKMARK48">regulatory motif</a> is (the pattern expected by the enzyme).</li>
+<li>where the <a href="#BOOKMARK49">transcription factor binding site</a>s are (which <a href="#BOOKMARK13">k-mer</a>s the enzyme is targeting).</li>
+<li>how long the <a href="#BOOKMARK49">transcription factor binding site</a>s are (which k the enzyme is targeting).</li>
+</ul>
+<p>The <a href="#BOOKMARK48">regulatory motif</a> expected by a <a href="#BOOKMARK45">transcription factor</a> typically expects <a href="#BOOKMARK13">k-mer</a>s that have the same length and are similar to each other (short hamming distance). As such, potential <a href="#BOOKMARK46">motif</a> candidates can be derived by identifying <a href="#BOOKMARK13">k-mer</a>s across the set of sequences that are similar to each other.</p>
+<a name="HEADREF16"></a><h3>Bruteforce Algorithm</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
+</ul>
+</div>
+<p><strong>ALGORITHM</strong>:</p>
 <p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
 <p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
 <p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
@@ -702,8 +731,10 @@
 <p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
 <p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
 <p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<a name="HEADREF14"></a><h1>Stories</h1>
-<a name="HEADREF15"></a><h2>Bacteria Replication</h2>
+<a name="HEADREF17"></a><h3>Randomized Search Algorithm</h3>
+<a name="HEADREF18"></a><h3>Gibbs Sampling Search Algorithm</h3>
+<a name="HEADREF19"></a><h1>Stories</h1>
+<a name="HEADREF20"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK21">replication origin</a> (<a href="#BOOKMARK22">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK23">replication terminus</a> (<a href="#BOOKMARK24">ter</a>) is where it ends. The <a href="#BOOKMARK22">ori</a> and <a href="#BOOKMARK24">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK20">replication fork</a> opening at the <a href="#BOOKMARK22">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK24">ter</a>...</p>
@@ -725,7 +756,7 @@
 <p>The <a href="#BOOKMARK29">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK30">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>You now have two complete copies of the DNA.</p>
-<a name="HEADREF16"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF21"></a><h3>Find Ori and Ter</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -760,12 +791,12 @@
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK22">ori</a> / <a href="#BOOKMARK24">ter</a> regions.</p>
 </div>
-<a name="HEADREF17"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF22"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
 <li>Find <a href="#BOOKMARK22">Ori</a> and <a href="#BOOKMARK24">Ter</a></li>
-<li>Find Repeating <a href="#BOOKMARK13">K-mer</a> in Window</li>
+<li>Find Repeating <a href="#BOOKMARK13">K-mer</a>s in Window</li>
 </ul>
 </div>
 <p>Within the <a href="#BOOKMARK22">ori</a> region, there exists several copies of some <a href="#BOOKMARK13">k-mer</a> pattern. These copies are referred to as <a name="BOOKMARK12"></a><strong>DnaA box</strong>es.</p>
@@ -782,8 +813,8 @@
 <li>the reverse complement of the 9-mer.</li>
 <li>slight variations of the reverse complement of the 9-mer.</li>
 </ul>
-<p>The repeating <a href="#BOOKMARK13">k-mer</a> found are potential <a href="#BOOKMARK12">DnaA box</a> candidates.</p>
-<p>For example, we know where the general vicinity of the <a href="#BOOKMARK22">ori</a> is in E. coli given its GC skew. We can search the vicinity of the <a href="#BOOKMARK22">ori</a> for repeating <a href="#BOOKMARK13">k-mer</a>.</p>
+<p>The repeating <a href="#BOOKMARK13">k-mer</a>s found are potential <a href="#BOOKMARK12">DnaA box</a> candidates.</p>
+<p>For example, we know where the general vicinity of the <a href="#BOOKMARK22">ori</a> is in E. coli given its GC skew. We can search the vicinity of the <a href="#BOOKMARK22">ori</a> for repeating <a href="#BOOKMARK13">k-mer</a>s.</p>
 <div style="border:1px solid black;">
 <p></p>
 <p>Calculating skew for: ...</p>
@@ -856,7 +887,7 @@
 </ul>
 </div>
 <p></p>
-<a name="HEADREF18"></a><h1>Terminology</h1>
+<a name="HEADREF23"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p>A <a name="BOOKMARK13"></a><strong>k-mer</strong> is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK13">k-mer</a>'s exist:</p>
@@ -864,7 +895,7 @@
 <thead>
 <tr>
 <th>k</th>
-<th><a href="#BOOKMARK13">k-mer</a></th>
+<th><a href="#BOOKMARK13">k-mer</a>s</th>
 </tr>
 </thead>
 <tbody>
@@ -1013,10 +1044,10 @@
 <p><a name="BOOKMARK45"></a><strong>transcription factor</strong> - A <a href="#BOOKMARK39">regulatory protein</a> that controls the rate of <a href="#BOOKMARK35">transcription</a> for some <a href="#BOOKMARK33">gene</a> that it has influence over (the copying of DNA to mRNA). The protein binds to a specific sequence in the <a href="#BOOKMARK33">gene</a>'s upstream region.</p>
 </li>
 <li>
-<p><a name="BOOKMARK46"></a><strong>motif</strong> - A pattern that matches against many different <a href="#BOOKMARK13">k-mer</a>, where those matched <a href="#BOOKMARK13">k-mer</a> have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK46">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
+<p><a name="BOOKMARK46"></a><strong>motif</strong> - A pattern that matches against many different <a href="#BOOKMARK13">k-mer</a>s, where those matched <a href="#BOOKMARK13">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK46">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK47"></a><strong>motif matrix</strong> - A set of <a href="#BOOKMARK13">k-mer</a> that form a <a href="#BOOKMARK46">motif</a>. For example, the <a href="#BOOKMARK46">motif</a> <code>[AT]TT[GC]C</code> has the following matrix:</p>
+<p><a name="BOOKMARK47"></a><strong>motif matrix</strong> - A set of <a href="#BOOKMARK13">k-mer</a>s that form a <a href="#BOOKMARK46">motif</a>. For example, the <a href="#BOOKMARK46">motif</a> <code>[AT]TT[GC]C</code> has the following matrix:</p>
 <table>
 <thead>
 <tr>
