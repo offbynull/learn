@@ -140,7 +140,7 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK2">/K-mer/Hamming Distance</a></li>
+<li><a href="#BOOKMARK2">K-mer/Hamming Distance</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given a source <a href="#BOOKMARK13">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK13">k-mer</a> such within the hamming distance of the source <a href="#BOOKMARK13">k-mer</a>. In other words, find all <a href="#BOOKMARK13">k-mer</a> such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
@@ -162,7 +162,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAGA', 'AAAT', 'AGAA', 'GAAA', 'AACA', 'AAAC', 'AAAA', 'TAAA', 'ATAA', 'AAAG', 'AATA', 'ACAA', 'CAAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'AGAA', 'GAAA', 'AAAA', 'AATA', 'CAAA', 'AAGA', 'ATAA', 'AACA', 'AAAG', 'AAAT', 'ACAA', 'TAAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h2>Find Locations</h2>
@@ -170,8 +170,8 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK2">/K-mer/Hamming Distance</a></li>
-<li><a href="#BOOKMARK1">/K-mer/Reverse Complement</a></li>
+<li><a href="#BOOKMARK2">K-mer/Hamming Distance</a></li>
+<li><a href="#BOOKMARK1">K-mer/Reverse Complement</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given a <a href="#BOOKMARK13">k-mer</a>, find where that <a href="#BOOKMARK13">k-mer</a> occurs in some larger sequence. The search may potentially include the <a href="#BOOKMARK13">k-mer</a>'s variants (e.g. reverse complement).</p>
@@ -213,7 +213,7 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK4">/K-mer/Find Locations</a></li>
+<li><a href="#BOOKMARK4">K-mer/Find Locations</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given a <a href="#BOOKMARK13">k-mer</a>, find where that <a href="#BOOKMARK13">k-mer</a> clusters in some larger sequence. The search may potentially include the <a href="#BOOKMARK13">k-mer</a>'s variants (e.g. reverse complement).</p>
@@ -245,8 +245,8 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK1">/K-mer/Reverse Complement</a></li>
-<li><a href="#BOOKMARK3">/K-mer/Hamming Distance Neighbourhood</a></li>
+<li><a href="#BOOKMARK1">K-mer/Reverse Complement</a></li>
+<li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given a sequence, find clusters of unique <a href="#BOOKMARK13">k-mer</a> within that sequence. In other words, for each unique <a href="#BOOKMARK13">k-mer</a> that exists in the sequence, see if it clusters in the sequence. The search may potentially include variants of <a href="#BOOKMARK13">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK13">k-mer</a>).</p>
@@ -285,12 +285,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>GATCA = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
-<li>TTAAA = 6 occurrences</li>
 <li>TGATC = 6 occurrences</li>
 <li>AAGGG = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
+<li>GATCA = 6 occurrences</li>
+<li>TTAAA = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -299,7 +299,7 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK6">/K-mer/Find Repeating</a></li>
+<li><a href="#BOOKMARK6">K-mer/Find Repeating</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given a sequence, find regions within that sequence that contain clusters of unique <a href="#BOOKMARK13">k-mer</a>. In other words, ...</p>
@@ -361,18 +361,18 @@
 <p></p>
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
-<li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -381,7 +381,7 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK4">/K-mer/Find Locations</a></li>
+<li><a href="#BOOKMARK4">K-mer/Find Locations</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given ...</p>
@@ -569,7 +569,7 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK0">/K-mer</a></li>
+<li><a href="#BOOKMARK0">K-mer</a></li>
 </ul>
 </div>
 <p>A <a href="#BOOKMARK46">motif</a> is a pattern that matches many different <a href="#BOOKMARK13">k-mer</a>, where those matched <a href="#BOOKMARK13">k-mer</a> have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK46">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
@@ -683,7 +683,7 @@
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK3">/K-mer/Hamming Distance Neighbourhood</a></li>
+<li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
 </ul>
 </div>
 <p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
@@ -792,33 +792,33 @@
 <p>Ori vicinity (min pos): 4719166</p>
 <p>In the ori vicinity, found clusters of k=9 (at least 3 occurrences in window of 500) in ... at...</p>
 <ul>
-<li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCGGCGGTA', start_index=52, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=163, occurrence_count=4)</li>
 <li>KmerCluster(kmer='CATCAGGCG', start_index=164, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
@@ -832,15 +832,15 @@
 <li>KmerCluster(kmer='ATCACCATT', start_index=500, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCCTTTTTA', start_index=513, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCCTTTTT', start_index=514, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>

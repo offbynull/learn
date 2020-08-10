@@ -11,7 +11,7 @@ Bioinformatics
 
 # K-mer
 
-`{bm} /(\/K-mer)_TOPIC/`
+`{bm} /(K-mer)_TOPIC/`
 
 A k-mer is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
@@ -32,7 +32,7 @@ Often times we'll need to either...
 
 ## Reverse Complement
 
-`{bm} /(\/K-mer\/Reverse Complement)_TOPIC/`
+`{bm} /(K-mer\/Reverse Complement)_TOPIC/`
 
 **WHAT**: Given a DNA k-mer, calculate its reverse complement.
 
@@ -67,7 +67,7 @@ TAATCCG
 
 ## Hamming Distance
 
-`{bm} /(\/K-mer\/Hamming Distance)_TOPIC/`
+`{bm} /(K-mer\/Hamming Distance)_TOPIC/`
 
 **WHAT**: Given 2 k-mers, the hamming distance is the number of positional mismatches between them.
 
@@ -89,10 +89,10 @@ AGTTTCTT
 
 ## Hamming Distance Neighbourhood
 
-`{bm} /(\/K-mer\/Hamming Distance Neighbourhood)_TOPIC/`
+`{bm} /(K-mer\/Hamming Distance Neighbourhood)_TOPIC/`
 
 ```{prereq}
-/K-mer/Hamming Distance_TOPIC
+K-mer/Hamming Distance_TOPIC
 ```
 
 **WHAT**: Given a source k-mer and a minimum hamming distance, find all k-mers such within the hamming distance of the source k-mer. In other words, find all k-mers such that `hamming_distance(source_kmer, kmer) <= min_distance`.
@@ -115,11 +115,11 @@ AAAA
 
 ## Find Locations
 
-`{bm} /(\/K-mer\/Find Locations)_TOPIC/`
+`{bm} /(K-mer\/Find Locations)_TOPIC/`
 
 ```{prereq}
-/K-mer/Hamming Distance_TOPIC
-/K-mer/Reverse Complement_TOPIC
+K-mer/Hamming Distance_TOPIC
+K-mer/Reverse Complement_TOPIC
 ```
 
 **WHAT**: Given a k-mer, find where that k-mer occurs in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
@@ -149,10 +149,10 @@ True
 
 ## Find Clumps
 
-`{bm} /(\/K-mer\/Find Clumps)_TOPIC/`
+`{bm} /(K-mer\/Find Clumps)_TOPIC/`
 
 ```{prereq}
-/K-mer/Find Locations_TOPIC
+K-mer/Find Locations_TOPIC
 ```
 
 **WHAT**: Given a k-mer, find where that k-mer clusters in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
@@ -181,11 +181,11 @@ True
 
 ## Find Repeating
 
-`{bm} /(\/K-mer\/Find Repeating)_TOPIC/`
+`{bm} /(K-mer\/Find Repeating)_TOPIC/`
 
 ```{prereq}
-/K-mer/Reverse Complement_TOPIC
-/K-mer/Hamming Distance Neighbourhood_TOPIC
+K-mer/Reverse Complement_TOPIC
+K-mer/Hamming Distance Neighbourhood_TOPIC
 ```
 
 **WHAT**: Given a sequence, find clusters of unique k-mers within that sequence. In other words, for each unique k-mer that exists in the sequence, see if it clusters in the sequence. The search may potentially include variants of k-mer variants (e.g. reverse complements of the k-mers).
@@ -212,10 +212,10 @@ True
 
 ## Find Repeating in Window
 
-`{bm} /(\/K-mer\/Find Repeating in Window)_TOPIC/`
+`{bm} /(K-mer\/Find Repeating in Window)_TOPIC/`
 
 ```{prereq}
-/K-mer/Find Repeating_TOPIC
+K-mer/Find Repeating_TOPIC
 ```
 
 **WHAT**: Given a sequence, find regions within that sequence that contain clusters of unique k-mers. In other words, ...
@@ -248,10 +248,10 @@ True
 
 ## Probability of Appearance
 
-`{bm} /(\/K-mer\/Probability of Appearance)_TOPIC/`
+`{bm} /(K-mer\/Probability of Appearance)_TOPIC/`
 
 ```{prereq}
-/K-mer/Find Locations_TOPIC
+K-mer/Find Locations_TOPIC
 ```
 
 **WHAT**: Given ...
@@ -353,10 +353,10 @@ CACGGGTGGTTTTGGGGGCCCCCC
 
 # Motif
 
-`{bm} /(\/Motif)_TOPIC/`
+`{bm} /(Motif)_TOPIC/`
 
 ```{prereq}
-/K-mer_TOPIC
+K-mer_TOPIC
 ```
 
 A motif is a pattern that matches many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
@@ -390,7 +390,7 @@ A motif matrix is what we call a set of k-mers that we suspect to be members of 
 
 ## Consensus String
 
-`{bm} /(\/Motif\/Consensus String)_TOPIC/`
+`{bm} /(Motif\/Consensus String)_TOPIC/`
 
 **WHAT**: Given a motif matrix, generate a k-mer where each position is the nucleotide most abundant at that column of the matrix.
 
@@ -418,7 +418,7 @@ TTTCA
 `{bm} /(\/Motif\/Enumerative Motif Finding)_TOPIC/`
 
 ```{prereq}
-/K-mer/Hamming Distance Neighbourhood_TOPIC
+K-mer/Hamming Distance Neighbourhood_TOPIC
 ```
 
 TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
