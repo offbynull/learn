@@ -4,10 +4,10 @@ from FindAllDnaKmersWithinHammingDistance import find_all_dna_kmers_within_hammi
 from HammingDistanceBetweenKmers import hamming_distance
 from Utils import slide_window
 
+# MARKDOWN
 # Don't get confused by this method. It enumerates every possible kmer that COULD be the motif. That is, every possible
 # kmer that has a matching kmer in each string in dnas[]. "Matching kmer" in this case means matching within some
 # hamming distance.
-# MARKDOWN
 def motif_enumeration(
         dnas: List[str],      # dna strings to search in for motif
         k: int,               # k-mer length
