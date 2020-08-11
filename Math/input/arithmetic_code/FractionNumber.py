@@ -266,9 +266,13 @@ class FractionNumber:
             res = FractionNumber(
                 IntegerNumber(Sign.NEGATIVE, new_num),
                 IntegerNumber(Sign.POSITIVE, new_den))
-        else:  # if original was positive, so will the simplified
+        elif self.sign == Sign.POSITIVE:  # if original was positive, so will the simplified
             res = FractionNumber(
                 IntegerNumber(Sign.POSITIVE, new_num),
+                IntegerNumber(Sign.POSITIVE, new_den))
+        else:  # if original was 0 (no sign), so will the simplified
+            res = FractionNumber(
+                IntegerNumber(None, new_num),
                 IntegerNumber(Sign.POSITIVE, new_den))
 
         log_unindent()
