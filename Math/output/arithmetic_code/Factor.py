@@ -139,7 +139,8 @@ class FactorTreeNode:
             output_list = []
 
         if self.left is None and self.right is None:
-            output_list.append(self.value)
+            if self.value != WholeNumber.from_str('1'):  # REMEMBER: 1 is not a prime number
+                output_list.append(self.value)
 
         if self.left is not None:
             self.left.get_prime_factors(output_list)

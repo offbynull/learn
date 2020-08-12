@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from builtins import type
 from typing import List, Union
 
 from Digit import Digit
@@ -156,15 +157,15 @@ class DecimalNumber:
     def __init__(self, sign: Union[Sign, None], wholes: WholeNumber, partial: PartialNumber):
         self.sign = sign
         self.wholes = wholes.copy()
-        self.partial = partial.copy()
+        self.partials = partial.copy()
 
         if wholes == WholeNumber.from_str('0') and partial == PartialNumber.from_str('0') and sign is not None:
             raise Exception('Magnitude of 0 cannot have a sign')
 
     def copy(self: DecimalNumber) -> DecimalNumber:
-        return DecimalNumber(self.sign, self.wholes, self.partial)
+        return DecimalNumber(self.sign, self.wholes, self.partials)
 
-    def __str__(self):
+    def __str__(self: DecimalNumber):
         if self.sign == Sign.POSITIVE:
             ret = '+'
         elif self.sign == Sign.NEGATIVE:
@@ -172,15 +173,27 @@ class DecimalNumber:
         else:
             ret = ''
 
-        ret += str(self.wholes) + '.' + str(self.partial)
+        ret += str(self.wholes) + '.' + str(self.partials)
 
         return ret
 
-    def __repr__(self: WholeNumber):
+    def __repr__(self: DecimalNumber):
         return self.__str__()
 
-    def __hash__(self):
-        return hash(tuple([self.sign, self.wholes, self.partial]))
+    def __hash__(self: DecimalNumber):
+        return hash(tuple([self.sign, self.wholes, self.partials]))
+
+    def __getitem__(self: DecimalNumber, key: int) -> Digit:
+        if key >= 0:
+            return self.wholes[key]
+        else:
+            return self.partials[-key -1]
+
+    def __setitem__(self: DecimalNumber, key: int, value: Digit) -> None:
+        if key >= 0:
+            self.wholes[key] = value
+        else:
+            self.partials[-key -1] = value
 
     #MARKDOWN_AS_FRAC
     @log_decorator
@@ -188,13 +201,13 @@ class DecimalNumber:
         log(f'Converting {self} to fraction number...')
         log_indent()
 
-        log(f'Determining denominator based on length of partial portion ({self.partial})...')
-        denom = IntegerNumber.from_str('1' + '0' * len(self.partial.digits))
+        log(f'Determining denominator based on length of partial portion ({self.partials})...')
+        denom = IntegerNumber.from_str('1' + '0' * len(self.partials.digits))
         log(f'{denom}')
 
-        log(f'Converting partial portion ({self.partial} to fraction...')
+        log(f'Converting partial portion ({self.partials} to fraction...')
         partial_fraction = FractionNumber(
-            IntegerNumber.from_str(str(self.partial)),
+            IntegerNumber.from_str(str(self.partials)),
             denom
         )
         log(f'{partial_fraction}')
@@ -251,11 +264,11 @@ class DecimalNumber:
         log(f'Wholes as words: {wholes_words}')
 
         log(f'Converting partial portion to words...')
-        partial_words = WholeNumber.from_str(str(self.partial)).to_words()
+        partial_words = WholeNumber.from_str(str(self.partials)).to_words()
         log(f'Partial as words: {partial_words}')
 
         output = ''
-        if self.wholes == WholeNumber.from_str('0') and self.partial == PartialNumber.from_str('0'):
+        if self.wholes == WholeNumber.from_str('0') and self.partials == PartialNumber.from_str('0'):
             output += 'zero'
         else:
             if self.sign == Sign.NEGATIVE:
@@ -264,16 +277,16 @@ class DecimalNumber:
             if self.wholes != WholeNumber.from_str('0'):
                 output += wholes_words
 
-            if self.wholes != WholeNumber.from_str('0') and self.partial != PartialNumber.from_str('0'):
+            if self.wholes != WholeNumber.from_str('0') and self.partials != PartialNumber.from_str('0'):
                 output += ' and '
 
-            if self.partial != PartialNumber.from_str('0'):
+            if self.partials != PartialNumber.from_str('0'):
                 output += partial_words
-                suffix = partials_len_to_suffixes[len(self.partial.digits)]
+                suffix = partials_len_to_suffixes[len(self.partials.digits)]
                 if suffix is None:
                     raise Exception('Partial too large')
                 log(f'Partial suffix: {suffix}')
-                if self.partial != PartialNumber.from_str('0'):  # pluralize suffix if more than 1
+                if self.partials != PartialNumber.from_str('0'):  # pluralize suffix if more than 1
                     suffix += 's'
                 output += ' ' + suffix
 
@@ -283,6 +296,113 @@ class DecimalNumber:
         return output.strip()
     #MARKDOWN_TO_WORDS
 
+    #MARKDOWN_ROUND
+    @log_decorator
+    def round(self, position: str) -> DecimalNumber:
+        log(f'Rounding {self} at {position} position...')
+        log_indent()
+
+        position = position.strip()
+        if position.endswith('s'):
+            position = position[:-1]
+        position_word_to_index = {
+            'hundred-quintillion': 20,
+            'ten-quintillion': 19,
+            'quintillion': 18,
+            'hundred-quadillion': 17,
+            'ten-quadrillion': 16,
+            'quadrillion': 15,
+            'hundred-trillion': 14,
+            'ten-trillion': 13,
+            'trillion': 12,
+            'hundred-billion': 11,
+            'ten-billion': 10,
+            'billion': 9,
+            'hundred-million': 8,
+            'ten-million': 7,
+            'million': 6,
+            'hundred-thousand': 5,
+            'ten-thousand': 4,
+            'thousand': 3,
+            'hundred': 2,
+            'ten': 1,
+            'one': 0,
+            'tenth': -1,
+            'hundredth': -2,
+            'thousandth': -3,
+            'ten-thousandth': -4,
+            'hundred-thousandth': -5,
+            'millionth': -6,
+            'ten-millionth': -7,
+            'hundred-millionth': -8,
+            'billionth': -9,
+            'ten-billionth': -10,
+            'hundred-billionth': -11,
+            'trillionth': -12,
+            'ten-trillionth': -13,
+            'hundred-trillionth': -14,
+            'quadrillionth': -15,
+            'ten-quadrillionth': -16,
+            'hundred-quadillionth': -17,
+            'quintillionth': -18,
+            'ten-quintillionth': -19,
+            'hundred-quintillionth': -20,
+        }
+        position_idx = position_word_to_index[position]
+        if position_idx is None:
+            raise Exception('Position unknown')
+
+        next_position_idx = position_idx - 1
+
+        log(f'Determining adder based on following position...')
+        log_indent()
+        log(f'Checking if digit at following position is >= 5...')
+        following_digit = WholeNumber.from_digit(self[next_position_idx])
+        if following_digit >= WholeNumber.from_str("5"):
+            log(f'True ({following_digit} >= 5), deriving adder based on position...')
+            if position_idx >= 0:
+                adder = DecimalNumber(
+                    self.sign,
+                    WholeNumber.from_str('1' + '0' * position_idx),
+                    PartialNumber.from_str('0')
+                )
+            else:
+                adder = DecimalNumber(
+                    self.sign,
+                    WholeNumber.from_str('0'),
+                    PartialNumber.from_str('0' * -(position_idx + 1) + '1')
+                )
+        else:
+            log(f'False ({following_digit} < 5), setting adder to 0...')
+            adder = DecimalNumber.from_str('0')
+        log_unindent()
+        log(f'Adder is {adder}')
+
+        log(f'Adding {adder} to {self}...')
+        ret = self.copy() + adder
+        log(f'{ret}')
+
+        log(f'Truncating all following positions...')
+        log_indent()
+        if position_idx >= 0:
+            for i in range(0, position_idx):
+                ret[i] = Digit(0)
+                log(f'{ret}')
+            for i in range(0, len(self.partials.digits)):
+                ret[-i - 1] = Digit(0)
+                log(f'{ret}')
+        else:
+            for i in range(-position_idx, len(self.partials.digits)):
+                ret[-i - 1] = Digit(0)
+                log(f'{ret}')
+        log_unindent()
+
+        log_unindent()
+        log(f'{ret}')
+
+        return ret
+    #MARKDOWN_ROUND
+
     #MARKDOWN_EQ
     @log_decorator
     def __eq__(self: DecimalNumber, other: DecimalNumber) -> bool:
@@ -290,20 +410,20 @@ class DecimalNumber:
         log_indent()
 
         adjust_len = max(
-            len(self.partial.digits),
-            len(other.partial.digits)
+            len(self.partials.digits),
+            len(other.partials.digits)
         )
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partial.digits)
-        self_combined_digits = self.partial.digits + self.wholes.digits
+        self_extra_0s = adjust_len - len(self.partials.digits)
+        self_combined_digits = self.partials.digits + self.wholes.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partial.digits)
-        other_combined_digits = other.partial.digits + other.wholes.digits
+        other_extra_0s = adjust_len - len(other.partials.digits)
+        other_combined_digits = other.partials.digits + other.wholes.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -325,20 +445,20 @@ class DecimalNumber:
         log_indent()
 
         adjust_len = max(
-            len(self.partial.digits),
-            len(other.partial.digits)
+            len(self.partials.digits),
+            len(other.partials.digits)
         )
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partial.digits)
-        self_combined_digits = self.partial.digits + self.wholes.digits
+        self_extra_0s = adjust_len - len(self.partials.digits)
+        self_combined_digits = self.partials.digits + self.wholes.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partial.digits)
-        other_combined_digits = other.partial.digits + other.wholes.digits
+        other_extra_0s = adjust_len - len(other.partials.digits)
+        other_combined_digits = other.partials.digits + other.wholes.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -363,20 +483,20 @@ class DecimalNumber:
         log_indent()
 
         adjust_len = max(
-            len(self.partial.digits),
-            len(other.partial.digits)
+            len(self.partials.digits),
+            len(other.partials.digits)
         )
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partial.digits)
-        self_combined_digits = self.partial.digits + self.wholes.digits
+        self_extra_0s = adjust_len - len(self.partials.digits)
+        self_combined_digits = self.partials.digits + self.wholes.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partial.digits)
-        other_combined_digits = other.partial.digits + other.wholes.digits
+        other_extra_0s = adjust_len - len(other.partials.digits)
+        other_combined_digits = other.partials.digits + other.wholes.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -401,20 +521,20 @@ class DecimalNumber:
         log_indent()
 
         adjust_len = max(
-            len(self.partial.digits),
-            len(other.partial.digits)
+            len(self.partials.digits),
+            len(other.partials.digits)
         )
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partial.digits)
-        self_combined_digits = self.partial.digits + self.wholes.digits
+        self_extra_0s = adjust_len - len(self.partials.digits)
+        self_combined_digits = self.partials.digits + self.wholes.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partial.digits)
-        other_combined_digits = other.partial.digits + other.wholes.digits
+        other_extra_0s = adjust_len - len(other.partials.digits)
+        other_combined_digits = other.partials.digits + other.wholes.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -443,20 +563,20 @@ class DecimalNumber:
         log_indent()
 
         adjust_len = max(
-            len(self.partial.digits),
-            len(other.partial.digits)
+            len(self.partials.digits),
+            len(other.partials.digits)
         )
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partial.digits)
-        self_combined_digits = self.partial.digits + self.wholes.digits
+        self_extra_0s = adjust_len - len(self.partials.digits)
+        self_combined_digits = self.partials.digits + self.wholes.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partial.digits)
-        other_combined_digits = other.partial.digits + other.wholes.digits
+        other_extra_0s = adjust_len - len(other.partials.digits)
+        other_combined_digits = other.partials.digits + other.wholes.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -484,19 +604,19 @@ class DecimalNumber:
         log(f'Multiplying {self} and {other}...')
         log_indent()
 
-        adjust_len_self = len(self.partial.digits)
-        adjust_len_other = len(other.partial.digits)
+        adjust_len_self = len(self.partials.digits)
+        adjust_len_other = len(other.partials.digits)
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len_self - len(self.partial.digits)
-        self_combined_digits = self.partial.digits + self.wholes.digits
+        self_extra_0s = adjust_len_self - len(self.partials.digits)
+        self_combined_digits = self.partials.digits + self.wholes.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len_other - len(other.partial.digits)
-        other_combined_digits = other.partial.digits + other.wholes.digits
+        other_extra_0s = adjust_len_other - len(other.partials.digits)
+        other_combined_digits = other.partials.digits + other.wholes.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -526,19 +646,19 @@ class DecimalNumber:
         log_indent()
 
         # CHECK TO MAKE SURE DECIMAL WILL TERM -- replace with calling to_suitable_fraction()?
-        adjust_len_self = len(self.partial.digits)
-        adjust_len_other = len(other.partial.digits)
+        adjust_len_self = len(self.partials.digits)
+        adjust_len_other = len(other.partials.digits)
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len_self - len(self.partial.digits)
-        self_combined_digits = self.partial.digits + self.wholes.digits
+        self_extra_0s = adjust_len_self - len(self.partials.digits)
+        self_combined_digits = self.partials.digits + self.wholes.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len_other - len(other.partial.digits)
-        other_combined_digits = other.partial.digits + other.wholes.digits
+        other_extra_0s = adjust_len_other - len(other.partials.digits)
+        other_combined_digits = other.partials.digits + other.wholes.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -666,18 +786,56 @@ if __name__ == '__main__':
     # print(f'{DecimalNumber.from_str("11.2") * DecimalNumber.from_str("1.3")}')
     # print(f'{DecimalNumber.from_str("0.0") * DecimalNumber.from_str("0.0")}')
 
-    print(f'{DecimalNumber.from_str("-271") / DecimalNumber.from_str("-25")}')
+    # print(f'{DecimalNumber.from_str("-271") / DecimalNumber.from_str("-25")}')
+    #
+    # print(f'{DecimalNumber.from_str("-271") / DecimalNumber.from_str("25")}')
+    # print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("-2.5")}')
+    # print(f'{DecimalNumber.from_str("-27.1") / DecimalNumber.from_str("2.5")}')
+    # print(f'{DecimalNumber.from_str("2.71") / DecimalNumber.from_str("-2.5")}')
+    # print(f'{DecimalNumber.from_str("-271") / DecimalNumber.from_str("0.25")}')
+    # print(f'{DecimalNumber.from_str("0") / DecimalNumber.from_str("-25")}')
+    #
+    # print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("25")}')
+    # print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("2.5")}')
+    # print(f'{DecimalNumber.from_str("27.1") / DecimalNumber.from_str("2.5")}')
+    # print(f'{DecimalNumber.from_str("2.71") / DecimalNumber.from_str("2.5")}')
+    # print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("0.25")}')
+    # print(f'{DecimalNumber.from_str("0") / DecimalNumber.from_str("25")}')
 
-    print(f'{DecimalNumber.from_str("-271") / DecimalNumber.from_str("25")}')
-    print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("-2.5")}')
-    print(f'{DecimalNumber.from_str("-27.1") / DecimalNumber.from_str("2.5")}')
-    print(f'{DecimalNumber.from_str("2.71") / DecimalNumber.from_str("-2.5")}')
-    print(f'{DecimalNumber.from_str("-271") / DecimalNumber.from_str("0.25")}')
-    print(f'{DecimalNumber.from_str("0") / DecimalNumber.from_str("-25")}')
+    # print(f'{DecimalNumber.from_str("123.456")[3]}')
+    # print(f'{DecimalNumber.from_str("123.456")[2]}')
+    # print(f'{DecimalNumber.from_str("123.456")[1]}')
+    # print(f'{DecimalNumber.from_str("123.456")[0]}')
+    # print(f'{DecimalNumber.from_str("123.456")[-1]}')
+    # print(f'{DecimalNumber.from_str("123.456")[-2]}')
+    # print(f'{DecimalNumber.from_str("123.456")[-3]}')
+    # print(f'{DecimalNumber.from_str("123.456")[-4]}')
 
-    print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("25")}')
-    print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("2.5")}')
-    print(f'{DecimalNumber.from_str("27.1") / DecimalNumber.from_str("2.5")}')
-    print(f'{DecimalNumber.from_str("2.71") / DecimalNumber.from_str("2.5")}')
-    print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("0.25")}')
-    print(f'{DecimalNumber.from_str("0") / DecimalNumber.from_str("25")}')
+    # print(f'{DecimalNumber.from_str("123.456").round(3)}')
+    # print(f'{DecimalNumber.from_str("123.456").round(2)}')
+    # print(f'{DecimalNumber.from_str("123.456").round(1)}')
+    # print(f'{DecimalNumber.from_str("123.456").round(0)}')
+    # print(f'{DecimalNumber.from_str("123.456").round(-1)}')
+    # print(f'{DecimalNumber.from_str("123.456").round(-2)}')
+    # print(f'{DecimalNumber.from_str("123.456").round(-3)}')
+    # print(f'{DecimalNumber.from_str("123.456").round(-4)}')
+    #
+    # print(f'{DecimalNumber.from_str("456.123").round(3)}')
+    # print(f'{DecimalNumber.from_str("456.123").round(2)}')
+    # print(f'{DecimalNumber.from_str("456.123").round(1)}')
+    # print(f'{DecimalNumber.from_str("456.123").round(0)}')
+    # print(f'{DecimalNumber.from_str("456.123").round(-1)}')
+    # print(f'{DecimalNumber.from_str("456.123").round(-2)}')
+    # print(f'{DecimalNumber.from_str("456.123").round(-3)}')
+    # print(f'{DecimalNumber.from_str("456.123").round(-4)}')
+    #
+    # print(f'{DecimalNumber.from_str("999.999").round(4)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(3)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(2)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(1)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(0)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(-1)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(-2)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(-3)}')
+    # print(f'{DecimalNumber.from_str("999.999").round(-4)}')
+    pass

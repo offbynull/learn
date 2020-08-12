@@ -3999,7 +3999,7 @@ python
 ## Word Conversion
 
 ```{prereq}
-Whole Number Word Conversion
+Whole number word conversion
 ```
 
 `{bm} Integer word conversion/(integer word conversion|integer number word conversion)/i` is the process of taking an integer number and converting it to words. The algorithm used by humans to convert an integer number to words is as follows:
@@ -5991,6 +5991,22 @@ To convert a decimal number to a mixed number...
 
 2.009 ⟶ `{kt} 2 \frac{9}{1000}`
 
+## Greater Than
+
+```{prereq}
+Fraction greater than
+```
+
+`{bm} Decimal number greater than/(decimal number greater than|decimal greater than)/i`
+
+## Less Than
+
+```{prereq}
+Fraction less than
+```
+
+`{bm} Decimal number less than/(decimal number less than|decimal less than)/i`
+
 ## Word Conversion
 
 ```{prereq}
@@ -6133,12 +6149,6 @@ python
 -33.125
 ```
 
-## Round
-
-`{bm} Decimal rounding/(decimal number rounding|decimal rounding)/i`
-
-TODO: chapter 5.1 -- e.g. round to the nearest tenth, round to the nearest hundredth, round to the tens, round to the hundreds
-
 ## Addition
 
 `{bm} Decimal addition/(decimal number addition|decimal addition)/i`
@@ -6174,6 +6184,70 @@ TODO: show using standard algorithm
 TODO: show by converting to fractions
 
 TODO: show using standard long division algorithm (only works if denominator is an integer) -- if not need to scale up e.g. 10/5.2 needs to be scaled to equiv frac of 100/52 and then perform using the standard long division algo
+
+## Shift
+
+```{prereq}
+Decimal multiplication
+Decimal division
+```
+
+TODO: multiply by 10 to move digits up, divide by 10 to move digits down
+
+## Round
+
+```{prereq}
+Decimal word conversion
+Decimal greater than
+Decimal less than
+Decimal addition
+```
+
+`{bm} Decimal rounding/(decimal number rounding|decimal rounding|round)/i` is the process of making a decimal number less exact. Rounding is often used in an attempt to make numbers more convenient at the expense of being less accurate. For example, it's acceptable to say 330 million people live in the USA even though it very likely isn't the exact number of people.
+
+To round a decimal number, ...
+
+1. choose a position to round at.
+2. increment at that position if the digit at the following position is greater than_REL or equal to 5.
+3. set all digits following that position to zero.
+
+For example, to round 123.456 at the tenths position...
+
+  1. locate the tenths position...
+
+     ```{svgbob}
+             |
+             v
+     1 2 3 . 4 5 6
+     ```
+
+  2. is the position immediately following the tenths greater than_REL or equal to 5?
+
+     ```{svgbob}
+             | +---- "5 >= 5"
+             v v
+     1 2 3 . 4 5 6
+     ```
+   
+     yes, the hundredths position is greater than or equal to 5, so increment at the tenths position...
+
+     123.456 + 000.100 = 123.556
+
+  3. set all digits following the tenths to 0...
+
+     123.500 (can be shortened to 123.5)
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_ROUND\s*\n([\s\S]+?)\n\s*#MARKDOWN_ROUND
+```
+
+```{decnumround}
+123.456 tenths
+```
 
 ## Conversion from Fraction
 

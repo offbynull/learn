@@ -60,7 +60,7 @@ class WholeNumber:
 
         self._prune_unnecessary_0s()
 
-    def __getitem__(self, key) -> Digit:
+    def __getitem__(self: WholeNumber, key: int) -> Digit:
         if key >= len(self.digits):
             return Digit(0)
         return self.digits[key]
