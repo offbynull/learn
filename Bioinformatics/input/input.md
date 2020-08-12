@@ -292,7 +292,7 @@ This isn't trivial to accurately compute because the occurrences of a k-mer with
 
 **ALGORITHM**:
 
-The following algorithm uses brute-force to determine the probability...
+This algorithm tries every possible combination of sequence to find the probability. It falls over once the length of the sequence extends into the double digits. It's intended to help conceptualize what's going on.
 
 ```{output}
 ch1_code/src/BruteforceProbabilityOfKmerInArbitrarySequence.py
@@ -310,7 +310,55 @@ ACTG
 
 **ALGORITHM**:
 
-The following algorithm estimates the probability by ignoring the fact that k-mer occurrences may overlap within the sequence, which allows for much more faster algorithm...
+```{note}
+The explanation in the comments below are a bastardization of "1.13 Detour: Probabilities of Patterns in a String" in the Pevzner book...
+```
+
+This algorithm tries estimating the probability by ignoring the fact that the occurrences of a k-mer in a sequence may overlap. For example, searching for the 2-mer AA in the sequence AAAT yields 2 instances of AA:
+
+ * \[AA\]AT
+ * A\[AA\]T
+
+If we go ahead and ignore overlaps, we can think of the k-mers occurring in a string as insertions. For example, imagine a sequence of length 7 and the 2-mer AA. If we were to inject 2 instances of AA into the sequence to get it to reach length 7, how would that look?
+
+2 instances of a 2-mer is 4 characters has a length of 5. To get the sequence to end up with a length of 7 after the insertions, the sequence needs to start with a length of 3:
+
+```
+SSS
+```
+
+Given that we're changing reality to say that the instances WON'T overlap in the sequence, we can treat each instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted into the sequence is 10:
+
+```
+I = insertion of AA, S = arbitrary sequence character
+
+IISSS  ISISS  ISSIS  ISSSI
+SIISS  SISIS  SISSI
+SSIIS  SSISI
+SSSII
+```
+
+Another way to think of the above insertions is that they aren't insertions. Rather, we have 5 items in total and we're selecting 2 of them. How many ways can we select 2 of those 5 items? 10.
+
+The number of ways to insert can be counted via the "binomial coefficient": `bc(m, k) = m!/(k!(m-k)!)`, where m is the total number of items (5 in the example above) and k is the number of selections (2 in the example above). For the example above:
+
+```
+bc(5, 2) = 5!/(2!(5-2)!) = 10
+```
+
+Since the SSS can be any arbitrary nucleotide sequence of 3, we count the number of different representations that are possible for SSS: `4^3 = 4*4*4 = 64` (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In each of these representations, the 2-mer AA can be inserted in 10 different ways:
+
+```
+64*10 = 640
+```
+
+Since the total length of the sequence is 7, we count the number of different representations that are possible:
+
+```
+4^7 = 4*4*4*4*4*4*4 = 16384
+```
+
+The estimated probability is 640/16384. For non-overlapping k-mers the estimation will actually be "relatively accurate", while for overlapping k-mers not so much. Maybe try training a deep learning model to see if it can provide better estimates?
 
 ```{output}
 ch1_code/src/EstimateProbabilityOfKmerInArbitrarySequence.py
@@ -429,7 +477,7 @@ K-mer/Hamming Distance Neighbourhood_TOPIC
 
 **WHAT**: Given a set of sequences, identify k-mers in those sequences that may be members of the same motif.
 
-**WHY**: A transcription factor is an enzyme that regulates the transcription of a gene by either increasing or decreasing the rate of transcription. It does so by binding to a specific part of the gene's upstream region. This part is called the transcription factor binding site, and it contains a k-mer that matches a motif expected by the transcription factor called a regulatory motif. 
+**WHY**: A transcription factor is an enzyme that either increases or decreases a gene's transcription rate. It does so by binding to a specific part of the gene's upstream region called the transcription factor binding site. That transcription factor binding site consists of a k-mer that matches the motif expected by that transcription factor, called a regulatory motif. 
 
 A single transcription factor may operate on many different genes. Often times a scientist will identify a set of genes that are suspected to be regulated by a single transcription factor, but that scientist won't know ...
 
@@ -447,43 +495,25 @@ K-mer/Hamming Distance Neighbourhood_TOPIC
 
 **ALGORITHM**:
 
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+This algorithm scans over all k-mers in a set of sequences, enumerates the hamming distance neighbourhood of each k-mer, and uses the k-mers from the hamming distance neighbourhood to build out possible motif matrices. Of all the motif matrices built, it selects the one with the lowest score.
 
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+Neither k nor the mismatches allowed by the motif is known. As such, the algorithm may need to be repeated multiple times with different value combinations.
 
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
-
-TODO: THIS IS THE ENUMERATIVE MOTIF FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD
+Even for trivial inputs, this algorithm falls over very quickly. It's intended to help conceptualize the problem of motif finding.
 
 ```{output}
 ch2_code/src/MotifEnumeration.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
+
+TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES MOTIF MATRICIES
+
+TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES MOTIF MATRICIES
+
+TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES MOTIF MATRICIES
+
+TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES MOTIF MATRICIES
 
 TODO: ADD SAMPLE RUN
 
@@ -1043,7 +1073,7 @@ DnaABoxCandidateFinder
 
  * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
 
- * `{bm} motif matrix` - A set of k-mers that form a motif. For example, the motif `[AT]TT[GC]C` has the following matrix:
+ * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers that form a motif. For example, the motif `[AT]TT[GC]C` has the following matrix:
 
    |0|1|2|3|4|
    |-|-|-|-|-|

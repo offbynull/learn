@@ -1,11 +1,11 @@
 from typing import List
 
 
-# MARKDOWN
 # This implementation tries every possible combination of sequence to find the probability. It falls over once the
 # length of the sequence extends into the double digits -- it's a toy implementation to help conceptualize what's
 # going on.
-#
+
+# MARKDOWN
 # Of the X sequence combinations tried, Y had the k-mer. The probability is Y/X.
 def bruteforce_probability(searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int) -> (int, int):
     found = 0

@@ -171,7 +171,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'AGAA', 'GAAA', 'AAAA', 'AATA', 'CAAA', 'AAGA', 'ATAA', 'AACA', 'AAAG', 'AAAT', 'ACAA', 'TAAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'ACAA', 'ATAA', 'AGAA', 'AAGA', 'AAAC', 'AAAT', 'AATA', 'AACA', 'CAAA', 'AAAG', 'GAAA', 'TAAA', 'AAAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h2>Find Locations</h2>
@@ -294,12 +294,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>TGATC = 6 occurrences</li>
 <li>AAGGG = 6 occurrences</li>
 <li>CCCTT = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
 <li>GATCA = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
 <li>TTAAA = 6 occurrences</li>
+<li>TGATC = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -370,10 +370,10 @@
 <p></p>
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
@@ -426,12 +426,8 @@
 <p><strong>WHY</strong>: When a <a href="#BOOKMARK13">k-mer</a> is found within a sequence, knowing the probability of that <a href="#BOOKMARK13">k-mer</a> being found within an arbitrary sequence of the same length hints at the significance of the find. For example, if some 10-mer has a 0.2 chance of appearing in an arbitrary sequence of length 50, that's too high of a chance to consider it a significant find -- 0.2 means 1 in 5 chance that the 10-mer just randomly happens to appear.</p>
 <a name="HEADREF10"></a><h3>Bruteforce Algorithm</h3>
 <p><strong>ALGORITHM</strong>:</p>
-<p>The following algorithm uses brute-force to determine the probability...</p>
-<pre class="hljs"><code><span class="hljs-comment"># This implementation tries every possible combination of sequence to find the probability. It falls over once the</span>
-<span class="hljs-comment"># length of the sequence extends into the double digits -- it's a toy implementation to help conceptualize what's</span>
-<span class="hljs-comment"># going on.</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># Of the X sequence combinations tried, Y had the k-mer. The probability is Y/X.</span>
+<p>This algorithm tries every possible combination of sequence to find the probability. It falls over once the length of the sequence extends into the double digits. It's intended to help conceptualize what's going on.</p>
+<pre class="hljs"><code><span class="hljs-comment"># Of the X sequence combinations tried, Y had the k-mer. The probability is Y/X.</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bruteforce_probability</span>(<span class="hljs-params">searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int</span>) -&gt; (int, int):</span>
     found = <span class="hljs-number">0</span>
     found_max = searchspace_symbol_count ** searchspace_len
@@ -468,59 +464,39 @@
 <p></p>
 <a name="HEADREF11"></a><h3>Selection Estimate Algorithm</h3>
 <p><strong>ALGORITHM</strong>:</p>
-<p>The following algorithm estimates the probability by ignoring the fact that <a href="#BOOKMARK13">k-mer</a> occurrences may overlap within the sequence, which allows for much more faster algorithm...</p>
-<pre class="hljs"><code><span class="hljs-comment"># The explanation in the comments below are a bastardization of "1.13 Detour: Probabilities of Patterns in a String"</span>
-<span class="hljs-comment"># in the Pevzner book...</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># This implementation tries estimating the probability by ignoring the fact that the occurrences of a k-mer in a</span>
-<span class="hljs-comment"># sequence may overlap. For example, searching for the 2-mer AA in the sequence AAAT yields 2 instances of AA:</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># * [AA]AT</span>
-<span class="hljs-comment"># * A[AA]T</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># If we go ahead and ignore overlaps, we can think of the k-mers occurring in a string as insertions. For example,</span>
-<span class="hljs-comment"># imagine a sequence of length 7 and the 2-mer AA. If we were to inject 2 instances of AA into the sequence to get it</span>
-<span class="hljs-comment"># to reach length 7, how would that look?</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># 2 instances of a 2-mer is 4 characters has a length of 5. To get the sequence to end up with a length of 7 after the</span>
-<span class="hljs-comment"># insertions, the sequence needs to start with a length of 3:</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># SSS</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># Given that we're changing reality to say that the instances WON'T overlap in the sequence, we can treat each</span>
-<span class="hljs-comment"># instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted</span>
-<span class="hljs-comment"># into the sequence is 10:</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># I = insertion of AA, S = arbitrary sequence character</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># IISSS  ISISS  ISSIS  ISSSI</span>
-<span class="hljs-comment"># SIISS  SISIS  SISSI</span>
-<span class="hljs-comment"># SSIIS  SSISI</span>
-<span class="hljs-comment"># SSSII</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># Another way to think of the above insertions is that they aren't insertions. Rather, we have 5 items in total and</span>
-<span class="hljs-comment"># we're selecting 2 of them. How many ways can we select 2 of those 5 items? 10.</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># The number of ways to insert can be counted via the "bionomial coefficient": bc(m, k) = m!/(k!(m-k)!), where m is the</span>
-<span class="hljs-comment"># total number of items (5 in the example above) and k is the number of selections (2 in the example above). For the</span>
-<span class="hljs-comment"># example above:</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># bc(5, 2) = 5!/(2!(5-2)!) = 10</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># Since the SSS can be any arbitrary nucleotide sequence of 3, we count the number of different representations that are</span>
-<span class="hljs-comment"># possible for SSS: 4^3 = 4*4*4 = 64 (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In</span>
-<span class="hljs-comment"># each of these representations, the 2-mer AA can be inserted in 10 different ways:</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># 64*10 = 640</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># Since the total length of the sequence is 7, we count the number of different representations that are possible:</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># 4^7 = 4*4*4*4*4*4*4 = 16384</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># The estimated probability is 640/16384. For non-overlapping k-mers the estimation will actually be "relatively</span>
-<span class="hljs-comment"># accurate", while for overlapping k-mers not so much. Maybe try training a deep learning model to see if it can provide</span>
-<span class="hljs-comment"># better estimates?</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">estimate_probability</span>(<span class="hljs-params">searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int</span>) -&gt; float:</span>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>The explanation in the comments below are a bastardization of "1.13 Detour: Probabilities of Patterns in a String" in the Pevzner book...</p>
+</div>
+<p>This algorithm tries estimating the probability by ignoring the fact that the occurrences of a <a href="#BOOKMARK13">k-mer</a> in a sequence may overlap. For example, searching for the 2-mer AA in the sequence AAAT yields 2 instances of AA:</p>
+<ul>
+<li>[AA]AT</li>
+<li>A[AA]T</li>
+</ul>
+<p>If we go ahead and ignore overlaps, we can think of the <a href="#BOOKMARK13">k-mer</a>s occurring in a string as insertions. For example, imagine a sequence of length 7 and the 2-mer AA. If we were to inject 2 instances of AA into the sequence to get it to reach length 7, how would that look?</p>
+<p>2 instances of a 2-mer is 4 characters has a length of 5. To get the sequence to end up with a length of 7 after the insertions, the sequence needs to start with a length of 3:</p>
+<pre><code>SSS
+</code></pre>
+<p>Given that we're changing reality to say that the instances WON'T overlap in the sequence, we can treat each instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted into the sequence is 10:</p>
+<pre><code>I = insertion of AA, S = arbitrary sequence character
+
+IISSS  ISISS  ISSIS  ISSSI
+SIISS  SISIS  SISSI
+SSIIS  SSISI
+SSSII
+</code></pre>
+<p>Another way to think of the above insertions is that they aren't insertions. Rather, we have 5 items in total and we're selecting 2 of them. How many ways can we select 2 of those 5 items? 10.</p>
+<p>The number of ways to insert can be counted via the "binomial coefficient": <code>bc(m, k) = m!/(k!(m-k)!)</code>, where m is the total number of items (5 in the example above) and k is the number of selections (2 in the example above). For the example above:</p>
+<pre><code>bc(5, 2) = 5!/(2!(5-2)!) = 10
+</code></pre>
+<p>Since the SSS can be any arbitrary nucleotide sequence of 3, we count the number of different representations that are possible for SSS: <code>4^3 = 4*4*4 = 64</code> (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In each of these representations, the 2-mer AA can be inserted in 10 different ways:</p>
+<pre><code>64*10 = 640
+</code></pre>
+<p>Since the total length of the sequence is 7, we count the number of different representations that are possible:</p>
+<pre><code>4^7 = 4*4*4*4*4*4*4 = 16384
+</code></pre>
+<p>The estimated probability is 640/16384. For non-overlapping <a href="#BOOKMARK13">k-mer</a>s the estimation will actually be "relatively accurate", while for overlapping <a href="#BOOKMARK13">k-mer</a>s not so much. Maybe try training a deep learning model to see if it can provide better estimates?</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">estimate_probability</span>(<span class="hljs-params">searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int</span>) -&gt; float:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factorial</span>(<span class="hljs-params">num</span>):</span>
         <span class="hljs-keyword">if</span> num == <span class="hljs-number">1</span>:
             <span class="hljs-keyword">return</span> num
@@ -699,7 +675,7 @@
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given a set of sequences, identify <a href="#BOOKMARK13">k-mer</a>s in those sequences that may be members of the same <a href="#BOOKMARK46">motif</a>.</p>
-<p><strong>WHY</strong>: A <a href="#BOOKMARK45">transcription factor</a> is an enzyme that regulates the <a href="#BOOKMARK35">transcription</a> of a <a href="#BOOKMARK33">gene</a> by either increasing or decreasing the rate of <a href="#BOOKMARK35">transcription</a>. It does so by binding to a specific part of the <a href="#BOOKMARK33">gene</a>'s upstream region. This part is called the <a href="#BOOKMARK49">transcription factor binding site</a>, and it contains a <a href="#BOOKMARK13">k-mer</a> that matches a <a href="#BOOKMARK46">motif</a> expected by the <a href="#BOOKMARK45">transcription factor</a> called a <a href="#BOOKMARK48">regulatory motif</a>.</p>
+<p><strong>WHY</strong>: A <a href="#BOOKMARK45">transcription factor</a> is an enzyme that either increases or decreases a <a href="#BOOKMARK33">gene</a>'s <a href="#BOOKMARK35">transcription</a> rate. It does so by binding to a specific part of the <a href="#BOOKMARK33">gene</a>'s upstream region called the <a href="#BOOKMARK49">transcription factor binding site</a>. That <a href="#BOOKMARK49">transcription factor binding site</a> consists of a <a href="#BOOKMARK13">k-mer</a> that matches the <a href="#BOOKMARK46">motif</a> expected by that <a href="#BOOKMARK45">transcription factor</a>, called a <a href="#BOOKMARK48">regulatory motif</a>.</p>
 <p>A single <a href="#BOOKMARK45">transcription factor</a> may operate on many different <a href="#BOOKMARK33">genes</a>. Often times a scientist will identify a set of <a href="#BOOKMARK33">genes</a> that are suspected to be regulated by a single <a href="#BOOKMARK45">transcription factor</a>, but that scientist won't know ...</p>
 <ul>
 <li>what the <a href="#BOOKMARK48">regulatory motif</a> is (the pattern expected by the enzyme).</li>
@@ -715,22 +691,9 @@
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
-<p>TODO: THIS IS THE ENUMERATIVE <a href="#BOOKMARK46">MOTIF</a> FINDING IN SECTION 2.2 -- BRUTE FORCE BASED ON HAMMING DISTANCE NEIGHBOURHOOD</p>
+<p>This algorithm scans over all <a href="#BOOKMARK13">k-mer</a>s in a set of sequences, enumerates the hamming distance neighbourhood of each <a href="#BOOKMARK13">k-mer</a>, and uses the <a href="#BOOKMARK13">k-mer</a>s from the hamming distance neighbourhood to build out possible <a href="#BOOKMARK47">motif matrices</a>. Of all the <a href="#BOOKMARK47">motif matrices</a> built, it selects the one with the lowest score.</p>
+<p>Neither k nor the mismatches allowed by the <a href="#BOOKMARK46">motif</a> is known. As such, the algorithm may need to be repeated multiple times with different value combinations.</p>
+<p>Even for trivial inputs, this algorithm falls over very quickly. It's intended to help conceptualize the problem of <a href="#BOOKMARK46">motif</a> finding.</p>
 <pre class="hljs"><code><span class="hljs-comment"># Don't get confused by this method. It enumerates every possible kmer that COULD be the motif. That is, every possible</span>
 <span class="hljs-comment"># kmer that has a matching kmer in each string in dnas[]. "Matching kmer" in this case means matching within some</span>
 <span class="hljs-comment"># hamming distance.</span>
@@ -757,7 +720,11 @@
         <span class="hljs-keyword">if</span> found_count == len(dnas):
             found_kmers.add(kmer_to_check)
 
-    <span class="hljs-keyword">return</span> found_kmers</code></pre><p>TODO: ADD SAMPLE RUN</p>
+    <span class="hljs-keyword">return</span> found_kmers</code></pre><p>TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES <a href="#BOOKMARK46">MOTIF</a> MATRICIES</p>
+<p>TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES <a href="#BOOKMARK46">MOTIF</a> MATRICIES</p>
+<p>TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES <a href="#BOOKMARK46">MOTIF</a> MATRICIES</p>
+<p>TODO: FIX SO IT ACTUALLY BUILDS AND EVALUTES <a href="#BOOKMARK46">MOTIF</a> MATRICIES</p>
+<p>TODO: ADD SAMPLE RUN</p>
 <p>TODO: ADD SAMPLE RUN</p>
 <p>TODO: ADD SAMPLE RUN</p>
 <a name="HEADREF17"></a><h3>Randomized Search Algorithm</h3>
@@ -852,15 +819,15 @@
 <p>Ori vicinity (min pos): 4719166</p>
 <p>In the ori vicinity, found clusters of k=9 (at least 3 occurrences in window of 500) in ... at...</p>
 <ul>
-<li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCGGCGGTA', start_index=52, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=163, occurrence_count=4)</li>
@@ -868,22 +835,22 @@
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTAAA', start_index=282, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTTTGATAC', start_index=427, occurrence_count=3)</li>
@@ -892,13 +859,13 @@
 <li>KmerCluster(kmer='ATCACCATT', start_index=500, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCCTTTTTA', start_index=513, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCCTTTTT', start_index=514, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>

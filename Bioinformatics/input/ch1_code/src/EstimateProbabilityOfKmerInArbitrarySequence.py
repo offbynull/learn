@@ -1,7 +1,6 @@
 from typing import List
 
 
-# MARKDOWN
 # The explanation in the comments below are a bastardization of "1.13 Detour: Probabilities of Patterns in a String"
 # in the Pevzner book...
 #
@@ -53,6 +52,8 @@ from typing import List
 # The estimated probability is 640/16384. For non-overlapping k-mers the estimation will actually be "relatively
 # accurate", while for overlapping k-mers not so much. Maybe try training a deep learning model to see if it can provide
 # better estimates?
+
+# MARKDOWN
 def estimate_probability(searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int) -> float:
     def factorial(num):
         if num == 1:
