@@ -13,6 +13,7 @@ from typing import List
 # 1. each column has its probability distribution calculated (prob of A vs prob C vs prob of T vs prob of G)
 # 2. the entropy of each of those prob dist are calculated
 # 3. those entropies are summed up to get the entropy of the motif
+# MARKDOWN
 def score_motif(motif_matrix: List[str]) -> int:
     rows = len(motif_matrix)
     cols = len(motif_matrix[0])
@@ -35,20 +36,30 @@ def score_motif(motif_matrix: List[str]) -> int:
         unpopular_sums.append(unpopular_sum)
 
     return sum(unpopular_sums)
+# MARKDOWN
+
+
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        dnas = []
+        while True:
+            try:
+                dna = input().strip().upper()
+                if len(dna) > 0:
+                    dnas.append(dna)
+            except EOFError:
+                break
+
+        score = score_motif(dnas)
+        print(f'Scoring...\n\n')
+        print(f'{"<br>".join(dnas)}\n\n')
+        print(f'{score}\n\n')
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
 
 
 if __name__ == '__main__':
-    entropy = score_motif([
-        'TCGGGGgTTTtt'.lower(),
-        'cCGGtGAcTTaC'.lower(),
-        'aCGGGGATTTtC'.lower(),
-        'TtGGGGAcTTtt'.lower(),
-        'aaGGGGAcTTCC'.lower(),
-        'TtGGGGAcTTCC'.lower(),
-        'TCGGGGATTcat'.lower(),
-        'TCGGGGATTcCt'.lower(),
-        'TaGGGGAacTaC'.lower(),
-        'TCGGGtATaaCC'.lower()
-    ])
-
-    print(f'{entropy}')
+    main()
