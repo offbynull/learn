@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-from builtins import type
-from typing import List, Union
+from typing import Union
 
 from Digit import Digit
 from Factor import factor_tree
 from FractionNumber import FractionNumber
 from IntegerNumber import IntegerNumber
 from Output import log, log_indent, log_unindent, log_decorator
-from PartialNumber import PartialNumber
+from FractionalNumber import FractionalNumber
 from Sign import Sign
 from WholeNumber import WholeNumber
 
@@ -34,16 +33,16 @@ class DecimalNumber:
             else:
                 sign = Sign.POSITIVE
 
-            wholes = FractionNumber(
+            whole = FractionNumber(
                 IntegerNumber.from_whole(WholeNumber.from_str(values[0])),
                 IntegerNumber.from_str('1')
             )
-            partial = FractionNumber(
+            fractional = FractionNumber(
                 IntegerNumber.from_whole(WholeNumber.from_str(values[1])),
                 IntegerNumber.from_whole(WholeNumber.from_str('1' + ('0' * len(values[1]))))
             )
 
-            final_frac = wholes + partial
+            final_frac = whole + fractional
             if sign == Sign.NEGATIVE:
                 final_frac = final_frac * FractionNumber.from_str("-1/1")
 
@@ -82,27 +81,27 @@ class DecimalNumber:
             raise Exception('Denominator must be power of 10')
 
         log(f'Resolving fraction {value}...')
-        wholes, remaining = num / denom
-        log(f'{wholes} wholes and {remaining} remaining')
+        whole, remaining = num / denom
+        log(f'{whole} wholes and {remaining} remaining')
 
-        log(f'Converting {remaining} of {denom} to partial value...')
+        log(f'Converting {remaining} of {denom} to fractional value...')
         num_digits_in_rem = len(remaining.digits)
         num_0s_in_den = len(denom.digits) - 1  # starts with 1 followed by 0s, so - 1 to ignore the starting 1
         num_0s_to_prepend_to_rem = num_0s_in_den - num_digits_in_rem
-        partials_digits = remaining.digits[:]  # copy digits
-        partials_digits = partials_digits + [Digit(0)] * num_0s_to_prepend_to_rem  # this prepending 0s...
+        fractional_digits = remaining.digits[:]  # copy digits
+        fractional_digits = fractional_digits + [Digit(0)] * num_0s_to_prepend_to_rem  # this prepending 0s...
                                                                                    # you might be confused because the
                                                                                    # 0s are being addeed to the end, but
-                                                                                   # that's how PartialNumber expects
+                                                                                   # that's how FractionalNumber expects
                                                                                    # digits -- in reversed order
-        partials = PartialNumber(partials_digits)
-        log(f'{partials}')
+        fractional = FractionalNumber(fractional_digits)
+        log(f'{fractional}')
 
         sign = value.sign
 
         log_unindent()
 
-        ret = DecimalNumber(sign, wholes, partials)
+        ret = DecimalNumber(sign, whole, fractional)
         log(f'Decimal number: {ret}')
         return ret
     #MARKDOWN_FROM_FRAC
@@ -154,16 +153,16 @@ class DecimalNumber:
         return value
     #MARKDOWN_TO_SUITABLE_FRAC
 
-    def __init__(self, sign: Union[Sign, None], wholes: WholeNumber, partial: PartialNumber):
+    def __init__(self, sign: Union[Sign, None], whole: WholeNumber, fractional: FractionalNumber):
         self.sign = sign
-        self.wholes = wholes.copy()
-        self.partials = partial.copy()
+        self.whole = whole.copy()
+        self.fractional = fractional.copy()
 
-        if wholes == WholeNumber.from_str('0') and partial == PartialNumber.from_str('0') and sign is not None:
+        if whole == WholeNumber.from_str('0') and fractional == FractionalNumber.from_str('0') and sign is not None:
             raise Exception('Magnitude of 0 cannot have a sign')
 
     def copy(self: DecimalNumber) -> DecimalNumber:
-        return DecimalNumber(self.sign, self.wholes, self.partials)
+        return DecimalNumber(self.sign, self.whole, self.fractional)
 
     def __str__(self: DecimalNumber):
         if self.sign == Sign.POSITIVE:
@@ -173,7 +172,7 @@ class DecimalNumber:
         else:
             ret = ''
 
-        ret += str(self.wholes) + '.' + str(self.partials)
+        ret += str(self.whole) + '.' + str(self.fractional)
 
         return ret
 
@@ -181,19 +180,19 @@ class DecimalNumber:
         return self.__str__()
 
     def __hash__(self: DecimalNumber):
-        return hash(tuple([self.sign, self.wholes, self.partials]))
+        return hash(tuple([self.sign, self.whole, self.fractional]))
 
     def __getitem__(self: DecimalNumber, key: int) -> Digit:
         if key >= 0:
-            return self.wholes[key]
+            return self.whole[key]
         else:
-            return self.partials[-key -1]
+            return self.fractional[-key - 1]
 
     def __setitem__(self: DecimalNumber, key: int, value: Digit) -> None:
         if key >= 0:
-            self.wholes[key] = value
+            self.whole[key] = value
         else:
-            self.partials[-key -1] = value
+            self.fractional[-key - 1] = value
 
     #MARKDOWN_AS_FRAC
     @log_decorator
@@ -201,23 +200,23 @@ class DecimalNumber:
         log(f'Converting {self} to fraction number...')
         log_indent()
 
-        log(f'Determining denominator based on length of partial portion ({self.partials})...')
-        denom = IntegerNumber.from_str('1' + '0' * len(self.partials.digits))
+        log(f'Determining denominator based on length of fractional portion ({self.fractional})...')
+        denom = IntegerNumber.from_str('1' + '0' * len(self.fractional.digits))
         log(f'{denom}')
 
-        log(f'Converting partial portion ({self.partials} to fraction...')
-        partial_fraction = FractionNumber(
-            IntegerNumber.from_str(str(self.partials)),
+        log(f'Converting fractional portion ({self.fractional} to fraction...')
+        fractional_fraction = FractionNumber(
+            IntegerNumber.from_str(str(self.fractional)),
             denom
         )
-        log(f'{partial_fraction}')
+        log(f'{fractional_fraction}')
 
-        log(f'Converting whole portion ({self.wholes}) to fraction...')
-        wholes_fraction = FractionNumber.from_whole(self.wholes)
-        log(f'{wholes_fraction}')
+        log(f'Converting whole portion ({self.whole}) to fraction...')
+        whole_fraction = FractionNumber.from_whole(self.whole)
+        log(f'{whole_fraction}')
 
-        log(f'Adding ({wholes_fraction}) to ({partial_fraction})...')
-        fraction = wholes_fraction + partial_fraction
+        log(f'Adding ({whole_fraction}) to ({fractional_fraction})...')
+        fraction = whole_fraction + fractional_fraction
         log(f'{fraction}')
 
         log(f'Applying sign of ({self.sign}) to {fraction}...')
@@ -233,7 +232,7 @@ class DecimalNumber:
     #MARKDOWN_TO_WORDS
     @log_decorator
     def to_words(self):
-        partials_len_to_suffixes = {
+        fractional_len_to_suffixes = {
             1: 'tenth',
             2: 'hundredth',
             3: 'thousandth',
@@ -259,34 +258,34 @@ class DecimalNumber:
         log(f'Converting {self}...')
         log_indent()
 
-        log(f'Converting wholes portion to words...')
-        wholes_words = self.wholes.to_words()
-        log(f'Wholes as words: {wholes_words}')
+        log(f'Converting whole portion to words...')
+        whole_words = self.whole.to_words()
+        log(f'Whole as words: {whole_words}')
 
-        log(f'Converting partial portion to words...')
-        partial_words = WholeNumber.from_str(str(self.partials)).to_words()
-        log(f'Partial as words: {partial_words}')
+        log(f'Converting fractional portion to words...')
+        fractional_words = WholeNumber.from_str(str(self.fractional)).to_words()
+        log(f'fractional as words: {fractional_words}')
 
         output = ''
-        if self.wholes == WholeNumber.from_str('0') and self.partials == PartialNumber.from_str('0'):
+        if self.whole == WholeNumber.from_str('0') and self.fractional == FractionalNumber.from_str('0'):
             output += 'zero'
         else:
             if self.sign == Sign.NEGATIVE:
                 output += 'negative '
 
-            if self.wholes != WholeNumber.from_str('0'):
-                output += wholes_words
+            if self.whole != WholeNumber.from_str('0'):
+                output += whole_words
 
-            if self.wholes != WholeNumber.from_str('0') and self.partials != PartialNumber.from_str('0'):
+            if self.whole != WholeNumber.from_str('0') and self.fractional != FractionalNumber.from_str('0'):
                 output += ' and '
 
-            if self.partials != PartialNumber.from_str('0'):
-                output += partial_words
-                suffix = partials_len_to_suffixes[len(self.partials.digits)]
+            if self.fractional != FractionalNumber.from_str('0'):
+                output += fractional_words
+                suffix = fractional_len_to_suffixes[len(self.fractional.digits)]
                 if suffix is None:
-                    raise Exception('Partial too large')
-                log(f'Partial suffix: {suffix}')
-                if self.partials != PartialNumber.from_str('0'):  # pluralize suffix if more than 1
+                    raise Exception('Fractional too large')
+                log(f'Fractional suffix: {suffix}')
+                if self.fractional != FractionalNumber.from_str('0'):  # pluralize suffix if more than 1
                     suffix += 's'
                 output += ' ' + suffix
 
@@ -364,19 +363,19 @@ class DecimalNumber:
                 adder = DecimalNumber(
                     self.sign,
                     WholeNumber.from_str('1' + '0' * position_idx),
-                    PartialNumber.from_str('0')
+                    FractionalNumber.from_str('0')
                 )
             else:
                 adder = DecimalNumber(
                     self.sign,
                     WholeNumber.from_str('0'),
-                    PartialNumber.from_str('0' * -(position_idx + 1) + '1')
+                    FractionalNumber.from_str('0' * -(position_idx + 1) + '1')
                 )
         else:
             log(f'False ({following_digit} < 5), setting adder to 0...')
             adder = DecimalNumber.from_str('0')
         log_unindent()
-        log(f'Adder is {adder}')
+        log(f'{adder}')
 
         log(f'Adding {adder} to {self}...')
         ret = self.copy() + adder
@@ -388,14 +387,15 @@ class DecimalNumber:
             for i in range(0, position_idx):
                 ret[i] = Digit(0)
                 log(f'{ret}')
-            for i in range(0, len(self.partials.digits)):
+            for i in range(0, len(self.fractional.digits)):
                 ret[-i - 1] = Digit(0)
                 log(f'{ret}')
         else:
-            for i in range(-position_idx, len(self.partials.digits)):
+            for i in range(-position_idx, len(self.fractional.digits)):
                 ret[-i - 1] = Digit(0)
                 log(f'{ret}')
         log_unindent()
+        log(f'{ret}')
 
         log_unindent()
         log(f'{ret}')
@@ -406,31 +406,35 @@ class DecimalNumber:
     #MARKDOWN_EQ
     @log_decorator
     def __eq__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        class FailedTestException(Exception):
+            pass
+
         log(f'Equality testing {self} and {other}...')
         log_indent()
 
-        adjust_len = max(
-            len(self.partials.digits),
-            len(other.partials.digits)
-        )
+        try:
+            log(f'Testing signs...')
+            sign_eq = self.sign == other.sign
+            if not sign_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partials.digits)
-        self_combined_digits = self.partials.digits + self.wholes.digits
-        self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
-        log(f'{mock_self}')
+            log(f'Testing whole...')
+            whole_eq = self.whole == other.whole
+            if not whole_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partials.digits)
-        other_combined_digits = other.partials.digits + other.wholes.digits
-        other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
-        log(f'{mock_other}')
+            log(f'Testing fractional...')
+            fractional_eq = self.fractional == other.fractional
+            if not fractional_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Testing {mock_self} == {mock_other}...')
-        ret = mock_self == mock_other
-        log(f'{ret}')
+            ret = sign_eq and whole_eq and fractional_eq
+        except FailedTestException:
+            log(f'Not equal')
+            ret = False
 
         log_unindent()
         log(f'{ret}')
@@ -441,31 +445,50 @@ class DecimalNumber:
     #MARKDOWN_LT
     @log_decorator
     def __lt__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        class PassedTestException(Exception):
+            pass
+
+        class FailedTestException(Exception):
+            pass
+
         log(f'Less than testing {self} and {other}...')
         log_indent()
 
-        adjust_len = max(
-            len(self.partials.digits),
-            len(other.partials.digits)
-        )
+        try:
+            log(f'Testing signs...')
+            sign_lt = self.sign == Sign.NEGATIVE and other.sign != Sign.NEGATIVE
+            if sign_lt:
+                raise PassedTestException()
+            sign_eq = self.sign == other.sign
+            if not sign_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partials.digits)
-        self_combined_digits = self.partials.digits + self.wholes.digits
-        self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
-        log(f'{mock_self}')
+            log(f'Testing whole...')
+            whole_lt = self.whole < other.whole
+            if whole_lt:
+                raise PassedTestException()
+            whole_eq = self.whole == other.whole
+            if not whole_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partials.digits)
-        other_combined_digits = other.partials.digits + other.wholes.digits
-        other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
-        log(f'{mock_other}')
+            log(f'Testing fractional...')
+            fractional_lt = self.fractional < other.fractional
+            if fractional_lt:
+                raise PassedTestException()
+            fractional_eq = self.fractional == other.fractional
+            if not fractional_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Testing {mock_self} < {mock_other}...')
-        ret = mock_self < mock_other
-        log(f'{ret}')
+            ret = False
+        except PassedTestException:
+            log(f'Less')
+            ret = True
+        except FailedTestException:
+            log(f'Not less or equal')
+            ret = False
 
         log_unindent()
         log(f'{ret}')
@@ -479,31 +502,50 @@ class DecimalNumber:
     #MARKDOWN_GT
     @log_decorator
     def __gt__(self: DecimalNumber, other: DecimalNumber) -> bool:
+        class PassedTestException(Exception):
+            pass
+
+        class FailedTestException(Exception):
+            pass
+
         log(f'Greater than testing {self} and {other}...')
         log_indent()
 
-        adjust_len = max(
-            len(self.partials.digits),
-            len(other.partials.digits)
-        )
+        try:
+            log(f'Testing signs...')
+            sign_gt = self.sign == Sign.POSITIVE and other.sign != Sign.POSITIVE
+            if sign_gt:
+                raise PassedTestException()
+            sign_eq = self.sign == other.sign
+            if not sign_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partials.digits)
-        self_combined_digits = self.partials.digits + self.wholes.digits
-        self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
-        log(f'{mock_self}')
+            log(f'Testing whole...')
+            whole_gt = self.whole > other.whole
+            if whole_gt:
+                raise PassedTestException()
+            whole_eq = self.whole == other.whole
+            if not whole_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partials.digits)
-        other_combined_digits = other.partials.digits + other.wholes.digits
-        other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
-        log(f'{mock_other}')
+            log(f'Testing fractional...')
+            fractional_gt = self.fractional > other.fractional
+            if fractional_gt:
+                raise PassedTestException()
+            fractional_eq = self.fractional == other.fractional
+            if not fractional_eq:
+                raise FailedTestException()
+            log(f'Equal')
 
-        log(f'Testing {mock_self} > {mock_other}...')
-        ret = mock_self > mock_other
-        log(f'{ret}')
+            ret = False
+        except PassedTestException:
+            log(f'Greater')
+            ret = True
+        except FailedTestException:
+            log(f'Not greater or equal')
+            ret = False
 
         log_unindent()
         log(f'{ret}')
@@ -521,20 +563,20 @@ class DecimalNumber:
         log_indent()
 
         adjust_len = max(
-            len(self.partials.digits),
-            len(other.partials.digits)
+            len(self.fractional.digits),
+            len(other.fractional.digits)
         )
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partials.digits)
-        self_combined_digits = self.partials.digits + self.wholes.digits
+        self_extra_0s = adjust_len - len(self.fractional.digits)
+        self_combined_digits = self.fractional.digits + self.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partials.digits)
-        other_combined_digits = other.partials.digits + other.wholes.digits
+        other_extra_0s = adjust_len - len(other.fractional.digits)
+        other_combined_digits = other.fractional.digits + other.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -545,9 +587,9 @@ class DecimalNumber:
 
         log(f'Unmocking {mock_ret}...')
         ret_sign = mock_ret.sign
-        ret_partial_digits = [mock_ret.magnitude[i] for i in range(0, adjust_len)]
+        ret_fractional_digits = [mock_ret.magnitude[i] for i in range(0, adjust_len)]
         ret_whole_digits = [mock_ret.magnitude[i] for i in range(adjust_len, len(mock_ret.magnitude.digits))]
-        ret = DecimalNumber(ret_sign, WholeNumber(ret_whole_digits), PartialNumber(ret_partial_digits))
+        ret = DecimalNumber(ret_sign, WholeNumber(ret_whole_digits), FractionalNumber(ret_fractional_digits))
         log(f'{ret}')
 
         log_unindent()
@@ -563,20 +605,20 @@ class DecimalNumber:
         log_indent()
 
         adjust_len = max(
-            len(self.partials.digits),
-            len(other.partials.digits)
+            len(self.fractional.digits),
+            len(other.fractional.digits)
         )
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.partials.digits)
-        self_combined_digits = self.partials.digits + self.wholes.digits
+        self_extra_0s = adjust_len - len(self.fractional.digits)
+        self_combined_digits = self.fractional.digits + self.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.partials.digits)
-        other_combined_digits = other.partials.digits + other.wholes.digits
+        other_extra_0s = adjust_len - len(other.fractional.digits)
+        other_combined_digits = other.fractional.digits + other.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -587,9 +629,9 @@ class DecimalNumber:
 
         log(f'Unmocking {mock_ret}...')
         ret_sign = mock_ret.sign
-        ret_partial_digits = [mock_ret.magnitude[i] for i in range(0, adjust_len)]
+        ret_fractional_digits = [mock_ret.magnitude[i] for i in range(0, adjust_len)]
         ret_whole_digits = [mock_ret.magnitude[i] for i in range(adjust_len, len(mock_ret.magnitude.digits))]
-        ret = DecimalNumber(ret_sign, WholeNumber(ret_whole_digits), PartialNumber(ret_partial_digits))
+        ret = DecimalNumber(ret_sign, WholeNumber(ret_whole_digits), FractionalNumber(ret_fractional_digits))
         log(f'{ret}')
 
         log_unindent()
@@ -604,19 +646,19 @@ class DecimalNumber:
         log(f'Multiplying {self} and {other}...')
         log_indent()
 
-        adjust_len_self = len(self.partials.digits)
-        adjust_len_other = len(other.partials.digits)
+        adjust_len_self = len(self.fractional.digits)
+        adjust_len_other = len(other.fractional.digits)
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len_self - len(self.partials.digits)
-        self_combined_digits = self.partials.digits + self.wholes.digits
+        self_extra_0s = adjust_len_self - len(self.fractional.digits)
+        self_combined_digits = self.fractional.digits + self.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len_other - len(other.partials.digits)
-        other_combined_digits = other.partials.digits + other.wholes.digits
+        other_extra_0s = adjust_len_other - len(other.fractional.digits)
+        other_combined_digits = other.fractional.digits + other.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -628,9 +670,9 @@ class DecimalNumber:
         log(f'Unmocking {mock_ret}...')
         unadjust_len = adjust_len_self + adjust_len_other
         ret_sign = mock_ret.sign
-        ret_partial_digits = [mock_ret.magnitude[i] for i in range(0, unadjust_len)]
+        ret_fractional_digits = [mock_ret.magnitude[i] for i in range(0, unadjust_len)]
         ret_whole_digits = [mock_ret.magnitude[i] for i in range(unadjust_len, len(mock_ret.magnitude.digits))]
-        ret = DecimalNumber(ret_sign, WholeNumber(ret_whole_digits), PartialNumber(ret_partial_digits))
+        ret = DecimalNumber(ret_sign, WholeNumber(ret_whole_digits), FractionalNumber(ret_fractional_digits))
         log(f'{ret}')
 
         log_unindent()
@@ -646,19 +688,19 @@ class DecimalNumber:
         log_indent()
 
         # CHECK TO MAKE SURE DECIMAL WILL TERM -- replace with calling to_suitable_fraction()?
-        adjust_len_self = len(self.partials.digits)
-        adjust_len_other = len(other.partials.digits)
+        adjust_len_self = len(self.fractional.digits)
+        adjust_len_other = len(other.fractional.digits)
 
         log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len_self - len(self.partials.digits)
-        self_combined_digits = self.partials.digits + self.wholes.digits
+        self_extra_0s = adjust_len_self - len(self.fractional.digits)
+        self_combined_digits = self.fractional.digits + self.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
         mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len_other - len(other.partials.digits)
-        other_combined_digits = other.partials.digits + other.wholes.digits
+        other_extra_0s = adjust_len_other - len(other.fractional.digits)
+        other_combined_digits = other.fractional.digits + other.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
         mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
@@ -675,7 +717,7 @@ class DecimalNumber:
 
         # DIVIDE using divide-and-conquer multiplication
         log(f'Performing {self} / {other}...')
-        modifier = DecimalNumber.from_str('1' + '0' * len(self.wholes.digits))
+        modifier = DecimalNumber.from_str('1' + '0' * len(self.whole.digits))
         if other.sign == Sign.NEGATIVE:
             modifier = modifier * DecimalNumber.from_str('-1.0')
         test = DecimalNumber.from_str('0.0')
@@ -752,6 +794,30 @@ if __name__ == '__main__':
 
     # print(f'{DecimalNumber.from_str("12.34") == DecimalNumber.from_str("012.340")}')
     # print(f'{DecimalNumber.from_str("12.34") == DecimalNumber.from_str("12.345")}')
+    # print(f'{DecimalNumber.from_str("12.34") == DecimalNumber.from_str("112.34")}')
+    # print(f'{DecimalNumber.from_str("12.34") == DecimalNumber.from_str("112.345")}')
+
+    # print(f'{DecimalNumber.from_str("0") < DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("0.1") < DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("-0.1") < DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("1.0") < DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("-1.0") < DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("0") < DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("0.1") < DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("-0.1") < DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("1.0") < DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("-1.0") < DecimalNumber.from_str("1")}')
+
+    # print(f'{DecimalNumber.from_str("0") > DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("0.1") > DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("-0.1") > DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("1.0") > DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("-1.0") > DecimalNumber.from_str("0")}')
+    # print(f'{DecimalNumber.from_str("0") > DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("0.1") > DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("-0.1") > DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("1.0") > DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("-1.0") > DecimalNumber.from_str("1")}')
 
     # print(f'{DecimalNumber.from_str("12.34") + DecimalNumber.from_str("12.34")}')
     # print(f'{DecimalNumber.from_str("0.02") + DecimalNumber.from_str("0.02")}')

@@ -5962,34 +5962,149 @@ Fraction number
 +------------------------------------+
 ```
 
-A `{bm} decimal number` is another way of representing a mixed number where the denominator is 1 followed by trailing 0s. For example, ...
+A `{bm} decimal number` is another way of representing a mixed number where the denominator of the fraction is 1 followed by 0s. For example, ...
 
-* `{kt} 2 \frac{9}{10}` ↔ 2.9
-* `{kt} 7 \frac{9}{100}` ↔ 2.09
-* `{kt} 2 \frac{9}{1000}` ↔ 2.009
-* `{kt} 2` ↔ 2.0 (2 is equivalent to `{kt} 2 \frac{0}{10}`)
+ * `{kt} 2 \frac{0}{1}` ↔ 2.0
+ * `{kt} 2 \frac{9}{10}` ↔ 2.9
+ * `{kt} 2 \frac{9}{100}` ↔ 2.09
+ * `{kt} 2 \frac{9}{1000}` ↔ 2.009
 
-To convert a mixed number with a qualifying denominator into a decimal number is ...
+The period placed in between the whole and the fraction is referred to as a `{bm} decimal point`. The number to the ...
 
-1. subtract the number of 0s in the denominator from the number of digits in the numerator, prepend that many 0s to the numerator.
-2. remove the denominator and place a period between the whole portion and the numerator.
+ * left of the decimal point is referred to as the whole part.
+ * right of the decimal point is referred to as the `{bm} fractional` part.
 
-`{kt} 2 \frac{9}{1000}` ⟶ 2.009
+A mixed number can be converted to a decimal number so long as it has a qualifying denominator. A qualifying denominator starts with 1 followed by 0s. For example, `{kt} 2 \frac{1}{10}` has a qualifying denominator but `{kt} 2 \frac{1}{2}` doesn't.
 
-The period placed in step step 2 is refereed to as a `{bm} decimal point`.
+If the denominator doesn't qualify, the mixed number may still be convertible so long as an equivalent fraction exists that does have a qualifying denominator. In the previous example, `{kt} 2 \frac {5}{10}` is an equivalent fraction to `{kt} 2 \frac{1}{2}`.
 
-If a mixed number doesn't have a qualifying denominator, it may need to be converted to an equivalent fraction that does. In certain cases, this may not be possible.
+To convert a mixed number into a decimal number ...
+
+ 1. ensure that the denominator qualifies for conversion (try to find an equivalent if it doesn't).
+ 2. count the number of 0s in the denominator.
+ 3. count the number of digits in the numerator.
+ 4. subtract the result of 2 from 3.
+ 5. prepend as many 0s as the result of 4 on to the numerator.
+ 6. place a decimal point between the whole and the fraction and remove the denominator.
+
+For example, converting `{kt} 2 \frac{9}{1000}` to a decimal number results in 2.009.
 
 ```{note}
-See fraction conversion subsections for more in-depth discussion on how to conversions.
+Steps for conversion are as follows:
+
+ 1. denominator qualifies for conversion (1000).
+ 2. number of 0s in the denominator is 3.
+ 3. number of digits in the numerator is 1.
+ 4. 3 - 1 = 2.
+ 5. 00 gets prepended to 9 to become 009.
+ 6. resulting decimal is 2.009 .
+
+Fraction conversion subsections below provide more in-depth discussion on how to conversions. However, those subsections require that you know how to do basic decimal number arithmetic before hand.
 ```
 
 To convert a decimal number to a mixed number...
 
-1. count the number of digits after the decimal point, add a denominator to these digits that starts with 1 followed by that many 0s.
-2. remove the decimal point.
+1. count the number of digits in the fractional part.
+2. set denominator to 1 followed by as many 0s as the result of 2 and remove the decimal point.
 
-2.009 ⟶ `{kt} 2 \frac{9}{1000}`
+For example, converting 2.009 to a mixed number results in `{kt} 2 \frac{9}{1000}`
+
+```{note}
+Steps for conversion are as follows:
+
+ 1. number of digits in fractional part is 3.
+ 2. `{kt} 2 \frac{9}{1000}` (009 simplifies to 9 because a numerator is an integer).
+
+Fraction conversion subsections below provide more in-depth discussion on how to conversions. However, those subsections require that you know how to do basic decimal number arithmetic before hand.
+```
+
+## Equality
+
+```{prereq}
+Integer equality
+```
+
+Conceptually, you can think of `{bm} decimal quality/(decimal number quality|decimal quality)/i` the same as fraction equality where the fraction is represented as a mixed number. However, for decimal numbers specifically, a quick set of tests can determine if a decimal number is equal to some other decimal number:
+
+ * Signs must be equal.
+ * Whole parts must be equal.
+ * Fractional part must be equal.
+
+If all 3 of the tests above pass, the decimal numbers are equal.
+
+For example, the numbers -195.26 and 195.36 are not equal...
+
+```
+- 1 9 5 . 2 6
+x | | |   x |
++ 1 9 5 . 3 6
+```
+
+... while the numbers -195.26 and -195.26 are equal...
+
+```
+- 1 9 5 . 2 6
+| | | |   | |
+- 1 9 5 . 2 6
+```
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
+```
+
+```{decnumeq}
+312.12 312.12
+```
+
+```{note}
+Remember that decimal numbers are just another way of representing fractions. As such, decimal numbers can also be tested by first converting them to fractions and then applying fraction equality.
+```
+
+## Less Than
+
+```{prereq}
+Fraction less than
+```
+
+Conceptually, you can think of `{bm} decimal less than/(decimal number less than|decimal less than)/i` the same as fraction less than where the fraction is represented as a mixed number. However, for decimal numbers specifically, a quick series of tests can determine if a decimal number is to the left of some other decimal number (less than_REL):
+
+ 1. Check the signs...
+    * Is the number being tested negative while the number being tested against non-negative? it's less than_REL.
+    * Are they equal? move to step 2, otherwise it isn't less than_REL.
+ 2. Check the whole parts...
+    * Is the number being tested less than_REL the number being tested against? it's less than_REL.
+    * Are they equal? move to step 3, otherwise it isn't less than_REL.
+ 3. Check the fractional parts...
+    * Is the number being tested less than_REL the number being tested against? it's less than_REL.
+    * Are they equal? it's less than_REL, otherwise it isn't less than_REL.
+
+For example, to test if 312.02 < 312.12:
+
+ 1. Signs are equal. Go to step 2.
+ 2. Wholes are equal. Go to step 3.
+ 3. Fractional being tested is less than_REL the other number's fractional.
+
+312.02 < 312.12 is true.
+ 
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
+```
+
+```{decnumlt}
+312.02 312.12
+```
+
+```{note}
+Remember that decimal numbers are just another way of representing fractions. As such, decimal numbers can also be tested by first converting them to fractions and then applying fraction less than.
+```
 
 ## Greater Than
 
@@ -5999,13 +6114,19 @@ Fraction greater than
 
 `{bm} Decimal number greater than/(decimal number greater than|decimal greater than)/i`
 
-## Less Than
-
-```{prereq}
-Fraction less than
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
 ```
 
-`{bm} Decimal number less than/(decimal number less than|decimal less than)/i`
+```{decnumgt}
+312.12 312.02
+```
+
+```{note}
+Remember that decimal numbers are just another way of representing fractions. As such, decimal numbers can also be tested by first converting them to fractions and then applying fraction greater than.
+```
 
 ## Word Conversion
 

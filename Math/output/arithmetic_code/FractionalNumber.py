@@ -6,26 +6,29 @@ from Digit import Digit
 from Output import log_decorator, log, log_indent, log_unindent
 
 
-class PartialNumber:
+# Don't confuse this with FractionNumber...
+# * FractionNumber represents a fraction
+# * FractionalNumber (this class) represents the part of a decimal number that's past the decimal point
+class FractionalNumber:
 
     @staticmethod
     def from_str(digits: str):
         digits = list(map(lambda i: Digit(int(i)), digits))
         digits.reverse()
-        return PartialNumber(digits)
+        return FractionalNumber(digits)
 
     @staticmethod
     def from_digit(digit: Digit):
-        return PartialNumber.from_digit_list([digit])
+        return FractionalNumber.from_digit_list([digit])
 
     @staticmethod
     def from_digit_list(digits: List[Digit]):
-        return PartialNumber(digits)
+        return FractionalNumber(digits)
 
     @staticmethod
     def from_int_list(digits: List[int]):
         digits = list(map(lambda i: Digit(i), digits))
-        return PartialNumber(digits)
+        return FractionalNumber(digits)
 
     def __init__(self, digits: List[Digit]):
         if digits is None:
@@ -48,15 +51,15 @@ class PartialNumber:
 
         self._prune_unnecessary_0s()
 
-    def copy(self: PartialNumber) -> PartialNumber:
-        return PartialNumber(self.digits)
+    def copy(self: FractionalNumber) -> FractionalNumber:
+        return FractionalNumber(self.digits)
 
     def __getitem__(self, key) -> Digit:
         if key >= len(self.digits):
             return Digit(0)
         return self.digits[len(self.digits) - key - 1]
 
-    def __setitem__(self: PartialNumber, key: int, value: Union[Digit, int]) -> None:
+    def __setitem__(self: FractionalNumber, key: int, value: Union[Digit, int]) -> None:
         if key >= len(self.digits):
             excess = key - len(self.digits) + 1
             self.digits[0:0] = [Digit(0)] * excess  # insert at 0
@@ -69,22 +72,22 @@ class PartialNumber:
 
         self._prune_unnecessary_0s()
 
-    def __len__(self: PartialNumber) -> int:
+    def __len__(self: FractionalNumber) -> int:
         return len(self.digits)
 
-    def __str__(self: PartialNumber) -> str:
+    def __str__(self: FractionalNumber) -> str:
         output = ''
         for digit in reversed(self.digits):
             output += str(digit.value)
         return output
 
-    def __repr__(self: PartialNumber):
+    def __repr__(self: FractionalNumber):
         return self.__str__()
 
     def __hash__(self):
         return hash(tuple(self.digits))
 
-    def _prune_unnecessary_0s(self: PartialNumber) -> None:
+    def _prune_unnecessary_0s(self: FractionalNumber) -> None:
         trim_count = 0
         for digit in self.digits:
             if digit == 0:
@@ -99,8 +102,8 @@ class PartialNumber:
             self.digits = [Digit(0)]
 
     @log_decorator
-    def __eq__(self: PartialNumber, other: PartialNumber) -> bool:
-        if not isinstance(other, PartialNumber):
+    def __eq__(self: FractionalNumber, other: FractionalNumber) -> bool:
+        if not isinstance(other, FractionalNumber):
             raise Exception()
 
         log(f'Equality testing {self} and {other}...')
@@ -114,8 +117,8 @@ class PartialNumber:
         return ret
 
     @log_decorator
-    def __lt__(self: PartialNumber, other: PartialNumber) -> bool:
-        if not isinstance(other, PartialNumber):
+    def __lt__(self: FractionalNumber, other: FractionalNumber) -> bool:
+        if not isinstance(other, FractionalNumber):
             raise Exception()
 
         log(f'Less than testing {self} and {other}...')
@@ -137,8 +140,8 @@ class PartialNumber:
         return False
 
     @log_decorator
-    def __gt__(self: PartialNumber, other: PartialNumber) -> bool:
-        if not isinstance(other, PartialNumber):
+    def __gt__(self: FractionalNumber, other: FractionalNumber) -> bool:
+        if not isinstance(other, FractionalNumber):
             raise Exception()
 
         log(f'Greater than testing {self} and {other}...')
@@ -161,15 +164,15 @@ class PartialNumber:
 
 
 if __name__ == '__main__':
-    print(f'{PartialNumber.from_str("401") < PartialNumber.from_str("45")}')
-    print(f'{PartialNumber.from_str("45") < PartialNumber.from_str("401")}')
+    print(f'{FractionalNumber.from_str("401") < FractionalNumber.from_str("45")}')
+    print(f'{FractionalNumber.from_str("45") < FractionalNumber.from_str("401")}')
 
-    print(f'{PartialNumber.from_str("401") > PartialNumber.from_str("45")}')
-    print(f'{PartialNumber.from_str("45") > PartialNumber.from_str("401")}')
+    print(f'{FractionalNumber.from_str("401") > FractionalNumber.from_str("45")}')
+    print(f'{FractionalNumber.from_str("45") > FractionalNumber.from_str("401")}')
 
-    print(f'{PartialNumber.from_str("400") == PartialNumber.from_str("4")}')
-    print(f'{PartialNumber.from_str("4") == PartialNumber.from_str("400")}')
-    print(f'{PartialNumber.from_str("4") == PartialNumber.from_str("401")}')
+    print(f'{FractionalNumber.from_str("400") == FractionalNumber.from_str("4")}')
+    print(f'{FractionalNumber.from_str("4") == FractionalNumber.from_str("400")}')
+    print(f'{FractionalNumber.from_str("4") == FractionalNumber.from_str("401")}')
 
     # print(f'{PartialNumber.from_str("4")}')
     # print(f'{PartialNumber.from_str("04")}')
