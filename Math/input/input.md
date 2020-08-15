@@ -3890,7 +3890,7 @@ Integer addition
 Integer multiplication
 ```
 
-Conceptually, you can think of `{bm} integer division/(integer number division|divide integer numbers|divide integers|division of integer numbers|division of integers)/i` the same as whole number division: repetitive integer subtraction -- how many iterations can be subtracted until reaching 0. When both numbers being divided have the same sign, the process is nearly the same as whole number division. For example, ...
+Conceptually, you can think of `{bm} integer division/(integer number division|integer division|divide integer numbers|divide integers|division of integer numbers|division of integers)/i` the same as whole number division: repetitive integer subtraction -- how many iterations can be subtracted until reaching 0. When both numbers being divided have the same sign, the process is nearly the same as whole number division. For example, ...
 
 * 15 / 3 -- how many iterations og subtracting by 3 before 15 reaches 0
 
@@ -6476,7 +6476,6 @@ Multiplying by 10 shifts the decimal point to the right. Dividing by 10 shifts t
 ```
 
 The way to perform this algorithm via code is as follows...
-   
 
 ```{output}
 arithmetic_code/DecimalNumber.py
@@ -6581,7 +6580,6 @@ Multiplying by 10 shifts the decimal point to the right. Dividing by 10 shifts t
 
 The way to perform this algorithm via code is as follows...
    
-
 ```{output}
 arithmetic_code/DecimalNumber.py
 python
@@ -6595,28 +6593,104 @@ DecimalNumberSubLauncher
 
 ## Multiplication
 
-`{bm} Decimal multiplication/(decimal number multiplication|decimal multiplication)/i`
+```{prereq}
+Whole number multiplication
+Integer multiplication
+Fraction multiplication
+Decimal addition
+```
 
-TODO: show by converting to fractions
+Conceptually, you can think of `{bm} decimal multiplication/(decimal number multiplication|decimal multiplication)/i` the same as fraction multiplication where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction multiplication, a more straight-forward algorithm exists.
 
-TODO: show using standard algorithm
+The algorithms used by humans to perform decimal multiplication is almost the same as vertical multiplication for whole numbers:
+
+ 1. Stack the numbers on top of each other and perform whole number multiplication as if the decimal points didn't exist.
+ 2. Then, count up the number fractional digits in both input numbers and place a decimal point in the result just after the digit at that position (starting from the left).
+ 
+For example, to multiply 123.45 by 1.1, perform the multiplication without the decimal points...
+
+```{ktvertmul}
+{ }{1}{2}{3}{4}{5}
+{ }{ }{ }{ }{1}{1}
+---
+{ }{1}{2}{3}{4}{5}
+{1}{2}{3}{4}{5}{ }
+---
+{1}{3}{5}{7}{9}{5}
+```
+
+Then, place in the decimal point. Since 123.45 has 2 fractional digits and 1.1 has 1 fractional digit (2 + 1 = 3), the decimal point is placed in just after the digit at the 3rd position (starting from the left)...
+
+`{kt} 135.795`
+
+This works because the ideas behind whole number multiplication are similar to the ideas behind decimal number multiplication:
+
+ 1. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 135.759 can be broken down as ...
+
+    * 1 \* 100
+    * 3 \* 10
+    * 5 \* 1
+    * 7 \* `{kt} \frac{1}{10}`
+    * 5 \* `{kt} \frac{1}{100}`
+    * 9 \* `{kt} \frac{1}{1000}`
+
+ 2. If the single digit components being multiplied are both from the whole part, the result of their multiplication is equivalent to multiplying the single non-zero digits together and appending the 0s to the end. For example, ...
+
+   * 30 \* 2 = 60 -- 3 \* 2 = 6, append 1 zero to get 60.
+   * 3 \* 20 = 60 -- 3 \* 2 = 6, append 1 zero to get 60.
+   * 30 \* 20 = 600 -- 3 \* 2 = 6, append 2 zeros to get 600.
+
+ 3. If the single digit components being multiplied are both from the fractional part, the result of their multiplication is equivalent to multiplying the single non-zero digits together and prepending as many 0s as there are combined digits in the fractional part. For example, ...
+
+   * 0.3 \* 0.2 = 0.06 -- 3 \* 2 = 6, add a decimal point followed by a zero to get 0.06
+   * 0.3 \* 0.02 is 0.006 -- 0.3 has 1 fractional digit and 0.02 has 2 fractional digits, so the result has 3 fractional digits.
+   * 0.03 \* 0.02 is 0.0006 -- 0.03 has 2 fractional digit and 0.02 has 2 fractional digits, so the result has 4 fractional digits.
+
+   FIX ME
+
+   FIX ME
+
+   FIX ME
+
+   FIX ME
+
+   FIX ME
+
+   FIX ME
+
+ 4. If the single digit components being multiplied are from the whole and the fractional part. TODO TODO TODO
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
+```
+
+```{arithmetic}
+DecimalNumberMulLauncher
+123.45 1.1
+```
 
 ## Division
 
+```{prereq}
+Whole number division
+Integer division
+Fraction division
+Decimal less than
+```
+
 `{bm} Decimal division/(decimal number division|decimal division)/i`
+
+TODO: long division where you shift the divisor and dividend until there is no fractional part, then divide as is... e.g. 0.1 / 0.3 is the result result as 1 / 3 is the same result as 10/30 -- but, you only really need to shift until the divisor is whole, just keep the decimal point in the same place and it'll still work out
 
 TODO: show by converting to fractions
 
 TODO: show using standard long division algorithm (only works if denominator is an integer) -- if not need to scale up e.g. 10/5.2 needs to be scaled to equiv frac of 100/52 and then perform using the standard long division algo
 
-## Shift
-
-```{prereq}
-Decimal multiplication
-Decimal division
-```
-
-TODO: multiply by 10 to move digits up, divide by 10 to move digits down
+TODO: divide by 10 to move digits down
 
 ## Round
 
@@ -6808,37 +6882,6 @@ Examples of mixed number and decimal number equivalents...
 * `{kt} 2 \frac{9}{1000}` ↔ 2.009
 * `{kt} 7 \frac{9}{100}` ↔ 7.09
 * `{kt} 5 \frac{9}{10}` ↔ 5.9
-
-# Irrational Number
-
-```{prereq}
-ARE THERE ANY PREREQUISTES FOR THIS?
-```
-
-```{svgbob}
-+----------------------------------------------------------------------------------+
-|                                                                                  |
-|                                      Real                                        |
-|                                                                                  |
-|   +-+-+-+------------------------------+   +---------------------------------+   |
-|   | | | |                              |   |                                 |   |
-|   | | | |   "Natural (e.g. 1, 7, 291)" |   |                                 |   |
-|   | | | |                              |   |                                 |   |
-|   | | | +------------------------------+   |                                 |   |
-|   | | |                                |   |                                 |   |
-|   | | |   "Whole (0)"                  |   |                                 |   |
-|   | | |                                |   |                                 |   |
-|   | | +--------------------------------+   | "Irrational (e.g. pi, sqrt(2))" |   |
-|   | |                                  |   |                                 |   |
-|   | |   "Integer (e.g. -7, -19, -471)" |   |                                 |   |
-|   | |                                  |   |                                 |   |
-|   | +----------------------------------+   |                                 |   |
-|   |                                    |   |                                 |   |
-|   |   "Rational (e.g. -0.5, 1/3, 1.2)" |   |                                 |   |
-|   |                                    |   |                                 |   |
-|   +------------------------------------+   +---------------------------------+   |
-+----------------------------------------------------------------------------------+
-```
 
 # Power
 
@@ -7406,6 +7449,39 @@ TODO: do your best to write some explanations are algorithms for logarithms
 TODO: do your best to write some explanations are algorithms for logarithms
 
 TODO: do your best to write some explanations are algorithms for logarithms
+
+# Irrational Number
+
+```{prereq}
+Root
+```
+
+```{svgbob}
++----------------------------------------------------------------------------------+
+|                                                                                  |
+|                                      Real                                        |
+|                                                                                  |
+|   +-+-+-+------------------------------+   +---------------------------------+   |
+|   | | | |                              |   |                                 |   |
+|   | | | |   "Natural (e.g. 1, 7, 291)" |   |                                 |   |
+|   | | | |                              |   |                                 |   |
+|   | | | +------------------------------+   |                                 |   |
+|   | | |                                |   |                                 |   |
+|   | | |   "Whole (0)"                  |   |                                 |   |
+|   | | |                                |   |                                 |   |
+|   | | +--------------------------------+   | "Irrational (e.g. pi, sqrt(2))" |   |
+|   | |                                  |   |                                 |   |
+|   | |   "Integer (e.g. -7, -19, -471)" |   |                                 |   |
+|   | |                                  |   |                                 |   |
+|   | +----------------------------------+   |                                 |   |
+|   |                                    |   |                                 |   |
+|   |   "Rational (e.g. -0.5, 1/3, 1.2)" |   |                                 |   |
+|   |                                    |   |                                 |   |
+|   +------------------------------------+   +---------------------------------+   |
++----------------------------------------------------------------------------------+
+```
+
+TODO: example is sqrt(2)
 
 # Algebra
 
