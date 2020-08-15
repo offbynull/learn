@@ -5,7 +5,7 @@ from FractionNumber import FractionNumber
 from IntegerNumber import IntegerNumber
 from WholeNumber import WholeNumber, log_whitelist
 
-if __name__ == '__main__':
+def main():
     log_whitelist([(inspect.getfile(DecimalNumber), 'round')])
 
     print("<div style=\"border:1px solid black;\">", end="\n\n")
@@ -18,3 +18,6 @@ if __name__ == '__main__':
     finally:
         print("</div>", end="\n\n")
         print("`{bm-enable-all}`", end="\n\n")
+
+if __name__ == '__main__':
+    main()

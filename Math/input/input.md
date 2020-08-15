@@ -943,7 +943,8 @@ python
 The code is making use of python lists to do the 2 tests above. Python's list equality already applies ideas 1 and 2 internally to determine if the contents of the list are equal.
 ```
 
-```{wholenumeq}
+```{arithmetic}
+WholeNumberEqLauncher
 195 195
 ```
 
@@ -1030,7 +1031,8 @@ python
 #MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
 ```
 
-```{wholenumlt}
+```{arithmetic}
+WholeNumberLtLauncher
 190 195
 ```
 
@@ -1117,7 +1119,8 @@ python
 #MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
 ```
 
-```{wholenumgt}
+```{arithmetic}
+WholeNumberGtLauncher
 195 190
 ```
 
@@ -1336,7 +1339,8 @@ python
 #MARKDOWN_ADD\s*\n([\s\S]+)\n\s*#MARKDOWN_ADD
 ```
 
-```{wholenumadd}
+```{arithmetic}
+WholeNumberAddLauncher
 273 991
 ```
 
@@ -1693,7 +1697,8 @@ python
 #MARKDOWN_SUB\s*\n([\s\S]+)\n\s*#MARKDOWN_SUB
 ```
 
-```{wholenumsub}
+```{arithmetic}
+WholeNumberSubLauncher
 100 11
 ```
 
@@ -2073,7 +2078,8 @@ python
 #MARKDOWN_MUL\s*\n([\s\S]+)\n\s*#MARKDOWN_MUL
 ```
 
-```{wholenummul}
+```{arithmetic}
+WholeNumberMulLauncher
 77 87
 ```
 
@@ -2266,7 +2272,8 @@ python
 #MARKDOWN_DIVTE\s*\n([\s\S]+)\n\s*#MARKDOWN_DIVTE
 ```
 
-```{wholenumdivte}
+```{arithmetic}
+WholeNumberDivTeLauncher
 98 3
 ```
 
@@ -2964,7 +2971,8 @@ python
 #MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
 ```
 
-```{wholenumdiv}
+```{arithmetic}
+WholeNumberDivLauncher
 752 3
 ```
 
@@ -3308,7 +3316,8 @@ python
 #MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
 ```
 
-```{wholenumtowords}
+```{arithmetic}
+WholeNumberToWordsLauncher
 9876543210
 ```
 
@@ -3444,7 +3453,8 @@ python
 #MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
 ```
 
-```{intnumeq}
+```{arithmetic}
+IntegerNumberEqLauncher
 -195 -195
 ```
 
@@ -3531,7 +3541,8 @@ python
 #MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
 ```
 
-```{intnumlt}
+```{arithmetic}
+IntegerNumberLtLauncher
 -195 -194
 ```
 
@@ -3618,7 +3629,8 @@ python
 #MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
 ```
 
-```{intnumgt}
+```{arithmetic}
+IntegerNumberGtLauncher
 -194 -195
 ```
 
@@ -3699,7 +3711,8 @@ python
 #MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
 ```
 
-```{intnumadd}
+```{arithmetic}
+IntegerNumberAddLauncher
 -752 3
 ```
 
@@ -3795,7 +3808,8 @@ python
 #MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
 ```
 
-```{intnumsub}
+```{arithmetic}
+IntegerNumberSubLauncher
 752 -3 
 ```
 
@@ -3861,7 +3875,8 @@ python
 #MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
 ```
 
-```{intnummul}
+```{arithmetic}
+IntegerNumberMulLauncher
 -6 -5
 ```
 
@@ -3992,7 +4007,8 @@ python
 #MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
 ```
 
-```{intnumdiv}
+```{arithmetic}
+IntegerNumberDivLauncher
 -30 5
 ```
 
@@ -4049,7 +4065,8 @@ python
 #MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
 ```
 
-```{intnumtowords}
+```{arithmetic}
+IntegerNumberToWordsLauncher
 -1234
 ```
 
@@ -4250,7 +4267,8 @@ python
 
 For example, the common divisibility tests for 18...
 
-```{commdivtest}
+```{arithmetic}
+CommonDivisibilityTestLauncher
 18
 ```
 
@@ -4295,7 +4313,8 @@ python
 #MARKDOWN_NAIVE\s*\n([\s\S]+)\n\s*#MARKDOWN_NAIVE
 ```
 
-```{factornaive}
+```{arithmetic}
+FactorNaiveLauncher
 4
 ```
 
@@ -4307,7 +4326,8 @@ python
 #MARKDOWN_FAST\s*\n([\s\S]+)\n\s*#MARKDOWN_FAST
 ```
 
-```{factorfast}
+```{arithmetic}
+FactorFastLauncher
 16
 ```
 
@@ -4332,7 +4352,8 @@ python
 #MARKDOWN_FASTEST\s*\n([\s\S]+)\n\s*#MARKDOWN_FASTEST
 ```
 
-```{factorfastest}
+```{arithmetic}
+FactorFastestLauncher
 16
 ```
 
@@ -4376,7 +4397,8 @@ python
 #MARKDOWN_PRIMETEST\s*\n([\s\S]+)\n\s*#MARKDOWN_PRIMETEST
 ```
 
-```{primetest}
+```{arithmetic}
+FactorPrimeTestLauncher
 13
 ```
 
@@ -4466,7 +4488,8 @@ The process of breaking down a composite number into a factor of primes is calle
    #MARKDOWN_FACTORTREE\s*\n([\s\S]+)\n\s*#MARKDOWN_FACTORTREE
    ```
    
-   ```{factortree}
+   ```{arithmetic}
+   FactorTreeLauncher
    24
    ```
 
@@ -4551,7 +4574,8 @@ The process of breaking down a composite number into a factor of primes is calle
    #MARKDOWN_LADDER\s*\n([\s\S]+)\n\s*#MARKDOWN_LADDER
    ```
    
-   ```{factorladder}
+   ```{arithmetic}
+   FactorLadderLauncher
    81
    ```
 
@@ -4582,7 +4606,8 @@ python
 #MARKDOWN_WALK\s*\n([\s\S]+)\n\s*#MARKDOWN_WALK
 ```
 
-```{lcmlist}
+```{arithmetic}
+LeastCommonMultipleWalkLauncher
 12 18
 ```
 
@@ -4626,7 +4651,8 @@ python
 #MARKDOWN_PF\s*\n([\s\S]+)\n\s*#MARKDOWN_PF
 ```
 
-```{lcmprimefactor}
+```{arithmetic}
+LeastCommonMultiplePFLauncher
 12 18
 ```
 
@@ -4666,7 +4692,8 @@ python
 #MARKDOWN_NAIVE\s*\n([\s\S]+)\n\s*#MARKDOWN_NAIVE
 ```
 
-```{gcdnaive}
+```{arithmetic}
+GreatestCommonDivisorNaiveLauncher
 22 8
 ```
 
@@ -4707,7 +4734,8 @@ python
 #MARKDOWN_FACTOR\s*\n([\s\S]+)\n\s*#MARKDOWN_FACTOR
 ```
 
-```{gcdfactor}
+```{arithmetic}
+GreatestCommonDivisorFactorLauncher
 22 8
 ```
 
@@ -4735,7 +4763,8 @@ python
 #MARKDOWN_EUCLID\s*\n([\s\S]+)\n\s*#MARKDOWN_EUCLID
 ```
 
-```{gcdeuclid}
+```{arithmetic}
+GreatestCommonDivisorEuclidLauncher
 22 8
 ```
 
@@ -5095,7 +5124,8 @@ python
 #MARKDOWN_SIMP\s*\n([\s\S]+?)\n\s*#MARKDOWN_SIMP
 ```
 
-```{fracnumsimp}
+```{arithmetic}
+FractionNumberSimplifyLauncher
 -12/8
 ```
 
@@ -5159,7 +5189,8 @@ python
 #MARKDOWN_COMMON_DENOMINATOR_NAIVE\s*\n([\s\S]+?)\n\s*#MARKDOWN_COMMON_DENOMINATOR_NAIVE
 ```
 
-```{fracnumcommondenomnaive}
+```{arithmetic}
+FractionNumberCommonDenominatorNaiveLauncher
 1/2 1/6
 ```
 
@@ -5193,7 +5224,8 @@ python
 #MARKDOWN_COMMON_DENOMINATOR_LCM\s*\n([\s\S]+?)\n\s*#MARKDOWN_COMMON_DENOMINATOR_LCM
 ```
 
-```{fracnumcommondenomlcm}
+```{arithmetic}
+FractionNumberCommonDenominatorLcmLauncher
 4/15 5/10
 ```
 
@@ -5266,7 +5298,8 @@ python
 #MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
 ```
 
-```{fracnumeq}
+```{arithmetic}
+FractionNumberEqLauncher
 1/4 2/8
 ```
 
@@ -5339,7 +5372,8 @@ python
 #MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
 ```
 
-```{fracnumlt}
+```{arithmetic}
+FractionNumberLtLauncher
 1/4 3/8
 ```
 
@@ -5412,7 +5446,8 @@ python
 #MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
 ```
 
-```{fracnumgt}
+```{arithmetic}
+FractionNumberGtLauncher
 3/4 2/8
 ```
 
@@ -5498,7 +5533,8 @@ python
 #MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
 ```
 
-```{fracnumadd}
+```{arithmetic}
+FractionNumberAddLauncher
 1/4 1/6
 ```
 
@@ -5584,7 +5620,8 @@ python
 #MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
 ```
 
-```{fracnumsub}
+```{arithmetic}
+FractionNumberSubLauncher
 3/12 2/12
 ```
 
@@ -5691,7 +5728,8 @@ python
 #MARKDOWN_MUL\s*\n([\s\S]+?)\n\s*#MARKDOWN_MUL
 ```
 
-```{fracnummul}
+```{arithmetic}
+FractionNumberMulLauncher
 -1/3 -2/6
 ```
 
@@ -5716,7 +5754,8 @@ python
 #MARKDOWN_RECIP\s*\n([\s\S]+?)\n\s*#MARKDOWN_RECIP
 ```
 
-```{fracnumrecip}
+```{arithmetic}
+FractionNumberReciprocalLauncher
 2/7
 ```
 
@@ -5813,7 +5852,8 @@ python
 #MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
 ```
 
-```{fracnumdiv}
+```{arithmetic}
+FractionNumberDivLauncher
 8/1 5/2
 ```
 
@@ -5884,7 +5924,8 @@ python
 #MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
 ```
 
-```{fracnumtowords}
+```{arithmetic}
+FractionNumberToWordsLauncher
 -1234/12
 ```
 
@@ -6056,7 +6097,8 @@ python
 #MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
 ```
 
-```{decnumeq}
+```{arithmetic}
+DecimalNumberEqLauncher
 312.12 312.12
 ```
 
@@ -6098,7 +6140,8 @@ python
 #MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
 ```
 
-```{decnumlt}
+```{arithmetic}
+DecimalNumberLtLauncher
 312.02 312.12
 ```
 
@@ -6120,7 +6163,8 @@ python
 #MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
 ```
 
-```{decnumgt}
+```{arithmetic}
+DecimalNumberGtLauncher
 312.12 312.02
 ```
 
@@ -6266,7 +6310,8 @@ python
 #MARKDOWN_TO_WORDS\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_WORDS
 ```
 
-```{decnumtowords}
+```{arithmetic}
+DecimalNumberToWordsLauncher
 -33.125
 ```
 
@@ -6366,7 +6411,8 @@ python
 #MARKDOWN_ROUND\s*\n([\s\S]+?)\n\s*#MARKDOWN_ROUND
 ```
 
-```{decnumround}
+```{arithmetic}
+DecimalNumberRoundLauncher
 123.456 tenths
 ```
 
@@ -6423,7 +6469,8 @@ python
 #MARKDOWN_TO_SUITABLE_FRAC\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_SUITABLE_FRAC
 ```
 
-```{decnumtosuitablefrac}
+```{arithmetic}
+DecimalNumberSuitableFractionLauncher
 10/20
 ```
 
@@ -6492,7 +6539,8 @@ python
 #MARKDOWN_AS_FRAC\s*\n([\s\S]+?)\n\s*#MARKDOWN_AS_FRAC
 ```
 
-```{decnumtofrac}
+```{arithmetic}
+DecimalNumberToFractionLauncher
 22.018
 ```
 
@@ -6704,7 +6752,8 @@ python
 #MARKDOWN_POWIT\s*\n([\s\S]+?)\n\s*#MARKDOWN_POWIT
 ```
 
-```{wholenumpowit}
+```{arithmetic}
+WholeNumberPowItLauncher
 2 5
 ```
 
@@ -6903,7 +6952,8 @@ python
 #MARKDOWN_POW\s*\n([\s\S]+?)\n\s*#MARKDOWN_POW
 ```
 
-```{wholenumpow}
+```{arithmetic}
+WholeNumberPowLauncher
 2 20
 ```
 

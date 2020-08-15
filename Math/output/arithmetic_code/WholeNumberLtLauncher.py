@@ -3,7 +3,7 @@ import inspect
 from Output import log_whitelist
 from WholeNumber import WholeNumber
 
-if __name__ == '__main__':
+def main():
     log_whitelist([(inspect.getfile(WholeNumber), '__lt__')])
 
     print("<div style=\"border:1px solid black;\">", end="\n\n")
@@ -16,3 +16,6 @@ if __name__ == '__main__':
     finally:
         print("</div>", end="\n\n")
         print("`{bm-enable-all}`", end="\n\n")
+
+if __name__ == '__main__':
+    main()

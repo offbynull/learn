@@ -6,7 +6,7 @@ from LeastCommonMultiple import lcm_walk, lcm_prime_factorize
 from Output import log_whitelist
 from WholeNumber import WholeNumber
 
-if __name__ == '__main__':
+def main():
     log_whitelist([(inspect.getfile(LeastCommonMultiple), 'lcm_prime_factorize')])
 
     print("<div style=\"border:1px solid black;\">", end="\n\n")
@@ -19,3 +19,6 @@ if __name__ == '__main__':
     finally:
         print("</div>", end="\n\n")
         print("`{bm-enable-all}`", end="\n\n")
+
+if __name__ == '__main__':
+    main()
