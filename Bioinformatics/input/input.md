@@ -467,9 +467,61 @@ TTTCC
 TTTCA
 ```
 
-## Score Motif
+## Motif Matrix Count
 
-`{bm} /(Motif\/Score Motif)_TOPIC/`
+`{bm} /(Motif\/Motif Matrix Count)_TOPIC/`
+
+**WHAT**: Given a motif matrix, count how many of each nucleotide are in each column.
+
+**WHY**: Having a count of the number of nucleotides in each column is a basic statistic that gets used further down the line for tasks such as scoring a motif matrix.
+
+**ALGORITHM**:
+
+```{output}
+ch2_code/src/MotifMatrixCount.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+MotifMatrixCount
+ATTGC
+TTTGC
+TTTGG
+ATTGC
+```
+
+## Motif Matrix Profile
+
+`{bm} /(Motif\/Motif Matrix Profile)_TOPIC/`
+
+```{prereq}
+Motif/Motif Matrix Count
+```
+
+**WHAT**: Given a motif matrix, for each column generate the percentage that each nucleotide appears.
+
+**WHY**: Each column's percentages represent a probability distribution. These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary k-mer conforms to the same matrix.
+
+**ALGORITHM**:
+
+```{output}
+ch2_code/src/MotifMatrixProfile.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+MotifMatrixProfile
+ATTGC
+TTTGC
+TTTGG
+ATTGC
+```
+
+## Motif Matrix Score
+
+`{bm} /(Motif\/Motif Matrix Score)_TOPIC/`
 
 **WHAT**: Given a motif matrix, assign it a score based on how similar the k-mers that make up the matrix are to each other. Specifically, how conserved the nucleotides at each column are.
 
@@ -479,7 +531,7 @@ TTTCA
 
 **ALGORITHM**:
 
-This algorithm scores a motif by summing up the number of unpopular items in a column. For example, imagine a column has 7 Ts, 2 Cs, and 1A. The Ts are the most popular (7 items), meaning that the 3 items (2 Cs and 1 A) are unpopular -- the score for the column is 3.
+This algorithm scores a motif matrix by summing up the number of unpopular items in a column. For example, imagine a column has 7 Ts, 2 Cs, and 1A. The Ts are the most popular (7 items), meaning that the 3 items (2 Cs and 1 A) are unpopular -- the score for the column is 3.
 
 Sum up each of the column scores to the get the final score for the motif matrix.
 
@@ -500,6 +552,10 @@ ATTGC
 ### Entropy Algorithm
 
 **ALGORITHM**:
+
+This algorithm scores a motif matrix by summing up the entropy for each column. The entropy is defined as the level of uncertainty for a column. For example, a column with 10 As has low entropy because it's highly conserved, while a column with 6 As and 4Ts has a higher entropy because it's less highly conserved.
+
+Sum up each of the column scores to the get the final score for the motif matrix.
 
 TODO FILL ME IN
 
