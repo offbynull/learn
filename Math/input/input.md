@@ -6015,6 +6015,10 @@ The period placed in between the whole and the fraction is referred to as a `{bm
  * left of the decimal point is referred to as the whole part.
  * right of the decimal point is referred to as the `{bm} fractional` part.
 
+```{note}
+You can consider the sign and the whole part as the integer part. The term integer part is used in the subsections below.
+```
+
 A mixed number can be converted to a decimal number so long as it has a qualifying denominator. A qualifying denominator starts with 1 followed by 0s. For example, `{kt} 2 \frac{1}{10}` has a qualifying denominator but `{kt} 2 \frac{1}{2}` doesn't.
 
 If the denominator doesn't qualify, the mixed number may still be convertible so long as an equivalent fraction exists that does have a qualifying denominator. In the previous example, `{kt} 2 \frac {5}{10}` is an equivalent fraction to `{kt} 2 \frac{1}{2}`.
@@ -6063,15 +6067,15 @@ Fraction conversion subsections below provide more in-depth discussion on how to
 
 ```{prereq}
 Integer equality
+Fraction equality
 ```
 
-Conceptually, you can think of `{bm} decimal quality/(decimal number quality|decimal quality)/i` the same as fraction equality where the fraction is represented as a mixed number. However, for decimal numbers specifically, a quick set of tests can determine if a decimal number is equal to some other decimal number:
+Conceptually, you can think of `{bm} decimal equality/(decimal number equality|decimal equality)/i` the same as fraction equality where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction quality, a quick series of tests on the decimal numbers themselves can determine equality:
 
- * Signs must be equal.
- * Whole parts must be equal.
+ * Integer parts must be equal.
  * Fractional part must be equal.
 
-If all 3 of the tests above pass, the decimal numbers are equal.
+If all tests above pass, the decimal numbers are equal.
 
 For example, the numbers -195.26 and 195.36 are not equal...
 
@@ -6091,8 +6095,18 @@ x | | |   x |
 
 The way to perform this algorithm via code is as follows...
 
+```{note}
+The first listing is the main DecimalNumber code, while the second listing is the code for fractional part called by the main DecimalNumber code.
+```
+
 ```{output}
 arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
+```
+
+```{output}
+arithmetic_code/FractionalNumber.py
 python
 #MARKDOWN_EQ\s*\n([\s\S]+)\n\s*#MARKDOWN_EQ
 ```
@@ -6102,40 +6116,60 @@ DecimalNumberEqLauncher
 312.12 312.12
 ```
 
-```{note}
-Remember that decimal numbers are just another way of representing fractions. As such, decimal numbers can also be tested by first converting them to fractions and then applying fraction equality.
-```
-
 ## Less Than
 
 ```{prereq}
+Integer less than
 Fraction less than
 ```
 
-Conceptually, you can think of `{bm} decimal less than/(decimal number less than|decimal less than)/i` the same as fraction less than where the fraction is represented as a mixed number. However, for decimal numbers specifically, a quick series of tests can determine if a decimal number is to the left of some other decimal number (less than_REL):
+Conceptually, you can think of `{bm} decimal less than/(decimal number less than|decimal less than)/i` the same as fraction less than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine less than_REL:
 
- 1. Check the signs...
-    * Is the number being tested negative while the number being tested against non-negative? it's less than_REL.
-    * Are they equal? move to step 2, otherwise it isn't less than_REL.
- 2. Check the whole parts...
-    * Is the number being tested less than_REL the number being tested against? it's less than_REL.
-    * Are they equal? move to step 3, otherwise it isn't less than_REL.
- 3. Check the fractional parts...
-    * Is the number being tested less than_REL the number being tested against? it's less than_REL.
-    * Are they equal? it's less than_REL, otherwise it isn't less than_REL.
+ 1. Check the integer parts...
+
+    If the integer parts are integer less than, then the decimal numbers themselves will be decimal less than. For example, any decimal number with an integer part of 5 will always be less than_REL any decimal number with an integer part of 6...
+
+    ```{svgbob}
+    <---|----|----|----|----|----|----|----|----|----|----|--->
+       5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9  6.0  
+    ```
+
+    If the integer parts are equal, go to step 2.
+
+    Otherwise, stop. The decimal numbers are not less than_REL.
+
+ 2. Check the fractional parts...
+
+    If the fractional parts are less than_REL, the decimal numbers are less than_REL. The process of testing the fractional parts is similar to whole number less than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 01 is less than_REL a fractional part of 1...
+
+    ```{svgbob}
+    <---|------|------|------|------|------|------|------|------|------|------|--->
+       .01    .02    .03    .04    .05    .06    .07    .08    .09    .1    .11
+      1/100  2/100  3/100  4/100  5/100  6/100  7/100  8/100  9/100 10/100 11/100
+                                                                     1/10
+    ```
 
 For example, to test if 312.02 < 312.12:
 
- 1. Signs are equal. Go to step 2.
- 2. Wholes are equal. Go to step 3.
- 3. Fractional being tested is less than_REL the other number's fractional.
+ 1. Integers are equal. Go to step 2.
+ 2. Fractional being tested is less than_REL the other number's fractional.
 
 312.02 < 312.12 is true.
  
 The way to perform this algorithm via code is as follows...
 
+```{note}
+The first listing is the main DecimalNumber code, while the second listing is the code for fractional part called by the main DecimalNumber code.
+```
+
 ```{output}
 arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
+```
+
+```{output}
+arithmetic_code/FractionalNumber.py
 python
 #MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
 ```
@@ -6145,17 +6179,51 @@ DecimalNumberLtLauncher
 312.02 312.12
 ```
 
-```{note}
-Remember that decimal numbers are just another way of representing fractions. As such, decimal numbers can also be tested by first converting them to fractions and then applying fraction less than.
-```
-
 ## Greater Than
 
 ```{prereq}
+Integer greater than
 Fraction greater than
 ```
 
-`{bm} Decimal number greater than/(decimal number greater than|decimal greater than)/i`
+Conceptually, you can think of `{bm} decimal greater than/(decimal number greater than|decimal greater than)/i` the same as fraction greater than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine greater than_REL:
+
+ 1. Check the integer parts...
+
+    If the integer parts are integer greater than, then the decimal numbers themselves will be decimal greater than. For example, any decimal number with an integer part of 6 will always be greater than_REL any decimal number with an integer part of 5...
+
+    ```{svgbob}
+    <---|----|----|----|----|----|----|----|----|----|----|--->
+       5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9  6.0  
+    ```
+
+    If the integer parts are equal, go to step 2.
+
+    Otherwise, stop. The decimal numbers are not less than_REL.
+
+ 2. Check the fractional parts...
+
+    If the fractional parts are greater than_REL, the decimal numbers are greater than_REL. The process of testing the fractional parts is similar to whole number greater than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 1 is greater than_REL a fractional part of 01...
+
+    ```{svgbob}
+    <---|------|------|------|------|------|------|------|------|------|------|--->
+       .01    .02    .03    .04    .05    .06    .07    .08    .09    .1    .11
+      1/100  2/100  3/100  4/100  5/100  6/100  7/100  8/100  9/100 10/100 11/100
+                                                                     1/10
+    ```
+
+For example, to test if 312.12 < 312.02:
+
+ 1. Integers are equal. Go to step 2.
+ 2. Fractional being tested is greater than_REL the other number's fractional.
+
+312.12 > 312.02 is true.
+ 
+The way to perform this algorithm via code is as follows...
+
+```{note}
+The first listing is the main DecimalNumber code, while the second listing is the code for fractional part called by the main DecimalNumber code.
+```
 
 ```{output}
 arithmetic_code/DecimalNumber.py
@@ -6163,13 +6231,15 @@ python
 #MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
 ```
 
+```{output}
+arithmetic_code/FractionalNumber.py
+python
+#MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
+```
+
 ```{arithmetic}
 DecimalNumberGtLauncher
 312.12 312.02
-```
-
-```{note}
-Remember that decimal numbers are just another way of representing fractions. As such, decimal numbers can also be tested by first converting them to fractions and then applying fraction greater than.
 ```
 
 ## Word Conversion

@@ -856,19 +856,19 @@ while (dividend &gt;= divisor) {
 </code></pre>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">self: WholeNumber, other: WholeNumber</span>) -&gt; bool:</span>
-    <span class="hljs-keyword">if</span> isinstance(other, int):
-        other = WholeNumber.from_int(other)
-    <span class="hljs-keyword">elif</span> isinstance(other, str):
-        other = WholeNumber.from_str(other)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">lhs: WholeNumber, rhs: WholeNumber</span>) -&gt; bool:</span>
+    <span class="hljs-keyword">if</span> isinstance(rhs, int):
+        rhs = WholeNumber.from_int(rhs)
+    <span class="hljs-keyword">elif</span> isinstance(rhs, str):
+        rhs = WholeNumber.from_str(rhs)
 
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(other, WholeNumber):
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(rhs, WholeNumber):
         <span class="hljs-keyword">raise</span> Exception()
 
-    log(<span class="hljs-string">f'Equality testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+    log(<span class="hljs-string">f'Equality testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
-    ret = self.digits == other.digits
+    ret = lhs.digits == rhs.digits
 
     log_unindent()
     log(<span class="hljs-string">f'<span class="hljs-subst">{ret}</span>'</span>)
@@ -955,31 +955,31 @@ while (dividend &gt;= divisor) {
 </div>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">self: WholeNumber, other: WholeNumber</span>) -&gt; bool:</span>
-    <span class="hljs-keyword">if</span> isinstance(other, int):
-        other = WholeNumber.from_int(other)
-    <span class="hljs-keyword">elif</span> isinstance(other, str):
-        other = WholeNumber.from_str(other)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">lhs: WholeNumber, rhs: WholeNumber</span>) -&gt; bool:</span>
+    <span class="hljs-keyword">if</span> isinstance(rhs, int):
+        rhs = WholeNumber.from_int(rhs)
+    <span class="hljs-keyword">elif</span> isinstance(rhs, str):
+        rhs = WholeNumber.from_str(rhs)
 
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(other, WholeNumber):
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(rhs, WholeNumber):
         <span class="hljs-keyword">raise</span> Exception()
 
-    log(<span class="hljs-string">f'Less than testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+    log(<span class="hljs-string">f'Less than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
-    count = max(len(self.digits), len(other.digits))
+    count = max(len(lhs.digits), len(rhs.digits))
     <span class="hljs-keyword">for</span> pos <span class="hljs-keyword">in</span> reversed(range(<span class="hljs-number">0</span>, count)):  <span class="hljs-comment"># from smallest to largest component</span>
-        log(<span class="hljs-string">f'Test digits <span class="hljs-subst">{self[pos]}</span> and <span class="hljs-subst">{other[pos]}</span>...'</span>)
-        <span class="hljs-keyword">if</span> self[pos] &gt; other[pos]:
-            log(<span class="hljs-string">f'<span class="hljs-subst">{self[pos]}</span> &gt; <span class="hljs-subst">{other[pos]}</span> -- <span class="hljs-subst">{self}</span> is NOT less than <span class="hljs-subst">{other}</span>, it is greater than'</span>)
+        log(<span class="hljs-string">f'Test digits <span class="hljs-subst">{lhs[pos]}</span> and <span class="hljs-subst">{rhs[pos]}</span>...'</span>)
+        <span class="hljs-keyword">if</span> lhs[pos] &gt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &gt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is NOT less than <span class="hljs-subst">{rhs}</span>, it is greater than'</span>)
             <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
-        <span class="hljs-keyword">elif</span> self[pos] &lt; other[pos]:
-            log(<span class="hljs-string">f'<span class="hljs-subst">{self[pos]}</span> &lt; <span class="hljs-subst">{other[pos]}</span> -- <span class="hljs-subst">{self}</span> is less than <span class="hljs-subst">{other}</span>'</span>)
+        <span class="hljs-keyword">elif</span> lhs[pos] &lt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &lt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is less than <span class="hljs-subst">{rhs}</span>'</span>)
             <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
         <span class="hljs-keyword">else</span>:
-            log(<span class="hljs-string">f'<span class="hljs-subst">{self[pos]}</span> == <span class="hljs-subst">{other[pos]}</span> -- continuing testing'</span>)
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> == <span class="hljs-subst">{rhs[pos]}</span> -- continuing testing'</span>)
 
-    log(<span class="hljs-string">f'No more digits to test -- <span class="hljs-subst">{self}</span> is NOT less than <span class="hljs-subst">{other}</span>, it is equal'</span>)
+    log(<span class="hljs-string">f'No more digits to test -- <span class="hljs-subst">{lhs}</span> is NOT less than <span class="hljs-subst">{rhs}</span>, it is equal'</span>)
     <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
@@ -1066,31 +1066,31 @@ while (dividend &gt;= divisor) {
 </div>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">self: WholeNumber, other: WholeNumber</span>) -&gt; bool:</span>
-    <span class="hljs-keyword">if</span> isinstance(other, int):
-        other = WholeNumber.from_int(other)
-    <span class="hljs-keyword">elif</span> isinstance(other, str):
-        other = WholeNumber.from_str(other)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">lhs: WholeNumber, rhs: WholeNumber</span>) -&gt; bool:</span>
+    <span class="hljs-keyword">if</span> isinstance(rhs, int):
+        rhs = WholeNumber.from_int(rhs)
+    <span class="hljs-keyword">elif</span> isinstance(rhs, str):
+        rhs = WholeNumber.from_str(rhs)
 
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(other, WholeNumber):
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(rhs, WholeNumber):
         <span class="hljs-keyword">raise</span> Exception()
 
-    log(<span class="hljs-string">f'Greater than testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+    log(<span class="hljs-string">f'Greater than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
-    count = max(len(self.digits), len(other.digits))
+    count = max(len(lhs.digits), len(rhs.digits))
     <span class="hljs-keyword">for</span> pos <span class="hljs-keyword">in</span> reversed(range(<span class="hljs-number">0</span>, count)):  <span class="hljs-comment"># from smallest to largest component</span>
-        log(<span class="hljs-string">f'Test digits <span class="hljs-subst">{self[pos]}</span> and <span class="hljs-subst">{other[pos]}</span>...'</span>)
-        <span class="hljs-keyword">if</span> self[pos] &gt; other[pos]:
-            log(<span class="hljs-string">f'<span class="hljs-subst">{self[pos]}</span> &gt; <span class="hljs-subst">{other[pos]}</span> -- <span class="hljs-subst">{self}</span> is greater than <span class="hljs-subst">{other}</span>'</span>)
+        log(<span class="hljs-string">f'Test digits <span class="hljs-subst">{lhs[pos]}</span> and <span class="hljs-subst">{rhs[pos]}</span>...'</span>)
+        <span class="hljs-keyword">if</span> lhs[pos] &gt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &gt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is greater than <span class="hljs-subst">{rhs}</span>'</span>)
             <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
-        <span class="hljs-keyword">elif</span> self[pos] &lt; other[pos]:
-            log(<span class="hljs-string">f'<span class="hljs-subst">{self[pos]}</span> &lt; <span class="hljs-subst">{other[pos]}</span> -- <span class="hljs-subst">{self}</span> is NOT greater than <span class="hljs-subst">{other}</span>, it is less than'</span>)
+        <span class="hljs-keyword">elif</span> lhs[pos] &lt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &lt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is NOT greater than <span class="hljs-subst">{rhs}</span>, it is less than'</span>)
             <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
         <span class="hljs-keyword">else</span>:
-            log(<span class="hljs-string">f'<span class="hljs-subst">{self[pos]}</span> == <span class="hljs-subst">{other[pos]}</span> -- continuing testing'</span>)
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> == <span class="hljs-subst">{rhs[pos]}</span> -- continuing testing'</span>)
 
-    log(<span class="hljs-string">f'No more digits to test -- <span class="hljs-subst">{self}</span> is NOT greater than <span class="hljs-subst">{other}</span>, it is equal'</span>)
+    log(<span class="hljs-string">f'No more digits to test -- <span class="hljs-subst">{lhs}</span> is NOT greater than <span class="hljs-subst">{rhs}</span>, it is equal'</span>)
     <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
@@ -3186,7 +3186,7 @@ move those items back to the 10s place (1 group in 100s becomes 10 groups in the
 <p><img src="svgbob_868505cd0974ad1a4eb6e9b366a7cb31ab975e3c.svg" alt="Kroki diagram output"></p>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self</span>):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self: WholeNumber</span>) -&gt; str:</span>
     suffixes = [<span class="hljs-literal">None</span>, <span class="hljs-string">'thousand'</span>, <span class="hljs-string">'million'</span>, <span class="hljs-string">'billion'</span>, <span class="hljs-string">'trillion'</span>, <span class="hljs-string">'quadrillion'</span>, <span class="hljs-string">'quintillion'</span>]
 
     log(<span class="hljs-string">f'Converting <span class="hljs-subst">{self}</span>...'</span>)
@@ -4062,7 +4062,7 @@ x | | |
 </ul>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self</span>):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self: IntegerNumber</span>) -&gt; str:</span>
     log(<span class="hljs-string">f'Converting <span class="hljs-subst">{self}</span>...'</span>)
 
     output = <span class="hljs-string">''</span>
@@ -5989,34 +5989,34 @@ Of all the <a href="#BOOKMARK124">equivalent fraction</a>s that represent a valu
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>3</mn><mn>6</mn></mfrac><mo>=</mo><mfrac><mn>4</mn><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{3}{6} = \frac{4}{6}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> <a href="#BOOKMARK5">is</a> computed as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">3 = 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> (false).</p>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">self: FractionNumber, other: FractionNumber</span>) -&gt; bool:</span>
-    log(<span class="hljs-string">f'Equality testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">lhs: FractionNumber, rhs: FractionNumber</span>) -&gt; bool:</span>
+    log(<span class="hljs-string">f'Equality testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
     <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
     log(<span class="hljs-string">f'Checking if denominators are the same...'</span>)
-    <span class="hljs-keyword">if</span> self._denominator != other._denominator:
+    <span class="hljs-keyword">if</span> lhs._denominator != rhs._denominator:
         log(<span class="hljs-string">f'Not same -- finding equivalent fractions with common denominator...'</span>)
         log_indent()
 
         log(<span class="hljs-string">f'Calculating common denominator...'</span>)
-        denominator = other._denominator * self._denominator
+        denominator = rhs._denominator * lhs._denominator
         log(<span class="hljs-string">f'<span class="hljs-subst">{denominator}</span>'</span>)
 
-        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{self}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
-        lhs_numerator = self._numerator * other._denominator
+        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{lhs}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
+        lhs_numerator = lhs._numerator * rhs._denominator
         log(<span class="hljs-string">f'Numerator: <span class="hljs-subst">{lhs_numerator}</span> Denominator: <span class="hljs-subst">{denominator}</span>'</span>)
 
-        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{other}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
-        rhs_numerator = other._numerator * self._denominator
+        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{rhs}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
+        rhs_numerator = rhs._numerator * lhs._denominator
         log(<span class="hljs-string">f'Numerator: <span class="hljs-subst">{rhs_numerator}</span> Denominator: <span class="hljs-subst">{denominator}</span>'</span>)
 
         log_unindent()
     <span class="hljs-keyword">else</span>:
         log(<span class="hljs-string">f'Same'</span>)
-        lhs_numerator = self._numerator
-        rhs_numerator = other._numerator
-        denominator = other._denominator
+        lhs_numerator = lhs._numerator
+        rhs_numerator = rhs._numerator
+        denominator = rhs._denominator
 
     log(<span class="hljs-string">f'Testing <span class="hljs-subst">{lhs_numerator}</span> == <span class="hljs-subst">{rhs_numerator}</span>...'</span>)
     ret = lhs_numerator == rhs_numerator
@@ -6082,34 +6082,34 @@ Of all the <a href="#BOOKMARK124">equivalent fraction</a>s that represent a valu
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>3</mn><mn>12</mn></mfrac><mo>&lt;</mo><mfrac><mn>2</mn><mn>12</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{3}{12} &lt; \frac{2}{12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> <a href="#BOOKMARK5">is</a> computed as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">3 &lt; 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> (false).</p>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">self: FractionNumber, other: FractionNumber</span>) -&gt; bool:</span>
-    log(<span class="hljs-string">f'Less than testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">lhs: FractionNumber, rhs: FractionNumber</span>) -&gt; bool:</span>
+    log(<span class="hljs-string">f'Less than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
     <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
     log(<span class="hljs-string">f'Checking if denominators are the same...'</span>)
-    <span class="hljs-keyword">if</span> self._denominator != other._denominator:
+    <span class="hljs-keyword">if</span> lhs._denominator != rhs._denominator:
         log(<span class="hljs-string">f'Not same -- finding equivalent fractions with common denominator...'</span>)
         log_indent()
 
         log(<span class="hljs-string">f'Calculating common denominator...'</span>)
-        denominator = other._denominator * self._denominator
+        denominator = rhs._denominator * lhs._denominator
         log(<span class="hljs-string">f'<span class="hljs-subst">{denominator}</span>'</span>)
 
-        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{self}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
-        lhs_numerator = self._numerator * other._denominator
+        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{lhs}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
+        lhs_numerator = lhs._numerator * rhs._denominator
         log(<span class="hljs-string">f'Numerator: <span class="hljs-subst">{lhs_numerator}</span> Denominator: <span class="hljs-subst">{denominator}</span>'</span>)
 
-        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{other}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
-        rhs_numerator = other._numerator * self._denominator
+        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{rhs}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
+        rhs_numerator = rhs._numerator * lhs._denominator
         log(<span class="hljs-string">f'Numerator: <span class="hljs-subst">{rhs_numerator}</span> Denominator: <span class="hljs-subst">{denominator}</span>'</span>)
 
         log_unindent()
     <span class="hljs-keyword">else</span>:
         log(<span class="hljs-string">f'Same'</span>)
-        lhs_numerator = self._numerator
-        rhs_numerator = other._numerator
-        denominator = other._denominator
+        lhs_numerator = lhs._numerator
+        rhs_numerator = rhs._numerator
+        denominator = rhs._denominator
 
     log(<span class="hljs-string">f'Testing <span class="hljs-subst">{lhs_numerator}</span> &lt; <span class="hljs-subst">{rhs_numerator}</span>...'</span>)
     ret = lhs_numerator &lt; rhs_numerator
@@ -6175,34 +6175,34 @@ Of all the <a href="#BOOKMARK124">equivalent fraction</a>s that represent a valu
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>3</mn><mn>12</mn></mfrac><mo>&gt;</mo><mfrac><mn>2</mn><mn>12</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{3}{12} &gt; \frac{2}{12}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> <a href="#BOOKMARK5">is</a> computed as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">3 &gt; 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> (true).</p>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">self: FractionNumber, other: FractionNumber</span>) -&gt; bool:</span>
-    log(<span class="hljs-string">f'Greater than testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">lhs: FractionNumber, rhs: FractionNumber</span>) -&gt; bool:</span>
+    log(<span class="hljs-string">f'Greater than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
     <span class="hljs-comment"># Sign is only kept on the numerator, not the denominator</span>
     log(<span class="hljs-string">f'Checking if denominators are the same...'</span>)
-    <span class="hljs-keyword">if</span> self._denominator != other._denominator:
+    <span class="hljs-keyword">if</span> lhs._denominator != rhs._denominator:
         log(<span class="hljs-string">f'Not same -- finding equivalent fractions with common denominator...'</span>)
         log_indent()
 
         log(<span class="hljs-string">f'Calculating common denominator...'</span>)
-        denominator = other._denominator * self._denominator
+        denominator = rhs._denominator * lhs._denominator
         log(<span class="hljs-string">f'<span class="hljs-subst">{denominator}</span>'</span>)
 
-        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{self}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
-        lhs_numerator = self._numerator * other._denominator
+        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{lhs}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
+        lhs_numerator = lhs._numerator * rhs._denominator
         log(<span class="hljs-string">f'Numerator: <span class="hljs-subst">{lhs_numerator}</span> Denominator: <span class="hljs-subst">{denominator}</span>'</span>)
 
-        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{other}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
-        rhs_numerator = other._numerator * self._denominator
+        log(<span class="hljs-string">f'Scaling numerator for <span class="hljs-subst">{rhs}</span> so denominator becomes <span class="hljs-subst">{denominator}</span>...'</span>)
+        rhs_numerator = rhs._numerator * lhs._denominator
         log(<span class="hljs-string">f'Numerator: <span class="hljs-subst">{rhs_numerator}</span> Denominator: <span class="hljs-subst">{denominator}</span>'</span>)
 
         log_unindent()
     <span class="hljs-keyword">else</span>:
         log(<span class="hljs-string">f'Same'</span>)
-        lhs_numerator = self._numerator
-        rhs_numerator = other._numerator
-        denominator = other._denominator
+        lhs_numerator = lhs._numerator
+        rhs_numerator = rhs._numerator
+        denominator = rhs._denominator
 
     log(<span class="hljs-string">f'Testing <span class="hljs-subst">{lhs_numerator}</span> &gt; <span class="hljs-subst">{rhs_numerator}</span>...'</span>)
     ret = lhs_numerator &gt; rhs_numerator
@@ -6614,7 +6614,7 @@ The <a name="BOOKMARK136"></a><strong>reciprocal</strong> of a <a href="#BOOKMAR
 </ul>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self</span>):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self: FractionNumber</span>) -&gt; str:</span>
     log(<span class="hljs-string">f'Converting <span class="hljs-subst">{self}</span>...'</span>)
 
     output = <span class="hljs-string">''</span>
@@ -6688,6 +6688,10 @@ The <a name="BOOKMARK136"></a><strong>reciprocal</strong> of a <a href="#BOOKMAR
 <li>left of the <a href="#BOOKMARK141">decimal point</a> <a href="#BOOKMARK5">is</a> referred to as the whole part.</li>
 <li>right of the <a href="#BOOKMARK141">decimal point</a> <a href="#BOOKMARK5">is</a> referred to as the <a name="BOOKMARK142"></a><strong>fractional</strong> part.</li>
 </ul>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>You can consider the <a href="#BOOKMARK91">sign</a> and the whole part as the <a href="#BOOKMARK86">integer</a> part. The <a href="#BOOKMARK173">term</a> <a href="#BOOKMARK86">integer</a> part <a href="#BOOKMARK5">is</a> used in the subsections below.</p>
+</div>
 <p>A <a href="#BOOKMARK137">mixed number</a> can be converted to a <a href="#BOOKMARK140">decimal number</a> so long as it has a qualifying <a href="#BOOKMARK121">denominator</a>. A qualifying <a href="#BOOKMARK121">denominator</a> starts with 1 followed by 0s. For example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mfrac><mn>1</mn><mn>10</mn></mfrac></mrow><annotation encoding="application/x-tex">2 \frac{1}{10}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">2</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> has a qualifying <a href="#BOOKMARK121">denominator</a> but <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">2 \frac{1}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">2</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> doesn't.</p>
 <p>If the <a href="#BOOKMARK121">denominator</a> doesn't qualify, the <a href="#BOOKMARK137">mixed number</a> may still be convertible so long as an <a href="#BOOKMARK124">equivalent fraction</a> exists that does have a qualifying <a href="#BOOKMARK121">denominator</a>. In the previous example, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mfrac><mn>5</mn><mn>10</mn></mfrac></mrow><annotation encoding="application/x-tex">2 \frac {5}{10}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">2</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> <a href="#BOOKMARK5">is</a> an <a href="#BOOKMARK124">equivalent fraction</a> to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">2 \frac{1}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">2</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
 <p>To convert a <a href="#BOOKMARK137">mixed number</a> into a <a href="#BOOKMARK140">decimal number</a> ...</p>
@@ -6733,15 +6737,15 @@ The <a name="BOOKMARK136"></a><strong>reciprocal</strong> of a <a href="#BOOKMAR
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
 <li><a href="#BOOKMARK92">Integer equality</a></li>
+<li><a href="#BOOKMARK129">Fraction equality</a></li>
 </ul>
 </div>
-<p>Conceptually, you can think of <a name="BOOKMARK143"></a><strong>decimal quality</strong> <a href="#BOOKMARK8">the same</a> as <a href="#BOOKMARK129">fraction equality</a> where the <a href="#BOOKMARK119">fraction</a> <a href="#BOOKMARK5">is</a> represented as a <a href="#BOOKMARK137">mixed number</a>. However, for <a href="#BOOKMARK140">decimal number</a>s specifically, a quick set of tests can de<a href="#BOOKMARK173">term</a>ine if a <a href="#BOOKMARK140">decimal number</a> <a href="#BOOKMARK5">is</a> <a href="#BOOKMARK4">equal</a> to some other <a href="#BOOKMARK140">decimal number</a>:</p>
+<p>Conceptually, you can think of <a name="BOOKMARK143"></a><strong>decimal equality</strong> <a href="#BOOKMARK8">the same</a> as <a href="#BOOKMARK129">fraction equality</a> where the <a href="#BOOKMARK119">fraction</a> <a href="#BOOKMARK5">is</a> represented as a <a href="#BOOKMARK137">mixed number</a>. However, rather than converting both numbers to a <a href="#BOOKMARK119">fraction</a> and performing <a href="#BOOKMARK119">fraction</a> quality, a quick series of tests on the <a href="#BOOKMARK140">decimal number</a>s themselves can de<a href="#BOOKMARK173">term</a>ine <a href="#BOOKMARK3">equality</a>:</p>
 <ul>
-<li><a href="#BOOKMARK91">Sign</a>s must be <a href="#BOOKMARK4">equal</a>.</li>
-<li>Whole parts must be <a href="#BOOKMARK4">equal</a>.</li>
+<li><a href="#BOOKMARK86">Integer</a> parts must be <a href="#BOOKMARK4">equal</a>.</li>
 <li><a href="#BOOKMARK142">Fractional</a> part must be <a href="#BOOKMARK4">equal</a>.</li>
 </ul>
-<p>If all 3 of the tests above pass, the <a href="#BOOKMARK140">decimal number</a>s are <a href="#BOOKMARK4">equal</a>.</p>
+<p>If all tests above pass, the <a href="#BOOKMARK140">decimal number</a>s are <a href="#BOOKMARK4">equal</a>.</p>
 <p>For example, the numbers -195.26 and 195.36 are <a href="#BOOKMARK11">not equal</a>...</p>
 <pre><code>- 1 9 5 . 2 6
 x | | |   x |
@@ -6753,37 +6757,48 @@ x | | |   x |
 - 1 9 5 . 2 6
 </code></pre>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>The first listing <a href="#BOOKMARK5">is</a> the main DecimalNumber code, while the second listing <a href="#BOOKMARK5">is</a> the code for <a href="#BOOKMARK142">fractional</a> part called by the main DecimalNumber code.</p>
+</div>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">self: DecimalNumber, other: DecimalNumber</span>) -&gt; bool:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">lhs: DecimalNumber, rhs: DecimalNumber</span>) -&gt; bool:</span>
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FailedTestException</span>(<span class="hljs-params">Exception</span>):</span>
         <span class="hljs-keyword">pass</span>
 
-    log(<span class="hljs-string">f'Equality testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+    log(<span class="hljs-string">f'Equality testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
     <span class="hljs-keyword">try</span>:
-        log(<span class="hljs-string">f'Testing signs...'</span>)
-        sign_eq = self.sign == other.sign
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> sign_eq:
-            <span class="hljs-keyword">raise</span> FailedTestException()
-        log(<span class="hljs-string">f'Equal'</span>)
-
-        log(<span class="hljs-string">f'Testing whole...'</span>)
-        whole_eq = self.whole == other.whole
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> whole_eq:
+        log(<span class="hljs-string">f'Testing integer...'</span>)
+        int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> int_eq:
             <span class="hljs-keyword">raise</span> FailedTestException()
         log(<span class="hljs-string">f'Equal'</span>)
 
         log(<span class="hljs-string">f'Testing fractional...'</span>)
-        fractional_eq = self.fractional == other.fractional
+        fractional_eq = lhs.fractional == rhs.fractional
         <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> fractional_eq:
             <span class="hljs-keyword">raise</span> FailedTestException()
         log(<span class="hljs-string">f'Equal'</span>)
 
-        ret = sign_eq <span class="hljs-keyword">and</span> whole_eq <span class="hljs-keyword">and</span> fractional_eq
+        ret = <span class="hljs-literal">True</span>
     <span class="hljs-keyword">except</span> FailedTestException:
         log(<span class="hljs-string">f'Not equal'</span>)
         ret = <span class="hljs-literal">False</span>
+
+    log_unindent()
+    log(<span class="hljs-string">f'<span class="hljs-subst">{ret}</span>'</span>)
+
+    <span class="hljs-keyword">return</span> ret</code></pre><pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">lhs: FractionalNumber, rhs: FractionalNumber</span>) -&gt; bool:</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(rhs, FractionalNumber):
+        <span class="hljs-keyword">raise</span> Exception()
+
+    log(<span class="hljs-string">f'Equality testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
+    log_indent()
+
+    ret = lhs.digits == rhs.digits
 
     log_unindent()
     log(<span class="hljs-string">f'<span class="hljs-subst">{ret}</span>'</span>)
@@ -6793,9 +6808,7 @@ x | | |   x |
 <ul>
 <li>Equality testing +312.12 and +312.12...
 <ul>
-<li>Testing signs...</li>
-<li>Equal</li>
-<li>Testing whole...</li>
+<li>Testing integer...</li>
 <li>Equal</li>
 <li>Testing fractional...</li>
 <li>Equal</li>
@@ -6805,81 +6818,66 @@ x | | |   x |
 </ul>
 </div>
 <p></p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Remember that <a href="#BOOKMARK140">decimal number</a>s are just another way of representing <a href="#BOOKMARK119">fraction</a>s. As such, <a href="#BOOKMARK140">decimal number</a>s can also be tested by first converting them to <a href="#BOOKMARK119">fraction</a>s and then applying <a href="#BOOKMARK129">fraction equality</a>.</p>
-</div>
 <a name="HEADREF51"></a><h2>Less Than</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
+<li><a href="#BOOKMARK93">Integer less than</a></li>
 <li><a href="#BOOKMARK130">Fraction less than</a></li>
 </ul>
 </div>
-<p>Conceptually, you can think of <a name="BOOKMARK144"></a><strong>decimal less than</strong> <a href="#BOOKMARK8">the same</a> as <a href="#BOOKMARK130">fraction less than</a> where the <a href="#BOOKMARK119">fraction</a> <a href="#BOOKMARK5">is</a> represented as a <a href="#BOOKMARK137">mixed number</a>. However, for <a href="#BOOKMARK140">decimal number</a>s specifically, a quick series of tests can de<a href="#BOOKMARK173">term</a>ine if a <a href="#BOOKMARK140">decimal number</a> <a href="#BOOKMARK5">is</a> to the left of some other <a href="#BOOKMARK140">decimal number</a> (<a href="#BOOKMARK25">less than</a>):</p>
+<p>Conceptually, you can think of <a name="BOOKMARK144"></a><strong>decimal less than</strong> <a href="#BOOKMARK8">the same</a> as <a href="#BOOKMARK130">fraction less than</a> where the <a href="#BOOKMARK119">fraction</a> <a href="#BOOKMARK5">is</a> represented as a <a href="#BOOKMARK137">mixed number</a>. However, rather than converting both numbers to a <a href="#BOOKMARK119">fraction</a> and performing <a href="#BOOKMARK130">fraction less than</a>, a quick series of tests on the <a href="#BOOKMARK140">decimal number</a>s themselves can de<a href="#BOOKMARK173">term</a>ine <a href="#BOOKMARK25">less than</a>:</p>
 <ol>
-<li>Check the <a href="#BOOKMARK91">sign</a>s...
-<ul>
-<li><a href="#BOOKMARK5">Is</a> the number being tested <a href="#BOOKMARK88">negative</a> while the number being tested against <a href="#BOOKMARK90">non-negative</a>? it's <a href="#BOOKMARK25">less than</a>.</li>
-<li>Are they <a href="#BOOKMARK4">equal</a>? move to step 2, otherwise it <a href="#BOOKMARK12">isn't</a> <a href="#BOOKMARK25">less than</a>.</li>
-</ul>
+<li>
+<p>Check the <a href="#BOOKMARK86">integer</a> parts...</p>
+<p>If the <a href="#BOOKMARK86">integer</a> parts are <a href="#BOOKMARK93">integer less than</a>, then the <a href="#BOOKMARK140">decimal number</a>s themselves <a href="#BOOKMARK7">will be</a> <a href="#BOOKMARK144">decimal less than</a>. For example, any <a href="#BOOKMARK140">decimal number</a> with an <a href="#BOOKMARK86">integer</a> part of 5 will always be <a href="#BOOKMARK25">less than</a> any <a href="#BOOKMARK140">decimal number</a> with an <a href="#BOOKMARK86">integer</a> part of 6...</p>
+<p><img src="svgbob_7c10b54db17ab8638c47bba07abd51f4a9d0a87e.svg" alt="Kroki diagram output"></p>
+<p>If the <a href="#BOOKMARK86">integer</a> parts are <a href="#BOOKMARK4">equal</a>, go to step 2.</p>
+<p>Otherwise, stop. The <a href="#BOOKMARK140">decimal number</a>s are not <a href="#BOOKMARK25">less than</a>.</p>
 </li>
-<li>Check the whole parts...
-<ul>
-<li><a href="#BOOKMARK5">Is</a> the number being tested <a href="#BOOKMARK25">less than</a> the number being tested against? it's <a href="#BOOKMARK25">less than</a>.</li>
-<li>Are they <a href="#BOOKMARK4">equal</a>? move to step 3, otherwise it <a href="#BOOKMARK12">isn't</a> <a href="#BOOKMARK25">less than</a>.</li>
-</ul>
-</li>
-<li>Check the <a href="#BOOKMARK142">fractional</a> parts...
-<ul>
-<li><a href="#BOOKMARK5">Is</a> the number being tested <a href="#BOOKMARK25">less than</a> the number being tested against? it's <a href="#BOOKMARK25">less than</a>.</li>
-<li>Are they <a href="#BOOKMARK4">equal</a>? it's <a href="#BOOKMARK25">less than</a>, otherwise it <a href="#BOOKMARK12">isn't</a> <a href="#BOOKMARK25">less than</a>.</li>
-</ul>
+<li>
+<p>Check the <a href="#BOOKMARK142">fractional</a> parts...</p>
+<p>If the <a href="#BOOKMARK142">fractional</a> parts are <a href="#BOOKMARK25">less than</a>, the <a href="#BOOKMARK140">decimal number</a>s are <a href="#BOOKMARK25">less than</a>. The process of testing the <a href="#BOOKMARK142">fractional</a> parts <a href="#BOOKMARK5">is</a> similar to <a href="#BOOKMARK74">whole number less than</a>, except the order in which positions are tested <a href="#BOOKMARK5">is</a> reversed (index 0 <a href="#BOOKMARK5">is</a> the most <a href="#BOOKMARK91">sign</a>ificant <a href="#BOOKMARK1">digit</a>, index 1 <a href="#BOOKMARK5">is</a> the second <a href="#BOOKMARK1">digit</a>, index 2 <a href="#BOOKMARK5">is</a> the third most <a href="#BOOKMARK91">sign</a>ificant <a href="#BOOKMARK1">digit</a>, ...). For example, a <a href="#BOOKMARK142">fractional</a> part of 01 <a href="#BOOKMARK5">is</a> <a href="#BOOKMARK25">less than</a> a <a href="#BOOKMARK142">fractional</a> part of 1...</p>
+<p><img src="svgbob_7fd56d69b76da8b4ac0a1d7d36e44bc9ea799d26.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
 <p>For example, to test if 312.02 &lt; 312.12:</p>
 <ol>
-<li><a href="#BOOKMARK91">Sign</a>s are <a href="#BOOKMARK4">equal</a>. Go to step 2.</li>
-<li>Wholes are <a href="#BOOKMARK4">equal</a>. Go to step 3.</li>
+<li><a href="#BOOKMARK86">Integer</a>s are <a href="#BOOKMARK4">equal</a>. Go to step 2.</li>
 <li><a href="#BOOKMARK142">Fractional</a> being tested <a href="#BOOKMARK5">is</a> <a href="#BOOKMARK25">less than</a> the other number's <a href="#BOOKMARK142">fractional</a>.</li>
 </ol>
 <p>312.02 &lt; 312.12 <a href="#BOOKMARK5">is</a> true.</p>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>The first listing <a href="#BOOKMARK5">is</a> the main DecimalNumber code, while the second listing <a href="#BOOKMARK5">is</a> the code for <a href="#BOOKMARK142">fractional</a> part called by the main DecimalNumber code.</p>
+</div>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">self: DecimalNumber, other: DecimalNumber</span>) -&gt; bool:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">lhs: DecimalNumber, rhs: DecimalNumber</span>) -&gt; bool:</span>
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PassedTestException</span>(<span class="hljs-params">Exception</span>):</span>
         <span class="hljs-keyword">pass</span>
 
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FailedTestException</span>(<span class="hljs-params">Exception</span>):</span>
         <span class="hljs-keyword">pass</span>
 
-    log(<span class="hljs-string">f'Less than testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+    log(<span class="hljs-string">f'Less than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
     <span class="hljs-keyword">try</span>:
-        log(<span class="hljs-string">f'Testing signs...'</span>)
-        sign_lt = self.sign == Sign.NEGATIVE <span class="hljs-keyword">and</span> other.sign != Sign.NEGATIVE
-        <span class="hljs-keyword">if</span> sign_lt:
+        log(<span class="hljs-string">f'Testing integer...'</span>)
+        int_lt = IntegerNumber(lhs.sign, lhs.whole) &lt; IntegerNumber(rhs.sign, rhs.whole)
+        <span class="hljs-keyword">if</span> int_lt:
             <span class="hljs-keyword">raise</span> PassedTestException()
-        sign_eq = self.sign == other.sign
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> sign_eq:
-            <span class="hljs-keyword">raise</span> FailedTestException()
-        log(<span class="hljs-string">f'Equal'</span>)
-
-        log(<span class="hljs-string">f'Testing whole...'</span>)
-        whole_lt = self.whole &lt; other.whole
-        <span class="hljs-keyword">if</span> whole_lt:
-            <span class="hljs-keyword">raise</span> PassedTestException()
-        whole_eq = self.whole == other.whole
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> whole_eq:
+        int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> int_eq:
             <span class="hljs-keyword">raise</span> FailedTestException()
         log(<span class="hljs-string">f'Equal'</span>)
 
         log(<span class="hljs-string">f'Testing fractional...'</span>)
-        fractional_lt = self.fractional &lt; other.fractional
+        fractional_lt = lhs.fractional &lt; rhs.fractional
         <span class="hljs-keyword">if</span> fractional_lt:
             <span class="hljs-keyword">raise</span> PassedTestException()
-        fractional_eq = self.fractional == other.fractional
+        fractional_eq = lhs.fractional == rhs.fractional
         <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> fractional_eq:
             <span class="hljs-keyword">raise</span> FailedTestException()
         log(<span class="hljs-string">f'Equal'</span>)
@@ -6895,14 +6893,33 @@ x | | |   x |
     log_unindent()
     log(<span class="hljs-string">f'<span class="hljs-subst">{ret}</span>'</span>)
 
-    <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
+    <span class="hljs-keyword">return</span> ret</code></pre><pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">lhs: FractionalNumber, rhs: FractionalNumber</span>) -&gt; bool:</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(rhs, FractionalNumber):
+        <span class="hljs-keyword">raise</span> Exception()
+
+    log(<span class="hljs-string">f'Less than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
+    log_indent()
+
+    count = max(len(lhs.digits), len(rhs.digits))
+    <span class="hljs-keyword">for</span> pos <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, count):  <span class="hljs-comment"># from smallest to largest component</span>
+        log(<span class="hljs-string">f'Test digits <span class="hljs-subst">{lhs[pos]}</span> and <span class="hljs-subst">{rhs[pos]}</span>...'</span>)
+        <span class="hljs-keyword">if</span> lhs[pos] &gt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &gt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is NOT less than <span class="hljs-subst">{rhs}</span>, it is greater than'</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+        <span class="hljs-keyword">elif</span> lhs[pos] &lt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &lt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is less than <span class="hljs-subst">{rhs}</span>'</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> == <span class="hljs-subst">{rhs[pos]}</span> -- continuing testing'</span>)
+
+    log(<span class="hljs-string">f'No more digits to test -- <span class="hljs-subst">{lhs}</span> is NOT less than <span class="hljs-subst">{rhs}</span>, it is equal'</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
 <li>Less than testing +312.02 and +312.12...
 <ul>
-<li>Testing signs...</li>
-<li>Equal</li>
-<li>Testing whole...</li>
+<li>Testing integer...</li>
 <li>Equal</li>
 <li>Testing fractional...</li>
 <li>Less</li>
@@ -6912,53 +6929,66 @@ x | | |   x |
 </ul>
 </div>
 <p></p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Remember that <a href="#BOOKMARK140">decimal number</a>s are just another way of representing <a href="#BOOKMARK119">fraction</a>s. As such, <a href="#BOOKMARK140">decimal number</a>s can also be tested by first converting them to <a href="#BOOKMARK119">fraction</a>s and then applying <a href="#BOOKMARK130">fraction less than</a>.</p>
-</div>
 <a name="HEADREF52"></a><h2>Greater Than</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
+<li><a href="#BOOKMARK94">Integer greater than</a></li>
 <li><a href="#BOOKMARK131">Fraction greater than</a></li>
 </ul>
 </div>
-<p><a name="BOOKMARK145"></a><strong>Decimal number greater than</strong></p>
+<p>Conceptually, you can think of <a name="BOOKMARK145"></a><strong>decimal greater than</strong> <a href="#BOOKMARK8">the same</a> as <a href="#BOOKMARK131">fraction greater than</a> where the <a href="#BOOKMARK119">fraction</a> <a href="#BOOKMARK5">is</a> represented as a <a href="#BOOKMARK137">mixed number</a>. However, rather than converting both numbers to a <a href="#BOOKMARK119">fraction</a> and performing <a href="#BOOKMARK130">fraction less than</a>, a quick series of tests on the <a href="#BOOKMARK140">decimal number</a>s themselves can de<a href="#BOOKMARK173">term</a>ine <a href="#BOOKMARK18">greater than</a>:</p>
+<ol>
+<li>
+<p>Check the <a href="#BOOKMARK86">integer</a> parts...</p>
+<p>If the <a href="#BOOKMARK86">integer</a> parts are <a href="#BOOKMARK94">integer greater than</a>, then the <a href="#BOOKMARK140">decimal number</a>s themselves <a href="#BOOKMARK7">will be</a> <a href="#BOOKMARK145">decimal greater than</a>. For example, any <a href="#BOOKMARK140">decimal number</a> with an <a href="#BOOKMARK86">integer</a> part of 6 will always be <a href="#BOOKMARK18">greater than</a> any <a href="#BOOKMARK140">decimal number</a> with an <a href="#BOOKMARK86">integer</a> part of 5...</p>
+<p><img src="svgbob_7c10b54db17ab8638c47bba07abd51f4a9d0a87e.svg" alt="Kroki diagram output"></p>
+<p>If the <a href="#BOOKMARK86">integer</a> parts are <a href="#BOOKMARK4">equal</a>, go to step 2.</p>
+<p>Otherwise, stop. The <a href="#BOOKMARK140">decimal number</a>s are not <a href="#BOOKMARK25">less than</a>.</p>
+</li>
+<li>
+<p>Check the <a href="#BOOKMARK142">fractional</a> parts...</p>
+<p>If the <a href="#BOOKMARK142">fractional</a> parts are <a href="#BOOKMARK18">greater than</a>, the <a href="#BOOKMARK140">decimal number</a>s are <a href="#BOOKMARK18">greater than</a>. The process of testing the <a href="#BOOKMARK142">fractional</a> parts <a href="#BOOKMARK5">is</a> similar to <a href="#BOOKMARK75">whole number greater than</a>, except the order in which positions are tested <a href="#BOOKMARK5">is</a> reversed (index 0 <a href="#BOOKMARK5">is</a> the most <a href="#BOOKMARK91">sign</a>ificant <a href="#BOOKMARK1">digit</a>, index 1 <a href="#BOOKMARK5">is</a> the second <a href="#BOOKMARK1">digit</a>, index 2 <a href="#BOOKMARK5">is</a> the third most <a href="#BOOKMARK91">sign</a>ificant <a href="#BOOKMARK1">digit</a>, ...). For example, a <a href="#BOOKMARK142">fractional</a> part of 1 <a href="#BOOKMARK5">is</a> <a href="#BOOKMARK18">greater than</a> a <a href="#BOOKMARK142">fractional</a> part of 01...</p>
+<p><img src="svgbob_7fd56d69b76da8b4ac0a1d7d36e44bc9ea799d26.svg" alt="Kroki diagram output"></p>
+</li>
+</ol>
+<p>For example, to test if 312.12 &lt; 312.02:</p>
+<ol>
+<li><a href="#BOOKMARK86">Integer</a>s are <a href="#BOOKMARK4">equal</a>. Go to step 2.</li>
+<li><a href="#BOOKMARK142">Fractional</a> being tested <a href="#BOOKMARK5">is</a> <a href="#BOOKMARK18">greater than</a> the other number's <a href="#BOOKMARK142">fractional</a>.</li>
+</ol>
+<p>312.12 &gt; 312.02 <a href="#BOOKMARK5">is</a> true.</p>
+<p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>The first listing <a href="#BOOKMARK5">is</a> the main DecimalNumber code, while the second listing <a href="#BOOKMARK5">is</a> the code for <a href="#BOOKMARK142">fractional</a> part called by the main DecimalNumber code.</p>
+</div>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">self: DecimalNumber, other: DecimalNumber</span>) -&gt; bool:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">lhs: DecimalNumber, rhs: DecimalNumber</span>) -&gt; bool:</span>
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PassedTestException</span>(<span class="hljs-params">Exception</span>):</span>
         <span class="hljs-keyword">pass</span>
 
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FailedTestException</span>(<span class="hljs-params">Exception</span>):</span>
         <span class="hljs-keyword">pass</span>
 
-    log(<span class="hljs-string">f'Greater than testing <span class="hljs-subst">{self}</span> and <span class="hljs-subst">{other}</span>...'</span>)
+    log(<span class="hljs-string">f'Greater than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
     log_indent()
 
     <span class="hljs-keyword">try</span>:
-        log(<span class="hljs-string">f'Testing signs...'</span>)
-        sign_gt = self.sign == Sign.POSITIVE <span class="hljs-keyword">and</span> other.sign != Sign.POSITIVE
-        <span class="hljs-keyword">if</span> sign_gt:
+        log(<span class="hljs-string">f'Testing integer...'</span>)
+        int_lt = IntegerNumber(lhs.sign, lhs.whole) &gt; IntegerNumber(rhs.sign, rhs.whole)
+        <span class="hljs-keyword">if</span> int_lt:
             <span class="hljs-keyword">raise</span> PassedTestException()
-        sign_eq = self.sign == other.sign
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> sign_eq:
-            <span class="hljs-keyword">raise</span> FailedTestException()
-        log(<span class="hljs-string">f'Equal'</span>)
-
-        log(<span class="hljs-string">f'Testing whole...'</span>)
-        whole_gt = self.whole &gt; other.whole
-        <span class="hljs-keyword">if</span> whole_gt:
-            <span class="hljs-keyword">raise</span> PassedTestException()
-        whole_eq = self.whole == other.whole
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> whole_eq:
+        int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> int_eq:
             <span class="hljs-keyword">raise</span> FailedTestException()
         log(<span class="hljs-string">f'Equal'</span>)
 
         log(<span class="hljs-string">f'Testing fractional...'</span>)
-        fractional_gt = self.fractional &gt; other.fractional
+        fractional_gt = lhs.fractional &gt; rhs.fractional
         <span class="hljs-keyword">if</span> fractional_gt:
             <span class="hljs-keyword">raise</span> PassedTestException()
-        fractional_eq = self.fractional == other.fractional
+        fractional_eq = lhs.fractional == rhs.fractional
         <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> fractional_eq:
             <span class="hljs-keyword">raise</span> FailedTestException()
         log(<span class="hljs-string">f'Equal'</span>)
@@ -6974,14 +7004,33 @@ x | | |   x |
     log_unindent()
     log(<span class="hljs-string">f'<span class="hljs-subst">{ret}</span>'</span>)
 
-    <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
+    <span class="hljs-keyword">return</span> ret</code></pre><pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">lhs: FractionalNumber, rhs: FractionalNumber</span>) -&gt; bool:</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isinstance(rhs, FractionalNumber):
+        <span class="hljs-keyword">raise</span> Exception()
+
+    log(<span class="hljs-string">f'Greater than testing <span class="hljs-subst">{lhs}</span> and <span class="hljs-subst">{rhs}</span>...'</span>)
+    log_indent()
+
+    count = max(len(lhs.digits), len(rhs.digits))
+    <span class="hljs-keyword">for</span> pos <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, count):  <span class="hljs-comment"># from smallest to largest component</span>
+        log(<span class="hljs-string">f'Test digits <span class="hljs-subst">{lhs[pos]}</span> and <span class="hljs-subst">{rhs[pos]}</span>...'</span>)
+        <span class="hljs-keyword">if</span> lhs[pos] &gt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &gt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is greater than <span class="hljs-subst">{rhs}</span>'</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+        <span class="hljs-keyword">elif</span> lhs[pos] &lt; rhs[pos]:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> &lt; <span class="hljs-subst">{rhs[pos]}</span> -- <span class="hljs-subst">{lhs}</span> is NOT greater than <span class="hljs-subst">{rhs}</span>, it is less than'</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">f'<span class="hljs-subst">{lhs[pos]}</span> == <span class="hljs-subst">{rhs[pos]}</span> -- continuing testing'</span>)
+
+    log(<span class="hljs-string">f'No more digits to test -- <span class="hljs-subst">{lhs}</span> is NOT greater than <span class="hljs-subst">{rhs}</span>, it is equal'</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></code></pre><div style="border:1px solid black;">
 <p></p>
 <ul>
 <li>Greater than testing +312.12 and +312.02...
 <ul>
-<li>Testing signs...</li>
-<li>Equal</li>
-<li>Testing whole...</li>
+<li>Testing integer...</li>
 <li>Equal</li>
 <li>Testing fractional...</li>
 <li>Greater</li>
@@ -6991,10 +7040,6 @@ x | | |   x |
 </ul>
 </div>
 <p></p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Remember that <a href="#BOOKMARK140">decimal number</a>s are just another way of representing <a href="#BOOKMARK119">fraction</a>s. As such, <a href="#BOOKMARK140">decimal number</a>s can also be tested by first converting them to <a href="#BOOKMARK119">fraction</a>s and then applying <a href="#BOOKMARK131">fraction greater than</a>.</p>
-</div>
 <a name="HEADREF53"></a><h2>Word Conversion</h2>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -7092,7 +7137,7 @@ x | | |   x |
 </ul>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self</span>):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_words</span>(<span class="hljs-params">self: DecimalNumber</span>) -&gt; str:</span>
     fractional_len_to_suffixes = {
         <span class="hljs-number">1</span>: <span class="hljs-string">'tenth'</span>,
         <span class="hljs-number">2</span>: <span class="hljs-string">'hundredth'</span>,
@@ -7232,7 +7277,7 @@ x | | |   x |
 </ol>
 <p>The way to perform this algorithm via code <a href="#BOOKMARK5">is</a> as follows...</p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">round</span>(<span class="hljs-params">self, position: str</span>) -&gt; DecimalNumber:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">round</span>(<span class="hljs-params">self: DecimalNumber, position: str</span>) -&gt; DecimalNumber:</span>
     log(<span class="hljs-string">f'Rounding <span class="hljs-subst">{self}</span> at <span class="hljs-subst">{position}</span> position...'</span>)
     log_indent()
 
@@ -7497,7 +7542,7 @@ x | | |   x |
 <p>Then, remove the <a href="#BOOKMARK141">decimal point</a>...</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>22</mn><mfrac><mn>18</mn><mn>1000</mn></mfrac></mrow><annotation encoding="application/x-tex">22 \frac{18}{1000}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">2</span><span class="mord">2</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">8</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <pre class="hljs"><code><span class="hljs-meta">@log_decorator</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">as_fraction</span>(<span class="hljs-params">self</span>) -&gt; FractionNumber:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">as_fraction</span>(<span class="hljs-params">self: DecimalNumber</span>) -&gt; FractionNumber:</span>
     log(<span class="hljs-string">f'Converting <span class="hljs-subst">{self}</span> to fraction number...'</span>)
     log_indent()
 

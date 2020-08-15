@@ -12,21 +12,21 @@ from Output import log_decorator, log, log_indent, log_unindent
 class FractionalNumber:
 
     @staticmethod
-    def from_str(digits: str):
+    def from_str(digits: str) -> FractionalNumber:
         digits = list(map(lambda i: Digit(int(i)), digits))
         digits.reverse()
         return FractionalNumber(digits)
 
     @staticmethod
-    def from_digit(digit: Digit):
+    def from_digit(digit: Digit) -> FractionalNumber:
         return FractionalNumber.from_digit_list([digit])
 
     @staticmethod
-    def from_digit_list(digits: List[Digit]):
+    def from_digit_list(digits: List[Digit]) -> FractionalNumber:
         return FractionalNumber(digits)
 
     @staticmethod
-    def from_int_list(digits: List[int]):
+    def from_int_list(digits: List[int]) -> FractionalNumber:
         digits = list(map(lambda i: Digit(i), digits))
         return FractionalNumber(digits)
 
@@ -101,66 +101,78 @@ class FractionalNumber:
         if len(self.digits) == 0:
             self.digits = [Digit(0)]
 
+    #MARKDOWN_EQ
     @log_decorator
-    def __eq__(self: FractionalNumber, other: FractionalNumber) -> bool:
-        if not isinstance(other, FractionalNumber):
+    def __eq__(lhs: FractionalNumber, rhs: FractionalNumber) -> bool:
+        if not isinstance(rhs, FractionalNumber):
             raise Exception()
 
-        log(f'Equality testing {self} and {other}...')
+        log(f'Equality testing {lhs} and {rhs}...')
         log_indent()
 
-        ret = self.digits == other.digits
+        ret = lhs.digits == rhs.digits
 
         log_unindent()
         log(f'{ret}')
 
         return ret
+    #MARKDOWN_EQ
 
+    #MARKDOWN_LT
     @log_decorator
-    def __lt__(self: FractionalNumber, other: FractionalNumber) -> bool:
-        if not isinstance(other, FractionalNumber):
+    def __lt__(lhs: FractionalNumber, rhs: FractionalNumber) -> bool:
+        if not isinstance(rhs, FractionalNumber):
             raise Exception()
 
-        log(f'Less than testing {self} and {other}...')
+        log(f'Less than testing {lhs} and {rhs}...')
         log_indent()
 
-        count = max(len(self.digits), len(other.digits))
+        count = max(len(lhs.digits), len(rhs.digits))
         for pos in range(0, count):  # from smallest to largest component
-            log(f'Test digits {self[pos]} and {other[pos]}...')
-            if self[pos] > other[pos]:
-                log(f'{self[pos]} > {other[pos]} -- {self} is NOT less than {other}, it is greater than')
+            log(f'Test digits {lhs[pos]} and {rhs[pos]}...')
+            if lhs[pos] > rhs[pos]:
+                log(f'{lhs[pos]} > {rhs[pos]} -- {lhs} is NOT less than {rhs}, it is greater than')
                 return False
-            elif self[pos] < other[pos]:
-                log(f'{self[pos]} < {other[pos]} -- {self} is less than {other}')
+            elif lhs[pos] < rhs[pos]:
+                log(f'{lhs[pos]} < {rhs[pos]} -- {lhs} is less than {rhs}')
                 return True
             else:
-                log(f'{self[pos]} == {other[pos]} -- continuing testing')
+                log(f'{lhs[pos]} == {rhs[pos]} -- continuing testing')
 
-        log(f'No more digits to test -- {self} is NOT less than {other}, it is equal')
+        log(f'No more digits to test -- {lhs} is NOT less than {rhs}, it is equal')
         return False
+    #MARKDOWN_LT
 
+    def __le__(lhs: FractionalNumber, rhs: FractionalNumber) -> bool:
+        return lhs < rhs or lhs == rhs
+
+    #MARKDOWN_GT
     @log_decorator
-    def __gt__(self: FractionalNumber, other: FractionalNumber) -> bool:
-        if not isinstance(other, FractionalNumber):
+    def __gt__(lhs: FractionalNumber, rhs: FractionalNumber) -> bool:
+        if not isinstance(rhs, FractionalNumber):
             raise Exception()
 
-        log(f'Greater than testing {self} and {other}...')
+        log(f'Greater than testing {lhs} and {rhs}...')
         log_indent()
 
-        count = max(len(self.digits), len(other.digits))
+        count = max(len(lhs.digits), len(rhs.digits))
         for pos in range(0, count):  # from smallest to largest component
-            log(f'Test digits {self[pos]} and {other[pos]}...')
-            if self[pos] > other[pos]:
-                log(f'{self[pos]} > {other[pos]} -- {self} is greater than {other}')
+            log(f'Test digits {lhs[pos]} and {rhs[pos]}...')
+            if lhs[pos] > rhs[pos]:
+                log(f'{lhs[pos]} > {rhs[pos]} -- {lhs} is greater than {rhs}')
                 return True
-            elif self[pos] < other[pos]:
-                log(f'{self[pos]} < {other[pos]} -- {self} is NOT greater than {other}, it is less than')
+            elif lhs[pos] < rhs[pos]:
+                log(f'{lhs[pos]} < {rhs[pos]} -- {lhs} is NOT greater than {rhs}, it is less than')
                 return False
             else:
-                log(f'{self[pos]} == {other[pos]} -- continuing testing')
+                log(f'{lhs[pos]} == {rhs[pos]} -- continuing testing')
 
-        log(f'No more digits to test -- {self} is NOT greater than {other}, it is equal')
+        log(f'No more digits to test -- {lhs} is NOT greater than {rhs}, it is equal')
         return False
+    #MARKDOWN_GT
+
+    def __ge__(self: FractionalNumber, other: FractionalNumber) -> bool:
+        return self > other or self == other
 
 
 if __name__ == '__main__':

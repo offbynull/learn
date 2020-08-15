@@ -11,13 +11,13 @@ from Digit import Digit
 class WholeNumber:
 
     @staticmethod
-    def from_str(digits: str):
+    def from_str(digits: str) -> WholeNumber:
         digits = list(map(lambda i: Digit(int(i)), digits))
         digits.reverse()
         return WholeNumber(digits)
 
     @staticmethod
-    def from_int(value: int):
+    def from_int(value: int) -> WholeNumber:
         if value < 0:
             raise Exception('Negative int not allowed')
         digits = str(value)
@@ -27,15 +27,15 @@ class WholeNumber:
 
 
     @staticmethod
-    def from_digit(digit: Digit):
+    def from_digit(digit: Digit) -> WholeNumber:
         return WholeNumber.from_digit_list([digit])
 
     @staticmethod
-    def from_digit_list(digits: List[Digit]):
+    def from_digit_list(digits: List[Digit]) -> WholeNumber:
         return WholeNumber(digits)
 
     @staticmethod
-    def from_int_list(digits: List[int]):
+    def from_int_list(digits: List[int]) -> WholeNumber:
         digits = list(map(lambda i: Digit(i), digits))
         return WholeNumber(digits)
 
@@ -87,10 +87,10 @@ class WholeNumber:
             output += str(digit.value)
         return output
 
-    def __repr__(self: WholeNumber):
+    def __repr__(self: WholeNumber) -> str:
         return self.__str__()
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(tuple(self.digits))
 
     def _as_int(self: WholeNumber) -> int:
@@ -137,19 +137,19 @@ class WholeNumber:
 
     #MARKDOWN_EQ
     @log_decorator
-    def __eq__(self: WholeNumber, other: WholeNumber) -> bool:
-        if isinstance(other, int):
-            other = WholeNumber.from_int(other)
-        elif isinstance(other, str):
-            other = WholeNumber.from_str(other)
+    def __eq__(lhs: WholeNumber, rhs: WholeNumber) -> bool:
+        if isinstance(rhs, int):
+            rhs = WholeNumber.from_int(rhs)
+        elif isinstance(rhs, str):
+            rhs = WholeNumber.from_str(rhs)
 
-        if not isinstance(other, WholeNumber):
+        if not isinstance(rhs, WholeNumber):
             raise Exception()
 
-        log(f'Equality testing {self} and {other}...')
+        log(f'Equality testing {lhs} and {rhs}...')
         log_indent()
 
-        ret = self.digits == other.digits
+        ret = lhs.digits == rhs.digits
 
         log_unindent()
         log(f'{ret}')
@@ -159,69 +159,69 @@ class WholeNumber:
 
     #MARKDOWN_LT
     @log_decorator
-    def __lt__(self: WholeNumber, other: WholeNumber) -> bool:
-        if isinstance(other, int):
-            other = WholeNumber.from_int(other)
-        elif isinstance(other, str):
-            other = WholeNumber.from_str(other)
+    def __lt__(lhs: WholeNumber, rhs: WholeNumber) -> bool:
+        if isinstance(rhs, int):
+            rhs = WholeNumber.from_int(rhs)
+        elif isinstance(rhs, str):
+            rhs = WholeNumber.from_str(rhs)
 
-        if not isinstance(other, WholeNumber):
+        if not isinstance(rhs, WholeNumber):
             raise Exception()
 
-        log(f'Less than testing {self} and {other}...')
+        log(f'Less than testing {lhs} and {rhs}...')
         log_indent()
 
-        count = max(len(self.digits), len(other.digits))
+        count = max(len(lhs.digits), len(rhs.digits))
         for pos in reversed(range(0, count)):  # from smallest to largest component
-            log(f'Test digits {self[pos]} and {other[pos]}...')
-            if self[pos] > other[pos]:
-                log(f'{self[pos]} > {other[pos]} -- {self} is NOT less than {other}, it is greater than')
+            log(f'Test digits {lhs[pos]} and {rhs[pos]}...')
+            if lhs[pos] > rhs[pos]:
+                log(f'{lhs[pos]} > {rhs[pos]} -- {lhs} is NOT less than {rhs}, it is greater than')
                 return False
-            elif self[pos] < other[pos]:
-                log(f'{self[pos]} < {other[pos]} -- {self} is less than {other}')
+            elif lhs[pos] < rhs[pos]:
+                log(f'{lhs[pos]} < {rhs[pos]} -- {lhs} is less than {rhs}')
                 return True
             else:
-                log(f'{self[pos]} == {other[pos]} -- continuing testing')
+                log(f'{lhs[pos]} == {rhs[pos]} -- continuing testing')
 
-        log(f'No more digits to test -- {self} is NOT less than {other}, it is equal')
+        log(f'No more digits to test -- {lhs} is NOT less than {rhs}, it is equal')
         return False
     #MARKDOWN_LT
 
-    def __le__(self: WholeNumber, other: WholeNumber) -> bool:
-        return self < other or self == other
+    def __le__(lhs: WholeNumber, rhs: WholeNumber) -> bool:
+        return lhs < rhs or lhs == rhs
 
     #MARKDOWN_GT
     @log_decorator
-    def __gt__(self: WholeNumber, other: WholeNumber) -> bool:
-        if isinstance(other, int):
-            other = WholeNumber.from_int(other)
-        elif isinstance(other, str):
-            other = WholeNumber.from_str(other)
+    def __gt__(lhs: WholeNumber, rhs: WholeNumber) -> bool:
+        if isinstance(rhs, int):
+            rhs = WholeNumber.from_int(rhs)
+        elif isinstance(rhs, str):
+            rhs = WholeNumber.from_str(rhs)
 
-        if not isinstance(other, WholeNumber):
+        if not isinstance(rhs, WholeNumber):
             raise Exception()
 
-        log(f'Greater than testing {self} and {other}...')
+        log(f'Greater than testing {lhs} and {rhs}...')
         log_indent()
 
-        count = max(len(self.digits), len(other.digits))
+        count = max(len(lhs.digits), len(rhs.digits))
         for pos in reversed(range(0, count)):  # from smallest to largest component
-            log(f'Test digits {self[pos]} and {other[pos]}...')
-            if self[pos] > other[pos]:
-                log(f'{self[pos]} > {other[pos]} -- {self} is greater than {other}')
+            log(f'Test digits {lhs[pos]} and {rhs[pos]}...')
+            if lhs[pos] > rhs[pos]:
+                log(f'{lhs[pos]} > {rhs[pos]} -- {lhs} is greater than {rhs}')
                 return True
-            elif self[pos] < other[pos]:
-                log(f'{self[pos]} < {other[pos]} -- {self} is NOT greater than {other}, it is less than')
+            elif lhs[pos] < rhs[pos]:
+                log(f'{lhs[pos]} < {rhs[pos]} -- {lhs} is NOT greater than {rhs}, it is less than')
                 return False
             else:
-                log(f'{self[pos]} == {other[pos]} -- continuing testing')
+                log(f'{lhs[pos]} == {rhs[pos]} -- continuing testing')
 
-        log(f'No more digits to test -- {self} is NOT greater than {other}, it is equal')
+        log(f'No more digits to test -- {lhs} is NOT greater than {rhs}, it is equal')
         return False
     #MARKDOWN_GT
 
-    def __ge__(self: WholeNumber, other: WholeNumber) -> bool:
-        return self > other or self == other
+    def __ge__(lhs: WholeNumber, rhs: WholeNumber) -> bool:
+        return lhs > rhs or lhs == rhs
 
     #MARKDOWN_ADD
     @log_decorator
@@ -689,7 +689,7 @@ class WholeNumber:
 
     #MARKDOWN_TO_WORDS
     @log_decorator
-    def to_words(self):
+    def to_words(self: WholeNumber) -> str:
         suffixes = [None, 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion']
 
         log(f'Converting {self}...')
@@ -821,6 +821,7 @@ class WholeNumber:
 
         return output.strip()
     #MARKDOWN_TO_WORDS
+
 
 class WholeNumberRange:
     def __init__(self, min: WholeNumber, max: WholeNumber):

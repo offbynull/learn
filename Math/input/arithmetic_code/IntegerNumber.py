@@ -193,7 +193,7 @@ class IntegerNumber:
 
     #MARKDOWN_TO_WORDS
     @log_decorator
-    def to_words(self):
+    def to_words(self: IntegerNumber) -> str:
         log(f'Converting {self}...')
 
         output = ''
@@ -312,8 +312,11 @@ class IntegerNumber:
         ret += str(self.magnitude)
         return ret
 
-    def __repr__(self: IntegerNumber):
+    def __repr__(self: IntegerNumber) -> str:
         return self.__str__()
+
+    def __hash__(self: IntegerNumber) -> int:
+        return hash(tuple([self.sign, self.magnitude]))
 
 
 if __name__ == '__main__':

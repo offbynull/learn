@@ -51,15 +51,15 @@ class DecimalNumber:
             raise Exception(f'Bad format: {val}')
 
     @staticmethod
-    def from_whole(value: WholeNumber):
+    def from_whole(value: WholeNumber) -> DecimalNumber:
         return DecimalNumber.from_fraction(FractionNumber.from_whole(value))
 
     @staticmethod
-    def from_integer(value: IntegerNumber):
+    def from_integer(value: IntegerNumber) -> DecimalNumber:
         return DecimalNumber.from_fraction(FractionNumber.from_integer(value))
 
     @staticmethod
-    def from_int(value: int):
+    def from_int(value: int) -> DecimalNumber:
         return DecimalNumber.from_fraction(FractionNumber.from_int(value))
 
     #MARKDOWN_FROM_FRAC
@@ -176,10 +176,10 @@ class DecimalNumber:
 
         return ret
 
-    def __repr__(self: DecimalNumber):
+    def __repr__(self: DecimalNumber) -> str:
         return self.__str__()
 
-    def __hash__(self: DecimalNumber):
+    def __hash__(self: DecimalNumber) -> int:
         return hash(tuple([self.sign, self.whole, self.fractional]))
 
     def __getitem__(self: DecimalNumber, key: int) -> Digit:
@@ -196,7 +196,7 @@ class DecimalNumber:
 
     #MARKDOWN_AS_FRAC
     @log_decorator
-    def as_fraction(self) -> FractionNumber:
+    def as_fraction(self: DecimalNumber) -> FractionNumber:
         log(f'Converting {self} to fraction number...')
         log_indent()
 
@@ -231,7 +231,7 @@ class DecimalNumber:
 
     #MARKDOWN_TO_WORDS
     @log_decorator
-    def to_words(self):
+    def to_words(self: DecimalNumber) -> str:
         fractional_len_to_suffixes = {
             1: 'tenth',
             2: 'hundredth',
@@ -297,7 +297,7 @@ class DecimalNumber:
 
     #MARKDOWN_ROUND
     @log_decorator
-    def round(self, position: str) -> DecimalNumber:
+    def round(self: DecimalNumber, position: str) -> DecimalNumber:
         log(f'Rounding {self} at {position} position...')
         log_indent()
 
@@ -405,33 +405,27 @@ class DecimalNumber:
 
     #MARKDOWN_EQ
     @log_decorator
-    def __eq__(self: DecimalNumber, other: DecimalNumber) -> bool:
+    def __eq__(lhs: DecimalNumber, rhs: DecimalNumber) -> bool:
         class FailedTestException(Exception):
             pass
 
-        log(f'Equality testing {self} and {other}...')
+        log(f'Equality testing {lhs} and {rhs}...')
         log_indent()
 
         try:
-            log(f'Testing signs...')
-            sign_eq = self.sign == other.sign
-            if not sign_eq:
-                raise FailedTestException()
-            log(f'Equal')
-
-            log(f'Testing whole...')
-            whole_eq = self.whole == other.whole
-            if not whole_eq:
+            log(f'Testing integer...')
+            int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
+            if not int_eq:
                 raise FailedTestException()
             log(f'Equal')
 
             log(f'Testing fractional...')
-            fractional_eq = self.fractional == other.fractional
+            fractional_eq = lhs.fractional == rhs.fractional
             if not fractional_eq:
                 raise FailedTestException()
             log(f'Equal')
 
-            ret = sign_eq and whole_eq and fractional_eq
+            ret = True
         except FailedTestException:
             log(f'Not equal')
             ret = False
@@ -444,40 +438,31 @@ class DecimalNumber:
 
     #MARKDOWN_LT
     @log_decorator
-    def __lt__(self: DecimalNumber, other: DecimalNumber) -> bool:
+    def __lt__(lhs: DecimalNumber, rhs: DecimalNumber) -> bool:
         class PassedTestException(Exception):
             pass
 
         class FailedTestException(Exception):
             pass
 
-        log(f'Less than testing {self} and {other}...')
+        log(f'Less than testing {lhs} and {rhs}...')
         log_indent()
 
         try:
-            log(f'Testing signs...')
-            sign_lt = self.sign == Sign.NEGATIVE and other.sign != Sign.NEGATIVE
-            if sign_lt:
+            log(f'Testing integer...')
+            int_lt = IntegerNumber(lhs.sign, lhs.whole) < IntegerNumber(rhs.sign, rhs.whole)
+            if int_lt:
                 raise PassedTestException()
-            sign_eq = self.sign == other.sign
-            if not sign_eq:
-                raise FailedTestException()
-            log(f'Equal')
-
-            log(f'Testing whole...')
-            whole_lt = self.whole < other.whole
-            if whole_lt:
-                raise PassedTestException()
-            whole_eq = self.whole == other.whole
-            if not whole_eq:
+            int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
+            if not int_eq:
                 raise FailedTestException()
             log(f'Equal')
 
             log(f'Testing fractional...')
-            fractional_lt = self.fractional < other.fractional
+            fractional_lt = lhs.fractional < rhs.fractional
             if fractional_lt:
                 raise PassedTestException()
-            fractional_eq = self.fractional == other.fractional
+            fractional_eq = lhs.fractional == rhs.fractional
             if not fractional_eq:
                 raise FailedTestException()
             log(f'Equal')
@@ -496,45 +481,36 @@ class DecimalNumber:
         return ret
     #MARKDOWN_LT
 
-    def __le__(self: DecimalNumber, other: DecimalNumber) -> bool:
-        return self < other or self == other
+    def __le__(lhs: DecimalNumber, rhs: DecimalNumber) -> bool:
+        return lhs < rhs or lhs == rhs
 
     #MARKDOWN_GT
     @log_decorator
-    def __gt__(self: DecimalNumber, other: DecimalNumber) -> bool:
+    def __gt__(lhs: DecimalNumber, rhs: DecimalNumber) -> bool:
         class PassedTestException(Exception):
             pass
 
         class FailedTestException(Exception):
             pass
 
-        log(f'Greater than testing {self} and {other}...')
+        log(f'Greater than testing {lhs} and {rhs}...')
         log_indent()
 
         try:
-            log(f'Testing signs...')
-            sign_gt = self.sign == Sign.POSITIVE and other.sign != Sign.POSITIVE
-            if sign_gt:
+            log(f'Testing integer...')
+            int_lt = IntegerNumber(lhs.sign, lhs.whole) > IntegerNumber(rhs.sign, rhs.whole)
+            if int_lt:
                 raise PassedTestException()
-            sign_eq = self.sign == other.sign
-            if not sign_eq:
-                raise FailedTestException()
-            log(f'Equal')
-
-            log(f'Testing whole...')
-            whole_gt = self.whole > other.whole
-            if whole_gt:
-                raise PassedTestException()
-            whole_eq = self.whole == other.whole
-            if not whole_eq:
+            int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
+            if not int_eq:
                 raise FailedTestException()
             log(f'Equal')
 
             log(f'Testing fractional...')
-            fractional_gt = self.fractional > other.fractional
+            fractional_gt = lhs.fractional > rhs.fractional
             if fractional_gt:
                 raise PassedTestException()
-            fractional_eq = self.fractional == other.fractional
+            fractional_eq = lhs.fractional == rhs.fractional
             if not fractional_eq:
                 raise FailedTestException()
             log(f'Equal')
@@ -553,32 +529,32 @@ class DecimalNumber:
         return ret
     #MARKDOWN_GT
 
-    def __ge__(self: DecimalNumber, other: DecimalNumber) -> bool:
-        return self > other or self == other
+    def __ge__(lhs: DecimalNumber, rhs: DecimalNumber) -> bool:
+        return lhs > rhs or lhs == rhs
 
     #MARKDOWN_ADD
     @log_decorator
-    def __add__(self: DecimalNumber, other: DecimalNumber) -> DecimalNumber:
-        log(f'Adding {self} and {other}...')
+    def __add__(lhs: DecimalNumber, rhs: DecimalNumber) -> DecimalNumber:
+        log(f'Adding {lhs} and {rhs}...')
         log_indent()
 
         adjust_len = max(
-            len(self.fractional.digits),
-            len(other.fractional.digits)
+            len(lhs.fractional.digits),
+            len(rhs.fractional.digits)
         )
 
-        log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.fractional.digits)
-        self_combined_digits = self.fractional.digits + self.whole.digits
+        log(f'Generating mock integer number for {lhs}...')
+        self_extra_0s = adjust_len - len(lhs.fractional.digits)
+        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
-        log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.fractional.digits)
-        other_combined_digits = other.fractional.digits + other.whole.digits
+        log(f'Generating mock integer number for {rhs}...')
+        other_extra_0s = adjust_len - len(rhs.fractional.digits)
+        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
 
         log(f'Performing {mock_self} + {mock_other}...')
@@ -600,27 +576,27 @@ class DecimalNumber:
 
     #MARKDOWN_SUB
     @log_decorator
-    def __sub__(self: DecimalNumber, other: DecimalNumber) -> DecimalNumber:
-        log(f'Subtracting {self} and {other}...')
+    def __sub__(lhs: DecimalNumber, rhs: DecimalNumber) -> DecimalNumber:
+        log(f'Subtracting {lhs} and {rhs}...')
         log_indent()
 
         adjust_len = max(
-            len(self.fractional.digits),
-            len(other.fractional.digits)
+            len(lhs.fractional.digits),
+            len(rhs.fractional.digits)
         )
 
-        log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len - len(self.fractional.digits)
-        self_combined_digits = self.fractional.digits + self.whole.digits
+        log(f'Generating mock integer number for {lhs}...')
+        self_extra_0s = adjust_len - len(lhs.fractional.digits)
+        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
-        log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len - len(other.fractional.digits)
-        other_combined_digits = other.fractional.digits + other.whole.digits
+        log(f'Generating mock integer number for {rhs}...')
+        other_extra_0s = adjust_len - len(rhs.fractional.digits)
+        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
 
         log(f'Performing {mock_self} - {mock_other}...')
@@ -642,25 +618,25 @@ class DecimalNumber:
 
     #MARKDOWN_MUL
     @log_decorator
-    def __mul__(self: DecimalNumber, other: DecimalNumber) -> DecimalNumber:
-        log(f'Multiplying {self} and {other}...')
+    def __mul__(lhs: DecimalNumber, rhs: DecimalNumber) -> DecimalNumber:
+        log(f'Multiplying {lhs} and {rhs}...')
         log_indent()
 
-        adjust_len_self = len(self.fractional.digits)
-        adjust_len_other = len(other.fractional.digits)
+        adjust_len_self = len(lhs.fractional.digits)
+        adjust_len_other = len(rhs.fractional.digits)
 
-        log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len_self - len(self.fractional.digits)
-        self_combined_digits = self.fractional.digits + self.whole.digits
+        log(f'Generating mock integer number for {lhs}...')
+        self_extra_0s = adjust_len_self - len(lhs.fractional.digits)
+        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
-        log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len_other - len(other.fractional.digits)
-        other_combined_digits = other.fractional.digits + other.whole.digits
+        log(f'Generating mock integer number for {rhs}...')
+        other_extra_0s = adjust_len_other - len(rhs.fractional.digits)
+        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
 
         log(f'Performing {mock_self} * {mock_other}...')
@@ -683,26 +659,26 @@ class DecimalNumber:
 
     #MARKDOWN_DIV
     @log_decorator
-    def __truediv__(self: DecimalNumber, other: DecimalNumber) -> DecimalNumber:
-        log(f'Dividing {self} and {other}...')
+    def __truediv__(lhs: DecimalNumber, rhs: DecimalNumber) -> DecimalNumber:
+        log(f'Dividing {lhs} and {rhs}...')
         log_indent()
 
         # CHECK TO MAKE SURE DECIMAL WILL TERM -- replace with calling to_suitable_fraction()?
-        adjust_len_self = len(self.fractional.digits)
-        adjust_len_other = len(other.fractional.digits)
+        adjust_len_self = len(lhs.fractional.digits)
+        adjust_len_other = len(rhs.fractional.digits)
 
-        log(f'Generating mock integer number for {self}...')
-        self_extra_0s = adjust_len_self - len(self.fractional.digits)
-        self_combined_digits = self.fractional.digits + self.whole.digits
+        log(f'Generating mock integer number for {lhs}...')
+        self_extra_0s = adjust_len_self - len(lhs.fractional.digits)
+        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
         self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(self.sign, WholeNumber(self_combined_digits))
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
         log(f'{mock_self}')
 
-        log(f'Generating mock integer number for {other}...')
-        other_extra_0s = adjust_len_other - len(other.fractional.digits)
-        other_combined_digits = other.fractional.digits + other.whole.digits
+        log(f'Generating mock integer number for {rhs}...')
+        other_extra_0s = adjust_len_other - len(rhs.fractional.digits)
+        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
         other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(other.sign, WholeNumber(other_combined_digits))
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
         log(f'{mock_other}')
 
         log(f'Check to make sure decimal will terminate...')
@@ -716,19 +692,19 @@ class DecimalNumber:
             raise Exception('Resulting decimal will be non-terminating')
 
         # DIVIDE using divide-and-conquer multiplication
-        log(f'Performing {self} / {other}...')
-        modifier = DecimalNumber.from_str('1' + '0' * len(self.whole.digits))
-        if other.sign == Sign.NEGATIVE:
+        log(f'Performing {lhs} / {rhs}...')
+        modifier = DecimalNumber.from_str('1' + '0' * len(lhs.whole.digits))
+        if rhs.sign == Sign.NEGATIVE:
             modifier = modifier * DecimalNumber.from_str('-1.0')
         test = DecimalNumber.from_str('0.0')
         while True:
-            if test * other == self:
+            if test * rhs == lhs:
                 break
-            elif test * other > self:
-                while test * other > self:
+            elif test * rhs > lhs:
+                while test * rhs > lhs:
                     test -= modifier
-            elif test * other < self:
-                while test * other < self:
+            elif test * rhs < lhs:
+                while test * rhs < lhs:
                     test += modifier
             modifier *= DecimalNumber.from_str('0.1')
         log(f'{test}')
@@ -807,6 +783,7 @@ if __name__ == '__main__':
     # print(f'{DecimalNumber.from_str("-0.1") < DecimalNumber.from_str("1")}')
     # print(f'{DecimalNumber.from_str("1.0") < DecimalNumber.from_str("1")}')
     # print(f'{DecimalNumber.from_str("-1.0") < DecimalNumber.from_str("1")}')
+    print(f'{DecimalNumber.from_str("-2") < DecimalNumber.from_str("-3")}')
 
     # print(f'{DecimalNumber.from_str("0") > DecimalNumber.from_str("0")}')
     # print(f'{DecimalNumber.from_str("0.1") > DecimalNumber.from_str("0")}')
