@@ -561,7 +561,7 @@ class DecimalNumber:
         mock_ret = mock_self + mock_other
         log(f'{mock_ret}')
 
-        log(f'Unmocking {mock_ret}...')
+        log(f'Unmocking {mock_ret} back to decimal...')
         ret_sign = mock_ret.sign
         ret_fractional_digits = [mock_ret.magnitude[i] for i in range(0, adjust_len)]
         ret_whole_digits = [mock_ret.magnitude[i] for i in range(adjust_len, len(mock_ret.magnitude.digits))]
@@ -603,7 +603,7 @@ class DecimalNumber:
         mock_ret = mock_self - mock_other
         log(f'{mock_ret}')
 
-        log(f'Unmocking {mock_ret}...')
+        log(f'Unmocking {mock_ret} back to decimal...')
         ret_sign = mock_ret.sign
         ret_fractional_digits = [mock_ret.magnitude[i] for i in range(0, adjust_len)]
         ret_whole_digits = [mock_ret.magnitude[i] for i in range(adjust_len, len(mock_ret.magnitude.digits))]
@@ -643,7 +643,7 @@ class DecimalNumber:
         mock_ret = mock_self * mock_other
         log(f'{mock_ret}')
 
-        log(f'Unmocking {mock_ret}...')
+        log(f'Unmocking {mock_ret} back to decimal...')
         unadjust_len = adjust_len_self + adjust_len_other
         ret_sign = mock_ret.sign
         ret_fractional_digits = [mock_ret.magnitude[i] for i in range(0, unadjust_len)]

@@ -1991,7 +1991,7 @@ Then, for each component in the bottom number (from right-to-left), isolate to i
    {\green{8}}{6}        {0}
    ```
 
-Then, add the the answers from each bottom iteration to get the final answer...
+Then, add the answers from each bottom iteration to get the final answer...
 
 ```{ktvertmul}
 { }        {4}        {3}
@@ -2056,7 +2056,7 @@ In many cases, multiplying 2 individual single digit components results in an ex
    {\green{6}}{\green{1}}        {6}        {0}
    ```
 
-Then, add the the answers from each bottom iteration to get the final answer...
+Then, add the answers from each bottom iteration to get the final answer...
 
    ```{ktvertmul}
    { }                { }        {5}        { }
@@ -3361,7 +3361,7 @@ The word ...
 * `{bm} non-negative` means 0 or positive.
 ```
 
-The prefix that determines if a integer is positive or negative is referred to as the `{bm} sign`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
+The prefix that determines if a integer is positive or negative is referred to as the `{bm} sign/\b(sign)s?\b/i`. All numbers other than 0 have a sign. 0 represents nothing / no value, which is why it doesn't have a sign -- it's used as a separation point between the positive and negative values.
 
 ```{note}
 If a number (other than 0) is positive, the + sign is typically left out. So, ... 
@@ -4552,7 +4552,7 @@ The process of breaking down a composite number into a factor of primes is calle
    If you know exponents, the example above can be further condensed as `{kt} 54 = 2 \cdot 3^3`.
    ```
    
-   Note that that factor tree method and the ladder method are effectively doing the same thing. The only difference is that the    ladder method is forcing you to choose a factor pair with a prime in it -- it's testing testing primes to see if they're viable    factor pairs.
+   Note that factor tree method and the ladder method are effectively doing the same thing. The only difference is that the    ladder method is forcing you to choose a factor pair with a prime in it -- it's testing primes to see if they're viable    factor pairs.
    
    The ladder above is represented as the following factor tree...
    
@@ -6387,23 +6387,211 @@ DecimalNumberToWordsLauncher
 
 ## Addition
 
-`{bm} Decimal addition/(decimal number addition|decimal addition)/i`
+```{prereq}
+Whole number addition
+Integer addition
+Fraction addition
+```
 
-TODO: show by converting to fractions
+Conceptually, you can think of `{bm} decimal addition/(decimal number addition|decimal addition)/i` the same as fraction addition where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction addition, a more straight-forward algorithm exists.
 
-TODO: show by using mixed numbers
+The algorithms used by humans to perform decimal addition is essentially the same as vertical addition: stack the numbers on top of each other aligned by position and add each digit, carrying over when an overflow occurs. For example, adding 123.45 to 1.1...
 
-TODO: show using standard algorithm
+```{ktvertadd}
+{1}{2}{3}{.}{4}{5}
+{ }{ }{1}{.}{1}{ }
+---
+{1}{2}{4}{.}{5}{5}
+```
+
+```{note}
+Recall that empty positions are 0, so you can think of the 1.1 in the vertical addition example above as 001.10 .
+```
+
+This works for the fractional part just as it does for the whole part because the overflow from the fractional part bleeds into the whole part. For example, adding `{kt} \frac{2}{100}` to `{kt} \frac{99}{100}` results in the mixed number `{kt} 1 \frac{1}{100}`. That same operation done through vertical addition with equivalent decimal numbers produces the same result...
+
+* `{kt} \frac{2}{100}` ⟷ 0.02
+* `{kt} \frac{99}{100}` ⟷ 0.99
+* `{kt} 1 \frac{1}{100}` ⟷ 1.01
+
+```{ktvertadd}
+{ }{ }{1}{ }{1}{ }
+{ }{ }{0}{.}{0}{2}
+{ }{ }{0}{.}{9}{9}
+---
+{ }{ }{1}{.}{0}{1}
+```
+
+Notice how if you were to remove the decimal point from the decimal numbers being added, the result would be the same as adding them with the decimal point and removing the decimal point from the result. For the 123.45 + 1.1 example above, ...
+
+ * adding with decimal point...
+
+   ```{ktvertadd}
+   {1}{2}{3}{.}{4}{5}
+   { }{ }{1}{.}{1}{ }
+   ---
+   {1}{2}{4}{.}{5}{5}
+   ```
+
+ * adding without decimal point...
+ 
+   ```{ktvertadd}
+   {1}{2}{3}{4}{5}
+   { }{ }{1}{1}{ }
+   ---
+   {1}{2}{4}{5}{5}
+   ```
+
+The decimal point can simply be placed in after the addition takes place: 12455 ⟶ 124.55.
+
+Knowing this, a new vertical addition algorithm / implementation isn't needed. The inputs can be massaged (remove decimal point) so they work with the existing algorithm and the output can be massaged back (place in decimal point).
+
+Since decimal numbers also have a sign, vertical addition can't be used if either number is negative. Rather, integer addition needs to be used. Integer addition makes use to vertical addition but also accounts for the sign.
+
+```{note}
+If you know about decimal multiplication and decimal division already, you're essentially counting the number of fractional digits for the number that has more fractional digits, then multiplying each number by 10 for that many iterations.
+
+1. Between 123.45 and 1.1, 123.45 has more fractional digits.
+2. 123.45 has 2 digits in its fractional part.
+3. Multiply the first number by 10 for 2 iterations...
+  * 123.45 * 10 = 1234.5
+  * 1234.5 * 10 = 12345
+3. Multiply the second number by 10 for 2 iterations...
+  * 1.1 * 10 = 11
+  * 11 * 10 = 110
+
+The results are guaranteed to have no fractional part, so you can use integer addition on them.
+
+4. 12345 + 110 = 12445
+
+Once you've added, divide the result by 10 for the same number of iterations to get back the result as a decimal number.
+
+4. Divide the result by 10 for 2 iterations...
+   * 12455 / 10 = 1245.5
+   * 12455 / 10 = 124.55
+
+The result is 124.55.
+  
+Multiplying by 10 shifts the decimal point to the right. Dividing by 10 shifts the decimal point to the left.
+```
+
+The way to perform this algorithm via code is as follows...
+   
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_ADD\s*\n([\s\S]+?)\n\s*#MARKDOWN_ADD
+```
+
+```{arithmetic}
+DecimalNumberAddLauncher
+123.45 1.1
+```
 
 ## Subtraction
 
-`{bm} Decimal subtraction/(decimal number subtraction|decimal subtraction)/i`
+```{prereq}
+Whole number subtraction
+Integer subtraction
+Fraction subtraction
+```
 
-TODO: show by converting to fractions
+Conceptually, you can think of `{bm} decimal subtraction/(decimal number subtraction|decimal subtraction)/i` the same as fraction subtraction where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction subtraction, a more straight-forward algorithm exists.
 
-TODO: show by using mixed numbers
+The algorithms used by humans to perform decimal subtraction is essentially the same as vertical subtraction: stack the numbers on top of each other aligned by position and subtract each digit, borrowing when necessary. For example, subtracting 1.1 from 123.45...
 
-TODO: show using standard algorithm
+```{ktvertsub}
+{1}{2}{3}{.}{4}{5}
+{ }{ }{1}{.}{1}{ }
+---
+{1}{2}{2}{.}{3}{5}
+```
+
+```{note}
+Recall that empty positions are 0, so you can think of the 1.1 in the vertical subtracting example above as 001.10 .
+```
+
+This works for the fractional part just as it does for the whole part because the carry over for the fractional part comes from the whole part. For example, subtracting `{kt} \frac{2}{100}` from the mixed number `{kt} 1 \frac{1}{100}` results in `{kt} \frac{99}{100}`. That same operation done through vertical subtraction with equivalent decimal numbers produces the same result...
+
+* `{kt} 1 \frac{1}{100}` ⟷ 1.01
+* `{kt} \frac{2}{100}` ⟷ 0.02
+* `{kt} \frac{99}{100}` ⟷ 0.99
+
+```{ktvertsub}
+{ }{ }{0}{ }{9}{11}
+{ }{ }{1}{.}{0}{1}
+{ }{ }{0}{.}{0}{2}
+---
+{ }{ }{0}{.}{9}{9}
+```
+
+Notice how if you were to remove the decimal point from the decimal numbers being subtracted, the result would be the same as subtracting them with the decimal point and removing the decimal point from the result. For the 123.45 - 1.1 example above, ...
+
+ * subtracting with decimal point...
+
+   ```{ktvertsub}
+   {1}{2}{3}{.}{4}{5}
+   { }{ }{1}{.}{1}{ }
+   ---
+   {1}{2}{2}{.}{3}{5}
+   ```
+
+ * subtracting without decimal point...
+ 
+   ```{ktvertsub}
+   {1}{2}{3}{4}{5}
+   { }{ }{1}{1}{ }
+   ---
+   {1}{2}{2}{3}{5}
+   ```
+
+The decimal point can simply be placed in after the subtraction takes place: 12235 ⟶ 122.35. 
+
+Knowing this, a new vertical subtraction algorithm / implementation isn't needed. The inputs can be massaged (remove decimal point) so they work with the existing algorithm and the output can be massaged back (place in decimal point).
+
+Since decimal numbers also have a sign, vertical subtraction can't be used if either number is negative. Rather, integer subtraction needs to be used. Integer subtraction makes use to vertical subtraction but also accounts for the sign.
+
+```{note}
+If you know about decimal multiplication and decimal division already, you're essentially counting the number of fractional digits for the number that has more fractional digits, then multiplying each number by 10 for that many iterations.
+
+1. Between 123.45 and 1.1, 123.45 has more fractional digits.
+2. 123.45 has 2 digits in its fractional part.
+3. Multiply the first number by 10 for 2 iterations...
+  * 123.45 * 10 = 1234.5
+  * 1234.5 * 10 = 12345
+3. Multiply the second number by 10 for 2 iterations...
+  * 1.1 * 10 = 11
+  * 11 * 10 = 110
+
+The results are guaranteed to have no fractional part, so you can use integer subtraction on them.
+
+4. 12345 - 110 = 12235
+
+Once you've subtracted, divide the result by 10 for the same number of iterations to get back the result as a decimal number.
+
+4. Divide the result by 10 for 2 iterations...
+   * 12235 / 10 = 1223.5
+   * 12235 / 10 = 122.35
+
+The result is 122.35.
+  
+Multiplying by 10 shifts the decimal point to the right. Dividing by 10 shifts the decimal point to the left.
+```
+
+The way to perform this algorithm via code is as follows...
+   
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_SUB\s*\n([\s\S]+?)\n\s*#MARKDOWN_SUB
+```
+
+```{arithmetic}
+DecimalNumberSubLauncher
+123.45 1.1
+```
 
 ## Multiplication
 
@@ -7330,14 +7518,14 @@ Algebraic notation:
   When the value of left-side is more than_REL the right-side, the left is said to be greater than_REL the right.
 
   ```{note}
-  This is the same as `{kt} b < a`. Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.
+  This is the same as `{kt} b < a`. Think of the symbol as a mouth. The mouth is trying to eat the larger value -- it's open in that direction.
   ```
 * `{kt} a < b` -- less than_REL
 
   When the value of left-side is less than_REL the right-side, the left is said to be greater than_REL the right.
 
   ```{note}
-  This is the same as `{kt} b > a`.  Think of the symbol as a mouth. The mouth is trying trying to eat the larger value -- it's open in that direction.
+  This is the same as `{kt} b > a`.  Think of the symbol as a mouth. The mouth is trying to eat the larger value -- it's open in that direction.
   ```
 
 * `{kt} a \geq b` -- greater than_REL or equal
@@ -7427,7 +7615,7 @@ inverse of division
 
 inverse of multiplication
 
-TODO: fraction bars as as grouping -- treat the numerator as if it was in parenthesis and the denominator as if it were in parenthesis
+TODO: fraction bars as grouping -- treat the numerator as if it was in parenthesis and the denominator as if it were in parenthesis
 
 ## Equality Rules
 
