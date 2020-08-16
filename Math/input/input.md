@@ -6637,6 +6637,7 @@ Whole number multiplication
 Integer multiplication
 Fraction multiplication
 Decimal addition
+Decimal subtraction
 ```
 
 Conceptually, you can think of `{bm} decimal multiplication/(decimal number multiplication|decimal multiplication)/i` the same as fraction multiplication where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction multiplication, a more straight-forward algorithm exists.
@@ -6644,7 +6645,7 @@ Conceptually, you can think of `{bm} decimal multiplication/(decimal number mult
 The algorithms used by humans to perform decimal multiplication is almost the same as vertical multiplication for whole numbers:
 
  1. Stack the numbers on top of each other and perform whole number multiplication as if the decimal points didn't exist.
- 2. Then, count up the number fractional digits in both input numbers and place a decimal point in the result just after the digit at that position (starting from the left).
+ 2. Then, count up the number fractional digits in both input numbers and place a decimal point in the result just before the digit at that position (starting from the left).
  
 For example, to multiply 123.45 by 1.1, perform the multiplication without the decimal points...
 
@@ -6659,46 +6660,111 @@ VerticalMultiplication
 {1}{3}{5}{7}{9}{5}
 ```
 
-Then, place in the decimal point. Since 123.45 has 2 fractional digits and 1.1 has 1 fractional digit (2 + 1 = 3), the decimal point is placed in just after the digit at the 3rd position (starting from the left)...
+Then, place in the decimal point. Since 123.45 has 2 fractional digits and 1.1 has 1 fractional digit (2 + 1 = 3), the decimal point is placed in just before the digit at the 3rd position (starting from the left)...
 
 `{kt} 135.795`
 
-This works because the ideas behind whole number multiplication are similar to the ideas behind decimal number multiplication:
+The vertical multiplication algorithm works because the ideas behind whole number multiplication are similar to the ideas behind decimal number multiplication:
 
- 1. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 135.759 can be broken down as ...
+ 1. Numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 123.45 can be broken down as ...
 
-    * 1 \* 100
-    * 3 \* 10
-    * 5 \* 1
-    * 7 \* `{kt} \frac{1}{10}`
-    * 5 \* `{kt} \frac{1}{100}`
-    * 9 \* `{kt} \frac{1}{1000}`
+    * 1 \* `{kt} \frac{100}{1}` ⟶ 1 \* 100 ⟶ 100
+    * 2 \* `{kt} \frac{10}{1}` ⟶ 2 \* 10 ⟶ 20
+    * 3 \* `{kt} \frac{1}{1}` ⟶ 3 \* 1 ⟶ 3
+    * 4 \* `{kt} \frac{1}{10}` ⟶ 4 \* 0.1 ⟶ 0.4
+    * 5 \* `{kt} \frac{1}{100}` ⟶ 5 \* 0.01 ⟶ 0.05
 
- 2. If the single digit components being multiplied are both from the whole part, the result of their multiplication is equivalent to multiplying the single non-zero digits together and appending the 0s to the end. For example, ...
+ 2. The multiplication of any two single digit components from rule 1 is equivalent to individually multiplying the single digit components and individually multiplying the fractional part, then multiplying the results together. For example, ...
 
-   * 30 \* 2 = 60 -- 3 \* 2 = 6, append 1 zero to get 60.
-   * 3 \* 20 = 60 -- 3 \* 2 = 6, append 1 zero to get 60.
-   * 30 \* 20 = 600 -- 3 \* 2 = 6, append 2 zeros to get 600.
+    * 3 \* `{kt} \frac{1}{1}` and 3 \* `{kt} \frac{1}{1}` ⟶ 9 \* `{kt} \frac{1}{1}` ⟶  9.0
+    * 5 \* `{kt} \frac{1}{100}` and 1 \* `{kt} \frac{100}{1}` ⟶  5 \* `{kt} \frac{1}{1}` ⟶  5.0
+    * 1 \* `{kt} \frac{100}{1}` and 2 \* `{kt} \frac{10}{1}` ⟶  2 \* `{kt} \frac{1000}{1}` ⟶ 2000.0
+    * 5 \* `{kt} \frac{1}{100}` and 4 \* `{kt} \frac{1}{10}` ⟶  20 \* `{kt} \frac{1}{1000}` ⟶ 0.020
+  
+ 3. Recall that multiplication can be thought of as repetitive addition. However, unlike with whole numbers, decimal numbers have a fractional part that need to be accounted for. That fractional part represents a fraction of the number being iteratively added. 
+  
+    For example, 8 \* 2.5 = 20 produces the same result as 8 + 8 + 8 * `{kt} \frac{5}{10}` = 20. 8 is added for 2 iterations, and then half of 8 is added (0.5 is equivalent to `{kt} \frac{5}{10}` which simplifies to `{kt} \frac{1}{2}`).
 
- 3. If the single digit components being multiplied are both from the fractional part, the result of their multiplication is equivalent to multiplying the single non-zero digits together and prepending as many 0s as there are combined digits in the fractional part. For example, ...
+    That same result (20) could have been produced from any number of different addition combinations:
 
-   * 0.3 \* 0.2 = 0.06 -- 3 \* 2 = 6, add a decimal point followed by a zero to get 0.06
-   * 0.3 \* 0.02 is 0.006 -- 0.3 has 1 fractional digit and 0.02 has 2 fractional digits, so the result has 3 fractional digits.
-   * 0.03 \* 0.02 is 0.0006 -- 0.03 has 2 fractional digit and 0.02 has 2 fractional digits, so the result has 4 fractional digits.
+    * 1 + 19 = 20
+    * 5 + 5 + 10 = 20
+    * 15 + 5 = 20
+    * etc..
 
-   FIX ME
+Given these ideas, any two numbers can be multiplied by ...
 
-   FIX ME
+ 1. breaking down each number into its single digit components (idea 1),
+ 2. then multiplying each component from the first number by each components from the second number (idea 2),
+ 3. then adding the results of those multiplications (idea 3).
 
-   FIX ME
+For example, to multiply 123.45 by 1.1, begin by enumerating the single digit components of each number (idea 1)...
 
-   FIX ME
+ * 123.45 breaks down to...
 
-   FIX ME
+   * 1 \* `{kt} \frac{100}{1}` ⟶ 1 \* 100 ⟶ 100
+   * 2 \* `{kt} \frac{10}{1}` ⟶ 2 \* 10 ⟶ 20
+   * 3 \* `{kt} \frac{1}{1}` ⟶ 3 \* 1 ⟶ 3
+   * 4 \* `{kt} \frac{1}{10}` ⟶ 4 \* 0.1 ⟶ 0.4
+   * 5 \* `{kt} \frac{1}{100}` ⟶ 5 \* 0.01 ⟶ 0.05
 
-   FIX ME
+ * 1.1 breaks down to...
 
- 4. If the single digit components being multiplied are from the whole and the fractional part. TODO TODO TODO
+   * 1 \* `{kt} \frac{1}{1}` ⟶ 1 \* 1 ⟶ 1
+   * 1 \* `{kt} \frac{1}{10}` ⟶ 1 \* 0.1 ⟶ 0.1
+
+Then, multiply the single digit components of 123.45 with the single digit components of 1.1...
+
+ * multiply each single digit components of 123.45 by the 1.0 component of 1.1:
+ 
+   * 1 \* 1 \* 1 \* 100 = 100
+   * 1 \* 1 \* 2 \* 10 = 20
+   * 1 \* 1 \* 3 \* 1 = 3
+   * 1 \* 1 \* 4 \* 0.1 = 0.4
+   * 1 \* 1 \* 5 \* 0.01 = 0.05
+
+ * multiply each single digit components of 123.45 by the 0.1 component of 1.1:
+ 
+   * 1 \* 0.1 \* 1 \* 100 = 10
+   * 1 \* 0.1 \* 2 \* 10 = 2
+   * 1 \* 0.1 \* 3 \* 1 = 0.3
+   * 1 \* 0.1 \* 4 \* 0.1 = 0.04
+   * 1 \* 0.1 \* 5 \* 0.01 = 0.005
+
+Then, add the result of the multiplications in the previous step:
+   
+   * 100 + 20 + 3 + 0.4 + 0.05 = 123.45
+   * 10 + 2 + 0.3 + 0.04 + 0.005 = 12.345
+   * 123.45 + 12.345 = 135.795
+
+Notice how in the example, the multiplication of the least significant single digit component from both inputs produces the least significant single digit component in the output. That is, ...
+
+ * 0.05 is the least significant single digit component in 123.45.
+ * 0.1 is the least significant single digit component in 1.1.
+ * 0.05 * 0.1 = 0.005
+
+The number of digits in the fractional part of the output will always be the total number of digits in the fractional parts of both inputs. The first input (123.45) has 2 fractional digits and the second input (1.1) has 1 fractional digit, so the output (135.795) is guaranteed to have 3 fractional digits.
+
+This is the intuition behind the post-processing step in vertical multiplication where the decimal point is added back in:
+
+> For example, to multiply 123.45 by 1.1, perform the multiplication without the decimal points...
+> 
+> ```{kthelper}
+> VerticalMultiplication
+> { }{1}{2}{3}{4}{5}
+> { }{ }{ }{ }{1}{1}
+> ---
+> { }{1}{2}{3}{4}{5}
+> {1}{2}{3}{4}{5}{ }
+> ---
+> {1}{3}{5}{7}{9}{5}
+> ```
+> 
+> Then, place in the decimal point. Since 123.45 has 2 fractional digits and 1.1 has 1 fractional digit (2 + 1 = 3), the decimal point is placed in just before the digit at the 3rd position (starting from the left)...
+> 
+> `{kt} 135.795`
+
+Since decimal numbers also have a sign, vertical multiplication can't be used if either number is negative. Rather, integer multiplication needs to be used. Integer multiplication makes use to vertical multiplication but also accounts for the sign.
 
 The way to perform this algorithm via code is as follows...
 
