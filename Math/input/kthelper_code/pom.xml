@@ -31,20 +31,8 @@
                             </platforms>
                             <programs>
                                 <program>
-                                    <mainClass>com.offbynull.kthelper.MainLongDivision</mainClass>
-                                    <id>MainLongDivision</id>
-                                </program>
-                                <program>
-                                    <mainClass>com.offbynull.kthelper.MainVerticalAddition</mainClass>
-                                    <id>MainVerticalAddition</id>
-                                </program>
-                                <program>
-                                    <mainClass>com.offbynull.kthelper.MainVerticalMultiplication</mainClass>
-                                    <id>MainVerticalMultiplication</id>
-                                </program>
-                                <program>
-                                    <mainClass>com.offbynull.kthelper.MainVerticalSubtraction</mainClass>
-                                    <id>MainVerticalSubtraction</id>
+                                    <mainClass>com.offbynull.kthelper.Router</mainClass>
+                                    <id>Router</id>
                                 </program>
                             </programs>
                         </configuration>

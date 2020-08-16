@@ -1310,7 +1310,8 @@ The digit in the 10s place is the result for the 10s place, while the digit in t
 
 The way to perform this algorithm in real-life is to stack the two numbers being added on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, add the individual single digit components together (from right-to-left). For example...
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 {1}{5}{3}
 { }{2}{1}
 ---
@@ -1323,7 +1324,8 @@ The number 21 has nothing in its 100s place -- nothing is the same as 0. 21 is t
 
 If 2 individual single digit components combine together to results in an extra digit (e.g. 5+8=13), the bleed over digit is carried over to the next position (on the left). This is denoted by stacking the bleed over digit on top of the next position -- it's being combined along with the other digits at that position. For example...
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 {1}{ }{ }
 {5}{5}{1}
 { }{8}{1}
@@ -1620,7 +1622,8 @@ Borrow recursively to handle this case:
 
 The way to perform this algorithm in real-life is to stack the two numbers being subtracted on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, subtract the individual single digit components together (from right-to-left). Everytime borrowing is needed, cross out the number being changed and put the place their new numbers above. For example, subtracting 100 and 11 ...
 
-```{ktvertsub}
+```{kthelper}
+VerticalSubtraction
 {1}{0}{0}
 { }{1}{1}
 ------
@@ -1633,7 +1636,8 @@ The way to perform this algorithm in real-life is to stack the two numbers being
 
     * borrow from 100s position: 100s position subtracts 1 (goes from 1 to 0), 10s position adds 10 (goes from 0 to 10)
 
-      ```{ktvertsub}
+      ```{kthelper}
+      VerticalSubtraction
       {0}{10}{ }
       {1}{ 0}{0}
       { }{ 1}{1}
@@ -1643,7 +1647,8 @@ The way to perform this algorithm in real-life is to stack the two numbers being
 
   * borrow from 10s position: 10s subtracts 1 (goes from 10 to 9), 1s position adds 10 (goes from 0 to 10)
 
-    ```{ktvertsub}
+    ```{kthelper}
+    VerticalSubtraction
     { }{ 9}{  }
     {0}{10}{10}
     {1}{ 0}{ 0}
@@ -1654,7 +1659,8 @@ The way to perform this algorithm in real-life is to stack the two numbers being
 
 * subtract 1s position: 10-1 results in 9
 
-  ```{ktvertsub}
+  ```{kthelper}
+  VerticalSubtraction
   { }{ 9}{  }
   {0}{10}{10}
   {1}{ 0}{ 0}
@@ -1665,7 +1671,8 @@ The way to perform this algorithm in real-life is to stack the two numbers being
 
 * subtract 10s position: 9-1 results in 8
 
-  ```{ktvertsub}
+  ```{kthelper}
+  VerticalSubtraction
   { }{ 9}{  }
   {0}{10}{10}
   {1}{ 0}{ 0}
@@ -1676,7 +1683,8 @@ The way to perform this algorithm in real-life is to stack the two numbers being
 
 * subtract 100s position: 0-0 results in 0
 
-  ```{ktvertsub}
+  ```{kthelper}
+  VerticalSubtraction
   { }{ 9}{  }
   {0}{10}{10}
   {1}{ 0}{ 0}
@@ -1944,7 +1952,8 @@ Add the results of the multiplications: 800 + 60 + 80 + 6 is 946. Note that 43 +
 
 The way to perform this algorithm in real-life is to stack the two numbers being multiplied on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). For example...
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{4}{3}
 { }{2}{2}
 -----
@@ -1955,7 +1964,8 @@ Then, for each component in the bottom number (from right-to-left), isolate to i
 
  * Isolate to 2 (bottom) and 3 (top), resulting in 6.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }        {4}        {\green{3}}
    { }        {2}        {\green{2}}
    -----
@@ -1964,7 +1974,8 @@ Then, for each component in the bottom number (from right-to-left), isolate to i
 
  * Isolate to 2 (bottom) and 40 (top), resulting in 80. Only the 8 needs to be written because this is effectively the same as doing 40\*2 (80) then adding the 6 from the 3\*2 prior --  80+6 is 86.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }        {\green{4}}{3}
    { }        {2}        {\green{2}}
    -----
@@ -1973,7 +1984,8 @@ Then, for each component in the bottom number (from right-to-left), isolate to i
 
  * Isolate to 20 (bottom) and 3 (top), resulting in 60.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }        {4}        {\green{3}}
    { }        {\green{2}}{2}
    -----
@@ -1983,7 +1995,8 @@ Then, for each component in the bottom number (from right-to-left), isolate to i
 
  * Isolate to 20 (bottom) and 40 (top), resulting in 800. Only the 8 needs to be written because this is effectively the same as doing 40\*20 (800) then adding the 60 from the 3\*20 prior --  800+60 is 860.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }        {\green{4}}{3}
    { }        {\green{2}}{2}
    -----
@@ -1993,7 +2006,8 @@ Then, for each component in the bottom number (from right-to-left), isolate to i
 
 Then, add the answers from each bottom iteration to get the final answer...
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }        {4}        {3}
 { }        {2}        {2}
 -----
@@ -2005,7 +2019,8 @@ Then, add the answers from each bottom iteration to get the final answer...
 
 In many cases, multiplying 2 individual single digit components results in an extra digit (e.g. 7\*7=49). If this happens, the bleed over digit is carried over to the next position (on the left). That is, the bleed over digit will get added to the result of the multiplication in the next position. This is denoted by stacking the bleed over digit on top of the next position. For example...
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{7}{7}
 { }{7}{7}
 -----
@@ -2014,7 +2029,8 @@ In many cases, multiplying 2 individual single digit components results in an ex
 
  * Isolate to 7 (bottom) and 7 (top), resulting in 49. The 9 is kept and 40 carries over to the next position.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }        {\green{4}}        { }
    { }                {7}{\green{7}}
    { }                {8}{\green{7}}
@@ -2024,7 +2040,8 @@ In many cases, multiplying 2 individual single digit components results in an ex
 
  * Isolate to 7 (bottom) and 70 (top), resulting in 490. Add the 40 from the carry-over to make it 530. Only the 53 needs to be written because this is effectively the same as having 530 then adding the 9 from the 7\*7 prior --  530+9 is 539.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }        {\green{4}}        { }
    { }        {\green{7}}        {7}
    { }                {8}{\green{7}}
@@ -2034,7 +2051,8 @@ In many cases, multiplying 2 individual single digit components results in an ex
 
  * Isolate to 80 (bottom) and 7 (top), resulting in 560. The 60 is kept and 500 carries over to the next position.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }        {\green{5}}        { }
    { }                {4}        { }
    { }                {7}{\green{7}}
@@ -2046,7 +2064,8 @@ In many cases, multiplying 2 individual single digit components results in an ex
 
  * Isolate to 80 (bottom) and 70 (top), resulting in 5600. Add the 500 from the carry-over to make it 6100. Only the 61 needs to be written because this is effectively the same as having 6100 then adding the 60 from the 80\*7 prior --  6100+60 is 6160.
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }                { }{\green{5}}        { }
    { }                { }        {4}        { }
    { }                { }{\green{7}}        {7}
@@ -2058,7 +2077,8 @@ In many cases, multiplying 2 individual single digit components results in an ex
 
 Then, add the answers from each bottom iteration to get the final answer...
 
-   ```{ktvertmul}
+   ```{kthelper}
+   VerticalMultiplication
    { }                { }        {5}        { }
    { }                { }        {4}        { }
    { }                { }        {7}        {7}
@@ -2840,14 +2860,16 @@ This is effectively the algorithm that humans use for long division -- for each 
 
 The notation used by humans for long division is...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
 {quotient}
 {divisor}{dividend}
 ```
 
 For example, long division notation for 752 / 3 is initially written as...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {}
 {3}{752}
 ```
@@ -2856,7 +2878,8 @@ For example, long division notation for 752 / 3 is initially written as...
 
 Starting with the first component, divide (using idea 3) to get the quotient and remainder for that component: 200R100. Then, strip-off the trialing 0s and place the quotient on-top of the component and the remainder below the component...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {\green{2}}
 {3}{752}
    {?}
@@ -2865,7 +2888,8 @@ Starting with the first component, divide (using idea 3) to get the quotient and
 
 A question mark is sandwiched between the component and remainder. The question mark should be set to the value of the divisor (3) multiplied by the quotient (200), with its trailing 0s stripped out. 3 \* 200 = 600, strip the trialing 0s to get 6...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {2}
 {3}{752}
    {\underline{\green{6}}}
@@ -2880,14 +2904,16 @@ The traditional way this is stated when being taught in school is "how many time
 * 3\*2 = 6
 * 3\*3 = 9 <-- too large, must be 7 or less, so pick the last one
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {2}
 {3}{752}
 ```
 
 Put the answer to 3\*2 = 6 underneath the component, then subtract to get the remainder...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {2}
 {3}{752}
    {\underline{6}}
@@ -2897,7 +2923,8 @@ Put the answer to 3\*2 = 6 underneath the component, then subtract to get the re
 
 Copy the next largest component down such that it's next the remainder...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {2}
 {3}{752}
    {\underline{6}}
@@ -2914,7 +2941,8 @@ The traditional way this is stated when being taught in school is "drag down the
 
 Repeat the process but target the 15 at the bottom. The 15 is the next component rolled into the remainder...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {2\green{5}}
 {3}{752}
    {\underline{6}}
@@ -2925,7 +2953,8 @@ Repeat the process but target the 15 at the bottom. The 15 is the next component
 
 Copy the next largest component down such that it's next the remainder...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {25}
 {3}{752}
    {6}
@@ -2938,7 +2967,8 @@ Copy the next largest component down such that it's next the remainder...
 
 Repeat the entire process but target the 2 at the bottom. The 2 is the next component rolled into the remainder...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {25\green{0}}
 {3}{752}
    {\underline{6}}
@@ -2952,7 +2982,8 @@ Repeat the entire process but target the 2 at the bottom. The 2 is the next comp
 
 The final reminder isn't 0, so place it next to the final quotient...
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {250\green{R2}}
 {3}{752}
    {\underline{6}}
@@ -6397,7 +6428,8 @@ Conceptually, you can think of `{bm} decimal addition/(decimal number addition|d
 
 The algorithms used by humans to perform decimal addition is essentially the same as vertical addition: stack the numbers on top of each other aligned by position and add each digit, carrying over when an overflow occurs. For example, adding 123.45 to 1.1...
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 {1}{2}{3}{.}{4}{5}
 { }{ }{1}{.}{1}{ }
 ---
@@ -6414,7 +6446,8 @@ This works for the fractional part just as it does for the whole part because th
 * `{kt} \frac{99}{100}` ⟷ 0.99
 * `{kt} 1 \frac{1}{100}` ⟷ 1.01
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 { }{ }{1}{ }{1}{ }
 { }{ }{0}{.}{0}{2}
 { }{ }{0}{.}{9}{9}
@@ -6426,7 +6459,8 @@ Notice how if you were to remove the decimal point from the decimal numbers bein
 
  * adding with decimal point...
 
-   ```{ktvertadd}
+   ```{kthelper}
+   VerticalAddition
    {1}{2}{3}{.}{4}{5}
    { }{ }{1}{.}{1}{ }
    ---
@@ -6435,7 +6469,8 @@ Notice how if you were to remove the decimal point from the decimal numbers bein
 
  * adding without decimal point...
  
-   ```{ktvertadd}
+   ```{kthelper}
+   VerticalAddition
    {1}{2}{3}{4}{5}
    { }{ }{1}{1}{ }
    ---
@@ -6500,7 +6535,8 @@ Conceptually, you can think of `{bm} decimal subtraction/(decimal number subtrac
 
 The algorithms used by humans to perform decimal subtraction is essentially the same as vertical subtraction: stack the numbers on top of each other aligned by position and subtract each digit, borrowing when necessary. For example, subtracting 1.1 from 123.45...
 
-```{ktvertsub}
+```{kthelper}
+VerticalSubtraction
 {1}{2}{3}{.}{4}{5}
 { }{ }{1}{.}{1}{ }
 ---
@@ -6517,7 +6553,8 @@ This works for the fractional part just as it does for the whole part because th
 * `{kt} \frac{2}{100}` ⟷ 0.02
 * `{kt} \frac{99}{100}` ⟷ 0.99
 
-```{ktvertsub}
+```{kthelper}
+VerticalSubtraction
 { }{ }{0}{ }{9}{11}
 { }{ }{1}{.}{0}{1}
 { }{ }{0}{.}{0}{2}
@@ -6529,7 +6566,8 @@ Notice how if you were to remove the decimal point from the decimal numbers bein
 
  * subtracting with decimal point...
 
-   ```{ktvertsub}
+   ```{kthelper}
+   VerticalSubtraction
    {1}{2}{3}{.}{4}{5}
    { }{ }{1}{.}{1}{ }
    ---
@@ -6538,7 +6576,8 @@ Notice how if you were to remove the decimal point from the decimal numbers bein
 
  * subtracting without decimal point...
  
-   ```{ktvertsub}
+   ```{kthelper}
+   VerticalSubtraction
    {1}{2}{3}{4}{5}
    { }{ }{1}{1}{ }
    ---
@@ -6609,7 +6648,8 @@ The algorithms used by humans to perform decimal multiplication is almost the sa
  
 For example, to multiply 123.45 by 1.1, perform the multiplication without the decimal points...
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{2}{3}{4}{5}
 { }{ }{ }{ }{1}{1}
 ---
@@ -10848,7 +10888,8 @@ __TRY IT__
 
 1.121)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0659}
 {4}{2636}
    {0}
@@ -10862,7 +10903,8 @@ __TRY IT__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{2}{3}{ }
 { }{6}{5}{9}
 { }{ }{ }{4}
@@ -10872,7 +10914,8 @@ __TRY IT__
 
 1.122)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0679}
 {4}{2716}
    {0}
@@ -10886,7 +10929,8 @@ __TRY IT__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{3}{3}{ }
 { }{6}{7}{9}
 { }{ }{ }{4}
@@ -10896,7 +10940,8 @@ __TRY IT__
 
 1.123)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0861}
 {5}{4305}
    {0}
@@ -10907,7 +10952,8 @@ __TRY IT__
    {0005}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{3}{ }{ }
 { }{8}{6}{1}
 { }{ }{ }{5}
@@ -10917,7 +10963,8 @@ __TRY IT__
 
 1.124)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0651}
 {6}{3906}
    {0}
@@ -10930,7 +10977,8 @@ __TRY IT__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{3}{ }{ }
 { }{6}{5}{1}
 { }{ }{ }{6}
@@ -10940,7 +10988,8 @@ __TRY IT__
 
 1.125)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0704}
 {7}{4928}
    {0}
@@ -10953,7 +11002,8 @@ __TRY IT__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{2}{ }
 { }{7}{0}{4}
 { }{ }{ }{7}
@@ -10963,7 +11013,8 @@ __TRY IT__
 
 1.126)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0809}
 {7}{5663}
    {\underline{0}}
@@ -10976,7 +11027,8 @@ __TRY IT__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{6}{ }
 { }{8}{0}{9}
 { }{ }{ }{7}
@@ -10986,7 +11038,8 @@ __TRY IT__
 
 1.127)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0476R4}
 {8}{3812}
    {\underline{0}}
@@ -10999,7 +11052,8 @@ __TRY IT__
    {0004}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{6}{4}{ }
 { }{4}{7}{6}
 { }{ }{ }{8}
@@ -11007,7 +11061,8 @@ __TRY IT__
 {3}{8}{0}{8}
 ```
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 { }{ }{1}{ }
 {3}{8}{0}{8}
 { }{ }{ }{4}
@@ -11017,7 +11072,8 @@ __TRY IT__
 
 1.128)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0539R7}
 {8}{4319}
    {\underline{0}}
@@ -11030,7 +11086,8 @@ __TRY IT__
    {0007}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{3}{7}{ }
 { }{5}{3}{9}
 { }{ }{ }{8}
@@ -11038,7 +11095,8 @@ __TRY IT__
 {4}{3}{1}{2}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }
 {4}{3}{1}{2}
 { }{ }{ }{7}
@@ -11048,7 +11106,8 @@ __TRY IT__
 
 1.129)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {0114R11}
 {13}{1493}
     {\underline{13}}
@@ -11059,7 +11118,8 @@ __TRY IT__
     {0011}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{1}{ }
 { }{1}{1}{4}
 { }{ }{1}{3}
@@ -11070,7 +11130,8 @@ __TRY IT__
 {1}{4}{8}{2}
 ```
 
-```{ktvertsub}
+```{kthelper}
+VerticalSubtraction
 {1}{4}{9}{3}
 {1}{4}{8}{2}
 ------------
@@ -11079,7 +11140,8 @@ __TRY IT__
 
 1.130)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {0121R9}
 {12}{1461}
     {\underline{12}}
@@ -11090,7 +11152,8 @@ __TRY IT__
     {0009}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{2}{1}
 { }{ }{1}{2}
 ------------
@@ -11100,7 +11163,8 @@ __TRY IT__
 {1}{4}{5}{2}
 ```
 
-```{ktvertsub}
+```{kthelper}
+VerticalSubtraction
 { }{ }{5}{11}
 {1}{4}{6}{1}
 {1}{4}{5}{2}
@@ -11110,7 +11174,8 @@ __TRY IT__
 
 1.31)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
      {00300R41}
 {256}{78641}
      {\underline{786}}
@@ -11121,7 +11186,8 @@ __TRY IT__
      {00041}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{1}{1}{ }
 { }{ }{2}{5}{6}
 { }{ }{3}{0}{0}
@@ -11133,7 +11199,8 @@ __TRY IT__
 {7}{6}{8}{0}{0}
 ```
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 {7}{6}{8}{0}{0}
 { }{ }{ }{4}{1}
 ---------------
@@ -11142,7 +11209,8 @@ __TRY IT__
 
 1.132)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
      {00308R77}
 {248}{76461}
      {\underline{744}}
@@ -11153,7 +11221,8 @@ __TRY IT__
      {00077}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{1}{2}{ }
 { }{ }{3}{6}{ }
 { }{ }{2}{4}{8}
@@ -11166,7 +11235,8 @@ __TRY IT__
 {7}{6}{3}{8}{4}
 ```
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 { }{ }{1}{1}{ }
 {7}{6}{3}{8}{4}
 { }{ }{ }{7}{7}
@@ -11324,7 +11394,8 @@ __EXERCISE__
 
 1.5.388)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {19}
 {3}{57}
    {3}
@@ -11333,7 +11404,8 @@ __EXERCISE__
    {00}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{2}{ }
 { }{1}{9}
 { }{ }{3}
@@ -11343,7 +11415,8 @@ __EXERCISE__
 
 1.5.389)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {12}
 {8}{96}
    {8}
@@ -11352,7 +11425,8 @@ __EXERCISE__
    {00}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{ }
 { }{1}{2}
 { }{ }{8}
@@ -11362,7 +11436,8 @@ __EXERCISE__
 
 1.5.390)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {13}
 {6}{78}
    {6}
@@ -11371,7 +11446,8 @@ __EXERCISE__
    {00}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{ }
 { }{1}{3}
 { }{ }{6}
@@ -11381,7 +11457,8 @@ __EXERCISE__
 
 1.5.391)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {093}
 {5}{465}
    {45}
@@ -11390,7 +11467,8 @@ __EXERCISE__
    {000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{1}{ }
 { }{ }{9}{3}
 { }{ }{ }{5}
@@ -11400,7 +11478,8 @@ __EXERCISE__
 
 1.5.392)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {132}
 {4}{528}
    {4}
@@ -11411,7 +11490,8 @@ __EXERCISE__
    {000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{ }{ }
 { }{1}{3}{2}
 { }{ }{ }{4}
@@ -11421,7 +11501,8 @@ __EXERCISE__
 
 1.5.393)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {132}
 {7}{924}
    {7}
@@ -11432,7 +11513,8 @@ __EXERCISE__
    {000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{2}{1}{ }
 { }{1}{3}{2}
 { }{ }{ }{7}
@@ -11442,7 +11524,8 @@ __EXERCISE__
 
 1.5.394)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {123}
 {7}{861}
    {7}
@@ -11453,7 +11536,8 @@ __EXERCISE__
    {000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{2}{ }
 { }{1}{2}{3}
 { }{ }{ }{7}
@@ -11463,7 +11547,8 @@ __EXERCISE__
 
 1.5.395)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0871}
 {6}{5226}
    {48}
@@ -11476,7 +11561,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{4}{ }{ }
 { }{8}{7}{1}
 { }{ }{ }{6}
@@ -11486,7 +11572,8 @@ __EXERCISE__
 
 1.5.396)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0472}
 {8}{3776}
    {32}
@@ -11497,7 +11584,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{5}{1}{ }
 { }{4}{7}{2}
 { }{ }{ }{8}
@@ -11507,7 +11595,8 @@ __EXERCISE__
 
 1.5.397)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {07831}
 {4}{31324}
    {28}
@@ -11518,7 +11607,8 @@ __EXERCISE__
    {00004}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{3}{1}{ }{ }
 { }{7}{8}{3}{1}
 { }{ }{ }{ }{4}
@@ -11528,7 +11618,8 @@ __EXERCISE__
 
 1.5.398)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {09371}
 {5}{46855}
    {45}
@@ -11541,7 +11632,8 @@ __EXERCISE__
    {00000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{3}{ }{ }
 { }{9}{3}{7}{1}
 { }{ }{ }{ }{5}
@@ -11551,7 +11643,8 @@ __EXERCISE__
 
 1.5.399)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {2403}
 {3}{7209}
    {6}
@@ -11564,7 +11657,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{ }{ }{ }
 { }{2}{4}{0}{3}
 { }{ }{ }{ }{3}
@@ -11574,7 +11668,8 @@ __EXERCISE__
 
 1.5.400)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {1602}
 {3}{4806}
    {3}
@@ -11587,7 +11682,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{ }{ }{ }
 { }{1}{6}{0}{2}
 { }{ }{ }{ }{3}
@@ -11597,7 +11693,8 @@ __EXERCISE__
 
 1.5.401)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0901}
 {6}{5406}
    {54}
@@ -11608,7 +11705,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{9}{0}{1}
 { }{ }{ }{ }{6}
 --
@@ -11617,7 +11715,8 @@ __EXERCISE__
 
 1.5.402)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0801}
 {4}{3208}
    {32}
@@ -11628,7 +11727,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{8}{0}{1}
 { }{ }{ }{ }{4}
 --
@@ -11637,7 +11737,8 @@ __EXERCISE__
 
 1.5.403)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0704}
 {4}{2816}
    {28}
@@ -11648,7 +11749,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{1}{ }
 { }{ }{7}{0}{4}
 { }{ }{ }{ }{4}
@@ -11658,7 +11760,8 @@ __EXERCISE__
 
 1.5.404)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0604}
 {6}{3624}
    {36}
@@ -11669,7 +11772,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{2}{ }
 { }{ }{6}{0}{4}
 { }{ }{ }{ }{6}
@@ -11679,7 +11783,8 @@ __EXERCISE__
 
 1.5.405)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {10209}
 {9}{91881}
    {9}
@@ -11694,7 +11799,8 @@ __EXERCISE__
    {00000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{1}{ }{8}{ }
 {1}{0}{2}{0}{9}
 { }{ }{ }{ }{9}
@@ -11704,7 +11810,8 @@ __EXERCISE__
 
 1.5.406)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {10407}
 {8}{83256}
    {8}
@@ -11719,7 +11826,8 @@ __EXERCISE__
    {00000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{3}{ }{5}{ }
 {1}{0}{4}{0}{7}
 { }{ }{ }{ }{8}
@@ -11729,7 +11837,8 @@ __EXERCISE__
 
 1.5.407)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0410}
 {7}{2470}
    {24}
@@ -11738,7 +11847,8 @@ __EXERCISE__
    {0000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{4}{1}{0}
 { }{ }{ }{ }{7}
 --
@@ -11747,7 +11857,8 @@ __EXERCISE__
 
 1.5.408)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {0534R3}
 {7}{3741}
    {35}
@@ -11758,7 +11869,8 @@ __EXERCISE__
    {0003}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{2}{2}{ }
 { }{ }{5}{3}{4}
 { }{ }{ }{ }{7}
@@ -11770,7 +11882,8 @@ __EXERCISE__
 
 1.5.409)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {06913R1}
 {8}{55305}
    {48}
@@ -11783,7 +11896,8 @@ __EXERCISE__
    {00001}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{7}{1}{2}{ }
 { }{6}{9}{1}{3}
 { }{ }{ }{ }{8}
@@ -11795,7 +11909,8 @@ __EXERCISE__
 
 1.5.410)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {05721R3}
 {9}{51492}
    {45}
@@ -11808,7 +11923,8 @@ __EXERCISE__
    {00003}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{6}{1}{ }{ }
 { }{5}{7}{2}{1}
 { }{ }{ }{ }{9}
@@ -11820,7 +11936,8 @@ __EXERCISE__
 
 1.5.411)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {086234R4}
 {5}{431174}
    {40}
@@ -11835,7 +11952,8 @@ __EXERCISE__
    {000004}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{3}{1}{1}{2}{ }
 { }{ }{8}{6}{2}{3}{4}
 { }{ }{ }{ }{ }{ }{5}
@@ -11847,7 +11965,8 @@ __EXERCISE__
 
 1.5.412)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {074319R1}
 {4}{297277}
    {28}
@@ -11862,7 +11981,8 @@ __EXERCISE__
    {000001}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{1}{1}{ }{3}{ }
 { }{ }{7}{4}{3}{1}{9}
 { }{ }{ }{ }{ }{ }{4}
@@ -11874,7 +11994,8 @@ __EXERCISE__
 
 1.5.413)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {043338R2}
 {3}{130016}
    {12}
@@ -11889,7 +12010,8 @@ __EXERCISE__
    {000002}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{1}{1}{1}{2}{ }
 { }{ }{4}{3}{3}{3}{8}
 { }{ }{ }{ }{ }{ }{3}
@@ -11901,7 +12023,8 @@ __EXERCISE__
 
 1.5.414)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
    {052804R1}
 {2}{105609}
    {10}
@@ -11916,7 +12039,8 @@ __EXERCISE__
    {000001}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{1}{ }{ }{ }
 { }{ }{5}{2}{8}{0}{4}
 { }{ }{ }{ }{ }{ }{2}
@@ -11928,7 +12052,8 @@ __EXERCISE__
 
 1.5.415)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {0382R5}
 {15}{5735}
     {45}
@@ -11939,7 +12064,8 @@ __EXERCISE__
     {0005}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }{ }{ }{ }
 { }{ }{ }{ }{4}{1}{ }
 { }{ }{ }{ }{3}{8}{2}
@@ -11955,7 +12081,8 @@ __EXERCISE__
 
 1.5.416)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {0234R19}
 {21}{4933}
     {42}
@@ -11966,7 +12093,8 @@ __EXERCISE__
     {0019}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }{2}{3}{4}
 { }{ }{ }{ }{ }{2}{1}
 --
@@ -11980,7 +12108,8 @@ __EXERCISE__
 
 1.5.417)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {00849}
 {67}{56883}
     {536}
@@ -11991,7 +12120,8 @@ __EXERCISE__
     {00000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }{2}{5}{ }
 { }{ }{ }{ }{3}{6}{ }
 { }{ }{ }{ }{8}{4}{9}
@@ -12005,7 +12135,8 @@ __EXERCISE__
 
 1.5.418)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {00583}
 {75}{43725}
     {375}
@@ -12016,7 +12147,8 @@ __EXERCISE__
     {00000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }{5}{2}{ }
 { }{ }{ }{ }{4}{1}{ }
 { }{ }{ }{ }{5}{8}{3}
@@ -12030,7 +12162,8 @@ __EXERCISE__
 
 1.5.419)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
      {00096}
 {314}{30144}
      {2826}
@@ -12039,7 +12172,8 @@ __EXERCISE__
      {00000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }{1}{3}{ }
 { }{ }{ }{ }{ }{2}{ }
 { }{ }{ }{ }{3}{1}{4}
@@ -12053,7 +12187,8 @@ __EXERCISE__
 
 1.5.420)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
      {00063}
 {415}{26145}
      {2490}
@@ -12062,7 +12197,8 @@ __EXERCISE__
      {00000}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }{ }{3}{ }
 { }{ }{ }{ }{ }{1}{ }
 { }{ }{ }{ }{4}{1}{5}
@@ -12077,7 +12213,8 @@ __EXERCISE__
 
 1.5.421)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
      {001986R17}
 {273}{542195}
      {273}
@@ -12090,7 +12227,8 @@ __EXERCISE__
      {000017}
 ```
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{ }{ }{ }{ }
 { }{ }{ }{1}{1}{1}{ }
 { }{ }{ }{6}{6}{4}{ }
@@ -12109,7 +12247,8 @@ __EXERCISE__
 
 1.5.422)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
      {001766R351}
 {462}{816243}
      {462}
@@ -12123,7 +12262,8 @@ __EXERCISE__
 ```
 
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{ }{3}{2}{2}{ }
 { }{ }{ }{4}{3}{3}{ }
 { }{ }{ }{1}{1}{1}{ }
@@ -12141,7 +12281,8 @@ __EXERCISE__
 
 1.5.423)
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{2}{ }
 { }{2}{0}{4}
 { }{ }{1}{5}
@@ -12154,7 +12295,8 @@ __EXERCISE__
 
 1.5.424)
 
-```{ktvertmul}
+```{kthelper}
+VerticalMultiplication
 { }{ }{6}{ }{ }
 { }{ }{3}{ }{ }
 { }{ }{3}{9}{1}
@@ -12168,7 +12310,8 @@ __EXERCISE__
 
 1.5.425)
 
-```{ktvertsub}
+```{kthelper}
+VerticalSubtraction
 {1}{15}{ }
 {2}{5 }{6}
 {1}{8 }{4}
@@ -12178,7 +12321,8 @@ __EXERCISE__
 
 1.5.426)
 
-```{ktvertsub}
+```{kthelper}
+VerticalSubtraction
 {2}{10}{ }
 {3}{ 0}{5}
 {2}{ 6}{2}
@@ -12188,7 +12332,8 @@ __EXERCISE__
 
 1.5.427)
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 { }{ }{1}{ }
 { }{7}{1}{9}
 { }{3}{4}{1}
@@ -12198,7 +12343,8 @@ __EXERCISE__
 
 1.5.428)
 
-```{ktvertadd}
+```{kthelper}
+VerticalAddition
 { }{ }{1}{ }
 { }{6}{4}{7}
 { }{5}{2}{8}
@@ -12208,7 +12354,8 @@ __EXERCISE__
 
 1.5.429)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {035}
 {25}{875}
     {75}
@@ -12219,7 +12366,8 @@ __EXERCISE__
 
 1.5.430)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {0048}
 {23}{1104}
     {092}
@@ -12274,7 +12422,8 @@ long division seems to be the inverse of vertical multiplication.
 
 1.5.451) 
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {026R1}
 {14}{365}
     {28}
@@ -12285,7 +12434,8 @@ long division seems to be the inverse of vertical multiplication.
 
 1.5.452)
 
-```{ktlongdiv}
+```{kthelper}
+LongDivision
     {014R15}
 {25}{365}
     {25}
