@@ -544,17 +544,17 @@ class DecimalNumber:
         )
 
         log(f'Generating mock integer number for {lhs}...')
-        self_extra_0s = adjust_len - len(lhs.fractional.digits)
-        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
-        self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
+        lhs_extra_0s = adjust_len - len(lhs.fractional.digits)
+        lhs_combined_digits = lhs.fractional.digits + lhs.whole.digits
+        lhs_combined_digits[0:0] = [Digit(0)] * lhs_extra_0s
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(lhs_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {rhs}...')
-        other_extra_0s = adjust_len - len(rhs.fractional.digits)
-        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
-        other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
+        rhs_extra_0s = adjust_len - len(rhs.fractional.digits)
+        rhs_combined_digits = rhs.fractional.digits + rhs.whole.digits
+        rhs_combined_digits[0:0] = [Digit(0)] * rhs_extra_0s
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(rhs_combined_digits))
         log(f'{mock_other}')
 
         log(f'Performing {mock_self} + {mock_other}...')
@@ -586,17 +586,17 @@ class DecimalNumber:
         )
 
         log(f'Generating mock integer number for {lhs}...')
-        self_extra_0s = adjust_len - len(lhs.fractional.digits)
-        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
-        self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
+        lhs_extra_0s = adjust_len - len(lhs.fractional.digits)
+        lhs_combined_digits = lhs.fractional.digits + lhs.whole.digits
+        lhs_combined_digits[0:0] = [Digit(0)] * lhs_extra_0s
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(lhs_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {rhs}...')
-        other_extra_0s = adjust_len - len(rhs.fractional.digits)
-        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
-        other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
+        rhs_extra_0s = adjust_len - len(rhs.fractional.digits)
+        rhs_combined_digits = rhs.fractional.digits + rhs.whole.digits
+        rhs_combined_digits[0:0] = [Digit(0)] * rhs_extra_0s
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(rhs_combined_digits))
         log(f'{mock_other}')
 
         log(f'Performing {mock_self} - {mock_other}...')
@@ -626,17 +626,17 @@ class DecimalNumber:
         adjust_len_other = len(rhs.fractional.digits)
 
         log(f'Generating mock integer number for {lhs}...')
-        self_extra_0s = adjust_len_self - len(lhs.fractional.digits)
-        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
-        self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
+        lhs_extra_0s = adjust_len_self - len(lhs.fractional.digits)
+        lhs_combined_digits = lhs.fractional.digits + lhs.whole.digits
+        lhs_combined_digits[0:0] = [Digit(0)] * lhs_extra_0s
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(lhs_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {rhs}...')
-        other_extra_0s = adjust_len_other - len(rhs.fractional.digits)
-        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
-        other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
+        rhs_extra_0s = adjust_len_other - len(rhs.fractional.digits)
+        rhs_combined_digits = rhs.fractional.digits + rhs.whole.digits
+        rhs_combined_digits[0:0] = [Digit(0)] * rhs_extra_0s
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(rhs_combined_digits))
         log(f'{mock_other}')
 
         log(f'Performing {mock_self} * {mock_other}...')
@@ -668,17 +668,17 @@ class DecimalNumber:
         adjust_len_other = len(rhs.fractional.digits)
 
         log(f'Generating mock integer number for {lhs}...')
-        self_extra_0s = adjust_len_self - len(lhs.fractional.digits)
-        self_combined_digits = lhs.fractional.digits + lhs.whole.digits
-        self_combined_digits[0:0] = [Digit(0)] * self_extra_0s
-        mock_self = IntegerNumber(lhs.sign, WholeNumber(self_combined_digits))
+        lhs_extra_0s = adjust_len_self - len(lhs.fractional.digits)
+        lhs_combined_digits = lhs.fractional.digits + lhs.whole.digits
+        lhs_combined_digits[0:0] = [Digit(0)] * lhs_extra_0s
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(lhs_combined_digits))
         log(f'{mock_self}')
 
         log(f'Generating mock integer number for {rhs}...')
-        other_extra_0s = adjust_len_other - len(rhs.fractional.digits)
-        other_combined_digits = rhs.fractional.digits + rhs.whole.digits
-        other_combined_digits[0:0] = [Digit(0)] * other_extra_0s
-        mock_other = IntegerNumber(rhs.sign, WholeNumber(other_combined_digits))
+        rhs_extra_0s = adjust_len_other - len(rhs.fractional.digits)
+        rhs_combined_digits = rhs.fractional.digits + rhs.whole.digits
+        rhs_combined_digits[0:0] = [Digit(0)] * rhs_extra_0s
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(rhs_combined_digits))
         log(f'{mock_other}')
 
         log(f'Check to make sure decimal will terminate...')

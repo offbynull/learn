@@ -9,13 +9,15 @@ Mathematics
 
 The `{bm} place value system/(place value system|place-value system|place value notation|place-value notation|positional numeral system)/i` is the modern way in which numbers are represented. A number represented using the place value system is made up of a string of symbols separated by a dot, where each (index, symbol) combination in the string represents a value (i.e. `val[idx] = compute(idx, str[idx])`).
 
+`{bm-redirect} (whole)/i/(whole)_PVS/i`
+`{bm-redirect} (fractional)/i/(fractional)_PVS/i`
 
 The symbols used to represent a number are called `{bm} digit`s. All digits to the...
 
- * left of the dot represents wholes.
- * right of the dot represents a partial (less than_REL a whole).
+ * left of the dot represents entire objects, called the `{bm} whole/(whole)_PVS/i` part.
+ * right of the dot represents a partial object, called the `{bm} fractional/(fractional)_PVS/i` part.
 
-These wholes and partial are combined to represent the final value for the number. The exact grammar and algorithm for computing the final value is detailed below.
+These wholes and fractional are combined to represent the final value for the number. For example, the number 43.5 represents...
 
 ```
 ●●●●●●●●●●
@@ -28,33 +30,23 @@ These wholes and partial are combined to represent the final value for the numbe
 The grammar for the place value system is...
 
 ```antlr
-number: whole (DOT partial)?;
+number: whole (DOT fractional)?;
 whole: DIGIT+;
-partial: DIGIT+;
+fractional: DIGIT+;
 
 DOT: '.';
 DIGIT: [0123456789];
 ```
 
-The entry point to the grammar is the number rule. Note that the partial portion of the number rule is optional -- a number with a missing partial portion is assumed to have a partial portion of 0 (e.g. 5 is the same as 5.0).
-
-The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / number operations -- value is tracked by iteratively pushing blocks into arrays.
+The entry point to the grammar is the number rule. Note that the fractional part of the number rule is optional -- a number with a missing fractional part is assumed to have no partial value -- it consists of only entire objects.
 
 ```{note}
-Why create an algorithm without using numbers? Using numbers to describe numbers is circular logic.
+The details below describe each sub-rule as well as the algorithm to process that sub-rule. None of the algorithms use actual numbers / number operations -- value is tracked by iteratively pushing blocks into arrays. Why create an algorithm without using numbers? Using numbers to describe numbers is circular logic.
 ```
 
-**whole rule**
+The whole rule is used to express how many entire objects there are. The algorithm for determining that value consists of 3 steps:
 
-```
-number: whole ('.' partial)?;
-         │
-         └── DIGIT+;
-```
-
-The whole rule is used to express how many whole values there are. For example, to process the string 572 for the whole rule, ...
-
- 1. begin by first determining the value each digit represents...
+ 1. Determine the value each digit represents...
 
     ```
     0 = <empty>
@@ -69,8 +61,9 @@ The whole rule is used to express how many whole values there are. For example, 
     9 = ●●●●●●●●●
     ```
 
+    These are the digits and their values.
 
- 2. Then, calculate the value for each index of the string 572. The algorithm for determining the value of each index is...
+ 2. Then, calculate the value for each index of the whole part. The algorithm for determining the value of each index is...
 
     ```
     index_values = []
@@ -88,7 +81,7 @@ The whole rule is used to express how many whole values there are. For example, 
     index_values.reverse()
     ```
 
-    ..., so for the string 572, the index values would be...
+    For example, the index values in the whole part 572 are...
 
     ```
     _ _ _
@@ -108,7 +101,7 @@ The whole rule is used to express how many whole values there are. For example, 
         value.push(index_value)
     ```
 
-    ... , so each (digit, index) in the number 572 would be computed as...
+    For example, the (digit, index) values in the whole part 572 are....
 
     * 5\_\_
 
@@ -162,23 +155,7 @@ The whole rule is used to express how many whole values there are. For example, 
            ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
     ```
 
-**partial rule**
-
-```
-number: whole ('.' partial)?;
-                      │
-                      └── DIGIT+;
-```
-
-```{note}
-It's expected that you fully understand the whole rule because whole numbers are used to explain the partial rule.
-```
-
-The partial rule is used to express a portion of a whole. In other words, some value that is less than_REL a whole.
-
-If the partial rule is not set, it's assumed to be 0.
-
-Conceptually, you can think of each digit in the partial string as a recursive slicing of a single whole. For example, in the partial string 358, the first index picks out 3 equal parts out of the whole ...
+The fractional rule is used to express some portion of an object (`{bm-skip} less than` a single object). Conceptually, you can think of each digit in the fractional string as a recursive slicing of a single whole. For example, in the fractional string 358, the first index picks out 3 equal parts out of the whole ...
 
 ```{diagramhelperpartrecurse}
 3
@@ -208,9 +185,9 @@ This is exactly the same as chopping up a whole into 1000 equal parts and pickin
 358
 ```
 
-The algorithm for processing the partial rule is similar to the conceptual model. For example, to process the string 55 for the partial rule, ...
+The algorithm for processing the fractional rule is similar to the conceptual model described above. It consists of 2 steps:
 
- 1. begin by determining the total number of parts there are. The algorithm to do this is as follows..
+ 1. Determine the total number of parts there are. The algorithm for this is...
 
     ```
     total_parts = <empty>
@@ -227,7 +204,7 @@ The algorithm for processing the partial rule is similar to the conceptual model
     }
     ```
 
-    ..., so for the string 55, the total number of parts would be 100...
+    For example, for a fractional part of 55 the total number of parts would be 100...
 
     ```
     ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
@@ -239,20 +216,22 @@ The algorithm for processing the partial rule is similar to the conceptual model
      1. set the first index to 1.
      1. set all other indexes to 0.
      
-    So if the partial string has 2 digits (as 55 does), the total number of parts would be 100.
+    So if the fractional string has 2 digits (as 55 does), the total number of parts would be 100.
 
     The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.
     ```
 
     ```{note}
-    An easier way to do the same thing is 10^partial.length.
+    Know exponents? Doing 10^fractional.length is the same thing.
      
-    So if the partial string has 2 digits (as 55 does), the total number of parts would be 10^2=100.
+    If the fractional string has 2 digits (as 55 does), the total number of parts would be 10^2=100.
 
     The reason why the code above doesn't do this is because I'm trying to avoid the use of numbers and operations that haven't been introduced yet.
     ````
 
- 2. The partial string is a selection out the total parts calculated in the step above. Out of 100 parts, 55 are selected.
+ 2. The fractional string is a selection out the total parts calculated in the step above.
+ 
+    For example, for a fractional part of 55, ...
 
     ```
     [●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●]●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
@@ -262,13 +241,7 @@ The algorithm for processing the partial rule is similar to the conceptual model
     55
     ```
 
-# Number Line
-
-```{prereq}
-Place value system
-```
-
-A `{bm} number line/(number line|number-line|numberline)/i` is a way to visualize the value that a number represents. It consists of a straight horizontal line with equidistant vertical notches spliced through out, where each notch is labelled with incrementally larger numbers from left-to-right...
+Similar to the sliced circle diagrams shown in the algorithm descriptions above, a `{bm} number line` may also be used to visualize the value that a number represents. It consists of a straight horizontal line with equidistant vertical notches spliced through out, where each notch is labelled with incrementally larger numbers from left-to-right...
 
 ```{svgbob}
 |---|---|---|---|---|---|---|---|---|
@@ -285,7 +258,7 @@ The number being represented is marked on the line. For example, to represent th
 0   1   2   3   4   5   6   7   8   9
 ```
 
-Numbers with partial portions may also be marked on the line. Move the marker to the whole portion of the number, then determine the amount of space that the partial portion consumes and move over that much towards the next notch. For example, to represent the number 5.5...
+Numbers with fractional parts may also be marked on the line. Move the marker to the whole part of the number, then determine the amount of space that the fractional part consumes and move over that much towards the next notch. For example, to represent the number 5.5...
 
 ```{diagramhelperfrac}
 radius 40
@@ -303,7 +276,7 @@ First, move the marker over to the whole: 5...
 0   1   2   3   4   5   6   7   8   9
 ```
 
-Then, determine how much space in the partial portion was consumed. 5.5's partial portion takes up half a circle, so it gets moved half way towards the next notch...
+Then, determine how much space in the fractional part was consumed. 5.5's fractional part takes up half a circle, so it gets moved half way towards the next notch...
 
 ```{svgbob}
                      5.5
@@ -317,10 +290,9 @@ Then, determine how much space in the partial portion was consumed. 5.5's partia
 
 ```{prereq}
 Place value system
-Number line
 ```
 
-`{bm} Equality` is the concept of checking if one number to see if it has the same value as another number. In other words, checking if both numbers are the same. For example, the numbers 5 and 5 are the same number, so they're said to be equal.
+`{bm} Equality/(equality|equal)/i` is the concept of checking if one number to see if it has the same value as another number. In other words, checking if both numbers are the same. For example, the numbers 5 and 5 are the same number, so they're said to be equal.
 
 If you were to visualize both numbers on a number line, they would both sit at the same position...
 
@@ -345,18 +317,22 @@ The output of an equality operation is either true or false: true when the numbe
 
 When using words, equality is typically represented using the following syntax:
 
-* `{bm} equal` -- e.g. 5 equals 5
-* `{bm} is/(\bis\b)/i` -- e.g. 5 is 5
-* `{bm} was` -- e.g. 5 was 5
-* `{bm} will be` -- e.g. 5 will be 5
-* `{bm} the same` -- e.g. 5 and 5 are the same
-* `{bm} gives` -- e.g. performing the operation gives 5
+* equal -- e.g. 5 equals 5
+* is -- e.g. 5 is 5
+* was -- e.g. 5 was 5
+* will be -- e.g. 5 will be 5
+* the same -- e.g. 5 and 5 are the same
+* gives -- e.g. performing the operation gives 5
+
+```{note}
+Not all of the above are bookmarked because there's too much ambiguity. For example, the word "is" is used in many contexts outside of addition.
+```
 
 ```{note}
 If you know algebra, the word "gives" is applicable more so to algebra and beyond. For example: the addition of x and 1 gives 5 means x+1 = 5.
 ```
 
-The opposite of equality is `{bm} not equality`. That is, not equality is the concept of checking if one number has a different number of items than another number. For example, the numbers 5 and 6 are different, so they're said to be not equal.
+The opposite of equality is not equality. That is, not equality is the concept of checking if one number has a different number of items than another number. For example, the numbers 5 and 6 are different, so they're said to be not equal.
 
 Not equality is typically represented using the infix operator ≠ or !=. The above example would be represented as 5≠6.
 
@@ -366,26 +342,29 @@ The output of a not equality operation is either true or false: true when the nu
 
 When using words, not equality is typically represented using the following syntax:
 
-* `{bm} not equal/(not equal|isn't equal)/i` -- e.g. 6 is not equal to 5
-* `{bm} is not/(isn't|is not)/i` -- e.g. 6 is not 5
-* `{bm} was not/(wasn't|was not)/i` -- e.g. 6 was not 5
-* `{bm} won't be` -- e.g. 6 won't be 5
-* `{bm} not the same/(not the same|isn't the same)/i` -- e.g. 6 and 5 are not the same
-* `{bm} does not give/(does not give|doesn't give)/i` -- e.g. performing the operation does not give 5
+* not equal -- e.g. 6 is not equal to 5
+* is not -- e.g. 6 is not 5
+* was not -- e.g. 6 was not 5
+* won't be -- e.g. 6 won't be 5
+* not the same -- e.g. 6 and 5 are not the same
+* does not give -- e.g. performing the operation does not give 5
 
 ```{note}
-Sometimes you may see the word `{bm} inequality`. This refers to operations that compare two numbers for something other than equality: greater than_REL (>), less than_REL (<), not equality (≠), and potentially others.
+Not all of the above are bookmarked because there's too much ambiguity. For example, the words "is not" is used in many contexts outside of addition.
+```
+
+```{note}
+Sometimes you may see the word `{bm} inequality`. This refers to operations that compare two numbers for something other than equality: greater than (>), less than (<), not equality (≠), and potentially others.
 ```
 
 # Greater Than
 
 ```{prereq}
 Place value system
-Number line
 Equality
 ```
 
-`{bm} Greater than/(greater than)_REL/i` is the concept of checking if one number represents more items than another number. For example, the number 8 has more items than the number 5, so 8 is said to be greater than_REL 5.
+`{bm} Greater than` is the concept of checking if one number represents more items than another number. For example, the number 8 has more items than the number 5, so 8 is said to be greater than 5.
 
 If you were to visualize both numbers on a number line, the number 8 would be ahead of 5...
 
@@ -403,19 +382,19 @@ If you were to visualize both numbers on a number line, the number 8 would be ah
                     5
 ```
 
-Greater than_REL is typically represented using the infix operator >. The above example would be represented as 8>5.
+Greater than is typically represented using the infix operator >. The above example would be represented as 8>5.
 
-The output of a greater than_REL operation is either true or false: true when the first number has more items and false when it doesn't. For example, ...
+The output of a greater than operation is either true or false: true when the first number has more items and false when it doesn't. For example, ...
 * 8 > 5 is true because the first number (8) has more items.
 * 5 > 5 is false because the first number (5) doesn't have more items.
 
-When using words, greater than_REL is typically represented using the following syntax:
+When using words, greater than is typically represented using the following syntax:
 
-* greater than_REL -- e.g. 8 is greater than_REL 5
-* `{bm} larger than/(larger than)_REL/i` -- e.g. 8 is larger than_REL 5
-* `{bm} more than/(more than)_REL/i` -- e.g. 8 is more than_REL 5
+* greater than -- e.g. 8 is greater than 5
+* larger than -- e.g. 8 is larger than 5
+* more than -- e.g. 8 is more than 5
 
-`{bm} Greater than or equal` is common shorthand to compare if a number is greater than_REL or equal to some other number. It's typically represented using the infix operator ≥ or >=. For example...
+Greater than or equal is common shorthand to compare if a number is greater than or equal to some other number. It's typically represented using the infix operator ≥ or >=. For example...
 
 * 8 ≥ 5 is true because the first number (8) has more items.
 * 5 ≥ 5 is true because the first number (5) has equal items.
@@ -423,13 +402,13 @@ When using words, greater than_REL is typically represented using the following 
 
 When using words, greater than or equal is typically represented using the following syntax:
 
-* greater than or equal -- e.g. 8 is greater than or equal 5
-* `{bm} larger than or equal` -- e.g. 8 is larger than or equal 5
-* `{bm} more than or equal` -- e.g. 8 is more than or equal 5
-* `{bm} at least` -- e.g. 8 is at least 5
+* greater than or equal -- e.g. 8 is greater than or equal to 5
+* larger than or equal -- e.g. 8 is larger than or equal to  5
+* more than or equal -- e.g. 8 is more than or equal to 5
+* at least -- e.g. 8 is at least 5
 
 ```{note}
-Think of at least as "not less than_REL" -- 8 is not less than_REL 5.  If you can follow the logic...
+Think of at least as "not less than" -- 8 is not less than 5.  If you can follow the logic...
 
 * not(8 < 5)
 * 8 ≥ 5
@@ -439,11 +418,10 @@ Think of at least as "not less than_REL" -- 8 is not less than_REL 5.  If you ca
 
 ```{prereq}
 Place value system
-Number line
 Equality
 ```
 
-`{bm} Less than/(less than)_REL/i` is the concept of checking if one number has fewer items than another number. For example, the number 5 has fewer items than the number 8, so 5 is said to be less than_REL 8.
+`{bm} Less than` is the concept of checking if one number has fewer items than another number. For example, the number 5 has fewer items than the number 8, so 5 is said to be less than 8.
 
 If you were to visualize both numbers on a number line, the number 5 would be behind of 8...
 
@@ -461,19 +439,19 @@ If you were to visualize both numbers on a number line, the number 5 would be be
                                 8
 ```
 
-Less than_REL is typically represented using the infix operator <. The above example would be represented as 5<8.
+Less than is typically represented using the infix operator <. The above example would be represented as 5<8.
 
-The output of a less than_REL operation is either true or false: true when the first number has fewer items and false when it doesn't. For example, ...
+The output of a less than operation is either true or false: true when the first number has fewer items and false when it doesn't. For example, ...
 * 5 < 8 is true because the first number (5) has fewer items.
 * 5 > 5 is false because the first number (5) doesn't have fewer items.
 
-When using words, less than_REL is typically represented using the following syntax:
+When using words, less than is typically represented using the following syntax:
 
-* less than_REL -- e.g. 5 is less than_REL 8
-* `{bm} smaller than/(smaller than)_REL/i` -- e.g. 5 is smaller than_REL 8
-* `{bm} fewer than/(fewer than)_REL/i` -- e.g. 5 is fewer than_REL 8
+* less than -- e.g. 5 is less than 8
+* smaller than -- e.g. 5 is smaller than 8
+* fewer than -- e.g. 5 is fewer than 8
 
-`{bm} Less than or equal` is common shorthand to compare if a number is less than_REL or equal to some other number. It's typically represented using the infix operator ≤ or <=. For example...
+Less than or equal is common shorthand to compare if a number is less than or equal to some other number. It's typically represented using the infix operator ≤ or <=. For example...
 
 * 5 ≤ 8 is true because the first number (5) has less items.
 * 5 ≤ 5 is true because the first number (5) has equal items.
@@ -482,12 +460,12 @@ When using words, less than_REL is typically represented using the following syn
 When using words, less than or equal is typically represented using the following syntax:
 
 * less than or equal -- e.g. 8 is less than or equal 5
-* `{bm} smaller than or equal` -- e.g. 8 is smaller than or equal 5
-* `{bm} fewer than or equal` -- e.g. 8 is less than or equal 5
-* `{bm} at most` -- e.g. 5 is at most 8
+* smaller than or equal -- e.g. 8 is smaller than or equal 5
+* fewer than or equal -- e.g. 8 is fewer than or equal 5
+* at most -- e.g. 5 is at most 8
 
 ```{note}
-Think of at most as "not more than_REL" -- 5 is not more than_REL 8. If you can follow the logic...
+Think of at most as "not more than" -- 5 is not more than 8. If you can follow the logic...
 
 * not(5 > 8)
 * 5 ≤ 8
@@ -498,9 +476,10 @@ Think of at most as "not more than_REL" -- 5 is not more than_REL 8. If you can 
 ```{prereq}
 Place value system
 Equality
+Greater than
 ```
 
-`{bm} Addition` is the concept of taking two numbers and combining their values together. For example, combining 3 items and 5 items together results in 7 items...
+`{bm} Addition/(addition|add)/i` is the concept of taking two numbers and combining their values together. For example, combining 3 items and 5 items together results in 7 items...
 
 ```
  [●●●]    [●●●●●]
@@ -514,17 +493,28 @@ group values together
 
 Addition is typically represented using the infix operator +. The above example would be represented as 3+5.
 
+The output of an addition operation is called the `{bm} sum`. In the example above, 7 is the sum.
+
 When using words, addition is typically represented using the following syntax:
 
 * addition -- e.g. the addition of 3 and 5
-* `{bm} add` -- e.g. add 3 and 5
-* `{bm} plus` -- e.g. 3 plus 5
-* `{bm} sum` -- e.g. sum of 3 and 5
-* `{bm} increase` -- e.g. 3 increased by 5
-* `{bm} more than/(more than)_ADD/i` -- e.g. 3 more than_ADD 5
-* `{bm} larger than/(larger than)_ADD/i` -- e.g. 3 larger than_ADD 5
-* `{bm} greater than/(greater than)_ADD/i` -- e.g. 3 greater than_ADD 5
-* `{bm} total` -- e.g. total of 3 and 5
+* add -- e.g. add 3 and 5
+* plus -- e.g. 3 plus 5
+* sum -- e.g. sum of 3 and 5
+* increase -- e.g. 3 increased by 5
+* more than -- e.g. 3 more than 5
+* larger than -- e.g. 3 larger than 5
+* `{bm-skip} greater than -- e.g. 3 greater than 5`
+* total -- e.g. total of 3 and 5
+
+```{note}
+More than, larger than, and `{bm-skip} greater than` are more much more commonly used for the greater than relational operator. For example...
+
+* `{bm-skip} 5 greater than 3 -- 5 + 3`
+* `{bm-skip} 5 is greater than 3 -- 5 > 3`
+
+You'll need to disambiguate based on the context.
+```
 
 Properties of addition:
 
@@ -555,7 +545,7 @@ Place value system
 Equality
 ```
 
-`{bm} Subtraction` is the concept of removing the value of one number from another number. For example, removing 3 items from 5 items results in 2 items...
+`{bm} Subtraction/(subtraction|subtract)/i` is the concept of removing the value of one number from another number. For example, removing 3 items from 5 items results in 2 items...
 
 ```
     [●●●●●]
@@ -569,17 +559,28 @@ pick out 3 from the 5
 
 Subtraction is typically represented using the infix operator -. The above example would be represented as 5-3.
 
+The output of an subtraction operation is called the `{bm} difference`. In the example above, 2 is the difference.
+
 When using words, subtraction is typically represented using the following syntax:
 
 * subtraction -- e.g. the subtraction of 3 and 5
-* `{bm} minus` -- e.g. 5 minus 3
-* `{bm} difference of` -- e.g. difference of 5 and 3
-* `{bm} subtracted by` -- e.g. 5 subtracted by 3
-* `{bm} decreased by` -- e.g. 5 decreased by 3
-* `{bm} less than/(less than)_SUB/i` -- e.g. 3 less than_SUB 5
-* `{bm} fewer than/(fewer than)_SUB/i` -- e.g. 3 fewer than_SUB 5
-* `{bm} smaller than/(smaller than)_SUB/i` -- e.g. 3 smaller than_SUB 5
-* `{bm} subtracted from` -- e.g. 3 subtracted from 5
+* minus -- e.g. 5 minus 3
+* difference of -- e.g. difference of 5 and 3
+* subtracted by -- e.g. 5 subtracted by 3
+* decreased by -- e.g. 5 decreased by 3
+* `{bm-skip} less than` -- e.g. 3 less than 5
+* fewer than -- e.g. 3 fewer than 5
+* smaller than -- e.g. 3 smaller than 5
+* subtracted from -- e.g. 3 subtracted from 5
+
+```{note}
+Fewer than, smaller than, and `{bm-skip} less than` are more much more commonly used for the less than relational operator. For example...
+
+* `{bm-skip} 3 less than 5 -- 3 - 5`
+* `{bm-skip} 3 is less than 5 -- 3 < 5`
+
+You'll need to disambiguate based on the context.
+```
 
 Properties of subtraction:
 
@@ -602,7 +603,7 @@ Equality
 Addition
 ```
 
-`{bm} Multiplication` is the concept of taking a number and iteratively adding it to itself a certain number of iterations. For example, 3 added to itself for 5 iterations results in 15 items...
+`{bm} Multiplication/(multiplication|multiply)/i` is the concept of taking a number and iteratively adding it to itself a certain number of iterations. For example, 3 added to itself for 5 iterations results in 15 items...
 
 ```
 3+3+3+3+3=15
@@ -632,10 +633,10 @@ The inputs into the multiplication operation are either...
 When using words, multiplication is typically represented using the following syntax:
 
 * multiplication -- e.g. the multiplication of 3 and 5
-* `{bm} multiply` -- e.g. multiply 3 and 5
-* `{bm} multiplied` -- e.g. 3 multiplied by 5
-* `{bm} times` -- e.g. 3 times 5
-* `{bm} product of` -- e.g. the product of 3 and 5
+* multiply -- e.g. multiply 3 and 5
+* multiplied -- e.g. 3 multiplied by 5
+* times -- e.g. 3 times 5
+* product of -- e.g. the product of 3 and 5
 
 ```{note}
 There are certain special words that denote multiplication. For example, the word `{bm} twice` means 2 multiplied by something else -- e.g. twice 5 is the same thing as 2*5.
@@ -687,12 +688,12 @@ Properties of multiplication:
 ```{prereq}
 Place value system
 Equality
-Less Than_REL
-Greater Than_REL
+Less Than
+Greater Than
 Subtraction
 ```
 
-`{bm} Division` is the concept of taking a number and iteratively subtracting it by another number to find out how many iterations it can be subtracted. For example, 15 can be subtracted by 3 exactly 5 iterations before nothing's left...
+`{bm} Division/(division|divide)/i` is the concept of taking a number and iteratively subtracting it by another number to find out how many iterations it can be subtracted. For example, 15 can be subtracted by 3 exactly 5 iterations before nothing's left...
 
 ```
  [●●●●●●●●●●●●●●●] start with 15
@@ -776,15 +777,15 @@ The quotient is the number of times you can subtract.
 When using words, division is typically represented using the following syntax:
 
 * division -- e.g. the division of 3 and 15
-* `{bm} divide` -- e.g. divide 3 by 15
-* `{bm} divided by/(divided by|divide by)/i` -- e.g. 3 divided by 15
-* `{bm} divided into` -- e.g. 15 divided into 3
-* `{bm} quotient of` -- e.g. the quotient of 3 and 15
+* divide -- e.g. divide 3 by 15
+* divided by -- e.g. 3 divided by 15
+* divided into -- e.g. 15 divided into 3
+* quotient of -- e.g. the quotient of 3 and 15
 
 ```{note}
 There are certain special words that denote division. For example, the word ...
-* `{bm} half` means something divided by 2 -- e.g. half of 10 is the same as 10/2.
-* `{bm} quarter` means something divided by 4 -- e.g. a quarter of 10 is the same 10/4.
+* half means something divided by 2 -- e.g. half of 10 is the same as 10/2.
+* quarter means something divided by 4 -- e.g. a quarter of 10 is the same 10/4.
 ```
 
 Properties of division:
@@ -825,7 +826,7 @@ Properties of division:
    }
    ```
 
-   This will iterate forever if the divisor is 0 because the dividend would never become less than_REL the divisor -- the loop wouldn't terminate.
+   This will iterate forever if the divisor is 0 because the dividend would never become less than the divisor -- the loop wouldn't terminate.
 
    ```{note}
    Another way to think of this is that division is the inverse of multiplication (it undoes multiplication). If it were the case that 10/0=?, then ?\*0=10. We know that this can't be the case because ?\*0=0.
@@ -849,7 +850,7 @@ Place-value system
 +--------------------------------+ 
 ```
 
-`{bm} Whole number`s are numbers which have no partial portion -- they only consist of wholes. For example, 5, 0, 104, and 27 are whole numbers while 4.2 is not.
+`{bm} Whole number`s are numbers which have no fractional part -- they only consist of wholes. For example, 5, 0, 104, and 27 are whole numbers while 4.2 is not.
 
 ```{svgbob}
 +-+-+-+-+-+-+-+-+-->
@@ -952,8 +953,8 @@ WholeNumberEqLauncher
 
 ```{prereq}
 Equality
-Less than_REL
-Greater than_REL
+Less than
+Greater than
 ```
 
 The algorithm used by humans to test for `{bm} whole number less than` relies on the idea that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
@@ -998,8 +999,8 @@ The algorithm used by humans to test for `{bm} whole number less than` relies on
 
 Since a number can be broken down into single digit components, each single digit component from the numbers being compared can individually tested from most significant to least significant (left-to-right). If a digit from the number being tested is...
 
-* less than_REL the corresponding digit from the number being tested against, the number being tested is less than_REL (algorithm ends).
-* greater than_REL the corresponding digit from the number being tested against, the number being tested is greater than_REL (algorithm ends).
+* less than the corresponding digit from the number being tested against, the number being tested is less than (algorithm ends).
+* greater than the corresponding digit from the number being tested against, the number being tested is greater than (algorithm ends).
 * equal to the corresponding digit from the number being tested against, continue to testing the next digit.
 
 If no more digits are remaining for testing, the number being tested is equal.
@@ -1017,7 +1018,7 @@ For example, imagine testing the number 23 and 21...
      ●●●●●●●●●●
 ```
 
-The first digits are equal (2 == 2), so move to the next digit. The next digit is larger than_REL the other digit (3 > 1), so 23 is not less than_REL 21.
+The first digits are equal (2 == 2), so move to the next digit. The next digit is larger than the other digit (3 > 1), so 23 is not less than 21.
 
 ```{note}
 What happens when the number of digits aren't the same between the numbers being tested (e.g. 55 and 12345)? Recall how place-value notation works. 0 can be used when a corresponding digit doesn't exist at some position.
@@ -1040,8 +1041,8 @@ WholeNumberLtLauncher
 
 ```{prereq}
 Equality
-Less than_REL
-Greater than_REL
+Less than
+Greater than
 ```
 
 The algorithm used by humans to test for `{bm} whole number greater than` relies on the idea that numbers represented in place-value notation can be broken down into single digit components -- the place of each digit in the number represents some portion of that number's value. For example, the number 935 can be broken down as 9 100s, 3 10s, and 5 1s...
@@ -1086,8 +1087,8 @@ The algorithm used by humans to test for `{bm} whole number greater than` relies
 
 Since a number can be broken down into single digit components, each single digit component from the numbers being compared can individually tested from most significant to least significant (left-to-right). If a digit from the number being tested is...
 
-* less than_REL the corresponding digit from the number being tested against, the number being tested is less than_REL (algorithm ends).
-* greater than_REL the corresponding digit from the number being tested against, the number being tested is greater than_REL (algorithm ends).
+* less than the corresponding digit from the number being tested against, the number being tested is less than (algorithm ends).
+* greater than the corresponding digit from the number being tested against, the number being tested is greater than (algorithm ends).
 * equal to the corresponding digit from the number being tested against, continue to testing the next digit.
 
 If no more digits are remaining for testing, the number being tested is equal.
@@ -1105,7 +1106,7 @@ For example, imagine testing the number 23 and 21...
      ●●●●●●●●●●
 ```
 
-The first digits are equal (2 == 2), so move to the next digit. The next digit is larger than_REL the other digit (3 > 1), so 23 is greater than_REL than 21.
+The first digits are equal (2 == 2), so move to the next digit. The next digit is larger than the other digit (3 > 1), so 23 is greater than than 21.
 
 ```{note}
 What happens when the number of digits aren't the same between the numbers being tested (e.g. 55 and 12345)? Recall how place-value notation works. 0 can be used when a corresponding digit doesn't exist at some position.
@@ -1131,9 +1132,11 @@ Addition
 Whole number equality
 ```
 
-`{bm} /(whole number addition|add whole numbers|addition of whole numbers)/i`
+`{bm-redirect} (vertical addition)/i/(vertical addition)_WHOLE/i`
 
-The algorithm used by humans to add large whole numbers together is called `{bm} vertical addition`. Vertical addition relies on two ideas...
+`{bm} /(whole number addition)/i`
+
+The algorithm used by humans to add large whole numbers together is called `{bm} vertical addition/(vertical addition)_WHOLE/i`. Vertical addition relies on two ideas...
 
 1. Humans can easily add a single digit number to another single digit number without much effort. For example...
 
@@ -1346,6 +1349,8 @@ WholeNumberAddLauncher
 273 991
 ```
 
+`{bm-reset} (vertical addition)/i`
+
 ## Subtraction
 
 ```{prereq}
@@ -1353,11 +1358,13 @@ Subtraction
 Whole number equality
 ```
 
-`{bm} /(whole number subtraction|subtract whole numbers)/i`
+`{bm-redirect} (vertical subtraction)/i/(vertical subtraction)_WHOLE/i`
 
-The algorithm used by humans to subtract large whole numbers from each other is called `{bm} vertical subtraction`. Vertical subtraction relies on two ideas...
+`{bm} /(whole number subtraction)/i`
 
-1. Humans can easily subtract a small 1 to 2 digit numbers (anything smaller than_REL 20) from each other without much effort. For example...
+The algorithm used by humans to subtract large whole numbers from each other is called `{bm} vertical subtraction/(vertical subtraction)_WHOLE/i`. Vertical subtraction relies on two ideas...
+
+1. Humans can easily subtract a small 1 to 2 digit numbers (anything smaller than 20) from each other without much effort. For example...
 
    * 4-3 is 1
    * 10-1 is 9
@@ -1710,6 +1717,8 @@ WholeNumberSubLauncher
 100 11
 ```
 
+`{bm-reset} (vertical subtraction)/i`
+
 ## Multiplication
 
 ```{prereq}
@@ -1718,9 +1727,11 @@ Whole number equality
 Whole number addition
 ```
 
-`{bm} /(whole number multiplication|multiply whole numbers)/i`
+`{bm-redirect} (vertical multiplication)/i/(vertical multiplication)_WHOLE/i`
 
-The algorithm used by humans to multiply large whole numbers together is called `{bm} vertical multiplication`. Vertical multiplication relies on three ideas...
+`{bm} /(whole number multiplication)/i`
+
+The algorithm used by humans to multiply large whole numbers together is called `{bm} vertical multiplication/(vertical multiplication)_WHOLE/i`. Vertical multiplication relies on three ideas...
 
 1. Humans have the ability to multiply a single digit number to another single digit number through memorization. For example...
 
@@ -2103,13 +2114,15 @@ WholeNumberMulLauncher
 77 87
 ```
 
+`{bm-reset} (vertical multiplication)/i`
+
 ## Division
 
 ```{prereq}
 Division
 ```
 
-`{bm} /(whole number division|divide whole numbers)/i`
+`{bm} /(whole number division)/i`
 
 There are 2 algorithms used to divide large whole numbers:
 
@@ -2548,7 +2561,7 @@ The idea behind long division is to break up the dividend into its individual si
  make? "700 / 3"        make? "50 / 3"      make? "2 / 3"
 ```
 
-Each of the divisions are easy to perform because trialing 0s can be stripped-off prior to trial-and-error division (ideas 2 and 3). That is, the actual numbers being input into trial-and-error division are much smaller than_REL they would normally be because trailing 0s are removed. Smaller numbers mean easier to perform.
+Each of the divisions are easy to perform because trialing 0s can be stripped-off prior to trial-and-error division (ideas 2 and 3). That is, the actual numbers being input into trial-and-error division are much smaller than they would normally be because trailing 0s are removed. Smaller numbers mean easier to perform.
 
 ```{svgbob}
                               752                 
@@ -2579,7 +2592,7 @@ Each of the divisions are easy to perform because trialing 0s can be stripped-of
 The TE block is applying idea 3. The trialing 0s are being stripped off, trial-and-error division is being performed, then the 0s are re-append to the quotient and the remainder.
 ```
 
-The remainders need to be accounted for. That is, if there are enough remaining items to form a group, they should be grouped. The process is repeated on the remaining items until there aren't enough to form a group (until the remainder is less than_REL the divisor). Once there aren't enough remaining items to form a group, the sum of the quotients becomes the final quotient (final number of groups) and the remainder becomes the final remainder...
+The remainders need to be accounted for. That is, if there are enough remaining items to form a group, they should be grouped. The process is repeated on the remaining items until there aren't enough to form a group (until the remainder is less than the divisor). Once there aren't enough remaining items to form a group, the sum of the quotients becomes the final quotient (final number of groups) and the remainder becomes the final remainder...
 
 ```{note}
 The diagram below looks daunting but it's just 3 copies of the diagrams above stacked on top of each other -- 1 for each iteration. The remainders from each iteration are being combined and used as the input for the next iteration. The quotients from each iteration are being combined to get the total quotient (total number of groups).
@@ -3374,7 +3387,7 @@ Whole numbers
 +----------------------------------+
 ```
 
-`{bm} Integer number/(integer number|integer)/i`s are place-value notation numbers that have no partial portion but are mirrored across 0. That is, think of integers as 2 sets of counting numbers separated by 0, where everything to the...
+`{bm} Integer number/(integer number|integer)/i`s are place-value notation numbers that have no fractional part but are mirrored across 0. That is, think of integers as 2 sets of counting numbers separated by 0, where everything to the...
 
 * right of 0 is called a `{bm} positive` number (signified by a + prefix)
 * left of 0 is called a `{bm} negative` number (signified by a - prefix)
@@ -3492,7 +3505,6 @@ IntegerNumberEqLauncher
 ## Less Than
 
 ```{prereq}
-Number line
 Whole number less than
 Whole number greater than
 ```
@@ -3580,7 +3592,6 @@ IntegerNumberLtLauncher
 ## Greater Than
 
 ```{prereq}
-Number line
 Whole number less than
 Whole number greater than
 ```
@@ -3668,13 +3679,12 @@ IntegerNumberGtLauncher
 ## Addition
 
 ```{prereq}
-Number line
 Whole number addition
 Whole number subtraction
 Integer equality
 ```
 
-Conceptually, you can think of `{bm} integer addition/(integer number addition|integer addition|add integer numbers|add integers|addition of integer numbers|addition of integers)/i` as movement on a number line. If some integer is being added to a...
+Conceptually, you can think of `{bm} integer addition/(integer number addition|integer addition)/i` as movement on a number line. If some integer is being added to a...
 
 * positive integer, it's moving right on the number line.
 
@@ -3750,14 +3760,13 @@ IntegerNumberAddLauncher
 ## Subtraction
 
 ```{prereq}
-Number line
 Whole number addition
 Whole number subtraction
 Integer equality
 Integer addition
 ```
 
-Conceptually, you can think of `{bm} integer subtraction/(integer number subtraction|integer subtraction|subtract integer numbers|subtract integers|subtraction of integer numbers|subtraction of integers)/i` as movement on a number line (opposite movement to that of integer addition). If the integer being subtracted by (right-hand side) is a...
+Conceptually, you can think of `{bm} integer subtraction/(integer number subtraction|integer subtraction)/i` as movement on a number line (opposite movement to that of integer addition). If the integer being subtracted by (right-hand side) is a...
 
 * positive integer, it's moving left on the number line.
 
@@ -3853,7 +3862,7 @@ Integer addition
 Integer subtraction
 ```
 
-Conceptually, you can think of `{bm} integer multiplication/(integer number multiplication|multiply integer numbers|multiply integers|multiplication of integer numbers|multiplication of integers)/i` as repetitive integer addition / integer subtraction. When the right hand side is negative, think of it as subtraction instead of addition. For example, think of ...
+Conceptually, you can think of `{bm} integer multiplication/(integer number multiplication|integer multiplication)/i` as repetitive integer addition / integer subtraction. When the right hand side is negative, think of it as subtraction instead of addition. For example, think of ...
 
 * 5 \* 3 as add 5, 3 times
 
@@ -3921,7 +3930,7 @@ Integer addition
 Integer multiplication
 ```
 
-Conceptually, you can think of `{bm} integer division/(integer number division|integer division|divide integer numbers|divide integers|division of integer numbers|division of integers)/i` the same as whole number division: repetitive integer subtraction -- how many iterations can be subtracted until reaching 0. When both numbers being divided have the same sign, the process is nearly the same as whole number division. For example, ...
+Conceptually, you can think of `{bm} integer division/(integer number division|integer division)/i` the same as whole number division: repetitive integer subtraction -- how many iterations can be subtracted until reaching 0. When both numbers being divided have the same sign, the process is nearly the same as whole number division. For example, ...
 
 * 15 / 3 -- how many iterations og subtracting by 3 before 15 reaches 0
 
@@ -4409,15 +4418,15 @@ The second is that if the number were a negative integer, the factors would incl
 
 ```{prereq}
 Divisible
-Factors
+Factor
 ```
 
 A counting number with only 2 factors is called a `{bm} prime` number. That is, if a counting number is only divisible by 1 and it itself, it's a prime number. Examples of prime numbers: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, and 47.
 
-A counting number with more than_REL 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
+A counting number with more than 2 factors is called a `{bm} composite` number. Examples of composite numbers: 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, and 20.
 
 ```{note}
-The number 1 is neither a prime number nor a composite number. 1's only factor is itself: 1\*1=1. Prime numbers need 2 factors and composite numbers need more than_REL 2 factors.
+The number 1 is neither a prime number nor a composite number. 1's only factor is itself: 1\*1=1. Prime numbers need 2 factors (1 and itself) and composite numbers need more than 2 factors.
 ```
 
 The algorithm to identify primes vs composites is as follows...
@@ -4433,13 +4442,20 @@ FactorPrimeTestLauncher
 13
 ```
 
+# Prime Factor
+
+```{prereq}
+Prime
+Factor
+```
+
 Every composite number can be written as a product of prime numbers. For example...
 
 * 12 = 3\*2\*2
 * 16 = 2\*2\*2\*2
 * 21 = 3\*3\*3
 
-The process of breaking down a composite number into a factor of primes is called `{bm} prime factorization/(prime factorization|prime factor|factor prime|factorize prime|factors of prime|factors of a prime)/i`. There are 2 algorithms that humans use to factorize primes: factor tree method and ladder method. Each method is described below.
+The process of breaking down a composite number into a product of primes is called `{bm} prime factorization/(prime factorization|prime factor|factor prime|factorize prime)/i`. There are 2 algorithms that humans use to factorize primes: factor tree method and ladder method. Each method is described below.
 
  * Factor Tree
 
@@ -4613,7 +4629,7 @@ The process of breaking down a composite number into a factor of primes is calle
 # Least Common Multiple
 
 ```{prereq}
-Prime numbers
+Prime factor
 ```
 
 The `{bm} least common multiple` `{bm} /(LCM|L\.C\.M\.)/` is the process of taking 2 numbers and finding the smallest multiple between them. That is, if you listed out their multiples starting from 1, the first match between them would be the least common multiple.
@@ -4690,8 +4706,8 @@ LeastCommonMultiplePFLauncher
 # Greatest Common Divisor
 
 ```{prereq}
-Factors
-Primes
+Factor
+Prime factor
 ```
 
 The `{bm} greatest common divisor/(greatest common divisor|highest common divisor|largest common divisor|greatest common factor|highest common factor|largest common divisor)/i` `{bm} /(GCD|G\.C\.D.)/i` is the process of taking 2 numbers and finding the largest possible divisor between the two of them. That is, finding the greatest number that evenly divides both numbers.
@@ -5024,7 +5040,7 @@ Integer numbers
 +------------------------------------+
 ```
 
-`{bm} Fraction/(fraction number|fraction)/i`s are a way of representing partial values. The syntax for a fraction is `{kt} \frac{numerator}{denominator}`, where the...
+`{bm} Fraction/(fraction number|fraction)/i`s are a way of representing numbers with fractional parts. The syntax for a fraction is `{kt} \frac{numerator}{denominator}`, where the...
 
  * `{bm}numerator` (top) is an integer that represents the number of parts available.
  * `{bm}denominator` (bottom) is an integer that represents the number of parts in a whole.
@@ -5062,7 +5078,7 @@ Since a fraction represent integer division, the same rules as integer division 
 
 If a fraction has ...
 
- * less than_REL 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
+ * less than 1 whole, it's referred to as a `{bm} proper fraction` (e.g. `{kt} \frac{1}{2}`, `{kt} \frac{4}{5}`, and `{kt} \frac{3}{10}`).
  * at least 1 whole, it's refereed to as a `{bm} improper fraction` (e.g. `{kt} \frac{3}{2}`, `{kt} \frac{5}{5}`, and `{kt} \frac{15}{3}`).
 
 ```{note}
@@ -5667,7 +5683,7 @@ Fraction equality
 
 Conceptually, you can think of `{bm} fraction multiplication/(fraction number multiplication|fraction multiplication)/i` as an extension to integer multiplication. In integer multiplication, you're repeatedly adding the same value for a certain number of iterations. For example, in `{kt} 4 \cdot 2`, the number 4 is being added for 2 iterations: `{kt} 4 + 4`.
 
-Fraction multiplication follows the same concept but may also involve the adding of a partial value. For example, imagine `{kt} 4 \cdot \frac{5}{2}`. Recall that fractions can be thought of as unresolved integer division -- the fraction `{kt} \frac{5}{2}` is just another way of saying `{kt} 5 \div 2`.
+Fraction multiplication follows the same concept but may also involve the adding of a fractional value. For example, imagine `{kt} 4 \cdot \frac{5}{2}`. Recall that fractions can be thought of as unresolved integer division -- the fraction `{kt} \frac{5}{2}` is just another way of saying `{kt} 5 \div 2`.
 
 If you perform `{kt} 5 \div 2`, the quotient would be `{kt} 2R1`...
 
@@ -5774,8 +5790,7 @@ If you understand algebra, the reasoning for why the above algorithm works is av
 Fraction multiplication
 ```
 
-`{bm} /(fraction number reciprocal|fraction reciprocal)/i`
-The `{bm} reciprocal` of a fraction is when you take that fraction and flip its numerator and denominator. For example, the reciprocal of `{kt} -\frac{5}{6}` is `{kt} -\frac{6}{5}`.
+The `{bm} reciprocal/(fraction number reciprocal|fraction reciprocal|reciprocal)/i` of a fraction is when you take that fraction and flip its numerator and denominator. For example, the reciprocal of `{kt} -\frac{5}{6}` is `{kt} -\frac{6}{5}`.
 
 When you multiply a fraction by its reciprocal, you will always end up with a whole. For example, `{kt} \frac{2}{7} \cdot \frac{7}{2}` is `{kt} \frac{14}{14}`.
 
@@ -5837,7 +5852,7 @@ Fraction equality
 
 Conceptually, you can think of `{bm} fraction division/(fraction number division|fraction division)/i` as an extension to integer division. In integer division, you're repeatedly subtracting the some value until it reaches 0. For example, in `{kt} 8 \div 2`, the number 8 is subtracted for 4 iterations to reach 0: `{kt} 8 - 2 - 2 - 2 - 2` is 0.
 
-Fraction division follows the same concept but may also involve the subtraction of a partial value. For example, imagine `{kt} 8 \div \frac{3}{2}`. You can successfully subtract `{kt} \frac{3}{2}` for 5 iterations before the value becomes smaller than_REL `{kt} \frac{3}{2}` but larger than_REL 0...
+Fraction division follows the same concept but may also involve the subtraction of a fractional value. For example, imagine `{kt} 8 \div \frac{3}{2}`. You can successfully subtract `{kt} \frac{3}{2}` for 5 iterations before the value becomes smaller than `{kt} \frac{3}{2}` but larger than 0...
 
 `{kt} 8 - \frac{3}{2} - \frac{3}{2} - \frac{3}{2} - \frac{3}{2} - \frac{3}{2}` is `{kt} \frac{1}{2}`.
 
@@ -6043,8 +6058,11 @@ A `{bm} decimal number` is another way of representing a mixed number where the 
 
 The period placed in between the whole and the fraction is referred to as a `{bm} decimal point`. The number to the ...
 
- * left of the decimal point is referred to as the whole part.
- * right of the decimal point is referred to as the `{bm} fractional` part.
+ * left of the decimal point is referred to as the `{bm} whole/(whole)_DECIMAL/i` part.
+ * right of the decimal point is referred to as the `{bm} fractional/(fractional)_DECIMAL/i` part.
+
+`{bm-redirect} (whole)/i/(whole)_DECIMAL/i`
+`{bm-redirect} (fractional)/i/(fractional)_DECIMAL/i`
 
 ```{note}
 You can consider the sign and the whole part as the integer part. The term integer part is used in the subsections below.
@@ -6154,11 +6172,11 @@ Integer less than
 Fraction less than
 ```
 
-Conceptually, you can think of `{bm} decimal less than/(decimal number less than|decimal less than)/i` the same as fraction less than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine less than_REL:
+Conceptually, you can think of `{bm} decimal less than/(decimal number less than|decimal less than)/i` the same as fraction less than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine less than:
 
  1. Check the integer parts...
 
-    If the integer parts are integer less than, then the decimal numbers themselves will be decimal less than. For example, any decimal number with an integer part of 5 will always be less than_REL any decimal number with an integer part of 6...
+    If the integer parts are integer less than, then the decimal numbers themselves will be decimal less than. For example, any decimal number with an integer part of 5 will always be less than any decimal number with an integer part of 6...
 
     ```{svgbob}
     <---|----|----|----|----|----|----|----|----|----|----|--->
@@ -6167,11 +6185,11 @@ Conceptually, you can think of `{bm} decimal less than/(decimal number less than
 
     If the integer parts are equal, go to step 2.
 
-    Otherwise, stop. The decimal numbers are not less than_REL.
+    Otherwise, stop. The decimal numbers are not less than.
 
  2. Check the fractional parts...
 
-    If the fractional parts are less than_REL, the decimal numbers are less than_REL. The process of testing the fractional parts is similar to whole number less than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 01 is less than_REL a fractional part of 1...
+    If the fractional parts are less than, the decimal numbers are less than. The process of testing the fractional parts is similar to whole number less than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 01 is less than a fractional part of 1...
 
     ```{svgbob}
     <---|------|------|------|------|------|------|------|------|------|------|--->
@@ -6183,7 +6201,7 @@ Conceptually, you can think of `{bm} decimal less than/(decimal number less than
 For example, to test if 312.02 < 312.12:
 
  1. Integers are equal. Go to step 2.
- 2. Fractional being tested is less than_REL the other number's fractional.
+ 2. Fractional being tested is less than the other number's fractional.
 
 312.02 < 312.12 is true.
  
@@ -6217,11 +6235,11 @@ Integer greater than
 Fraction greater than
 ```
 
-Conceptually, you can think of `{bm} decimal greater than/(decimal number greater than|decimal greater than)/i` the same as fraction greater than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine greater than_REL:
+Conceptually, you can think of `{bm} decimal greater than/(decimal number greater than|decimal greater than)/i` the same as fraction greater than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine greater than:
 
  1. Check the integer parts...
 
-    If the integer parts are integer greater than, then the decimal numbers themselves will be decimal greater than. For example, any decimal number with an integer part of 6 will always be greater than_REL any decimal number with an integer part of 5...
+    If the integer parts are integer greater than, then the decimal numbers themselves will be decimal greater than. For example, any decimal number with an integer part of 6 will always be greater than any decimal number with an integer part of 5...
 
     ```{svgbob}
     <---|----|----|----|----|----|----|----|----|----|----|--->
@@ -6230,11 +6248,11 @@ Conceptually, you can think of `{bm} decimal greater than/(decimal number greate
 
     If the integer parts are equal, go to step 2.
 
-    Otherwise, stop. The decimal numbers are not less than_REL.
+    Otherwise, stop. The decimal numbers are not less than.
 
  2. Check the fractional parts...
 
-    If the fractional parts are greater than_REL, the decimal numbers are greater than_REL. The process of testing the fractional parts is similar to whole number greater than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 1 is greater than_REL a fractional part of 01...
+    If the fractional parts are greater than, the decimal numbers are greater than. The process of testing the fractional parts is similar to whole number greater than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 1 is greater than a fractional part of 01...
 
     ```{svgbob}
     <---|------|------|------|------|------|------|------|------|------|------|--->
@@ -6246,7 +6264,7 @@ Conceptually, you can think of `{bm} decimal greater than/(decimal number greate
 For example, to test if 312.12 < 312.02:
 
  1. Integers are equal. Go to step 2.
- 2. Fractional being tested is greater than_REL the other number's fractional.
+ 2. Fractional being tested is greater than the other number's fractional.
 
 312.12 > 312.02 is true.
  
@@ -6307,17 +6325,17 @@ if      |
 Then, if the number isn't 0.0, ...
 
 1. write out the wholes as you would during whole number word conversion and stop.
-2. if the partial isn't 0, ...
+2. if the fractional isn't 0, ...
    1. write out the word "and",
-   2. write out the partial as you would during whole number word conversion.
+   2. write out the fractional as you would during whole number word conversion.
 
 ```{svgbob}
-                                                                        +--------> and ---------> "[write partial]"
-                                                                        | "number.partial != 0"
+                                                                        +--------> and ---------> "[write fractional]"
+                                                                        | "number.fractional != 0"
         +-----------> "negative" ------+------> "[write wholes]" -------+
         | "number.sign == Negative"    |                            if  |
 --------+                              |                                +-------->
-if      |                              |                                  "number.partial == 0"
+if      |                              |                                  "number.fractional == 0"
         +-----------> -----------------+ 
         | "number.sign == Positive"     
         |                               
@@ -6326,7 +6344,7 @@ if      |                              |                                  "numbe
           
 ```
 
-Then, count the number of digits in the partial and write out the matching word...
+Then, count the number of digits in the fractional and write out the matching word...
 
 | Count | Word                  |
 |-------|-----------------------|
@@ -6340,56 +6358,56 @@ Then, count the number of digits in the partial and write out the matching word.
 | 8     | hundred-millionth     |
 | ...   | ...                   |
 
-If the partial is more than_REL 1 piece, append the letter s to the number being written out. For example, ...
+If the fractional is more than 1 piece, append the letter s to the number being written out. For example, ...
 
 * 01 ⟶ `{kt} \frac{1}{100}` ⟶ one hundredth
 * 02 ⟶ `{kt} \frac{2}{100}` ⟶ two hundredths
 * 03 ⟶ `{kt} \frac{3}{100}` ⟶ three hundredths
 
 ```{svgbob}
-                                                                        +--------> and ---------> "[write partial]" ---+
-                                                                        | "number.partial != 0"                        |
-        +-----------> "negative" ------+------> "[write wholes]" -------+                                              |
-        | "number.sign == Negative"    |                            if  |                                              |
---------+                              |                                +-------->                                     |
-   if   |                              |                                  "number.partial == 0"                        |
-        +-----------> -----------------+                                                                               |
-        | "number.sign == Positive"                                                                                    |
-        |                                                                                                              |
-        +-----------> zero                                                                                             |
-          "number == 0.0"                                                                                              |
-                                                                                                                       |
-                                                                                                                       |
-+----------------------------------------------------------------------------------------------------------------------+
+                                                                        +--------> and ---------> "[write fractional]" ---+
+                                                                        | "number.fractional != 0"                        |
+        +-----------> "negative" ------+------> "[write wholes]" -------+                                                 |
+        | "number.sign == Negative"    |                            if  |                                                 |
+--------+                              |                                +-------->                                        |
+   if   |                              |                                  "number.fractional == 0"                        |
+        +-----------> -----------------+                                                                                  |
+        | "number.sign == Positive"                                                                                       |
+        |                                                                                                                 |
+        +-----------> zero                                                                                                |
+          "number == 0.0"                                                                                                 |
+                                                                                                                          |
+                                                                                                                          |
++-------------------------------------------------------------------------------------------------------------------------+
 |
 |
 |         
 +-------+------------------------------>
-   if   | "number.partial == 0"                                         +-----------> s
-        |                                                               | "number.partial > 1"
+   if   | "number.fractional == 0"                                      +-----------> s
+        |                                                               | "number.fractional > 1"
         +------------------------------> "tenths" ---------------+------+
-        | "len(number.partial) == 1"                             |  if  |
+        | "len(number.fractional) == 1"                          |  if  |
         |                                                        |      +----------->
-        +------------------------------> "hundredths" -----------+        "number.partial <= 1"
-        | "len(number.partial) == 2"                             |
+        +------------------------------> "hundredths" -----------+        "number.fractional <= 1"
+        | "len(number.fractional) == 2"                          |
         |                                                        |
         +------------------------------> "thousandths" ----------+
-        | "len(number.partial) == 3"                             |
+        | "len(number.fractional) == 3"                          |
         |                                                        |
         +------------------------------> "ten-thousandths" ------+
-        | "len(number.partial) == 4"                             |
+        | "len(number.fractional) == 4"                          |
         |                                                        |
         +------------------------------> "hundred-thousandths" --+
-        | "len(number.partial) == 5"                             |
+        | "len(number.fractional) == 5"                          |
         |                                                        |
         +------------------------------> "millionths" -----------+
-        | "len(number.partial) == 6"                             |
+        | "len(number.fractional) == 6"                          |
         |                                                        |
         +------------------------------> "ten-millionths" -------+
-        | "len(number.partial) == 7"                             |
+        | "len(number.fractional) == 7"                          |
         |                                                        |
         +------------------------------> "hundred-millionths" ---+
-        | "len(number.partial) == 8"                             |
+        | "len(number.fractional) == 8"                          |
         |                                                        |
         +------------------------------> "..." ------------------+
           "..."
@@ -6418,15 +6436,18 @@ DecimalNumberToWordsLauncher
 
 ## Addition
 
+`{bm-redirect} (vertical addition)/i/(vertical addition)_DECIMAL/i`
+
 ```{prereq}
 Whole number addition
 Integer addition
 Fraction addition
+Decimal equality
 ```
 
 Conceptually, you can think of `{bm} decimal addition/(decimal number addition|decimal addition)/i` the same as fraction addition where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction addition, a more straight-forward algorithm exists.
 
-The algorithms used by humans to perform decimal addition is essentially the same as vertical addition: stack the numbers on top of each other aligned by position and add each digit, carrying over when an overflow occurs. For example, adding 123.45 to 1.1...
+The algorithms used by humans to perform decimal addition is essentially the same as vertical addition_WHOLE for whole numbers. To perform `{bm} vertical addition/(vertical addition)_DECIMAL/i` for decimal numbers: stack the numbers on top of each other aligned by position and add each digit, carrying over when an overflow occurs. For example, adding 123.45 to 1.1...
 
 ```{kthelper}
 VerticalAddition
@@ -6481,7 +6502,7 @@ The decimal point can simply be placed in after the addition takes place: 12455 
 
 Knowing this, a new vertical addition algorithm / implementation isn't needed. The inputs can be massaged (remove decimal point) so they work with the existing algorithm and the output can be massaged back (place in decimal point).
 
-Since decimal numbers also have a sign, vertical addition can't be used if either number is negative. Rather, integer addition needs to be used. Integer addition makes use to vertical addition but also accounts for the sign.
+Since decimal numbers also have a sign, vertical addition can't be used if either number is negative. Rather, integer addition needs to be used. Integer addition makes use of whole number vertical addition_WHOLE but also accounts for the sign.
 
 ```{note}
 If you know about decimal multiplication and decimal division already, you're essentially counting the number of fractional digits for the number that has more fractional digits, then multiplying each number by 10 for that many iterations.
@@ -6523,17 +6544,22 @@ DecimalNumberAddLauncher
 123.45 1.1
 ```
 
+`{bm-reset} (vertical addition)/i`
+
 ## Subtraction
 
 ```{prereq}
 Whole number subtraction
 Integer subtraction
 Fraction subtraction
+Decimal equality
 ```
+
+`{bm-redirect} (vertical subtraction)/i/(vertical subtraction)_DECIMAL/i`
 
 Conceptually, you can think of `{bm} decimal subtraction/(decimal number subtraction|decimal subtraction)/i` the same as fraction subtraction where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction subtraction, a more straight-forward algorithm exists.
 
-The algorithms used by humans to perform decimal subtraction is essentially the same as vertical subtraction: stack the numbers on top of each other aligned by position and subtract each digit, borrowing when necessary. For example, subtracting 1.1 from 123.45...
+The algorithms used by humans to perform decimal subtraction is essentially the same as vertical subtraction_WHOLE for whole numbers. To perform `{bm} vertical subtraction/(vertical subtraction)_DECIMAL/i` for decimal numbers: stack the numbers on top of each other aligned by position and subtract each digit, borrowing when necessary. For example, subtracting 1.1 from 123.45...
 
 ```{kthelper}
 VerticalSubtraction
@@ -6588,7 +6614,7 @@ The decimal point can simply be placed in after the subtraction takes place: 122
 
 Knowing this, a new vertical subtraction algorithm / implementation isn't needed. The inputs can be massaged (remove decimal point) so they work with the existing algorithm and the output can be massaged back (place in decimal point).
 
-Since decimal numbers also have a sign, vertical subtraction can't be used if either number is negative. Rather, integer subtraction needs to be used. Integer subtraction makes use to vertical subtraction but also accounts for the sign.
+Since decimal numbers also have a sign, vertical subtraction can't be used if either number is negative. Rather, integer subtraction needs to be used. Integer subtraction makes use of whole number vertical subtraction_WHOLE but also accounts for the sign.
 
 ```{note}
 If you know about decimal multiplication and decimal division already, you're essentially counting the number of fractional digits for the number that has more fractional digits, then multiplying each number by 10 for that many iterations.
@@ -6630,19 +6656,24 @@ DecimalNumberSubLauncher
 123.45 1.1
 ```
 
+`{bm-reset} (vertical subtraction)/i`
+
 ## Multiplication
 
 ```{prereq}
 Whole number multiplication
 Integer multiplication
 Fraction multiplication
+Decimal equality
 Decimal addition
 Decimal subtraction
 ```
 
+`{bm-redirect} (vertical multiplication)/i/(vertical multiplication)_DECIMAL/i`
+
 Conceptually, you can think of `{bm} decimal multiplication/(decimal number multiplication|decimal multiplication)/i` the same as fraction multiplication where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction multiplication, a more straight-forward algorithm exists.
 
-The algorithms used by humans to perform decimal multiplication is almost the same as vertical multiplication for whole numbers:
+The algorithms used by humans to perform decimal multiplication is almost the same as vertical multiplication_WHOLE for whole numbers. To perform `{bm} vertical multiplication/(vertical multiplication)_DECIMAL/i` for decimal numbers:
 
  1. Stack the numbers on top of each other and perform whole number multiplication as if the decimal points didn't exist.
  2. Then, count up the number fractional digits in both input numbers and place a decimal point in the result just before the digit at that position (starting from the left).
@@ -6764,7 +6795,7 @@ This is the intuition behind the post-processing step in vertical multiplication
 > 
 > `{kt} 135.795`
 
-Since decimal numbers also have a sign, vertical multiplication can't be used if either number is negative. Rather, integer multiplication needs to be used. Integer multiplication makes use to vertical multiplication but also accounts for the sign.
+Since decimal numbers also have a sign, vertical multiplication can't be used if either number is negative. Rather, integer multiplication needs to be used. Integer multiplication makes use of whole number vertical multiplication_WHOLE but also accounts for the sign.
 
 The way to perform this algorithm via code is as follows...
 
@@ -6778,6 +6809,8 @@ python
 DecimalNumberMulLauncher
 123.45 1.1
 ```
+
+`{bm-reset} (vertical multiplication)/i`
 
 ## Division
 
@@ -6812,7 +6845,7 @@ Decimal addition
 To round a decimal number, ...
 
 1. choose a position to round at.
-2. increment at that position if the digit at the following position is greater than_REL or equal to 5.
+2. increment at that position if the digit at the following position is greater than or equal to 5.
 3. set all digits following that position to zero.
 
 For example, to round 123.456 at the tenths position...
@@ -6825,7 +6858,7 @@ For example, to round 123.456 at the tenths position...
      1 2 3 . 4 5 6
      ```
 
-  2. is the position immediately following the tenths greater than_REL or equal to 5?
+  2. is the position immediately following the tenths greater than or equal to 5?
 
      ```{svgbob}
              | +---- "5 >= 5"
@@ -6859,6 +6892,7 @@ DecimalNumberRoundLauncher
 ```{prereq}
 Decimal rounding
 Decimal division
+Prime factor
 ```
 
 Recall that a decimal number is another way of representing a mixed number where the denominator is 1 followed by trailing 0s. For example, ...
@@ -6912,35 +6946,35 @@ DecimalNumberSuitableFractionLauncher
 10/20
 ```
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
-TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the partial portion
+TODO: talk about terminating vs non-terminating decimals -- non-terminating decimals can be explained by the explaination in the place value system of the fractional part
 
 ## Conversion to Fraction
 
@@ -6988,6 +7022,9 @@ Examples of mixed number and decimal number equivalents...
 * `{kt} 2 \frac{9}{1000}` ↔ 2.009
 * `{kt} 7 \frac{9}{100}` ↔ 7.09
 * `{kt} 5 \frac{9}{10}` ↔ 5.9
+
+`{bm-reset} (whole)/i`
+`{bm-reset} (fractional)/i`
 
 # Power
 
@@ -7104,35 +7141,35 @@ Special cases to be aware of for exponentiation:
 
 ## Non-negative Integer Exponent
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
-TODO: algorithm code needs to be moved OUT of wholenumber and into its own package!!!
+TODO: algorithm code needs to be moved OUT of whole number and into its own package!!!
 
 
 There are 2 algorithms used by humans to calculate exponents that are >= 1. The first algorithm is the simplest and most used: multiply base to itself for exponent iterations. For example, to calculate `{kt} 2^5`...
@@ -7671,7 +7708,7 @@ To `{bm} solve` an equation means to determine the values of the variables in th
 
  The set of variable to number mappings for an equation is called a `{bm} solution` -- `{kt} x=6` is the solution of the equation.
 
-TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than_REL twice x = 2x-(9*5)). If you see a comma, treat it like you're putting parenthesis around everything before and then applying the stuff after -- e.g. sum of 4 and 1, increased by 8 = (4+1) + 8.
+TODO: write section on converting words to algebra / algebra to words (see "Translate Words to Algebraic Expressions" in chapter 2.2) -- write a solver for this and make sure it handles complex expressions (e.g. nine times five less than twice x = 2x-(9*5)). If you see a comma, treat it like you're putting parenthesis around everything before and then applying the stuff after -- e.g. sum of 4 and 1, increased by 8 = (4+1) + 8.
 
 
 
@@ -7695,28 +7732,28 @@ Algebraic notation:
 
   When both sides represent different value, it's said that they're not equal.
 
-* `{kt} a > b` -- greater than_REL
+* `{kt} a > b` -- greater than
 
-  When the value of left-side is more than_REL the right-side, the left is said to be greater than_REL the right.
+  When the value of left-side is more than the right-side, the left is said to be greater than the right.
 
   ```{note}
   This is the same as `{kt} b < a`. Think of the symbol as a mouth. The mouth is trying to eat the larger value -- it's open in that direction.
   ```
-* `{kt} a < b` -- less than_REL
+* `{kt} a < b` -- less than
 
-  When the value of left-side is less than_REL the right-side, the left is said to be greater than_REL the right.
+  When the value of left-side is less than the right-side, the left is said to be greater than the right.
 
   ```{note}
   This is the same as `{kt} b > a`.  Think of the symbol as a mouth. The mouth is trying to eat the larger value -- it's open in that direction.
   ```
 
-* `{kt} a \geq b` -- greater than_REL or equal
+* `{kt} a \geq b` -- greater than or equal
 
-  When the value of left-side is more than_REL OR equal to the right-side, the left is said to be greater than_REL the right.
+  When the value of left-side is more OR equal to the right-side, the left is said to be greater than the right.
 
-* `{kt} a \leq b` -- less than_REL or equal
+* `{kt} a \leq b` -- less than or equal
 
-  When the value of left-side is less than_REL OR equal to the right-side, the left is said to be greater than_REL the right.
+  When the value of left-side is less than OR equal to the right-side, the left is said to be greater than the right.
 
 KEEP WORKING ON THESE:
 ADD FRACTION ADDING AND MULTIPLICATION RULES (recipriocals, cross multiply, etc..)
@@ -7831,7 +7868,7 @@ some of the above are overkill and need to be pruned
 
 TODO: discuss as if it were a scale
 
-TODO: discuss as on a number line -- if a is greater than_REL b, a is to the right of b
+TODO: discuss as on a number line -- if a is greater than b, a is to the right of b
 
 # Absolute Value
 
@@ -17951,7 +17988,7 @@ __EXERCISE__
 
 1/2 walnut per pan, 5 pans
 * a) 2 1/2
-* b) mixed number, because the baker probably has 1 cup and with mixed numbers its obvious how many whole cups are needed before going in for fractional portion
+* b) mixed number, because the baker probably has 1 cup and with mixed numbers its obvious how many whole cups are needed before going in for fractional part
 
 4.1.75) baking cookies
 
@@ -22156,7 +22193,7 @@ __EXERCISE__
 
 5.1.91) money is an application of decimals 
 
-5.1.92) the and is the decimal point, stuff to the left is the whole while stuff to the right is the partial.hundredths indicates that the partial is a fraction that's some value over 100 (e.g. 9/100)
+5.1.92) the and is the decimal point, stuff to the left is the whole while stuff to the right is the fractional.hundredths indicates that the fractional is a fraction that's some value over 100 (e.g. 9/100)
 
 5.1.93) tim. he was faster because he took LESS time 
 
@@ -22191,10 +22228,9 @@ START BACK UP HERE
 
 
 
-`{bm-error} Add the suffix _REL or _ADD/(more than)/i`
-`{bm-error} Add the suffix _REL or _ADD/(larger than)/i`
-`{bm-error} Add the suffix _REL or _ADD/(greater than)/i`
+`{bm-error} Add the suffix _PVS or _DECIMAL/(whole)/i`
+`{bm-error} Add the suffix _PVS or _DECIMAL/(fractional)/i`
 
-`{bm-error} Add the suffix _REL or _SUB/(less than)/i`
-`{bm-error} Add the suffix _REL or _SUB/(smaller than)/i`
-`{bm-error} Add the suffix _REL or _SUB/(fewer than)/i`
+`{bm-error} Add the suffix _WHOLE or _DECIMAL/(vertical addition)/i`
+`{bm-error} Add the suffix _WHOLE or _DECIMAL/(vertical subtraction)/i`
+`{bm-error} Add the suffix _WHOLE or _DECIMAL/(vertical multiplication)/i`
