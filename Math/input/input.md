@@ -6064,10 +6064,6 @@ The period placed in between the whole and the fraction is referred to as a `{bm
 `{bm-redirect} (whole)/i/(whole)_DECIMAL/i`
 `{bm-redirect} (fractional)/i/(fractional)_DECIMAL/i`
 
-```{note}
-You can consider the sign and the whole part as the integer part. The term integer part is used in the subsections below.
-```
-
 A mixed number can be converted to a decimal number so long as it has a qualifying denominator. A qualifying denominator starts with 1 followed by 0s. For example, `{kt} 2 \frac{1}{10}` has a qualifying denominator but `{kt} 2 \frac{1}{2}` doesn't.
 
 If the denominator doesn't qualify, the mixed number may still be convertible so long as an equivalent fraction exists that does have a qualifying denominator. In the previous example, `{kt} 2 \frac {5}{10}` is an equivalent fraction to `{kt} 2 \frac{1}{2}`.
@@ -6115,13 +6111,15 @@ Fraction conversion subsections below provide more in-depth discussion on how to
 ## Equality
 
 ```{prereq}
+Whole equality
 Integer equality
 Fraction equality
 ```
 
 Conceptually, you can think of `{bm} decimal equality/(decimal number equality|decimal equality)/i` the same as fraction equality where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction quality, a quick series of tests on the decimal numbers themselves can determine equality:
 
- * Integer parts must be equal.
+ * Sign must be equal.
+ * Whole parts must be equal.
  * Fractional part must be equal.
 
 If all tests above pass, the decimal numbers are equal.
@@ -6168,47 +6166,88 @@ DecimalNumberEqLauncher
 ## Less Than
 
 ```{prereq}
+Whole less than
+Whole greater than
 Integer less than
 Fraction less than
 ```
 
 Conceptually, you can think of `{bm} decimal less than/(decimal number less than|decimal less than)/i` the same as fraction less than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine less than:
 
- 1. Check the integer parts...
+ 1. Check the signs...
 
-    If the integer parts are integer less than, then the decimal numbers themselves will be decimal less than. For example, any decimal number with an integer part of 5 will always be less than any decimal number with an integer part of 6...
+    If the signs are equal, go to the next step.
+
+    If the sign of the number being tested is negative while the sign of the number being tested against is non-negative, then the decimal number will be less than. Any negative number is less than a non-negative number.
+
+ 2. Check the whole parts...
+
+    If whole parts are equal, go to the next step.
+
+    If the signs are both non-negative, then use whole number less than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any non-negative decimal number with a whole part of 5 will be less than any non-negative decimal number with a whole part of 6...
 
     ```{svgbob}
+    <--------- "further to the left means less than"
+
     <---|----|----|----|----|----|----|----|----|----|----|--->
        5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9  6.0  
     ```
 
-    If the integer parts are equal, go to step 2.
-
-    Otherwise, stop. The decimal numbers are not less than.
-
- 2. Check the fractional parts...
-
-    If the fractional parts are less than, the decimal numbers are less than. The process of testing the fractional parts is similar to whole number less than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 01 is less than a fractional part of 1...
+    If the signs are both negative, then use whole number greater than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any negative decimal number with a whole part of 6 will be less than any negative decimal number with a whole part of 5...
 
     ```{svgbob}
+    <--------- "further to the left means less than"
+
+    <---|----|----|----|----|----|----|----|----|----|----|--->
+      -6.0 -5.9 -5.8 -5.7 -5.6 -5.5 -5.4 -5.3 -5.2 -5.1 -5.0  
+    ```
+
+    Otherwise, stop. It isn't less than.
+
+ 3. Check the fractional parts...
+
+    If the signs are both non-negative, then use fractional less than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any non-negative decimal number with a fractional part of .01 is less than any non-negative decimal number with a fractional part of .1 ...
+
+    ```{svgbob}
+    <--------- "further to the left means less than"
+
     <---|------|------|------|------|------|------|------|------|------|------|--->
-       .01    .02    .03    .04    .05    .06    .07    .08    .09    .1    .11
-      1/100  2/100  3/100  4/100  5/100  6/100  7/100  8/100  9/100 10/100 11/100
-                                                                     1/10
+       0.01   0.02   0.03   0.04   0.05   0.06   0.07   0.08   0.09   0.1    0.11
+      1/100  2/100  3/100  4/100  5/100  6/100  7/100  8/100  9/100  1/10  11/100
+                                                                    10/100
+    ```
+
+    If the signs are both negative, then use fractional greater than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any negative decimal number with a fractional part of .1 is less than any negative decimal number with a fractional part of .01 ...
+
+    ```{svgbob}
+    <--------- "further to the left means less than"
+
+    <---|------|------|------|------|------|------|------|------|------|------|--->
+      -0.11  -0.1   -0.09  -0.08  -0.07  -0.06  -0.05  -0.04  -0.03  -0.02  -0.01   
+    -11/100  -1/10 -9/100 -8/100 -7/100 -6/100 -5/100 -4/100 -3/100 -2/100 -1/100  
+            -10/100                                                                 
+    ```
+
+    Otherwise, stop. It isn't less than.
+
+    ```{note}
+    It hasn't be discussed before, but the process of testing the fractional parts is similar to whole number, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...).
+
+    The code at the end of this section shows you how its done.
     ```
 
 For example, to test if 312.02 < 312.12:
 
- 1. Integers are equal. Go to step 2.
- 2. Fractional being tested is less than the other number's fractional.
+ 1. Signs are equal. Go to next step.
+ 2. Wholes are equal. Go to next step.
+ 3. Fractional being tested is less than the other number's fractional.
 
 312.02 < 312.12 is true.
  
 The way to perform this algorithm via code is as follows...
 
 ```{note}
-The first listing is the main DecimalNumber code, while the second listing is the code for fractional part called by the main DecimalNumber code.
+The first listing is the main DecimalNumber code, while the remaining listings are the code for fractional part called by the main DecimalNumber code.
 ```
 
 ```{output}
@@ -6223,6 +6262,12 @@ python
 #MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
 ```
 
+```{output}
+arithmetic_code/FractionalNumber.py
+python
+#MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
+```
+
 ```{arithmetic}
 DecimalNumberLtLauncher
 312.02 312.12
@@ -6231,53 +6276,100 @@ DecimalNumberLtLauncher
 ## Greater Than
 
 ```{prereq}
+Whole less than
+Whole greater than
 Integer greater than
 Fraction greater than
 ```
 
 Conceptually, you can think of `{bm} decimal greater than/(decimal number greater than|decimal greater than)/i` the same as fraction greater than where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction less than, a quick series of tests on the decimal numbers themselves can determine greater than:
 
- 1. Check the integer parts...
+ 1. Check the signs...
 
-    If the integer parts are integer greater than, then the decimal numbers themselves will be decimal greater than. For example, any decimal number with an integer part of 6 will always be greater than any decimal number with an integer part of 5...
+    If the signs are equal, go to the next step.
+
+    If the sign of the number being tested is non-negative while the sign of the number being tested against is negative, then the decimal number will be greater than. Any non-negative number is greater than a negative number.
+
+ 2. Check the whole parts...
+
+    If whole parts are equal, go to the next step.
+
+    If the signs are both non-negative, then use whole number greater than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, any non-negative decimal number with a whole part of 6 will be greater than any non-negative decimal number with a whole part of 5...
 
     ```{svgbob}
+           "further to the right means greater than" --------->
+                              
     <---|----|----|----|----|----|----|----|----|----|----|--->
        5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9  6.0  
     ```
 
-    If the integer parts are equal, go to step 2.
+    If the signs are both negative, then use whole number less than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, any negative decimal number with a whole part of 5 will be greater than any negative decimal number with a whole part of 6...
+
+    ```{svgbob}
+           "further to the right means greater than" --------->
+                              
+    <---|----|----|----|----|----|----|----|----|----|----|--->
+      -6.0 -5.9 -5.8 -5.7 -5.6 -5.5 -5.4 -5.3 -5.2 -5.1 -5.0  
+    ```
 
     Otherwise, stop. The decimal numbers are not less than.
 
- 2. Check the fractional parts...
+ 3. Check the fractional parts...
 
-    If the fractional parts are greater than, the decimal numbers are greater than. The process of testing the fractional parts is similar to whole number greater than, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...). For example, a fractional part of 1 is greater than a fractional part of 01...
+    If the signs are both non-negative, then use fractional greater than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, a fractional part of .1 is greater than a fractional part of .01 ...
 
     ```{svgbob}
+                               "further to the right means greater than" --------->
+
     <---|------|------|------|------|------|------|------|------|------|------|--->
        .01    .02    .03    .04    .05    .06    .07    .08    .09    .1    .11
       1/100  2/100  3/100  4/100  5/100  6/100  7/100  8/100  9/100 10/100 11/100
                                                                      1/10
     ```
 
+    If the signs are both negative, then use fractional less than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, a fractional part of -.01 is greater than a fractional part of -.1 ...
+
+    ```{svgbob}
+                               "further to the right means greater than" --------->
+
+    <---|------|------|------|------|------|------|------|------|------|------|--->
+      -0.11  -0.1   -0.09  -0.08  -0.07  -0.06  -0.05  -0.04  -0.03  -0.02  -0.01   
+    -11/100  -1/10 -9/100 -8/100 -7/100 -6/100 -5/100 -4/100 -3/100 -2/100 -1/100  
+            -10/100                                                                 
+    ```
+
+    Otherwise, stop. It isn't less than.
+
+    ```{note}
+    It hasn't be discussed before, but the process of testing the fractional parts is similar to whole number, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...).
+
+    The code at the end of this section shows you how its done.
+    ```
+
 For example, to test if 312.12 < 312.02:
 
- 1. Integers are equal. Go to step 2.
- 2. Fractional being tested is greater than the other number's fractional.
+ 1. Signs are equal. Go to next step.
+ 2. Wholes are equal. Go to next step.
+ 3. Fractional being tested is greater than the other number's fractional.
 
 312.12 > 312.02 is true.
  
 The way to perform this algorithm via code is as follows...
 
 ```{note}
-The first listing is the main DecimalNumber code, while the second listing is the code for fractional part called by the main DecimalNumber code.
+The first listing is the main DecimalNumber code, while the remaining listings are the code for fractional part called by the main DecimalNumber code.
 ```
 
 ```{output}
 arithmetic_code/DecimalNumber.py
 python
 #MARKDOWN_GT\s*\n([\s\S]+)\n\s*#MARKDOWN_GT
+```
+
+```{output}
+arithmetic_code/FractionalNumber.py
+python
+#MARKDOWN_LT\s*\n([\s\S]+)\n\s*#MARKDOWN_LT
 ```
 
 ```{output}
@@ -6837,9 +6929,98 @@ Whole number division
 Integer division
 Fraction division
 Decimal less than
+Decimal greater than
+Decimal multiplication
 ```
 
-`{bm} Decimal division/(decimal number division|decimal division)/i`
+Conceptually, you can think of `{bm} decimal division/(decimal number division|decimal division)/i` the same as fraction multiplication where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction multiplication, algorithms that are very whole number division can be applied: trial-and-error division and long division.
+
+### Trial and Error
+
+The same concept as trial-and-error for whole numbers can be applied to trial-and-error for decimal numbers. The only difference is that now fractional parts are supported. That is, once the whole parts match, the fractional parts must also match.
+
+The core idea behind the algorithm is that multiplication is the inverse of division. That is, multiplication reverses / un-does division (and vice-versa). For example...
+
+ * 2 * 5.5 is 11 -- If you have 2 groups of 5.5 items each, you'll have 11 items.
+ * 11 / 5.5 is 2 -- If you have 11 items and you break them up into groups of 5.5, you'll have 2 groups.
+
+Knowing this, multiplication can be used to check if some number is the quotient. For example, to find the quotient for 21 / 4, test to see 4 * ? = 21...
+
+ * 4 * 100 = 400 (40 < 21)
+ * 4 * 0 = 0 (0 < 21)
+ * 4 * 10 = 40 (40 < 21)
+ * 4 * 0 = 0 (0 < 21)
+ * 4 * 1 = 4 (4 < 21)
+ * 4 * 2 = 8 (8 < 21)
+ * 4 * 3 = 12 (12 < 21)
+ * 4 * 4 = 16 (16 < 21)
+ * 4 * 5 = 20 (20 < 21)
+ * 4 * 6 = 24 (24 > 21)
+ * 4 * 5.9 = 23.6 (23.6 > 21)
+ * 4 * 5.8 = 23.2 (23.2 > 21)
+ * 4 * 5.7 = 22.8 (22.8 > 21)
+ * 4 * 5.6 = 22.4 (22.4 > 21)
+ * 4 * 5.5 = 22 (22 > 21)
+ * 4 * 5.4 = 21.6 (21.6 > 21)
+ * 4 * 5.3 = 21.2 (21.2 > 21)
+ * 4 * 5.2 = 20.8 (20.8 < 21)
+ * 4 * 5.21 = 20.84 (20.84 < 21)
+ * 4 * 5.22 = 20.88 (20.88 < 21)
+ * 4 * 5.23 = 20.92 (20.92 < 21)
+ * 4 * 5.24 = 20.96 (20.96 < 21)
+ * 4 * 5.25 = 21 (21 = 21)
+
+TODO: the paragraph below is WRONG. you need to pick a starting number that will result in MORE whole digits than 21. 100 works for 4 because 400 has more digits than 21, but it own't work for 0.004 -- 0.004 * 100 = 0.4... .4 is bad starting number, but 400 isn't.
+
+Start by picking a randomly chosen number, preferably one with more whole digits than the dividend. In the example above, the result of the multiplication must equal the dividend (21). Since the dividend is goes up to the tens position, we start out by multiplying by a number that goes past the tens position: 100...
+
+> * 4 * 100 is 400 <-- 400 > 21
+ 
+If the result of the multiplication is ...
+
+ * equal to the dividend (21), the answer's been found.
+ * greater than the dividend (21), decrement the most significant digit of the number being multiplied and repeat.
+ * less than the dividend (21), move to the next lesser significant digit, increment the digit, and repeat.
+
+4 > 21, so decrement the most significant digit of 100: 0...
+
+>  * 4 * 0 is 0 <-- 0 < 21
+
+Repeat the process. 4 * 0 = 0. 0 < 21, so move to the next lesser significant digit and increment it...
+
+> * 4 * 10 is 4 <-- 40 < 21
+
+Repeat the process. 4 * 10 = 4. 4 < 21, so move to the next lesser significant digit and increment it...
+
+> * 4 * 10 is 4 <-- 40 < 21
+
+
+
+ 
+ * 4 * 0 is 0 <-- 0 < 21
+ 
+If it's less than, you move over to the next least significant digit and repeat the process move down a single move to the fodivisor If the result of the multiplication is larger than the dividend..
+
+* within the bound, narrow the number range by some amount.
+* above the bound, move the range down.
+* below the bound, move the range up.
+
+Repeat until the answer is found.
+
+4 * 5.25 is 21 -- If you have 4 groups of 5.25 items each, you'll have 21 items.
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
+```
+
+```{arithmetic}
+DecimalNumberDivTeLauncher
+21 4
+```
+
+### Long Division
 
 TODO: long division where you shift the divisor and dividend until there is no fractional part, then divide as is... e.g. 0.1 / 0.3 is the result result as 1 / 3 is the same result as 10/30 -- but, you only really need to shift until the divisor is whole, just keep the decimal point in the same place and it'll still work out
 

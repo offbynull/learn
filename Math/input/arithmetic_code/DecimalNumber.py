@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import inspect
 from typing import Union
 
 from Digit import Digit
 from Factor import factor_tree
 from FractionNumber import FractionNumber
 from IntegerNumber import IntegerNumber
-from Output import log, log_indent, log_unindent, log_decorator
+from Output import log, log_indent, log_unindent, log_decorator, log_whitelist
 from FractionalNumber import FractionalNumber
 from Sign import Sign
 from WholeNumber import WholeNumber
@@ -413,9 +414,15 @@ class DecimalNumber:
         log_indent()
 
         try:
-            log(f'Testing integer...')
-            int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
-            if not int_eq:
+            log(f'Testing sign...')
+            sign_eq = lhs.sign == rhs.sign
+            if not sign_eq:
+                raise FailedTestException()
+            log(f'Equal')
+
+            log(f'Testing whole...')
+            whole_eq = lhs.whole == rhs.whole
+            if not whole_eq:
                 raise FailedTestException()
             log(f'Equal')
 
@@ -449,17 +456,32 @@ class DecimalNumber:
         log_indent()
 
         try:
-            log(f'Testing integer...')
-            int_lt = IntegerNumber(lhs.sign, lhs.whole) < IntegerNumber(rhs.sign, rhs.whole)
-            if int_lt:
+            log(f'Testing sign...')
+            sign_lt = (lhs.sign == Sign.NEGATIVE or lhs.sign is None) and rhs.sign == Sign.POSITIVE
+            if sign_lt:
                 raise PassedTestException()
-            int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
-            if not int_eq:
+            sign_eq = lhs.sign == rhs.sign
+            if not sign_eq:
+                raise FailedTestException()
+            log(f'Equal')
+
+            log(f'Testing whole...')
+            if lhs.sign != Sign.NEGATIVE:
+                whole_lt = lhs.whole < rhs.whole
+            else:
+                whole_lt = lhs.whole > rhs.whole
+            if whole_lt:
+                raise PassedTestException()
+            whole_eq = lhs.whole == rhs.whole
+            if not whole_eq:
                 raise FailedTestException()
             log(f'Equal')
 
             log(f'Testing fractional...')
-            fractional_lt = lhs.fractional < rhs.fractional
+            if lhs.sign != Sign.NEGATIVE:
+                fractional_lt = lhs.fractional < rhs.fractional
+            else:
+                fractional_lt = lhs.fractional > rhs.fractional
             if fractional_lt:
                 raise PassedTestException()
             fractional_eq = lhs.fractional == rhs.fractional
@@ -497,17 +519,32 @@ class DecimalNumber:
         log_indent()
 
         try:
-            log(f'Testing integer...')
-            int_lt = IntegerNumber(lhs.sign, lhs.whole) > IntegerNumber(rhs.sign, rhs.whole)
-            if int_lt:
+            log(f'Testing sign...')
+            sign_gt = lhs.sign == Sign.POSITIVE and (rhs.sign == Sign.NEGATIVE or rhs.sign is None)
+            if sign_gt:
                 raise PassedTestException()
-            int_eq = IntegerNumber(lhs.sign, lhs.whole) == IntegerNumber(rhs.sign, rhs.whole)
-            if not int_eq:
+            sign_eq = lhs.sign == rhs.sign
+            if not sign_eq:
+                raise FailedTestException()
+            log(f'Equal')
+
+            log(f'Testing whole...')
+            if lhs.sign != Sign.NEGATIVE:
+                whole_gt = lhs.whole > rhs.whole
+            else:
+                whole_gt = lhs.whole < rhs.whole
+            if whole_gt:
+                raise PassedTestException()
+            whole_eq = lhs.whole == rhs.whole
+            if not whole_eq:
                 raise FailedTestException()
             log(f'Equal')
 
             log(f'Testing fractional...')
-            fractional_gt = lhs.fractional > rhs.fractional
+            if lhs.sign != Sign.NEGATIVE:
+                fractional_gt = lhs.fractional > rhs.fractional
+            else:
+                fractional_gt = lhs.fractional < rhs.fractional
             if fractional_gt:
                 raise PassedTestException()
             fractional_eq = lhs.fractional == rhs.fractional
@@ -690,23 +727,64 @@ class DecimalNumber:
                 or {WholeNumber.from_str('5')} == mock_fraction_denom_prime_factors
                 or 0 == len(mock_fraction_denom_prime_factors)):
             raise Exception('Resulting decimal will be non-terminating')
+        log(f'True')
 
         # DIVIDE using divide-and-conquer multiplication
         log(f'Performing {lhs} / {rhs}...')
+        log_indent()
+
+        log(f'Calculating position to start testing at...')
         modifier = DecimalNumber.from_str('1' + '0' * len(lhs.whole.digits))
         if rhs.sign == Sign.NEGATIVE:
             modifier = modifier * DecimalNumber.from_str('-1.0')
-        test = DecimalNumber.from_str('0.0')
+        log(f'{modifier}')
+
+        test = modifier
         while True:
-            if test * rhs == lhs:
-                break
-            elif test * rhs > lhs:
-                while test * rhs > lhs:
-                    test -= modifier
-            elif test * rhs < lhs:
-                while test * rhs < lhs:
-                    test += modifier
+            log(f'Testing {test}: {test} * {rhs}...')
+            test_res = test * rhs
+            log(f'{test_res}')
+
+            log(f'Is {test_res} ==, >, or < to {lhs}? ...')
+            log_indent()
+            try:
+                if test_res == lhs:
+                    log(f'{test_res} == {lhs} -- Found')
+                    break
+                elif test_res > lhs:
+                    log(f'{test_res} > {lhs} -- Decrementing {test} by {modifier} until not >...')
+                    log_indent()
+                    while True:
+                        log(f'Decrementing {test} by {modifier}...')
+                        test -= modifier
+                        log(f'{test} * {rhs}...')
+                        modify_res = test * rhs
+                        log(f'{modify_res}')
+                        if not modify_res > lhs:
+                            break
+                    log_unindent()
+                    log(f'Done: {test}')
+                elif test_res < lhs:
+                    log(f'{test_res} < {lhs} -- Incrementing {test} by {modifier} until not <...')
+                    log_indent()
+                    while True:
+                        log(f'Incrementing {test} by {modifier}...')
+                        test += modifier
+                        log(f'{test} * {rhs}...')
+                        modify_res = test * rhs
+                        log(f'{modify_res}')
+                        if not modify_res < lhs:
+                            break
+                    log_unindent()
+                    log(f'Done: {test}')
+            finally:
+                log_unindent()
+
+            log(f'Calculating position for next test...')
             modifier *= DecimalNumber.from_str('0.1')
+            log(f'{modifier}')
+
+        log_unindent()
         log(f'{test}')
 
         log_unindent()
@@ -783,7 +861,12 @@ if __name__ == '__main__':
     # print(f'{DecimalNumber.from_str("-0.1") < DecimalNumber.from_str("1")}')
     # print(f'{DecimalNumber.from_str("1.0") < DecimalNumber.from_str("1")}')
     # print(f'{DecimalNumber.from_str("-1.0") < DecimalNumber.from_str("1")}')
-    print(f'{DecimalNumber.from_str("-2") < DecimalNumber.from_str("-3")}')
+    # print(f'{DecimalNumber.from_str("-2") < DecimalNumber.from_str("-3")}')
+    # print(f'{DecimalNumber.from_str("0.4") < DecimalNumber.from_str("0.5")}')
+    # print(f'{DecimalNumber.from_str("0.04") < DecimalNumber.from_str("0.05")}')
+    # print(f'{DecimalNumber.from_str("0.4") < DecimalNumber.from_str("0.05")}')
+    # print(f'{DecimalNumber.from_str("-0.4") < DecimalNumber.from_str("-0.5")}')
+    # print(f'{DecimalNumber.from_str("-0.5") < DecimalNumber.from_str("-0.4")}')
 
     # print(f'{DecimalNumber.from_str("0") > DecimalNumber.from_str("0")}')
     # print(f'{DecimalNumber.from_str("0.1") > DecimalNumber.from_str("0")}')
@@ -795,6 +878,12 @@ if __name__ == '__main__':
     # print(f'{DecimalNumber.from_str("-0.1") > DecimalNumber.from_str("1")}')
     # print(f'{DecimalNumber.from_str("1.0") > DecimalNumber.from_str("1")}')
     # print(f'{DecimalNumber.from_str("-1.0") > DecimalNumber.from_str("1")}')
+    # print(f'{DecimalNumber.from_str("-2") > DecimalNumber.from_str("-3")}')
+    # print(f'{DecimalNumber.from_str("0.4") > DecimalNumber.from_str("0.5")}')
+    # print(f'{DecimalNumber.from_str("0.04") > DecimalNumber.from_str("0.05")}')
+    # print(f'{DecimalNumber.from_str("0.4") > DecimalNumber.from_str("0.05")}')
+    # print(f'{DecimalNumber.from_str("-0.4") > DecimalNumber.from_str("-0.5")}')
+    # print(f'{DecimalNumber.from_str("-0.5") > DecimalNumber.from_str("-0.4")}')
 
     # print(f'{DecimalNumber.from_str("12.34") + DecimalNumber.from_str("12.34")}')
     # print(f'{DecimalNumber.from_str("0.02") + DecimalNumber.from_str("0.02")}')
@@ -844,6 +933,9 @@ if __name__ == '__main__':
     # print(f'{DecimalNumber.from_str("2.71") / DecimalNumber.from_str("2.5")}')
     # print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("0.25")}')
     # print(f'{DecimalNumber.from_str("0") / DecimalNumber.from_str("25")}')
+
+    log_whitelist([(inspect.getfile(DecimalNumber), '__truediv__')])
+    print(f'{DecimalNumber.from_str("21") / DecimalNumber.from_str("4")}')
 
     # print(f'{DecimalNumber.from_str("123.456")[3]}')
     # print(f'{DecimalNumber.from_str("123.456")[2]}')
