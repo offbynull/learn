@@ -739,7 +739,7 @@ SSSII
 <a name="HEADREF18"></a><h3>Popularity Algorithm</h3>
 <p><strong>ALGORITHM</strong>:</p>
 <p>This algorithm scores a <a href="#BOOKMARK50">motif matrix</a> by summing up the number of unpopular items in a column. For example, imagine a column has 7 Ts, 2 Cs, and 1A. The Ts are the most popular (7 items), meaning that the 3 items (2 Cs and 1 A) are unpopular -- the score for the column is 3.</p>
-<p>Sum up each of the column scores to the get the final score for the <a href="#BOOKMARK50">motif matrix</a>.</p>
+<p>Sum up each of the column scores to the get the final score for the <a href="#BOOKMARK50">motif matrix</a>. A lower score is better.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">score_motif</span>(<span class="hljs-params">motif_matrix: List[str]</span>) -&gt; int:</span>
     rows = len(motif_matrix)
     cols = len(motif_matrix[<span class="hljs-number">0</span>])
@@ -769,24 +769,53 @@ SSSII
 </div>
 <p></p>
 <a name="HEADREF19"></a><h3>Entropy Algorithm</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK12">Motif/Motif Matrix Profile</a></li>
+</ul>
+</div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm scores a <a href="#BOOKMARK50">motif matrix</a> by summing up the entropy for each column. The entropy is defined as the level of uncertainty for a column. For example, a column with 10 As has low entropy because it's highly conserved, while a column with 6 As and 4Ts has a higher entropy because it's less highly conserved.</p>
-<p>Sum up each of the column scores to the get the final score for the <a href="#BOOKMARK50">motif matrix</a>.</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
-<p>TODO FILL ME IN</p>
+<p>This algorithm scores a <a href="#BOOKMARK50">motif matrix</a> by calculating the <a href="#BOOKMARK64">entropy</a> of each column in the <a href="#BOOKMARK50">motif matrix</a>. <a href="#BOOKMARK64">Entropy</a> is defined as the level of uncertainty for some variable. The more uncertain the nucleotides are in the column of a <a href="#BOOKMARK50">motif matrix</a>, the higher (worse) the score. For example, given a <a href="#BOOKMARK50">motif matrix</a> with 10 rows, a column with ...</p>
+<ul>
+<li>10 A nucleotides has low <a href="#BOOKMARK64">entropy</a> because it's highly conserved,</li>
+<li>6 A and 4 T nucleotides has a higher <a href="#BOOKMARK64">entropy</a> because it's less highly conserved.</li>
+</ul>
+<p>Sum the output for each column to get the final score for the <a href="#BOOKMARK50">motif matrix</a>. A lower score is better.</p>
+<pre class="hljs"><code><span class="hljs-comment"># According to the book, method of scoring a motif matrix as defined in ScoreMotif.py isn't the method used in the</span>
+<span class="hljs-comment"># real-world. The method used in the real-world is this method, where...</span>
+<span class="hljs-comment"># 1. each column has its probability distribution calculated (prob of A vs prob C vs prob of T vs prob of G)</span>
+<span class="hljs-comment"># 2. the entropy of each of those prob dist are calculated</span>
+<span class="hljs-comment"># 3. those entropies are summed up to get the ENTROPY OF THE MOTIF MATRIX</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_entropy</span>(<span class="hljs-params">values: List[float]</span>) -&gt; float:</span>
+    ret = <span class="hljs-number">0.0</span>
+    <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> values:
+        ret += value * (log(value, <span class="hljs-number">2.0</span>) <span class="hljs-keyword">if</span> value &gt; <span class="hljs-number">0.0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0.0</span>)
+    ret = -ret
+    <span class="hljs-keyword">return</span> ret
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">score_motify_entropy</span>(<span class="hljs-params">motif_matrix: List[str]</span>) -&gt; float:</span>
+    rows = len(motif_matrix)
+    cols = len(motif_matrix[<span class="hljs-number">0</span>])
+
+    <span class="hljs-comment"># count up each column</span>
+    counts = motif_matrix_count(motif_matrix)
+    profile = motif_matrix_profile(counts)
+
+    <span class="hljs-comment"># prob dist to entropy</span>
+    entropy_per_col = []
+    <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> range(cols):
+        entropy = calculate_entropy([profile[<span class="hljs-string">'A'</span>][c], profile[<span class="hljs-string">'C'</span>][c], profile[<span class="hljs-string">'G'</span>][c], profile[<span class="hljs-string">'T'</span>][c]])
+        entropy_per_col.append(entropy)
+
+    <span class="hljs-comment"># sum up entropies to get entropy of motif</span>
+    <span class="hljs-keyword">return</span> sum(entropy_per_col)</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Scoring...</p>
+<p>ATTGC<br>TTTGC<br>TTTGG<br>ATTGC</p>
+<p>1.811278124459133</p>
+</div>
+<p></p>
 <a name="HEADREF20"></a><h2>Find Motif</h2>
 <p><a name="BOOKMARK14"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
@@ -851,7 +880,7 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>GAGAT<br>GAGAT<br>GAGAT</p>
+<p>AAAAA<br>AAAAA<br>AAAAA</p>
 </div>
 <p></p>
 <a name="HEADREF22"></a><h3>Monte Carlo Search Algorithm</h3>
@@ -1335,6 +1364,9 @@ SSSII
 </tr>
 </tbody>
 </table>
+</li>
+<li>
+<p><a name="BOOKMARK64"></a><strong>entropy</strong> - A level of uncertainty inherent in some random variable. Given some set of outcomes for a variable, it's calculated as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\sum_{i=1}^{n} P(x_i) log P(x_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>.</p>
 </li>
 </ul>
 

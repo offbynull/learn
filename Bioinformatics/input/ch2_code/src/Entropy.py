@@ -2,12 +2,7 @@ from math import log
 from typing import List
 
 
-def calculate_entropy(values: List[float]) -> float:
-    ret = 0.0
-    for value in values:
-        ret += value * (log(value, 2.0) if value > 0.0 else 0.0)
-    ret = -ret
-    return ret
+
 
 
 if __name__ == '__main__':

@@ -533,7 +533,7 @@ ATTGC
 
 This algorithm scores a motif matrix by summing up the number of unpopular items in a column. For example, imagine a column has 7 Ts, 2 Cs, and 1A. The Ts are the most popular (7 items), meaning that the 3 items (2 Cs and 1 A) are unpopular -- the score for the column is 3.
 
-Sum up each of the column scores to the get the final score for the motif matrix.
+Sum up each of the column scores to the get the final score for the motif matrix. A lower score is better.
 
 ```{output}
 ch2_code/src/ScoreMotif.py
@@ -551,41 +551,32 @@ ATTGC
 
 ### Entropy Algorithm
 
+```{prereq}
+Motif/Motif Matrix Profile_TOPIC
+```
+
 **ALGORITHM**:
 
-This algorithm scores a motif matrix by summing up the entropy for each column. The entropy is defined as the level of uncertainty for a column. For example, a column with 10 As has low entropy because it's highly conserved, while a column with 6 As and 4Ts has a higher entropy because it's less highly conserved.
+This algorithm scores a motif matrix by calculating the entropy of each column in the motif matrix. Entropy is defined as the level of uncertainty for some variable. The more uncertain the nucleotides are in the column of a motif matrix, the higher (worse) the score. For example, given a motif matrix with 10 rows, a column with ...
 
-Sum up each of the column scores to the get the final score for the motif matrix.
+ * 10 A nucleotides has low entropy because it's highly conserved,
+ * 6 A and 4 T nucleotides has a higher entropy because it's less highly conserved.
 
-TODO FILL ME IN
+Sum the output for each column to get the final score for the motif matrix. A lower score is better.
 
-TODO FILL ME IN
+```{output}
+ch2_code/src/ScoreMotifUsingEntropy.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
 
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
-
-TODO FILL ME IN
+```{ch2}
+ScoreMotifUsingEntropy
+ATTGC
+TTTGC
+TTTGG
+ATTGC
+```
 
 ## Find Motif
 
@@ -1286,3 +1277,5 @@ DnaABoxCandidateFinder
     |k-mer 4  |T|T|T|C|C|
     |k-mer 5  |A|T|T|C|G|
     |consensus|A|T|T|C|C|
+  
+  * `{bm} entropy` - A level of uncertainty inherent in some random variable. Given some set of outcomes for a variable, it's calculated as `{kt} -\sum_{i=1}^{n} P(x_i) log P(x_i)`.
