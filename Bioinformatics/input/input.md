@@ -501,7 +501,7 @@ Motif/Motif Matrix Count
 
 **WHAT**: Given a motif matrix, for each column generate the percentage that each nucleotide appears.
 
-**WHY**: Each column's percentages represent a probability distribution. These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary k-mer conforms to the same matrix.
+**WHY**: Each column's percentages represent a probability distribution. These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary k-mer conforms to the same motif matrix.
 
 **ALGORITHM**:
 
@@ -576,6 +576,110 @@ ATTGC
 TTTGC
 TTTGG
 ATTGC
+```
+
+## Probability of Match
+
+`{bm} /(Motif\/Probability of Match)_TOPIC/`
+
+```{prereq}
+Motif/Motif Matrix Count_TOPIC
+Motif/Motif Matrix Profile_TOPIC
+K-mer_TOPIC
+```
+
+**WHAT**: Given a motif matrix and a k-mer, calculate the probability of that k-mer being member of the motif matrix.
+
+**WHY**: Being able to determine if a k-mer is potentially a member of a motif can help speed up experiments. For example, imagine that you suspect 21 different genes of being regulated by the same transcription factor. You isolate a motif matrix from 6 of those genes for what you suspect is the regulatory motif for that transcription factor. This algorithm can then be used to scan through the k-mers in the remaining 15 gene sequences to test for potential matches.
+
+If a k-mer exists such that it matches the motif matrix with high probability, it likely is a transcription factor binding site for that transcription factor.
+
+**ALGORITHM**:
+
+This algorithm requires the use of pseudocounts when calculating the motif matrix profile. For example, imagine the following motif matrix:
+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|---|---|---|---|---|
+| A | T | T | T | G | C | A | A | A | C |
+| A | T | T | T | G | C | A | A | A | C |
+| A | T | T | T | C | C | A | A | A | C |
+| A | T | T | T | C | C | A | A | A | C |
+
+The profile for that motif matrix:
+
+|   | 0 | 1 | 2 | 3 |  4  | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|-----|---|---|---|---|---|
+| A | 1 | 0 | 0 | 0 | 0   | 0 | 1 | 1 | 1 | 0 |
+| C | 0 | 0 | 0 | 0 | 0.5 | 1 | 0 | 0 | 0 | 1 |
+| T | 0 | 1 | 1 | 1 | 0   | 0 | 0 | 0 | 0 | 0 |
+| G | 0 | 0 | 0 | 0 | 0.5 | 0 | 0 | 0 | 0 | 0 |
+
+Using the probabilities for each nucleotide, the k-mer...
+
+* ATTGCAAAC is calculated as 1\*1\*1\*1\*1\*0.5\*1\*1\*1\*1\*1 = 0.5
+* TTTGCAAAC is calculated as 0\*1\*1\*1\*1\*0.5\*1\*1\*1\*1\*1 = 0
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+TODO: EXPLAIN WHY 2ND KMER CALCULATION IS BAD AND WHY PSUEDOCOUNTS FIX THIS
+
+```{output}
+ch2_code/src/FindMostProbableKmerUsingProfileMatrix.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+FindMostProbableKmerUsingProfileMatrix
+ATTTGCAAAC
+ATTTGCAAAC
+ATTTCCAAAC
+ATTTCCAAAC
+GGGGGGGGGG
 ```
 
 ## Find Motif

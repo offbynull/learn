@@ -1,8 +1,11 @@
 from typing import Dict, List, Tuple
 
+from MotifMatrixCount import motif_matrix_count
+from MotifMatrixProfile import motif_matrix_profile
 from Utils import slide_window
 
 
+# MARKDOWN
 # Recall that a profile matrix is a matrix of probabilities. Each row represents a single element (e.g. nucleotide) and
 # each column represents the probability distribution for that position.
 #
@@ -21,6 +24,7 @@ def determine_probability_of_match_using_profile_matrix(profile_matrix: Dict[str
     for idx, element in enumerate(kmer):
         prob = prob * profile_matrix[element][idx]
     return prob
+# MARKDOWN
 
 
 def find_most_probable_kmer_using_profile_matrix(profile_matrix: Dict[str, List[float]], dna: str):
@@ -35,14 +39,28 @@ def find_most_probable_kmer_using_profile_matrix(profile_matrix: Dict[str, List[
     return most_probable
 
 
-if __name__ == '__main__':
-    found = find_most_probable_kmer_using_profile_matrix(
-        {
-            'A': [0.2, 0.2, 0.3, 0.2, 0.3],
-            'C': [0.4, 0.3, 0.1, 0.5, 0.1],
-            'G': [0.3, 0.3, 0.5, 0.2, 0.4],
-            'T': [0.1, 0.2, 0.1, 0.1, 0.2]
-        },
-        'ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATATAGCCCGAGGGCCT'
-    )
-    print(f'{found}')
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        dnas = []
+        while True:
+            try:
+                dna = input().strip().upper()
+                if len(dna) > 0:
+                    dnas.append(dna)
+            except EOFError:
+                break
+        
+        kmer = dnas[-1]
+        motif_matrix = dnas[:-2]
+
+        counts = motif_matrix_count(motif_matrix)
+        profile = motif_matrix_profile(counts)
+        prob = determine_probability_of_match_using_profile_matrix(profile, kmer)
+        print(f'Motif matrix...\n\n')
+        print(f'{"<br>".join(motif_matrix)}\n\n')
+        print(f'Probability that {kmer} matches the motif {prob}...\n\n')
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
