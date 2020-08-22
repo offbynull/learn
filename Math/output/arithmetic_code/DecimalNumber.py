@@ -136,12 +136,28 @@ class DecimalNumber:
                 raise Exception('Simplified denominator contains prime factors other than 2 and 5')
 
             log(f'Calculating value to scale by so {denom} becomes next largest power of 10...')
-            expected_0s_in_denom = len(str(denom))
-            expected_denom = WholeNumber.from_str('1' + '0' * expected_0s_in_denom)
-            scale_by, _ = expected_denom / denom  # remainder will be 0
+            num_of_2s = len(list(filter(lambda pf: pf == WholeNumber.from_str('2'), denom_prime_factors)))
+            num_of_5s = len(list(filter(lambda pf: pf == WholeNumber.from_str('5'), denom_prime_factors)))
+            extra_2s = 0
+            extra_5s = 0
+            if num_of_2s == 0 and num_of_5s == 0:
+                extra_2s = 1
+                extra_5s = 1
+            elif num_of_2s < num_of_5s:
+                extra_2s = num_of_5s - num_of_2s
+            elif num_of_2s > num_of_5s:
+                extra_5s = num_of_2s - num_of_5s
+            log(f'Require {extra_2s} 2s and {extra_5s} 5s')
+
+            log(f'Multiplying {extra_2s} 2s and {extra_5s} 5s to get scale...')
+            scale_by = WholeNumber.from_str('1')
+            for i in range(extra_2s):
+                scale_by *= WholeNumber.from_str('2')
+            for i in range(extra_5s):
+                scale_by *= WholeNumber.from_str('5')
             log(f'{scale_by}')
 
-            log(f'Scaling {value} by {scale_by}...')
+            log(f'Multiplying {value}\'s numerator and denominator by {scale_by}...')
             value = value * FractionNumber(
                 IntegerNumber.from_whole(scale_by),
                 IntegerNumber.from_whole(scale_by)
@@ -694,6 +710,31 @@ class DecimalNumber:
         return ret
     #MARKDOWN_MUL
 
+
+    #MARKDOWN_TE_DIV_STARTNUM
+    @staticmethod
+    @log_decorator
+    def _choose_start_num_for_divte(input1: DecimalNumber, expected_product: DecimalNumber) -> DecimalNumber:
+        log(f'Choosing a starting number to find {input1} \\* ? = {expected_product}...')
+        log_indent()
+
+        log(f'{input1}\'s whole part has length of {len(input1.whole.digits)}')
+        log(f'{expected_product}\'s whole part has length of {len(expected_product.whole.digits)}')
+        num_of_zeros = len(expected_product.whole.digits) - len(input1.whole.digits)
+        start_num = DecimalNumber.from_str('1' + '0' * (num_of_zeros + 1))
+
+        if input1.sign != Sign.NEGATIVE and expected_product.sign == Sign.NEGATIVE\
+                or input1.sign == Sign.NEGATIVE and expected_product.sign != Sign.NEGATIVE:
+            start_num = start_num * DecimalNumber.from_str('-1.0')
+
+        log(f'Starting number: {start_num}')
+
+        log_unindent()
+        log(f'{start_num}')
+        return start_num
+    #MARKDOWN_TE_DIV_STARTNUM
+
+
     #MARKDOWN_DIV
     @log_decorator
     def __truediv__(lhs: DecimalNumber, rhs: DecimalNumber) -> DecimalNumber:
@@ -734,9 +775,7 @@ class DecimalNumber:
         log_indent()
 
         log(f'Calculating position to start testing at...')
-        modifier = DecimalNumber.from_str('1' + '0' * len(lhs.whole.digits))
-        if rhs.sign == Sign.NEGATIVE:
-            modifier = modifier * DecimalNumber.from_str('-1.0')
+        modifier = DecimalNumber._choose_start_num_for_divte(lhs, rhs)
         log(f'{modifier}')
 
         test = modifier
@@ -934,8 +973,11 @@ if __name__ == '__main__':
     # print(f'{DecimalNumber.from_str("271") / DecimalNumber.from_str("0.25")}')
     # print(f'{DecimalNumber.from_str("0") / DecimalNumber.from_str("25")}')
 
-    log_whitelist([(inspect.getfile(DecimalNumber), '__truediv__')])
-    print(f'{DecimalNumber.from_str("21") / DecimalNumber.from_str("4")}')
+    # log_whitelist([(inspect.getfile(DecimalNumber), '__truediv__')])
+    # print(f'{DecimalNumber.from_str("21") / DecimalNumber.from_str("4")}')
+
+    log_whitelist([(inspect.getfile(DecimalNumber), '_choose_start_num_for_divte')])
+    print(f'{DecimalNumber._choose_start_num_for_divte(DecimalNumber.from_str("2"), DecimalNumber.from_str("50"))}')
 
     # print(f'{DecimalNumber.from_str("123.456")[3]}')
     # print(f'{DecimalNumber.from_str("123.456")[2]}')

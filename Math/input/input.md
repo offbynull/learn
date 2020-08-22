@@ -698,11 +698,11 @@ Subtraction
 ```
  [●●●●●●●●●●●●●●●] start with 15
 
- [●●●●●●●●●●●●] 15-3 is 12 (iteration 1)
- [●●●●●●●●●] 12-3 is 9 (iteration 2)
- [●●●●●●] 9-3 is 6 (iteration 3)
- [●●●] 6-3 is 3 (iteration 4)
- [] 3-3 is 0 (iteration 5)
+ [●●●●●●●●●●●●] 15-3=12 (iteration 1)
+ [●●●●●●●●●] 12-3=9 (iteration 2)
+ [●●●●●●] 9-3=6 (iteration 3)
+ [●●●] 6-3=3 (iteration 4)
+ [] 3-3=0 (iteration 5)
 ```
 
 Another way of thinking about division is that it's chopping up a number. Imagine cutting up a pie into 15 pieces and eating 3 pieces at a time. The pie will be done after you've eaten 5 times.
@@ -743,11 +743,11 @@ In certain cases, division may result in some remaining value that isn't large e
 ```
  [●●●●●●●●●●●●●●●●] start with 16
 
- [●●●●●●●●●●●●●] 16-3 is 13 (iteration 1)
- [●●●●●●●●●●] 13-3 is 10 (iteration 2)
- [●●●●●●●] 10-3 is 7 (iteration 3)
- [●●●●] 7-3 is 4 (iteration 4)
- [●] 4-3 is 1 (iteration 5)
+ [●●●●●●●●●●●●●] 16-3=13 (iteration 1)
+ [●●●●●●●●●●] 13-3=10 (iteration 2)
+ [●●●●●●●] 10-3=7 (iteration 3)
+ [●●●●] 7-3=4 (iteration 4)
+ [●] 4-3=1 (iteration 5)
 
  only 1 item left -- not enough for another subtraction iteration
  
@@ -795,11 +795,11 @@ Properties of division:
    ```
    [●●●●●] start with 5
   
-   [●●●●] 5-1 is 4 (iteration 1)
-   [●●●] 4-1 is 3 (iteration 2)
-   [●●] 3-1 is 2 (iteration 3)
-   [●] 2-1 is 1 (iteration 4)
-   [] 1-1 is 0 (iteration 5)
+   [●●●●] 5-1=4 (iteration 1)
+   [●●●] 4-1=3 (iteration 2)
+   [●●] 3-1=2 (iteration 3)
+   [●] 2-1=1 (iteration 4)
+   [] 1-1=0 (iteration 5)
   
    5 iterations total
    ```
@@ -809,7 +809,7 @@ Properties of division:
    ```
    [●●●●●] start with 5
   
-   [] 5-5 is 0 (iteration 1)
+   [] 5-5=0 (iteration 1)
   
    1 iteration total
    ```
@@ -818,12 +818,11 @@ Properties of division:
 
    This makes sense if you think of division as iterative subtraction...
 
-   ```{javascript}
-   var quotient = 0;
-   while (dividend >= divisor) {
-       dividend -= divisor;
-       quotient += 1;
-   }
+   ```{python}
+   quotient = 0
+   while dividend >= divisor:
+       dividend -= divisor
+       quotient += 1
    ```
 
    This will iterate forever if the divisor is 0 because the dividend would never become less than the divisor -- the loop wouldn't terminate.
@@ -1140,9 +1139,9 @@ The algorithm used by humans to add large whole numbers together is called `{bm}
 
 1. Humans can easily add a single digit number to another single digit number without much effort. For example...
 
-   * 3+4 is 7
-   * 1+9 is 10
-   * 9+9 is 18
+   * 3+4=7
+   * 1+9=10
+   * 9+9=18
 
    ... are all addition operations that don't take much effort / are already probably cached in person's memory.
 
@@ -1366,9 +1365,9 @@ The algorithm used by humans to subtract large whole numbers from each other is 
 
 1. Humans can easily subtract a small 1 to 2 digit numbers (anything smaller than 20) from each other without much effort. For example...
 
-   * 4-3 is 1
-   * 10-1 is 9
-   * 15-3 is 13
+   * 4-3=1
+   * 10-1=9
+   * 15-3=13
 
    ... are all subtraction operations that don't take much effort / are already probably cached in person's memory.
 
@@ -1627,7 +1626,7 @@ Borrow recursively to handle this case:
 
 * subtract 100s position: 0-0 results in 0 (why? because 11 is the same as 011)
 
-The way to perform this algorithm in real-life is to stack the two numbers being subtracted on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, subtract the individual single digit components together (from right-to-left). Everytime borrowing is needed, cross out the number being changed and put the place their new numbers above. For example, subtracting 100 and 11 ...
+The way to perform this algorithm in real-life is to stack the two numbers being subtracted on top of each other, where the positions for both numbers match up (e.g. the 1s position matches up, the 10s position matches up, the 100s position matched up, etc..). Then, subtract the individual single digit components together (from right-to-left). Every time borrowing is needed, cross out the number being changed and put the place their new numbers above. For example, subtracting 100 and 11 ...
 
 ```{kthelper}
 VerticalSubtraction
@@ -1735,9 +1734,9 @@ The algorithm used by humans to multiply large whole numbers together is called 
 
 1. Humans have the ability to multiply a single digit number to another single digit number through memorization. For example...
 
-   * 3\*4 is 12 (3+3+3+3)
-   * 1\*9 is 9  (9)
-   * 9\*9 is 81 (9+9+9+9+9+9+9+9+9)
+   * 3\*4=12 (3+3+3+3)
+   * 1\*9=9  (9)
+   * 9\*9=81 (9+9+9+9+9+9+9+9+9)
 
    ... are all multiplication operations that can be done quickly if the person has cached the table below into their memory.
 
@@ -1796,7 +1795,7 @@ The algorithm used by humans to multiply large whole numbers together is called 
 
 3. If two numbers start with a single non-zero digit is followed by zero or more 0s, the result of their multiplication is equivalent to multiplying the single non-zero digits together and appending the 0s to the end. For example, ..
 
-   * 30 \* 2 is 60 -- 3 ends in 1 zero and 2 ends in no zeros, so the result has 1 zero
+   * 30 \* 2 = 60 -- 3 ends in 1 zero and 2 ends in no zeros, so the result has 1 zero
 
      ```
      ┌─┬─┬─┐
@@ -1812,7 +1811,7 @@ The algorithm used by humans to multiply large whole numbers together is called 
      └──────────┴──────────┴──────────┘
      ```
 
-   * 3 \* 20 is 60 -- 3 ends in no zeros and 2 ends in 1 zero, so the result has 1 zero
+   * 3 \* 20 = 60 -- 3 ends in no zeros and 2 ends in 1 zero, so the result has 1 zero
 
      ```
      ┌─┬─┬─┐
@@ -1846,7 +1845,7 @@ The algorithm used by humans to multiply large whole numbers together is called 
      └─┴─┴─┘
      ```
 
-   * 30 \* 20 is 600 -- 30 ends in 1 zero and 20 ends in 1 zero, so the result has 2 zeros
+   * 30 \* 20 = 600 -- 30 ends in 1 zero and 20 ends in 1 zero, so the result has 2 zeros
 
      ```
      ┌─┬─┬─┐
@@ -2141,11 +2140,11 @@ Whole number multiplication
 
 `{bm} Trial-and-error division` is an algorithm used for dividing numbers. The core idea behind the algorithm is that multiplication is the inverse of division. That is, multiplication reverses / un-does division (and vice-versa). For example...
 
-* 3 * 4 is 12 -- If you have 3 groups of 4 items each, you'll have 12 items.
-* 12 / 3 is 4 -- If you have 12 items and you break them up into 3 groups, you'll have 4 items in each group.
+* 3 * 4 = 12 -- If you have 3 groups of 4 items each, you'll have 12 items.
+* 12 / 3 = 4 -- If you have 12 items and you break them up into 3 groups, you'll have 4 items in each group.
 
 ```{svgbob}
-"3 * 4 is 12"       "12 / 3 is 4"
+"3 * 4 = 12"       "12 / 3 = 4"
           
   +----+          +----+----+----+
   |●●●●| 4        |●●●●|●●●●|●●●●| 12
@@ -2160,19 +2159,19 @@ Whole number multiplication
 
         +------------+
         |            |
-        |  +--+     +++    +-+
-        |  |12| "/" |3| is |4|---+
-        |  +-++     +-+    +-+   |
-        |    |                   |
-        |    +-------------+     |
-        |                  |     |
-        |                  v     |
-        |  +-+     +-+    +--+   |
-        +->|3| "*" |4| is |12|   |
-           +-+     +-+    +--+   |
-                    ^            |
-                    |            |
-                    +------------+
+        |  +--+     +++     +-+
+        |  |12| "/" |3| "=" |4|---+
+        |  +-++     +-+     +-+   |
+        |    |                    |
+        |    +--------------+     |
+        |                   |     |
+        |                   v     |
+        |  +-+     +-+     +--+   |
+        +->|3| "*" |4| "=" |12|   |
+           +-+     +-+     +--+   |
+                    ^             |
+                    |             |
+                    +-------------+
 ```
 
 Knowing this, multiplication can be used to check if some number is the quotient. For example, to find the quotient for 20 / 5...
@@ -2180,30 +2179,30 @@ Knowing this, multiplication can be used to check if some number is the quotient
 ```{svgbob}
 +------------+
 |            |
-|  +--+     +++    +-+
-|  |20| "/" |5| is |?+---+
-|  +-++     +-+    +-+   |
-|    |                   |
-|    +-------------+     |
-|                  |     |
-|                  v     |
-|  +-+     +-+    +--+   |
-+->|5| "*" |?| is |20|   |
-   +-+     +++    +--+   |
-            ^            |
-            |            |
-            +------------+
+|  +--+     +++     +-+
+|  |20| "/" |5| "=" |?+---+
+|  +-++     +-+     +-+   |
+|    |                    |
+|    +--------------+     |
+|                   |     |
+|                   v     |
+|  +-+     +-+     +--+   |
++->|5| "*" |?| "=" |20|   |
+   +-+     +++     +--+   |
+            ^             |
+            |             |
+            +-------------+
 ```
 
-* 5 * 1 is 5 <-- test 1, no
-* 5 * 2 is 10 <-- test 2, no
-* 5 * 3 is 15 <-- test 3, no
-* 5 * 4 is 20 <-- test 4, FOUND -- 20 / 5 is 4
+* 5 * 1 = 5 <-- test 1, no
+* 5 * 2 = 10 <-- test 2, no
+* 5 * 3 = 15 <-- test 3, no
+* 5 * 4 = 20 <-- test 4, FOUND -- 20 / 5 = 4
 
-5 * 4 is 20 -- If you have 5 groups of 4 items each, you'll have 20 items.
+5 * 4 = 20 -- If you have 5 groups of 4 items each, you'll have 20 items.
 
 ```{svgbob}
-"5 * 4 is 20"         "20 / 5 is 4"
+"5 * 4 = 20"         "20 / 5 = 4"
 
   +----+       +----+----+----+----+----+
   |●●●●| 4     |●●●●|●●●●|●●●●|●●●●|●●●●| 20
@@ -2222,19 +2221,19 @@ Knowing this, multiplication can be used to check if some number is the quotient
 
         +------------+
         |            |
-        |  +--+     +++    +-+
-        |  |20| "/" |5| is |4|---+
-        |  +-++     +-+    +-+   |
-        |    |                   |
-        |    +-------------+     |
-        |                  |     |
-        |                  v     |
-        |  +-+     +-+    +--+   |
-        +->|5| "*" |4| is |20|   |
-           +-+     +++    +--+   |
-                    ^            |
-                    |            |
-                    +------------+
+        |  +--+     +++     +-+
+        |  |20| "/" |5| "=" |4|---+
+        |  +-++     +-+     +-+   |
+        |    |                    |
+        |    +--------------+     |
+        |                   |     |
+        |                   v     |
+        |  +-+     +-+     +--+   |
+        +->|5| "*" |4| "=" |20|   |
+           +-+     +++     +--+   |
+                    ^             |
+                    |             |
+                    +-------------+
 ```
 
 Rather than testing each number one-by-one, it's faster to start with a number range and narrow / tweak it until you converge to the answer. That is, start with an arbitrary lower-bound and upper-bound and test both. If the product is...
@@ -2250,19 +2249,19 @@ For example, 2617 / 52...
 ```{svgbob}
 +--------------+
 |              |
-|  +----+     ++-+    +-+
-|  |2617| "/" |52| is |?+---+
-|  +-+--+     +--+    +-+   |
-|    |                      |
-|    +---------------+      |
-|                    |      |
-|                    v      |
-|  +--+     +-+    +----+   |
-+->|52| "*" |?| is |2617|   |
-   +--+     +++    +----+   |
-             ^              |
-             |              |
-             +--------------+
+|  +----+     ++-+     +-+
+|  |2617| "/" |52| "=" |?+---+
+|  +-+--+     +--+     +-+   |
+|    |                       |
+|    +----------------+      |
+|                     |      |
+|                     v      |
+|  +--+     +-+     +----+   |
++->|52| "*" |?| "=" |2617|   |
+   +--+     +++     +----+   |
+             ^               |
+             |               |
+             +---------------+
 ```
 
 Decide on a range and test...
@@ -2365,28 +2364,28 @@ The algorithm used by humans to divide large whole numbers is called `{bm} long 
    ```{svgbob}
    +----------+
    |          |
-   |  +--+   +++    +-+
-   |  |20| / |5| is |?+---+
-   |  +-++   +-+    +-+   |
-   |    |                 |
-   |    +-----------+     |
-   |                |     |
-   |                v     |
-   |  +-+   +-+    +--+   |
-   +->|5| x |?| is |20|   |
-      +-+   +++    +--+   |
-             ^            |
-             |            |
-             +------------+
+   |  +--+   +++     +-+
+   |  |20| / |5| "=" |?+---+
+   |  +-++   +-+     +-+   |
+   |    |                  |
+   |    +------------+     |
+   |                 |     |
+   |                 v     |
+   |  +-+   +-+     +--+   |
+   +->|5| x |?| "=" |20|   |
+      +-+   +++     +--+   |
+             ^             |
+             |             |
+             +-------------+
    ```
 
-   * 5 * 1 is 5 <-- test 1, no
-   * 5 * 9 is 45 <-- test 9, no
-   * 5 * 2 is 10 <-- test 2, no
-   * 5 * 8 is 40 <-- test 8, no
-   * 5 * 3 is 15 <-- test 3, no
-   * 5 * 7 is 35 <-- test 7, no
-   * 5 * 4 is 20 <-- test 4, FOUND -- 20 / 5 is 4
+   * 5 * 1 = 5 <-- test 1, no
+   * 5 * 9 = 45 <-- test 9, no
+   * 5 * 2 = 10 <-- test 2, no
+   * 5 * 8 = 40 <-- test 8, no
+   * 5 * 3 = 15 <-- test 3, no
+   * 5 * 7 = 35 <-- test 7, no
+   * 5 * 4 = 20 <-- test 4, FOUND -- 20 / 5 = 4
 
 3. When dividing, if the number being divided (dividend) has trailing zeros, those trailing zeros can be removed prior to the division and then put back on after the division. For example, 4500 / 6...
 
@@ -3770,7 +3769,7 @@ Conceptually, you can think of `{bm} integer subtraction/(integer number subtrac
 
 * positive integer, it's moving left on the number line.
 
-  For example, 5 - 4 is 1...
+  For example, 5 - 4 = 1...
 
   ```{svgbob}
   <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
@@ -3782,7 +3781,7 @@ Conceptually, you can think of `{bm} integer subtraction/(integer number subtrac
                                       -4
   ```
 
-  For example, -2 - 4 is -6...
+  For example, -2 - 4 = -6...
 
   ```{svgbob}
   <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
@@ -3794,9 +3793,9 @@ Conceptually, you can think of `{bm} integer subtraction/(integer number subtrac
                  -4
   ```
 
-  Notice that the result of this example's movement is exactly the same as adding magnitudes, then tacking on a negative sign to the result: 2 + 4 is 6, tack on a negative sign to get -6.
+  Notice that the result of this example's movement is exactly the same as adding magnitudes, then tacking on a negative sign to the result: 2 + 4 = 6, tack on a negative sign to get -6.
 
-  For example, 3 - 4 is -1...
+  For example, 3 - 4 = -1...
 
   ```{svgbob}
   <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
@@ -3808,11 +3807,11 @@ Conceptually, you can think of `{bm} integer subtraction/(integer number subtrac
                                -4
   ```
 
-  Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a negative sign: 4 - 3 is 1, tack on a negative sign to get -1.
+  Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a negative sign: 4 - 3 = 1, tack on a negative sign to get -1.
 
 * negative integer, it's moving right on the number line.
 
-  For example, 3 - -4 is 7...
+  For example, 3 - -4 = 7...
 
   ```{svgbob}
   <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
@@ -3826,7 +3825,7 @@ Conceptually, you can think of `{bm} integer subtraction/(integer number subtrac
 
   Notice that the result of this movement is exactly the same as performing 3 + 4.
 
-  For example, -3 - -4 is 1...
+  For example, -3 - -4 = 1...
 
   ```{svgbob}
   <--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-->
@@ -3838,7 +3837,7 @@ Conceptually, you can think of `{bm} integer subtraction/(integer number subtrac
                           +4
   ```
 
-  Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a positive sign to the result: 4 - 3 is 1, tack on a positive sign: 1.
+  Notice that the result of this example's movement is exactly the same as swapping, subtracting, then tacking on a positive sign to the result: 4 - 3 = 1, tack on a positive sign: 1.
 
 The algorithm used by humans to subtract integer numbers revolves around inspecting the sign and magnitude of each integer, then deciding whether to perform whole number addition or whole number subtraction to get the result. The codification of this algorithm is as follows...
 
@@ -3872,9 +3871,9 @@ Conceptually, you can think of `{bm} integer multiplication/(integer number mult
 
   ```{note}
   Subtraction starts from 0, so it'd be...
-  1. 0 - 5 is -5
-  2. -5 - 5 is -10
-  3. -10 - 5 is -15
+  1. 0 - 5 = -5
+  2. -5 - 5 = -10
+  3. -10 - 5 = -15
 
   Or, you could use the commutative property of multiplication and swap the operands -- 3 \* -5 becomes -5 \* 3, exactly the same as the previous bullet point.
   ```
@@ -3883,20 +3882,20 @@ Conceptually, you can think of `{bm} integer multiplication/(integer number mult
 
   ```{note}
   Subtraction starts from 0, so it'd be...
-  1. 0 - -5 is 5
-  2. -5 - -5 is 10
-  3. -10 - -5 is 15
+  1. 0 - -5 = 5
+  2. -5 - -5 = 10
+  3. -10 - -5 = 15
   ```
 
 One useful property of integer multiplication is that, multiplying any non-zero number by -1 will slip its sign. For example...
 
-* 5 \* -1 is -5
+* 5 \* -1 = -5
 
-  1. 0 - 5 is -5
+  1. 0 - 5 = -5
 
-* -5 \* -1 is 5
+* -5 \* -1 = 5
 
-  1. 0 - -5 is 5
+  1. 0 - -5 = 5
 
 The algorithms humans use to perform integer multiplication is as follows:
 
@@ -3944,11 +3943,11 @@ Conceptually, you can think of `{bm} integer division/(integer number division|i
 
   You need to subtract by 3 to get closer to 0...
 
-  1. 15 - 3 is -12
-  2. 12 - 3 is -9
-  3. 9 - 3 is -6
-  4. 6 - 3 is -3
-  5. 3 - 3 is 0
+  1. 15 - 3 = -12
+  2. 12 - 3 = -9
+  3. 9 - 3 = -6
+  4. 6 - 3 = -3
+  5. 3 - 3 = 0
 
   5 iterations of subtraction.
 
@@ -3964,19 +3963,19 @@ Conceptually, you can think of `{bm} integer division/(integer number division|i
 
   You need to subtract by -3 to get closer to 0...
 
-  1. -15 - -3 is -12
-  2. -12 - -3 is -9
-  3. -9 - -3 is -6
-  4. -6 - -3 is -3
-  5. -3 - -3 is 0
+  1. -15 - -3 = -12
+  2. -12 - -3 = -9
+  3. -9 - -3 = -6
+  4. -6 - -3 = -3
+  5. -3 - -3 = 0
 
   5 iterations of subtraction.
 
 When the signs are different, it becomes slightly more difficult to conceptualize. For example, using repetitive subtraction on -15 / 3 will get farther from 0 rather than closer:
 
-  1. -15 - 3 is -18
-  2. -18 - 3 is -21
-  3. -21 - 3 is -24
+  1. -15 - 3 = -18
+  2. -18 - 3 = -21
+  3. -21 - 3 = -24
   4. ...
 
 In cases such as this, the concept of negative iterations is needed. For example, when ...
@@ -4002,11 +4001,11 @@ Remember that for integer numbers, a negative integer is one that's the mirror o
 
   You need to add by 3 to get closer to 0...
 
-  1. -15 + 3 is -12
-  2. -12 + 3 is -9
-  3. -9 + 3 is -6
-  4. -6 + 3 is -3
-  5. -3 + 3 is 0
+  1. -15 + 3 = -12
+  2. -12 + 3 = -9
+  3. -9 + 3 = -6
+  4. -6 + 3 = -3
+  5. -3 + 3 = 0
 
   -5 iterations of subtraction.
 
@@ -4022,11 +4021,11 @@ Remember that for integer numbers, a negative integer is one that's the mirror o
 
   You need to add by -3 to get closer to 0...
 
-  1. 15 + -3 is 12
-  2. 12 + -3 is 9
-  3. 9 + -3 is 6
-  4. 6 + -3 is 3
-  5. 3 + -3 is 0
+  1. 15 + -3 = 12
+  2. 12 + -3 = 9
+  3. 9 + -3 = 6
+  4. 6 + -3 = 3
+  5. 3 + -3 = 0
 
   -5 iterations of subtraction.
 
@@ -4116,7 +4115,7 @@ IntegerNumberToWordsLauncher
 Integer multiplication
 ```
 
-To say that m is a `{bm} multiple` of n means that some integer exists such that when you multiply it by n you get m:- `{kt} n \cdot ? = m`. Typically both n and m are also integers.
+Imagine that you have the integer numbers n and m (use the letters as placeholders for some arbitrary integer numbers). m is a `{bm} multiple` of n if some integer exists such that `{kt} n \cdot ? = m`.
 
 For example, the multiples of 2 are...
 
@@ -4174,7 +4173,7 @@ See divisible section.
 Integer division
 ```
 
-To say that m is `{bm} divisible` by n means that an integer results from dividing m by n: `{kt} m \div n = ?`. Typically both m and n are also integers, with the exception that n can't be 0 (can't divide by 0).
+Imagine that you have the integer numbers d and n (use the letters as placeholders for some arbitrary integer numbers). d is `{bm} divisible` by n if `{kt} d \div n` has a remainder of 0.
 
 For example, 8 is divisible by...
 
@@ -4210,7 +4209,7 @@ For example, 8 is divisible by...
   └─┴─┴─┴─┴─┴─┴─┴─┘
   ```
 
-In all of the above cases, the quotient is an integer -- it doesn't have a remainder. 8 wouldn't be divisible by a number like 3 because the result wouldn't be an integer. 8/3=2.6667, but 2.6667 isn't an integer.
+In all of the above cases, there is no remainder. 8 wouldn't be divisible by a number like 3 because there would be a remainder. 8/3=2R2.
 
 ```
 ┌───┬───┬──┐
@@ -4221,7 +4220,7 @@ In all of the above cases, the quotient is an integer -- it doesn't have a remai
 ```{note}
 The phrases `{bm} evenly divisible`, `{bm} evenly divide`s and divisible all mean the same thing.
 
-The phrase `{bm} evenly divides into` is the same as `{bm} divides into` but that it doesn't have a remainder (whole). 4 divides into 8 (4/8=2), but 6 doesn't divide into 8 (6/8=0.75).
+The phrase `{bm} evenly divides into` is the same as `{bm} divides into` but that it doesn't have a remainder. 4 divides into 8 (4/8=2), but 6 doesn't divide into 8 (6/8=0.75).
 ```
 
 ```{note}
@@ -4321,11 +4320,11 @@ Integer multiplication
 Let's say you have an integer number. The `{bm} factor`s of that number are the integers you can multiply together to get that number...
 
 ```python
-my_number: int = ...;
-factor1: int = ...;
-factor2: int = ...;
+my_number: int = ...
+factor1: int = ...
+factor2: int = ...
 if (factor1 * factor2 == my_number):
-    print(f'{factor1} and {factor2} are factors of {my_number});
+    print(f'{factor1} and {factor2} are factors of {my_number})
 ```
 
 For example, the factors of 32 are...
@@ -4643,7 +4642,7 @@ The first algorithm is called the  `{bm} listing multiples` method. It involves 
 | **4** | 4 |   8    | **12** |   16   | 20 | **24** | 28 | 32 | **36** |
 | **6** | 6 | **12** |   18   | **24** | 30 | **36** |    |    |        |
 
-is 12 because 6\*2 is 12 and 4\*3 is 12.
+is 12 because 6\*2=12 and 4\*3=12.
 
 The way to perform this algorithm as code is as follows...
 
@@ -5226,8 +5225,8 @@ For any 2 fractions, the easiest algorithm to find equivalent fractions with com
 ```{note}
 If you already know fraction multiplication, you're effectively doing fraction multiplication here...
 
-* `{kt} \frac{1}{3} \cdot \frac{6}{6}` is `{kt} \frac{6}{18}`
-* `{kt} \frac{1}{6} \cdot \frac{3}{3}` is `{kt} \frac{3}{18}`
+* `{kt} \frac{1}{3} \cdot \frac{6}{6}` = `{kt} \frac{6}{18}`
+* `{kt} \frac{1}{6} \cdot \frac{3}{3}` = `{kt} \frac{3}{18}`
 ```
 
 ```{output}
@@ -5255,14 +5254,14 @@ A better approach that often leads to smaller numerators and denominators is to 
 
 So for the example above, the least common denominator for 15 and 10 is 30...
 
- * `{kt} 30 \div 15` is 2, so `{kt} \frac{4}{15}` becomes `{kt} \frac{8}{30}`.
- * `{kt} 30 \div 10` is 3, so `{kt} \frac{5}{10}` becomes `{kt} \frac{15}{30}`.
+ * `{kt} 30 \div 15` = 2, so `{kt} \frac{4}{15}` becomes `{kt} \frac{8}{30}`.
+ * `{kt} 30 \div 10` = 3, so `{kt} \frac{5}{10}` becomes `{kt} \frac{15}{30}`.
 
 ```{note}
 If you already know fraction multiplication, you're effectively doing fraction multiplication here...
 
-* `{kt} \frac{4}{15} \cdot \frac{2}{2}` is `{kt} \frac{8}{30}`
-* `{kt} \frac{5}{10} \cdot \frac{3}{3}` is `{kt} \frac{15}{30}`
+* `{kt} \frac{4}{15} \cdot \frac{2}{2}` = `{kt} \frac{8}{30}`
+* `{kt} \frac{5}{10} \cdot \frac{3}{3}` = `{kt} \frac{15}{30}`
 ```
 
 ```{output}
@@ -5526,7 +5525,7 @@ For example, the denominator for the fractions `{kt} \frac{1}{4}` and `{kt} \fra
    4
    ```
 
- * `{kt} \frac{1}{4} + \frac{2}{4}` is `{kt} \frac{3}{4}`
+ * `{kt} \frac{1}{4} + \frac{2}{4} = \frac{3}{4}`
 
    ```{diagramhelperfrac}
    radius 40
@@ -5566,7 +5565,7 @@ If the fraction being added don't have a common denominator, you'll need to find
    12
    ```
 
- * `{kt} \frac{3}{12} + \frac{2}{12}` is `{kt} \frac{5}{12}`
+ * `{kt} \frac{3}{12} + \frac{2}{12} = {kt} \frac{5}{12}`
 
    ```{diagramhelperfrac}
    radius 40
@@ -5613,7 +5612,7 @@ For example, the denominator for the fractions `{kt} \frac{2}{4}` and `{kt} \fra
    4
    ```
 
- * `{kt} \frac{2}{4} - \frac{1}{4}` is `{kt} \frac{1}{4}`
+ * `{kt} \frac{2}{4} - \frac{1}{4} = \frac{1}{4}`
 
    ```{diagramhelperfrac}
    radius 40
@@ -5653,7 +5652,7 @@ If the fraction being subtracted don't have a common denominator, you'll need to
    12
    ```
 
- * `{kt} \frac{3}{12} - \frac{2}{12}` is `{kt} \frac{1}{12}`
+ * `{kt} \frac{3}{12} - \frac{2}{12} = \frac{1}{12}`
 
    ```{diagramhelperfrac}
    radius 40
@@ -6064,9 +6063,9 @@ The period placed in between the whole and the fraction is referred to as a `{bm
 `{bm-redirect} (whole)/i/(whole)_DECIMAL/i`
 `{bm-redirect} (fractional)/i/(fractional)_DECIMAL/i`
 
-A mixed number can be converted to a decimal number so long as it has a qualifying denominator. A qualifying denominator starts with 1 followed by 0s. For example, `{kt} 2 \frac{1}{10}` has a qualifying denominator but `{kt} 2 \frac{1}{2}` doesn't.
+A mixed number can be converted to a decimal number so long as it has a suitable denominator: 1 followed by zero or more 0s. For example, `{kt} 2 \frac{1}{10}` has a suitable denominator but `{kt} 2 \frac{1}{2}` doesn't.
 
-If the denominator doesn't qualify, the mixed number may still be convertible so long as an equivalent fraction exists that does have a qualifying denominator. In the previous example, `{kt} 2 \frac {5}{10}` is an equivalent fraction to `{kt} 2 \frac{1}{2}`.
+If the denominator isn't suitable, the mixed number may still be convertible so long as an equivalent fraction exists that does have a suitable denominator. In the previous example, `{kt} 2 \frac {5}{10}` is an equivalent fraction to `{kt} 2 \frac{1}{2}`.
 
 To convert a mixed number into a decimal number ...
 
@@ -6182,9 +6181,13 @@ Conceptually, you can think of `{bm} decimal less than/(decimal number less than
 
  2. Check the whole parts...
 
+    ```{note}
+    This is very similar to integer less than. When the sign is negative, the number-line is mirrored.
+    ```
+
     If whole parts are equal, go to the next step.
 
-    If the signs are both non-negative, then use whole number less than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any non-negative decimal number with a whole part of 5 will be less than any non-negative decimal number with a whole part of 6...
+    If the signs are both positive, then use whole number less than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any positive decimal number with a whole part of 5 will be less than any positive decimal number with a whole part of 6...
 
     ```{svgbob}
     <--------- "further to the left means less than"
@@ -6206,7 +6209,19 @@ Conceptually, you can think of `{bm} decimal less than/(decimal number less than
 
  3. Check the fractional parts...
 
-    If the signs are both non-negative, then use fractional less than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any non-negative decimal number with a fractional part of .01 is less than any non-negative decimal number with a fractional part of .1 ...
+    ```{note}
+    This is very similar to integer less than. When the sign is negative, the number-line is mirrored.
+    ```
+
+    If fractional parts are equal, stop. It isn't less than.
+
+    ```{note}
+    It hasn't be discussed before, but less than_REL testing the fractional parts is similar to whole number, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...).
+
+    The code at the end of this section shows you how its done.
+    ```
+
+    If the signs are both positive, then use fractional less than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal less than. For example, any positive decimal number with a fractional part of .01 is less than any positive decimal number with a fractional part of .1 ...
 
     ```{svgbob}
     <--------- "further to the left means less than"
@@ -6229,12 +6244,6 @@ Conceptually, you can think of `{bm} decimal less than/(decimal number less than
     ```
 
     Otherwise, stop. It isn't less than.
-
-    ```{note}
-    It hasn't be discussed before, but the process of testing the fractional parts is similar to whole number, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...).
-
-    The code at the end of this section shows you how its done.
-    ```
 
 For example, to test if 312.02 < 312.12:
 
@@ -6292,9 +6301,13 @@ Conceptually, you can think of `{bm} decimal greater than/(decimal number greate
 
  2. Check the whole parts...
 
+    ```{note}
+    This is very similar to integer greater than. When the sign is negative, the number-line is mirrored.
+    ```
+
     If whole parts are equal, go to the next step.
 
-    If the signs are both non-negative, then use whole number greater than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, any non-negative decimal number with a whole part of 6 will be greater than any non-negative decimal number with a whole part of 5...
+    If the signs are both positive, then use whole number greater than to to test the whole parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, any positive decimal number with a whole part of 6 will be greater than any positive decimal number with a whole part of 5...
 
     ```{svgbob}
            "further to the right means greater than" --------->
@@ -6312,11 +6325,23 @@ Conceptually, you can think of `{bm} decimal greater than/(decimal number greate
       -6.0 -5.9 -5.8 -5.7 -5.6 -5.5 -5.4 -5.3 -5.2 -5.1 -5.0  
     ```
 
-    Otherwise, stop. The decimal numbers are not less than.
+    Otherwise, stop. It isn't greater than.
 
  3. Check the fractional parts...
 
-    If the signs are both non-negative, then use fractional greater than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, a fractional part of .1 is greater than a fractional part of .01 ...
+    ```{note}
+    This is very similar to integer greater than. When the sign is negative, the number-line is mirrored.
+    ```
+
+    If fractional parts are equal, stop. It isn't greater than.
+
+    ```{note}
+    It hasn't be discussed before, but greater than testing the fractional parts is similar to whole number, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...).
+
+    The code at the end of this section shows you how its done.
+    ```
+
+    If the signs are both positive, then use fractional greater than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, any positive decimal number with a fractional part of .1 is greater than any decimal number with a fractional part of .01 ...
 
     ```{svgbob}
                                "further to the right means greater than" --------->
@@ -6327,7 +6352,7 @@ Conceptually, you can think of `{bm} decimal greater than/(decimal number greate
                                                                      1/10
     ```
 
-    If the signs are both negative, then use fractional less than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, a fractional part of -.01 is greater than a fractional part of -.1 ...
+    If the signs are both negative, then use fractional less than to test the fractional parts. If the test passes, then the decimal numbers themselves will be decimal greater than. For example, any negative decimal number with a fractional part of -.01 is greater than any decimal number with a fractional part of -.1 ...
 
     ```{svgbob}
                                "further to the right means greater than" --------->
@@ -6338,13 +6363,7 @@ Conceptually, you can think of `{bm} decimal greater than/(decimal number greate
             -10/100                                                                 
     ```
 
-    Otherwise, stop. It isn't less than.
-
-    ```{note}
-    It hasn't be discussed before, but the process of testing the fractional parts is similar to whole number, except the order in which positions are tested is reversed (index 0 is the most significant digit, index 1 is the second digit, index 2 is the third most significant digit, ...).
-
-    The code at the end of this section shows you how its done.
-    ```
+    Otherwise, stop. It isn't greater than.
 
 For example, to test if 312.12 < 312.02:
 
@@ -6822,7 +6841,7 @@ The vertical multiplication algorithm works because the ideas behind whole numbe
       e.g. `{kt} \frac{100}{1}` * `{kt} \frac{1}{10}` = `{kt} \frac{10}{1}`
     ```
   
- 3. Recall that multiplication can be thought of as repetitive addition. However, unlike with whole numbers, decimal numbers have a fractional part that need to be accounted for. That fractional part represents a fraction of the number being iteratively added. 
+ 3. Multiplication can be thought of as repetitive addition. However, unlike with whole numbers, decimal numbers have a fractional part that need to be accounted for. That fractional part represents a fraction of the number being iteratively added. 
   
     For example, 8 \* 2.5 = 20 produces the same result as 8 + 8 + 8 * `{kt} \frac{5}{10}` = 20. 8 is added for 2 iterations, and then half of 8 is added (0.5 is equivalent to `{kt} \frac{5}{10}` which simplifies to `{kt} \frac{1}{2}`).
 
@@ -6922,6 +6941,49 @@ DecimalNumberMulLauncher
 
 `{bm-reset} (vertical multiplication)/i`
 
+## Fraction Conversion
+
+```{prereq}
+Prime factor
+```
+
+Recall that all decimal numbers can be converted to fractions, but only some fractions can be converted to decimal numbers.
+
+A fraction can be converted to a decimal number so long as it has a denominator that is 1 followed by zero or more 0s. For example, these fractions all have a denominator that make them suitable for conversion to decimal:
+
+ * `{kt} \frac{1}{1}`
+ * `{kt} \frac{15}{10}`
+ * `{kt} \frac{15}{100}`
+ * `{kt} \frac{21}{1000}`
+
+Fractions that don't have a suitable denominator may be convertible to decimal numbers as well -- an equivalent fraction may exist with that has a suitable denominator. For the examples above, calculating their denominator's prime factors show that their prime factors can only include the numbers 2 and 5 in equal amounts. For example, ...
+
+ * 1 = (empty) (0 of each)
+ * 10 = 2\*5 (1 of each)
+ * 100 = 2\*2\*5\*5 (2 of each)
+ * 1000 = 2\*2\*2\*5\*5\*5 (3 of each)
+
+As such, any fraction that has the prime factors of none, 2, 5, or 2 and 5 has an equivalent fraction with a suitable denominator. To get to that equivalent fraction, there need to be an equal number of 2s and 5s in the prime factors of the denominator.
+
+For example, the fraction `{kt} \frac{1}{4}` has a denominator of 4. 4 has the prime factors 2 and 2. If you were to multiply both the numerator and the denominator by 5\*5, you would end up with a suitable fraction...
+
+`{kt} \frac{1}{4} \cdot \frac{5 \cdot 5}{5 \cdot 5} = \frac{25}{100}`
+
+`{kt} \frac{25}{100}` is an equivalent fraction to `{kt} \frac{1}{4}`. As such, both `{kt} \frac{1}{4}` and `{kt} \frac{25}{100}` convert to the decimal number 0.25.
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_TO_SUITABLE_FRAC\s*\n([\s\S]+?)\n\s*#MARKDOWN_TO_SUITABLE_FRAC
+```
+
+```{arithmetic}
+DecimalNumberSuitableFractionLauncher
+1/4
+```
+
 ## Division
 
 ```{prereq}
@@ -6933,81 +6995,175 @@ Decimal greater than
 Decimal multiplication
 ```
 
-Conceptually, you can think of `{bm} decimal division/(decimal number division|decimal division)/i` the same as fraction multiplication where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction multiplication, algorithms that are very whole number division can be applied: trial-and-error division and long division.
+Conceptually, you can think of `{bm} decimal division/(decimal number division|decimal division)/i` the same as fraction division where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction division, algorithms that are perform whole number division can be applied: trial-and-error division and long division.
 
 ### Trial and Error
 
-The same concept as trial-and-error for whole numbers can be applied to trial-and-error for decimal numbers. The only difference is that now fractional parts are supported. That is, once the whole parts match, the fractional parts must also match.
+The same concept as trial-and-error division for whole numbers can be applied to trial-and-error division for decimal numbers. The only difference is that now fractional parts needs to be accounted for. That is, once the algorithm homes in on the whole part, it needs to continue homing in on to the fractional part.
 
 The core idea behind the algorithm is that multiplication is the inverse of division. That is, multiplication reverses / un-does division (and vice-versa). For example...
 
- * 2 * 5.5 is 11 -- If you have 2 groups of 5.5 items each, you'll have 11 items.
- * 11 / 5.5 is 2 -- If you have 11 items and you break them up into groups of 5.5, you'll have 2 groups.
+ * 2 * 5.5 = 11 -- If you have 2 groups of 5.5 items each, you'll have 11 items.
+ * 11 / 5.5 = 2 -- If you have 11 items and you break them up into groups of 5.5, you'll have 2 groups.
 
-Knowing this, multiplication can be used to check if some number is the quotient. For example, to find the quotient for 21 / 4, test to see 4 * ? = 21...
+Knowing this, multiplication can be used to check if some number is the quotient. For example, to find the quotient for 11 / 2, test to see 2 * ? = 11...
 
- * 4 * 100 = 400 (40 < 21)
- * 4 * 0 = 0 (0 < 21)
- * 4 * 10 = 40 (40 < 21)
- * 4 * 0 = 0 (0 < 21)
- * 4 * 1 = 4 (4 < 21)
- * 4 * 2 = 8 (8 < 21)
- * 4 * 3 = 12 (12 < 21)
- * 4 * 4 = 16 (16 < 21)
- * 4 * 5 = 20 (20 < 21)
- * 4 * 6 = 24 (24 > 21)
- * 4 * 5.9 = 23.6 (23.6 > 21)
- * 4 * 5.8 = 23.2 (23.2 > 21)
- * 4 * 5.7 = 22.8 (22.8 > 21)
- * 4 * 5.6 = 22.4 (22.4 > 21)
- * 4 * 5.5 = 22 (22 > 21)
- * 4 * 5.4 = 21.6 (21.6 > 21)
- * 4 * 5.3 = 21.2 (21.2 > 21)
- * 4 * 5.2 = 20.8 (20.8 < 21)
- * 4 * 5.21 = 20.84 (20.84 < 21)
- * 4 * 5.22 = 20.88 (20.88 < 21)
- * 4 * 5.23 = 20.92 (20.92 < 21)
- * 4 * 5.24 = 20.96 (20.96 < 21)
- * 4 * 5.25 = 21 (21 = 21)
+ * 2 * 10 = 20 (20 > 11)
+ * 2 * 0 = 0 (0 < 11)
+ * 2 * 1 = 2 (2 < 11)
+ * 2 * 2 = 4 (4 < 11)
+ * 2 * 3 = 6 (6 < 11)
+ * 2 * 4 = 8 (8 < 11)
+ * 2 * 5 = 10 (10 < 11)
+ * 2 * 6 = 12 (12 > 11)
+ * 2 * 5.9 = 11.8 (11.8 > 11)
+ * 2 * 5.8 = 11.6 (11.6 > 11)
+ * 2 * 5.7 = 11.4 (11.4 > 11)
+ * 2 * 5.6 = 11.2 (11.2 > 11)
+ * 2 * 5.5 = 11 (11 == 11)
 
-TODO: the paragraph below is WRONG. you need to pick a starting number that will result in MORE whole digits than 21. 100 works for 4 because 400 has more digits than 21, but it own't work for 0.004 -- 0.004 * 100 = 0.4... .4 is bad starting number, but 400 isn't.
+The algorithm starts by selecting a starting number to test. It does this by inspecting the number of whole digits in the known input and product. Specifically, a property of multiplication is ...
 
-Start by picking a randomly chosen number, preferably one with more whole digits than the dividend. In the example above, the result of the multiplication must equal the dividend (21). Since the dividend is goes up to the tens position, we start out by multiplying by a number that goes past the tens position: 100...
+```python
+in1_len = len(input1.whole.digits)
+in2_len = len(input2.whole.digits)
+product_len = len(product.whole.digits)
 
-> * 4 * 100 is 400 <-- 400 > 21
- 
-If the result of the multiplication is ...
+condition1 = in1_len + in2_len == product_len
+condition2 = in1_len + in2_len - 1 == product_len
 
- * equal to the dividend (21), the answer's been found.
- * greater than the dividend (21), decrement the most significant digit of the number being multiplied and repeat.
- * less than the dividend (21), move to the next lesser significant digit, increment the digit, and repeat.
+assert condition1 or condition2
+```
 
-4 > 21, so decrement the most significant digit of 100: 0...
+This property states that the total number of digits in the whole parts of both inputs will equal to either ...
 
->  * 4 * 0 is 0 <-- 0 < 21
+ * the number of whole digits in the product (condition1),
+ * or the number of whole digits in the product plus 1 (condition2).
 
-Repeat the process. 4 * 0 = 0. 0 < 21, so move to the next lesser significant digit and increment it...
+For example, ...
 
-> * 4 * 10 is 4 <-- 40 < 21
+|                | `in1_len + in2_len == product_len` | `in1_len + in2_len - 1 == product_len` |
+|----------------|------------------------------------|----------------------------------------|
+| 99 * 99 = 9801 | True                               | False                                  |
+| 9 * 9 = 81     | True                               | False                                  |
+| 1 * 9 = 9      | False                              | True                                   |
 
-Repeat the process. 4 * 10 = 4. 4 < 21, so move to the next lesser significant digit and increment it...
+Given this property, the algorithm knows the maximum number of digits that the unknown input's whole part can be... 
 
-> * 4 * 10 is 4 <-- 40 < 21
+```python
+max_in2_len = product_len - in1_len + 1
+```
 
+```{note}
+If you know algebra already, the way the code above was derive requires algebra. If you don't know algebra just take it at face value.
+```
 
+For example, ...
 
- 
- * 4 * 0 is 0 <-- 0 < 21
- 
-If it's less than, you move over to the next least significant digit and repeat the process move down a single move to the fodivisor If the result of the multiplication is larger than the dividend..
+|               | `product_len - in1_len + 1` |
+|---------------|-----------------------------|
+| 99 * ? = 9801 | 3                           |
+| 9 * ? = 81    | 2                           |
+| 1 * ? = 9     | 1                           |
 
-* within the bound, narrow the number range by some amount.
-* above the bound, move the range down.
-* below the bound, move the range up.
+The algorithm picks a starting number using this maximum: 1 followed by 0s...
 
-Repeat until the answer is found.
+|               | `product_len - in1_len + 1` | `start_test_num` |
+|---------------|-----------------------------|------------------|
+| 99 * ? = 9801 | 3                           | 100              |
+| 9 * ? = 81    | 2                           | 10               |
+| 1 * ? = 9     | 1                           | 1                |
 
-4 * 5.25 is 21 -- If you have 4 groups of 5.25 items each, you'll have 21 items.
+When one of the known numbers is negative and the other is non-negative, the algorithm picks the same number but makes it negative...
+
+|                | `product_len - in1_len + 1` | `start_test_num` |
+|----------------|-----------------------------|------------------|
+| -99 * ? = 9801 | 3                           | -100             |
+| 9 * ? = -81    | 2                           | -1               |
+| -1 * ? = 9     | 1                           | -1               |
+
+The way to perform this algorithm as code...
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_TE_DIV_STARTNUM\s*\n([\s\S]+?)\n\s*#MARKDOWN_TE_DIV_STARTNUM
+```
+
+```{arithmetic}
+DecimalNumberDivTeStartNumChooseLauncher
+2 11
+```
+
+From there, the algorithm keeps a pointer to a position in the test number to increment / decrement. At a high-level:
+
+ * Starting from the most significant digit, it decrements until the product is too low.
+ * Then, it moves to the next significant digit and increments until the product is too high.
+ * Then, it moves to the next significant digit and decrements until the product is too low.
+ * Then, it moves to the next significant digit and increments until the product is too high.
+ * ...
+
+It does this until the test number narrows to the expected product.
+
+In the example, the position is set to the most significant digit of the test number.  That digit gets decremented until the product becomes either equal to or greater than the expected product...
+
+> * 2 * 10 = 20 (20 > 11)
+
+Decrement test by 10.
+
+> * 2 * 0 = 0 (0 < 11)
+
+The test number is now smaller than the expected product. The position then moves to the next significant digit of the test number. That digit gets incremented until the product becomes either equal or greater than the expected product...
+
+> * 2 * 0 = 0 (0 < 11)
+
+Increment test by 1.
+
+> * 2 * 1 = 2 (2 < 11)
+
+Increment test by 1.
+
+> * 2 * 2 = 4 (4 < 11)
+
+Increment test by 1.
+
+> * 2 * 3 = 6 (6 < 11)
+
+Increment test by 1.
+
+> * 2 * 4 = 8 (8 < 11)
+
+Increment test by 1.
+
+> * 2 * 5 = 10 (10 < 11)
+
+Increment test by 1.
+
+> * 2 * 6 = 12 (12 > 11)
+
+The product is now larger than the expected product. The position then moves to the next significant digit of the test number. That digit gets decremented until the product becomes either equal or greater than the expected product...
+
+> * 2 * 5.1 = 10.2 (10.2 < 11)
+
+Decrement test by 1.
+
+> * 2 * 5.2 = 10.4 (10.4 < 11)
+
+Decrement test by 1.
+
+> * 2 * 5.3 = 10.6 (10.6 < 11)
+
+Decrement test by 1.
+
+> * 2 * 5.4 = 10.8 (10.8 < 11)
+
+Decrement test by 1.
+
+> * 2 * 5.5 = 11 (11 == 11)
+
+The product is now equal to the expected product.
+
+The way to perform this algorithm as code...
 
 ```{output}
 arithmetic_code/DecimalNumber.py
@@ -7017,10 +7173,87 @@ python
 
 ```{arithmetic}
 DecimalNumberDivTeLauncher
-21 4
+11 2
 ```
 
 ### Long Division
+
+The algorithm used by humans to perform decimal division is almost the same as long division for whole numbers. The key differences are:
+
+ 1. The divisor must be a whole number.
+
+    If the divisor isn't a whole number, multiply both the dividend and divisor by 10 until the divisor loses its fractional part. Multiplying a decimal number by 10 shifts its decimal point to the right. For example, ...
+    
+    * 1.234 * 10 = 12.34
+    * 12.34 * 10 = 123.4
+    * 123.4 * 10 = 1234
+
+ 2. The position of the decimal point in the quotient is the same as the position of the decimal point in the dividend.
+    
+    Place the decimal point in the quotient prior to performing the division. For example, 0.5 / 15 ...
+
+    ```{kthelper}
+    LongDivision
+        {\phantom{0}        {.}\phantom{5}}
+    {15}{        {0}        {.}        {5}}
+    ```
+
+ 3. If you run out of digits to pull down from the dividend but the remainder isn't 0, you keep going.
+
+    Continue to pull down 0s from the end of the fractional part until a subtraction results in 0. For example...
+
+    ```{kthelper}
+    LongDivision
+       {           {1}        {.}        {2}}
+    {4}{           {3}        {.}        {0}}
+       {\underline{{0}                      }}
+       {           {3}\phantom{.}        {0}}
+       {\underline{{2}\phantom{.}        {2}}}
+       {\underline{{2}\phantom{.}        {2}}}
+    ```
+
+For example,
+
+relies of 4 key ideas:
+
+ 1. Multiplying any decimal number by 10 will shift the decimal point 1 position to the right.
+ 
+    For example...
+    
+    * 1.234 * 10 = 12.34
+    * 12.34 * 10 = 123.4
+    * 123.4 * 10 = 1234
+    * 1234 * 10 = 12340
+
+    If you multiply by 10 enough times the number becomes an integer because the fractional part gets removed -- it becomes 0. For example, 12.34 has 2 digits in its fractional part...
+
+    * 12.34 * 10 = 123.4
+    * 123.4 * 10 = 1234
+
+ 2. Any decimal number can be represented as a fraction.
+
+    For example, 1.52 can be represented as `{kt} \frac{152}{100}`.
+  
+ 3. A fraction that has its numerator and denominator multiplied by the same number will have the same value.
+
+    
+
+ 4. 
+
+To divide any two decimal numbers, ...
+
+ 1. Count the number of digits in the fractional parts of both the divisior and the dividend
+ 3. Divide them as integers.
+ 4. Multiply the quotient by 0.1 for the number of iterations in step 1 and step 2.
+
+For example, to divide 1.5 by 0.5, begin by multiplying both inputs by 10 until neither are decimals:
+
+ * 1.5 * 10 = 15
+ * 0.5 * 10 = 5
+
+Then, divide them as integers...
+
+ * 15 / 5 = 3
 
 TODO: long division where you shift the divisor and dividend until there is no fractional part, then divide as is... e.g. 0.1 / 0.3 is the result result as 1 / 3 is the same result as 10/30 -- but, you only really need to shift until the divisor is whole, just keep the decimal point in the same place and it'll still work out
 
