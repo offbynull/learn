@@ -499,9 +499,23 @@ ATTGC
 Motif/Motif Matrix Count
 ```
 
-**WHAT**: Given a motif matrix, for each column generate the percentage that each nucleotide appears.
+**WHAT**: Given a motif matrix, for each column calculate how often A, C, G, and T occur as percentages.
 
-**WHY**: Each column's percentages represent a probability distribution. These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary k-mer conforms to the same motif matrix.
+**WHY**: The percentages for each column represent a probability distribution for that column. For example, in column 1 of...
+
+|0|1|2|3|4|
+|-|-|-|-|-|
+|A|T|T|C|G|
+|C|T|T|C|G|
+|T|T|T|C|G|
+|T|T|T|T|G|
+
+* A appears 25% of the time.
+* C appears 25% of the time.
+* T appears 50% of the time.
+* G appears 0% of the time.
+
+These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary k-mer conforms to the same motif matrix.
 
 **ALGORITHM**:
 
@@ -513,10 +527,10 @@ python
 
 ```{ch2}
 MotifMatrixProfile
-ATTGC
-TTTGC
-TTTGG
-ATTGC
+ATTCG
+CTTCG
+TTTCG
+TTTTG
 ```
 
 ## Motif Matrix Score
@@ -588,66 +602,77 @@ Motif/Motif Matrix Profile_TOPIC
 K-mer_TOPIC
 ```
 
-**WHAT**: Given a motif matrix and a k-mer, calculate the probability of that k-mer being member of the motif matrix.
+**WHAT**: Given a motif matrix and a k-mer, calculate the probability of that k-mer being member of that motif.
 
-**WHY**: Being able to determine if a k-mer is potentially a member of a motif can help speed up experiments. For example, imagine that you suspect 21 different genes of being regulated by the same transcription factor. You isolate a motif matrix from 6 of those genes for what you suspect is the regulatory motif for that transcription factor. This algorithm can then be used to scan through the k-mers in the remaining 15 gene sequences to test for potential matches.
+**WHY**: Being able to determine if a k-mer is potentially a member of a motif can help speed up experiments. For example, imagine that you suspect 21 different genes of being regulated by the same transcription factor. You isolate the transcription factor binding site for 6 of those genes and use their sequences as the underlying k-mers for a motif matrix. That motif matrix doesn't represent the transcription factor's motif exactly, but it's close enough that you can use it to scan through the k-mers in the remaining 15 genes and calculate the probability of them being members of the same motif.
 
-If a k-mer exists such that it matches the motif matrix with high probability, it likely is a transcription factor binding site for that transcription factor.
+If a k-mer exists such that it conforms to the motif matrix with a high probability, it likely is a member of the motif.
 
 **ALGORITHM**:
 
-This algorithm requires the use of pseudocounts when calculating the motif matrix profile. For example, imagine the following motif matrix:
+Imagine the following motif matrix:
 
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-|---|---|---|---|---|---|---|---|---|---|
-| A | T | T | T | G | C | A | A | A | C |
-| A | T | T | T | G | C | A | A | A | C |
-| A | T | T | T | C | C | A | A | A | C |
-| A | T | T | T | C | C | A | A | A | C |
+| 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| A | T | G | C | A | C |
+| A | T | G | C | A | C |
+| A | T | C | C | A | C |
+| A | T | C | C | A | C |
 
-The profile for that motif matrix:
+Calculating the counts for that motif matrix results in:
 
-|   | 0 | 1 | 2 | 3 |  4  | 5 | 6 | 7 | 8 | 9 |
-|---|---|---|---|---|-----|---|---|---|---|---|
-| A | 1 | 0 | 0 | 0 | 0   | 0 | 1 | 1 | 1 | 0 |
-| C | 0 | 0 | 0 | 0 | 0.5 | 1 | 0 | 0 | 0 | 1 |
-| T | 0 | 1 | 1 | 1 | 0   | 0 | 0 | 0 | 0 | 0 |
-| G | 0 | 0 | 0 | 0 | 0.5 | 0 | 0 | 0 | 0 | 0 |
+|   | 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|---|
+| A | 4 | 0 | 0 | 0 | 4 | 0 |
+| C | 0 | 0 | 2 | 4 | 0 | 4 |
+| T | 0 | 4 | 0 | 0 | 0 | 0 |
+| G | 0 | 0 | 2 | 0 | 0 | 0 |
 
-Using the probabilities for each nucleotide, the k-mer...
+Calculating the profile from those counts results in:
 
-* ATTGCAAAC is calculated as 1\*1\*1\*1\*1\*0.5\*1\*1\*1\*1\*1 = 0.5
-* TTTGCAAAC is calculated as 0\*1\*1\*1\*1\*0.5\*1\*1\*1\*1\*1 = 0
+|   | 0 | 1 |  2  | 3 | 4 | 5 |
+|---|---|---|-----|---|---|---|
+| A | 1 | 0 | 0   | 0 | 1 | 0 |
+| C | 0 | 0 | 0.5 | 1 | 0 | 1 |
+| T | 0 | 1 | 0   | 0 | 0 | 0 |
+| G | 0 | 0 | 0.5 | 0 | 0 | 0 |
 
-Both of these k-mers reasonably conform to the given motif matrix. They may not match exactly, but they're are very close.
+Using this profile, the probability that a k-mer conforms to the motif matrix is calculated by mapping the nucleotide at each position of the k-mer to the corresponding nucleotide in the corresponding position of the profile and multiplying them together. For example, the probability that the k-mer...
 
-However, notice how even though the second k-mer is a very close match, it ends up with a 0% probability of matching. The reason has to do with the underlying concept behind a motif matrix: the matrix contains k-mers known to work for some biological event / property. None of those k-mers have a T at their first position.
+ * ATGCAC conforms to the example profile above is calculated as 1\*1\*0.5\*1\*1\*1 = 0.5
+ * TTGCAC conforms to the example profile above is calculated as 0\*1\*0.5\*1\*1\*1 = 0
 
-Just because it hasn't appeared yet doesn't mean that  mean a T can never appear at that position.
+Of the these two k-mers, ...
 
-Cromwell's rule says that when a proper is based off past events, hard 0 or 1 values shouldn't be used. To that end,
+ * all positions in the first (ATGCAC) have been seen before in the motif matrix.
+ * all but one position in the the second (TTGCAC) have been seen before in the motif matrix (index 0).
 
-TODO FIX ME
+Both of these k-mers should have a reasonable probability of being members of the motif. However, notice how the second k-mer ends up with a 0 probability. The reason has to do with the underlying concept behind motif matrices: the entire point of a motif matrix is to use the known members of a motif to find other potential members of that same motif. The second k-mer contains a T at index 0, but none of the known members of the motif have a T at that index. As such, its probability gets reduced to 0 even though the rest of the k-mer conforms.
 
-TODO FIX ME
+Cromwell's rule says that when a probability is based off past events, a hard 0 or 1 values shouldn't be used. As such, a quick workaround to the 0% probability problem described above is to artificially inflate the the counts that lead to the profile such that no count is 0 (pseudocounts). For example, for the same motif matrix, incrementing the counts by 1 results in:
 
-TODO FIX ME
+|   | 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|---|
+| A | 5 | 1 | 1 | 1 | 5 | 1 |
+| C | 1 | 1 | 3 | 5 | 1 | 5 |
+| T | 1 | 5 | 1 | 1 | 1 | 1 |
+| G | 1 | 1 | 3 | 1 | 1 | 1 |
 
-TODO FIX ME
+Calculating the profile from those inflated counts results in:
 
-TODO FIX ME
+|   |   0   |   1   |   2   |   3   |   4   |   5   |
+|---|-------|-------|-------|-------|-------|-------|
+| A | 0.625 | 0.125 | 0.125 | 0.125 | 0.625 | 0.125 |
+| C | 0.125 | 0.125 | 0.375 | 0.625 | 0.125 | 0.625 |
+| T | 0.125 | 0.625 | 0.125 | 0.125 | 0.125 | 0.125 |
+| G | 0.125 | 0.125 | 0.375 | 0.125 | 0.125 | 0.125 |
 
-TODO FIX ME
+Using this new profile, the probability that the previous k-mers conform are:
 
-TODO FIX ME
+ * ATGCAC is calculated as 0.625\*0.625\*0.325\*0.625\*0.625\*0.625 = 0.031
+ * TTGCAC is calculated as 0.125\*0.625\*0.325\*0.625\*0.625\*0.625 = 0.0062
 
-TODO FIX ME
-
-TODO FIX ME
-
-TODO FIX ME
-
-TODO FIX ME
+Although the probabilities seem low, it's all relative. The probability calculated for the first k-mer (ATGCAC) is the highest probability possible -- each position in the k-mer maps to the highest probability nucleotide of the corresponding position of the profile.
 
 ```{output}
 ch2_code/src/FindMostProbableKmerUsingProfileMatrix.py
@@ -657,11 +682,11 @@ python
 
 ```{ch2}
 FindMostProbableKmerUsingProfileMatrix
-ATTTGCAAAC
-ATTTGCAAAC
-ATTTCCAAAC
-ATTTCCAAAC
-GGGGGGGGGG
+ATGCAC
+ATGCAC
+ATCCAC
+ATCCAC
+TTGCAC
 ```
 
 ## Find Motif

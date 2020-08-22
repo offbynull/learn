@@ -6,6 +6,13 @@ from Utils import slide_window
 
 
 # MARKDOWN
+# Run this on the counts before generating the profile to avoid the 0 probability problem.
+def apply_psuedocounts_to_count_matrix(count_matrix: Dict[str, List[int]], extra_count: int = 1):
+    for element, counts in count_matrix.items():
+        for i in range(len(counts)):
+            counts[i] += extra_count
+
+
 # Recall that a profile matrix is a matrix of probabilities. Each row represents a single element (e.g. nucleotide) and
 # each column represents the probability distribution for that position.
 #

@@ -709,8 +709,56 @@ SSSII
 <li><a href="#BOOKMARK50">Motif</a>/<a href="#BOOKMARK51">Motif Matrix</a> Count</li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK51">motif matrix</a>, for each column generate the percentage that each nucleotide appears.</p>
-<p><strong>WHY</strong>: Each column's percentages represent a probability distribution. These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary <a href="#BOOKMARK17">k-mer</a> conforms to the same <a href="#BOOKMARK51">motif matrix</a>.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK51">motif matrix</a>, for each column calculate how often A, C, G, and T occur as percentages.</p>
+<p><strong>WHY</strong>: The percentages for each column represent a probability distribution for that column. For example, in column 1 of...</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>T</td>
+<td>T</td>
+<td>C</td>
+<td>G</td>
+</tr>
+<tr>
+<td>C</td>
+<td>T</td>
+<td>T</td>
+<td>C</td>
+<td>G</td>
+</tr>
+<tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>C</td>
+<td>G</td>
+</tr>
+<tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>G</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>A appears 25% of the time.</li>
+<li>C appears 25% of the time.</li>
+<li>T appears 50% of the time.</li>
+<li>G appears 0% of the time.</li>
+</ul>
+<p>These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary <a href="#BOOKMARK17">k-mer</a> conforms to the same <a href="#BOOKMARK51">motif matrix</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">motif_matrix_profile</span>(<span class="hljs-params">motif_matrix_counts: Dict[str, List[int]]</span>) -&gt; Dict[str, List[float]]:</span>
     ret = {}
@@ -728,9 +776,9 @@ SSSII
     <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
 <p></p>
 <p>Profiling nucleotides at each column of the motif matrix...</p>
-<p>ATTGC<br>TTTGC<br>TTTGG<br>ATTGC</p>
+<p>ATTCG<br>CTTCG<br>TTTCG<br>TTTTG</p>
 <p>Result...</p>
-<p>('A', [0.5, 0.0, 0.0, 0.0, 0.0])<br>('C', [0.0, 0.0, 0.0, 0.0, 0.75])<br>('G', [0.0, 0.0, 0.0, 1.0, 0.25])<br>('T', [0.5, 1.0, 1.0, 0.0, 0.0])</p>
+<p>('A', [0.25, 0.0, 0.0, 0.0, 0.0])<br>('C', [0.25, 0.0, 0.0, 0.75, 0.0])<br>('G', [0.0, 0.0, 0.0, 0.0, 1.0])<br>('T', [0.5, 1.0, 1.0, 0.25, 0.0])</p>
 </div>
 <p></p>
 <a name="HEADREF17"></a><h2>Motif Matrix Score</h2>
@@ -827,11 +875,11 @@ SSSII
 <li><a href="#BOOKMARK0">K-mer</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK51">motif matrix</a> and a <a href="#BOOKMARK17">k-mer</a>, calculate the probability of that <a href="#BOOKMARK17">k-mer</a> being member of the <a href="#BOOKMARK51">motif matrix</a>.</p>
-<p><strong>WHY</strong>: Being able to determine if a <a href="#BOOKMARK17">k-mer</a> is potentially a member of a <a href="#BOOKMARK50">motif</a> can help speed up experiments. For example, imagine that you suspect 21 different <a href="#BOOKMARK37">genes</a> of being regulated by the same <a href="#BOOKMARK49">transcription factor</a>. You isolate a <a href="#BOOKMARK51">motif matrix</a> from 6 of those <a href="#BOOKMARK37">genes</a> for what you suspect is the <a href="#BOOKMARK52">regulatory motif</a> for that <a href="#BOOKMARK49">transcription factor</a>. This algorithm can then be used to scan through the <a href="#BOOKMARK17">k-mer</a>s in the remaining 15 <a href="#BOOKMARK37">gene</a> sequences to test for potential matches.</p>
-<p>If a <a href="#BOOKMARK17">k-mer</a> exists such that it matches the <a href="#BOOKMARK51">motif matrix</a> with high probability, it likely is a <a href="#BOOKMARK53">transcription factor binding site</a> for that <a href="#BOOKMARK49">transcription factor</a>.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK51">motif matrix</a> and a <a href="#BOOKMARK17">k-mer</a>, calculate the probability of that <a href="#BOOKMARK17">k-mer</a> being member of that <a href="#BOOKMARK50">motif</a>.</p>
+<p><strong>WHY</strong>: Being able to determine if a <a href="#BOOKMARK17">k-mer</a> is potentially a member of a <a href="#BOOKMARK50">motif</a> can help speed up experiments. For example, imagine that you suspect 21 different <a href="#BOOKMARK37">genes</a> of being regulated by the same <a href="#BOOKMARK49">transcription factor</a>. You isolate the <a href="#BOOKMARK53">transcription factor binding site</a> for 6 of those <a href="#BOOKMARK37">genes</a> and use their sequences as the underlying <a href="#BOOKMARK17">k-mer</a>s for a <a href="#BOOKMARK51">motif matrix</a>. That <a href="#BOOKMARK51">motif matrix</a> doesn't represent the <a href="#BOOKMARK49">transcription factor</a>'s <a href="#BOOKMARK50">motif</a> exactly, but it's close enough that you can use it to scan through the <a href="#BOOKMARK17">k-mer</a>s in the remaining 15 <a href="#BOOKMARK37">genes</a> and calculate the probability of them being members of the same <a href="#BOOKMARK50">motif</a>.</p>
+<p>If a <a href="#BOOKMARK17">k-mer</a> exists such that it conforms to the <a href="#BOOKMARK51">motif matrix</a> with a high probability, it likely is a member of the <a href="#BOOKMARK50">motif</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm requires the use of <a href="#BOOKMARK60">pseudocount</a>s when calculating the <a href="#BOOKMARK51">motif matrix</a> profile. For example, imagine the following <a href="#BOOKMARK51">motif matrix</a>:</p>
+<p>Imagine the following <a href="#BOOKMARK51">motif matrix</a>:</p>
 <table>
 <thead>
 <tr>
@@ -841,64 +889,44 @@ SSSII
 <th>3</th>
 <th>4</th>
 <th>5</th>
-<th>6</th>
-<th>7</th>
-<th>8</th>
-<th>9</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>A</td>
 <td>T</td>
-<td>T</td>
+<td>G</td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+</tr>
+<tr>
+<td>A</td>
 <td>T</td>
 <td>G</td>
 <td>C</td>
 <td>A</td>
+<td>C</td>
+</tr>
+<tr>
 <td>A</td>
+<td>T</td>
+<td>C</td>
+<td>C</td>
 <td>A</td>
 <td>C</td>
 </tr>
 <tr>
 <td>A</td>
 <td>T</td>
-<td>T</td>
-<td>T</td>
-<td>G</td>
-<td>C</td>
-<td>A</td>
-<td>A</td>
-<td>A</td>
-<td>C</td>
-</tr>
-<tr>
-<td>A</td>
-<td>T</td>
-<td>T</td>
-<td>T</td>
 <td>C</td>
 <td>C</td>
-<td>A</td>
-<td>A</td>
-<td>A</td>
-<td>C</td>
-</tr>
-<tr>
-<td>A</td>
-<td>T</td>
-<td>T</td>
-<td>T</td>
-<td>C</td>
-<td>C</td>
-<td>A</td>
-<td>A</td>
 <td>A</td>
 <td>C</td>
 </tr>
 </tbody>
 </table>
-<p>The profile for that <a href="#BOOKMARK51">motif matrix</a>:</p>
+<p>Calculating the counts for that <a href="#BOOKMARK51">motif matrix</a> results in:</p>
 <table>
 <thead>
 <tr>
@@ -909,47 +937,31 @@ SSSII
 <th>3</th>
 <th>4</th>
 <th>5</th>
-<th>6</th>
-<th>7</th>
-<th>8</th>
-<th>9</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>A</td>
-<td>1</td>
+<td>4</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
+<td>4</td>
 <td>0</td>
 </tr>
 <tr>
 <td>C</td>
 <td>0</td>
 <td>0</td>
+<td>2</td>
+<td>4</td>
 <td>0</td>
-<td>0</td>
-<td>0.5</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
+<td>4</td>
 </tr>
 <tr>
 <td>T</td>
 <td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
+<td>4</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -959,38 +971,194 @@ SSSII
 <td>G</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.5</td>
-<td>0</td>
-<td>0</td>
+<td>2</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 </tr>
 </tbody>
 </table>
-<p>Using the probabilities for each nucleotide, the <a href="#BOOKMARK17">k-mer</a>...</p>
+<p>Calculating the profile from those counts results in:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>C</td>
+<td>0</td>
+<td>0</td>
+<td>0.5</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>T</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>G</td>
+<td>0</td>
+<td>0</td>
+<td>0.5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Using this profile, the probability that a <a href="#BOOKMARK17">k-mer</a> conforms to the <a href="#BOOKMARK51">motif matrix</a> is calculated by mapping the nucleotide at each position of the <a href="#BOOKMARK17">k-mer</a> to the corresponding nucleotide in the corresponding position of the profile and multiplying them together. For example, the probability that the <a href="#BOOKMARK17">k-mer</a>...</p>
 <ul>
-<li>ATTGCAAAC is calculated as 1*1*1*1*1*0.5*1*1*1*1*1 = 0.5</li>
-<li>TTTGCAAAC is calculated as 0*1*1*1*1*0.5*1*1*1*1*1 = 0</li>
+<li>ATGCAC conforms to the example profile above is calculated as 1*1*0.5*1*1*1 = 0.5</li>
+<li>TTGCAC conforms to the example profile above is calculated as 0*1*0.5*1*1*1 = 0</li>
 </ul>
-<p>Both of these <a href="#BOOKMARK17">k-mer</a>s reasonably conform to the given <a href="#BOOKMARK51">motif matrix</a>. They may not match exactly, but they're are very close.</p>
-<p>However, notice how even though the second <a href="#BOOKMARK17">k-mer</a> is a very close match, it ends up with a 0% probability of matching. The reason has to do with the underlying concept behind a <a href="#BOOKMARK51">motif matrix</a>: the matrix contains <a href="#BOOKMARK17">k-mer</a>s known to work for some biological event / property. None of those <a href="#BOOKMARK17">k-mer</a>s have a T at their first position.</p>
-<p>Just because it hasn't appeared yet doesn't mean that  mean a T can never appear at that position.</p>
-<p><a href="#BOOKMARK58">Cromwell's rule</a> says that when a proper is based off past events, hard 0 or 1 values shouldn't be used. To that end,</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<p>TODO FIX ME</p>
-<pre class="hljs"><code><span class="hljs-comment"># Recall that a profile matrix is a matrix of probabilities. Each row represents a single element (e.g. nucleotide) and</span>
+<p>Of the these two <a href="#BOOKMARK17">k-mer</a>s, ...</p>
+<ul>
+<li>all positions in the first (ATGCAC) have been seen before in the <a href="#BOOKMARK51">motif matrix</a>.</li>
+<li>all but one position in the the second (TTGCAC) have been seen before in the <a href="#BOOKMARK51">motif matrix</a> (index 0).</li>
+</ul>
+<p>Both of these <a href="#BOOKMARK17">k-mer</a>s should have a reasonable probability of being members of the <a href="#BOOKMARK50">motif</a>. However, notice how the second <a href="#BOOKMARK17">k-mer</a> ends up with a 0 probability. The reason has to do with the underlying concept behind <a href="#BOOKMARK51">motif matrices</a>: the entire point of a <a href="#BOOKMARK51">motif matrix</a> is to use the known members of a <a href="#BOOKMARK50">motif</a> to find other potential members of that same <a href="#BOOKMARK50">motif</a>. The second <a href="#BOOKMARK17">k-mer</a> contains a T at index 0, but none of the known members of the <a href="#BOOKMARK50">motif</a> have a T at that index. As such, its probability gets reduced to 0 even though the rest of the <a href="#BOOKMARK17">k-mer</a> conforms.</p>
+<p><a href="#BOOKMARK58">Cromwell's rule</a> says that when a probability is based off past events, a hard 0 or 1 values shouldn't be used. As such, a quick workaround to the 0% probability problem described above is to artificially inflate the the counts that lead to the profile such that no count is 0 (<a href="#BOOKMARK60">pseudocount</a>s). For example, for the same <a href="#BOOKMARK51">motif matrix</a>, incrementing the counts by 1 results in:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>C</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>T</td>
+<td>1</td>
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>G</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Calculating the profile from those inflated counts results in:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>0.625</td>
+<td>0.125</td>
+<td>0.125</td>
+<td>0.125</td>
+<td>0.625</td>
+<td>0.125</td>
+</tr>
+<tr>
+<td>C</td>
+<td>0.125</td>
+<td>0.125</td>
+<td>0.375</td>
+<td>0.625</td>
+<td>0.125</td>
+<td>0.625</td>
+</tr>
+<tr>
+<td>T</td>
+<td>0.125</td>
+<td>0.625</td>
+<td>0.125</td>
+<td>0.125</td>
+<td>0.125</td>
+<td>0.125</td>
+</tr>
+<tr>
+<td>G</td>
+<td>0.125</td>
+<td>0.125</td>
+<td>0.375</td>
+<td>0.125</td>
+<td>0.125</td>
+<td>0.125</td>
+</tr>
+</tbody>
+</table>
+<p>Using this new profile, the probability that the previous <a href="#BOOKMARK17">k-mer</a>s conform are:</p>
+<ul>
+<li>ATGCAC is calculated as 0.625*0.625*0.325*0.625*0.625*0.625 = 0.031</li>
+<li>TTGCAC is calculated as 0.125*0.625*0.325*0.625*0.625*0.625 = 0.0062</li>
+</ul>
+<p>Although the probabilities seem low, it's all relative. The probability calculated for the first <a href="#BOOKMARK17">k-mer</a> (ATGCAC) is the highest probability possible -- each position in the <a href="#BOOKMARK17">k-mer</a> maps to the highest probability nucleotide of the corresponding position of the profile.</p>
+<pre class="hljs"><code><span class="hljs-comment"># Run this on the counts before generating the profile to avoid the 0 probability problem.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">apply_psuedocounts_to_count_matrix</span>(<span class="hljs-params">count_matrix: Dict[str, List[int]], extra_count: int = <span class="hljs-number">1</span></span>):</span>
+    <span class="hljs-keyword">for</span> element, counts <span class="hljs-keyword">in</span> count_matrix.items():
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(counts)):
+            counts[i] += extra_count
+
+
+<span class="hljs-comment"># Recall that a profile matrix is a matrix of probabilities. Each row represents a single element (e.g. nucleotide) and</span>
 <span class="hljs-comment"># each column represents the probability distribution for that position.</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># So for example, imagine the following probability distribution...</span>
@@ -1010,8 +1178,8 @@ SSSII
     <span class="hljs-keyword">return</span> prob</code></pre><div style="border:1px solid black;">
 <p></p>
 <p>Motif matrix...</p>
-<p>ATTTGCAAAC<br>ATTTGCAAAC<br>ATTTCCAAAC</p>
-<p>Probability that GGGGGGGGGG matches the motif 0.0...</p>
+<p>ATGCAC<br>ATGCAC<br>ATCCAC</p>
+<p>Probability that TTGCAC matches the motif 0.0...</p>
 </div>
 <p></p>
 <a name="HEADREF21"></a><h2>Find Motif</h2>
@@ -1078,7 +1246,7 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>AAAAA<br>AAAAA<br>AAAAA</p>
+<p>ATAAT<br>ATAAT<br>ATAAT</p>
 </div>
 <p></p>
 <a name="HEADREF23"></a><h3>Monte Carlo Search Algorithm</h3>
