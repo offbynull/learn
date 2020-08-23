@@ -810,20 +810,102 @@ GCTGAGCACCGG
 AGTTCGGGACAG
 ```
 
-### Monte Carlo Search Algorithm
+### Greedy Algorithm
 
 ```{prereq}
 Motif/Motif Matrix Score_TOPIC
 Motif/K-mer Match Probability_TOPIC
 ```
 
-This algorithm picks a starting k-mer from one of the sequences at random. It then builds out a motif matrix by going through each subsequent k-mer at random and picking the k-mer with the most probable match.
+**ALGORITHM**:
 
-This is a greedy algorithm - it's fast but the result it produces is 
+This algorithm begins by constructing a motif matrix where the only member is a k-mer picked from the first sequence. From there, it goes through the k-mers in the ...
+
+ 1. second sequence to find the one that has the highest match probability to the motif matrix and adds it as a member to to the motif matrix.
+ 2. third sequence to find the one that has the highest match probability to the motif matrix and adds it as a member to to the motif matrix.
+ 3. fourth sequence to find the one that has the highest match probability to the motif matrix and adds it as a member to to the motif matrix.
+ 4. ...
+
+This process repeats once for every k-mer in the first sequence. Each repetition produces a motif matrix. Of all the motif matrices built, the one with the lowest score is selected.
+
+This is a greedy algorithm. It builds out potential motif matrices by selecting the locally optimal k-mer from each sequence. While this may not lead to the globally optimal result, it's fast and has a higher than normal likelihood of picking out the correct motif matrix.
+
+```{output}
+ch2_code/src/GreedyMotifSearch.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+GreedyMotifSearch
+3
+AAATTGACGCAT
+GACGACCACGTT
+CGTCAGCGCCTG
+GCTGAGCACCGG
+AGTTCGGGACAG
+```
+
+### Randomized Algorithm
+
+```{prereq}
+Motif/Motif Matrix Score_TOPIC
+Motif/Motif Matrix Profile_TOPIC
+Motif/K-mer Match Probability_TOPIC
+```
 
 **ALGORITHM**:
 
-### Gibbs Sampling Search Algorithm
+This algorithm selects a random k-mer from each sequence to form a motif matrix. Then, for each sequence, it finds the k-mer that has the highest probability of matching that motif matrix. Those k-mers form the members of a new motif matrix. If the new motif matrix scores better than the existing motif matrix, the existing motif matrix gets replaced with the new motif matrix and the process repeats. Otherwise, the existing motif matrix is selected.
+
+In theory, this algorithm works because all k-mers in a sequence other than the motif member are considered to be random noise. As such, if no motif members were selected when creating the initial motif matrix, the profile of that initial motif matrix would be more or less uniform:
+
+|   |   0  |   1  |   2  |   3  |   4  |   5  |
+|---|------|------|------|------|------|------|
+| A | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
+| C | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
+| T | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
+| G | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
+
+Such a profile matrix wouldn't converge to a vastly better scoring motif matrix.
+
+However, if at least one motif member were selected when creating the initial motif matrix, the profile of that initial motif matrix would skew towards the motif:
+
+|   |     0     |     1     |     2     |     3     |     4     |     5     |
+|---|-----------|-----------|-----------|-----------|-----------|-----------|
+| A | **0.333** |   0.233   |   0.233   |   0.233   | **0.333** |   0.233   |
+| C |   0.233   |   0.233   | **0.333** | **0.333** |   0.233   | **0.333** |
+| T |   0.233   | **0.333** |   0.233   |   0.233   |   0.233   |   0.233   |
+| G |   0.233   |   0.233   |   0.233   |   0.233   |   0.233   |   0.233   |
+
+Such a profile matrix would lead to a better scoring motif matrix where that better scoring motif matrix contains the other members of the motif.
+
+In practice, this algorithm may trip up on real-world data. Real-world sequences don't actually contain random noise. The hope is that the only k-mers that are highly similar to each other in the sequences are members of the motif. It's possible that the sequences contain other sets of k-mers that are similar to each other but vastly different than the motif members. In such cases, even if a motif member were to be selected when creating the initial motif matrix, the algorithm may converge to a motif matrix that isn't for the motif.
+
+This is a monte carlo algorithm. It uses randomness to deliver an approximate solution. While this may not lead to globally optimal result, it's fast and as such can be run multiple times. The run with the best result will likely be a good enough solution (it captures most of the motif members, or parts of the motif members if k was too small, or etc..).
+
+```{note}
+Use probabilities to determine the number of times to run the algorithm. For example, if each sequence has a length of 2000 and k=10, each sequence has 201 k-mers. Of those 201 k-mers, one of them is the motif member. The odds of selecting that motif member is `{kt} \frac{1}{201}`. Running the algorithm for 201 times should result in a good chance of selecting the motif member at least once.
+```
+
+```{output}
+ch2_code/src/RandomizedMotifSearchWithPsuedocounts.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+RandomizedMotifSearchWithPsuedocounts
+1000
+3
+AAATTGACGCAT
+GACGACCACGTT
+CGTCAGCGCCTG
+GCTGAGCACCGG
+AGTTCGGGACAG
+```
+
+### Gibbs Sampling Algorithm
 
 ```{prereq}
 Motif/Motif Matrix Score_TOPIC
@@ -1380,7 +1462,7 @@ DnaABoxCandidateFinder
 
  * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
 
- * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers that form a motif. For example, the motif `[AT]TT[GC]C` has the following matrix:
+ * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers that are members of a motif. For example, the motif `[AT]TT[GC]C` has the following matrix:
 
    |0|1|2|3|4|
    |-|-|-|-|-|

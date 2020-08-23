@@ -7,6 +7,7 @@ from ScoreMotif import score_motif
 from Utils import slide_window
 
 
+# MARKDOWN
 def greedy_motif_search(k: int, dnas: List[str]):
     best_motif_matrix = [dna[0:k] for dna in dnas]
 
@@ -26,19 +27,41 @@ def greedy_motif_search(k: int, dnas: List[str]):
             best_motif_matrix = motif_matrix
 
     return best_motif_matrix
+# MARKDOWN
+
+
+# EXAMPLE INPUT: (make sure to send EOF signal to begin processing, it may take forever to finish)
+#
+# 3
+# AAATTGACGCAT
+# GACGACCACGTT
+# CGTCAGCGCCTG
+# GCTGAGCACCGG
+# AGTTCGGGACAG
+
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        k = int(input())
+        dnas = []
+        while True:
+            try:
+                dna = input().strip().upper()
+                if len(dna) > 0:
+                    dnas.append(dna)
+            except EOFError:
+                break
+
+        found_motif_matrix = greedy_motif_search(k, dnas)
+        print(f'Searching for motif of k={k} in the following...\n\n')
+        print(f'{"<br>".join(dnas)}\n\n')
+        print(f'Found the motif matrix...\n\n')
+        print(f'{"<br>".join(found_motif_matrix)}\n\n')
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
 
 
 if __name__ == '__main__':
-    found_motif_matrix = greedy_motif_search(
-        3,
-        [
-            'GGCGTTCAGGCA',
-            'AAGAATCAGTCA',
-            'CAAGGAGTTCGC',
-            'CACGTCAATCAC',
-            'CAATAATATTCG'
-        ]
-    )
-
-    for motif in found_motif_matrix:
-        print(f'{motif}')
+    main()

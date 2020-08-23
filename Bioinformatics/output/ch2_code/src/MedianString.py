@@ -24,12 +24,12 @@ def distance_between_pattern_and_strings(pattern: str, dnas: List[str]) -> int:
 
 
 def median_string(k: int, dnas: List[str]):
-    last_found: Tuple[str, int] = None  # last found patter and its distance,
+    last_best: Tuple[str, int] = None  # last found consensus string and its score
     for kmer in enumerate_patterns(k):
         score = distance_between_pattern_and_strings(kmer, dnas)  # find score of best motif matrix where consensus str is kmer
-        if last_found is None or score < last_found[1]:
-            last_found = kmer, score
-    return last_found
+        if last_best is None or score < last_best[1]:
+            last_best = kmer, score
+    return last_best
 # MARKDOWN
 
 

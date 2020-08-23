@@ -37,19 +37,20 @@
 <ul>
 <li><a href="#HEADREF22">Bruteforce Algorithm</a></li>
 <li><a href="#HEADREF23">Media String Algorithm</a></li>
-<li><a href="#HEADREF24">Monte Carlo Search Algorithm</a></li>
-<li><a href="#HEADREF25">Gibbs Sampling Search Algorithm</a></li>
+<li><a href="#HEADREF24">Greedy Algorithm</a></li>
+<li><a href="#HEADREF25">Randomized Algorithm</a></li>
+<li><a href="#HEADREF26">Gibbs Sampling Algorithm</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF26">Stories</a></li>
+<li><a href="#HEADREF27">Stories</a></li>
 <ul>
-<li><a href="#HEADREF27">Bacteria Replication</a></li>
+<li><a href="#HEADREF28">Bacteria Replication</a></li>
 <ul>
-<li><a href="#HEADREF28">Find Ori and Ter</a></li>
-<li><a href="#HEADREF29">Find the DnaA Box</a></li>
+<li><a href="#HEADREF29">Find Ori and Ter</a></li>
+<li><a href="#HEADREF30">Find the DnaA Box</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF30">Terminology</a></li>
+<li><a href="#HEADREF31">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -1485,30 +1486,19 @@ SSSII
 
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">median_string</span>(<span class="hljs-params">k: int, dnas: List[str]</span>):</span>
-    last_found: Tuple[str, int] = <span class="hljs-literal">None</span>  <span class="hljs-comment"># last found patter and its distance,</span>
+    last_best: Tuple[str, int] = <span class="hljs-literal">None</span>  <span class="hljs-comment"># last found consensus string and its score</span>
     <span class="hljs-keyword">for</span> kmer <span class="hljs-keyword">in</span> enumerate_patterns(k):
         score = distance_between_pattern_and_strings(kmer, dnas)  <span class="hljs-comment"># find score of best motif matrix where consensus str is kmer</span>
-        <span class="hljs-keyword">if</span> last_found <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> score &lt; last_found[<span class="hljs-number">1</span>]:
-            last_found = kmer, score
-    <span class="hljs-keyword">return</span> last_found</code></pre><div style="border:1px solid black;">
+        <span class="hljs-keyword">if</span> last_best <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> score &lt; last_best[<span class="hljs-number">1</span>]:
+            last_best = kmer, score
+    <span class="hljs-keyword">return</span> last_best</code></pre><div style="border:1px solid black;">
 <p></p>
 <p>Searching for motif of k=3 in the following...</p>
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Found the consensus string GAC with a score of 2</p>
 </div>
 <p></p>
-<a name="HEADREF24"></a><h3>Monte Carlo Search Algorithm</h3>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>↩PREREQUISITES↩</strong></p>
-<ul>
-<li><a href="#BOOKMARK13">Motif/Motif Matrix Score</a></li>
-<li><a href="#BOOKMARK14">Motif/K-mer Match Probability</a></li>
-</ul>
-</div>
-<p>This algorithm picks a starting <a href="#BOOKMARK17">k-mer</a> from one of the sequences at random. It then builds out a <a href="#BOOKMARK51">motif matrix</a> by going through each subsequent <a href="#BOOKMARK17">k-mer</a> at random and picking the <a href="#BOOKMARK17">k-mer</a> with the most probable match.</p>
-<p>This is a <a href="#BOOKMARK57">greedy algorithm</a> - it's fast but the result it produces is</p>
-<p><strong>ALGORITHM</strong>:</p>
-<a name="HEADREF25"></a><h3>Gibbs Sampling Search Algorithm</h3>
+<a name="HEADREF24"></a><h3>Greedy Algorithm</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -1517,8 +1507,202 @@ SSSII
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<a name="HEADREF26"></a><h1>Stories</h1>
-<a name="HEADREF27"></a><h2>Bacteria Replication</h2>
+<p>This algorithm begins by constructing a <a href="#BOOKMARK51">motif matrix</a> where the only member is a <a href="#BOOKMARK17">k-mer</a> picked from the first sequence. From there, it goes through the <a href="#BOOKMARK17">k-mer</a>s in the ...</p>
+<ol>
+<li>second sequence to find the one that has the highest match probability to the <a href="#BOOKMARK51">motif matrix</a> and adds it as a member to to the <a href="#BOOKMARK51">motif matrix</a>.</li>
+<li>third sequence to find the one that has the highest match probability to the <a href="#BOOKMARK51">motif matrix</a> and adds it as a member to to the <a href="#BOOKMARK51">motif matrix</a>.</li>
+<li>fourth sequence to find the one that has the highest match probability to the <a href="#BOOKMARK51">motif matrix</a> and adds it as a member to to the <a href="#BOOKMARK51">motif matrix</a>.</li>
+<li>...</li>
+</ol>
+<p>This process repeats once for every <a href="#BOOKMARK17">k-mer</a> in the first sequence. Each repetition produces a <a href="#BOOKMARK51">motif matrix</a>. Of all the <a href="#BOOKMARK51">motif matrices</a> built, the one with the lowest score is selected.</p>
+<p>This is a <a href="#BOOKMARK57">greedy algorithm</a>. It builds out potential <a href="#BOOKMARK51">motif matrices</a> by selecting the locally optimal <a href="#BOOKMARK17">k-mer</a> from each sequence. While this may not lead to the globally optimal result, it's fast and has a higher than normal likelihood of picking out the correct <a href="#BOOKMARK51">motif matrix</a>.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">greedy_motif_search</span>(<span class="hljs-params">k: int, dnas: List[str]</span>):</span>
+    best_motif_matrix = [dna[<span class="hljs-number">0</span>:k] <span class="hljs-keyword">for</span> dna <span class="hljs-keyword">in</span> dnas]
+
+    <span class="hljs-keyword">for</span> motif, _ <span class="hljs-keyword">in</span> slide_window(dnas[<span class="hljs-number">0</span>], k):
+        motif_matrix = [motif]
+        counts = motif_matrix_count(motif_matrix)
+        profile = motif_matrix_profile(counts)
+
+        <span class="hljs-keyword">for</span> dna <span class="hljs-keyword">in</span> dnas[<span class="hljs-number">1</span>:]:
+            next_motif, _ = find_most_probable_kmer_using_profile_matrix(profile, dna)
+            <span class="hljs-comment"># pop in closest kmer as a motif and recompute profile for the next iteration</span>
+            motif_matrix.append(next_motif)
+            counts = motif_matrix_count(motif_matrix)
+            profile = motif_matrix_profile(counts)
+
+        <span class="hljs-keyword">if</span> score_motif(motif_matrix) &lt; score_motif(best_motif_matrix):
+            best_motif_matrix = motif_matrix
+
+    <span class="hljs-keyword">return</span> best_motif_matrix</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Searching for motif of k=3 in the following...</p>
+<p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
+<p>Found the motif matrix...</p>
+<p>GAC<br>GAC<br>CGT<br>CAC<br>GAC</p>
+</div>
+<p></p>
+<a name="HEADREF25"></a><h3>Randomized Algorithm</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK13">Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK12">Motif/Motif Matrix Profile</a></li>
+<li><a href="#BOOKMARK14">Motif/K-mer Match Probability</a></li>
+</ul>
+</div>
+<p><strong>ALGORITHM</strong>:</p>
+<p>This algorithm selects a random <a href="#BOOKMARK17">k-mer</a> from each sequence to form a <a href="#BOOKMARK51">motif matrix</a>. Then, for each sequence, it finds the <a href="#BOOKMARK17">k-mer</a> that has the highest probability of matching that <a href="#BOOKMARK51">motif matrix</a>. Those <a href="#BOOKMARK17">k-mer</a>s form the members of a new <a href="#BOOKMARK51">motif matrix</a>. If the new <a href="#BOOKMARK51">motif matrix</a> scores better than the existing <a href="#BOOKMARK51">motif matrix</a>, the existing <a href="#BOOKMARK51">motif matrix</a> gets replaced with the new <a href="#BOOKMARK51">motif matrix</a> and the process repeats. Otherwise, the existing <a href="#BOOKMARK51">motif matrix</a> is selected.</p>
+<p>In theory, this algorithm works because all <a href="#BOOKMARK17">k-mer</a>s in a sequence other than the <a href="#BOOKMARK50">motif</a> member are considered to be random noise. As such, if no <a href="#BOOKMARK50">motif</a> members were selected when creating the initial <a href="#BOOKMARK51">motif matrix</a>, the profile of that initial <a href="#BOOKMARK51">motif matrix</a> would be more or less uniform:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>C</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>T</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>G</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+</tbody>
+</table>
+<p>Such a profile matrix wouldn't converge to a vastly better scoring <a href="#BOOKMARK51">motif matrix</a>.</p>
+<p>However, if at least one <a href="#BOOKMARK50">motif</a> member were selected when creating the initial <a href="#BOOKMARK51">motif matrix</a>, the profile of that initial <a href="#BOOKMARK51">motif matrix</a> would skew towards the <a href="#BOOKMARK50">motif</a>:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><strong>0.333</strong></td>
+<td>0.233</td>
+<td>0.233</td>
+<td>0.233</td>
+<td><strong>0.333</strong></td>
+<td>0.233</td>
+</tr>
+<tr>
+<td>C</td>
+<td>0.233</td>
+<td>0.233</td>
+<td><strong>0.333</strong></td>
+<td><strong>0.333</strong></td>
+<td>0.233</td>
+<td><strong>0.333</strong></td>
+</tr>
+<tr>
+<td>T</td>
+<td>0.233</td>
+<td><strong>0.333</strong></td>
+<td>0.233</td>
+<td>0.233</td>
+<td>0.233</td>
+<td>0.233</td>
+</tr>
+<tr>
+<td>G</td>
+<td>0.233</td>
+<td>0.233</td>
+<td>0.233</td>
+<td>0.233</td>
+<td>0.233</td>
+<td>0.233</td>
+</tr>
+</tbody>
+</table>
+<p>Such a profile matrix would lead to a better scoring <a href="#BOOKMARK51">motif matrix</a> where that better scoring <a href="#BOOKMARK51">motif matrix</a> contains the other members of the <a href="#BOOKMARK50">motif</a>.</p>
+<p>In practice, this algorithm may trip up on real-world data. Real-world sequences don't actually contain random noise. The hope is that the only <a href="#BOOKMARK17">k-mer</a>s that are highly similar to each other in the sequences are members of the <a href="#BOOKMARK50">motif</a>. It's possible that the sequences contain other sets of <a href="#BOOKMARK17">k-mer</a>s that are similar to each other but vastly different than the <a href="#BOOKMARK50">motif</a> members. In such cases, even if a <a href="#BOOKMARK50">motif</a> member were to be selected when creating the initial <a href="#BOOKMARK51">motif matrix</a>, the algorithm may converge to a <a href="#BOOKMARK51">motif matrix</a> that isn't for the <a href="#BOOKMARK50">motif</a>.</p>
+<p>This is a <a href="#BOOKMARK63">monte carlo algorithm</a>. It uses randomness to deliver an approximate solution. While this may not lead to globally optimal result, it's fast and as such can be run multiple times. The run with the best result will likely be a good enough solution (it captures most of the <a href="#BOOKMARK50">motif</a> members, or parts of the <a href="#BOOKMARK50">motif</a> members if k was too small, or etc..).</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>Use probabilities to determine the number of times to run the algorithm. For example, if each sequence has a length of 2000 and k=10, each sequence has 201 <a href="#BOOKMARK17">k-mer</a>s. Of those 201 <a href="#BOOKMARK17">k-mer</a>s, one of them is the <a href="#BOOKMARK50">motif</a> member. The odds of selecting that <a href="#BOOKMARK50">motif</a> member is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>201</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{201}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">0</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>. Running the algorithm for 201 times should result in a good chance of selecting the <a href="#BOOKMARK50">motif</a> member at least once.</p>
+</div>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomized_motif_search_with_psuedocounts</span>(<span class="hljs-params">k: int, dnas: List[str]</span>) -&gt; List[str]:</span>
+    motifs = []
+    <span class="hljs-keyword">for</span> dna <span class="hljs-keyword">in</span> dnas:
+        start = randrange(len(dna) - k + <span class="hljs-number">1</span>)
+        motif = dna[start:start + k]
+        motifs.append(motif)
+
+    best_motifs = motifs
+
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        counts_matrix = motif_matrix_count(motifs)
+        apply_psuedocounts_to_count_matrix(counts_matrix)
+        profile_matrix = motif_matrix_profile(counts_matrix)
+
+        motifs = [find_most_probable_kmer_using_profile_matrix(profile_matrix, dna)[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> dna <span class="hljs-keyword">in</span> dnas]
+        <span class="hljs-keyword">if</span> score_motif(motifs) &lt; score_motif(best_motifs):
+            best_motifs = motifs
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">return</span> best_motifs</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Searching for motif of k=3 in the following...</p>
+<p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
+<p>Running 1000 iterations...</p>
+<p>Best found the motif matrix...</p>
+<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
+</div>
+<p></p>
+<a name="HEADREF26"></a><h3>Gibbs Sampling Algorithm</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK13">Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK14">Motif/K-mer Match Probability</a></li>
+</ul>
+</div>
+<p><strong>ALGORITHM</strong>:</p>
+<a name="HEADREF27"></a><h1>Stories</h1>
+<a name="HEADREF28"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK25">replication origin</a> (<a href="#BOOKMARK26">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK27">replication terminus</a> (<a href="#BOOKMARK28">ter</a>) is where it ends. The <a href="#BOOKMARK26">ori</a> and <a href="#BOOKMARK28">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK24">replication fork</a> opening at the <a href="#BOOKMARK26">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK28">ter</a>...</p>
@@ -1540,7 +1724,7 @@ SSSII
 <p>The <a href="#BOOKMARK33">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK34">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>You now have two complete copies of the DNA.</p>
-<a name="HEADREF28"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF29"></a><h3>Find Ori and Ter</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -1575,7 +1759,7 @@ SSSII
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK26">ori</a> / <a href="#BOOKMARK28">ter</a> regions.</p>
 </div>
-<a name="HEADREF29"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF30"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -1671,7 +1855,7 @@ SSSII
 </ul>
 </div>
 <p></p>
-<a name="HEADREF30"></a><h1>Terminology</h1>
+<a name="HEADREF31"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p>A <a name="BOOKMARK17"></a><strong>k-mer</strong> is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK17">k-mer</a>'s exist:</p>
@@ -1831,7 +2015,7 @@ SSSII
 <p><a name="BOOKMARK50"></a><strong>motif</strong> - A pattern that matches against many different <a href="#BOOKMARK17">k-mer</a>s, where those matched <a href="#BOOKMARK17">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK50">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK51"></a><strong>motif matrix</strong> - A set of <a href="#BOOKMARK17">k-mer</a>s that form a <a href="#BOOKMARK50">motif</a>. For example, the <a href="#BOOKMARK50">motif</a> <code>[AT]TT[GC]C</code> has the following matrix:</p>
+<p><a name="BOOKMARK51"></a><strong>motif matrix</strong> - A set of <a href="#BOOKMARK17">k-mer</a>s that are members of a <a href="#BOOKMARK50">motif</a>. For example, the <a href="#BOOKMARK50">motif</a> <code>[AT]TT[GC]C</code> has the following matrix:</p>
 <table>
 <thead>
 <tr>
