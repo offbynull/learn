@@ -592,9 +592,9 @@ TTTGG
 ATTGC
 ```
 
-## Probability of Match
+## K-mer Match Probability
 
-`{bm} /(Motif\/Probability of Match)_TOPIC/`
+`{bm} /(Motif\/K-mer Match Probability)_TOPIC/`
 
 ```{prereq}
 Motif/Motif Matrix Count_TOPIC
@@ -689,12 +689,12 @@ ATCCAC
 TTGCAC
 ```
 
-## Find Motif
+## Find Motif Matrix
 
 `{bm} /(Motif\/Find Motif)_TOPIC/`
 
 ```{prereq}
-K-mer/Hamming Distance Neighbourhood_TOPIC
+Motif/K-mer Match Probability_TOPIC
 ```
 
 **WHAT**: Given a set of sequences, identify k-mers in those sequences that may be members of the same motif.
@@ -713,12 +713,12 @@ The regulatory motif expected by a transcription factor typically expects k-mers
 
 ```{prereq}
 K-mer/Hamming Distance Neighbourhood_TOPIC
-Motif/Score Motif_TOPIC
+Motif/Motif Matrix Score_TOPIC
 ```
 
 **ALGORITHM**:
 
-This algorithm scans over all k-mers in a set of sequences, enumerates the hamming distance neighbourhood of each k-mer, and uses the k-mers from the hamming distance neighbourhood to build out possible motif matrices. Of all the motif matrices built, it selects the one with the lowest score.
+This algorithm scans over all k-mers in a set of DNA sequences, enumerates the hamming distance neighbourhood of each k-mer, and uses the k-mers from the hamming distance neighbourhood to build out possible motif matrices. Of all the motif matrices built, it selects the one with the lowest score.
 
 Neither k nor the mismatches allowed by the motif is known. As such, the algorithm may need to be repeated multiple times with different value combinations.
 
@@ -739,9 +739,98 @@ acagaaatgat
 tgaaataacct
 ```
 
+### Media String Algorithm
+
+```{prereq}
+Motif/Consensus String_TOPIC
+Motif/Motif Matrix Score_TOPIC
+K-mer/Hamming Distance_TOPIC
+```
+
+**ALGORITHM**:
+
+This algorithm takes advantage of the fact that the same score can be derived by scoring a motif matrix either row-by-row or column-by-column. For example, the score for the following motif matrix is 3...
+
+|       | 0 | 1 |   2   | 3 |   4   | 5 |   |
+|-------|---|---|-------|---|-------|---|---|
+|       | A | T | **G** | C |   A   | C |   |
+|       | A | T | **G** | C |   A   | C |   |
+|       | A | T |   C   | C | **T** | C |   |
+|       | A | T |   C   | C |   A   | C |   |
+| Score | 0 | 0 |   2   | 0 |   1   | 0 | 3 |
+
+For each column, the number of unpopular nucleotides is counted. Then, those counts are summed to get the score: 0 + 0 + 2 + 0 + 1 + 0 = 3. 
+
+That exact same score scan be calculated by working through the motif matrix row-by-row...
+
+| 0 | 1 |   2   | 3 |   4   | 5 | Score |
+|---|---|-------|---|-------|---|-------|
+| A | T | **G** | C |   A   | C |   1   |
+| A | T | **G** | C |   A   | C |   1   |
+| A | T |   C   | C | **T** | C |   1   |
+| A | T |   C   | C |   A   | C |   0   |
+|   |   |       |   |       |   |   3   |
+
+For each row, the number of unpopular nucleotides is counted. Then, those counts are summed to get the score: 1 + 1 + 1 + 0 = 3.
+
+|       | 0 | 1 |   2   | 3 |   4   | 5 | Score |
+|-------|---|---|-------|---|-------|---|-------|
+|       | A | T | **G** | C |   A   | C |   1   |
+|       | A | T | **G** | C |   A   | C |   1   |
+|       | A | T |   C   | C | **T** | C |   1   |
+|       | A | T |   C   | C |   A   | C |   0   |
+| Score | 0 | 0 |   2   | 0 |   1   | 0 |   3   |
+
+Notice how each row's score is equivalent to the hamming distance between the k-mer at that row and the motif matrix's consensus string. Specifically, the consensus string for the motif matrix is ATCCAC. For each row, ...
+
+ * hamming_distance(ATGCAC, ATCCAC) = 1
+ * hamming_distance(ATGCAC, ATCCAC) = 1
+ * hamming_distance(ATCCTC, ATCCAC) = 1
+ * hamming_distance(ATCCAC, ATCCAC) = 0
+
+Given these facts, this algorithm constructs a set of consensus strings by enumerating through all possible k-mers for some k. Then, for each consensus string, it scans over each sequence to find the k-mer that minimizes the hamming distance for that consensus string. These k-mers are used as the members of a motif matrix.
+
+Of all the motif matrices built, the one with the lowest score is selected.
+
+Since the k for the motif is unknown, this algorithm may need to be repeated multiple times with different k values. This algorithm also doesn't scale very well. For k=10, 1048576 different consensus strings are possible.
+
+```{output}
+ch2_code/src/MedianString.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+MedianString
+3
+AAATTGACGCAT
+GACGACCACGTT
+CGTCAGCGCCTG
+GCTGAGCACCGG
+AGTTCGGGACAG
+```
+
 ### Monte Carlo Search Algorithm
 
+```{prereq}
+Motif/Motif Matrix Score_TOPIC
+Motif/K-mer Match Probability_TOPIC
+```
+
+This algorithm picks a starting k-mer from one of the sequences at random. It then builds out a motif matrix by going through each subsequent k-mer at random and picking the k-mer with the most probable match.
+
+This is a greedy algorithm - it's fast but the result it produces is 
+
+**ALGORITHM**:
+
 ### Gibbs Sampling Search Algorithm
+
+```{prereq}
+Motif/Motif Matrix Score_TOPIC
+Motif/K-mer Match Probability_TOPIC
+```
+
+**ALGORITHM**:
 
 # Stories
 

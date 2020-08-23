@@ -32,23 +32,24 @@
 <li><a href="#HEADREF18">Popularity Algorithm</a></li>
 <li><a href="#HEADREF19">Entropy Algorithm</a></li>
 </ul>
-<li><a href="#HEADREF20">Probability of Match</a></li>
-<li><a href="#HEADREF21">Find Motif</a></li>
+<li><a href="#HEADREF20">K-mer Match Probability</a></li>
+<li><a href="#HEADREF21">Find Motif Matrix</a></li>
 <ul>
 <li><a href="#HEADREF22">Bruteforce Algorithm</a></li>
-<li><a href="#HEADREF23">Monte Carlo Search Algorithm</a></li>
-<li><a href="#HEADREF24">Gibbs Sampling Search Algorithm</a></li>
+<li><a href="#HEADREF23">Media String Algorithm</a></li>
+<li><a href="#HEADREF24">Monte Carlo Search Algorithm</a></li>
+<li><a href="#HEADREF25">Gibbs Sampling Search Algorithm</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF25">Stories</a></li>
+<li><a href="#HEADREF26">Stories</a></li>
 <ul>
-<li><a href="#HEADREF26">Bacteria Replication</a></li>
+<li><a href="#HEADREF27">Bacteria Replication</a></li>
 <ul>
-<li><a href="#HEADREF27">Find Ori and Ter</a></li>
-<li><a href="#HEADREF28">Find the DnaA Box</a></li>
+<li><a href="#HEADREF28">Find Ori and Ter</a></li>
+<li><a href="#HEADREF29">Find the DnaA Box</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF29">Terminology</a></li>
+<li><a href="#HEADREF30">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -180,7 +181,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'ACAA', 'ATAA', 'AGAA', 'AAGA', 'AAAC', 'AAAT', 'AATA', 'AACA', 'CAAA', 'AAAG', 'GAAA', 'TAAA', 'AAAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'ACAA', 'AAAT', 'AAGA', 'GAAA', 'CAAA', 'AATA', 'AAAG', 'TAAA', 'AACA', 'ATAA', 'AAAA', 'AGAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h2>Find Locations</h2>
@@ -303,12 +304,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>AAGGG = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
 <li>GATCA = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
 <li>TTAAA = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
 <li>TGATC = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -379,18 +380,18 @@
 <p></p>
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -865,7 +866,7 @@ SSSII
 <p>1.811278124459133</p>
 </div>
 <p></p>
-<a name="HEADREF20"></a><h2>Probability of Match</h2>
+<a name="HEADREF20"></a><h2>K-mer Match Probability</h2>
 <p><a name="BOOKMARK14"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -1182,12 +1183,12 @@ SSSII
 <p>Probability that TTGCAC matches the motif 0.0...</p>
 </div>
 <p></p>
-<a name="HEADREF21"></a><h2>Find Motif</h2>
+<a name="HEADREF21"></a><h2>Find Motif Matrix</h2>
 <p><a name="BOOKMARK15"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
+<li><a href="#BOOKMARK14">Motif/K-mer Match Probability</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given a set of sequences, identify <a href="#BOOKMARK17">k-mer</a>s in those sequences that may be members of the same <a href="#BOOKMARK50">motif</a>.</p>
@@ -1204,11 +1205,11 @@ SSSII
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
 <li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
-<li><a href="#BOOKMARK50">Motif</a>/Score <a href="#BOOKMARK9">Motif</a></li>
+<li><a href="#BOOKMARK13">Motif/Motif Matrix Score</a></li>
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm scans over all <a href="#BOOKMARK17">k-mer</a>s in a set of sequences, enumerates the hamming distance neighbourhood of each <a href="#BOOKMARK17">k-mer</a>, and uses the <a href="#BOOKMARK17">k-mer</a>s from the hamming distance neighbourhood to build out possible <a href="#BOOKMARK51">motif matrices</a>. Of all the <a href="#BOOKMARK51">motif matrices</a> built, it selects the one with the lowest score.</p>
+<p>This algorithm scans over all <a href="#BOOKMARK17">k-mer</a>s in a set of DNA sequences, enumerates the hamming distance neighbourhood of each <a href="#BOOKMARK17">k-mer</a>, and uses the <a href="#BOOKMARK17">k-mer</a>s from the hamming distance neighbourhood to build out possible <a href="#BOOKMARK51">motif matrices</a>. Of all the <a href="#BOOKMARK51">motif matrices</a> built, it selects the one with the lowest score.</p>
 <p>Neither k nor the mismatches allowed by the <a href="#BOOKMARK50">motif</a> is known. As such, the algorithm may need to be repeated multiple times with different value combinations.</p>
 <p>Even for trivial inputs, this algorithm falls over very quickly. It's intended to help conceptualize the problem of <a href="#BOOKMARK50">motif</a> finding.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">enumerate_hamming_distance_neighbourhood_for_all_kmer</span>(<span class="hljs-params">
@@ -1246,13 +1247,278 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>ATAAT<br>ATAAT<br>ATAAT</p>
+<p>AAATG<br>AAATG<br>AAATG</p>
 </div>
 <p></p>
-<a name="HEADREF23"></a><h3>Monte Carlo Search Algorithm</h3>
-<a name="HEADREF24"></a><h3>Gibbs Sampling Search Algorithm</h3>
-<a name="HEADREF25"></a><h1>Stories</h1>
-<a name="HEADREF26"></a><h2>Bacteria Replication</h2>
+<a name="HEADREF23"></a><h3>Media String Algorithm</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK10">Motif/Consensus String</a></li>
+<li><a href="#BOOKMARK13">Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK2">K-mer/Hamming Distance</a></li>
+</ul>
+</div>
+<p><strong>ALGORITHM</strong>:</p>
+<p>This algorithm takes advantage of the fact that the same score can be derived by scoring a <a href="#BOOKMARK51">motif matrix</a> either row-by-row or column-by-column. For example, the score for the following <a href="#BOOKMARK51">motif matrix</a> is 3...</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td><strong>G</strong></td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td><strong>G</strong></td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+<td>C</td>
+<td><strong>T</strong></td>
+<td>C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td></td>
+</tr>
+<tr>
+<td>Score</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>For each column, the number of unpopular nucleotides is counted. Then, those counts are summed to get the score: 0 + 0 + 2 + 0 + 1 + 0 = 3.</p>
+<p>That exact same score scan be calculated by working through the <a href="#BOOKMARK51">motif matrix</a> row-by-row...</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>T</td>
+<td><strong>G</strong></td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td>1</td>
+</tr>
+<tr>
+<td>A</td>
+<td>T</td>
+<td><strong>G</strong></td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td>1</td>
+</tr>
+<tr>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+<td>C</td>
+<td><strong>T</strong></td>
+<td>C</td>
+<td>1</td>
+</tr>
+<tr>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>For each row, the number of unpopular nucleotides is counted. Then, those counts are summed to get the score: 1 + 1 + 1 + 0 = 3.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td><strong>G</strong></td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td><strong>G</strong></td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+<td>C</td>
+<td><strong>T</strong></td>
+<td>C</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+<td>C</td>
+<td>A</td>
+<td>C</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>Notice how each row's score is equivalent to the hamming distance between the <a href="#BOOKMARK17">k-mer</a> at that row and the <a href="#BOOKMARK51">motif matrix</a>'s <a href="#BOOKMARK64">consensus string</a>. Specifically, the <a href="#BOOKMARK64">consensus string</a> for the <a href="#BOOKMARK51">motif matrix</a> is ATCCAC. For each row, ...</p>
+<ul>
+<li>hamming_distance(ATGCAC, ATCCAC) = 1</li>
+<li>hamming_distance(ATGCAC, ATCCAC) = 1</li>
+<li>hamming_distance(ATCCTC, ATCCAC) = 1</li>
+<li>hamming_distance(ATCCAC, ATCCAC) = 0</li>
+</ul>
+<p>Given these facts, this algorithm constructs a set of <a href="#BOOKMARK64">consensus string</a>s by enumerating through all possible <a href="#BOOKMARK17">k-mer</a>s for some k. Then, for each <a href="#BOOKMARK64">consensus string</a>, it scans over each sequence to find the <a href="#BOOKMARK17">k-mer</a> that minimizes the hamming distance for that <a href="#BOOKMARK64">consensus string</a>. These <a href="#BOOKMARK17">k-mer</a>s are used as the members of a <a href="#BOOKMARK51">motif matrix</a>.</p>
+<p>Of all the <a href="#BOOKMARK51">motif matrices</a> built, the one with the lowest score is selected.</p>
+<p>Since the k for the <a href="#BOOKMARK50">motif</a> is unknown, this algorithm may need to be repeated multiple times with different k values. This algorithm also doesn't scale very well. For k=10, 1048576 different <a href="#BOOKMARK64">consensus string</a>s are possible.</p>
+<pre class="hljs"><code><span class="hljs-comment"># The name is slightly confusing. What this actually does...</span>
+<span class="hljs-comment">#   For each dna string:</span>
+<span class="hljs-comment">#     Find the k-mer with the min hamming distance between the k-mers that make up the DNA string and pattern</span>
+<span class="hljs-comment">#   Sum up the min hamming distances of the found k-mers (equivalent to the motif matrix score)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">distance_between_pattern_and_strings</span>(<span class="hljs-params">pattern: str, dnas: List[str]</span>) -&gt; int:</span>
+    min_hds = []
+
+    k = len(pattern)
+    <span class="hljs-keyword">for</span> dna <span class="hljs-keyword">in</span> dnas:
+        min_hd = <span class="hljs-literal">None</span>
+        <span class="hljs-keyword">for</span> dna_kmer, _ <span class="hljs-keyword">in</span> slide_window(dna, k):
+            hd = hamming_distance(pattern, dna_kmer)
+            <span class="hljs-keyword">if</span> min_hd <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> hd &lt; min_hd:
+                min_hd = hd
+        min_hds.append(min_hd)
+    <span class="hljs-keyword">return</span> sum(min_hds)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">median_string</span>(<span class="hljs-params">k: int, dnas: List[str]</span>):</span>
+    last_found: Tuple[str, int] = <span class="hljs-literal">None</span>  <span class="hljs-comment"># last found patter and its distance,</span>
+    <span class="hljs-keyword">for</span> kmer <span class="hljs-keyword">in</span> enumerate_patterns(k):
+        score = distance_between_pattern_and_strings(kmer, dnas)  <span class="hljs-comment"># find score of best motif matrix where consensus str is kmer</span>
+        <span class="hljs-keyword">if</span> last_found <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> score &lt; last_found[<span class="hljs-number">1</span>]:
+            last_found = kmer, score
+    <span class="hljs-keyword">return</span> last_found</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Searching for motif of k=3 in the following...</p>
+<p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
+<p>Found the consensus string GAC with a score of 2</p>
+</div>
+<p></p>
+<a name="HEADREF24"></a><h3>Monte Carlo Search Algorithm</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK13">Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK14">Motif/K-mer Match Probability</a></li>
+</ul>
+</div>
+<p>This algorithm picks a starting <a href="#BOOKMARK17">k-mer</a> from one of the sequences at random. It then builds out a <a href="#BOOKMARK51">motif matrix</a> by going through each subsequent <a href="#BOOKMARK17">k-mer</a> at random and picking the <a href="#BOOKMARK17">k-mer</a> with the most probable match.</p>
+<p>This is a <a href="#BOOKMARK57">greedy algorithm</a> - it's fast but the result it produces is</p>
+<p><strong>ALGORITHM</strong>:</p>
+<a name="HEADREF25"></a><h3>Gibbs Sampling Search Algorithm</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK13">Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK14">Motif/K-mer Match Probability</a></li>
+</ul>
+</div>
+<p><strong>ALGORITHM</strong>:</p>
+<a name="HEADREF26"></a><h1>Stories</h1>
+<a name="HEADREF27"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK25">replication origin</a> (<a href="#BOOKMARK26">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK27">replication terminus</a> (<a href="#BOOKMARK28">ter</a>) is where it ends. The <a href="#BOOKMARK26">ori</a> and <a href="#BOOKMARK28">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK24">replication fork</a> opening at the <a href="#BOOKMARK26">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK28">ter</a>...</p>
@@ -1274,7 +1540,7 @@ SSSII
 <p>The <a href="#BOOKMARK33">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK34">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>You now have two complete copies of the DNA.</p>
-<a name="HEADREF27"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF28"></a><h3>Find Ori and Ter</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -1309,7 +1575,7 @@ SSSII
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK26">ori</a> / <a href="#BOOKMARK28">ter</a> regions.</p>
 </div>
-<a name="HEADREF28"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF29"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -1341,14 +1607,14 @@ SSSII
 <p>Ori vicinity (min pos): 4719166</p>
 <p>In the ori vicinity, found clusters of k=9 (at least 3 occurrences in window of 500) in ... at...</p>
 <ul>
-<li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCGGCGGTA', start_index=52, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
@@ -1357,17 +1623,17 @@ SSSII
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
@@ -1381,12 +1647,12 @@ SSSII
 <li>KmerCluster(kmer='ATCACCATT', start_index=500, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCCTTTTTA', start_index=513, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCCTTTTT', start_index=514, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
@@ -1405,7 +1671,7 @@ SSSII
 </ul>
 </div>
 <p></p>
-<a name="HEADREF29"></a><h1>Terminology</h1>
+<a name="HEADREF30"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p>A <a name="BOOKMARK17"></a><strong>k-mer</strong> is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence <code>GAAATC</code>, the following <a href="#BOOKMARK17">k-mer</a>'s exist:</p>
