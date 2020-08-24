@@ -1,9 +1,9 @@
 from typing import Set, List
 
 from FindAllDnaKmersWithinHammingDistance import find_all_dna_kmers_within_hamming_distance
-from HammingDistanceBetweenKmers import hamming_distance
 from ScoreMotif import score_motif
 from Utils import slide_window
+
 
 # MARKDOWN
 def enumerate_hamming_distance_neighbourhood_for_all_kmer(
@@ -18,6 +18,7 @@ def enumerate_hamming_distance_neighbourhood_for_all_kmer(
 
     return kmers_to_check
 
+
 def exhaustive_motif_search(dnas: List[str], k: int, max_mismatches: int):
     kmers_for_dnas = [enumerate_hamming_distance_neighbourhood_for_all_kmer(dna, k, max_mismatches) for dna in dnas]
 
@@ -31,12 +32,12 @@ def exhaustive_motif_search(dnas: List[str], k: int, max_mismatches: int):
                 yield from build_next_matrix(out_matrix)
                 out_matrix.pop()
 
-    best_motif = None
-    for next_motif in build_next_matrix([]):
-        if best_motif is None or score_motif(next_motif) < score_motif(best_motif):
-            best_motif = next_motif
+    best_motif_matrix = None
+    for next_motif_matrix in build_next_matrix([]):
+        if best_motif_matrix is None or score_motif(next_motif_matrix) < score_motif(best_motif_matrix):
+            best_motif_matrix = next_motif_matrix
 
-    return best_motif
+    return best_motif_matrix
 # MARKDOWN
 
 

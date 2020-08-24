@@ -1,9 +1,4 @@
-from math import log
-from typing import List
-
-
-
-
+from ScoreMotifUsingEntropy import calculate_entropy
 
 if __name__ == '__main__':
     print(f'{calculate_entropy([0.2, 0.6, 0.0, 0.2])}')

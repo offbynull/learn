@@ -496,7 +496,7 @@ ATTGC
 `{bm} /(Motif\/Motif Matrix Profile)_TOPIC/`
 
 ```{prereq}
-Motif/Motif Matrix Count
+Motif/Motif Matrix Count_TOPIC
 ```
 
 **WHAT**: Given a motif matrix, for each column calculate how often A, C, G, and T occur as percentages.
@@ -691,7 +691,7 @@ TTGCAC
 
 ## Find Motif Matrix
 
-`{bm} /(Motif\/Find Motif)_TOPIC/`
+`{bm} /(Motif\/Find Motif Matrix)_TOPIC/`
 
 ```{prereq}
 Motif/K-mer Match Probability_TOPIC
@@ -725,13 +725,13 @@ Neither k nor the mismatches allowed by the motif is known. As such, the algorit
 Even for trivial inputs, this algorithm falls over very quickly. It's intended to help conceptualize the problem of motif finding.
 
 ```{output}
-ch2_code/src/ExhaustiveMotifSearch.py
+ch2_code/src/ExhaustiveMotifMatrixSearch.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch2}
-ExhaustiveMotifSearch
+ExhaustiveMotifMatrixSearch
 5
 1
 ataaagggata
@@ -795,13 +795,13 @@ Of all the motif matrices built, the one with the lowest score is selected.
 Since the k for the motif is unknown, this algorithm may need to be repeated multiple times with different k values. This algorithm also doesn't scale very well. For k=10, 1048576 different consensus strings are possible.
 
 ```{output}
-ch2_code/src/MedianString.py
+ch2_code/src/MedianStringSearch.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch2}
-MedianString
+MedianStringSearch
 3
 AAATTGACGCAT
 GACGACCACGTT
@@ -828,16 +828,16 @@ This algorithm begins by constructing a motif matrix where the only member is a 
 
 This process repeats once for every k-mer in the first sequence. Each repetition produces a motif matrix. Of all the motif matrices built, the one with the lowest score is selected.
 
-This is a greedy algorithm. It builds out potential motif matrices by selecting the locally optimal k-mer from each sequence. While this may not lead to the globally optimal result, it's fast and has a higher than normal likelihood of picking out the correct motif matrix.
+This is a greedy algorithm. It builds out potential motif matrices by selecting the locally optimal k-mer from each sequence. While this may not lead to the globally optimal motif matrix, it's fast and has a higher than normal likelihood of picking out the correct motif matrix.
 
 ```{output}
-ch2_code/src/GreedyMotifSearch.py
+ch2_code/src/GreedyMotifMatrixSearchWithPsuedocounts.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch2}
-GreedyMotifSearch
+GreedyMotifMatrixSearchWithPsuedocounts
 3
 AAATTGACGCAT
 GACGACCACGTT
@@ -848,6 +848,8 @@ AGTTCGGGACAG
 
 ### Randomized Algorithm
 
+`{bm} /(Motif\/Find Motif Matrix\/Randomized Algorithm)_TOPIC/`
+
 ```{prereq}
 Motif/Motif Matrix Score_TOPIC
 Motif/Motif Matrix Profile_TOPIC
@@ -856,7 +858,7 @@ Motif/K-mer Match Probability_TOPIC
 
 **ALGORITHM**:
 
-This algorithm selects a random k-mer from each sequence to form a motif matrix. Then, for each sequence, it finds the k-mer that has the highest probability of matching that motif matrix. Those k-mers form the members of a new motif matrix. If the new motif matrix scores better than the existing motif matrix, the existing motif matrix gets replaced with the new motif matrix and the process repeats. Otherwise, the existing motif matrix is selected.
+This algorithm selects a random k-mer from each sequence to form an initial motif matrix. Then, for each sequence, it finds the k-mer that has the highest probability of matching that motif matrix. Those k-mers form the members of a new motif matrix. If the new motif matrix scores better than the existing motif matrix, the existing motif matrix gets replaced with the new motif matrix and the process repeats. Otherwise, the existing motif matrix is selected.
 
 In theory, this algorithm works because all k-mers in a sequence other than the motif member are considered to be random noise. As such, if no motif members were selected when creating the initial motif matrix, the profile of that initial motif matrix would be more or less uniform:
 
@@ -867,7 +869,7 @@ In theory, this algorithm works because all k-mers in a sequence other than the 
 | T | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
 | G | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
 
-Such a profile matrix wouldn't converge to a vastly better scoring motif matrix.
+Such a profile wouldn't allow for converging to a vastly better scoring motif matrix.
 
 However, if at least one motif member were selected when creating the initial motif matrix, the profile of that initial motif matrix would skew towards the motif:
 
@@ -878,24 +880,20 @@ However, if at least one motif member were selected when creating the initial mo
 | T |   0.233   | **0.333** |   0.233   |   0.233   |   0.233   |   0.233   |
 | G |   0.233   |   0.233   |   0.233   |   0.233   |   0.233   |   0.233   |
 
-Such a profile matrix would lead to a better scoring motif matrix where that better scoring motif matrix contains the other members of the motif.
+Such a profile would lead to a better scoring motif matrix where that better scoring motif matrix contains the other members of the motif.
 
 In practice, this algorithm may trip up on real-world data. Real-world sequences don't actually contain random noise. The hope is that the only k-mers that are highly similar to each other in the sequences are members of the motif. It's possible that the sequences contain other sets of k-mers that are similar to each other but vastly different than the motif members. In such cases, even if a motif member were to be selected when creating the initial motif matrix, the algorithm may converge to a motif matrix that isn't for the motif.
 
-This is a monte carlo algorithm. It uses randomness to deliver an approximate solution. While this may not lead to globally optimal result, it's fast and as such can be run multiple times. The run with the best result will likely be a good enough solution (it captures most of the motif members, or parts of the motif members if k was too small, or etc..).
-
-```{note}
-Use probabilities to determine the number of times to run the algorithm. For example, if each sequence has a length of 2000 and k=10, each sequence has 201 k-mers. Of those 201 k-mers, one of them is the motif member. The odds of selecting that motif member is `{kt} \frac{1}{201}`. Running the algorithm for 201 times should result in a good chance of selecting the motif member at least once.
-```
+This is a monte carlo algorithm. It uses randomness to deliver an approximate solution. While this may not lead to the globally optimal motif matrix, it's fast and as such can be run multiple times. The run with the best motif matrix will likely be a good enough solution (it captures most of the motif members, or parts of the motif members if k was too small, or etc..).
 
 ```{output}
-ch2_code/src/RandomizedMotifSearchWithPsuedocounts.py
+ch2_code/src/RandomizedMotifMatrixSearchWithPsuedocounts.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch2}
-RandomizedMotifSearchWithPsuedocounts
+RandomizedMotifMatrixSearchWithPsuedocounts
 1000
 3
 AAATTGACGCAT
@@ -910,9 +908,39 @@ AGTTCGGGACAG
 ```{prereq}
 Motif/Motif Matrix Score_TOPIC
 Motif/K-mer Match Probability_TOPIC
+Motif/Find Motif Matrix/Randomized Algorithm_TOPIC
 ```
 
 **ALGORITHM**:
+
+```{note}
+The Pevzner book mentions there's more to Gibbs Sampling than what it discussed. I looked up the topic but couldn't make much sense of it.
+```
+
+This algorithm selects a random k-mer from each sequence to form an initial motif matrix. Then, one of the k-mers from the motif matrix is randomly chosen and replaced with another k-mer from the same sequence that the removed k-mer came from. The replacement is selected by using a weighted random number algorithm, where how likely a k-mer is to be chosen as a replacement has to do with how probable of a match it is to the motif matrix.
+
+This process of replacement is repeated for some user-defined number of cycles, at which point the algorithm has hopefully homed in on the desired motif matrix.
+
+This is a monte carlo algorithm. It uses randomness to deliver an approximate solution. While this may not lead to the globally optimal motif matrix, it's fast and as such can be run multiple times. The run with the best motif matrix will likely be a good enough solution (it captures most of the motif members, or parts of the motif members if k was too small, or etc..).
+
+The idea behind this algorithm is similar to the idea behind the randomized algorithm for motif matrix finding, except that this algorithm is more conservative in how it converges on a motif matrix and the weighted random selection allows it to potentially break out if stuck in a local optima.
+
+```{output}
+ch2_code/src/GibbsSamplerMotifMatrixSearchWithPsuedocounts.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+GibbsSamplerMotifMatrixSearchWithPsuedocounts
+1000
+3
+AAATTGACGCAT
+GACGACCACGTT
+CGTCAGCGCCTG
+GCTGAGCACCGG
+AGTTCGGGACAG
+```
 
 # Stories
 
@@ -1518,7 +1546,7 @@ DnaABoxCandidateFinder
    
    The idea is that once the experimental cDNA is introduced to that region, it should bind to the control cDNA that's been printed to form double-stranded DNA. The color emitted in a region should correspond to the amount of gene expression for the gene that region represents. For example, if a region on the sheet is fully yellow, it means that the gene expression for that gene is roughly equal (red mixed with green is yellow).
 
- * `{bm} greedy algorithm` - An algorithm that tries to speed things up by taking the locally optimum choice at each step. That is, the algorithm doesn't look more than 1 step ahead.
+ * `{bm} greedy algorithm` - An algorithm that tries to speed things up by taking the locally optimal choice at each step. That is, the algorithm doesn't look more than 1 step ahead.
  
    For example, imagine a chess playing AI that had a strategy of trying to eliminate the other player's most valuable piece at each turn. It would be considered greedy because it only looks 1 move ahead before taking action. Normal chess AIs / players look many moves ahead before taking action. As such, the greedy AI may be fast but it would very likely lose most matches. 
   

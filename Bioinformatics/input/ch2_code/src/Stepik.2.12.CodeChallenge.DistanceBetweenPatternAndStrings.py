@@ -1,4 +1,4 @@
-from MedianString import distance_between_pattern_and_strings
+from MedianStringSearch import distance_between_pattern_and_strings
 from MotifEnumeration import motif_enumeration
 
 with open('/home/user/Downloads/dataset_240248_1.txt', mode='r', encoding='utf-8') as f:

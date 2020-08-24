@@ -11,24 +11,24 @@ from ScoreMotif import score_motif
 # How to use: Execute this method 1000 or so times and pick the best result out of all the results
 # MARKDOWN
 def randomized_motif_search_with_psuedocounts(k: int, dnas: List[str]) -> List[str]:
-    motifs = []
-    for dna in dnas:
-        start = randrange(len(dna) - k + 1)
-        motif = dna[start:start + k]
-        motifs.append(motif)
+        motif_matrix = []
+        for dna in dnas:
+            start = randrange(len(dna) - k + 1)
+            kmer = dna[start:start + k]
+            motif_matrix.append(kmer)
 
-    best_motifs = motifs
+        best_motif_matrix = motif_matrix
 
-    while True:
-        counts_matrix = motif_matrix_count(motifs)
-        apply_psuedocounts_to_count_matrix(counts_matrix)
-        profile_matrix = motif_matrix_profile(counts_matrix)
+        while True:
+            counts = motif_matrix_count(motif_matrix)
+            apply_psuedocounts_to_count_matrix(counts)
+            profile = motif_matrix_profile(counts)
 
-        motifs = [find_most_probable_kmer_using_profile_matrix(profile_matrix, dna)[0] for dna in dnas]
-        if score_motif(motifs) < score_motif(best_motifs):
-            best_motifs = motifs
-        else:
-            return best_motifs
+            motif_matrix = [find_most_probable_kmer_using_profile_matrix(profile, dna)[0] for dna in dnas]
+            if score_motif(motif_matrix) < score_motif(best_motif_matrix):
+                best_motif_matrix = motif_matrix
+            else:
+                return best_motif_matrix
 # MARKDOWN
 
 

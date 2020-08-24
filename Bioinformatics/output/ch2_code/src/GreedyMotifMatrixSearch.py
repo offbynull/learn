@@ -18,7 +18,7 @@ def greedy_motif_search(k: int, dnas: List[str]):
 
         for dna in dnas[1:]:
             next_motif, _ = find_most_probable_kmer_using_profile_matrix(profile, dna)
-            # pop in closest kmer as a motif and recompute profile for the next iteration
+            # push in closest kmer as a motif member and recompute profile for the next iteration
             motif_matrix.append(next_motif)
             counts = motif_matrix_count(motif_matrix)
             profile = motif_matrix_profile(counts)

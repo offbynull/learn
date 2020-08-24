@@ -1,4 +1,4 @@
-from GibbsSamplerMotifSearchWithPsuedoCounts import gibbs_sampler_motif_search_with_psuedocounts
+from GibbsSamplerMotifMatrixSearchWithPsuedocounts import gibbs_sampler_motif_search_with_psuedocounts
 from ScoreMotif import score_motif
 
 with open('/home/user/Downloads/cryptomycota_csf55/ncbi_dataset/data/GCA_000442015.1/unplaced.scaf.fna', mode='r', encoding='utf-8') as f:
