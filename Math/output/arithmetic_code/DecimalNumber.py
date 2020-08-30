@@ -711,6 +711,56 @@ class DecimalNumber:
     #MARKDOWN_MUL
 
 
+    #MARKDOWN_DIVTERM_TEST
+    @staticmethod
+    @log_decorator
+    def will_division_terminate(lhs: DecimalNumber, rhs: DecimalNumber) -> bool:
+        log(f'Checking if {lhs} / {rhs} results in a non-terminating decimal...')
+        log_indent()
+
+        adjust_len_self = len(lhs.fractional.digits)
+        adjust_len_other = len(rhs.fractional.digits)
+
+        log(f'Generating mock integer number for {lhs}...')
+        lhs_extra_0s = adjust_len_self - len(lhs.fractional.digits)
+        lhs_combined_digits = lhs.fractional.digits + lhs.whole.digits
+        lhs_combined_digits[0:0] = [Digit(0)] * lhs_extra_0s
+        mock_self = IntegerNumber(lhs.sign, WholeNumber(lhs_combined_digits))
+        log(f'{mock_self}')
+
+        log(f'Generating mock integer number for {rhs}...')
+        rhs_extra_0s = adjust_len_other - len(rhs.fractional.digits)
+        rhs_combined_digits = rhs.fractional.digits + rhs.whole.digits
+        rhs_combined_digits[0:0] = [Digit(0)] * rhs_extra_0s
+        mock_other = IntegerNumber(rhs.sign, WholeNumber(rhs_combined_digits))
+        log(f'{mock_other}')
+
+        log(f'Generating mock fraction for {lhs} / {rhs}...')
+        mock_fraction = FractionNumber(mock_self, mock_other)
+        log(f'{mock_fraction}')
+
+        log(f'Simplifying mock fraction...')
+        mock_fraction = mock_fraction.simplify()
+        log(f'{mock_fraction}')
+
+        log(f'Checking if prime factors of denom ({mock_fraction.denominator}) is {{}}, {{2}}, {{5}}, or {{2,5}}...')
+        mock_fraction_denom_prime_factors = set(factor_tree(mock_fraction.denominator).get_prime_factors())
+        if not ({WholeNumber.from_str('2'), WholeNumber.from_str('5')} == mock_fraction_denom_prime_factors
+                or {WholeNumber.from_str('2')} == mock_fraction_denom_prime_factors
+                or {WholeNumber.from_str('5')} == mock_fraction_denom_prime_factors
+                or 0 == len(mock_fraction_denom_prime_factors)):
+            ret = False
+            log(f'{ret} -- Won\'t terminate.')
+        else:
+            ret = True
+            log(f'{ret} -- Will terminate.')
+
+        log_unindent()
+        log(f'{ret}')
+        return ret
+    #MARKDOWN_DIVTERM_TEST
+
+
     #MARKDOWN_TE_DIV_STARTNUM
     @staticmethod
     @log_decorator
@@ -741,38 +791,9 @@ class DecimalNumber:
         log(f'Dividing {lhs} and {rhs}...')
         log_indent()
 
-        # CHECK TO MAKE SURE DECIMAL WILL TERM -- replace with calling to_suitable_fraction()?
-        adjust_len_self = len(lhs.fractional.digits)
-        adjust_len_other = len(rhs.fractional.digits)
-
-        log(f'Generating mock integer number for {lhs}...')
-        lhs_extra_0s = adjust_len_self - len(lhs.fractional.digits)
-        lhs_combined_digits = lhs.fractional.digits + lhs.whole.digits
-        lhs_combined_digits[0:0] = [Digit(0)] * lhs_extra_0s
-        mock_self = IntegerNumber(lhs.sign, WholeNumber(lhs_combined_digits))
-        log(f'{mock_self}')
-
-        log(f'Generating mock integer number for {rhs}...')
-        rhs_extra_0s = adjust_len_other - len(rhs.fractional.digits)
-        rhs_combined_digits = rhs.fractional.digits + rhs.whole.digits
-        rhs_combined_digits[0:0] = [Digit(0)] * rhs_extra_0s
-        mock_other = IntegerNumber(rhs.sign, WholeNumber(rhs_combined_digits))
-        log(f'{mock_other}')
-
-        log(f'Check to make sure decimal will terminate...')
-        mock_fraction = FractionNumber(mock_self, mock_other)
-        mock_fraction = mock_fraction.simplify()
-        mock_fraction_denom_prime_factors = set(factor_tree(mock_fraction.denominator).get_prime_factors())
-        if not ({WholeNumber.from_str('2'), WholeNumber.from_str('5')} == mock_fraction_denom_prime_factors
-                or {WholeNumber.from_str('2')} == mock_fraction_denom_prime_factors
-                or {WholeNumber.from_str('5')} == mock_fraction_denom_prime_factors
-                or 0 == len(mock_fraction_denom_prime_factors)):
+        log(f'Ensuring {lhs} / {rhs} results in a terminating decimal...')
+        if not DecimalNumber.will_division_terminate(lhs, rhs):
             raise Exception('Resulting decimal will be non-terminating')
-        log(f'True')
-
-        # DIVIDE using divide-and-conquer multiplication
-        log(f'Performing {lhs} / {rhs}...')
-        log_indent()
 
         log(f'Calculating position to start testing at...')
         modifier = DecimalNumber._choose_start_num_for_divte(lhs, rhs)
@@ -822,9 +843,6 @@ class DecimalNumber:
             log(f'Calculating position for next test...')
             modifier *= DecimalNumber.from_str('0.1')
             log(f'{modifier}')
-
-        log_unindent()
-        log(f'{test}')
 
         log_unindent()
         log(f'{test}')
@@ -976,8 +994,8 @@ if __name__ == '__main__':
     # log_whitelist([(inspect.getfile(DecimalNumber), '__truediv__')])
     # print(f'{DecimalNumber.from_str("21") / DecimalNumber.from_str("4")}')
 
-    log_whitelist([(inspect.getfile(DecimalNumber), '_choose_start_num_for_divte')])
-    print(f'{DecimalNumber._choose_start_num_for_divte(DecimalNumber.from_str("2"), DecimalNumber.from_str("50"))}')
+    log_whitelist([(inspect.getfile(DecimalNumber), 'will_division_terminate')])
+    print(f'{DecimalNumber.will_division_terminate(DecimalNumber.from_str("1"), DecimalNumber.from_str("3"))}')
 
     # print(f'{DecimalNumber.from_str("123.456")[3]}')
     # print(f'{DecimalNumber.from_str("123.456")[2]}')

@@ -63,7 +63,7 @@ public final class MainPartialConceptDraw {
             maxSlices *= 10;
         }
         int fillSlices = Integer.parseInt(stream(digits).mapToObj(i -> "" + i).collect(joining()));
-        double degreeOffset = 0;
+        double degreeOffset = 90;
         double degreesPerSlice = 360.0 / maxSlices;
         drawSlices(g, width, height, fillSlices, maxSlices, degreesPerSlice, degreeOffset);
     }

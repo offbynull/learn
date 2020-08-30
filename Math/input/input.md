@@ -6997,6 +6997,121 @@ Decimal multiplication
 
 Conceptually, you can think of `{bm} decimal division/(decimal number division|decimal division)/i` the same as fraction division where the fraction is represented as a mixed number. However, rather than converting both numbers to a fraction and performing fraction division, algorithms that are perform whole number division can be applied: trial-and-error division and long division.
 
+### Non-terminating Decimal
+
+In certain cases, decimal number division will result in a non-terminating decimal number. That is, the number will continue on forever. For example, `{kt} 0.001 \div 3.0 = 0.00033333...`.
+
+```{note}
+Another convention for showing a repeating decimal is to put a line over the portion that repeats: `{kt} 0.001 \div 3.0 = 0.000\overline{3}`.
+```
+
+The reason that a decimal divisions may result in non-terminating quotient relies on 3 ideas:
+
+ 1. A fraction represents an unresolved integer division.
+
+    * `{kt} \frac{9}{15}` is equivalent to `{kt} 9 \div 15`.
+    * `{kt} \frac{1}{3}` is equivalent to `{kt} 1 \div 3`.
+    * `{kt} \frac{5}{25}` is equivalent to `{kt} 5 \div 25`.
+
+ 2. When dividing, shifting the decimal point in the numerator and denominator by equal amounts doesn't change the quotient.
+
+    * `{kt} 2500.0 \div 500.0 = 5.0`
+    * `{kt} 250.0 \div 50.0 = 5.0`
+    * `{kt} 25.0 \div 5.0 = 5.0`
+    * `{kt} 2.5 \div 0.5 = 5.0`
+    * `{kt} 0.25 \div 0.05 = 5.0`
+    * `{kt} 0.025 \div 0.005 = 5.0`
+
+ 3. Decimal numbers are a way of representing fractions where the denominator is 1 possibly followed by 0s.
+
+    * `{kt} \frac{2}{1}` ↔ 2.0
+    * `{kt} \frac{29}{10}` ↔ 2.9
+    * `{kt} \frac{209}{100}` ↔ 2.09
+    * `{kt} \frac{2009}{1000}` ↔ 2.009
+
+In the example above, to determine if the quotient is a non-terminating decimal, begin by shifting the decimal point in both the dividend and the divisor until both are integers (idea 2):
+
+ * `{kt} 0.001 \div 3.0`
+ * `{kt} 0.01 \div 30.0`
+ * `{kt} 0.1 \div 300.0`
+ * `{kt} 1.0 \div 3000.0`
+
+Now that both the dividend and divisor are integers (no fractional part), convert the division operation to a fraction (idea 1):
+
+ * `{kt} 1 \div 3000` is equivalent to `{kt} \frac{1}{3000}`
+
+If `{kt} \frac{1}{3000}` were representable as a decimal number, either it or an equivalent fraction would have a denominator of 1 possibly followed by 0s (idea 3):
+
+ * `{kt} \frac{1}{3000}`'s denominator doesn't meet this criteria.
+ * `{kt} \frac{1}{3000}`'s equivalent fractions don't have a denominator that meets this criteria.
+
+Rather than going through all possible equivalent fractions, a quicker way to check for a non-terminating quotient is to simplify it and list out the simplified denominator's prime factors: if the prime factors ...
+
+ * are empty,
+ * contain only 2s,
+ * contain only 5s,
+ * or contain only 2s and 5s,
+
+... then an equivalent fraction exists where the denominator is 1 possibly followed by 0s (idea 3). For example, `{kt} \frac{4}{200}` simplifies to `{kt} \frac{1}{50}`. The prime factors of 50 are 2\*5\*5, so it does terminate. That is, an equivalent fraction exists where the denominator of 1 possibly followed by 0s (idea 3).
+
+The key insight behind this is that if you were to take a fraction where the denominator is 1 possibly followed by 0s (idea 3), listing out the prime factors of its denominator always results in the primes 2 and 5 in equal amounts. For example, ...
+
+ * `{kt} \frac{1}{1}` has a denominator of 1: 1 = (empty) (0 of each)
+ * `{kt} \frac{15}{10}` has a denominator of 10: 10 = 2\*5 (1 of each)
+ * `{kt} \frac{15}{100}` has a denominator of 100: 100 = 2\*2\*5\*5 (2 of each)
+ * `{kt} \frac{21}{1000}` has a denominator of 1000: 1000 = 2\*2\*2\*5\*5\*5 (3 of each)
+
+As such, any fraction that has the prime factors of nothing, only 2s, only 5s, or only 2s and 5s has an equivalent fraction with a suitable denominator. To get to that equivalent fraction, there need to be an equal number of 2s and 5s in the prime factors of the denominator. For the example above, the fraction `{kt} \frac{1}{50}` has a denominator of 50. 50 breaks down to the prime factors of 2\*5\*5. If you were to multiply both the numerator and the denominator by 2, you would end up with an equivalent fraction that has a suitable denominator...
+
+`{kt} \frac{1}{50} \cdot \frac{2}{2} = \frac{2}{100} = 0.02`
+
+`{kt} \frac{2}{100}` has a denominator of 100: 100 = 2\*2\*5\*5 (2 of each).
+
+The way to perform this algorithm via code is as follows...
+
+```{output}
+arithmetic_code/DecimalNumber.py
+python
+#MARKDOWN_DIVTERM_TEST\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIVTERM_TEST
+```
+
+```{arithmetic}
+DecimalNumberDivTerminationTestLauncher
+1 3
+```
+
+Conceptually, the idea behind a non-terminating decimal is that the underlying fraction can't be represented in pieces of 1, 10, 100, 1000, etc.. As such, the decimal number keeps breaking up into smaller and smaller pieces in an effort to reach that underlying fraction, but ultimately never getting there. For example, representing the fraction `{kt} \frac{1}{3}` as a fraction where the denominator is 1 possibly followed by 0s (idea 3) is impossible. The fraction `{kt} \frac{1}{3}` (represented as non-terminating decimal number 0.333...) is visualized as...
+
+```{diagramhelperfrac}
+1
+3
+```
+
+With 10 parts, the closest you can get is `{kt} \frac{3}{10}` (represented as decimal number 0.3)...
+
+```{diagramhelperpartrecurse}
+3
+```
+
+With 100 parts, the closest you can get is `{kt} \frac{33}{100}` (represented as decimal number 0.33)...
+
+```{diagramhelperpartrecurse}
+33
+```
+
+With 1000 parts, the closest you can get is `{kt} \frac{333}{1000}` (represented as decimal number 0.333)...
+
+```{diagramhelperpartrecurse}
+333
+```
+
+The further you go, the closer you will get to `{kt} \frac{1}{3}`. But, you'll never fully reach `{kt} \frac{1}{3}`:
+
+ * `{kt} \frac{3}{10} \lt \frac{1}{3}` (0.3 < 0.333...)
+ * `{kt} \frac{33}{100} \lt \frac{1}{3}` (0.33 < 0.333...)
+ * `{kt} \frac{333}{1000} \lt \frac{1}{3}` (0.333 < 0.333...)
+ * ...
+
 ### Trial and Error
 
 The same concept as trial-and-error division for whole numbers can be applied to trial-and-error division for decimal numbers. The only difference is that now fractional parts needs to be accounted for. That is, once the algorithm homes in on the whole part, it needs to continue homing in on to the fractional part.
@@ -7004,7 +7119,7 @@ The same concept as trial-and-error division for whole numbers can be applied to
 The core idea behind the algorithm is that multiplication is the inverse of division. That is, multiplication reverses / un-does division (and vice-versa). For example...
 
  * 2 * 5.5 = 11 -- If you have 2 groups of 5.5 items each, you'll have 11 items.
- * 11 / 5.5 = 2 -- If you have 11 items and you break them up into groups of 5.5, you'll have 2 groups.
+ * 11 / 5.5 = 2 -- If you have 11 items and you break them up into 5.5 items per group, you'll have 2 groups.
 
 Knowing this, multiplication can be used to check if some number is the quotient. For example, to find the quotient for 11 / 2, test to see 2 * ? = 11...
 
@@ -7022,7 +7137,10 @@ Knowing this, multiplication can be used to check if some number is the quotient
  * 2 * 5.6 = 11.2 (11.2 > 11)
  * 2 * 5.5 = 11 (11 == 11)
 
-The algorithm starts by selecting a starting number to test. It does this by inspecting the number of whole digits in the known input and product. Specifically, a property of multiplication is ...
+The algorithm starts by selecting a starting number to test. To select a starting number, the algorithm takes advantage of a special property of decimal multiplication: the total number of digits in the whole parts of both inputs will equal to either ...
+
+ * the number of whole digits in the product (`condition1` below),
+ * or the number of whole digits in the product plus 1 (`condition2` below).
 
 ```python
 in1_len = len(input1.whole.digits)
@@ -7030,28 +7148,24 @@ in2_len = len(input2.whole.digits)
 product_len = len(product.whole.digits)
 
 condition1 = in1_len + in2_len == product_len
-condition2 = in1_len + in2_len - 1 == product_len
+condition2 = in1_len + in2_len == product_len + 1
 
 assert condition1 or condition2
 ```
 
-This property states that the total number of digits in the whole parts of both inputs will equal to either ...
-
- * the number of whole digits in the product (condition1),
- * or the number of whole digits in the product plus 1 (condition2).
-
 For example, ...
 
-|                | `in1_len + in2_len == product_len` | `in1_len + in2_len - 1 == product_len` |
-|----------------|------------------------------------|----------------------------------------|
-| 99 * 99 = 9801 | True                               | False                                  |
-| 9 * 9 = 81     | True                               | False                                  |
-| 1 * 9 = 9      | False                              | True                                   |
+|                | `input1.whole` | `input2.whole` | `in1_len + in2_len == product_len` | `in1_len + in2_len == product_len + 1` |
+|----------------|----------------|----------------|------------------------------------|----------------------------------------|
+| 99 * 99 = 9801 | 99             | 99             | True                               | False                                  |
+| 9 * 9 = 81     | 9              | 9              | True                               | False                                  |
+| 1 * 9 = 9      | 1              | 9              | False                              | True                                   |
 
-Given this property, the algorithm knows the maximum number of digits that the unknown input's whole part can be... 
+Given this property, the algorithm works backwards to calculate the maximum number of digits that `input2`'s (the unknown input) whole part can be... 
 
 ```python
-max_in2_len = product_len - in1_len + 1
+min_in2_len = product_len - in1_len
+max_in2_len = product_len + 1 - in1_len
 ```
 
 ```{note}
@@ -7060,27 +7174,34 @@ If you know algebra already, the way the code above was derive requires algebra.
 
 For example, ...
 
-|               | `product_len - in1_len + 1` |
-|---------------|-----------------------------|
-| 99 * ? = 9801 | 3                           |
-| 9 * ? = 81    | 2                           |
-| 1 * ? = 9     | 1                           |
+|               | `product_len - in1_len` (`min_in2_len`) | `product_len - in1_len + 1` (`max_in2_len`) |
+|---------------|-----------------------------------------|---------------------------------------------|
+| 99 * ? = 9801 | 2                                       | 3                                           |
+| 9 * ? = 81    | 1                                       | 2                                           |
+| 1 * ? = 9     | 0                                       | 1                                           |
 
-The algorithm picks a starting number using this maximum: 1 followed by 0s...
+The algorithm uses the maximum to pick a starting number: 1 followed by 0s...
 
-|               | `product_len - in1_len + 1` | `start_test_num` |
-|---------------|-----------------------------|------------------|
-| 99 * ? = 9801 | 3                           | 100              |
-| 9 * ? = 81    | 2                           | 10               |
-| 1 * ? = 9     | 1                           | 1                |
+|               | `max_in2_len` | `input2_starting_test_num` |
+|---------------|---------------|----------------------------|
+| 99 * ? = 9801 | 3             | 100                        |
+| 9 * ? = 81    | 2             | 10                         |
+| 1 * ? = 9     | 1             | 1                          |
 
-When one of the known numbers is negative and the other is non-negative, the algorithm picks the same number but makes it negative...
 
-|                | `product_len - in1_len + 1` | `start_test_num` |
-|----------------|-----------------------------|------------------|
-| -99 * ? = 9801 | 3                           | -100             |
-| 9 * ? = -81    | 2                           | -1               |
-| -1 * ? = 9     | 1                           | -1               |
+The above logic is used for when both `input1` and `product` are non-negative. If ...
+
+ * `input1` is negative and `product` is negative, the algorithm picks the same number and keeps it non-negative.
+ * `input1` is negative but `product` is non-negative, the algorithm picks the same number but makes it negative.
+ * `input1` is non-negative but `product` is negative, the algorithm picks the same number but makes it negative.
+
+|                 | `product_len - in1_len + 1` | `input2_starting_test_num` |
+|-----------------|-----------------------------|----------------------------|
+| 99 * ? = 9801   | 3                           | 100                        |
+| -99 * ? = -9801 | 3                           | 100                        |
+| -99 * ? = 9801  | 3                           | -100                       |
+| 9 * ? = -81     | 2                           | -1                         |
+| -1 * ? = 9      | 1                           | -1                         |
 
 The way to perform this algorithm as code...
 
@@ -7095,7 +7216,7 @@ DecimalNumberDivTeStartNumChooseLauncher
 2 11
 ```
 
-From there, the algorithm keeps a pointer to a position in the test number to increment / decrement. At a high-level:
+Once a starting test number has been selected, the algorithm maintains a pointer to an position in the test number which it uses to increment / decrement the digit at that position. At a high-level:
 
  * Starting from the most significant digit, it decrements until the product is too low.
  * Then, it moves to the next significant digit and increments until the product is too high.
@@ -7105,7 +7226,7 @@ From there, the algorithm keeps a pointer to a position in the test number to in
 
 It does this until the test number narrows to the expected product.
 
-In the example, the position is set to the most significant digit of the test number.  That digit gets decremented until the product becomes either equal to or greater than the expected product...
+In the example, the position is set to the most significant digit of the test number. Since the test results in a number that's larger than the expected product (20 > 11), the most significant digit gets decremented until the product becomes greater than or equal to the expected product...
 
 > * 2 * 10 = 20 (20 > 11)
 
@@ -7113,7 +7234,7 @@ Decrement test by 10.
 
 > * 2 * 0 = 0 (0 < 11)
 
-The test number is now smaller than the expected product. The position then moves to the next significant digit of the test number. That digit gets incremented until the product becomes either equal or greater than the expected product...
+The test number is now smaller than the expected product. The position moves to the next significant digit of the test number. That digit gets incremented until the product becomes either equal or greater than the expected product...
 
 > * 2 * 0 = 0 (0 < 11)
 
@@ -7161,7 +7282,7 @@ Decrement test by 1.
 
 > * 2 * 5.5 = 11 (11 == 11)
 
-The product is now equal to the expected product.
+The product is now equal to the expected product, so the answer has been found: 11 / 2 = 5.5.
 
 The way to perform this algorithm as code...
 

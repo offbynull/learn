@@ -60,7 +60,7 @@ public final class MainPartialConceptRecurseDraw {
     
     public static void drawSlices(SVGGraphics2D g, double width, double height, int[] digits, int maxDigit, boolean drawEmpty) {
         int limit = maxDigit + 1;
-        double degreeOffset = 0;
+        double degreeOffset = 90;
         double degreesPerSlice = 360 / limit;
         for (int digit : digits) {
             drawSlices(g, width, height, digit, drawEmpty ? limit : digit, degreesPerSlice, degreeOffset);
