@@ -510,6 +510,23 @@ class WholeNumber:
     #MARKDOWN_DIVTE
     @staticmethod
     @log_decorator
+    def choose_start_num_for_divte(input1: WholeNumber, expected_product: WholeNumber) -> WholeNumber:
+        log(f'Choosing a starting number to find {input1} \\* ? = {expected_product}...')
+        log_indent()
+
+        log(f'{input1}\'s whole part has length of {len(input1.digits)}')
+        log(f'{expected_product}\'s whole part has length of {len(expected_product.digits)}')
+        num_of_zeros = len(expected_product.digits) - len(input1.digits)
+        start_num = WholeNumber.from_str('1' + '0' * (num_of_zeros + 1))
+
+        log(f'Starting number: {start_num}')
+
+        log_unindent()
+        log(f'{start_num}')
+        return start_num
+
+    @staticmethod
+    @log_decorator
     def trial_and_error_div(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
         if divisor == WholeNumber.from_int(0):
             raise Exception('Cannot divide by 0')

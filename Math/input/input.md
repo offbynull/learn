@@ -2194,6 +2194,7 @@ Knowing this, multiplication can be used to check if some number is the quotient
             +-------------+
 ```
 
+* 5 * 0 = 0 <-- test 0, no
 * 5 * 1 = 5 <-- test 1, no
 * 5 * 2 = 10 <-- test 2, no
 * 5 * 3 = 15 <-- test 3, no
@@ -2236,15 +2237,30 @@ Knowing this, multiplication can be used to check if some number is the quotient
                     +-------------+
 ```
 
-Rather than testing each number one-by-one, it's faster to start with a number range and narrow / tweak it until you converge to the answer. That is, start with an arbitrary lower-bound and upper-bound and test both. If the product is...
+Rather than testing each number incrementally, it's faster to start with a large test number and tweak its digits until the multiplication test passes. The core ideas behind this are:
 
-* within the bound, narrow the number range by some amount.
-* above the bound, move the range down.
-* below the bound, move the range up.
+ 1. When comparing two test numbers, multiplying by the larger test number will result in a larger product.
 
-Repeat until the answer is found.
+    * 5 * 100 = 500
+    * 5 * 99 = 495
+    * 5 * 98 = 490
 
-For example, 2617 / 52...
+ 2. When comparing two test numbers, multiplying by the test number with more digits will result in a larger product.
+
+    * 5 * 100 = 500 (3 digits)
+    * 5 * 99 = 495 (2 digits)
+    * 5 * 98 = 490 (2 digits)
+    * ...
+
+The algorithm maintains a pointer to a position in the test number which it uses to increment / decrement the digit at that position. Given a test number that's too large to possibly be the answer:
+
+ * Starting from the most significant digit, it decrements until the product is too low.
+ * Then, it moves to the next significant digit and increments until the product is too high.
+ * Then, it moves to the next significant digit and decrements until the product is too low.
+ * Then, it moves to the next significant digit and increments until the product is too high.
+ * ...
+
+It continually does this until the product matches the correct number or there are no more digits to tweak. For example, 2617 / 52...
 
 ```{svgbob}
 +--------------+
@@ -2264,37 +2280,86 @@ For example, 2617 / 52...
              +---------------+
 ```
 
-Decide on a range and test...
+Starting with a test number of 100...
 
-* ? = [10, 100]
-  * 10 * 52 = 520
-  * 100 * 52 = 5200
+ * **1**00
+   * 52 \* **1**00 = 5200 (5200 > 2617, too large - subtract 100)
+   * 52 \* **0**00 = 0 (0 < 2617, too small - move to next index)
+ * 000**0**0
+   * 52 \* 0**0**0 = 0 (0 < 2617, too small - add 10)
+   * 52 \* 0**1**0 = 520 (520 < 2617, too small - add 10)
+   * 52 \* 0**2**0 = 1040 (1040 < 2617, too small - add 10)
+   * 52 \* 0**3**0 = 1560 (1560 < 2617, too small - add 10)
+   * 52 \* 0**4**0 = 2080 (2080 < 2617, too small - add 10)
+   * 52 \* 0**5**0 = 2600 (2600 < 2617, too small - add 10)
+   * 52 \* 0**6**0 = 3120 (3120 > 2617, too large - move to next index)
+ * 0006**0**
+   * 52 \* 06**0** = 3120 (3120 > 2617, too large - subtract 1)
+   * 52 \* 05**9** = 3068 (3068 > 2617, too large - subtract 1)
+   * 52 \* 05**8** = 3016 (3016 > 2617, too large - subtract 1)
+   * 52 \* 05**7** = 2964 (2964 > 2617, too large - subtract 1)
+   * 52 \* 05**6** = 2912 (2912 > 2617, too large - subtract 1)
+   * 52 \* 05**5** = 2860 (2860 > 2617, too large - subtract 1)
+   * 52 \* 05**4** = 2808 (2808 > 2617, too large - subtract 1)
+   * 52 \* 05**3** = 2756 (2756 > 2617, too large - subtract 1)
+   * 52 \* 05**2** = 2704 (2704 > 2617, too large - subtract 1)
+   * 52 \* 05**1** = 2652 (2652 > 2617, too large - subtract 1)
+   * 52 \* 05**0** = 2600 (2600 < 2617, too small - stop because no more digits)
 
-2617 sits BETWEEN the range, so narrow...
+Since there are no more digits left, the quotient is 50 and the remainder is 17 (2617 - 2600 = 17).
 
-* ? = [20, 40]
-  * 20 * 52 = 1040
-  * 40 * 52 = 2080
+This algorithm will only perform quickly if a good starting test number is selected. In the example above, the starting test number of 100 was selected by taking advantage of a special property of whole number multiplication: the total number of digits in both inputs will equal to either ...
 
-2617 sits BELOW the range, so move up...
+ * the number of digits in the product (`condition1` below),
+ * or the number of digits in the product plus 1 (`condition2` below).
 
-* ? = [40, 60]
-  * 40 * 52 = 2080
-  * 60 * 52 = 3120
+```python
+in1_len = len(input1.digits)
+in2_len = len(input2.digits)
+product_len = len(product.digits)
 
-2617 sits between the range, so narrow...
+condition1 = in1_len + in2_len == product_len
+condition2 = in1_len + in2_len == product_len + 1
 
-* ? = [50, 51]
-  * 50 * 52 = 2600
-  * 51 * 52 = 2652
+assert condition1 or condition2
+```
 
-2617 sits between the range but doesn't make sense to narrow any further. The quotient is 50, the remainder is 17 (2617 - 2600).
+For example, ...
+
+|                | `input1` | `input2` | `in1_len + in2_len == product_len` | `in1_len + in2_len == product_len + 1` |
+|----------------|----------|----------|------------------------------------|----------------------------------------|
+| 99 * 99 = 9801 | 99       | 99       | True                               | False                                  |
+| 9 * 9 = 81     | 9        | 9        | True                               | False                                  |
+| 1 * 9 = 9      | 1        | 9        | False                              | True                                   |
+
+Given this property, the algorithm works backwards to calculate the maximum number of digits that `input2`'s (the unknown input) whole part can be... 
+
+```python
+min_in2_len = product_len - in1_len
+max_in2_len = product_len + 1 - in1_len
+```
 
 ```{note}
-There's a specific algorithm for picking a starting range as well as how much to tweak that range in each iteration. You'll find those algorithms if you view the file for the code below (they aren't shown in the output).
-
-If you're doing this on paper you can just look and guess. If you're writing code you should probably use these algorithms or come up with something better.
+If you know algebra already, the way the code above was derive requires algebra. If you don't know algebra just take it at face value.
 ```
+
+For example, ...
+
+|               | `product_len - in1_len` (`min_in2_len`) | `product_len - in1_len + 1` (`max_in2_len`) |
+|---------------|-----------------------------------------|---------------------------------------------|
+| 99 * ? = 9801 | 2                                       | 3                                           |
+| 9 * ? = 81    | 1                                       | 2                                           |
+| 1 * ? = 9     | 0                                       | 1                                           |
+
+The algorithm uses the maximum to pick a starting number: 1 followed by 0s...
+
+|               | `max_in2_len` | `input2_starting_test_num` |
+|---------------|---------------|----------------------------|
+| 99 * ? = 9801 | 3             | 100                        |
+| 9 * ? = 81    | 2             | 10                         |
+| 1 * ? = 9     | 1             | 1                          |
+
+In the main example above (52 * ? = 2617), the product has 4 digits and the known input has 2 digits, so a starting test number should of 3 digits was selected: 100.
 
 The trial-and-error division algorithm written as code is as follows:
 
