@@ -866,4 +866,4 @@ if __name__ == '__main__':
 
     log_whitelist([(inspect.getfile(WholeNumber), 'trial_and_error_div')])
     # print(f'{WholeNumber.trial_and_error_div(WholeNumber.from_str("2617"), WholeNumber.from_str("52"))}')
-    print(f'{WholeNumber.trial_and_error_div(WholeNumber.from_str("26170"), WholeNumber.from_str("52"))}')
+    print(f'{WholeNumber.trial_and_error_div(WholeNumber.from_str("11"), WholeNumber.from_str("2"))}')

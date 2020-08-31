@@ -761,79 +761,108 @@ class DecimalNumber:
     #MARKDOWN_DIVTERM_TEST
 
 
-    #MARKDOWN_TE_DIV_STARTNUM
+    #MARKDOWN_DIVTE
     @staticmethod
     @log_decorator
-    def _choose_start_num_for_divte(input1: DecimalNumber, expected_product: DecimalNumber) -> DecimalNumber:
+    def choose_start_test_num_for_divte(input1: DecimalNumber, expected_product: DecimalNumber) -> DecimalNumber:
         log(f'Choosing a starting number to find {input1} \\* ? = {expected_product}...')
         log_indent()
 
-        log(f'{input1}\'s whole part has length of {len(input1.whole.digits)}')
-        log(f'{expected_product}\'s whole part has length of {len(expected_product.whole.digits)}')
-        num_of_zeros = len(expected_product.whole.digits) - len(input1.whole.digits)
-        start_num = DecimalNumber.from_str('1' + '0' * (num_of_zeros + 1))
+        log(f'Checking which case should apply...')
+        if input1 < DecimalNumber.from_str('1.0') and expected_product >= DecimalNumber.from_str('1.0'):
+            log(f'{input1} has {len(input1.fractional.digits)} fractional digits')
+            log(f'{expected_product}\'s has {len(expected_product.whole.digits)} whole digits')
+            num_of_zeros = len(expected_product.whole.digits) + len(input1.fractional.digits) - 1
+            start_test_num = DecimalNumber.from_str('1' + '0' * num_of_zeros)
+        else:
+            log(f'{input1} has {len(input1.whole.digits)} whole digits')
+            log(f'{expected_product}\'s has {len(expected_product.whole.digits)} whole digits')
+            num_of_zeros = len(expected_product.whole.digits) - len(input1.whole.digits)
+            start_test_num = DecimalNumber.from_str('1' + '0' * num_of_zeros)
 
-        if input1.sign != Sign.NEGATIVE and expected_product.sign == Sign.NEGATIVE\
-                or input1.sign == Sign.NEGATIVE and expected_product.sign != Sign.NEGATIVE:
-            start_num = start_num * DecimalNumber.from_str('-1.0')
-
-        log(f'Starting number: {start_num}')
+        log(f'Starting number: {start_test_num}')
 
         log_unindent()
-        log(f'{start_num}')
-        return start_num
-    #MARKDOWN_TE_DIV_STARTNUM
+        log(f'{start_test_num}')
+        return start_test_num
 
-
-    #MARKDOWN_DIV
+    @staticmethod
     @log_decorator
-    def __truediv__(lhs: DecimalNumber, rhs: DecimalNumber) -> DecimalNumber:
-        log(f'Dividing {lhs} and {rhs}...')
+    def choose_start_modifier_for_divte(start_test_num: DecimalNumber) -> DecimalNumber:
+        log(f'Choosing a starting modifier for {start_test_num}...')
         log_indent()
 
-        log(f'Ensuring {lhs} / {rhs} results in a terminating decimal...')
-        if not DecimalNumber.will_division_terminate(lhs, rhs):
+        log(f'{start_test_num} has {len(start_test_num.whole.digits)} digits')
+        num_of_zeros = len(start_test_num.whole.digits) - 1
+        start_modifier_num = DecimalNumber.from_str('1' + '0' * num_of_zeros)
+
+        log(f'Starting modifier: {start_modifier_num}')
+
+        log_unindent()
+        log(f'{start_modifier_num}')
+        return start_modifier_num
+
+    @staticmethod
+    @log_decorator
+    def trial_and_error_div(dividend: DecimalNumber, divisor: DecimalNumber) -> DecimalNumber:
+        log(f'Dividing {dividend} and {divisor}...')
+        log_indent()
+
+        log(f'Ensuring {dividend} / {divisor} results in a terminating decimal...')
+        if not DecimalNumber.will_division_terminate(dividend, divisor):
             raise Exception('Resulting decimal will be non-terminating')
 
-        log(f'Calculating position to start testing at...')
-        modifier = DecimalNumber._choose_start_num_for_divte(lhs, rhs)
+        log(f'Treating {dividend} and {divisor} as non-negative to perform the algorithm...')
+        orig_dividend_sign = dividend.sign
+        orig_divisor_sign = divisor.sign
+        if dividend.sign == Sign.NEGATIVE:
+            dividend *= DecimalNumber.from_str('-1.0')
+        if divisor.sign == Sign.NEGATIVE:
+            divisor *= DecimalNumber.from_str('-1.0')
+        log(f'Non-negative: {dividend} and {divisor}...')
+
+        log(f'Calculating starting test number...')
+        test = DecimalNumber.choose_start_test_num_for_divte(divisor, dividend)
+        log(f'{test}')
+
+        log(f'Calculating starting modifier for test number...')
+        modifier = DecimalNumber.choose_start_modifier_for_divte(test)
         log(f'{modifier}')
 
-        test = modifier
         while True:
-            log(f'Testing {test}: {test} * {rhs}...')
-            test_res = test * rhs
+            log(f'Testing {test}: {test} * {divisor}...')
+            test_res = test * divisor
             log(f'{test_res}')
 
-            log(f'Is {test_res} ==, >, or < to {lhs}? ...')
+            log(f'Is {test_res} ==, >, or < to {dividend}? ...')
             log_indent()
             try:
-                if test_res == lhs:
-                    log(f'{test_res} == {lhs} -- Found')
+                if test_res == dividend:
+                    log(f'{test_res} == {dividend} -- Found')
                     break
-                elif test_res > lhs:
-                    log(f'{test_res} > {lhs} -- Decrementing {test} by {modifier} until not >...')
+                elif test_res > dividend:
+                    log(f'{test_res} > {dividend} -- Decrementing {test} by {modifier} until not >...')
                     log_indent()
                     while True:
                         log(f'Decrementing {test} by {modifier}...')
                         test -= modifier
-                        log(f'{test} * {rhs}...')
-                        modify_res = test * rhs
+                        log(f'{test} * {divisor}...')
+                        modify_res = test * divisor
                         log(f'{modify_res}')
-                        if not modify_res > lhs:
+                        if not modify_res > dividend:
                             break
                     log_unindent()
                     log(f'Done: {test}')
-                elif test_res < lhs:
-                    log(f'{test_res} < {lhs} -- Incrementing {test} by {modifier} until not <...')
+                elif test_res < dividend:
+                    log(f'{test_res} < {dividend} -- Incrementing {test} by {modifier} until not <...')
                     log_indent()
                     while True:
                         log(f'Incrementing {test} by {modifier}...')
                         test += modifier
-                        log(f'{test} * {rhs}...')
-                        modify_res = test * rhs
+                        log(f'{test} * {divisor}...')
+                        modify_res = test * divisor
                         log(f'{modify_res}')
-                        if not modify_res < lhs:
+                        if not modify_res < dividend:
                             break
                     log_unindent()
                     log(f'Done: {test}')
@@ -847,8 +876,14 @@ class DecimalNumber:
         log_unindent()
         log(f'{test}')
 
+        log(f'Modifying sign of {test} based on original sign of dividend ({orig_dividend_sign}) and divisor ({orig_divisor_sign})...')
+        if orig_dividend_sign == Sign.NEGATIVE and orig_divisor_sign != Sign.NEGATIVE \
+                or orig_dividend_sign != Sign.NEGATIVE and orig_divisor_sign == Sign.NEGATIVE:
+            test *= DecimalNumber.from_str('-1.0')
+        log(f'{test}')
+
         return test
-    #MARKDOWN_DIV
+    #MARKDOWN_DIVTE
 
 
 if __name__ == '__main__':
@@ -994,8 +1029,8 @@ if __name__ == '__main__':
     # log_whitelist([(inspect.getfile(DecimalNumber), '__truediv__')])
     # print(f'{DecimalNumber.from_str("21") / DecimalNumber.from_str("4")}')
 
-    log_whitelist([(inspect.getfile(DecimalNumber), 'will_division_terminate')])
-    print(f'{DecimalNumber.will_division_terminate(DecimalNumber.from_str("1"), DecimalNumber.from_str("3"))}')
+    log_whitelist([(inspect.getfile(DecimalNumber), 'trial_and_error_div')])
+    print(f'{DecimalNumber.trial_and_error_div(DecimalNumber.from_str("11"), DecimalNumber.from_str("2"))}')
 
     # print(f'{DecimalNumber.from_str("123.456")[3]}')
     # print(f'{DecimalNumber.from_str("123.456")[2]}')

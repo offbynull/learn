@@ -13,7 +13,7 @@ def main():
         args = input().split()  # read from stdin
         input1 = DecimalNumber.from_str(args[0])
         input2 = DecimalNumber.from_str(args[1])
-        res = DecimalNumber._choose_start_num_for_divte(input1, input2)  # this will output markdown to stdout
+        res = DecimalNumber.choose_starting_test_num_for_divte(input1, input2)  # this will output markdown to stdout
     finally:
         print("</div>", end="\n\n")
         print("`{bm-enable-all}`", end="\n\n")

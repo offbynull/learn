@@ -2237,7 +2237,25 @@ Knowing this, multiplication can be used to check if some number is the quotient
                     +-------------+
 ```
 
-Rather than testing each number incrementally, it's faster to start with a large test number and tweak its digits until the multiplication test passes. The core ideas behind this are:
+Rather than testing each number incrementally, it's faster to start with a large test number and tweak its digits until the multiplication test passes. The algorithm maintains a pointer to a position in the test number which it uses to increment / decrement the digit at that position. Given a test number:
+
+ * Starting from the most significant digit, if the product is ...
+   * too large then decrement that position until it becomes too small.
+   * too small then increment that position until it becomes too large.
+   * a match then stop.
+ * Move to the next significant digit, if the product is ...
+   * too large then decrement that position until it becomes too small.
+   * too small then increment that position until it becomes too large.
+   * a match then stop.
+ * Move to the next significant digit, if the product is ...
+   * too large then decrement that position until it becomes too small.
+   * too small then increment that position until it becomes too large.
+   * a match then stop.
+ * ...
+
+It continually does this until either the product matches the correct number or there are no more digits to tweak. 
+
+The core ideas behind this algorithm are:
 
  1. When comparing two test numbers, multiplying by the larger test number will result in a larger product.
 
@@ -2252,15 +2270,7 @@ Rather than testing each number incrementally, it's faster to start with a large
     * 5 * 98 = 490 (2 digits)
     * ...
 
-The algorithm maintains a pointer to a position in the test number which it uses to increment / decrement the digit at that position. Given a test number that's too large to possibly be the answer:
-
- * Starting from the most significant digit, it decrements until the product is too low.
- * Then, it moves to the next significant digit and increments until the product is too high.
- * Then, it moves to the next significant digit and decrements until the product is too low.
- * Then, it moves to the next significant digit and increments until the product is too high.
- * ...
-
-It continually does this until the product matches the correct number or there are no more digits to tweak. For example, 2617 / 52...
+For example, 2617 / 52...
 
 ```{svgbob}
 +--------------+
@@ -2285,7 +2295,7 @@ Starting with a test number of 100...
  * **1**00
    * 52 \* **1**00 = 5200 (5200 > 2617, too large - subtract 100)
    * 52 \* **0**00 = 0 (0 < 2617, too small - move to next index)
- * 000**0**0
+ * 0**0**0
    * 52 \* 0**0**0 = 0 (0 < 2617, too small - add 10)
    * 52 \* 0**1**0 = 520 (520 < 2617, too small - add 10)
    * 52 \* 0**2**0 = 1040 (1040 < 2617, too small - add 10)
@@ -2293,7 +2303,7 @@ Starting with a test number of 100...
    * 52 \* 0**4**0 = 2080 (2080 < 2617, too small - add 10)
    * 52 \* 0**5**0 = 2600 (2600 < 2617, too small - add 10)
    * 52 \* 0**6**0 = 3120 (3120 > 2617, too large - move to next index)
- * 0006**0**
+ * 06**0**
    * 52 \* 06**0** = 3120 (3120 > 2617, too large - subtract 1)
    * 52 \* 05**9** = 3068 (3068 > 2617, too large - subtract 1)
    * 52 \* 05**8** = 3016 (3016 > 2617, too large - subtract 1)
@@ -2308,7 +2318,7 @@ Starting with a test number of 100...
 
 Since there are no more digits left, the quotient is 50 and the remainder is 17 (2617 - 2600 = 17).
 
-This algorithm will only perform quickly if a good starting test number is selected. In the example above, the starting test number of 100 was selected by taking advantage of a special property of whole number multiplication: the total number of digits in both inputs will equal to either ...
+In the example above, the starting test number of 100 was selected by taking advantage of a special property of whole number multiplication: the total number of digits in both inputs will equal to either ...
 
  * the number of digits in the product (`condition1` below),
  * or the number of digits in the product plus 1 (`condition2` below).
@@ -2320,7 +2330,6 @@ product_len = len(product.digits)
 
 condition1 = in1_len + in2_len == product_len
 condition2 = in1_len + in2_len == product_len + 1
-
 assert condition1 or condition2
 ```
 
@@ -2360,6 +2369,10 @@ The algorithm uses the maximum to pick a starting number: 1 followed by 0s...
 | 1 * ? = 9     | 1             | 1                          |
 
 In the main example above (52 * ? = 2617), the product has 4 digits and the known input has 2 digits, so a starting test number should of 3 digits was selected: 100.
+
+```{note}
+This algorithm only performs quickly when a good starting test number is selected. For example, if the number 1 were selected as the starting test number for 52 * ? = 2617, the code will perform more steps than is necessary.
+```
 
 The trial-and-error division algorithm written as code is as follows:
 
@@ -7179,182 +7192,94 @@ The further you go, the closer you will get to `{kt} \frac{1}{3}`. But, you'll n
 
 ### Trial and Error
 
-The same concept as trial-and-error division for whole numbers can be applied to trial-and-error division for decimal numbers. The only difference is that now fractional parts needs to be accounted for. That is, once the algorithm homes in on the whole part, it needs to continue homing in on to the fractional part.
+The same concept as trial-and-error division for whole numbers can be applied to trial-and-error division for decimal numbers. The only differences are that for a decimal number, the...
 
-The core idea behind the algorithm is that multiplication is the inverse of division. That is, multiplication reverses / un-does division (and vice-versa). For example...
+ * fractional part needs to be accounted for. That is, once the algorithm homes in on the whole part, it needs to continue homing in on to the fractional part.
+ * sign needs to be accounted for. This is similar to how the sign is accounted for in integer division.
 
- * 2 * 5.5 = 11 -- If you have 2 groups of 5.5 items each, you'll have 11 items.
- * 11 / 5.5 = 2 -- If you have 11 items and you break them up into 5.5 items per group, you'll have 2 groups.
+For example, to find the quotient for 11 / 2 = ?, test to see 2 * ? = 11...
 
-Knowing this, multiplication can be used to check if some number is the quotient. For example, to find the quotient for 11 / 2, test to see 2 * ? = 11...
+ * **1**0
+   * 2 * **1**0 = 20 (20 > 11, too large - subtract 10)
+   * 2 * **0**0 = 0 (0 < 11, too small - move to next index)
+ * 0**0**
+   * 2 * 0**0** = 0 (0 < 11, too small - add 1)
+   * 2 * 0**1** = 2 (2 < 11, too small - add 1)
+   * 2 * 0**2** = 4 (4 < 11, too small - add 1)
+   * 2 * 0**3** = 6 (6 < 11, too small - add 1)
+   * 2 * 0**4** = 8 (8 < 11, too small - add 1)
+   * 2 * 0**5** = 10 (10 < 11, too small - add 1)
+   * 2 * 0**6** = 12 (12 > 11, too large - move to next index)
+ * 06.**0**
+   * 2 * 06.**0** = 12 (12 > 11, too large - subtract 0.1)
+   * 2 * 05.**9** = 11.8 (11.8 > 11, too large - subtract 0.1)
+   * 2 * 05.**8** = 11.6 (11.6 > 11, too large - subtract 0.1)
+   * 2 * 05.**7** = 11.4 (11.4 > 11, too large - subtract 0.1)
+   * 2 * 05.**6** = 11.2 (11.2 > 11, too large - subtract 0.1)
+   * 2 * 05.**5** = 11 (11 == 11, equal - stop because the answer has been found)
 
- * 2 * 10 = 20 (20 > 11)
- * 2 * 0 = 0 (0 < 11)
- * 2 * 1 = 2 (2 < 11)
- * 2 * 2 = 4 (4 < 11)
- * 2 * 3 = 6 (6 < 11)
- * 2 * 4 = 8 (8 < 11)
- * 2 * 5 = 10 (10 < 11)
- * 2 * 6 = 12 (12 > 11)
- * 2 * 5.9 = 11.8 (11.8 > 11)
- * 2 * 5.8 = 11.6 (11.6 > 11)
- * 2 * 5.7 = 11.4 (11.4 > 11)
- * 2 * 5.6 = 11.2 (11.2 > 11)
- * 2 * 5.5 = 11 (11 == 11)
+Selecting a starting test number is similar to selecting a starting test number for whole number division, but with an exception: If `input1` is less than 1 but `product` isn't, you can reasonably guess that the maximum number of whole digits in `input2` is the number of fractional digits in `input1` added to the number of whole digits in `product`:
+ 
+`len(input1.fractional.digits) + len(product.whole.digits) <= len(input2.whole.digits)`.
 
-The algorithm starts by selecting a starting number to test. To select a starting number, the algorithm takes advantage of a special property of decimal multiplication: the total number of digits in the whole parts of both inputs will equal to either ...
-
- * the number of whole digits in the product (`condition1` below),
- * or the number of whole digits in the product plus 1 (`condition2` below).
-
-```python
-in1_len = len(input1.whole.digits)
-in2_len = len(input2.whole.digits)
-product_len = len(product.whole.digits)
-
-condition1 = in1_len + in2_len == product_len
-condition2 = in1_len + in2_len == product_len + 1
-
-assert condition1 or condition2
-```
-
-For example, ...
-
-|                | `input1.whole` | `input2.whole` | `in1_len + in2_len == product_len` | `in1_len + in2_len == product_len + 1` |
-|----------------|----------------|----------------|------------------------------------|----------------------------------------|
-| 99 * 99 = 9801 | 99             | 99             | True                               | False                                  |
-| 9 * 9 = 81     | 9              | 9              | True                               | False                                  |
-| 1 * 9 = 9      | 1              | 9              | False                              | True                                   |
-
-Given this property, the algorithm works backwards to calculate the maximum number of digits that `input2`'s (the unknown input) whole part can be... 
+ * 0.01 * ? = 99
+   (? = 9900 - 4 digits vs max of 4 digits)
+ * 0.01 * ? = 99.99
+   (? = 9999 - 4 digits vs max of 4 digits)
+ * 0.99 * ? = 9899.01
+   (? = 9999 - 4 digits vs max of 6 digits)
 
 ```python
-min_in2_len = product_len - in1_len
-max_in2_len = product_len + 1 - in1_len
+if input1 < 1.0 and product >= 1.0:  # special case logic
+    in1_len = len(input1.fractional.digits)
+    in2_len = len(input2.whole.digits)
+    product_len = len(product.whole.digits)
+
+    condition = in1_len + product_len <= in2_len
+    assert condition
+else:  # existing logic from whole number division
+    in1_len = len(input1.whole.digits)   
+    in2_len = len(input2.whole.digits)
+    product_len = len(product.whole.digits)
+
+    condition1 = in1_len + in2_len == product_len
+    condition2 = in1_len + in2_len == product_len + 1
+    assert condition1 or condition2
 ```
 
-```{note}
-If you know algebra already, the way the code above was derive requires algebra. If you don't know algebra just take it at face value.
-```
+Once a starting test number has been selected, the algorithm proceeds similarly to whole number trial-and-error division: maintain a pointer to an position in the test number which it uses to increment / decrement the digit at that position. The only differences are that...
 
-For example, ...
+ 1. the sign needs to be accounted for similar to the integer multiplication rules for sign. Specifically, if ...
 
-|               | `product_len - in1_len` (`min_in2_len`) | `product_len - in1_len + 1` (`max_in2_len`) |
-|---------------|-----------------------------------------|---------------------------------------------|
-| 99 * ? = 9801 | 2                                       | 3                                           |
-| 9 * ? = 81    | 1                                       | 2                                           |
-| 1 * ? = 9     | 0                                       | 1                                           |
+   * `input1` is negative and `product` is negative, pick the same number and keep it non-negative.
+   * `input1` is negative but `product` is non-negative, pick the same number but makes it negative.
+   * `input1` is non-negative but `product` is negative, pick the same number but makes it negative.
 
-The algorithm uses the maximum to pick a starting number: 1 followed by 0s...
+ 1. the process doesn't stop once the whole part has run out of digits. It continues into the fractional part until an answer has been found.
 
-|               | `max_in2_len` | `input2_starting_test_num` |
-|---------------|---------------|----------------------------|
-| 99 * ? = 9801 | 3             | 100                        |
-| 9 * ? = 81    | 2             | 10                         |
-| 1 * ? = 9     | 1             | 1                          |
+The one caveat with having the algorithm dive into the fractional part is that a division operation may result in a fractional part that never terminates: a non-terminating decimal. In such a case, the algorithm never finishes because the expected product can't be reached.
 
+For example, imagine performing the algorithm for 1.0 / 3.0 = ?. That is, find the missing number for 3.0 * ? = 1.0.
 
-The above logic is used for when both `input1` and `product` are non-negative. If ...
-
- * `input1` is negative and `product` is negative, the algorithm picks the same number and keeps it non-negative.
- * `input1` is negative but `product` is non-negative, the algorithm picks the same number but makes it negative.
- * `input1` is non-negative but `product` is negative, the algorithm picks the same number but makes it negative.
-
-|                 | `product_len - in1_len + 1` | `input2_starting_test_num` |
-|-----------------|-----------------------------|----------------------------|
-| 99 * ? = 9801   | 3                           | 100                        |
-| -99 * ? = -9801 | 3                           | 100                        |
-| -99 * ? = 9801  | 3                           | -100                       |
-| 9 * ? = -81     | 2                           | -1                         |
-| -1 * ? = 9      | 1                           | -1                         |
-
-The way to perform this algorithm as code...
-
-```{output}
-arithmetic_code/DecimalNumber.py
-python
-#MARKDOWN_TE_DIV_STARTNUM\s*\n([\s\S]+?)\n\s*#MARKDOWN_TE_DIV_STARTNUM
-```
-
-```{arithmetic}
-DecimalNumberDivTeStartNumChooseLauncher
-2 11
-```
-
-Once a starting test number has been selected, the algorithm maintains a pointer to an position in the test number which it uses to increment / decrement the digit at that position. At a high-level:
-
- * Starting from the most significant digit, it decrements until the product is too low.
- * Then, it moves to the next significant digit and increments until the product is too high.
- * Then, it moves to the next significant digit and decrements until the product is too low.
- * Then, it moves to the next significant digit and increments until the product is too high.
+ * 0.3 * 3.0 = 0.9
+ * 0.33 * 3.0 = 0.99
+ * 0.333 * 3.0 = 0.999
+ * 0.3333 * 3.0 = 0.9999
  * ...
 
-It does this until the test number narrows to the expected product.
+The number required to solve the multiplication 3.0 * ? = 1.0 can't be represented as a decimal. That number is `{kt} \frac{1}{3}`: 3.0 * `{kt} \frac{1}{3}` = 1.0.
 
-In the example, the position is set to the most significant digit of the test number. Since the test results in a number that's larger than the expected product (20 > 11), the most significant digit gets decremented until the product becomes greater than or equal to the expected product...
+The workaround to non-terminating decimals is to either ...
 
-> * 2 * 10 = 20 (20 > 11)
-
-Decrement test by 10.
-
-> * 2 * 0 = 0 (0 < 11)
-
-The test number is now smaller than the expected product. The position moves to the next significant digit of the test number. That digit gets incremented until the product becomes either equal or greater than the expected product...
-
-> * 2 * 0 = 0 (0 < 11)
-
-Increment test by 1.
-
-> * 2 * 1 = 2 (2 < 11)
-
-Increment test by 1.
-
-> * 2 * 2 = 4 (4 < 11)
-
-Increment test by 1.
-
-> * 2 * 3 = 6 (6 < 11)
-
-Increment test by 1.
-
-> * 2 * 4 = 8 (8 < 11)
-
-Increment test by 1.
-
-> * 2 * 5 = 10 (10 < 11)
-
-Increment test by 1.
-
-> * 2 * 6 = 12 (12 > 11)
-
-The product is now larger than the expected product. The position then moves to the next significant digit of the test number. That digit gets decremented until the product becomes either equal or greater than the expected product...
-
-> * 2 * 5.1 = 10.2 (10.2 < 11)
-
-Decrement test by 1.
-
-> * 2 * 5.2 = 10.4 (10.4 < 11)
-
-Decrement test by 1.
-
-> * 2 * 5.3 = 10.6 (10.6 < 11)
-
-Decrement test by 1.
-
-> * 2 * 5.4 = 10.8 (10.8 < 11)
-
-Decrement test by 1.
-
-> * 2 * 5.5 = 11 (11 == 11)
-
-The product is now equal to the expected product, so the answer has been found: 11 / 2 = 5.5.
-
-The way to perform this algorithm as code...
+ * forcefully terminate the operation after some predefined number of fractional digits have been output (similar to rounding),
+ * or to detect if the fractional part never terminates and bail out of the division.
+ 
+This is discussed in more depth in the non-terminating decimal section.
 
 ```{output}
 arithmetic_code/DecimalNumber.py
 python
-#MARKDOWN_DIV\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIV
+#MARKDOWN_DIVTE\s*\n([\s\S]+?)\n\s*#MARKDOWN_DIVTE
 ```
 
 ```{arithmetic}

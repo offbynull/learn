@@ -510,79 +510,126 @@ class WholeNumber:
     #MARKDOWN_DIVTE
     @staticmethod
     @log_decorator
-    def choose_start_num_for_divte(input1: WholeNumber, expected_product: WholeNumber) -> WholeNumber:
-        log(f'Choosing a starting number to find {input1} \\* ? = {expected_product}...')
+    def choose_start_test_num_for_divte(input1: WholeNumber, expected_product: WholeNumber) -> WholeNumber:
+        log(f'Choosing a starting test number to find {input1} \\* ? = {expected_product}...')
         log_indent()
 
-        log(f'{input1}\'s whole part has length of {len(input1.digits)}')
-        log(f'{expected_product}\'s whole part has length of {len(expected_product.digits)}')
+        log(f'{input1} has {len(input1.digits)} digits')
+        log(f'{expected_product}\'s has {len(expected_product.digits)} digits')
         num_of_zeros = len(expected_product.digits) - len(input1.digits)
-        start_num = WholeNumber.from_str('1' + '0' * (num_of_zeros + 1))
+        start_test_num = WholeNumber.from_str('1' + '0' * num_of_zeros)
 
-        log(f'Starting number: {start_num}')
+        log(f'Starting test number: {start_test_num}')
 
         log_unindent()
-        log(f'{start_num}')
-        return start_num
+        log(f'{start_test_num}')
+        return start_test_num
+
+    @staticmethod
+    @log_decorator
+    def choose_start_modifier_for_divte(start_test_num: WholeNumber) -> WholeNumber:
+        log(f'Choosing a starting modifier for {start_test_num}...')
+        log_indent()
+
+        log(f'{start_test_num} has {len(start_test_num.digits)} digits')
+        num_of_zeros = len(start_test_num.digits) - 1
+        start_modifier_num = WholeNumber.from_str('1' + '0' * num_of_zeros)
+
+        log(f'Starting modifier: {start_modifier_num}')
+
+        log_unindent()
+        log(f'{start_modifier_num}')
+        return start_modifier_num
 
     @staticmethod
     @log_decorator
     def trial_and_error_div(dividend: WholeNumber, divisor: WholeNumber) -> (WholeNumber, WholeNumber):
-        if divisor == WholeNumber.from_int(0):
+        if divisor == WholeNumber.from_str('0'):
             raise Exception('Cannot divide by 0')
 
-        log(f'Dividing {dividend} by {divisor}...')
+        log(f'Dividing {dividend} and {divisor}...')
         log_indent()
 
-        if dividend == 0:
-            log(f'Found: {dividend} / {divisor} = 0R0')
-            return WholeNumber.from_int(0), WholeNumber.from_int(0)
+        log(f'Calculating starting test number...')
+        test = WholeNumber.choose_start_test_num_for_divte(divisor, dividend)
+        log(f'{test}')
 
-        wn_range = WholeNumber.pick_start_range(dividend)
-        log(f'Start range: [{wn_range.min}, {wn_range.max}]')
+        log(f'Calculating starting modifier for test number...')
+        modifier = WholeNumber.choose_start_modifier_for_divte(test)
+        log(f'{modifier}')
 
-        quotient = None
-        remainder = None
+        class StepType(Enum):
+            INCREMENTING = 0
+            DECREMENTING = 1
+            EQUAL = 2
+
+        last_steptype = None
         while True:
-            min_test = divisor * wn_range.min
-            max_test = divisor * wn_range.max
+            log(f'Testing {test}: {test} * {divisor}...')
+            test_res = test * divisor
+            log(f'{test_res}')
 
+            log(f'Is {test_res} ==, >, or < to {dividend}? ...')
             log_indent()
-            log(f'{divisor} * {wn_range.min} = {min_test}')
-            log(f'{divisor} * {wn_range.max} = {max_test}')
-            log_unindent()
+            try:
+                if test_res == dividend:
+                    last_steptype = StepType.EQUAL
+                    log(f'{test_res} == {dividend} -- Found')
+                    break
+                elif test_res > dividend:
+                    last_steptype = StepType.DECREMENTING
+                    log(f'{test_res} > {dividend} -- Decrementing {test} by {modifier} until not >...')
+                    log_indent()
+                    while True:
+                        log(f'Decrementing {test} by {modifier}...')
+                        test -= modifier
+                        log(f'{test} * {divisor}...')
+                        modify_res = test * divisor
+                        log(f'{modify_res}')
+                        if not modify_res > dividend:
+                            break
+                    log_unindent()
+                    log(f'Done: {test}')
+                elif test_res < dividend:
+                    last_steptype = StepType.INCREMENTING
+                    log(f'{test_res} < {dividend} -- Incrementing {test} by {modifier} until not <...')
+                    log_indent()
+                    while True:
+                        log(f'Incrementing {test} by {modifier}...')
+                        test += modifier
+                        log(f'{test} * {divisor}...')
+                        modify_res = test * divisor
+                        log(f'{modify_res}')
+                        if not modify_res < dividend:
+                            break
+                    log_unindent()
+                    log(f'Done: {test}')
+            finally:
+                log_unindent()
 
-            # check if found
-            if min_test == dividend:  # found as min
-                quotient = wn_range.min
-                remainder = WholeNumber.from_int(0)
+            if modifier == WholeNumber.from_str('1'):
                 break
 
-            if max_test == dividend:  # found as max
-                quotient = wn_range.max
-                remainder = WholeNumber.from_int(0)
-                break
+            log(f'Reducing modifier for next set of tests...')
+            modifier = WholeNumber.from_str(str(modifier)[0:-1])
+            log(f'{modifier}')
 
-            if min_test < dividend < max_test and wn_range.max - wn_range.min == 1:  # found between min and max
-                quotient = wn_range.min
-                remainder = dividend - min_test
-                break
+        # if the last set of tests were incrementing, the test number will be 1 more than where it needs to be moved
+        # because the loop increments until it exceeds PAST the dividend
+        if StepType.INCREMENTING == last_steptype:
+            log(f'Decrementing test number (only happens if last set of tests were incrementing)...')
+            if test * divisor > dividend:
+                test -= WholeNumber.from_str('1')
+            log(f'{test}')
 
-            # not found, so modify range
-            if min_test < dividend < max_test:
-                WholeNumber.narrow_range(dividend, divisor, wn_range)
-                log(f'Narrowing range: [{wn_range.min}, {wn_range.max}]')
-            elif min_test < dividend and max_test < dividend:
-                WholeNumber.move_up_range(wn_range)
-                log(f'Increasing range: [{wn_range.min}, {wn_range.max}]')
-            elif min_test > dividend and max_test > dividend:
-                WholeNumber.move_down_range(wn_range)
-                log(f'Decreasing range: [{wn_range.min}, {wn_range.max}]')
+        log (f'Determining remainder...')
+        remainder = dividend - (test * divisor)
+        log(f'{remainder}')
 
         log_unindent()
-        log(f'Quotient: {quotient}, Remainder: {remainder}')
+        log(f'Quotient: {test}, Remainder: {remainder}')
 
-        return quotient, remainder
+        return test, remainder
     #MARKDOWN_DIVTE
 
     #MARKDOWN_POWIT
@@ -657,43 +704,6 @@ class WholeNumber:
 
         return power
     #MARKDOWN_POW
-
-
-    @staticmethod
-    def pick_start_range(dividend: WholeNumber) -> WholeNumberRange:
-        return WholeNumberRange(
-            WholeNumber.from_str('1' + '0' * (len(dividend) - 1)),
-            WholeNumber.from_str('1' + '0' * len(dividend))
-        )
-
-    @staticmethod
-    def narrow_range(dividend: WholeNumber, divisor: WholeNumber, wn_range: WholeNumberRange) -> None:
-        diff = wn_range.max - wn_range.min - WholeNumber.from_int(1)
-        adjustment = WholeNumber.from_str('1' + ('0' * (len(diff) - 1)))
-
-        min_test = divisor * wn_range.min
-        max_test = divisor * wn_range.max
-
-        if dividend - min_test > max_test - dividend:
-            wn_range.min += adjustment
-        else:
-            wn_range.max -= adjustment
-
-    @staticmethod
-    def move_up_range(wn_range: WholeNumberRange) -> None:
-        diff = wn_range.max - wn_range.min - WholeNumber.from_int(1)
-        adjustment = WholeNumber.from_str('1' + ('0' * (len(diff) - 1)))
-
-        wn_range.min += adjustment
-        wn_range.max += adjustment
-
-    @staticmethod
-    def move_down_range(wn_range: WholeNumberRange) -> None:
-        diff = wn_range.max - wn_range.min - WholeNumber.from_int(1)
-        adjustment = WholeNumber.from_str('1' + ('0' * (len(diff) - 1)))
-
-        wn_range.min -= adjustment
-        wn_range.max -= adjustment
 
     @staticmethod
     def range(start: WholeNumber, end: WholeNumber, end_inclusive: bool = False) -> WholeNumber:
@@ -854,5 +864,6 @@ if __name__ == '__main__':
     # print(n3)
     import inspect
 
-    log_whitelist([(inspect.getfile(WholeNumber), '__lt__')])
-    print(f'{WholeNumber.from_str("44") < WholeNumber.from_str("4")}')
+    log_whitelist([(inspect.getfile(WholeNumber), 'trial_and_error_div')])
+    # print(f'{WholeNumber.trial_and_error_div(WholeNumber.from_str("2617"), WholeNumber.from_str("52"))}')
+    print(f'{WholeNumber.trial_and_error_div(WholeNumber.from_str("11"), WholeNumber.from_str("2"))}')
