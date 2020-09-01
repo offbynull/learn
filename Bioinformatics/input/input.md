@@ -1592,9 +1592,11 @@ DnaABoxCandidateFinder
 
  * `{bm} genome` - All of the DNA for some organism.
 
- * `{bm} sequencing/(sequence|sequencing|sequenced)/i` - The process of determining which nucleotides are assigned to which positions in a strand of DNA.
+ * `{bm} sequence` - The ordered elements that make up some biological entity. For example, a DNA sequence contains the set of nucleotides and their positions for that DNA strand.
 
-   The machinery used for DNA sequencing takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and sequences those fragments. Because these fragments vary in terms of size and starting index, the original larger DNA sequence that they came from can be constructed by finding fragment sequences with overlapping regions and stitching them together.
+ * `{bm} sequencing/(sequencing|sequenced)/i` - The process of determining which nucleotides are assigned to which positions in a strand of DNA.
+
+   The machinery used for DNA sequencing takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and sequences those fragments (read_DNAs). Because these fragments vary in terms of size and starting index, the original larger DNA sequence that they came from can be constructed by finding fragment sequences with overlapping regions and stitching them together.
 
    |             |0|1|2|3|4|5|6|7|8|9|
    |-------------|-|-|-|-|-|-|-|-|-|-|
@@ -1605,7 +1607,7 @@ DnaABoxCandidateFinder
    |fragment 5   |A|T|T|G|C|T| | | | |
    |reconstructed|A|T|T|G|C|T|T|C|T|T|
 
- * `{bm} sequencer` - A machine used to sequence DNA.
+ * `{bm} sequencer` - A machine that performs DNA sequencing.
 
  * `{bm} read/(read)_DNA/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA.
 

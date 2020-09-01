@@ -182,7 +182,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'ACAA', 'AAAT', 'AAGA', 'GAAA', 'CAAA', 'AATA', 'AAAG', 'TAAA', 'AACA', 'ATAA', 'AAAA', 'AGAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'ACAA', 'ATAA', 'AGAA', 'AAGA', 'AAAC', 'AAAT', 'AATA', 'AACA', 'CAAA', 'AAAG', 'GAAA', 'TAAA', 'AAAA'}</p>
 </div>
 <p></p>
 <a name="HEADREF5"></a><h2>Find Locations</h2>
@@ -305,12 +305,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>GATCA = 6 occurrences</li>
 <li>AAGGG = 6 occurrences</li>
-<li>TTAAA = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
-<li>TGATC = 6 occurrences</li>
 <li>CCCTT = 6 occurrences</li>
+<li>GATCA = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
+<li>TTAAA = 6 occurrences</li>
+<li>TGATC = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -381,18 +381,18 @@
 <p></p>
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -1261,7 +1261,7 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>AAAAA<br>AAAAA<br>AAAAA</p>
+<p>GGAAA<br>GGAAA<br>GGAAA</p>
 </div>
 <p></p>
 <a name="HEADREF23"></a><h3>Media String Algorithm</h3>
@@ -1772,7 +1772,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>GAG<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
 </div>
 <p></p>
 <a name="HEADREF27"></a><h1>Stories</h1>
@@ -1865,14 +1865,14 @@ SSSII
 <p>Ori vicinity (min pos): 4719166</p>
 <p>In the ori vicinity, found clusters of k=9 (at least 3 occurrences in window of 500) in ... at...</p>
 <ul>
-<li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCGGCGGTA', start_index=52, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
@@ -1881,17 +1881,17 @@ SSSII
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
@@ -1905,12 +1905,12 @@ SSSII
 <li>KmerCluster(kmer='ATCACCATT', start_index=500, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCCTTTTTA', start_index=513, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCCTTTTT', start_index=514, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
@@ -2262,8 +2262,11 @@ SSSII
 <p><a name="BOOKMARK67"></a><strong>genome</strong> - All of the DNA for some organism.</p>
 </li>
 <li>
-<p><a name="BOOKMARK68"></a><strong>sequencing</strong> - The process of determining which nucleotides are assigned to which positions in a strand of DNA.</p>
-<p>The machinery used for DNA <a href="#BOOKMARK68">sequencing</a> takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and <a href="#BOOKMARK68">sequence</a>s those fragments. Because these fragments vary in terms of size and starting index, the original larger DNA <a href="#BOOKMARK68">sequence</a> that they came from can be constructed by finding fragment <a href="#BOOKMARK68">sequence</a>s with overlapping regions and stitching them together.</p>
+<p><a name="BOOKMARK68"></a><strong>sequence</strong> - The ordered elements that make up some biological entity. For example, a DNA <a href="#BOOKMARK68">sequence</a> contains the set of nucleotides and their positions for that DNA strand.</p>
+</li>
+<li>
+<p><a name="BOOKMARK69"></a><strong>sequencing</strong> - The process of determining which nucleotides are assigned to which positions in a strand of DNA.</p>
+<p>The machinery used for DNA <a href="#BOOKMARK69">sequencing</a> takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and <a href="#BOOKMARK68">sequence</a>s those fragments (<a href="#BOOKMARK71">read</a>s). Because these fragments vary in terms of size and starting index, the original larger DNA <a href="#BOOKMARK68">sequence</a> that they came from can be constructed by finding fragment <a href="#BOOKMARK68">sequence</a>s with overlapping regions and stitching them together.</p>
 <table>
 <thead>
 <tr>
@@ -2363,16 +2366,16 @@ SSSII
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK69"></a><strong>sequencer</strong> - A machine used to <a href="#BOOKMARK68">sequence</a> DNA.</p>
+<p><a name="BOOKMARK70"></a><strong>sequencer</strong> - A machine that performs DNA <a href="#BOOKMARK69">sequencing</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK70"></a><strong>read</strong> - A <a href="#BOOKMARK68">sequence</a>d fragment produced in the process of <a href="#BOOKMARK68">sequencing</a> some larger strand of DNA.</p>
+<p><a name="BOOKMARK71"></a><strong>read</strong> - A <a href="#BOOKMARK69">sequenced</a> fragment produced in the process of <a href="#BOOKMARK69">sequencing</a> some larger strand of DNA.</p>
 </li>
 </ul>
 <p>
 </p>
 <ul>
-<li><a name="BOOKMARK73"></a><strong>assembly</strong> - The process of stitching together overlapping <a href="#BOOKMARK70">read</a>s to construct the <a href="#BOOKMARK68">sequence</a> of the original larger DNA that those <a href="#BOOKMARK70">read</a>s came from.</li>
+<li><a name="BOOKMARK74"></a><strong>assembly</strong> - The process of stitching together overlapping <a href="#BOOKMARK71">read</a>s to construct the <a href="#BOOKMARK68">sequence</a> of the original larger DNA that those <a href="#BOOKMARK71">read</a>s came from.</li>
 </ul>
 
         </body></html>
