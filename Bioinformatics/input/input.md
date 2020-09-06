@@ -739,7 +739,7 @@ acagaaatgat
 tgaaataacct
 ```
 
-### Media String Algorithm
+### Median String Algorithm
 
 ```{prereq}
 Motif/Consensus String_TOPIC
@@ -1265,6 +1265,96 @@ DnaABoxCandidateFinder
 /input/ch1_code/src/GCA_000008865.2_ASM886v2_genomic.fna.xz
 ```
 
+## Transcription Factors
+
+A transcription factor / regulatory protein is an enzyme that influences the rate of gene expression for some set of genes. It does so by searching for and binding to a fuzzy nucleotide sequence called a regulatory motif. Regulatory motifs are typically 8 to 12 nucleotides in length, where each position may have one or more alternates. The simplest way to think of a regulatory motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]CCCTA` may match to `ATTGCCCTA`, `ATTCCCCTA`, `TTTGCCCTA`, and `TTTCCCCTA`. The regex itself is the motif, while the sequences being matched are motif members.
+
+The physical location in DNA that contains a motif member for a transcription factor's regulatory motif is called a transcription factor binding site. The transcription factor binding site for a gene is located in a gene's upstream region: ~250 to 2000 nucleotides before the start of the gene.
+
+```{svgbob}
+  |- - - - - - - - - - - - - - - - gene upstream - - - - - - - - - - - - - - - - - -|- - - - - - - - gene - - - - - -|
+
+                       .------------------------------------------.
+                       |          transcription factor            |
+5' . . . A -> A -> A -> A -> T -> T -> G -> C -> C -> C -> T -> A -> A -> C -> . . . . . . A -> C -> G -> G -> C . . . 3'
+                       `------------------------------------------`
+
+"Transcription factor binding to a transcription factor binding site."
+```
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+
+For example, imagine a flower where the petals...
+
+ * bunch together (phenotype) at night time when sunlight is hidden and temperature is lower (environment conditions).
+ * spread out (phenotype) at day time when sunlight is available and temperature is higher (environment conditions).
+
+In this specific case, the phenotype changes because there are a set of genes that control it. The rate of gene expression for these genes changes based on the environment conditions: more expression when spread out, less expression when bunched up.
+
+The environment conditions causes the flower cells to generate a special type of enzyme called a transcription factor.
+
+When sunny and warm, the cells of the flower increase the production of a . These enzymes bind to genes that contain a certain fuzzy sequence in their upstream region, causing the rate of transcription of that gene to either go up or go down. These fuzzy sequences are called regulatory motifs.
+
+Several genes may influence this phenotype. The change in phenotype (bunching vs spreading) results from a change in the rate of gene expression for genes that influence that phenotype. How often some gene is expressed is referred to as the rate of gene expression. Enzymes called transcription factors / regulatory proteins can influence the rate of gene expression. Transcription factors may appear due to
+
+In the example, when sunlight is available and temperature is high, a certain transcription factor is generated in higher amounts. Since that transcription factor is more available, it more frequently binds to the gene responsible for causing the petals to spread. The more frequent binding causes that gene's rate of gene expression to go up, resulting in the petals spreading out.
+
+ 1. Environment conditions change,
+ 2. which in turn causes saturation of the related transcription factors to change,
+ 3. which in turn causes gene expression of the related genes to change,
+ 4. which in turn causes the related phenotype change.
+
+```{svgbob}
+    "sunlight"    "temperature"
+         |            |
+         +-----+------+
+               |
+               v
+"change transcription factor saturation"
+               |
+               v
+  "change gene expression rate"
+               |
+               v
+      "express phenotype"
+```
+
+A transcription factor targets a gene by binding to an 8 to 12 nucleotide long fuzzy sequence called a regulatory motif. The specific sequence is a member of the motif. Its location is called the transcription factor binding site. The transcription factor binding site is typically found in the gene's upstream region (~2000 nucleotide long sequence just before the gene starts)
+
+To support this, biologists run experiments using DNA microarrays or RNA-Seq to snapshot an cell's mRNA when a phenotype is expressed vs when it isn't expressed. Comparing these snapshots isolates which genes have noticeably different gene expression rates. The genes with noticeablt different rates of gene expression rates are isolated for further analysis. Specifically, if these genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would all contain members of the same regulatory motif.
+
+
+
 # Terminology
 
  * A `{bm} k-mer/(k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
@@ -1486,6 +1576,10 @@ DnaABoxCandidateFinder
 
  * `{bm} circadian clock` / `{bm} circadian oscillator` - A biological clock that synchronizes roughly around the earth's day-night cycle. This internal clock helps many species regulate their physical and behavioural attributes. For example, hunt during the night vs sleep during the day (e.g. nocturnal owls).
 
+ * `{bm} upstream region` - The area just before some interval of DNA. Since the direction of DNA is 5' to 3', this area is towards the 5' end (upper end).
+
+ * `{bm} downstream region` - The area just after some interval of DNA. Since the direction of DNA is 5' to 3', this area is towards the 3' end (lower end).
+
  * `{bm} transcription factor` - A regulatory protein that controls the rate of transcription for some gene that it has influence over (the copying of DNA to mRNA). The protein binds to a specific sequence in the gene's upstream region.
 
  * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
@@ -1609,10 +1703,10 @@ DnaABoxCandidateFinder
 
  * `{bm} sequencer` - A machine that performs DNA sequencing.
 
- * `{bm} read/(read)_DNA/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA.
+ * `{bm} read/\b(read)_DNA/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA.
 
- `{bm-ignore} (read)_NORM/i`
- `{bm-error} Apply suffix _NORM or _DNA/(read)/i`
+ `{bm-ignore} \b(read)_NORM/i`
+ `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
 
  * `{bm} assembly` - The process of stitching together overlapping read_DNAs to construct the sequence of the original larger DNA that those read_DNAs came from.
 
