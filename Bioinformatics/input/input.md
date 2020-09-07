@@ -374,6 +374,8 @@ ACTG
 
 # GC Skew
 
+`{bm} /(GC Skew)_TOPIC/`
+
 **WHAT**: Given a sequence, walk over it and ...
 * increment every time you spot a G.
 * decrement every time you spot a C.
@@ -1131,8 +1133,10 @@ You now have two complete copies of the DNA.
 
 ### Find Ori and Ter
 
+`{bm} /(Stories\/Bacteria Replication\/Find Ori and Ter)_TOPIC/`
+
 ```{prereq}
-GC Skew
+GC Skew_TOPIC
 ```
 
 Since the forward half-strand gets its reverse complement synthesized at a much slower rate than the reverse half-strand, it stays single stranded for a much longer time. Single-stranded DNA is 100 times more susceptible to mutations than double-stranded DNA. Specifically, in single-stranded DNA, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.
@@ -1227,8 +1231,8 @@ The material talks about how not all bacteria have a single peak and single vall
 ### Find the DnaA Box
 
 ```{prereq}
-Find Ori and Ter
-Find Repeating K-mers in Window
+Stories/Bacteria Replication/Find Ori and Ter_TOPIC
+K-mer/Find Repeating in Window_TOPIC
 ```
 
 Within the ori region, there exists several copies of some k-mer pattern. These copies are referred to as `{bm} DnaA box`es.
@@ -1269,7 +1273,7 @@ DnaABoxCandidateFinder
 
 A transcription factor / regulatory protein is an enzyme that influences the rate of gene expression for some set of genes. It does so by searching for and binding to a fuzzy nucleotide sequence called a regulatory motif. Regulatory motifs are typically 8 to 12 nucleotides in length, where each position may have one or more alternates. The simplest way to think of a regulatory motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]CCCTA` may match to `ATTGCCCTA`, `ATTCCCCTA`, `TTTGCCCTA`, and `TTTCCCCTA`. The regex itself is the motif, while the sequences being matched are motif members.
 
-The physical location in DNA that contains a motif member for a transcription factor's regulatory motif is called a transcription factor binding site. The transcription factor binding site for a gene is located in a gene's upstream region: ~250 to 2000 nucleotides before the start of the gene.
+The physical location in DNA that a transcription factor binds to is called a transcription factor binding site. The binding site is located in a gene's upstream region (~250 to 2000 nucleotides before the start of the gene) and the sequence at that location is a motif member of that transcription factor's regulatory motif. When the transcription factor binds, that gene's rate of gene expression changes: either more transcription happens or less transcription happens.
 
 ```{svgbob}
   |- - - - - - - - - - - - - - - - gene upstream - - - - - - - - - - - - - - - - - -|- - - - - - - - gene - - - - - -|
@@ -1282,78 +1286,34 @@ The physical location in DNA that contains a motif member for a transcription fa
 "Transcription factor binding to a transcription factor binding site."
 ```
 
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+The production of transcription factors may be tied to certain internal or external conditions. For example, imagine a flower where the petals...
 
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
+ * bunch together (phenotype) at night time when sunlight is hidden and temperature is lower (conditions).
+ * spread out (phenotype) at day time when sunlight is available and temperature is higher (conditions).
 
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-CONTINUE FROM HERE -- Certain environmental conditions may cause an organism's cells to increase or decrease specific transcription factors (MENTION THE FLOwER EXAMPLE OR THE BOOK TB EXAMPLE)
-
-For example, imagine a flower where the petals...
-
- * bunch together (phenotype) at night time when sunlight is hidden and temperature is lower (environment conditions).
- * spread out (phenotype) at day time when sunlight is available and temperature is higher (environment conditions).
-
-In this specific case, the phenotype changes because there are a set of genes that control it. The rate of gene expression for these genes changes based on the environment conditions: more expression when spread out, less expression when bunched up.
-
-The environment conditions causes the flower cells to generate a special type of enzyme called a transcription factor.
-
-When sunny and warm, the cells of the flower increase the production of a . These enzymes bind to genes that contain a certain fuzzy sequence in their upstream region, causing the rate of transcription of that gene to either go up or go down. These fuzzy sequences are called regulatory motifs.
-
-Several genes may influence this phenotype. The change in phenotype (bunching vs spreading) results from a change in the rate of gene expression for genes that influence that phenotype. How often some gene is expressed is referred to as the rate of gene expression. Enzymes called transcription factors / regulatory proteins can influence the rate of gene expression. Transcription factors may appear due to
-
-In the example, when sunlight is available and temperature is high, a certain transcription factor is generated in higher amounts. Since that transcription factor is more available, it more frequently binds to the gene responsible for causing the petals to spread. The more frequent binding causes that gene's rate of gene expression to go up, resulting in the petals spreading out.
-
- 1. Environment conditions change,
- 2. which in turn causes saturation of the related transcription factors to change,
- 3. which in turn causes gene expression of the related genes to change,
- 4. which in turn causes the related phenotype change.
+The external conditions of sunlight and temperature causes the saturation of some transcription factors to change. Those transcription factors influence the rate of gene expression for the genes that control the bunching or spreading of the petals.
 
 ```{svgbob}
-    "sunlight"    "temperature"
-         |            |
-         +-----+------+
-               |
-               v
+      "sunlight"    "temperature"
+           |            |
+           +-----+------+
+                 |
+                 v
 "change transcription factor saturation"
-               |
-               v
-  "change gene expression rate"
-               |
-               v
-      "express phenotype"
+                 |
+                 v
+   "change gene expression rate"
+                 |
+                 v
+ "change petal bunching/spreading"
 ```
 
-A transcription factor targets a gene by binding to an 8 to 12 nucleotide long fuzzy sequence called a regulatory motif. The specific sequence is a member of the motif. Its location is called the transcription factor binding site. The transcription factor binding site is typically found in the gene's upstream region (~2000 nucleotide long sequence just before the gene starts)
+When a biologist suspects that a transcription factor may be responsible for a phenotype change, that biologist uses DNA microarrays or RNA-Seq to take snapshots of an organism's mRNA:
 
-To support this, biologists run experiments using DNA microarrays or RNA-Seq to snapshot an cell's mRNA when a phenotype is expressed vs when it isn't expressed. Comparing these snapshots isolates which genes have noticeably different gene expression rates. The genes with noticeablt different rates of gene expression rates are isolated for further analysis. Specifically, if these genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would all contain members of the same regulatory motif.
+ * one where the phenotype is expressed,
+ * and one where the phenotype isn't expressed.
 
-
+Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. These identified genes are isolated and sequenced for further analysis. Specifically, if these genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain motif members of that transcription factor's regulatory motif. But there often isn't a specific transcription factor being targeted, so biologists run algorithms on these isolated sequences to identify k-mer patterns that are similar to each other: these patterns, if they exist, could be members of the a transcription factor's regulatory motif. Further experiments need to be performed to validate or discredit.
 
 # Terminology
 
@@ -1584,7 +1544,14 @@ To support this, biologists run experiments using DNA microarrays or RNA-Seq to 
 
  * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
 
- * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers that are members of a motif. For example, the motif `[AT]TT[GC]C` has the following matrix:
+ * `{bm} motif member` - A specific nucleotide sequence that matches a motif. For example, given that a motif represented by the regex `[AT]TT[GC]C`, the sequences `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC` would be its members.
+
+ * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers stacked on top of each other in a matrix, where the k-mers are either...
+
+   * `{bm-target} member/(motif member)/i`s of the same motif,
+   * or suspected `{bm-target} member/(motif member)/i`s of the same motif.
+   
+   For example, the motif `[AT]TT[GC]C` has the following matrix:
 
    |0|1|2|3|4|
    |-|-|-|-|-|
@@ -1593,7 +1560,9 @@ To support this, biologists run experiments using DNA microarrays or RNA-Seq to 
    |T|T|T|G|C|
    |T|T|T|C|C|
 
- * `{bm} regulatory motif` / `{bm} transcription factor binding site` - The binding site of a transcription factor. A gene that's regulated by a transcription factor needs a sequence located in its upstream region that the transcription factor can bind to. This sequence can take one of many forms, all of which are similar to each other but not exact (motif). For example, the sequence being bound to could be either AAAACCCCT, AAAACCCCG, AAATCCCCT, etc..
+ * `{bm} regulatory motif` - The motif of a transcription factor, typically 8 to 12 nucleotides in length.
+
+ * `{bm} transcription factor binding site` - The physical binding site for a transcription factor. A gene that's regulated by a transcription factor needs a sequence located in its upstream region that the transcription factor can bind to: a motif member of that transcription factor's regulatory motif.
 
    ```{note}
    A gene's upstream region is the 600 to 1000 nucleotides preceding the start of the gene.
