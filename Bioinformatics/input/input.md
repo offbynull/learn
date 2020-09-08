@@ -9,9 +9,11 @@ Bioinformatics
 
 Bioinformatics is the science of transforming and processing biological data to gain new insights, particularly omics data: genomics, proteomics, metabolomics, etc.. Bioinformatics is mostly a mix of biology, computer science, and statistics / data science.
 
-# K-mer
+# Algorithms
 
-`{bm} /(K-mer)_TOPIC/`
+## K-mer
+
+`{bm} /(Algorithms\/K-mer)_TOPIC/`
 
 A k-mer is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
@@ -30,9 +32,9 @@ Often times we'll need to either...
 * search for an approximate k-mer (fuzzy search).
 * find k-mers of interest in a sequence (e.g. repeating k-mers).
 
-## Reverse Complement
+### Reverse Complement
 
-`{bm} /(K-mer\/Reverse Complement)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Reverse Complement)_TOPIC/`
 
 **WHAT**: Given a DNA k-mer, calculate its reverse complement.
 
@@ -65,9 +67,9 @@ ReverseComplementADnaKmer
 TAATCCG
 ```
 
-## Hamming Distance
+### Hamming Distance
 
-`{bm} /(K-mer\/Hamming Distance)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Hamming Distance)_TOPIC/`
 
 **WHAT**: Given 2 k-mers, the hamming distance is the number of positional mismatches between them.
 
@@ -87,12 +89,12 @@ ACTTTGTT
 AGTTTCTT
 ```
 
-## Hamming Distance Neighbourhood
+### Hamming Distance Neighbourhood
 
-`{bm} /(K-mer\/Hamming Distance Neighbourhood)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Hamming Distance Neighbourhood)_TOPIC/`
 
 ```{prereq}
-K-mer/Hamming Distance_TOPIC
+Algorithms/K-mer/Hamming Distance_TOPIC
 ```
 
 **WHAT**: Given a source k-mer and a minimum hamming distance, find all k-mers such within the hamming distance of the source k-mer. In other words, find all k-mers such that `hamming_distance(source_kmer, kmer) <= min_distance`.
@@ -113,13 +115,13 @@ AAAA
 1
 ```
 
-## Find Locations
+### Find Locations
 
-`{bm} /(K-mer\/Find Locations)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Find Locations)_TOPIC/`
 
 ```{prereq}
-K-mer/Hamming Distance_TOPIC
-K-mer/Reverse Complement_TOPIC
+Algorithms/K-mer/Hamming Distance_TOPIC
+Algorithms/K-mer/Reverse Complement_TOPIC
 ```
 
 **WHAT**: Given a k-mer, find where that k-mer occurs in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
@@ -147,12 +149,12 @@ AAAA
 True
 ```
 
-## Find Clumps
+### Find Clumps
 
-`{bm} /(K-mer\/Find Clumps)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Find Clumps)_TOPIC/`
 
 ```{prereq}
-K-mer/Find Locations_TOPIC
+Algorithms/K-mer/Find Locations_TOPIC
 ```
 
 **WHAT**: Given a k-mer, find where that k-mer clusters in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
@@ -179,13 +181,13 @@ GGG
 True
 ```
 
-## Find Repeating
+### Find Repeating
 
-`{bm} /(K-mer\/Find Repeating)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Find Repeating)_TOPIC/`
 
 ```{prereq}
-K-mer/Reverse Complement_TOPIC
-K-mer/Hamming Distance Neighbourhood_TOPIC
+Algorithms/K-mer/Reverse Complement_TOPIC
+Algorithms/K-mer/Hamming Distance Neighbourhood_TOPIC
 ```
 
 **WHAT**: Given a sequence, find clusters of unique k-mers within that sequence. In other words, for each unique k-mer that exists in the sequence, see if it clusters in the sequence. The search may potentially include variants of k-mer variants (e.g. reverse complements of the k-mers).
@@ -210,12 +212,12 @@ GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT
 True
 ```
 
-## Find Repeating in Window
+### Find Repeating in Window
 
-`{bm} /(K-mer\/Find Repeating in Window)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Find Repeating in Window)_TOPIC/`
 
 ```{prereq}
-K-mer/Find Repeating_TOPIC
+Algorithms/K-mer/Find Repeating_TOPIC
 ```
 
 **WHAT**: Given a sequence, find regions within that sequence that contain clusters of unique k-mers. In other words, ...
@@ -246,12 +248,12 @@ TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT
 True
 ```
 
-## Probability of Appearance
+### Probability of Appearance
 
-`{bm} /(K-mer\/Probability of Appearance)_TOPIC/`
+`{bm} /(Algorithms\/K-mer\/Probability of Appearance)_TOPIC/`
 
 ```{prereq}
-K-mer/Find Locations_TOPIC
+Algorithms/K-mer/Find Locations_TOPIC
 ```
 
 **WHAT**: Given ...
@@ -288,7 +290,7 @@ This isn't trivial to accurately compute because the occurrences of a k-mer with
 
 **WHY**: When a k-mer is found within a sequence, knowing the probability of that k-mer being found within an arbitrary sequence of the same length hints at the significance of the find. For example, if some 10-mer has a 0.2 chance of appearing in an arbitrary sequence of length 50, that's too high of a chance to consider it a significant find -- 0.2 means 1 in 5 chance that the 10-mer just randomly happens to appear.
 
-### Bruteforce Algorithm
+#### Bruteforce Algorithm
 
 **ALGORITHM**:
 
@@ -306,7 +308,7 @@ ACTG
 8
 ```
 
-### Selection Estimate Algorithm
+#### Selection Estimate Algorithm
 
 **ALGORITHM**:
 
@@ -372,9 +374,9 @@ ACTG
 8
 ```
 
-# GC Skew
+## GC Skew
 
-`{bm} /(GC Skew)_TOPIC/`
+`{bm} /(Algorithms\/GC Skew)_TOPIC/`
 
 **WHAT**: Given a sequence, walk over it and ...
 * increment every time you spot a G.
@@ -407,12 +409,12 @@ GCSkew
 CACGGGTGGTTTTGGGGGCCCCCC
 ```
 
-# Motif
+## Motif
 
-`{bm} /(Motif)_TOPIC/`
+`{bm} /(Algorithms\/Motif)_TOPIC/`
 
 ```{prereq}
-K-mer_TOPIC
+Algorithms/K-mer_TOPIC
 ```
 
 A motif is a pattern that matches many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
@@ -444,9 +446,9 @@ A motif matrix is a matrix of k-mers that are suspected to be part of a motif. I
 |T|T|T|G|C|
 |T|T|T|C|C|
 
-## Consensus String
+### Consensus String
 
-`{bm} /(Motif\/Consensus String)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/Consensus String)_TOPIC/`
 
 **WHAT**: Given a motif matrix, generate a k-mer where each position is the nucleotide most abundant at that column of the matrix.
 
@@ -469,9 +471,9 @@ TTTCC
 TTTCA
 ```
 
-## Motif Matrix Count
+### Motif Matrix Count
 
-`{bm} /(Motif\/Motif Matrix Count)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/Motif Matrix Count)_TOPIC/`
 
 **WHAT**: Given a motif matrix, count how many of each nucleotide are in each column.
 
@@ -493,12 +495,12 @@ TTTGG
 ATTGC
 ```
 
-## Motif Matrix Profile
+### Motif Matrix Profile
 
-`{bm} /(Motif\/Motif Matrix Profile)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/Motif Matrix Profile)_TOPIC/`
 
 ```{prereq}
-Motif/Motif Matrix Count_TOPIC
+Algorithms/Motif/Motif Matrix Count_TOPIC
 ```
 
 **WHAT**: Given a motif matrix, for each column calculate how often A, C, G, and T occur as percentages.
@@ -535,15 +537,15 @@ TTTCG
 TTTTG
 ```
 
-## Motif Matrix Score
+### Motif Matrix Score
 
-`{bm} /(Motif\/Motif Matrix Score)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/Motif Matrix Score)_TOPIC/`
 
 **WHAT**: Given a motif matrix, assign it a score based on how similar the k-mers that make up the matrix are to each other. Specifically, how conserved the nucleotides at each column are.
 
-**WHY**: Given a set of k-mers that are suspected to be part of a motif (motif matrix), the more similar those k-mers are to each other the more likely it is that those k-mers are members of the same motif. This seems to be the case for many enzymes that bind to DNA based on a motif (e.g. transcription factors).
+**WHY**: Given a set of k-mers that are suspected to be part of a motif (motif matrix), the more similar those k-mers are to each other the more likely it is that those k-mers are member_MOTIFs of the same motif. This seems to be the case for many enzymes that bind to DNA based on a motif (e.g. transcription factors).
 
-### Popularity Algorithm
+#### Popularity Algorithm
 
 **ALGORITHM**:
 
@@ -565,10 +567,10 @@ TTTGG
 ATTGC
 ```
 
-### Entropy Algorithm
+#### Entropy Algorithm
 
 ```{prereq}
-Motif/Motif Matrix Profile_TOPIC
+Algorithms/Motif/Motif Matrix Profile_TOPIC
 ```
 
 **ALGORITHM**:
@@ -594,21 +596,21 @@ TTTGG
 ATTGC
 ```
 
-## K-mer Match Probability
+### K-mer Match Probability
 
-`{bm} /(Motif\/K-mer Match Probability)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/K-mer Match Probability)_TOPIC/`
 
 ```{prereq}
-Motif/Motif Matrix Count_TOPIC
-Motif/Motif Matrix Profile_TOPIC
-K-mer_TOPIC
+Algorithms/Motif/Motif Matrix Count_TOPIC
+Algorithms/Motif/Motif Matrix Profile_TOPIC
+Algorithms/K-mer_TOPIC
 ```
 
-**WHAT**: Given a motif matrix and a k-mer, calculate the probability of that k-mer being member of that motif.
+**WHAT**: Given a motif matrix and a k-mer, calculate the probability of that k-mer being a member_MOTIF of that motif.
 
-**WHY**: Being able to determine if a k-mer is potentially a member of a motif can help speed up experiments. For example, imagine that you suspect 21 different genes of being regulated by the same transcription factor. You isolate the transcription factor binding site for 6 of those genes and use their sequences as the underlying k-mers for a motif matrix. That motif matrix doesn't represent the transcription factor's motif exactly, but it's close enough that you can use it to scan through the k-mers in the remaining 15 genes and calculate the probability of them being members of the same motif.
+**WHY**: Being able to determine if a k-mer is potentially a member_MOTIF of a motif can help speed up experiments. For example, imagine that you suspect 21 different genes of being regulated by the same transcription factor. You isolate the transcription factor binding site for 6 of those genes and use their sequences as the underlying k-mers for a motif matrix. That motif matrix doesn't represent the transcription factor's motif exactly, but it's close enough that you can use it to scan through the k-mers in the remaining 15 genes and calculate the probability of them being member_MOTIFs of the same motif.
 
-If a k-mer exists such that it conforms to the motif matrix with a high probability, it likely is a member of the motif.
+If a k-mer exists such that it conforms to the motif matrix with a high probability, it likely is a member_MOTIF of the motif.
 
 **ALGORITHM**:
 
@@ -649,7 +651,7 @@ Of the these two k-mers, ...
  * all positions in the first (ATGCAC) have been seen before in the motif matrix.
  * all but one position in the the second (TTGCAC) have been seen before in the motif matrix (index 0).
 
-Both of these k-mers should have a reasonable probability of being members of the motif. However, notice how the second k-mer ends up with a 0 probability. The reason has to do with the underlying concept behind motif matrices: the entire point of a motif matrix is to use the known members of a motif to find other potential members of that same motif. The second k-mer contains a T at index 0, but none of the known members of the motif have a T at that index. As such, its probability gets reduced to 0 even though the rest of the k-mer conforms.
+Both of these k-mers should have a reasonable probability of being member_MOTIFs of the motif. However, notice how the second k-mer ends up with a 0 probability. The reason has to do with the underlying concept behind motif matrices: the entire point of a motif matrix is to use the known member_MOTIFs of a motif to find other potential member_MOTIFs of that same motif. The second k-mer contains a T at index 0, but none of the known member_MOTIFs of the motif have a T at that index. As such, its probability gets reduced to 0 even though the rest of the k-mer conforms.
 
 Cromwell's rule says that when a probability is based off past events, a hard 0 or 1 values shouldn't be used. As such, a quick workaround to the 0% probability problem described above is to artificially inflate the the counts that lead to the profile such that no count is 0 (pseudocounts). For example, for the same motif matrix, incrementing the counts by 1 results in:
 
@@ -691,15 +693,15 @@ ATCCAC
 TTGCAC
 ```
 
-## Find Motif Matrix
+### Find Motif Matrix
 
-`{bm} /(Motif\/Find Motif Matrix)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/Find Motif Matrix)_TOPIC/`
 
 ```{prereq}
-Motif/K-mer Match Probability_TOPIC
+Algorithms/Motif/K-mer Match Probability_TOPIC
 ```
 
-**WHAT**: Given a set of sequences, identify k-mers in those sequences that may be members of the same motif.
+**WHAT**: Given a set of sequences, identify k-mers in those sequences that may be member_MOTIFs of the same motif.
 
 **WHY**: A transcription factor is an enzyme that either increases or decreases a gene's transcription rate. It does so by binding to a specific part of the gene's upstream region called the transcription factor binding site. That transcription factor binding site consists of a k-mer that matches the motif expected by that transcription factor, called a regulatory motif. 
 
@@ -711,11 +713,11 @@ A single transcription factor may operate on many different genes. Often times a
 
 The regulatory motif expected by a transcription factor typically expects k-mers that have the same length and are similar to each other (short hamming distance). As such, potential motif candidates can be derived by identifying k-mers across the set of sequences that are similar to each other.
 
-### Bruteforce Algorithm
+#### Bruteforce Algorithm
 
 ```{prereq}
-K-mer/Hamming Distance Neighbourhood_TOPIC
-Motif/Motif Matrix Score_TOPIC
+Algorithms/K-mer/Hamming Distance Neighbourhood_TOPIC
+Algorithms/Motif/Motif Matrix Score_TOPIC
 ```
 
 **ALGORITHM**:
@@ -741,12 +743,12 @@ acagaaatgat
 tgaaataacct
 ```
 
-### Median String Algorithm
+#### Median String Algorithm
 
 ```{prereq}
-Motif/Consensus String_TOPIC
-Motif/Motif Matrix Score_TOPIC
-K-mer/Hamming Distance_TOPIC
+Algorithms/Motif/Consensus String_TOPIC
+Algorithms/Motif/Motif Matrix Score_TOPIC
+Algorithms/K-mer/Hamming Distance_TOPIC
 ```
 
 **ALGORITHM**:
@@ -790,7 +792,7 @@ Notice how each row's score is equivalent to the hamming distance between the k-
  * hamming_distance(ATCCTC, ATCCAC) = 1
  * hamming_distance(ATCCAC, ATCCAC) = 0
 
-Given these facts, this algorithm constructs a set of consensus strings by enumerating through all possible k-mers for some k. Then, for each consensus string, it scans over each sequence to find the k-mer that minimizes the hamming distance for that consensus string. These k-mers are used as the members of a motif matrix.
+Given these facts, this algorithm constructs a set of consensus strings by enumerating through all possible k-mers for some k. Then, for each consensus string, it scans over each sequence to find the k-mer that minimizes the hamming distance for that consensus string. These k-mers are used as the member_MOTIFs of a motif matrix.
 
 Of all the motif matrices built, the one with the lowest score is selected.
 
@@ -812,20 +814,20 @@ GCTGAGCACCGG
 AGTTCGGGACAG
 ```
 
-### Greedy Algorithm
+#### Greedy Algorithm
 
 ```{prereq}
-Motif/Motif Matrix Score_TOPIC
-Motif/K-mer Match Probability_TOPIC
+Algorithms/Motif/Motif Matrix Score_TOPIC
+Algorithms/Motif/K-mer Match Probability_TOPIC
 ```
 
 **ALGORITHM**:
 
-This algorithm begins by constructing a motif matrix where the only member is a k-mer picked from the first sequence. From there, it goes through the k-mers in the ...
+This algorithm begins by constructing a motif matrix where the only member_MOTIF is a k-mer picked from the first sequence. From there, it goes through the k-mers in the ...
 
- 1. second sequence to find the one that has the highest match probability to the motif matrix and adds it as a member to to the motif matrix.
- 2. third sequence to find the one that has the highest match probability to the motif matrix and adds it as a member to to the motif matrix.
- 3. fourth sequence to find the one that has the highest match probability to the motif matrix and adds it as a member to to the motif matrix.
+ 1. second sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to to the motif matrix.
+ 2. third sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to to the motif matrix.
+ 3. fourth sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to to the motif matrix.
  4. ...
 
 This process repeats once for every k-mer in the first sequence. Each repetition produces a motif matrix. Of all the motif matrices built, the one with the lowest score is selected.
@@ -848,19 +850,19 @@ GCTGAGCACCGG
 AGTTCGGGACAG
 ```
 
-### Randomized Algorithm
+#### Randomized Algorithm
 
-`{bm} /(Motif\/Find Motif Matrix\/Randomized Algorithm)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/Find Motif Matrix\/Randomized Algorithm)_TOPIC/`
 
 ```{prereq}
-Motif/Motif Matrix Score_TOPIC
-Motif/Motif Matrix Profile_TOPIC
-Motif/K-mer Match Probability_TOPIC
+Algorithms/Motif/Motif Matrix Score_TOPIC
+Algorithms/Motif/Motif Matrix Profile_TOPIC
+Algorithms/Motif/K-mer Match Probability_TOPIC
 ```
 
 **ALGORITHM**:
 
-This algorithm selects a random k-mer from each sequence to form an initial motif matrix. Then, for each sequence, it finds the k-mer that has the highest probability of matching that motif matrix. Those k-mers form the members of a new motif matrix. If the new motif matrix scores better than the existing motif matrix, the existing motif matrix gets replaced with the new motif matrix and the process repeats. Otherwise, the existing motif matrix is selected.
+This algorithm selects a random k-mer from each sequence to form an initial motif matrix. Then, for each sequence, it finds the k-mer that has the highest probability of matching that motif matrix. Those k-mers form the member_MOTIFs of a new motif matrix. If the new motif matrix scores better than the existing motif matrix, the existing motif matrix gets replaced with the new motif matrix and the process repeats. Otherwise, the existing motif matrix is selected.
 
 In theory, this algorithm works because all k-mers in a sequence other than the motif member are considered to be random noise. As such, if no motif members were selected when creating the initial motif matrix, the profile of that initial motif matrix would be more or less uniform:
 
@@ -882,9 +884,9 @@ However, if at least one motif member were selected when creating the initial mo
 | T |   0.233   | **0.333** |   0.233   |   0.233   |   0.233   |   0.233   |
 | G |   0.233   |   0.233   |   0.233   |   0.233   |   0.233   |   0.233   |
 
-Such a profile would lead to a better scoring motif matrix where that better scoring motif matrix contains the other members of the motif.
+Such a profile would lead to a better scoring motif matrix where that better scoring motif matrix contains the other member_MOTIFs of the motif.
 
-In practice, this algorithm may trip up on real-world data. Real-world sequences don't actually contain random noise. The hope is that the only k-mers that are highly similar to each other in the sequences are members of the motif. It's possible that the sequences contain other sets of k-mers that are similar to each other but vastly different than the motif members. In such cases, even if a motif member were to be selected when creating the initial motif matrix, the algorithm may converge to a motif matrix that isn't for the motif.
+In practice, this algorithm may trip up on real-world data. Real-world sequences don't actually contain random noise. The hope is that the only k-mers that are highly similar to each other in the sequences are member_MOTIFs of the motif. It's possible that the sequences contain other sets of k-mers that are similar to each other but vastly different than the motif members. In such cases, even if a motif member were to be selected when creating the initial motif matrix, the algorithm may converge to a motif matrix that isn't for the motif.
 
 This is a monte carlo algorithm. It uses randomness to deliver an approximate solution. While this may not lead to the globally optimal motif matrix, it's fast and as such can be run multiple times. The run with the best motif matrix will likely be a good enough solution (it captures most of the motif members, or parts of the motif members if k was too small, or etc..).
 
@@ -905,12 +907,12 @@ GCTGAGCACCGG
 AGTTCGGGACAG
 ```
 
-### Gibbs Sampling Algorithm
+#### Gibbs Sampling Algorithm
 
 ```{prereq}
-Motif/Motif Matrix Score_TOPIC
-Motif/K-mer Match Probability_TOPIC
-Motif/Find Motif Matrix/Randomized Algorithm_TOPIC
+Algorithms/Motif/Motif Matrix Score_TOPIC
+Algorithms/Motif/K-mer Match Probability_TOPIC
+Algorithms/Motif/Find Motif Matrix/Randomized Algorithm_TOPIC
 ```
 
 **ALGORITHM**:
@@ -1136,7 +1138,7 @@ You now have two complete copies of the DNA.
 `{bm} /(Stories\/Bacteria Replication\/Find Ori and Ter)_TOPIC/`
 
 ```{prereq}
-GC Skew_TOPIC
+Algorithms/GC Skew_TOPIC
 ```
 
 Since the forward half-strand gets its reverse complement synthesized at a much slower rate than the reverse half-strand, it stays single stranded for a much longer time. Single-stranded DNA is 100 times more susceptible to mutations than double-stranded DNA. Specifically, in single-stranded DNA, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.
@@ -1232,10 +1234,11 @@ The material talks about how not all bacteria have a single peak and single vall
 
 ```{prereq}
 Stories/Bacteria Replication/Find Ori and Ter_TOPIC
-K-mer/Find Repeating in Window_TOPIC
+Algorithms/K-mer/Find Repeating in Window_TOPIC
+Algorithms/GC Skew_TOPIC
 ```
 
-Within the ori region, there exists several copies of some k-mer pattern. These copies are referred to as `{bm} DnaA box`es.
+Within the ori region, there exists several copies of some k-mer pattern. These copies are referred to as DnaA boxes.
 
 ```{svgbob}
                      DnaA boxes within the ori
@@ -1271,9 +1274,9 @@ DnaABoxCandidateFinder
 
 ## Transcription Factors
 
-A transcription factor / regulatory protein is an enzyme that influences the rate of gene expression for some set of genes. It does so by searching for and binding to a fuzzy nucleotide sequence called a regulatory motif. Regulatory motifs are typically 8 to 12 nucleotides in length, where each position may have one or more alternates. The simplest way to think of a regulatory motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]CCCTA` may match to `ATTGCCCTA`, `ATTCCCCTA`, `TTTGCCCTA`, and `TTTCCCCTA`. The regex itself is the motif, while the sequences being matched are motif members.
+A transcription factor / regulatory protein is an enzyme that influences the rate of gene expression for some set of genes. As the saturation of a transcription factor changes, so does the rate of gene expression for the set of genes that it influences.
 
-The physical location in DNA that a transcription factor binds to is called a transcription factor binding site. The binding site is located in a gene's upstream region (~250 to 2000 nucleotides before the start of the gene) and the sequence at that location is a motif member of that transcription factor's regulatory motif. When the transcription factor binds, that gene's rate of gene expression changes: either more transcription happens or less transcription happens.
+Transcription factors bind to DNA near the genes they influence: a transcription factor binding site is located in a gene's upstream region and the sequence at that location is a fuzzy nucleotide sequence of length 8 to 12 called a regulatory motif. The simplest way to think of a regulatory motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]CCCTA` may match to `ATTGCCCTA`, `ATTCCCCTA`, `TTTGCCCTA`, and `TTTCCCCTA`. The regex itself is the motif, while the sequences being matched are motif members.
 
 ```{svgbob}
   |- - - - - - - - - - - - - - - - gene upstream - - - - - - - - - - - - - - - - - -|- - - - - - - - gene - - - - - -|
@@ -1288,10 +1291,10 @@ The physical location in DNA that a transcription factor binds to is called a tr
 
 The production of transcription factors may be tied to certain internal or external conditions. For example, imagine a flower where the petals...
 
- * bunch together (phenotype) at night time when sunlight is hidden and temperature is lower (conditions).
- * spread out (phenotype) at day time when sunlight is available and temperature is higher (conditions).
+ * bunch together at night time when sunlight is hidden and temperature is lower.
+ * spread out at day time when sunlight is available and temperature is higher.
 
-The external conditions of sunlight and temperature causes the saturation of some transcription factors to change. Those transcription factors influence the rate of gene expression for the genes that control the bunching or spreading of the petals.
+The external conditions of sunlight and temperature causes the saturation of some transcription factors to change. Those transcription factors influence the rate of gene expression for the genes that control the bunching and spreading of the petals.
 
 ```{svgbob}
       "sunlight"    "temperature"
@@ -1308,12 +1311,56 @@ The external conditions of sunlight and temperature causes the saturation of som
  "change petal bunching/spreading"
 ```
 
-When a biologist suspects that a transcription factor may be responsible for a phenotype change, that biologist uses DNA microarrays or RNA-Seq to take snapshots of an organism's mRNA:
+### Find Regulatory Motif
 
- * one where the phenotype is expressed,
- * and one where the phenotype isn't expressed.
+```{prereq}
+Algorithms/Motif/Find Motif Matrix_TOPIC
+```
 
-Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. These identified genes are isolated and sequenced for further analysis. Specifically, if these genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain motif members of that transcription factor's regulatory motif. But there often isn't a specific transcription factor being targeted, so biologists run algorithms on these isolated sequences to identify k-mer patterns that are similar to each other: these patterns, if they exist, could be members of the a transcription factor's regulatory motif. Further experiments need to be performed to validate or discredit.
+Given a organism, we suspect that some physical change in that organism is linked to a transcription factor. But, we don't know which transcription factor or what the regulatory motif for such a transcription factor would be.
+
+In such cases, a special device (DNA microarrays or RNA sequencers) is used to take snapshots of that organism's mRNA at different points in time. Two snapshots are taken:
+
+ 1. When the physical change is expressed.
+ 2. When the physical change isn't expressed.
+ 
+Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. If the identified genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain member_MOTIFs of that transcription factor's regulatory motif. Since neither the transcription factor nor the regulatory motif are known, we can run algorithms on the sequences to find sets of k-mers that are similar to each other. Because the member_MOTIFs of a regulatory motif are very similar to each other, these similar k-mers may all be member_MOTIFs of the same transcription factor's regulatory motif.
+
+```{svgbob}
+      "identify genes with differing gene expression levels"
+                         |
+                         v
+                 "sequence genes"
+                         |
+                         v
+"search for similar k-mers across sequences (1 per sequence)"
+```
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
+
+TODO: ADD EXAMPLE HERE
 
 # Terminology
 
@@ -1453,6 +1500,8 @@ Comparing these snapshots identifies which genes have noticeably differing rates
 
  * `{bm} DNA ligase` - An enzyme that sews together short segments of DNA called Okazaki fragments by binding the phosphate group on the end of one strand with the deoxyribose group on the other strand.
 
+ * `{bm} DnaA box` - A sequence in the ori that the DnaA protein (responsible for DNA replication) binds to.
+
  * `{bm} single stranded DNA/(single stranded DNA|single-stranded DNA)/i` - A single strand of DNA, not bound to a strand of its reverse complements.
 
    ```{svgbob}
@@ -1544,7 +1593,7 @@ Comparing these snapshots identifies which genes have noticeably differing rates
 
  * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
 
- * `{bm} motif member` - A specific nucleotide sequence that matches a motif. For example, given that a motif represented by the regex `[AT]TT[GC]C`, the sequences `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC` would be its members.
+ * `{bm} motif member` `{bm} /\b(member)_MOTIF/i` - A specific nucleotide sequence that matches a motif. For example, given that a motif represented by the regex `[AT]TT[GC]C`, the sequences `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC` would be its member_MOTIFs.
 
  * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers stacked on top of each other in a matrix, where the k-mers are either...
 
@@ -1657,7 +1706,7 @@ Comparing these snapshots identifies which genes have noticeably differing rates
 
  * `{bm} sequence` - The ordered elements that make up some biological entity. For example, a DNA sequence contains the set of nucleotides and their positions for that DNA strand.
 
- * `{bm} sequencing/(sequencing|sequenced)/i` - The process of determining which nucleotides are assigned to which positions in a strand of DNA.
+ * `{bm} sequencing/(sequencing|sequenced)/i` - The process of determining which nucleotides are assigned to which positions in a strand of DNA or RNA.
 
    The machinery used for DNA sequencing takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and sequences those fragments (read_DNAs). Because these fragments vary in terms of size and starting index, the original larger DNA sequence that they came from can be constructed by finding fragment sequences with overlapping regions and stitching them together.
 
@@ -1670,13 +1719,14 @@ Comparing these snapshots identifies which genes have noticeably differing rates
    |fragment 5   |A|T|T|G|C|T| | | | |
    |reconstructed|A|T|T|G|C|T|T|C|T|T|
 
- * `{bm} sequencer` - A machine that performs DNA sequencing.
+ * `{bm} sequencer` - A machine that performs DNA or RNA sequencing.
 
  * `{bm} read/\b(read)_DNA/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA.
 
- `{bm-ignore} \b(read)_NORM/i`
- `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
-
  * `{bm} assembly` - The process of stitching together overlapping read_DNAs to construct the sequence of the original larger DNA that those read_DNAs came from.
 
- 
+`{bm-ignore} \b(read)_NORM/i`
+`{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
+`{bm-ignore} \b(member)_NORM/i`
+`{bm-error} Apply suffix _NORM or _MOTIF/\b(member)/i`
+`{bm-error} Missing topic reference/(_TOPIC)/i`

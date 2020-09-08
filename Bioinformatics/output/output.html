@@ -6,64 +6,71 @@
           <body class="markdown-body"><div class="toc">
 <ul>
 <li><a href="#HEADREF0">Introduction</a></li>
-<li><a href="#HEADREF1">K-mer</a></li>
+<li><a href="#HEADREF1">Algorithms</a></li>
 <ul>
-<li><a href="#HEADREF2">Reverse Complement</a></li>
-<li><a href="#HEADREF3">Hamming Distance</a></li>
-<li><a href="#HEADREF4">Hamming Distance Neighbourhood</a></li>
-<li><a href="#HEADREF5">Find Locations</a></li>
-<li><a href="#HEADREF6">Find Clumps</a></li>
-<li><a href="#HEADREF7">Find Repeating</a></li>
-<li><a href="#HEADREF8">Find Repeating in Window</a></li>
-<li><a href="#HEADREF9">Probability of Appearance</a></li>
+<li><a href="#HEADREF2">K-mer</a></li>
 <ul>
-<li><a href="#HEADREF10">Bruteforce Algorithm</a></li>
-<li><a href="#HEADREF11">Selection Estimate Algorithm</a></li>
+<li><a href="#HEADREF3">Reverse Complement</a></li>
+<li><a href="#HEADREF4">Hamming Distance</a></li>
+<li><a href="#HEADREF5">Hamming Distance Neighbourhood</a></li>
+<li><a href="#HEADREF6">Find Locations</a></li>
+<li><a href="#HEADREF7">Find Clumps</a></li>
+<li><a href="#HEADREF8">Find Repeating</a></li>
+<li><a href="#HEADREF9">Find Repeating in Window</a></li>
+<li><a href="#HEADREF10">Probability of Appearance</a></li>
+<ul>
+<li><a href="#HEADREF11">Bruteforce Algorithm</a></li>
+<li><a href="#HEADREF12">Selection Estimate Algorithm</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF12">GC Skew</a></li>
-<li><a href="#HEADREF13">Motif</a></li>
+<li><a href="#HEADREF13">GC Skew</a></li>
+<li><a href="#HEADREF14">Motif</a></li>
 <ul>
-<li><a href="#HEADREF14">Consensus String</a></li>
-<li><a href="#HEADREF15">Motif Matrix Count</a></li>
-<li><a href="#HEADREF16">Motif Matrix Profile</a></li>
-<li><a href="#HEADREF17">Motif Matrix Score</a></li>
+<li><a href="#HEADREF15">Consensus String</a></li>
+<li><a href="#HEADREF16">Motif Matrix Count</a></li>
+<li><a href="#HEADREF17">Motif Matrix Profile</a></li>
+<li><a href="#HEADREF18">Motif Matrix Score</a></li>
 <ul>
-<li><a href="#HEADREF18">Popularity Algorithm</a></li>
-<li><a href="#HEADREF19">Entropy Algorithm</a></li>
+<li><a href="#HEADREF19">Popularity Algorithm</a></li>
+<li><a href="#HEADREF20">Entropy Algorithm</a></li>
 </ul>
-<li><a href="#HEADREF20">K-mer Match Probability</a></li>
-<li><a href="#HEADREF21">Find Motif Matrix</a></li>
+<li><a href="#HEADREF21">K-mer Match Probability</a></li>
+<li><a href="#HEADREF22">Find Motif Matrix</a></li>
 <ul>
-<li><a href="#HEADREF22">Bruteforce Algorithm</a></li>
-<li><a href="#HEADREF23">Median String Algorithm</a></li>
-<li><a href="#HEADREF24">Greedy Algorithm</a></li>
-<li><a href="#HEADREF25">Randomized Algorithm</a></li>
-<li><a href="#HEADREF26">Gibbs Sampling Algorithm</a></li>
+<li><a href="#HEADREF23">Bruteforce Algorithm</a></li>
+<li><a href="#HEADREF24">Median String Algorithm</a></li>
+<li><a href="#HEADREF25">Greedy Algorithm</a></li>
+<li><a href="#HEADREF26">Randomized Algorithm</a></li>
+<li><a href="#HEADREF27">Gibbs Sampling Algorithm</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF27">Stories</a></li>
+</ul>
+<li><a href="#HEADREF28">Stories</a></li>
 <ul>
-<li><a href="#HEADREF28">Bacteria Replication</a></li>
+<li><a href="#HEADREF29">Bacteria Replication</a></li>
 <ul>
-<li><a href="#HEADREF29">Find Ori and Ter</a></li>
-<li><a href="#HEADREF30">Find the DnaA Box</a></li>
+<li><a href="#HEADREF30">Find Ori and Ter</a></li>
+<li><a href="#HEADREF31">Find the DnaA Box</a></li>
 </ul>
-<li><a href="#HEADREF31">Transcription Factors</a></li>
+<li><a href="#HEADREF32">Transcription Factors</a></li>
+<ul>
+<li><a href="#HEADREF33">Find Regulatory Motif</a></li>
 </ul>
-<li><a href="#HEADREF32">Terminology</a></li>
+</ul>
+<li><a href="#HEADREF34">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
 <p>Bioinformatics is the science of transforming and processing biological data to gain new insights, particularly omics data: genomics, proteomics, metabolomics, etc.. Bioinformatics is mostly a mix of biology, computer science, and statistics / data science.</p>
-<a name="HEADREF1"></a><h1>K-mer</h1>
+<a name="HEADREF1"></a><h1>Algorithms</h1>
+<a name="HEADREF2"></a><h2>K-mer</h2>
 <p><a name="BOOKMARK0"></a><strong></strong></p>
-<p>A <a href="#BOOKMARK20">k-mer</a> is a sub<a href="#BOOKMARK73">sequence</a> of length k within some larger biological <a href="#BOOKMARK73">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BOOKMARK73">sequence</a> <code>GAAATC</code>, the following <a href="#BOOKMARK20">k-mer</a>'s exist:</p>
+<p>A <a href="#BOOKMARK19">k-mer</a> is a sub<a href="#BOOKMARK74">sequence</a> of length k within some larger biological <a href="#BOOKMARK74">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BOOKMARK74">sequence</a> <code>GAAATC</code>, the following <a href="#BOOKMARK19">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
 <th>k</th>
-<th><a href="#BOOKMARK20">k-mer</a>s</th>
+<th><a href="#BOOKMARK19">k-mer</a>s</th>
 </tr>
 </thead>
 <tbody>
@@ -95,14 +102,14 @@
 </table>
 <p>Often times we'll need to either...</p>
 <ul>
-<li>search for an exact <a href="#BOOKMARK20">k-mer</a>.</li>
-<li>search for an approximate <a href="#BOOKMARK20">k-mer</a> (fuzzy search).</li>
-<li>find <a href="#BOOKMARK20">k-mer</a>s of interest in a <a href="#BOOKMARK73">sequence</a> (e.g. repeating <a href="#BOOKMARK20">k-mer</a>s).</li>
+<li>search for an exact <a href="#BOOKMARK19">k-mer</a>.</li>
+<li>search for an approximate <a href="#BOOKMARK19">k-mer</a> (fuzzy search).</li>
+<li>find <a href="#BOOKMARK19">k-mer</a>s of interest in a <a href="#BOOKMARK74">sequence</a> (e.g. repeating <a href="#BOOKMARK19">k-mer</a>s).</li>
 </ul>
-<a name="HEADREF2"></a><h2>Reverse Complement</h2>
+<a name="HEADREF3"></a><h3>Reverse Complement</h3>
 <p><a name="BOOKMARK1"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given a DNA <a href="#BOOKMARK20">k-mer</a>, calculate its reverse complement.</p>
-<p><strong>WHY</strong>: Depending on the type of biological <a href="#BOOKMARK73">sequence</a>, a <a href="#BOOKMARK20">k-mer</a> may have one or more alternatives. For DNA <a href="#BOOKMARK73">sequence</a>s specifically, a <a href="#BOOKMARK20">k-mer</a> of interest may have an alternate form. Since the DNA molecule comes as 2 strands, where ...</p>
+<p><strong>WHAT</strong>: Given a DNA <a href="#BOOKMARK19">k-mer</a>, calculate its reverse complement.</p>
+<p><strong>WHY</strong>: Depending on the type of biological <a href="#BOOKMARK74">sequence</a>, a <a href="#BOOKMARK19">k-mer</a> may have one or more alternatives. For DNA <a href="#BOOKMARK74">sequence</a>s specifically, a <a href="#BOOKMARK19">k-mer</a> of interest may have an alternate form. Since the DNA molecule comes as 2 strands, where ...</p>
 <ul>
 <li>each strand's direction is opposite of the other,</li>
 <li>each strand position has a nucleotide that complements the nucleotide at that same position on the other stand:
@@ -113,7 +120,7 @@
 </li>
 </ul>
 <p><img src="svgbob_c44b72fd8e03cfe92b63a0a3b83bfe37c5551666.svg" alt="Kroki diagram output"></p>
-<p>, ... the reverse complement of that <a href="#BOOKMARK20">k-mer</a> may be just as valid as the original <a href="#BOOKMARK20">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BOOKMARK20">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BOOKMARK20">k-mer</a>.</p>
+<p>, ... the reverse complement of that <a href="#BOOKMARK19">k-mer</a> may be just as valid as the original <a href="#BOOKMARK19">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BOOKMARK19">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BOOKMARK19">k-mer</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_complement</span>(<span class="hljs-params">strand: str</span>):</span>
     ret = <span class="hljs-string">''</span>
@@ -137,10 +144,10 @@
 <p>Reverse Complement: CGGATTA</p>
 </div>
 <p></p>
-<a name="HEADREF3"></a><h2>Hamming Distance</h2>
+<a name="HEADREF4"></a><h3>Hamming Distance</h3>
 <p><a name="BOOKMARK2"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given 2 <a href="#BOOKMARK20">k-mer</a>s, the hamming distance is the number of positional mismatches between them.</p>
-<p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK20">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK20">k-mer</a> patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.</p>
+<p><strong>WHAT</strong>: Given 2 <a href="#BOOKMARK19">k-mer</a>s, the hamming distance is the number of positional mismatches between them.</p>
+<p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK19">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK19">k-mer</a> patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hamming_distance</span>(<span class="hljs-params">kmer1: str, kmer2: str</span>) -&gt; int:</span>
     mismatch = <span class="hljs-number">0</span>
@@ -156,16 +163,16 @@
 <p>Hamming Distance: 2</p>
 </div>
 <p></p>
-<a name="HEADREF4"></a><h2>Hamming Distance Neighbourhood</h2>
+<a name="HEADREF5"></a><h3>Hamming Distance Neighbourhood</h3>
 <p><a name="BOOKMARK3"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK2">K-mer/Hamming Distance</a></li>
+<li><a href="#BOOKMARK2">Algorithms/K-mer/Hamming Distance</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a source <a href="#BOOKMARK20">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK20">k-mer</a>s such within the hamming distance of the source <a href="#BOOKMARK20">k-mer</a>. In other words, find all <a href="#BOOKMARK20">k-mer</a>s such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
-<p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK20">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK20">k-mer</a> patterns that are slight variations of the original. This algorithm finds all such variations.</p>
+<p><strong>WHAT</strong>: Given a source <a href="#BOOKMARK19">k-mer</a> and a minimum hamming distance, find all <a href="#BOOKMARK19">k-mer</a>s such within the hamming distance of the source <a href="#BOOKMARK19">k-mer</a>. In other words, find all <a href="#BOOKMARK19">k-mer</a>s such that <code>hamming_distance(source_kmer, kmer) &lt;= min_distance</code>.</p>
+<p><strong>WHY</strong>: Imagine an enzyme that looks for a specific DNA <a href="#BOOKMARK19">k-mer</a> pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other <a href="#BOOKMARK19">k-mer</a> patterns that are slight variations of the original. This algorithm finds all such variations.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_all_dna_kmers_within_hamming_distance</span>(<span class="hljs-params">kmer: str, hamming_dist: int</span>) -&gt; set[str]:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recurse</span>(<span class="hljs-params">kmer: str, hamming_dist: int, output: set[str]</span>) -&gt; <span class="hljs-keyword">None</span>:</span>
@@ -183,21 +190,21 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'ACAA', 'ATAA', 'AGAA', 'AAGA', 'AAAC', 'AAAT', 'AATA', 'AACA', 'CAAA', 'AAAG', 'GAAA', 'TAAA', 'AAAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'ACAA', 'AAAT', 'AAGA', 'GAAA', 'CAAA', 'AATA', 'AAAG', 'TAAA', 'AACA', 'ATAA', 'AAAA', 'AGAA'}</p>
 </div>
 <p></p>
-<a name="HEADREF5"></a><h2>Find Locations</h2>
+<a name="HEADREF6"></a><h3>Find Locations</h3>
 <p><a name="BOOKMARK4"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK2">K-mer/Hamming Distance</a></li>
-<li><a href="#BOOKMARK1">K-mer/Reverse Complement</a></li>
+<li><a href="#BOOKMARK2">Algorithms/K-mer/Hamming Distance</a></li>
+<li><a href="#BOOKMARK1">Algorithms/K-mer/Reverse Complement</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK20">k-mer</a>, find where that <a href="#BOOKMARK20">k-mer</a> occurs in some larger <a href="#BOOKMARK73">sequence</a>. The search may potentially include the <a href="#BOOKMARK20">k-mer</a>'s variants (e.g. reverse complement).</p>
-<p><strong>WHY</strong>: Imagine that you know of a specific <a href="#BOOKMARK20">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK20">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK20">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK20">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK19">DnaA box</a>.</p>
-<p>The enzyme that operates on that <a href="#BOOKMARK20">k-mer</a> may also operate on its reverse complement as well as slight variations on that <a href="#BOOKMARK20">k-mer</a>. For example, if an enzyme binds to AAAAAAAAA, it may also bind to its...</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK19">k-mer</a>, find where that <a href="#BOOKMARK19">k-mer</a> occurs in some larger <a href="#BOOKMARK74">sequence</a>. The search may potentially include the <a href="#BOOKMARK19">k-mer</a>'s variants (e.g. reverse complement).</p>
+<p><strong>WHY</strong>: Imagine that you know of a specific <a href="#BOOKMARK19">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BOOKMARK19">k-mer</a> pattern appearing in some other related organism, it could be a sign that that <a href="#BOOKMARK19">k-mer</a> pattern serves a similar function. For example, the same <a href="#BOOKMARK19">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BOOKMARK37">DnaA box</a>.</p>
+<p>The enzyme that operates on that <a href="#BOOKMARK19">k-mer</a> may also operate on its reverse complement as well as slight variations on that <a href="#BOOKMARK19">k-mer</a>. For example, if an enzyme binds to AAAAAAAAA, it may also bind to its...</p>
 <ul>
 <li>reverse complement: TTTTTTTTT</li>
 <li>approximate variants: AAAAAAAAA, AAATAAAAA, AAAAAGAAA, ...</li>
@@ -229,17 +236,17 @@
 <p>Found AAAA in AAAAGAACCTAATCTTAAAGGAGATGATGATTCTAA at index [0, 1, 2, 3, 12, 15, 16, 30]</p>
 </div>
 <p></p>
-<a name="HEADREF6"></a><h2>Find Clumps</h2>
+<a name="HEADREF7"></a><h3>Find Clumps</h3>
 <p><a name="BOOKMARK5"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK4">K-mer/Find Locations</a></li>
+<li><a href="#BOOKMARK4">Algorithms/K-mer/Find Locations</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK20">k-mer</a>, find where that <a href="#BOOKMARK20">k-mer</a> clusters in some larger <a href="#BOOKMARK73">sequence</a>. The search may potentially include the <a href="#BOOKMARK20">k-mer</a>'s variants (e.g. reverse complement).</p>
-<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK20">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK20">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK20">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK19">DnaA box</a> is a special <a href="#BOOKMARK20">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK19">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK28">replication origin</a>. Finding the <a href="#BOOKMARK19">DnaA box</a> clustered in a small region is a good indicator that you've found the <a href="#BOOKMARK28">replication origin</a>.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK19">k-mer</a>, find where that <a href="#BOOKMARK19">k-mer</a> clusters in some larger <a href="#BOOKMARK74">sequence</a>. The search may potentially include the <a href="#BOOKMARK19">k-mer</a>'s variants (e.g. reverse complement).</p>
+<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK19">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK19">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK19">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
+<p>For example, the <a href="#BOOKMARK37">DnaA box</a> is a special <a href="#BOOKMARK19">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK37">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK27">replication origin</a>. Finding the <a href="#BOOKMARK37">DnaA box</a> clustered in a small region is a good indicator that you've found the <a href="#BOOKMARK27">replication origin</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_kmer_clusters</span>(<span class="hljs-params">sequence: str, kmer: str, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options(<span class="hljs-params"></span>)</span>) -&gt; List[int]:</span>
     cluster_locs = []
@@ -261,18 +268,18 @@
 <p>Found clusters of GGG (at least 3 occurrences in window of 13) in GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT at index [19, 37]</p>
 </div>
 <p></p>
-<a name="HEADREF7"></a><h2>Find Repeating</h2>
+<a name="HEADREF8"></a><h3>Find Repeating</h3>
 <p><a name="BOOKMARK6"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK1">K-mer/Reverse Complement</a></li>
-<li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
+<li><a href="#BOOKMARK1">Algorithms/K-mer/Reverse Complement</a></li>
+<li><a href="#BOOKMARK3">Algorithms/K-mer/Hamming Distance Neighbourhood</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK73">sequence</a>, find clusters of unique <a href="#BOOKMARK20">k-mer</a>s within that <a href="#BOOKMARK73">sequence</a>. In other words, for each unique <a href="#BOOKMARK20">k-mer</a> that exists in the <a href="#BOOKMARK73">sequence</a>, see if it clusters in the <a href="#BOOKMARK73">sequence</a>. The search may potentially include variants of <a href="#BOOKMARK20">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK20">k-mer</a>s).</p>
-<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK20">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK20">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK20">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK19">DnaA box</a> is a special <a href="#BOOKMARK20">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK19">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK28">replication origin</a>. Given that you don't know the <a href="#BOOKMARK20">k-mer</a> pattern for the <a href="#BOOKMARK19">DnaA box</a> but you do know the <a href="#BOOKMARK28">replication origin</a>, you can scan through the <a href="#BOOKMARK28">replication origin</a> for repeating <a href="#BOOKMARK20">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK20">k-mer</a> pattern for the <a href="#BOOKMARK19">DnaA box</a>.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK74">sequence</a>, find clusters of unique <a href="#BOOKMARK19">k-mer</a>s within that <a href="#BOOKMARK74">sequence</a>. In other words, for each unique <a href="#BOOKMARK19">k-mer</a> that exists in the <a href="#BOOKMARK74">sequence</a>, see if it clusters in the <a href="#BOOKMARK74">sequence</a>. The search may potentially include variants of <a href="#BOOKMARK19">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK19">k-mer</a>s).</p>
+<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK19">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK19">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK19">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
+<p>For example, the <a href="#BOOKMARK37">DnaA box</a> is a special <a href="#BOOKMARK19">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK37">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK27">replication origin</a>. Given that you don't know the <a href="#BOOKMARK19">k-mer</a> pattern for the <a href="#BOOKMARK37">DnaA box</a> but you do know the <a href="#BOOKMARK27">replication origin</a>, you can scan through the <a href="#BOOKMARK27">replication origin</a> for repeating <a href="#BOOKMARK19">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK19">k-mer</a> pattern for the <a href="#BOOKMARK37">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-keyword">from</span> Utils <span class="hljs-keyword">import</span> slide_window
 
@@ -306,31 +313,31 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>AAGGG = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
 <li>GATCA = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
 <li>TTAAA = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
 <li>TGATC = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
-<a name="HEADREF8"></a><h2>Find Repeating in Window</h2>
+<a name="HEADREF9"></a><h3>Find Repeating in Window</h3>
 <p><a name="BOOKMARK7"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK6">K-mer/Find Repeating</a></li>
+<li><a href="#BOOKMARK6">Algorithms/K-mer/Find Repeating</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK73">sequence</a>, find regions within that <a href="#BOOKMARK73">sequence</a> that contain clusters of unique <a href="#BOOKMARK20">k-mer</a>s. In other words, ...</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK74">sequence</a>, find regions within that <a href="#BOOKMARK74">sequence</a> that contain clusters of unique <a href="#BOOKMARK19">k-mer</a>s. In other words, ...</p>
 <ul>
 <li>slide a window over the cluster.</li>
-<li>for each unique <a href="#BOOKMARK20">k-mer</a> that exists in the window, see if it clusters in the <a href="#BOOKMARK73">sequence</a>.</li>
+<li>for each unique <a href="#BOOKMARK19">k-mer</a> that exists in the window, see if it clusters in the <a href="#BOOKMARK74">sequence</a>.</li>
 </ul>
-<p>The search may potentially include variants of <a href="#BOOKMARK20">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK20">k-mer</a>s).</p>
-<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK20">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK20">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK20">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
-<p>For example, the <a href="#BOOKMARK19">DnaA box</a> is a special <a href="#BOOKMARK20">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK19">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK28">replication origin</a>. Given that you don't know the <a href="#BOOKMARK20">k-mer</a> pattern for the <a href="#BOOKMARK19">DnaA box</a> but you do know the <a href="#BOOKMARK28">replication origin</a>, you can scan through the <a href="#BOOKMARK28">replication origin</a> for repeating <a href="#BOOKMARK20">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK20">k-mer</a> pattern for the <a href="#BOOKMARK19">DnaA box</a>.</p>
+<p>The search may potentially include variants of <a href="#BOOKMARK19">k-mer</a> variants (e.g. reverse complements of the <a href="#BOOKMARK19">k-mer</a>s).</p>
+<p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BOOKMARK19">k-mer</a> pattern to bind to, where that <a href="#BOOKMARK19">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BOOKMARK19">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
+<p>For example, the <a href="#BOOKMARK37">DnaA box</a> is a special <a href="#BOOKMARK19">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BOOKMARK37">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BOOKMARK27">replication origin</a>. Given that you don't know the <a href="#BOOKMARK19">k-mer</a> pattern for the <a href="#BOOKMARK37">DnaA box</a> but you do know the <a href="#BOOKMARK27">replication origin</a>, you can scan through the <a href="#BOOKMARK27">replication origin</a> for repeating <a href="#BOOKMARK19">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BOOKMARK19">k-mer</a> pattern for the <a href="#BOOKMARK37">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_for_repeating_kmers_in_clusters</span>(<span class="hljs-params">sequence: str, k: int, min_occurrence_in_cluster: int, cluster_window_size: int, options: Options = Options(<span class="hljs-params"></span>)</span>) -&gt; Set[KmerCluster]:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">neighborhood</span>(<span class="hljs-params">kmer: str</span>) -&gt; Set[str]:</span>
@@ -382,36 +389,36 @@
 <p></p>
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
-<a name="HEADREF9"></a><h2>Probability of Appearance</h2>
+<a name="HEADREF10"></a><h3>Probability of Appearance</h3>
 <p><a name="BOOKMARK8"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK4">K-mer/Find Locations</a></li>
+<li><a href="#BOOKMARK4">Algorithms/K-mer/Find Locations</a></li>
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given ...</p>
 <ul>
-<li>the length of a <a href="#BOOKMARK73">sequence</a> (n)</li>
-<li>a <a href="#BOOKMARK20">k-mer</a></li>
+<li>the length of a <a href="#BOOKMARK74">sequence</a> (n)</li>
+<li>a <a href="#BOOKMARK19">k-mer</a></li>
 <li>a count (c)</li>
 </ul>
-<p>... find the probability of that <a href="#BOOKMARK20">k-mer</a> appearing at least c times within an arbitrary <a href="#BOOKMARK73">sequence</a> of length n. For example, the probability that the 2-mer AA appears at least 2 times in a <a href="#BOOKMARK73">sequence</a> of length 4:</p>
+<p>... find the probability of that <a href="#BOOKMARK19">k-mer</a> appearing at least c times within an arbitrary <a href="#BOOKMARK74">sequence</a> of length n. For example, the probability that the 2-mer AA appears at least 2 times in a <a href="#BOOKMARK74">sequence</a> of length 4:</p>
 <ul>
 <li>AAAA - yes</li>
 <li>AAAT - yes</li>
@@ -434,11 +441,11 @@
 <li>GGGG - no</li>
 </ul>
 <p>The probability is 7/256.</p>
-<p>This isn't trivial to accurately compute because the occurrences of a <a href="#BOOKMARK20">k-mer</a> within a <a href="#BOOKMARK73">sequence</a> may overlap. For example, the number of times AA appears in AAAA is 3 while in CAAA it's 2.</p>
-<p><strong>WHY</strong>: When a <a href="#BOOKMARK20">k-mer</a> is found within a <a href="#BOOKMARK73">sequence</a>, knowing the probability of that <a href="#BOOKMARK20">k-mer</a> being found within an arbitrary <a href="#BOOKMARK73">sequence</a> of the same length hints at the significance of the find. For example, if some 10-mer has a 0.2 chance of appearing in an arbitrary <a href="#BOOKMARK73">sequence</a> of length 50, that's too high of a chance to consider it a significant find -- 0.2 means 1 in 5 chance that the 10-mer just randomly happens to appear.</p>
-<a name="HEADREF10"></a><h3>Bruteforce Algorithm</h3>
+<p>This isn't trivial to accurately compute because the occurrences of a <a href="#BOOKMARK19">k-mer</a> within a <a href="#BOOKMARK74">sequence</a> may overlap. For example, the number of times AA appears in AAAA is 3 while in CAAA it's 2.</p>
+<p><strong>WHY</strong>: When a <a href="#BOOKMARK19">k-mer</a> is found within a <a href="#BOOKMARK74">sequence</a>, knowing the probability of that <a href="#BOOKMARK19">k-mer</a> being found within an arbitrary <a href="#BOOKMARK74">sequence</a> of the same length hints at the significance of the find. For example, if some 10-mer has a 0.2 chance of appearing in an arbitrary <a href="#BOOKMARK74">sequence</a> of length 50, that's too high of a chance to consider it a significant find -- 0.2 means 1 in 5 chance that the 10-mer just randomly happens to appear.</p>
+<a name="HEADREF11"></a><h4>Bruteforce Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm tries every possible combination of <a href="#BOOKMARK73">sequence</a> to find the probability. It falls over once the length of the <a href="#BOOKMARK73">sequence</a> extends into the double digits. It's intended to help conceptualize what's going on.</p>
+<p>This algorithm tries every possible combination of <a href="#BOOKMARK74">sequence</a> to find the probability. It falls over once the length of the <a href="#BOOKMARK74">sequence</a> extends into the double digits. It's intended to help conceptualize what's going on.</p>
 <pre class="hljs"><code><span class="hljs-comment"># Of the X sequence combinations tried, Y had the k-mer. The probability is Y/X.</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bruteforce_probability</span>(<span class="hljs-params">searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int</span>) -&gt; (int, int):</span>
     found = <span class="hljs-number">0</span>
@@ -474,22 +481,22 @@
 <p>Probability: 0.0195159912109375 (1279/65536)</p>
 </div>
 <p></p>
-<a name="HEADREF11"></a><h3>Selection Estimate Algorithm</h3>
+<a name="HEADREF12"></a><h4>Selection Estimate Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The explanation in the comments below are a bastardization of "1.13 Detour: Probabilities of Patterns in a String" in the Pevzner book...</p>
 </div>
-<p>This algorithm tries estimating the probability by ignoring the fact that the occurrences of a <a href="#BOOKMARK20">k-mer</a> in a <a href="#BOOKMARK73">sequence</a> may overlap. For example, searching for the 2-mer AA in the <a href="#BOOKMARK73">sequence</a> AAAT yields 2 instances of AA:</p>
+<p>This algorithm tries estimating the probability by ignoring the fact that the occurrences of a <a href="#BOOKMARK19">k-mer</a> in a <a href="#BOOKMARK74">sequence</a> may overlap. For example, searching for the 2-mer AA in the <a href="#BOOKMARK74">sequence</a> AAAT yields 2 instances of AA:</p>
 <ul>
 <li>[AA]AT</li>
 <li>A[AA]T</li>
 </ul>
-<p>If we go ahead and ignore overlaps, we can think of the <a href="#BOOKMARK20">k-mer</a>s occurring in a string as insertions. For example, imagine a <a href="#BOOKMARK73">sequence</a> of length 7 and the 2-mer AA. If we were to inject 2 instances of AA into the <a href="#BOOKMARK73">sequence</a> to get it to reach length 7, how would that look?</p>
-<p>2 instances of a 2-mer is 4 characters has a length of 5. To get the <a href="#BOOKMARK73">sequence</a> to end up with a length of 7 after the insertions, the <a href="#BOOKMARK73">sequence</a> needs to start with a length of 3:</p>
+<p>If we go ahead and ignore overlaps, we can think of the <a href="#BOOKMARK19">k-mer</a>s occurring in a string as insertions. For example, imagine a <a href="#BOOKMARK74">sequence</a> of length 7 and the 2-mer AA. If we were to inject 2 instances of AA into the <a href="#BOOKMARK74">sequence</a> to get it to reach length 7, how would that look?</p>
+<p>2 instances of a 2-mer is 4 characters has a length of 5. To get the <a href="#BOOKMARK74">sequence</a> to end up with a length of 7 after the insertions, the <a href="#BOOKMARK74">sequence</a> needs to start with a length of 3:</p>
 <pre><code>SSS
 </code></pre>
-<p>Given that we're changing reality to say that the instances WON'T overlap in the <a href="#BOOKMARK73">sequence</a>, we can treat each instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted into the <a href="#BOOKMARK73">sequence</a> is 10:</p>
+<p>Given that we're changing reality to say that the instances WON'T overlap in the <a href="#BOOKMARK74">sequence</a>, we can treat each instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted into the <a href="#BOOKMARK74">sequence</a> is 10:</p>
 <pre><code>I = insertion of AA, S = arbitrary sequence character
 
 IISSS  ISISS  ISSIS  ISSSI
@@ -501,13 +508,13 @@ SSSII
 <p>The number of ways to insert can be counted via the "binomial coefficient": <code>bc(m, k) = m!/(k!(m-k)!)</code>, where m is the total number of items (5 in the example above) and k is the number of selections (2 in the example above). For the example above:</p>
 <pre><code>bc(5, 2) = 5!/(2!(5-2)!) = 10
 </code></pre>
-<p>Since the SSS can be any arbitrary nucleotide <a href="#BOOKMARK73">sequence</a> of 3, we count the number of different representations that are possible for SSS: <code>4^3 = 4*4*4 = 64</code> (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In each of these representations, the 2-mer AA can be inserted in 10 different ways:</p>
+<p>Since the SSS can be any arbitrary nucleotide <a href="#BOOKMARK74">sequence</a> of 3, we count the number of different representations that are possible for SSS: <code>4^3 = 4*4*4 = 64</code> (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In each of these representations, the 2-mer AA can be inserted in 10 different ways:</p>
 <pre><code>64*10 = 640
 </code></pre>
-<p>Since the total length of the <a href="#BOOKMARK73">sequence</a> is 7, we count the number of different representations that are possible:</p>
+<p>Since the total length of the <a href="#BOOKMARK74">sequence</a> is 7, we count the number of different representations that are possible:</p>
 <pre><code>4^7 = 4*4*4*4*4*4*4 = 16384
 </code></pre>
-<p>The estimated probability is 640/16384. For non-overlapping <a href="#BOOKMARK20">k-mer</a>s the estimation will actually be "relatively accurate", while for overlapping <a href="#BOOKMARK20">k-mer</a>s not so much. Maybe try training a deep learning model to see if it can provide better estimates?</p>
+<p>The estimated probability is 640/16384. For non-overlapping <a href="#BOOKMARK19">k-mer</a>s the estimation will actually be "relatively accurate", while for overlapping <a href="#BOOKMARK19">k-mer</a>s not so much. Maybe try training a deep learning model to see if it can provide better estimates?</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">estimate_probability</span>(<span class="hljs-params">searchspace_len: int, searchspace_symbol_count: int, search_for: List[int], min_occurrence: int</span>) -&gt; float:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factorial</span>(<span class="hljs-params">num</span>):</span>
         <span class="hljs-keyword">if</span> num == <span class="hljs-number">1</span>:
@@ -526,14 +533,14 @@ SSSII
 <p>Probability: 0.01953125</p>
 </div>
 <p></p>
-<a name="HEADREF12"></a><h1>GC Skew</h1>
+<a name="HEADREF13"></a><h2>GC Skew</h2>
 <p><a name="BOOKMARK9"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK73">sequence</a>, walk over it and ...</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK74">sequence</a>, walk over it and ...</p>
 <ul>
 <li>increment every time you spot a G.</li>
 <li>decrement every time you spot a C.</li>
 </ul>
-<p><strong>WHY</strong>: Given the DNA <a href="#BOOKMARK73">sequence</a> of an organism, some segments may have lower count of Gs vs Cs.</p>
+<p><strong>WHY</strong>: Given the DNA <a href="#BOOKMARK74">sequence</a> of an organism, some segments may have lower count of Gs vs Cs.</p>
 <p>During replication, some segments of DNA stay single-stranded for a much longer time than other segments. <a href="#BOOKMARK38">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BOOKMARK39">double-stranded DNA</a>. Specifically, in <a href="#BOOKMARK38">single-stranded DNA</a>, C has a greater tendency to mutate to T. When that <a href="#BOOKMARK38">single-stranded DNA</a> re-binds to a neighbouring strand, the positions of any nucleotides that mutated from C to T will change on the neighbouring strand from G to A.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
@@ -544,7 +551,7 @@ SSSII
 </ul>
 <p>It mutated from C to T. Since its now T, its complement is A.</p>
 </div>
-<p>Plotting the skew lets you know the rough location of segments that stayed single-stranded for a longer period of time. That information hints at special / useful locations in the organism's DNA <a href="#BOOKMARK73">sequence</a> (<a href="#BOOKMARK28">replication origin</a> / <a href="#BOOKMARK30">replication terminus</a>).</p>
+<p>Plotting the skew lets you know the rough location of segments that stayed single-stranded for a longer period of time. That information hints at special / useful locations in the organism's DNA <a href="#BOOKMARK74">sequence</a> (<a href="#BOOKMARK27">replication origin</a> / <a href="#BOOKMARK29">replication terminus</a>).</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gc_skew</span>(<span class="hljs-params">seq: str</span>):</span>
     counter = <span class="hljs-number">0</span>
@@ -565,20 +572,20 @@ SSSII
 <p><img src="skew_babf857bad6dd935f0d1ddbbb8b5005f.png" alt="GC Skew Plot"></p>
 </div>
 <p></p>
-<a name="HEADREF13"></a><h1>Motif</h1>
+<a name="HEADREF14"></a><h2>Motif</h2>
 <p><a name="BOOKMARK10"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK0">K-mer</a></li>
+<li><a href="#BOOKMARK0">Algorithms/K-mer</a></li>
 </ul>
 </div>
-<p>A <a href="#BOOKMARK55">motif</a> is a pattern that matches many different <a href="#BOOKMARK20">k-mer</a>s, where those matched <a href="#BOOKMARK20">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK55">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
-<p>Often times we'll have identified a set of biological <a href="#BOOKMARK73">sequence</a>s where each <a href="#BOOKMARK73">sequence</a>, we suspect, contains a <a href="#BOOKMARK20">k-mer</a> that matches some <a href="#BOOKMARK55">motif</a>. We'll need to find the <a href="#BOOKMARK20">k-mer</a>s and the <a href="#BOOKMARK55">motif</a> they match. For example, each of the following <a href="#BOOKMARK73">sequence</a>s contains a <a href="#BOOKMARK20">k-mer</a> that matches some <a href="#BOOKMARK55">motif</a>:</p>
+<p>A <a href="#BOOKMARK55">motif</a> is a pattern that matches many different <a href="#BOOKMARK19">k-mer</a>s, where those matched <a href="#BOOKMARK19">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK55">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
+<p>Often times we'll have identified a set of biological <a href="#BOOKMARK74">sequence</a>s where each <a href="#BOOKMARK74">sequence</a>, we suspect, contains a <a href="#BOOKMARK19">k-mer</a> that matches some <a href="#BOOKMARK55">motif</a>. We'll need to find the <a href="#BOOKMARK19">k-mer</a>s and the <a href="#BOOKMARK55">motif</a> they match. For example, each of the following <a href="#BOOKMARK74">sequence</a>s contains a <a href="#BOOKMARK19">k-mer</a> that matches some <a href="#BOOKMARK55">motif</a>:</p>
 <table>
 <thead>
 <tr>
-<th><a href="#BOOKMARK73">Sequence</a>s</th>
+<th><a href="#BOOKMARK74">Sequence</a>s</th>
 </tr>
 </thead>
 <tbody>
@@ -600,7 +607,7 @@ SSSII
 <table>
 <thead>
 <tr>
-<th><a href="#BOOKMARK73">Sequence</a>s</th>
+<th><a href="#BOOKMARK74">Sequence</a>s</th>
 </tr>
 </thead>
 <tbody>
@@ -618,7 +625,7 @@ SSSII
 </tr>
 </tbody>
 </table>
-<p>A <a href="#BOOKMARK57">motif matrix</a> is a matrix of <a href="#BOOKMARK20">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK55">motif</a>. In the example <a href="#BOOKMARK73">sequence</a>s above, the <a href="#BOOKMARK57">motif matrix</a> would be:</p>
+<p>A <a href="#BOOKMARK58">motif matrix</a> is a matrix of <a href="#BOOKMARK19">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK55">motif</a>. In the example <a href="#BOOKMARK74">sequence</a>s above, the <a href="#BOOKMARK58">motif matrix</a> would be:</p>
 <table>
 <thead>
 <tr>
@@ -660,10 +667,10 @@ SSSII
 </tr>
 </tbody>
 </table>
-<a name="HEADREF14"></a><h2>Consensus String</h2>
+<a name="HEADREF15"></a><h3>Consensus String</h3>
 <p><a name="BOOKMARK11"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK57">motif matrix</a>, generate a <a href="#BOOKMARK20">k-mer</a> where each position is the nucleotide most abundant at that column of the matrix.</p>
-<p><strong>WHY</strong>: Given a set of <a href="#BOOKMARK20">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK55">motif</a> (<a href="#BOOKMARK57">motif matrix</a>), the <a href="#BOOKMARK20">k-mer</a> generated by selecting the most abundant column at each index is the "ideal" <a href="#BOOKMARK20">k-mer</a> for the <a href="#BOOKMARK55">motif</a>. It's a concise way of describing the <a href="#BOOKMARK55">motif</a>, especially if the columns in the <a href="#BOOKMARK57">motif matrix</a> are highly conserved.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK58">motif matrix</a>, generate a <a href="#BOOKMARK19">k-mer</a> where each position is the nucleotide most abundant at that column of the matrix.</p>
+<p><strong>WHY</strong>: Given a set of <a href="#BOOKMARK19">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK55">motif</a> (<a href="#BOOKMARK58">motif matrix</a>), the <a href="#BOOKMARK19">k-mer</a> generated by selecting the most abundant column at each index is the "ideal" <a href="#BOOKMARK19">k-mer</a> for the <a href="#BOOKMARK55">motif</a>. It's a concise way of describing the <a href="#BOOKMARK55">motif</a>, especially if the columns in the <a href="#BOOKMARK58">motif matrix</a> are highly conserved.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_consensus_string</span>(<span class="hljs-params">kmers: List[str]</span>) -&gt; str:</span>
     count = len(kmers[<span class="hljs-number">0</span>]);
@@ -679,10 +686,10 @@ SSSII
 <p>Consensus is TTTCC in <br><br> ATTGC<br>ATTCC<br>TTTGC<br>TTTCC<br>TTTCA</p>
 </div>
 <p></p>
-<a name="HEADREF15"></a><h2>Motif Matrix Count</h2>
+<a name="HEADREF16"></a><h3>Motif Matrix Count</h3>
 <p><a name="BOOKMARK12"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK57">motif matrix</a>, count how many of each nucleotide are in each column.</p>
-<p><strong>WHY</strong>: Having a count of the number of nucleotides in each column is a basic statistic that gets used further down the line for tasks such as scoring a <a href="#BOOKMARK57">motif matrix</a>.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK58">motif matrix</a>, count how many of each nucleotide are in each column.</p>
+<p><strong>WHY</strong>: Having a count of the number of nucleotides in each column is a basic statistic that gets used further down the line for tasks such as scoring a <a href="#BOOKMARK58">motif matrix</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">motif_matrix_count</span>(<span class="hljs-params">motif_matrix: List[str], elements=<span class="hljs-string">'ACGT'</span></span>) -&gt; Dict[str, List[int]]:</span>
     rows = len(motif_matrix)
@@ -705,15 +712,15 @@ SSSII
 <p>('A', [2, 0, 0, 0, 0])<br>('C', [0, 0, 0, 0, 3])<br>('G', [0, 0, 0, 4, 1])<br>('T', [2, 4, 4, 0, 0])</p>
 </div>
 <p></p>
-<a name="HEADREF16"></a><h2>Motif Matrix Profile</h2>
+<a name="HEADREF17"></a><h3>Motif Matrix Profile</h3>
 <p><a name="BOOKMARK13"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK12">Motif/Motif Matrix Count</a></li>
+<li><a href="#BOOKMARK12">Algorithms/Motif/Motif Matrix Count</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK57">motif matrix</a>, for each column calculate how often A, C, G, and T occur as percentages.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK58">motif matrix</a>, for each column calculate how often A, C, G, and T occur as percentages.</p>
 <p><strong>WHY</strong>: The percentages for each column represent a probability distribution for that column. For example, in column 1 of...</p>
 <table>
 <thead>
@@ -762,7 +769,7 @@ SSSII
 <li>T appears 50% of the time.</li>
 <li>G appears 0% of the time.</li>
 </ul>
-<p>These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary <a href="#BOOKMARK20">k-mer</a> conforms to the same <a href="#BOOKMARK57">motif matrix</a>.</p>
+<p>These probability distributions can be used further down the line for tasks such as determining the probability that some arbitrary <a href="#BOOKMARK19">k-mer</a> conforms to the same <a href="#BOOKMARK58">motif matrix</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">motif_matrix_profile</span>(<span class="hljs-params">motif_matrix_counts: Dict[str, List[int]]</span>) -&gt; Dict[str, List[float]]:</span>
     ret = {}
@@ -785,14 +792,14 @@ SSSII
 <p>('A', [0.25, 0.0, 0.0, 0.0, 0.0])<br>('C', [0.25, 0.0, 0.0, 0.75, 0.0])<br>('G', [0.0, 0.0, 0.0, 0.0, 1.0])<br>('T', [0.5, 1.0, 1.0, 0.25, 0.0])</p>
 </div>
 <p></p>
-<a name="HEADREF17"></a><h2>Motif Matrix Score</h2>
+<a name="HEADREF18"></a><h3>Motif Matrix Score</h3>
 <p><a name="BOOKMARK14"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK57">motif matrix</a>, assign it a score based on how similar the <a href="#BOOKMARK20">k-mer</a>s that make up the matrix are to each other. Specifically, how conserved the nucleotides at each column are.</p>
-<p><strong>WHY</strong>: Given a set of <a href="#BOOKMARK20">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK55">motif</a> (<a href="#BOOKMARK57">motif matrix</a>), the more similar those <a href="#BOOKMARK20">k-mer</a>s are to each other the more likely it is that those <a href="#BOOKMARK20">k-mer</a>s are members of the same <a href="#BOOKMARK55">motif</a>. This seems to be the case for many enzymes that bind to DNA based on a <a href="#BOOKMARK55">motif</a> (e.g. <a href="#BOOKMARK54">transcription factor</a>s).</p>
-<a name="HEADREF18"></a><h3>Popularity Algorithm</h3>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK58">motif matrix</a>, assign it a score based on how similar the <a href="#BOOKMARK19">k-mer</a>s that make up the matrix are to each other. Specifically, how conserved the nucleotides at each column are.</p>
+<p><strong>WHY</strong>: Given a set of <a href="#BOOKMARK19">k-mer</a>s that are suspected to be part of a <a href="#BOOKMARK55">motif</a> (<a href="#BOOKMARK58">motif matrix</a>), the more similar those <a href="#BOOKMARK19">k-mer</a>s are to each other the more likely it is that those <a href="#BOOKMARK19">k-mer</a>s are <a href="#BOOKMARK57">member</a>s of the same <a href="#BOOKMARK55">motif</a>. This seems to be the case for many enzymes that bind to DNA based on a <a href="#BOOKMARK55">motif</a> (e.g. <a href="#BOOKMARK54">transcription factor</a>s).</p>
+<a name="HEADREF19"></a><h4>Popularity Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm scores a <a href="#BOOKMARK57">motif matrix</a> by summing up the number of unpopular items in a column. For example, imagine a column has 7 Ts, 2 Cs, and 1A. The Ts are the most popular (7 items), meaning that the 3 items (2 Cs and 1 A) are unpopular -- the score for the column is 3.</p>
-<p>Sum up each of the column scores to the get the final score for the <a href="#BOOKMARK57">motif matrix</a>. A lower score is better.</p>
+<p>This algorithm scores a <a href="#BOOKMARK58">motif matrix</a> by summing up the number of unpopular items in a column. For example, imagine a column has 7 Ts, 2 Cs, and 1A. The Ts are the most popular (7 items), meaning that the 3 items (2 Cs and 1 A) are unpopular -- the score for the column is 3.</p>
+<p>Sum up each of the column scores to the get the final score for the <a href="#BOOKMARK58">motif matrix</a>. A lower score is better.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">score_motif</span>(<span class="hljs-params">motif_matrix: List[str]</span>) -&gt; int:</span>
     rows = len(motif_matrix)
     cols = len(motif_matrix[<span class="hljs-number">0</span>])
@@ -821,20 +828,20 @@ SSSII
 <p>3</p>
 </div>
 <p></p>
-<a name="HEADREF19"></a><h3>Entropy Algorithm</h3>
+<a name="HEADREF20"></a><h4>Entropy Algorithm</h4>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK13">Motif/Motif Matrix Profile</a></li>
+<li><a href="#BOOKMARK13">Algorithms/Motif/Motif Matrix Profile</a></li>
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm scores a <a href="#BOOKMARK57">motif matrix</a> by calculating the <a href="#BOOKMARK71">entropy</a> of each column in the <a href="#BOOKMARK57">motif matrix</a>. <a href="#BOOKMARK71">Entropy</a> is defined as the level of uncertainty for some variable. The more uncertain the nucleotides are in the column of a <a href="#BOOKMARK57">motif matrix</a>, the higher (worse) the score. For example, given a <a href="#BOOKMARK57">motif matrix</a> with 10 rows, a column with ...</p>
+<p>This algorithm scores a <a href="#BOOKMARK58">motif matrix</a> by calculating the <a href="#BOOKMARK72">entropy</a> of each column in the <a href="#BOOKMARK58">motif matrix</a>. <a href="#BOOKMARK72">Entropy</a> is defined as the level of uncertainty for some variable. The more uncertain the nucleotides are in the column of a <a href="#BOOKMARK58">motif matrix</a>, the higher (worse) the score. For example, given a <a href="#BOOKMARK58">motif matrix</a> with 10 rows, a column with ...</p>
 <ul>
-<li>10 A nucleotides has low <a href="#BOOKMARK71">entropy</a> because it's highly conserved,</li>
-<li>6 A and 4 T nucleotides has a higher <a href="#BOOKMARK71">entropy</a> because it's less highly conserved.</li>
+<li>10 A nucleotides has low <a href="#BOOKMARK72">entropy</a> because it's highly conserved,</li>
+<li>6 A and 4 T nucleotides has a higher <a href="#BOOKMARK72">entropy</a> because it's less highly conserved.</li>
 </ul>
-<p>Sum the output for each column to get the final score for the <a href="#BOOKMARK57">motif matrix</a>. A lower score is better.</p>
+<p>Sum the output for each column to get the final score for the <a href="#BOOKMARK58">motif matrix</a>. A lower score is better.</p>
 <pre class="hljs"><code><span class="hljs-comment"># According to the book, method of scoring a motif matrix as defined in ScoreMotif.py isn't the method used in the</span>
 <span class="hljs-comment"># real-world. The method used in the real-world is this method, where...</span>
 <span class="hljs-comment"># 1. each column has its probability distribution calculated (prob of A vs prob C vs prob of T vs prob of G)</span>
@@ -869,21 +876,21 @@ SSSII
 <p>1.811278124459133</p>
 </div>
 <p></p>
-<a name="HEADREF20"></a><h2>K-mer Match Probability</h2>
+<a name="HEADREF21"></a><h3>K-mer Match Probability</h3>
 <p><a name="BOOKMARK15"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK12">Motif/Motif Matrix Count</a></li>
-<li><a href="#BOOKMARK13">Motif/Motif Matrix Profile</a></li>
-<li><a href="#BOOKMARK0">K-mer</a></li>
+<li><a href="#BOOKMARK12">Algorithms/Motif/Motif Matrix Count</a></li>
+<li><a href="#BOOKMARK13">Algorithms/Motif/Motif Matrix Profile</a></li>
+<li><a href="#BOOKMARK0">Algorithms/K-mer</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK57">motif matrix</a> and a <a href="#BOOKMARK20">k-mer</a>, calculate the probability of that <a href="#BOOKMARK20">k-mer</a> being member of that <a href="#BOOKMARK55">motif</a>.</p>
-<p><strong>WHY</strong>: Being able to determine if a <a href="#BOOKMARK20">k-mer</a> is potentially a member of a <a href="#BOOKMARK55">motif</a> can help speed up experiments. For example, imagine that you suspect 21 different <a href="#BOOKMARK40">genes</a> of being regulated by the same <a href="#BOOKMARK54">transcription factor</a>. You isolate the <a href="#BOOKMARK59">transcription factor binding site</a> for 6 of those <a href="#BOOKMARK40">genes</a> and use their <a href="#BOOKMARK73">sequence</a>s as the underlying <a href="#BOOKMARK20">k-mer</a>s for a <a href="#BOOKMARK57">motif matrix</a>. That <a href="#BOOKMARK57">motif matrix</a> doesn't represent the <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK55">motif</a> exactly, but it's close enough that you can use it to scan through the <a href="#BOOKMARK20">k-mer</a>s in the remaining 15 <a href="#BOOKMARK40">genes</a> and calculate the probability of them being members of the same <a href="#BOOKMARK55">motif</a>.</p>
-<p>If a <a href="#BOOKMARK20">k-mer</a> exists such that it conforms to the <a href="#BOOKMARK57">motif matrix</a> with a high probability, it likely is a member of the <a href="#BOOKMARK55">motif</a>.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK58">motif matrix</a> and a <a href="#BOOKMARK19">k-mer</a>, calculate the probability of that <a href="#BOOKMARK19">k-mer</a> being a <a href="#BOOKMARK57">member</a> of that <a href="#BOOKMARK55">motif</a>.</p>
+<p><strong>WHY</strong>: Being able to determine if a <a href="#BOOKMARK19">k-mer</a> is potentially a <a href="#BOOKMARK57">member</a> of a <a href="#BOOKMARK55">motif</a> can help speed up experiments. For example, imagine that you suspect 21 different <a href="#BOOKMARK40">genes</a> of being regulated by the same <a href="#BOOKMARK54">transcription factor</a>. You isolate the <a href="#BOOKMARK60">transcription factor binding site</a> for 6 of those <a href="#BOOKMARK40">genes</a> and use their <a href="#BOOKMARK74">sequence</a>s as the underlying <a href="#BOOKMARK19">k-mer</a>s for a <a href="#BOOKMARK58">motif matrix</a>. That <a href="#BOOKMARK58">motif matrix</a> doesn't represent the <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK55">motif</a> exactly, but it's close enough that you can use it to scan through the <a href="#BOOKMARK19">k-mer</a>s in the remaining 15 <a href="#BOOKMARK40">genes</a> and calculate the probability of them being <a href="#BOOKMARK57">member</a>s of the same <a href="#BOOKMARK55">motif</a>.</p>
+<p>If a <a href="#BOOKMARK19">k-mer</a> exists such that it conforms to the <a href="#BOOKMARK58">motif matrix</a> with a high probability, it likely is a <a href="#BOOKMARK57">member</a> of the <a href="#BOOKMARK55">motif</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<p>Imagine the following <a href="#BOOKMARK57">motif matrix</a>:</p>
+<p>Imagine the following <a href="#BOOKMARK58">motif matrix</a>:</p>
 <table>
 <thead>
 <tr>
@@ -930,7 +937,7 @@ SSSII
 </tr>
 </tbody>
 </table>
-<p>Calculating the counts for that <a href="#BOOKMARK57">motif matrix</a> results in:</p>
+<p>Calculating the counts for that <a href="#BOOKMARK58">motif matrix</a> results in:</p>
 <table>
 <thead>
 <tr>
@@ -1034,18 +1041,18 @@ SSSII
 </tr>
 </tbody>
 </table>
-<p>Using this profile, the probability that a <a href="#BOOKMARK20">k-mer</a> conforms to the <a href="#BOOKMARK57">motif matrix</a> is calculated by mapping the nucleotide at each position of the <a href="#BOOKMARK20">k-mer</a> to the corresponding nucleotide in the corresponding position of the profile and multiplying them together. For example, the probability that the <a href="#BOOKMARK20">k-mer</a>...</p>
+<p>Using this profile, the probability that a <a href="#BOOKMARK19">k-mer</a> conforms to the <a href="#BOOKMARK58">motif matrix</a> is calculated by mapping the nucleotide at each position of the <a href="#BOOKMARK19">k-mer</a> to the corresponding nucleotide in the corresponding position of the profile and multiplying them together. For example, the probability that the <a href="#BOOKMARK19">k-mer</a>...</p>
 <ul>
 <li>ATGCAC conforms to the example profile above is calculated as 1*1*0.5*1*1*1 = 0.5</li>
 <li>TTGCAC conforms to the example profile above is calculated as 0*1*0.5*1*1*1 = 0</li>
 </ul>
-<p>Of the these two <a href="#BOOKMARK20">k-mer</a>s, ...</p>
+<p>Of the these two <a href="#BOOKMARK19">k-mer</a>s, ...</p>
 <ul>
-<li>all positions in the first (ATGCAC) have been seen before in the <a href="#BOOKMARK57">motif matrix</a>.</li>
-<li>all but one position in the the second (TTGCAC) have been seen before in the <a href="#BOOKMARK57">motif matrix</a> (index 0).</li>
+<li>all positions in the first (ATGCAC) have been seen before in the <a href="#BOOKMARK58">motif matrix</a>.</li>
+<li>all but one position in the the second (TTGCAC) have been seen before in the <a href="#BOOKMARK58">motif matrix</a> (index 0).</li>
 </ul>
-<p>Both of these <a href="#BOOKMARK20">k-mer</a>s should have a reasonable probability of being members of the <a href="#BOOKMARK55">motif</a>. However, notice how the second <a href="#BOOKMARK20">k-mer</a> ends up with a 0 probability. The reason has to do with the underlying concept behind <a href="#BOOKMARK57">motif matrices</a>: the entire point of a <a href="#BOOKMARK57">motif matrix</a> is to use the known members of a <a href="#BOOKMARK55">motif</a> to find other potential members of that same <a href="#BOOKMARK55">motif</a>. The second <a href="#BOOKMARK20">k-mer</a> contains a T at index 0, but none of the known members of the <a href="#BOOKMARK55">motif</a> have a T at that index. As such, its probability gets reduced to 0 even though the rest of the <a href="#BOOKMARK20">k-mer</a> conforms.</p>
-<p><a href="#BOOKMARK64">Cromwell's rule</a> says that when a probability is based off past events, a hard 0 or 1 values shouldn't be used. As such, a quick workaround to the 0% probability problem described above is to artificially inflate the the counts that lead to the profile such that no count is 0 (<a href="#BOOKMARK66">pseudocount</a>s). For example, for the same <a href="#BOOKMARK57">motif matrix</a>, incrementing the counts by 1 results in:</p>
+<p>Both of these <a href="#BOOKMARK19">k-mer</a>s should have a reasonable probability of being <a href="#BOOKMARK57">member</a>s of the <a href="#BOOKMARK55">motif</a>. However, notice how the second <a href="#BOOKMARK19">k-mer</a> ends up with a 0 probability. The reason has to do with the underlying concept behind <a href="#BOOKMARK58">motif matrices</a>: the entire point of a <a href="#BOOKMARK58">motif matrix</a> is to use the known <a href="#BOOKMARK57">member</a>s of a <a href="#BOOKMARK55">motif</a> to find other potential <a href="#BOOKMARK57">member</a>s of that same <a href="#BOOKMARK55">motif</a>. The second <a href="#BOOKMARK19">k-mer</a> contains a T at index 0, but none of the known <a href="#BOOKMARK57">member</a>s of the <a href="#BOOKMARK55">motif</a> have a T at that index. As such, its probability gets reduced to 0 even though the rest of the <a href="#BOOKMARK19">k-mer</a> conforms.</p>
+<p><a href="#BOOKMARK65">Cromwell's rule</a> says that when a probability is based off past events, a hard 0 or 1 values shouldn't be used. As such, a quick workaround to the 0% probability problem described above is to artificially inflate the the counts that lead to the profile such that no count is 0 (<a href="#BOOKMARK67">pseudocount</a>s). For example, for the same <a href="#BOOKMARK58">motif matrix</a>, incrementing the counts by 1 results in:</p>
 <table>
 <thead>
 <tr>
@@ -1149,12 +1156,12 @@ SSSII
 </tr>
 </tbody>
 </table>
-<p>Using this new profile, the probability that the previous <a href="#BOOKMARK20">k-mer</a>s conform are:</p>
+<p>Using this new profile, the probability that the previous <a href="#BOOKMARK19">k-mer</a>s conform are:</p>
 <ul>
 <li>ATGCAC is calculated as 0.625*0.625*0.325*0.625*0.625*0.625 = 0.031</li>
 <li>TTGCAC is calculated as 0.125*0.625*0.325*0.625*0.625*0.625 = 0.0062</li>
 </ul>
-<p>Although the probabilities seem low, it's all relative. The probability calculated for the first <a href="#BOOKMARK20">k-mer</a> (ATGCAC) is the highest probability possible -- each position in the <a href="#BOOKMARK20">k-mer</a> maps to the highest probability nucleotide of the corresponding position of the profile.</p>
+<p>Although the probabilities seem low, it's all relative. The probability calculated for the first <a href="#BOOKMARK19">k-mer</a> (ATGCAC) is the highest probability possible -- each position in the <a href="#BOOKMARK19">k-mer</a> maps to the highest probability nucleotide of the corresponding position of the profile.</p>
 <pre class="hljs"><code><span class="hljs-comment"># Run this on the counts before generating the profile to avoid the 0 probability problem.</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">apply_psuedocounts_to_count_matrix</span>(<span class="hljs-params">counts: Dict[str, List[int]], extra_count: int = <span class="hljs-number">1</span></span>):</span>
     <span class="hljs-keyword">for</span> elem, elem_counts <span class="hljs-keyword">in</span> counts.items():
@@ -1198,33 +1205,33 @@ SSSII
 <p>Probability that TTGCAC matches the motif 0.0...</p>
 </div>
 <p></p>
-<a name="HEADREF21"></a><h2>Find Motif Matrix</h2>
+<a name="HEADREF22"></a><h3>Find Motif Matrix</h3>
 <p><a name="BOOKMARK16"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK15">Motif/K-mer Match Probability</a></li>
+<li><a href="#BOOKMARK15">Algorithms/Motif/K-mer Match Probability</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a set of <a href="#BOOKMARK73">sequence</a>s, identify <a href="#BOOKMARK20">k-mer</a>s in those <a href="#BOOKMARK73">sequence</a>s that may be members of the same <a href="#BOOKMARK55">motif</a>.</p>
-<p><strong>WHY</strong>: A <a href="#BOOKMARK54">transcription factor</a> is an enzyme that either increases or decreases a <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK42">transcription</a> rate. It does so by binding to a specific part of the <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK52">upstream region</a> called the <a href="#BOOKMARK59">transcription factor binding site</a>. That <a href="#BOOKMARK59">transcription factor binding site</a> consists of a <a href="#BOOKMARK20">k-mer</a> that matches the <a href="#BOOKMARK55">motif</a> expected by that <a href="#BOOKMARK54">transcription factor</a>, called a <a href="#BOOKMARK58">regulatory motif</a>.</p>
+<p><strong>WHAT</strong>: Given a set of <a href="#BOOKMARK74">sequence</a>s, identify <a href="#BOOKMARK19">k-mer</a>s in those <a href="#BOOKMARK74">sequence</a>s that may be <a href="#BOOKMARK57">member</a>s of the same <a href="#BOOKMARK55">motif</a>.</p>
+<p><strong>WHY</strong>: A <a href="#BOOKMARK54">transcription factor</a> is an enzyme that either increases or decreases a <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK42">transcription</a> rate. It does so by binding to a specific part of the <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK52">upstream region</a> called the <a href="#BOOKMARK60">transcription factor binding site</a>. That <a href="#BOOKMARK60">transcription factor binding site</a> consists of a <a href="#BOOKMARK19">k-mer</a> that matches the <a href="#BOOKMARK55">motif</a> expected by that <a href="#BOOKMARK54">transcription factor</a>, called a <a href="#BOOKMARK59">regulatory motif</a>.</p>
 <p>A single <a href="#BOOKMARK54">transcription factor</a> may operate on many different <a href="#BOOKMARK40">genes</a>. Often times a scientist will identify a set of <a href="#BOOKMARK40">genes</a> that are suspected to be regulated by a single <a href="#BOOKMARK54">transcription factor</a>, but that scientist won't know ...</p>
 <ul>
-<li>what the <a href="#BOOKMARK58">regulatory motif</a> is (the pattern expected by the enzyme).</li>
-<li>where the <a href="#BOOKMARK59">transcription factor binding site</a>s are (which <a href="#BOOKMARK20">k-mer</a>s the enzyme is targeting).</li>
-<li>how long the <a href="#BOOKMARK59">transcription factor binding site</a>s are (which k the enzyme is targeting).</li>
+<li>what the <a href="#BOOKMARK59">regulatory motif</a> is (the pattern expected by the enzyme).</li>
+<li>where the <a href="#BOOKMARK60">transcription factor binding site</a>s are (which <a href="#BOOKMARK19">k-mer</a>s the enzyme is targeting).</li>
+<li>how long the <a href="#BOOKMARK60">transcription factor binding site</a>s are (which k the enzyme is targeting).</li>
 </ul>
-<p>The <a href="#BOOKMARK58">regulatory motif</a> expected by a <a href="#BOOKMARK54">transcription factor</a> typically expects <a href="#BOOKMARK20">k-mer</a>s that have the same length and are similar to each other (short hamming distance). As such, potential <a href="#BOOKMARK55">motif</a> candidates can be derived by identifying <a href="#BOOKMARK20">k-mer</a>s across the set of <a href="#BOOKMARK73">sequence</a>s that are similar to each other.</p>
-<a name="HEADREF22"></a><h3>Bruteforce Algorithm</h3>
+<p>The <a href="#BOOKMARK59">regulatory motif</a> expected by a <a href="#BOOKMARK54">transcription factor</a> typically expects <a href="#BOOKMARK19">k-mer</a>s that have the same length and are similar to each other (short hamming distance). As such, potential <a href="#BOOKMARK55">motif</a> candidates can be derived by identifying <a href="#BOOKMARK19">k-mer</a>s across the set of <a href="#BOOKMARK74">sequence</a>s that are similar to each other.</p>
+<a name="HEADREF23"></a><h4>Bruteforce Algorithm</h4>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK3">K-mer/Hamming Distance Neighbourhood</a></li>
-<li><a href="#BOOKMARK14">Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK3">Algorithms/K-mer/Hamming Distance Neighbourhood</a></li>
+<li><a href="#BOOKMARK14">Algorithms/Motif/Motif Matrix Score</a></li>
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm scans over all <a href="#BOOKMARK20">k-mer</a>s in a set of DNA <a href="#BOOKMARK73">sequence</a>s, enumerates the hamming distance neighbourhood of each <a href="#BOOKMARK20">k-mer</a>, and uses the <a href="#BOOKMARK20">k-mer</a>s from the hamming distance neighbourhood to build out possible <a href="#BOOKMARK57">motif matrices</a>. Of all the <a href="#BOOKMARK57">motif matrices</a> built, it selects the one with the lowest score.</p>
+<p>This algorithm scans over all <a href="#BOOKMARK19">k-mer</a>s in a set of DNA <a href="#BOOKMARK74">sequence</a>s, enumerates the hamming distance neighbourhood of each <a href="#BOOKMARK19">k-mer</a>, and uses the <a href="#BOOKMARK19">k-mer</a>s from the hamming distance neighbourhood to build out possible <a href="#BOOKMARK58">motif matrices</a>. Of all the <a href="#BOOKMARK58">motif matrices</a> built, it selects the one with the lowest score.</p>
 <p>Neither k nor the mismatches allowed by the <a href="#BOOKMARK55">motif</a> is known. As such, the algorithm may need to be repeated multiple times with different value combinations.</p>
 <p>Even for trivial inputs, this algorithm falls over very quickly. It's intended to help conceptualize the problem of <a href="#BOOKMARK55">motif</a> finding.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">enumerate_hamming_distance_neighbourhood_for_all_kmer</span>(<span class="hljs-params">
@@ -1263,20 +1270,20 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>GGAAA<br>GGAAA<br>GGAAA</p>
+<p>AAAAA<br>AAAAA<br>AAAAA</p>
 </div>
 <p></p>
-<a name="HEADREF23"></a><h3>Median String Algorithm</h3>
+<a name="HEADREF24"></a><h4>Median String Algorithm</h4>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK11">Motif/Consensus String</a></li>
-<li><a href="#BOOKMARK14">Motif/Motif Matrix Score</a></li>
-<li><a href="#BOOKMARK2">K-mer/Hamming Distance</a></li>
+<li><a href="#BOOKMARK11">Algorithms/Motif/Consensus String</a></li>
+<li><a href="#BOOKMARK14">Algorithms/Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK2">Algorithms/K-mer/Hamming Distance</a></li>
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm takes advantage of the fact that the same score can be derived by scoring a <a href="#BOOKMARK57">motif matrix</a> either row-by-row or column-by-column. For example, the score for the following <a href="#BOOKMARK57">motif matrix</a> is 3...</p>
+<p>This algorithm takes advantage of the fact that the same score can be derived by scoring a <a href="#BOOKMARK58">motif matrix</a> either row-by-row or column-by-column. For example, the score for the following <a href="#BOOKMARK58">motif matrix</a> is 3...</p>
 <table>
 <thead>
 <tr>
@@ -1344,7 +1351,7 @@ SSSII
 </tbody>
 </table>
 <p>For each column, the number of unpopular nucleotides is counted. Then, those counts are summed to get the score: 0 + 0 + 2 + 0 + 1 + 0 = 3.</p>
-<p>That exact same score scan be calculated by working through the <a href="#BOOKMARK57">motif matrix</a> row-by-row...</p>
+<p>That exact same score scan be calculated by working through the <a href="#BOOKMARK58">motif matrix</a> row-by-row...</p>
 <table>
 <thead>
 <tr>
@@ -1472,16 +1479,16 @@ SSSII
 </tr>
 </tbody>
 </table>
-<p>Notice how each row's score is equivalent to the hamming distance between the <a href="#BOOKMARK20">k-mer</a> at that row and the <a href="#BOOKMARK57">motif matrix</a>'s <a href="#BOOKMARK70">consensus string</a>. Specifically, the <a href="#BOOKMARK70">consensus string</a> for the <a href="#BOOKMARK57">motif matrix</a> is ATCCAC. For each row, ...</p>
+<p>Notice how each row's score is equivalent to the hamming distance between the <a href="#BOOKMARK19">k-mer</a> at that row and the <a href="#BOOKMARK58">motif matrix</a>'s <a href="#BOOKMARK71">consensus string</a>. Specifically, the <a href="#BOOKMARK71">consensus string</a> for the <a href="#BOOKMARK58">motif matrix</a> is ATCCAC. For each row, ...</p>
 <ul>
 <li>hamming_distance(ATGCAC, ATCCAC) = 1</li>
 <li>hamming_distance(ATGCAC, ATCCAC) = 1</li>
 <li>hamming_distance(ATCCTC, ATCCAC) = 1</li>
 <li>hamming_distance(ATCCAC, ATCCAC) = 0</li>
 </ul>
-<p>Given these facts, this algorithm constructs a set of <a href="#BOOKMARK70">consensus string</a>s by enumerating through all possible <a href="#BOOKMARK20">k-mer</a>s for some k. Then, for each <a href="#BOOKMARK70">consensus string</a>, it scans over each <a href="#BOOKMARK73">sequence</a> to find the <a href="#BOOKMARK20">k-mer</a> that minimizes the hamming distance for that <a href="#BOOKMARK70">consensus string</a>. These <a href="#BOOKMARK20">k-mer</a>s are used as the members of a <a href="#BOOKMARK57">motif matrix</a>.</p>
-<p>Of all the <a href="#BOOKMARK57">motif matrices</a> built, the one with the lowest score is selected.</p>
-<p>Since the k for the <a href="#BOOKMARK55">motif</a> is unknown, this algorithm may need to be repeated multiple times with different k values. This algorithm also doesn't scale very well. For k=10, 1048576 different <a href="#BOOKMARK70">consensus string</a>s are possible.</p>
+<p>Given these facts, this algorithm constructs a set of <a href="#BOOKMARK71">consensus string</a>s by enumerating through all possible <a href="#BOOKMARK19">k-mer</a>s for some k. Then, for each <a href="#BOOKMARK71">consensus string</a>, it scans over each <a href="#BOOKMARK74">sequence</a> to find the <a href="#BOOKMARK19">k-mer</a> that minimizes the hamming distance for that <a href="#BOOKMARK71">consensus string</a>. These <a href="#BOOKMARK19">k-mer</a>s are used as the <a href="#BOOKMARK57">member</a>s of a <a href="#BOOKMARK58">motif matrix</a>.</p>
+<p>Of all the <a href="#BOOKMARK58">motif matrices</a> built, the one with the lowest score is selected.</p>
+<p>Since the k for the <a href="#BOOKMARK55">motif</a> is unknown, this algorithm may need to be repeated multiple times with different k values. This algorithm also doesn't scale very well. For k=10, 1048576 different <a href="#BOOKMARK71">consensus string</a>s are possible.</p>
 <pre class="hljs"><code><span class="hljs-comment"># The name is slightly confusing. What this actually does...</span>
 <span class="hljs-comment">#   For each dna string:</span>
 <span class="hljs-comment">#     Find the k-mer with the min hamming distance between the k-mers that make up the DNA string and pattern</span>
@@ -1513,24 +1520,24 @@ SSSII
 <p>Found the consensus string GAC with a score of 2</p>
 </div>
 <p></p>
-<a name="HEADREF24"></a><h3>Greedy Algorithm</h3>
+<a name="HEADREF25"></a><h4>Greedy Algorithm</h4>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK14">Motif/Motif Matrix Score</a></li>
-<li><a href="#BOOKMARK15">Motif/K-mer Match Probability</a></li>
+<li><a href="#BOOKMARK14">Algorithms/Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK15">Algorithms/Motif/K-mer Match Probability</a></li>
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm begins by constructing a <a href="#BOOKMARK57">motif matrix</a> where the only member is a <a href="#BOOKMARK20">k-mer</a> picked from the first <a href="#BOOKMARK73">sequence</a>. From there, it goes through the <a href="#BOOKMARK20">k-mer</a>s in the ...</p>
+<p>This algorithm begins by constructing a <a href="#BOOKMARK58">motif matrix</a> where the only <a href="#BOOKMARK57">member</a> is a <a href="#BOOKMARK19">k-mer</a> picked from the first <a href="#BOOKMARK74">sequence</a>. From there, it goes through the <a href="#BOOKMARK19">k-mer</a>s in the ...</p>
 <ol>
-<li>second <a href="#BOOKMARK73">sequence</a> to find the one that has the highest match probability to the <a href="#BOOKMARK57">motif matrix</a> and adds it as a member to to the <a href="#BOOKMARK57">motif matrix</a>.</li>
-<li>third <a href="#BOOKMARK73">sequence</a> to find the one that has the highest match probability to the <a href="#BOOKMARK57">motif matrix</a> and adds it as a member to to the <a href="#BOOKMARK57">motif matrix</a>.</li>
-<li>fourth <a href="#BOOKMARK73">sequence</a> to find the one that has the highest match probability to the <a href="#BOOKMARK57">motif matrix</a> and adds it as a member to to the <a href="#BOOKMARK57">motif matrix</a>.</li>
+<li>second <a href="#BOOKMARK74">sequence</a> to find the one that has the highest match probability to the <a href="#BOOKMARK58">motif matrix</a> and adds it as a <a href="#BOOKMARK57">member</a> to to the <a href="#BOOKMARK58">motif matrix</a>.</li>
+<li>third <a href="#BOOKMARK74">sequence</a> to find the one that has the highest match probability to the <a href="#BOOKMARK58">motif matrix</a> and adds it as a <a href="#BOOKMARK57">member</a> to to the <a href="#BOOKMARK58">motif matrix</a>.</li>
+<li>fourth <a href="#BOOKMARK74">sequence</a> to find the one that has the highest match probability to the <a href="#BOOKMARK58">motif matrix</a> and adds it as a <a href="#BOOKMARK57">member</a> to to the <a href="#BOOKMARK58">motif matrix</a>.</li>
 <li>...</li>
 </ol>
-<p>This process repeats once for every <a href="#BOOKMARK20">k-mer</a> in the first <a href="#BOOKMARK73">sequence</a>. Each repetition produces a <a href="#BOOKMARK57">motif matrix</a>. Of all the <a href="#BOOKMARK57">motif matrices</a> built, the one with the lowest score is selected.</p>
-<p>This is a <a href="#BOOKMARK63">greedy algorithm</a>. It builds out potential <a href="#BOOKMARK57">motif matrices</a> by selecting the locally optimal <a href="#BOOKMARK20">k-mer</a> from each <a href="#BOOKMARK73">sequence</a>. While this may not lead to the globally optimal <a href="#BOOKMARK57">motif matrix</a>, it's fast and has a higher than normal likelihood of picking out the correct <a href="#BOOKMARK57">motif matrix</a>.</p>
+<p>This process repeats once for every <a href="#BOOKMARK19">k-mer</a> in the first <a href="#BOOKMARK74">sequence</a>. Each repetition produces a <a href="#BOOKMARK58">motif matrix</a>. Of all the <a href="#BOOKMARK58">motif matrices</a> built, the one with the lowest score is selected.</p>
+<p>This is a <a href="#BOOKMARK64">greedy algorithm</a>. It builds out potential <a href="#BOOKMARK58">motif matrices</a> by selecting the locally optimal <a href="#BOOKMARK19">k-mer</a> from each <a href="#BOOKMARK74">sequence</a>. While this may not lead to the globally optimal <a href="#BOOKMARK58">motif matrix</a>, it's fast and has a higher than normal likelihood of picking out the correct <a href="#BOOKMARK58">motif matrix</a>.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">greedy_motif_search_with_psuedocounts</span>(<span class="hljs-params">k: int, dnas: List[str]</span>):</span>
     best_motif_matrix = [dna[<span class="hljs-number">0</span>:k] <span class="hljs-keyword">for</span> dna <span class="hljs-keyword">in</span> dnas]
 
@@ -1559,19 +1566,19 @@ SSSII
 <p>GAC<br>GAC<br>GTC<br>GAG<br>GAC</p>
 </div>
 <p></p>
-<a name="HEADREF25"></a><h3>Randomized Algorithm</h3>
+<a name="HEADREF26"></a><h4>Randomized Algorithm</h4>
 <p><a name="BOOKMARK17"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK14">Motif/Motif Matrix Score</a></li>
-<li><a href="#BOOKMARK13">Motif/Motif Matrix Profile</a></li>
-<li><a href="#BOOKMARK15">Motif/K-mer Match Probability</a></li>
+<li><a href="#BOOKMARK14">Algorithms/Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK13">Algorithms/Motif/Motif Matrix Profile</a></li>
+<li><a href="#BOOKMARK15">Algorithms/Motif/K-mer Match Probability</a></li>
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
-<p>This algorithm selects a random <a href="#BOOKMARK20">k-mer</a> from each <a href="#BOOKMARK73">sequence</a> to form an initial <a href="#BOOKMARK57">motif matrix</a>. Then, for each <a href="#BOOKMARK73">sequence</a>, it finds the <a href="#BOOKMARK20">k-mer</a> that has the highest probability of matching that <a href="#BOOKMARK57">motif matrix</a>. Those <a href="#BOOKMARK20">k-mer</a>s form the members of a new <a href="#BOOKMARK57">motif matrix</a>. If the new <a href="#BOOKMARK57">motif matrix</a> scores better than the existing <a href="#BOOKMARK57">motif matrix</a>, the existing <a href="#BOOKMARK57">motif matrix</a> gets replaced with the new <a href="#BOOKMARK57">motif matrix</a> and the process repeats. Otherwise, the existing <a href="#BOOKMARK57">motif matrix</a> is selected.</p>
-<p>In theory, this algorithm works because all <a href="#BOOKMARK20">k-mer</a>s in a <a href="#BOOKMARK73">sequence</a> other than the <a href="#BOOKMARK56">motif member</a> are considered to be random noise. As such, if no <a href="#BOOKMARK56">motif member</a>s were selected when creating the initial <a href="#BOOKMARK57">motif matrix</a>, the profile of that initial <a href="#BOOKMARK57">motif matrix</a> would be more or less uniform:</p>
+<p>This algorithm selects a random <a href="#BOOKMARK19">k-mer</a> from each <a href="#BOOKMARK74">sequence</a> to form an initial <a href="#BOOKMARK58">motif matrix</a>. Then, for each <a href="#BOOKMARK74">sequence</a>, it finds the <a href="#BOOKMARK19">k-mer</a> that has the highest probability of matching that <a href="#BOOKMARK58">motif matrix</a>. Those <a href="#BOOKMARK19">k-mer</a>s form the <a href="#BOOKMARK57">member</a>s of a new <a href="#BOOKMARK58">motif matrix</a>. If the new <a href="#BOOKMARK58">motif matrix</a> scores better than the existing <a href="#BOOKMARK58">motif matrix</a>, the existing <a href="#BOOKMARK58">motif matrix</a> gets replaced with the new <a href="#BOOKMARK58">motif matrix</a> and the process repeats. Otherwise, the existing <a href="#BOOKMARK58">motif matrix</a> is selected.</p>
+<p>In theory, this algorithm works because all <a href="#BOOKMARK19">k-mer</a>s in a <a href="#BOOKMARK74">sequence</a> other than the <a href="#BOOKMARK56">motif member</a> are considered to be random noise. As such, if no <a href="#BOOKMARK56">motif member</a>s were selected when creating the initial <a href="#BOOKMARK58">motif matrix</a>, the profile of that initial <a href="#BOOKMARK58">motif matrix</a> would be more or less uniform:</p>
 <table>
 <thead>
 <tr>
@@ -1623,8 +1630,8 @@ SSSII
 </tr>
 </tbody>
 </table>
-<p>Such a profile wouldn't allow for converging to a vastly better scoring <a href="#BOOKMARK57">motif matrix</a>.</p>
-<p>However, if at least one <a href="#BOOKMARK56">motif member</a> were selected when creating the initial <a href="#BOOKMARK57">motif matrix</a>, the profile of that initial <a href="#BOOKMARK57">motif matrix</a> would skew towards the <a href="#BOOKMARK55">motif</a>:</p>
+<p>Such a profile wouldn't allow for converging to a vastly better scoring <a href="#BOOKMARK58">motif matrix</a>.</p>
+<p>However, if at least one <a href="#BOOKMARK56">motif member</a> were selected when creating the initial <a href="#BOOKMARK58">motif matrix</a>, the profile of that initial <a href="#BOOKMARK58">motif matrix</a> would skew towards the <a href="#BOOKMARK55">motif</a>:</p>
 <table>
 <thead>
 <tr>
@@ -1676,9 +1683,9 @@ SSSII
 </tr>
 </tbody>
 </table>
-<p>Such a profile would lead to a better scoring <a href="#BOOKMARK57">motif matrix</a> where that better scoring <a href="#BOOKMARK57">motif matrix</a> contains the other members of the <a href="#BOOKMARK55">motif</a>.</p>
-<p>In practice, this algorithm may trip up on real-world data. Real-world <a href="#BOOKMARK73">sequence</a>s don't actually contain random noise. The hope is that the only <a href="#BOOKMARK20">k-mer</a>s that are highly similar to each other in the <a href="#BOOKMARK73">sequence</a>s are members of the <a href="#BOOKMARK55">motif</a>. It's possible that the <a href="#BOOKMARK73">sequence</a>s contain other sets of <a href="#BOOKMARK20">k-mer</a>s that are similar to each other but vastly different than the <a href="#BOOKMARK56">motif member</a>s. In such cases, even if a <a href="#BOOKMARK56">motif member</a> were to be selected when creating the initial <a href="#BOOKMARK57">motif matrix</a>, the algorithm may converge to a <a href="#BOOKMARK57">motif matrix</a> that isn't for the <a href="#BOOKMARK55">motif</a>.</p>
-<p>This is a <a href="#BOOKMARK69">monte carlo algorithm</a>. It uses randomness to deliver an approximate solution. While this may not lead to the globally optimal <a href="#BOOKMARK57">motif matrix</a>, it's fast and as such can be run multiple times. The run with the best <a href="#BOOKMARK57">motif matrix</a> will likely be a good enough solution (it captures most of the <a href="#BOOKMARK56">motif member</a>s, or parts of the <a href="#BOOKMARK56">motif member</a>s if k was too small, or etc..).</p>
+<p>Such a profile would lead to a better scoring <a href="#BOOKMARK58">motif matrix</a> where that better scoring <a href="#BOOKMARK58">motif matrix</a> contains the other <a href="#BOOKMARK57">member</a>s of the <a href="#BOOKMARK55">motif</a>.</p>
+<p>In practice, this algorithm may trip up on real-world data. Real-world <a href="#BOOKMARK74">sequence</a>s don't actually contain random noise. The hope is that the only <a href="#BOOKMARK19">k-mer</a>s that are highly similar to each other in the <a href="#BOOKMARK74">sequence</a>s are <a href="#BOOKMARK57">member</a>s of the <a href="#BOOKMARK55">motif</a>. It's possible that the <a href="#BOOKMARK74">sequence</a>s contain other sets of <a href="#BOOKMARK19">k-mer</a>s that are similar to each other but vastly different than the <a href="#BOOKMARK56">motif member</a>s. In such cases, even if a <a href="#BOOKMARK56">motif member</a> were to be selected when creating the initial <a href="#BOOKMARK58">motif matrix</a>, the algorithm may converge to a <a href="#BOOKMARK58">motif matrix</a> that isn't for the <a href="#BOOKMARK55">motif</a>.</p>
+<p>This is a <a href="#BOOKMARK70">monte carlo algorithm</a>. It uses randomness to deliver an approximate solution. While this may not lead to the globally optimal <a href="#BOOKMARK58">motif matrix</a>, it's fast and as such can be run multiple times. The run with the best <a href="#BOOKMARK58">motif matrix</a> will likely be a good enough solution (it captures most of the <a href="#BOOKMARK56">motif member</a>s, or parts of the <a href="#BOOKMARK56">motif member</a>s if k was too small, or etc..).</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomized_motif_search_with_psuedocounts</span>(<span class="hljs-params">k: int, dnas: List[str]</span>) -&gt; List[str]:</span>
         motif_matrix = []
         <span class="hljs-keyword">for</span> dna <span class="hljs-keyword">in</span> dnas:
@@ -1706,13 +1713,13 @@ SSSII
 <p>GAC<br>GAC<br>GCC<br>CAC<br>GAC</p>
 </div>
 <p></p>
-<a name="HEADREF26"></a><h3>Gibbs Sampling Algorithm</h3>
+<a name="HEADREF27"></a><h4>Gibbs Sampling Algorithm</h4>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK14">Motif/Motif Matrix Score</a></li>
-<li><a href="#BOOKMARK15">Motif/K-mer Match Probability</a></li>
-<li><a href="#BOOKMARK17">Motif/Find Motif Matrix/Randomized Algorithm</a></li>
+<li><a href="#BOOKMARK14">Algorithms/Motif/Motif Matrix Score</a></li>
+<li><a href="#BOOKMARK15">Algorithms/Motif/K-mer Match Probability</a></li>
+<li><a href="#BOOKMARK17">Algorithms/Motif/Find Motif Matrix/Randomized Algorithm</a></li>
 </ul>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
@@ -1720,10 +1727,10 @@ SSSII
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The Pevzner book mentions there's more to Gibbs Sampling than what it discussed. I looked up the topic but couldn't make much sense of it.</p>
 </div>
-<p>This algorithm selects a random <a href="#BOOKMARK20">k-mer</a> from each <a href="#BOOKMARK73">sequence</a> to form an initial <a href="#BOOKMARK57">motif matrix</a>. Then, one of the <a href="#BOOKMARK20">k-mer</a>s from the <a href="#BOOKMARK57">motif matrix</a> is randomly chosen and replaced with another <a href="#BOOKMARK20">k-mer</a> from the same <a href="#BOOKMARK73">sequence</a> that the removed <a href="#BOOKMARK20">k-mer</a> came from. The replacement is selected by using a weighted random number algorithm, where how likely a <a href="#BOOKMARK20">k-mer</a> is to be chosen as a replacement has to do with how probable of a match it is to the <a href="#BOOKMARK57">motif matrix</a>.</p>
-<p>This process of replacement is repeated for some user-defined number of cycles, at which point the algorithm has hopefully homed in on the desired <a href="#BOOKMARK57">motif matrix</a>.</p>
-<p>This is a <a href="#BOOKMARK69">monte carlo algorithm</a>. It uses randomness to deliver an approximate solution. While this may not lead to the globally optimal <a href="#BOOKMARK57">motif matrix</a>, it's fast and as such can be run multiple times. The run with the best <a href="#BOOKMARK57">motif matrix</a> will likely be a good enough solution (it captures most of the <a href="#BOOKMARK56">motif member</a>s, or parts of the <a href="#BOOKMARK56">motif member</a>s if k was too small, or etc..).</p>
-<p>The idea behind this algorithm is similar to the idea behind the <a href="#BOOKMARK67">randomized algorithm</a> for <a href="#BOOKMARK57">motif matrix</a> finding, except that this algorithm is more conservative in how it converges on a <a href="#BOOKMARK57">motif matrix</a> and the weighted random selection allows it to potentially break out if stuck in a local optima.</p>
+<p>This algorithm selects a random <a href="#BOOKMARK19">k-mer</a> from each <a href="#BOOKMARK74">sequence</a> to form an initial <a href="#BOOKMARK58">motif matrix</a>. Then, one of the <a href="#BOOKMARK19">k-mer</a>s from the <a href="#BOOKMARK58">motif matrix</a> is randomly chosen and replaced with another <a href="#BOOKMARK19">k-mer</a> from the same <a href="#BOOKMARK74">sequence</a> that the removed <a href="#BOOKMARK19">k-mer</a> came from. The replacement is selected by using a weighted random number algorithm, where how likely a <a href="#BOOKMARK19">k-mer</a> is to be chosen as a replacement has to do with how probable of a match it is to the <a href="#BOOKMARK58">motif matrix</a>.</p>
+<p>This process of replacement is repeated for some user-defined number of cycles, at which point the algorithm has hopefully homed in on the desired <a href="#BOOKMARK58">motif matrix</a>.</p>
+<p>This is a <a href="#BOOKMARK70">monte carlo algorithm</a>. It uses randomness to deliver an approximate solution. While this may not lead to the globally optimal <a href="#BOOKMARK58">motif matrix</a>, it's fast and as such can be run multiple times. The run with the best <a href="#BOOKMARK58">motif matrix</a> will likely be a good enough solution (it captures most of the <a href="#BOOKMARK56">motif member</a>s, or parts of the <a href="#BOOKMARK56">motif member</a>s if k was too small, or etc..).</p>
+<p>The idea behind this algorithm is similar to the idea behind the <a href="#BOOKMARK68">randomized algorithm</a> for <a href="#BOOKMARK58">motif matrix</a> finding, except that this algorithm is more conservative in how it converges on a <a href="#BOOKMARK58">motif matrix</a> and the weighted random selection allows it to potentially break out if stuck in a local optima.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gibbs_rand</span>(<span class="hljs-params">prob_dist: List[float]</span>) -&gt; int:</span>
     <span class="hljs-comment"># normalize prob_dist -- just incase sum(prob_dist) != 1.0</span>
     prob_dist_sum = sum(prob_dist)
@@ -1774,55 +1781,55 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>GAG<br>GAC</p>
 </div>
 <p></p>
-<a name="HEADREF27"></a><h1>Stories</h1>
-<a name="HEADREF28"></a><h2>Bacteria Replication</h2>
-<p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK28">replication origin</a> (<a href="#BOOKMARK29">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK30">replication terminus</a> (<a href="#BOOKMARK31">ter</a>) is where it ends. The <a href="#BOOKMARK29">ori</a> and <a href="#BOOKMARK31">ter</a> and usually placed on opposite ends of each other.</p>
+<a name="HEADREF28"></a><h1>Stories</h1>
+<a name="HEADREF29"></a><h2>Bacteria Replication</h2>
+<p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK27">replication origin</a> (<a href="#BOOKMARK28">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK29">replication terminus</a> (<a href="#BOOKMARK30">ter</a>) is where it ends. The <a href="#BOOKMARK28">ori</a> and <a href="#BOOKMARK30">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
-<p>The replication process begins by a <a href="#BOOKMARK27">replication fork</a> opening at the <a href="#BOOKMARK29">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK31">ter</a>...</p>
+<p>The replication process begins by a <a href="#BOOKMARK26">replication fork</a> opening at the <a href="#BOOKMARK28">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK30">ter</a>...</p>
 <p><img src="svgbob_fc7cf2c734fa0cab15b5746e25ad07e25f85ec64.svg" alt="Kroki diagram output"></p>
-<p>For each forked <a href="#BOOKMARK38">single-stranded DNA</a>, <a href="#BOOKMARK25">DNA polymerase</a>s attach on and synthesize a new reverse complement strand so that it turns back into <a href="#BOOKMARK39">double-stranded DNA</a>....</p>
+<p>For each forked <a href="#BOOKMARK38">single-stranded DNA</a>, <a href="#BOOKMARK24">DNA polymerase</a>s attach on and synthesize a new reverse complement strand so that it turns back into <a href="#BOOKMARK39">double-stranded DNA</a>....</p>
 <p><img src="svgbob_971abfeff166ada9787cd484db9bfbe43120973a.svg" alt="Kroki diagram output"></p>
-<p>The process of synthesizing a reverse complement strand is different based on the section of DNA that <a href="#BOOKMARK25">DNA polymerase</a> is operating on. For each <a href="#BOOKMARK38">single-stranded DNA</a>, if the direction of that DNA strand is traveling from ...</p>
+<p>The process of synthesizing a reverse complement strand is different based on the section of DNA that <a href="#BOOKMARK24">DNA polymerase</a> is operating on. For each <a href="#BOOKMARK38">single-stranded DNA</a>, if the direction of that DNA strand is traveling from ...</p>
 <ul>
-<li><a href="#BOOKMARK29">ori</a> to <a href="#BOOKMARK31">ter</a>, it's called a <a href="#BOOKMARK32">forward half-strand</a>.</li>
-<li><a href="#BOOKMARK31">ter</a> to <a href="#BOOKMARK29">ori</a>, it's called a <a href="#BOOKMARK33">reverse half-strand</a>.</li>
+<li><a href="#BOOKMARK28">ori</a> to <a href="#BOOKMARK30">ter</a>, it's called a <a href="#BOOKMARK31">forward half-strand</a>.</li>
+<li><a href="#BOOKMARK30">ter</a> to <a href="#BOOKMARK28">ori</a>, it's called a <a href="#BOOKMARK32">reverse half-strand</a>.</li>
 </ul>
 <p><img src="svgbob_ad11e0114c63955ab620cbe9a8dee61a85caa1f9.svg" alt="Kroki diagram output"></p>
-<p>Since <a href="#BOOKMARK25">DNA polymerase</a> can only walk over DNA in the reverse direction (<a href="#BOOKMARK23">3'</a> to <a href="#BOOKMARK21">5'</a>), the 2 <a href="#BOOKMARK33">reverse half-strand</a>s will quickly get walked over in one shot. A <a href="#BOOKMARK26">primer</a> gets attached to the <a href="#BOOKMARK29">ori</a>, then a <a href="#BOOKMARK25">DNA polymerase</a> attaches to that <a href="#BOOKMARK26">primer</a> to begin synthesis of a new strand. Synthesis continues until the <a href="#BOOKMARK31">ter</a> is reached...</p>
+<p>Since <a href="#BOOKMARK24">DNA polymerase</a> can only walk over DNA in the reverse direction (<a href="#BOOKMARK22">3'</a> to <a href="#BOOKMARK20">5'</a>), the 2 <a href="#BOOKMARK32">reverse half-strand</a>s will quickly get walked over in one shot. A <a href="#BOOKMARK25">primer</a> gets attached to the <a href="#BOOKMARK28">ori</a>, then a <a href="#BOOKMARK24">DNA polymerase</a> attaches to that <a href="#BOOKMARK25">primer</a> to begin synthesis of a new strand. Synthesis continues until the <a href="#BOOKMARK30">ter</a> is reached...</p>
 <p><img src="svgbob_83b0a64a4614fa906388ef166341e3fd293c6dc0.svg" alt="Kroki diagram output"></p>
-<p>For the <a href="#BOOKMARK32">forward half-strand</a>s, the process is much slower. Since <a href="#BOOKMARK25">DNA polymerase</a> can only walk DNA in the reverse direction, the <a href="#BOOKMARK32">forward half-strand</a>s get replicated in small segments. That is, as the <a href="#BOOKMARK27">replication fork</a> continues to grow, every ~2000 nucleotides a new <a href="#BOOKMARK26">primer</a> attaches to the end of the fork on the forward strands. A new <a href="#BOOKMARK25">DNA polymerase</a> attaches to each <a href="#BOOKMARK26">primer</a> and walks in the reverse direction (towards the <a href="#BOOKMARK29">ori</a>) to synthesize a small segment of DNA. That small segment of DNA is called an <a href="#BOOKMARK36">Okazaki fragment</a>...</p>
+<p>For the <a href="#BOOKMARK31">forward half-strand</a>s, the process is much slower. Since <a href="#BOOKMARK24">DNA polymerase</a> can only walk DNA in the reverse direction, the <a href="#BOOKMARK31">forward half-strand</a>s get replicated in small segments. That is, as the <a href="#BOOKMARK26">replication fork</a> continues to grow, every ~2000 nucleotides a new <a href="#BOOKMARK25">primer</a> attaches to the end of the fork on the forward strands. A new <a href="#BOOKMARK24">DNA polymerase</a> attaches to each <a href="#BOOKMARK25">primer</a> and walks in the reverse direction (towards the <a href="#BOOKMARK28">ori</a>) to synthesize a small segment of DNA. That small segment of DNA is called an <a href="#BOOKMARK35">Okazaki fragment</a>...</p>
 <p><img src="svgbob_4c651d9aa100c5b586103bb0d42cc91ff27da474.svg" alt="Kroki diagram output"></p>
-<p>The <a href="#BOOKMARK27">replication fork</a> will keep widening until the original 2 strands split off. <a href="#BOOKMARK25">DNA polymerase</a> will have made sure that for each separated strand, a newly synthesized reverse complement is paired to it. The end result is 2 daughter chromosome where each chromosome has gaps...</p>
+<p>The <a href="#BOOKMARK26">replication fork</a> will keep widening until the original 2 strands split off. <a href="#BOOKMARK24">DNA polymerase</a> will have made sure that for each separated strand, a newly synthesized reverse complement is paired to it. The end result is 2 daughter chromosome where each chromosome has gaps...</p>
 <p><img src="svgbob_eac405c5709e835b492078d1ea557a7199d8f722.svg" alt="Kroki diagram output"></p>
-<p>The <a href="#BOOKMARK36">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK37">DNA ligase</a>...</p>
+<p>The <a href="#BOOKMARK35">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK36">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>You now have two complete copies of the DNA.</p>
-<a name="HEADREF29"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF30"></a><h3>Find Ori and Ter</h3>
 <p><a name="BOOKMARK18"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK9">GC Skew</a></li>
+<li><a href="#BOOKMARK9">Algorithms/GC Skew</a></li>
 </ul>
 </div>
-<p>Since the <a href="#BOOKMARK32">forward half-strand</a> gets its reverse complement synthesized at a much slower rate than the <a href="#BOOKMARK33">reverse half-strand</a>, it stays single stranded for a much longer time. <a href="#BOOKMARK38">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BOOKMARK39">double-stranded DNA</a>. Specifically, in <a href="#BOOKMARK38">single-stranded DNA</a>, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.</p>
+<p>Since the <a href="#BOOKMARK31">forward half-strand</a> gets its reverse complement synthesized at a much slower rate than the <a href="#BOOKMARK32">reverse half-strand</a>, it stays single stranded for a much longer time. <a href="#BOOKMARK38">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BOOKMARK39">double-stranded DNA</a>. Specifically, in <a href="#BOOKMARK38">single-stranded DNA</a>, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.</p>
 <p><img src="svgbob_f52124bb3b29a8388ed6a1fc5f597b26a2514f42.svg" alt="Kroki diagram output"></p>
-<p>The <a href="#BOOKMARK33">reverse half-strand</a> spends much less time as a <a href="#BOOKMARK38">single-stranded DNA</a>. As such, it experiences much less C to T mutations.</p>
+<p>The <a href="#BOOKMARK32">reverse half-strand</a> spends much less time as a <a href="#BOOKMARK38">single-stranded DNA</a>. As such, it experiences much less C to T mutations.</p>
 <p><img src="svgbob_7d778227822729bde64ce4a36b5cc9da206869c1.svg" alt="Kroki diagram output"></p>
-<p>Ultimately, that means that a single strand will have a different nucleotide distribution between its <a href="#BOOKMARK32">forward half-strand</a> vs its <a href="#BOOKMARK33">backward half-strand</a>. If the half-strand being targeted for replication is the ...</p>
+<p>Ultimately, that means that a single strand will have a different nucleotide distribution between its <a href="#BOOKMARK31">forward half-strand</a> vs its <a href="#BOOKMARK32">backward half-strand</a>. If the half-strand being targeted for replication is the ...</p>
 <ul>
-<li><a href="#BOOKMARK32">forward half-strand</a>, some Cs get replaced with Ts. As such, its synthesized <a href="#BOOKMARK33">reverse half-strand</a> will have less Gs.</li>
-<li><a href="#BOOKMARK33">reverse half-strand</a>, most Cs are kept. As such, its synthesized <a href="#BOOKMARK32">forward half-strand</a> will keep its Gs.</li>
+<li><a href="#BOOKMARK31">forward half-strand</a>, some Cs get replaced with Ts. As such, its synthesized <a href="#BOOKMARK32">reverse half-strand</a> will have less Gs.</li>
+<li><a href="#BOOKMARK32">reverse half-strand</a>, most Cs are kept. As such, its synthesized <a href="#BOOKMARK31">forward half-strand</a> will keep its Gs.</li>
 </ul>
 <p>To simplify, the ...</p>
 <ul>
-<li><a href="#BOOKMARK32">forward half-strand</a>: loses Cs, keeps Gs.</li>
-<li><a href="#BOOKMARK33">reverse half-strand</a>: keeps Cs, loses Gs.</li>
+<li><a href="#BOOKMARK31">forward half-strand</a>: loses Cs, keeps Gs.</li>
+<li><a href="#BOOKMARK32">reverse half-strand</a>: keeps Cs, loses Gs.</li>
 </ul>
-<p>You can use a GC skew diagram to help pinpoint where the <a href="#BOOKMARK29">ori</a> and <a href="#BOOKMARK31">ter</a> might be. The plot will typically form a peak where the <a href="#BOOKMARK31">ter</a> is (more G vs C) and form a valley where the <a href="#BOOKMARK29">ori</a> is (less G vs C). For example, the GC skew diagram for E. coli bacteria shows a distinct peak and distinct valley.</p>
+<p>You can use a GC skew diagram to help pinpoint where the <a href="#BOOKMARK28">ori</a> and <a href="#BOOKMARK30">ter</a> might be. The plot will typically form a peak where the <a href="#BOOKMARK30">ter</a> is (more G vs C) and form a valley where the <a href="#BOOKMARK28">ori</a> is (less G vs C). For example, the GC skew diagram for E. coli bacteria shows a distinct peak and distinct valley.</p>
 <div style="border:1px solid black;">
 <p></p>
 <p>Calculating skew for: ...</p>
@@ -1834,32 +1841,33 @@ SSSII
 <p></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK29">ori</a> / <a href="#BOOKMARK31">ter</a> regions.</p>
+<p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK28">ori</a> / <a href="#BOOKMARK30">ter</a> regions.</p>
 </div>
-<a name="HEADREF30"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF31"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
 <li><a href="#BOOKMARK18">Stories/Bacteria Replication/Find Ori and Ter</a></li>
-<li><a href="#BOOKMARK7">K-mer/Find Repeating in Window</a></li>
+<li><a href="#BOOKMARK7">Algorithms/K-mer/Find Repeating in Window</a></li>
+<li><a href="#BOOKMARK9">Algorithms/GC Skew</a></li>
 </ul>
 </div>
-<p>Within the <a href="#BOOKMARK29">ori</a> region, there exists several copies of some <a href="#BOOKMARK20">k-mer</a> pattern. These copies are referred to as <a name="BOOKMARK19"></a><strong>DnaA box</strong>es.</p>
+<p>Within the <a href="#BOOKMARK28">ori</a> region, there exists several copies of some <a href="#BOOKMARK19">k-mer</a> pattern. These copies are referred to as <a href="#BOOKMARK37">DnaA box</a>es.</p>
 <p><img src="svgbob_d3e7c213995dec8a967fa89f40ebae73ed6e53ac.svg" alt="Kroki diagram output"></p>
-<p>The DnaA protein binds to a <a href="#BOOKMARK19">DnaA box</a> to activate the process of DNA replication. Through experiments, biologists have determined that <a href="#BOOKMARK19">DnaA box</a>es are typical 9-mers.</p>
+<p>The DnaA protein binds to a <a href="#BOOKMARK37">DnaA box</a> to activate the process of DNA replication. Through experiments, biologists have determined that <a href="#BOOKMARK37">DnaA box</a>es are typical 9-mers.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>The reason why multiple copies of the same <a href="#BOOKMARK20">k-mer</a> exist (<a href="#BOOKMARK19">DnaA box</a>) probably has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein no longer binds to it, it can still bind to the other copies.</p>
+<p>The reason why multiple copies of the same <a href="#BOOKMARK19">k-mer</a> exist (<a href="#BOOKMARK37">DnaA box</a>) probably has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein no longer binds to it, it can still bind to the other copies.</p>
 </div>
-<p>For some bacterial organism, given that we've found the general vicinity of the <a href="#BOOKMARK29">ori</a> for that organism, we can search that vicinity for repeating 9-mers instances. The 9-mers may not match exactly -- the DnaA protein may bind to ...</p>
+<p>For some bacterial organism, given that we've found the general vicinity of the <a href="#BOOKMARK28">ori</a> for that organism, we can search that vicinity for repeating 9-mers instances. The 9-mers may not match exactly -- the DnaA protein may bind to ...</p>
 <ul>
 <li>the 9-mer itself.</li>
 <li>slight variations of the 9-mer.</li>
 <li>the reverse complement of the 9-mer.</li>
 <li>slight variations of the reverse complement of the 9-mer.</li>
 </ul>
-<p>The repeating <a href="#BOOKMARK20">k-mer</a>s found are potential <a href="#BOOKMARK19">DnaA box</a> candidates.</p>
-<p>For example, we know where the general vicinity of the <a href="#BOOKMARK29">ori</a> is in E. coli given its GC skew. We can search the vicinity of the <a href="#BOOKMARK29">ori</a> for repeating <a href="#BOOKMARK20">k-mer</a>s.</p>
+<p>The repeating <a href="#BOOKMARK19">k-mer</a>s found are potential <a href="#BOOKMARK37">DnaA box</a> candidates.</p>
+<p>For example, we know where the general vicinity of the <a href="#BOOKMARK28">ori</a> is in E. coli given its GC skew. We can search the vicinity of the <a href="#BOOKMARK28">ori</a> for repeating <a href="#BOOKMARK19">k-mer</a>s.</p>
 <div style="border:1px solid black;">
 <p></p>
 <p>Calculating skew for: ...</p>
@@ -1868,14 +1876,14 @@ SSSII
 <p>Ori vicinity (min pos): 4719166</p>
 <p>In the ori vicinity, found clusters of k=9 (at least 3 occurrences in window of 500) in ... at...</p>
 <ul>
-<li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGTGCTGG', start_index=9, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGCGCTGG', start_index=9, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCGGCGGTA', start_index=52, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
@@ -1884,17 +1892,17 @@ SSSII
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
-<li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
+<li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
@@ -1908,12 +1916,12 @@ SSSII
 <li>KmerCluster(kmer='ATCACCATT', start_index=500, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCCTTTTTA', start_index=513, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCCTTTTT', start_index=514, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
@@ -1932,32 +1940,54 @@ SSSII
 </ul>
 </div>
 <p></p>
-<a name="HEADREF31"></a><h2>Transcription Factors</h2>
-<p>A <a href="#BOOKMARK54">transcription factor</a> / <a href="#BOOKMARK46">regulatory protein</a> is an enzyme that influences the rate of <a href="#BOOKMARK44">gene expression</a> for some set of <a href="#BOOKMARK40">genes</a>. It does so by searching for and binding to a fuzzy nucleotide <a href="#BOOKMARK73">sequence</a> called a <a href="#BOOKMARK58">regulatory motif</a>. <a href="#BOOKMARK58">Regulatory motif</a>s are typically 8 to 12 nucleotides in length, where each position may have one or more alternates. The simplest way to think of a <a href="#BOOKMARK58">regulatory motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]CCCTA</code> may match to <code>ATTGCCCTA</code>, <code>ATTCCCCTA</code>, <code>TTTGCCCTA</code>, and <code>TTTCCCCTA</code>. The regex itself is the <a href="#BOOKMARK55">motif</a>, while the <a href="#BOOKMARK73">sequence</a>s being matched are <a href="#BOOKMARK56">motif member</a>s.</p>
-<p>The physical location in DNA that a <a href="#BOOKMARK54">transcription factor</a> binds to is called a <a href="#BOOKMARK59">transcription factor binding site</a>. The binding site is located in a <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK52">upstream region</a> (~250 to 2000 nucleotides before the start of the <a href="#BOOKMARK40">gene</a>) and the <a href="#BOOKMARK73">sequence</a> at that location is a <a href="#BOOKMARK56">motif member</a> of that <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK58">regulatory motif</a>. When the <a href="#BOOKMARK54">transcription factor</a> binds, that <a href="#BOOKMARK40">gene</a>'s rate of <a href="#BOOKMARK44">gene expression</a> changes: either more <a href="#BOOKMARK42">transcription</a> happens or less <a href="#BOOKMARK42">transcription</a> happens.</p>
+<a name="HEADREF32"></a><h2>Transcription Factors</h2>
+<p>A <a href="#BOOKMARK54">transcription factor</a> / <a href="#BOOKMARK46">regulatory protein</a> is an enzyme that influences the rate of <a href="#BOOKMARK44">gene expression</a> for some set of <a href="#BOOKMARK40">genes</a>. As the saturation of a <a href="#BOOKMARK54">transcription factor</a> changes, so does the rate of <a href="#BOOKMARK44">gene expression</a> for the set of <a href="#BOOKMARK40">genes</a> that it influences.</p>
+<p><a href="#BOOKMARK54">Transcription factor</a>s bind to DNA near the <a href="#BOOKMARK40">genes</a> they influence: a <a href="#BOOKMARK60">transcription factor binding site</a> is located in a <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK52">upstream region</a> and the <a href="#BOOKMARK74">sequence</a> at that location is a fuzzy nucleotide <a href="#BOOKMARK74">sequence</a> of length 8 to 12 called a <a href="#BOOKMARK59">regulatory motif</a>. The simplest way to think of a <a href="#BOOKMARK59">regulatory motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]CCCTA</code> may match to <code>ATTGCCCTA</code>, <code>ATTCCCCTA</code>, <code>TTTGCCCTA</code>, and <code>TTTCCCCTA</code>. The regex itself is the <a href="#BOOKMARK55">motif</a>, while the <a href="#BOOKMARK74">sequence</a>s being matched are <a href="#BOOKMARK56">motif member</a>s.</p>
 <p><img src="svgbob_c77523791e9f610ea50acd1a596be075095bcceb.svg" alt="Kroki diagram output"></p>
 <p>The production of <a href="#BOOKMARK54">transcription factor</a>s may be tied to certain internal or external conditions. For example, imagine a flower where the petals...</p>
 <ul>
-<li>bunch together (phenotype) at night time when sunlight is hidden and temperature is lower (conditions).</li>
-<li>spread out (phenotype) at day time when sunlight is available and temperature is higher (conditions).</li>
+<li>bunch together at night time when sunlight is hidden and temperature is lower.</li>
+<li>spread out at day time when sunlight is available and temperature is higher.</li>
 </ul>
-<p>The external conditions of sunlight and temperature causes the saturation of some <a href="#BOOKMARK54">transcription factor</a>s to change. Those <a href="#BOOKMARK54">transcription factor</a>s influence the rate of <a href="#BOOKMARK44">gene expression</a> for the <a href="#BOOKMARK40">genes</a> that control the bunching or spreading of the petals.</p>
+<p>The external conditions of sunlight and temperature causes the saturation of some <a href="#BOOKMARK54">transcription factor</a>s to change. Those <a href="#BOOKMARK54">transcription factor</a>s influence the rate of <a href="#BOOKMARK44">gene expression</a> for the <a href="#BOOKMARK40">genes</a> that control the bunching and spreading of the petals.</p>
 <p><img src="svgbob_72fc4d67642aada86238235353d018e0ed888c6e.svg" alt="Kroki diagram output"></p>
-<p>When a biologist suspects that a <a href="#BOOKMARK54">transcription factor</a> may be responsible for a phenotype change, that biologist uses <a href="#BOOKMARK61">DNA microarray</a>s or RNA-Seq to take snapshots of an organism's mRNA:</p>
+<a name="HEADREF33"></a><h3>Find Regulatory Motif</h3>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li>one where the phenotype is expressed,</li>
-<li>and one where the phenotype isn't expressed.</li>
+<li><a href="#BOOKMARK16">Algorithms/Motif/Find Motif Matrix</a></li>
 </ul>
-<p>Comparing these snapshots identifies which <a href="#BOOKMARK40">genes</a> have noticeably differing rates of <a href="#BOOKMARK44">gene expression</a>. These identified <a href="#BOOKMARK40">genes</a> are isolated and <a href="#BOOKMARK74">sequenced</a> for further analysis. Specifically, if these <a href="#BOOKMARK40">genes</a> (or a subset of these <a href="#BOOKMARK40">genes</a>) were influenced by the same <a href="#BOOKMARK54">transcription factor</a>, their <a href="#BOOKMARK52">upstream region</a>s would contain <a href="#BOOKMARK56">motif member</a>s of that <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK58">regulatory motif</a>. But there often isn't a specific <a href="#BOOKMARK54">transcription factor</a> being targeted, so biologists run algorithms on these isolated <a href="#BOOKMARK73">sequence</a>s to identify <a href="#BOOKMARK20">k-mer</a> patterns that are similar to each other: these patterns, if they exist, could be members of the a <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK58">regulatory motif</a>. Further experiments need to be performed to validate or discredit.</p>
-<a name="HEADREF32"></a><h1>Terminology</h1>
+</div>
+<p>Given a organism, we suspect that some physical change in that organism is linked to a <a href="#BOOKMARK54">transcription factor</a>. But, we don't know which <a href="#BOOKMARK54">transcription factor</a> or what the <a href="#BOOKMARK59">regulatory motif</a> for such a <a href="#BOOKMARK54">transcription factor</a> would be.</p>
+<p>In such cases, a special device (<a href="#BOOKMARK62">DNA microarray</a>s or RNA <a href="#BOOKMARK76">sequencer</a>s) is used to take snapshots of that organism's mRNA at different points in time. Two snapshots are taken:</p>
+<ol>
+<li>When the physical change is expressed.</li>
+<li>When the physical change isn't expressed.</li>
+</ol>
+<p>Comparing these snapshots identifies which <a href="#BOOKMARK40">genes</a> have noticeably differing rates of <a href="#BOOKMARK44">gene expression</a>. If the identified <a href="#BOOKMARK40">genes</a> (or a subset of these <a href="#BOOKMARK40">genes</a>) were influenced by the same <a href="#BOOKMARK54">transcription factor</a>, their <a href="#BOOKMARK52">upstream region</a>s would contain <a href="#BOOKMARK57">member</a>s of that <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK59">regulatory motif</a>. Since neither the <a href="#BOOKMARK54">transcription factor</a> nor the <a href="#BOOKMARK59">regulatory motif</a> are known, we can run algorithms on the <a href="#BOOKMARK74">sequence</a>s to find sets of <a href="#BOOKMARK19">k-mer</a>s that are similar to each other. Because the <a href="#BOOKMARK57">member</a>s of a <a href="#BOOKMARK59">regulatory motif</a> are very similar to each other, these similar <a href="#BOOKMARK19">k-mer</a>s may all be <a href="#BOOKMARK57">member</a>s of the same <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK59">regulatory motif</a>.</p>
+<p><img src="svgbob_eb911a251a1a14e1f3e2d24980bd7a55613623fc.svg" alt="Kroki diagram output"></p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<p>TODO: ADD EXAMPLE HERE</p>
+<a name="HEADREF34"></a><h1>Terminology</h1>
 <ul>
 <li>
-<p>A <a name="BOOKMARK20"></a><strong>k-mer</strong> is a sub<a href="#BOOKMARK73">sequence</a> of length k within some larger biological <a href="#BOOKMARK73">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BOOKMARK73">sequence</a> <code>GAAATC</code>, the following <a href="#BOOKMARK20">k-mer</a>'s exist:</p>
+<p>A <a name="BOOKMARK19"></a><strong>k-mer</strong> is a sub<a href="#BOOKMARK74">sequence</a> of length k within some larger biological <a href="#BOOKMARK74">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BOOKMARK74">sequence</a> <code>GAAATC</code>, the following <a href="#BOOKMARK19">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
 <th>k</th>
-<th><a href="#BOOKMARK20">k-mer</a>s</th>
+<th><a href="#BOOKMARK19">k-mer</a>s</th>
 </tr>
 </thead>
 <tbody>
@@ -1989,70 +2019,73 @@ SSSII
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK21"></a><strong>5'</strong> (<a name="BOOKMARK22"></a><strong>5 prime</strong>) / <a name="BOOKMARK23"></a><strong>3'</strong> (<a name="BOOKMARK24"></a><strong>3 prime</strong>) - <a href="#BOOKMARK21">5'</a> (<a href="#BOOKMARK22">5 prime</a>) and <a href="#BOOKMARK23">3'</a> (<a href="#BOOKMARK24">3 prime</a>) describe the opposite ends of DNA. The chemical structure at each end is what defines if it's <a href="#BOOKMARK21">5'</a> or <a href="#BOOKMARK23">3'</a> -- each end is guaranteed to be different from the other. The forward direction on DNA is defined as <a href="#BOOKMARK21">5'</a> to <a href="#BOOKMARK23">3'</a>, while the backwards direction is <a href="#BOOKMARK23">3'</a> to <a href="#BOOKMARK21">5'</a>.</p>
+<p><a name="BOOKMARK20"></a><strong>5'</strong> (<a name="BOOKMARK21"></a><strong>5 prime</strong>) / <a name="BOOKMARK22"></a><strong>3'</strong> (<a name="BOOKMARK23"></a><strong>3 prime</strong>) - <a href="#BOOKMARK20">5'</a> (<a href="#BOOKMARK21">5 prime</a>) and <a href="#BOOKMARK22">3'</a> (<a href="#BOOKMARK23">3 prime</a>) describe the opposite ends of DNA. The chemical structure at each end is what defines if it's <a href="#BOOKMARK20">5'</a> or <a href="#BOOKMARK22">3'</a> -- each end is guaranteed to be different from the other. The forward direction on DNA is defined as <a href="#BOOKMARK20">5'</a> to <a href="#BOOKMARK22">3'</a>, while the backwards direction is <a href="#BOOKMARK22">3'</a> to <a href="#BOOKMARK20">5'</a>.</p>
 <p>Two complementing DNA strands will always be attached in opposite directions.</p>
 <p><img src="svgbob_a2c87a8f72a4ea21f474350dc6a429e386ae8222.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK25"></a><strong>DNA polymerase</strong> - An enzyme that replicates a strand of DNA. That is, <a href="#BOOKMARK25">DNA polymerase</a> walks over a single strand of DNA bases (not the strand of base pairs) and  generates a strand of complements. Before <a href="#BOOKMARK25">DNA polymerase</a> can attach itself and start replicating DNA, it requires a <a href="#BOOKMARK26">primer</a>.</p>
+<p><a name="BOOKMARK24"></a><strong>DNA polymerase</strong> - An enzyme that replicates a strand of DNA. That is, <a href="#BOOKMARK24">DNA polymerase</a> walks over a single strand of DNA bases (not the strand of base pairs) and  generates a strand of complements. Before <a href="#BOOKMARK24">DNA polymerase</a> can attach itself and start replicating DNA, it requires a <a href="#BOOKMARK25">primer</a>.</p>
 <p><img src="svgbob_ac1f3f5c9441e395290e542abbc9256bed49302f.svg" alt="Kroki diagram output"></p>
-<p><a href="#BOOKMARK25">DNA polymerase</a> is unidirectional, meaning that it can only walk a DNA strand in one direction: reverse (<a href="#BOOKMARK23">3'</a> to <a href="#BOOKMARK21">5'</a>)</p>
+<p><a href="#BOOKMARK24">DNA polymerase</a> is unidirectional, meaning that it can only walk a DNA strand in one direction: reverse (<a href="#BOOKMARK22">3'</a> to <a href="#BOOKMARK20">5'</a>)</p>
 </li>
 <li>
-<p><a name="BOOKMARK26"></a><strong>primer</strong> - A <a href="#BOOKMARK26">primer</a> is a short strand of RNA that binds to some larger strand of DNA (single bases, not a strand of base pairs) and allows DNA synthesis to  happen. That is, the <a href="#BOOKMARK26">primer</a> acts as the entry point for special enzymes <a href="#BOOKMARK25">DNA polymerase</a>s. <a href="#BOOKMARK25">DNA polymerase</a>s bind to the <a href="#BOOKMARK26">primer</a> to get access to the strand.</p>
+<p><a name="BOOKMARK25"></a><strong>primer</strong> - A <a href="#BOOKMARK25">primer</a> is a short strand of RNA that binds to some larger strand of DNA (single bases, not a strand of base pairs) and allows DNA synthesis to  happen. That is, the <a href="#BOOKMARK25">primer</a> acts as the entry point for special enzymes <a href="#BOOKMARK24">DNA polymerase</a>s. <a href="#BOOKMARK24">DNA polymerase</a>s bind to the <a href="#BOOKMARK25">primer</a> to get access to the strand.</p>
 </li>
 <li>
-<p><a name="BOOKMARK27"></a><strong>replication fork</strong> - The process of DNA replication requires that DNA's 2 complementing strands be unwound and split open. The area where the DNA starts to  split is called the <a href="#BOOKMARK27">replication fork</a>. In bacteria, the <a href="#BOOKMARK27">replication fork</a> starts at the <a href="#BOOKMARK28">replication origin</a> and keeps expanding until it reaches the <a href="#BOOKMARK30">replication terminus</a>.  Special enzymes called <a href="#BOOKMARK25">DNA polymerase</a>s walk over each unwound strand and create complementing strands.</p>
+<p><a name="BOOKMARK26"></a><strong>replication fork</strong> - The process of DNA replication requires that DNA's 2 complementing strands be unwound and split open. The area where the DNA starts to  split is called the <a href="#BOOKMARK26">replication fork</a>. In bacteria, the <a href="#BOOKMARK26">replication fork</a> starts at the <a href="#BOOKMARK27">replication origin</a> and keeps expanding until it reaches the <a href="#BOOKMARK29">replication terminus</a>.  Special enzymes called <a href="#BOOKMARK24">DNA polymerase</a>s walk over each unwound strand and create complementing strands.</p>
 <p><img src="svgbob_fc7cf2c734fa0cab15b5746e25ad07e25f85ec64.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK28"></a><strong>replication origin</strong> (<a name="BOOKMARK29"></a><strong>ori</strong>) - The point in DNA at which replication starts.</p>
+<p><a name="BOOKMARK27"></a><strong>replication origin</strong> (<a name="BOOKMARK28"></a><strong>ori</strong>) - The point in DNA at which replication starts.</p>
 </li>
 <li>
-<p><a name="BOOKMARK30"></a><strong>replication terminus</strong> (<a name="BOOKMARK31"></a><strong>ter</strong>) - The point in DNA at which replication ends.</p>
+<p><a name="BOOKMARK29"></a><strong>replication terminus</strong> (<a name="BOOKMARK30"></a><strong>ter</strong>) - The point in DNA at which replication ends.</p>
 </li>
 <li>
-<p><a name="BOOKMARK32"></a><strong>forward half-strand</strong> / <a name="BOOKMARK33"></a><strong>reverse half-strand</strong> - Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the <a href="#BOOKMARK28">replication origin</a> (<a href="#BOOKMARK29">ori</a>) is the region of DNA where replication starts, while the <a href="#BOOKMARK30">replication terminus</a> (<a href="#BOOKMARK31">ter</a>) is where replication ends.</p>
+<p><a name="BOOKMARK31"></a><strong>forward half-strand</strong> / <a name="BOOKMARK32"></a><strong>reverse half-strand</strong> - Bacteria are known to have a single chromosome of circular / looping DNA. In this DNA, the <a href="#BOOKMARK27">replication origin</a> (<a href="#BOOKMARK28">ori</a>) is the region of DNA where replication starts, while the <a href="#BOOKMARK29">replication terminus</a> (<a href="#BOOKMARK30">ter</a>) is where replication ends.</p>
 <p><img src="svgbob_fb9438945a109c884df7ccc79d1d8051fd358a87.svg" alt="Kroki diagram output"></p>
-<p>If you split up the DNA based on <a href="#BOOKMARK29">ori</a> and <a href="#BOOKMARK31">ter</a> being cutting points, you end up with 4 distinct strands. Given that the direction of a strand is <a href="#BOOKMARK21">5'</a> to <a href="#BOOKMARK23">3'</a>, if the direction of the strand starts at...</p>
+<p>If you split up the DNA based on <a href="#BOOKMARK28">ori</a> and <a href="#BOOKMARK30">ter</a> being cutting points, you end up with 4 distinct strands. Given that the direction of a strand is <a href="#BOOKMARK20">5'</a> to <a href="#BOOKMARK22">3'</a>, if the direction of the strand starts at...</p>
 <ul>
 <li>
-<p><a href="#BOOKMARK29">ori</a> and ends at <a href="#BOOKMARK31">ter</a>, it's called the <a href="#BOOKMARK32">forward half-strand</a>.</p>
+<p><a href="#BOOKMARK28">ori</a> and ends at <a href="#BOOKMARK30">ter</a>, it's called the <a href="#BOOKMARK31">forward half-strand</a>.</p>
 <p><img src="svgbob_d97cf1f12de4bd77dbaf9eca708b0e9120e50b33.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a href="#BOOKMARK31">ter</a> and ends at <a href="#BOOKMARK29">ori</a>, it's called the <a href="#BOOKMARK33">reverse half-strand</a>.</p>
+<p><a href="#BOOKMARK30">ter</a> and ends at <a href="#BOOKMARK28">ori</a>, it's called the <a href="#BOOKMARK32">reverse half-strand</a>.</p>
 <p><img src="svgbob_0016146d0b3f1f6edf2724e9978d52de7057f5f4.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <ul>
-<li><a href="#BOOKMARK32">Forward half-strand</a> is the same as <a href="#BOOKMARK35">lagging half-strand</a>.</li>
-<li><a href="#BOOKMARK33">Reverse half-strand</a> is the same as <a href="#BOOKMARK34">leading half-strand</a>.</li>
+<li><a href="#BOOKMARK31">Forward half-strand</a> is the same as <a href="#BOOKMARK34">lagging half-strand</a>.</li>
+<li><a href="#BOOKMARK32">Reverse half-strand</a> is the same as <a href="#BOOKMARK33">leading half-strand</a>.</li>
 </ul>
 </div>
 </li>
 <li>
-<p><a name="BOOKMARK34"></a><strong>leading half-strand</strong> / <a name="BOOKMARK35"></a><strong>lagging half-strand</strong> - Given the 2 strands tha make up a DNA molecule, the strand that goes in the...</p>
+<p><a name="BOOKMARK33"></a><strong>leading half-strand</strong> / <a name="BOOKMARK34"></a><strong>lagging half-strand</strong> - Given the 2 strands tha make up a DNA molecule, the strand that goes in the...</p>
 <ul>
-<li>reverse direction (<a href="#BOOKMARK23">3'</a> to <a href="#BOOKMARK21">5'</a>) is called the <a href="#BOOKMARK34">leading half-strand</a>.</li>
-<li>forward direction (<a href="#BOOKMARK21">5'</a> to <a href="#BOOKMARK23">3'</a>) is called the <a href="#BOOKMARK35">lagging half-strand</a>.</li>
+<li>reverse direction (<a href="#BOOKMARK22">3'</a> to <a href="#BOOKMARK20">5'</a>) is called the <a href="#BOOKMARK33">leading half-strand</a>.</li>
+<li>forward direction (<a href="#BOOKMARK20">5'</a> to <a href="#BOOKMARK22">3'</a>) is called the <a href="#BOOKMARK34">lagging half-strand</a>.</li>
 </ul>
-<p>This nomenclature has to do with <a href="#BOOKMARK25">DNA polymerase</a>. Since <a href="#BOOKMARK25">DNA polymerase</a> can only walk in the reverse direction (<a href="#BOOKMARK23">3'</a> to <a href="#BOOKMARK21">5'</a>), it synthesizes the <a href="#BOOKMARK34">leading half-strand</a> in one shot. For the <a href="#BOOKMARK35">lagging half-strand</a> (<a href="#BOOKMARK21">5'</a> to <a href="#BOOKMARK23">3'</a>), multiple <a href="#BOOKMARK25">DNA polymerase</a>s have to used to synthesize DNA, each binding to the lagging strand and walking backwards a small amount to generate a small fragment of DNA (<a href="#BOOKMARK36">Okazaki fragment</a>). the process is much slower for the <a href="#BOOKMARK35">lagging half-strand</a>, that's why it's called lagging.</p>
+<p>This nomenclature has to do with <a href="#BOOKMARK24">DNA polymerase</a>. Since <a href="#BOOKMARK24">DNA polymerase</a> can only walk in the reverse direction (<a href="#BOOKMARK22">3'</a> to <a href="#BOOKMARK20">5'</a>), it synthesizes the <a href="#BOOKMARK33">leading half-strand</a> in one shot. For the <a href="#BOOKMARK34">lagging half-strand</a> (<a href="#BOOKMARK20">5'</a> to <a href="#BOOKMARK22">3'</a>), multiple <a href="#BOOKMARK24">DNA polymerase</a>s have to used to synthesize DNA, each binding to the lagging strand and walking backwards a small amount to generate a small fragment of DNA (<a href="#BOOKMARK35">Okazaki fragment</a>). the process is much slower for the <a href="#BOOKMARK34">lagging half-strand</a>, that's why it's called lagging.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <ul>
-<li><a href="#BOOKMARK34">Leading half-strand</a> is the same as <a href="#BOOKMARK33">reverse half-strand</a>.</li>
-<li><a href="#BOOKMARK35">Lagging half-strand</a> is the same as <a href="#BOOKMARK32">forward half-strand</a>.</li>
+<li><a href="#BOOKMARK33">Leading half-strand</a> is the same as <a href="#BOOKMARK32">reverse half-strand</a>.</li>
+<li><a href="#BOOKMARK34">Lagging half-strand</a> is the same as <a href="#BOOKMARK31">forward half-strand</a>.</li>
 </ul>
 </div>
 </li>
 <li>
-<p><a name="BOOKMARK36"></a><strong>Okazaki fragment</strong> - A small fragment of DNA generated by <a href="#BOOKMARK25">DNA polymerase</a> for <a href="#BOOKMARK32">forward half-strand</a>s. DNA synthesis for the <a href="#BOOKMARK32">forward half-strand</a>s can only happen in small pieces. As the fork open ups every ~2000 nucleotides, <a href="#BOOKMARK25">DNA polymerase</a> attaches to the end of the fork on the <a href="#BOOKMARK32">forward half-strand</a> and walks in reverse to generate that small segment (<a href="#BOOKMARK25">DNA polymerase</a> can only walk in the reverse direction).</p>
+<p><a name="BOOKMARK35"></a><strong>Okazaki fragment</strong> - A small fragment of DNA generated by <a href="#BOOKMARK24">DNA polymerase</a> for <a href="#BOOKMARK31">forward half-strand</a>s. DNA synthesis for the <a href="#BOOKMARK31">forward half-strand</a>s can only happen in small pieces. As the fork open ups every ~2000 nucleotides, <a href="#BOOKMARK24">DNA polymerase</a> attaches to the end of the fork on the <a href="#BOOKMARK31">forward half-strand</a> and walks in reverse to generate that small segment (<a href="#BOOKMARK24">DNA polymerase</a> can only walk in the reverse direction).</p>
 </li>
 <li>
-<p><a name="BOOKMARK37"></a><strong>DNA ligase</strong> - An enzyme that sews together short segments of DNA called <a href="#BOOKMARK36">Okazaki fragment</a>s by binding the phosphate group on the end of one strand with the deoxyribose group on the other strand.</p>
+<p><a name="BOOKMARK36"></a><strong>DNA ligase</strong> - An enzyme that sews together short segments of DNA called <a href="#BOOKMARK35">Okazaki fragment</a>s by binding the phosphate group on the end of one strand with the deoxyribose group on the other strand.</p>
+</li>
+<li>
+<p><a name="BOOKMARK37"></a><strong>DnaA box</strong> - A <a href="#BOOKMARK74">sequence</a> in the <a href="#BOOKMARK28">ori</a> that the DnaA protein (responsible for DNA replication) binds to.</p>
 </li>
 <li>
 <p><a name="BOOKMARK38"></a><strong>single stranded DNA</strong> - A single strand of DNA, not bound to a strand of its reverse complements.</p>
@@ -2103,22 +2136,22 @@ SSSII
 <p><a name="BOOKMARK50"></a><strong>circadian clock</strong> / <a name="BOOKMARK51"></a><strong>circadian oscillator</strong> - A biological clock that synchronizes roughly around the earth's day-night cycle. This internal clock helps many species regulate their physical and behavioural attributes. For example, hunt during the night vs sleep during the day (e.g. nocturnal owls).</p>
 </li>
 <li>
-<p><a name="BOOKMARK52"></a><strong>upstream region</strong> - The area just before some interval of DNA. Since the direction of DNA is <a href="#BOOKMARK21">5'</a> to <a href="#BOOKMARK23">3'</a>, this area is towards the <a href="#BOOKMARK21">5'</a> end (upper end).</p>
+<p><a name="BOOKMARK52"></a><strong>upstream region</strong> - The area just before some interval of DNA. Since the direction of DNA is <a href="#BOOKMARK20">5'</a> to <a href="#BOOKMARK22">3'</a>, this area is towards the <a href="#BOOKMARK20">5'</a> end (upper end).</p>
 </li>
 <li>
-<p><a name="BOOKMARK53"></a><strong>downstream region</strong> - The area just after some interval of DNA. Since the direction of DNA is <a href="#BOOKMARK21">5'</a> to <a href="#BOOKMARK23">3'</a>, this area is towards the <a href="#BOOKMARK23">3'</a> end (lower end).</p>
+<p><a name="BOOKMARK53"></a><strong>downstream region</strong> - The area just after some interval of DNA. Since the direction of DNA is <a href="#BOOKMARK20">5'</a> to <a href="#BOOKMARK22">3'</a>, this area is towards the <a href="#BOOKMARK22">3'</a> end (lower end).</p>
 </li>
 <li>
-<p><a name="BOOKMARK54"></a><strong>transcription factor</strong> - A <a href="#BOOKMARK46">regulatory protein</a> that controls the rate of <a href="#BOOKMARK42">transcription</a> for some <a href="#BOOKMARK40">gene</a> that it has influence over (the copying of DNA to mRNA). The protein binds to a specific <a href="#BOOKMARK73">sequence</a> in the <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK52">upstream region</a>.</p>
+<p><a name="BOOKMARK54"></a><strong>transcription factor</strong> - A <a href="#BOOKMARK46">regulatory protein</a> that controls the rate of <a href="#BOOKMARK42">transcription</a> for some <a href="#BOOKMARK40">gene</a> that it has influence over (the copying of DNA to mRNA). The protein binds to a specific <a href="#BOOKMARK74">sequence</a> in the <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK52">upstream region</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK55"></a><strong>motif</strong> - A pattern that matches against many different <a href="#BOOKMARK20">k-mer</a>s, where those matched <a href="#BOOKMARK20">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK55">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
+<p><a name="BOOKMARK55"></a><strong>motif</strong> - A pattern that matches against many different <a href="#BOOKMARK19">k-mer</a>s, where those matched <a href="#BOOKMARK19">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BOOKMARK55">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK56"></a><strong>motif member</strong> - A specific nucleotide <a href="#BOOKMARK73">sequence</a> that matches a <a href="#BOOKMARK55">motif</a>. For example, given that a <a href="#BOOKMARK55">motif</a> represented by the regex <code>[AT]TT[GC]C</code>, the <a href="#BOOKMARK73">sequence</a>s <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code> would be its members.</p>
+<p><a name="BOOKMARK56"></a><strong>motif member</strong> <a name="BOOKMARK57"></a><strong></strong> - A specific nucleotide <a href="#BOOKMARK74">sequence</a> that matches a <a href="#BOOKMARK55">motif</a>. For example, given that a <a href="#BOOKMARK55">motif</a> represented by the regex <code>[AT]TT[GC]C</code>, the <a href="#BOOKMARK74">sequence</a>s <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code> would be its <a href="#BOOKMARK57">member</a>s.</p>
 </li>
 <li>
-<p><a name="BOOKMARK57"></a><strong>motif matrix</strong> - A set of <a href="#BOOKMARK20">k-mer</a>s stacked on top of each other in a matrix, where the <a href="#BOOKMARK20">k-mer</a>s are either...</p>
+<p><a name="BOOKMARK58"></a><strong>motif matrix</strong> - A set of <a href="#BOOKMARK19">k-mer</a>s stacked on top of each other in a matrix, where the <a href="#BOOKMARK19">k-mer</a>s are either...</p>
 <ul>
 <li><a href="#BOOKMARK56">member</a>s of the same <a href="#BOOKMARK55">motif</a>,</li>
 <li>or suspected <a href="#BOOKMARK56">member</a>s of the same <a href="#BOOKMARK55">motif</a>.</li>
@@ -2167,40 +2200,40 @@ SSSII
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK58"></a><strong>regulatory motif</strong> - The <a href="#BOOKMARK55">motif</a> of a <a href="#BOOKMARK54">transcription factor</a>, typically 8 to 12 nucleotides in length.</p>
+<p><a name="BOOKMARK59"></a><strong>regulatory motif</strong> - The <a href="#BOOKMARK55">motif</a> of a <a href="#BOOKMARK54">transcription factor</a>, typically 8 to 12 nucleotides in length.</p>
 </li>
 <li>
-<p><a name="BOOKMARK59"></a><strong>transcription factor binding site</strong> - The physical binding site for a <a href="#BOOKMARK54">transcription factor</a>. A <a href="#BOOKMARK40">gene</a> that's regulated by a <a href="#BOOKMARK54">transcription factor</a> needs a <a href="#BOOKMARK73">sequence</a> located in its <a href="#BOOKMARK52">upstream region</a> that the <a href="#BOOKMARK54">transcription factor</a> can bind to: a <a href="#BOOKMARK56">motif member</a> of that <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK58">regulatory motif</a>.</p>
+<p><a name="BOOKMARK60"></a><strong>transcription factor binding site</strong> - The physical binding site for a <a href="#BOOKMARK54">transcription factor</a>. A <a href="#BOOKMARK40">gene</a> that's regulated by a <a href="#BOOKMARK54">transcription factor</a> needs a <a href="#BOOKMARK74">sequence</a> located in its <a href="#BOOKMARK52">upstream region</a> that the <a href="#BOOKMARK54">transcription factor</a> can bind to: a <a href="#BOOKMARK56">motif member</a> of that <a href="#BOOKMARK54">transcription factor</a>'s <a href="#BOOKMARK59">regulatory motif</a>.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>A <a href="#BOOKMARK40">gene</a>'s <a href="#BOOKMARK52">upstream region</a> is the 600 to 1000 nucleotides preceding the start of the <a href="#BOOKMARK40">gene</a>.</p>
 </div>
 </li>
 <li>
-<p><a name="BOOKMARK60"></a><strong>cDNA</strong> - A single strand of DNA generated from mRNA. The enzyme reverse transcriptase scans over the mRNA and creates the complementing single DNA strand.</p>
+<p><a name="BOOKMARK61"></a><strong>cDNA</strong> - A single strand of DNA generated from mRNA. The enzyme reverse transcriptase scans over the mRNA and creates the complementing single DNA strand.</p>
 <p><img src="svgbob_97c5d076bf0a1cd98b75bbb88b72fc29c3b1b93d.svg" alt="Kroki diagram output"></p>
 <p>The mRNA portion breaks off, leaving the <a href="#BOOKMARK38">single-stranded DNA</a>.</p>
 <p><img src="svgbob_97e71090d31bdaa40278b0e705aef4e3555be8e3.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK61"></a><strong>DNA microarray</strong> / <a name="BOOKMARK62"></a><strong>DNA array</strong> - A device used to compare <a href="#BOOKMARK44">gene expression</a>. This works by measuring 2 mRNA samples against each other: a control sample and an experimental sample. The samples could be from...</p>
+<p><a name="BOOKMARK62"></a><strong>DNA microarray</strong> / <a name="BOOKMARK63"></a><strong>DNA array</strong> - A device used to compare <a href="#BOOKMARK44">gene expression</a>. This works by measuring 2 mRNA samples against each other: a control sample and an experimental sample. The samples could be from...</p>
 <ul>
 <li>the same organism but at different times.</li>
 <li>diseased and healthy versions of the same organism.</li>
 <li>etc..</li>
 </ul>
-<p>Both mRNA samples are converted to <a href="#BOOKMARK60">cDNA</a> and are given fluorescent dyes. The control sample gets dyed green while the experimental sample gets dyed red.</p>
+<p>Both mRNA samples are converted to <a href="#BOOKMARK61">cDNA</a> and are given fluorescent dyes. The control sample gets dyed green while the experimental sample gets dyed red.</p>
 <p><img src="svgbob_6ce607591d81d0fd6c7507408e97fb8146e83baf.svg" alt="Kroki diagram output"></p>
-<p>A sheet is broken up into multiple regions, where each region has the <a href="#BOOKMARK60">cDNA</a> for one specific <a href="#BOOKMARK40">gene</a> from the control sample printed.</p>
+<p>A sheet is broken up into multiple regions, where each region has the <a href="#BOOKMARK61">cDNA</a> for one specific <a href="#BOOKMARK40">gene</a> from the control sample printed.</p>
 <p><img src="svgbob_421210658cf3b4d0040b4815e879948ebfd7ccc5.svg" alt="Kroki diagram output"></p>
-<p>The idea is that once the experimental <a href="#BOOKMARK60">cDNA</a> is introduced to that region, it should bind to the control <a href="#BOOKMARK60">cDNA</a> that's been printed to form <a href="#BOOKMARK39">double-stranded DNA</a>. The color emitted in a region should correspond to the amount of <a href="#BOOKMARK44">gene expression</a> for the <a href="#BOOKMARK40">gene</a> that region represents. For example, if a region on the sheet is fully yellow, it means that the <a href="#BOOKMARK44">gene expression</a> for that <a href="#BOOKMARK40">gene</a> is roughly equal (red mixed with green is yellow).</p>
+<p>The idea is that once the experimental <a href="#BOOKMARK61">cDNA</a> is introduced to that region, it should bind to the control <a href="#BOOKMARK61">cDNA</a> that's been printed to form <a href="#BOOKMARK39">double-stranded DNA</a>. The color emitted in a region should correspond to the amount of <a href="#BOOKMARK44">gene expression</a> for the <a href="#BOOKMARK40">gene</a> that region represents. For example, if a region on the sheet is fully yellow, it means that the <a href="#BOOKMARK44">gene expression</a> for that <a href="#BOOKMARK40">gene</a> is roughly equal (red mixed with green is yellow).</p>
 </li>
 <li>
-<p><a name="BOOKMARK63"></a><strong>greedy algorithm</strong> - An algorithm that tries to speed things up by taking the locally optimal choice at each step. That is, the algorithm doesn't look more than 1 step ahead.</p>
+<p><a name="BOOKMARK64"></a><strong>greedy algorithm</strong> - An algorithm that tries to speed things up by taking the locally optimal choice at each step. That is, the algorithm doesn't look more than 1 step ahead.</p>
 <p>For example, imagine a chess playing AI that had a strategy of trying to eliminate the other player's most valuable piece at each turn. It would be considered greedy because it only looks 1 move ahead before taking action. Normal chess AIs / players look many moves ahead before taking action. As such, the greedy AI may be fast but it would very likely lose most matches.</p>
 </li>
 <li>
-<p><a name="BOOKMARK64"></a><strong>Cromwell's rule</strong> - When a probability is based off past events, 0.0 and 1.0 shouldn't be used. That is, if you've...</p>
+<p><a name="BOOKMARK65"></a><strong>Cromwell's rule</strong> - When a probability is based off past events, 0.0 and 1.0 shouldn't be used. That is, if you've...</p>
 <ul>
 <li>never seen an even occur in the past, it doesn't mean that there's a 0.0 probability of it occurring next.</li>
 <li>always seen an event occur in the past, it doesn't mean that there's a 1.0 probability of it occurring next.</li>
@@ -2208,27 +2241,27 @@ SSSII
 <p>Unless you're dealing with hard logical statements where prior occurrences don't come in to play (e.g. 1+1=2), you should include a small chance that some extremely unlikely event may happen. The example tossed around is "the probability that the sun will not rise tomorrow." Prior recorded observations show that that sun has always risen, but that doesn't mean that there's a 1.0 probability of the sun rising tomorrow (e.g. some extremely unlikely cataclysmic event may prevent the sun from rising).</p>
 </li>
 <li>
-<p><a name="BOOKMARK65"></a><strong>Laplace's rule of succession</strong> - If some independent true/false event occurs n times, and s of those n times were successes, it's natural for people to assume the probability of success is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>s</mi><mi>n</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{s}{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.040392em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>. However, if the number of successes is 0, the probability would be 0.0. <a href="#BOOKMARK64">Cromwell's rule</a> states that when a probability is based off past events, 0.0 and 1.0 shouldn't be used. As such, a more appropriate / meaningful measure of probability is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{s+1}{n+2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2484389999999999em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
-<p>For example, imagine you're sitting on a park bench having lunch. Of the 8 birds you've seen since starting your lunch, all have been pigeons. If you were to calculate the probability that the next bird you'll see a crow, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>0</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{0}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> would be flawed because it states that there's no chance that the next bird will be a crow (there obviously is a chance, but it may be a small chance). Instead, applying <a href="#BOOKMARK65">Laplace's rule</a> allows for the small probability that a crow may be seen next: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>0</mn><mo>+</mo><mn>1</mn></mrow><mrow><mn>8</mn><mo>+</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{0+1}{8+2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2484389999999999em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
-<p><a href="#BOOKMARK65">Laplace's rule of succession</a> is more meaningful when the number of trials (n) is small.</p>
+<p><a name="BOOKMARK66"></a><strong>Laplace's rule of succession</strong> - If some independent true/false event occurs n times, and s of those n times were successes, it's natural for people to assume the probability of success is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>s</mi><mi>n</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{s}{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.040392em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>. However, if the number of successes is 0, the probability would be 0.0. <a href="#BOOKMARK65">Cromwell's rule</a> states that when a probability is based off past events, 0.0 and 1.0 shouldn't be used. As such, a more appropriate / meaningful measure of probability is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{s+1}{n+2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2484389999999999em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
+<p>For example, imagine you're sitting on a park bench having lunch. Of the 8 birds you've seen since starting your lunch, all have been pigeons. If you were to calculate the probability that the next bird you'll see a crow, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>0</mn><mn>8</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{0}{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> would be flawed because it states that there's no chance that the next bird will be a crow (there obviously is a chance, but it may be a small chance). Instead, applying <a href="#BOOKMARK66">Laplace's rule</a> allows for the small probability that a crow may be seen next: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>0</mn><mo>+</mo><mn>1</mn></mrow><mrow><mn>8</mn><mo>+</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{0+1}{8+2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2484389999999999em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>.</p>
+<p><a href="#BOOKMARK66">Laplace's rule of succession</a> is more meaningful when the number of trials (n) is small.</p>
 </li>
 <li>
-<p><a name="BOOKMARK66"></a><strong>pseudocount</strong> - When a zero is replaced with a small number to prevent unfair scoring. See <a href="#BOOKMARK65">Laplace's rule of succession</a>.</p>
+<p><a name="BOOKMARK67"></a><strong>pseudocount</strong> - When a zero is replaced with a small number to prevent unfair scoring. See <a href="#BOOKMARK66">Laplace's rule of succession</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK67"></a><strong>randomized algorithm</strong> - An algorithm that uses a source of randomness as part of its logic. <a href="#BOOKMARK67">Randomized algorithm</a>s come in two forms: <a href="#BOOKMARK68">Las Vegas algorithm</a>s and <a href="#BOOKMARK69">Monte Carlo algorithm</a>s</p>
+<p><a name="BOOKMARK68"></a><strong>randomized algorithm</strong> - An algorithm that uses a source of randomness as part of its logic. <a href="#BOOKMARK68">Randomized algorithm</a>s come in two forms: <a href="#BOOKMARK69">Las Vegas algorithm</a>s and <a href="#BOOKMARK70">Monte Carlo algorithm</a>s</p>
 </li>
 <li>
-<p><a name="BOOKMARK68"></a><strong>Las Vegas algorithm</strong> - A <a href="#BOOKMARK67">randomized algorithm</a> that delivers a guaranteed exact solution. That is, even though the algorithm makes random decisions it is guaranteed to converge on the exact solution to the problem its trying to solve (not an approximate solution).</p>
-<p>An example of a <a href="#BOOKMARK68">Las Vegas algorithm</a> is randomized quicksort (randomness is applied when choosing the pivot).</p>
+<p><a name="BOOKMARK69"></a><strong>Las Vegas algorithm</strong> - A <a href="#BOOKMARK68">randomized algorithm</a> that delivers a guaranteed exact solution. That is, even though the algorithm makes random decisions it is guaranteed to converge on the exact solution to the problem its trying to solve (not an approximate solution).</p>
+<p>An example of a <a href="#BOOKMARK69">Las Vegas algorithm</a> is randomized quicksort (randomness is applied when choosing the pivot).</p>
 </li>
 <li>
-<p><a name="BOOKMARK69"></a><strong>Monte Carlo algorithm</strong> - A <a href="#BOOKMARK67">randomized algorithm</a> that delivers an approximate solution. Because these algorithms are quick, they're typically run many times. The approximation considered the best out of all runs is the one that gets chosen as the solution.</p>
-<p>An example of a <a href="#BOOKMARK69">Monte Carlo algorithm</a> is a genetic algorithm to optimize the weights of a deep neural network. That is, a step of the optimization requires running n different neural networks to see which gives the best result, then replacing those n networks with n copies of the best performing network where each copy has randomly tweaked weights. At some point the algorithm will stop producing incrementally better results.</p>
+<p><a name="BOOKMARK70"></a><strong>Monte Carlo algorithm</strong> - A <a href="#BOOKMARK68">randomized algorithm</a> that delivers an approximate solution. Because these algorithms are quick, they're typically run many times. The approximation considered the best out of all runs is the one that gets chosen as the solution.</p>
+<p>An example of a <a href="#BOOKMARK70">Monte Carlo algorithm</a> is a genetic algorithm to optimize the weights of a deep neural network. That is, a step of the optimization requires running n different neural networks to see which gives the best result, then replacing those n networks with n copies of the best performing network where each copy has randomly tweaked weights. At some point the algorithm will stop producing incrementally better results.</p>
 <p>Perform the optimization (the entire thing, not just a single step) thousands of times and pick the best network.</p>
 </li>
 <li>
-<p><a name="BOOKMARK70"></a><strong>consensus string</strong> - The <a href="#BOOKMARK20">k-mer</a> generated by selecting the most abundant column at each index of a <a href="#BOOKMARK57">motif matrix</a>.</p>
+<p><a name="BOOKMARK71"></a><strong>consensus string</strong> - The <a href="#BOOKMARK19">k-mer</a> generated by selecting the most abundant column at each index of a <a href="#BOOKMARK58">motif matrix</a>.</p>
 <table>
 <thead>
 <tr>
@@ -2242,7 +2275,7 @@ SSSII
 </thead>
 <tbody>
 <tr>
-<td><a href="#BOOKMARK20">k-mer</a> 1</td>
+<td><a href="#BOOKMARK19">k-mer</a> 1</td>
 <td>A</td>
 <td>T</td>
 <td>T</td>
@@ -2250,7 +2283,7 @@ SSSII
 <td>C</td>
 </tr>
 <tr>
-<td><a href="#BOOKMARK20">k-mer</a> 2</td>
+<td><a href="#BOOKMARK19">k-mer</a> 2</td>
 <td>A</td>
 <td>T</td>
 <td>T</td>
@@ -2258,7 +2291,7 @@ SSSII
 <td>C</td>
 </tr>
 <tr>
-<td><a href="#BOOKMARK20">k-mer</a> 3</td>
+<td><a href="#BOOKMARK19">k-mer</a> 3</td>
 <td>T</td>
 <td>T</td>
 <td>T</td>
@@ -2266,7 +2299,7 @@ SSSII
 <td>C</td>
 </tr>
 <tr>
-<td><a href="#BOOKMARK20">k-mer</a> 4</td>
+<td><a href="#BOOKMARK19">k-mer</a> 4</td>
 <td>T</td>
 <td>T</td>
 <td>T</td>
@@ -2274,7 +2307,7 @@ SSSII
 <td>C</td>
 </tr>
 <tr>
-<td><a href="#BOOKMARK20">k-mer</a> 5</td>
+<td><a href="#BOOKMARK19">k-mer</a> 5</td>
 <td>A</td>
 <td>T</td>
 <td>T</td>
@@ -2293,17 +2326,17 @@ SSSII
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK71"></a><strong>entropy</strong> - A level of uncertainty inherent in some random variable. Given some set of outcomes for a variable, it's calculated as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\sum_{i=1}^{n} P(x_i) log P(x_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>.</p>
+<p><a name="BOOKMARK72"></a><strong>entropy</strong> - A level of uncertainty inherent in some random variable. Given some set of outcomes for a variable, it's calculated as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\sum_{i=1}^{n} P(x_i) log P(x_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK72"></a><strong>genome</strong> - All of the DNA for some organism.</p>
+<p><a name="BOOKMARK73"></a><strong>genome</strong> - All of the DNA for some organism.</p>
 </li>
 <li>
-<p><a name="BOOKMARK73"></a><strong>sequence</strong> - The ordered elements that make up some biological entity. For example, a DNA <a href="#BOOKMARK73">sequence</a> contains the set of nucleotides and their positions for that DNA strand.</p>
+<p><a name="BOOKMARK74"></a><strong>sequence</strong> - The ordered elements that make up some biological entity. For example, a DNA <a href="#BOOKMARK74">sequence</a> contains the set of nucleotides and their positions for that DNA strand.</p>
 </li>
 <li>
-<p><a name="BOOKMARK74"></a><strong>sequencing</strong> - The process of determining which nucleotides are assigned to which positions in a strand of DNA.</p>
-<p>The machinery used for DNA <a href="#BOOKMARK74">sequencing</a> takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and <a href="#BOOKMARK73">sequence</a>s those fragments (<a href="#BOOKMARK76">read</a>s). Because these fragments vary in terms of size and starting index, the original larger DNA <a href="#BOOKMARK73">sequence</a> that they came from can be constructed by finding fragment <a href="#BOOKMARK73">sequence</a>s with overlapping regions and stitching them together.</p>
+<p><a name="BOOKMARK75"></a><strong>sequencing</strong> - The process of determining which nucleotides are assigned to which positions in a strand of DNA or RNA.</p>
+<p>The machinery used for DNA <a href="#BOOKMARK75">sequencing</a> takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and <a href="#BOOKMARK74">sequence</a>s those fragments (<a href="#BOOKMARK77">read</a>s). Because these fragments vary in terms of size and starting index, the original larger DNA <a href="#BOOKMARK74">sequence</a> that they came from can be constructed by finding fragment <a href="#BOOKMARK74">sequence</a>s with overlapping regions and stitching them together.</p>
 <table>
 <thead>
 <tr>
@@ -2403,16 +2436,19 @@ SSSII
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK75"></a><strong>sequencer</strong> - A machine that performs DNA <a href="#BOOKMARK74">sequencing</a>.</p>
+<p><a name="BOOKMARK76"></a><strong>sequencer</strong> - A machine that performs DNA or RNA <a href="#BOOKMARK75">sequencing</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK76"></a><strong>read</strong> - A <a href="#BOOKMARK74">sequenced</a> fragment produced in the process of <a href="#BOOKMARK74">sequencing</a> some larger strand of DNA.</p>
+<p><a name="BOOKMARK77"></a><strong>read</strong> - A <a href="#BOOKMARK75">sequenced</a> fragment produced in the process of <a href="#BOOKMARK75">sequencing</a> some larger strand of DNA.</p>
+</li>
+<li>
+<p><a name="BOOKMARK78"></a><strong>assembly</strong> - The process of stitching together overlapping <a href="#BOOKMARK77">read</a>s to construct the <a href="#BOOKMARK74">sequence</a> of the original larger DNA that those <a href="#BOOKMARK77">read</a>s came from.</p>
 </li>
 </ul>
 <p>
+
+
+
 </p>
-<ul>
-<li><a name="BOOKMARK79"></a><strong>assembly</strong> - The process of stitching together overlapping <a href="#BOOKMARK76">read</a>s to construct the <a href="#BOOKMARK73">sequence</a> of the original larger DNA that those <a href="#BOOKMARK76">read</a>s came from.</li>
-</ul>
 
         </body></html>
