@@ -569,6 +569,8 @@ ATTGC
 
 #### Entropy Algorithm
 
+`{bm} /(Algorithms\/Motif\/Motif Matrix Score\/Entropy Algorithm)_TOPIC/`
+
 ```{prereq}
 Algorithms/Motif/Motif Matrix Profile_TOPIC
 ```
@@ -594,6 +596,71 @@ ATTGC
 TTTGC
 TTTGG
 ATTGC
+```
+
+#### Relative Entropy Algorithm
+
+```{prereq}
+Algorithms/Motif/Motif Matrix Profile_TOPIC
+Algorithms/Motif/Motif Matrix Score/Entropy Algorithm_TOPIC
+```
+
+**ALGORITHM**:
+
+This algorithm scores a motif matrix by calculating the entropy of each column relative to the overall nucleotide distribution of the sequences from which each motif member came from. This is important when finding motif members across a set of sequences. For example, the following sequences have a nucleotide distribution highly skewed towards C...
+
+| Sequences                 |
+|---------------------------|
+| CCCCCCCCCCCCCCCCCATTGCCCC |
+| ATTCCCCCCCCCCCCCCCCCCCCCC |
+| CCCCCCCCCCCCCCCTTTGCCCCCC |
+| CCCCCCTTTCTCCCCCCCCCCCCCC |
+
+Given the sequences in the example above, of all motif matrices possible for k=5, basic entropy scoring will always lead to a matrix filled with Cs:
+
+|0|1|2|3|4|
+|-|-|-|-|-|
+|C|C|C|C|C|
+|C|C|C|C|C|
+|C|C|C|C|C|
+|C|C|C|C|C|
+
+Even though the above motif matrix scores perfect, it's likely junk. Member_MOTIFs containing all Cs score better because the sequences they come from are biased (saturated with Cs), not because they share some higher biological significance.
+
+To reduce bias, the nucleotide distributions from which the member_MOTIFs came from need to be factored in to the entropy calculation: relative entropy.
+
+```{output}
+ch2_code/src/ScoreMotifUsingRelativeEntropy.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{note}
+In the outputs below, the score in the second output should be less than (better) the score in the first output.
+```
+
+```{ch2}
+ScoreMotifUsingRelativeEntropy
+CCCCC
+CCCCC
+CCCCC
+CCCCC
+CCCCCCCCCCCCCCCCCATTGCCCC
+ATTCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCTTTGCCCCCC
+CCCCCCTTTCTCCCCCCCCCCCCCC
+```
+
+```{ch2}
+ScoreMotifUsingRelativeEntropy
+ATTGC
+ATTCC
+CTTTG
+TTTCT
+CCCCCCCCCCCCCCCCCATTGCCCC
+ATTCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCTTTGCCCCCC
+CCCCCCTTTCTCCCCCCCCCCCCCC
 ```
 
 ### K-mer Match Probability
@@ -944,6 +1011,48 @@ GACGACCACGTT
 CGTCAGCGCCTG
 GCTGAGCACCGG
 AGTTCGGGACAG
+```
+
+### Hybrid Alphabet
+
+`{bm} /(Algorithms\/Motif\/Hybrid Alphabet)_TOPIC/`
+
+```{prereq}
+Algorithms/Motif/Consensus String_TOPIC
+Algorithms/Motif/Motif Matrix Score_TOPIC
+Algorithms/Motif/Find Motif Matrix_TOPIC
+```
+
+**WHAT**: When creating finding a motif, it may be beneficial to use a hybrid alphabet rather than the standard nucleotides (A, C, T, and G). For example, the following hybrid alphabet marks certain combinations of nucleotides as a single letter:
+
+ * A = A
+ * C = C
+ * T = T
+ * G = G
+ * W = A or T
+ * S = G or C
+ * K = G or T
+ * Y = C or T
+
+```{note}
+The alphabet above was pulled from the Pevzner book section 2.16: Complications in Motif Finding. It's a subset of the (IUPAC nucleotide code)[https://www.bioinformatics.org/sms/iupac.html] alphabet. The author didn't mention if the alphabet was explicitly chosen for regulatory motif finding. If it was, it may have been derived from running probabilities over already discovered regulatory motifs: e.g. for a position in an already discovered motif, G/C (S) and G/T (K) are likely, but G/A isn't.
+```
+
+**WHY**: Hybrid alphabets may make it easier for motif finding algorithms to converge on a motif. For example, when scoring a motif matrix, treat the position as a single letter if the distinct nucleotides at that position map to one of the combinations in the hybrid alphabet.
+
+**ALGORITHM**:
+
+```{output}
+ch2_code/src/HybridAlphabetMatrix.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+HybridAlphabetMatrix
+CATCCG
+CTTCCT
+CATCTT
 ```
 
 # Stories
@@ -1319,12 +1428,14 @@ Algorithms/Motif/Find Motif Matrix_TOPIC
 
 Given a organism, we suspect that some physical change in that organism is linked to a transcription factor. But, we don't know which transcription factor or what the regulatory motif for such a transcription factor would be.
 
-In such cases, a special device (DNA microarrays or RNA sequencers) is used to take snapshots of that organism's mRNA at different points in time. Two snapshots are taken:
+In such cases, a special device (DNA microarray or RNA sequencer) is used to take snapshots of that organism's mRNA at different points in time. Two snapshots are taken:
 
  1. When the physical change is expressed.
  2. When the physical change isn't expressed.
  
-Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. If the identified genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain member_MOTIFs of that transcription factor's regulatory motif. Since neither the transcription factor nor the regulatory motif are known, we can run algorithms on the sequences to find sets of k-mers that are similar to each other. Because the member_MOTIFs of a regulatory motif are very similar to each other, these similar k-mers may all be member_MOTIFs of the same transcription factor's regulatory motif.
+Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. If the identified genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain member_MOTIFs of that transcription factor's regulatory motif. Since neither the transcription factor nor the regulatory motif are known, we can run algorithms on the sequences to find sets of k-mers that are similar to each other.
+
+Because the member_MOTIFs of a regulatory motif are very similar to each other, these similar k-mers may all be member_MOTIFs of the same transcription factor's regulatory motif.
 
 ```{svgbob}
       "identify genes with differing gene expression levels"
@@ -1700,7 +1811,9 @@ TODO: ADD EXAMPLE HERE
    |k-mer 5  |A|T|T|C|G|
    |consensus|A|T|T|C|C|
   
- * `{bm} entropy` - A level of uncertainty inherent in some random variable. Given some set of outcomes for a variable, it's calculated as `{kt} -\sum_{i=1}^{n} P(x_i) log P(x_i)`.
+ * `{bm} entropy` - The uncertainty associated with a random variable. Given some set of outcomes for a variable, it's calculated as `{kt} -\sum_{i=1}^{n} P(x_i) log P(x_i)`.
+
+   This definition is for information theory. In other contexts (e.g. physics, economics), this term has a different meaning.
 
  * `{bm} genome` - All of the DNA for some organism.
 
