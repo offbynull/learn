@@ -456,6 +456,10 @@ A motif matrix is a matrix of k-mers that are suspected to be part of a motif. I
 
 **ALGORITHM**:
 
+```{note}
+It may be more appropriate to use a hybrid alphabet when representing consensus strings. The book doesn't mention this specifically but multiple online sources discuss it.
+```
+
 ```{output}
 ch2_code/src/ConsensusString.py
 python
@@ -1013,9 +1017,9 @@ GCTGAGCACCGG
 AGTTCGGGACAG
 ```
 
-### Hybrid Alphabet
+### Motif Matrix Hybrid Alphabet
 
-`{bm} /(Algorithms\/Motif\/Hybrid Alphabet)_TOPIC/`
+`{bm} /(Algorithms\/Motif\/Motif Matrix Hybrid Alphabet)_TOPIC/`
 
 ```{prereq}
 Algorithms/Motif/Consensus String_TOPIC
@@ -1035,10 +1039,12 @@ Algorithms/Motif/Find Motif Matrix_TOPIC
  * Y = C or T
 
 ```{note}
-The alphabet above was pulled from the Pevzner book section 2.16: Complications in Motif Finding. It's a subset of the (IUPAC nucleotide code)[https://www.bioinformatics.org/sms/iupac.html] alphabet. The author didn't mention if the alphabet was explicitly chosen for regulatory motif finding. If it was, it may have been derived from running probabilities over already discovered regulatory motifs: e.g. for a position in an already discovered motif, G/C (S) and G/T (K) are likely, but G/A isn't.
+The alphabet above was pulled from the Pevzner book section 2.16: Complications in Motif Finding. It's a subset of the (IUPAC nucleotide code)[https://www.bioinformatics.org/sms/iupac.html] alphabet. The author didn't mention if the alphabet was explicitly chosen for regulatory motif finding. If it was, it may have been derived from running probabilities over already discovered regulatory motifs: e.g. for the motifs already discovered, if a position has 2 possible nucleotides then G/C (S), G/T (K), C/T (Y), and A/T (W) are likely but other combinations aren't.
 ```
 
 **WHY**: Hybrid alphabets may make it easier for motif finding algorithms to converge on a motif. For example, when scoring a motif matrix, treat the position as a single letter if the distinct nucleotides at that position map to one of the combinations in the hybrid alphabet.
+
+Hybrid alphabets may make more sense for representing a consensus string. Rather than picking out the most popular nucleotide, the hybrid alphabet can be used to describe alternating nucleotides at each position.
 
 **ALGORITHM**:
 
@@ -1374,7 +1380,7 @@ For some bacterial organism, given that we've found the general vicinity of the 
 
 The repeating k-mers found are potential DnaA box candidates.
 
-For example, we know where the general vicinity of the ori is in E. coli given its GC skew. We can search the vicinity of the ori for repeating k-mers.
+In the example below, we know where the general vicinity of the ori is in E. coli given its GC skew. We can search that vicinity for repeating k-mers.
 
 ```{ch1}
 DnaABoxCandidateFinder
@@ -1406,17 +1412,17 @@ The production of transcription factors may be tied to certain internal or exter
 The external conditions of sunlight and temperature causes the saturation of some transcription factors to change. Those transcription factors influence the rate of gene expression for the genes that control the bunching and spreading of the petals.
 
 ```{svgbob}
-      "sunlight"    "temperature"
-           |            |
-           +-----+------+
-                 |
-                 v
+   "sunlight"    "temperature"
+        |            |
+        +-----+------+
+              |
+              v
 "change transcription factor saturation"
-                 |
-                 v
+              |
+              v
    "change gene expression rate"
-                 |
-                 v
+              |
+              v
  "change petal bunching/spreading"
 ```
 
@@ -1426,52 +1432,36 @@ The external conditions of sunlight and temperature causes the saturation of som
 Algorithms/Motif/Find Motif Matrix_TOPIC
 ```
 
-Given a organism, we suspect that some physical change in that organism is linked to a transcription factor. But, we don't know which transcription factor or what the regulatory motif for such a transcription factor would be.
+Given a organism, it's suspected that some physical change in that organism is linked to a transcription factor. However, it isn't known ...
 
-In such cases, a special device (DNA microarray or RNA sequencer) is used to take snapshots of that organism's mRNA at different points in time. Two snapshots are taken:
+ * which transcription factor (if any).
+ * what the regulatory motif for that transcription factor is.
+
+A special device is used to take snapshots of the organism's mRNA at different points in time: DNA microarray / RNA sequencer. Specifically, two snapshots are taken:
 
  1. When the physical change is expressed.
  2. When the physical change isn't expressed.
  
-Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. If the identified genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain member_MOTIFs of that transcription factor's regulatory motif. Since neither the transcription factor nor the regulatory motif are known, we can run algorithms on the sequences to find sets of k-mers that are similar to each other.
+Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. If these genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain member_MOTIFs of that transcription factor's regulatory motif.
 
-Because the member_MOTIFs of a regulatory motif are very similar to each other, these similar k-mers may all be member_MOTIFs of the same transcription factor's regulatory motif.
+Since neither the transcription factor nor its regulatory motif are known, there is no specific motif to search for in the upstream regions. But, because motif member_MOTIFs are typically similar to each other, motif matrix finding algorithms can be used on these upstream regions to identify sets of similar k-mers. These similar k-mers may all be member_MOTIFs of the same transcription factor's regulatory motif.
 
 ```{svgbob}
-      "identify genes with differing gene expression levels"
-                         |
-                         v
-                 "sequence genes"
-                         |
-                         v
-"search for similar k-mers across sequences (1 per sequence)"
+       "identify genes with differing gene expression levels"
+                          |
+                          v
+"search for similar k-mers in upstream regions (1 per upstream region)"
 ```
 
-TODO: ADD EXAMPLE HERE
+The example below attempts to find a identify a motif across a set of genes in baker's yeast (Saccharomyces cerevisiae) that are suspected of being influenced by the same transcription factor.
 
-TODO: ADD EXAMPLE HERE
+````{note}
+The example below hard codes k to 18, but you typically don't know what k should be set to beforehand. The Pevzner book doesn't discuss how to work around this problem. A strategy for finding k may be to run the motif matrix finding algorithm multiple times, but with a different k each time. For each run and member_MOTIF, if the selected k-mer came from the same general vicinity of the upstream region, you may be either picking a part of the actual member_MOTIF (if k too small) or the member_MOTIF with some junk prepended/appended to it (if k too large).
+````
 
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
-
-TODO: ADD EXAMPLE HERE
+```{ch2}
+PracticalMotifFindingExample
+```
 
 # Terminology
 
@@ -1837,6 +1827,21 @@ TODO: ADD EXAMPLE HERE
  * `{bm} read/\b(read)_DNA/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA.
 
  * `{bm} assembly` - The process of stitching together overlapping read_DNAs to construct the sequence of the original larger DNA that those read_DNAs came from.
+
+ * `{bm} hybrid alphabet` - When representing a sequence that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the (IUPAC nucleotide code)[https://www.bioinformatics.org/sms/iupac.html] provides the following alphabet:
+
+   * A = A
+   * C = C
+   * T = T
+   * G = G
+   * W = A or T
+   * S = G or C
+   * K = G or T
+   * Y = C or T 
+   * ...
+
+   If the sequence being represented can be either AAAC or AATT, it may be easier to represent a single string of AAWY.
+
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`

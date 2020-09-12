@@ -7,4 +7,5 @@ fi
 
 source /opt/conda/etc/profile.d/conda.sh
 conda activate $NAME
-python /input/ch2_code/src/Router.py < /input/input.data > /output/output.md
+cd /input/ch3_code/src
+python /input/ch3_code/src/Router.py < /input/input.data > /output/output.md
