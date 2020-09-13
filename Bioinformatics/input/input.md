@@ -26,11 +26,11 @@ A k-mer is a subsequence of length k within some larger biological sequence (e.g
 | 5 | GAAAT AAATC     |
 | 6 | GAAATC          |
 
-Often times we'll need to either...
+Common scenarios involving k-mers:
 
-* search for an exact k-mer.
-* search for an approximate k-mer (fuzzy search).
-* find k-mers of interest in a sequence (e.g. repeating k-mers).
+ * Search for an exact k-mer.
+ * Search for an approximate k-mer (fuzzy search).
+ * Find k-mers of interest in a sequence (e.g. repeating k-mers).
 
 ### Reverse Complement
 
@@ -321,7 +321,7 @@ This algorithm tries estimating the probability by ignoring the fact that the oc
  * \[AA\]AT
  * A\[AA\]T
 
-If we go ahead and ignore overlaps, we can think of the k-mers occurring in a string as insertions. For example, imagine a sequence of length 7 and the 2-mer AA. If we were to inject 2 instances of AA into the sequence to get it to reach length 7, how would that look?
+If you go ahead and ignore overlaps, you can think of the k-mers occurring in a string as insertions. For example, imagine a sequence of length 7 and the 2-mer AA. If you were to inject 2 instances of AA into the sequence to get it to reach length 7, how would that look?
 
 2 instances of a 2-mer is 4 characters has a length of 5. To get the sequence to end up with a length of 7 after the insertions, the sequence needs to start with a length of 3:
 
@@ -329,7 +329,7 @@ If we go ahead and ignore overlaps, we can think of the k-mers occurring in a st
 SSS
 ```
 
-Given that we're changing reality to say that the instances WON'T overlap in the sequence, we can treat each instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted into the sequence is 10:
+Given that you're changing reality to say that the instances WON'T overlap in the sequence, you can treat each instance of the 2-mer AA as a single entity being inserted. The number of ways that these 2 instances can be inserted into the sequence is 10:
 
 ```
 I = insertion of AA, S = arbitrary sequence character
@@ -340,7 +340,7 @@ SSIIS  SSISI
 SSSII
 ```
 
-Another way to think of the above insertions is that they aren't insertions. Rather, we have 5 items in total and we're selecting 2 of them. How many ways can we select 2 of those 5 items? 10.
+Another way to think of the above insertions is that they aren't insertions. Rather, you have 5 items in total and you're selecting 2 of them. How many ways can you select 2 of those 5 items? 10.
 
 The number of ways to insert can be counted via the "binomial coefficient": `bc(m, k) = m!/(k!(m-k)!)`, where m is the total number of items (5 in the example above) and k is the number of selections (2 in the example above). For the example above:
 
@@ -348,19 +348,26 @@ The number of ways to insert can be counted via the "binomial coefficient": `bc(
 bc(5, 2) = 5!/(2!(5-2)!) = 10
 ```
 
-Since the SSS can be any arbitrary nucleotide sequence of 3, we count the number of different representations that are possible for SSS: `4^3 = 4*4*4 = 64` (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In each of these representations, the 2-mer AA can be inserted in 10 different ways:
+Since the SSS can be any arbitrary nucleotide sequence of 3, count the number of different representations that are possible for SSS: `4^3 = 4*4*4 = 64` (4^3, 4 because a nucleotide can be one of ACTG, 3 because the length is 3). In each of these representations, the 2-mer AA can be inserted in 10 different ways:
 
 ```
 64*10 = 640
 ```
 
-Since the total length of the sequence is 7, we count the number of different representations that are possible:
+Since the total length of the sequence is 7, count the number of different representations that are possible:
 
 ```
 4^7 = 4*4*4*4*4*4*4 = 16384
 ```
 
-The estimated probability is 640/16384. For non-overlapping k-mers the estimation will actually be "relatively accurate", while for overlapping k-mers not so much. Maybe try training a deep learning model to see if it can provide better estimates?
+The estimated probability is 640/16384. For...
+
+* non-overlapping k-mers, the estimation will actually be relatively accurate.
+* overlapping k-mers, the estimation won't be as accurate.
+
+```{note}
+Maybe try training a deep learning model to see if it can provide better estimates?
+```
 
 ```{output}
 ch1_code/src/EstimateProbabilityOfKmerInArbitrarySequence.py
@@ -378,9 +385,10 @@ ACTG
 
 `{bm} /(Algorithms\/GC Skew)_TOPIC/`
 
-**WHAT**: Given a sequence, walk over it and ...
-* increment every time you spot a G.
-* decrement every time you spot a C.
+**WHAT**: Given a sequence, create a counter and walk over the sequence. Whenever a ...
+
+* G is encountered, increment the counter.
+* C is encountered, decrement the counter.
 
 **WHY**: Given the DNA sequence of an organism, some segments may have lower count of Gs vs Cs.
 
@@ -394,7 +402,7 @@ Recall that the reverse complements of ...
 It mutated from C to T. Since its now T, its complement is A.
 ```
 
-Plotting the skew lets you know the rough location of segments that stayed single-stranded for a longer period of time. That information hints at special / useful locations in the organism's DNA sequence (replication origin / replication terminus).
+Plotting the skew shows roughly which segments of DNA stayed single-stranded for a longer period of time. That information hints at special / useful locations in the organism's DNA sequence (replication origin / replication terminus).
 
 **ALGORITHM**:
 
@@ -419,7 +427,9 @@ Algorithms/K-mer_TOPIC
 
 A motif is a pattern that matches many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
 
-Often times we'll have identified a set of biological sequences where each sequence, we suspect, contains a k-mer that matches some motif. We'll need to find the k-mers and the motif they match. For example, each of the following sequences contains a k-mer that matches some motif:
+A common scenario involving motifs is to search through a set of DNA sequences for an unknown motif: Given a set of sequences, it's suspected that each sequence contains a k-mer that matches some motif. But, that motif isn't known beforehand. Both the k-mers and the motif they match need to be found.
+
+For example, each of the following sequences contains a k-mer that matches some motif:
 
 | Sequences                 |
 |---------------------------|
@@ -428,7 +438,7 @@ Often times we'll have identified a set of biological sequences where each seque
 | CCCCAGGAGGGAACCTTTGCACACA |
 | TATATATTTCCCACCCCAAGGGGGG |
 
-The motif is the one described above (`[AT]TT[GC]C`):
+That motif is the one described above (`[AT]TT[GC]C`):
 
 | Sequences                     |
 |-------------------------------|
@@ -437,7 +447,7 @@ The motif is the one described above (`[AT]TT[GC]C`):
 | CCCCAGGAGGGAACC**TTTGC**ACACA |
 | TATATA**TTTCC**CACCCCAAGGGGGG |
 
-A motif matrix is a matrix of k-mers that are suspected to be part of a motif. In the example sequences above, the motif matrix would be:
+A motif matrix is a matrix of k-mers where each k-mer matches a motif. In the example sequences above, the motif matrix would be:
 
 |0|1|2|3|4|
 |-|-|-|-|-|
@@ -445,6 +455,8 @@ A motif matrix is a matrix of k-mers that are suspected to be part of a motif. I
 |A|T|T|C|C|
 |T|T|T|G|C|
 |T|T|T|C|C|
+
+A k-mer that matches a motif may be referred to as a motif member.
 
 ### Consensus String
 
@@ -807,7 +819,7 @@ TTGCAC
 Algorithms/Motif/K-mer Match Probability_TOPIC
 ```
 
-**WHAT**: Given a set of sequences, identify k-mers in those sequences that may be member_MOTIFs of the same motif.
+**WHAT**: Given a set of sequences, find k-mers in those sequences that may be member_MOTIFs of the same motif.
 
 **WHY**: A transcription factor is an enzyme that either increases or decreases a gene's transcription rate. It does so by binding to a specific part of the gene's upstream region called the transcription factor binding site. That transcription factor binding site consists of a k-mer that matches the motif expected by that transcription factor, called a regulatory motif. 
 
@@ -817,7 +829,7 @@ A single transcription factor may operate on many different genes. Often times a
 * where the transcription factor binding sites are (which k-mers the enzyme is targeting).
 * how long the transcription factor binding sites are (which k the enzyme is targeting).
 
-The regulatory motif expected by a transcription factor typically expects k-mers that have the same length and are similar to each other (short hamming distance). As such, potential motif candidates can be derived by identifying k-mers across the set of sequences that are similar to each other.
+The regulatory motif expected by a transcription factor typically expects k-mers that have the same length and are similar to each other (short hamming distance). As such, potential motif candidates can be derived by finding k-mers across the set of sequences that are similar to each other.
 
 #### Bruteforce Algorithm
 
@@ -1281,7 +1293,7 @@ The Okazaki fragments synthesized on the forward strands end up getting sewn tog
   `---------- ter ----------`            `---------- ter ----------`
 ```
 
-You now have two complete copies of the DNA.
+There are now two complete copies of the DNA.
 
 ### Find Ori and Ter
 
@@ -1400,22 +1412,18 @@ Within the ori region, there exists several copies of some k-mer pattern. These 
   DnaA box          DnaA box                         DnaA box        
 ```
 
-The DnaA protein binds to a DnaA box to activate the process of DNA replication. Through experiments, biologists have determined that DnaA boxes are typical 9-mers.
-
-```{note}
-The reason why multiple copies of the same k-mer exist (DnaA box) probably has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein no longer binds to it, it can still bind to the other copies.
-```
-
-For some bacterial organism, given that we've found the general vicinity of the ori for that organism, we can search that vicinity for repeating 9-mers instances. The 9-mers may not match exactly -- the DnaA protein may bind to ...
+The DnaA protein binds to a DnaA box to activate the process of DNA replication. Through experiments, biologists have determined that DnaA boxes are typical 9-mers. The 9-mers may not match exactly -- the DnaA protein may bind to ...
 
  * the 9-mer itself.
  * slight variations of the 9-mer.
  * the reverse complement of the 9-mer.
  * slight variations of the reverse complement of the 9-mer.
 
-The repeating k-mers found are potential DnaA box candidates.
+```{note}
+The reason why multiple copies of the DnaA box exist probably has to do with DNA mutation. If one of the copies mutates to a point where the DnaA protein no longer binds to it, it can still bind to the other copies.
+```
 
-In the example below, we know where the general vicinity of the ori is in E. coli given its GC skew. We can search that vicinity for repeating k-mers.
+In the example below, the general vicinity of E. coli's ori is found using GC skew, then that general vicinity is searched for repeating 9-mers. These repeating 9-mers are potential DnaA box candidates.
 
 ```{ch1}
 DnaABoxCandidateFinder
@@ -1479,19 +1487,23 @@ A special device is used to take snapshots of the organism's mRNA at different p
  
 Comparing these snapshots identifies which genes have noticeably differing rates of gene expression. If these genes (or a subset of these genes) were influenced by the same transcription factor, their upstream regions would contain member_MOTIFs of that transcription factor's regulatory motif.
 
-Since neither the transcription factor nor its regulatory motif are known, there is no specific motif to search for in the upstream regions. But, because motif member_MOTIFs are typically similar to each other, motif matrix finding algorithms can be used on these upstream regions to identify sets of similar k-mers. These similar k-mers may all be member_MOTIFs of the same transcription factor's regulatory motif.
+Since neither the transcription factor nor its regulatory motif are known, there is no specific motif to search for in the upstream regions. But, because motif members are typically similar to each other, motif matrix finding algorithms can be used on these upstream regions to find sets of similar k-mers. These similar k-mers may all be member_MOTIFs of the same transcription factor's regulatory motif.
 
 ```{svgbob}
-       "identify genes with differing gene expression levels"
+         "find genes with differing gene expression levels"
                           |
                           v
 "search for similar k-mers in upstream regions (1 per upstream region)"
 ```
 
-The example below attempts to find a identify a motif across a set of genes in baker's yeast (Saccharomyces cerevisiae) that are suspected of being influenced by the same transcription factor.
+In the example below, a set of genes in baker's yeast (Saccharomyces cerevisiae) are suspected of being influenced by the same transcription factor. These genes are searched for a common motif. Assuming one is found, it could be the motif of the suspected transcription factor.
 
 ````{note}
-The example below hard codes k to 18, but you typically don't know what k should be set to beforehand. The Pevzner book doesn't discuss how to work around this problem. A strategy for finding k may be to run the motif matrix finding algorithm multiple times, but with a different k each time. For each member_MOTIF, if the k-mers selected across the runs came from the same general vicinity of the gene's upstream region, those k-mers may either be picking a part of the actual member_MOTIF (if k too small) or the member_MOTIF with some junk prepended/appended to it (if k too large).
+The example below hard codes k to 18, but you typically don't know what k should be set to beforehand. The Pevzner book doesn't discuss how to work around this problem. A strategy for finding k may be to run the motif matrix finding algorithm multiple times, but with a different k each time. For each member_MOTIF, if the k-mers selected across the runs came from the same general vicinity of the gene's upstream region, those k-mers may either be picking ...
+
+ * the actual member_MOTIF.
+ * a part of the actual member_MOTIF.
+ * a part of the actual member_MOTIF with some junk prepended/appended to it.
 ````
 
 ```{ch2}
@@ -1500,7 +1512,7 @@ PracticalMotifFindingExample
 
 # Terminology
 
- * A `{bm} k-mer/(k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+ * A `{bm} k-mer/(\d+-mer|k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
    | k | k-mers          |
    |---|-----------------|
@@ -1729,7 +1741,7 @@ PracticalMotifFindingExample
 
  * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
 
- * `{bm} motif member` `{bm} /\b(member)_MOTIF/i` - A specific nucleotide sequence that matches a motif. For example, given that a motif represented by the regex `[AT]TT[GC]C`, the sequences `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC` would be its member_MOTIFs.
+ * `{bm} motif member` `{bm} /\b(member)_MOTIF/i` - A specific nucleotide sequence that matches a motif. For example, given a motif represented by the regex `[AT]TT[GC]C`, the sequences `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC` would be its member_MOTIFs.
 
  * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers stacked on top of each other in a matrix, where the k-mers are either...
 
@@ -1865,7 +1877,7 @@ PracticalMotifFindingExample
 
  * `{bm} assembly` - The process of stitching together overlapping read_DNAs to construct the sequence of the original larger DNA that those read_DNAs came from.
 
- * `{bm} hybrid alphabet` - When representing a sequence that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the IUPAC nucleotide codes provides the following alphabet:
+ * `{bm} hybrid alphabet/(hybrid alphabet|alternate alphabet|alternative alphabet)/i` - When representing a sequence that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the IUPAC nucleotide codes provides the following alphabet:
 
    * A = A
    * C = C
@@ -1925,6 +1937,9 @@ PracticalMotifFindingExample
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
+
 `{bm-ignore} \b(member)_NORM/i`
 `{bm-error} Apply suffix _NORM or _MOTIF/\b(member)/i`
+
 `{bm-error} Missing topic reference/(_TOPIC)/i`
+`{bm-error} Use you instead of we/\b(we)\b/i`

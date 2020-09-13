@@ -84,8 +84,8 @@ search for similar k-mers in upstream regions (1 per upstream region)
 </text>
 </g>
 <g>
-<text x="57" y="12">
-identify genes with differing gene expression levels
+<text x="73" y="12">
+find genes with differing gene expression levels
 </text>
 </g>
 </svg>
