@@ -1,8 +1,9 @@
-NAME=$(md5sum /input/ch2_code/src/conda_env.yml | cut -d " " -f1)
+NAME=$(md5sum /input/ch3_code/src/conda_env.yml | cut -d " " -f1)
 ENV_NAMES=$(conda info --envs)
 
 if [[ $NAME != *$ENV_NAMES* ]]; then
-  conda env create -f /input/ch2_code/src/conda_env.yml -n $NAME
+  cp /input/ch3_code/src/conda_env.yml /tmp
+  conda env create -f /tmp/conda_env.yml -n $NAME
 fi
 
 source /opt/conda/etc/profile.d/conda.sh

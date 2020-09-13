@@ -457,7 +457,7 @@ A motif matrix is a matrix of k-mers that are suspected to be part of a motif. I
 **ALGORITHM**:
 
 ```{note}
-It may be more appropriate to use a hybrid alphabet when representing consensus strings. The book doesn't mention this specifically but multiple online sources discuss it.
+It may be more appropriate to use a hybrid alphabet when representing consensus string because alternate nucleotides could be represented as a single letter. The Pevzner book doesn't mention this specifically but multiple online sources discuss it.
 ```
 
 ```{output}
@@ -605,7 +605,6 @@ ATTGC
 #### Relative Entropy Algorithm
 
 ```{prereq}
-Algorithms/Motif/Motif Matrix Profile_TOPIC
 Algorithms/Motif/Motif Matrix Score/Entropy Algorithm_TOPIC
 ```
 
@@ -665,6 +664,42 @@ CCCCCCCCCCCCCCCCCATTGCCCC
 ATTCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCTTTGCCCCCC
 CCCCCCTTTCTCCCCCCCCCCCCCC
+```
+
+### Motif Logo
+
+`{bm} /(Algorithms\/Motif\/Motif Logo)_TOPIC/`
+
+```{prereq}
+Algorithms/Motif/Motif Matrix Score/Entropy Algorithm_TOPIC
+```
+
+**WHAT**: Given a motif matrix, generate a graphical representation showing how conserved the motif is. Each position has its possible nucleotides stacked on top of each other, where the height of each nucleotide is based on how conserved it is. The more conserved a position is, the taller that column will be. This type of graphical representation is called a sequence logo.
+
+**WHY**: A sequence logo helps more quickly convey the characteristics of the motif matrix it's for.
+
+**ALGORITHM**:
+
+For this particular logo implementation, a lower entropy results in a taller overall column.
+
+```{output}
+ch2_code/src/MotifLogo.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch2}
+MotifLogo
+TCGGGGGTTTTT
+CCGGTGACTTAC
+ACGGGGATTTTC
+TTGGGGACTTTT
+AAGGGGACTTCC
+TTGGGGACTTCC
+TCGGGGATTCAT
+TCGGGGATTCCT
+TAGGGGAACTAC
+TCGGGTATAACC
 ```
 
 ### K-mer Match Probability
@@ -1865,7 +1900,28 @@ PracticalMotifFindingExample
    | N        | any base            |
    | . or -   | gap                 |
 
-   [Source](https://www.bioinformatics.org/sms/iupac.html)
+   [Source](https://www.bioinformatics.org/sms/iupac.html).
+
+ * `{bm} sequence logo/(\blogo|sequence logo)/i` - A graphical representation of how conserved a sequence's positions are. Each position has its possible nucleotides stacked on top of each other, where the height of each nucleotide is based on how conserved it is. The more conserved a position is, the taller that column will be.
+ 
+   Typically applied to DNA or RNA, and May also be applied to other biological sequence types (e.g. amino acids).
+
+   The following is an example of a logo generated from a motif sequence:
+
+   ```{ch2}
+   MotifLogo
+   TCGGGGGTTTTT
+   CCGGTGACTTAC
+   ACGGGGATTTTC
+   TTGGGGACTTTT
+   AAGGGGACTTCC
+   TTGGGGACTTCC
+   TCGGGGATTCAT
+   TCGGGGATTCCT
+   TAGGGGAACTAC
+   TCGGGTATAACC
+   ```
+
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
