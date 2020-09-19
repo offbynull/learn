@@ -1,5 +1,7 @@
 from typing import List
 
+from Utils import normalize_graph
+
 
 def prefix(kmer: str):
     return kmer[:-1]
@@ -10,15 +12,16 @@ def suffix(kmer: str):
 
 
 def debruijn_graph_from_kmers(kmers: List[str]):
-    nodes = dict()
+    graph = dict()
     for kmer in kmers:
         from_node = prefix(kmer)
         to_node = suffix(kmer)
-        nodes.setdefault(from_node, []).append(to_node)
-    return nodes
+        graph.setdefault(from_node, []).append(to_node)
+    graph = normalize_graph(graph)
+    return graph
 
 
 if __name__ == '__main__':
-    nodes = debruijn_graph_from_kmers(['GAGG', 'CAGG', 'GGGG', 'GGGA', 'CAGG', 'AGGG', 'GGAG'])
-    for kmer, other_kmers in nodes.items():
+    graph = debruijn_graph_from_kmers(['GAGG', 'CAGG', 'GGGG', 'GGGA', 'CAGG', 'AGGG', 'GGAG'])
+    for kmer, other_kmers in graph.items():
         print(f'{kmer} -> {",".join(other_kmers)}')

@@ -1,4 +1,4 @@
-from typing import List, Tuple, Dict
+from typing import List, Dict
 
 
 def prefix(kmer: str):
@@ -9,7 +9,7 @@ def suffix(kmer: str):
     return kmer[1:]
 
 
-def hash_find_overlaps(kmers: List[str]) -> Dict[str, List[str]]:
+def hash_overlap_search(kmers: List[str]) -> Dict[str, List[str]]:
     ret = dict()
 
     prefixes = dict()
@@ -36,5 +36,5 @@ def hash_find_overlaps(kmers: List[str]) -> Dict[str, List[str]]:
 
 
 if __name__ == '__main__':
-    out = hash_find_overlaps(['ATGCG', 'GCATG', 'CATGC', 'AGGCA', 'GGCAT', 'GGCAC'])
+    out = hash_overlap_search(['ATGCG', 'GCATG', 'CATGC', 'AGGCA', 'GGCAT', 'GGCAC'])
     print(f'{out}')

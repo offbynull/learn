@@ -1,4 +1,4 @@
-from typing import List, Tuple, Dict
+from typing import List, Dict
 
 
 def prefix(kmer: str):
@@ -9,7 +9,7 @@ def suffix(kmer: str):
     return kmer[1:]
 
 
-def bruteforce_find_overlaps(kmers: List[str]) -> Dict[str, List[str]]:
+def bruteforce_overlap_search(kmers: List[str]) -> Dict[str, List[str]]:
     ret = dict()
     for i, kmer in enumerate(kmers):
         kmer_suffix = suffix(kmer)
@@ -23,5 +23,5 @@ def bruteforce_find_overlaps(kmers: List[str]) -> Dict[str, List[str]]:
 
 
 if __name__ == '__main__':
-    out = bruteforce_find_overlaps(['ATGCG', 'GCATG', 'CATGC', 'AGGCA', 'GGCAT', 'GGCAC'])
+    out = bruteforce_overlap_search(['ATGCG', 'GCATG', 'CATGC', 'AGGCA', 'GGCAT', 'GGCAC'])
     print(f'{out}')

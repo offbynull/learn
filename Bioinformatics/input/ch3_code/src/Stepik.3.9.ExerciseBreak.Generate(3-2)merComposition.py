@@ -1,9 +1,9 @@
-from Utils import slide_window
+from Utils import slide_window_kd
 
 dna = 'TAATGCCATGGGATGTT'
 kdmers = []
-for a, b in zip(slide_window(dna, 3), slide_window(dna[5:], 3)):
-    kdmers.append('(' + a[0] + '|' + b[0] + ')')
+for kdmer, _ in slide_window_kd(dna, 3, 2):
+    kdmers.append('(' + kdmer.head + '|' + kdmer.tail + ')')
 
 kdmers.sort()
 print(f'{" ".join(kdmers)}')

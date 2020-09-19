@@ -1,12 +1,11 @@
-from BruteforceOverlapSearch import bruteforce_find_overlaps
-from HashOverlapSearch import hash_find_overlaps
-from StringSpelledByGenomePath import string_spelled_by_genome_path
+from Kmer_HashOverlapSearch import hash_overlap_search
+from Kmer_StringSpelledByGenomePath import string_spelled_by_genome_path
 from Utils import enumerate_patterns
 
 segments = list(enumerate_patterns(4, '01'))
 print(f'{segments}')
 
-nodes = hash_find_overlaps(segments)
+nodes = hash_overlap_search(segments)
 for kmer, other_kmers in sorted(nodes.items()):
     print(f'{kmer} -> {",".join(other_kmers)}')
 
