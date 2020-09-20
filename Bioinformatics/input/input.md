@@ -1110,6 +1110,12 @@ CATCTT
 
 ## Assembly
 
+`{bm} /(Algorithms\/Assembly)_TOPIC/`
+
+```{prereq}
+Algorithms/K-mer_TOPIC
+```
+
 DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into smaller fragments, then scanning in those smaller fragments. The scanning of fragments come in two flavours:
 
  * read_DNAs - small DNA fragments of equal size (represented as k-mers).
@@ -1150,16 +1156,91 @@ A C T A A G A A C C T A A T T T A G C
                                               
 ```
 
-Typically, all read_DNAs / read-pairs scanned in by the sequencer are of the same length.
+Typically, all read_DNAs / read-pairs scanned in by the sequencer are the same length.
 
 The number of nucleotides scanned in by a sequencer per read_DNA / read-pair can't be too long because the chance of error increases as the number of scanned nucleotides increases. For this reason, read-pairs are typically longer than read_DNAs: By only scanning in the prefix and suffix of a long fragment, the scan won't contain as many errors as a read_DNA of the same length but will contain extra information which helps with stitching (length of unknown nucleotides in between the prefix and suffix).
 
 Typical complications with assembly:
 
+ * Which strand of double stranded DNA that a read_DNA / read-pair comes from isn't known, which means that some read_DNAs / read-pairs need to be converted to their reverse complements before finding overlaps.
  * The read_DNAs / read-pairs may have errors (e.g. wrong nucleotides scanned in), which may prevent finding overlaps.
  * The read_DNAs / read-pairs may not cover the entire genome, which will prevent full reconstruction.
- * The read_DNAs / read-pairs for highly repetitive parts of the genome (e.g. telomeres) likely can't be reconstructed.
- * Which strand of double stranded DNA that a read_DNA / read-pair comes from isn't known, which means that some read_DNAs / read-pairs need to be converted to their reverse complements before finding overlaps.
+ * The read_DNAs / read-pairs for repetitive parts of the genome (e.g. telomeres) likely can't be accurately reconstructed.
+
+Currently, no workaround exists for the repetitive parts complication. For example, the human genome is around 3 billion in length and around half of it is made up of repeats. Those repeats prevent full reconstruction of the genome. If repeats didn't exist, the odds of two read_DNAs / read-pairs from different parts of the human genome containing the exact same content would be low. Given a read_DNA length of 300, the odds of 300-mer repeating in a random DNA string of length 3 billion is `{kt} \frac{1}{4^{300}} * 2999999701`.
+
+### Find Read Overlaps
+
+**WHAT**: Given a list of read_DNAs for the same organism, find overlaps between those read_DNAs.
+
+**WHY**: Finding overlaps across read_DNAs is required for assembly.
+
+#### Bruteforce Algorithm
+
+**ALGORITHM**:
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+
+#### Hash Algorithm
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
+
+TODO: FILL IN
 
 # Stories
 
@@ -1999,6 +2080,15 @@ PracticalMotifFindingExample
    TCGGGTATAACC
    ```
 
+ * `{bm} transposon/(transposon|transposable element|jumping gene)/i` - A DNA sequence that can change its position within a genome, altering the genome size. They come in two flavours:
+
+   * Class I (retrotransposon) - Behaves similarly to copy-and-paste where the sequence is duplicated. DNA is transcribed to RNA, followed by that RNA being reverse transcribed back to DNA by an enzyme called reverse transcriptase.
+   * Class II (DNA transposon) - Behaves similarly to cut-and-paste where the sequence is moved. DNA is physically cut out by an enzyme called transposases and placed back in at some other location.
+  
+   Often times, transposons cause disease. For example, ...
+
+   * insertion of a transposon into a gene will likely disable that gene.
+   * after a transposon leaves a gene, the gap likely won't be repaired correctly.
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
