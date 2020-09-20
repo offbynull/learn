@@ -10,4 +10,6 @@ kmers = [l for l in kmers if len(l) > 0] # get rid of empty lines
 
 nodes = debruijn_graph_from_kmers(kmers)
 for node, other_nodes in nodes.items():
+    if len(other_nodes) == 0:
+        continue
     print(f'{node} -> {",".join(other_nodes)}')

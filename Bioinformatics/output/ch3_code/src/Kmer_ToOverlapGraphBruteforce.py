@@ -1,4 +1,8 @@
-from typing import List, Tuple, Dict
+import typing
+from collections import Counter
+from typing import List, Dict
+
+from Utils import normalize_graph
 
 
 def prefix(kmer: str):
@@ -9,7 +13,7 @@ def suffix(kmer: str):
     return kmer[1:]
 
 
-def bruteforce_find_overlaps(kmers: List[str]) -> Dict[str, List[str]]:
+def to_overlap_graph(kmers: List[str]) -> Dict[str, typing.Counter[str]]:
     ret = dict()
     for i, kmer in enumerate(kmers):
         kmer_suffix = suffix(kmer)
@@ -18,10 +22,11 @@ def bruteforce_find_overlaps(kmers: List[str]) -> Dict[str, List[str]]:
                 continue
             other_kmer_prefix = prefix(other_kmer)
             if kmer_suffix == other_kmer_prefix:
-                ret.setdefault(kmer, []).append(other_kmer)
+                ret.setdefault(kmer, Counter())[other_kmer] += 1
+    ret = normalize_graph(ret)
     return ret
 
 
 if __name__ == '__main__':
-    out = bruteforce_find_overlaps(['ATGCG', 'GCATG', 'CATGC', 'AGGCA', 'GGCAT', 'GGCAC'])
+    out = to_overlap_graph(['ATGCG', 'GCATG', 'CATGC', 'AGGCA', 'GGCAT', 'GGCAC'])
     print(f'{out}')

@@ -1,4 +1,4 @@
-from Utils import slide_window
+from Utils import slide_window, normalize_graph
 
 
 def prefix(kmer: str):
@@ -10,12 +10,13 @@ def suffix(kmer: str):
 
 
 def debruijn_graph_from_string(k: int, dna: str):
-    nodes = dict()
+    graph = dict()
     for kmer, _ in slide_window(dna, k):
         from_node = prefix(kmer)
         to_node = suffix(kmer)
-        nodes.setdefault(from_node, []).append(to_node)
-    return nodes
+        graph.setdefault(from_node, []).append(to_node)
+    graph = normalize_graph(graph)
+    return graph
 
 
 if __name__ == '__main__':

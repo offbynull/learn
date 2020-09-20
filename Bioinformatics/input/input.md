@@ -1108,6 +1108,59 @@ CTTCCT
 CATCTT
 ```
 
+## Assembly
+
+DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into smaller fragments, then scanning in those smaller fragments. The scanning of fragments come in two flavours:
+
+ * read_DNAs - small DNA fragments of equal size (represented as k-mers).
+
+   ```{svgbob}
+   A -> A -> A -> C -> C -> G -> A -> A -> A -> C
+   ```
+
+ * read-pairs - small DNA fragments of equal size where the prefix and suffix are known, but the nucleotides in between aren't known (represented as kd-mers).
+
+   Given a read-pair, the length of the ...
+    * prefix and suffix are equal to each other.
+    * unknown nucleotides in between the prefix and suffix is known.
+
+   ```{svgbob}
+   A -> C -> A -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> T -> G -> C
+   ```
+
+Assembly is the process of reconstructing an organism's genome from these fragments: Since the sequencer fragments multiple copies of the same DNA and each fragment's start position is random, the original organism can be reconstructed by finding overlaps between fragments and stitching them back together.
+
+```{svgbob}
+        "Capture DNA fragments"                                   "Stitch DNA fragments"
+   
+    |-----------| |-----------|                         A C T A A G A              
+A C T A A G A A C C T A A T T T A G C                     C T A A G A A            
+                                                            T A A G A A C          
+|-----------|           |-----------|                           A G A A C C T                
+A C T A A G A A C C T A A T T T A G C                               A A C C T A A            
+                                           ------->                       C T A A T T T      
+  |-----------|         |-----------|                                         A A T T T A G  
+A C T A A G A A C C T A A T T T A G C                                           A T T T A G C
+                                                                                A T T T A G C
+        |-----------| |-----------|                     A C T A A G A A C C T A A T T T A G C
+A C T A A G A A C C T A A T T T A G C                
+                                                     
+            |-----------|            
+A C T A A G A A C C T A A T T T A G C
+                                              
+```
+
+Typically, all read_DNAs / read-pairs scanned in by the sequencer are of the same length.
+
+The number of nucleotides scanned in by a sequencer per read_DNA / read-pair can't be too long because the chance of error increases as the number of scanned nucleotides increases. For this reason, read-pairs are typically longer than read_DNAs: By only scanning in the prefix and suffix of a long fragment, the scan won't contain as many errors as a read_DNA of the same length but will contain extra information which helps with stitching (length of unknown nucleotides in between the prefix and suffix).
+
+Typical complications with assembly:
+
+ * The read_DNAs / read-pairs may have errors (e.g. wrong nucleotides scanned in), which may prevent finding overlaps.
+ * The read_DNAs / read-pairs may not cover the entire genome, which will prevent full reconstruction.
+ * The read_DNAs / read-pairs for highly repetitive parts of the genome (e.g. telomeres) likely can't be reconstructed.
+ * Which strand of double stranded DNA that a read_DNA / read-pair comes from isn't known, which means that some read_DNAs / read-pairs need to be converted to their reverse complements before finding overlaps.
+
 # Stories
 
 ## Bacteria Replication
@@ -1512,7 +1565,7 @@ PracticalMotifFindingExample
 
 # Terminology
 
- * A `{bm} k-mer/(\d+-mer|k-mer|kmer)/i` is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+ * `{bm} k-mer/(\d+-mer|k-mer|kmer)/i` - A subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
 
    | k | k-mers          |
    |---|-----------------|
@@ -1522,6 +1575,12 @@ PracticalMotifFindingExample
    | 4 | GAAA AAAT AATC  |
    | 5 | GAAAT AAATC     |
    | 6 | GAAATC          |
+
+ * `{bm} kd-mer/(\(\d+,\s*\d+\)-mer|kd-mer|kdmer|\(k,\s*d\)-mer)/i` - A subsequence of length 2k + d within some larger biological sequence (e.g. DNA or amino acid chain) where the first k elements and the last k elements are known but the d elements in between isn't known.
+ 
+   When identifying a kd-mer with a specific k and d, the proper syntax is (k, d)-mer. For example, (1, 2)-mer represents a kd-mer with k=1 and d=2. In the DNA sequence `GAAATC`, the following (1, 2)-mer's exist: `G--A`, `A--T`, `A--C`.
+
+   See read-pair.
 
  * `{bm} 5'` (`{bm} 5 prime`) / `{bm} 3'` (`{bm} 3 prime`) - 5' (5 prime) and 3' (3 prime) describe the opposite ends of DNA. The chemical structure at each end is what defines if it's 5' or 3' -- each end is guaranteed to be different from the other. The forward direction on DNA is defined as 5' to 3', while the backwards direction is 3' to 5'.
 
@@ -1875,7 +1934,13 @@ PracticalMotifFindingExample
 
  * `{bm} read/\b(read)_DNA/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA.
 
- * `{bm} assembly` - The process of stitching together overlapping read_DNAs to construct the sequence of the original larger DNA that those read_DNAs came from.
+ * `{bm} read-pair/(read-pair|read pair)/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA, where the middle of the fragment is unknown. That is, the first k elements and the last k elements are known, but the d elements in between aren't known. The total size of the fragment is 2k + d.
+
+   Sequencers provide read-pairs as an alternative to longer read_DNAs because the longer a read_DNA is the more errors it contains.
+
+   See kd-mer.
+
+ * `{bm} assembly` - The process of stitching together overlapping read_DNAs / read-pairs to construct the sequence of the original larger DNA that those read_DNAs / read-pairs came from.
 
  * `{bm} hybrid alphabet/(hybrid alphabet|alternate alphabet|alternative alphabet)/i` - When representing a sequence that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the IUPAC nucleotide codes provides the following alphabet:
 

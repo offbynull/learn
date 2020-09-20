@@ -1,4 +1,4 @@
-from StringComposition import string_composition
+from Kmer_StringComposition import string_composition
 
 with open('/home/user/Downloads/dataset_240255_3.txt', mode='r', encoding='utf-8') as f:
     data = f.read()

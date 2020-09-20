@@ -1,9 +1,9 @@
 from copy import deepcopy
-from typing import List, Set
+from typing import List
 
 from EulerianCycle import eularian_cycle
 from EulerianPathToEulerianCycle import normalize_graph_representation
-from StringSpelledByGenomePath import string_spelled_by_genome_path
+from Kmer_StringSpelledByGenomePath import string_spelled_by_genome_path
 
 adjacency_list = [
     ('00', ['00', '01']),

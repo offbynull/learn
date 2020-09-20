@@ -1,7 +1,7 @@
 from DeBruijnGraphFromKmers import debruijn_graph_from_kmers
 from EulerianPathToEulerianCycle import normalize_graph_representation, \
     find_eularian_path_in_nearly_balanced_graph
-from StringSpelledByGenomePath import string_spelled_by_genome_path
+from Kmer_StringSpelledByGenomePath import string_spelled_by_genome_path
 
 with open('/home/user/Downloads/dataset_240261_7.txt', mode='r', encoding='utf-8') as f:
     data = f.read()

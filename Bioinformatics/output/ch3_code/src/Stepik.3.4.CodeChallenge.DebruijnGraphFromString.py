@@ -9,4 +9,6 @@ dna = lines[1].strip()
 
 nodes = debruijn_graph_from_string(k, dna)
 for node, other_nodes in nodes.items():
+    if len(other_nodes) == 0:
+        continue
     print(f'{node} -> {",".join(other_nodes)}')

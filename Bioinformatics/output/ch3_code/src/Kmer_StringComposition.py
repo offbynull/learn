@@ -18,7 +18,7 @@ def main():
         text = input()
 
         composition = string_composition(k, text)
-        print(f'String composition of {text} is {str(composition)}')
+        print(f'String k-mer composition of {text} is {str(composition)}')
     finally:
         print("</div>", end="\n\n")
         print("`{bm-enable-all}`", end="\n\n")
