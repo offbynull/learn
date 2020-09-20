@@ -20,10 +20,10 @@ def random_walk_until_back_at_node_while_removing_edges_as_walking(node: str, gr
 
 # graph must be strongly connected
 # graph must be eulerian
-def eularian_cycle(graph: Dict[str, List[str]]) -> List[str]:
+def eularian_cycle(graph: Dict[str, List[str]], start_id=None) -> List[str]:
     graph_copy = dict(graph)
 
-    start_id = list(graph_copy.keys())[0]
+    start_id = list(graph_copy.keys())[0] if start_id is None else start_id
     edge_cycle = random_walk_until_back_at_node_while_removing_edges_as_walking(
         start_id,
         graph_copy
@@ -34,6 +34,8 @@ def eularian_cycle(graph: Dict[str, List[str]]) -> List[str]:
     while len(graph_copy) > 0:
         unexplored_nodes = set(total_node_cycle).intersection(graph_copy.keys())
         for unexplored_node in unexplored_nodes:
+            if unexplored_node not in graph_copy.keys():
+                continue
             if len(graph_copy) == 0:
                 break
             start_id = unexplored_node

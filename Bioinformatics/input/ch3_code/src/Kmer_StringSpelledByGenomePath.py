@@ -16,7 +16,6 @@ def string_spelled_by_genome_path(path: List[str]) -> str:
     k = len(path[0])
     ret = path[0]
     for p2 in path[1:]:
-        assert len(p2) == k  # sanity check
         p1 = ret[-k:]
 
         overlap1 = suffix(p1)
