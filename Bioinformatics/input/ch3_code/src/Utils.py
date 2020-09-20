@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import typing
 from collections import Counter
-from typing import Tuple, Dict, List, TypeVar
+from typing import Tuple, Dict, TypeVar, Set
 
 from Kdmer import Kdmer
 
@@ -31,33 +31,31 @@ def enumerate_patterns(k: int, elements='ACGT') -> str:
 T = TypeVar('T')
 
 
-def copy_graph(graph: Dict[T, List[T]]) -> Dict[T, List[T]]:
+def copy_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T]]:
     copy = dict()
     for k, v in graph.items():
-        copy[k] = list(v)
+        copy[k] = v.copy()
     return copy
 
 
 # make sure every node that appears as a child also appears as a key
-def normalize_graph(graph: Dict[T, List[T]]) -> Dict[T, List[T]]:
+def normalize_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T]]:
     graph = copy_graph(graph)
-    all_nodes = graph.keys() | set([node for nodes in graph.values() for node in nodes])
-    for n in all_nodes:
-        graph.setdefault(n, [])
-    return graph
-
-
-def copy_de_bruijn_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T]]:
-    copy = dict()
-    for k, v in graph.items():
-        copy[k] = Counter(v)
-    return copy
-
-
-# make sure every node that appears as a child also appears as a key
-def normalize_de_bruijn_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T]]:
-    graph = copy_de_bruijn_graph(graph)
     all_nodes = graph.keys() | set([node for nodes in graph.values() for node in nodes])
     for n in all_nodes:
         graph.setdefault(n, Counter())
     return graph
+
+
+def find_graph_roots(graph: Dict[T, typing.Counter[T]]) -> Set[T]:
+    nodes_with_incoming_conns = set([n for v in graph.values() for n in v])
+    nodes = graph.keys()
+    start_nodes = nodes - nodes_with_incoming_conns
+    return start_nodes
+
+
+def count_graph_edges(graph: Dict[T, typing.Counter[T]]) -> int:
+    ret = 0
+    for from_node in graph.keys():
+        ret += len(graph[from_node])
+    return ret

@@ -1,6 +1,9 @@
+import typing
+from collections import Counter
 from typing import List, Tuple, Dict
 
 from Kdmer import Kdmer
+from Utils import normalize_graph
 
 
 def prefix(kmer: str):
@@ -11,7 +14,7 @@ def suffix(kmer: str):
     return kmer[1:]
 
 
-def bruteforce_overlap_search(kdmers: List[Kdmer]) -> Dict[str, List[str]]:
+def to_overlap_graph(kdmers: List[Kdmer]) -> Dict[str, typing.Counter[Kdmer]]:
     ret = dict()
     for i, kdmer in enumerate(kdmers):
         head_suffix = suffix(kdmer.head)
@@ -22,13 +25,14 @@ def bruteforce_overlap_search(kdmers: List[Kdmer]) -> Dict[str, List[str]]:
             other_head_prefix = prefix(other_kdmer.head)
             other_tail_prefix = prefix(other_kdmer.tail)
             if head_suffix == other_head_prefix and tail_suffix == other_tail_prefix:
-                ret.setdefault(kdmer, []).append(other_kdmer)
+                ret.setdefault(kdmer, Counter())[other_kdmer] += 1
+    ret = normalize_graph(ret)
     return ret
 
 
 if __name__ == '__main__':
     # ACTACTGGTACT
-    out = bruteforce_overlap_search(
+    out = to_overlap_graph(
         [
             Kdmer('ACT', 'CTG', 1),
             Kdmer('CTA', 'TGG', 1),

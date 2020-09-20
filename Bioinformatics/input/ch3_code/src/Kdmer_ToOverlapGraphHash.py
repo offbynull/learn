@@ -1,6 +1,9 @@
+import typing
+from collections import Counter
 from typing import List, Dict
 
 from Kdmer import Kdmer
+from Utils import normalize_graph
 
 
 def prefix(kmer: str):
@@ -11,7 +14,7 @@ def suffix(kmer: str):
     return kmer[1:]
 
 
-def hash_overlap_search(kdmers: List[Kdmer]) -> Dict[str, List[Kdmer]]:
+def to_overlap_graph(kdmers: List[Kdmer]) -> Dict[str, typing.Counter[Kdmer]]:
     ret = dict()
 
     prefixes = dict()
@@ -34,14 +37,15 @@ def hash_overlap_search(kdmers: List[Kdmer]) -> Dict[str, List[Kdmer]]:
                 if i == j:
                     continue
                 other_kdmer = kdmers[j]
-                ret.setdefault(kdmer, []).append(other_kdmer)
+                ret.setdefault(kdmer, Counter())[other_kdmer] += 1
 
+    ret = normalize_graph(ret)
     return ret
 
 
 if __name__ == '__main__':
     # ACTACTGGTACT
-    out = hash_overlap_search(
+    out = to_overlap_graph(
         [
             Kdmer('ACT', 'CTG', 1),
             Kdmer('CTA', 'TGG', 1),

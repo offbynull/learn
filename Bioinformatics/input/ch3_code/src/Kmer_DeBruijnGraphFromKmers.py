@@ -2,7 +2,7 @@ import typing
 from collections import Counter
 from typing import List, Dict
 
-from Utils import normalize_de_bruijn_graph
+from Utils import normalize_graph
 
 
 def prefix(kmer: str):
@@ -20,7 +20,7 @@ def debruijn_graph_from_kmers(kmers: List[str]) -> Dict[str, typing.Counter[str]
         from_node = prefix(kmer)
         to_node = suffix(kmer)
         graph.setdefault(from_node, Counter())[to_node] += 1
-    graph = normalize_de_bruijn_graph(graph)
+    graph = normalize_graph(graph)
     return graph
 
 
