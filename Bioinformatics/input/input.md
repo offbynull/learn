@@ -2314,7 +2314,32 @@ PracticalMotifFindingExample
    * 110: 0001**110**100
    * 111: 000**111**0100
 
-   De Bruijn graphs were invented in an effort to construct k-universal strings for arbitrary values of k. Finding k-universal strings for larger values of k (e.g. 20) would be too computationally intensive without de Bruijn graphs.
+   De Bruijn graphs were invented in an effort to construct k-universal strings for arbitrary values of k. For example, given only the k-mers in the example above (000, 001, ...), a k-universal string can be found by constructing a de Bruijn graph from the k-mers and finding a Eulerian cycle in that graph.
+
+   ```{svgbob}
+        001                011
+   +-----------> 01 -------------+
+   |             ^|              |
+   |+----+       |+----+   +----+|
+   ||    |  +----+ 010 |   |    ||
+   ||    |  |          |   |    |v
+   00    |  |          |   |    11
+   ^^    |  |          |   |    || 
+   ||000 |  | 101 +----+   |111 ||
+   |+----+  +----+|        +----+|
+   |             |v              |
+   +------------ 10 <------------+
+       100                110
+   
+   "* Cycle 1:"            00 -> 00
+   "* Cycle 2:"                  00 -> 01 -------------------------> 10 -> 00
+   "* Cycle 3:"                        01 -> 11 -> 11 -> 10 -> 01
+   "* Merged 1 to 2 to 3:" 00 -> 00 -> 01 -> 11 -> 11 -> 10 -> 01 -> 10 -> 00
+   
+   "* k-universal string:" 0001110100
+   ```
+   
+   For larger values of k (e.g. 20), finding k-universal strings would be too computationally intensive without de Bruijn graphs and Eulerian cycles.
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
