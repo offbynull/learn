@@ -3204,7 +3204,28 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK103"></a><strong>k-universal</strong> - For some alphabet, a string is considered <a href="#BOOKMARK103">k-universal</a> if it contains every possible <a href="#BOOKMARK23">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a <a href="#BOOKMARK103">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK23">3-mer</a> exactly once:</p>
+<p><a name="BOOKMARK103"></a><strong>De Bruijn graph</strong> - A special graph representing the <a href="#BOOKMARK23">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
+<ol>
+<li>
+<p>Each <a href="#BOOKMARK23">k-mer</a> is represented as an edge connecting 2 nodes. The ...</p>
+<ul>
+<li>source node represents the first 0 to n-1 elements of the <a href="#BOOKMARK23">k-mer</a>,</li>
+<li>destination node represents last 1 to n elements of the <a href="#BOOKMARK23">k-mer</a>,</li>
+<li>and edge represents the <a href="#BOOKMARK23">k-mer</a>.</li>
+</ul>
+<p>For example, ...</p>
+<p><img src="svgbob_8e6112b97be535a52f2be925bb5b56b546699aaa.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p>Each node representing the same value is merged together to form the graph.</p>
+<p>For example, ...</p>
+<p><img src="svgbob_cfa519e3b0b53ea602d7a16720f54ea9c85f3f08.svg" alt="Kroki diagram output"></p>
+</li>
+</ol>
+<p><a href="#BOOKMARK103">De Bruijn graph</a>s are used for efficient <a href="#BOOKMARK78">genome</a> <a href="#BOOKMARK84">assembly</a>. They were originally invented to solve the <a href="#BOOKMARK104">k-universal</a> string problem.</p>
+</li>
+<li>
+<p><a name="BOOKMARK104"></a><strong>k-universal</strong> - For some alphabet, a string is considered <a href="#BOOKMARK104">k-universal</a> if it contains every possible <a href="#BOOKMARK23">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a <a href="#BOOKMARK104">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK23">3-mer</a> exactly once:</p>
 <ul>
 <li>000: <strong>000</strong>1110100</li>
 <li>001: 0<strong>001</strong>110100</li>
@@ -3215,11 +3236,38 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>110: 0001<strong>110</strong>100</li>
 <li>111: 000<strong>111</strong>0100</li>
 </ul>
-<p>De Bruijn graphs were invented in an effort to construct <a href="#BOOKMARK103">k-universal</a> strings for arbitrary values of k. For example, given only the <a href="#BOOKMARK23">k-mer</a>s in the example above (000, 001, ...), a <a href="#BOOKMARK103">k-universal</a> string can be found by constructing a de Bruijn graph from the <a href="#BOOKMARK23">k-mer</a>s and finding a <a href="#BOOKMARK93">Eulerian cycle</a> in that graph.</p>
+<p><a href="#BOOKMARK103">De Bruijn graph</a>s were invented in an effort to construct <a href="#BOOKMARK104">k-universal</a> strings for arbitrary values of k. For example, given only the <a href="#BOOKMARK23">k-mer</a>s in the example above (000, 001, ...), a <a href="#BOOKMARK104">k-universal</a> string can be found by constructing a <a href="#BOOKMARK103">de Bruijn graph</a> from the <a href="#BOOKMARK23">k-mer</a>s and finding a <a href="#BOOKMARK93">Eulerian cycle</a> in that graph.</p>
 <p><img src="svgbob_66eb5a77801a2c3970b3c946b504604bbcc6ff7d.svg" alt="Kroki diagram output"></p>
-<p>For larger values of k (e.g. 20), finding <a href="#BOOKMARK103">k-universal</a> strings would be too computationally intensive without de Bruijn graphs and <a href="#BOOKMARK93">Eulerian cycle</a>s.</p>
+<p>For larger values of k (e.g. 20), finding <a href="#BOOKMARK104">k-universal</a> strings would be too computationally intensive without <a href="#BOOKMARK103">De Bruijn graph</a>s and <a href="#BOOKMARK93">Eulerian cycle</a>s.</p>
+</li>
+<li>
+<p><a name="BOOKMARK105"></a><strong>coverage</strong> - Given a substring from some larger <a href="#BOOKMARK79">sequence</a> that was reconstructed from <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s, the <a href="#BOOKMARK105">coverage</a> of that substring is the number of <a href="#BOOKMARK82">read</a>s used to construct it. The substring length is typically 1: the <a href="#BOOKMARK105">coverage</a> for each position of the <a href="#BOOKMARK79">sequence</a>.</p>
+<p><img src="svgbob_8dd35ba9a6498739b4dd8f3759fd49dec3d1e9c8.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK106"></a><strong>read breaking</strong> - The concept of taking multiple <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s and breaking them up into smaller <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s.</p>
+<p><img src="svgbob_b9da2f5a17d7b035165b1d412184651af769c4f7.svg" alt="Kroki diagram output"></p>
+<p>When <a href="#BOOKMARK106">read breaking</a>, smaller <a href="#BOOKMARK23">k-mer</a>s result in better <a href="#BOOKMARK105">coverage</a> but also make the <a href="#BOOKMARK103">de Bruijn graph</a> more tangled. The more tangled the de Bruijn is, the harder it is to infer the original <a href="#BOOKMARK79">sequence</a>.</p>
+<p>In the example above, the average <a href="#BOOKMARK105">coverage</a>...</p>
+<ul>
+<li>for the left-hand side (original) is 2.1.</li>
+<li>for the right-hand side (broken) is 4.</li>
+</ul>
+</li>
+<li>
+<p><a name="BOOKMARK107"></a><strong>contig</strong> <a name="BOOKMARK108"></a><strong></strong> - A long continuous piece of DNA. Derived by searching a <a href="#BOOKMARK103">de Bruijn graph</a> for paths that are the longest possible stretches of non-branching nodes.</p>
+<p>For example, in the following <a href="#BOOKMARK103">de Bruijn graph</a>, the <a href="#BOOKMARK108">contig</a> are: GTGG, GGT, and GGT:</p>
+<p><img src="svgbob_46fcb9e3ace3d275171e88f82dfd21756ef25890.svg" alt="Kroki diagram output"></p>
+<p>Assemblies often have gaps due to...</p>
+<ul>
+<li>repeats in the <a href="#BOOKMARK78">genome</a>, which are impossible to fix.</li>
+<li>poor <a href="#BOOKMARK105">coverage</a>, which may be cost prohibitive to fix (more <a href="#BOOKMARK82">read</a>s required).</li>
+</ul>
+<p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK108">contig</a>.</p>
 </li>
 </ul>
+<p>
+</p>
 <p>
 </p>
 <p>

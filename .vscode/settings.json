@@ -5,6 +5,8 @@
     "files.autoSaveDelay": 100,
     "cSpell.words": [
         "Bioinformatics",
+        "Bioinformatician",
+        "Bioinformaticians",
         "Cils",
         "Dihydrogen",
         "Faghihi",
@@ -86,6 +88,8 @@
         "Eulerian",
         "microarray",
         "indegree",
-        "outdegree"
+        "outdegree",
+        "contig",
+        "contigs"
     ]
 }

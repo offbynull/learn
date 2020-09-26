@@ -2303,6 +2303,53 @@ PracticalMotifFindingExample
    | D    | 1        | 1         |
    | F    | 1        | 1         |
 
+ * `{bm} De Bruijn graph` - A special graph representing the k-mers making up a string. Specifically, the graph is built in 2 steps:
+ 
+   1. Each k-mer is represented as an edge connecting 2 nodes. The ...
+
+      * source node represents the first 0 to n-1 elements of the k-mer,
+      * destination node represents last 1 to n elements of the k-mer,
+      * and edge represents the k-mer.
+
+      For example, ...
+
+      ```{svgbob}
+      "* GGTGGT has k-mers GGT GTG TGG GGT"
+      
+         GGT
+      GG ---> GT
+
+         GTG
+      GT ---> TG
+
+         TGG
+      TG ---> GG
+
+         GGT
+      GG ---> GT
+      ```
+
+   2. Each node representing the same value is merged together to form the graph.
+
+      For example, ...
+
+      ```{svgbob}
+      "* GGTGGT has k-mers GGT GTG TGG GGT"
+
+              GTG       
+      +----------------+
+      |                |
+      |        +------+|
+      |        | GGT  ||
+      v  TGG   |      v|
+      TG ---> GG      GT
+               |      ^
+               | GGT  |
+               +------+
+      ```
+
+   De Bruijn graphs are used for efficient genome assembly. They were originally invented to solve the k-universal string problem.
+
  * `{bm} k-universal/(k-universal|\d+-universal)/i` - For some alphabet, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
 
    * 000: **000**1110100
@@ -2335,11 +2382,87 @@ PracticalMotifFindingExample
    "* Cycle 2:"                  00 -> 01 -------------------------> 10 -> 00
    "* Cycle 3:"                        01 -> 11 -> 11 -> 10 -> 01
    "* Merged 1 to 2 to 3:" 00 -> 00 -> 01 -> 11 -> 11 -> 10 -> 01 -> 10 -> 00
-   
+
    "* k-universal string:" 0001110100
    ```
    
-   For larger values of k (e.g. 20), finding k-universal strings would be too computationally intensive without de Bruijn graphs and Eulerian cycles.
+   For larger values of k (e.g. 20), finding k-universal strings would be too computationally intensive without De Bruijn graphs and Eulerian cycles.
+
+ * `{bm} coverage/(coverage)_SEQUENCING/i` - Given a substring from some larger sequence that was reconstructed from read_DNAs / read-pairs, the coverage_SEQUENCING of that substring is the number of read_DNAs used to construct it. The substring length is typically 1: the coverage_SEQUENCING for each position of the sequence.
+
+   ```{svgbob}
+              "Read coverage for each 1-mer"
+   
+   "1:"        A C T A A G A              
+   "2:"          C T A A G A A            
+   "3:"            T A A G A A C          
+   "4:"                A G A A C C T                
+   "5:"                    A A C C T A A            
+   "6:"                          C T A A T T T      
+   "7:"                              A A T T T A G  
+   "8:"                                A T T T A G C
+   "String:"   A C T A A G A A C C T A A T T T A G C
+   
+   "Coverage:" 1 2 3 3 4 4 5 4 3 3 3 3 4 3 3 3 2 2 1
+   ```
+
+ * `{bm} read breaking/(read breaking|read-breaking)/i` - The concept of taking multiple read_DNAs / read-pairs and breaking them up into smaller read_DNAs / read-pairs.
+
+   ```{svgbob}
+                      "4 original 10-mer reads (left) broken up to perfectly overlapping 5-mers (right)"
+
+   "1:"        A C T A A G A A C C --+--------------------> A C T A A                                   
+                                     +-------------------->   C T A A G                                 
+                                     +-------------------->     T A A G A                               
+   "2:"              A A G A A C C T A A --+-------------->       A A G A A                             
+                                           +-------------->         A G A A C                           
+   "3:"                  G A A C C T A A T T --+---------->           G A A C C                         
+                                               +---------->             A A C C T                       
+                                               +---------->               A C C T A                     
+                                               +---------->                 C C T A A                   
+                                               +---------->                   C T A A T                 
+   "4:"                            T A A T T T A G C T -+->                     T A A T T               
+                                                        +->                       A A T T T             
+                                                        +->                         A T T T A           
+                                                        +->                           T T T A G         
+                                                        +->                             T T A G C       
+                                                        +->                               T A G C T     
+   "String:"   A C T A A G A A C C T A A T T T A G C T      A C T A A G A A C C T A A T T T A G C T     
+   "Coverage:" 1 1 2 2 3 3 3 3 3 3 3 3 3 2 2 1 1 1 1 1      1 2 3 4 5 5 5 5 5 5 5 5 5 5 5 5 4 3 2 1
+   ```
+
+   When read breaking, smaller k-mers result in better coverage_SEQUENCING but also make the de Bruijn graph more tangled. The more tangled the de Bruijn is, the harder it is to infer the original sequence.
+
+   In the example above, the average coverage_SEQUENCING...
+
+    * for the left-hand side (original) is 2.1.
+    * for the right-hand side (broken) is 4.
+
+ * `{bm} contig/(contig)\b/i` `{bm} /(contig)s\b/i` - A long continuous piece of DNA. Derived by searching a de Bruijn graph for paths that are the longest possible stretches of non-branching nodes.
+
+   For example, in the following de Bruijn graph, the contigs are: GTGG, GGT, and GGT:
+
+   ```{svgbob}
+       "Original"            "Contig 1: GTGG"     "Contig 2: GGT"   "Contig 3: GGT"
+
+           GTG                      GTG                                          
+   +----------------+       +----------------+                                   
+   |                |       |                |                                   
+   |        +------+|       |                |        +------+                   
+   |        | GGT  ||       |                |        | GGT  |                   
+   v  TGG   |      v|       v  TGG           |        |      v                   
+   TG ---> GG      GT       TG ---> GG      GT       GG      GT        GG      GT
+            |      ^                                                    |      ^  
+            | GGT  |                                                    | GGT  |  
+            +------+                                                    +------+  
+   ```
+ 
+   Assemblies often have gaps due to...
+   
+    * repeats in the genome, which are impossible to fix.
+    * poor coverage_SEQUENCING, which may be cost prohibitive to fix (more read_DNAs required).
+    
+   As such, biologists / bioinformaticians have no choice but to settle on contigs.
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
@@ -2349,6 +2472,9 @@ PracticalMotifFindingExample
 
 `{bm-ignore} (balanced)_NORM/i`
 `{bm-error} Apply suffix _NORM, _GRAPH, or _NODE/(balanced)/i`
+
+`{bm-ignore} (coverage)_NORM/i`
+`{bm-error} Apply suffix _NORM, _SEQUENCING/(coverage)/i`
 
 `{bm-error} Missing topic reference/(_TOPIC)/i`
 `{bm-error} Use you instead of we/\b(we)\b/i`

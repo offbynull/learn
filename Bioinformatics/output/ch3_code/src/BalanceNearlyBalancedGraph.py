@@ -1,6 +1,6 @@
 import typing
 from collections import Counter
-from typing import Dict, List, Tuple, TypeVar
+from typing import Dict, List, Tuple, TypeVar, Set, Optional
 
 from Utils import copy_graph, normalize_graph
 from WalkEulerianCycle import walk_eularian_cycle
@@ -8,12 +8,17 @@ from WalkEulerianCycle import walk_eularian_cycle
 T = TypeVar('T')
 
 
+def get_degrees(graph: Dict[T, typing.Counter[T]], node: T) -> Tuple[int, int]:
+    out_degree = sum(graph[node].values())
+    in_degree = sum([children[node] for children in graph.values() if node in children])
+    return in_degree, out_degree
+
+
 def find_unbalanced_nodes(graph: Dict[T, typing.Counter[T]]) -> List[Tuple[T, int, int]]:
     all_nodes = graph.keys()
     unbalanced_nodes = []
     for node in all_nodes:
-        out_degree = sum(graph[node].values())
-        in_degree = sum([children[node] for children in graph.values() if node in children])
+        in_degree, out_degree = get_degrees(graph, node)
         if in_degree != out_degree:
             unbalanced_nodes.append((node, in_degree, out_degree))
     return unbalanced_nodes
@@ -21,7 +26,7 @@ def find_unbalanced_nodes(graph: Dict[T, typing.Counter[T]]) -> List[Tuple[T, in
 
 # creates a balanced graph from a nearly balanced graph -- nearly balanced means the graph has an equal number of
 # missing outputs and missing inputs.
-def balance_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T]]:
+def balance_graph(graph: Dict[T, typing.Counter[T]]) -> Tuple[Dict[T, typing.Counter[T]], Set[T], Set[T]]:
     unbalanced_nodes = find_unbalanced_nodes(graph)
     nodes_with_missing_ins = filter(lambda x: x[1] < x[2], unbalanced_nodes)
     nodes_with_missing_outs = filter(lambda x: x[1] > x[2], unbalanced_nodes)
@@ -37,7 +42,7 @@ def balance_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T
     for n_need_in, n_need_out in zip(n_per_need_in, n_per_need_out):
         graph[n_need_out][n_need_in] += 1
 
-    return graph
+    return graph, set(n_per_need_in), set(n_per_need_out)  # return graph with cycle, orig root nodes, orig tail nodes
 
 
 if __name__ == '__main__':
@@ -53,6 +58,6 @@ if __name__ == '__main__':
     }
     graph = normalize_graph(graph)
 
-    graph = balance_graph(graph)
+    graph, _, _ = balance_graph(graph)
     path = walk_eularian_cycle(graph, '0')
     print(f'{"->".join(path)}')
