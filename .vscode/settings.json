@@ -82,6 +82,10 @@
         "transposons",
         "retrotransposon",
         "transcriptase",
-        "transposases"
+        "transposases",
+        "Eulerian",
+        "microarray",
+        "indegree",
+        "outdegree"
     ]
 }

@@ -2088,7 +2088,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK0">Algorithms/K-mer</a></li>
 </ul>
 </div>
-<p>DNA <a href="#BOOKMARK81">sequencer</a>s work by taking many copies of an organism's <a href="#BOOKMARK78">genome</a>, breaking up those copies into smaller fragments, then scanning in those smaller fragments. The scanning of fragments come in two flavours:</p>
+<p>DNA <a href="#BOOKMARK81">sequencer</a>s work by taking many copies of an organism's <a href="#BOOKMARK78">genome</a>, breaking up those copies into fragments, then scanning in those fragments. The scanning of fragments come in two flavours:</p>
 <ul>
 <li>
 <p><a href="#BOOKMARK82">read</a>s - small DNA fragments of equal size (represented as <a href="#BOOKMARK23">k-mer</a>s).</p>
@@ -2115,7 +2115,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s may not cover the entire <a href="#BOOKMARK78">genome</a>, which will prevent full reconstruction.</li>
 <li>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s for repetitive parts of the <a href="#BOOKMARK78">genome</a> (e.g. telomeres) likely can't be accurately reconstructed.</li>
 </ul>
-<p>Currently, no workaround exists for the repetitive parts complication. For example, the human <a href="#BOOKMARK78">genome</a> is around 3 billion in length and around half of it is made up of repeats. Those repeats prevent full reconstruction of the <a href="#BOOKMARK78">genome</a>. If repeats didn't exist, the odds of two <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s from different parts of the human <a href="#BOOKMARK78">genome</a> containing the exact same content would be low. Given a <a href="#BOOKMARK82">read</a> length of 300, the odds of <a href="#BOOKMARK23">300-mer</a> repeating in a random DNA string of length 3 billion is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><msup><mn>4</mn><mn>300</mn></msup></mfrac><mo>∗</mo><mn>2999999701</mn></mrow><annotation encoding="application/x-tex">\frac{1}{4^{300}} * 2999999701</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">7</span><span class="mord">0</span><span class="mord">1</span></span></span></span>.</p>
+<p>Currently, no workaround exists for the repetitive parts complication. For example, the human <a href="#BOOKMARK78">genome</a> is around 3 billion in length and around half of it is made up of repeats. Those repeats prevent full reconstruction. If those repeats didn't exist there, the odds of two <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s from different parts of the human <a href="#BOOKMARK78">genome</a> containing the exact same content would be low: Given a <a href="#BOOKMARK82">read</a> length of 300, the odds of a specific <a href="#BOOKMARK23">300-mer</a> showing up in a random DNA string of length 3 billion is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><msup><mn>4</mn><mn>300</mn></msup></mfrac><mo>∗</mo><mn>2999999701</mn></mrow><annotation encoding="application/x-tex">\frac{1}{4^{300}} * 2999999701</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">7</span><span class="mord">0</span><span class="mord">1</span></span></span></span>.</p>
 <a name="HEADREF32"></a><h3>Find Read Overlaps</h3>
 <p><strong>WHAT</strong>: Given a list of <a href="#BOOKMARK82">read</a>s for the same organism, find overlaps between those <a href="#BOOKMARK82">read</a>s.</p>
 <p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
@@ -2534,8 +2534,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>
 <p><a name="BOOKMARK63"></a><strong>motif matrix</strong> - A set of <a href="#BOOKMARK23">k-mer</a>s stacked on top of each other in a matrix, where the <a href="#BOOKMARK23">k-mer</a>s are either...</p>
 <ul>
-<li><a href="#BOOKMARK61">member</a>s of the same <a href="#BOOKMARK60">motif</a>,</li>
-<li>or suspected <a href="#BOOKMARK61">member</a>s of the same <a href="#BOOKMARK60">motif</a>.</li>
+<li><a href="#BOOKMARK62">member</a>s of the same <a href="#BOOKMARK60">motif</a>,</li>
+<li>or suspected <a href="#BOOKMARK62">member</a>s of the same <a href="#BOOKMARK60">motif</a>.</li>
 </ul>
 <p>For example, the <a href="#BOOKMARK60">motif</a> <code>[AT]TT[GC]C</code> has the following matrix:</p>
 <table>
@@ -2950,7 +2950,276 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>after a <a href="#BOOKMARK88">transposon</a> leaves a <a href="#BOOKMARK45">gene</a>, the gap likely won't be repaired correctly.</li>
 </ul>
 </li>
+<li>
+<p><a name="BOOKMARK89"></a><strong>adjacency list</strong> - An internal representation of a graph where each node has a list of pointers to other nodes that it can forward to.</p>
+<p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
+<p>The graph above represented as an <a href="#BOOKMARK89">adjacency list</a> would be...</p>
+<table>
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>B</td>
+</tr>
+<tr>
+<td>B</td>
+<td>C</td>
+</tr>
+<tr>
+<td>C</td>
+<td>D,E</td>
+</tr>
+<tr>
+<td>D</td>
+<td>F</td>
+</tr>
+<tr>
+<td>E</td>
+<td>D,F</td>
+</tr>
+<tr>
+<td>F</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><a name="BOOKMARK90"></a><strong>adjacency matrix</strong> - An internal representation of a graph where a matrix defines the number of times that each node forwards to every other node.</p>
+<p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
+<p>The graph above represented as an <a href="#BOOKMARK90">adjacency matrix</a> would be...</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>B</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>C</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>D</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>E</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>F</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><a name="BOOKMARK91"></a><strong>Hamiltonian path</strong> - A path in a graph that visits every node exactly once.</p>
+<p>The graph below has the <a href="#BOOKMARK91">Hamiltonian path</a> ABCEDF.</p>
+<p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK92"></a><strong>Eulerian path</strong> - A path in a graph that visits every edge exactly once.</p>
+<p>In the graph below, the <a href="#BOOKMARK92">Eulerian path</a> is (A,B), (B,C), (C,D), (D,E), (E,C), (C,D), (D,F).</p>
+<p><img src="svgbob_ffbd8255bf88b6e48bfd1faddcf9ff6bbf5f9dae.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK93"></a><strong>Eulerian cycle</strong> - An <a href="#BOOKMARK92">Eulerian path</a> that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.</p>
+<p>The graph below has an <a href="#BOOKMARK93">Eulerian cycle</a> of (A,B), (B,C) (C,D), (D,F), (F,C), (C,A).</p>
+<p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
+<p>For a graph to be <a href="#BOOKMARK93">Eulerian</a>, it must be both <a href="#BOOKMARK102">balanced</a> and <a href="#BOOKMARK96">strongly connected</a>. Note how in the graph above, ...</p>
+<ul>
+<li>
+<p>every node is reachable from every other node (<a href="#BOOKMARK96">strongly connected</a>),</p>
+</li>
+<li>
+<p>every node has an <a href="#BOOKMARK98">outdegree</a> equal to its <a href="#BOOKMARK97">indegree</a> (<a href="#BOOKMARK102">balanced</a>).</p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th><a href="#BOOKMARK97">Indegree</a></th>
+<th><a href="#BOOKMARK98">Outdegree</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>D</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>F</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ul>
+<p>In contrast, the following graphs are not <a href="#BOOKMARK93">Eulerian graph</a>s (no <a href="#BOOKMARK93">Eulerian cycle</a>s exist):</p>
+<ul>
+<li>
+<p><a href="#BOOKMARK96">Strongly connected</a> but not <a href="#BOOKMARK102">balanced</a>.</p>
+<p><img src="svgbob_efdff1b3ec66000b9acf2ddc84c2d3684d318683.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a href="#BOOKMARK102">Balanced</a> but not <a href="#BOOKMARK96">strongly connected</a>.</p>
+<p><img src="svgbob_48abea7e0377d91bfd845a85b2ee9615e9852bfd.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a href="#BOOKMARK102">Balanced</a> but <a href="#BOOKMARK94">disconnected</a> (not <a href="#BOOKMARK96">strongly connected</a>).</p>
+<p><img src="svgbob_1f6d7503fdb3f3654b3c64f041254352c8d9a43e.svg" alt="Kroki diagram output"></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a name="BOOKMARK94"></a><strong>disconnected</strong> / <a name="BOOKMARK95"></a><strong>connected</strong> - A graph is <a href="#BOOKMARK94">disconnected</a> if you can break it out into 2 or more distinct sub-graphs without breaking any paths. In other words, the graph contains at least two nodes which aren't contained in any path.</p>
+<p>The graph below is <a href="#BOOKMARK94">disconnected</a> because there is no path that contains E, F, G, or H and A, B, C, or D.</p>
+<p><img src="svgbob_754a446a49b8209971f339d76f4fcc492acbb615.svg" alt="Kroki diagram output"></p>
+<p>The graph below is <a href="#BOOKMARK95">connected</a>.</p>
+<p><img src="svgbob_028c9291a4412afebe0b605b464987e2c9bf75ef.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK96"></a><strong>strongly connected</strong> - A graph is <a href="#BOOKMARK96">strongly connected</a> if every node is reachable from every other node.</p>
+<p>The graph below is <strong>not</strong> <a href="#BOOKMARK96">strongly connected</a> because neither A nor B is reachable by C, D, E, or F.</p>
+<p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
+<p>The graph below is <a href="#BOOKMARK96">strongly connected</a> because all nodes are reachable by all other nodes.</p>
+<p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK97"></a><strong>indegree</strong> / <a name="BOOKMARK98"></a><strong>outdegree</strong> - The number of edges leading into / out of a node of a directed graph.</p>
+<p>The node below has an <a href="#BOOKMARK97">indegree</a> of 3 and an <a href="#BOOKMARK98">outdegree</a> of 1.</p>
+<p><img src="svgbob_7159ebaf654fe57b46d2f14a29a73d50e280afe6.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK99"></a><strong>balanced node</strong> <a name="BOOKMARK100"></a><strong></strong> - A node of a directed graph that has an equal <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a>. That is, the number of edges coming in is equal to the number of edges going out.</p>
+<p>The node below has an <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a> of 1. It is <a href="#BOOKMARK100">balanced</a>.</p>
+<p><img src="svgbob_7c49a4fbe8fc85173147545e7a459bca61c84f26.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p><a name="BOOKMARK101"></a><strong>balanced graph</strong> <a name="BOOKMARK102"></a><strong></strong> - A directed graph where ever node is <a href="#BOOKMARK100">balanced</a>.</p>
+<p>The graph below is <a href="#BOOKMARK102">balanced</a> because all nodes are <a href="#BOOKMARK100">balanced</a>.</p>
+<p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th><a href="#BOOKMARK97">Indegree</a></th>
+<th><a href="#BOOKMARK98">Outdegree</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>D</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>F</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><a name="BOOKMARK103"></a><strong>k-universal</strong> - For some alphabet, a string is considered <a href="#BOOKMARK103">k-universal</a> if it contains every possible <a href="#BOOKMARK23">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a <a href="#BOOKMARK103">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK23">3-mer</a> exactly once:</p>
+<ul>
+<li>000: <strong>000</strong>1110100</li>
+<li>001: 0<strong>001</strong>110100</li>
+<li>010: 000111<strong>010</strong>0</li>
+<li>011: 00<strong>011</strong>10100</li>
+<li>100: 0001110<strong>100</strong></li>
+<li>101: 00011<strong>101</strong>00</li>
+<li>110: 0001<strong>110</strong>100</li>
+<li>111: 000<strong>111</strong>0100</li>
+</ul>
+<p>De Bruijn graphs were invented in an effort to construct <a href="#BOOKMARK103">k-universal</a> strings for arbitrary values of k. Finding <a href="#BOOKMARK103">k-universal</a> strings for larger values of k (e.g. 20) would be too computationally intensive without de Bruijn graphs.</p>
+</li>
+</ul>
+<p>
+</p>
 <p>
 </p>
 <p>

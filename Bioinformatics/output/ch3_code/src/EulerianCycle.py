@@ -19,7 +19,8 @@ def random_walk_until_back_at_node_while_removing_edges_as_walking(node: str, gr
 
 
 # graph must be strongly connected
-# graph must be eulerian
+# graph must be balanced
+# if the 2 conditions above are met, the graph will be eularian (a eulerian cycle exists)
 def eularian_cycle(graph: Dict[str, List[str]], start_id=None) -> List[str]:
     graph_copy = dict(graph)
 

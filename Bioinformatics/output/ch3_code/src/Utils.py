@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import typing
 from collections import Counter
-from typing import Tuple, Dict, TypeVar, Set
+from typing import Tuple, Dict, TypeVar, Set, List
 
 from Kdmer import Kdmer
 
@@ -59,3 +59,18 @@ def count_graph_edges(graph: Dict[T, typing.Counter[T]]) -> int:
     for from_node in graph.keys():
         ret += len(graph[from_node])
     return ret
+
+
+# (6, 8), (8, 7), (7, 9), (9, 6)  ---->  68796
+def walk_edge_nodes(edges: List[Tuple[T, T]]) -> T:
+    yield edges[0][0]
+    for e in edges:
+        yield e[1]
+
+
+class WrappedStr(object):
+    def __init__(self, val: str):
+        self.val = val
+
+    def __str__(self):
+        return self.val

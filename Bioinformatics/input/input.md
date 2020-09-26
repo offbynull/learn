@@ -1116,7 +1116,7 @@ CATCTT
 Algorithms/K-mer_TOPIC
 ```
 
-DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into smaller fragments, then scanning in those smaller fragments. The scanning of fragments come in two flavours:
+DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into fragments, then scanning in those fragments. The scanning of fragments come in two flavours:
 
  * read_DNAs - small DNA fragments of equal size (represented as k-mers).
 
@@ -1167,7 +1167,7 @@ Typical complications with assembly:
  * The read_DNAs / read-pairs may not cover the entire genome, which will prevent full reconstruction.
  * The read_DNAs / read-pairs for repetitive parts of the genome (e.g. telomeres) likely can't be accurately reconstructed.
 
-Currently, no workaround exists for the repetitive parts complication. For example, the human genome is around 3 billion in length and around half of it is made up of repeats. Those repeats prevent full reconstruction of the genome. If repeats didn't exist, the odds of two read_DNAs / read-pairs from different parts of the human genome containing the exact same content would be low. Given a read_DNA length of 300, the odds of 300-mer repeating in a random DNA string of length 3 billion is `{kt} \frac{1}{4^{300}} * 2999999701`.
+Currently, no workaround exists for the repetitive parts complication. For example, the human genome is around 3 billion in length and around half of it is made up of repeats. Those repeats prevent full reconstruction. If those repeats didn't exist there, the odds of two read_DNAs / read-pairs from different parts of the human genome containing the exact same content would be low: Given a read_DNA length of 300, the odds of a specific 300-mer showing up in a random DNA string of length 3 billion is `{kt} \frac{1}{4^{300}} * 2999999701`.
 
 ### Find Read Overlaps
 
@@ -1885,8 +1885,8 @@ PracticalMotifFindingExample
 
  * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers stacked on top of each other in a matrix, where the k-mers are either...
 
-   * `{bm-target} member/(motif member)/i`s of the same motif,
-   * or suspected `{bm-target} member/(motif member)/i`s of the same motif.
+   * member_MOTIFs of the same motif,
+   * or suspected member_MOTIFs of the same motif.
    
    For example, the motif `[AT]TT[GC]C` has the following matrix:
 
@@ -2090,11 +2090,240 @@ PracticalMotifFindingExample
    * insertion of a transposon into a gene will likely disable that gene.
    * after a transposon leaves a gene, the gap likely won't be repaired correctly.
 
+ * `{bm} adjacency list` - An internal representation of a graph where each node has a list of pointers to other nodes that it can forward to.
+
+   ```{svgbob}
+   A ---> B ---> C ---> D ---> F
+                 |      ^      ^
+                 |      |      |
+                 +----> E -----+
+   ```
+
+   The graph above represented as an adjacency list would be...
+
+   | From | To  |
+   |------|-----|
+   | A    | B   |
+   | B    | C   |
+   | C    | D,E |
+   | D    | F   |
+   | E    | D,F |
+   | F    |     |
+
+ * `{bm} adjacency matrix` - An internal representation of a graph where a matrix defines the number of times that each node forwards to every other node.
+
+   ```{svgbob}
+   A ---> B ---> C ---> D ---> F
+                 |      ^      ^
+                 |      |      |
+                 +----> E -----+
+   ```
+
+   The graph above represented as an adjacency matrix would be...
+
+   |   | A | B | C | D | E | F |
+   |---|---|---|---|---|---|---|
+   | A | 0 | 1 | 0 | 0 | 0 | 0 |
+   | B | 0 | 0 | 1 | 0 | 0 | 0 |
+   | C | 0 | 0 | 0 | 1 | 1 | 0 |
+   | D | 0 | 0 | 0 | 0 | 0 | 1 |
+   | E | 0 | 0 | 0 | 1 | 0 | 1 |
+   | F | 0 | 0 | 0 | 0 | 0 | 0 |
+
+ * `{bm} Hamiltonian path/(Hamiltonian path|Hamilton path)/i` - A path in a graph that visits every node exactly once.
+ 
+   The graph below has the Hamiltonian path ABCEDF.
+
+   ```{svgbob}
+   A ---> B ---> C ---> D ---> F
+                 |      ^      ^
+                 |      |      |
+                 +----> E -----+
+   ```
+
+ * `{bm} Eulerian path` - A path in a graph that visits every edge exactly once.
+ 
+   In the graph below, the Eulerian path is (A,B), (B,C), (C,D), (D,E), (E,C), (C,D), (D,F).
+
+   ```{svgbob}
+   A ---> B ---> C ===> D ---> F
+                 ^      |
+                 |      v
+                 +----- E
+                 
+   "* Note that C has 2 edges pointing to D."
+   ```
+
+ * `{bm} Eulerian cycle/(Eulerian graph|Eulerian cycle|Eulerian)/i` - An Eulerian path that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.
+ 
+   The graph below has an Eulerian cycle of (A,B), (B,C) (C,D), (D,F), (F,C), (C,A).
+
+   ```{svgbob}
+                 +-------------+
+                 |             |
+                 v             |
+   A ---> B ---> C ---> D ---> F
+   ^             |
+   |             |
+   +-------------+
+   ```
+
+   For a graph to be Eulerian, it must be both balanced_GRAPH and strongly connected. Note how in the graph above, ...
+   
+   * every node is reachable from every other node (strongly connected),
+   * every node has an outdegree equal to its indegree (balanced_GRAPH).
+
+     | Node | Indegree | Outdegree |
+     |------|----------|-----------|
+     | A    | 1        | 1         |
+     | B    | 1        | 1         |
+     | C    | 2        | 2         |
+     | D    | 1        | 1         |
+     | F    | 1        | 1         |
+
+   In contrast, the following graphs are not Eulerian graphs (no Eulerian cycles exist):
+   
+   * Strongly connected but not balanced_GRAPH.
+
+     ```{svgbob}
+     A ---> B <--- D
+     ^      |      ^
+     |      v      |
+     +----- C -----+
+
+     "* B contains 2 indegree but only 1 outdegree."
+     ```
+
+   * Balanced_GRAPH but not strongly connected.
+
+     ```{svgbob}
+     A ---> B ---> E ---> F
+     ^      |      ^      |
+     |      v      |      v
+     D <--- C      H <--- G
+
+     "* It isn't possible to reach B from E, F, G, or H"
+     ```
+
+   * Balanced_GRAPH but disconnected (not strongly connected).
+
+     ```{svgbob}
+     A ---> B      E ---> F
+     ^      |      ^      |
+     |      v      |      v
+     D <--- C      H <--- G
+
+     "* It isn't possible to reach E, F, G, or H from A, B, C, or D (and vice versa)"
+     ```
+
+ * `{bm} disconnected` / `{bm} connected` - A graph is disconnected if you can break it out into 2 or more distinct sub-graphs without breaking any paths. In other words, the graph contains at least two nodes which aren't contained in any path.
+
+   The graph below is disconnected because there is no path that contains E, F, G, or H and A, B, C, or D.
+
+    ```{svgbob}
+   A ---> B      E ---> F
+   ^      |      ^      |
+   |      v      |      v
+   D <--- C      H <--- G
+   ```
+
+   The graph below is connected.
+
+   ```{svgbob}
+   A ---> B ---> E ---> F
+   ^      |      ^      |
+   |      v      |      v
+   D <--- C      H <--- G
+   ```
+
+ * `{bm} strongly connected` - A graph is strongly connected if every node is reachable from every other node.
+
+   The graph below is **not** strongly connected because neither A nor B is reachable by C, D, E, or F.
+
+   ```{svgbob}
+   A ---> B ---> C ---> D ---> F
+                 |      ^      ^
+                 |      |      |
+                 +----> E -----+
+   ```
+
+   The graph below is strongly connected because all nodes are reachable by all other nodes.
+
+   ```{svgbob}
+                 +-------------+
+                 |             |
+                 v             |
+   A ---> B ---> C ---> D ---> F
+   ^             |
+   |             |
+   +-------------+
+   ```
+
+ * `{bm} indegree` / `{bm} outdegree` - The number of edges leading into / out of a node of a directed graph.
+
+    The node below has an indegree of 3 and an outdegree of 1.
+
+    ```{svgbob}
+    -----+
+         |
+         v
+    ---> N --->
+         ^
+         |
+    -----+
+    ```
+
+ * `{bm} balanced node` `{bm} /(balanced)_NODE/i` - A node of a directed graph that has an equal indegree and outdegree. That is, the number of edges coming in is equal to the number of edges going out.
+
+    The node below has an indegree and outdegree of 1. It is balanced_NODE.
+
+    ```{svgbob}
+    ---> N --->
+    ```
+
+ * `{bm} balanced graph` `{bm} /(balanced)_GRAPH/i` - A directed graph where ever node is balanced_NODE.
+
+   The graph below is balanced_GRAPH because all nodes are balanced_NODE.
+
+   ```{svgbob}
+                 +-------------+
+                 |             |
+                 v             |
+   A ---> B ---> C ---> D ---> F
+   ^             |
+   |             |
+   +-------------+
+   ```
+
+   | Node | Indegree | Outdegree |
+   |------|----------|-----------|
+   | A    | 1        | 1         |
+   | B    | 1        | 1         |
+   | C    | 2        | 2         |
+   | D    | 1        | 1         |
+   | F    | 1        | 1         |
+
+ * `{bm} k-universal/(k-universal|\d+-universal)/i` - For some alphabet, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
+
+   * 000: **000**1110100
+   * 001: 0**001**110100
+   * 010: 000111**010**0
+   * 011: 00**011**10100
+   * 100: 0001110**100**
+   * 101: 00011**101**00
+   * 110: 0001**110**100
+   * 111: 000**111**0100
+
+   De Bruijn graphs were invented in an effort to construct k-universal strings for arbitrary values of k. Finding k-universal strings for larger values of k (e.g. 20) would be too computationally intensive without de Bruijn graphs.
+
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
 
 `{bm-ignore} \b(member)_NORM/i`
 `{bm-error} Apply suffix _NORM or _MOTIF/\b(member)/i`
+
+`{bm-ignore} (balanced)_NORM/i`
+`{bm-error} Apply suffix _NORM, _GRAPH, or _NODE/(balanced)/i`
 
 `{bm-error} Missing topic reference/(_TOPIC)/i`
 `{bm-error} Use you instead of we/\b(we)\b/i`

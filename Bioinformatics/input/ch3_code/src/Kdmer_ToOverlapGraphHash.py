@@ -14,7 +14,7 @@ def suffix(kmer: str):
     return kmer[1:]
 
 
-def to_overlap_graph(kdmers: List[Kdmer]) -> Dict[str, typing.Counter[Kdmer]]:
+def to_overlap_graph(kdmers: List[Kdmer]) -> Dict[Kdmer, typing.Counter[Kdmer]]:
     ret = dict()
 
     prefixes = dict()
