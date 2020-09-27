@@ -2431,7 +2431,7 @@ PracticalMotifFindingExample
    "Coverage:" 1 1 2 2 3 3 3 3 3 3 3 3 3 2 2 1 1 1 1 1      1 2 3 4 5 5 5 5 5 5 5 5 5 5 5 5 4 3 2 1
    ```
 
-   When read breaking, smaller k-mers result in better coverage_SEQ but also make the de Bruijn graph more tangled. The more tangled the de Bruijn is, the harder it is to infer the original sequence.
+   When read breaking, smaller k-mers result in better coverage_SEQ but also make the de Bruijn graph more tangled. The more tangled the de Bruijn is, the harder it is to infer the full sequence.
 
    In the example above, the average coverage_SEQ...
 

@@ -1,11 +1,11 @@
 from typing import List
 
 
-def prefix(kmer: str):
+def prefix(kmer: str) -> str:
     return kmer[:-1]
 
 
-def suffix(kmer: str):
+def suffix(kmer: str) -> str:
     return kmer[1:]
 
 

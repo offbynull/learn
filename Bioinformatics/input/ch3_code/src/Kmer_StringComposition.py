@@ -5,8 +5,8 @@ from Utils import slide_window
 
 def string_composition(k: int, text: str) -> List[str]:
     ret = []
-    for kmer in slide_window(text, k):
-        ret.append(kmer[0])
+    for kmer, _ in slide_window(text, k):
+        ret.append(kmer)
     return ret
 
 
