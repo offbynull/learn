@@ -2021,7 +2021,7 @@ PracticalMotifFindingExample
 
    See kd-mer.
 
- * `{bm} assembly` - The process of stitching together overlapping read_DNAs / read-pairs to construct the sequence of the original larger DNA that those read_DNAs / read-pairs came from.
+ * `{bm} assembly/(assembly|assemble)/i` - The process of stitching together overlapping read_DNAs / read-pairs to construct the sequence of the original larger DNA that those read_DNAs / read-pairs came from.
 
  * `{bm} hybrid alphabet/(hybrid alphabet|alternate alphabet|alternative alphabet)/i` - When representing a sequence that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the IUPAC nucleotide codes provides the following alphabet:
 
@@ -2388,7 +2388,7 @@ PracticalMotifFindingExample
    
    For larger values of k (e.g. 20), finding k-universal strings would be too computationally intensive without De Bruijn graphs and Eulerian cycles.
 
- * `{bm} coverage/(coverage)_SEQUENCING/i` - Given a substring from some larger sequence that was reconstructed from read_DNAs / read-pairs, the coverage_SEQUENCING of that substring is the number of read_DNAs used to construct it. The substring length is typically 1: the coverage_SEQUENCING for each position of the sequence.
+ * `{bm} coverage/(coverage)_SEQ/i` - Given a substring from some larger sequence that was reconstructed from read_DNAs / read-pairs, the coverage_SEQ of that substring is the number of read_DNAs used to construct it. The substring length is typically 1: the coverage_SEQ for each position of the sequence.
 
    ```{svgbob}
               "Read coverage for each 1-mer"
@@ -2431,19 +2431,26 @@ PracticalMotifFindingExample
    "Coverage:" 1 1 2 2 3 3 3 3 3 3 3 3 3 2 2 1 1 1 1 1      1 2 3 4 5 5 5 5 5 5 5 5 5 5 5 5 4 3 2 1
    ```
 
-   When read breaking, smaller k-mers result in better coverage_SEQUENCING but also make the de Bruijn graph more tangled. The more tangled the de Bruijn is, the harder it is to infer the original sequence.
+   When read breaking, smaller k-mers result in better coverage_SEQ but also make the de Bruijn graph more tangled. The more tangled the de Bruijn is, the harder it is to infer the original sequence.
 
-   In the example above, the average coverage_SEQUENCING...
+   In the example above, the average coverage_SEQ...
 
     * for the left-hand side (original) is 2.1.
     * for the right-hand side (broken) is 4.
 
- * `{bm} contig/(contig)\b/i` `{bm} /(contig)s\b/i` - A long continuous piece of DNA. Derived by searching a de Bruijn graph for paths that are the longest possible stretches of non-branching nodes.
+   ```{note}
+   What purpose does this actually serve? Mimicking 1 long read_DNA as n shorter read_DNAs isn't equivalent to actually having sequenced those n shorter read_DNAs. For example, what if the longer read_DNA being broken up has an error? That error replicates when breaking into n shorter read_DNAs, which gives a false sense of having good coverage_SEQ and makes it seems as if it wasn't an error.
+   ```
+
+ * `{bm} contig/(contig)s?\b/i/true/true` - A long continuous piece of DNA. Derived by searching a de Bruijn graph for paths that are the longest possible stretches of nodes with 1 indegree and 1 outdegree. That is, a path must either ...
+
+   * be a cycle where each node has an indegree and outdegree of 1.
+   * start and end at a node that doesn't have an indegree and outdegree of 1.
 
    For example, in the following de Bruijn graph, the contigs are: GTGG, GGT, and GGT:
 
    ```{svgbob}
-       "Original"            "Contig 1: GTGG"     "Contig 2: GGT"   "Contig 3: GGT"
+       "Original"            "Contig 1: GTGG"      "Contig 2: GGT"     "Contig 3: GGT"    "Contig 4: CACCA"
 
            GTG                      GTG                                          
    +----------------+       +----------------+                                   
@@ -2455,12 +2462,18 @@ PracticalMotifFindingExample
             |      ^                                                    |      ^  
             | GGT  |                                                    | GGT  |  
             +------+                                                    +------+  
+
+       CAC     ACC                                                                          CAC     ACC    
+    CA ---> AC ---> CC                                                                   CA ---> AC ---> CC
+    ^                |                                                                   ^                |
+    |      CCA       |                                                                   |      CCA       |
+    +----------------+                                                                   +----------------+
    ```
  
    Assemblies often have gaps due to...
    
-    * repeats in the genome, which are impossible to fix.
-    * poor coverage_SEQUENCING, which may be cost prohibitive to fix (more read_DNAs required).
+    * repeats in the genome, which make it impossible to fully assemble.
+    * poor coverage_SEQ, which may be cost prohibitive to fix (more read_DNAs required).
     
    As such, biologists / bioinformaticians have no choice but to settle on contigs.
 
@@ -2474,7 +2487,7 @@ PracticalMotifFindingExample
 `{bm-error} Apply suffix _NORM, _GRAPH, or _NODE/(balanced)/i`
 
 `{bm-ignore} (coverage)_NORM/i`
-`{bm-error} Apply suffix _NORM, _SEQUENCING/(coverage)/i`
+`{bm-error} Apply suffix _NORM, _SEQ/(coverage)/i`
 
 `{bm-error} Missing topic reference/(_TOPIC)/i`
 `{bm-error} Use you instead of we/\b(we)\b/i`

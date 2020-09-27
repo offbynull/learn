@@ -3253,17 +3253,25 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>for the left-hand side (original) is 2.1.</li>
 <li>for the right-hand side (broken) is 4.</li>
 </ul>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>What purpose does this actually serve? Mimicking 1 long <a href="#BOOKMARK82">read</a> as n shorter <a href="#BOOKMARK82">read</a>s isn't equivalent to actually having <a href="#BOOKMARK80">sequenced</a> those n shorter <a href="#BOOKMARK82">read</a>s. For example, what if the longer <a href="#BOOKMARK82">read</a> being broken up has an error? That error replicates when breaking into n shorter <a href="#BOOKMARK82">read</a>s, which gives a false sense of having good <a href="#BOOKMARK105">coverage</a> and makes it seems as if it wasn't an error.</p>
+</div>
 </li>
 <li>
-<p><a name="BOOKMARK107"></a><strong>contig</strong> <a name="BOOKMARK108"></a><strong></strong> - A long continuous piece of DNA. Derived by searching a <a href="#BOOKMARK103">de Bruijn graph</a> for paths that are the longest possible stretches of non-branching nodes.</p>
-<p>For example, in the following <a href="#BOOKMARK103">de Bruijn graph</a>, the <a href="#BOOKMARK108">contig</a> are: GTGG, GGT, and GGT:</p>
-<p><img src="svgbob_46fcb9e3ace3d275171e88f82dfd21756ef25890.svg" alt="Kroki diagram output"></p>
+<p><a name="BOOKMARK107"></a><strong>contig</strong> - A long continuous piece of DNA. Derived by searching a <a href="#BOOKMARK103">de Bruijn graph</a> for paths that are the longest possible stretches of nodes with 1 <a href="#BOOKMARK97">indegree</a> and 1 <a href="#BOOKMARK98">outdegree</a>. That is, a path must either ...</p>
+<ul>
+<li>be a cycle where each node has an <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a> of 1.</li>
+<li>start and end at a node that doesn't have an <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a> of 1.</li>
+</ul>
+<p>For example, in the following <a href="#BOOKMARK103">de Bruijn graph</a>, the <a href="#BOOKMARK107">contig</a>s are: GTGG, GGT, and GGT:</p>
+<p><img src="svgbob_a90b2398b01bdc55d3409e08bb813c748d346635.svg" alt="Kroki diagram output"></p>
 <p>Assemblies often have gaps due to...</p>
 <ul>
-<li>repeats in the <a href="#BOOKMARK78">genome</a>, which are impossible to fix.</li>
+<li>repeats in the <a href="#BOOKMARK78">genome</a>, which make it impossible to fully <a href="#BOOKMARK84">assemble</a>.</li>
 <li>poor <a href="#BOOKMARK105">coverage</a>, which may be cost prohibitive to fix (more <a href="#BOOKMARK82">read</a>s required).</li>
 </ul>
-<p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK108">contig</a>.</p>
+<p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK107">contig</a>s.</p>
 </li>
 </ul>
 <p>
