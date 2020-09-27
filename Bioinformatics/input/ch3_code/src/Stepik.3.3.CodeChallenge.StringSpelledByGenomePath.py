@@ -1,6 +1,6 @@
 from Kmer_StringSpelledByGenomePath import string_spelled_by_genome_path
 
-with open('/home/user/Downloads/dataset_240256_3(1).txt', mode='r', encoding='utf-8') as f:
+with open('/home/user/Downloads/dataset_240256_3.txt', mode='r', encoding='utf-8') as f:
     data = f.read()
 
 lines = data.split('\n')

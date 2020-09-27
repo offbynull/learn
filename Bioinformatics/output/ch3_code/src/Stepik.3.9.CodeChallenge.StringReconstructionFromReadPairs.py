@@ -4,7 +4,7 @@ from Kdmer_StringSpelledByGenomePath import string_spelled_by_genome_path
 from Kdmer_ToOverlapGraphHash import to_overlap_graph
 from WalkEulerianCycle import walk_eularian_cycle
 
-with open('/home/user/Downloads/dataset_240262_16.txt', mode='r', encoding='utf-8') as f:
+with open('/home/user/Downloads/dataset_240262_16(1).txt', mode='r', encoding='utf-8') as f:
     data = f.read()
 
 

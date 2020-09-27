@@ -1,18 +1,19 @@
-from copy import deepcopy
+from collections import Counter
 from typing import List
 
-from EulerianCycle import eularian_cycle
-from EulerianPathToEulerianCycle import normalize_graph_representation
 from Kmer_StringSpelledByGenomePath import string_spelled_by_genome_path
+from Utils import normalize_graph
+from WalkEulerianCycle import walk_eularian_cycle
 
 adjacency_list = [
-    ('00', ['00', '01']),
-    ('01', ['10', '11']),
-    ('10', ['00', '01']),
-    ('11', ['10', '11']),
+    ('00', Counter(['00', '01'])),
+    ('01', Counter(['10', '11'])),
+    ('10', Counter(['00', '01'])),
+    ('11', Counter(['10', '11'])),
 ]
 graph = dict(adjacency_list)
-normalize_graph_representation(graph)
+graph = normalize_graph(graph)
+
 
 def prefix(kmer: str):
     return kmer[:-1]
@@ -38,19 +39,19 @@ def do_kmers_cycle(kmers: List[str]) -> bool:
     return True
 
 
-cycle_path = eularian_cycle(deepcopy(graph), '00')
+cycle_path = walk_eularian_cycle(graph, '00')
 print(f'{eularian_path_to_kmers(cycle_path)}')
 print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
 print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
-cycle_path = eularian_cycle(deepcopy(graph), '01')
+cycle_path = walk_eularian_cycle(graph, '01')
 print(f'{eularian_path_to_kmers(cycle_path)}')
 print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
 print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
-cycle_path = eularian_cycle(deepcopy(graph), '10')
+cycle_path = walk_eularian_cycle(graph, '10')
 print(f'{eularian_path_to_kmers(cycle_path)}')
 print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
 print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
-cycle_path = eularian_cycle(deepcopy(graph), '11')
+cycle_path = walk_eularian_cycle(graph, '11')
 print(f'{eularian_path_to_kmers(cycle_path)}')
 print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
 print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
