@@ -134,6 +134,16 @@ class Graph(Generic[T]):
         graph._inbound = copy_inbound
         return graph
 
+    def to_graphviz(self: Graph) -> str:
+        out = ''
+        for node, to_nodes in self._outbound.items():
+            for to_node in to_nodes:
+                out += '"' + str(node).replace("\"", "\\\"") + '\"'\
+                       + ' -> '\
+                       + '"' + str(to_node).replace("\"", "\\\"") + '"'\
+                       + ' [shape=plain];\n'
+        return 'digraph {\n' + out + '}\n'
+
     def __len__(self: Graph) -> int:
         return len(self._outbound)
 

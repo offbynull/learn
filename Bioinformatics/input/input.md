@@ -2247,7 +2247,7 @@ PracticalMotifFindingExample
                  +----> E -----+
    ```
 
-   The graph below is strongly connected because all nodes are reachable by all other nodes.
+   The graph below is strongly connected because all nodes are reachable from all nodes.
 
    ```{svgbob}
                  +-------------+

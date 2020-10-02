@@ -3,7 +3,6 @@ import lzma
 from FindMaximalNonBranchingPaths import find_maximal_non_branching_paths
 from Kdmer import Kdmer
 from ReadPair import ReadPair
-# Pull out readpairs from text file
 from ToDeBruijnGraph import to_debruijn_graph
 
 reads_filepath = 'FinalChallengeReads.txt.xz'
@@ -15,7 +14,7 @@ with lzma.open(reads_filepath, mode='rt', encoding='utf-8') as f:
 lines_split = [tuple(l.split('|', maxsplit=2)) for l in lines]
 kdmers = [Kdmer(k1, k2, 1000) for k1, k2 in lines_split]
 rps = [ReadPair(kdmer) for kdmer in kdmers]
-broken_rps = [broken_rp for rp in rps for broken_rp in rp.shatter(40)]
+broken_rps = [broken_rp for rp in rps for broken_rp in rp.shatter(55)]
 
 broken_rps = list(set(broken_rps))
 
