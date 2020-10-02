@@ -1,21 +1,19 @@
-import typing
-from collections import Counter
-from typing import Dict, TypeVar, List, Optional
+from typing import TypeVar, List, Optional
 
-from BalanceNearlyBalancedGraph import get_degrees
-from Utils import normalize_graph
+from Graph import Graph
 
 T = TypeVar('T')
 
 
-def walk_until_non_1_to_1(graph: Dict[T, typing.Counter[T]], node: T) -> Optional[List[T]]:
+def walk_until_non_1_to_1(graph: Graph[T], node: T) -> Optional[List[T]]:
     ret = [node]
     while True:
-        in_degree, out_degree = get_degrees(graph, node)
+        out_degree = graph.get_out_degree(node)
+        in_degree = graph.get_in_degree(node)
         if not(in_degree == 1 and out_degree == 1):
             return ret
 
-        children = graph[node].elements()
+        children = graph.get_outputs(node)
         child = next(children)
         if child in ret:
             return None
@@ -24,14 +22,14 @@ def walk_until_non_1_to_1(graph: Dict[T, typing.Counter[T]], node: T) -> Optiona
         ret.append(node)
 
 
-def walk_until_loop(graph: Dict[T, typing.Counter[T]], node: T) -> Optional[List[T]]:
+def walk_until_loop(graph: Graph[T], node: T) -> Optional[List[T]]:
     ret = [node]
     while True:
-        children = graph[node].elements()
-        child_count = sum(graph[node].values())
-        if child_count > 1 or child_count == 0:
+        out_degree = graph.get_out_degree(node)
+        if out_degree > 1 or out_degree == 0:
             return None
 
+        children = graph.get_outputs(node)
         child = next(children)
         if child in ret:
             return ret
@@ -40,15 +38,15 @@ def walk_until_loop(graph: Dict[T, typing.Counter[T]], node: T) -> Optional[List
         ret.append(node)
 
 
-def find_maximal_non_branching_paths(graph: Dict[T, typing.Counter[T]]) -> List[List[T]]:
+def find_maximal_non_branching_paths(graph: Graph[T]) -> List[List[T]]:
     paths = []
 
-    for node in graph.keys():
-        in_degree, out_degree = get_degrees(graph, node)
+    for node in graph.get_nodes():
+        out_degree = graph.get_out_degree(node)
+        in_degree = graph.get_in_degree(node)
         if (in_degree == 1 and out_degree == 1) or out_degree == 0:
             continue
-        children = graph[node].elements()
-        for child in children:
+        for child in graph.get_outputs(node):
             path_from_child = walk_until_non_1_to_1(graph, child)
             if path_from_child is None:
                 continue
@@ -56,10 +54,11 @@ def find_maximal_non_branching_paths(graph: Dict[T, typing.Counter[T]]) -> List[
             paths.append(path)
 
     skip_nodes = set()
-    for node in graph.keys():
+    for node in graph.get_nodes():
         if node in skip_nodes:
             continue
-        in_degree, out_degree = get_degrees(graph, node)
+        out_degree = graph.get_out_degree(node)
+        in_degree = graph.get_in_degree(node)
         if not (in_degree == 1 and out_degree == 1) or out_degree == 0:
             continue
         path = walk_until_loop(graph, node)
@@ -73,13 +72,15 @@ def find_maximal_non_branching_paths(graph: Dict[T, typing.Counter[T]]) -> List[
 
 
 if __name__ == '__main__':
-    graph = {
-        '1': Counter(['2']),
-        '2': Counter(['3', '4', '5']),
-        '4': Counter(['6', '10']),
-        '5': Counter(['7']),
-        '6': Counter(['10'])
-    }
-    graph = normalize_graph(graph)
-    for path in find_maximal_non_branching_paths(graph):
+    g = Graph()
+    g.insert_edge('1', '2')
+    g.insert_edge('2', '3')
+    g.insert_edge('2', '4')
+    g.insert_edge('2', '5')
+    g.insert_edge('4', '6')
+    g.insert_edge('4', '10')
+    g.insert_edge('5', '7')
+    g.insert_edge('6', '10')
+
+    for path in find_maximal_non_branching_paths(g):
         print(f'{"->".join(path)}')

@@ -1,4 +1,5 @@
-from Kmer_ToOverlapGraphHash import to_overlap_graph
+from Read import Read
+from ToOverlapGraphHash import to_overlap_graph
 
 with open('/home/user/Downloads/dataset_240256_10(1).txt', mode='r', encoding='utf-8') as f:
     data = f.read()
@@ -8,8 +9,10 @@ dnas = lines[:]
 dnas = [l.strip() for l in dnas] # get rid of whitespace
 dnas = [l for l in dnas if len(l) > 0] # get rid of empty lines
 
-overlaps = to_overlap_graph(dnas)
-for kmer, other_kmers in overlaps.items():
+reads = [Read(kmer) for kmer in dnas]
+overlaps = to_overlap_graph(reads)
+for kmer, other_kmers in overlaps.get_all_outputs():
+    other_kmers = list(other_kmers)
     if len(other_kmers) == 0:
         continue
-    print(f'{kmer} -> {",".join(other_kmers)}')
+    print(f'{kmer} -> {",".join([str(x) for x in other_kmers])}')

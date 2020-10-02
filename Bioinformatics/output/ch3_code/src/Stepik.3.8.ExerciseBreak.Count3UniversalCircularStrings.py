@@ -1,60 +1,57 @@
-from collections import Counter
 from typing import List
 
-from Kmer_StringSpelledByGenomePath import string_spelled_by_genome_path
-from Utils import normalize_graph
+from Graph import Graph
+from Read import Read
 from WalkEulerianCycle import walk_eularian_cycle
 
-adjacency_list = [
-    ('00', Counter(['00', '01'])),
-    ('01', Counter(['10', '11'])),
-    ('10', Counter(['00', '01'])),
-    ('11', Counter(['10', '11'])),
-]
-graph = dict(adjacency_list)
-graph = normalize_graph(graph)
+graph = Graph()
+graph.insert_edge(Read('00'), Read('00'))
+graph.insert_edge(Read('00'), Read('01'))
+graph.insert_edge(Read('01'), Read('10'))
+graph.insert_edge(Read('01'), Read('11'))
+graph.insert_edge(Read('10'), Read('00'))
+graph.insert_edge(Read('10'), Read('01'))
+graph.insert_edge(Read('11'), Read('10'))
+graph.insert_edge(Read('11'), Read('11'))
 
 
-def prefix(kmer: str):
-    return kmer[:-1]
-
-
-def suffix(kmer: str):
-    return kmer[1:]
-
-
-def eularian_path_to_kmers(cycle_path: List[str]) -> List[str]:
+def eularian_path_to_kmers(cycle_path: List[Read]) -> List[Read]:
     out = []
     for i in range(len(cycle_path) - 1):
-        out.append(cycle_path[i] + cycle_path[i+1][-1])
+        kmer = cycle_path[i].data + cycle_path[i + 1].data[-1]
+        out.append(Read(kmer))
     return out
 
 
-def do_kmers_cycle(kmers: List[str]) -> bool:
-    for i in range(len(kmers) - 1):
-        if suffix(kmers[i]) != prefix(kmers[i+1]):
+def do_kmers_cycle(reads: List[Read]) -> bool:
+    for i in range(len(reads) - 1):
+        if reads[i].suffix() != reads[i + 1].prefix():
             return False
-    if suffix(kmers[-1]) != prefix(kmers[0]):
+    if reads[-1].suffix() != reads[0].prefix():
         return False
     return True
 
 
-cycle_path = walk_eularian_cycle(graph, '00')
-print(f'{eularian_path_to_kmers(cycle_path)}')
-print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
-print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
-cycle_path = walk_eularian_cycle(graph, '01')
-print(f'{eularian_path_to_kmers(cycle_path)}')
-print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
-print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
-cycle_path = walk_eularian_cycle(graph, '10')
-print(f'{eularian_path_to_kmers(cycle_path)}')
-print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
-print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
-cycle_path = walk_eularian_cycle(graph, '11')
-print(f'{eularian_path_to_kmers(cycle_path)}')
-print(f'{string_spelled_by_genome_path(eularian_path_to_kmers(cycle_path))}')
-print(f'{do_kmers_cycle(eularian_path_to_kmers(cycle_path))}')
+cycle_path = walk_eularian_cycle(graph, Read('00'))
+cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
+print(f'{cycle_path_as_kmers}')
+print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers[1:])}')
+print(f'{do_kmers_cycle(cycle_path_as_kmers)}')
+cycle_path = walk_eularian_cycle(graph, Read('01'))
+cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
+print(f'{cycle_path_as_kmers}')
+print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers[1:])}')
+print(f'{do_kmers_cycle(cycle_path_as_kmers)}')
+cycle_path = walk_eularian_cycle(graph, Read('10'))
+cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
+print(f'{cycle_path_as_kmers}')
+print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers[1:])}')
+print(f'{do_kmers_cycle(cycle_path_as_kmers)}')
+cycle_path = walk_eularian_cycle(graph, Read('11'))
+cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
+print(f'{cycle_path_as_kmers}')
+print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers[1:])}')
+print(f'{do_kmers_cycle(cycle_path_as_kmers)}')
 
 # ['000', '001', '011', '111', '110', '101', '010', '100']
 # 0001110100

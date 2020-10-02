@@ -1,12 +1,14 @@
-from Kmer_StringSpelledByGenomePath import string_spelled_by_genome_path
+from Read import Read
 
 with open('/home/user/Downloads/dataset_240256_3.txt', mode='r', encoding='utf-8') as f:
     data = f.read()
 
 lines = data.split('\n')
-dnas = lines[:]
-dnas = [l.strip() for l in dnas] # get rid of whitespace
-dnas = [l for l in dnas if len(l) > 0] # get rid of empty lines
+kmers = lines[:]
+kmers = [l.strip() for l in kmers] # get rid of whitespace
+kmers = [l for l in kmers if len(l) > 0] # get rid of empty lines
 
-composition = string_spelled_by_genome_path(dnas)
+reads = [Read(kmer) for kmer in kmers]
+
+composition = reads[0].stitch(reads[1:])
 print(composition)

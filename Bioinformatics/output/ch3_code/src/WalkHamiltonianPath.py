@@ -1,14 +1,15 @@
-import typing
-from collections import Counter
-from typing import List, Dict, Set, Tuple, TypeVar
+from typing import List, TypeVar
 
-from Utils import find_graph_roots
+from Graph import Graph
+from ReadPair import ReadPair
+from ToOverlapGraphHash import to_overlap_graph
+from Utils import slide_window_kd
 
 T = TypeVar('T')
 
 
 def exhaustively_walk_until_all_nodes_touched_exactly_one(
-        graph: Dict[T, typing.Counter[T]],
+        graph: Graph[T],
         from_node: T,
         current_path: List[T]
 ) -> List[List[T]]:
@@ -17,9 +18,10 @@ def exhaustively_walk_until_all_nodes_touched_exactly_one(
     if len(current_path) == len(graph):
         found_paths = [current_path.copy()]
     else:
-        to_nodes = graph[from_node].keys() - current_path
         found_paths = []
-        for to_node in to_nodes:
+        for to_node in graph.get_outputs(from_node):
+            if to_node in set(current_path):
+                continue
             found_paths += exhaustively_walk_until_all_nodes_touched_exactly_one(graph, to_node, current_path)
 
     current_path.pop()
@@ -27,15 +29,20 @@ def exhaustively_walk_until_all_nodes_touched_exactly_one(
 
 
 # walk each node exactly once
-def walk_hamiltonian_path(graph: Dict[T, typing.Counter[T]], from_node: T) -> List[List[T]]:
+def walk_hamiltonian_path(graph: Graph[T], from_node: T) -> List[List[T]]:
     return exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])
 
 
-# def exhaustively_walk_graph(graph: Dict[T, typing.Counter[T]]) -> List[List[T]]:
-#     ret = []
-#     root_nodes = find_graph_roots(graph)
-#     assert len(root_nodes) > 0  # must have at least 1 root
-#     for root_node in root_nodes:
-#         paths = walk_hamiltonian_path(graph, root_node)
-#         ret += paths
-#     return ret
+if __name__ == '__main__':
+    readpairs = [ReadPair(kdmer) for kdmer, _ in slide_window_kd('TAATGCCATGGGATGTT', 3, 1)]
+    graph = to_overlap_graph(readpairs)
+
+    dnas = set()
+    for node in graph.get_nodes():
+        paths = walk_hamiltonian_path(graph, node)
+        for path in paths:
+            dna = path[0].stitch(path[1:])
+            dnas.add(dna)
+
+    for dna in dnas:
+        print(f'{dna}')

@@ -1,24 +1,16 @@
-import typing
-from collections import Counter
-from typing import Dict, List, Tuple, TypeVar, Set, Optional
+from typing import List, Tuple, TypeVar, Set
 
-from Utils import copy_graph, normalize_graph
+from Graph import Graph
 from WalkEulerianCycle import walk_eularian_cycle
 
 T = TypeVar('T')
 
 
-def get_degrees(graph: Dict[T, typing.Counter[T]], node: T) -> Tuple[int, int]:
-    out_degree = sum(graph[node].values())
-    in_degree = sum([children[node] for children in graph.values() if node in children])
-    return in_degree, out_degree
-
-
-def find_unbalanced_nodes(graph: Dict[T, typing.Counter[T]]) -> List[Tuple[T, int, int]]:
-    all_nodes = graph.keys()
+def find_unbalanced_nodes(graph: Graph[T]) -> List[Tuple[T, int, int]]:
     unbalanced_nodes = []
-    for node in all_nodes:
-        in_degree, out_degree = get_degrees(graph, node)
+    for node in graph.get_nodes():
+        in_degree = graph.get_in_degree(node)
+        out_degree = graph.get_out_degree(node)
         if in_degree != out_degree:
             unbalanced_nodes.append((node, in_degree, out_degree))
     return unbalanced_nodes
@@ -26,12 +18,12 @@ def find_unbalanced_nodes(graph: Dict[T, typing.Counter[T]]) -> List[Tuple[T, in
 
 # creates a balanced graph from a nearly balanced graph -- nearly balanced means the graph has an equal number of
 # missing outputs and missing inputs.
-def balance_graph(graph: Dict[T, typing.Counter[T]]) -> Tuple[Dict[T, typing.Counter[T]], Set[T], Set[T]]:
+def balance_graph(graph: Graph[T]) -> Tuple[Graph[T], Set[T], Set[T]]:
     unbalanced_nodes = find_unbalanced_nodes(graph)
     nodes_with_missing_ins = filter(lambda x: x[1] < x[2], unbalanced_nodes)
     nodes_with_missing_outs = filter(lambda x: x[1] > x[2], unbalanced_nodes)
 
-    graph = copy_graph(graph)
+    graph = graph.copy()
 
     # create 1 copy per missing input / per missing output
     n_per_need_in = [_n for n, in_degree, out_degree in nodes_with_missing_ins for _n in [n] * (out_degree - in_degree)]
@@ -40,24 +32,24 @@ def balance_graph(graph: Dict[T, typing.Counter[T]]) -> Tuple[Dict[T, typing.Cou
 
     # balance
     for n_need_in, n_need_out in zip(n_per_need_in, n_per_need_out):
-        graph[n_need_out][n_need_in] += 1
+        graph.insert_edge(n_need_out, n_need_in)
 
     return graph, set(n_per_need_in), set(n_per_need_out)  # return graph with cycle, orig root nodes, orig tail nodes
 
 
 if __name__ == '__main__':
-    graph = {
-        '0': Counter(['2']),
-        '1': Counter(['3']),
-        '2': Counter(['1']),
-        '3': Counter(['0', '4']),
-        '6': Counter(['3', '7']),
-        '7': Counter(['8']),
-        '8': Counter(['9']),
-        '9': Counter(['6'])
-    }
-    graph = normalize_graph(graph)
+    g = Graph()
+    g.insert_edge('0', '2')
+    g.insert_edge('1', '3')
+    g.insert_edge('2', '1')
+    g.insert_edge('3', '0')
+    g.insert_edge('3', '4')
+    g.insert_edge('6', '3')
+    g.insert_edge('6', '7')
+    g.insert_edge('7', '8')
+    g.insert_edge('8', '9')
+    g.insert_edge('9', '6')
 
-    graph, _, _ = balance_graph(graph)
-    path = walk_eularian_cycle(graph, '0')
+    g, _, _ = balance_graph(g)
+    path = walk_eularian_cycle(g, '0')
     print(f'{"->".join(path)}')

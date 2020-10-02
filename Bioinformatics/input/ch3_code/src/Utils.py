@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import typing
-from collections import Counter
-from typing import Tuple, Dict, TypeVar, Set, List
+from typing import Tuple
 
 from Kdmer import Kdmer
 
@@ -26,51 +24,3 @@ def enumerate_patterns(k: int, elements='ACGT') -> str:
                 yield from inner(current + element, k - 1, elements)
 
     yield from inner('', k, elements)
-
-
-T = TypeVar('T')
-
-
-def copy_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T]]:
-    copy = dict()
-    for k, v in graph.items():
-        copy[k] = v.copy()
-    return copy
-
-
-# make sure every node that appears as a child also appears as a key
-def normalize_graph(graph: Dict[T, typing.Counter[T]]) -> Dict[T, typing.Counter[T]]:
-    graph = copy_graph(graph)
-    all_nodes = graph.keys() | set([node for nodes in graph.values() for node in nodes])
-    for n in all_nodes:
-        graph.setdefault(n, Counter())
-    return graph
-
-
-def find_graph_roots(graph: Dict[T, typing.Counter[T]]) -> Set[T]:
-    nodes_with_incoming_conns = set([n for v in graph.values() for n in v])
-    nodes = graph.keys()
-    start_nodes = nodes - nodes_with_incoming_conns
-    return start_nodes
-
-
-def count_graph_edges(graph: Dict[T, typing.Counter[T]]) -> int:
-    ret = 0
-    for from_node in graph.keys():
-        ret += len(graph[from_node])
-    return ret
-
-
-# (6, 8), (8, 7), (7, 9), (9, 6)  ---->  68796
-def walk_edge_nodes(edges: List[Tuple[T, T]]) -> T:
-    yield edges[0][0]
-    for e in edges:
-        yield e[1]
-
-
-class WrappedStr(object):
-    def __init__(self, val: str):
-        self.val = val
-
-    def __str__(self):
-        return self.val

@@ -1,6 +1,5 @@
 from Kdmer import Kdmer
-from Kdmer_StringSpelledByGenomePath import string_spelled_by_genome_path
-
+from ReadPair import ReadPair
 
 # AG-AG
 #  GC-GC
@@ -12,7 +11,7 @@ from Kdmer_StringSpelledByGenomePath import string_spelled_by_genome_path
 #        GC-GC
 #         CT-CA
 # AGCAGCTGCTGCA
-out = string_spelled_by_genome_path([
+kdmers =[
     Kdmer('AG', 'AG', 1),
     Kdmer('GC', 'GC', 1),
     Kdmer('CA', 'CT', 1),
@@ -22,5 +21,7 @@ out = string_spelled_by_genome_path([
     Kdmer('TG', 'TG', 1),
     Kdmer('GC', 'GC', 1),
     Kdmer('CT', 'CA', 1)
-])
+]
+readpairs = [ReadPair(kdmer) for kdmer in kdmers]
+out = readpairs[0].stitch(readpairs[1:])
 print(f'{out}')
