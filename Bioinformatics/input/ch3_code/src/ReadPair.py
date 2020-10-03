@@ -15,6 +15,7 @@ class ReadPair:
         self.data = data
         self.instance = instance
         self.source = source
+        self._hash_cache = hash((self.data, self.instance))  # this is an immutable class, so caching hash is okay
 
     # If instantize is true, each duplicate kdmer in text will be given a unique instance number, meaning that it'll be
     # distinct from its duplicates.
@@ -98,7 +99,7 @@ class ReadPair:
         return type(self) is type(x) and self.data == x.data and self.instance == x.instance
 
     def __hash__(self: ReadPair) -> int:
-        return hash((self.data, self.instance))
+        return self._hash_cache
 
     def __repr__(self: ReadPair) -> str:
         return str(self.data)

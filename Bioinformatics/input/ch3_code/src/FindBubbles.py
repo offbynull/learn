@@ -48,6 +48,15 @@ def find_bubbles(graph: Graph[T], k: int) -> Dict[Tuple[T, T], List[List[T]]]:
 
 
 if __name__ == '__main__':
+    # random.seed(1)
+    # data = generate_random_genome(60)
+    # reads = generate_random_reads(data, 12, 60 * 100)
+    # error_read = reads[0]
+    # error_read = introduce_random_errors_in_read(error_read, 1)
+    # reads[0] = error_read
+    # reads = [broken_read for read in reads for broken_read in read.shatter(7)]
+    # graph = to_debruijn_graph(set(reads))
+    # print(graph.to_graphviz())
     graph = to_debruijn_graph([
         Read('CCGTA'),
         Read('CGTAT'),

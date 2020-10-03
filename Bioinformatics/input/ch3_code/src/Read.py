@@ -13,6 +13,7 @@ class Read:
         self.data = data
         self.instance = instance
         self.source = source
+        self._hash_cache = hash((self.data, self.instance))  # this is an immutable class, so caching hash is okay
 
     # If instantize is true, each duplicate kmer in text will be given a unique instance number, meaning that it'll be
     # distinct from its duplicates.
@@ -60,7 +61,7 @@ class Read:
     # This is read breaking -- why not just call it break? because break is a reserved keyword.
     def shatter(self: Read, k: int) -> List[Read]:
         ret = []
-        for kmer in slide_window(self.data, k):
+        for kmer, _ in slide_window(self.data, k):
             r = Read(kmer, source=[self])
             ret.append(r)
         return ret
@@ -69,7 +70,7 @@ class Read:
         return type(self) is type(x) and self.data == x.data and self.instance == x.instance
 
     def __hash__(self: Read) -> int:
-        return hash((self.data, self.instance))
+        return self._hash_cache
 
     def __repr__(self: Read) -> str:
         return self.data
