@@ -136,6 +136,7 @@ def to_graphviz(graph: Graph, weights: Dict[T, float]) -> str:
                    + ' -> '\
                    + '"' + str(to_node).replace("\"", "\\\"") + '"'\
                    + f' [color="{color}"];\n'
+    # https://stackoverflow.com/questions/8610710/compacting-a-digraph-in-graphviz-using-dot-language
     return 'digraph {\n'\
            + 'graph[center=true, margin=0.2, nodesep=0.1, ranksep=0.15]\n'\
            + 'node[shape=none, fontname="Courier-Bold", fontsize=10, width=0.4, height=0.4, fixedsize=true]\n'\

@@ -1116,7 +1116,7 @@ CATCTT
 Algorithms/K-mer_TOPIC
 ```
 
-DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into fragments, then scanning in those fragments. The scanning of fragments come in two flavours:
+DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into fragments, then scanning in those fragments. Sequencer typically scan fragments in 1 of 2 ways:
 
  * read_DNAs - small DNA fragments of equal size (represented as k-mers).
 
@@ -1124,52 +1124,117 @@ DNA sequencers work by taking many copies of an organism's genome, breaking up t
    A -> A -> A -> C -> C -> G -> A -> A -> A -> C
    ```
 
- * read-pairs - small DNA fragments of equal size where the prefix and suffix are known, but the nucleotides in between aren't known (represented as kd-mers).
-
-   Given a read-pair, the length of the ...
-    * prefix and suffix are equal to each other.
-    * unknown nucleotides in between the prefix and suffix is known.
+ * read-pairs - small DNA fragments of equal size where the bases in the middle part of the fragment aren't known (represented as kd-mers).
 
    ```{svgbob}
    A -> C -> A -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> T -> G -> C
+
+   "* First and last k=3 bases are known."
+   "* Middle d=16 bases aren't known."
    ```
 
-Assembly is the process of reconstructing an organism's genome from these fragments: Since the sequencer fragments multiple copies of the same DNA and each fragment's start position is random, the original organism can be reconstructed by finding overlaps between fragments and stitching them back together.
+Assembly is the process of reconstructing an organism's genome from the fragments returned by a sequencer. Since the sequencer breaks up many copies of the same DNA and each fragment's start position is random, the original organism can be reconstructed by finding overlaps between fragments and stitching them back together.
 
 ```{svgbob}
-        "Capture DNA fragments"                                   "Stitch DNA fragments"
-   
-    |-----------| |-----------|                         A C T A A G A              
-A C T A A G A A C C T A A T T T A G C                     C T A A G A A            
-                                                            T A A G A A C          
-|-----------|           |-----------|                           A G A A C C T                
-A C T A A G A A C C T A A T T T A G C                               A A C C T A A            
-                                           ------->                       C T A A T T T      
-  |-----------|         |-----------|                                         A A T T T A G  
-A C T A A G A A C C T A A T T T A G C                                           A T T T A G C
-                                                                                A T T T A G C
-        |-----------| |-----------|                     A C T A A G A A C C T A A T T T A G C
-A C T A A G A A C C T A A T T T A G C                
-                                                     
-            |-----------|            
-A C T A A G A A C C T A A T T T A G C
-                                              
+              "DNA reads"                               "Stitched DNA reads"
+ 
+    +-------------+                                  
+ A C|T A A G A A C|C T A A T T T A G C  -----+
+    +-------------+                          |                                                 
++-------------+                              \                                                 
+|A C T A A G A|A C C T A A T T T A G C  ------]-+   A C T A A G A A C C T A A T T T A G C
++-------------+                              /  |   
+                        +-------------+      |  +-> A C T A A G A                            
+ A C T A A G A A C C T A|A T T T A G C| --+  |        C T A A G A A <----------------------------+
+                        +-------------+   |  +--------> T A A G A A C                            |
+        +-------------+                   \             +-> A G A A C C T                        |
+ A C T A|A G A A C C T|A A T T T A G C  ---]------------+   +-> A A C C T A A                    |
+        +-------------+                   /                 |         C T A A T T T <----------+ \
+            +-------------+               \                 |             A A T T T A G <-------]-]-+
+ A C T A A G|A A C C T A A|T T T A G C  ---]----------------+               A T T T A G C <--+ / /  |
+            +-------------+               /                                                  | | |  |
+                  +-------------+        +---------------------------------------------------+ | |  |
+ A C T A A G A A C|C T A A T T T|A G C  -------------------------------------------------------+ |  |
+                  +-------------+                                                                |  |
+  +-------------+                                                                                |  |
+ A|C T A A G A A|C C T A A T T T A G C  ---------------------------------------------------------+  |
+  +-------------+                                                                                   |
+                      +-------------+                                                               |
+ A C T A A G A A C C T|A A T T T A G|C  ------------------------------------------------------------+
+                      +-------------+                                                          
 ```
 
-Typically, all read_DNAs / read-pairs scanned in by the sequencer are the same length.
+A typical problem with sequencing is that the number of errors in a fragment increase as the number of scanned bases increases. As such, read-pairs are preferred over read_DNAs: by only scanning in the head and tail of a long fragment, the scan won't contain as many errors as a read_DNA of the same length but will still contain extra information which helps with assembly (length of unknown nucleotides in between the prefix and suffix).
 
-The number of nucleotides scanned in by a sequencer per read_DNA / read-pair can't be too long because the chance of error increases as the number of scanned nucleotides increases. For this reason, read-pairs are typically longer than read_DNAs: By only scanning in the prefix and suffix of a long fragment, the scan won't contain as many errors as a read_DNA of the same length but will contain extra information which helps with stitching (length of unknown nucleotides in between the prefix and suffix).
+Assembly has many practical complications that prevent full genome reconstruction from fragments:
 
-Typical complications with assembly:
+ * Which strand of double stranded DNA that a read_DNA / read-pair comes from isn't known, which means the overlaps you find may not be accurate.
 
- * Which strand of double stranded DNA that a read_DNA / read-pair comes from isn't known, which means that some read_DNAs / read-pairs need to be converted to their reverse complements before finding overlaps.
+   ```{svgbob}
+          "DNA reads"           "Stitched DNA reads"
+       
+       +-------+                             
+    T T|T A A A| -------+        T A A A T T T
+       +-------+        |                    
+   +-------+            +------> T A A A      
+   |A A A T|T T  ----------------> A A A T    
+   +-------+            +------------> A T T T
+       +-------+        |      
+    A A|A T T T| -------+                     
+       +-------+                                
+    "* 1st is the reverse complement of the 2nd and 3rd."
+   ```
+
+ * The read_DNAs / read-pairs may not cover the entire genome, which prevents full reconstruction.
+
+   ```{svgbob}
+          "DNA reads"        "Stitched DNA reads"
+
+    +-------+                  A A T T T         
+   G|A A T T|T ---------+
+    +-------+           +----> A A T T  
+      +-------+        +-------> A T T T
+   G A|A T T T| -------+                 
+      +-------+                            
+
+   "* Starting G wasn't captured."
+   ```
+
  * The read_DNAs / read-pairs may have errors (e.g. wrong nucleotides scanned in), which may prevent finding overlaps.
- * The read_DNAs / read-pairs may not cover the entire genome, which will prevent full reconstruction.
- * The read_DNAs / read-pairs for repetitive parts of the genome (e.g. telomeres) likely can't be accurately reconstructed.
 
-Currently, no workaround exists for the repetitive parts complication. For example, the human genome is around 3 billion in length and around half of it is made up of repeats. Those repeats prevent full reconstruction. If those repeats didn't exist there, the odds of two read_DNAs / read-pairs from different parts of the human genome containing the exact same content would be low: Given a read_DNA length of 300, the odds of a specific 300-mer showing up in a random DNA string of length 3 billion is `{kt} \frac{1}{4^{300}} * 2999999701`.
+   ```{svgbob}
+          "DNA reads"          "Stitched DNA reads"
+      
+       +-------+                               
+    T T|T A A A| ------+        T A A A T T T             
+       +-------+       |                                   
+   +-------+           +------> T A A A      
+   |A A A T|T T  ---------------> A A A T    
+   +-------+           +------------> A T T T
+       +-------+       |      
+    A A|A T T T| ------+                   
+       +-------+                               
 
-### Find Read Overlaps
+   "* 1st is the reverse complement of the 2nd and 3rd."
+   "* Reconstructed genome has an extra T prepended."
+   ```
+
+ * The read_DNAs / read-pairs for repetitive parts of the genome (e.g. transposons) likely can't be accurately assembled.
+
+   ```{svgbob}
+          "DNA reads"        "Stitched DNA reads"
+      
+   +-------+                      T A T A
+   |T A T A|T A  ---------+ 
+   +-------+              +-----> T A T A
+       +-------+           +----> T A T A
+    T A|T A T A| ----------+
+       +-------+
+
+   "* Wrong overlap identified."
+   ```
+
+### Find Fragment Overlaps
 
 **WHAT**: Given a list of read_DNAs for the same organism, find overlaps between those read_DNAs.
 
@@ -1179,68 +1244,25 @@ Currently, no workaround exists for the repetitive parts complication. For examp
 
 **ALGORITHM**:
 
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-
 #### Hash Algorithm
 
-TODO: FILL IN
+**ALGORITHM**:
 
-TODO: FILL IN
+### Break Fragments
 
-TODO: FILL IN
+### Construct Overlap Graph
 
-TODO: FILL IN
+### Find Hamiltonian Paths
 
-TODO: FILL IN
+### Construct De Bruijn Graph
 
-TODO: FILL IN
+### Find Eulerian Paths
 
-TODO: FILL IN
+### Find Contigs
 
-TODO: FILL IN
+### Find Error Fragments
 
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
-
-TODO: FILL IN
+### Find Repeat Fragments
 
 # Stories
 

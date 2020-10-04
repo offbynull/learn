@@ -49,26 +49,34 @@
 </ul>
 <li><a href="#HEADREF31">Assembly</a></li>
 <ul>
-<li><a href="#HEADREF32">Find Read Overlaps</a></li>
+<li><a href="#HEADREF32">Find Fragment Overlaps</a></li>
 <ul>
 <li><a href="#HEADREF33">Bruteforce Algorithm</a></li>
 <li><a href="#HEADREF34">Hash Algorithm</a></li>
 </ul>
+<li><a href="#HEADREF35">Break Fragments</a></li>
+<li><a href="#HEADREF36">Construct Overlap Graph</a></li>
+<li><a href="#HEADREF37">Find Hamiltonian Paths</a></li>
+<li><a href="#HEADREF38">Construct De Bruijn Graph</a></li>
+<li><a href="#HEADREF39">Find Eulerian Paths</a></li>
+<li><a href="#HEADREF40">Find Contigs</a></li>
+<li><a href="#HEADREF41">Find Error Fragments</a></li>
+<li><a href="#HEADREF42">Find Repeat Fragments</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF35">Stories</a></li>
+<li><a href="#HEADREF43">Stories</a></li>
 <ul>
-<li><a href="#HEADREF36">Bacteria Replication</a></li>
+<li><a href="#HEADREF44">Bacteria Replication</a></li>
 <ul>
-<li><a href="#HEADREF37">Find Ori and Ter</a></li>
-<li><a href="#HEADREF38">Find the DnaA Box</a></li>
+<li><a href="#HEADREF45">Find Ori and Ter</a></li>
+<li><a href="#HEADREF46">Find the DnaA Box</a></li>
 </ul>
-<li><a href="#HEADREF39">Transcription Factors</a></li>
+<li><a href="#HEADREF47">Transcription Factors</a></li>
 <ul>
-<li><a href="#HEADREF40">Find Regulatory Motif</a></li>
+<li><a href="#HEADREF48">Find Regulatory Motif</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF41">Terminology</a></li>
+<li><a href="#HEADREF49">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -2088,72 +2096,56 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK0">Algorithms/K-mer</a></li>
 </ul>
 </div>
-<p>DNA <a href="#BOOKMARK81">sequencer</a>s work by taking many copies of an organism's <a href="#BOOKMARK78">genome</a>, breaking up those copies into fragments, then scanning in those fragments. The scanning of fragments come in two flavours:</p>
+<p>DNA <a href="#BOOKMARK81">sequencer</a>s work by taking many copies of an organism's <a href="#BOOKMARK78">genome</a>, breaking up those copies into fragments, then scanning in those fragments. <a href="#BOOKMARK81">Sequencer</a> typically scan fragments in 1 of 2 ways:</p>
 <ul>
 <li>
 <p><a href="#BOOKMARK82">read</a>s - small DNA fragments of equal size (represented as <a href="#BOOKMARK23">k-mer</a>s).</p>
 <p><img src="svgbob_0466ab6a6dc49c17c2bac89fed628823f1b8d580.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a href="#BOOKMARK83">read-pair</a>s - small DNA fragments of equal size where the prefix and suffix are known, but the nucleotides in between aren't known (represented as <a href="#BOOKMARK24">kd-mer</a>s).</p>
-<p>Given a <a href="#BOOKMARK83">read-pair</a>, the length of the ...</p>
-<ul>
-<li>prefix and suffix are equal to each other.</li>
-<li>unknown nucleotides in between the prefix and suffix is known.</li>
-</ul>
-<p><img src="svgbob_b8c1da5fdd99c875806fe42eb95a583eed764b2c.svg" alt="Kroki diagram output"></p>
+<p><a href="#BOOKMARK83">read-pair</a>s - small DNA fragments of equal size where the bases in the middle part of the fragment aren't known (represented as <a href="#BOOKMARK24">kd-mer</a>s).</p>
+<p><img src="svgbob_246ba3d13372ae267d9a596e030d11d7550b036b.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
-<p><a href="#BOOKMARK84">Assembly</a> is the process of reconstructing an organism's <a href="#BOOKMARK78">genome</a> from these fragments: Since the <a href="#BOOKMARK81">sequencer</a> fragments multiple copies of the same DNA and each fragment's start position is random, the original organism can be reconstructed by finding overlaps between fragments and stitching them back together.</p>
-<p><img src="svgbob_d7e94324d21c3d881ef2dd70fd08a907e8e5e6a7.svg" alt="Kroki diagram output"></p>
-<p>Typically, all <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s scanned in by the <a href="#BOOKMARK81">sequencer</a> are the same length.</p>
-<p>The number of nucleotides scanned in by a <a href="#BOOKMARK81">sequencer</a> per <a href="#BOOKMARK82">read</a> / <a href="#BOOKMARK83">read-pair</a> can't be too long because the chance of error increases as the number of scanned nucleotides increases. For this reason, <a href="#BOOKMARK83">read-pair</a>s are typically longer than <a href="#BOOKMARK82">read</a>s: By only scanning in the prefix and suffix of a long fragment, the scan won't contain as many errors as a <a href="#BOOKMARK82">read</a> of the same length but will contain extra information which helps with stitching (length of unknown nucleotides in between the prefix and suffix).</p>
-<p>Typical complications with <a href="#BOOKMARK84">assembly</a>:</p>
+<p><a href="#BOOKMARK84">Assembly</a> is the process of reconstructing an organism's <a href="#BOOKMARK78">genome</a> from the fragments returned by a <a href="#BOOKMARK81">sequencer</a>. Since the <a href="#BOOKMARK81">sequencer</a> breaks up many copies of the same DNA and each fragment's start position is random, the original organism can be reconstructed by finding overlaps between fragments and stitching them back together.</p>
+<p><img src="svgbob_c14e6c546e8e4369db69bd39a7c6e934e7ddefe7.svg" alt="Kroki diagram output"></p>
+<p>A typical problem with <a href="#BOOKMARK80">sequencing</a> is that the number of errors in a fragment increase as the number of scanned bases increases. As such, <a href="#BOOKMARK83">read-pair</a>s are preferred over <a href="#BOOKMARK82">read</a>s: by only scanning in the head and tail of a long fragment, the scan won't contain as many errors as a <a href="#BOOKMARK82">read</a> of the same length but will still contain extra information which helps with <a href="#BOOKMARK84">assembly</a> (length of unknown nucleotides in between the prefix and suffix).</p>
+<p><a href="#BOOKMARK84">Assembly</a> has many practical complications that prevent full <a href="#BOOKMARK78">genome</a> reconstruction from fragments:</p>
 <ul>
-<li>Which strand of <a href="#BOOKMARK44">double stranded DNA</a> that a <a href="#BOOKMARK82">read</a> / <a href="#BOOKMARK83">read-pair</a> comes from isn't known, which means that some <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s need to be converted to their reverse complements before finding overlaps.</li>
-<li>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s may have errors (e.g. wrong nucleotides scanned in), which may prevent finding overlaps.</li>
-<li>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s may not cover the entire <a href="#BOOKMARK78">genome</a>, which will prevent full reconstruction.</li>
-<li>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s for repetitive parts of the <a href="#BOOKMARK78">genome</a> (e.g. telomeres) likely can't be accurately reconstructed.</li>
+<li>
+<p>Which strand of <a href="#BOOKMARK44">double stranded DNA</a> that a <a href="#BOOKMARK82">read</a> / <a href="#BOOKMARK83">read-pair</a> comes from isn't known, which means the overlaps you find may not be accurate.</p>
+<p><img src="svgbob_9a1e8981d7c6da721c87d87057f266ca1aeee3d2.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s may not cover the entire <a href="#BOOKMARK78">genome</a>, which prevents full reconstruction.</p>
+<p><img src="svgbob_b6294ec3ffaf661c338522ed9985ae78672bd1a0.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s may have errors (e.g. wrong nucleotides scanned in), which may prevent finding overlaps.</p>
+<p><img src="svgbob_2999b6b6a83079f71e5ec624ca63433adc1fd7c4.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s for repetitive parts of the <a href="#BOOKMARK78">genome</a> (e.g. <a href="#BOOKMARK88">transposon</a>s) likely can't be accurately <a href="#BOOKMARK84">assemble</a>d.</p>
+<p><img src="svgbob_b6caa3257c0c8b7d997763ca20474e872861ae48.svg" alt="Kroki diagram output"></p>
+</li>
 </ul>
-<p>Currently, no workaround exists for the repetitive parts complication. For example, the human <a href="#BOOKMARK78">genome</a> is around 3 billion in length and around half of it is made up of repeats. Those repeats prevent full reconstruction. If those repeats didn't exist there, the odds of two <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s from different parts of the human <a href="#BOOKMARK78">genome</a> containing the exact same content would be low: Given a <a href="#BOOKMARK82">read</a> length of 300, the odds of a specific <a href="#BOOKMARK23">300-mer</a> showing up in a random DNA string of length 3 billion is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><msup><mn>4</mn><mn>300</mn></msup></mfrac><mo>∗</mo><mn>2999999701</mn></mrow><annotation encoding="application/x-tex">\frac{1}{4^{300}} * 2999999701</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mord">7</span><span class="mord">0</span><span class="mord">1</span></span></span></span>.</p>
-<a name="HEADREF32"></a><h3>Find Read Overlaps</h3>
+<a name="HEADREF32"></a><h3>Find Fragment Overlaps</h3>
 <p><strong>WHAT</strong>: Given a list of <a href="#BOOKMARK82">read</a>s for the same organism, find overlaps between those <a href="#BOOKMARK82">read</a>s.</p>
 <p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
 <a name="HEADREF33"></a><h4>Bruteforce Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
 <a name="HEADREF34"></a><h4>Hash Algorithm</h4>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<p>TODO: FILL IN</p>
-<a name="HEADREF35"></a><h1>Stories</h1>
-<a name="HEADREF36"></a><h2>Bacteria Replication</h2>
+<p><strong>ALGORITHM</strong>:</p>
+<a name="HEADREF35"></a><h3>Break Fragments</h3>
+<a name="HEADREF36"></a><h3>Construct Overlap Graph</h3>
+<a name="HEADREF37"></a><h3>Find Hamiltonian Paths</h3>
+<a name="HEADREF38"></a><h3>Construct De Bruijn Graph</h3>
+<a name="HEADREF39"></a><h3>Find Eulerian Paths</h3>
+<a name="HEADREF40"></a><h3>Find Contigs</h3>
+<a name="HEADREF41"></a><h3>Find Error Fragments</h3>
+<a name="HEADREF42"></a><h3>Find Repeat Fragments</h3>
+<a name="HEADREF43"></a><h1>Stories</h1>
+<a name="HEADREF44"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK32">replication origin</a> (<a href="#BOOKMARK33">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK34">replication terminus</a> (<a href="#BOOKMARK35">ter</a>) is where it ends. The <a href="#BOOKMARK33">ori</a> and <a href="#BOOKMARK35">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK31">replication fork</a> opening at the <a href="#BOOKMARK33">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK35">ter</a>...</p>
@@ -2175,7 +2167,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>The <a href="#BOOKMARK40">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK41">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>There are now two complete copies of the DNA.</p>
-<a name="HEADREF37"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF45"></a><h3>Find Ori and Ter</h3>
 <p><a name="BOOKMARK22"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -2211,7 +2203,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK33">ori</a> / <a href="#BOOKMARK35">ter</a> regions.</p>
 </div>
-<a name="HEADREF38"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF46"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -2306,7 +2298,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 </div>
 <p></p>
-<a name="HEADREF39"></a><h2>Transcription Factors</h2>
+<a name="HEADREF47"></a><h2>Transcription Factors</h2>
 <p>A <a href="#BOOKMARK59">transcription factor</a> / <a href="#BOOKMARK51">regulatory protein</a> is an enzyme that influences the rate of <a href="#BOOKMARK49">gene expression</a> for some set of <a href="#BOOKMARK45">genes</a>. As the saturation of a <a href="#BOOKMARK59">transcription factor</a> changes, so does the rate of <a href="#BOOKMARK49">gene expression</a> for the set of <a href="#BOOKMARK45">genes</a> that it influences.</p>
 <p><a href="#BOOKMARK59">Transcription factor</a>s bind to DNA near the <a href="#BOOKMARK45">genes</a> they influence: a <a href="#BOOKMARK65">transcription factor binding site</a> is located in a <a href="#BOOKMARK45">gene</a>'s <a href="#BOOKMARK57">upstream region</a> and the <a href="#BOOKMARK79">sequence</a> at that location is a fuzzy nucleotide <a href="#BOOKMARK79">sequence</a> of length 8 to 12 called a <a href="#BOOKMARK64">regulatory motif</a>. The simplest way to think of a <a href="#BOOKMARK64">regulatory motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]CCCTA</code> may match to <code>ATTGCCCTA</code>, <code>ATTCCCCTA</code>, <code>TTTGCCCTA</code>, and <code>TTTCCCCTA</code>. The regex itself is the <a href="#BOOKMARK60">motif</a>, while the <a href="#BOOKMARK79">sequence</a>s being matched are <a href="#BOOKMARK61">motif member</a>s.</p>
 <p><img src="svgbob_c77523791e9f610ea50acd1a596be075095bcceb.svg" alt="Kroki diagram output"></p>
@@ -2317,7 +2309,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 <p>The external conditions of sunlight and temperature causes the saturation of some <a href="#BOOKMARK59">transcription factor</a>s to change. Those <a href="#BOOKMARK59">transcription factor</a>s influence the rate of <a href="#BOOKMARK49">gene expression</a> for the <a href="#BOOKMARK45">genes</a> that control the bunching and spreading of the petals.</p>
 <p><img src="svgbob_02d5e3f967efc5f1f94cccd5f97a6610035cb8fd.svg" alt="Kroki diagram output"></p>
-<a name="HEADREF40"></a><h3>Find Regulatory Motif</h3>
+<a name="HEADREF48"></a><h3>Find Regulatory Motif</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -2355,7 +2347,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>Score is: 20</p>
 </div>
 <p></p>
-<a name="HEADREF41"></a><h1>Terminology</h1>
+<a name="HEADREF49"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p><a name="BOOKMARK23"></a><strong>k-mer</strong> - A sub<a href="#BOOKMARK79">sequence</a> of length k within some larger biological <a href="#BOOKMARK79">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BOOKMARK79">sequence</a> <code>GAAATC</code>, the following <a href="#BOOKMARK23">k-mer</a>'s exist:</p>
