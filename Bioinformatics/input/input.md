@@ -2146,12 +2146,13 @@ PracticalMotifFindingExample
    In the graph below, the Eulerian path is (A,B), (B,C), (C,D), (D,E), (E,C), (C,D), (D,F).
 
    ```{svgbob}
-   A ---> B ---> C ===> D ---> F
+                 +------+
+                 |      |
+                 |      v
+   A ---> B ---> C ---> D ---> F
                  ^      |
                  |      v
                  +----- E
-                 
-   "* Note that C has 2 edges pointing to D."
    ```
 
  * `{bm} Eulerian cycle/(Eulerian graph|Eulerian cycle|Eulerian)/i` - An Eulerian path that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.

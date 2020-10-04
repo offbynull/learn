@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 from collections import Counter
-from typing import List
+from random import Random
+from typing import List, Tuple, Optional, Callable
 
 from Kdmer import Kdmer
 from Read import Read
@@ -9,12 +10,12 @@ from Utils import slide_window, slide_window_kd
 
 
 class ReadPair:
-    def __init__(self: ReadPair, data: Kdmer, instance: int = 0, source: List[ReadPair] = None) -> None:
-        if source is None:
-            source = []
+    def __init__(self: ReadPair, data: Kdmer, instance: int = 0, source: Optional[Tuple[str, List[ReadPair]]] = None) -> None:
+        self.source = source
         self.data = data
         self.instance = instance
         self.source = source
+        self._hash_cache = hash((self.data, self.instance))  # this is an immutable class, so caching hash is okay
 
     # If instantize is true, each duplicate kdmer in text will be given a unique instance number, meaning that it'll be
     # distinct from its duplicates.
@@ -43,7 +44,7 @@ class ReadPair:
                 self.data.tail[:-skip],
                 self.data.d
             ),
-            source=[self]
+            source=('prefix', [self])
         )
 
     def suffix(self: ReadPair, skip: int = 1) -> ReadPair:
@@ -53,7 +54,7 @@ class ReadPair:
                 self.data.tail[skip:],
                 self.data.d
             ),
-            source=[self]
+            source=('suffix', [self])
         )
 
     def append_overlap(self: ReadPair, other: ReadPair, skip: int = 1) -> ReadPair:
@@ -73,7 +74,7 @@ class ReadPair:
         new_d = self.d - skip
         kdmer = Kdmer(new_head, new_tail, new_d)
 
-        return ReadPair(kdmer, source=[self, other])
+        return ReadPair(kdmer, source=('overlap', [self, other]))
 
     def stitch(self: ReadPair, subsequent: List[ReadPair]) -> str:
         ret = self
@@ -90,18 +91,73 @@ class ReadPair:
             kmer_head, _ = window_head
             kmer_tail, _ = window_tail
             kdmer = Kdmer(kmer_head, kmer_tail, self.data.d)
-            rp = ReadPair(kdmer, source=[self])
+            rp = ReadPair(kdmer, source=('shatter', [self]))
             ret.append(rp)
+        return ret
+
+    def collapse(self: ReadPair, subsequent: List[ReadPair]) -> List[ReadPair]:
+        full_list = [self] + subsequent
+        collector = dict()
+        for item in full_list:
+            collector.setdefault(item.data, []).append(item)
+        ret = []
+        for data, matches in collector.items():
+            collapsed = Read(data, source=('collapse', matches))
+            ret.append(collapsed)
         return ret
 
     def __eq__(self, x: ReadPair) -> bool:
         return type(self) is type(x) and self.data == x.data and self.instance == x.instance
 
     def __hash__(self: ReadPair) -> int:
-        return hash((self.data, self.instance))
+        return self._hash_cache
 
     def __repr__(self: ReadPair) -> str:
         return str(self.data)
 
     def __str__(self: ReadPair) -> str:
         return str(self.data)
+
+    @staticmethod
+    def random_fragment(data: str, k: int, d: int, read_count: int, r: Optional[Random] = None) -> List[ReadPair]:
+        if r is None:
+            r = Random()
+        total_kmers = len(data) - (k*2 + d) + 1
+        ret = []
+        for i in range(read_count):
+            offset = r.randint(0, total_kmers)
+            kdmer_head = data[offset:offset+k]
+            kdmer_tail = data[offset+k+d:offset+k+d+k]
+            kdmer = Kdmer(kdmer_head, kdmer_tail, d)
+            read = ReadPair(kdmer)
+            ret.append(read)
+        return ret
+
+    def introduce_random_errors(self: ReadPair, count: int, include_source: bool = False, r: Optional[Random] = None) -> ReadPair:
+        if r is None:
+            r = Random()
+        data = self.data.head + self.data.tail
+        offsets = list(range(len(data)))
+        for i in range(count):
+            offset = r.choice(offsets)
+            offsets.remove(offset)
+            choices = ['A', 'C', 'T', 'G']
+            choices.remove(data[offset])
+            data = data[:offset] + r.choice(choices) + data[offset+1:]
+        source = ('introduce_error', [self]) if include_source else None
+        return ReadPair(Kdmer(data[:self.k], data[self.k:], self.d), source=source)
+
+    def to_sources(self: ReadPair, stop_func: Callable[[str, List[ReadPair]], bool] = lambda x: False) -> List[List[ReadPair]]:
+        def walk_up(item: ReadPair, path: List[ReadPair]) -> List[List[ReadPair]]:
+            if item.source is None:
+                return [path]
+            source_name, source_list = item.source
+            if stop_func(source_name, source_list):
+                return [path]
+            ret = []
+            for new_source in source_list:
+                new_path = path.copy() + [new_source]
+                new_paths = walk_up(new_source, new_path)
+                ret.extend(new_paths)
+            return ret
+        return walk_up(self, [self])

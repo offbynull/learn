@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from typing import TypeVar, Iterable, Generic, Tuple, Iterator
+from typing import TypeVar, Generic, Tuple, Iterator
 
 T = TypeVar('T')
 
@@ -15,6 +15,19 @@ class Graph(Generic[T]):
         assert node not in self._outbound  # if it's not in outbound, it won't be in inbound as well
         self._outbound[node] = Counter()
         self._inbound[node] = Counter()
+
+    def replace_node(self: Graph, old_node: T, new_node: T):
+        assert old_node in self._outbound  # if it's not in outbound, it won't be in inbound as well
+        if new_node != old_node:
+            assert new_node not in self._outbound  # if it's not in outbound, it won't be in inbound as well
+        out_counter = self._outbound[old_node].copy()
+        in_counter = self._inbound[old_node].copy()
+        self.delete_node(old_node)
+        self.insert_node(new_node)
+        for to_node in out_counter.elements():
+            self.insert_edge(new_node, to_node)
+        for from_node in in_counter.elements():
+            self.insert_edge(from_node, new_node)
 
     def delete_node(self: Graph, node: T):
         assert node in self._outbound
@@ -137,12 +150,17 @@ class Graph(Generic[T]):
     def to_graphviz(self: Graph) -> str:
         out = ''
         for node, to_nodes in self._outbound.items():
-            for to_node in to_nodes:
+            for to_node in to_nodes.elements():
                 out += '"' + str(node).replace("\"", "\\\"") + '\"'\
                        + ' -> '\
                        + '"' + str(to_node).replace("\"", "\\\"") + '"'\
                        + ' [shape=plain];\n'
-        return 'digraph {\n' + out + '}\n'
+        return 'digraph {\n'\
+               + 'graph[center=true, margin=0.2, nodesep=0.1, ranksep=0.2]\n'\
+               + 'node[shape=none, fontname="Courier-Bold", fontsize=10, width=0.4, height=0.4, fixedsize=true]\n'\
+               + 'edge[arrowsize=0.6, arrowhead=vee]\n'\
+               + out\
+               + '}\n'
 
     def __len__(self: Graph) -> int:
         return len(self._outbound)

@@ -7,6 +7,7 @@ T = TypeVar('T')
 
 def walk_until_non_1_to_1(graph: Graph[T], node: T) -> Optional[List[T]]:
     ret = [node]
+    ret_quick_lookup = {node}
     while True:
         out_degree = graph.get_out_degree(node)
         in_degree = graph.get_in_degree(node)
@@ -15,15 +16,17 @@ def walk_until_non_1_to_1(graph: Graph[T], node: T) -> Optional[List[T]]:
 
         children = graph.get_outputs(node)
         child = next(children)
-        if child in ret:
-            return None
+        if child in ret_quick_lookup:
+            return ret
 
         node = child
         ret.append(node)
+        ret_quick_lookup.add(node)
 
 
 def walk_until_loop(graph: Graph[T], node: T) -> Optional[List[T]]:
     ret = [node]
+    ret_quick_lookup = {node}
     while True:
         out_degree = graph.get_out_degree(node)
         if out_degree > 1 or out_degree == 0:
@@ -31,11 +34,12 @@ def walk_until_loop(graph: Graph[T], node: T) -> Optional[List[T]]:
 
         children = graph.get_outputs(node)
         child = next(children)
-        if child in ret:
+        if child in ret_quick_lookup:
             return ret
 
         node = child
         ret.append(node)
+        ret_quick_lookup.add(node)
 
 
 def find_maximal_non_branching_paths(graph: Graph[T]) -> List[List[T]]:
