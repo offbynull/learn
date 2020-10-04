@@ -7,6 +7,7 @@ from Utils import slide_window
 T = TypeVar('T')
 
 
+# MARKDOWN
 def to_debruijn_graph(reads: List[T], skip: int = 1) -> Graph[T]:
     graph = Graph()
     for read in reads:
@@ -14,6 +15,7 @@ def to_debruijn_graph(reads: List[T], skip: int = 1) -> Graph[T]:
         to_node = read.suffix(skip)
         graph.insert_edge(from_node, to_node)
     return graph
+# MARKDOWN
 
 
 if __name__ == '__main__':

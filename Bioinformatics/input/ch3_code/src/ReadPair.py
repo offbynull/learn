@@ -57,6 +57,7 @@ class ReadPair:
             source=('suffix', [self])
         )
 
+    # MARKDOWN_MERGE_OVERLAPPING
     def append_overlap(self: ReadPair, other: ReadPair, skip: int = 1) -> ReadPair:
         self_head = Read(self.data.head)
         other_head = Read(other.data.head)
@@ -75,6 +76,7 @@ class ReadPair:
         kdmer = Kdmer(new_head, new_tail, new_d)
 
         return ReadPair(kdmer, source=('overlap', [self, other]))
+    # MARKDOWN_MERGE_OVERLAPPING
 
     def stitch(self: ReadPair, subsequent: List[ReadPair]) -> str:
         ret = self
@@ -84,6 +86,7 @@ class ReadPair:
         overlap_count = -ret.d
         return ret.data.head + ret.data.tail[overlap_count:]
 
+    # MARKDOWN_BREAK
     # This is read breaking -- why not just call it break? because break is a reserved keyword.
     def shatter(self: ReadPair, k: int) -> List[ReadPair]:
         ret = []
@@ -94,6 +97,7 @@ class ReadPair:
             rp = ReadPair(kdmer, source=('shatter', [self]))
             ret.append(rp)
         return ret
+    # MARKDOWN_BREAK
 
     def collapse(self: ReadPair, subsequent: List[ReadPair]) -> List[ReadPair]:
         full_list = [self] + subsequent

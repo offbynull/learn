@@ -8,6 +8,7 @@ from Utils import slide_window_kd
 T = TypeVar('T')
 
 
+# MARKDOWN
 def exhaustively_walk_until_all_nodes_touched_exactly_one(
         graph: Graph[T],
         from_node: T,
@@ -31,6 +32,7 @@ def exhaustively_walk_until_all_nodes_touched_exactly_one(
 # walk each node exactly once
 def walk_hamiltonian_path(graph: Graph[T], from_node: T) -> List[List[T]]:
     return exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])
+# MARKDOWN
 
 
 if __name__ == '__main__':

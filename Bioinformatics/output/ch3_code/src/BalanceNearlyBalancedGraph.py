@@ -6,6 +6,7 @@ from WalkEulerianCycle import walk_eularian_cycle
 T = TypeVar('T')
 
 
+# MARKDOWN
 def find_unbalanced_nodes(graph: Graph[T]) -> List[Tuple[T, int, int]]:
     unbalanced_nodes = []
     for node in graph.get_nodes():
@@ -35,6 +36,7 @@ def balance_graph(graph: Graph[T]) -> Tuple[Graph[T], Set[T], Set[T]]:
         graph.insert_edge(n_need_out, n_need_in)
 
     return graph, set(n_per_need_in), set(n_per_need_out)  # return graph with cycle, orig root nodes, orig tail nodes
+# MARKDOWN
 
 
 if __name__ == '__main__':

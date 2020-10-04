@@ -8,6 +8,7 @@ from ReadPair import ReadPair
 T = TypeVar('T', Read, ReadPair)
 
 
+# MARKDOWN
 def to_overlap_graph(items: List[T], skip: int = 1) -> Graph[T]:
     ret = Graph()
 
@@ -31,6 +32,7 @@ def to_overlap_graph(items: List[T], skip: int = 1) -> Graph[T]:
                 other_item = items[j]
                 ret.insert_edge(item, other_item)
     return ret
+# MARKDOWN
 
 
 if __name__ == '__main__':

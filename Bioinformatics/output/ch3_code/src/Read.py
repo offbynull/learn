@@ -36,6 +36,7 @@ class Read:
     def suffix(self: Read, skip: int = 1) -> Read:
         return Read(self.data[skip:], source=('suffix', [self]))
 
+    # MARKDOWN_MERGE_OVERLAPPING
     def append_overlap(self: Read, other: Read, skip: int = 1) -> Read:
         offset = len(self.data) - len(other.data)
         data_head = self.data[:offset]
@@ -50,6 +51,7 @@ class Read:
             ret += ch1 if ch1 == ch2 else '?'  # for failure, use IUPAC nucleotide codes instead of question mark?
         ret += suffix
         return Read(ret, source=('overlap', [self, other]))
+    # MARKDOWN_MERGE_OVERLAPPING
 
     def stitch(self: Read, subsequent: List[Read]) -> str:
         ret = self
@@ -57,6 +59,7 @@ class Read:
             ret = ret.append_overlap(other)
         return ret.data
 
+    # MARKDOWN_BREAK
     # This is read breaking -- why not just call it break? because break is a reserved keyword.
     def shatter(self: Read, k: int) -> List[Read]:
         ret = []
@@ -64,6 +67,7 @@ class Read:
             r = Read(kmer, source=('shatter', [self]))
             ret.append(r)
         return ret
+    # MARKDOWN_BREAK
 
     def collapse(self: Read, subsequent: List[Read]) -> List[Read]:
         full_list = [self] + subsequent

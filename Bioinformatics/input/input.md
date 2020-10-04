@@ -1234,7 +1234,61 @@ Assembly has many practical complications that prevent full genome reconstructio
    "* Wrong overlap identified."
    ```
 
-### Find Fragment Overlaps
+### Merge Two Overlapping Fragments
+
+**WHAT**: Given a two read_DNAs / read-pairs that have an overlapping region, merge them together.
+
+**WHY**: Finding overlaps across read_DNAs is required for assembly.
+
+**ALGORITHM**:
+
+```{output}
+ch3_code/src/Read.py
+python
+# MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
+```
+
+```{output}
+ch3_code/src/ReadPair.py
+python
+# MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
+```
+
+### Merge Multiple Overlapping Fragments
+
+**WHAT**: Given a two read_DNAs / read-pairs that have an overlapping region, merge them together.
+
+**WHY**: Finding overlaps across read_DNAs is required for assembly.
+
+**ALGORITHM**:
+
+```{output}
+ch3_code/src/Read.py
+python
+# MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
+```
+
+```{output}
+ch3_code/src/ReadPair.py
+python
+# MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
+```
+
+### Break Fragments
+
+```{output}
+ch3_code/src/Read.py
+python
+# MARKDOWN_BREAK\s*\n([\s\S]+)\n\s*# MARKDOWN_BREAK
+```
+
+```{output}
+ch3_code/src/ReadPair.py
+python
+# MARKDOWN_BREAK\s*\n([\s\S]+)\n\s*# MARKDOWN_BREAK
+```
+
+### Construct Overlap Graph
 
 **WHAT**: Given a list of read_DNAs for the same organism, find overlaps between those read_DNAs.
 
@@ -1244,21 +1298,61 @@ Assembly has many practical complications that prevent full genome reconstructio
 
 **ALGORITHM**:
 
+```{output}
+ch3_code/src/ToOverlapGraphBruteforce.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
 #### Hash Algorithm
 
 **ALGORITHM**:
 
-### Break Fragments
-
-### Construct Overlap Graph
+```{output}
+ch3_code/src/ToOverlapGraphHash.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
 
 ### Find Hamiltonian Paths
 
+```{output}
+ch3_code/src/WalkHamiltonianPath.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
 ### Construct De Bruijn Graph
 
-### Find Eulerian Paths
+```{output}
+ch3_code/src/ToDeBruijnGraph.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+### Find Eulerian Cycles
+
+```{output}
+ch3_code/src/WalkEulerianCycle.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+### Balance Nearly Balanced Graph
+
+```{output}
+ch3_code/src/BalanceNearlyBalancedGraph.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
 
 ### Find Contigs
+
+```{output}
+ch3_code/src/FindMaximalNonBranchingPaths.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
 
 ### Find Error Fragments
 

@@ -5,6 +5,7 @@ from Graph import Graph
 T = TypeVar('T')
 
 
+# MARKDOWN
 def randomly_walk_and_remove_edges_until_cycle(graph: Graph[T], node: T) -> List[Tuple[T, T]]:
     end_node = node
     edge_list = []
@@ -62,6 +63,7 @@ def walk_eularian_cycle(graph: Graph[T], start_node: T) -> List[T]:
         node_cycle = new_node_cycle
 
     return node_cycle
+# MARKDOWN
 
 
 if __name__ == '__main__':

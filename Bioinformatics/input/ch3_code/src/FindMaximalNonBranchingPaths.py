@@ -5,6 +5,7 @@ from Graph import Graph
 T = TypeVar('T')
 
 
+# MARKDOWN
 def walk_until_non_1_to_1(graph: Graph[T], node: T) -> Optional[List[T]]:
     ret = [node]
     ret_quick_lookup = {node}
@@ -73,6 +74,7 @@ def find_maximal_non_branching_paths(graph: Graph[T]) -> List[List[T]]:
         skip_nodes |= set(path)
 
     return paths
+# MARKDOWN
 
 
 if __name__ == '__main__':

@@ -49,34 +49,36 @@
 </ul>
 <li><a href="#HEADREF31">Assembly</a></li>
 <ul>
-<li><a href="#HEADREF32">Find Fragment Overlaps</a></li>
+<li><a href="#HEADREF32">Merge Two Overlapping Fragments</a></li>
+<li><a href="#HEADREF33">Merge Multiple Overlapping Fragments</a></li>
+<li><a href="#HEADREF34">Break Fragments</a></li>
+<li><a href="#HEADREF35">Construct Overlap Graph</a></li>
 <ul>
-<li><a href="#HEADREF33">Bruteforce Algorithm</a></li>
-<li><a href="#HEADREF34">Hash Algorithm</a></li>
+<li><a href="#HEADREF36">Bruteforce Algorithm</a></li>
+<li><a href="#HEADREF37">Hash Algorithm</a></li>
 </ul>
-<li><a href="#HEADREF35">Break Fragments</a></li>
-<li><a href="#HEADREF36">Construct Overlap Graph</a></li>
-<li><a href="#HEADREF37">Find Hamiltonian Paths</a></li>
-<li><a href="#HEADREF38">Construct De Bruijn Graph</a></li>
-<li><a href="#HEADREF39">Find Eulerian Paths</a></li>
-<li><a href="#HEADREF40">Find Contigs</a></li>
-<li><a href="#HEADREF41">Find Error Fragments</a></li>
-<li><a href="#HEADREF42">Find Repeat Fragments</a></li>
+<li><a href="#HEADREF38">Find Hamiltonian Paths</a></li>
+<li><a href="#HEADREF39">Construct De Bruijn Graph</a></li>
+<li><a href="#HEADREF40">Find Eulerian Cycles</a></li>
+<li><a href="#HEADREF41">Balance Nearly Balanced Graph</a></li>
+<li><a href="#HEADREF42">Find Contigs</a></li>
+<li><a href="#HEADREF43">Find Error Fragments</a></li>
+<li><a href="#HEADREF44">Find Repeat Fragments</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF43">Stories</a></li>
+<li><a href="#HEADREF45">Stories</a></li>
 <ul>
-<li><a href="#HEADREF44">Bacteria Replication</a></li>
+<li><a href="#HEADREF46">Bacteria Replication</a></li>
 <ul>
-<li><a href="#HEADREF45">Find Ori and Ter</a></li>
-<li><a href="#HEADREF46">Find the DnaA Box</a></li>
+<li><a href="#HEADREF47">Find Ori and Ter</a></li>
+<li><a href="#HEADREF48">Find the DnaA Box</a></li>
 </ul>
-<li><a href="#HEADREF47">Transcription Factors</a></li>
+<li><a href="#HEADREF49">Transcription Factors</a></li>
 <ul>
-<li><a href="#HEADREF48">Find Regulatory Motif</a></li>
+<li><a href="#HEADREF50">Find Regulatory Motif</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF49">Terminology</a></li>
+<li><a href="#HEADREF51">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -2129,23 +2131,315 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_b6caa3257c0c8b7d997763ca20474e872861ae48.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
-<a name="HEADREF32"></a><h3>Find Fragment Overlaps</h3>
+<a name="HEADREF32"></a><h3>Merge Two Overlapping Fragments</h3>
+<p><strong>WHAT</strong>: Given a two <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s that have an overlapping region, merge them together.</p>
+<p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
+<p><strong>ALGORITHM</strong>:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: Read, other: Read, skip: int = <span class="hljs-number">1</span></span>) -&gt; Read:</span>
+    offset = len(self.data) - len(other.data)
+    data_head = self.data[:offset]
+    data = self.data[offset:]
+
+    prefix = data[:skip]
+    overlap1 = data[skip:]
+    overlap2 = other.data[:-skip]
+    suffix = other.data[-skip:]
+    ret = data_head + prefix
+    <span class="hljs-keyword">for</span> ch1, ch2 <span class="hljs-keyword">in</span> zip(overlap1, overlap2):
+        ret += ch1 <span class="hljs-keyword">if</span> ch1 == ch2 <span class="hljs-keyword">else</span> <span class="hljs-string">'?'</span>  <span class="hljs-comment"># for failure, use IUPAC nucleotide codes instead of question mark?</span>
+    ret += suffix
+    <span class="hljs-keyword">return</span> Read(ret, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: ReadPair, other: ReadPair, skip: int = <span class="hljs-number">1</span></span>) -&gt; ReadPair:</span>
+    self_head = Read(self.data.head)
+    other_head = Read(other.data.head)
+    new_head = self_head.append_overlap(other_head)
+    new_head = new_head.data
+
+    self_tail = Read(self.data.tail)
+    other_tail = Read(other.data.tail)
+    new_tail = self_tail.append_overlap(other_tail)
+    new_tail = new_tail.data
+
+    <span class="hljs-comment"># WARNING: new_d may go negative -- In the event of a negative d, it means that rather than there being a gap</span>
+    <span class="hljs-comment"># in between the head and tail, there's an OVERLAP in between the head and tail. To get rid of the overlap, you</span>
+    <span class="hljs-comment"># need to remove either the last d chars from head or first d chars from tail.</span>
+    new_d = self.d - skip
+    kdmer = Kdmer(new_head, new_tail, new_d)
+
+    <span class="hljs-keyword">return</span> ReadPair(kdmer, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><a name="HEADREF33"></a><h3>Merge Multiple Overlapping Fragments</h3>
+<p><strong>WHAT</strong>: Given a two <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s that have an overlapping region, merge them together.</p>
+<p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
+<p><strong>ALGORITHM</strong>:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: Read, other: Read, skip: int = <span class="hljs-number">1</span></span>) -&gt; Read:</span>
+    offset = len(self.data) - len(other.data)
+    data_head = self.data[:offset]
+    data = self.data[offset:]
+
+    prefix = data[:skip]
+    overlap1 = data[skip:]
+    overlap2 = other.data[:-skip]
+    suffix = other.data[-skip:]
+    ret = data_head + prefix
+    <span class="hljs-keyword">for</span> ch1, ch2 <span class="hljs-keyword">in</span> zip(overlap1, overlap2):
+        ret += ch1 <span class="hljs-keyword">if</span> ch1 == ch2 <span class="hljs-keyword">else</span> <span class="hljs-string">'?'</span>  <span class="hljs-comment"># for failure, use IUPAC nucleotide codes instead of question mark?</span>
+    ret += suffix
+    <span class="hljs-keyword">return</span> Read(ret, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: ReadPair, other: ReadPair, skip: int = <span class="hljs-number">1</span></span>) -&gt; ReadPair:</span>
+    self_head = Read(self.data.head)
+    other_head = Read(other.data.head)
+    new_head = self_head.append_overlap(other_head)
+    new_head = new_head.data
+
+    self_tail = Read(self.data.tail)
+    other_tail = Read(other.data.tail)
+    new_tail = self_tail.append_overlap(other_tail)
+    new_tail = new_tail.data
+
+    <span class="hljs-comment"># WARNING: new_d may go negative -- In the event of a negative d, it means that rather than there being a gap</span>
+    <span class="hljs-comment"># in between the head and tail, there's an OVERLAP in between the head and tail. To get rid of the overlap, you</span>
+    <span class="hljs-comment"># need to remove either the last d chars from head or first d chars from tail.</span>
+    new_d = self.d - skip
+    kdmer = Kdmer(new_head, new_tail, new_d)
+
+    <span class="hljs-keyword">return</span> ReadPair(kdmer, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><a name="HEADREF34"></a><h3>Break Fragments</h3>
+<pre class="hljs"><code><span class="hljs-comment"># This is read breaking -- why not just call it break? because break is a reserved keyword.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shatter</span>(<span class="hljs-params">self: Read, k: int</span>) -&gt; List[Read]:</span>
+    ret = []
+    <span class="hljs-keyword">for</span> kmer, _ <span class="hljs-keyword">in</span> slide_window(self.data, k):
+        r = Read(kmer, source=(<span class="hljs-string">'shatter'</span>, [self]))
+        ret.append(r)
+    <span class="hljs-keyword">return</span> ret</code></pre><pre class="hljs"><code><span class="hljs-comment"># This is read breaking -- why not just call it break? because break is a reserved keyword.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shatter</span>(<span class="hljs-params">self: ReadPair, k: int</span>) -&gt; List[ReadPair]:</span>
+    ret = []
+    <span class="hljs-keyword">for</span> window_head, window_tail <span class="hljs-keyword">in</span> zip(slide_window(self.data.head, k), slide_window(self.data.tail, k)):
+        kmer_head, _ = window_head
+        kmer_tail, _ = window_tail
+        kdmer = Kdmer(kmer_head, kmer_tail, self.data.d)
+        rp = ReadPair(kdmer, source=(<span class="hljs-string">'shatter'</span>, [self]))
+        ret.append(rp)
+    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF35"></a><h3>Construct Overlap Graph</h3>
 <p><strong>WHAT</strong>: Given a list of <a href="#BOOKMARK82">read</a>s for the same organism, find overlaps between those <a href="#BOOKMARK82">read</a>s.</p>
 <p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
-<a name="HEADREF33"></a><h4>Bruteforce Algorithm</h4>
+<a name="HEADREF36"></a><h4>Bruteforce Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
-<a name="HEADREF34"></a><h4>Hash Algorithm</h4>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_overlap_graph</span>(<span class="hljs-params">items: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
+    ret = Graph()
+    <span class="hljs-keyword">for</span> i, item <span class="hljs-keyword">in</span> enumerate(items):
+        <span class="hljs-keyword">for</span> j, other_item <span class="hljs-keyword">in</span> enumerate(items):
+            <span class="hljs-keyword">if</span> i == j:
+                <span class="hljs-keyword">continue</span>
+            <span class="hljs-keyword">if</span> item.suffix(skip) == other_item.prefix(skip):
+                ret.insert_edge(item, other_item)
+    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF37"></a><h4>Hash Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
-<a name="HEADREF35"></a><h3>Break Fragments</h3>
-<a name="HEADREF36"></a><h3>Construct Overlap Graph</h3>
-<a name="HEADREF37"></a><h3>Find Hamiltonian Paths</h3>
-<a name="HEADREF38"></a><h3>Construct De Bruijn Graph</h3>
-<a name="HEADREF39"></a><h3>Find Eulerian Paths</h3>
-<a name="HEADREF40"></a><h3>Find Contigs</h3>
-<a name="HEADREF41"></a><h3>Find Error Fragments</h3>
-<a name="HEADREF42"></a><h3>Find Repeat Fragments</h3>
-<a name="HEADREF43"></a><h1>Stories</h1>
-<a name="HEADREF44"></a><h2>Bacteria Replication</h2>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_overlap_graph</span>(<span class="hljs-params">items: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
+    ret = Graph()
+
+    prefixes = dict()
+    suffixes = dict()
+    <span class="hljs-keyword">for</span> i, item <span class="hljs-keyword">in</span> enumerate(items):
+        prefix = item.prefix(skip)
+        prefixes.setdefault(prefix, set()).add(i)
+        suffix = item.suffix(skip)
+        suffixes.setdefault(suffix, set()).add(i)
+
+    <span class="hljs-keyword">for</span> key, indexes <span class="hljs-keyword">in</span> suffixes.items():
+        other_indexes = prefixes.get(key)
+        <span class="hljs-keyword">if</span> other_indexes <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-keyword">continue</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> indexes:
+            item = items[i]
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> other_indexes:
+                <span class="hljs-keyword">if</span> i == j:
+                    <span class="hljs-keyword">continue</span>
+                other_item = items[j]
+                ret.insert_edge(item, other_item)
+    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF38"></a><h3>Find Hamiltonian Paths</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exhaustively_walk_until_all_nodes_touched_exactly_one</span>(<span class="hljs-params">
+        graph: Graph[T],
+        from_node: T,
+        current_path: List[T]
+</span>) -&gt; List[List[T]]:</span>
+    current_path.append(from_node)
+
+    <span class="hljs-keyword">if</span> len(current_path) == len(graph):
+        found_paths = [current_path.copy()]
+    <span class="hljs-keyword">else</span>:
+        found_paths = []
+        <span class="hljs-keyword">for</span> to_node <span class="hljs-keyword">in</span> graph.get_outputs(from_node):
+            <span class="hljs-keyword">if</span> to_node <span class="hljs-keyword">in</span> set(current_path):
+                <span class="hljs-keyword">continue</span>
+            found_paths += exhaustively_walk_until_all_nodes_touched_exactly_one(graph, to_node, current_path)
+
+    current_path.pop()
+    <span class="hljs-keyword">return</span> found_paths
+
+
+<span class="hljs-comment"># walk each node exactly once</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_hamiltonian_path</span>(<span class="hljs-params">graph: Graph[T], from_node: T</span>) -&gt; List[List[T]]:</span>
+    <span class="hljs-keyword">return</span> exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])</code></pre><a name="HEADREF39"></a><h3>Construct De Bruijn Graph</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_debruijn_graph</span>(<span class="hljs-params">reads: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
+    graph = Graph()
+    <span class="hljs-keyword">for</span> read <span class="hljs-keyword">in</span> reads:
+        from_node = read.prefix(skip)
+        to_node = read.suffix(skip)
+        graph.insert_edge(from_node, to_node)
+    <span class="hljs-keyword">return</span> graph</code></pre><a name="HEADREF40"></a><h3>Find Eulerian Cycles</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomly_walk_and_remove_edges_until_cycle</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; List[Tuple[T, T]]:</span>
+    end_node = node
+    edge_list = []
+    from_node = node
+    <span class="hljs-keyword">while</span> len(graph) &gt; <span class="hljs-number">0</span>:
+        to_nodes = graph.get_outputs(from_node)
+        to_node = next(to_nodes, <span class="hljs-literal">None</span>)
+        <span class="hljs-keyword">assert</span> to_node <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>  <span class="hljs-comment"># eularian graphs are strongly connected, meaning we should never hit dead-end nodes</span>
+
+        graph.delete_edge(from_node, to_node, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>)
+
+        edge = (from_node, to_node)
+        edge_list.append(edge)
+        from_node = to_node
+        <span class="hljs-keyword">if</span> from_node == end_node:
+            <span class="hljs-keyword">return</span> edge_list
+
+    <span class="hljs-keyword">assert</span> <span class="hljs-literal">False</span>  <span class="hljs-comment"># eularian graphs are strongly connected and balanced, meaning we should never run out of nodes</span>
+
+
+<span class="hljs-comment"># (6, 8), (8, 7), (7, 9), (9, 6)  ----&gt;  68796</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_edge_nodes</span>(<span class="hljs-params">edges: List[Tuple[T, T]]</span>) -&gt; T:</span>
+    <span class="hljs-keyword">yield</span> edges[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> edges:
+        <span class="hljs-keyword">yield</span> e[<span class="hljs-number">1</span>]
+
+
+<span class="hljs-comment"># graph must be strongly connected</span>
+<span class="hljs-comment"># graph must be balanced</span>
+<span class="hljs-comment"># if the 2 conditions above are met, the graph will be eularian (a eulerian cycle exists)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_eularian_cycle</span>(<span class="hljs-params">graph: Graph[T], start_node: T</span>) -&gt; List[T]:</span>
+    graph = graph.copy()
+
+    node_cycle = list(
+        walk_edge_nodes(
+            randomly_walk_and_remove_edges_until_cycle(graph, start_node)
+        )
+    )
+    node_cycle_ptr = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">while</span> len(graph) &gt; <span class="hljs-number">0</span>:
+        new_node_cycle = <span class="hljs-literal">None</span>
+        <span class="hljs-keyword">for</span> local_ptr, node <span class="hljs-keyword">in</span> enumerate(node_cycle[node_cycle_ptr:]):
+            <span class="hljs-keyword">if</span> node <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> graph:
+                <span class="hljs-keyword">continue</span>
+            node_cycle_ptr += local_ptr
+            inject_node_cycle = list(
+                walk_edge_nodes(
+                    randomly_walk_and_remove_edges_until_cycle(graph, node)
+                )
+            )
+            new_node_cycle = node_cycle[:]
+            new_node_cycle[node_cycle_ptr:node_cycle_ptr+<span class="hljs-number">1</span>] = inject_node_cycle
+            <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">assert</span> new_node_cycle <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>
+        node_cycle = new_node_cycle
+
+    <span class="hljs-keyword">return</span> node_cycle</code></pre><a name="HEADREF41"></a><h3>Balance Nearly Balanced Graph</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_unbalanced_nodes</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; List[Tuple[T, int, int]]:</span>
+    unbalanced_nodes = []
+    <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> graph.get_nodes():
+        in_degree = graph.get_in_degree(node)
+        out_degree = graph.get_out_degree(node)
+        <span class="hljs-keyword">if</span> in_degree != out_degree:
+            unbalanced_nodes.append((node, in_degree, out_degree))
+    <span class="hljs-keyword">return</span> unbalanced_nodes
+
+
+<span class="hljs-comment"># creates a balanced graph from a nearly balanced graph -- nearly balanced means the graph has an equal number of</span>
+<span class="hljs-comment"># missing outputs and missing inputs.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">balance_graph</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; Tuple[Graph[T], Set[T], Set[T]]:</span>
+    unbalanced_nodes = find_unbalanced_nodes(graph)
+    nodes_with_missing_ins = filter(<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>] &lt; x[<span class="hljs-number">2</span>], unbalanced_nodes)
+    nodes_with_missing_outs = filter(<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>] &gt; x[<span class="hljs-number">2</span>], unbalanced_nodes)
+
+    graph = graph.copy()
+
+    <span class="hljs-comment"># create 1 copy per missing input / per missing output</span>
+    n_per_need_in = [_n <span class="hljs-keyword">for</span> n, in_degree, out_degree <span class="hljs-keyword">in</span> nodes_with_missing_ins <span class="hljs-keyword">for</span> _n <span class="hljs-keyword">in</span> [n] * (out_degree - in_degree)]
+    n_per_need_out = [_n <span class="hljs-keyword">for</span> n, in_degree, out_degree <span class="hljs-keyword">in</span> nodes_with_missing_outs <span class="hljs-keyword">for</span> _n <span class="hljs-keyword">in</span> [n] * (in_degree - out_degree)]
+    <span class="hljs-keyword">assert</span> len(n_per_need_in) == len(n_per_need_out)  <span class="hljs-comment"># need an equal count of missing ins and missing outs to balance</span>
+
+    <span class="hljs-comment"># balance</span>
+    <span class="hljs-keyword">for</span> n_need_in, n_need_out <span class="hljs-keyword">in</span> zip(n_per_need_in, n_per_need_out):
+        graph.insert_edge(n_need_out, n_need_in)
+
+    <span class="hljs-keyword">return</span> graph, set(n_per_need_in), set(n_per_need_out)  <span class="hljs-comment"># return graph with cycle, orig root nodes, orig tail nodes</span></code></pre><a name="HEADREF42"></a><h3>Find Contigs</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_until_non_1_to_1</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; Optional[List[T]]:</span>
+    ret = [node]
+    ret_quick_lookup = {node}
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        out_degree = graph.get_out_degree(node)
+        in_degree = graph.get_in_degree(node)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(in_degree == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> out_degree == <span class="hljs-number">1</span>):
+            <span class="hljs-keyword">return</span> ret
+
+        children = graph.get_outputs(node)
+        child = next(children)
+        <span class="hljs-keyword">if</span> child <span class="hljs-keyword">in</span> ret_quick_lookup:
+            <span class="hljs-keyword">return</span> ret
+
+        node = child
+        ret.append(node)
+        ret_quick_lookup.add(node)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_until_loop</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; Optional[List[T]]:</span>
+    ret = [node]
+    ret_quick_lookup = {node}
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        out_degree = graph.get_out_degree(node)
+        <span class="hljs-keyword">if</span> out_degree &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> out_degree == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+
+        children = graph.get_outputs(node)
+        child = next(children)
+        <span class="hljs-keyword">if</span> child <span class="hljs-keyword">in</span> ret_quick_lookup:
+            <span class="hljs-keyword">return</span> ret
+
+        node = child
+        ret.append(node)
+        ret_quick_lookup.add(node)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_maximal_non_branching_paths</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; List[List[T]]:</span>
+    paths = []
+
+    <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> graph.get_nodes():
+        out_degree = graph.get_out_degree(node)
+        in_degree = graph.get_in_degree(node)
+        <span class="hljs-keyword">if</span> (in_degree == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> out_degree == <span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> out_degree == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">continue</span>
+        <span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> graph.get_outputs(node):
+            path_from_child = walk_until_non_1_to_1(graph, child)
+            <span class="hljs-keyword">if</span> path_from_child <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+                <span class="hljs-keyword">continue</span>
+            path = [node] + path_from_child
+            paths.append(path)
+
+    skip_nodes = set()
+    <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> graph.get_nodes():
+        <span class="hljs-keyword">if</span> node <span class="hljs-keyword">in</span> skip_nodes:
+            <span class="hljs-keyword">continue</span>
+        out_degree = graph.get_out_degree(node)
+        in_degree = graph.get_in_degree(node)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (in_degree == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> out_degree == <span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> out_degree == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">continue</span>
+        path = walk_until_loop(graph, node)
+        <span class="hljs-keyword">if</span> path <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-keyword">continue</span>
+        path = path + [node]
+        paths.append(path)
+        skip_nodes |= set(path)
+
+    <span class="hljs-keyword">return</span> paths</code></pre><a name="HEADREF43"></a><h3>Find Error Fragments</h3>
+<a name="HEADREF44"></a><h3>Find Repeat Fragments</h3>
+<a name="HEADREF45"></a><h1>Stories</h1>
+<a name="HEADREF46"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK32">replication origin</a> (<a href="#BOOKMARK33">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK34">replication terminus</a> (<a href="#BOOKMARK35">ter</a>) is where it ends. The <a href="#BOOKMARK33">ori</a> and <a href="#BOOKMARK35">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK31">replication fork</a> opening at the <a href="#BOOKMARK33">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK35">ter</a>...</p>
@@ -2167,7 +2461,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>The <a href="#BOOKMARK40">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK41">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>There are now two complete copies of the DNA.</p>
-<a name="HEADREF45"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF47"></a><h3>Find Ori and Ter</h3>
 <p><a name="BOOKMARK22"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -2203,7 +2497,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK33">ori</a> / <a href="#BOOKMARK35">ter</a> regions.</p>
 </div>
-<a name="HEADREF46"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF48"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -2298,7 +2592,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 </div>
 <p></p>
-<a name="HEADREF47"></a><h2>Transcription Factors</h2>
+<a name="HEADREF49"></a><h2>Transcription Factors</h2>
 <p>A <a href="#BOOKMARK59">transcription factor</a> / <a href="#BOOKMARK51">regulatory protein</a> is an enzyme that influences the rate of <a href="#BOOKMARK49">gene expression</a> for some set of <a href="#BOOKMARK45">genes</a>. As the saturation of a <a href="#BOOKMARK59">transcription factor</a> changes, so does the rate of <a href="#BOOKMARK49">gene expression</a> for the set of <a href="#BOOKMARK45">genes</a> that it influences.</p>
 <p><a href="#BOOKMARK59">Transcription factor</a>s bind to DNA near the <a href="#BOOKMARK45">genes</a> they influence: a <a href="#BOOKMARK65">transcription factor binding site</a> is located in a <a href="#BOOKMARK45">gene</a>'s <a href="#BOOKMARK57">upstream region</a> and the <a href="#BOOKMARK79">sequence</a> at that location is a fuzzy nucleotide <a href="#BOOKMARK79">sequence</a> of length 8 to 12 called a <a href="#BOOKMARK64">regulatory motif</a>. The simplest way to think of a <a href="#BOOKMARK64">regulatory motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]CCCTA</code> may match to <code>ATTGCCCTA</code>, <code>ATTCCCCTA</code>, <code>TTTGCCCTA</code>, and <code>TTTCCCCTA</code>. The regex itself is the <a href="#BOOKMARK60">motif</a>, while the <a href="#BOOKMARK79">sequence</a>s being matched are <a href="#BOOKMARK61">motif member</a>s.</p>
 <p><img src="svgbob_c77523791e9f610ea50acd1a596be075095bcceb.svg" alt="Kroki diagram output"></p>
@@ -2309,7 +2603,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 <p>The external conditions of sunlight and temperature causes the saturation of some <a href="#BOOKMARK59">transcription factor</a>s to change. Those <a href="#BOOKMARK59">transcription factor</a>s influence the rate of <a href="#BOOKMARK49">gene expression</a> for the <a href="#BOOKMARK45">genes</a> that control the bunching and spreading of the petals.</p>
 <p><img src="svgbob_02d5e3f967efc5f1f94cccd5f97a6610035cb8fd.svg" alt="Kroki diagram output"></p>
-<a name="HEADREF48"></a><h3>Find Regulatory Motif</h3>
+<a name="HEADREF50"></a><h3>Find Regulatory Motif</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -2347,7 +2641,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>Score is: 20</p>
 </div>
 <p></p>
-<a name="HEADREF49"></a><h1>Terminology</h1>
+<a name="HEADREF51"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p><a name="BOOKMARK23"></a><strong>k-mer</strong> - A sub<a href="#BOOKMARK79">sequence</a> of length k within some larger biological <a href="#BOOKMARK79">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BOOKMARK79">sequence</a> <code>GAAATC</code>, the following <a href="#BOOKMARK23">k-mer</a>'s exist:</p>
