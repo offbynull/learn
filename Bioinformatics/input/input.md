@@ -1116,15 +1116,15 @@ CATCTT
 Algorithms/K-mer_TOPIC
 ```
 
-DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into fragments, then scanning in those fragments. Sequencer typically scan fragments in 1 of 2 ways:
+DNA sequencers work by taking many copies of an organism's genome, breaking up those copies into fragment_NORMs, then scanning in those fragment_NORMs. Sequencer typically scan fragment_NORMs in 1 of 2 ways:
 
- * read_DNAs - small DNA fragments of equal size (represented as k-mers).
+ * read_SEQs - small DNA fragment_NORMs of equal size (represented as k-mers).
 
    ```{svgbob}
    A -> A -> A -> C -> C -> G -> A -> A -> A -> C
    ```
 
- * read-pairs - small DNA fragments of equal size where the bases in the middle part of the fragment aren't known (represented as kd-mers).
+ * read-pairs - small DNA fragment_NORMs of equal size where the bases in the middle part of the fragment_NORM aren't known (represented as kd-mers).
 
    ```{svgbob}
    A -> C -> A -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> ? -> T -> G -> C
@@ -1133,7 +1133,7 @@ DNA sequencers work by taking many copies of an organism's genome, breaking up t
    "* Middle d=16 bases aren't known."
    ```
 
-Assembly is the process of reconstructing an organism's genome from the fragments returned by a sequencer. Since the sequencer breaks up many copies of the same DNA and each fragment's start position is random, the original organism can be reconstructed by finding overlaps between fragments and stitching them back together.
+Assembly is the process of reconstructing an organism's genome from the fragment_SEQs returned by a sequencer. Since the sequencer breaks up many copies of the same genome and each fragment_SEQ's start position is random, the original genome can be reconstructed by finding overlaps between fragment_SEQs and stitching them back together.
 
 ```{svgbob}
               "DNA reads"                               "Stitched DNA reads"
@@ -1164,11 +1164,11 @@ Assembly is the process of reconstructing an organism's genome from the fragment
                       +-------------+                                                          
 ```
 
-A typical problem with sequencing is that the number of errors in a fragment increase as the number of scanned bases increases. As such, read-pairs are preferred over read_DNAs: by only scanning in the head and tail of a long fragment, the scan won't contain as many errors as a read_DNA of the same length but will still contain extra information which helps with assembly (length of unknown nucleotides in between the prefix and suffix).
+A typical problem with sequencing is that the number of errors in a fragment_SEQ increase as the number of scanned bases increases. As such, read-pairs are preferred over read_SEQs: by only scanning in the head and tail of a long fragment_SEQ, the scan won't contain as many errors as a read_SEQ of the same length but will still contain extra information which helps with assembly (length of unknown nucleotides in between the prefix and suffix).
 
-Assembly has many practical complications that prevent full genome reconstruction from fragments:
+Assembly has many practical complications that prevent full genome reconstruction from fragment_SEQs:
 
- * Which strand of double stranded DNA that a read_DNA / read-pair comes from isn't known, which means the overlaps you find may not be accurate.
+ * Which strand of double stranded DNA that a read_SEQ / read-pair comes from isn't known, which means the overlaps you find may not be accurate.
 
    ```{svgbob}
           "DNA reads"           "Stitched DNA reads"
@@ -1185,7 +1185,7 @@ Assembly has many practical complications that prevent full genome reconstructio
     "* 1st is the reverse complement of the 2nd and 3rd."
    ```
 
- * The read_DNAs / read-pairs may not cover the entire genome, which prevents full reconstruction.
+ * The read_SEQs / read-pairs may not cover the entire genome, which prevents full reconstruction.
 
    ```{svgbob}
           "DNA reads"        "Stitched DNA reads"
@@ -1200,7 +1200,7 @@ Assembly has many practical complications that prevent full genome reconstructio
    "* Starting G wasn't captured."
    ```
 
- * The read_DNAs / read-pairs may have errors (e.g. wrong nucleotides scanned in), which may prevent finding overlaps.
+ * The read_SEQs / read-pairs may have errors (e.g. wrong nucleotides scanned in), which may prevent finding overlaps.
 
    ```{svgbob}
           "DNA reads"          "Stitched DNA reads"
@@ -1219,7 +1219,7 @@ Assembly has many practical complications that prevent full genome reconstructio
    "* Reconstructed genome has an extra T prepended."
    ```
 
- * The read_DNAs / read-pairs for repetitive parts of the genome (e.g. transposons) likely can't be accurately assembled.
+ * The read_SEQs / read-pairs for repetitive parts of the genome (e.g. transposons) likely can't be accurately assembled.
 
    ```{svgbob}
           "DNA reads"        "Stitched DNA reads"
@@ -1234,13 +1234,34 @@ Assembly has many practical complications that prevent full genome reconstructio
    "* Wrong overlap identified."
    ```
 
-### Merge Two Overlapping Fragments
+### Merge Fragments
 
-**WHAT**: Given a two read_DNAs / read-pairs that have an overlapping region, merge them together.
+**WHAT**: Given a list of overlapping fragment_SEQs where ...
 
-**WHY**: Finding overlaps across read_DNAs is required for assembly.
+ * each fragment_SEQ overlaps the subsequent fragment_SEQ and
+ * all overlaps are of the same length
 
-**ALGORITHM**:
+... , merge them together. For example, in the read_SEQ list `[GAAA, AAAT, AATC]` each read_SEQ overlaps the subsequent read_SEQ by an offset of 1: `GAAATC`.
+
+|        | 0 | 1 | 2 | 3 | 4 | 5 |
+|--------|---|---|---|---|---|---|
+| R1     | G | A | A | A |   |   |
+| R2     |   | A | A | A | T |   |
+| R3     |   |   | A | A | T | C |
+| Merged | G | A | A | A | T | C |
+
+**WHY**: Since the sequencer breaks up many copies of the same DNA and each fragment_SEQ's start position is random, larger parts of the original DNA can be reconstructed by finding overlaps between fragment_SEQs and stitching them back together.
+
+**ALGORITHM (Read_SEQ)**:
+
+Overlapping read_SEQs are merged by taking the first read_SEQ and iterating through the remaining read_SEQs where the suffix from each remaining read_SEQ is appended to the first read_SEQ. For example, ...
+
+|        | 0 | 1 | 2 | 3 | 4 | 5 |
+|--------|---|---|---|---|---|---|
+| R1     | G | A | A | A |   |   |
+| R2     |   | A | A | A | T |   |
+| R3     |   |   | A | A | T | C |
+| Merged | G | A | A | A | T | C |
 
 ```{output}
 ch3_code/src/Read.py
@@ -1248,30 +1269,44 @@ python
 # MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
 ```
 
+```{ch3}
+Read
+stitch
+GAAA
+AAAT
+AATC
+```
+
+**ALGORITHM (Read-pair)**:
+
+Overlapping read-pairs are merged by taking the first read-pair and iterating through the remaining read-pairs where ...
+
+ * the suffix from each remaining read-pair's head k is appended to the first read-pair's head k.
+ * the suffix from each remaining read-pair's tail k is appended to the first read-pair's tail k.
+
+For example, ...
+
+|        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11|
+|--------|---|---|---|---|---|---|---|---|---|---|---|---|
+| R1     | A | T | G | - | - | - | C | C | G |   |   |   |
+| R2     |   | T | G | T | - | - | - | C | G | T |   |   |
+| R3     |   |   | G | T | T | - | - | - | G | T | T |   |
+| R4     |   |   |   | T | T | A | - | - | - | T | T | C |
+| Merged | A | T | G | T | T | A | C | C | G | T | T | C |
+
 ```{output}
 ch3_code/src/ReadPair.py
 python
 # MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
 ```
 
-### Merge Multiple Overlapping Fragments
-
-**WHAT**: Given a two read_DNAs / read-pairs that have an overlapping region, merge them together.
-
-**WHY**: Finding overlaps across read_DNAs is required for assembly.
-
-**ALGORITHM**:
-
-```{output}
-ch3_code/src/Read.py
-python
-# MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
-```
-
-```{output}
-ch3_code/src/ReadPair.py
-python
-# MARKDOWN_MERGE_OVERLAPPING\s*\n([\s\S]+)\n\s*# MARKDOWN_MERGE_OVERLAPPING
+```{ch3}
+ReadPair
+stitch
+ATG|3|CCG
+TGT|3|CGT
+GTT|3|GTT
+TTA|3|TTC
 ```
 
 ### Break Fragments
@@ -1290,9 +1325,9 @@ python
 
 ### Construct Overlap Graph
 
-**WHAT**: Given a list of read_DNAs for the same organism, find overlaps between those read_DNAs.
+**WHAT**: Given a list of read_SEQs for the same organism, find overlaps between those read_SEQs.
 
-**WHY**: Finding overlaps across read_DNAs is required for assembly.
+**WHY**: Finding overlaps across read_SEQs is required for assembly.
 
 #### Bruteforce Algorithm
 
@@ -1893,14 +1928,14 @@ PracticalMotifFindingExample
    * reverse direction (3' to 5') is called the leading half-strand.
    * forward direction (5' to 3') is called the lagging half-strand.
 
-   This nomenclature has to do with DNA polymerase. Since DNA polymerase can only walk in the reverse direction (3' to 5'), it synthesizes the leading half-strand in one shot. For the lagging half-strand (5' to 3'), multiple DNA polymerases have to used to synthesize DNA, each binding to the lagging strand and walking backwards a small amount to generate a small fragment of DNA (Okazaki fragment). the process is much slower for the lagging half-strand, that's why it's called lagging.
+   This nomenclature has to do with DNA polymerase. Since DNA polymerase can only walk in the reverse direction (3' to 5'), it synthesizes the leading half-strand in one shot. For the lagging half-strand (5' to 3'), multiple DNA polymerases have to used to synthesize DNA, each binding to the lagging strand and walking backwards a small amount to generate a small fragment_NORM of DNA (Okazaki fragment). the process is much slower for the lagging half-strand, that's why it's called lagging.
 
    ```{note}
    * Leading half-strand is the same as reverse half-strand.
    * Lagging half-strand is the same as forward half-strand.
    ```
 
- * `{bm} Okazaki fragment` - A small fragment of DNA generated by DNA polymerase for forward half-strands. DNA synthesis for the forward half-strands can only happen in small pieces. As the fork open ups every ~2000 nucleotides, DNA polymerase attaches to the end of the fork on the forward half-strand and walks in reverse to generate that small segment (DNA polymerase can only walk in the reverse direction).
+ * `{bm} Okazaki fragment` - A small fragment_NORM of DNA generated by DNA polymerase for forward half-strands. DNA synthesis for the forward half-strands can only happen in small pieces. As the fork open ups every ~2000 nucleotides, DNA polymerase attaches to the end of the fork on the forward half-strand and walks in reverse to generate that small segment (DNA polymerase can only walk in the reverse direction).
 
  * `{bm} DNA ligase` - An enzyme that sews together short segments of DNA called Okazaki fragments by binding the phosphate group on the end of one strand with the deoxyribose group on the other strand.
 
@@ -2116,28 +2151,30 @@ PracticalMotifFindingExample
 
  * `{bm} sequencing/(sequencing|sequenced)/i` - The process of determining which nucleotides are assigned to which positions in a strand of DNA or RNA.
 
-   The machinery used for DNA sequencing takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and sequences those fragments (read_DNAs). Because these fragments vary in terms of size and starting index, the original larger DNA sequence that they came from can be constructed by finding fragment sequences with overlapping regions and stitching them together.
+   The machinery used for DNA sequencing takes multiple copies of the same DNA, breaks that DNA up into smaller fragment_NORMs, and scans in those fragment_SEQs. Because these fragment_SEQs vary in terms of size and starting index, the original larger DNA sequence that they came from can be constructed by finding fragment_SEQ with overlapping regions and stitching them together.
 
    |             |0|1|2|3|4|5|6|7|8|9|
    |-------------|-|-|-|-|-|-|-|-|-|-|
-   |fragment 1   | | | | |C|T|T|C|T|T|
-   |fragment 2   | | | |G|C|T|T|C|T| |
-   |fragment 3   | | |T|G|C|T|T|C| | |
-   |fragment 4   | |T|T|G|C|T|T| | | |
-   |fragment 5   |A|T|T|G|C|T| | | | |
+   |read_SEQ 1   | | | | |C|T|T|C|T|T|
+   |read_SEQ 2   | | | |G|C|T|T|C|T| |
+   |read_SEQ 3   | | |T|G|C|T|T|C| | |
+   |read_SEQ 4   | |T|T|G|C|T|T| | | |
+   |read_SEQ 5   |A|T|T|G|C|T| | | | |
    |reconstructed|A|T|T|G|C|T|T|C|T|T|
 
  * `{bm} sequencer` - A machine that performs DNA or RNA sequencing.
 
- * `{bm} read/\b(read)_DNA/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA.
+ * `{bm} read/\b(read)_SEQ/i` - A segment of genome scanned in during the process of sequencing.
 
- * `{bm} read-pair/(read-pair|read pair)/i` - A sequenced fragment produced in the process of sequencing some larger strand of DNA, where the middle of the fragment is unknown. That is, the first k elements and the last k elements are known, but the d elements in between aren't known. The total size of the fragment is 2k + d.
+ * `{bm} read-pair/(read-pair|read pair)/i` - A segment of genome scanning in during the process of sequencing, where the middle of the segment is unknown. That is, the first k elements and the last k elements are known, but the d elements in between aren't known. The total size of the segment is 2k + d.
 
-   Sequencers provide read-pairs as an alternative to longer read_DNAs because the longer a read_DNA is the more errors it contains.
+   Sequencers provide read-pairs as an alternative to longer read_SEQs because the longer a read_SEQ is the more errors it contains.
 
    See kd-mer.
 
- * `{bm} assembly/(assembly|assemble)/i` - The process of stitching together overlapping read_DNAs / read-pairs to construct the sequence of the original larger DNA that those read_DNAs / read-pairs came from.
+ * `{bm} fragment/(fragment)_SEQ/i` - A scanned sequence returned by a sequencer. Represented as either a read_SEQ or a read-pair.
+
+ * `{bm} assembly/(assembly|assemble)/i` - The process of stitching together overlapping read_SEQs / read-pairs to construct the sequence of the original larger DNA that those read_SEQs / read-pairs came from.
 
  * `{bm} hybrid alphabet/(hybrid alphabet|alternate alphabet|alternative alphabet)/i` - When representing a sequence that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the IUPAC nucleotide codes provides the following alphabet:
 
@@ -2505,7 +2542,7 @@ PracticalMotifFindingExample
    
    For larger values of k (e.g. 20), finding k-universal strings would be too computationally intensive without De Bruijn graphs and Eulerian cycles.
 
- * `{bm} coverage/(coverage)_SEQ/i` - Given a substring from some larger sequence that was reconstructed from read_DNAs / read-pairs, the coverage_SEQ of that substring is the number of read_DNAs used to construct it. The substring length is typically 1: the coverage_SEQ for each position of the sequence.
+ * `{bm} coverage/(coverage)_SEQ/i` - Given a substring from some larger sequence that was reconstructed from read_SEQs / read-pairs, the coverage_SEQ of that substring is the number of read_SEQs used to construct it. The substring length is typically 1: the coverage_SEQ for each position of the sequence.
 
    ```{svgbob}
               "Read coverage for each 1-mer"
@@ -2523,7 +2560,7 @@ PracticalMotifFindingExample
    "Coverage:" 1 2 3 3 4 4 5 4 3 3 3 3 4 3 3 3 2 2 1
    ```
 
- * `{bm} read breaking/(read breaking|read-breaking)/i` - The concept of taking multiple read_DNAs / read-pairs and breaking them up into smaller read_DNAs / read-pairs.
+ * `{bm} read breaking/(read breaking|read-breaking)/i` - The concept of taking multiple read_SEQs / read-pairs and breaking them up into smaller read_SEQs / read-pairs.
 
    ```{svgbob}
                       "4 original 10-mer reads (left) broken up to perfectly overlapping 5-mers (right)"
@@ -2556,7 +2593,7 @@ PracticalMotifFindingExample
     * for the right-hand side (broken) is 4.
 
    ```{note}
-   What purpose does this actually serve? Mimicking 1 long read_DNA as n shorter read_DNAs isn't equivalent to actually having sequenced those n shorter read_DNAs. For example, what if the longer read_DNA being broken up has an error? That error replicates when breaking into n shorter read_DNAs, which gives a false sense of having good coverage_SEQ and makes it seems as if it wasn't an error.
+   What purpose does this actually serve? Mimicking 1 long read_SEQ as n shorter read_SEQs isn't equivalent to actually having sequenced those n shorter read_SEQs. For example, what if the longer read_SEQ being broken up has an error? That error replicates when breaking into n shorter read_SEQs, which gives a false sense of having good coverage_SEQ and makes it seems as if it wasn't an error.
    ```
 
  * `{bm} contig/(contig)s?\b/i/true/true` - A long continuous piece of DNA. Derived by searching a de Bruijn graph for paths that are the longest possible stretches of nodes with 1 indegree and 1 outdegree. That is, a path must either ...
@@ -2590,12 +2627,12 @@ PracticalMotifFindingExample
    Assemblies often have gaps due to...
    
     * repeats in the genome, which make it impossible to fully assemble.
-    * poor coverage_SEQ, which may be cost prohibitive to fix (more read_DNAs required).
+    * poor coverage_SEQ, which may be cost prohibitive to fix (more read_SEQs required).
     
    As such, biologists / bioinformaticians have no choice but to settle on contigs.
 
 `{bm-ignore} \b(read)_NORM/i`
-`{bm-error} Apply suffix _NORM or _DNA/\b(read)/i`
+`{bm-error} Apply suffix _NORM or _SEQ/\b(read)/i`
 
 `{bm-ignore} \b(member)_NORM/i`
 `{bm-error} Apply suffix _NORM or _MOTIF/\b(member)/i`
@@ -2605,6 +2642,9 @@ PracticalMotifFindingExample
 
 `{bm-ignore} (coverage)_NORM/i`
 `{bm-error} Apply suffix _NORM, _SEQ/(coverage)/i`
+
+`{bm-ignore} (fragment)_NORM/i`
+`{bm-error} Apply suffix _NORM, _SEQ/(fragment)/i`
 
 `{bm-error} Missing topic reference/(_TOPIC)/i`
 `{bm-error} Use you instead of we/\b(we)\b/i`

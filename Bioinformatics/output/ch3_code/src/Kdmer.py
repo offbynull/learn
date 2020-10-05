@@ -32,7 +32,7 @@ class Kdmer:
         return hash((self._head, self._tail, self._d))
 
     def __str__(self):
-        return str((self._head, self._tail, self._d))
+        return str(self._head) + ('-' * self._d) + str(self._tail)
 
     def __repr__(self):
         return str(self)

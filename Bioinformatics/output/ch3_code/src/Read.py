@@ -51,13 +51,13 @@ class Read:
             ret += ch1 if ch1 == ch2 else '?'  # for failure, use IUPAC nucleotide codes instead of question mark?
         ret += suffix
         return Read(ret, source=('overlap', [self, other]))
-    # MARKDOWN_MERGE_OVERLAPPING
 
-    def stitch(self: Read, subsequent: List[Read]) -> str:
+    def stitch(self: Read, subsequent: List[Read], skip: int = 1) -> str:
         ret = self
         for other in subsequent:
-            ret = ret.append_overlap(other)
+            ret = ret.append_overlap(other, skip)
         return ret.data
+    # MARKDOWN_MERGE_OVERLAPPING
 
     # MARKDOWN_BREAK
     # This is read breaking -- why not just call it break? because break is a reserved keyword.
@@ -133,3 +133,35 @@ class Read:
                 ret.extend(new_paths)
             return ret
         return walk_up(self, [self])
+
+
+
+
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        lines = []
+        while True:
+            try:
+                line = input().strip()
+                if len(line) > 0:
+                    lines.append(line)
+            except EOFError:
+                break
+
+        command = lines[0]
+        lines = lines[1:]
+        if command == 'stitch':
+            reads = [Read(l) for l in lines]
+            genome = reads[0].stitch(reads[1:])
+            print(f'Stitched {reads} to {genome}\n\n')
+        else:
+            raise
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
+
+
+if __name__ == '__main__':
+    main()

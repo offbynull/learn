@@ -76,15 +76,15 @@ class ReadPair:
         kdmer = Kdmer(new_head, new_tail, new_d)
 
         return ReadPair(kdmer, source=('overlap', [self, other]))
-    # MARKDOWN_MERGE_OVERLAPPING
 
-    def stitch(self: ReadPair, subsequent: List[ReadPair]) -> str:
+    def stitch(self: ReadPair, subsequent: List[ReadPair], skip: int = 1) -> str:
         ret = self
         for other in subsequent:
-            ret = ret.append_overlap(other)
+            ret = ret.append_overlap(other, skip)
         assert ret.d <= 0, "Gap still exists -- not enough to stitch"
         overlap_count = -ret.d
         return ret.data.head + ret.data.tail[overlap_count:]
+    # MARKDOWN_MERGE_OVERLAPPING
 
     # MARKDOWN_BREAK
     # This is read breaking -- why not just call it break? because break is a reserved keyword.
@@ -165,3 +165,35 @@ class ReadPair:
                 ret.extend(new_paths)
             return ret
         return walk_up(self, [self])
+
+
+
+
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        lines = []
+        while True:
+            try:
+                line = input().strip()
+                if len(line) > 0:
+                    lines.append(line)
+            except EOFError:
+                break
+
+        command = lines[0]
+        lines = lines[1:]
+        if command == 'stitch':
+            read_pairs = [ReadPair(Kdmer(l.split('|')[0], l.split('|')[2], int(l.split('|')[1]))) for l in lines]
+            genome = read_pairs[0].stitch(read_pairs[1:])
+            print(f'Stitched {read_pairs} to {genome}\n\n')
+        else:
+            raise
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
+
+
+if __name__ == '__main__':
+    main()

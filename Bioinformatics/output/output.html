@@ -49,36 +49,35 @@
 </ul>
 <li><a href="#HEADREF31">Assembly</a></li>
 <ul>
-<li><a href="#HEADREF32">Merge Two Overlapping Fragments</a></li>
-<li><a href="#HEADREF33">Merge Multiple Overlapping Fragments</a></li>
-<li><a href="#HEADREF34">Break Fragments</a></li>
-<li><a href="#HEADREF35">Construct Overlap Graph</a></li>
+<li><a href="#HEADREF32">Merge Fragments</a></li>
+<li><a href="#HEADREF33">Break Fragments</a></li>
+<li><a href="#HEADREF34">Construct Overlap Graph</a></li>
 <ul>
-<li><a href="#HEADREF36">Bruteforce Algorithm</a></li>
-<li><a href="#HEADREF37">Hash Algorithm</a></li>
+<li><a href="#HEADREF35">Bruteforce Algorithm</a></li>
+<li><a href="#HEADREF36">Hash Algorithm</a></li>
 </ul>
-<li><a href="#HEADREF38">Find Hamiltonian Paths</a></li>
-<li><a href="#HEADREF39">Construct De Bruijn Graph</a></li>
-<li><a href="#HEADREF40">Find Eulerian Cycles</a></li>
-<li><a href="#HEADREF41">Balance Nearly Balanced Graph</a></li>
-<li><a href="#HEADREF42">Find Contigs</a></li>
-<li><a href="#HEADREF43">Find Error Fragments</a></li>
-<li><a href="#HEADREF44">Find Repeat Fragments</a></li>
+<li><a href="#HEADREF37">Find Hamiltonian Paths</a></li>
+<li><a href="#HEADREF38">Construct De Bruijn Graph</a></li>
+<li><a href="#HEADREF39">Find Eulerian Cycles</a></li>
+<li><a href="#HEADREF40">Balance Nearly Balanced Graph</a></li>
+<li><a href="#HEADREF41">Find Contigs</a></li>
+<li><a href="#HEADREF42">Find Error Fragments</a></li>
+<li><a href="#HEADREF43">Find Repeat Fragments</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF45">Stories</a></li>
+<li><a href="#HEADREF44">Stories</a></li>
 <ul>
-<li><a href="#HEADREF46">Bacteria Replication</a></li>
+<li><a href="#HEADREF45">Bacteria Replication</a></li>
 <ul>
-<li><a href="#HEADREF47">Find Ori and Ter</a></li>
-<li><a href="#HEADREF48">Find the DnaA Box</a></li>
+<li><a href="#HEADREF46">Find Ori and Ter</a></li>
+<li><a href="#HEADREF47">Find the DnaA Box</a></li>
 </ul>
-<li><a href="#HEADREF49">Transcription Factors</a></li>
+<li><a href="#HEADREF48">Transcription Factors</a></li>
 <ul>
-<li><a href="#HEADREF50">Find Regulatory Motif</a></li>
+<li><a href="#HEADREF49">Find Regulatory Motif</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF51">Terminology</a></li>
+<li><a href="#HEADREF50">Terminology</a></li>
 </ul>
 </div>
 <a name="HEADREF0"></a><h1>Introduction</h1>
@@ -211,7 +210,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAT', 'TAAA', 'AACA', 'AAGA', 'AGAA', 'ATAA', 'AATA', 'AAAG', 'ACAA', 'AAAC', 'AAAA', 'CAAA', 'GAAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'GAAA', 'AAAT', 'AAGA', 'AAAG', 'ACAA', 'AGAA', 'AATA', 'AAAA', 'TAAA', 'CAAA', 'ATAA', 'AACA'}</p>
 </div>
 <p></p>
 <a name="HEADREF6"></a><h3>Find Locations</h3>
@@ -334,12 +333,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>TTAAA = 6 occurrences</li>
-<li>AAGGG = 6 occurrences</li>
-<li>GATCA = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
 <li>TGATC = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
+<li>TTAAA = 6 occurrences</li>
+<li>GATCA = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -411,17 +410,17 @@
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -705,7 +704,7 @@ SSSII
 <p><strong>ALGORITHM</strong>:</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>It may be more appropriate to use a <a href="#BOOKMARK85">hybrid alphabet</a> when representing <a href="#BOOKMARK76">consensus string</a> because alternate nucleotides could be represented as a single letter. The Pevzner book doesn't mention this specifically but multiple online sources discuss it.</p>
+<p>It may be more appropriate to use a <a href="#BOOKMARK86">hybrid alphabet</a> when representing <a href="#BOOKMARK76">consensus string</a> because alternate nucleotides could be represented as a single letter. The Pevzner book doesn't mention this specifically but multiple online sources discuss it.</p>
 </div>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_consensus_string</span>(<span class="hljs-params">kmers: List[str]</span>) -&gt; str:</span>
     count = len(kmers[<span class="hljs-number">0</span>]);
@@ -1089,10 +1088,10 @@ SSSII
 <li><a href="#BOOKMARK15">Algorithms/Motif/Motif Matrix Score/Entropy Algorithm</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK63">motif matrix</a>, generate a graphical representation showing how conserved the <a href="#BOOKMARK60">motif</a> is. Each position has its possible nucleotides stacked on top of each other, where the height of each nucleotide is based on how conserved it is. The more conserved a position is, the taller that column will be. This type of graphical representation is called a <a href="#BOOKMARK87">sequence logo</a>.</p>
-<p><strong>WHY</strong>: A <a href="#BOOKMARK87">sequence logo</a> helps more quickly convey the characteristics of the <a href="#BOOKMARK63">motif matrix</a> it's for.</p>
+<p><strong>WHAT</strong>: Given a <a href="#BOOKMARK63">motif matrix</a>, generate a graphical representation showing how conserved the <a href="#BOOKMARK60">motif</a> is. Each position has its possible nucleotides stacked on top of each other, where the height of each nucleotide is based on how conserved it is. The more conserved a position is, the taller that column will be. This type of graphical representation is called a <a href="#BOOKMARK88">sequence logo</a>.</p>
+<p><strong>WHY</strong>: A <a href="#BOOKMARK88">sequence logo</a> helps more quickly convey the characteristics of the <a href="#BOOKMARK63">motif matrix</a> it's for.</p>
 <p><strong>ALGORITHM</strong>:</p>
-<p>For this particular <a href="#BOOKMARK87">logo</a> implementation, a lower <a href="#BOOKMARK77">entropy</a> results in a taller overall column.</p>
+<p>For this particular <a href="#BOOKMARK88">logo</a> implementation, a lower <a href="#BOOKMARK77">entropy</a> results in a taller overall column.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_entropy</span>(<span class="hljs-params">values: List[float]</span>) -&gt; float:</span>
     ret = <span class="hljs-number">0.0</span>
     <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> values:
@@ -1518,7 +1517,7 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>AAAGA<br>AAAGA<br>AAAGA</p>
+<p>ATAAT<br>ATAAT<br>ATAAT</p>
 </div>
 <p></p>
 <a name="HEADREF26"></a><h4>Median String Algorithm</h4>
@@ -1958,7 +1957,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>GAG<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
 </div>
 <p></p>
 <a name="HEADREF29"></a><h4>Gibbs Sampling Algorithm</h4>
@@ -2029,7 +2028,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
+<p>GAC<br>GAC<br>GCC<br>CAC<br>GAC</p>
 </div>
 <p></p>
 <a name="HEADREF30"></a><h3>Motif Matrix Hybrid Alphabet</h3>
@@ -2042,7 +2041,7 @@ SSSII
 <li><a href="#BOOKMARK18">Algorithms/Motif/Find Motif Matrix</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: When creating finding a <a href="#BOOKMARK60">motif</a>, it may be beneficial to use a <a href="#BOOKMARK85">hybrid alphabet</a> rather than the standard nucleotides (A, C, T, and G). For example, the following <a href="#BOOKMARK85">hybrid alphabet</a> marks certain combinations of nucleotides as a single letter:</p>
+<p><strong>WHAT</strong>: When creating finding a <a href="#BOOKMARK60">motif</a>, it may be beneficial to use a <a href="#BOOKMARK86">hybrid alphabet</a> rather than the standard nucleotides (A, C, T, and G). For example, the following <a href="#BOOKMARK86">hybrid alphabet</a> marks certain combinations of nucleotides as a single letter:</p>
 <ul>
 <li>A = A</li>
 <li>C = C</li>
@@ -2055,10 +2054,10 @@ SSSII
 </ul>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>The alphabet above was pulled from the Pevzner book section 2.16: Complications in <a href="#BOOKMARK60">Motif</a> Finding. It's a subset of the <a href="#BOOKMARK86">IUPAC nucleotide code</a>s alphabet. The author didn't mention if the alphabet was explicitly chosen for <a href="#BOOKMARK64">regulatory motif</a> finding. If it was, it may have been derived from running probabilities over already discovered <a href="#BOOKMARK64">regulatory motif</a>s: e.g. for the <a href="#BOOKMARK60">motif</a>s already discovered, if a position has 2 possible nucleotides then G/C (S), G/T (K), C/T (Y), and A/T (W) are likely but other combinations aren't.</p>
+<p>The alphabet above was pulled from the Pevzner book section 2.16: Complications in <a href="#BOOKMARK60">Motif</a> Finding. It's a subset of the <a href="#BOOKMARK87">IUPAC nucleotide code</a>s alphabet. The author didn't mention if the alphabet was explicitly chosen for <a href="#BOOKMARK64">regulatory motif</a> finding. If it was, it may have been derived from running probabilities over already discovered <a href="#BOOKMARK64">regulatory motif</a>s: e.g. for the <a href="#BOOKMARK60">motif</a>s already discovered, if a position has 2 possible nucleotides then G/C (S), G/T (K), C/T (Y), and A/T (W) are likely but other combinations aren't.</p>
 </div>
-<p><strong>WHY</strong>: <a href="#BOOKMARK85">Hybrid alphabet</a>s may make it easier for <a href="#BOOKMARK60">motif</a> finding algorithms to converge on a <a href="#BOOKMARK60">motif</a>. For example, when scoring a <a href="#BOOKMARK63">motif matrix</a>, treat the position as a single letter if the distinct nucleotides at that position map to one of the combinations in the <a href="#BOOKMARK85">hybrid alphabet</a>.</p>
-<p><a href="#BOOKMARK85">Hybrid alphabet</a>s may make more sense for representing a <a href="#BOOKMARK76">consensus string</a>. Rather than picking out the most popular nucleotide, the <a href="#BOOKMARK85">hybrid alphabet</a> can be used to describe alternating nucleotides at each position.</p>
+<p><strong>WHY</strong>: <a href="#BOOKMARK86">Hybrid alphabet</a>s may make it easier for <a href="#BOOKMARK60">motif</a> finding algorithms to converge on a <a href="#BOOKMARK60">motif</a>. For example, when scoring a <a href="#BOOKMARK63">motif matrix</a>, treat the position as a single letter if the distinct nucleotides at that position map to one of the combinations in the <a href="#BOOKMARK86">hybrid alphabet</a>.</p>
+<p><a href="#BOOKMARK86">Hybrid alphabet</a>s may make more sense for representing a <a href="#BOOKMARK76">consensus string</a>. Rather than picking out the most popular nucleotide, the <a href="#BOOKMARK86">hybrid alphabet</a> can be used to describe alternating nucleotides at each position.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code>PEVZNER_2_16_ALPHABET = dict()
 PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'A'</span>, <span class="hljs-string">'T'</span>})] = <span class="hljs-string">'W'</span>
@@ -2087,7 +2086,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>to...</p>
 <p>CWTCYK<br>CWTCYK<br>CWTCYK</p>
 <p>using...</p>
-<p>{frozenset({'T', 'A'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'C', 'T'}): 'Y'}</p>
+<p>{frozenset({'A', 'T'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'T', 'C'}): 'Y'}</p>
 </div>
 <p></p>
 <a name="HEADREF31"></a><h2>Assembly</h2>
@@ -2109,10 +2108,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_246ba3d13372ae267d9a596e030d11d7550b036b.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
-<p><a href="#BOOKMARK84">Assembly</a> is the process of reconstructing an organism's <a href="#BOOKMARK78">genome</a> from the fragments returned by a <a href="#BOOKMARK81">sequencer</a>. Since the <a href="#BOOKMARK81">sequencer</a> breaks up many copies of the same DNA and each fragment's start position is random, the original organism can be reconstructed by finding overlaps between fragments and stitching them back together.</p>
+<p><a href="#BOOKMARK85">Assembly</a> is the process of reconstructing an organism's <a href="#BOOKMARK78">genome</a> from the <a href="#BOOKMARK84">fragment</a>s returned by a <a href="#BOOKMARK81">sequencer</a>. Since the <a href="#BOOKMARK81">sequencer</a> breaks up many copies of the same <a href="#BOOKMARK78">genome</a> and each <a href="#BOOKMARK84">fragment</a>'s start position is random, the original <a href="#BOOKMARK78">genome</a> can be reconstructed by finding overlaps between <a href="#BOOKMARK84">fragment</a>s and stitching them back together.</p>
 <p><img src="svgbob_c14e6c546e8e4369db69bd39a7c6e934e7ddefe7.svg" alt="Kroki diagram output"></p>
-<p>A typical problem with <a href="#BOOKMARK80">sequencing</a> is that the number of errors in a fragment increase as the number of scanned bases increases. As such, <a href="#BOOKMARK83">read-pair</a>s are preferred over <a href="#BOOKMARK82">read</a>s: by only scanning in the head and tail of a long fragment, the scan won't contain as many errors as a <a href="#BOOKMARK82">read</a> of the same length but will still contain extra information which helps with <a href="#BOOKMARK84">assembly</a> (length of unknown nucleotides in between the prefix and suffix).</p>
-<p><a href="#BOOKMARK84">Assembly</a> has many practical complications that prevent full <a href="#BOOKMARK78">genome</a> reconstruction from fragments:</p>
+<p>A typical problem with <a href="#BOOKMARK80">sequencing</a> is that the number of errors in a <a href="#BOOKMARK84">fragment</a> increase as the number of scanned bases increases. As such, <a href="#BOOKMARK83">read-pair</a>s are preferred over <a href="#BOOKMARK82">read</a>s: by only scanning in the head and tail of a long <a href="#BOOKMARK84">fragment</a>, the scan won't contain as many errors as a <a href="#BOOKMARK82">read</a> of the same length but will still contain extra information which helps with <a href="#BOOKMARK85">assembly</a> (length of unknown nucleotides in between the prefix and suffix).</p>
+<p><a href="#BOOKMARK85">Assembly</a> has many practical complications that prevent full <a href="#BOOKMARK78">genome</a> reconstruction from <a href="#BOOKMARK84">fragment</a>s:</p>
 <ul>
 <li>
 <p>Which strand of <a href="#BOOKMARK44">double stranded DNA</a> that a <a href="#BOOKMARK82">read</a> / <a href="#BOOKMARK83">read-pair</a> comes from isn't known, which means the overlaps you find may not be accurate.</p>
@@ -2127,14 +2126,122 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_2999b6b6a83079f71e5ec624ca63433adc1fd7c4.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s for repetitive parts of the <a href="#BOOKMARK78">genome</a> (e.g. <a href="#BOOKMARK88">transposon</a>s) likely can't be accurately <a href="#BOOKMARK84">assemble</a>d.</p>
+<p>The <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s for repetitive parts of the <a href="#BOOKMARK78">genome</a> (e.g. <a href="#BOOKMARK89">transposon</a>s) likely can't be accurately <a href="#BOOKMARK85">assemble</a>d.</p>
 <p><img src="svgbob_b6caa3257c0c8b7d997763ca20474e872861ae48.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
-<a name="HEADREF32"></a><h3>Merge Two Overlapping Fragments</h3>
-<p><strong>WHAT</strong>: Given a two <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s that have an overlapping region, merge them together.</p>
-<p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
-<p><strong>ALGORITHM</strong>:</p>
+<a name="HEADREF32"></a><h3>Merge Fragments</h3>
+<p><strong>WHAT</strong>: Given a list of overlapping <a href="#BOOKMARK84">fragment</a>s where ...</p>
+<ul>
+<li>each <a href="#BOOKMARK84">fragment</a> overlaps the subsequent <a href="#BOOKMARK84">fragment</a> and</li>
+<li>all overlaps are of the same length</li>
+</ul>
+<p>... , merge them together. For example, in the <a href="#BOOKMARK82">read</a> list <code>[GAAA, AAAT, AATC]</code> each <a href="#BOOKMARK82">read</a> overlaps the subsequent <a href="#BOOKMARK82">read</a> by an offset of 1: <code>GAAATC</code>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>G</td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R2</td>
+<td></td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>T</td>
+<td></td>
+</tr>
+<tr>
+<td>R3</td>
+<td></td>
+<td></td>
+<td>A</td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+</tr>
+<tr>
+<td>Merged</td>
+<td>G</td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
+<p><strong>WHY</strong>: Since the <a href="#BOOKMARK81">sequencer</a> breaks up many copies of the same DNA and each <a href="#BOOKMARK84">fragment</a>'s start position is random, larger parts of the original DNA can be reconstructed by finding overlaps between <a href="#BOOKMARK84">fragment</a>s and stitching them back together.</p>
+<p><strong>ALGORITHM (<a href="#BOOKMARK82">Read</a>)</strong>:</p>
+<p>Overlapping <a href="#BOOKMARK82">read</a>s are merged by taking the first <a href="#BOOKMARK82">read</a> and iterating through the remaining <a href="#BOOKMARK82">read</a>s where the suffix from each remaining <a href="#BOOKMARK82">read</a> is appended to the first <a href="#BOOKMARK82">read</a>. For example, ...</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>G</td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R2</td>
+<td></td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>T</td>
+<td></td>
+</tr>
+<tr>
+<td>R3</td>
+<td></td>
+<td></td>
+<td>A</td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+</tr>
+<tr>
+<td>Merged</td>
+<td>G</td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>T</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: Read, other: Read, skip: int = <span class="hljs-number">1</span></span>) -&gt; Read:</span>
     offset = len(self.data) - len(other.data)
     data_head = self.data[:offset]
@@ -2148,7 +2255,121 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
     <span class="hljs-keyword">for</span> ch1, ch2 <span class="hljs-keyword">in</span> zip(overlap1, overlap2):
         ret += ch1 <span class="hljs-keyword">if</span> ch1 == ch2 <span class="hljs-keyword">else</span> <span class="hljs-string">'?'</span>  <span class="hljs-comment"># for failure, use IUPAC nucleotide codes instead of question mark?</span>
     ret += suffix
-    <span class="hljs-keyword">return</span> Read(ret, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: ReadPair, other: ReadPair, skip: int = <span class="hljs-number">1</span></span>) -&gt; ReadPair:</span>
+    <span class="hljs-keyword">return</span> Read(ret, source=(<span class="hljs-string">'overlap'</span>, [self, other]))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stitch</span>(<span class="hljs-params">self: Read, subsequent: List[Read], skip: int = <span class="hljs-number">1</span></span>) -&gt; str:</span>
+    ret = self
+    <span class="hljs-keyword">for</span> other <span class="hljs-keyword">in</span> subsequent:
+        ret = ret.append_overlap(other, skip)
+    <span class="hljs-keyword">return</span> ret.data</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Stitched [GAAA, AAAT, AATC] to GAAATC</p>
+</div>
+<p></p>
+<p><strong>ALGORITHM (<a href="#BOOKMARK83">Read-pair</a>)</strong>:</p>
+<p>Overlapping <a href="#BOOKMARK83">read-pair</a>s are merged by taking the first <a href="#BOOKMARK83">read-pair</a> and iterating through the remaining <a href="#BOOKMARK83">read-pair</a>s where ...</p>
+<ul>
+<li>the suffix from each remaining <a href="#BOOKMARK83">read-pair</a>'s head k is appended to the first <a href="#BOOKMARK83">read-pair</a>'s head k.</li>
+<li>the suffix from each remaining <a href="#BOOKMARK83">read-pair</a>'s tail k is appended to the first <a href="#BOOKMARK83">read-pair</a>'s tail k.</li>
+</ul>
+<p>For example, ...</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>A</td>
+<td>T</td>
+<td>G</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>C</td>
+<td>C</td>
+<td>G</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R2</td>
+<td></td>
+<td>T</td>
+<td>G</td>
+<td>T</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>C</td>
+<td>G</td>
+<td>T</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R3</td>
+<td></td>
+<td></td>
+<td>G</td>
+<td>T</td>
+<td>T</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>G</td>
+<td>T</td>
+<td>T</td>
+<td></td>
+</tr>
+<tr>
+<td>R4</td>
+<td></td>
+<td></td>
+<td></td>
+<td>T</td>
+<td>T</td>
+<td>A</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>T</td>
+<td>T</td>
+<td>C</td>
+</tr>
+<tr>
+<td>Merged</td>
+<td>A</td>
+<td>T</td>
+<td>G</td>
+<td>T</td>
+<td>T</td>
+<td>A</td>
+<td>C</td>
+<td>C</td>
+<td>G</td>
+<td>T</td>
+<td>T</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: ReadPair, other: ReadPair, skip: int = <span class="hljs-number">1</span></span>) -&gt; ReadPair:</span>
     self_head = Read(self.data.head)
     other_head = Read(other.data.head)
     new_head = self_head.append_overlap(other_head)
@@ -2165,41 +2386,20 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
     new_d = self.d - skip
     kdmer = Kdmer(new_head, new_tail, new_d)
 
-    <span class="hljs-keyword">return</span> ReadPair(kdmer, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><a name="HEADREF33"></a><h3>Merge Multiple Overlapping Fragments</h3>
-<p><strong>WHAT</strong>: Given a two <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s that have an overlapping region, merge them together.</p>
-<p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
-<p><strong>ALGORITHM</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: Read, other: Read, skip: int = <span class="hljs-number">1</span></span>) -&gt; Read:</span>
-    offset = len(self.data) - len(other.data)
-    data_head = self.data[:offset]
-    data = self.data[offset:]
+    <span class="hljs-keyword">return</span> ReadPair(kdmer, source=(<span class="hljs-string">'overlap'</span>, [self, other]))
 
-    prefix = data[:skip]
-    overlap1 = data[skip:]
-    overlap2 = other.data[:-skip]
-    suffix = other.data[-skip:]
-    ret = data_head + prefix
-    <span class="hljs-keyword">for</span> ch1, ch2 <span class="hljs-keyword">in</span> zip(overlap1, overlap2):
-        ret += ch1 <span class="hljs-keyword">if</span> ch1 == ch2 <span class="hljs-keyword">else</span> <span class="hljs-string">'?'</span>  <span class="hljs-comment"># for failure, use IUPAC nucleotide codes instead of question mark?</span>
-    ret += suffix
-    <span class="hljs-keyword">return</span> Read(ret, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">append_overlap</span>(<span class="hljs-params">self: ReadPair, other: ReadPair, skip: int = <span class="hljs-number">1</span></span>) -&gt; ReadPair:</span>
-    self_head = Read(self.data.head)
-    other_head = Read(other.data.head)
-    new_head = self_head.append_overlap(other_head)
-    new_head = new_head.data
-
-    self_tail = Read(self.data.tail)
-    other_tail = Read(other.data.tail)
-    new_tail = self_tail.append_overlap(other_tail)
-    new_tail = new_tail.data
-
-    <span class="hljs-comment"># WARNING: new_d may go negative -- In the event of a negative d, it means that rather than there being a gap</span>
-    <span class="hljs-comment"># in between the head and tail, there's an OVERLAP in between the head and tail. To get rid of the overlap, you</span>
-    <span class="hljs-comment"># need to remove either the last d chars from head or first d chars from tail.</span>
-    new_d = self.d - skip
-    kdmer = Kdmer(new_head, new_tail, new_d)
-
-    <span class="hljs-keyword">return</span> ReadPair(kdmer, source=(<span class="hljs-string">'overlap'</span>, [self, other]))</code></pre><a name="HEADREF34"></a><h3>Break Fragments</h3>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stitch</span>(<span class="hljs-params">self: ReadPair, subsequent: List[ReadPair], skip: int = <span class="hljs-number">1</span></span>) -&gt; str:</span>
+    ret = self
+    <span class="hljs-keyword">for</span> other <span class="hljs-keyword">in</span> subsequent:
+        ret = ret.append_overlap(other, skip)
+    <span class="hljs-keyword">assert</span> ret.d &lt;= <span class="hljs-number">0</span>, <span class="hljs-string">"Gap still exists -- not enough to stitch"</span>
+    overlap_count = -ret.d
+    <span class="hljs-keyword">return</span> ret.data.head + ret.data.tail[overlap_count:]</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Stitched [ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC] to ATGTTACCGTTC</p>
+</div>
+<p></p>
+<a name="HEADREF33"></a><h3>Break Fragments</h3>
 <pre class="hljs"><code><span class="hljs-comment"># This is read breaking -- why not just call it break? because break is a reserved keyword.</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shatter</span>(<span class="hljs-params">self: Read, k: int</span>) -&gt; List[Read]:</span>
     ret = []
@@ -2215,10 +2415,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
         kdmer = Kdmer(kmer_head, kmer_tail, self.data.d)
         rp = ReadPair(kdmer, source=(<span class="hljs-string">'shatter'</span>, [self]))
         ret.append(rp)
-    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF35"></a><h3>Construct Overlap Graph</h3>
+    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF34"></a><h3>Construct Overlap Graph</h3>
 <p><strong>WHAT</strong>: Given a list of <a href="#BOOKMARK82">read</a>s for the same organism, find overlaps between those <a href="#BOOKMARK82">read</a>s.</p>
-<p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK84">assembly</a>.</p>
-<a name="HEADREF36"></a><h4>Bruteforce Algorithm</h4>
+<p><strong>WHY</strong>: Finding overlaps across <a href="#BOOKMARK82">read</a>s is required for <a href="#BOOKMARK85">assembly</a>.</p>
+<a name="HEADREF35"></a><h4>Bruteforce Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_overlap_graph</span>(<span class="hljs-params">items: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
     ret = Graph()
@@ -2228,7 +2428,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
                 <span class="hljs-keyword">continue</span>
             <span class="hljs-keyword">if</span> item.suffix(skip) == other_item.prefix(skip):
                 ret.insert_edge(item, other_item)
-    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF37"></a><h4>Hash Algorithm</h4>
+    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF36"></a><h4>Hash Algorithm</h4>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_overlap_graph</span>(<span class="hljs-params">items: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
     ret = Graph()
@@ -2252,7 +2452,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
                     <span class="hljs-keyword">continue</span>
                 other_item = items[j]
                 ret.insert_edge(item, other_item)
-    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF38"></a><h3>Find Hamiltonian Paths</h3>
+    <span class="hljs-keyword">return</span> ret</code></pre><a name="HEADREF37"></a><h3>Find Hamiltonian Paths</h3>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exhaustively_walk_until_all_nodes_touched_exactly_one</span>(<span class="hljs-params">
         graph: Graph[T],
         from_node: T,
@@ -2275,14 +2475,14 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 
 <span class="hljs-comment"># walk each node exactly once</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_hamiltonian_path</span>(<span class="hljs-params">graph: Graph[T], from_node: T</span>) -&gt; List[List[T]]:</span>
-    <span class="hljs-keyword">return</span> exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])</code></pre><a name="HEADREF39"></a><h3>Construct De Bruijn Graph</h3>
+    <span class="hljs-keyword">return</span> exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])</code></pre><a name="HEADREF38"></a><h3>Construct De Bruijn Graph</h3>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_debruijn_graph</span>(<span class="hljs-params">reads: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
     graph = Graph()
     <span class="hljs-keyword">for</span> read <span class="hljs-keyword">in</span> reads:
         from_node = read.prefix(skip)
         to_node = read.suffix(skip)
         graph.insert_edge(from_node, to_node)
-    <span class="hljs-keyword">return</span> graph</code></pre><a name="HEADREF40"></a><h3>Find Eulerian Cycles</h3>
+    <span class="hljs-keyword">return</span> graph</code></pre><a name="HEADREF39"></a><h3>Find Eulerian Cycles</h3>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomly_walk_and_remove_edges_until_cycle</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; List[Tuple[T, T]]:</span>
     end_node = node
     edge_list = []
@@ -2339,7 +2539,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
         <span class="hljs-keyword">assert</span> new_node_cycle <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>
         node_cycle = new_node_cycle
 
-    <span class="hljs-keyword">return</span> node_cycle</code></pre><a name="HEADREF41"></a><h3>Balance Nearly Balanced Graph</h3>
+    <span class="hljs-keyword">return</span> node_cycle</code></pre><a name="HEADREF40"></a><h3>Balance Nearly Balanced Graph</h3>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_unbalanced_nodes</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; List[Tuple[T, int, int]]:</span>
     unbalanced_nodes = []
     <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> graph.get_nodes():
@@ -2368,7 +2568,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
     <span class="hljs-keyword">for</span> n_need_in, n_need_out <span class="hljs-keyword">in</span> zip(n_per_need_in, n_per_need_out):
         graph.insert_edge(n_need_out, n_need_in)
 
-    <span class="hljs-keyword">return</span> graph, set(n_per_need_in), set(n_per_need_out)  <span class="hljs-comment"># return graph with cycle, orig root nodes, orig tail nodes</span></code></pre><a name="HEADREF42"></a><h3>Find Contigs</h3>
+    <span class="hljs-keyword">return</span> graph, set(n_per_need_in), set(n_per_need_out)  <span class="hljs-comment"># return graph with cycle, orig root nodes, orig tail nodes</span></code></pre><a name="HEADREF41"></a><h3>Find Contigs</h3>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_until_non_1_to_1</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; Optional[List[T]]:</span>
     ret = [node]
     ret_quick_lookup = {node}
@@ -2436,10 +2636,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
         paths.append(path)
         skip_nodes |= set(path)
 
-    <span class="hljs-keyword">return</span> paths</code></pre><a name="HEADREF43"></a><h3>Find Error Fragments</h3>
-<a name="HEADREF44"></a><h3>Find Repeat Fragments</h3>
-<a name="HEADREF45"></a><h1>Stories</h1>
-<a name="HEADREF46"></a><h2>Bacteria Replication</h2>
+    <span class="hljs-keyword">return</span> paths</code></pre><a name="HEADREF42"></a><h3>Find Error Fragments</h3>
+<a name="HEADREF43"></a><h3>Find Repeat Fragments</h3>
+<a name="HEADREF44"></a><h1>Stories</h1>
+<a name="HEADREF45"></a><h2>Bacteria Replication</h2>
 <p>Bacteria are known to have a single chromosome of circular / looping DNA. On that DNA, the <a href="#BOOKMARK32">replication origin</a> (<a href="#BOOKMARK33">ori</a>) is the region in which DNA replication starts, while the <a href="#BOOKMARK34">replication terminus</a> (<a href="#BOOKMARK35">ter</a>) is where it ends. The <a href="#BOOKMARK33">ori</a> and <a href="#BOOKMARK35">ter</a> and usually placed on opposite ends of each other.</p>
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BOOKMARK31">replication fork</a> opening at the <a href="#BOOKMARK33">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BOOKMARK35">ter</a>...</p>
@@ -2461,7 +2661,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>The <a href="#BOOKMARK40">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BOOKMARK41">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
 <p>There are now two complete copies of the DNA.</p>
-<a name="HEADREF47"></a><h3>Find Ori and Ter</h3>
+<a name="HEADREF46"></a><h3>Find Ori and Ter</h3>
 <p><a name="BOOKMARK22"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -2497,7 +2697,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>The material talks about how not all bacteria have a single peak and single valley. Some may have multiple. The reasoning for this still hasn't been discovered. It was speculated at one point that some bacteria may have multiple <a href="#BOOKMARK33">ori</a> / <a href="#BOOKMARK35">ter</a> regions.</p>
 </div>
-<a name="HEADREF48"></a><h3>Find the DnaA Box</h3>
+<a name="HEADREF47"></a><h3>Find the DnaA Box</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -2534,8 +2734,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
@@ -2543,12 +2743,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CATCAGGCG', start_index=164, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
@@ -2556,8 +2756,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
@@ -2571,12 +2771,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>
@@ -2592,7 +2792,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 </div>
 <p></p>
-<a name="HEADREF49"></a><h2>Transcription Factors</h2>
+<a name="HEADREF48"></a><h2>Transcription Factors</h2>
 <p>A <a href="#BOOKMARK59">transcription factor</a> / <a href="#BOOKMARK51">regulatory protein</a> is an enzyme that influences the rate of <a href="#BOOKMARK49">gene expression</a> for some set of <a href="#BOOKMARK45">genes</a>. As the saturation of a <a href="#BOOKMARK59">transcription factor</a> changes, so does the rate of <a href="#BOOKMARK49">gene expression</a> for the set of <a href="#BOOKMARK45">genes</a> that it influences.</p>
 <p><a href="#BOOKMARK59">Transcription factor</a>s bind to DNA near the <a href="#BOOKMARK45">genes</a> they influence: a <a href="#BOOKMARK65">transcription factor binding site</a> is located in a <a href="#BOOKMARK45">gene</a>'s <a href="#BOOKMARK57">upstream region</a> and the <a href="#BOOKMARK79">sequence</a> at that location is a fuzzy nucleotide <a href="#BOOKMARK79">sequence</a> of length 8 to 12 called a <a href="#BOOKMARK64">regulatory motif</a>. The simplest way to think of a <a href="#BOOKMARK64">regulatory motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]CCCTA</code> may match to <code>ATTGCCCTA</code>, <code>ATTCCCCTA</code>, <code>TTTGCCCTA</code>, and <code>TTTCCCCTA</code>. The regex itself is the <a href="#BOOKMARK60">motif</a>, while the <a href="#BOOKMARK79">sequence</a>s being matched are <a href="#BOOKMARK61">motif member</a>s.</p>
 <p><img src="svgbob_c77523791e9f610ea50acd1a596be075095bcceb.svg" alt="Kroki diagram output"></p>
@@ -2603,7 +2803,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 <p>The external conditions of sunlight and temperature causes the saturation of some <a href="#BOOKMARK59">transcription factor</a>s to change. Those <a href="#BOOKMARK59">transcription factor</a>s influence the rate of <a href="#BOOKMARK49">gene expression</a> for the <a href="#BOOKMARK45">genes</a> that control the bunching and spreading of the petals.</p>
 <p><img src="svgbob_02d5e3f967efc5f1f94cccd5f97a6610035cb8fd.svg" alt="Kroki diagram output"></p>
-<a name="HEADREF50"></a><h3>Find Regulatory Motif</h3>
+<a name="HEADREF49"></a><h3>Find Regulatory Motif</h3>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -2637,11 +2837,11 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 <p>Organism is baker's yeast. Suspected genes influenced by transcription factor: THI12, YHL017W, SYN8, YCG1, UBX5, and KEI1.</p>
 <p>Searching for 18-mer across a set of 6 gene upstream regions...</p>
-<p>GAAAAAGGAAGGAAAAAT<br>GAAAAAAAAAGGAAAAAA<br>GAAAAAGAAAAAAAAAAA<br>GAAAAAAAGAAGACAAAG<br>GAATATAAACATATAAAA<br>GAATATAAACATATAAAA</p>
-<p>Score is: 20</p>
+<p>AGAAAAAGGAAGGAAAAA<br>AGAAAAAAAAAGGAAAAA<br>AGAAAAAGAAAAAAAAAA<br>AGAAAAGGAAAAAAAGAA<br>ATAAAAACATCATAAAAA<br>CGAACAACATGAGATAAA</p>
+<p>Score is: 19</p>
 </div>
 <p></p>
-<a name="HEADREF51"></a><h1>Terminology</h1>
+<a name="HEADREF50"></a><h1>Terminology</h1>
 <ul>
 <li>
 <p><a name="BOOKMARK23"></a><strong>k-mer</strong> - A sub<a href="#BOOKMARK79">sequence</a> of length k within some larger biological <a href="#BOOKMARK79">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BOOKMARK79">sequence</a> <code>GAAATC</code>, the following <a href="#BOOKMARK23">k-mer</a>'s exist:</p>
@@ -2991,7 +3191,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </tr>
 </tbody>
 </table>
-<p>The generate <a href="#BOOKMARK23">k-mer</a> may also use a <a href="#BOOKMARK85">hybrid alphabet</a>. The <a href="#BOOKMARK76">consensus string</a> for the same matrix above using <a href="#BOOKMARK86">IUPAC nucleotide code</a>s: <code>WTTSS</code>.</p>
+<p>The generate <a href="#BOOKMARK23">k-mer</a> may also use a <a href="#BOOKMARK86">hybrid alphabet</a>. The <a href="#BOOKMARK76">consensus string</a> for the same matrix above using <a href="#BOOKMARK87">IUPAC nucleotide code</a>s: <code>WTTSS</code>.</p>
 </li>
 <li>
 <p><a name="BOOKMARK77"></a><strong>entropy</strong> - The uncertainty associated with a random variable. Given some set of outcomes for a variable, it's calculated as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\sum_{i=1}^{n} P(x_i) log P(x_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>.</p>
@@ -3005,7 +3205,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </li>
 <li>
 <p><a name="BOOKMARK80"></a><strong>sequencing</strong> - The process of determining which nucleotides are assigned to which positions in a strand of DNA or RNA.</p>
-<p>The machinery used for DNA <a href="#BOOKMARK80">sequencing</a> takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and <a href="#BOOKMARK79">sequence</a>s those fragments (<a href="#BOOKMARK82">read</a>s). Because these fragments vary in terms of size and starting index, the original larger DNA <a href="#BOOKMARK79">sequence</a> that they came from can be constructed by finding fragment <a href="#BOOKMARK79">sequence</a>s with overlapping regions and stitching them together.</p>
+<p>The machinery used for DNA <a href="#BOOKMARK80">sequencing</a> takes multiple copies of the same DNA, breaks that DNA up into smaller fragments, and scans in those <a href="#BOOKMARK84">fragment</a>s. Because these <a href="#BOOKMARK84">fragment</a>s vary in terms of size and starting index, the original larger DNA <a href="#BOOKMARK79">sequence</a> that they came from can be constructed by finding <a href="#BOOKMARK84">fragment</a> with overlapping regions and stitching them together.</p>
 <table>
 <thead>
 <tr>
@@ -3024,7 +3224,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </thead>
 <tbody>
 <tr>
-<td>fragment 1</td>
+<td><a href="#BOOKMARK82">read</a> 1</td>
 <td></td>
 <td></td>
 <td></td>
@@ -3037,7 +3237,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <td>T</td>
 </tr>
 <tr>
-<td>fragment 2</td>
+<td><a href="#BOOKMARK82">read</a> 2</td>
 <td></td>
 <td></td>
 <td></td>
@@ -3050,7 +3250,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <td></td>
 </tr>
 <tr>
-<td>fragment 3</td>
+<td><a href="#BOOKMARK82">read</a> 3</td>
 <td></td>
 <td></td>
 <td>T</td>
@@ -3063,7 +3263,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <td></td>
 </tr>
 <tr>
-<td>fragment 4</td>
+<td><a href="#BOOKMARK82">read</a> 4</td>
 <td></td>
 <td>T</td>
 <td>T</td>
@@ -3076,7 +3276,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <td></td>
 </tr>
 <tr>
-<td>fragment 5</td>
+<td><a href="#BOOKMARK82">read</a> 5</td>
 <td>A</td>
 <td>T</td>
 <td>T</td>
@@ -3108,18 +3308,21 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a name="BOOKMARK81"></a><strong>sequencer</strong> - A machine that performs DNA or RNA <a href="#BOOKMARK80">sequencing</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK82"></a><strong>read</strong> - A <a href="#BOOKMARK80">sequenced</a> fragment produced in the process of <a href="#BOOKMARK80">sequencing</a> some larger strand of DNA.</p>
+<p><a name="BOOKMARK82"></a><strong>read</strong> - A segment of <a href="#BOOKMARK78">genome</a> scanned in during the process of <a href="#BOOKMARK80">sequencing</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK83"></a><strong>read-pair</strong> - A <a href="#BOOKMARK80">sequenced</a> fragment produced in the process of <a href="#BOOKMARK80">sequencing</a> some larger strand of DNA, where the middle of the fragment is unknown. That is, the first k elements and the last k elements are known, but the d elements in between aren't known. The total size of the fragment is 2k + d.</p>
+<p><a name="BOOKMARK83"></a><strong>read-pair</strong> - A segment of <a href="#BOOKMARK78">genome</a> scanning in during the process of <a href="#BOOKMARK80">sequencing</a>, where the middle of the segment is unknown. That is, the first k elements and the last k elements are known, but the d elements in between aren't known. The total size of the segment is 2k + d.</p>
 <p><a href="#BOOKMARK81">Sequencer</a>s provide <a href="#BOOKMARK83">read-pair</a>s as an alternative to longer <a href="#BOOKMARK82">read</a>s because the longer a <a href="#BOOKMARK82">read</a> is the more errors it contains.</p>
 <p>See <a href="#BOOKMARK24">kd-mer</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK84"></a><strong>assembly</strong> - The process of stitching together overlapping <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s to construct the <a href="#BOOKMARK79">sequence</a> of the original larger DNA that those <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s came from.</p>
+<p><a name="BOOKMARK84"></a><strong>fragment</strong> - A scanned <a href="#BOOKMARK79">sequence</a> returned by a <a href="#BOOKMARK81">sequencer</a>. Represented as either a <a href="#BOOKMARK82">read</a> or a <a href="#BOOKMARK83">read-pair</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK85"></a><strong>hybrid alphabet</strong> - When representing a <a href="#BOOKMARK79">sequence</a> that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the <a href="#BOOKMARK86">IUPAC nucleotide code</a>s provides the following alphabet:</p>
+<p><a name="BOOKMARK85"></a><strong>assembly</strong> - The process of stitching together overlapping <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s to construct the <a href="#BOOKMARK79">sequence</a> of the original larger DNA that those <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s came from.</p>
+</li>
+<li>
+<p><a name="BOOKMARK86"></a><strong>hybrid alphabet</strong> - When representing a <a href="#BOOKMARK79">sequence</a> that isn't fully conserved, it may be more appropriate to use an alphabet where each letter can represent more than 1 nucleotide. For example, the <a href="#BOOKMARK87">IUPAC nucleotide code</a>s provides the following alphabet:</p>
 <ul>
 <li>A = A</li>
 <li>C = C</li>
@@ -3134,7 +3337,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>If the <a href="#BOOKMARK79">sequence</a> being represented can be either AAAC or AATT, it may be easier to represent a single string of AAWY.</p>
 </li>
 <li>
-<p><a name="BOOKMARK86"></a><strong>IUPAC nucleotide code</strong> - A <a href="#BOOKMARK85">hybrid alphabet</a> with the following mapping:</p>
+<p><a name="BOOKMARK87"></a><strong>IUPAC nucleotide code</strong> - A <a href="#BOOKMARK86">hybrid alphabet</a> with the following mapping:</p>
 <table>
 <thead>
 <tr>
@@ -3212,9 +3415,9 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a href="https://www.bioinformatics.org/sms/iupac.html">Source</a>.</p>
 </li>
 <li>
-<p><a name="BOOKMARK87"></a><strong>sequence logo</strong> - A graphical representation of how conserved a <a href="#BOOKMARK79">sequence</a>'s positions are. Each position has its possible nucleotides stacked on top of each other, where the height of each nucleotide is based on how conserved it is. The more conserved a position is, the taller that column will be.</p>
+<p><a name="BOOKMARK88"></a><strong>sequence logo</strong> - A graphical representation of how conserved a <a href="#BOOKMARK79">sequence</a>'s positions are. Each position has its possible nucleotides stacked on top of each other, where the height of each nucleotide is based on how conserved it is. The more conserved a position is, the taller that column will be.</p>
 <p>Typically applied to DNA or RNA, and May also be applied to other biological <a href="#BOOKMARK79">sequence</a> types (e.g. amino acids).</p>
-<p>The following is an example of a <a href="#BOOKMARK87">logo</a> generated from a <a href="#BOOKMARK60">motif</a> <a href="#BOOKMARK79">sequence</a>:</p>
+<p>The following is an example of a <a href="#BOOKMARK88">logo</a> generated from a <a href="#BOOKMARK60">motif</a> <a href="#BOOKMARK79">sequence</a>:</p>
 <div style="border:1px solid black;">
 <p></p>
 <p>Generating logo for the following motif matrix...</p>
@@ -3225,21 +3428,21 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 </li>
 <li>
-<p><a name="BOOKMARK88"></a><strong>transposon</strong> - A DNA <a href="#BOOKMARK79">sequence</a> that can change its position within a <a href="#BOOKMARK78">genome</a>, altering the <a href="#BOOKMARK78">genome</a> size. They come in two flavours:</p>
+<p><a name="BOOKMARK89"></a><strong>transposon</strong> - A DNA <a href="#BOOKMARK79">sequence</a> that can change its position within a <a href="#BOOKMARK78">genome</a>, altering the <a href="#BOOKMARK78">genome</a> size. They come in two flavours:</p>
 <ul>
-<li>Class I (retro<a href="#BOOKMARK88">transposon</a>) - Behaves similarly to copy-and-paste where the <a href="#BOOKMARK79">sequence</a> is duplicated. DNA is <a href="#BOOKMARK47">transcribed</a> to RNA, followed by that RNA being reverse <a href="#BOOKMARK47">transcribed</a> back to DNA by an enzyme called reverse transcriptase.</li>
-<li>Class II (DNA <a href="#BOOKMARK88">transposon</a>) - Behaves similarly to cut-and-paste where the <a href="#BOOKMARK79">sequence</a> is moved. DNA is physically cut out by an enzyme called transposases and placed back in at some other location.</li>
+<li>Class I (retro<a href="#BOOKMARK89">transposon</a>) - Behaves similarly to copy-and-paste where the <a href="#BOOKMARK79">sequence</a> is duplicated. DNA is <a href="#BOOKMARK47">transcribed</a> to RNA, followed by that RNA being reverse <a href="#BOOKMARK47">transcribed</a> back to DNA by an enzyme called reverse transcriptase.</li>
+<li>Class II (DNA <a href="#BOOKMARK89">transposon</a>) - Behaves similarly to cut-and-paste where the <a href="#BOOKMARK79">sequence</a> is moved. DNA is physically cut out by an enzyme called transposases and placed back in at some other location.</li>
 </ul>
-<p>Often times, <a href="#BOOKMARK88">transposon</a>s cause disease. For example, ...</p>
+<p>Often times, <a href="#BOOKMARK89">transposon</a>s cause disease. For example, ...</p>
 <ul>
-<li>insertion of a <a href="#BOOKMARK88">transposon</a> into a <a href="#BOOKMARK45">gene</a> will likely disable that <a href="#BOOKMARK45">gene</a>.</li>
-<li>after a <a href="#BOOKMARK88">transposon</a> leaves a <a href="#BOOKMARK45">gene</a>, the gap likely won't be repaired correctly.</li>
+<li>insertion of a <a href="#BOOKMARK89">transposon</a> into a <a href="#BOOKMARK45">gene</a> will likely disable that <a href="#BOOKMARK45">gene</a>.</li>
+<li>after a <a href="#BOOKMARK89">transposon</a> leaves a <a href="#BOOKMARK45">gene</a>, the gap likely won't be repaired correctly.</li>
 </ul>
 </li>
 <li>
-<p><a name="BOOKMARK89"></a><strong>adjacency list</strong> - An internal representation of a graph where each node has a list of pointers to other nodes that it can forward to.</p>
+<p><a name="BOOKMARK90"></a><strong>adjacency list</strong> - An internal representation of a graph where each node has a list of pointers to other nodes that it can forward to.</p>
 <p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
-<p>The graph above represented as an <a href="#BOOKMARK89">adjacency list</a> would be...</p>
+<p>The graph above represented as an <a href="#BOOKMARK90">adjacency list</a> would be...</p>
 <table>
 <thead>
 <tr>
@@ -3276,9 +3479,9 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK90"></a><strong>adjacency matrix</strong> - An internal representation of a graph where a matrix defines the number of times that each node forwards to every other node.</p>
+<p><a name="BOOKMARK91"></a><strong>adjacency matrix</strong> - An internal representation of a graph where a matrix defines the number of times that each node forwards to every other node.</p>
 <p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
-<p>The graph above represented as an <a href="#BOOKMARK90">adjacency matrix</a> would be...</p>
+<p>The graph above represented as an <a href="#BOOKMARK91">adjacency matrix</a> would be...</p>
 <table>
 <thead>
 <tr>
@@ -3350,32 +3553,32 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK91"></a><strong>Hamiltonian path</strong> - A path in a graph that visits every node exactly once.</p>
-<p>The graph below has the <a href="#BOOKMARK91">Hamiltonian path</a> ABCEDF.</p>
+<p><a name="BOOKMARK92"></a><strong>Hamiltonian path</strong> - A path in a graph that visits every node exactly once.</p>
+<p>The graph below has the <a href="#BOOKMARK92">Hamiltonian path</a> ABCEDF.</p>
 <p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK92"></a><strong>Eulerian path</strong> - A path in a graph that visits every edge exactly once.</p>
-<p>In the graph below, the <a href="#BOOKMARK92">Eulerian path</a> is (A,B), (B,C), (C,D), (D,E), (E,C), (C,D), (D,F).</p>
+<p><a name="BOOKMARK93"></a><strong>Eulerian path</strong> - A path in a graph that visits every edge exactly once.</p>
+<p>In the graph below, the <a href="#BOOKMARK93">Eulerian path</a> is (A,B), (B,C), (C,D), (D,E), (E,C), (C,D), (D,F).</p>
 <p><img src="svgbob_87660b191d813d39c396985391b70507c8c1236b.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK93"></a><strong>Eulerian cycle</strong> - An <a href="#BOOKMARK92">Eulerian path</a> that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.</p>
-<p>The graph below has an <a href="#BOOKMARK93">Eulerian cycle</a> of (A,B), (B,C) (C,D), (D,F), (F,C), (C,A).</p>
+<p><a name="BOOKMARK94"></a><strong>Eulerian cycle</strong> - An <a href="#BOOKMARK93">Eulerian path</a> that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.</p>
+<p>The graph below has an <a href="#BOOKMARK94">Eulerian cycle</a> of (A,B), (B,C) (C,D), (D,F), (F,C), (C,A).</p>
 <p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
-<p>For a graph to be <a href="#BOOKMARK93">Eulerian</a>, it must be both <a href="#BOOKMARK102">balanced</a> and <a href="#BOOKMARK96">strongly connected</a>. Note how in the graph above, ...</p>
+<p>For a graph to be <a href="#BOOKMARK94">Eulerian</a>, it must be both <a href="#BOOKMARK103">balanced</a> and <a href="#BOOKMARK97">strongly connected</a>. Note how in the graph above, ...</p>
 <ul>
 <li>
-<p>every node is reachable from every other node (<a href="#BOOKMARK96">strongly connected</a>),</p>
+<p>every node is reachable from every other node (<a href="#BOOKMARK97">strongly connected</a>),</p>
 </li>
 <li>
-<p>every node has an <a href="#BOOKMARK98">outdegree</a> equal to its <a href="#BOOKMARK97">indegree</a> (<a href="#BOOKMARK102">balanced</a>).</p>
+<p>every node has an <a href="#BOOKMARK99">outdegree</a> equal to its <a href="#BOOKMARK98">indegree</a> (<a href="#BOOKMARK103">balanced</a>).</p>
 <table>
 <thead>
 <tr>
 <th>Node</th>
-<th><a href="#BOOKMARK97">Indegree</a></th>
-<th><a href="#BOOKMARK98">Outdegree</a></th>
+<th><a href="#BOOKMARK98">Indegree</a></th>
+<th><a href="#BOOKMARK99">Outdegree</a></th>
 </tr>
 </thead>
 <tbody>
@@ -3408,56 +3611,56 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 </li>
 </ul>
-<p>In contrast, the following graphs are not <a href="#BOOKMARK93">Eulerian graph</a>s (no <a href="#BOOKMARK93">Eulerian cycle</a>s exist):</p>
+<p>In contrast, the following graphs are not <a href="#BOOKMARK94">Eulerian graph</a>s (no <a href="#BOOKMARK94">Eulerian cycle</a>s exist):</p>
 <ul>
 <li>
-<p><a href="#BOOKMARK96">Strongly connected</a> but not <a href="#BOOKMARK102">balanced</a>.</p>
+<p><a href="#BOOKMARK97">Strongly connected</a> but not <a href="#BOOKMARK103">balanced</a>.</p>
 <p><img src="svgbob_efdff1b3ec66000b9acf2ddc84c2d3684d318683.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a href="#BOOKMARK102">Balanced</a> but not <a href="#BOOKMARK96">strongly connected</a>.</p>
+<p><a href="#BOOKMARK103">Balanced</a> but not <a href="#BOOKMARK97">strongly connected</a>.</p>
 <p><img src="svgbob_48abea7e0377d91bfd845a85b2ee9615e9852bfd.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a href="#BOOKMARK102">Balanced</a> but <a href="#BOOKMARK94">disconnected</a> (not <a href="#BOOKMARK96">strongly connected</a>).</p>
+<p><a href="#BOOKMARK103">Balanced</a> but <a href="#BOOKMARK95">disconnected</a> (not <a href="#BOOKMARK97">strongly connected</a>).</p>
 <p><img src="svgbob_1f6d7503fdb3f3654b3c64f041254352c8d9a43e.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
 </li>
 <li>
-<p><a name="BOOKMARK94"></a><strong>disconnected</strong> / <a name="BOOKMARK95"></a><strong>connected</strong> - A graph is <a href="#BOOKMARK94">disconnected</a> if you can break it out into 2 or more distinct sub-graphs without breaking any paths. In other words, the graph contains at least two nodes which aren't contained in any path.</p>
-<p>The graph below is <a href="#BOOKMARK94">disconnected</a> because there is no path that contains E, F, G, or H and A, B, C, or D.</p>
+<p><a name="BOOKMARK95"></a><strong>disconnected</strong> / <a name="BOOKMARK96"></a><strong>connected</strong> - A graph is <a href="#BOOKMARK95">disconnected</a> if you can break it out into 2 or more distinct sub-graphs without breaking any paths. In other words, the graph contains at least two nodes which aren't contained in any path.</p>
+<p>The graph below is <a href="#BOOKMARK95">disconnected</a> because there is no path that contains E, F, G, or H and A, B, C, or D.</p>
 <p><img src="svgbob_754a446a49b8209971f339d76f4fcc492acbb615.svg" alt="Kroki diagram output"></p>
-<p>The graph below is <a href="#BOOKMARK95">connected</a>.</p>
+<p>The graph below is <a href="#BOOKMARK96">connected</a>.</p>
 <p><img src="svgbob_028c9291a4412afebe0b605b464987e2c9bf75ef.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK96"></a><strong>strongly connected</strong> - A graph is <a href="#BOOKMARK96">strongly connected</a> if every node is reachable from every other node.</p>
-<p>The graph below is <strong>not</strong> <a href="#BOOKMARK96">strongly connected</a> because neither A nor B is reachable by C, D, E, or F.</p>
+<p><a name="BOOKMARK97"></a><strong>strongly connected</strong> - A graph is <a href="#BOOKMARK97">strongly connected</a> if every node is reachable from every other node.</p>
+<p>The graph below is <strong>not</strong> <a href="#BOOKMARK97">strongly connected</a> because neither A nor B is reachable by C, D, E, or F.</p>
 <p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
-<p>The graph below is <a href="#BOOKMARK96">strongly connected</a> because all nodes are reachable from all nodes.</p>
+<p>The graph below is <a href="#BOOKMARK97">strongly connected</a> because all nodes are reachable from all nodes.</p>
 <p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK97"></a><strong>indegree</strong> / <a name="BOOKMARK98"></a><strong>outdegree</strong> - The number of edges leading into / out of a node of a directed graph.</p>
-<p>The node below has an <a href="#BOOKMARK97">indegree</a> of 3 and an <a href="#BOOKMARK98">outdegree</a> of 1.</p>
+<p><a name="BOOKMARK98"></a><strong>indegree</strong> / <a name="BOOKMARK99"></a><strong>outdegree</strong> - The number of edges leading into / out of a node of a directed graph.</p>
+<p>The node below has an <a href="#BOOKMARK98">indegree</a> of 3 and an <a href="#BOOKMARK99">outdegree</a> of 1.</p>
 <p><img src="svgbob_7159ebaf654fe57b46d2f14a29a73d50e280afe6.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK99"></a><strong>balanced node</strong> <a name="BOOKMARK100"></a><strong></strong> - A node of a directed graph that has an equal <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a>. That is, the number of edges coming in is equal to the number of edges going out.</p>
-<p>The node below has an <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a> of 1. It is <a href="#BOOKMARK100">balanced</a>.</p>
+<p><a name="BOOKMARK100"></a><strong>balanced node</strong> <a name="BOOKMARK101"></a><strong></strong> - A node of a directed graph that has an equal <a href="#BOOKMARK98">indegree</a> and <a href="#BOOKMARK99">outdegree</a>. That is, the number of edges coming in is equal to the number of edges going out.</p>
+<p>The node below has an <a href="#BOOKMARK98">indegree</a> and <a href="#BOOKMARK99">outdegree</a> of 1. It is <a href="#BOOKMARK101">balanced</a>.</p>
 <p><img src="svgbob_7c49a4fbe8fc85173147545e7a459bca61c84f26.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK101"></a><strong>balanced graph</strong> <a name="BOOKMARK102"></a><strong></strong> - A directed graph where ever node is <a href="#BOOKMARK100">balanced</a>.</p>
-<p>The graph below is <a href="#BOOKMARK102">balanced</a> because all nodes are <a href="#BOOKMARK100">balanced</a>.</p>
+<p><a name="BOOKMARK102"></a><strong>balanced graph</strong> <a name="BOOKMARK103"></a><strong></strong> - A directed graph where ever node is <a href="#BOOKMARK101">balanced</a>.</p>
+<p>The graph below is <a href="#BOOKMARK103">balanced</a> because all nodes are <a href="#BOOKMARK101">balanced</a>.</p>
 <p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
 <table>
 <thead>
 <tr>
 <th>Node</th>
-<th><a href="#BOOKMARK97">Indegree</a></th>
-<th><a href="#BOOKMARK98">Outdegree</a></th>
+<th><a href="#BOOKMARK98">Indegree</a></th>
+<th><a href="#BOOKMARK99">Outdegree</a></th>
 </tr>
 </thead>
 <tbody>
@@ -3490,7 +3693,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 </li>
 <li>
-<p><a name="BOOKMARK103"></a><strong>De Bruijn graph</strong> - A special graph representing the <a href="#BOOKMARK23">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
+<p><a name="BOOKMARK104"></a><strong>De Bruijn graph</strong> - A special graph representing the <a href="#BOOKMARK23">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
 <ol>
 <li>
 <p>Each <a href="#BOOKMARK23">k-mer</a> is represented as an edge connecting 2 nodes. The ...</p>
@@ -3508,10 +3711,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_cfa519e3b0b53ea602d7a16720f54ea9c85f3f08.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
-<p><a href="#BOOKMARK103">De Bruijn graph</a>s are used for efficient <a href="#BOOKMARK78">genome</a> <a href="#BOOKMARK84">assembly</a>. They were originally invented to solve the <a href="#BOOKMARK104">k-universal</a> string problem.</p>
+<p><a href="#BOOKMARK104">De Bruijn graph</a>s are used for efficient <a href="#BOOKMARK78">genome</a> <a href="#BOOKMARK85">assembly</a>. They were originally invented to solve the <a href="#BOOKMARK105">k-universal</a> string problem.</p>
 </li>
 <li>
-<p><a name="BOOKMARK104"></a><strong>k-universal</strong> - For some alphabet, a string is considered <a href="#BOOKMARK104">k-universal</a> if it contains every possible <a href="#BOOKMARK23">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a <a href="#BOOKMARK104">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK23">3-mer</a> exactly once:</p>
+<p><a name="BOOKMARK105"></a><strong>k-universal</strong> - For some alphabet, a string is considered <a href="#BOOKMARK105">k-universal</a> if it contains every possible <a href="#BOOKMARK23">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a <a href="#BOOKMARK105">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK23">3-mer</a> exactly once:</p>
 <ul>
 <li>000: <strong>000</strong>1110100</li>
 <li>001: 0<strong>001</strong>110100</li>
@@ -3522,44 +3725,46 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>110: 0001<strong>110</strong>100</li>
 <li>111: 000<strong>111</strong>0100</li>
 </ul>
-<p><a href="#BOOKMARK103">De Bruijn graph</a>s were invented in an effort to construct <a href="#BOOKMARK104">k-universal</a> strings for arbitrary values of k. For example, given only the <a href="#BOOKMARK23">k-mer</a>s in the example above (000, 001, ...), a <a href="#BOOKMARK104">k-universal</a> string can be found by constructing a <a href="#BOOKMARK103">de Bruijn graph</a> from the <a href="#BOOKMARK23">k-mer</a>s and finding a <a href="#BOOKMARK93">Eulerian cycle</a> in that graph.</p>
+<p><a href="#BOOKMARK104">De Bruijn graph</a>s were invented in an effort to construct <a href="#BOOKMARK105">k-universal</a> strings for arbitrary values of k. For example, given only the <a href="#BOOKMARK23">k-mer</a>s in the example above (000, 001, ...), a <a href="#BOOKMARK105">k-universal</a> string can be found by constructing a <a href="#BOOKMARK104">de Bruijn graph</a> from the <a href="#BOOKMARK23">k-mer</a>s and finding a <a href="#BOOKMARK94">Eulerian cycle</a> in that graph.</p>
 <p><img src="svgbob_f05ffef51444183bdc007d88010e832876608ed7.svg" alt="Kroki diagram output"></p>
-<p>For larger values of k (e.g. 20), finding <a href="#BOOKMARK104">k-universal</a> strings would be too computationally intensive without <a href="#BOOKMARK103">De Bruijn graph</a>s and <a href="#BOOKMARK93">Eulerian cycle</a>s.</p>
+<p>For larger values of k (e.g. 20), finding <a href="#BOOKMARK105">k-universal</a> strings would be too computationally intensive without <a href="#BOOKMARK104">De Bruijn graph</a>s and <a href="#BOOKMARK94">Eulerian cycle</a>s.</p>
 </li>
 <li>
-<p><a name="BOOKMARK105"></a><strong>coverage</strong> - Given a substring from some larger <a href="#BOOKMARK79">sequence</a> that was reconstructed from <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s, the <a href="#BOOKMARK105">coverage</a> of that substring is the number of <a href="#BOOKMARK82">read</a>s used to construct it. The substring length is typically 1: the <a href="#BOOKMARK105">coverage</a> for each position of the <a href="#BOOKMARK79">sequence</a>.</p>
+<p><a name="BOOKMARK106"></a><strong>coverage</strong> - Given a substring from some larger <a href="#BOOKMARK79">sequence</a> that was reconstructed from <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s, the <a href="#BOOKMARK106">coverage</a> of that substring is the number of <a href="#BOOKMARK82">read</a>s used to construct it. The substring length is typically 1: the <a href="#BOOKMARK106">coverage</a> for each position of the <a href="#BOOKMARK79">sequence</a>.</p>
 <p><img src="svgbob_8dd35ba9a6498739b4dd8f3759fd49dec3d1e9c8.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK106"></a><strong>read breaking</strong> - The concept of taking multiple <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s and breaking them up into smaller <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s.</p>
+<p><a name="BOOKMARK107"></a><strong>read breaking</strong> - The concept of taking multiple <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s and breaking them up into smaller <a href="#BOOKMARK82">read</a>s / <a href="#BOOKMARK83">read-pair</a>s.</p>
 <p><img src="svgbob_b9da2f5a17d7b035165b1d412184651af769c4f7.svg" alt="Kroki diagram output"></p>
-<p>When <a href="#BOOKMARK106">read breaking</a>, smaller <a href="#BOOKMARK23">k-mer</a>s result in better <a href="#BOOKMARK105">coverage</a> but also make the <a href="#BOOKMARK103">de Bruijn graph</a> more tangled. The more tangled the de Bruijn is, the harder it is to infer the full <a href="#BOOKMARK79">sequence</a>.</p>
-<p>In the example above, the average <a href="#BOOKMARK105">coverage</a>...</p>
+<p>When <a href="#BOOKMARK107">read breaking</a>, smaller <a href="#BOOKMARK23">k-mer</a>s result in better <a href="#BOOKMARK106">coverage</a> but also make the <a href="#BOOKMARK104">de Bruijn graph</a> more tangled. The more tangled the de Bruijn is, the harder it is to infer the full <a href="#BOOKMARK79">sequence</a>.</p>
+<p>In the example above, the average <a href="#BOOKMARK106">coverage</a>...</p>
 <ul>
 <li>for the left-hand side (original) is 2.1.</li>
 <li>for the right-hand side (broken) is 4.</li>
 </ul>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>What purpose does this actually serve? Mimicking 1 long <a href="#BOOKMARK82">read</a> as n shorter <a href="#BOOKMARK82">read</a>s isn't equivalent to actually having <a href="#BOOKMARK80">sequenced</a> those n shorter <a href="#BOOKMARK82">read</a>s. For example, what if the longer <a href="#BOOKMARK82">read</a> being broken up has an error? That error replicates when breaking into n shorter <a href="#BOOKMARK82">read</a>s, which gives a false sense of having good <a href="#BOOKMARK105">coverage</a> and makes it seems as if it wasn't an error.</p>
+<p>What purpose does this actually serve? Mimicking 1 long <a href="#BOOKMARK82">read</a> as n shorter <a href="#BOOKMARK82">read</a>s isn't equivalent to actually having <a href="#BOOKMARK80">sequenced</a> those n shorter <a href="#BOOKMARK82">read</a>s. For example, what if the longer <a href="#BOOKMARK82">read</a> being broken up has an error? That error replicates when breaking into n shorter <a href="#BOOKMARK82">read</a>s, which gives a false sense of having good <a href="#BOOKMARK106">coverage</a> and makes it seems as if it wasn't an error.</p>
 </div>
 </li>
 <li>
-<p><a name="BOOKMARK107"></a><strong>contig</strong> - A long continuous piece of DNA. Derived by searching a <a href="#BOOKMARK103">de Bruijn graph</a> for paths that are the longest possible stretches of nodes with 1 <a href="#BOOKMARK97">indegree</a> and 1 <a href="#BOOKMARK98">outdegree</a>. That is, a path must either ...</p>
+<p><a name="BOOKMARK108"></a><strong>contig</strong> - A long continuous piece of DNA. Derived by searching a <a href="#BOOKMARK104">de Bruijn graph</a> for paths that are the longest possible stretches of nodes with 1 <a href="#BOOKMARK98">indegree</a> and 1 <a href="#BOOKMARK99">outdegree</a>. That is, a path must either ...</p>
 <ul>
-<li>be a cycle where each node has an <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a> of 1.</li>
-<li>start and end at a node that doesn't have an <a href="#BOOKMARK97">indegree</a> and <a href="#BOOKMARK98">outdegree</a> of 1.</li>
+<li>be a cycle where each node has an <a href="#BOOKMARK98">indegree</a> and <a href="#BOOKMARK99">outdegree</a> of 1.</li>
+<li>start and end at a node that doesn't have an <a href="#BOOKMARK98">indegree</a> and <a href="#BOOKMARK99">outdegree</a> of 1.</li>
 </ul>
-<p>For example, in the following <a href="#BOOKMARK103">de Bruijn graph</a>, the <a href="#BOOKMARK107">contig</a>s are: GTGG, GGT, and GGT:</p>
+<p>For example, in the following <a href="#BOOKMARK104">de Bruijn graph</a>, the <a href="#BOOKMARK108">contig</a>s are: GTGG, GGT, and GGT:</p>
 <p><img src="svgbob_a90b2398b01bdc55d3409e08bb813c748d346635.svg" alt="Kroki diagram output"></p>
 <p>Assemblies often have gaps due to...</p>
 <ul>
-<li>repeats in the <a href="#BOOKMARK78">genome</a>, which make it impossible to fully <a href="#BOOKMARK84">assemble</a>.</li>
-<li>poor <a href="#BOOKMARK105">coverage</a>, which may be cost prohibitive to fix (more <a href="#BOOKMARK82">read</a>s required).</li>
+<li>repeats in the <a href="#BOOKMARK78">genome</a>, which make it impossible to fully <a href="#BOOKMARK85">assemble</a>.</li>
+<li>poor <a href="#BOOKMARK106">coverage</a>, which may be cost prohibitive to fix (more <a href="#BOOKMARK82">read</a>s required).</li>
 </ul>
-<p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK107">contig</a>s.</p>
+<p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK108">contig</a>s.</p>
 </li>
 </ul>
+<p>
+</p>
 <p>
 </p>
 <p>
