@@ -1234,11 +1234,13 @@ Assembly has many practical complications that prevent full genome reconstructio
    "* Wrong overlap identified."
    ```
 
-### Merge Fragments
+### Merge Reads
 
-**WHAT**: Given a list of overlapping fragment_SEQs where ...
+`{bm} /(Algorithms\/Assembly\/Merge Reads)_TOPIC/`
 
- * each fragment_SEQ overlaps the subsequent fragment_SEQ and
+**WHAT**: Given a list of overlapping read_SEQs where ...
+
+ * each read_SEQ overlaps the subsequent read_SEQ and
  * all overlaps are of the same length
 
 ... , merge them together. For example, in the read_SEQ list `[GAAA, AAAT, AATC]` each read_SEQ overlaps the subsequent read_SEQ by an offset of 1: `GAAATC`.
@@ -1250,18 +1252,9 @@ Assembly has many practical complications that prevent full genome reconstructio
 | R3     |   |   | A | A | T | C |
 | Merged | G | A | A | A | T | C |
 
-**WHY**: Since the sequencer breaks up many copies of the same DNA and each fragment_SEQ's start position is random, larger parts of the original DNA can be reconstructed by finding overlaps between fragment_SEQs and stitching them back together.
+**WHY**: Since the sequencer breaks up many copies of the same DNA and each read_SEQ's start position is random, larger parts of the original DNA can be reconstructed by finding overlaps between fragment_SEQs and stitching them back together.
 
-**ALGORITHM (Read_SEQ)**:
-
-Overlapping read_SEQs are merged by taking the first read_SEQ and iterating through the remaining read_SEQs where the suffix from each remaining read_SEQ is appended to the first read_SEQ. For example, ...
-
-|        | 0 | 1 | 2 | 3 | 4 | 5 |
-|--------|---|---|---|---|---|---|
-| R1     | G | A | A | A |   |   |
-| R2     |   | A | A | A | T |   |
-| R3     |   |   | A | A | T | C |
-| Merged | G | A | A | A | T | C |
+**ALGORITHM**:
 
 ```{output}
 ch3_code/src/Read.py
@@ -1277,14 +1270,20 @@ AAAT
 AATC
 ```
 
-**ALGORITHM (Read-pair)**:
+### Merge Read-Pairs
 
-Overlapping read-pairs are merged by taking the first read-pair and iterating through the remaining read-pairs where ...
+`{bm} /(Algorithms\/Assembly\/Merge Read-Pairs)_TOPIC/`
 
- * the suffix from each remaining read-pair's head k is appended to the first read-pair's head k.
- * the suffix from each remaining read-pair's tail k is appended to the first read-pair's tail k.
+```{prereq}
+Algorithms/Assembly/Merge Reads_TOPIC
+```
 
-For example, ...
+**WHAT**: Given a list of overlapping read-pairs where ...
+
+ * each read-pair overlaps the subsequent read-pair and
+ * all overlaps are of the same length
+
+... , merge them together. For example, in the read-pair list `[ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC]` each read-pair overlaps the subsequent read-pair by an offset of 1: `ATGTTACCGTTC`.
 
 |        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11|
 |--------|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -1293,6 +1292,26 @@ For example, ...
 | R3     |   |   | G | T | T | - | - | - | G | T | T |   |
 | R4     |   |   |   | T | T | A | - | - | - | T | T | C |
 | Merged | A | T | G | T | T | A | C | C | G | T | T | C |
+
+**WHY**: Since the sequencer breaks up many copies of the same DNA and each read_SEQ's start position is random, larger parts of the original DNA can be reconstructed by finding overlaps between fragment_SEQs and stitching them back together.
+
+**ALGORITHM**:
+
+Overlapping read-pairs are merged by taking the first read-pair and iterating through the remaining read-pairs where ...
+
+ * the suffix from each remaining read-pair's head k is appended to the first read-pair's head k.
+ * the suffix from each remaining read-pair's tail k is appended to the first read-pair's tail k.
+
+For example, to merge `[ATG---CCG, TGT---CGT]`, ...
+
+ 1. merge the heads as if they were read_SEQs: `[ATG, TGT]` results in `ATGT`,
+ 2. merge the tails as if they were read_SEQs: `[CCG, CGT]` results in `CCGT`.
+
+|        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|--------|---|---|---|---|---|---|---|---|---|---|
+| R1     | A | T | G | - | - | - | C | C | G |   |
+| R2     |   | T | G | T | - | - | - | C | G | T |
+| Merged | A | T | G | T | - | - | C | C | G | T |
 
 ```{output}
 ch3_code/src/ReadPair.py
@@ -1309,13 +1328,35 @@ GTT|3|GTT
 TTA|3|TTC
 ```
 
-### Break Fragments
+### Break Reads
+
+`{bm} /(Algorithms\/Assembly\/Break Reads)_TOPIC/`
+
+**WHAT**: 
+
+**WHY**: 
+
+**ALGORITHM**:
 
 ```{output}
 ch3_code/src/Read.py
 python
 # MARKDOWN_BREAK\s*\n([\s\S]+)\n\s*# MARKDOWN_BREAK
 ```
+
+### Break Read-Pairs
+
+`{bm} /(Algorithms\/Assembly\/Break Read-Pairs)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Break Reads_TOPIC
+```
+
+**WHAT**: 
+
+**WHY**: 
+
+**ALGORITHM**:
 
 ```{output}
 ch3_code/src/ReadPair.py
@@ -1325,9 +1366,18 @@ python
 
 ### Construct Overlap Graph
 
-**WHAT**: Given a list of read_SEQs for the same organism, find overlaps between those read_SEQs.
+`{bm} /(Algorithms\/Assembly\/Construct Overlap Graph)_TOPIC/`
 
-**WHY**: Finding overlaps across read_SEQs is required for assembly.
+```{prereq}
+Algorithms/Assembly/Merge Reads_TOPIC
+Algorithms/Assembly/Merge Read-Pairs_TOPIC
+Algorithms/Assembly/Break Reads_TOPIC
+Algorithms/Assembly/Break Read-Pairs_TOPIC
+```
+
+**WHAT**: Given a set of fragment_SEQs for the same organism, create a directed graph where each node is a fragment_SEQ that forms outgoing connections to other fragment_SEQs when the suffix of the outgoing node matches the prefix of the incoming node. For example...
+
+**WHY**: Candidates for the original genome may be inferred by finding Hamiltonian paths in the graph.
 
 #### Bruteforce Algorithm
 
@@ -1351,13 +1401,26 @@ python
 
 ### Find Hamiltonian Paths
 
+```{prereq}
+Algorithms/Assembly/Construct Overlap Graph_TOPIC
+```
+
 ```{output}
 ch3_code/src/WalkHamiltonianPath.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-### Construct De Bruijn Graph
+### Construct de Bruijn Graph
+
+`{bm} /(Algorithms\/Assembly\/Construct de Bruijn Graph)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Merge Reads_TOPIC
+Algorithms/Assembly/Merge Read-Pairs_TOPIC
+Algorithms/Assembly/Break Reads_TOPIC
+Algorithms/Assembly/Break Read-Pairs_TOPIC
+```
 
 ```{output}
 ch3_code/src/ToDeBruijnGraph.py
@@ -1365,7 +1428,13 @@ python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
-### Find Eulerian Cycles
+### Find Eulerian Path
+
+`{bm} /(Algorithms\/Assembly\/Find Eulerian Path)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Construct de Bruijn Graph_TOPIC
+```
 
 ```{output}
 ch3_code/src/WalkEulerianCycle.py
@@ -1375,6 +1444,12 @@ python
 
 ### Balance Nearly Balanced Graph
 
+`{bm} /(Algorithms\/Assembly\/Balance Nearly Balanced Graph)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Construct de Bruijn Graph_TOPIC
+```
+
 ```{output}
 ch3_code/src/BalanceNearlyBalancedGraph.py
 python
@@ -1382,6 +1457,12 @@ python
 ```
 
 ### Find Contigs
+
+`{bm} /(Algorithms\/Assembly\/Find Contigs)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Construct de Bruijn Graph_TOPIC
+```
 
 ```{output}
 ch3_code/src/FindMaximalNonBranchingPaths.py
