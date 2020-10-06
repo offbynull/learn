@@ -15,5 +15,5 @@ reads = [Read(kmer) for kmer in kmers]
 graph = to_debruijn_graph(reads)
 contigs = find_maximal_non_branching_paths(graph)
 for contig in contigs:
-    output = contig[0].stitch(contig[1:])
+    output = contig[0].stitch(contig)
     print(f'{output}')

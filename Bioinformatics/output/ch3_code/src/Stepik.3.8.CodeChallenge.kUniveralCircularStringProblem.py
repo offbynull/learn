@@ -12,5 +12,5 @@ k = int(lines[0])
 reads = [Read(s) for s in enumerate_patterns(k, '01')]
 graph = to_debruijn_graph(reads)
 path = walk_eularian_cycle(graph, next(graph.get_nodes()))
-k_universal_str = path[0].stitch(path[1:])
+k_universal_str = path[0].stitch(path)
 print(k_universal_str)

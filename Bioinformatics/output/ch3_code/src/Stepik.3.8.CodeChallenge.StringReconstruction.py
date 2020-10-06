@@ -19,5 +19,5 @@ graph, roots, tails = balance_graph(graph)
 
 path = walk_eularian_cycle(graph, roots.pop())
 path.pop()  # last conn in cycle is artificial -- it was created from balancing so generating this path would be fast
-genome = path[0].stitch(path[1:])
+genome = path[0].stitch(path)
 print(f'{genome}')

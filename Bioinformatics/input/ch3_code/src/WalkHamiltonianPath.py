@@ -43,7 +43,7 @@ if __name__ == '__main__':
     for node in graph.get_nodes():
         paths = walk_hamiltonian_path(graph, node)
         for path in paths:
-            dna = path[0].stitch(path[1:])
+            dna = path[0].stitch(path)
             dnas.add(dna)
 
     for dna in dnas:

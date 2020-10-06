@@ -2257,13 +2257,15 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
     ret += suffix
     <span class="hljs-keyword">return</span> Read(ret, source=(<span class="hljs-string">'overlap'</span>, [self, other]))
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stitch</span>(<span class="hljs-params">self: Read, subsequent: List[Read], skip: int = <span class="hljs-number">1</span></span>) -&gt; str:</span>
-    ret = self
-    <span class="hljs-keyword">for</span> other <span class="hljs-keyword">in</span> subsequent:
+<span class="hljs-meta">@staticmethod</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stitch</span>(<span class="hljs-params">items: List[Read], skip: int = <span class="hljs-number">1</span></span>) -&gt; str:</span>
+    <span class="hljs-keyword">assert</span> len(items) &gt; <span class="hljs-number">0</span>
+    ret = items[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">for</span> other <span class="hljs-keyword">in</span> items[<span class="hljs-number">1</span>:]:
         ret = ret.append_overlap(other, skip)
     <span class="hljs-keyword">return</span> ret.data</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Stitched [GAAA, AAAT, AATC] to GAAATC</p>
+<p>Stitched [GAAA, AAAT, AATC] to AAATC</p>
 </div>
 <p></p>
 <p><strong>ALGORITHM (<a href="#BOOKMARK83">Read-pair</a>)</strong>:</p>
@@ -2388,9 +2390,11 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 
     <span class="hljs-keyword">return</span> ReadPair(kdmer, source=(<span class="hljs-string">'overlap'</span>, [self, other]))
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stitch</span>(<span class="hljs-params">self: ReadPair, subsequent: List[ReadPair], skip: int = <span class="hljs-number">1</span></span>) -&gt; str:</span>
-    ret = self
-    <span class="hljs-keyword">for</span> other <span class="hljs-keyword">in</span> subsequent:
+<span class="hljs-meta">@staticmethod</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stitch</span>(<span class="hljs-params">items: List[ReadPair], skip: int = <span class="hljs-number">1</span></span>) -&gt; str:</span>
+    <span class="hljs-keyword">assert</span> len(items) &gt; <span class="hljs-number">0</span>
+    ret = items[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">for</span> other <span class="hljs-keyword">in</span> items[<span class="hljs-number">1</span>:]:
         ret = ret.append_overlap(other, skip)
     <span class="hljs-keyword">assert</span> ret.d &lt;= <span class="hljs-number">0</span>, <span class="hljs-string">"Gap still exists -- not enough to stitch"</span>
     overlap_count = -ret.d

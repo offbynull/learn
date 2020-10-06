@@ -10,5 +10,5 @@ kmers = [l for l in kmers if len(l) > 0] # get rid of empty lines
 
 reads = [Read(kmer) for kmer in kmers]
 
-composition = reads[0].stitch(reads[1:])
+composition = reads[0].stitch(reads)
 print(composition)

@@ -26,12 +26,12 @@ contig_paths.sort(key=lambda x: len(x))
 
 for path in contig_paths:
     if len(path) >= path[0].d:
-        out = path[0].stitch(path[1:])
+        out = path[0].stitch(path)
         print(f'{len(path)} kd-mers = {out}')
     else:
         heads = [Read(p.data.head) for p in path]
-        heads_out = heads[0].stitch(heads[1:])
+        heads_out = heads[0].stitch(heads)
         tails = [Read(p.data.tail) for p in path]
-        tails_out = tails[0].stitch(tails[1:])
+        tails_out = tails[0].stitch(tails)
         print(f'{len(heads)} k-mers = {heads_out}')
         print(f'{len(tails)} k-mers = {tails_out}')

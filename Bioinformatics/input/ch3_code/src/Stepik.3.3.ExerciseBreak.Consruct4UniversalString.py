@@ -18,7 +18,7 @@ for segment, other_segments in graph_items_randomized:
 
 def walk(path):
     if len(path) == len(graph):
-        print(f'{path} -> {path[0].stitch(path[1:])}')
+        print(f'{path} -> {path[0].stitch(path)}')
         return
 
     n = path[-1]

@@ -14,5 +14,5 @@ splits = [tuple(s.split('|', maxsplit=2)) for s in lines[1:]]
 kdmers = [Kdmer(k1, k2, d) for k1, k2 in splits]
 readpairs = [ReadPair(kdmer) for kdmer in kdmers]
 
-genome = readpairs[0].stitch(readpairs[1:])
+genome = readpairs[0].stitch(readpairs)
 print(f'{genome}')

@@ -23,5 +23,5 @@ kdmers =[
     Kdmer('CT', 'CA', 1)
 ]
 readpairs = [ReadPair(kdmer) for kdmer in kdmers]
-out = readpairs[0].stitch(readpairs[1:])
+out = readpairs[0].stitch(readpairs)
 print(f'{out}')

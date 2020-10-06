@@ -77,9 +77,11 @@ class ReadPair:
 
         return ReadPair(kdmer, source=('overlap', [self, other]))
 
-    def stitch(self: ReadPair, subsequent: List[ReadPair], skip: int = 1) -> str:
-        ret = self
-        for other in subsequent:
+    @staticmethod
+    def stitch(items: List[ReadPair], skip: int = 1) -> str:
+        assert len(items) > 0
+        ret = items[0]
+        for other in items[1:]:
             ret = ret.append_overlap(other, skip)
         assert ret.d <= 0, "Gap still exists -- not enough to stitch"
         overlap_count = -ret.d
@@ -99,14 +101,14 @@ class ReadPair:
         return ret
     # MARKDOWN_BREAK
 
-    def collapse(self: ReadPair, subsequent: List[ReadPair]) -> List[ReadPair]:
-        full_list = [self] + subsequent
+    @staticmethod
+    def collapse(items: List[ReadPair]) -> List[ReadPair]:
         collector = dict()
-        for item in full_list:
+        for item in items:
             collector.setdefault(item.data, []).append(item)
         ret = []
         for data, matches in collector.items():
-            collapsed = Read(data, source=('collapse', matches))
+            collapsed = ReadPair(data, source=('collapse', matches))
             ret.append(collapsed)
         return ret
 
@@ -186,7 +188,7 @@ def main():
         lines = lines[1:]
         if command == 'stitch':
             read_pairs = [ReadPair(Kdmer(l.split('|')[0], l.split('|')[2], int(l.split('|')[1]))) for l in lines]
-            genome = read_pairs[0].stitch(read_pairs[1:])
+            genome = read_pairs[0].stitch(read_pairs)
             print(f'Stitched {read_pairs} to {genome}\n\n')
         else:
             raise

@@ -158,7 +158,7 @@ if __name__ == '__main__':
     reads = [broken_read for read in reads for broken_read in read.shatter(k_break)]
     normalized_read_counts = normalize_based_on_read_counts(reads)
     print(f'{normalized_read_counts}')
-    reads = reads[0].collapse(reads[1:])
+    reads = reads[0].collapse(reads)
     graph = to_debruijn_graph(reads)
     print(to_graphviz(graph, normalized_read_counts))
     potentially_bad_paths = find_bubbles(graph, k_break)\

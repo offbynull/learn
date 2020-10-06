@@ -52,9 +52,11 @@ class Read:
         ret += suffix
         return Read(ret, source=('overlap', [self, other]))
 
-    def stitch(self: Read, subsequent: List[Read], skip: int = 1) -> str:
-        ret = self
-        for other in subsequent:
+    @staticmethod
+    def stitch(items: List[Read], skip: int = 1) -> str:
+        assert len(items) > 0
+        ret = items[0]
+        for other in items[1:]:
             ret = ret.append_overlap(other, skip)
         return ret.data
     # MARKDOWN_MERGE_OVERLAPPING
@@ -69,10 +71,10 @@ class Read:
         return ret
     # MARKDOWN_BREAK
 
-    def collapse(self: Read, subsequent: List[Read]) -> List[Read]:
-        full_list = [self] + subsequent
+    @staticmethod
+    def collapse(items: List[Read]) -> List[Read]:
         collector = dict()
-        for item in full_list:
+        for item in items:
             collector.setdefault(item.data, []).append(item)
         ret = []
         for data, matches in collector.items():

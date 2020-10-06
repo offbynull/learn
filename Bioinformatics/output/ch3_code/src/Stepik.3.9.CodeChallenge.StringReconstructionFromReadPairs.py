@@ -27,5 +27,5 @@ path = walk_eularian_cycle(
 path.pop()  # remove last kdmer because the cycle we created when balancing the graph is artificial -- we just did it so
             # we can get the path using eularian cycles, which is an efficient way of reconstructing the string.
 
-genome = path[0].stitch(path[1:])
+genome = path[0].stitch(path)
 print(f'{genome}')
