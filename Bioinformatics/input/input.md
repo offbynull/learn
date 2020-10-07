@@ -1507,9 +1507,29 @@ Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 
 **WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from.
 
-For example, the following 3-mer read_SEQs are from a single strand of genome: TTA, TAC, ACT, CTT, TTA, and TAG. That single strand of genome may have been either TACTTAG or TTAGTTAC.
+For example, the following 3-mer read_SEQs are from a single strand of genome: TTA, TAC, ACT, CTT, TTA, and TAG. That single strand of genome may have been either TTACTTAG or TTAGTTAC.
 
 **WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce produce a more complete picture of the genome.
+
+In theory, these fragment_SEQs can be merged together to construct the original genome they were derived from. In practice, it's next to impossible to construct the original genome in its entirety:
+
+ * Fragment_SEQs are for both strands of the genome and it isn't obvious which strand a fragment_SEQ came from (double stranded DNA).
+ * Fragment_SEQs may be missing for some parts of the genome.
+ * Fragment_SEQs may be incorrectly duplicated.
+ * Fragment_SEQs may have errors that weren't properly filtered out.
+ * Fragment_SEQs may be for repeat regions that weren't properly accounted for.
+ * There may be many genome possibilities for a set of fragment_SEQs.
+ * Finding genome possibilities for a set of fragment_SEQs may be computationally intensive.
+
+Never the less, in an ideal world where most of these problems don't exist, the child sections below detail good ways of sussing out possible genomes for a set of fragment_SEQs. Each child section assumes that the fragment_SEQs it's operating on are:
+
+ * from 1 strand of the genome,
+ * have correct cardinality (no duplicates or missing),
+ * and contain no errors.
+
+```{note}
+Although these practical problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Contigs_TOPIC.
+```
 
 #### Overlap Graph Algorithm
 
@@ -1540,7 +1560,7 @@ Given the fragment_SEQs for a single strand of genome, create a directed graph w
 
 This directed graph is called an overlap graph because the edges show the different overlap candidates between fragment_SEQs.
 
-In theory, an overlap graph shows the different ways that fragment_SEQs can be merged to construct a genome. A path in the graph that touches each node exactly once is a guess of what the genome might be. Such a path is called the Hamiltonian path. There are may be multiple Hamiltonian paths in the graph, meaning that there may be multiple genome guesses. In the example graph above, the Hamiltonian paths are ...
+An overlap graph shows the different ways that fragment_SEQs can be merged to construct a genome. A path in the graph that touches each node exactly once is a guess of what the genome might be. Such a path is called the Hamiltonian path. There are may be multiple Hamiltonian paths in the graph, meaning that there may be multiple genome guesses. In the example graph above, the Hamiltonian paths are ...
 
   * \[`TTA`, `TAG`, `AGT`, `GTT`, `TTA`, `TAC`, `ACT`, `CTT`\] ⟶ `TTAGTTACTT`
   * \[`TTA`, `TAC`, `ACT`, `CTT`, `TTA`, `TAG`, `AGT`, `GTT`\] ⟶ `TTACTTAGTT`
@@ -1552,29 +1572,13 @@ In theory, an overlap graph shows the different ways that fragment_SEQs can be m
 Notice that the example graph is circular. If the organism genome itself were also circular (e.g. bacterial genome), the genome guesses above are all actually the same because circular genomes don't have a beginning / end.
 ```
 
-In practice, there are many complications with finding Hamiltonian paths:
-
- 1. Practical problems with sequencing mean that Hamiltonian paths will either not exist or be wildly incorrect:
-    * Fragment_SEQs are for both strands of double stranded DNA, meaning that either...
-      * fragment_SEQs from the different strands may incidentally overlap, resulting in incorrect nodes/ edges.
-      * fragment_SEQs from the different strands may not overlap, resulting in a disconnected graph.
-    * Fragment_SEQs may have errors that weren't properly detected/filtered out, resulting in incorrect nodes / edges.
-    * Fragment_SEQs may be for repeat regions that weren't properly accounted for, resulting in incorrect nodes / edges.
-    * Fragment_SEQs may be missing for some parts of the genome, resulting in missing nodes / edges.
- 2. Finding Hamiltonian paths is computationally intensive. The execution time grows exponentially as graph complexity grows linearly.
- 3. More than one Hamiltonian path means that it isn't possible to definitively know what the original genome was.
-
-Never the less, in an ideal world where most of these problems don't exist, finding Hamiltonian paths would be a good way to guess the genome.
-
-```{note}
-Although these practical problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Contigs_TOPIC.
-```
-
 ##### Hamiltonian Path Algorithm
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Hamiltonian Path Algorithm)_TOPIC/`
 
-Given a graph, you can recursively walk the graph to pull out all paths. Every path that touches each node exactly once is a Hamiltonian path.
+Given a graph, a path that touches each node exactly once is a Hamiltonian path. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.
+
+This algorithm will likely fall over on non-trivial overlay graphs. Even finding one Hamiltonian path is computationally intensive.
 
 ```{output}
 ch3_code/src/WalkAllHamiltonianPaths.py
@@ -1671,29 +1675,12 @@ Given the fragment_SEQs for a single strand of genome, create a directed graph w
 This graph is called a de Bruijn graph: a balanced_GRAPH and strongly connected graph where the fragment_SEQs are represented as edges.
 
 ```{note}
-Depending on the fragment_SEQs, the resulting graph may not be totally balanced_GRAPH. A technique for dealing with this is detailed further on. For now, just assume that hte graph will be balanced_GRAPH.
+Depending on the fragment_SEQs, the resulting graph may not be totally balanced_GRAPH. A technique for dealing with this is detailed in the graph construction child section. For now, just assume that hte graph will be balanced_GRAPH.
 ```
 
 Similar to an overlay graph, a de Bruijn graph shows the different ways that fragment_SEQs can be merged to construct a genome. However, unlike an overlay graph, the fragment_SEQs are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (Hamiltonian path), in a de Bruijn graph you need to find paths that walk over every edge exactly once.
 
-A path in a de Bruijn graph that walks over each edge exactly once is a guess of the genome might be. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding Hamiltonian paths in an overlay graph, it's much faster to find Eulerian cycles in an de Bruijn graph.
-
-Even with the faster speed, finding Eulerian cycles in a de Bruijn graph has many of the same complications as finding Hamiltonian paths in an overlay graph:
-
- 1. Practical problems with sequencing mean that Eulerian cycles will either not exist or be wildly incorrect:
-    * Fragment_SEQs are for both strands of double stranded DNA, meaning that either...
-      * fragment_SEQs from the different strands may incidentally overlap, resulting in incorrect nodes/ edges.
-      * fragment_SEQs from the different strands may not overlap, resulting in a disconnected graph.
-    * Fragment_SEQs may have errors that weren't properly detected/filtered out, resulting in incorrect nodes / edges.
-    * Fragment_SEQs may be for repeat regions that weren't properly accounted for, resulting in incorrect nodes / edges.
-    * Fragment_SEQs may be missing for some parts of the genome, resulting in missing nodes / edges.
- 2. More than one Eulerian cycle means that it isn't possible to definitively know what the original genome was.
-
-Never the less, in an ideal world where most of these problems don't exist, finding Eulerian cycles would be a good way to guess the genome.
-
-```{note}
-Although these practical problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Contigs_TOPIC.
-```
+A path in a de Bruijn graph that walks over each edge exactly once is a guess of the genome might be. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding a Hamiltonian path in an overlay graph, it's much faster to find an Eulerian cycle in an de Bruijn graph.
 
 ##### Eulerian Cycle Algorithm
 
@@ -1732,7 +1719,7 @@ See the section on k-universal strings to see a real-world application of Euleri
 Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm_TOPIC
 ```
 
-To construct a de Bruijn graph, add an edge for each fragment_SEQ making sure to not create duplicate nodes.
+To construct a de Bruijn graph, add an edge for each fragment_SEQ, creating missing nodes as required.
 
 ```{output}
 ch3_code/src/ToDeBruijnGraph.py
@@ -1753,9 +1740,7 @@ ACTT
 CTTA
 ```
 
-Note how the graph above is both balanced_GRAPH and strongly connected. In most cases, non-circular genomes won't generate a balanced graph like the one above. Instead, a non-circular genome will very likely generate a graph that's nearly balanced_GRAPH.
-
-Nearly balanced graphs are graphs that are would be balanced_GRAPH if not for a few unbalanced nodes (usually root and tail nodes). They can artificially be made to become balanced_GRAPH by finding imbalanced nodes and creating artificial edges between them until they become balanced nodes.
+Note how the graph above is both balanced_GRAPH and strongly connected. In most cases, non-circular genomes won't generate a balanced graph like the one above. Instead, a non-circular genome will very likely generate a graph that's nearly balanced_GRAPH: Nearly balanced graphs are graphs that are would be balanced_GRAPH if not for a few unbalanced nodes (usually root and tail nodes). They can artificially be made to become balanced_GRAPH by finding imbalanced nodes and creating artificial edges between them until they become balanced nodes.
 
 ```{note}
 Circular genomes are genomes that wrap around (e.g. bacterial genomes). They don't have a beginning / end.
@@ -1776,7 +1761,7 @@ ACCC
 CCCT
 ```
 
-In the graph above, an artificial edge is inserted between CCT and TTA to create a balanced graph. With this balanced graph, a path that touches lal nodes can found by finding the Eulerian cycle from the original starting from the original root node (TTA). The artificial edge will show up at the end of the Eulerian cycle (CCT to TTA), and as such can be dropped.
+In the graph above, an artificial edge is inserted between CCT and TTA to create a balanced graph. With this balanced graph, a path that walks all edges (fragment_SEQs) can found by finding the Eulerian cycle from the original root node (TTA). The artificial edge will show up at the end of the Eulerian cycle (CCT to TTA), and as such can be dropped from the path.
 
 ##### K-universal String Algorithm
 
@@ -3211,6 +3196,13 @@ PracticalMotifFindingExample
     * poor coverage_SEQ, which may be cost prohibitive to fix (more read_SEQs required).
     
    As such, biologists / bioinformaticians have no choice but to settle on contigs.
+
+ * `{bm} ribonucleotide` - Elements that make up RNA, similar to how nucleotides are the elements that make up DNA.
+
+   * A = Adenine (same as nucleotide)
+   * C = Cytosine (same as nucleotide)
+   * G = Guanine (same as nucleotide)
+   * U = Uracil (replace nucleotide Thymine)
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _SEQ/\b(read)/i`

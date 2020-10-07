@@ -216,7 +216,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAT', 'TAAA', 'AACA', 'AAGA', 'AGAA', 'ATAA', 'AATA', 'AAAG', 'ACAA', 'AAAC', 'AAAA', 'CAAA', 'GAAA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'GAAA', 'AAAT', 'AAGA', 'AAAG', 'ACAA', 'AGAA', 'AATA', 'AAAA', 'TAAA', 'CAAA', 'ATAA', 'AACA'}</p>
 </div>
 <p></p>
 <a name="HEADREF6"></a><h3>Find Locations</h3>
@@ -339,12 +339,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>TTAAA = 6 occurrences</li>
-<li>AAGGG = 6 occurrences</li>
-<li>GATCA = 6 occurrences</li>
-<li>TTTAA = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
 <li>TGATC = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
+<li>TTAAA = 6 occurrences</li>
+<li>GATCA = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
+<li>TTTAA = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -416,17 +416,17 @@
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -1523,7 +1523,7 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>AAAGA<br>AAAGA<br>AAAGA</p>
+<p>ATAAT<br>ATAAT<br>ATAAT</p>
 </div>
 <p></p>
 <a name="HEADREF26"></a><h4>Median String Algorithm</h4>
@@ -1963,7 +1963,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>GAG<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
 </div>
 <p></p>
 <a name="HEADREF29"></a><h4>Gibbs Sampling Algorithm</h4>
@@ -2034,7 +2034,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
+<p>GAC<br>GAC<br>GCC<br>CAC<br>GAC</p>
 </div>
 <p></p>
 <a name="HEADREF30"></a><h3>Motif Matrix Hybrid Alphabet</h3>
@@ -2092,7 +2092,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>to...</p>
 <p>CWTCYK<br>CWTCYK<br>CWTCYK</p>
 <p>using...</p>
-<p>{frozenset({'T', 'A'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'C', 'T'}): 'Y'}</p>
+<p>{frozenset({'A', 'T'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'T', 'C'}): 'Y'}</p>
 </div>
 <p></p>
 <a name="HEADREF31"></a><h2>Assembly</h2>
@@ -2618,8 +2618,28 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 </div>
 <p><strong>WHAT</strong>: Given the <a href="#BOOKMARK99">fragment</a>s from a <a href="#BOOKMARK92">genome</a>, merge those <a href="#BOOKMARK99">fragment</a>s together in different ways so as to guess the <a href="#BOOKMARK92">genome</a> those <a href="#BOOKMARK99">fragment</a>s came from.</p>
-<p>For example, the following <a href="#BOOKMARK37">3-mer</a> <a href="#BOOKMARK97">read</a>s are from a single strand of <a href="#BOOKMARK92">genome</a>: TTA, TAC, ACT, CTT, TTA, and TAG. That single strand of <a href="#BOOKMARK92">genome</a> may have been either TACTTAG or TTAGTTAC.</p>
+<p>For example, the following <a href="#BOOKMARK37">3-mer</a> <a href="#BOOKMARK97">read</a>s are from a single strand of <a href="#BOOKMARK92">genome</a>: TTA, TAC, ACT, CTT, TTA, and TAG. That single strand of <a href="#BOOKMARK92">genome</a> may have been either TTACTTAG or TTAGTTAC.</p>
 <p><strong>WHY</strong>: <a href="#BOOKMARK95">Sequencer</a>s produce <a href="#BOOKMARK99">fragment</a>s, but <a href="#BOOKMARK99">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce produce a more complete picture of the <a href="#BOOKMARK92">genome</a>.</p>
+<p>In theory, these <a href="#BOOKMARK99">fragment</a>s can be merged together to construct the original <a href="#BOOKMARK92">genome</a> they were derived from. In practice, it's next to impossible to construct the original <a href="#BOOKMARK92">genome</a> in its entirety:</p>
+<ul>
+<li><a href="#BOOKMARK99">Fragment</a>s are for both strands of the <a href="#BOOKMARK92">genome</a> and it isn't obvious which strand a <a href="#BOOKMARK99">fragment</a> came from (<a href="#BOOKMARK58">double stranded DNA</a>).</li>
+<li><a href="#BOOKMARK99">Fragment</a>s may be missing for some parts of the <a href="#BOOKMARK92">genome</a>.</li>
+<li><a href="#BOOKMARK99">Fragment</a>s may be incorrectly duplicated.</li>
+<li><a href="#BOOKMARK99">Fragment</a>s may have errors that weren't properly filtered out.</li>
+<li><a href="#BOOKMARK99">Fragment</a>s may be for repeat regions that weren't properly accounted for.</li>
+<li>There may be many <a href="#BOOKMARK92">genome</a> possibilities for a set of <a href="#BOOKMARK99">fragment</a>s.</li>
+<li>Finding <a href="#BOOKMARK92">genome</a> possibilities for a set of <a href="#BOOKMARK99">fragment</a>s may be computationally intensive.</li>
+</ul>
+<p>Never the less, in an ideal world where most of these problems don't exist, the child sections below detail good ways of sussing out possible <a href="#BOOKMARK92">genome</a>s for a set of <a href="#BOOKMARK99">fragment</a>s. Each child section assumes that the <a href="#BOOKMARK99">fragment</a>s it's operating on are:</p>
+<ul>
+<li>from 1 strand of the <a href="#BOOKMARK92">genome</a>,</li>
+<li>have correct cardinality (no duplicates or missing),</li>
+<li>and contain no errors.</li>
+</ul>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>Although these practical problems make it impossible to get the entire <a href="#BOOKMARK92">genome</a>, it's still possible to pull out large parts of the <a href="#BOOKMARK92">genome</a>. This is discussed in the subsequent section <a href="#BOOKMARK35">Algorithms/Assembly/Find Contigs</a>.</p>
+</div>
 <a name="HEADREF38"></a><h4>Overlap Graph Algorithm</h4>
 <p><a name="BOOKMARK28"></a><strong></strong></p>
 <p>Given the <a href="#BOOKMARK99">fragment</a>s for a single strand of <a href="#BOOKMARK92">genome</a>, create a directed graph where ...</p>
@@ -2638,7 +2658,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </li>
 </ol>
 <p>This directed graph is called an overlap graph because the edges show the different overlap candidates between <a href="#BOOKMARK99">fragment</a>s.</p>
-<p>In theory, an overlap graph shows the different ways that <a href="#BOOKMARK99">fragment</a>s can be merged to construct a <a href="#BOOKMARK92">genome</a>. A path in the graph that touches each node exactly once is a guess of what the <a href="#BOOKMARK92">genome</a> might be. Such a path is called the <a href="#BOOKMARK107">Hamiltonian path</a>. There are may be multiple <a href="#BOOKMARK107">Hamiltonian path</a>s in the graph, meaning that there may be multiple <a href="#BOOKMARK92">genome</a> guesses. In the example graph above, the <a href="#BOOKMARK107">Hamiltonian path</a>s are ...</p>
+<p>An overlap graph shows the different ways that <a href="#BOOKMARK99">fragment</a>s can be merged to construct a <a href="#BOOKMARK92">genome</a>. A path in the graph that touches each node exactly once is a guess of what the <a href="#BOOKMARK92">genome</a> might be. Such a path is called the <a href="#BOOKMARK107">Hamiltonian path</a>. There are may be multiple <a href="#BOOKMARK107">Hamiltonian path</a>s in the graph, meaning that there may be multiple <a href="#BOOKMARK92">genome</a> guesses. In the example graph above, the <a href="#BOOKMARK107">Hamiltonian path</a>s are ...</p>
 <ul>
 <li>[<code>TTA</code>, <code>TAG</code>, <code>AGT</code>, <code>GTT</code>, <code>TTA</code>, <code>TAC</code>, <code>ACT</code>, <code>CTT</code>] ⟶ <code>TTAGTTACTT</code></li>
 <li>[<code>TTA</code>, <code>TAC</code>, <code>ACT</code>, <code>CTT</code>, <code>TTA</code>, <code>TAG</code>, <code>AGT</code>, <code>GTT</code>] ⟶ <code>TTACTTAGTT</code></li>
@@ -2650,32 +2670,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>Notice that the example graph is circular. If the organism <a href="#BOOKMARK92">genome</a> itself were also circular (e.g. bacterial <a href="#BOOKMARK92">genome</a>), the <a href="#BOOKMARK92">genome</a> guesses above are all actually the same because circular <a href="#BOOKMARK92">genome</a>s don't have a beginning / end.</p>
 </div>
-<p>In practice, there are many complications with finding <a href="#BOOKMARK107">Hamiltonian path</a>s:</p>
-<ol>
-<li>Practical problems with <a href="#BOOKMARK94">sequencing</a> mean that <a href="#BOOKMARK107">Hamiltonian path</a>s will either not exist or be wildly incorrect:
-<ul>
-<li><a href="#BOOKMARK99">Fragment</a>s are for both strands of <a href="#BOOKMARK58">double stranded DNA</a>, meaning that either...
-<ul>
-<li><a href="#BOOKMARK99">fragment</a>s from the different strands may incidentally overlap, resulting in incorrect nodes/ edges.</li>
-<li><a href="#BOOKMARK99">fragment</a>s from the different strands may not overlap, resulting in a <a href="#BOOKMARK114">disconnected</a> graph.</li>
-</ul>
-</li>
-<li><a href="#BOOKMARK99">Fragment</a>s may have errors that weren't properly detected/filtered out, resulting in incorrect nodes / edges.</li>
-<li><a href="#BOOKMARK99">Fragment</a>s may be for repeat regions that weren't properly accounted for, resulting in incorrect nodes / edges.</li>
-<li><a href="#BOOKMARK99">Fragment</a>s may be missing for some parts of the <a href="#BOOKMARK92">genome</a>, resulting in missing nodes / edges.</li>
-</ul>
-</li>
-<li>Finding <a href="#BOOKMARK107">Hamiltonian path</a>s is computationally intensive. The execution time grows exponentially as graph complexity grows linearly.</li>
-<li>More than one <a href="#BOOKMARK107">Hamiltonian path</a> means that it isn't possible to definitively know what the original <a href="#BOOKMARK92">genome</a> was.</li>
-</ol>
-<p>Never the less, in an ideal world where most of these problems don't exist, finding <a href="#BOOKMARK107">Hamiltonian path</a>s would be a good way to guess the <a href="#BOOKMARK92">genome</a>.</p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Although these practical problems make it impossible to get the entire <a href="#BOOKMARK92">genome</a>, it's still possible to pull out large parts of the <a href="#BOOKMARK92">genome</a>. This is discussed in the subsequent section <a href="#BOOKMARK35">Algorithms/Assembly/Find Contigs</a>.</p>
-</div>
 <a name="HEADREF39"></a><h5>Hamiltonian Path Algorithm</h5>
 <p><a name="BOOKMARK29"></a><strong></strong></p>
-<p>Given a graph, you can recursively walk the graph to pull out all paths. Every path that touches each node exactly once is a <a href="#BOOKMARK107">Hamiltonian path</a>.</p>
+<p>Given a graph, a path that touches each node exactly once is a <a href="#BOOKMARK107">Hamiltonian path</a>. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.</p>
+<p>This algorithm will likely fall over on non-trivial overlay graphs. Even finding one <a href="#BOOKMARK107">Hamiltonian path</a> is computationally intensive.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exhaustively_walk_until_all_nodes_touched_exactly_one</span>(<span class="hljs-params">
         graph: Graph[T],
         from_node: T,
@@ -2705,21 +2703,21 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>... and the Hamiltonian paths are ...</p>
 <ul>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
 <li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
 <li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
 <li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
 <li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
-<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
 </ul>
 </div>
 <p></p>
@@ -2786,32 +2784,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>This graph is called a <a href="#BOOKMARK125">de Bruijn graph</a>: a <a href="#BOOKMARK123">balanced</a> and <a href="#BOOKMARK116">strongly connected</a> graph where the <a href="#BOOKMARK99">fragment</a>s are represented as edges.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Depending on the <a href="#BOOKMARK99">fragment</a>s, the resulting graph may not be totally <a href="#BOOKMARK123">balanced</a>. A technique for dealing with this is detailed further on. For now, just assume that hte graph will be <a href="#BOOKMARK123">balanced</a>.</p>
+<p>Depending on the <a href="#BOOKMARK99">fragment</a>s, the resulting graph may not be totally <a href="#BOOKMARK123">balanced</a>. A technique for dealing with this is detailed in the graph construction child section. For now, just assume that hte graph will be <a href="#BOOKMARK123">balanced</a>.</p>
 </div>
 <p>Similar to an overlay graph, a <a href="#BOOKMARK125">de Bruijn graph</a> shows the different ways that <a href="#BOOKMARK99">fragment</a>s can be merged to construct a <a href="#BOOKMARK92">genome</a>. However, unlike an overlay graph, the <a href="#BOOKMARK99">fragment</a>s are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (<a href="#BOOKMARK107">Hamiltonian path</a>), in a <a href="#BOOKMARK125">de Bruijn graph</a> you need to find paths that walk over every edge exactly once.</p>
-<p>A path in a <a href="#BOOKMARK125">de Bruijn graph</a> that walks over each edge exactly once is a guess of the <a href="#BOOKMARK92">genome</a> might be. Such a path is called a <a href="#BOOKMARK110">Eulerian cycle</a>: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding <a href="#BOOKMARK107">Hamiltonian path</a>s in an overlay graph, it's much faster to find <a href="#BOOKMARK110">Eulerian cycle</a>s in an <a href="#BOOKMARK125">de Bruijn graph</a>.</p>
-<p>Even with the faster speed, finding <a href="#BOOKMARK110">Eulerian cycle</a>s in a <a href="#BOOKMARK125">de Bruijn graph</a> has many of the same complications as finding <a href="#BOOKMARK107">Hamiltonian path</a>s in an overlay graph:</p>
-<ol>
-<li>Practical problems with <a href="#BOOKMARK94">sequencing</a> mean that <a href="#BOOKMARK110">Eulerian cycle</a>s will either not exist or be wildly incorrect:
-<ul>
-<li><a href="#BOOKMARK99">Fragment</a>s are for both strands of <a href="#BOOKMARK58">double stranded DNA</a>, meaning that either...
-<ul>
-<li><a href="#BOOKMARK99">fragment</a>s from the different strands may incidentally overlap, resulting in incorrect nodes/ edges.</li>
-<li><a href="#BOOKMARK99">fragment</a>s from the different strands may not overlap, resulting in a <a href="#BOOKMARK114">disconnected</a> graph.</li>
-</ul>
-</li>
-<li><a href="#BOOKMARK99">Fragment</a>s may have errors that weren't properly detected/filtered out, resulting in incorrect nodes / edges.</li>
-<li><a href="#BOOKMARK99">Fragment</a>s may be for repeat regions that weren't properly accounted for, resulting in incorrect nodes / edges.</li>
-<li><a href="#BOOKMARK99">Fragment</a>s may be missing for some parts of the <a href="#BOOKMARK92">genome</a>, resulting in missing nodes / edges.</li>
-</ul>
-</li>
-<li>More than one <a href="#BOOKMARK110">Eulerian cycle</a> means that it isn't possible to definitively know what the original <a href="#BOOKMARK92">genome</a> was.</li>
-</ol>
-<p>Never the less, in an ideal world where most of these problems don't exist, finding <a href="#BOOKMARK110">Eulerian cycle</a>s would be a good way to guess the <a href="#BOOKMARK92">genome</a>.</p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Although these practical problems make it impossible to get the entire <a href="#BOOKMARK92">genome</a>, it's still possible to pull out large parts of the <a href="#BOOKMARK92">genome</a>. This is discussed in the subsequent section <a href="#BOOKMARK35">Algorithms/Assembly/Find Contigs</a>.</p>
-</div>
+<p>A path in a <a href="#BOOKMARK125">de Bruijn graph</a> that walks over each edge exactly once is a guess of the <a href="#BOOKMARK92">genome</a> might be. Such a path is called a <a href="#BOOKMARK110">Eulerian cycle</a>: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding a <a href="#BOOKMARK107">Hamiltonian path</a> in an overlay graph, it's much faster to find an <a href="#BOOKMARK110">Eulerian cycle</a> in an <a href="#BOOKMARK125">de Bruijn graph</a>.</p>
 <a name="HEADREF42"></a><h5>Eulerian Cycle Algorithm</h5>
 <p><a name="BOOKMARK32"></a><strong></strong></p>
 <p>Given a graph that's <a href="#BOOKMARK116">strongly connected</a> and <a href="#BOOKMARK123">balanced</a>, you can find a <a href="#BOOKMARK110">Eulerian cycle</a> by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.</p>
@@ -2885,7 +2861,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK32">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm</a></li>
 </ul>
 </div>
-<p>To construct a <a href="#BOOKMARK125">de Bruijn graph</a>, add an edge for each <a href="#BOOKMARK99">fragment</a> making sure to not create duplicate nodes.</p>
+<p>To construct a <a href="#BOOKMARK125">de Bruijn graph</a>, add an edge for each <a href="#BOOKMARK99">fragment</a>, creating missing nodes as required.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_debruijn_graph</span>(<span class="hljs-params">reads: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
     graph = Graph()
     <span class="hljs-keyword">for</span> read <span class="hljs-keyword">in</span> reads:
@@ -2898,8 +2874,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="dot_fc6c4f4bf004838f81f7a6343b7d2e19.svg" alt="Dot diagram"></p>
 </div>
 <p></p>
-<p>Note how the graph above is both <a href="#BOOKMARK123">balanced</a> and <a href="#BOOKMARK116">strongly connected</a>. In most cases, non-circular <a href="#BOOKMARK92">genome</a>s won't generate a <a href="#BOOKMARK122">balanced graph</a> like the one above. Instead, a non-circular <a href="#BOOKMARK92">genome</a> will very likely generate a graph that's nearly <a href="#BOOKMARK123">balanced</a>.</p>
-<p>Nearly <a href="#BOOKMARK122">balanced graph</a>s are graphs that are would be <a href="#BOOKMARK123">balanced</a> if not for a few un<a href="#BOOKMARK119">balanced node</a>s (usually root and tail nodes). They can artificially be made to become <a href="#BOOKMARK123">balanced</a> by finding im<a href="#BOOKMARK119">balanced node</a>s and creating artificial edges between them until they become <a href="#BOOKMARK119">balanced node</a>s.</p>
+<p>Note how the graph above is both <a href="#BOOKMARK123">balanced</a> and <a href="#BOOKMARK116">strongly connected</a>. In most cases, non-circular <a href="#BOOKMARK92">genome</a>s won't generate a <a href="#BOOKMARK122">balanced graph</a> like the one above. Instead, a non-circular <a href="#BOOKMARK92">genome</a> will very likely generate a graph that's nearly <a href="#BOOKMARK123">balanced</a>: Nearly <a href="#BOOKMARK122">balanced graph</a>s are graphs that are would be <a href="#BOOKMARK123">balanced</a> if not for a few un<a href="#BOOKMARK119">balanced node</a>s (usually root and tail nodes). They can artificially be made to become <a href="#BOOKMARK123">balanced</a> by finding im<a href="#BOOKMARK119">balanced node</a>s and creating artificial edges between them until they become <a href="#BOOKMARK119">balanced node</a>s.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>Circular <a href="#BOOKMARK92">genome</a>s are <a href="#BOOKMARK92">genome</a>s that wrap around (e.g. bacterial <a href="#BOOKMARK92">genome</a>s). They don't have a beginning / end.</p>
@@ -2939,7 +2914,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>... with original head nodes at {TTA} and tail nodes at {CCT}.</p>
 </div>
 <p></p>
-<p>In the graph above, an artificial edge is inserted between CCT and TTA to create a <a href="#BOOKMARK122">balanced graph</a>. With this <a href="#BOOKMARK122">balanced graph</a>, a path that touches lal nodes can found by finding the <a href="#BOOKMARK110">Eulerian cycle</a> from the original starting from the original root node (TTA). The artificial edge will show up at the end of the <a href="#BOOKMARK110">Eulerian cycle</a> (CCT to TTA), and as such can be dropped.</p>
+<p>In the graph above, an artificial edge is inserted between CCT and TTA to create a <a href="#BOOKMARK122">balanced graph</a>. With this <a href="#BOOKMARK122">balanced graph</a>, a path that walks all edges (<a href="#BOOKMARK99">fragment</a>s) can found by finding the <a href="#BOOKMARK110">Eulerian cycle</a> from the original root node (TTA). The artificial edge will show up at the end of the <a href="#BOOKMARK110">Eulerian cycle</a> (CCT to TTA), and as such can be dropped from the path.</p>
 <a name="HEADREF44"></a><h5>K-universal String Algorithm</h5>
 <p><a name="BOOKMARK34"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
@@ -3200,8 +3175,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
@@ -3209,12 +3184,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CATCAGGCG', start_index=164, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
@@ -3222,8 +3197,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
@@ -3237,12 +3212,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>
@@ -3303,8 +3278,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 <p>Organism is baker's yeast. Suspected genes influenced by transcription factor: THI12, YHL017W, SYN8, YCG1, UBX5, and KEI1.</p>
 <p>Searching for 18-mer across a set of 6 gene upstream regions...</p>
-<p>GAAAAAGGAAGGAAAAAT<br>GAAAAAAAAAGGAAAAAA<br>GAAAAAGAAAAAAAAAAA<br>GAAAAAAAGAAGACAAAG<br>GAATATAAACATATAAAA<br>GAATATAAACATATAAAA</p>
-<p>Score is: 20</p>
+<p>AGAAAAAGGAAGGAAAAA<br>AGAAAAAAAAAGGAAAAA<br>AGAAAAAGAAAAAAAAAA<br>AGAAAAGGAAAAAAAGAA<br>ATAAAAACATCATAAAAA<br>CGAACAACATGAGATAAA</p>
+<p>Score is: 19</p>
 </div>
 <p></p>
 <a name="HEADREF52"></a><h1>Terminology</h1>
@@ -4253,6 +4228,15 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>poor <a href="#BOOKMARK127">coverage</a>, which may be cost prohibitive to fix (more <a href="#BOOKMARK97">read</a>s required).</li>
 </ul>
 <p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK130">contig</a>s.</p>
+</li>
+<li>
+<p><a name="BOOKMARK131"></a><strong>ribonucleotide</strong> - Elements that make up RNA, similar to how nucleotides are the elements that make up DNA.</p>
+<ul>
+<li>A = Adenine (same as nucleotide)</li>
+<li>C = Cytosine (same as nucleotide)</li>
+<li>G = Guanine (same as nucleotide)</li>
+<li>U = Uracil (replace nucleotide Thymine)</li>
+</ul>
 </li>
 </ul>
 <p>
