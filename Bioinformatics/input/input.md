@@ -1206,13 +1206,13 @@ Assembly has many practical complications that prevent full genome reconstructio
           "DNA reads"          "Stitched DNA reads"
       
        +-------+                               
-    T T|T A A A| ------+        T A A A T T T             
+    T A|A A A T| ------+        A A A T T T A             
        +-------+       |                                   
-   +-------+           +------> T A A A      
-   |A A A T|T T  ---------------> A A A T    
-   +-------+           +------------> A T T T
+   +-------+           +------> A A A T      
+   |A T T T|T A  -----------------> A T T T  
+   +-------+           +------------> T T T A
        +-------+       |      
-    A A|A T T T| ------+                   
+    A T|T T T A| ------+                   
        +-------+                               
 
    "* 1st is the reverse complement of the 2nd and 3rd."
@@ -1430,7 +1430,7 @@ shatter
 ACTA|2|AACC
 ```
 
-### Find Error Fragments
+### Fragment Anomaly Probability
 
 ```{prereq}
 Algorithms/Assembly/Merge Reads_TOPIC
@@ -1439,14 +1439,84 @@ Algorithms/Assembly/Break Reads_TOPIC
 Algorithms/Assembly/Break Read-Pairs_TOPIC
 ```
 
-### Find Repeat Fragments
+**WHAT**: Imagine that you're sequencing the genome of some organism. Given that genome has less than 50% repeats and the sequencer produces enough fragment_SEQs to have good coverage_SEQ (e.g. ~30x as many fragment_SEQs as the length of the genome), you can use basic probabilities to hint at anomalies. Specifically, probabilities can be used to hint at fragment_SEQs that may ...
 
-```{prereq}
-Algorithms/Assembly/Merge Reads_TOPIC
-Algorithms/Assembly/Merge Read-Pairs_TOPIC
-Algorithms/Assembly/Break Reads_TOPIC
-Algorithms/Assembly/Break Read-Pairs_TOPIC
+ * contain sequencing errors (e.g. a fragment_SEQ may have a single position where the nucleotide wasn't scanned in properly).
+ * be for repeat regions (e.g. a fragment_SEQ may map to multiple parts of the genome).
+
+**WHY**: Detecting anomalies helps with assembly. Specifically, ...
+
+ 1. fragment_SEQs containing errors can be filtered out before assembly.
+ 2. knowing which fragment_SEQs are for repeats helps
+
+**ALGORITHM**:
+
+Imagine a toy genome of ATGGATGC. A sequencer runs over that genome generating 3-mer read_SEQs with roughly 30x coverage_SEQ. The resulting fragment_SEQs are ...
+
+| Read_SEQ | # of Copies |
+|----------|-------------|
+| ATG      | 61          |
+| TGG      | 30          |
+| GAT      | 31          |
+| TGC      | 29          |
+| TGT      | 1           |
+
+Since the genome is known to have less than 50% repeats, the dominate number of copies is likely maps to 1 instance of that read_SEQ appearing in the genome. Since the dominate number is ~30 ...
+
+| Read_SEQ | # of Copies | # of Appearances in Genome |
+|----------|-------------|----------------------------|
+| ATG      | 61          | 2                          |
+| TGG      | 30          | 1                          |
+| GAT      | 31          | 1                          |
+| TGC      | 29          | 1                          |
+| TGT      | 1           | 0.03                       |
+
+Note the last read_SEQ (TGT) has 0.03 appearances, meaning it's a read_SEQ that very likely contains an error.
+
+```{output}
+ch3_code/src/FindSequencingAnomalies.py
+python
+# MARKDOWN_NORMALIZE\s*\n([\s\S]+)\n\s*# MARKDOWN_NORMALIZE
 ```
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
+TODO: ADD SAMPLE RUN
+
 
 ### Construct Overlap Graph
 
@@ -1461,7 +1531,7 @@ Algorithms/Assembly/Break Read-Pairs_TOPIC
 
 **WHAT**: Given a set of fragment_SEQs for the same organism, create a directed graph where each node is a fragment_SEQ that forms outgoing connections to other fragment_SEQs when the suffix of the outgoing node matches the prefix of the incoming node. For example...
 
-**WHY**: Candidates for the original genome may be inferred by finding Hamiltonian paths in the graph.
+**WHY**: Candidates for the original genome may be inferred by finding the graph's Hamiltonian paths.
 
 #### Bruteforce Algorithm
 

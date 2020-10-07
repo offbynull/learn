@@ -11,6 +11,7 @@ from Utils import generate_random_genome, count_kmers
 T = TypeVar('T', Read, ReadPair)
 
 
+# MARKDOWN_NORMALIZE
 # If less than 50% of the reads are from repeats, this attempts to count and normalize such that it can hint at which
 # reads may contain errors (= ~0) and which reads are for repeat regions (> 1.0).
 def normalize_based_on_read_counts(reads: List[T]) -> Dict[T, float]:
@@ -25,6 +26,7 @@ def normalize_based_on_read_counts(reads: List[T]) -> Dict[T, float]:
         if times_counted >= len(rounded_counter) * 0.5:
             return dict([(key, value / most_occurring_count) for key, value in rounded_counter.items()])
     raise ValueError('Failed to find a common count')
+# MARKDOWN_NORMALIZE
 
 
 def walk_outs_until_converge(graph: Graph[T], node: T) -> Optional[List[T]]:

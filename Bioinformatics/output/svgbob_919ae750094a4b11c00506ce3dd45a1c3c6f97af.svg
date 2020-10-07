@@ -99,7 +99,7 @@ tspan.head{
 <line marker-end="url(#triangle)" x1="164" x2="220" y1="88" y2="88"/>
 </g>
 <g>
-<line marker-end="url(#triangle)" x1="112" x2="236" y1="104" y2="104"/>
+<line marker-end="url(#triangle)" x1="112" x2="252" y1="104" y2="104"/>
 </g>
 <g>
 <line x1="112" x2="164" y1="152" y2="152"/>
@@ -133,32 +133,32 @@ A
 </g>
 <g>
 <text x="25" y="60">
-T
+A
 </text>
 </g>
 <g>
 <text x="25" y="108">
-A
-</text>
-</g>
-<g>
-<text x="25" y="156">
-A
-</text>
-</g>
-<g>
-<text x="41" y="60">
 T
 </text>
 </g>
 <g>
-<text x="41" y="108">
+<text x="25" y="156">
+T
+</text>
+</g>
+<g>
+<text x="41" y="60">
 A
 </text>
 </g>
 <g>
+<text x="41" y="108">
+T
+</text>
+</g>
+<g>
 <text x="41" y="156">
-A
+T
 </text>
 </g>
 <g>
@@ -198,17 +198,17 @@ T
 </g>
 <g>
 <text x="89" y="60">
-A
+T
 </text>
 </g>
 <g>
 <text x="89" y="108">
-T
+A
 </text>
 </g>
 <g>
 <text x="89" y="156">
-T
+A
 </text>
 </g>
 <g>
@@ -218,12 +218,12 @@ Stitched DNA reads
 </g>
 <g>
 <text x="233" y="60">
-T
+A
 </text>
 </g>
 <g>
 <text x="233" y="92">
-T
+A
 </text>
 </g>
 <g>
@@ -233,11 +233,6 @@ A
 </g>
 <g>
 <text x="249" y="92">
-A
-</text>
-</g>
-<g>
-<text x="249" y="108">
 A
 </text>
 </g>
@@ -258,22 +253,22 @@ A
 </g>
 <g>
 <text x="281" y="60">
-A
+T
 </text>
 </g>
 <g>
 <text x="281" y="92">
-A
+T
 </text>
 </g>
 <g>
 <text x="281" y="108">
-A
+T
 </text>
 </g>
 <g>
 <text x="281" y="124">
-A
+T
 </text>
 </g>
 <g>
@@ -297,18 +292,23 @@ T
 </text>
 </g>
 <g>
+<text x="313" y="108">
+T
+</text>
+</g>
+<g>
 <text x="313" y="124">
 T
 </text>
 </g>
 <g>
 <text x="329" y="60">
-T
+A
 </text>
 </g>
 <g>
 <text x="329" y="124">
-T
+A
 </text>
 </g>
 </svg>
