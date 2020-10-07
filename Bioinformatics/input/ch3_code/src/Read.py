@@ -158,6 +158,11 @@ def main():
             reads = [Read(l) for l in lines]
             genome = reads[0].stitch(reads[1:])
             print(f'Stitched {reads} to {genome}\n\n')
+        elif command == 'shatter':
+            new_k = int(lines[0])
+            read = Read(lines[1])
+            shattered = read.shatter(new_k)
+            print(f'Broke {read} to {shattered}\n\n')
         else:
             raise
     finally:

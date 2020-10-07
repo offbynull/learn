@@ -92,10 +92,11 @@ class ReadPair:
     # This is read breaking -- why not just call it break? because break is a reserved keyword.
     def shatter(self: ReadPair, k: int) -> List[ReadPair]:
         ret = []
+        d = (self.k - k) + self.d
         for window_head, window_tail in zip(slide_window(self.data.head, k), slide_window(self.data.tail, k)):
             kmer_head, _ = window_head
             kmer_tail, _ = window_tail
-            kdmer = Kdmer(kmer_head, kmer_tail, self.data.d)
+            kdmer = Kdmer(kmer_head, kmer_tail, d)
             rp = ReadPair(kdmer, source=('shatter', [self]))
             ret.append(rp)
         return ret
@@ -190,6 +191,11 @@ def main():
             read_pairs = [ReadPair(Kdmer(l.split('|')[0], l.split('|')[2], int(l.split('|')[1]))) for l in lines]
             genome = read_pairs[0].stitch(read_pairs)
             print(f'Stitched {read_pairs} to {genome}\n\n')
+        elif command == 'shatter':
+            new_k = int(lines[0])
+            read = ReadPair(Kdmer(lines[1].split('|')[0], lines[1].split('|')[2], int(lines[1].split('|')[1])))
+            shattered = read.shatter(new_k)
+            print(f'Broke {read} to {shattered}\n\n')
         else:
             raise
     finally:

@@ -1332,9 +1332,42 @@ TTA|3|TTC
 
 `{bm} /(Algorithms\/Assembly\/Break Reads)_TOPIC/`
 
-**WHAT**: 
+**WHAT**: Given a set of read_SEQs that arbitrarily overlap, each read_SEQ can be broken into many smaller read_SEQs that overlap better. For example, given 4 10-mers that arbitrarily overlap, you can break them into better overlapping 5-mers...
 
-**WHY**: 
+```{svgbob}
+                    "4 original 10-mers (left) broken up to perfectly overlapping 5-mers (right)"
+
+"1:"        A C T A A G A A C C --+--------------------> A C T A A                                   
+                                  +-------------------->   C T A A G                                 
+                                  +-------------------->     T A A G A                               
+                                  +-------------------->       A A G A A                             
+                                  +-------------------->         A G A A C                           
+                                  +-------------------->           G A A C C                         
+"2:"              A A G A A C C T A A --+-------------->       A A G A A                             
+                                        +-------------->         A G A A C                           
+                                        +-------------->           G A A C C                         
+                                        +-------------->             A A C C T                       
+                                        +-------------->               A C C T A                     
+                                        +-------------->                 C C T A A                   
+"3:"                  G A A C C T A A T T --+---------->           G A A C C                         
+                                            +---------->             A A C C T                       
+                                            +---------->               A C C T A                     
+                                            +---------->                 C C T A A                   
+                                            +---------->                   C T A A T                 
+                                            +---------->                     T A A T T               
+"4:"                            T A A T T T A G C T -+->                     T A A T T               
+                                                     +->                       A A T T T             
+                                                     +->                         A T T T A           
+                                                     +->                           T T T A G         
+                                                     +->                             T T A G C       
+                                                     +->                               T A G C T     
+"String:"   A C T A A G A A C C T A A T T T A G C T      A C T A A G A A C C T A A T T T A G C T     
+"Coverage:" 1 1 1 2 2 3 3 3 3 3 3 3 3 2 2 1 1 1 1 1      1 2 3 5 7 9 > > > > 9 8 7 6 6 5 4 3 2 1
+
+"* Coverage of > means more than 9."
+```
+
+**WHY**: Breaking reads may cause more ambiguity in overlaps. At the same time, read breaking makes it easier to find overlaps by bringing the overlaps closer together and provides (artificially) increased coverage_SEQ.
 
 **ALGORITHM**:
 
@@ -1342,6 +1375,13 @@ TTA|3|TTC
 ch3_code/src/Read.py
 python
 # MARKDOWN_BREAK\s*\n([\s\S]+)\n\s*# MARKDOWN_BREAK
+```
+
+```{ch3}
+Read
+shatter
+5
+ACTAAGAACC
 ```
 
 ### Break Read-Pairs
@@ -1352,9 +1392,28 @@ python
 Algorithms/Assembly/Break Reads_TOPIC
 ```
 
-**WHAT**: 
+**WHAT**: Given a set of read-pairs that arbitrarily overlap, each read-pair can be broken into many read-pairs with a smaller k that overlap better. For example, given 4 (4,2)-mers that arbitrarily overlap, you can break them into better overlapping (2,4)-mers...
 
-**WHY**: 
+```{svgbob}
+                    "4 original (4,2)-mers (left) broken up to perfectly overlapping (2,4)-mers (right)"
+
+"1:"        A C T A ‑ ‑ A A C C --+------------------> A C ‑ ‑ ‑ ‑ A A                             
+                                  +------------------>   C T ‑ ‑ ‑ ‑ A C                           
+                                  +------------------>     T A ‑ ‑ ‑ ‑ C C                         
+"2:"              A A G A ‑ ‑ C T A A --+------------>       A A ‑ ‑ ‑ ‑ C T                       
+                                        +------------>         A G ‑ ‑ ‑ ‑ T A                     
+                                        +------------>           G A ‑ ‑ ‑ ‑ A A                   
+"3:"                  G A A C ‑ ‑ A A T T --+-------->           G A ‑ ‑ ‑ ‑ A A                 
+                                            +-------->             A A ‑ ‑ ‑ ‑ A T                  
+                                            +-------->               A C ‑ ‑ ‑ ‑ T T               
+"4:"                          C T A A ‑ ‑ A G C T -+->                   C T ‑ ‑ ‑ ‑ A G         
+                                                   +->                     T A ‑ ‑ ‑ ‑ G C         
+                                                   +->                       A A ‑ ‑ ‑ ‑ C T       
+"String:"   A C T A A G A A C C T A A T T A G C T      A C T A A G A A C C T A A T T A G C T     
+"Coverage:" 1 1 1 2 1 2 3 2 2 2 2 3 3 2 1 1 1 1 1      1 2 2 2 2 3 4 4 3 3 4 5 4 2 1 1 2 2 1
+```
+
+**WHY**: Breaking read-pairs may cause more ambiguity in overlaps. At the same time, read-pair breaking makes it easier to find overlaps by bringing the overlaps closer together and provides (artificially) increased coverage_SEQ.
 
 **ALGORITHM**:
 
@@ -1362,6 +1421,31 @@ Algorithms/Assembly/Break Reads_TOPIC
 ch3_code/src/ReadPair.py
 python
 # MARKDOWN_BREAK\s*\n([\s\S]+)\n\s*# MARKDOWN_BREAK
+```
+
+```{ch3}
+ReadPair
+shatter
+2
+ACTA|2|AACC
+```
+
+### Find Error Fragments
+
+```{prereq}
+Algorithms/Assembly/Merge Reads_TOPIC
+Algorithms/Assembly/Merge Read-Pairs_TOPIC
+Algorithms/Assembly/Break Reads_TOPIC
+Algorithms/Assembly/Break Read-Pairs_TOPIC
+```
+
+### Find Repeat Fragments
+
+```{prereq}
+Algorithms/Assembly/Merge Reads_TOPIC
+Algorithms/Assembly/Merge Read-Pairs_TOPIC
+Algorithms/Assembly/Break Reads_TOPIC
+Algorithms/Assembly/Break Read-Pairs_TOPIC
 ```
 
 ### Construct Overlap Graph
@@ -1387,6 +1471,58 @@ Algorithms/Assembly/Break Read-Pairs_TOPIC
 ch3_code/src/ToOverlapGraphBruteforce.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+TODO: FIX ME
+
+```{ch3}
+ToOverlapGraphBruteforce
+reads
+CTT
+TTT
+TTG
+TGT
+GTT
+TTT
+TTA
 ```
 
 #### Hash Algorithm
@@ -1469,10 +1605,6 @@ ch3_code/src/FindMaximalNonBranchingPaths.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
-
-### Find Error Fragments
-
-### Find Repeat Fragments
 
 # Stories
 
@@ -2641,21 +2773,29 @@ PracticalMotifFindingExample
    "Coverage:" 1 2 3 3 4 4 5 4 3 3 3 3 4 3 3 3 2 2 1
    ```
 
- * `{bm} read breaking/(read breaking|read-breaking)/i` - The concept of taking multiple read_SEQs / read-pairs and breaking them up into smaller read_SEQs / read-pairs.
+ * `{bm} read breaking/(read breaking|read-breaking|breaking reads)/i` - The concept of taking multiple read_SEQs and breaking them up into smaller read_SEQs.
 
    ```{svgbob}
-                      "4 original 10-mer reads (left) broken up to perfectly overlapping 5-mers (right)"
-
+                       "4 original 10-mers (left) broken up to perfectly overlapping 5-mers (right)"
+   
    "1:"        A C T A A G A A C C --+--------------------> A C T A A                                   
                                      +-------------------->   C T A A G                                 
                                      +-------------------->     T A A G A                               
+                                     +-------------------->       A A G A A                             
+                                     +-------------------->         A G A A C                           
+                                     +-------------------->           G A A C C                         
    "2:"              A A G A A C C T A A --+-------------->       A A G A A                             
                                            +-------------->         A G A A C                           
+                                           +-------------->           G A A C C                         
+                                           +-------------->             A A C C T                       
+                                           +-------------->               A C C T A                     
+                                           +-------------->                 C C T A A                   
    "3:"                  G A A C C T A A T T --+---------->           G A A C C                         
                                                +---------->             A A C C T                       
                                                +---------->               A C C T A                     
                                                +---------->                 C C T A A                   
                                                +---------->                   C T A A T                 
+                                               +---------->                     T A A T T               
    "4:"                            T A A T T T A G C T -+->                     T A A T T               
                                                         +->                       A A T T T             
                                                         +->                         A T T T A           
@@ -2663,18 +2803,56 @@ PracticalMotifFindingExample
                                                         +->                             T T A G C       
                                                         +->                               T A G C T     
    "String:"   A C T A A G A A C C T A A T T T A G C T      A C T A A G A A C C T A A T T T A G C T     
-   "Coverage:" 1 1 2 2 3 3 3 3 3 3 3 3 3 2 2 1 1 1 1 1      1 2 3 4 5 5 5 5 5 5 5 5 5 5 5 5 4 3 2 1
+   "Coverage:" 1 1 1 2 2 3 3 3 3 3 3 3 3 2 2 1 1 1 1 1      1 2 3 5 7 9 > > > > 9 8 7 6 6 5 4 3 2 1
+   
+   "* Coverage of > means more than 9."
    ```
 
-   When read breaking, smaller k-mers result in better coverage_SEQ but also make the de Bruijn graph more tangled. The more tangled the de Bruijn is, the harder it is to infer the full sequence.
+   When read breaking, smaller k-mers result in better coverage_SEQ but also make the de Bruijn graph more tangled. The more tangled the de Bruijn graph is, the harder it is to infer the full sequence.
 
    In the example above, the average coverage_SEQ...
 
     * for the left-hand side (original) is 2.1.
     * for the right-hand side (broken) is 4.
 
+   See also: read-pair breaking.
+
    ```{note}
    What purpose does this actually serve? Mimicking 1 long read_SEQ as n shorter read_SEQs isn't equivalent to actually having sequenced those n shorter read_SEQs. For example, what if the longer read_SEQ being broken up has an error? That error replicates when breaking into n shorter read_SEQs, which gives a false sense of having good coverage_SEQ and makes it seems as if it wasn't an error.
+   ```
+
+ * `{bm} read-pair breaking/(read-pair breaking|read pair breaking|breaking read-pairs|breaking read pairs)/i` - The concept of taking multiple read-pairs and breaking them up into read-pairs with a smaller k.
+
+   ```{svgbob}
+                       "4 original (4,2)-mers (left) broken up to perfectly overlapping (2,4)-mers (right)"
+   
+   "1:"        A C T A ‑ ‑ A A C C --+------------------> A C ‑ ‑ ‑ ‑ A A                             
+                                     +------------------>   C T ‑ ‑ ‑ ‑ A C                           
+                                     +------------------>     T A ‑ ‑ ‑ ‑ C C                         
+   "2:"              A A G A ‑ ‑ C T A A --+------------>       A A ‑ ‑ ‑ ‑ C T                       
+                                           +------------>         A G ‑ ‑ ‑ ‑ T A                     
+                                           +------------>           G A ‑ ‑ ‑ ‑ A A                   
+   "3:"                  G A A C ‑ ‑ A A T T --+-------->           G A ‑ ‑ ‑ ‑ A A                 
+                                               +-------->             A A ‑ ‑ ‑ ‑ A T                  
+                                               +-------->               A C ‑ ‑ ‑ ‑ T T               
+   "4:"                          C T A A ‑ ‑ A G C T -+->                   C T ‑ ‑ ‑ ‑ A G         
+                                                      +->                     T A ‑ ‑ ‑ ‑ G C         
+                                                      +->                       A A ‑ ‑ ‑ ‑ C T       
+   "String:"   A C T A A G A A C C T A A T T A G C T      A C T A A G A A C C T A A T T A G C T     
+   "Coverage:" 1 1 1 2 1 2 3 2 2 2 2 3 3 2 1 1 1 1 1      1 2 2 2 2 3 4 4 3 3 4 5 4 2 1 1 2 2 1
+   ```
+
+   When read-pair breaking, a smaller k results in better coverage_SEQ but also make the de Bruijn graph more tangled. The more tangled the de Bruijn graph is, the harder it is to infer the full sequence.
+
+   In the example above, the average coverage_SEQ...
+
+    * for the left-hand side (original) is 1.6.
+    * for the right-hand side (broken) is 2.5.
+
+   See also: read breaking.
+
+   ```{note}
+   What purpose does this actually serve? Mimicking 1 long read-pair as n shorter read-pairs isn't equivalent to actually having sequenced those n shorter read-pairs. For example, what if the longer read-pair being broken up has an error? That error replicates when breaking into n shorter read-pairs, which gives a false sense of having good coverage_SEQ and makes it seems as if it wasn't an error.
    ```
 
  * `{bm} contig/(contig)s?\b/i/true/true` - A long continuous piece of DNA. Derived by searching a de Bruijn graph for paths that are the longest possible stretches of nodes with 1 indegree and 1 outdegree. That is, a path must either ...
