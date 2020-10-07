@@ -1528,7 +1528,7 @@ Never the less, in an ideal world where most of these problems don't exist, the 
  * and contain no errors.
 
 ```{note}
-Although these practical problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Contigs_TOPIC.
+Although these practical problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Graph Contigs_TOPIC.
 ```
 
 #### Overlap Graph Algorithm
@@ -1834,9 +1834,53 @@ Any Eulerian cycle through the graph is a 3-universal binary string. For example
  * 1100010111
  * ...
 
-### Find Contigs
+### Find Graph Anomalies
 
-`{bm} /(Algorithms\/Assembly\/Find Contigs)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Find Graph Anomalies)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Guess Genome_TOPIC
+```
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+TODO: DISCUSS BUBBLES AND FORKS
+
+### Find Graph Contigs
+
+`{bm} /(Algorithms\/Assembly\/Find Graph Contigs)_TOPIC/`
 
 ```{prereq}
 Algorithms/Assembly/Guess Genome_TOPIC
