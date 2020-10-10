@@ -57,6 +57,27 @@ class ReadPair:
             source=('suffix', [self])
         )
 
+    def reverse_complement(self: ReadPair) -> ReadPair:
+        def complement(ch):
+            if ch == 'A':
+                return 'T'
+            elif ch == 'T':
+                return 'A'
+            elif ch == 'C':
+                return 'G'
+            elif ch == 'G':
+                return 'C'
+            else:
+                return '?'
+
+        new_head = ''
+        for ch in self.data.head[::-1]:
+            new_head += complement(ch)
+        new_tail = ''
+        for ch in self.data.tail[::-1]:
+            new_tail += complement(ch)
+        return ReadPair(Kdmer(new_head, new_tail, self.d))
+
     # MARKDOWN_MERGE_OVERLAPPING
     def append_overlap(self: ReadPair, other: ReadPair, skip: int = 1) -> ReadPair:
         self_head = Read(self.data.head)

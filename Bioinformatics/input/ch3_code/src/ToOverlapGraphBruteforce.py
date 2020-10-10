@@ -1,3 +1,4 @@
+from collections import Counter
 from typing import List, TypeVar
 
 from Graph import Graph
@@ -21,27 +22,6 @@ def to_overlap_graph(items: List[T], skip: int = 1) -> Graph[T]:
 # MARKDOWN
 
 
-# if __name__ == '__main__':
-#     out = to_overlap_graph([
-#         Read('ATGCG'),
-#         Read('GCATG'),
-#         Read('CATGC'),
-#         Read('AGGCA'),
-#         Read('GGCAT'),
-#         Read('GGCAC')
-#     ])
-#     print(f'{out}')
-#
-#     out = to_overlap_graph([
-#         ReadPair(Kdmer('AT', 'CG', 1)),
-#         ReadPair(Kdmer('GC', 'TG', 1)),
-#         ReadPair(Kdmer('CA', 'GC', 1)),
-#         ReadPair(Kdmer('AG', 'CA', 1)),
-#         ReadPair(Kdmer('GG', 'AT', 1)),
-#         ReadPair(Kdmer('GG', 'AC', 1))
-#     ])
-#     print(f'{out}')
-
 def to_graphviz(g: Graph) -> str:
     out = ''
     for node, to_nodes in g._outbound.items():
@@ -53,11 +33,12 @@ def to_graphviz(g: Graph) -> str:
                    + '"' + to_node_str.replace("\"", "\\\"") + '"'\
                    + ' [shape=plain];\n'
     return 'digraph {\n'\
-           + 'graph[center=true, margin=0.2, nodesep=0.2, ranksep=0.2]\n'\
+           + 'graph[rankdir=LR, center=true, margin=0.2, nodesep=0.15, ranksep=0.1]\n'\
            + 'node[shape=rectangle, fontname="Courier-Bold", fontsize=10, fixedsize=true]\n'\
            + 'edge[arrowsize=0.6, arrowhead=vee]\n'\
            + out\
            + '}\n'
+
 
 def main():
     print("<div style=\"border:1px solid black;\">", end="\n\n")
@@ -74,14 +55,14 @@ def main():
 
         command = lines[0]
         lines = lines[1:]
+        counter = Counter(lines)
         if command == 'reads':
-            reads = [Read(l, i) for i, l in enumerate(lines)]
-            graph = to_overlap_graph(reads)
+            frags = [Read(r, i) for r, c in counter.items() for i in range(c)]
         elif command == 'read-pairs':
-            read_pairs = [ReadPair(Kdmer(l.split('|')[0], l.split('|')[2], int(l.split('|')[1])), i) for i, l in enumerate(lines)]
-            graph = to_overlap_graph(read_pairs)
+            frags = [ReadPair(Kdmer(r.split('|')[0], r.split('|')[2], int(r.split('|')[1])), i) for r, c in counter.items() for i in range(c)]
         else:
             raise
+        graph = to_overlap_graph(frags)
         print(f'Given the fragments {lines}, the overlap graph is...', end="\n\n")
         print(f'```{{dot}}\n{to_graphviz(graph)}\n```\n\n')
     finally:

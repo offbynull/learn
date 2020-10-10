@@ -45,18 +45,3 @@ def generate_random_cyclic_genome(size: int, copies: int, r: Optional[Random] = 
         offset = r.randint(0, size)
         copies[i] = copy[offset+1:] + copy[:offset]
     return copies
-
-
-def complement_genome(data: str) -> str:
-    new_data = ''
-    for ch in reversed(data):
-        if ch == 'A':
-            ch = 'T'
-        elif ch == 'T':
-            ch = 'A'
-        elif ch == 'C':
-            ch = 'G'
-        elif ch == 'G':
-            ch = 'C'
-        new_data += ch
-    return new_data

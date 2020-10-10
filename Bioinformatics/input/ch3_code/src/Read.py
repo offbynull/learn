@@ -36,6 +36,21 @@ class Read:
     def suffix(self: Read, skip: int = 1) -> Read:
         return Read(self.data[skip:], source=('suffix', [self]))
 
+    def reverse_complement(self: Read) -> Read:
+        new_data = ''
+        for ch in self.data[::-1]:
+            if ch == 'A':
+                new_data += 'T'
+            elif ch == 'T':
+                new_data += 'A'
+            elif ch == 'C':
+                new_data += 'G'
+            elif ch == 'G':
+                new_data += 'C'
+            else:
+                new_data += '?'
+        return Read(new_data)
+
     # MARKDOWN_MERGE_OVERLAPPING
     def append_overlap(self: Read, other: Read, skip: int = 1) -> Read:
         offset = len(self.data) - len(other.data)
@@ -135,8 +150,6 @@ class Read:
                 ret.extend(new_paths)
             return ret
         return walk_up(self, [self])
-
-
 
 
 def main():

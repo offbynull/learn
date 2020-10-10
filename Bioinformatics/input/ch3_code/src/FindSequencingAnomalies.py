@@ -2,6 +2,7 @@ from collections import Counter
 from random import Random
 from typing import Dict, List, TypeVar, Optional, Tuple
 
+from FragmentOccurrenceProbabilityCalculator import calculate_fragment_occurrence_probabilities
 from Graph import Graph
 from Read import Read
 from ReadPair import ReadPair
@@ -9,24 +10,6 @@ from ToDeBruijnGraph import to_debruijn_graph
 from Utils import generate_random_genome, count_kmers
 
 T = TypeVar('T', Read, ReadPair)
-
-
-# MARKDOWN_NORMALIZE
-# If less than 50% of the reads are from repeats, this attempts to count and normalize such that it can hint at which
-# reads may contain errors (= ~0) and which reads are for repeat regions (> 1.0).
-def normalize_based_on_read_counts(reads: List[T]) -> Dict[T, float]:
-    counter = Counter(reads)
-    max_digit_count = max([len(str(count)) for count in counter.values()])
-    for i in range(max_digit_count):
-        rounded_counter = Counter(dict([(k, round(count, -i)) for k, count in counter.items()]))
-        for k, orig_count in counter.items():
-            if rounded_counter[k] == 0:
-                rounded_counter[k] = orig_count
-        most_occurring_count, times_counted = Counter(rounded_counter.values()).most_common(1)[0]
-        if times_counted >= len(rounded_counter) * 0.5:
-            return dict([(key, value / most_occurring_count) for key, value in rounded_counter.items()])
-    raise ValueError('Failed to find a common count')
-# MARKDOWN_NORMALIZE
 
 
 def walk_outs_until_converge(graph: Graph[T], node: T) -> Optional[List[T]]:
@@ -158,7 +141,7 @@ if __name__ == '__main__':
     reads = Read.random_fragment(genome, k_read, count_kmers(genome_len, k_read) * 30, r=r)
     reads[0] = reads[0].introduce_random_errors(1, r=r)
     reads = [broken_read for read in reads for broken_read in read.shatter(k_break)]
-    normalized_read_counts = normalize_based_on_read_counts(reads)
+    normalized_read_counts = calculate_fragment_occurrence_probabilities(reads)
     print(f'{normalized_read_counts}')
     reads = reads[0].collapse(reads)
     graph = to_debruijn_graph(reads)

@@ -1,8 +1,11 @@
+from collections import Counter
 from typing import List, TypeVar
 
 from Graph import Graph
+from Kdmer import Kdmer
+from Read import Read
 from ReadPair import ReadPair
-from ToOverlapGraphHash import to_overlap_graph
+from ToOverlapGraphHash import to_overlap_graph, to_graphviz
 from Utils import slide_window_kd
 
 T = TypeVar('T')
@@ -35,16 +38,40 @@ def walk_hamiltonian_path(graph: Graph[T], from_node: T) -> List[List[T]]:
 # MARKDOWN
 
 
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        lines = []
+        while True:
+            try:
+                line = input().strip()
+                if len(line) > 0:
+                    lines.append(line)
+            except EOFError:
+                break
+
+        command = lines[0]
+        lines = lines[1:]
+        counter = Counter(lines)
+        if command == 'reads':
+            frags = [Read(r, i) for r, c in counter.items() for i in range(c)]
+        elif command == 'read-pairs':
+            frags = [ReadPair(Kdmer(r.split('|')[0], r.split('|')[2], int(r.split('|')[1])), i) for r, c in counter.items() for i in range(c)]
+        else:
+            raise
+        graph = to_overlap_graph(frags)
+        print(f'Given the fragments {lines}, the overlap graph is...', end="\n\n")
+        print(f'```{{dot}}\n{to_graphviz(graph)}\n```', end="\n\n")
+        print(f'... and the Hamiltonian paths are ...', end="\n\n")
+        all_paths = set([tuple(path) for node in graph.get_nodes() for path in walk_hamiltonian_path(graph, node)])
+        for path in all_paths:
+            print(f' * {" -> ".join([str(p) for p in path])}')
+
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
+
+
 if __name__ == '__main__':
-    readpairs = [ReadPair(kdmer) for kdmer, _ in slide_window_kd('TAATGCCATGGGATGTT', 3, 1)]
-    graph = to_overlap_graph(readpairs)
-
-    dnas = set()
-    for node in graph.get_nodes():
-        paths = walk_hamiltonian_path(graph, node)
-        for path in paths:
-            dna = path[0].stitch(path)
-            dnas.add(dna)
-
-    for dna in dnas:
-        print(f'{dna}')
+    main()
