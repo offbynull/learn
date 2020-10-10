@@ -1457,7 +1457,7 @@ Algorithms/Assembly/Break Read-Pairs_TOPIC
 **ALGORITHM**:
 
 ```{note}
-For simplicity's sake, assume that the genome is single-stranded (not double-stranded DNA / no reverse complementing stand).
+For simplicity's sake, the genome is single-stranded (not double-stranded DNA / no reverse complementing stand).
 ```
 
 Imagine a genome of ATGGATGC. A sequencer runs over that single strand and generates 3-mer read_SEQs with roughly 30x coverage_SEQ. The resulting fragment_SEQs are ...
@@ -1497,105 +1497,37 @@ TGC 29
 TGT 1
 ```
 
-### Pair Reverse Complement Fragments
+### Guess Genome
 
-`{bm} /(Algorithms\/Assembly\/Pair Reverse Complement Fragments)_TOPIC/`
-
-```{prereq}
-Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
-```
-
-**WHAT**: Imagine that you're sequencing an organism's genome. Given that ...
-
- * there's good coverage_SEQ of the genome (e.g. ~30x as many fragment_SEQs as the length of the genome),
- * the number of times that each fragment_SEQ appears in the genome has been determined,
- * and the fragment_SEQs with sequencing errors have all been filtered out,
- 
-... you can reasonably assume that you have all fragment_SEQs for both strands of double-stranded DNA that make up the genome. Since each strand is the reverse complement of the other strand, it's possible to pair up each fragment_SEQ with the fragment_SEQ that is its reverse complement.
-
-**WHY**: Fragment_SEQ pairs represent the same part of genome but different strands of DNA. Pairing them together may make the process of assembly less complicated because the number of parameters get reduced.
-
-**ALGORITHM**:
-
-If a fragment_SEQ and its reverse complementing fragment_SEQ both have the same genome occurrence probability, they can be paired together. For example, given the following genome occurrence probabilities...
-
-| Read_SEQ | # of Copies | # of Appearances in Genome |
-|----------|-------------|----------------------------|
-| ATG      | 61          | 2                          |
-| TGG      | 30          | 1                          |
-| GAT      | 31          | 1                          |
-| TGC      | 29          | 1                          |
-| CAT      | 58          | 2                          |
-| CCT      | 32          | 1                          |
-| ATC      | 32          | 1                          |
-| GCA      | 28          | 1                          |
-
-, the following fragment_SEQ pairs very likely represent the same parts of genome (but different strands)...
-
- * ATG and CAT
- * TGG and CCT
- * GAT and ATC
- * TGC and GCA
-
-The only exception with this algorithm is when a fragment_SEQ's reverse complement is itself. For example, the reverse complement of the 4-mer TATA is TATA. If the genome occurrence probability for TATA were 2, it wouldn't be obvious where TATA is repeated. It may be that ...
-
- * TATA is duplicated on the same strand, in which case it's occurrence probability should remain as 2...
-
-   ```{svgbob}
-   5' . . . T -> A -> T -> A . . . T -> A -> T -> A -> . . . 3'    
-   ```
-
- * TATA is on both strands (reverse complement of each other), in which case its occurrence probability should be 1...
-
-   ```{svgbob}
-   3' . . . A <- T <- A <- T . . . 5'
-            │    │    │    │
-   5' . . . T -> A -> T -> A . . . 3'    
-   ```
-
-
-```{output}
-ch3_code/src/FragmentReverseComplementPairer.py
-python
-# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
-```
-
-```{ch3}
-FragmentReverseComplementPairer
-ATG 2
-TGG 1
-GAT 1
-TGC 1
-CAT 2
-CCA 1
-ATC 1
-GCA 1
-```
-
-### Infer Genome
-
-`{bm} /(Algorithms\/Assembly\/Infer Genome)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Guess Genome)_TOPIC/`
 
 ```{prereq}
 Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 ```
 
-**WHAT**:
+**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from. For example, the following 3-mer read_SEQs are from a single strand of genome: `TTA`, `TAC`, `ACT`, `CTT`, `TTA`, and `TAG`. That single strand of genome may have been either `TACTTAG` or `TTAGTTAC`.
 
-**WHY**:
+**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves often aren't good enough. They need to be merged together to produce larger chunks of genome / the entire genome.
 
 #### Overlap Graph Algorithm
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm)_TOPIC/`
 
-Imagine that you're sequencing an organism's genome. Given the fragment_SEQs sequenced for that genome, you normalize each fragment_SEQ based on fragment_SEQ occurrence in genome probabilities, then create a directed graph where ...
+Imagine that you're sequencing a single strand of an organism's genome. Given the fragment_SEQs for that genome, you create a directed graph where ...
 
   1. each node is a fragment_SEQ.
+
+     ```{svgbob}
+     TTA    TAG    AGT 
+     ```
+
   2. each edge is between overlapping fragment_SEQs (nodes), where the source node has the overlap in its suffix and the destination node has the overlap in its prefix.
 
-This graph is called an overlap graph, because the edges show the different overlap candidates.
+     ```{svgbob}
+     TTA --> TAG --> AGT 
+     ```
 
-For example, ...
+This graph is called an overlap graph, because the edges show the different overlap candidates. For example, ...
 
 | Read_SEQ | # of Copies | # of Appearances in Genome |
 |----------|-------------|----------------------------|
@@ -1620,7 +1552,7 @@ For example, ...
 
 ```
 
-In theory, an overlap graph shows the different ways that fragment_SEQs can be merged to reconstruct a genome. A path that touches each node exactly once (Hamiltonian path) is a guess of what the genome might be. There are may be multiple such paths, meaning that there may be multiple genome guesses.
+In theory, an overlap graph shows the different ways that fragment_SEQs can be merged to reconstruct a genome. A path in the graph that touches each node exactly once is a guess of what the genome might be. Such a path is called the Hamiltonian path. There are may be multiple Hamiltonian paths in the graph, meaning that there may be multiple genome guesses.
 
 For example, given the overlap graph ...
 
@@ -1637,22 +1569,33 @@ For example, given the overlap graph ...
 
 , the original genome may be ...
  
-  * TTAGTTACTT
-  * TTACTTAGTT
-  * ACTTAGTTAC
-  * CTTAGTTACT
+  * `TTAGTTACTT`
+  * `TTACTTAGTT`
+  * `ACTTAGTTAC`
+  * `CTTAGTTACT`
   * ...
 
-In practice, there may be multiple problems with finding Hamiltonian paths:
+In practice, there are many complications with finding Hamiltonian paths:
 
- 1. Finding Hamiltonian paths is computationally intensive. The execution time grows exponentially as graph complexity grows linearly.
- 2. Practical problems with sequencing mean that Hamiltonian paths may not exist or may be wildly incorrect:
-    * Fragment_SEQs are for both strands of double stranded DNA, meaning that fragment_SEQs from the different strands may incidentally overlap.
+ 1. More than one Hamiltonian path means that it isn't possible to definitively know what the original genome was.
+ 2. Finding Hamiltonian paths is computationally intensive. The execution time grows exponentially as graph complexity grows linearly.
+ 3. Practical problems with sequencing mean that Hamiltonian paths will either not exist or be wildly incorrect:
+    * Fragment_SEQs are for both strands of double stranded DNA, meaning that either...
+      * fragment_SEQs from the different strands may incidentally overlap, resulting in incorrect nodes/ edges.
+      * fragment_SEQs from the different strands may not overlap, resulting in a disconnected graph.
     * Fragment_SEQs may have errors that weren't properly detected/filtered out, resulting in incorrect nodes / edges.
     * Fragment_SEQs may be for repeat regions that weren't properly accounted for, resulting in incorrect nodes / edges.
     * Fragment_SEQs may be missing for some parts of the genome, resulting in missing nodes / edges.
 
-For each fragment_SEQ, this algorithm scans over every other fragment_SEQ to find matching overlaps. As the number of fragment_SEQs grow linearly, this algorithm's execution time grows exponentially. As such, it's purpose is to help conceptualize the problem of generating an overlay graph with trivial inputs.
+Never the less, in an ideal world where most of these problems don't exist, finding the Hamiltonian paths would be a good way to guess the genome.
+
+```{note}
+Although these problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Contigs_TOPIC.
+```
+
+There are 2 common methods to constructing an overlap graph.
+
+Bruteforce method: For each fragment_SEQ, scan over every other fragment_SEQ to find matching overlaps. As the number of fragment_SEQs grow linearly, this algorithm's execution time grows exponentially. As such, it's purpose is to help conceptualize the problem of generating an overlay graph with trivial inputs.
 
 ```{output}
 ch3_code/src/ToOverlapGraphBruteforce.py
@@ -1673,12 +1616,12 @@ GTT
 CTT
 ```
 
-A much quicker way of constructing an overlap graph is to use hash tables. For each fragment_SEQ, this algorithm adds that fragment_SEQ's ...
+Hash table method: A much quicker way of constructing an overlap graph is to use hash tables: For each fragment_SEQ, add that fragment_SEQ's ...
 
- * prefix to a hash table,
+ * prefix to a hash table.
  * suffix to a hash table.
  
-Then, the hash tables are joined together to find fragment_SEQs that overlap.
+Then, join the hash tables together to find overlapping fragment_SEQs.
 
 
 ```{output}
@@ -1700,7 +1643,7 @@ ACT
 CTT
 ```
 
-The overlap graph will be the same regardless of which method you use to construct it (bruteforce vs hash table). Hamiltonian path is a path that walks over each node of a graph exactly once.
+Once the overlap graph has been created, you can recursively walk over it to find the Hamiltonian path.
 
 ```{output}
 ch3_code/src/WalkHamiltonianPath.py
@@ -1730,12 +1673,39 @@ Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm_TOPIC
 ```
 
-Imagine that you're sequencing an organism's genome. Given the fragment_SEQs sequenced for that genome, you normalize each fragment_SEQ based on fragment_SEQ occurrence in genome probabilities, then create a directed graph where ...
+Imagine that you're sequencing a single strand of an organism's genome. Given the fragment_SEQs for that genome, you create a directed graph where ...
 
   1. each fragment_SEQ is represented as an edge connecting 2 nodes, where the source node is the prefix of the fragment_SEQ and the destination node is the suffix of the fragment_SEQ.
+
+     ```{svgbob}
+         TTA             TAT             ATT
+     TT -----> TA    TA -----> AT    AT -----> TT 
+
+         TTC             TCT             CTT
+     TT -----> TC    TC -----> CT    CT -----> TT 
+     ```
+
   2. duplicate nodes are merged into a single node.
 
-This graph is called a de Bruijn graph. The original purpose of de Bruijn graphs were to efficiently generate k-universal strings: For some alphabet, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
+     ```{svgbob}
+                  CTT
+     +--------------------------+
+     |                          |
+     |     TTC       TCT        |
+     |   +-----> TC -----> CT --+
+     v  /
+     TT 
+     ^  \
+     |   +-----> TA -----> AT --+
+     |     TTA       TAT        |
+     |                          |
+     +--------------------------+
+                  ATT
+     ```
+
+This graph is called a de Bruijn graph: a balanced_GRAPH strongly connected graph where the fragment_SEQs are represented by edges.
+
+De Bruijn graphs were originally invented to efficiently generate k-universal strings: For some alphabet, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
 
  * 000: **000**1110100
  * 001: 0**001**110100
@@ -1745,6 +1715,18 @@ This graph is called a de Bruijn graph. The original purpose of de Bruijn graphs
  * 101: 00011**101**00
  * 110: 0001**110**100
  * 111: 000**111**0100
+
+Given every possible 3-mer for a binary alphabet, construct the edge for each k-mer ...
+
+```{svgbob}
+    000              001              010              011     
+00 -----> 00     00 -----> 01     01 -----> 10     01 -----> 11
+
+    100              101              110              111     
+10 -----> 00     10 -----> 01     11 -----> 10     11 -----> 11
+```
+
+... and merge duplicate nodes together ...
 
 ```{svgbob}
     001                011
@@ -1769,7 +1751,50 @@ This graph is called a de Bruijn graph. The original purpose of de Bruijn graphs
 "* k-universal string:" 0001110100
 ```
 
-This is more-or-less the same problem as genome assembly. Given that you have every fragment_SEQ for a single strand of genome, find strings that use each fragment_SEQ exactly once:
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+TODO FIX FROM HERE
+
+
+Given the graph above, k-universal strings can be found by finding Eulerian cycle. An Eulerian cycle is a cycle that walks over every edge of the graph exactly once. Finding Eulerian cycles in a de Bruijn graph is much faster than finding Hamiltonian cycles in an overlay graph.
+
+The k-universal string problem is more-or-less the same problem as genome assembly. Given that you have every fragment_SEQ for a single strand of genome, find strings that use each fragment_SEQ exactly once:
 
 | Read_SEQ | # of Copies | # of Appearances in Genome |
 |----------|-------------|----------------------------|
@@ -1782,7 +1807,7 @@ This is more-or-less the same problem as genome assembly. Given that you have ev
 | ACTT     | 33          | 1                          |
 | CTTA     | 30          | 1                          |
 
-... result in the following edges ...
+Construct the edge for each read_SEQ
 
 ```{svgbob}
 TTA --> TAG 
@@ -1795,7 +1820,7 @@ ACT --> CTT
 CTT --> TTA
 ```
 
-... which merge together to make the following de Bruijn graph ...
+... and merge duplicate nodes together ...
 
 ```{svgbob}
                        GTTA
@@ -1813,7 +1838,9 @@ TTA
                        CTTA
 ```
 
-Note how both example graphs above are balanced_GRAPH and strongly connected. All de Bruijn graphs must be both strongly connected and balanced_GRAPH. If dealing with a circular genome (e.g. bacterial genomes), the graph will already be both balanced_GRAPH and strongly connected.
+The same algorithm used to find k-universal strings is used to find genome guesses.
+
+To construct a de Bruijn graph:
 
 ```{output}
 ch3_code/src/ToDeBruijnGraph.py
@@ -1834,7 +1861,9 @@ ACTT
 CTTA
 ```
 
-If dealing with non-circular genomes (e.g. eukaryotic genomes), the graph will be nearly balanced_GRAPH. Nearly balanced graphs can artificially be made to become balanced_GRAPH by finding imbalanced nodes (usually root and tail nodes) and creating artificial edges between them such that they become balanced_NODE.
+Note how both the k-universal string graph and the fragment_SEQ graph above are both balanced_GRAPH and strongly connected. If the graph isn't balanced_GRAPH and strongly connected, the algorithm to guess genomes won't work.
+
+This isn't a problem with circular genomes (e.g. bacterial genomes), but non-circular genomes (e.g. eukaryotic genomes) won't be fully balanced_GRAPH -- they will be nearly balanced_GRAPH. Nearly balanced graphs can artificially be made to become balanced_GRAPH by finding imbalanced nodes (usually root and tail nodes) and creating artificial edges between them such that they become balanced_NODE:
 
 ```{output}
 ch3_code/src/BalanceNearlyBalancedGraph.py
@@ -1845,12 +1874,10 @@ python
 ```{ch3}
 BalanceNearlyBalancedGraph
 reads
-TTAG
-TAGT
-AGTT
 TTAC
-TACT
-ACTT
+TACC
+ACCC
+CCCT
 ```
 
 ```{output}
@@ -1864,7 +1891,7 @@ python
 `{bm} /(Algorithms\/Assembly\/Find Contigs)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Infer Genome_TOPIC
+Algorithms/Assembly/Guess Genome_TOPIC
 ```
 
 ```{output}
