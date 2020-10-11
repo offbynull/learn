@@ -1,6 +1,11 @@
+from collections import Counter
 from typing import List, Tuple, TypeVar
 
 from Graph import Graph
+from Kdmer import Kdmer
+from Read import Read
+from ReadPair import ReadPair
+from ToDeBruijnGraph import to_debruijn_graph, to_graphviz
 
 T = TypeVar('T')
 
@@ -66,18 +71,54 @@ def walk_eularian_cycle(graph: Graph[T], start_node: T) -> List[T]:
 # MARKDOWN
 
 
+# if __name__ == '__main__':
+#     g = Graph()
+#     g.insert_edge('0', '3')
+#     g.insert_edge('1', '0')
+#     g.insert_edge('2', '1')
+#     g.insert_edge('2', '6')
+#     g.insert_edge('3', '2')
+#     g.insert_edge('4', '2')
+#     g.insert_edge('5', '4')
+#     g.insert_edge('6', '5')
+#     g.insert_edge('6', '8')
+#     g.insert_edge('7', '9')
+#     g.insert_edge('8', '7')
+#     g.insert_edge('9', '6')
+#     print(f'{"->".join(walk_eularian_cycle(g, "0"))}')
+
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        lines = []
+        while True:
+            try:
+                line = input().strip()
+                if len(line) > 0:
+                    lines.append(line)
+            except EOFError:
+                break
+
+        command = lines[0]
+        lines = lines[1:]
+        counter = Counter(lines)
+        if command == 'reads':
+            frags = [Read(r, i) for r, c in counter.items() for i in range(c)]
+        elif command == 'read-pairs':
+            frags = [ReadPair(Kdmer(r.split('|')[0], r.split('|')[2], int(r.split('|')[1])), i) for r, c in counter.items() for i in range(c)]
+        else:
+            raise
+        graph = to_debruijn_graph(frags)
+        print(f'Given the fragments {lines}, the de Bruijn graph is...', end="\n\n")
+        print(f'```{{dot}}\n{to_graphviz(graph)}\n```\n\n')
+        print(f'... and a Eulerian cycle is ...', end="\n\n")
+        path = walk_eularian_cycle(graph, frags[0].prefix())
+        print(f'{" -> ".join([str(p) for p in path])}')
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
+
+
 if __name__ == '__main__':
-    g = Graph()
-    g.insert_edge('0', '3')
-    g.insert_edge('1', '0')
-    g.insert_edge('2', '1')
-    g.insert_edge('2', '6')
-    g.insert_edge('3', '2')
-    g.insert_edge('4', '2')
-    g.insert_edge('5', '4')
-    g.insert_edge('6', '5')
-    g.insert_edge('6', '8')
-    g.insert_edge('7', '9')
-    g.insert_edge('8', '7')
-    g.insert_edge('9', '6')
-    print(f'{"->".join(walk_eularian_cycle(g, "0"))}')
+    main()
