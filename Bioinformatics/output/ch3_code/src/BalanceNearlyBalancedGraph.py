@@ -6,7 +6,7 @@ from Kdmer import Kdmer
 from Read import Read
 from ReadPair import ReadPair
 from ToDeBruijnGraph import to_debruijn_graph, to_graphviz
-from WalkEulerianCycle import walk_eularian_cycle
+from WalkRandomEulerianCycle import walk_eulerian_cycle
 
 T = TypeVar('T')
 

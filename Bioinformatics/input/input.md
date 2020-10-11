@@ -1505,9 +1505,11 @@ TGT 1
 Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 ```
 
-**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from. For example, the following 3-mer read_SEQs are from a single strand of genome: `TTA`, `TAC`, `ACT`, `CTT`, `TTA`, and `TAG`. That single strand of genome may have been either `TACTTAG` or `TTAGTTAC`.
+**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from.
 
-**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce larger chunks of genome / the entire genome.
+For example, the following 3-mer read_SEQs are from a single strand of genome: TTA, TAC, ACT, CTT, TTA, and TAG. That single strand of genome may have been either TACTTAG or TTAGTTAC.
+
+**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce produce a more complete picture of the genome.
 
 #### Overlap Graph Algorithm
 
@@ -1522,7 +1524,9 @@ Given the fragment_SEQs for a single strand of genome, create a directed graph w
      TAC     TTA     CTT     ACT 
      ```
 
-  2. each edge is between overlapping fragment_SEQs (nodes), where the source node has the overlap in its suffix and the destination node has the overlap in its prefix.
+  2. each edge is between overlapping fragment_SEQs (nodes), where the ...
+     * source node has the overlap in its suffix .
+     * destination node has the overlap in its prefix.
 
      ```{svgbob}
      +----------------------------------------------------------------+
@@ -1545,7 +1549,7 @@ In theory, an overlap graph shows the different ways that fragment_SEQs can be m
   * ...
 
 ```{note}
-Notice that the example graph is circular. If the organism genome itself were also circular (e.g. bacterial genome), the genome guesses above are all actually the same because circular genomes don't have a start / end point (it wraps).
+Notice that the example graph is circular. If the organism genome itself were also circular (e.g. bacterial genome), the genome guesses above are all actually the same because circular genomes don't have a beginning / end.
 ```
 
 In practice, there are many complications with finding Hamiltonian paths:
@@ -1573,13 +1577,13 @@ Although these practical problems make it impossible to get the entire genome, i
 Given a graph, you can recursively walk the graph to pull out all paths. Every path that touches each node exactly once is a Hamiltonian path.
 
 ```{output}
-ch3_code/src/WalkHamiltonianPath.py
+ch3_code/src/WalkAllHamiltonianPaths.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch3}
-WalkHamiltonianPath
+WalkAllHamiltonianPaths
 reads
 TTA
 TTA
@@ -1674,7 +1678,7 @@ Similar to an overlay graph, a de Bruijn graph shows the different ways that fra
 
 A path in a de Bruijn graph that walks over each edge exactly once is a guess of the genome might be. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding Hamiltonian paths in an overlay graph, it's much faster to find Eulerian cycles in an de Bruijn graph.
 
-Even with the faster speed, finding Eulerian cycles in a de Bruijn graph has many of the same complications as finding Hamiltonian paths in a overlay graph:
+Even with the faster speed, finding Eulerian cycles in a de Bruijn graph has many of the same complications as finding Hamiltonian paths in an overlay graph:
 
  1. Practical problems with sequencing mean that Eulerian cycles will either not exist or be wildly incorrect:
     * Fragment_SEQs are for both strands of double stranded DNA, meaning that either...
@@ -1685,7 +1689,7 @@ Even with the faster speed, finding Eulerian cycles in a de Bruijn graph has man
     * Fragment_SEQs may be missing for some parts of the genome, resulting in missing nodes / edges.
  2. More than one Eulerian cycle means that it isn't possible to definitively know what the original genome was.
 
-Never the less, in an ideal world where most of these problems don't exist, finding Eulerian would be a good way to guess the genome.
+Never the less, in an ideal world where most of these problems don't exist, finding Eulerian cycles would be a good way to guess the genome.
 
 ```{note}
 Although these practical problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Contigs_TOPIC.
@@ -1695,22 +1699,16 @@ Although these practical problems make it impossible to get the entire genome, i
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Eulerian Cycle Algorithm)_TOPIC/`
 
-Given a graph that's strongly connected and balanced_GRAPH, you can find a Eulerian cycle using the following algorithm:
-
-1. Pick a node.
-2. Walk edges until you return to the node you started from.
-   * For each node, ignore outgoing edges that have already been walked.
-   * For each node, pick an outgoing edge to walk at random.
-3. Of the nodes walked, pick one with unexplored edges and go to 2.
+Given a graph that's strongly connected and balanced_GRAPH, you can find a Eulerian cycle by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.
 
 ```{output}
-ch3_code/src/WalkEulerianCycle.py
+ch3_code/src/WalkRandomEulerianCycle.py
 python
 # MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
 ```
 
 ```{ch3}
-WalkEulerianCycle
+WalkRandomEulerianCycle
 reads
 TTA
 TAT
@@ -1718,6 +1716,12 @@ ATT
 TTC
 TCT
 CTT
+```
+
+This algorithm picks one Eulerian cycle in a graph. In the above graph, there are two. In other real-world applications, there likely will be way too many Eulerian cycles to enumerate all of them.
+
+```{note}
+See the section on k-universal strings to see a real-world application of Eulerian graphs. For something like k=20, good luck trying to enumerate all Eulerian cycles.
 ```
 
 ##### Graph Construction Algorithm
@@ -1728,7 +1732,7 @@ CTT
 Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm_TOPIC
 ```
 
-To construct a de Bruijn graph, add an edge for each fragment_SEQ making sure to not duplicate nodes.
+To construct a de Bruijn graph, add an edge for each fragment_SEQ making sure to not create duplicate nodes.
 
 ```{output}
 ch3_code/src/ToDeBruijnGraph.py
@@ -1772,7 +1776,7 @@ ACCC
 CCCT
 ```
 
-In the graph above, an artifical edge is inserted between CCT and TTA to create a balanced graph. With this balanced graph, an Eulerian cycle can be found by starting from the root node. The artificial edge shows up at the end of the Eulerian cycle, and as such can be dropped.
+In the graph above, an artificial edge is inserted between CCT and TTA to create a balanced graph. With this balanced graph, a path that touches lal nodes can found by finding the Eulerian cycle from the original starting from the original root node (TTA). The artificial edge will show up at the end of the Eulerian cycle (CCT to TTA), and as such can be dropped.
 
 ##### K-universal String Algorithm
 
@@ -1783,20 +1787,11 @@ Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algori
 Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm_TOPIC
 ```
 
-De Bruijn graphs were originally invented to efficiently generate k-universal strings: For some alphabet, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once.
+De Bruijn graphs were originally invented to efficiently generate k-universal strings: For some alphabet and k, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once.
 
-Solving the k-universal string problem is more-or-less the same as assembly. For example, for an alphabet containing only 0 and 1 (binary), a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
+Solving the k-universal string problem is more-or-less the same as assembly. For example, for an alphabet containing only 0 and 1 (binary) and k=3, list out all possible 3-mers: \[000, 001, 010, 011, 100, 101, 110, 111\].
 
- * 000: **000**1110100
- * 001: 0**001**110100
- * 010: 000111**010**0
- * 011: 00**011**10100
- * 100: 0001110**100**
- * 101: 00011**101**00
- * 110: 0001**110**100
- * 111: 000**111**0100
-
-Given every possible 3-mer for a binary alphabet, construct the edge for each k-mer ...
+Given these 3-mers, construct an edge for each one ...
 
 ```{svgbob}
     000              001              010              011     
@@ -1822,7 +1817,11 @@ Given every possible 3-mer for a binary alphabet, construct the edge for each k-
 |             |v              |
 +------------ 10 <------------+
     100                110
+```
 
+Any Eulerian cycle through the graph is a 3-universal binary string. For example, 0001110100:
+
+```{svgbob}
 "* Cycle 1:"            00 -> 00
 "* Cycle 2:"                  00 -> 01 -------------------------> 10 -> 00
 "* Cycle 3:"                        01 -> 11 -> 11 -> 10 -> 01
@@ -1831,7 +1830,18 @@ Given every possible 3-mer for a binary alphabet, construct the edge for each k-
 "* k-universal string:" 0001110100
 ```
 
-Given the graph above, k-universal strings can be found by finding Eulerian cycles. There are multiple Eulerian cycles, meaning that there are multiple k-universal strings:
+| 3-mer | Placement in 3-universal string |
+|-------|---------------------------------|
+| 000   | **000**1110100                  |
+| 001   | 0**001**110100                  |
+| 010   | 000111**010**0                  |
+| 011   | 00**011**10100                  |
+| 100   | 0001110**100**                  |
+| 101   | 00011**101**00                  |
+| 110   | 0001**110**100                  |
+| 111   | 000**111**0100                  |
+
+ There are multiple Eulerian cycles in the graph, meaning that there are multiple 3-universal strings:
 
  * 0001110100
  * 0011101000
@@ -1846,6 +1856,51 @@ Given the graph above, k-universal strings can be found by finding Eulerian cycl
 ```{prereq}
 Algorithms/Assembly/Guess Genome_TOPIC
 ```
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
+TODO: CONTINUE HERE
+
 
 ```{output}
 ch3_code/src/FindMaximalNonBranchingPaths.py
@@ -2756,7 +2811,7 @@ PracticalMotifFindingExample
                  +----> E -----+
    ```
 
- * `{bm} Eulerian path` - A path in a graph that visits every edge exactly once.
+ * `{bm} Eulerian path` `{bm} /(Eulerian)_PATH/i` - A path in a graph that visits every edge exactly once.
  
    In the graph below, the Eulerian path is (A,B), (B,C), (C,D), (D,E), (E,C), (C,D), (D,F).
 
@@ -2770,7 +2825,7 @@ PracticalMotifFindingExample
                  +----- E
    ```
 
- * `{bm} Eulerian cycle/(Eulerian graph|Eulerian cycle|Eulerian)/i` - An Eulerian path that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.
+ * `{bm} Eulerian cycle` `{bm} /(Eulerian)_CYCLE/i` - An Eulerian path that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.
  
    The graph below has an Eulerian cycle of (A,B), (B,C) (C,D), (D,F), (F,C), (C,A).
 
@@ -2784,7 +2839,21 @@ PracticalMotifFindingExample
    +-------------+
    ```
 
-   For a graph to be Eulerian, it must be both balanced_GRAPH and strongly connected. Note how in the graph above, ...
+   If a graph contains an Eulerian cycle, it's said to be an Eulerian graph.
+
+ * `{bm} Eulerian graph` `{bm} /(Eulerian)_GRAPH/i` - For a graph to be Eulerian_GRAPH, it must have am Eulerian cycle. For a graph to have an Eulerian cycle, it must be both balanced_GRAPH and strongly connected.
+ 
+    ```{svgbob}
+                 +-------------+
+                 |             |
+                 v             |
+   A ---> B ---> C ---> D ---> F
+   ^             |
+   |             |
+   +-------------+
+   ```
+
+   Note how in the graph above, ...
    
    * every node is reachable from every other node (strongly connected),
    * every node has an outdegree equal to its indegree (balanced_GRAPH).
@@ -2970,7 +3039,7 @@ PracticalMotifFindingExample
 
    De Bruijn graphs are used for efficient genome assembly. They were originally invented to solve the k-universal string problem.
 
- * `{bm} k-universal/(k-universal|\d+-universal)/i` - For some alphabet, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
+ * `{bm} k-universal/(k-universal|\d+-universal)/i` - For some alphabet and k, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary) and k=3, a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
 
    * 000: **000**1110100
    * 001: 0**001**110100
@@ -3157,6 +3226,9 @@ PracticalMotifFindingExample
 
 `{bm-ignore} (fragment)_NORM/i`
 `{bm-error} Apply suffix _NORM, _SEQ/(fragment)/i`
+
+`{bm-ignore} (Eulerian)_NORM/i`
+`{bm-error} Apply suffix _PATH, _CYCLE, _GRAPH, or _NORM/(Eulerian)/i`
 
 `{bm-error} Missing topic reference/(_TOPIC)/i`
 `{bm-error} Use you instead of we/\b(we)\b/i`

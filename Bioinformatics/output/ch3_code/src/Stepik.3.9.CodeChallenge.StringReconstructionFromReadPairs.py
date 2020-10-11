@@ -2,7 +2,7 @@ from BalanceNearlyBalancedGraph import balance_graph
 from ReadPair import ReadPair
 from Kdmer import Kdmer
 from ToOverlapGraphHash import to_overlap_graph
-from WalkEulerianCycle import walk_eularian_cycle
+from WalkRandomEulerianCycle import walk_eulerian_cycle
 
 with open('/home/user/Downloads/dataset_240262_16(1).txt', mode='r', encoding='utf-8') as f:
     data = f.read()
@@ -20,7 +20,7 @@ read_pairs = [ReadPair(kdmer) for kdmer in kdmers]
 
 graph = to_overlap_graph(read_pairs)
 graph, roots, tails = balance_graph(graph)
-path = walk_eularian_cycle(
+path = walk_eulerian_cycle(
     graph,
     list(roots)[0]
 )

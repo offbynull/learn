@@ -33,7 +33,7 @@ def exhaustively_walk_until_all_nodes_touched_exactly_one(
 
 
 # walk each node exactly once
-def walk_hamiltonian_path(graph: Graph[T], from_node: T) -> List[List[T]]:
+def walk_hamiltonian_paths(graph: Graph[T], from_node: T) -> List[List[T]]:
     return exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])
 # MARKDOWN
 
@@ -64,7 +64,7 @@ def main():
         print(f'Given the fragments {lines}, the overlap graph is...', end="\n\n")
         print(f'```{{dot}}\n{to_graphviz(graph)}\n```', end="\n\n")
         print(f'... and the Hamiltonian paths are ...', end="\n\n")
-        all_paths = set([tuple(path) for node in graph.get_nodes() for path in walk_hamiltonian_path(graph, node)])
+        all_paths = set([tuple(path) for node in graph.get_nodes() for path in walk_hamiltonian_paths(graph, node)])
         for path in all_paths:
             print(f' * {" -> ".join([str(p) for p in path])}')
 

@@ -1,6 +1,6 @@
 from BalanceNearlyBalancedGraph import balance_graph
 from Graph import Graph
-from WalkEulerianCycle import walk_eularian_cycle
+from WalkRandomEulerianCycle import walk_eulerian_cycle
 
 with open('/home/user/Downloads/dataset_240261_6(1).txt', mode='r', encoding='utf-8') as f:
     data = f.read()
@@ -16,6 +16,6 @@ graph = Graph()
 [graph.insert_edge(from_node, to_node) for from_node, to_nodes in adjacency_list for to_node in to_nodes]
 graph, roots, tails = balance_graph(graph)
 
-path = walk_eularian_cycle(graph, roots.pop())
+path = walk_eulerian_cycle(graph, roots.pop())
 path.pop()  # last conn in cycle is artificial -- it was created from balancing so generating this path would be fast
 print(f'{"->".join(path)}')

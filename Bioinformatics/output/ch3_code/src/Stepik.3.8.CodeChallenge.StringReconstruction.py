@@ -1,7 +1,7 @@
 from BalanceNearlyBalancedGraph import balance_graph
 from Read import Read
 from ToDeBruijnGraph import to_debruijn_graph
-from WalkEulerianCycle import walk_eularian_cycle
+from WalkRandomEulerianCycle import walk_eulerian_cycle
 
 with open('/home/user/Downloads/dataset_240261_7(1).txt', mode='r', encoding='utf-8') as f:
     data = f.read()
@@ -17,7 +17,7 @@ graph = to_debruijn_graph(reads)
 
 graph, roots, tails = balance_graph(graph)
 
-path = walk_eularian_cycle(graph, roots.pop())
+path = walk_eulerian_cycle(graph, roots.pop())
 path.pop()  # last conn in cycle is artificial -- it was created from balancing so generating this path would be fast
 genome = path[0].stitch(path)
 print(f'{genome}')

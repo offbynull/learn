@@ -2,7 +2,7 @@ from typing import List
 
 from Graph import Graph
 from Read import Read
-from WalkEulerianCycle import walk_eularian_cycle
+from WalkRandomEulerianCycle import walk_eulerian_cycle
 
 graph = Graph()
 graph.insert_edge(Read('00'), Read('00'))
@@ -32,22 +32,22 @@ def do_kmers_cycle(reads: List[Read]) -> bool:
     return True
 
 
-cycle_path = walk_eularian_cycle(graph, Read('00'))
+cycle_path = walk_eulerian_cycle(graph, Read('00'))
 cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
 print(f'{cycle_path_as_kmers}')
 print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers)}')
 print(f'{do_kmers_cycle(cycle_path_as_kmers)}')
-cycle_path = walk_eularian_cycle(graph, Read('01'))
+cycle_path = walk_eulerian_cycle(graph, Read('01'))
 cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
 print(f'{cycle_path_as_kmers}')
 print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers)}')
 print(f'{do_kmers_cycle(cycle_path_as_kmers)}')
-cycle_path = walk_eularian_cycle(graph, Read('10'))
+cycle_path = walk_eulerian_cycle(graph, Read('10'))
 cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
 print(f'{cycle_path_as_kmers}')
 print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers)}')
 print(f'{do_kmers_cycle(cycle_path_as_kmers)}')
-cycle_path = walk_eularian_cycle(graph, Read('11'))
+cycle_path = walk_eulerian_cycle(graph, Read('11'))
 cycle_path_as_kmers = eularian_path_to_kmers(cycle_path)
 print(f'{cycle_path_as_kmers}')
 print(f'{cycle_path_as_kmers[0].stitch(cycle_path_as_kmers)}')

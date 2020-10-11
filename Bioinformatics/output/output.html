@@ -2439,7 +2439,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a name="BOOKMARK24"></a><strong></strong></p>
 <p><strong>WHAT</strong>: Given a set of <a href="#BOOKMARK97">read</a>s that arbitrarily overlap, each <a href="#BOOKMARK97">read</a> can be broken into many smaller <a href="#BOOKMARK97">read</a>s that overlap better. For example, given 4 <a href="#BOOKMARK37">10-mer</a>s that arbitrarily overlap, you can break them into better overlapping <a href="#BOOKMARK37">5-mer</a>s...</p>
 <p><img src="svgbob_d9e103b16312cfe660d19df9305a9361ac1241ac.svg" alt="Kroki diagram output"></p>
-<p><strong>WHY</strong>: <a href="#BOOKMARK124">Breaking reads</a> may cause more ambiguity in overlaps. At the same time, <a href="#BOOKMARK124">read breaking</a> makes it easier to find overlaps by bringing the overlaps closer together and provides (artificially) increased <a href="#BOOKMARK123">coverage</a>.</p>
+<p><strong>WHY</strong>: <a href="#BOOKMARK128">Breaking reads</a> may cause more ambiguity in overlaps. At the same time, <a href="#BOOKMARK128">read breaking</a> makes it easier to find overlaps by bringing the overlaps closer together and provides (artificially) increased <a href="#BOOKMARK127">coverage</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-comment"># This is read breaking -- why not just call it break? because break is a reserved keyword.</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shatter</span>(<span class="hljs-params">self: Read, k: int</span>) -&gt; List[Read]:</span>
@@ -2462,7 +2462,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </div>
 <p><strong>WHAT</strong>: Given a set of <a href="#BOOKMARK98">read-pair</a>s that arbitrarily overlap, each <a href="#BOOKMARK98">read-pair</a> can be broken into many <a href="#BOOKMARK98">read-pair</a>s with a smaller k that overlap better. For example, given 4 <a href="#BOOKMARK38">(4,2)-mer</a>s that arbitrarily overlap, you can break them into better overlapping <a href="#BOOKMARK38">(2,4)-mer</a>s...</p>
 <p><img src="svgbob_eb8f1251b4e293a9662ade2c0a4452a7c7884f2f.svg" alt="Kroki diagram output"></p>
-<p><strong>WHY</strong>: <a href="#BOOKMARK125">Breaking read-pairs</a> may cause more ambiguity in overlaps. At the same time, <a href="#BOOKMARK125">read-pair breaking</a> makes it easier to find overlaps by bringing the overlaps closer together and provides (artificially) increased <a href="#BOOKMARK123">coverage</a>.</p>
+<p><strong>WHY</strong>: <a href="#BOOKMARK129">Breaking read-pairs</a> may cause more ambiguity in overlaps. At the same time, <a href="#BOOKMARK129">read-pair breaking</a> makes it easier to find overlaps by bringing the overlaps closer together and provides (artificially) increased <a href="#BOOKMARK127">coverage</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-comment"># This is read breaking -- why not just call it break? because break is a reserved keyword.</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shatter</span>(<span class="hljs-params">self: ReadPair, k: int</span>) -&gt; List[ReadPair]:</span>
@@ -2494,7 +2494,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <ul>
 <li>less than 50% of the <a href="#BOOKMARK92">genome</a> is repeats,</li>
 <li>the start position of <a href="#BOOKMARK99">fragment</a>s produced by the <a href="#BOOKMARK95">sequencer</a> is random,</li>
-<li>and there's good <a href="#BOOKMARK123">coverage</a> of the <a href="#BOOKMARK92">genome</a> (e.g. ~30x as many <a href="#BOOKMARK99">fragment</a>s as the length of the <a href="#BOOKMARK92">genome</a>),</li>
+<li>and there's good <a href="#BOOKMARK127">coverage</a> of the <a href="#BOOKMARK92">genome</a> (e.g. ~30x as many <a href="#BOOKMARK99">fragment</a>s as the length of the <a href="#BOOKMARK92">genome</a>),</li>
 </ul>
 <p>... you can use probabilities to hint at how many times a <a href="#BOOKMARK99">fragment</a> appears in the <a href="#BOOKMARK92">genome</a>.</p>
 <p><strong>WHY</strong>: Determining how many times a <a href="#BOOKMARK99">fragment</a> appears in a <a href="#BOOKMARK92">genome</a> helps with <a href="#BOOKMARK100">assembly</a>. Specifically, ...</p>
@@ -2507,7 +2507,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>For simplicity's sake, the <a href="#BOOKMARK92">genome</a> is single-stranded (not <a href="#BOOKMARK58">double-stranded DNA</a> / no reverse complementing stand).</p>
 </div>
-<p>Imagine a <a href="#BOOKMARK92">genome</a> of ATGGATGC. A <a href="#BOOKMARK95">sequencer</a> runs over that single strand and generates <a href="#BOOKMARK37">3-mer</a> <a href="#BOOKMARK97">read</a>s with roughly 30x <a href="#BOOKMARK123">coverage</a>. The resulting <a href="#BOOKMARK99">fragment</a>s are ...</p>
+<p>Imagine a <a href="#BOOKMARK92">genome</a> of ATGGATGC. A <a href="#BOOKMARK95">sequencer</a> runs over that single strand and generates <a href="#BOOKMARK37">3-mer</a> <a href="#BOOKMARK97">read</a>s with roughly 30x <a href="#BOOKMARK127">coverage</a>. The resulting <a href="#BOOKMARK99">fragment</a>s are ...</p>
 <table>
 <thead>
 <tr>
@@ -2617,8 +2617,9 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK26">Algorithms/Assembly/Fragment Occurrence in Genome Probability</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given the <a href="#BOOKMARK99">fragment</a>s from a <a href="#BOOKMARK92">genome</a>, merge those <a href="#BOOKMARK99">fragment</a>s together in different ways so as to guess the <a href="#BOOKMARK92">genome</a> those <a href="#BOOKMARK99">fragment</a>s came from. For example, the following <a href="#BOOKMARK37">3-mer</a> <a href="#BOOKMARK97">read</a>s are from a single strand of <a href="#BOOKMARK92">genome</a>: <code>TTA</code>, <code>TAC</code>, <code>ACT</code>, <code>CTT</code>, <code>TTA</code>, and <code>TAG</code>. That single strand of <a href="#BOOKMARK92">genome</a> may have been either <code>TACTTAG</code> or <code>TTAGTTAC</code>.</p>
-<p><strong>WHY</strong>: <a href="#BOOKMARK95">Sequencer</a>s produce <a href="#BOOKMARK99">fragment</a>s, but <a href="#BOOKMARK99">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce larger chunks of <a href="#BOOKMARK92">genome</a> / the entire <a href="#BOOKMARK92">genome</a>.</p>
+<p><strong>WHAT</strong>: Given the <a href="#BOOKMARK99">fragment</a>s from a <a href="#BOOKMARK92">genome</a>, merge those <a href="#BOOKMARK99">fragment</a>s together in different ways so as to guess the <a href="#BOOKMARK92">genome</a> those <a href="#BOOKMARK99">fragment</a>s came from.</p>
+<p>For example, the following <a href="#BOOKMARK37">3-mer</a> <a href="#BOOKMARK97">read</a>s are from a single strand of <a href="#BOOKMARK92">genome</a>: TTA, TAC, ACT, CTT, TTA, and TAG. That single strand of <a href="#BOOKMARK92">genome</a> may have been either TACTTAG or TTAGTTAC.</p>
+<p><strong>WHY</strong>: <a href="#BOOKMARK95">Sequencer</a>s produce <a href="#BOOKMARK99">fragment</a>s, but <a href="#BOOKMARK99">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce produce a more complete picture of the <a href="#BOOKMARK92">genome</a>.</p>
 <a name="HEADREF38"></a><h4>Overlap Graph Algorithm</h4>
 <p><a name="BOOKMARK28"></a><strong></strong></p>
 <p>Given the <a href="#BOOKMARK99">fragment</a>s for a single strand of <a href="#BOOKMARK92">genome</a>, create a directed graph where ...</p>
@@ -2628,7 +2629,11 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_ba61508d2d4f3dfef58ce5783f8e22f49ddec891.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p>each edge is between overlapping <a href="#BOOKMARK99">fragment</a>s (nodes), where the source node has the overlap in its suffix and the destination node has the overlap in its prefix.</p>
+<p>each edge is between overlapping <a href="#BOOKMARK99">fragment</a>s (nodes), where the ...</p>
+<ul>
+<li>source node has the overlap in its suffix .</li>
+<li>destination node has the overlap in its prefix.</li>
+</ul>
 <p><img src="svgbob_679d24959920acb04c059d6e53dee545fff77300.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
@@ -2643,7 +2648,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Notice that the example graph is circular. If the organism <a href="#BOOKMARK92">genome</a> itself were also circular (e.g. bacterial <a href="#BOOKMARK92">genome</a>), the <a href="#BOOKMARK92">genome</a> guesses above are all actually the same because circular <a href="#BOOKMARK92">genome</a>s don't have a start / end point (it wraps).</p>
+<p>Notice that the example graph is circular. If the organism <a href="#BOOKMARK92">genome</a> itself were also circular (e.g. bacterial <a href="#BOOKMARK92">genome</a>), the <a href="#BOOKMARK92">genome</a> guesses above are all actually the same because circular <a href="#BOOKMARK92">genome</a>s don't have a beginning / end.</p>
 </div>
 <p>In practice, there are many complications with finding <a href="#BOOKMARK107">Hamiltonian path</a>s:</p>
 <ol>
@@ -2652,7 +2657,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK99">Fragment</a>s are for both strands of <a href="#BOOKMARK58">double stranded DNA</a>, meaning that either...
 <ul>
 <li><a href="#BOOKMARK99">fragment</a>s from the different strands may incidentally overlap, resulting in incorrect nodes/ edges.</li>
-<li><a href="#BOOKMARK99">fragment</a>s from the different strands may not overlap, resulting in a <a href="#BOOKMARK110">disconnected</a> graph.</li>
+<li><a href="#BOOKMARK99">fragment</a>s from the different strands may not overlap, resulting in a <a href="#BOOKMARK114">disconnected</a> graph.</li>
 </ul>
 </li>
 <li><a href="#BOOKMARK99">Fragment</a>s may have errors that weren't properly detected/filtered out, resulting in incorrect nodes / edges.</li>
@@ -2692,7 +2697,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 
 
 <span class="hljs-comment"># walk each node exactly once</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_hamiltonian_path</span>(<span class="hljs-params">graph: Graph[T], from_node: T</span>) -&gt; List[List[T]]:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_hamiltonian_paths</span>(<span class="hljs-params">graph: Graph[T], from_node: T</span>) -&gt; List[List[T]]:</span>
     <span class="hljs-keyword">return</span> exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])</code></pre><div style="border:1px solid black;">
 <p></p>
 <p>Given the fragments ['TTA', 'TTA', 'TAG', 'AGT', 'GTT', 'TAC', 'ACT', 'CTT'], the overlap graph is...</p>
@@ -2700,21 +2705,21 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>... and the Hamiltonian paths are ...</p>
 <ul>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
 <li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
 </ul>
 </div>
 <p></p>
@@ -2778,21 +2783,21 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_1f00a351b7df371ff2872f1ee4d7a4db4e293578.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
-<p>This graph is called a <a href="#BOOKMARK121">de Bruijn graph</a>: a <a href="#BOOKMARK119">balanced</a> and <a href="#BOOKMARK112">strongly connected</a> graph where the <a href="#BOOKMARK99">fragment</a>s are represented as edges.</p>
+<p>This graph is called a <a href="#BOOKMARK125">de Bruijn graph</a>: a <a href="#BOOKMARK123">balanced</a> and <a href="#BOOKMARK116">strongly connected</a> graph where the <a href="#BOOKMARK99">fragment</a>s are represented as edges.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Depending on the <a href="#BOOKMARK99">fragment</a>s, the resulting graph may not be totally <a href="#BOOKMARK119">balanced</a>. A technique for dealing with this is detailed further on. For now, just assume that hte graph will be <a href="#BOOKMARK119">balanced</a>.</p>
+<p>Depending on the <a href="#BOOKMARK99">fragment</a>s, the resulting graph may not be totally <a href="#BOOKMARK123">balanced</a>. A technique for dealing with this is detailed further on. For now, just assume that hte graph will be <a href="#BOOKMARK123">balanced</a>.</p>
 </div>
-<p>Similar to an overlay graph, a <a href="#BOOKMARK121">de Bruijn graph</a> shows the different ways that <a href="#BOOKMARK99">fragment</a>s can be merged to construct a <a href="#BOOKMARK92">genome</a>. However, unlike an overlay graph, the <a href="#BOOKMARK99">fragment</a>s are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (<a href="#BOOKMARK107">Hamiltonian path</a>), in a <a href="#BOOKMARK121">de Bruijn graph</a> you need to find paths that walk over every edge exactly once.</p>
-<p>A path in a <a href="#BOOKMARK121">de Bruijn graph</a> that walks over each edge exactly once is a guess of the <a href="#BOOKMARK92">genome</a> might be. Such a path is called a <a href="#BOOKMARK109">Eulerian cycle</a>: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding <a href="#BOOKMARK107">Hamiltonian path</a>s in an overlay graph, it's much faster to find <a href="#BOOKMARK109">Eulerian cycle</a>s in an <a href="#BOOKMARK121">de Bruijn graph</a>.</p>
-<p>Even with the faster speed, finding <a href="#BOOKMARK109">Eulerian cycle</a>s in a <a href="#BOOKMARK121">de Bruijn graph</a> has many of the same complications as finding <a href="#BOOKMARK107">Hamiltonian path</a>s in a overlay graph:</p>
+<p>Similar to an overlay graph, a <a href="#BOOKMARK125">de Bruijn graph</a> shows the different ways that <a href="#BOOKMARK99">fragment</a>s can be merged to construct a <a href="#BOOKMARK92">genome</a>. However, unlike an overlay graph, the <a href="#BOOKMARK99">fragment</a>s are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (<a href="#BOOKMARK107">Hamiltonian path</a>), in a <a href="#BOOKMARK125">de Bruijn graph</a> you need to find paths that walk over every edge exactly once.</p>
+<p>A path in a <a href="#BOOKMARK125">de Bruijn graph</a> that walks over each edge exactly once is a guess of the <a href="#BOOKMARK92">genome</a> might be. Such a path is called a <a href="#BOOKMARK110">Eulerian cycle</a>: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding <a href="#BOOKMARK107">Hamiltonian path</a>s in an overlay graph, it's much faster to find <a href="#BOOKMARK110">Eulerian cycle</a>s in an <a href="#BOOKMARK125">de Bruijn graph</a>.</p>
+<p>Even with the faster speed, finding <a href="#BOOKMARK110">Eulerian cycle</a>s in a <a href="#BOOKMARK125">de Bruijn graph</a> has many of the same complications as finding <a href="#BOOKMARK107">Hamiltonian path</a>s in an overlay graph:</p>
 <ol>
-<li>Practical problems with <a href="#BOOKMARK94">sequencing</a> mean that <a href="#BOOKMARK109">Eulerian cycle</a>s will either not exist or be wildly incorrect:
+<li>Practical problems with <a href="#BOOKMARK94">sequencing</a> mean that <a href="#BOOKMARK110">Eulerian cycle</a>s will either not exist or be wildly incorrect:
 <ul>
 <li><a href="#BOOKMARK99">Fragment</a>s are for both strands of <a href="#BOOKMARK58">double stranded DNA</a>, meaning that either...
 <ul>
 <li><a href="#BOOKMARK99">fragment</a>s from the different strands may incidentally overlap, resulting in incorrect nodes/ edges.</li>
-<li><a href="#BOOKMARK99">fragment</a>s from the different strands may not overlap, resulting in a <a href="#BOOKMARK110">disconnected</a> graph.</li>
+<li><a href="#BOOKMARK99">fragment</a>s from the different strands may not overlap, resulting in a <a href="#BOOKMARK114">disconnected</a> graph.</li>
 </ul>
 </li>
 <li><a href="#BOOKMARK99">Fragment</a>s may have errors that weren't properly detected/filtered out, resulting in incorrect nodes / edges.</li>
@@ -2800,27 +2805,25 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK99">Fragment</a>s may be missing for some parts of the <a href="#BOOKMARK92">genome</a>, resulting in missing nodes / edges.</li>
 </ul>
 </li>
-<li>More than one <a href="#BOOKMARK109">Eulerian cycle</a> means that it isn't possible to definitively know what the original <a href="#BOOKMARK92">genome</a> was.</li>
+<li>More than one <a href="#BOOKMARK110">Eulerian cycle</a> means that it isn't possible to definitively know what the original <a href="#BOOKMARK92">genome</a> was.</li>
 </ol>
-<p>Never the less, in an ideal world where most of these problems don't exist, finding <a href="#BOOKMARK109">Eulerian</a> would be a good way to guess the <a href="#BOOKMARK92">genome</a>.</p>
+<p>Never the less, in an ideal world where most of these problems don't exist, finding <a href="#BOOKMARK110">Eulerian cycle</a>s would be a good way to guess the <a href="#BOOKMARK92">genome</a>.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>Although these practical problems make it impossible to get the entire <a href="#BOOKMARK92">genome</a>, it's still possible to pull out large parts of the <a href="#BOOKMARK92">genome</a>. This is discussed in the subsequent section <a href="#BOOKMARK35">Algorithms/Assembly/Find Contigs</a>.</p>
 </div>
 <a name="HEADREF42"></a><h5>Eulerian Cycle Algorithm</h5>
 <p><a name="BOOKMARK32"></a><strong></strong></p>
-<p>Given a graph that's <a href="#BOOKMARK112">strongly connected</a> and <a href="#BOOKMARK119">balanced</a>, you can find a <a href="#BOOKMARK109">Eulerian cycle</a> using the following algorithm:</p>
-<ol>
-<li>Pick a node.</li>
-<li>Walk edges until you return to the node you started from.
-<ul>
-<li>For each node, ignore outgoing edges that have already been walked.</li>
-<li>For each node, pick an outgoing edge to walk at random.</li>
-</ul>
-</li>
-<li>Of the nodes walked, pick one with unexplored edges and go to 2.</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomly_walk_and_remove_edges_until_cycle</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; List[Tuple[T, T]]:</span>
+<p>Given a graph that's <a href="#BOOKMARK116">strongly connected</a> and <a href="#BOOKMARK123">balanced</a>, you can find a <a href="#BOOKMARK110">Eulerian cycle</a> by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.</p>
+<pre class="hljs"><code><span class="hljs-comment"># (6, 8), (8, 7), (7, 9), (9, 6)  ----&gt;  68796</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">edge_list_to_node_list</span>(<span class="hljs-params">edges: List[Tuple[T, T]]</span>) -&gt; List[T]:</span>
+    ret = [edges[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]]
+    <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> edges:
+        ret.append(e[<span class="hljs-number">1</span>])
+    <span class="hljs-keyword">return</span> ret
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomly_walk_and_remove_edges_until_cycle</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; List[T]:</span>
     end_node = node
     edge_list = []
     from_node = node
@@ -2835,29 +2838,18 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
         edge_list.append(edge)
         from_node = to_node
         <span class="hljs-keyword">if</span> from_node == end_node:
-            <span class="hljs-keyword">return</span> edge_list
+            <span class="hljs-keyword">return</span> edge_list_to_node_list(edge_list)
 
     <span class="hljs-keyword">assert</span> <span class="hljs-literal">False</span>  <span class="hljs-comment"># eularian graphs are strongly connected and balanced, meaning we should never run out of nodes</span>
-
-
-<span class="hljs-comment"># (6, 8), (8, 7), (7, 9), (9, 6)  ----&gt;  68796</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_edge_nodes</span>(<span class="hljs-params">edges: List[Tuple[T, T]]</span>) -&gt; T:</span>
-    <span class="hljs-keyword">yield</span> edges[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> edges:
-        <span class="hljs-keyword">yield</span> e[<span class="hljs-number">1</span>]
 
 
 <span class="hljs-comment"># graph must be strongly connected</span>
 <span class="hljs-comment"># graph must be balanced</span>
 <span class="hljs-comment"># if the 2 conditions above are met, the graph will be eularian (a eulerian cycle exists)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_eularian_cycle</span>(<span class="hljs-params">graph: Graph[T], start_node: T</span>) -&gt; List[T]:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_eulerian_cycle</span>(<span class="hljs-params">graph: Graph[T], start_node: T</span>) -&gt; List[T]:</span>
     graph = graph.copy()
 
-    node_cycle = list(
-        walk_edge_nodes(
-            randomly_walk_and_remove_edges_until_cycle(graph, start_node)
-        )
-    )
+    node_cycle = randomly_walk_and_remove_edges_until_cycle(graph, start_node)
     node_cycle_ptr = <span class="hljs-number">0</span>
     <span class="hljs-keyword">while</span> len(graph) &gt; <span class="hljs-number">0</span>:
         new_node_cycle = <span class="hljs-literal">None</span>
@@ -2865,11 +2857,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
             <span class="hljs-keyword">if</span> node <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> graph:
                 <span class="hljs-keyword">continue</span>
             node_cycle_ptr += local_ptr
-            inject_node_cycle = list(
-                walk_edge_nodes(
-                    randomly_walk_and_remove_edges_until_cycle(graph, node)
-                )
-            )
+            inject_node_cycle = randomly_walk_and_remove_edges_until_cycle(graph, node)
             new_node_cycle = node_cycle[:]
             new_node_cycle[node_cycle_ptr:node_cycle_ptr+<span class="hljs-number">1</span>] = inject_node_cycle
             <span class="hljs-keyword">break</span>
@@ -2884,6 +2872,11 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>TT -&gt; TC -&gt; CT -&gt; TT -&gt; TA -&gt; AT -&gt; TT</p>
 </div>
 <p></p>
+<p>This algorithm picks one <a href="#BOOKMARK110">Eulerian cycle</a> in a graph. In the above graph, there are two. In other real-world applications, there likely will be way too many <a href="#BOOKMARK110">Eulerian cycle</a>s to enumerate all of them.</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>See the section on <a href="#BOOKMARK126">k-universal</a> strings to see a real-world application of <a href="#BOOKMARK112">Eulerian graph</a>s. For something like k=20, good luck trying to enumerate all <a href="#BOOKMARK110">Eulerian cycle</a>s.</p>
+</div>
 <a name="HEADREF43"></a><h5>Graph Construction Algorithm</h5>
 <p><a name="BOOKMARK33"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
@@ -2892,7 +2885,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK32">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm</a></li>
 </ul>
 </div>
-<p>To construct a <a href="#BOOKMARK121">de Bruijn graph</a>, add an edge for each <a href="#BOOKMARK99">fragment</a> making sure to not duplicate nodes.</p>
+<p>To construct a <a href="#BOOKMARK125">de Bruijn graph</a>, add an edge for each <a href="#BOOKMARK99">fragment</a> making sure to not create duplicate nodes.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_debruijn_graph</span>(<span class="hljs-params">reads: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
     graph = Graph()
     <span class="hljs-keyword">for</span> read <span class="hljs-keyword">in</span> reads:
@@ -2905,8 +2898,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="dot_fc6c4f4bf004838f81f7a6343b7d2e19.svg" alt="Dot diagram"></p>
 </div>
 <p></p>
-<p>Note how the graph above is both <a href="#BOOKMARK119">balanced</a> and <a href="#BOOKMARK112">strongly connected</a>. In most cases, non-circular <a href="#BOOKMARK92">genome</a>s won't generate a <a href="#BOOKMARK118">balanced graph</a> like the one above. Instead, a non-circular <a href="#BOOKMARK92">genome</a> will very likely generate a graph that's nearly <a href="#BOOKMARK119">balanced</a>.</p>
-<p>Nearly <a href="#BOOKMARK118">balanced graph</a>s are graphs that are would be <a href="#BOOKMARK119">balanced</a> if not for a few un<a href="#BOOKMARK115">balanced node</a>s (usually root and tail nodes). They can artificially be made to become <a href="#BOOKMARK119">balanced</a> by finding im<a href="#BOOKMARK115">balanced node</a>s and creating artificial edges between them until they become <a href="#BOOKMARK115">balanced node</a>s.</p>
+<p>Note how the graph above is both <a href="#BOOKMARK123">balanced</a> and <a href="#BOOKMARK116">strongly connected</a>. In most cases, non-circular <a href="#BOOKMARK92">genome</a>s won't generate a <a href="#BOOKMARK122">balanced graph</a> like the one above. Instead, a non-circular <a href="#BOOKMARK92">genome</a> will very likely generate a graph that's nearly <a href="#BOOKMARK123">balanced</a>.</p>
+<p>Nearly <a href="#BOOKMARK122">balanced graph</a>s are graphs that are would be <a href="#BOOKMARK123">balanced</a> if not for a few un<a href="#BOOKMARK119">balanced node</a>s (usually root and tail nodes). They can artificially be made to become <a href="#BOOKMARK123">balanced</a> by finding im<a href="#BOOKMARK119">balanced node</a>s and creating artificial edges between them until they become <a href="#BOOKMARK119">balanced node</a>s.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>Circular <a href="#BOOKMARK92">genome</a>s are <a href="#BOOKMARK92">genome</a>s that wrap around (e.g. bacterial <a href="#BOOKMARK92">genome</a>s). They don't have a beginning / end.</p>
@@ -2946,7 +2939,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>... with original head nodes at {TTA} and tail nodes at {CCT}.</p>
 </div>
 <p></p>
-<p>In the graph above, an artifical edge is inserted between CCT and TTA to create a <a href="#BOOKMARK118">balanced graph</a>. With this <a href="#BOOKMARK118">balanced graph</a>, an <a href="#BOOKMARK109">Eulerian cycle</a> can be found by starting from the root node. The artificial edge shows up at the end of the <a href="#BOOKMARK109">Eulerian cycle</a>, and as such can be dropped.</p>
+<p>In the graph above, an artificial edge is inserted between CCT and TTA to create a <a href="#BOOKMARK122">balanced graph</a>. With this <a href="#BOOKMARK122">balanced graph</a>, a path that touches lal nodes can found by finding the <a href="#BOOKMARK110">Eulerian cycle</a> from the original starting from the original root node (TTA). The artificial edge will show up at the end of the <a href="#BOOKMARK110">Eulerian cycle</a> (CCT to TTA), and as such can be dropped.</p>
 <a name="HEADREF44"></a><h5>K-universal String Algorithm</h5>
 <p><a name="BOOKMARK34"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
@@ -2956,23 +2949,57 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK33">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm</a></li>
 </ul>
 </div>
-<p><a href="#BOOKMARK121">De Bruijn graph</a>s were originally invented to efficiently generate <a href="#BOOKMARK122">k-universal</a> strings: For some alphabet, a string is considered <a href="#BOOKMARK122">k-universal</a> if it contains every possible <a href="#BOOKMARK37">k-mer</a> for that alphabet exactly once.</p>
-<p>Solving the <a href="#BOOKMARK122">k-universal</a> string problem is more-or-less the same as <a href="#BOOKMARK100">assembly</a>. For example, for an alphabet containing only 0 and 1 (binary), a <a href="#BOOKMARK122">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK37">3-mer</a> exactly once:</p>
-<ul>
-<li>000: <strong>000</strong>1110100</li>
-<li>001: 0<strong>001</strong>110100</li>
-<li>010: 000111<strong>010</strong>0</li>
-<li>011: 00<strong>011</strong>10100</li>
-<li>100: 0001110<strong>100</strong></li>
-<li>101: 00011<strong>101</strong>00</li>
-<li>110: 0001<strong>110</strong>100</li>
-<li>111: 000<strong>111</strong>0100</li>
-</ul>
-<p>Given every possible <a href="#BOOKMARK37">3-mer</a> for a binary alphabet, construct the edge for each <a href="#BOOKMARK37">k-mer</a> ...</p>
+<p><a href="#BOOKMARK125">De Bruijn graph</a>s were originally invented to efficiently generate <a href="#BOOKMARK126">k-universal</a> strings: For some alphabet and k, a string is considered <a href="#BOOKMARK126">k-universal</a> if it contains every possible <a href="#BOOKMARK37">k-mer</a> for that alphabet exactly once.</p>
+<p>Solving the <a href="#BOOKMARK126">k-universal</a> string problem is more-or-less the same as <a href="#BOOKMARK100">assembly</a>. For example, for an alphabet containing only 0 and 1 (binary) and k=3, list out all possible <a href="#BOOKMARK37">3-mer</a>s: [000, 001, 010, 011, 100, 101, 110, 111].</p>
+<p>Given these <a href="#BOOKMARK37">3-mer</a>s, construct an edge for each one ...</p>
 <p><img src="svgbob_a6e8092504d1c752a7111e79035300779af6e097.svg" alt="Kroki diagram output"></p>
 <p>... and merge duplicate nodes together ...</p>
-<p><img src="svgbob_735476b8920f9920dfc134d80545a776ace61b90.svg" alt="Kroki diagram output"></p>
-<p>Given the graph above, <a href="#BOOKMARK122">k-universal</a> strings can be found by finding <a href="#BOOKMARK109">Eulerian cycle</a>s. There are multiple <a href="#BOOKMARK109">Eulerian cycle</a>s, meaning that there are multiple <a href="#BOOKMARK122">k-universal</a> strings:</p>
+<p><img src="svgbob_be61c5528d3abb550d7511567671249607ef28ce.svg" alt="Kroki diagram output"></p>
+<p>Any <a href="#BOOKMARK110">Eulerian cycle</a> through the graph is a <a href="#BOOKMARK126">3-universal</a> binary string. For example, 0001110100:</p>
+<p><img src="svgbob_86ef4c23bb6f25f877df7cd7e014a3e70208ad74.svg" alt="Kroki diagram output"></p>
+<table>
+<thead>
+<tr>
+<th><a href="#BOOKMARK37">3-mer</a></th>
+<th>Placement in <a href="#BOOKMARK126">3-universal</a> string</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000</td>
+<td><strong>000</strong>1110100</td>
+</tr>
+<tr>
+<td>001</td>
+<td>0<strong>001</strong>110100</td>
+</tr>
+<tr>
+<td>010</td>
+<td>000111<strong>010</strong>0</td>
+</tr>
+<tr>
+<td>011</td>
+<td>00<strong>011</strong>10100</td>
+</tr>
+<tr>
+<td>100</td>
+<td>0001110<strong>100</strong></td>
+</tr>
+<tr>
+<td>101</td>
+<td>00011<strong>101</strong>00</td>
+</tr>
+<tr>
+<td>110</td>
+<td>0001<strong>110</strong>100</td>
+</tr>
+<tr>
+<td>111</td>
+<td>000<strong>111</strong>0100</td>
+</tr>
+</tbody>
+</table>
+<p>There are multiple <a href="#BOOKMARK110">Eulerian cycle</a>s in the graph, meaning that there are multiple <a href="#BOOKMARK126">3-universal</a> strings:</p>
 <ul>
 <li>0001110100</li>
 <li>0011101000</li>
@@ -2988,6 +3015,28 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK27">Algorithms/Assembly/Guess Genome</a></li>
 </ul>
 </div>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
+<p>TODO: CONTINUE HERE</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_until_non_1_to_1</span>(<span class="hljs-params">graph: Graph[T], node: T</span>) -&gt; Optional[List[T]]:</span>
     ret = [node]
     ret_quick_lookup = {node}
@@ -3978,27 +4027,32 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK108"></a><strong>Eulerian path</strong> - A path in a graph that visits every edge exactly once.</p>
+<p><a name="BOOKMARK108"></a><strong>Eulerian path</strong> <a name="BOOKMARK109"></a><strong></strong> - A path in a graph that visits every edge exactly once.</p>
 <p>In the graph below, the <a href="#BOOKMARK108">Eulerian path</a> is (A,B), (B,C), (C,D), (D,E), (E,C), (C,D), (D,F).</p>
 <p><img src="svgbob_87660b191d813d39c396985391b70507c8c1236b.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK109"></a><strong>Eulerian cycle</strong> - An <a href="#BOOKMARK108">Eulerian path</a> that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.</p>
-<p>The graph below has an <a href="#BOOKMARK109">Eulerian cycle</a> of (A,B), (B,C) (C,D), (D,F), (F,C), (C,A).</p>
+<p><a name="BOOKMARK110"></a><strong>Eulerian cycle</strong> <a name="BOOKMARK111"></a><strong></strong> - An <a href="#BOOKMARK108">Eulerian path</a> that forms a cycle. That is, a path in a graph that is a cycle and visits every edge exactly once.</p>
+<p>The graph below has an <a href="#BOOKMARK110">Eulerian cycle</a> of (A,B), (B,C) (C,D), (D,F), (F,C), (C,A).</p>
 <p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
-<p>For a graph to be <a href="#BOOKMARK109">Eulerian</a>, it must be both <a href="#BOOKMARK119">balanced</a> and <a href="#BOOKMARK112">strongly connected</a>. Note how in the graph above, ...</p>
-<ul>
-<li>
-<p>every node is reachable from every other node (<a href="#BOOKMARK112">strongly connected</a>),</p>
+<p>If a graph contains an <a href="#BOOKMARK110">Eulerian cycle</a>, it's said to be an <a href="#BOOKMARK112">Eulerian graph</a>.</p>
 </li>
 <li>
-<p>every node has an <a href="#BOOKMARK114">outdegree</a> equal to its <a href="#BOOKMARK113">indegree</a> (<a href="#BOOKMARK119">balanced</a>).</p>
+<p><a name="BOOKMARK112"></a><strong>Eulerian graph</strong> <a name="BOOKMARK113"></a><strong></strong> - For a graph to be <a href="#BOOKMARK113">Eulerian</a>, it must have am <a href="#BOOKMARK110">Eulerian cycle</a>. For a graph to have an <a href="#BOOKMARK110">Eulerian cycle</a>, it must be both <a href="#BOOKMARK123">balanced</a> and <a href="#BOOKMARK116">strongly connected</a>.</p>
+<p><img src="svgbob_d0af75d07c2969afc5f4088d18d3b7a327f26ef2.svg" alt="Kroki diagram output"></p>
+<p>Note how in the graph above, ...</p>
+<ul>
+<li>
+<p>every node is reachable from every other node (<a href="#BOOKMARK116">strongly connected</a>),</p>
+</li>
+<li>
+<p>every node has an <a href="#BOOKMARK118">outdegree</a> equal to its <a href="#BOOKMARK117">indegree</a> (<a href="#BOOKMARK123">balanced</a>).</p>
 <table>
 <thead>
 <tr>
 <th>Node</th>
-<th><a href="#BOOKMARK113">Indegree</a></th>
-<th><a href="#BOOKMARK114">Outdegree</a></th>
+<th><a href="#BOOKMARK117">Indegree</a></th>
+<th><a href="#BOOKMARK118">Outdegree</a></th>
 </tr>
 </thead>
 <tbody>
@@ -4031,57 +4085,57 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 </li>
 </ul>
-<p>In contrast, the following graphs are not <a href="#BOOKMARK109">Eulerian graph</a>s (no <a href="#BOOKMARK109">Eulerian cycle</a>s exist):</p>
+<p>In contrast, the following graphs are not <a href="#BOOKMARK112">Eulerian graph</a>s (no <a href="#BOOKMARK110">Eulerian cycle</a>s exist):</p>
 <ul>
 <li>
-<p><a href="#BOOKMARK112">Strongly connected</a> but not <a href="#BOOKMARK119">balanced</a>.</p>
+<p><a href="#BOOKMARK116">Strongly connected</a> but not <a href="#BOOKMARK123">balanced</a>.</p>
 <p><img src="svgbob_efdff1b3ec66000b9acf2ddc84c2d3684d318683.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a href="#BOOKMARK119">Balanced</a> but not <a href="#BOOKMARK112">strongly connected</a>.</p>
+<p><a href="#BOOKMARK123">Balanced</a> but not <a href="#BOOKMARK116">strongly connected</a>.</p>
 <p><img src="svgbob_48abea7e0377d91bfd845a85b2ee9615e9852bfd.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a href="#BOOKMARK119">Balanced</a> but <a href="#BOOKMARK110">disconnected</a> (not <a href="#BOOKMARK112">strongly connected</a>).</p>
+<p><a href="#BOOKMARK123">Balanced</a> but <a href="#BOOKMARK114">disconnected</a> (not <a href="#BOOKMARK116">strongly connected</a>).</p>
 <p><img src="svgbob_1f6d7503fdb3f3654b3c64f041254352c8d9a43e.svg" alt="Kroki diagram output"></p>
 </li>
 </ul>
 </li>
 <li>
-<p><a name="BOOKMARK110"></a><strong>disconnected</strong> / <a name="BOOKMARK111"></a><strong>connected</strong> - A graph is <a href="#BOOKMARK110">disconnected</a> if you can break it out into 2 or more distinct sub-graphs without breaking any paths. In other words, the graph contains at least two nodes which aren't contained in any path.</p>
-<p>The graph below is <a href="#BOOKMARK110">disconnected</a> because there is no path that contains E, F, G, or H and A, B, C, or D.</p>
+<p><a name="BOOKMARK114"></a><strong>disconnected</strong> / <a name="BOOKMARK115"></a><strong>connected</strong> - A graph is <a href="#BOOKMARK114">disconnected</a> if you can break it out into 2 or more distinct sub-graphs without breaking any paths. In other words, the graph contains at least two nodes which aren't contained in any path.</p>
+<p>The graph below is <a href="#BOOKMARK114">disconnected</a> because there is no path that contains E, F, G, or H and A, B, C, or D.</p>
 <p><img src="svgbob_754a446a49b8209971f339d76f4fcc492acbb615.svg" alt="Kroki diagram output"></p>
-<p>The graph below is <a href="#BOOKMARK111">connected</a>.</p>
+<p>The graph below is <a href="#BOOKMARK115">connected</a>.</p>
 <p><img src="svgbob_028c9291a4412afebe0b605b464987e2c9bf75ef.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK112"></a><strong>strongly connected</strong> - A graph is <a href="#BOOKMARK112">strongly connected</a> if every node is reachable from every other node.</p>
-<p>The graph below is <strong>not</strong> <a href="#BOOKMARK112">strongly connected</a> because neither A nor B is reachable by C, D, E, or F.</p>
+<p><a name="BOOKMARK116"></a><strong>strongly connected</strong> - A graph is <a href="#BOOKMARK116">strongly connected</a> if every node is reachable from every other node.</p>
+<p>The graph below is <strong>not</strong> <a href="#BOOKMARK116">strongly connected</a> because neither A nor B is reachable by C, D, E, or F.</p>
 <p><img src="svgbob_5b40f65c78645193c91742f02934854ae8846ede.svg" alt="Kroki diagram output"></p>
-<p>The graph below is <a href="#BOOKMARK112">strongly connected</a> because all nodes are reachable from all nodes.</p>
+<p>The graph below is <a href="#BOOKMARK116">strongly connected</a> because all nodes are reachable from all nodes.</p>
 <p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK113"></a><strong>indegree</strong> / <a name="BOOKMARK114"></a><strong>outdegree</strong> - The number of edges leading into / out of a node of a directed graph.</p>
-<p>The node below has an <a href="#BOOKMARK113">indegree</a> of 3 and an <a href="#BOOKMARK114">outdegree</a> of 1.</p>
+<p><a name="BOOKMARK117"></a><strong>indegree</strong> / <a name="BOOKMARK118"></a><strong>outdegree</strong> - The number of edges leading into / out of a node of a directed graph.</p>
+<p>The node below has an <a href="#BOOKMARK117">indegree</a> of 3 and an <a href="#BOOKMARK118">outdegree</a> of 1.</p>
 <p><img src="svgbob_7159ebaf654fe57b46d2f14a29a73d50e280afe6.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK115"></a><strong>balanced node</strong> <a name="BOOKMARK116"></a><strong></strong> - A node of a directed graph that has an equal <a href="#BOOKMARK113">indegree</a> and <a href="#BOOKMARK114">outdegree</a>. That is, the number of edges coming in is equal to the number of edges going out.</p>
-<p>The node below has an <a href="#BOOKMARK113">indegree</a> and <a href="#BOOKMARK114">outdegree</a> of 1. It is <a href="#BOOKMARK116">balanced</a>.</p>
+<p><a name="BOOKMARK119"></a><strong>balanced node</strong> <a name="BOOKMARK120"></a><strong></strong> - A node of a directed graph that has an equal <a href="#BOOKMARK117">indegree</a> and <a href="#BOOKMARK118">outdegree</a>. That is, the number of edges coming in is equal to the number of edges going out.</p>
+<p>The node below has an <a href="#BOOKMARK117">indegree</a> and <a href="#BOOKMARK118">outdegree</a> of 1. It is <a href="#BOOKMARK120">balanced</a>.</p>
 <p><img src="svgbob_7c49a4fbe8fc85173147545e7a459bca61c84f26.svg" alt="Kroki diagram output"></p>
 <p></p>
 </li>
 <li>
-<p><a name="BOOKMARK118"></a><strong>balanced graph</strong> <a name="BOOKMARK119"></a><strong></strong> - A directed graph where ever node is <a href="#BOOKMARK116">balanced</a>.</p>
-<p>The graph below is <a href="#BOOKMARK119">balanced</a> because all nodes are <a href="#BOOKMARK116">balanced</a>.</p>
+<p><a name="BOOKMARK122"></a><strong>balanced graph</strong> <a name="BOOKMARK123"></a><strong></strong> - A directed graph where ever node is <a href="#BOOKMARK120">balanced</a>.</p>
+<p>The graph below is <a href="#BOOKMARK123">balanced</a> because all nodes are <a href="#BOOKMARK120">balanced</a>.</p>
 <p><img src="svgbob_244dd1930eb16ef58be2261f1ffb9277ad2d793a.svg" alt="Kroki diagram output"></p>
 <table>
 <thead>
 <tr>
 <th>Node</th>
-<th><a href="#BOOKMARK113">Indegree</a></th>
-<th><a href="#BOOKMARK114">Outdegree</a></th>
+<th><a href="#BOOKMARK117">Indegree</a></th>
+<th><a href="#BOOKMARK118">Outdegree</a></th>
 </tr>
 </thead>
 <tbody>
@@ -4115,7 +4169,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 </li>
 <li>
-<p><a name="BOOKMARK121"></a><strong>De Bruijn graph</strong> - A special graph representing the <a href="#BOOKMARK37">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
+<p><a name="BOOKMARK125"></a><strong>De Bruijn graph</strong> - A special graph representing the <a href="#BOOKMARK37">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
 <ol>
 <li>
 <p>Each <a href="#BOOKMARK37">k-mer</a> is represented as an edge connecting 2 nodes. The ...</p>
@@ -4133,10 +4187,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_cfa519e3b0b53ea602d7a16720f54ea9c85f3f08.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
-<p><a href="#BOOKMARK121">De Bruijn graph</a>s are used for efficient <a href="#BOOKMARK92">genome</a> <a href="#BOOKMARK100">assembly</a>. They were originally invented to solve the <a href="#BOOKMARK122">k-universal</a> string problem.</p>
+<p><a href="#BOOKMARK125">De Bruijn graph</a>s are used for efficient <a href="#BOOKMARK92">genome</a> <a href="#BOOKMARK100">assembly</a>. They were originally invented to solve the <a href="#BOOKMARK126">k-universal</a> string problem.</p>
 </li>
 <li>
-<p><a name="BOOKMARK122"></a><strong>k-universal</strong> - For some alphabet, a string is considered <a href="#BOOKMARK122">k-universal</a> if it contains every possible <a href="#BOOKMARK37">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary), a <a href="#BOOKMARK122">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK37">3-mer</a> exactly once:</p>
+<p><a name="BOOKMARK126"></a><strong>k-universal</strong> - For some alphabet and k, a string is considered <a href="#BOOKMARK126">k-universal</a> if it contains every possible <a href="#BOOKMARK37">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary) and k=3, a <a href="#BOOKMARK126">3-universal</a> string would be 0001110100 because it contains every <a href="#BOOKMARK37">3-mer</a> exactly once:</p>
 <ul>
 <li>000: <strong>000</strong>1110100</li>
 <li>001: 0<strong>001</strong>110100</li>
@@ -4147,60 +4201,62 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>110: 0001<strong>110</strong>100</li>
 <li>111: 000<strong>111</strong>0100</li>
 </ul>
-<p><a href="#BOOKMARK121">De Bruijn graph</a>s were invented in an effort to construct <a href="#BOOKMARK122">k-universal</a> strings for arbitrary values of k. For example, given only the <a href="#BOOKMARK37">k-mer</a>s in the example above (000, 001, ...), a <a href="#BOOKMARK122">k-universal</a> string can be found by constructing a <a href="#BOOKMARK121">de Bruijn graph</a> from the <a href="#BOOKMARK37">k-mer</a>s and finding a <a href="#BOOKMARK109">Eulerian cycle</a> in that graph.</p>
+<p><a href="#BOOKMARK125">De Bruijn graph</a>s were invented in an effort to construct <a href="#BOOKMARK126">k-universal</a> strings for arbitrary values of k. For example, given only the <a href="#BOOKMARK37">k-mer</a>s in the example above (000, 001, ...), a <a href="#BOOKMARK126">k-universal</a> string can be found by constructing a <a href="#BOOKMARK125">de Bruijn graph</a> from the <a href="#BOOKMARK37">k-mer</a>s and finding a <a href="#BOOKMARK110">Eulerian cycle</a> in that graph.</p>
 <p><img src="svgbob_f05ffef51444183bdc007d88010e832876608ed7.svg" alt="Kroki diagram output"></p>
-<p>For larger values of k (e.g. 20), finding <a href="#BOOKMARK122">k-universal</a> strings would be too computationally intensive without <a href="#BOOKMARK121">De Bruijn graph</a>s and <a href="#BOOKMARK109">Eulerian cycle</a>s.</p>
+<p>For larger values of k (e.g. 20), finding <a href="#BOOKMARK126">k-universal</a> strings would be too computationally intensive without <a href="#BOOKMARK125">De Bruijn graph</a>s and <a href="#BOOKMARK110">Eulerian cycle</a>s.</p>
 </li>
 <li>
-<p><a name="BOOKMARK123"></a><strong>coverage</strong> - Given a substring from some larger <a href="#BOOKMARK93">sequence</a> that was reconstructed from a set of <a href="#BOOKMARK99">fragment</a>s, the <a href="#BOOKMARK123">coverage</a> of that substring is the number of <a href="#BOOKMARK97">read</a>s used to construct it. The substring length is typically 1: the <a href="#BOOKMARK123">coverage</a> for each position of the <a href="#BOOKMARK93">sequence</a>.</p>
+<p><a name="BOOKMARK127"></a><strong>coverage</strong> - Given a substring from some larger <a href="#BOOKMARK93">sequence</a> that was reconstructed from a set of <a href="#BOOKMARK99">fragment</a>s, the <a href="#BOOKMARK127">coverage</a> of that substring is the number of <a href="#BOOKMARK97">read</a>s used to construct it. The substring length is typically 1: the <a href="#BOOKMARK127">coverage</a> for each position of the <a href="#BOOKMARK93">sequence</a>.</p>
 <p><img src="svgbob_8dd35ba9a6498739b4dd8f3759fd49dec3d1e9c8.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BOOKMARK124"></a><strong>read breaking</strong> - The concept of taking multiple <a href="#BOOKMARK97">read</a>s and breaking them up into smaller <a href="#BOOKMARK97">read</a>s.</p>
+<p><a name="BOOKMARK128"></a><strong>read breaking</strong> - The concept of taking multiple <a href="#BOOKMARK97">read</a>s and breaking them up into smaller <a href="#BOOKMARK97">read</a>s.</p>
 <p><img src="svgbob_d9e103b16312cfe660d19df9305a9361ac1241ac.svg" alt="Kroki diagram output"></p>
-<p>When <a href="#BOOKMARK124">read breaking</a>, smaller <a href="#BOOKMARK37">k-mer</a>s result in better <a href="#BOOKMARK123">coverage</a> but also make the <a href="#BOOKMARK121">de Bruijn graph</a> more tangled. The more tangled the <a href="#BOOKMARK121">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BOOKMARK93">sequence</a>.</p>
-<p>In the example above, the average <a href="#BOOKMARK123">coverage</a>...</p>
+<p>When <a href="#BOOKMARK128">read breaking</a>, smaller <a href="#BOOKMARK37">k-mer</a>s result in better <a href="#BOOKMARK127">coverage</a> but also make the <a href="#BOOKMARK125">de Bruijn graph</a> more tangled. The more tangled the <a href="#BOOKMARK125">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BOOKMARK93">sequence</a>.</p>
+<p>In the example above, the average <a href="#BOOKMARK127">coverage</a>...</p>
 <ul>
 <li>for the left-hand side (original) is 2.1.</li>
 <li>for the right-hand side (broken) is 4.</li>
 </ul>
-<p>See also: <a href="#BOOKMARK125">read-pair breaking</a>.</p>
+<p>See also: <a href="#BOOKMARK129">read-pair breaking</a>.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>What purpose does this actually serve? Mimicking 1 long <a href="#BOOKMARK97">read</a> as n shorter <a href="#BOOKMARK97">read</a>s isn't equivalent to actually having <a href="#BOOKMARK94">sequenced</a> those n shorter <a href="#BOOKMARK97">read</a>s. For example, what if the longer <a href="#BOOKMARK97">read</a> being broken up has an error? That error replicates when breaking into n shorter <a href="#BOOKMARK97">read</a>s, which gives a false sense of having good <a href="#BOOKMARK123">coverage</a> and makes it seems as if it wasn't an error.</p>
+<p>What purpose does this actually serve? Mimicking 1 long <a href="#BOOKMARK97">read</a> as n shorter <a href="#BOOKMARK97">read</a>s isn't equivalent to actually having <a href="#BOOKMARK94">sequenced</a> those n shorter <a href="#BOOKMARK97">read</a>s. For example, what if the longer <a href="#BOOKMARK97">read</a> being broken up has an error? That error replicates when breaking into n shorter <a href="#BOOKMARK97">read</a>s, which gives a false sense of having good <a href="#BOOKMARK127">coverage</a> and makes it seems as if it wasn't an error.</p>
 </div>
 </li>
 <li>
-<p><a name="BOOKMARK125"></a><strong>read-pair breaking</strong> - The concept of taking multiple <a href="#BOOKMARK98">read-pair</a>s and breaking them up into <a href="#BOOKMARK98">read-pair</a>s with a smaller k.</p>
+<p><a name="BOOKMARK129"></a><strong>read-pair breaking</strong> - The concept of taking multiple <a href="#BOOKMARK98">read-pair</a>s and breaking them up into <a href="#BOOKMARK98">read-pair</a>s with a smaller k.</p>
 <p><img src="svgbob_eb8f1251b4e293a9662ade2c0a4452a7c7884f2f.svg" alt="Kroki diagram output"></p>
-<p>When <a href="#BOOKMARK125">read-pair breaking</a>, a smaller k results in better <a href="#BOOKMARK123">coverage</a> but also make the <a href="#BOOKMARK121">de Bruijn graph</a> more tangled. The more tangled the <a href="#BOOKMARK121">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BOOKMARK93">sequence</a>.</p>
-<p>In the example above, the average <a href="#BOOKMARK123">coverage</a>...</p>
+<p>When <a href="#BOOKMARK129">read-pair breaking</a>, a smaller k results in better <a href="#BOOKMARK127">coverage</a> but also make the <a href="#BOOKMARK125">de Bruijn graph</a> more tangled. The more tangled the <a href="#BOOKMARK125">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BOOKMARK93">sequence</a>.</p>
+<p>In the example above, the average <a href="#BOOKMARK127">coverage</a>...</p>
 <ul>
 <li>for the left-hand side (original) is 1.6.</li>
 <li>for the right-hand side (broken) is 2.5.</li>
 </ul>
-<p>See also: <a href="#BOOKMARK124">read breaking</a>.</p>
+<p>See also: <a href="#BOOKMARK128">read breaking</a>.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>What purpose does this actually serve? Mimicking 1 long <a href="#BOOKMARK98">read-pair</a> as n shorter <a href="#BOOKMARK98">read-pair</a>s isn't equivalent to actually having <a href="#BOOKMARK94">sequenced</a> those n shorter <a href="#BOOKMARK98">read-pair</a>s. For example, what if the longer <a href="#BOOKMARK98">read-pair</a> being broken up has an error? That error replicates when breaking into n shorter <a href="#BOOKMARK98">read-pair</a>s, which gives a false sense of having good <a href="#BOOKMARK123">coverage</a> and makes it seems as if it wasn't an error.</p>
+<p>What purpose does this actually serve? Mimicking 1 long <a href="#BOOKMARK98">read-pair</a> as n shorter <a href="#BOOKMARK98">read-pair</a>s isn't equivalent to actually having <a href="#BOOKMARK94">sequenced</a> those n shorter <a href="#BOOKMARK98">read-pair</a>s. For example, what if the longer <a href="#BOOKMARK98">read-pair</a> being broken up has an error? That error replicates when breaking into n shorter <a href="#BOOKMARK98">read-pair</a>s, which gives a false sense of having good <a href="#BOOKMARK127">coverage</a> and makes it seems as if it wasn't an error.</p>
 </div>
 </li>
 <li>
-<p><a name="BOOKMARK126"></a><strong>contig</strong> - A long continuous piece of DNA. Derived by searching a directed graph for paths that are the longest possible stretches of nodes with 1 <a href="#BOOKMARK113">indegree</a> and 1 <a href="#BOOKMARK114">outdegree</a>. That is, a path must either ...</p>
+<p><a name="BOOKMARK130"></a><strong>contig</strong> - A long continuous piece of DNA. Derived by searching a directed graph for paths that are the longest possible stretches of nodes with 1 <a href="#BOOKMARK117">indegree</a> and 1 <a href="#BOOKMARK118">outdegree</a>. That is, a path must either ...</p>
 <ul>
-<li>be a cycle where each node has an <a href="#BOOKMARK113">indegree</a> and <a href="#BOOKMARK114">outdegree</a> of 1.</li>
-<li>start and end at a node that doesn't have an <a href="#BOOKMARK113">indegree</a> and <a href="#BOOKMARK114">outdegree</a> of 1.</li>
+<li>be a cycle where each node has an <a href="#BOOKMARK117">indegree</a> and <a href="#BOOKMARK118">outdegree</a> of 1.</li>
+<li>start and end at a node that doesn't have an <a href="#BOOKMARK117">indegree</a> and <a href="#BOOKMARK118">outdegree</a> of 1.</li>
 </ul>
-<p>For example, in the following <a href="#BOOKMARK121">de Bruijn graph</a>, the <a href="#BOOKMARK126">contig</a>s are: GTGG, GGT, and GGT:</p>
+<p>For example, in the following <a href="#BOOKMARK125">de Bruijn graph</a>, the <a href="#BOOKMARK130">contig</a>s are: GTGG, GGT, and GGT:</p>
 <p><img src="svgbob_a90b2398b01bdc55d3409e08bb813c748d346635.svg" alt="Kroki diagram output"></p>
 <p>Assemblies often have gaps due to...</p>
 <ul>
 <li>repeats in the <a href="#BOOKMARK92">genome</a>, which make it impossible to fully <a href="#BOOKMARK100">assemble</a>.</li>
-<li>poor <a href="#BOOKMARK123">coverage</a>, which may be cost prohibitive to fix (more <a href="#BOOKMARK97">read</a>s required).</li>
+<li>poor <a href="#BOOKMARK127">coverage</a>, which may be cost prohibitive to fix (more <a href="#BOOKMARK97">read</a>s required).</li>
 </ul>
-<p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK126">contig</a>s.</p>
+<p>As such, biologists / bioinformaticians have no choice but to settle on <a href="#BOOKMARK130">contig</a>s.</p>
 </li>
 </ul>
+<p>
+</p>
 <p>
 </p>
 <p>
