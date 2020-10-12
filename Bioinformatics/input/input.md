@@ -1505,33 +1505,31 @@ TGT 1
 Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 ```
 
-**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from.
-
-For example, the following 3-mer read_SEQs are from a single strand of genome: \[TTA, TAC, ACT, CTT, TTA, TAG\]. That single strand of genome may have been either TTACTTAG or TTAGTTAC.
+**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from. For example, the following 3-mer read_SEQs are from a single strand of genome: \[TTA, TAC, ACT, CTT, TTA, TAG\]. That single strand of genome may have been either TTACTTAG or TTAGTTAC.
 
 **WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce a more complete picture of the genome.
 
-In theory, fragment_SEQs can be merged together to construct the original genome they were derived from. In practice, it's next to impossible to construct the original genome in its entirety:
+In theory, you can merge fragment_SEQs together to figure out the original genome from which they were derived from. In practice, real-world complications make it next to impossible to construct the original genome:
 
  * Fragment_SEQs are for both strands of the genome (not obvious which strand of double-stranded DNA a fragment_SEQ is from).
  * Fragment_SEQs may be missing (parts of genome not captured).
  * Fragment_SEQs may have incorrect occurrence counts (parts of genome represented too many/few times).
  * Fragment_SEQs may have errors (sequencing errors).
- * There may be more tha one genome possible for a set of fragment_SEQs.
+ * There may be more than one genome possible for a set of fragment_SEQs.
  * Finding genomes for a set of fragment_SEQs may be computationally intensive.
-
-```{note}
-Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC may help with some of the points above, but since it's probabilistic there's a decent chance that it'll miss some errors / some fragment_SEQs will get wrong occurrence counts. 
-```
 
 Never the less, in an ideal world where most of these problems don't exist, the child sections below detail good ways of sussing out possible genomes for a set of fragment_SEQs. Each child section assumes that the fragment_SEQs it's operating on are:
 
  * from 1 strand of the genome,
- * have correct cardinality (no duplicates or missing),
+ * have correct occurrence counts (no duplicates or missing),
  * and contain no errors.
 
 ```{note}
-Although these practical problems make it impossible to get the entire genome, it's still possible to pull out large parts of the genome. This is discussed in the subsequent section Algorithms/Assembly/Find Graph Contigs_TOPIC.
+Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC may help with filtering errors and finding occurrence counts, but it's probabilistic so there's a decent chance that it'll miss some errors / some fragment_SEQs will get wrong occurrence counts.
+```
+
+```{note}
+Although the complications discussed above make it impossible to get the original genome in its entirety, it's still possible to pull out large parts of the original genome. This is discussed in Algorithms/Assembly/Find Graph Contigs_TOPIC.
 ```
 
 #### Overlap Graph Algorithm
