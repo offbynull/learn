@@ -4,6 +4,7 @@ from typing import Dict, List, TypeVar, Optional, Tuple
 
 from FragmentOccurrenceProbabilityCalculator import calculate_fragment_occurrence_probabilities
 from Graph import Graph
+from Kdmer import Kdmer
 from Read import Read
 from ReadPair import ReadPair
 from ToDeBruijnGraph import to_debruijn_graph
@@ -48,6 +49,7 @@ def walk_ins_until_diverge(graph: Graph[T], node: T) -> Optional[List[T]]:
         ret_quick_lookup.add(node)
 
 
+# MARKDOWN
 def find_head_convergences(graph: Graph[T], branch_len: int) -> List[Tuple[Optional[T], List[T], Optional[T]]]:
     root_nodes = filter(lambda n: graph.get_in_degree(n) == 0, graph.get_nodes())
 
@@ -100,6 +102,7 @@ def find_bubbles(graph: Graph[T], branch_len: int) -> List[Tuple[Optional[T], Li
             if len(branch_path) <= branch_len:
                 ret.append(path)
     return ret
+# MARKDOWN
 
 
 def to_graphviz(graph: Graph, weights: Dict[T, float]) -> str:
@@ -120,34 +123,70 @@ def to_graphviz(graph: Graph, weights: Dict[T, float]) -> str:
             out += '"' + str(node).replace("\"", "\\\"") + '\"'\
                    + ' -> '\
                    + '"' + str(to_node).replace("\"", "\\\"") + '"'\
-                   + f' [color="{color}"];\n'
+                   + f' [color="{color}", label="{weight: .3f}"];\n'
     # https://stackoverflow.com/questions/8610710/compacting-a-digraph-in-graphviz-using-dot-language
     return 'digraph {\n'\
-           + 'graph[center=true, margin=0.2, nodesep=0.1, ranksep=0.15]\n'\
+           + 'graph[center=true, margin=0.1, nodesep=0.1, ranksep=0.1]\n'\
            + 'node[shape=none, fontname="Courier-Bold", fontsize=10, width=0.4, height=0.4, fixedsize=true]\n'\
-           + 'edge[arrowsize=0.6, arrowhead=vee]\n'\
+           + 'edge[arrowsize=0.6, fontname="Courier-Bold", fontsize=10, arrowhead=vee]\n'\
            + out\
            + '}\n'
 
 
+def main():
+    print("<div style=\"border:1px solid black;\">", end="\n\n")
+    print("`{bm-disable-all}`", end="\n\n")
+    try:
+        lines = []
+        while True:
+            try:
+                line = input().strip()
+                if len(line) > 0:
+                    lines.append(line)
+            except EOFError:
+                break
+
+        command = lines[0]
+        r = Random(int(lines[1]))
+        genome = lines[2]
+        bad_frag = lines[3]
+        coverage = int(lines[4])
+        if command == 'reads':
+            k = int(lines[5])
+            frags = Read.random_fragment(genome, k, count_kmers(len(genome), k) * coverage, r=r)
+            bad_frag = Read(bad_frag)
+        elif command == 'read-pairs':
+            k, d = tuple([int(s) for s in lines[5].split()])
+            frags = ReadPair.random_fragment(genome, k, d, count_kmers(len(genome), k) * coverage, r=r)
+            bad_frag = ReadPair(Kdmer(bad_frag.split('|')[0], bad_frag.split('|')[2], int(bad_frag.split('|')[1])))
+        else:
+            raise
+        frags += [bad_frag]
+        k_break = int(lines[6])
+        frags = [broken_read for frag in frags for broken_read in frag.shatter(k_break)]
+        frag_to_count = Counter(frags)
+        print(f'Genome: {genome}', end='\n\n')
+        print(f'Probability of occurrence in genome:', end='\n\n')
+        occurrence_probabilities = calculate_fragment_occurrence_probabilities(frags)
+        for f, appearances in occurrence_probabilities.items():
+            print(f' * {f} was scanned in {frag_to_count[f]} times, so it probably appears in the genome {appearances} times.')
+        print(f'', end='\n\n')
+        print(f'De Bruijn graph:', end='\n\n')
+        frags = frags[0].collapse(frags)
+        graph = to_debruijn_graph(frags)
+        print(f'```{{dot}}\n{to_graphviz(graph, occurrence_probabilities)}\n```')
+        print(f'', end='\n\n')
+        print(f'Problem paths:', end='\n\n')
+        potentially_bad_paths = find_bubbles(graph, k_break)\
+                                + find_head_convergences(graph, k_break)\
+                                + find_tail_divergences(graph, k_break)
+        for src, branch, dst in potentially_bad_paths:
+            print(f' * Src: {src}, Dst: {dst}, Branch: {"->".join([str(x) for x in branch])}')
+
+    finally:
+        print("</div>", end="\n\n")
+        print("`{bm-enable-all}`", end="\n\n")
+
+
 if __name__ == '__main__':
-    r = Random(126)
-
-    genome_len = 50
-    k_read = 12
-    k_break = 6
-
-    genome = generate_random_genome(genome_len, r=r)
-    reads = Read.random_fragment(genome, k_read, count_kmers(genome_len, k_read) * 30, r=r)
-    reads[0] = reads[0].introduce_random_errors(1, r=r)
-    reads = [broken_read for read in reads for broken_read in read.shatter(k_break)]
-    normalized_read_counts = calculate_fragment_occurrence_probabilities(reads)
-    print(f'{normalized_read_counts}')
-    reads = reads[0].collapse(reads)
-    graph = to_debruijn_graph(reads)
-    print(to_graphviz(graph, normalized_read_counts))
-    potentially_bad_paths = find_bubbles(graph, k_break)\
-                            + find_head_convergences(graph, k_break)\
-                            + find_tail_divergences(graph, k_break)
-    for src, branch, dst in potentially_bad_paths:
-        print(f'Src: {src}, Dst: {dst}, Branch: {"->".join([str(x) for x in branch])}')
+    main()

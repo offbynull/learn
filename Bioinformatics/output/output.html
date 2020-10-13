@@ -54,22 +54,22 @@
 <li><a href="#HEADREF34">Break Reads</a></li>
 <li><a href="#HEADREF35">Break Read-Pairs</a></li>
 <li><a href="#HEADREF36">Fragment Occurrence in Genome Probability</a></li>
-<li><a href="#HEADREF37">Find Genome</a></li>
+<li><a href="#HEADREF37">Assemble Fragments</a></li>
 <ul>
 <li><a href="#HEADREF38">Overlap Graph Algorithm</a></li>
 <ul>
-<li><a href="#HEADREF39">Hamiltonian Path Algorithm</a></li>
-<li><a href="#HEADREF40">Graph Construction Algorithm</a></li>
+<li><a href="#HEADREF39">Graph Construction Algorithm</a></li>
+<li><a href="#HEADREF40">Hamiltonian Path Algorithm</a></li>
 </ul>
 <li><a href="#HEADREF41">De Bruijn Graph Algorithm</a></li>
 <ul>
-<li><a href="#HEADREF42">Eulerian Cycle Algorithm</a></li>
-<li><a href="#HEADREF43">Graph Construction Algorithm</a></li>
+<li><a href="#HEADREF42">Graph Construction Algorithm</a></li>
+<li><a href="#HEADREF43">Eulerian Cycle Algorithm</a></li>
 <li><a href="#HEADREF44">K-universal String Algorithm</a></li>
 </ul>
 </ul>
-<li><a href="#HEADREF45">Find Graph Anomalies</a></li>
-<li><a href="#HEADREF46">Find Graph Contigs</a></li>
+<li><a href="#HEADREF45">Filter Graph Anomalies</a></li>
+<li><a href="#HEADREF46">Assemble Contigs</a></li>
 </ul>
 </ul>
 <li><a href="#HEADREF47">Stories</a></li>
@@ -2491,14 +2491,17 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK25">Algorithms/Assembly/Break Read-Pairs</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Imagine that you're <a href="#BOOKMARK95">sequencing</a> an organism's <a href="#BOOKMARK93">genome</a>. Given that ...</p>
+<p><strong>WHAT</strong>: <a href="#BOOKMARK96">Sequencer</a>s work by taking many copies of an organism's <a href="#BOOKMARK93">genome</a>, randomly breaking up those <a href="#BOOKMARK93">genome</a>s into smaller pieces, and randomly scanning in those pieces (<a href="#BOOKMARK100">fragment</a>s). As such, it isn't immediately obvious how many times each <a href="#BOOKMARK100">fragment</a> actually appears in the <a href="#BOOKMARK93">genome</a>.</p>
+<p>Imagine that you're <a href="#BOOKMARK95">sequencing</a> an organism's <a href="#BOOKMARK93">genome</a>. Given that ...</p>
 <ul>
-<li>less than 50% of the <a href="#BOOKMARK93">genome</a> is repeats,</li>
-<li>the start position of <a href="#BOOKMARK100">fragment</a>s produced by the <a href="#BOOKMARK96">sequencer</a> is random,</li>
-<li>and there's good <a href="#BOOKMARK128">coverage</a> of the <a href="#BOOKMARK93">genome</a> (e.g. ~30x as many <a href="#BOOKMARK100">fragment</a>s as the length of the <a href="#BOOKMARK93">genome</a>),</li>
+<li>there's good <a href="#BOOKMARK128">coverage</a> of the <a href="#BOOKMARK93">genome</a> (e.g. ~30x as many <a href="#BOOKMARK100">fragment</a>s as the length of the <a href="#BOOKMARK93">genome</a>),</li>
+<li>the <a href="#BOOKMARK100">fragment</a>s scanned in are chosen at random (unbiased),</li>
+<li>the <a href="#BOOKMARK100">fragment</a>s scanned in start at random offsets in the <a href="#BOOKMARK93">genome</a> (unbiased),</li>
+<li>and the majority of <a href="#BOOKMARK100">fragment</a>s are for non-repeating parts of the <a href="#BOOKMARK93">genome</a>.</li>
 </ul>
 <p>... you can use probabilities to hint at how many times a <a href="#BOOKMARK100">fragment</a> appears in the <a href="#BOOKMARK93">genome</a>.</p>
-<p><strong>WHY</strong>: Determining how many times a <a href="#BOOKMARK100">fragment</a> appears in a <a href="#BOOKMARK93">genome</a> helps with <a href="#BOOKMARK101">assembly</a>. Specifically, ...</p>
+<p><strong>WHY</strong>:</p>
+<p>Determining how many times a <a href="#BOOKMARK100">fragment</a> appears in a <a href="#BOOKMARK93">genome</a> helps with <a href="#BOOKMARK101">assembly</a>. Specifically, ...</p>
 <ul>
 <li><a href="#BOOKMARK100">fragment</a>s for repeat regions of the <a href="#BOOKMARK93">genome</a> can be accounted for during <a href="#BOOKMARK101">assembly</a>.</li>
 <li><a href="#BOOKMARK100">fragment</a>s containing <a href="#BOOKMARK97">sequencing error</a>s may be detectable and filtered out prior to <a href="#BOOKMARK101">assembly</a>.</li>
@@ -2576,7 +2579,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </tr>
 </tbody>
 </table>
-<p>Note the last <a href="#BOOKMARK98">read</a> (TGT) has 0.03 appearances, meaning it's a <a href="#BOOKMARK98">read</a> that very likely contains a <a href="#BOOKMARK97">sequencing error</a>.</p>
+<p>Note the last <a href="#BOOKMARK98">read</a> (TGT) has 0.03 appearances, meaning it's a <a href="#BOOKMARK98">read</a> that it either</p>
+<ul>
+<li>contains a <a href="#BOOKMARK97">sequencing error</a>,</li>
+<li>or it has poor <a href="#BOOKMARK128">coverage</a> (likely because it's at the head / tail of the <a href="#BOOKMARK93">genome</a> so it got scanned in less than other <a href="#BOOKMARK100">fragment</a>s).</li>
+</ul>
+<p>In this case, it's an error because it doesn't appear in the original <a href="#BOOKMARK93">genome</a>: TGT is not in ATGGATGC.</p>
 <pre class="hljs"><code><span class="hljs-comment"># If less than 50% of the reads are from repeats, this attempts to count and normalize such that it can hint at which</span>
 <span class="hljs-comment"># reads may contain errors (= ~0) and which reads are for repeat regions (&gt; 1.0).</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_fragment_occurrence_probabilities</span>(<span class="hljs-params">fragments: List[T]</span>) -&gt; Dict[T, float]:</span>
@@ -2610,7 +2618,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 </div>
 <p></p>
-<a name="HEADREF37"></a><h3>Find Genome</h3>
+<a name="HEADREF37"></a><h3>Assemble Fragments</h3>
 <p><a name="BOOKMARK27"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
@@ -2618,22 +2626,21 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BOOKMARK26">Algorithms/Assembly/Fragment Occurrence in Genome Probability</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given the <a href="#BOOKMARK100">fragment</a>s from a <a href="#BOOKMARK93">genome</a>, merge those <a href="#BOOKMARK100">fragment</a>s together in different ways so as to guess the <a href="#BOOKMARK93">genome</a> those <a href="#BOOKMARK100">fragment</a>s came from. For example, the following <a href="#BOOKMARK38">3-mer</a> <a href="#BOOKMARK98">read</a>s are from a single strand of <a href="#BOOKMARK93">genome</a>: [TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT]. That single strand of <a href="#BOOKMARK93">genome</a> may have been either TTACTTAGTT or TTAGTTACTT.</p>
-<p><img src="svgbob_f76e225a9e0c7e06793ba6615cf6130f7cdd7af4.svg" alt="Kroki diagram output"></p>
-<p><strong>WHY</strong>: <a href="#BOOKMARK96">Sequencer</a>s produce <a href="#BOOKMARK100">fragment</a>s, but <a href="#BOOKMARK100">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce a more complete picture of the <a href="#BOOKMARK93">genome</a>.</p>
-<p>In theory, you can merge <a href="#BOOKMARK100">fragment</a>s together to figure out the original <a href="#BOOKMARK93">genome</a>. In practice, real-world complications make it next to impossible to construct the original <a href="#BOOKMARK93">genome</a>:</p>
+<p><strong>WHAT</strong>: Given the <a href="#BOOKMARK100">fragment</a>s for a single-strand of DNA, make guesses as to what that single-strand of DNA was by merging overlapping <a href="#BOOKMARK100">fragment</a>s together. For example, the following <a href="#BOOKMARK38">3-mer</a> <a href="#BOOKMARK98">read</a>s: [TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT] may have come from either TTACTTAGTT or TTAGTTACTT.</p>
+<p><img src="svgbob_179666a8a27fdb428ea2cd4ffe30cdf0c3a4b815.svg" alt="Kroki diagram output"></p>
+<p><strong>WHY</strong>: <a href="#BOOKMARK96">Sequencer</a>s produce <a href="#BOOKMARK100">fragment</a>s, but <a href="#BOOKMARK100">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. In theory, merging overlapping <a href="#BOOKMARK100">fragment</a>s for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:</p>
 <ul>
-<li><a href="#BOOKMARK100">Fragment</a>s are for both strands of the <a href="#BOOKMARK93">genome</a> (not obvious which strand of <a href="#BOOKMARK59">double-stranded DNA</a> a <a href="#BOOKMARK100">fragment</a> is from).</li>
-<li><a href="#BOOKMARK100">Fragment</a>s may be missing (parts of <a href="#BOOKMARK93">genome</a> not captured).</li>
-<li><a href="#BOOKMARK100">Fragment</a>s may have incorrect occurrence counts (parts of <a href="#BOOKMARK93">genome</a> represented too many/few times).</li>
-<li><a href="#BOOKMARK100">Fragment</a>s may have errors (<a href="#BOOKMARK97">sequencing error</a>s).</li>
-<li>There may be more than one <a href="#BOOKMARK93">genome</a> possible for a set of <a href="#BOOKMARK100">fragment</a>s.</li>
-<li>Finding <a href="#BOOKMARK93">genome</a>s for a set of <a href="#BOOKMARK100">fragment</a>s may be computationally intensive.</li>
+<li><a href="#BOOKMARK100">Fragment</a>s are for both strands (strand of <a href="#BOOKMARK59">double-stranded DNA</a> a <a href="#BOOKMARK100">fragment</a>'s from isn't known).</li>
+<li><a href="#BOOKMARK100">Fragment</a>s may be missing (<a href="#BOOKMARK96">sequencer</a> didn't capture it).</li>
+<li><a href="#BOOKMARK100">Fragment</a>s may have incorrect occurrence counts (<a href="#BOOKMARK96">sequencer</a> captured it too many/few times).</li>
+<li><a href="#BOOKMARK100">Fragment</a>s may have errors (<a href="#BOOKMARK96">sequencer</a> produced <a href="#BOOKMARK97">sequencing error</a>s).</li>
+<li><a href="#BOOKMARK100">Fragment</a>s may be merge-able in more than one way (multiple guesses).</li>
+<li><a href="#BOOKMARK100">Fragment</a>s may take a long time to merge (computationally intensive).</li>
 </ul>
-<p>Never the less, in an ideal world where most of these problems don't exist, the child sections below detail good ways of sussing out possible <a href="#BOOKMARK93">genome</a>s for a set of <a href="#BOOKMARK100">fragment</a>s. Each child section assumes that the <a href="#BOOKMARK100">fragment</a>s it's operating on are:</p>
+<p>Never the less, in an ideal world where most of these problems don't exist, the child sections below detail various ways to guess the single-strand of DNA that a set of <a href="#BOOKMARK100">fragment</a>s came from. Each child section assumes that the <a href="#BOOKMARK100">fragment</a>s it's operating on ...</p>
 <ul>
-<li>from 1 strand of the <a href="#BOOKMARK93">genome</a>,</li>
-<li>have correct occurrence counts (no duplicates or missing),</li>
+<li>are from a single-strand of DNA,</li>
+<li>have correct occurrence counts (no missing or extra),</li>
 <li>and contain no errors.</li>
 </ul>
 <div style="margin:2em; background-color: #e0e0e0;">
@@ -2642,7 +2649,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </div>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Although the complications discussed above make it impossible to get the original <a href="#BOOKMARK93">genome</a> in its entirety, it's still possible to pull out large parts of the original <a href="#BOOKMARK93">genome</a>. This is discussed in <a href="#BOOKMARK36">Algorithms/Assembly/Find Graph Contigs</a>.</p>
+<p>Although the complications discussed above make it impossible to get the original <a href="#BOOKMARK93">genome</a> in its entirety, it's still possible to pull out large parts of the original <a href="#BOOKMARK93">genome</a>. This is discussed in <a href="#BOOKMARK36">Algorithms/Assembly/Assemble Contigs</a>.</p>
 </div>
 <a name="HEADREF38"></a><h4>Overlap Graph Algorithm</h4>
 <p><a name="BOOKMARK28"></a><strong></strong></p>
@@ -2674,59 +2681,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>Notice that the example graph is circular. If the organism <a href="#BOOKMARK93">genome</a> itself were also circular (e.g. bacterial <a href="#BOOKMARK93">genome</a>), the <a href="#BOOKMARK93">genome</a> guesses above are all actually the same because circular <a href="#BOOKMARK93">genome</a>s don't have a beginning / end.</p>
 </div>
-<a name="HEADREF39"></a><h5>Hamiltonian Path Algorithm</h5>
+<a name="HEADREF39"></a><h5>Graph Construction Algorithm</h5>
 <p><a name="BOOKMARK29"></a><strong></strong></p>
-<p>Given a graph, a path that touches each node exactly once is a <a href="#BOOKMARK108">Hamiltonian path</a>. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.</p>
-<p>This algorithm will likely fall over on non-trivial overlay graphs. Even finding one <a href="#BOOKMARK108">Hamiltonian path</a> is computationally intensive.</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exhaustively_walk_until_all_nodes_touched_exactly_one</span>(<span class="hljs-params">
-        graph: Graph[T],
-        from_node: T,
-        current_path: List[T]
-</span>) -&gt; List[List[T]]:</span>
-    current_path.append(from_node)
-
-    <span class="hljs-keyword">if</span> len(current_path) == len(graph):
-        found_paths = [current_path.copy()]
-    <span class="hljs-keyword">else</span>:
-        found_paths = []
-        <span class="hljs-keyword">for</span> to_node <span class="hljs-keyword">in</span> graph.get_outputs(from_node):
-            <span class="hljs-keyword">if</span> to_node <span class="hljs-keyword">in</span> set(current_path):
-                <span class="hljs-keyword">continue</span>
-            found_paths += exhaustively_walk_until_all_nodes_touched_exactly_one(graph, to_node, current_path)
-
-    current_path.pop()
-    <span class="hljs-keyword">return</span> found_paths
-
-
-<span class="hljs-comment"># walk each node exactly once</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_hamiltonian_paths</span>(<span class="hljs-params">graph: Graph[T], from_node: T</span>) -&gt; List[List[T]]:</span>
-    <span class="hljs-keyword">return</span> exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])</code></pre><div style="border:1px solid black;">
-<p></p>
-<p>Given the fragments ['TTA', 'TTA', 'TAG', 'AGT', 'GTT', 'TAC', 'ACT', 'CTT'], the overlap graph is...</p>
-<p><img src="dot_8ca9fb7886e86704dc01b1bffd1d6dd1.svg" alt="Dot diagram"></p>
-<p>... and the Hamiltonian paths are ...</p>
-<ul>
-<li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
-<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-</ul>
-</div>
-<p></p>
-<a name="HEADREF40"></a><h5>Graph Construction Algorithm</h5>
-<p><a name="BOOKMARK30"></a><strong></strong></p>
 <p>To construct an overlap graph, create an edge between <a href="#BOOKMARK100">fragment</a>s that have an overlap.</p>
 <p>For each <a href="#BOOKMARK100">fragment</a>, add that <a href="#BOOKMARK100">fragment</a>'s ...</p>
 <ul>
@@ -2762,6 +2718,63 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="dot_8ca9fb7886e86704dc01b1bffd1d6dd1.svg" alt="Dot diagram"></p>
 </div>
 <p></p>
+<a name="HEADREF40"></a><h5>Hamiltonian Path Algorithm</h5>
+<p><a name="BOOKMARK30"></a><strong></strong></p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK29">Algorithms/Assembly/Infer Genome/Overlap Graph Algorithm/Graph Construction Algorithm</a></li>
+</ul>
+</div>
+<p>Given a graph, a path that touches each node exactly once is a <a href="#BOOKMARK108">Hamiltonian path</a>. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.</p>
+<p>This algorithm will likely fall over on non-trivial overlay graphs. Even finding one <a href="#BOOKMARK108">Hamiltonian path</a> is computationally intensive.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exhaustively_walk_until_all_nodes_touched_exactly_one</span>(<span class="hljs-params">
+        graph: Graph[T],
+        from_node: T,
+        current_path: List[T]
+</span>) -&gt; List[List[T]]:</span>
+    current_path.append(from_node)
+
+    <span class="hljs-keyword">if</span> len(current_path) == len(graph):
+        found_paths = [current_path.copy()]
+    <span class="hljs-keyword">else</span>:
+        found_paths = []
+        <span class="hljs-keyword">for</span> to_node <span class="hljs-keyword">in</span> graph.get_outputs(from_node):
+            <span class="hljs-keyword">if</span> to_node <span class="hljs-keyword">in</span> set(current_path):
+                <span class="hljs-keyword">continue</span>
+            found_paths += exhaustively_walk_until_all_nodes_touched_exactly_one(graph, to_node, current_path)
+
+    current_path.pop()
+    <span class="hljs-keyword">return</span> found_paths
+
+
+<span class="hljs-comment"># walk each node exactly once</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">walk_hamiltonian_paths</span>(<span class="hljs-params">graph: Graph[T], from_node: T</span>) -&gt; List[List[T]]:</span>
+    <span class="hljs-keyword">return</span> exhaustively_walk_until_all_nodes_touched_exactly_one(graph, from_node, [])</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Given the fragments ['TTA', 'TTA', 'TAG', 'AGT', 'GTT', 'TAC', 'ACT', 'CTT'], the overlap graph is...</p>
+<p><img src="dot_8ca9fb7886e86704dc01b1bffd1d6dd1.svg" alt="Dot diagram"></p>
+<p>... and the Hamiltonian paths are ...</p>
+<ul>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
+<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+</ul>
+</div>
+<p></p>
 <a name="HEADREF41"></a><h4>De Bruijn Graph Algorithm</h4>
 <p><a name="BOOKMARK31"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
@@ -2791,9 +2804,71 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>Depending on the <a href="#BOOKMARK100">fragment</a>s, the resulting graph may not be totally <a href="#BOOKMARK124">balanced</a>. A technique for dealing with this is detailed in the graph construction child section. For now, just assume that hte graph will be <a href="#BOOKMARK124">balanced</a>.</p>
 </div>
 <p>Similar to an overlay graph, a <a href="#BOOKMARK126">de Bruijn graph</a> shows the different ways that <a href="#BOOKMARK100">fragment</a>s can be merged to construct a <a href="#BOOKMARK93">genome</a>. However, unlike an overlay graph, the <a href="#BOOKMARK100">fragment</a>s are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (<a href="#BOOKMARK108">Hamiltonian path</a>), in a <a href="#BOOKMARK126">de Bruijn graph</a> you need to find paths that walk over every edge exactly once.</p>
-<p>A path in a <a href="#BOOKMARK126">de Bruijn graph</a> that walks over each edge exactly once is a guess of the <a href="#BOOKMARK93">genome</a> might be. Such a path is called a <a href="#BOOKMARK111">Eulerian cycle</a>: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding a <a href="#BOOKMARK108">Hamiltonian path</a> in an overlay graph, it's much faster to find an <a href="#BOOKMARK111">Eulerian cycle</a> in an <a href="#BOOKMARK126">de Bruijn graph</a>.</p>
-<a name="HEADREF42"></a><h5>Eulerian Cycle Algorithm</h5>
+<p>A path in a <a href="#BOOKMARK126">de Bruijn graph</a> that walks over each edge exactly once is a guess of what the <a href="#BOOKMARK93">genome</a> might be. Such a path is called a <a href="#BOOKMARK111">Eulerian cycle</a>: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding a <a href="#BOOKMARK108">Hamiltonian path</a> in an overlay graph, it's much faster to find an <a href="#BOOKMARK111">Eulerian cycle</a> in an <a href="#BOOKMARK126">de Bruijn graph</a>.</p>
+<a name="HEADREF42"></a><h5>Graph Construction Algorithm</h5>
 <p><a name="BOOKMARK32"></a><strong></strong></p>
+<p>To construct a <a href="#BOOKMARK126">de Bruijn graph</a>, add an edge for each <a href="#BOOKMARK100">fragment</a>, creating missing nodes as required.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_debruijn_graph</span>(<span class="hljs-params">reads: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
+    graph = Graph()
+    <span class="hljs-keyword">for</span> read <span class="hljs-keyword">in</span> reads:
+        from_node = read.prefix(skip)
+        to_node = read.suffix(skip)
+        graph.insert_edge(from_node, to_node)
+    <span class="hljs-keyword">return</span> graph</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Given the fragments ['TTAG', 'TAGT', 'AGTT', 'GTTA', 'TTAC', 'TACT', 'ACTT', 'CTTA'], the de Bruijn graph is...</p>
+<p><img src="dot_fc6c4f4bf004838f81f7a6343b7d2e19.svg" alt="Dot diagram"></p>
+</div>
+<p></p>
+<p>Note how the graph above is both <a href="#BOOKMARK124">balanced</a> and <a href="#BOOKMARK117">strongly connected</a>. In most cases, non-circular <a href="#BOOKMARK93">genome</a>s won't generate a <a href="#BOOKMARK123">balanced graph</a> like the one above. Instead, a non-circular <a href="#BOOKMARK93">genome</a> will very likely generate a graph that's nearly <a href="#BOOKMARK124">balanced</a>: Nearly <a href="#BOOKMARK123">balanced graph</a>s are graphs that are would be <a href="#BOOKMARK124">balanced</a> if not for a few un<a href="#BOOKMARK120">balanced node</a>s (usually root and tail nodes). They can artificially be made to become <a href="#BOOKMARK124">balanced</a> by finding im<a href="#BOOKMARK120">balanced node</a>s and creating artificial edges between them until they become <a href="#BOOKMARK120">balanced node</a>s.</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>Circular <a href="#BOOKMARK93">genome</a>s are <a href="#BOOKMARK93">genome</a>s that wrap around (e.g. bacterial <a href="#BOOKMARK93">genome</a>s). They don't have a beginning / end.</p>
+</div>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_unbalanced_nodes</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; List[Tuple[T, int, int]]:</span>
+    unbalanced_nodes = []
+    <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> graph.get_nodes():
+        in_degree = graph.get_in_degree(node)
+        out_degree = graph.get_out_degree(node)
+        <span class="hljs-keyword">if</span> in_degree != out_degree:
+            unbalanced_nodes.append((node, in_degree, out_degree))
+    <span class="hljs-keyword">return</span> unbalanced_nodes
+
+
+<span class="hljs-comment"># creates a balanced graph from a nearly balanced graph -- nearly balanced means the graph has an equal number of</span>
+<span class="hljs-comment"># missing outputs and missing inputs.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">balance_graph</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; Tuple[Graph[T], Set[T], Set[T]]:</span>
+    unbalanced_nodes = find_unbalanced_nodes(graph)
+    nodes_with_missing_ins = filter(<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>] &lt; x[<span class="hljs-number">2</span>], unbalanced_nodes)
+    nodes_with_missing_outs = filter(<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>] &gt; x[<span class="hljs-number">2</span>], unbalanced_nodes)
+
+    graph = graph.copy()
+
+    <span class="hljs-comment"># create 1 copy per missing input / per missing output</span>
+    n_per_need_in = [_n <span class="hljs-keyword">for</span> n, in_degree, out_degree <span class="hljs-keyword">in</span> nodes_with_missing_ins <span class="hljs-keyword">for</span> _n <span class="hljs-keyword">in</span> [n] * (out_degree - in_degree)]
+    n_per_need_out = [_n <span class="hljs-keyword">for</span> n, in_degree, out_degree <span class="hljs-keyword">in</span> nodes_with_missing_outs <span class="hljs-keyword">for</span> _n <span class="hljs-keyword">in</span> [n] * (in_degree - out_degree)]
+    <span class="hljs-keyword">assert</span> len(n_per_need_in) == len(n_per_need_out)  <span class="hljs-comment"># need an equal count of missing ins and missing outs to balance</span>
+
+    <span class="hljs-comment"># balance</span>
+    <span class="hljs-keyword">for</span> n_need_in, n_need_out <span class="hljs-keyword">in</span> zip(n_per_need_in, n_per_need_out):
+        graph.insert_edge(n_need_out, n_need_in)
+
+    <span class="hljs-keyword">return</span> graph, set(n_per_need_in), set(n_per_need_out)  <span class="hljs-comment"># return graph with cycle, orig root nodes, orig tail nodes</span></code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Given the fragments ['TTAC', 'TACC', 'ACCC', 'CCCT'], the artificially balanced de Bruijn graph is...</p>
+<p><img src="dot_060b6d958ad63bcbb55a116f699b26f5.svg" alt="Dot diagram"></p>
+<p>... with original head nodes at {TTA} and tail nodes at {CCT}.</p>
+</div>
+<p></p>
+<p>In the graph above, an artificial edge is inserted between CCT and TTA to create a <a href="#BOOKMARK123">balanced graph</a>. With this <a href="#BOOKMARK123">balanced graph</a>, a path that walks all edges (<a href="#BOOKMARK100">fragment</a>s) can found by finding the <a href="#BOOKMARK111">Eulerian cycle</a> from the original root node (TTA). The artificial edge will show up at the end of the <a href="#BOOKMARK111">Eulerian cycle</a> (CCT to TTA), and as such can be dropped from the path.</p>
+<a name="HEADREF43"></a><h5>Eulerian Cycle Algorithm</h5>
+<p><a name="BOOKMARK33"></a><strong></strong></p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BOOKMARK32">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm</a></li>
+</ul>
+</div>
 <p>Given a graph that's <a href="#BOOKMARK117">strongly connected</a> and <a href="#BOOKMARK124">balanced</a>, you can find a <a href="#BOOKMARK111">Eulerian cycle</a> by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.</p>
 <pre class="hljs"><code><span class="hljs-comment"># (6, 8), (8, 7), (7, 9), (9, 6)  ----&gt;  68796</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">edge_list_to_node_list</span>(<span class="hljs-params">edges: List[Tuple[T, T]]</span>) -&gt; List[T]:</span>
@@ -2852,80 +2927,18 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>TT -&gt; TC -&gt; CT -&gt; TT -&gt; TA -&gt; AT -&gt; TT</p>
 </div>
 <p></p>
-<p>This algorithm picks one <a href="#BOOKMARK111">Eulerian cycle</a> in a graph. In the above graph, there are two. In other real-world applications, there likely will be way too many <a href="#BOOKMARK111">Eulerian cycle</a>s to enumerate all of them.</p>
+<p>This algorithm picks one <a href="#BOOKMARK111">Eulerian cycle</a> in a graph. In the above graph, there are two. In other real-world applications, there likely will be too many <a href="#BOOKMARK111">Eulerian cycle</a>s to enumerate all of them.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>See the section on <a href="#BOOKMARK127">k-universal</a> strings to see a real-world application of <a href="#BOOKMARK113">Eulerian graph</a>s. For something like k=20, good luck trying to enumerate all <a href="#BOOKMARK111">Eulerian cycle</a>s.</p>
 </div>
-<a name="HEADREF43"></a><h5>Graph Construction Algorithm</h5>
-<p><a name="BOOKMARK33"></a><strong></strong></p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>↩PREREQUISITES↩</strong></p>
-<ul>
-<li><a href="#BOOKMARK32">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm</a></li>
-</ul>
-</div>
-<p>To construct a <a href="#BOOKMARK126">de Bruijn graph</a>, add an edge for each <a href="#BOOKMARK100">fragment</a>, creating missing nodes as required.</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_debruijn_graph</span>(<span class="hljs-params">reads: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
-    graph = Graph()
-    <span class="hljs-keyword">for</span> read <span class="hljs-keyword">in</span> reads:
-        from_node = read.prefix(skip)
-        to_node = read.suffix(skip)
-        graph.insert_edge(from_node, to_node)
-    <span class="hljs-keyword">return</span> graph</code></pre><div style="border:1px solid black;">
-<p></p>
-<p>Given the fragments ['TTAG', 'TAGT', 'AGTT', 'GTTA', 'TTAC', 'TACT', 'ACTT', 'CTTA'], the de Bruijn graph is...</p>
-<p><img src="dot_fc6c4f4bf004838f81f7a6343b7d2e19.svg" alt="Dot diagram"></p>
-</div>
-<p></p>
-<p>Note how the graph above is both <a href="#BOOKMARK124">balanced</a> and <a href="#BOOKMARK117">strongly connected</a>. In most cases, non-circular <a href="#BOOKMARK93">genome</a>s won't generate a <a href="#BOOKMARK123">balanced graph</a> like the one above. Instead, a non-circular <a href="#BOOKMARK93">genome</a> will very likely generate a graph that's nearly <a href="#BOOKMARK124">balanced</a>: Nearly <a href="#BOOKMARK123">balanced graph</a>s are graphs that are would be <a href="#BOOKMARK124">balanced</a> if not for a few un<a href="#BOOKMARK120">balanced node</a>s (usually root and tail nodes). They can artificially be made to become <a href="#BOOKMARK124">balanced</a> by finding im<a href="#BOOKMARK120">balanced node</a>s and creating artificial edges between them until they become <a href="#BOOKMARK120">balanced node</a>s.</p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Circular <a href="#BOOKMARK93">genome</a>s are <a href="#BOOKMARK93">genome</a>s that wrap around (e.g. bacterial <a href="#BOOKMARK93">genome</a>s). They don't have a beginning / end.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_unbalanced_nodes</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; List[Tuple[T, int, int]]:</span>
-    unbalanced_nodes = []
-    <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> graph.get_nodes():
-        in_degree = graph.get_in_degree(node)
-        out_degree = graph.get_out_degree(node)
-        <span class="hljs-keyword">if</span> in_degree != out_degree:
-            unbalanced_nodes.append((node, in_degree, out_degree))
-    <span class="hljs-keyword">return</span> unbalanced_nodes
-
-
-<span class="hljs-comment"># creates a balanced graph from a nearly balanced graph -- nearly balanced means the graph has an equal number of</span>
-<span class="hljs-comment"># missing outputs and missing inputs.</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">balance_graph</span>(<span class="hljs-params">graph: Graph[T]</span>) -&gt; Tuple[Graph[T], Set[T], Set[T]]:</span>
-    unbalanced_nodes = find_unbalanced_nodes(graph)
-    nodes_with_missing_ins = filter(<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>] &lt; x[<span class="hljs-number">2</span>], unbalanced_nodes)
-    nodes_with_missing_outs = filter(<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>] &gt; x[<span class="hljs-number">2</span>], unbalanced_nodes)
-
-    graph = graph.copy()
-
-    <span class="hljs-comment"># create 1 copy per missing input / per missing output</span>
-    n_per_need_in = [_n <span class="hljs-keyword">for</span> n, in_degree, out_degree <span class="hljs-keyword">in</span> nodes_with_missing_ins <span class="hljs-keyword">for</span> _n <span class="hljs-keyword">in</span> [n] * (out_degree - in_degree)]
-    n_per_need_out = [_n <span class="hljs-keyword">for</span> n, in_degree, out_degree <span class="hljs-keyword">in</span> nodes_with_missing_outs <span class="hljs-keyword">for</span> _n <span class="hljs-keyword">in</span> [n] * (in_degree - out_degree)]
-    <span class="hljs-keyword">assert</span> len(n_per_need_in) == len(n_per_need_out)  <span class="hljs-comment"># need an equal count of missing ins and missing outs to balance</span>
-
-    <span class="hljs-comment"># balance</span>
-    <span class="hljs-keyword">for</span> n_need_in, n_need_out <span class="hljs-keyword">in</span> zip(n_per_need_in, n_per_need_out):
-        graph.insert_edge(n_need_out, n_need_in)
-
-    <span class="hljs-keyword">return</span> graph, set(n_per_need_in), set(n_per_need_out)  <span class="hljs-comment"># return graph with cycle, orig root nodes, orig tail nodes</span></code></pre><div style="border:1px solid black;">
-<p></p>
-<p>Given the fragments ['TTAC', 'TACC', 'ACCC', 'CCCT'], the artificially balanced de Bruijn graph is...</p>
-<p><img src="dot_060b6d958ad63bcbb55a116f699b26f5.svg" alt="Dot diagram"></p>
-<p>... with original head nodes at {TTA} and tail nodes at {CCT}.</p>
-</div>
-<p></p>
-<p>In the graph above, an artificial edge is inserted between CCT and TTA to create a <a href="#BOOKMARK123">balanced graph</a>. With this <a href="#BOOKMARK123">balanced graph</a>, a path that walks all edges (<a href="#BOOKMARK100">fragment</a>s) can found by finding the <a href="#BOOKMARK111">Eulerian cycle</a> from the original root node (TTA). The artificial edge will show up at the end of the <a href="#BOOKMARK111">Eulerian cycle</a> (CCT to TTA), and as such can be dropped from the path.</p>
 <a name="HEADREF44"></a><h5>K-universal String Algorithm</h5>
 <p><a name="BOOKMARK34"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK32">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm</a></li>
-<li><a href="#BOOKMARK33">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm</a></li>
+<li><a href="#BOOKMARK32">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm</a></li>
+<li><a href="#BOOKMARK33">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm</a></li>
 </ul>
 </div>
 <p><a href="#BOOKMARK126">De Bruijn graph</a>s were originally invented to efficiently generate <a href="#BOOKMARK127">k-universal</a> strings: For some alphabet and k, a string is considered <a href="#BOOKMARK127">k-universal</a> if it contains every possible <a href="#BOOKMARK38">k-mer</a> for that alphabet exactly once.</p>
@@ -2986,14 +2999,164 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>1100010111</li>
 <li>...</li>
 </ul>
-<a name="HEADREF45"></a><h3>Find Graph Anomalies</h3>
+<a name="HEADREF45"></a><h3>Filter Graph Anomalies</h3>
 <p><a name="BOOKMARK35"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK27">Algorithms/Assembly/Find Genome</a></li>
+<li><a href="#BOOKMARK27">Algorithms/Assembly/Assemble Fragments</a></li>
 </ul>
 </div>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_head_convergences</span>(<span class="hljs-params">graph: Graph[T], branch_len: int</span>) -&gt; List[Tuple[Optional[T], List[T], Optional[T]]]:</span>
+    root_nodes = filter(<span class="hljs-keyword">lambda</span> n: graph.get_in_degree(n) == <span class="hljs-number">0</span>, graph.get_nodes())
+
+    ret = []
+    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> root_nodes:
+        <span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> graph.get_outputs(n):
+            path_from_child = walk_outs_until_converge(graph, child)
+            <span class="hljs-keyword">if</span> path_from_child <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+                <span class="hljs-keyword">continue</span>
+            diverging_node = <span class="hljs-literal">None</span>
+            branch_path = [n] + path_from_child[:<span class="hljs-number">-1</span>]
+            converging_node = path_from_child[<span class="hljs-number">-1</span>]
+            path = (diverging_node, branch_path, converging_node)
+            <span class="hljs-keyword">if</span> len(branch_path) &lt;= branch_len:
+                ret.append(path)
+    <span class="hljs-keyword">return</span> ret
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_tail_divergences</span>(<span class="hljs-params">graph: Graph[T], branch_len: int</span>) -&gt; List[Tuple[Optional[T], List[T], Optional[T]]]:</span>
+    tail_nodes = filter(<span class="hljs-keyword">lambda</span> n: graph.get_out_degree(n) == <span class="hljs-number">0</span>, graph.get_nodes())
+
+    ret = []
+    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> tail_nodes:
+        <span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> graph.get_inputs(n):
+            path_from_child = walk_ins_until_diverge(graph, child)
+            <span class="hljs-keyword">if</span> path_from_child <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+                <span class="hljs-keyword">continue</span>
+            diverging_node = path_from_child[<span class="hljs-number">0</span>]
+            branch_path = path_from_child[<span class="hljs-number">1</span>:] + [n]
+            converging_node = <span class="hljs-literal">None</span>
+            path = (diverging_node, branch_path, converging_node)
+            <span class="hljs-keyword">if</span> len(branch_path) &lt;= branch_len:
+                ret.append(path)
+    <span class="hljs-keyword">return</span> ret
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_bubbles</span>(<span class="hljs-params">graph: Graph[T], branch_len: int</span>) -&gt; List[Tuple[Optional[T], List[T], Optional[T]]]:</span>
+    branching_nodes = filter(<span class="hljs-keyword">lambda</span> n: graph.get_out_degree(n) &gt; <span class="hljs-number">1</span>, graph.get_nodes())
+
+    ret = []
+    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> branching_nodes:
+        <span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> graph.get_outputs(n):
+            path_from_child = walk_outs_until_converge(graph, child)
+            <span class="hljs-keyword">if</span> path_from_child <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+                <span class="hljs-keyword">continue</span>
+            diverging_node = n
+            branch_path = path_from_child[:<span class="hljs-number">-1</span>]
+            converging_node = path_from_child[<span class="hljs-number">-1</span>]
+            path = (diverging_node, branch_path, converging_node)
+            <span class="hljs-keyword">if</span> len(branch_path) &lt;= branch_len:
+                ret.append(path)
+    <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
+<p></p>
+<p>Genome: ATTGGACAATGTCCGCAT</p>
+<p>Probability of occurrence in genome:</p>
+<ul>
+<li>ATTG was scanned in 25 times, so it probably appears in the genome 0.25 times.</li>
+<li>TTGG was scanned in 46 times, so it probably appears in the genome 0.46 times.</li>
+<li>TGGA was scanned in 78 times, so it probably appears in the genome 1.0 times.</li>
+<li>GGAC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
+<li>CCGC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
+<li>CGCA was scanned in 86 times, so it probably appears in the genome 1.0 times.</li>
+<li>GCAT was scanned in 60 times, so it probably appears in the genome 1.0 times.</li>
+<li>GACA was scanned in 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>GTCC was scanned in 96 times, so it probably appears in the genome 1.0 times.</li>
+<li>TCCG was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
+<li>ACAA was scanned in 123 times, so it probably appears in the genome 1.0 times.</li>
+<li>CAAT was scanned in 126 times, so it probably appears in the genome 1.0 times.</li>
+<li>AATG was scanned in 114 times, so it probably appears in the genome 1.0 times.</li>
+<li>ATGT was scanned in 106 times, so it probably appears in the genome 1.0 times.</li>
+<li>TGTC was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
+<li>ATCG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>TCGG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>CGGA was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+</ul>
+<p>De Bruijn graph:</p>
+<p><img src="dot_6b3f3c43bdb1b59064ca0df40540a916.svg" alt="Dot diagram"></p>
+<p>Problem paths:</p>
+<ul>
+<li>Src: None, Dst: GGA, Branch: ATT-&gt;TTG-&gt;TGG</li>
+<li>Src: None, Dst: GGA, Branch: ATC-&gt;TCG-&gt;CGG</li>
+</ul>
+</div>
+<p></p>
+<div style="border:1px solid black;">
+<p></p>
+<p>Genome: ATTGGACAATGTCCGCAT</p>
+<p>Probability of occurrence in genome:</p>
+<ul>
+<li>ATTG was scanned in 25 times, so it probably appears in the genome 0.25 times.</li>
+<li>TTGG was scanned in 46 times, so it probably appears in the genome 0.46 times.</li>
+<li>TGGA was scanned in 78 times, so it probably appears in the genome 1.0 times.</li>
+<li>GGAC was scanned in 108 times, so it probably appears in the genome 1.0 times.</li>
+<li>CCGC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
+<li>CGCA was scanned in 86 times, so it probably appears in the genome 1.0 times.</li>
+<li>GCAT was scanned in 60 times, so it probably appears in the genome 1.0 times.</li>
+<li>GACA was scanned in 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>GTCC was scanned in 96 times, so it probably appears in the genome 1.0 times.</li>
+<li>TCCG was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
+<li>ACAA was scanned in 123 times, so it probably appears in the genome 1.0 times.</li>
+<li>CAAT was scanned in 126 times, so it probably appears in the genome 1.0 times.</li>
+<li>AATG was scanned in 114 times, so it probably appears in the genome 1.0 times.</li>
+<li>ATGT was scanned in 106 times, so it probably appears in the genome 1.0 times.</li>
+<li>TGTC was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
+<li>ACAG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>CAGT was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>AGTG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>GTGT was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+</ul>
+<p>De Bruijn graph:</p>
+<p><img src="dot_29e2ac1f96da9d61aea02e035e2bbd13.svg" alt="Dot diagram"></p>
+<p>Problem paths:</p>
+<ul>
+<li>Src: ACA, Dst: TGT, Branch: CAA-&gt;AAT-&gt;ATG</li>
+<li>Src: ACA, Dst: TGT, Branch: CAG-&gt;AGT-&gt;GTG</li>
+</ul>
+</div>
+<p></p>
+<div style="border:1px solid black;">
+<p></p>
+<p>Genome: ATTGGACAATGTCCGCAT</p>
+<p>Probability of occurrence in genome:</p>
+<ul>
+<li>ATTG was scanned in 26 times, so it probably appears in the genome 0.26 times.</li>
+<li>TTGG was scanned in 46 times, so it probably appears in the genome 0.46 times.</li>
+<li>TGGA was scanned in 78 times, so it probably appears in the genome 1.0 times.</li>
+<li>GGAC was scanned in 108 times, so it probably appears in the genome 1.0 times.</li>
+<li>CCGC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
+<li>CGCA was scanned in 86 times, so it probably appears in the genome 1.0 times.</li>
+<li>GCAT was scanned in 60 times, so it probably appears in the genome 1.0 times.</li>
+<li>GACA was scanned in 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>GTCC was scanned in 96 times, so it probably appears in the genome 1.0 times.</li>
+<li>TCCG was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
+<li>ACAA was scanned in 123 times, so it probably appears in the genome 1.0 times.</li>
+<li>CAAT was scanned in 126 times, so it probably appears in the genome 1.0 times.</li>
+<li>AATG was scanned in 114 times, so it probably appears in the genome 1.0 times.</li>
+<li>ATGT was scanned in 106 times, so it probably appears in the genome 1.0 times.</li>
+<li>TGTC was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
+<li>TTGA was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>TGAA was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>GAAC was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+</ul>
+<p>De Bruijn graph:</p>
+<p><img src="dot_d6095af8e096b5cc55fa6405f526807f.svg" alt="Dot diagram"></p>
+<p>Problem paths:</p>
+<ul>
+<li>Src: TTG, Dst: None, Branch: TGA-&gt;GAA-&gt;AAC</li>
+</ul>
+</div>
+<p></p>
 <p>TODO: DISCUSS BUBBLES AND FORKS</p>
 <p>TODO: DISCUSS BUBBLES AND FORKS</p>
 <p>TODO: DISCUSS BUBBLES AND FORKS</p>
@@ -3012,12 +3175,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>TODO: DISCUSS BUBBLES AND FORKS</p>
 <p>TODO: DISCUSS BUBBLES AND FORKS</p>
 <p>TODO: DISCUSS BUBBLES AND FORKS</p>
-<a name="HEADREF46"></a><h3>Find Graph Contigs</h3>
+<a name="HEADREF46"></a><h3>Assemble Contigs</h3>
 <p><a name="BOOKMARK36"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BOOKMARK27">Algorithms/Assembly/Find Genome</a></li>
+<li><a href="#BOOKMARK27">Algorithms/Assembly/Assemble Fragments</a></li>
 </ul>
 </div>
 <p>TODO: CONTINUE HERE</p>

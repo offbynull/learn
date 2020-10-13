@@ -1441,15 +1441,20 @@ Algorithms/Assembly/Break Reads_TOPIC
 Algorithms/Assembly/Break Read-Pairs_TOPIC
 ```
 
-**WHAT**: Imagine that you're sequencing an organism's genome. Given that ...
+**WHAT**: Sequencers work by taking many copies of an organism's genome, randomly breaking up those genomes into smaller pieces, and randomly scanning in those pieces (fragment_SEQs). As such, it isn't immediately obvious how many times each fragment_SEQ actually appears in the genome.
 
- * less than 50% of the genome is repeats,
- * the start position of fragment_SEQs produced by the sequencer is random,
- * and there's good coverage_SEQ of the genome (e.g. ~30x as many fragment_SEQs as the length of the genome),
+Imagine that you're sequencing an organism's genome. Given that ...
+
+ * there's good coverage_SEQ of the genome (e.g. ~30x as many fragment_SEQs as the length of the genome),
+ * the fragment_SEQs scanned in are chosen at random (unbiased),
+ * the fragment_SEQs scanned in start at random offsets in the genome (unbiased),
+ * and the majority of fragment_SEQs are for non-repeating parts of the genome.
  
 ... you can use probabilities to hint at how many times a fragment_SEQ appears in the genome.
 
-**WHY**: Determining how many times a fragment_SEQ appears in a genome helps with assembly. Specifically, ...
+**WHY**: 
+
+Determining how many times a fragment_SEQ appears in a genome helps with assembly. Specifically, ...
 
  * fragment_SEQs for repeat regions of the genome can be accounted for during assembly.
  * fragment_SEQs containing sequencing errors may be detectable and filtered out prior to assembly.
@@ -1480,7 +1485,12 @@ Since the genome is known to have less than 50% repeats, the dominate number of 
 | TGC      | 29          | 1                          |
 | TGT      | 1           | 0.03                       |
 
-Note the last read_SEQ (TGT) has 0.03 appearances, meaning it's a read_SEQ that very likely contains a sequencing error.
+Note the last read_SEQ (TGT) has 0.03 appearances, meaning it's a read_SEQ that it either
+
+ * contains a sequencing error,
+ * or it has poor coverage_SEQ (likely because it's at the head / tail of the genome so it got scanned in less than other fragment_SEQs).
+
+In this case, it's an error because it doesn't appear in the original genome: TGT is not in ATGGATGC.
 
 ```{output}
 ch3_code/src/FragmentOccurrenceProbabilityCalculator.py
@@ -1497,15 +1507,15 @@ TGC 29
 TGT 1
 ```
 
-### Find Genome
+### Assemble Fragments
 
-`{bm} /(Algorithms\/Assembly\/Find Genome)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Assemble Fragments)_TOPIC/`
 
 ```{prereq}
 Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 ```
 
-**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from. For example, the following 3-mer read_SEQs are from a single strand of genome: \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\]. That single strand of genome may have been either TTACTTAGTT or TTAGTTACTT.
+**WHAT**: Given the fragment_SEQs for a single-strand of DNA, make guesses as to what that single-strand of DNA was by merging overlapping fragment_SEQs together. For example, the following 3-mer read_SEQs: \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\] may have come from either TTACTTAGTT or TTAGTTACTT.
 
 ```{svgbob}
                                                             +-------------+                                 
@@ -1527,24 +1537,21 @@ Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
                                                             | | +------------------------------+    |    |  
                                                             | +-------------------------------------+    |  
                                                             +--------------------------------------------+  
-                                                            
 ```
 
-**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce a more complete picture of the genome.
+**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. In theory, merging overlapping fragment_SEQs for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:
 
-In theory, you can merge fragment_SEQs together to figure out the original genome. In practice, real-world complications make it next to impossible to construct the original genome:
+ * Fragment_SEQs are for both strands (strand of double-stranded DNA a fragment_SEQ's from isn't known).
+ * Fragment_SEQs may be missing (sequencer didn't capture it).
+ * Fragment_SEQs may have incorrect occurrence counts (sequencer captured it too many/few times).
+ * Fragment_SEQs may have errors (sequencer produced sequencing errors).
+ * Fragment_SEQs may be merge-able in more than one way (multiple guesses).
+ * Fragment_SEQs may take a long time to merge (computationally intensive).
 
- * Fragment_SEQs are for both strands of the genome (not obvious which strand of double-stranded DNA a fragment_SEQ is from).
- * Fragment_SEQs may be missing (parts of genome not captured).
- * Fragment_SEQs may have incorrect occurrence counts (parts of genome represented too many/few times).
- * Fragment_SEQs may have errors (sequencing errors).
- * There may be more than one genome possible for a set of fragment_SEQs.
- * Finding genomes for a set of fragment_SEQs may be computationally intensive.
+Never the less, in an ideal world where most of these problems don't exist, the child sections below detail various ways to guess the single-strand of DNA that a set of fragment_SEQs came from. Each child section assumes that the fragment_SEQs it's operating on ...
 
-Never the less, in an ideal world where most of these problems don't exist, the child sections below detail good ways of sussing out possible genomes for a set of fragment_SEQs. Each child section assumes that the fragment_SEQs it's operating on are:
-
- * from 1 strand of the genome,
- * have correct occurrence counts (no duplicates or missing),
+ * are from a single-strand of DNA,
+ * have correct occurrence counts (no missing or extra),
  * and contain no errors.
 
 ```{note}
@@ -1552,7 +1559,7 @@ Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC may help wit
 ```
 
 ```{note}
-Although the complications discussed above make it impossible to get the original genome in its entirety, it's still possible to pull out large parts of the original genome. This is discussed in Algorithms/Assembly/Find Graph Contigs_TOPIC.
+Although the complications discussed above make it impossible to get the original genome in its entirety, it's still possible to pull out large parts of the original genome. This is discussed in Algorithms/Assembly/Assemble Contigs_TOPIC.
 ```
 
 #### Overlap Graph Algorithm
@@ -1596,33 +1603,6 @@ An overlap graph shows the different ways that fragment_SEQs can be merged to co
 Notice that the example graph is circular. If the organism genome itself were also circular (e.g. bacterial genome), the genome guesses above are all actually the same because circular genomes don't have a beginning / end.
 ```
 
-##### Hamiltonian Path Algorithm
-
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Hamiltonian Path Algorithm)_TOPIC/`
-
-Given a graph, a path that touches each node exactly once is a Hamiltonian path. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.
-
-This algorithm will likely fall over on non-trivial overlay graphs. Even finding one Hamiltonian path is computationally intensive.
-
-```{output}
-ch3_code/src/WalkAllHamiltonianPaths.py
-python
-# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
-```
-
-```{ch3}
-WalkAllHamiltonianPaths
-reads
-TTA
-TTA
-TAG
-AGT
-GTT
-TAC
-ACT
-CTT
-```
-
 ##### Graph Construction Algorithm
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Graph Construction Algorithm)_TOPIC/`
@@ -1645,6 +1625,37 @@ python
 
 ```{ch3}
 ToOverlapGraphHash
+reads
+TTA
+TTA
+TAG
+AGT
+GTT
+TAC
+ACT
+CTT
+```
+
+##### Hamiltonian Path Algorithm
+
+`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Hamiltonian Path Algorithm)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm\/Graph Construction Algorithm_TOPIC
+```
+
+Given a graph, a path that touches each node exactly once is a Hamiltonian path. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.
+
+This algorithm will likely fall over on non-trivial overlay graphs. Even finding one Hamiltonian path is computationally intensive.
+
+```{output}
+ch3_code/src/WalkAllHamiltonianPaths.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch3}
+WalkAllHamiltonianPaths
 reads
 TTA
 TTA
@@ -1704,44 +1715,11 @@ Depending on the fragment_SEQs, the resulting graph may not be totally balanced_
 
 Similar to an overlay graph, a de Bruijn graph shows the different ways that fragment_SEQs can be merged to construct a genome. However, unlike an overlay graph, the fragment_SEQs are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (Hamiltonian path), in a de Bruijn graph you need to find paths that walk over every edge exactly once.
 
-A path in a de Bruijn graph that walks over each edge exactly once is a guess of the genome might be. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding a Hamiltonian path in an overlay graph, it's much faster to find an Eulerian cycle in an de Bruijn graph.
-
-##### Eulerian Cycle Algorithm
-
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Eulerian Cycle Algorithm)_TOPIC/`
-
-Given a graph that's strongly connected and balanced_GRAPH, you can find a Eulerian cycle by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.
-
-```{output}
-ch3_code/src/WalkRandomEulerianCycle.py
-python
-# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
-```
-
-```{ch3}
-WalkRandomEulerianCycle
-reads
-TTA
-TAT
-ATT
-TTC
-TCT
-CTT
-```
-
-This algorithm picks one Eulerian cycle in a graph. In the above graph, there are two. In other real-world applications, there likely will be way too many Eulerian cycles to enumerate all of them.
-
-```{note}
-See the section on k-universal strings to see a real-world application of Eulerian graphs. For something like k=20, good luck trying to enumerate all Eulerian cycles.
-```
+A path in a de Bruijn graph that walks over each edge exactly once is a guess of what the genome might be. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding a Hamiltonian path in an overlay graph, it's much faster to find an Eulerian cycle in an de Bruijn graph.
 
 ##### Graph Construction Algorithm
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Graph Construction Algorithm)_TOPIC/`
-
-```{prereq}
-Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm_TOPIC
-```
 
 To construct a de Bruijn graph, add an edge for each fragment_SEQ, creating missing nodes as required.
 
@@ -1787,13 +1765,46 @@ CCCT
 
 In the graph above, an artificial edge is inserted between CCT and TTA to create a balanced graph. With this balanced graph, a path that walks all edges (fragment_SEQs) can found by finding the Eulerian cycle from the original root node (TTA). The artificial edge will show up at the end of the Eulerian cycle (CCT to TTA), and as such can be dropped from the path.
 
+##### Eulerian Cycle Algorithm
+
+`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Eulerian Cycle Algorithm)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm_TOPIC
+```
+
+Given a graph that's strongly connected and balanced_GRAPH, you can find a Eulerian cycle by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.
+
+```{output}
+ch3_code/src/WalkRandomEulerianCycle.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch3}
+WalkRandomEulerianCycle
+reads
+TTA
+TAT
+ATT
+TTC
+TCT
+CTT
+```
+
+This algorithm picks one Eulerian cycle in a graph. In the above graph, there are two. In other real-world applications, there likely will be too many Eulerian cycles to enumerate all of them.
+
+```{note}
+See the section on k-universal strings to see a real-world application of Eulerian graphs. For something like k=20, good luck trying to enumerate all Eulerian cycles.
+```
+
 ##### K-universal String Algorithm
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/K-universal String Algorithm)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm_TOPIC
 Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm_TOPIC
+Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm_TOPIC
 ```
 
 De Bruijn graphs were originally invented to efficiently generate k-universal strings: For some alphabet and k, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once.
@@ -1858,12 +1869,51 @@ Any Eulerian cycle through the graph is a 3-universal binary string. For example
  * 1100010111
  * ...
 
-### Find Graph Anomalies
+### Filter Graph Anomalies
 
-`{bm} /(Algorithms\/Assembly\/Find Graph Anomalies)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Filter Graph Anomalies)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Find Genome_TOPIC
+Algorithms/Assembly/Assemble Fragments_TOPIC
+```
+
+```{output}
+ch3_code/src/FindGraphAnomalies.py
+python
+# MARKDOWN\s*\n([\s\S]+)\n\s*# MARKDOWN
+```
+
+```{ch3}
+FindGraphAnomalies
+reads
+2096
+ATTGGACAATGTCCGCAT
+ATCGGAC
+30
+7
+4
+```
+
+```{ch3}
+FindGraphAnomalies
+reads
+2096
+ATTGGACAATGTCCGCAT
+ACAGTGT
+30
+7
+4
+```
+
+```{ch3}
+FindGraphAnomalies
+reads
+2096
+ATTGGACAATGTCCGCAT
+ATTGAAC
+30
+7
+4
 ```
 
 TODO: DISCUSS BUBBLES AND FORKS
@@ -1902,12 +1952,12 @@ TODO: DISCUSS BUBBLES AND FORKS
 
 TODO: DISCUSS BUBBLES AND FORKS
 
-### Find Graph Contigs
+### Assemble Contigs
 
-`{bm} /(Algorithms\/Assembly\/Find Graph Contigs)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Assemble Contigs)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Find Genome_TOPIC
+Algorithms/Assembly/Assemble Fragments_TOPIC
 ```
 
 TODO: CONTINUE HERE
