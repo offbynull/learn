@@ -1505,11 +1505,34 @@ TGT 1
 Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 ```
 
-**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from. For example, the following 3-mer read_SEQs are from a single strand of genome: \[TTA, TAC, ACT, CTT, TTA, TAG\]. That single strand of genome may have been either TTACTTAG or TTAGTTAC.
+**WHAT**: Given the fragment_SEQs from a genome, merge those fragment_SEQs together in different ways so as to guess the genome those fragment_SEQs came from. For example, the following 3-mer read_SEQs are from a single strand of genome: \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\]. That single strand of genome may have been either TTACTTAGTT or TTAGTTACTT.
+
+```{svgbob}
+                                                            +-------------+                                 
+                                                            | +---------+ |                                 
+                                                            | | +-----+ | |                                 
+                                                            | | | +-+ | | |                                 
+       T T A C T T A G T T                                  | | | | | | | |                                 
+       ^ ^ ^ ^ ^ ^ ^ ^                                      | | | | v v v v                                 
+       | | | | | | | |                                      | | | | T T A G T T A C T T                     
+       | | | | | | | +--------------+                       | | | |         ^ ^ ^ ^                         
+       | | | | | | +-----------+    |                       | | | |         | | | |                         
+       | | | | | +--------+    |    |                       | | | |   +-----+ | | |                         
+ +-----+ | | | +-----+    |    |    |                       | | | |   |    +--+ | |                         
+ |    +--+ | |       |    |    |    |                       | | | |   |    |    | +--+                      
+ |    |    | +--+    |    |    |    |                       | | | |   |    |    |    |                      
+ |    |    |    |    |    |    |    |                       | | | |   TTA  TAC  ACT  CTT  TTA  TAG  AGT  GTT
+ TTA  TAC  ACT  CTT  TTA  TAG  AGT  GTT                     | | | |                       |    |    │    |   
+                                                            | | | +-----------------------+    |    |    |  
+                                                            | | +------------------------------+    |    |  
+                                                            | +-------------------------------------+    |  
+                                                            +--------------------------------------------+  
+                                                            
+```
 
 **WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. They need to be merged together to produce a more complete picture of the genome.
 
-In theory, you can merge fragment_SEQs together to figure out the original genome from which they were derived from. In practice, real-world complications make it next to impossible to construct the original genome:
+In theory, you can merge fragment_SEQs together to figure out the original genome. In practice, real-world complications make it next to impossible to construct the original genome:
 
  * Fragment_SEQs are for both strands of the genome (not obvious which strand of double-stranded DNA a fragment_SEQ is from).
  * Fragment_SEQs may be missing (parts of genome not captured).
