@@ -73,7 +73,7 @@ TAATCCG
 
 **WHAT**: Given 2 k-mers, the hamming distance is the number of positional mismatches between them.
 
-**WHY**: Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other k-mer patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.
+**WHY**: Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. Since DNA is known to mutate, it may be that enzyme can also bind to other k-mer patterns that are slight variations of the original. For example, that enzyme may be able to bind to both AAACTG and AAAGTG.
 
 **ALGORITHM**:
 
@@ -99,7 +99,7 @@ Algorithms/K-mer/Hamming Distance_TOPIC
 
 **WHAT**: Given a source k-mer and a minimum hamming distance, find all k-mers such within the hamming distance of the source k-mer. In other words, find all k-mers such that `hamming_distance(source_kmer, kmer) <= min_distance`.
 
-**WHY**: Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. Since DNA is known to mutate, it may be that that enzyme can also bind to other k-mer patterns that are slight variations of the original. This algorithm finds all such variations.
+**WHY**: Imagine an enzyme that looks for a specific DNA k-mer pattern to bind to. Since DNA is known to mutate, it may be that enzyme can also bind to other k-mer patterns that are slight variations of the original. This algorithm finds all such variations.
 
 **ALGORITHM**:
 
@@ -126,7 +126,7 @@ Algorithms/K-mer/Reverse Complement_TOPIC
 
 **WHAT**: Given a k-mer, find where that k-mer occurs in some larger sequence. The search may potentially include the k-mer's variants (e.g. reverse complement).
 
-**WHY**: Imagine that you know of a specific k-mer pattern that serves some function in an organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that that k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 related types of bacteria as a DnaA box.
+**WHY**: Imagine that you know of a specific k-mer pattern that serves some function in an organism. If you see that same k-mer pattern appearing in some other related organism, it could be a sign that k-mer pattern serves a similar function. For example, the same k-mer pattern could be used by 2 related types of bacteria as a DnaA box.
 
 The enzyme that operates on that k-mer may also operate on its reverse complement as well as slight variations on that k-mer. For example, if an enzyme binds to AAAAAAAAA, it may also bind to its...
 * reverse complement: TTTTTTTTT
@@ -767,11 +767,11 @@ Using this profile, the probability that a k-mer conforms to the motif matrix is
 Of the these two k-mers, ...
 
  * all positions in the first (ATGCAC) have been seen before in the motif matrix.
- * all but one position in the the second (TTGCAC) have been seen before in the motif matrix (index 0).
+ * all but one position in the second (TTGCAC) have been seen before in the motif matrix (index 0).
 
 Both of these k-mers should have a reasonable probability of being member_MOTIFs of the motif. However, notice how the second k-mer ends up with a 0 probability. The reason has to do with the underlying concept behind motif matrices: the entire point of a motif matrix is to use the known member_MOTIFs of a motif to find other potential member_MOTIFs of that same motif. The second k-mer contains a T at index 0, but none of the known member_MOTIFs of the motif have a T at that index. As such, its probability gets reduced to 0 even though the rest of the k-mer conforms.
 
-Cromwell's rule says that when a probability is based off past events, a hard 0 or 1 values shouldn't be used. As such, a quick workaround to the 0% probability problem described above is to artificially inflate the the counts that lead to the profile such that no count is 0 (pseudocounts). For example, for the same motif matrix, incrementing the counts by 1 results in:
+Cromwell's rule says that when a probability is based off past events, a hard 0 or 1 values shouldn't be used. As such, a quick workaround to the 0% probability problem described above is to artificially inflate the counts that lead to the profile such that no count is 0 (pseudocounts). For example, for the same motif matrix, incrementing the counts by 1 results in:
 
 |   | 0 | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|---|
@@ -943,9 +943,9 @@ Algorithms/Motif/K-mer Match Probability_TOPIC
 
 This algorithm begins by constructing a motif matrix where the only member_MOTIF is a k-mer picked from the first sequence. From there, it goes through the k-mers in the ...
 
- 1. second sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to to the motif matrix.
- 2. third sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to to the motif matrix.
- 3. fourth sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to to the motif matrix.
+ 1. second sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to the motif matrix.
+ 2. third sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to the motif matrix.
+ 3. fourth sequence to find the one that has the highest match probability to the motif matrix and adds it as a member_MOTIF to the motif matrix.
  4. ...
 
 This process repeats once for every k-mer in the first sequence. Each repetition produces a motif matrix. Of all the motif matrices built, the one with the lowest score is selected.
@@ -1566,7 +1566,7 @@ Although the complications discussed above make it impossible to get the origina
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm)_TOPIC/`
 
-Given the fragment_SEQs for a single strand of genome, create a directed graph where ...
+Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
 
   1. each node is a fragment_SEQ.
 
@@ -1591,13 +1591,15 @@ Given the fragment_SEQs for a single strand of genome, create a directed graph w
 
 This directed graph is called an overlap graph because the edges show the different overlap candidates between fragment_SEQs.
 
-An overlap graph shows the different ways that fragment_SEQs can be merged to construct a genome. A path in the graph that touches each node exactly once is a guess of what the genome might be. Such a path is called the Hamiltonian path. There are may be multiple Hamiltonian paths in the graph, meaning that there may be multiple genome guesses. In the example graph above, the Hamiltonian paths are ...
+An overlap graph shows the different ways that fragment_SEQs can be stitched together. A path in in an overlay graph that touches each node exactly once is one possibility for the original single stranded DNA that the fragment_SEQs came from. For example...
 
-  * \[`TTA`, `TAG`, `AGT`, `GTT`, `TTA`, `TAC`, `ACT`, `CTT`\] ⟶ `TTAGTTACTT`
-  * \[`TTA`, `TAC`, `ACT`, `CTT`, `TTA`, `TAG`, `AGT`, `GTT`\] ⟶ `TTACTTAGTT`
-  * \[`ACT`, `CTT`, `TTA`, `TAG`, `AGT`, `GTT`, `TTA`, `TAC`\] ⟶ `ACTTAGTTAC`
-  * \[`CTT`, `TTA`, `TAG`, `AGT`, `GTT`, `TTA`, `TAC`, `ACT`\] ⟶ `CTTAGTTACT`
+  * \[TTA, TAG, AGT, GTT, TTA, TAC, ACT, CTT\] ⟶ TTAGTTACTT
+  * \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\] ⟶ TTACTTAGTT
+  * \[ACT, CTT, TTA, TAG, AGT, GTT, TTA, TAC\] ⟶ ACTTAGTTAC
+  * \[CTT, TTA, TAG, AGT, GTT, TTA, TAC, ACT\] ⟶ CTTAGTTACT
   * ...
+
+These paths are referred to as Hamiltonian paths.
 
 ```{note}
 Notice that the example graph is circular. If the organism genome itself were also circular (e.g. bacterial genome), the genome guesses above are all actually the same because circular genomes don't have a beginning / end.
@@ -1675,7 +1677,7 @@ CTT
 Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm_TOPIC
 ```
 
-Given the fragment_SEQs for a single strand of genome, create a directed graph where ...
+Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
 
   1. each fragment_SEQ is represented as an edge connecting 2 nodes, where the ...
      * source node is the prefix of the fragment_SEQ.
@@ -1707,19 +1709,21 @@ Given the fragment_SEQs for a single strand of genome, create a directed graph w
                   ATT
      ```
 
-This graph is called a de Bruijn graph: a balanced_GRAPH and strongly connected graph where the fragment_SEQs are represented as edges.
+This graph is called a de Bruijn graph: a balanced_GRAPH and strongly connected graph where the fragment_SEQs are represented as edges. De Bruijn graphs were originally invented to solve the k-universal string problem, which is effectively the same concept as assembly.
 
 ```{note}
-Depending on the fragment_SEQs, the resulting graph may not be totally balanced_GRAPH. A technique for dealing with this is detailed in the graph construction child section. For now, just assume that hte graph will be balanced_GRAPH.
+Depending on the fragment_SEQs, the resulting graph may not be totally balanced_GRAPH. A technique for dealing with this is detailed in the graph construction child section. For now, just assume that the graph will be balanced_GRAPH.
 ```
 
-Similar to an overlay graph, a de Bruijn graph shows the different ways that fragment_SEQs can be merged to construct a genome. However, unlike an overlay graph, the fragment_SEQs are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (Hamiltonian path), in a de Bruijn graph you need to find paths that walk over every edge exactly once.
+Similar to an overlay graph, a de Bruijn graph shows the different ways that fragment_SEQs can be stitched together. However, unlike an overlay graph, the fragment_SEQs are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (Hamiltonian path), in a de Bruijn graph you need to find paths that walk over every edge exactly once.
 
-A path in a de Bruijn graph that walks over each edge exactly once is a guess of what the genome might be. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph. In contrast to finding a Hamiltonian path in an overlay graph, it's much faster to find an Eulerian cycle in an de Bruijn graph.
+A path in a de Bruijn graph that walks over each edge exactly once is one possibility for the original single stranded DNA that the fragment_SEQs came from. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph.
 
-##### Graph Construction Algorithm
+In contrast to finding a Hamiltonian path in an overlay graph, it's much faster to find an Eulerian cycle in an de Bruijn graph.
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Graph Construction Algorithm)_TOPIC/`
+##### Graph Construction
+
+`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Graph Construction)_TOPIC/`
 
 To construct a de Bruijn graph, add an edge for each fragment_SEQ, creating missing nodes as required.
 
@@ -1765,15 +1769,15 @@ CCCT
 
 In the graph above, an artificial edge is inserted between CCT and TTA to create a balanced graph. With this balanced graph, a path that walks all edges (fragment_SEQs) can found by finding the Eulerian cycle from the original root node (TTA). The artificial edge will show up at the end of the Eulerian cycle (CCT to TTA), and as such can be dropped from the path.
 
-##### Eulerian Cycle Algorithm
+##### Eulerian Cycle
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Eulerian Cycle Algorithm)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Eulerian Cycle)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm_TOPIC
+Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction_TOPIC
 ```
 
-Given a graph that's strongly connected and balanced_GRAPH, you can find a Eulerian cycle by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.
+Given a de Bruijn graph (strongly connected and balanced_GRAPH), you can find a Eulerian cycle by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.
 
 ```{output}
 ch3_code/src/WalkRandomEulerianCycle.py
@@ -1797,77 +1801,6 @@ This algorithm picks one Eulerian cycle in a graph. In the above graph, there ar
 ```{note}
 See the section on k-universal strings to see a real-world application of Eulerian graphs. For something like k=20, good luck trying to enumerate all Eulerian cycles.
 ```
-
-##### K-universal String Algorithm
-
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/K-universal String Algorithm)_TOPIC/`
-
-```{prereq}
-Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction Algorithm_TOPIC
-Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Eulerian Cycle Algorithm_TOPIC
-```
-
-De Bruijn graphs were originally invented to efficiently generate k-universal strings: For some alphabet and k, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once.
-
-Solving the k-universal string problem is more-or-less the same as assembly. For example, for an alphabet containing only 0 and 1 (binary) and k=3, list out all possible 3-mers: \[000, 001, 010, 011, 100, 101, 110, 111\].
-
-Given these 3-mers, construct an edge for each one ...
-
-```{svgbob}
-    000              001              010              011     
-00 -----> 00     00 -----> 01     01 -----> 10     01 -----> 11
-
-    100              101              110              111     
-10 -----> 00     10 -----> 01     11 -----> 10     11 -----> 11
-```
-
-... and merge duplicate nodes together ...
-
-```{svgbob}
-    001                011
-+-----------> 01 -------------+
-|             ^|              |
-|+----+       |+----+   +----+|
-||    |  +----+ 010 |   |    ||
-||    |  |          |   |    ▼▼
-00    |  |          |   |    11
-^^    |  |          |   |    || 
-||000 |  | 101 +----+   |111 ||
-|+----+  +----+|        +----+|
-|             |v              |
-+------------ 10 <------------+
-    100                110
-```
-
-Any Eulerian cycle through the graph is a 3-universal binary string. For example, 0001110100:
-
-```{svgbob}
-"* Cycle 1:"            00 -> 00
-"* Cycle 2:"                  00 -> 01 -------------------------> 10 -> 00
-"* Cycle 3:"                        01 -> 11 -> 11 -> 10 -> 01
-"* Merged 1 to 2 to 3:" 00 -> 00 -> 01 -> 11 -> 11 -> 10 -> 01 -> 10 -> 00
-
-"* k-universal string:" 0001110100
-```
-
-| 3-mer | Placement in 3-universal string |
-|-------|---------------------------------|
-| 000   | **000**1110100                  |
-| 001   | 0**001**110100                  |
-| 010   | 000111**010**0                  |
-| 011   | 00**011**10100                  |
-| 100   | 0001110**100**                  |
-| 101   | 00011**101**00                  |
-| 110   | 0001**110**100                  |
-| 111   | 000**111**0100                  |
-
- There are multiple Eulerian cycles in the graph, meaning that there are multiple 3-universal strings:
-
- * 0001110100
- * 0011101000
- * 1110001011
- * 1100010111
- * ...
 
 ### Filter Graph Anomalies
 
@@ -3142,7 +3075,7 @@ PracticalMotifFindingExample
 
    De Bruijn graphs are used for efficient genome assembly. They were originally invented to solve the k-universal string problem.
 
- * `{bm} k-universal/(k-universal|\d+-universal)/i` - For some alphabet and k, a string is considered k-universal if it contains every possible k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary) and k=3, a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
+ * `{bm} k-universal/(k-universal|\d+-universal)/i` - For some alphabet and k, a string is considered k-universal if it contains every k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary) and k=3, a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
 
    * 000: **000**1110100
    * 001: 0**001**110100
@@ -3153,7 +3086,11 @@ PracticalMotifFindingExample
    * 110: 0001**110**100
    * 111: 000**111**0100
 
-   De Bruijn graphs were invented in an effort to construct k-universal strings for arbitrary values of k. For example, given only the k-mers in the example above (000, 001, ...), a k-universal string can be found by constructing a de Bruijn graph from the k-mers and finding a Eulerian cycle in that graph.
+   ```{note}
+   This is effectively assembly. There are a set of k-mers and they're being stitched together to form a larger string. The only difference is that the elements aren't nucleotides.
+   ```
+
+   De Bruijn graphs were invented in an effort to construct k-universal strings for arbitrary values of k. For example, given the k-mers in the example above (000, 001, ...), a k-universal string can be found by constructing a de Bruijn graph from the k-mers and finding a Eulerian cycle in that graph.
 
    ```{svgbob}
         001                011
@@ -3177,6 +3114,14 @@ PracticalMotifFindingExample
 
    "* k-universal string:" 0001110100
    ```
+
+   There are multiple Eulerian cycles in the graph, meaning that there are multiple 3-universal strings:
+  
+   * 0001110100
+   * 0011101000
+   * 1110001011
+   * 1100010111
+   * ...
    
    For larger values of k (e.g. 20), finding k-universal strings would be too computationally intensive without De Bruijn graphs and Eulerian cycles.
 
