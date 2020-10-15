@@ -1234,23 +1234,24 @@ Assembly has many practical complications that prevent full genome reconstructio
    "* Wrong overlap identified."
    ```
 
-### Merge Reads
+### Stitch Reads
 
-`{bm} /(Algorithms\/Assembly\/Merge Reads)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Stitch Reads)_TOPIC/`
 
 **WHAT**: Given a list of overlapping read_SEQs where ...
 
- * each read_SEQ overlaps the subsequent read_SEQ and
- * all overlaps are of the same length
+ * all read_SEQs are of the same k,
+ * all overlap regions are of the same length,
+ * and each read_SEQ in the list overlaps with the next read_SEQ in the list
 
-... , merge them together. For example, in the read_SEQ list `[GAAA, AAAT, AATC]` each read_SEQ overlaps the subsequent read_SEQ by an offset of 1: `GAAATC`.
+... , stitch them together. For example, in the read_SEQ list `[GAAA, AAAT, AATC]` each read_SEQ overlaps the subsequent read_SEQ by an offset of 1: `GAAATC`.
 
-|        | 0 | 1 | 2 | 3 | 4 | 5 |
-|--------|---|---|---|---|---|---|
-| R1     | G | A | A | A |   |   |
-| R2     |   | A | A | A | T |   |
-| R3     |   |   | A | A | T | C |
-| Merged | G | A | A | A | T | C |
+|          | 0 | 1 | 2 | 3 | 4 | 5 |
+|----------|---|---|---|---|---|---|
+| R1       | G | A | A | A |   |   |
+| R2       |   | A | A | A | T |   |
+| R3       |   |   | A | A | T | C |
+| Stitched | G | A | A | A | T | C |
 
 **WHY**: Since the sequencer breaks up many copies of the same DNA and each read_SEQ's start position is random, larger parts of the original DNA can be reconstructed by finding overlaps between fragment_SEQs and stitching them back together.
 
@@ -1270,48 +1271,49 @@ AAAT
 AATC
 ```
 
-### Merge Read-Pairs
+### Stitch Read-Pairs
 
-`{bm} /(Algorithms\/Assembly\/Merge Read-Pairs)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Stitch Read-Pairs)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Merge Reads_TOPIC
+Algorithms/Assembly/Stitch Reads_TOPIC
 ```
 
 **WHAT**: Given a list of overlapping read-pairs where ...
 
- * each read-pair overlaps the subsequent read-pair and
- * all overlaps are of the same length
+ * all read-pairs are of the same k and d,
+ * all overlap regions are of the same length,
+ * and each read-pair in the list overlaps with the next read-pair in the list
 
-... , merge them together. For example, in the read-pair list `[ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC]` each read-pair overlaps the subsequent read-pair by an offset of 1: `ATGTTACCGTTC`.
+... , stitch them together. For example, in the read-pair list `[ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC]` each read-pair overlaps the subsequent read-pair by an offset of 1: `ATGTTACCGTTC`.
 
-|        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11|
-|--------|---|---|---|---|---|---|---|---|---|---|---|---|
-| R1     | A | T | G | - | - | - | C | C | G |   |   |   |
-| R2     |   | T | G | T | - | - | - | C | G | T |   |   |
-| R3     |   |   | G | T | T | - | - | - | G | T | T |   |
-| R4     |   |   |   | T | T | A | - | - | - | T | T | C |
-| Merged | A | T | G | T | T | A | C | C | G | T | T | C |
+|          | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11|
+|----------|---|---|---|---|---|---|---|---|---|---|---|---|
+| R1       | A | T | G | - | - | - | C | C | G |   |   |   |
+| R2       |   | T | G | T | - | - | - | C | G | T |   |   |
+| R3       |   |   | G | T | T | - | - | - | G | T | T |   |
+| R4       |   |   |   | T | T | A | - | - | - | T | T | C |
+| Stitched | A | T | G | T | T | A | C | C | G | T | T | C |
 
 **WHY**: Since the sequencer breaks up many copies of the same DNA and each read_SEQ's start position is random, larger parts of the original DNA can be reconstructed by finding overlaps between fragment_SEQs and stitching them back together.
 
 **ALGORITHM**:
 
-Overlapping read-pairs are merged by taking the first read-pair and iterating through the remaining read-pairs where ...
+Overlapping read-pairs are stitched by taking the first read-pair and iterating through the remaining read-pairs where ...
 
  * the suffix from each remaining read-pair's head k is appended to the first read-pair's head k.
  * the suffix from each remaining read-pair's tail k is appended to the first read-pair's tail k.
 
-For example, to merge `[ATG---CCG, TGT---CGT]`, ...
+For example, to stitch `[ATG---CCG, TGT---CGT]`, ...
 
- 1. merge the heads as if they were read_SEQs: `[ATG, TGT]` results in `ATGT`,
- 2. merge the tails as if they were read_SEQs: `[CCG, CGT]` results in `CCGT`.
+ 1. stitch the heads as if they were read_SEQs: `[ATG, TGT]` results in `ATGT`,
+ 2. stitch the tails as if they were read_SEQs: `[CCG, CGT]` results in `CCGT`.
 
-|        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-|--------|---|---|---|---|---|---|---|---|---|---|
-| R1     | A | T | G | - | - | - | C | C | G |   |
-| R2     |   | T | G | T | - | - | - | C | G | T |
-| Merged | A | T | G | T | - | - | C | C | G | T |
+|          | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|----------|---|---|---|---|---|---|---|---|---|---|
+| R1       | A | T | G | - | - | - | C | C | G |   |
+| R2       |   | T | G | T | - | - | - | C | G | T |
+| Stitched | A | T | G | T | - | - | C | C | G | T |
 
 ```{output}
 ch3_code/src/ReadPair.py
@@ -1435,8 +1437,8 @@ ACTA|2|AACC
 `{bm} /(Algorithms\/Assembly\/Fragment Occurrence in Genome Probability)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Merge Reads_TOPIC
-Algorithms/Assembly/Merge Read-Pairs_TOPIC
+Algorithms/Assembly/Stitch Reads_TOPIC
+Algorithms/Assembly/Stitch Read-Pairs_TOPIC
 Algorithms/Assembly/Break Reads_TOPIC
 Algorithms/Assembly/Break Read-Pairs_TOPIC
 ```
@@ -1515,7 +1517,7 @@ TGT 1
 Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
 ```
 
-**WHAT**: Given the fragment_SEQs for a single-strand of DNA, make guesses as to what that single-strand of DNA was by merging overlapping fragment_SEQs together. For example, the following 3-mer read_SEQs: \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\] may have come from either TTACTTAGTT or TTAGTTACTT.
+**WHAT**: Given the fragment_SEQs for a single-strand of DNA, make guesses as to what that single-strand of DNA was by stitching overlapping fragment_SEQs together. For example, the following 3-mer read_SEQs: \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\] may have come from either TTACTTAGTT or TTAGTTACTT.
 
 ```{svgbob}
                                                             +-------------+                                 
@@ -1539,14 +1541,14 @@ Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
                                                             +--------------------------------------------+  
 ```
 
-**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. In theory, merging overlapping fragment_SEQs for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:
+**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping fragment_SEQs for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:
 
  * Fragment_SEQs are for both strands (strand of double-stranded DNA a fragment_SEQ's from isn't known).
  * Fragment_SEQs may be missing (sequencer didn't capture it).
  * Fragment_SEQs may have incorrect occurrence counts (sequencer captured it too many/few times).
  * Fragment_SEQs may have errors (sequencer produced sequencing errors).
- * Fragment_SEQs may be merge-able in more than one way (multiple guesses).
- * Fragment_SEQs may take a long time to merge (computationally intensive).
+ * Fragment_SEQs may be stitch-able in more than one way (multiple guesses).
+ * Fragment_SEQs may take a long time to stitch (computationally intensive).
 
 Never the less, in an ideal world where most of these problems don't exist, the child sections below detail various ways to guess the single-strand of DNA that a set of fragment_SEQs came from. Each child section assumes that the fragment_SEQs it's operating on ...
 
@@ -1565,6 +1567,8 @@ Although the complications discussed above make it impossible to get the origina
 #### Overlap Graph Algorithm
 
 `{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm)_TOPIC/`
+
+**ALGORITHM**:
 
 Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
 
@@ -1605,9 +1609,9 @@ These paths are referred to as Hamiltonian paths.
 Notice that the example graph is circular. If the organism genome itself were also circular (e.g. bacterial genome), the genome guesses above are all actually the same because circular genomes don't have a beginning / end.
 ```
 
-##### Graph Construction Algorithm
+##### Graph Construction
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Graph Construction Algorithm)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Graph Construction)_TOPIC/`
 
 To construct an overlap graph, create an edge between fragment_SEQs that have an overlap.
 
@@ -1638,12 +1642,12 @@ ACT
 CTT
 ```
 
-##### Hamiltonian Path Algorithm
+##### Hamiltonian Path
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Hamiltonian Path Algorithm)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Hamiltonian Path)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm\/Graph Construction Algorithm_TOPIC
+Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm\/Graph Construction_TOPIC
 ```
 
 Given a graph, a path that touches each node exactly once is a Hamiltonian path. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.
@@ -1676,6 +1680,8 @@ CTT
 ```{prereq}
 Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm_TOPIC
 ```
+
+**ALGORITHM**:
 
 Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
 
@@ -1802,13 +1808,16 @@ This algorithm picks one Eulerian cycle in a graph. In the above graph, there ar
 See the section on k-universal strings to see a real-world application of Eulerian graphs. For something like k=20, good luck trying to enumerate all Eulerian cycles.
 ```
 
-### Filter Graph Anomalies
+### Detect Error Branch
 
-`{bm} /(Algorithms\/Assembly\/Filter Graph Anomalies)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Detect Error Branch)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Assemble Fragments_TOPIC
+Algorithms/Assembly/Infer Genome/Overlap Graph Algorithm_TOPIC
+Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm_TOPIC
 ```
+
+**ALGORITHM**:
 
 ```{output}
 ch3_code/src/FindGraphAnomalies.py
@@ -1848,42 +1857,6 @@ ATTGAAC
 7
 4
 ```
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
-
-TODO: DISCUSS BUBBLES AND FORKS
 
 ### Assemble Contigs
 

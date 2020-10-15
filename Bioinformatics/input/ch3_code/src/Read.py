@@ -169,7 +169,7 @@ def main():
         lines = lines[1:]
         if command == 'stitch':
             reads = [Read(l) for l in lines]
-            genome = reads[0].stitch(reads[1:])
+            genome = reads[0].stitch(reads)
             print(f'Stitched {reads} to {genome}\n\n')
         elif command == 'shatter':
             new_k = int(lines[0])
