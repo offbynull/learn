@@ -146,30 +146,37 @@ def main():
             except EOFError:
                 break
 
-        command = lines[0]
-        r = Random(int(lines[1]))
-        genome = lines[2]
-        bad_frag = lines[3]
-        coverage = int(lines[4])
+        command = lines.pop(0)
+        count = int(lines.pop(0))
         if command == 'reads':
-            k = int(lines[5])
-            frags = Read.random_fragment(genome, k, count_kmers(len(genome), k) * coverage, r=r)
-            bad_frag = Read(bad_frag)
+            frags = []
+            for _ in range(count):
+                line = lines.pop(0)
+                kmer, kmer_count = tuple(line.split())
+                kmer_count = int(kmer_count)
+                frags += [Read(kmer)] * kmer_count
         elif command == 'read-pairs':
-            k, d = tuple([int(s) for s in lines[5].split()])
-            frags = ReadPair.random_fragment(genome, k, d, count_kmers(len(genome), k) * coverage, r=r)
-            bad_frag = ReadPair(Kdmer(bad_frag.split('|')[0], bad_frag.split('|')[2], int(bad_frag.split('|')[1])))
+            frags = []
+            for _ in range(count):
+                line = lines.pop(0)
+                kdmer, kdmer_count = tuple(line.split())
+                kdmer_count = int(kdmer_count)
+                prefix, d, suffix = tuple(kdmer.split('|'))
+                d = int(d)
+                frags += [ReadPair(Kdmer(prefix, suffix, d))] * kdmer_count
         else:
             raise
-        frags += [bad_frag]
-        k_break = int(lines[6])
+        k_break = int(lines.pop(0))
+        print(f'Fragments from sequencer:', end='\n\n')
+        for f, times in Counter(frags).items():
+            print(f' * {f} scanned in {times}.')
         frags = [broken_read for frag in frags for broken_read in frag.shatter(k_break)]
         frag_to_count = Counter(frags)
-        print(f'Genome: {genome}', end='\n\n')
-        print(f'Probability of occurrence in genome:', end='\n\n')
+        print(f'', end='\n\n')
+        print(f'Fragments after being broken to k={k_break}:', end='\n\n')
         occurrence_probabilities = calculate_fragment_occurrence_probabilities(frags)
         for f, appearances in occurrence_probabilities.items():
-            print(f' * {f} was scanned in {frag_to_count[f]} times, so it probably appears in the genome {appearances} times.')
+            print(f' * {f} broken out {frag_to_count[f]} times, so it probably appears in the genome {appearances} times.')
         print(f'', end='\n\n')
         print(f'De Bruijn graph:', end='\n\n')
         frags = frags[0].collapse(frags)
@@ -177,9 +184,10 @@ def main():
         print(f'```{{dot}}\n{to_graphviz(graph, occurrence_probabilities)}\n```')
         print(f'', end='\n\n')
         print(f'Problem paths:', end='\n\n')
-        potentially_bad_paths = find_bubbles(graph, k_break)\
-                                + find_head_convergences(graph, k_break)\
-                                + find_tail_divergences(graph, k_break)
+        # k_break-1 because de bruijn (nodes in a de buijrn graph are k-1 in len), use k by itself for overlap
+        potentially_bad_paths = find_bubbles(graph, k_break-1)\
+                                + find_head_convergences(graph, k_break-1)\
+                                + find_tail_divergences(graph, k_break-1)
         for src, branch, dst in potentially_bad_paths:
             print(f' * Src: {src}, Dst: {dst}, Branch: {"->".join([str(x) for x in branch])}')
 

@@ -25,7 +25,7 @@ def calculate_fragment_occurrence_probabilities(fragments: List[T]) -> Dict[T, f
         most_occurring_count, times_counted = Counter(rounded_counter.values()).most_common(1)[0]
         if times_counted >= len(rounded_counter) * 0.5:
             return dict([(key, value / most_occurring_count) for key, value in rounded_counter.items()])
-    raise ValueError('Failed to find a common count')
+    raise ValueError(f'Failed to find a common count: {counter}')
 # MARKDOWN
 
 

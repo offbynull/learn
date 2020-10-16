@@ -54,21 +54,10 @@
 <li><a href="#H_Break%20Reads">Break Reads</a></li>
 <li><a href="#H_Break%20Read-Pairs">Break Read-Pairs</a></li>
 <li><a href="#H_Fragment%20Occurrence%20in%20Genome%20Probability">Fragment Occurrence in Genome Probability</a></li>
-<li><a href="#H_Assemble%20Fragments">Assemble Fragments</a></li>
-<ul>
-<li><a href="#H_Overlap%20Graph%20Algorithm">Overlap Graph Algorithm</a></li>
-<ul>
-<li><a href="#H_Graph%20Construction">Graph Construction</a></li>
-<li><a href="#H_Hamiltonian%20Path">Hamiltonian Path</a></li>
-</ul>
-<li><a href="#H_De%20Bruijn%20Graph%20Algorithm">De Bruijn Graph Algorithm</a></li>
-<ul>
-<li><a href="#H1_Graph%20Construction">Graph Construction</a></li>
-<li><a href="#H_Eulerian%20Cycle">Eulerian Cycle</a></li>
-</ul>
-</ul>
-<li><a href="#H_Detect%20Error%20Branch">Detect Error Branch</a></li>
-<li><a href="#H_Assemble%20Contigs">Assemble Contigs</a></li>
+<li><a href="#H_Overlap%20Graph">Overlap Graph</a></li>
+<li><a href="#H_De%20Bruijn%20Graph">De Bruijn Graph</a></li>
+<li><a href="#H_Find%20Bubbles">Find Bubbles</a></li>
+<li><a href="#H_Find%20Contigs">Find Contigs</a></li>
 </ul>
 </ul>
 <li><a href="#H_Stories">Stories</a></li>
@@ -91,7 +80,7 @@
 <a name="H_Algorithms"></a><h1>Algorithms</h1>
 <a name="H_K-mer"></a><h2>K-mer</h2>
 <p><a name="BM_(Algorithms%5C%2FK-mer)_TOPIC%2F"></a><strong></strong></p>
-<p>A <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> is a sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> <code>GAAATC</code>, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
+<p>A <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> is a sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
@@ -216,7 +205,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'GAAA', 'AAAT', 'AAGA', 'AAAG', 'ACAA', 'AGAA', 'AATA', 'AAAA', 'TAAA', 'CAAA', 'ATAA', 'AACA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAT', 'TAAA', 'AACA', 'AAGA', 'AGAA', 'ATAA', 'AATA', 'AAAG', 'ACAA', 'AAAC', 'AAAA', 'CAAA', 'GAAA'}</p>
 </div>
 <p></p>
 <a name="H_Find%20Locations"></a><h3>Find Locations</h3>
@@ -339,12 +328,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>TGATC = 6 occurrences</li>
-<li>AAGGG = 6 occurrences</li>
 <li>TTAAA = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
 <li>GATCA = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
 <li>TTTAA = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
+<li>TGATC = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -416,17 +405,17 @@
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -614,7 +603,7 @@ SSSII
 <li><a href="#BM_(Algorithms%5C%2FK-mer)_TOPIC%2F">Algorithms/K-mer</a></li>
 </ul>
 </div>
-<p>A <a href="#BM_(motif)%2Fi">motif</a> is a pattern that matches many different <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s, where those matched <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BM_(motif)%2Fi">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
+<p>A <a href="#BM_(motif)%2Fi">motif</a> is a pattern that matches many different <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s, where those matched <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BM_(motif)%2Fi">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to ATTGC, ATTCC, TTTGC, and TTTCC.</p>
 <p>A common scenario involving <a href="#BM_(motif)%2Fi">motif</a>s is to search through a set of DNA <a href="#BM_(sequence)%2Fi">sequence</a>s for an unknown <a href="#BM_(motif)%2Fi">motif</a>: Given a set of <a href="#BM_(sequence)%2Fi">sequence</a>s, it's suspected that each <a href="#BM_(sequence)%2Fi">sequence</a> contains a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> that matches some <a href="#BM_(motif)%2Fi">motif</a>. But, that <a href="#BM_(motif)%2Fi">motif</a> isn't known beforehand. Both the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s and the <a href="#BM_(motif)%2Fi">motif</a> they match need to be found.</p>
 <p>For example, each of the following <a href="#BM_(sequence)%2Fi">sequence</a>s contains a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> that matches some <a href="#BM_(motif)%2Fi">motif</a>:</p>
 <table>
@@ -1523,7 +1512,7 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>ATAAT<br>ATAAT<br>ATAAT</p>
+<p>AAAGA<br>AAAGA<br>AAAGA</p>
 </div>
 <p></p>
 <a name="H_Median%20String%20Algorithm"></a><h4>Median String Algorithm</h4>
@@ -1963,7 +1952,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>GAG<br>GAC</p>
 </div>
 <p></p>
 <a name="H_Gibbs%20Sampling%20Algorithm"></a><h4>Gibbs Sampling Algorithm</h4>
@@ -2034,7 +2023,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GCC<br>CAC<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
 </div>
 <p></p>
 <a name="H_Motif%20Matrix%20Hybrid%20Alphabet"></a><h3>Motif Matrix Hybrid Alphabet</h3>
@@ -2092,7 +2081,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>to...</p>
 <p>CWTCYK<br>CWTCYK<br>CWTCYK</p>
 <p>using...</p>
-<p>{frozenset({'A', 'T'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'T', 'C'}): 'Y'}</p>
+<p>{frozenset({'T', 'A'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'C', 'T'}): 'Y'}</p>
 </div>
 <p></p>
 <a name="H_Assembly"></a><h2>Assembly</h2>
@@ -2144,7 +2133,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>all overlap regions are of the same length,</li>
 <li>and each <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> in the list overlaps with the next <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> in the list</li>
 </ul>
-<p>... , stitch them together. For example, in the <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> list <code>[GAAA, AAAT, AATC]</code> each <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> overlaps the subsequent <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> by an offset of 1: <code>GAAATC</code>.</p>
+<p>... , stitch them together. For example, in the <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> list [GAAA, AAAT, AATC] each <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> overlaps the subsequent <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> by an offset of 1: GAAATC.</p>
 <table>
 <thead>
 <tr>
@@ -2238,7 +2227,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>all overlap regions are of the same length,</li>
 <li>and each <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> in the list overlaps with the next <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> in the list</li>
 </ul>
-<p>... , stitch them together. For example, in the <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> list <code>[ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC]</code> each <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> overlaps the subsequent <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> by an offset of 1: <code>ATGTTACCGTTC</code>.</p>
+<p>... , stitch them together. For example, in the <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> list [ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC] each <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> overlaps the subsequent <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> by an offset of 1: ATGTTACCGTTC.</p>
 <table>
 <thead>
 <tr>
@@ -2342,10 +2331,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>the suffix from each remaining <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>'s head k is appended to the first <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>'s head k.</li>
 <li>the suffix from each remaining <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>'s tail k is appended to the first <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>'s tail k.</li>
 </ul>
-<p>For example, to stitch <code>[ATG---CCG, TGT---CGT]</code>, ...</p>
+<p>For example, to stitch [ATG---CCG, TGT---CGT], ...</p>
 <ol>
-<li>stitch the heads as if they were <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s: <code>[ATG, TGT]</code> results in <code>ATGT</code>,</li>
-<li>stitch the tails as if they were <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s: <code>[CCG, CGT]</code> results in <code>CCGT</code>.</li>
+<li>stitch the heads as if they were <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s: [ATG, TGT] results in ATGT,</li>
+<li>stitch the tails as if they were <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s: [CCG, CGT] results in CCGT.</li>
 </ol>
 <table>
 <thead>
@@ -2599,7 +2588,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
         most_occurring_count, times_counted = Counter(rounded_counter.values()).most_common(<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>]
         <span class="hljs-keyword">if</span> times_counted &gt;= len(rounded_counter) * <span class="hljs-number">0.5</span>:
             <span class="hljs-keyword">return</span> dict([(key, value / most_occurring_count) <span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">in</span> rounded_counter.items()])
-    <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Failed to find a common count'</span>)</code></pre><div style="border:1px solid black;">
+    <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">f'Failed to find a common count: <span class="hljs-subst">{counter}</span>'</span>)</code></pre><div style="border:1px solid black;">
 <p></p>
 <p>Sequenced fragments:</p>
 <ul>
@@ -2619,43 +2608,9 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </ul>
 </div>
 <p></p>
-<a name="H_Assemble%20Fragments"></a><h3>Assemble Fragments</h3>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FAssemble%20Fragments)_TOPIC%2F"></a><strong></strong></p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>↩PREREQUISITES↩</strong></p>
-<ul>
-<li><a href="#BM_(Algorithms%5C%2FAssembly%2FFragment%20Occurrence%20in%20Genome%20Probability)_TOPIC%2F">Algorithms/Assembly/Fragment Occurrence in Genome Probability</a></li>
-</ul>
-</div>
-<p><strong>WHAT</strong>: Given the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single-strand of DNA, make guesses as to what that single-strand of DNA was by stitching overlapping <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s together. For example, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">3-mer</a> <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s: [TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT] may have come from either TTACTTAGTT or TTAGTTACTT.</p>
-<p><img src="svgbob_179666a8a27fdb428ea2cd4ffe30cdf0c3a4b815.svg" alt="Kroki diagram output"></p>
-<p><strong>WHY</strong>: <a href="#BM_(sequencer)%2Fi">Sequencer</a>s produce <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s, but <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:</p>
-<ul>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s are for both strands (strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a> a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s from isn't known).</li>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be missing (<a href="#BM_(sequencer)%2Fi">sequencer</a> didn't capture it).</li>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have incorrect occurrence counts (<a href="#BM_(sequencer)%2Fi">sequencer</a> captured it too many/few times).</li>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have errors (<a href="#BM_(sequencer)%2Fi">sequencer</a> produced <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s).</li>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be stitch-able in more than one way (multiple guesses).</li>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may take a long time to stitch (computationally intensive).</li>
-</ul>
-<p>Never the less, in an ideal world where most of these problems don't exist, the child sections below detail various ways to guess the single-strand of DNA that a set of <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s came from. Each child section assumes that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s it's operating on ...</p>
-<ul>
-<li>are from a single-strand of DNA,</li>
-<li>have correct occurrence counts (no missing or extra),</li>
-<li>and contain no errors.</li>
-</ul>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p><a href="#BM_(Algorithms%5C%2FAssembly%2FFragment%20Occurrence%20in%20Genome%20Probability)_TOPIC%2F">Algorithms/Assembly/Fragment Occurrence in Genome Probability</a> may help with filtering errors and finding occurrence counts, but it's probabilistic so there's a decent chance that it'll miss some errors / some <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s will get wrong occurrence counts.</p>
-</div>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Although the complications discussed above make it impossible to get the original <a href="#BM_(genome)%2Fi">genome</a> in its entirety, it's still possible to pull out large parts of the original <a href="#BM_(genome)%2Fi">genome</a>. This is discussed in <a href="#BM_(Algorithms%5C%2FAssembly%2FAssemble%20Contigs)_TOPIC%2F">Algorithms/Assembly/Assemble Contigs</a>.</p>
-</div>
-<a name="H_Overlap%20Graph%20Algorithm"></a><h4>Overlap Graph Algorithm</h4>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FOverlap%20Graph%20Algorithm)_TOPIC%2F"></a><strong></strong></p>
-<p><strong>ALGORITHM</strong>:</p>
-<p>Given the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single strand of DNA, create a directed graph where ...</p>
+<a name="H_Overlap%20Graph"></a><h3>Overlap Graph</h3>
+<p><a name="BM_(Algorithms%5C%2FAssembly%2FOverlap%20Graph)_TOPIC%2F"></a><strong></strong></p>
+<p><strong>WHAT</strong>: Given the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single strand of DNA, create a directed graph where ...</p>
 <ol>
 <li>
 <p>each node is a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>.</p>
@@ -2667,11 +2622,11 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>source node has the overlap in its suffix .</li>
 <li>destination node has the overlap in its prefix.</li>
 </ul>
-<p><img src="svgbob_679d24959920acb04c059d6e53dee545fff77300.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_62843d070e55883049a5a0f4881f1ec17928f780.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
-<p>This directed graph is called an overlap graph because the edges show the different overlap candidates between <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s.</p>
-<p>An overlap graph shows the different ways that <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s can be stitched together. A path in in an overlay graph that touches each node exactly once is one possibility for the original <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single stranded DNA</a> that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s came from. For example...</p>
+<p>This is called an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>.</p>
+<p><strong>WHY</strong>: An <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a> shows the different ways that <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s can be stitched together. A path in in an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a> that touches each node exactly once is one possibility for the original <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single stranded DNA</a> that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s came from. For example...</p>
 <ul>
 <li>[TTA, TAG, AGT, GTT, TTA, TAC, ACT, CTT] ⟶ TTAGTTACTT</li>
 <li>[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT] ⟶ TTACTTAGTT</li>
@@ -2684,9 +2639,27 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>Notice that the example graph is circular. If the organism <a href="#BM_(genome)%2Fi">genome</a> itself were also circular (e.g. bacterial <a href="#BM_(genome)%2Fi">genome</a>), the <a href="#BM_(genome)%2Fi">genome</a> guesses above are all actually the same because circular <a href="#BM_(genome)%2Fi">genome</a>s don't have a beginning / end.</p>
 </div>
-<a name="H_Graph%20Construction"></a><h5>Graph Construction</h5>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FOverlap%20Graph%20Algorithm%2FGraph%20Construction)_TOPIC%2F"></a><strong></strong></p>
-<p>To construct an overlap graph, create an edge between <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s that have an overlap.</p>
+<p><strong>ALGORITHM</strong>:</p>
+<p><a href="#BM_(sequencer)%2Fi">Sequencer</a>s produce <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s, but <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:</p>
+<ul>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s are for both strands (strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a> a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s from isn't known).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be missing (<a href="#BM_(sequencer)%2Fi">sequencer</a> didn't capture it).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have incorrect occurrence counts (<a href="#BM_(sequencer)%2Fi">sequencer</a> captured it too many/few times).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have errors (<a href="#BM_(sequencer)%2Fi">sequencer</a> produced <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be stitch-able in more than one way (multiple guesses).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may take a long time to stitch (computationally intensive).</li>
+</ul>
+<p>Never the less, in an ideal world where most of these problems don't exist, an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a> is a good way to guess the single-strand of DNA that a set of <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s came from. An <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a> assumes that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s it's operating on ...</p>
+<ul>
+<li>are from a single-strand of DNA,</li>
+<li>have correct occurrence counts (no missing or extra),</li>
+<li>and contain no errors.</li>
+</ul>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>Although the complications discussed above make it impossible to get the original <a href="#BM_(genome)%2Fi">genome</a> in its entirety, it's still possible to pull out large parts of the original <a href="#BM_(genome)%2Fi">genome</a>. This is discussed in <a href="#BM_(Algorithms%5C%2FAssembly%2FFind%20Contigs)_TOPIC%2F">Algorithms/Assembly/Find Contigs</a>.</p>
+</div>
+<p>To construct an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>, create an edge between <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s that have an overlap.</p>
 <p>For each <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>, add that <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s ...</p>
 <ul>
 <li>prefix to a hash table.</li>
@@ -2721,16 +2694,9 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="dot_8ca9fb7886e86704dc01b1bffd1d6dd1.svg" alt="Dot diagram"></p>
 </div>
 <p></p>
-<a name="H_Hamiltonian%20Path"></a><h5>Hamiltonian Path</h5>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FOverlap%20Graph%20Algorithm%2FHamiltonian%20Path)_TOPIC%2F"></a><strong></strong></p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>↩PREREQUISITES↩</strong></p>
-<ul>
-<li><a href="#BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FOverlap%20Graph%20Algorithm%2FGraph%20Construction)_TOPIC%2F">Algorithms/Assembly/Infer Genome/Overlap Graph Algorithm/Graph Construction</a></li>
-</ul>
-</div>
-<p>Given a graph, a path that touches each node exactly once is a <a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a>. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.</p>
-<p>This algorithm will likely fall over on non-trivial overlay graphs. Even finding one <a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a> is computationally intensive.</p>
+<p>A path that touches each node of an graph exactly once is a <a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a>. Each  The <a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a> in an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a> is a guess as to the original single strand of DNA that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for the graph came from.</p>
+<p>The code shown below recursively walks all paths. Of all the paths it walks over, the ones that walk every node of the graph exactly once are selected.</p>
+<p>This algorithm will likely fall over on non-trivial <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>s. Even finding one <a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a> is computationally intensive.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exhaustively_walk_until_all_nodes_touched_exactly_one</span>(<span class="hljs-params">
         graph: Graph[T],
         from_node: T,
@@ -2760,34 +2726,33 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>... and the Hamiltonian paths are ...</p>
 <ul>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
 <li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
 <li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
 <li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
 <li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
+<li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
 <li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
 </ul>
 </div>
 <p></p>
-<a name="H_De%20Bruijn%20Graph%20Algorithm"></a><h4>De Bruijn Graph Algorithm</h4>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FDe%20Bruijn%20Graph%20Algorithm)_TOPIC%2F"></a><strong></strong></p>
+<a name="H_De%20Bruijn%20Graph"></a><h3>De Bruijn Graph</h3>
+<p><a name="BM_(Algorithms%5C%2FAssembly%2FDe%20Bruijn%20Graph)_TOPIC%2F"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FOverlap%20Graph%20Algorithm)_TOPIC%2F">Algorithms/Assembly/Infer Genome/Overlap Graph Algorithm</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FOverlap%20Graph)_TOPIC%2F">Algorithms/Assembly/Overlap Graph</a></li>
 </ul>
 </div>
-<p><strong>ALGORITHM</strong>:</p>
-<p>Given the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single strand of DNA, create a directed graph where ...</p>
+<p><strong>WHAT</strong>: Given the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single strand of DNA, create a directed graph where ...</p>
 <ol>
 <li>
 <p>each <a href="#BM_(fragment)_SEQ%2Fi">fragment</a> is represented as an edge connecting 2 nodes, where the ...</p>
@@ -2795,24 +2760,43 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>source node is the prefix of the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>.</li>
 <li>destination node is the suffix of the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>.</li>
 </ul>
-<p><img src="svgbob_a7e91c90fcea9f5c7c749ca43440cb29739c1c67.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_843b8aaedb289d3d3ad5aef2fcd9bf5a504ad5af.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
 <p>duplicate nodes are merged into a single node.</p>
-<p><img src="svgbob_1f00a351b7df371ff2872f1ee4d7a4db4e293578.svg" alt="Kroki diagram output"></p>
+<p><img src="svgbob_7dea4cc54e9eac3d3a657922085849157a9cf869.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
-<p>This graph is called a <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a>: a <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a> and <a href="#BM_(strongly%20connected)%2Fi">strongly connected</a> graph where the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s are represented as edges. <a href="#BM_(De%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s were originally invented to solve the <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> string problem, which is effectively the same concept as <a href="#BM_(assembly%7Cassemble)%2Fi">assembly</a>.</p>
+<p>This graph is called a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a>: a <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a> and <a href="#BM_(strongly%20connected)%2Fi">strongly connected</a> graph where the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s are represented as edges.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Depending on the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s, the resulting graph may not be totally <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>. A technique for dealing with this is detailed in the graph construction child section. For now, just assume that the graph will be <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>.</p>
+<p>The example graph above is <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>. But, depending on the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s used, the graph may not be totally <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>. A technique for dealing with this is detailed below. For now, just assume that the graph will be <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>.</p>
 </div>
-<p>Similar to an overlay graph, a <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> shows the different ways that <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s can be stitched together. However, unlike an overlay graph, the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (<a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a>), in a <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> you need to find paths that walk over every edge exactly once.</p>
-<p>A path in a <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> that walks over each edge exactly once is one possibility for the original <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single stranded DNA</a> that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s came from. Such a path is called a <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>: It starts and ends at the same node (a cycle), and walks over every edge in the graph.</p>
-<p>In contrast to finding a <a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a> in an overlay graph, it's much faster to find an <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> in an <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a>.</p>
-<a name="H1_Graph%20Construction"></a><h5>Graph Construction</h5>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FDe%20Bruijn%20Graph%20Algorithm%2FGraph%20Construction)_TOPIC%2F"></a><strong></strong></p>
-<p>To construct a <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a>, add an edge for each <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>, creating missing nodes as required.</p>
+<p><strong>WHY</strong>:  Similar to an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>, a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> shows the different ways that <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s can be stitched together. However, unlike an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>, the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s are represented as edges rather than nodes. Where in an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a> you need to find paths that touch every node exactly once (<a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a>), in a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> you need to find paths that walk over every edge exactly once (<a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>).</p>
+<p>A path in a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> that walks over each edge exactly once is one possibility for the original <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single stranded DNA</a> that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s came from: it starts and ends at the same node (a cycle), and walks over every edge in the graph.</p>
+<p>In contrast to finding a <a href="#BM_(Hamiltonian%20path%7CHamilton%20path)%2Fi">Hamiltonian path</a> in an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>, it's much faster to find an <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> in an <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a>.</p>
+<p><a href="#BM_(de%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s were originally invented to solve the <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> string problem, which is effectively the same concept as <a href="#BM_(assembly%7Cassemble)%2Fi">assembly</a>.</p>
+<p><strong>ALGORITHM</strong>:</p>
+<p><a href="#BM_(sequencer)%2Fi">Sequencer</a>s produce <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s, but <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:</p>
+<ul>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s are for both strands (strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a> a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s from isn't known).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be missing (<a href="#BM_(sequencer)%2Fi">sequencer</a> didn't capture it).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have incorrect occurrence counts (<a href="#BM_(sequencer)%2Fi">sequencer</a> captured it too many/few times).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have errors (<a href="#BM_(sequencer)%2Fi">sequencer</a> produced <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be stitch-able in more than one way (multiple guesses).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may take a long time to stitch (computationally intensive).</li>
+</ul>
+<p>Never the less, in an ideal world where most of these problems don't exist, an <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> is a good way to guess the single-strand of DNA that a set of <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s came from. A <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> assumes that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s it's operating on ...</p>
+<ul>
+<li>are from a single-strand of DNA,</li>
+<li>have correct occurrence counts (no missing or extra),</li>
+<li>and contain no errors.</li>
+</ul>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>Although the complications discussed above make it impossible to get the original <a href="#BM_(genome)%2Fi">genome</a> in its entirety, it's still possible to pull out large parts of the original <a href="#BM_(genome)%2Fi">genome</a>. This is discussed in <a href="#BM_(Algorithms%5C%2FAssembly%2FFind%20Contigs)_TOPIC%2F">Algorithms/Assembly/Find Contigs</a>.</p>
+</div>
+<p>To construct a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a>, add an edge for each <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>, creating missing nodes as required.</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_debruijn_graph</span>(<span class="hljs-params">reads: List[T], skip: int = <span class="hljs-number">1</span></span>) -&gt; Graph[T]:</span>
     graph = Graph()
     <span class="hljs-keyword">for</span> read <span class="hljs-keyword">in</span> reads:
@@ -2865,16 +2849,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>... with original head nodes at {TTA} and tail nodes at {CCT}.</p>
 </div>
 <p></p>
-<p>In the graph above, an artificial edge is inserted between CCT and TTA to create a <a href="#BM_(balanced%20graph)%2Fi">balanced graph</a>. With this <a href="#BM_(balanced%20graph)%2Fi">balanced graph</a>, a path that walks all edges (<a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s) can found by finding the <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> from the original root node (TTA). The artificial edge will show up at the end of the <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> (CCT to TTA), and as such can be dropped from the path.</p>
-<a name="H_Eulerian%20Cycle"></a><h5>Eulerian Cycle</h5>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FDe%20Bruijn%20Graph%20Algorithm%2FEulerian%20Cycle)_TOPIC%2F"></a><strong></strong></p>
-<div style="margin:2em; background-color: #e0e0e0;">
-<p><strong>↩PREREQUISITES↩</strong></p>
-<ul>
-<li><a href="#BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FDe%20Bruijn%20Graph%20Algorithm%2FGraph%20Construction)_TOPIC%2F">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction</a></li>
-</ul>
-</div>
-<p>Given a <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> (<a href="#BM_(strongly%20connected)%2Fi">strongly connected</a> and <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>), you can find a <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.</p>
+<p>Given a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> (<a href="#BM_(strongly%20connected)%2Fi">strongly connected</a> and <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>), you can find a <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.</p>
 <pre class="hljs"><code><span class="hljs-comment"># (6, 8), (8, 7), (7, 9), (9, 6)  ----&gt;  68796</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">edge_list_to_node_list</span>(<span class="hljs-params">edges: List[Tuple[T, T]]</span>) -&gt; List[T]:</span>
     ret = [edges[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]]
@@ -2932,19 +2907,67 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>TT -&gt; TC -&gt; CT -&gt; TT -&gt; TA -&gt; AT -&gt; TT</p>
 </div>
 <p></p>
-<p>This algorithm picks one <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> in a graph. In the above graph, there are two. In other real-world applications, there likely will be too many <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>s to enumerate all of them.</p>
+<p>Note that the graph above is naturally <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a> (no artificial edges have been added in to make it <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>). If the graph you're finding a <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> on has been artificially <a href="#BM_(balanced)_GRAPH%2Fi">balanced</a>, simply start the search for a <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> from one of the original head node. The artificial edge will show up at the end of the <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>, and as such can be dropped from the path.</p>
+<p><img src="svgbob_cdf5dbb7db5be8e11adb7461507ac8e7ae647e3a.svg" alt="Kroki diagram output"></p>
+<p>This algorithm picks one <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> in a graph. Most graph have multiple <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>s, likely too many to enumerate all of them.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>See the section on <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> strings to see a real-world application of <a href="#BM_(Eulerian%20graph)%2Fi">Eulerian graph</a>s. For something like k=20, good luck trying to enumerate all <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>s.</p>
 </div>
-<a name="H_Detect%20Error%20Branch"></a><h3>Detect Error Branch</h3>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FDetect%20Error%20Branch)_TOPIC%2F"></a><strong></strong></p>
+<a name="H_Find%20Bubbles"></a><h3>Find Bubbles</h3>
+<p><a name="BM_(Algorithms%5C%2FAssembly%2FFind%20Bubbles)_TOPIC%2F"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FOverlap%20Graph%20Algorithm)_TOPIC%2F">Algorithms/Assembly/Infer Genome/Overlap Graph Algorithm</a></li>
-<li><a href="#BM_(Algorithms%5C%2FAssembly%2FInfer%20Genome%2FDe%20Bruijn%20Graph%20Algorithm)_TOPIC%2F">Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FOverlap%20Graph)_TOPIC%2F">Algorithms/Assembly/Overlap Graph</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FDe%20Bruijn%20Graph)_TOPIC%2F">Algorithms/Assembly/De Bruijn Graph</a></li>
 </ul>
+</div>
+<p><strong>WHAT</strong>: Given a set of a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s that have been broken (<a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">read breaking</a> / <a href="#BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi">read-pair breaking</a>) to length k, any ...</p>
+<ul>
+<li>forked prefixes,</li>
+<li>forked suffixes,</li>
+<li>or bubbles</li>
+</ul>
+<p>... of length ...</p>
+<ul>
+<li>k in the <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>,</li>
+<li>or k-1 in the <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a></li>
+</ul>
+<p>... may have been from a <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>.</p>
+<p><img src="svgbob_986faa465630c014228747bd8c1b6750b9c7d5a7.svg" alt="Kroki diagram output"></p>
+<p><strong>WHY</strong>: When <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s returned by a <a href="#BM_(sequencer)%2Fi">sequencer</a> get broken (<a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">read breaking</a> / <a href="#BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi">read-pair breaking</a>), any <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s containing <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s may show up in the graph as one of 3 structures: forked prefix, forked suffix, or bubble. As such, it may be possible to detect these structures and flatten them (by removing bad branches) to get a cleaner graph.</p>
+<p>For example, imagine the <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> ATTGG. <a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">Read breaking</a> it into <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">2-mer</a> <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s results in: [AT, TT, TG, GG].</p>
+<p><img src="svgbob_14d21a2810cefc8cfab333aadbe576260b565d48.svg" alt="Kroki diagram output"></p>
+<p>Now, imagine that the <a href="#BM_(sequencer)%2Fi">sequencer</a> captured that same part of the <a href="#BM_(genome)%2Fi">genome</a> again, but this time the <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> contains a <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>. Depending on where the incorrect nucleotide is, one of the 3 structures will get introduced into the graph:</p>
+<ul>
+<li>
+<p>ATTGG vs A<strong>C</strong>TGG (within first 2 elements)</p>
+<p><img src="svgbob_0c0a09e604164ee4ffcdc4f3fcfa420c2035cdd5.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p>ATTGG vs ATT<strong>C</strong>G (within last 2 elements)</p>
+<p><img src="svgbob_8749bd635048fbfa4bd483e9c5425e73ff41a8d1.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p>ATTGG vs AT<strong>C</strong>GG (sandwiched after first 2 elements and before last 2 elements)</p>
+<p><img src="svgbob_3cc83e04b59a481951a59a2edd92cab8b200b193.svg" alt="Kroki diagram output"></p>
+</li>
+</ul>
+<p>Note that just because these structures exist doesn't mean that the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s they represent definitively have a <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s. These structures could have been caused by other problems / may not be problems at all:</p>
+<ul>
+<li>
+<p>Bubbles may be caused by repetitive regions of DNA.</p>
+<p><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s from different parts of the <a href="#BM_(genome)%2Fi">genome</a> that are the same except for a few positions will show up as bubbles.</p>
+</li>
+<li>
+<p>Bubbles / forks may be caused when <a href="#BM_(sequencing%7Csequenced)%2Fi">sequencing</a> <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>.</p>
+<p>When both strands of DNA get tangled into the same graph, it's possible that <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s from different strands may form bubbles or forks.</p>
+</li>
+</ul>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>The Pevzner book says that bubble removal is a common feature in modern <a href="#BM_(assembly%7Cassemble)%2Fi">assemble</a>rs. My assumption is that, before pulling out <a href="#BM_(contig)s%3F%5Cb%2Fi">contig</a>s (described later on), basic probabilities are used to try and suss out if a branch in a bubble / prefix fork / suffix fork is bad and remove it if it is. This (hopefully) results in longer <a href="#BM_(contig)s%3F%5Cb%2Fi">contig</a>s.</p>
 </div>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_head_convergences</span>(<span class="hljs-params">graph: Graph[T], branch_len: int</span>) -&gt; List[Tuple[Optional[T], List[T], Optional[T]]]:</span>
@@ -3000,109 +3023,71 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
                 ret.append(path)
     <span class="hljs-keyword">return</span> ret</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Genome: ATTGGACAATGTCCGCAT</p>
-<p>Probability of occurrence in genome:</p>
+<p>Fragments from sequencer:</p>
 <ul>
-<li>ATTG was scanned in 25 times, so it probably appears in the genome 0.25 times.</li>
-<li>TTGG was scanned in 46 times, so it probably appears in the genome 0.46 times.</li>
-<li>TGGA was scanned in 78 times, so it probably appears in the genome 1.0 times.</li>
-<li>GGAC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
-<li>CCGC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
-<li>CGCA was scanned in 86 times, so it probably appears in the genome 1.0 times.</li>
-<li>GCAT was scanned in 60 times, so it probably appears in the genome 1.0 times.</li>
-<li>GACA was scanned in 120 times, so it probably appears in the genome 1.0 times.</li>
-<li>GTCC was scanned in 96 times, so it probably appears in the genome 1.0 times.</li>
-<li>TCCG was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
-<li>ACAA was scanned in 123 times, so it probably appears in the genome 1.0 times.</li>
-<li>CAAT was scanned in 126 times, so it probably appears in the genome 1.0 times.</li>
-<li>AATG was scanned in 114 times, so it probably appears in the genome 1.0 times.</li>
-<li>ATGT was scanned in 106 times, so it probably appears in the genome 1.0 times.</li>
-<li>TGTC was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
-<li>ATCG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-<li>TCGG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-<li>CGGA was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>ATAGGAC scanned in 1.</li>
+<li>ATTGGAC scanned in 55.</li>
+<li>TTGGACA scanned in 30.</li>
+<li>TGGACAA scanned in 30.</li>
+<li>GGACAAT scanned in 30.</li>
+<li>GACAATC scanned in 30.</li>
+<li>ACAATCT scanned in 30.</li>
+<li>ACAGTCT scanned in 1.</li>
+<li>CAATCTC scanned in 30.</li>
+<li>AATCTCG scanned in 30.</li>
+<li>ATCTCGG scanned in 30.</li>
+<li>TCTCGGG scanned in 30.</li>
+<li>CTCGGGC scanned in 55.</li>
+<li>CTCGTGC scanned in 1.</li>
+</ul>
+<p>Fragments after being broken to k=4:</p>
+<ul>
+<li>ATAG broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>TAGG broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>AGGA broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>GGAC broken out 146 times, so it probably appears in the genome 1.0 times.</li>
+<li>ATTG broken out 55 times, so it probably appears in the genome 1.0 times.</li>
+<li>TTGG broken out 85 times, so it probably appears in the genome 1.0 times.</li>
+<li>TGGA broken out 115 times, so it probably appears in the genome 1.0 times.</li>
+<li>GACA broken out 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>ACAA broken out 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>CAAT broken out 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>AATC broken out 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>ATCT broken out 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>ACAG broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>CAGT broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>AGTC broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>GTCT broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>TCTC broken out 120 times, so it probably appears in the genome 1.0 times.</li>
+<li>CTCG broken out 146 times, so it probably appears in the genome 1.0 times.</li>
+<li>TCGG broken out 115 times, so it probably appears in the genome 1.0 times.</li>
+<li>CGGG broken out 85 times, so it probably appears in the genome 1.0 times.</li>
+<li>GGGC broken out 55 times, so it probably appears in the genome 1.0 times.</li>
+<li>TCGT broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>CGTG broken out 1 times, so it probably appears in the genome 0.01 times.</li>
+<li>GTGC broken out 1 times, so it probably appears in the genome 0.01 times.</li>
 </ul>
 <p>De Bruijn graph:</p>
-<p><img src="dot_6b3f3c43bdb1b59064ca0df40540a916.svg" alt="Dot diagram"></p>
+<p><img src="dot_58d24202dc65f3967dedac820f12af62.svg" alt="Dot diagram"></p>
 <p>Problem paths:</p>
 <ul>
+<li>Src: ACA, Dst: TCT, Branch: CAA-&gt;AAT-&gt;ATC</li>
+<li>Src: ACA, Dst: TCT, Branch: CAG-&gt;AGT-&gt;GTC</li>
+<li>Src: None, Dst: GGA, Branch: ATA-&gt;TAG-&gt;AGG</li>
 <li>Src: None, Dst: GGA, Branch: ATT-&gt;TTG-&gt;TGG</li>
-<li>Src: None, Dst: GGA, Branch: ATC-&gt;TCG-&gt;CGG</li>
+<li>Src: TCG, Dst: None, Branch: CGG-&gt;GGG-&gt;GGC</li>
+<li>Src: TCG, Dst: None, Branch: CGT-&gt;GTG-&gt;TGC</li>
 </ul>
 </div>
 <p></p>
-<div style="border:1px solid black;">
-<p></p>
-<p>Genome: ATTGGACAATGTCCGCAT</p>
-<p>Probability of occurrence in genome:</p>
-<ul>
-<li>ATTG was scanned in 25 times, so it probably appears in the genome 0.25 times.</li>
-<li>TTGG was scanned in 46 times, so it probably appears in the genome 0.46 times.</li>
-<li>TGGA was scanned in 78 times, so it probably appears in the genome 1.0 times.</li>
-<li>GGAC was scanned in 108 times, so it probably appears in the genome 1.0 times.</li>
-<li>CCGC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
-<li>CGCA was scanned in 86 times, so it probably appears in the genome 1.0 times.</li>
-<li>GCAT was scanned in 60 times, so it probably appears in the genome 1.0 times.</li>
-<li>GACA was scanned in 120 times, so it probably appears in the genome 1.0 times.</li>
-<li>GTCC was scanned in 96 times, so it probably appears in the genome 1.0 times.</li>
-<li>TCCG was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
-<li>ACAA was scanned in 123 times, so it probably appears in the genome 1.0 times.</li>
-<li>CAAT was scanned in 126 times, so it probably appears in the genome 1.0 times.</li>
-<li>AATG was scanned in 114 times, so it probably appears in the genome 1.0 times.</li>
-<li>ATGT was scanned in 106 times, so it probably appears in the genome 1.0 times.</li>
-<li>TGTC was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
-<li>ACAG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-<li>CAGT was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-<li>AGTG was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-<li>GTGT was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-</ul>
-<p>De Bruijn graph:</p>
-<p><img src="dot_29e2ac1f96da9d61aea02e035e2bbd13.svg" alt="Dot diagram"></p>
-<p>Problem paths:</p>
-<ul>
-<li>Src: ACA, Dst: TGT, Branch: CAA-&gt;AAT-&gt;ATG</li>
-<li>Src: ACA, Dst: TGT, Branch: CAG-&gt;AGT-&gt;GTG</li>
-</ul>
-</div>
-<p></p>
-<div style="border:1px solid black;">
-<p></p>
-<p>Genome: ATTGGACAATGTCCGCAT</p>
-<p>Probability of occurrence in genome:</p>
-<ul>
-<li>ATTG was scanned in 26 times, so it probably appears in the genome 0.26 times.</li>
-<li>TTGG was scanned in 46 times, so it probably appears in the genome 0.46 times.</li>
-<li>TGGA was scanned in 78 times, so it probably appears in the genome 1.0 times.</li>
-<li>GGAC was scanned in 108 times, so it probably appears in the genome 1.0 times.</li>
-<li>CCGC was scanned in 109 times, so it probably appears in the genome 1.0 times.</li>
-<li>CGCA was scanned in 86 times, so it probably appears in the genome 1.0 times.</li>
-<li>GCAT was scanned in 60 times, so it probably appears in the genome 1.0 times.</li>
-<li>GACA was scanned in 120 times, so it probably appears in the genome 1.0 times.</li>
-<li>GTCC was scanned in 96 times, so it probably appears in the genome 1.0 times.</li>
-<li>TCCG was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
-<li>ACAA was scanned in 123 times, so it probably appears in the genome 1.0 times.</li>
-<li>CAAT was scanned in 126 times, so it probably appears in the genome 1.0 times.</li>
-<li>AATG was scanned in 114 times, so it probably appears in the genome 1.0 times.</li>
-<li>ATGT was scanned in 106 times, so it probably appears in the genome 1.0 times.</li>
-<li>TGTC was scanned in 105 times, so it probably appears in the genome 1.0 times.</li>
-<li>TTGA was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-<li>TGAA was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-<li>GAAC was scanned in 1 times, so it probably appears in the genome 0.01 times.</li>
-</ul>
-<p>De Bruijn graph:</p>
-<p><img src="dot_d6095af8e096b5cc55fa6405f526807f.svg" alt="Dot diagram"></p>
-<p>Problem paths:</p>
-<ul>
-<li>Src: TTG, Dst: None, Branch: TGA-&gt;GAA-&gt;AAC</li>
-</ul>
-</div>
-<p></p>
-<a name="H_Assemble%20Contigs"></a><h3>Assemble Contigs</h3>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FAssemble%20Contigs)_TOPIC%2F"></a><strong></strong></p>
+<a name="H_Find%20Contigs"></a><h3>Find Contigs</h3>
+<p><a name="BM_(Algorithms%5C%2FAssembly%2FFind%20Contigs)_TOPIC%2F"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
-<li><a href="#BM_(Algorithms%5C%2FAssembly%2FAssemble%20Fragments)_TOPIC%2F">Algorithms/Assembly/Assemble Fragments</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FOverlap%20Graph)_TOPIC%2F">Algorithms/Assembly/Overlap Graph</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FDe%20Bruijn%20Graph)_TOPIC%2F">Algorithms/Assembly/De Bruijn Graph</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FFind%20Bubbles)_TOPIC%2F">Algorithms/Assembly/Find Bubbles</a></li>
 </ul>
 </div>
 <p>TODO: CONTINUE HERE</p>
@@ -3290,8 +3275,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
@@ -3299,12 +3284,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CATCAGGCG', start_index=164, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
@@ -3312,8 +3297,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
@@ -3327,12 +3312,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>
@@ -3350,7 +3335,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 <a name="H_Transcription%20Factors"></a><h2>Transcription Factors</h2>
 <p>A <a href="#BM_(transcription%20factor)%2Fi">transcription factor</a> / <a href="#BM_(regulatory%20protein)%2Fi">regulatory protein</a> is an enzyme that influences the rate of <a href="#BM_(gene%20expression)%2Fi">gene expression</a> for some set of <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">genes</a>. As the saturation of a <a href="#BM_(transcription%20factor)%2Fi">transcription factor</a> changes, so does the rate of <a href="#BM_(gene%20expression)%2Fi">gene expression</a> for the set of <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">genes</a> that it influences.</p>
-<p><a href="#BM_(transcription%20factor)%2Fi">Transcription factor</a>s bind to DNA near the <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">genes</a> they influence: a <a href="#BM_(transcription%20factor%20binding%20site)%2Fi">transcription factor binding site</a> is located in a <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a>'s <a href="#BM_(upstream%20region)%2Fi">upstream region</a> and the <a href="#BM_(sequence)%2Fi">sequence</a> at that location is a fuzzy nucleotide <a href="#BM_(sequence)%2Fi">sequence</a> of length 8 to 12 called a <a href="#BM_(regulatory%20motif)%2Fi">regulatory motif</a>. The simplest way to think of a <a href="#BM_(regulatory%20motif)%2Fi">regulatory motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]CCCTA</code> may match to <code>ATTGCCCTA</code>, <code>ATTCCCCTA</code>, <code>TTTGCCCTA</code>, and <code>TTTCCCCTA</code>. The regex itself is the <a href="#BM_(motif)%2Fi">motif</a>, while the <a href="#BM_(sequence)%2Fi">sequence</a>s being matched are <a href="#BM_(motif%20member)%2Fi">motif member</a>s.</p>
+<p><a href="#BM_(transcription%20factor)%2Fi">Transcription factor</a>s bind to DNA near the <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">genes</a> they influence: a <a href="#BM_(transcription%20factor%20binding%20site)%2Fi">transcription factor binding site</a> is located in a <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a>'s <a href="#BM_(upstream%20region)%2Fi">upstream region</a> and the <a href="#BM_(sequence)%2Fi">sequence</a> at that location is a fuzzy nucleotide <a href="#BM_(sequence)%2Fi">sequence</a> of length 8 to 12 called a <a href="#BM_(regulatory%20motif)%2Fi">regulatory motif</a>. The simplest way to think of a <a href="#BM_(regulatory%20motif)%2Fi">regulatory motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]CCCTA</code> may match to ATTGCCCTA, ATTCCCCTA, TTTGCCCTA, and TTTCCCCTA. The regex itself is the <a href="#BM_(motif)%2Fi">motif</a>, while the <a href="#BM_(sequence)%2Fi">sequence</a>s being matched are <a href="#BM_(motif%20member)%2Fi">motif member</a>s.</p>
 <p><img src="svgbob_c77523791e9f610ea50acd1a596be075095bcceb.svg" alt="Kroki diagram output"></p>
 <p>The production of <a href="#BM_(transcription%20factor)%2Fi">transcription factor</a>s may be tied to certain internal or external conditions. For example, imagine a flower where the petals...</p>
 <ul>
@@ -3393,14 +3378,14 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 <p>Organism is baker's yeast. Suspected genes influenced by transcription factor: THI12, YHL017W, SYN8, YCG1, UBX5, and KEI1.</p>
 <p>Searching for 18-mer across a set of 6 gene upstream regions...</p>
-<p>AGAAAAAGGAAGGAAAAA<br>AGAAAAAAAAAGGAAAAA<br>AGAAAAAGAAAAAAAAAA<br>AGAAAAGGAAAAAAAGAA<br>ATAAAAACATCATAAAAA<br>CGAACAACATGAGATAAA</p>
-<p>Score is: 19</p>
+<p>GAAAAAGGAAGGAAAAAT<br>GAAAAAAAAAGGAAAAAA<br>GAAAAAGAAAAAAAAAAA<br>GAAAAAAAGAAGACAAAG<br>GAATATAAACATATAAAA<br>GAATATAAACATATAAAA</p>
+<p>Score is: 20</p>
 </div>
 <p></p>
 <a name="H_Terminology"></a><h1>Terminology</h1>
 <ul>
 <li>
-<p><a name="BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi"></a><strong>k-mer</strong> - A sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> <code>GAAATC</code>, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
+<p><a name="BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi"></a><strong>k-mer</strong> - A sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
@@ -3438,7 +3423,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </li>
 <li>
 <p><a name="BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi"></a><strong>kd-mer</strong> - A sub<a href="#BM_(sequence)%2Fi">sequence</a> of length 2k + d within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain) where the first k elements and the last k elements are known but the d elements in between isn't known.</p>
-<p>When identifying a <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">kd-mer</a> with a specific k and d, the proper syntax is <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(k, d)-mer</a>. For example, <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(1, 2)-mer</a> represents a <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">kd-mer</a> with k=1 and d=2. In the DNA <a href="#BM_(sequence)%2Fi">sequence</a> <code>GAAATC</code>, the following <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(1, 2)-mer</a>'s exist: <code>G--A</code>, <code>A--T</code>, <code>A--C</code>.</p>
+<p>When identifying a <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">kd-mer</a> with a specific k and d, the proper syntax is <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(k, d)-mer</a>. For example, <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(1, 2)-mer</a> represents a <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">kd-mer</a> with k=1 and d=2. In the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(1, 2)-mer</a>'s exist: <code>G--A</code>, <code>A--T</code>, <code>A--C</code>.</p>
 <p>See <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>.</p>
 </li>
 <li>
@@ -3568,10 +3553,10 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a name="BM_(transcription%20factor)%2Fi"></a><strong>transcription factor</strong> - A <a href="#BM_(regulatory%20protein)%2Fi">regulatory protein</a> that controls the rate of <a href="#BM_(transcription%7Ctranscribed%7Ctranscribe)%2Fi">transcription</a> for some <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a> that it has influence over (the copying of DNA to mRNA). The protein binds to a specific <a href="#BM_(sequence)%2Fi">sequence</a> in the <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a>'s <a href="#BM_(upstream%20region)%2Fi">upstream region</a>.</p>
 </li>
 <li>
-<p><a name="BM_(motif)%2Fi"></a><strong>motif</strong> - A pattern that matches against many different <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s, where those matched <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BM_(motif)%2Fi">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code>.</p>
+<p><a name="BM_(motif)%2Fi"></a><strong>motif</strong> - A pattern that matches against many different <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s, where those matched <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a <a href="#BM_(motif)%2Fi">motif</a> is a regex pattern without quantifiers. For example, the regex <code>[AT]TT[GC]C</code> may match to ATTGC, ATTCC, TTTGC, and TTTCC.</p>
 </li>
 <li>
-<p><a name="BM_(motif%20member)%2Fi"></a><strong>motif member</strong> <a name="BM_%5Cb(member)_MOTIF%2Fi"></a><strong></strong> - A specific nucleotide <a href="#BM_(sequence)%2Fi">sequence</a> that matches a <a href="#BM_(motif)%2Fi">motif</a>. For example, given a <a href="#BM_(motif)%2Fi">motif</a> represented by the regex <code>[AT]TT[GC]C</code>, the <a href="#BM_(sequence)%2Fi">sequence</a>s <code>ATTGC</code>, <code>ATTCC</code>, <code>TTTGC</code>, and <code>TTTCC</code> would be its <a href="#BM_%5Cb(member)_MOTIF%2Fi">member</a>s.</p>
+<p><a name="BM_(motif%20member)%2Fi"></a><strong>motif member</strong> <a name="BM_%5Cb(member)_MOTIF%2Fi"></a><strong></strong> - A specific nucleotide <a href="#BM_(sequence)%2Fi">sequence</a> that matches a <a href="#BM_(motif)%2Fi">motif</a>. For example, given a <a href="#BM_(motif)%2Fi">motif</a> represented by the regex <code>[AT]TT[GC]C</code>, the <a href="#BM_(sequence)%2Fi">sequence</a>s ATTGC, ATTCC, TTTGC, and TTTCC would be its <a href="#BM_%5Cb(member)_MOTIF%2Fi">member</a>s.</p>
 </li>
 <li>
 <p><a name="BM_(motif%20matrix%7Cmotif%20matrices)%2Fi"></a><strong>motif matrix</strong> - A set of <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s stacked on top of each other in a matrix, where the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s are either...</p>
@@ -4259,7 +4244,25 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 </li>
 <li>
-<p><a name="BM_(De%20Bruijn%20graph)%2Fi"></a><strong>De Bruijn graph</strong> - A special graph representing the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
+<p><a name="BM_(overlap%20graph)%2Fi"></a><strong>overlap graph</strong> - A graph representing the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
+<ol>
+<li>
+<p>Each node is a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>.</p>
+<p><img src="svgbob_ba61508d2d4f3dfef58ce5783f8e22f49ddec891.svg" alt="Kroki diagram output"></p>
+</li>
+<li>
+<p>Each edge is between overlapping <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s (nodes), where the ...</p>
+<ul>
+<li>source node has the overlap in its suffix .</li>
+<li>destination node has the overlap in its prefix.</li>
+</ul>
+<p><img src="svgbob_679d24959920acb04c059d6e53dee545fff77300.svg" alt="Kroki diagram output"></p>
+</li>
+</ol>
+<p><a href="#BM_(overlap%20graph)%2Fi">Overlap graph</a>s used for <a href="#BM_(genome)%2Fi">genome</a> <a href="#BM_(assembly%7Cassemble)%2Fi">assembly</a>.</p>
+</li>
+<li>
+<p><a name="BM_(de%20Bruijn%20graph)%2Fi"></a><strong>de Bruijn graph</strong> - A special graph representing the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s making up a string. Specifically, the graph is built in 2 steps:</p>
 <ol>
 <li>
 <p>Each <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> is represented as an edge connecting 2 nodes. The ...</p>
@@ -4277,7 +4280,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_cfa519e3b0b53ea602d7a16720f54ea9c85f3f08.svg" alt="Kroki diagram output"></p>
 </li>
 </ol>
-<p><a href="#BM_(De%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s are used for efficient <a href="#BM_(genome)%2Fi">genome</a> <a href="#BM_(assembly%7Cassemble)%2Fi">assembly</a>. They were originally invented to solve the <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> string problem.</p>
+<p><a href="#BM_(de%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s are used for <a href="#BM_(genome)%2Fi">genome</a> <a href="#BM_(assembly%7Cassemble)%2Fi">assembly</a>. It's much faster to <a href="#BM_(assembly%7Cassemble)%2Fi">assemble</a> a <a href="#BM_(genome)%2Fi">genome</a> from a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> than it is to from an <a href="#BM_(overlap%20graph)%2Fi">overlap graph</a>s.</p>
+<p><a href="#BM_(de%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s were originally invented to solve the <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> string problem.</p>
 </li>
 <li>
 <p><a name="BM_(k-universal%7C%5Cd%2B-universal)%2Fi"></a><strong>k-universal</strong> - For some alphabet and k, a string is considered <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> if it contains every <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary) and k=3, a <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">3-universal</a> string would be 0001110100 because it contains every <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">3-mer</a> exactly once:</p>
@@ -4295,7 +4299,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
 <p>This is effectively <a href="#BM_(assembly%7Cassemble)%2Fi">assembly</a>. There are a set of <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s and they're being stitched together to form a larger string. The only difference is that the elements aren't nucleotides.</p>
 </div>
-<p><a href="#BM_(De%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s were invented in an effort to construct <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> strings for arbitrary values of k. For example, given the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s in the example above (000, 001, ...), a <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> string can be found by constructing a <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> from the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s and finding a <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> in that graph.</p>
+<p><a href="#BM_(de%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s were invented in an effort to construct <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> strings for arbitrary values of k. For example, given the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s in the example above (000, 001, ...), a <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> string can be found by constructing a <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> from the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s and finding a <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a> in that graph.</p>
 <p><img src="svgbob_f05ffef51444183bdc007d88010e832876608ed7.svg" alt="Kroki diagram output"></p>
 <p>There are multiple <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>s in the graph, meaning that there are multiple <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">3-universal</a> strings:</p>
 <ul>
@@ -4305,7 +4309,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>1100010111</li>
 <li>...</li>
 </ul>
-<p>For larger values of k (e.g. 20), finding <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> strings would be too computationally intensive without <a href="#BM_(De%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s and <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>s.</p>
+<p>For larger values of k (e.g. 20), finding <a href="#BM_(k-universal%7C%5Cd%2B-universal)%2Fi">k-universal</a> strings would be too computationally intensive without <a href="#BM_(de%20Bruijn%20graph)%2Fi">De Bruijn graph</a>s and <a href="#BM_(Eulerian%20cycle)%2Fi">Eulerian cycle</a>s.</p>
 </li>
 <li>
 <p><a name="BM_(coverage)_SEQ%2Fi"></a><strong>coverage</strong> - Given a substring from some larger <a href="#BM_(sequence)%2Fi">sequence</a> that was reconstructed from a set of <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s, the <a href="#BM_(coverage)_SEQ%2Fi">coverage</a> of that substring is the number of <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s used to construct it. The substring length is typically 1: the <a href="#BM_(coverage)_SEQ%2Fi">coverage</a> for each position of the <a href="#BM_(sequence)%2Fi">sequence</a>.</p>
@@ -4314,7 +4318,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>
 <p><a name="BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi"></a><strong>read breaking</strong> - The concept of taking multiple <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s and breaking them up into smaller <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s.</p>
 <p><img src="svgbob_d9e103b16312cfe660d19df9305a9361ac1241ac.svg" alt="Kroki diagram output"></p>
-<p>When <a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">read breaking</a>, smaller <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s result in better <a href="#BM_(coverage)_SEQ%2Fi">coverage</a> but also make the <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> more tangled. The more tangled the <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BM_(sequence)%2Fi">sequence</a>.</p>
+<p>When <a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">read breaking</a>, smaller <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s result in better <a href="#BM_(coverage)_SEQ%2Fi">coverage</a> but also make the <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> more tangled. The more tangled the <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BM_(sequence)%2Fi">sequence</a>.</p>
 <p>In the example above, the average <a href="#BM_(coverage)_SEQ%2Fi">coverage</a>...</p>
 <ul>
 <li>for the left-hand side (original) is 2.1.</li>
@@ -4329,7 +4333,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>
 <p><a name="BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi"></a><strong>read-pair breaking</strong> - The concept of taking multiple <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>s and breaking them up into <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>s with a smaller k.</p>
 <p><img src="svgbob_eb8f1251b4e293a9662ade2c0a4452a7c7884f2f.svg" alt="Kroki diagram output"></p>
-<p>When <a href="#BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi">read-pair breaking</a>, a smaller k results in better <a href="#BM_(coverage)_SEQ%2Fi">coverage</a> but also make the <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> more tangled. The more tangled the <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BM_(sequence)%2Fi">sequence</a>.</p>
+<p>When <a href="#BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi">read-pair breaking</a>, a smaller k results in better <a href="#BM_(coverage)_SEQ%2Fi">coverage</a> but also make the <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> more tangled. The more tangled the <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a> is, the harder it is to infer the full <a href="#BM_(sequence)%2Fi">sequence</a>.</p>
 <p>In the example above, the average <a href="#BM_(coverage)_SEQ%2Fi">coverage</a>...</p>
 <ul>
 <li>for the left-hand side (original) is 1.6.</li>
@@ -4347,7 +4351,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>be a cycle where each node has an <a href="#BM_(indegree)%2Fi">indegree</a> and <a href="#BM_(outdegree)%2Fi">outdegree</a> of 1.</li>
 <li>start and end at a node that doesn't have an <a href="#BM_(indegree)%2Fi">indegree</a> and <a href="#BM_(outdegree)%2Fi">outdegree</a> of 1.</li>
 </ul>
-<p>For example, in the following <a href="#BM_(De%20Bruijn%20graph)%2Fi">de Bruijn graph</a>, the <a href="#BM_(contig)s%3F%5Cb%2Fi">contig</a>s are: GTGG, GGT, and GGT:</p>
+<p>For example, in the following <a href="#BM_(de%20Bruijn%20graph)%2Fi">de Bruijn graph</a>, the <a href="#BM_(contig)s%3F%5Cb%2Fi">contig</a>s are: GTGG, GGT, and GGT:</p>
 <p><img src="svgbob_a90b2398b01bdc55d3409e08bb813c748d346635.svg" alt="Kroki diagram output"></p>
 <p>Assemblies often have gaps due to...</p>
 <ul>

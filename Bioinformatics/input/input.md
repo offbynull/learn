@@ -15,7 +15,7 @@ Bioinformatics is the science of transforming and processing biological data to 
 
 `{bm} /(Algorithms\/K-mer)_TOPIC/`
 
-A k-mer is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+A k-mer is a subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence GAAATC, the following k-mer's exist:
 
 | k | k-mers          |
 |---|-----------------|
@@ -425,7 +425,7 @@ CACGGGTGGTTTTGGGGGCCCCCC
 Algorithms/K-mer_TOPIC
 ```
 
-A motif is a pattern that matches many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
+A motif is a pattern that matches many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to ATTGC, ATTCC, TTTGC, and TTTCC.
 
 A common scenario involving motifs is to search through a set of DNA sequences for an unknown motif: Given a set of sequences, it's suspected that each sequence contains a k-mer that matches some motif. But, that motif isn't known beforehand. Both the k-mers and the motif they match need to be found.
 
@@ -1244,7 +1244,7 @@ Assembly has many practical complications that prevent full genome reconstructio
  * all overlap regions are of the same length,
  * and each read_SEQ in the list overlaps with the next read_SEQ in the list
 
-... , stitch them together. For example, in the read_SEQ list `[GAAA, AAAT, AATC]` each read_SEQ overlaps the subsequent read_SEQ by an offset of 1: `GAAATC`.
+... , stitch them together. For example, in the read_SEQ list [GAAA, AAAT, AATC] each read_SEQ overlaps the subsequent read_SEQ by an offset of 1: GAAATC.
 
 |          | 0 | 1 | 2 | 3 | 4 | 5 |
 |----------|---|---|---|---|---|---|
@@ -1285,7 +1285,7 @@ Algorithms/Assembly/Stitch Reads_TOPIC
  * all overlap regions are of the same length,
  * and each read-pair in the list overlaps with the next read-pair in the list
 
-... , stitch them together. For example, in the read-pair list `[ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC]` each read-pair overlaps the subsequent read-pair by an offset of 1: `ATGTTACCGTTC`.
+... , stitch them together. For example, in the read-pair list [ATG---CCG, TGT---CGT, GTT---GTT, TTA---TTC] each read-pair overlaps the subsequent read-pair by an offset of 1: ATGTTACCGTTC.
 
 |          | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11|
 |----------|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -1304,10 +1304,10 @@ Overlapping read-pairs are stitched by taking the first read-pair and iterating 
  * the suffix from each remaining read-pair's head k is appended to the first read-pair's head k.
  * the suffix from each remaining read-pair's tail k is appended to the first read-pair's tail k.
 
-For example, to stitch `[ATG---CCG, TGT---CGT]`, ...
+For example, to stitch [ATG---CCG, TGT---CGT], ...
 
- 1. stitch the heads as if they were read_SEQs: `[ATG, TGT]` results in `ATGT`,
- 2. stitch the tails as if they were read_SEQs: `[CCG, CGT]` results in `CCGT`.
+ 1. stitch the heads as if they were read_SEQs: [ATG, TGT] results in ATGT,
+ 2. stitch the tails as if they were read_SEQs: [CCG, CGT] results in CCGT.
 
 |          | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 |----------|---|---|---|---|---|---|---|---|---|---|
@@ -1509,68 +1509,11 @@ TGC 29
 TGT 1
 ```
 
-### Assemble Fragments
+### Overlap Graph
 
-`{bm} /(Algorithms\/Assembly\/Assemble Fragments)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Overlap Graph)_TOPIC/`
 
-```{prereq}
-Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC
-```
-
-**WHAT**: Given the fragment_SEQs for a single-strand of DNA, make guesses as to what that single-strand of DNA was by stitching overlapping fragment_SEQs together. For example, the following 3-mer read_SEQs: \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\] may have come from either TTACTTAGTT or TTAGTTACTT.
-
-```{svgbob}
-                                                            +-------------+                                 
-                                                            | +---------+ |                                 
-                                                            | | +-----+ | |                                 
-                                                            | | | +-+ | | |                                 
-       T T A C T T A G T T                                  | | | | | | | |                                 
-       ^ ^ ^ ^ ^ ^ ^ ^                                      | | | | v v v v                                 
-       | | | | | | | |                                      | | | | T T A G T T A C T T                     
-       | | | | | | | +--------------+                       | | | |         ^ ^ ^ ^                         
-       | | | | | | +-----------+    |                       | | | |         | | | |                         
-       | | | | | +--------+    |    |                       | | | |   +-----+ | | |                         
- +-----+ | | | +-----+    |    |    |                       | | | |   |    +--+ | |                         
- |    +--+ | |       |    |    |    |                       | | | |   |    |    | +--+                      
- |    |    | +--+    |    |    |    |                       | | | |   |    |    |    |                      
- |    |    |    |    |    |    |    |                       | | | |   TTA  TAC  ACT  CTT  TTA  TAG  AGT  GTT
- TTA  TAC  ACT  CTT  TTA  TAG  AGT  GTT                     | | | |                       |    |    │    |   
-                                                            | | | +-----------------------+    |    |    |  
-                                                            | | +------------------------------+    |    |  
-                                                            | +-------------------------------------+    |  
-                                                            +--------------------------------------------+  
-```
-
-**WHY**: Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping fragment_SEQs for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:
-
- * Fragment_SEQs are for both strands (strand of double-stranded DNA a fragment_SEQ's from isn't known).
- * Fragment_SEQs may be missing (sequencer didn't capture it).
- * Fragment_SEQs may have incorrect occurrence counts (sequencer captured it too many/few times).
- * Fragment_SEQs may have errors (sequencer produced sequencing errors).
- * Fragment_SEQs may be stitch-able in more than one way (multiple guesses).
- * Fragment_SEQs may take a long time to stitch (computationally intensive).
-
-Never the less, in an ideal world where most of these problems don't exist, the child sections below detail various ways to guess the single-strand of DNA that a set of fragment_SEQs came from. Each child section assumes that the fragment_SEQs it's operating on ...
-
- * are from a single-strand of DNA,
- * have correct occurrence counts (no missing or extra),
- * and contain no errors.
-
-```{note}
-Algorithms/Assembly/Fragment Occurrence in Genome Probability_TOPIC may help with filtering errors and finding occurrence counts, but it's probabilistic so there's a decent chance that it'll miss some errors / some fragment_SEQs will get wrong occurrence counts.
-```
-
-```{note}
-Although the complications discussed above make it impossible to get the original genome in its entirety, it's still possible to pull out large parts of the original genome. This is discussed in Algorithms/Assembly/Assemble Contigs_TOPIC.
-```
-
-#### Overlap Graph Algorithm
-
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm)_TOPIC/`
-
-**ALGORITHM**:
-
-Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
+**WHAT**: Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
 
   1. each node is a fragment_SEQ.
 
@@ -1584,18 +1527,18 @@ Given the fragment_SEQs for a single strand of DNA, create a directed graph wher
      * destination node has the overlap in its prefix.
 
      ```{svgbob}
-     +----------------------------------------------------------------+
+     .----------------------------------------------------------------.
      |                                                                |
      |                                                                |
-     +-> TTA --> TAG --> AGT --> GTT --> TTA --> TAC --> ACT --> CTT -+
+     `-> TTA --> TAG --> AGT --> GTT --> TTA --> TAC --> ACT --> CTT -'
           ^                       |       ^                       |
           |                       |       |                       |
-          +-----------------------+       +-----------------------+
+          `-----------------------'       `-----------------------'
      ```
 
-This directed graph is called an overlap graph because the edges show the different overlap candidates between fragment_SEQs.
+This is called an overlap graph.
 
-An overlap graph shows the different ways that fragment_SEQs can be stitched together. A path in in an overlay graph that touches each node exactly once is one possibility for the original single stranded DNA that the fragment_SEQs came from. For example...
+**WHY**: An overlap graph shows the different ways that fragment_SEQs can be stitched together. A path in in an overlap graph that touches each node exactly once is one possibility for the original single stranded DNA that the fragment_SEQs came from. For example...
 
   * \[TTA, TAG, AGT, GTT, TTA, TAC, ACT, CTT\] ⟶ TTAGTTACTT
   * \[TTA, TAC, ACT, CTT, TTA, TAG, AGT, GTT\] ⟶ TTACTTAGTT
@@ -1609,9 +1552,26 @@ These paths are referred to as Hamiltonian paths.
 Notice that the example graph is circular. If the organism genome itself were also circular (e.g. bacterial genome), the genome guesses above are all actually the same because circular genomes don't have a beginning / end.
 ```
 
-##### Graph Construction
+**ALGORITHM**:
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Graph Construction)_TOPIC/`
+Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping fragment_SEQs for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:
+
+ * Fragment_SEQs are for both strands (strand of double-stranded DNA a fragment_SEQ's from isn't known).
+ * Fragment_SEQs may be missing (sequencer didn't capture it).
+ * Fragment_SEQs may have incorrect occurrence counts (sequencer captured it too many/few times).
+ * Fragment_SEQs may have errors (sequencer produced sequencing errors).
+ * Fragment_SEQs may be stitch-able in more than one way (multiple guesses).
+ * Fragment_SEQs may take a long time to stitch (computationally intensive).
+
+Never the less, in an ideal world where most of these problems don't exist, an overlap graph is a good way to guess the single-strand of DNA that a set of fragment_SEQs came from. An overlap graph assumes that the fragment_SEQs it's operating on ...
+
+ * are from a single-strand of DNA,
+ * have correct occurrence counts (no missing or extra),
+ * and contain no errors.
+
+```{note}
+Although the complications discussed above make it impossible to get the original genome in its entirety, it's still possible to pull out large parts of the original genome. This is discussed in Algorithms/Assembly/Find Contigs_TOPIC.
+```
 
 To construct an overlap graph, create an edge between fragment_SEQs that have an overlap.
 
@@ -1642,17 +1602,11 @@ ACT
 CTT
 ```
 
-##### Hamiltonian Path
+A path that touches each node of an graph exactly once is a Hamiltonian path. Each  The Hamiltonian path in an overlap graph is a guess as to the original single strand of DNA that the fragment_SEQs for the graph came from.
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/Overlap Graph Algorithm\/Hamiltonian Path)_TOPIC/`
+The code shown below recursively walks all paths. Of all the paths it walks over, the ones that walk every node of the graph exactly once are selected.
 
-```{prereq}
-Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm\/Graph Construction_TOPIC
-```
-
-Given a graph, a path that touches each node exactly once is a Hamiltonian path. The code shown below goes through every node and recursively walks all paths. Of all the paths it finds, the ones that walk every node of the graph exactly once are selected.
-
-This algorithm will likely fall over on non-trivial overlay graphs. Even finding one Hamiltonian path is computationally intensive.
+This algorithm will likely fall over on non-trivial overlap graphs. Even finding one Hamiltonian path is computationally intensive.
 
 ```{output}
 ch3_code/src/WalkAllHamiltonianPaths.py
@@ -1673,63 +1627,80 @@ ACT
 CTT
 ```
 
-#### De Bruijn Graph Algorithm
+### De Bruijn Graph
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/De Bruijn Graph)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Infer Genome\/Overlap Graph Algorithm_TOPIC
+Algorithms/Assembly/Overlap Graph_TOPIC
 ```
 
-**ALGORITHM**:
-
-Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
+**WHAT**: Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
 
   1. each fragment_SEQ is represented as an edge connecting 2 nodes, where the ...
      * source node is the prefix of the fragment_SEQ.
      * destination node is the suffix of the fragment_SEQ.
 
      ```{svgbob}
-         TTA             TAT             ATT
-     TT -----> TA    TA -----> AT    AT -----> TT 
-
          TTC             TCT             CTT
      TT -----> TC    TC -----> CT    CT -----> TT 
+
+         TTA             TAT             ATT
+     TT -----> TA    TA -----> AT    AT -----> TT 
      ```
 
   2. duplicate nodes are merged into a single node.
 
      ```{svgbob}
                   CTT
-     +--------------------------+
+     .--------------------------.
      |                          |
      |     TTC       TCT        |
-     |   +-----> TC -----> CT --+
+     |   +-----> TC -----> CT --'
      v  /
      TT 
      ^  \
-     |   +-----> TA -----> AT --+
+     |   +-----> TA -----> AT --.
      |     TTA       TAT        |
      |                          |
-     +--------------------------+
+     `--------------------------'
                   ATT
      ```
 
-This graph is called a de Bruijn graph: a balanced_GRAPH and strongly connected graph where the fragment_SEQs are represented as edges. De Bruijn graphs were originally invented to solve the k-universal string problem, which is effectively the same concept as assembly.
+This graph is called a de Bruijn graph: a balanced_GRAPH and strongly connected graph where the fragment_SEQs are represented as edges.
 
 ```{note}
-Depending on the fragment_SEQs, the resulting graph may not be totally balanced_GRAPH. A technique for dealing with this is detailed in the graph construction child section. For now, just assume that the graph will be balanced_GRAPH.
+The example graph above is balanced_GRAPH. But, depending on the fragment_SEQs used, the graph may not be totally balanced_GRAPH. A technique for dealing with this is detailed below. For now, just assume that the graph will be balanced_GRAPH.
 ```
 
-Similar to an overlay graph, a de Bruijn graph shows the different ways that fragment_SEQs can be stitched together. However, unlike an overlay graph, the fragment_SEQs are represented as edges rather than nodes. Where in an overlay graph you need to find paths that touch every node exactly once (Hamiltonian path), in a de Bruijn graph you need to find paths that walk over every edge exactly once.
+**WHY**:  Similar to an overlap graph, a de Bruijn graph shows the different ways that fragment_SEQs can be stitched together. However, unlike an overlap graph, the fragment_SEQs are represented as edges rather than nodes. Where in an overlap graph you need to find paths that touch every node exactly once (Hamiltonian path), in a de Bruijn graph you need to find paths that walk over every edge exactly once (Eulerian cycle).
 
-A path in a de Bruijn graph that walks over each edge exactly once is one possibility for the original single stranded DNA that the fragment_SEQs came from. Such a path is called a Eulerian cycle: It starts and ends at the same node (a cycle), and walks over every edge in the graph.
+A path in a de Bruijn graph that walks over each edge exactly once is one possibility for the original single stranded DNA that the fragment_SEQs came from: it starts and ends at the same node (a cycle), and walks over every edge in the graph.
 
-In contrast to finding a Hamiltonian path in an overlay graph, it's much faster to find an Eulerian cycle in an de Bruijn graph.
+In contrast to finding a Hamiltonian path in an overlap graph, it's much faster to find an Eulerian cycle in an de Bruijn graph.
 
-##### Graph Construction
+De Bruijn graphs were originally invented to solve the k-universal string problem, which is effectively the same concept as assembly.
 
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Graph Construction)_TOPIC/`
+**ALGORITHM**:
+
+Sequencers produce fragment_SEQs, but fragment_SEQs by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping fragment_SEQs for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:
+
+ * Fragment_SEQs are for both strands (strand of double-stranded DNA a fragment_SEQ's from isn't known).
+ * Fragment_SEQs may be missing (sequencer didn't capture it).
+ * Fragment_SEQs may have incorrect occurrence counts (sequencer captured it too many/few times).
+ * Fragment_SEQs may have errors (sequencer produced sequencing errors).
+ * Fragment_SEQs may be stitch-able in more than one way (multiple guesses).
+ * Fragment_SEQs may take a long time to stitch (computationally intensive).
+
+Never the less, in an ideal world where most of these problems don't exist, an de Bruijn graph is a good way to guess the single-strand of DNA that a set of fragment_SEQs came from. A de Bruijn graph assumes that the fragment_SEQs it's operating on ...
+
+ * are from a single-strand of DNA,
+ * have correct occurrence counts (no missing or extra),
+ * and contain no errors.
+
+```{note}
+Although the complications discussed above make it impossible to get the original genome in its entirety, it's still possible to pull out large parts of the original genome. This is discussed in Algorithms/Assembly/Find Contigs_TOPIC.
+```
 
 To construct a de Bruijn graph, add an edge for each fragment_SEQ, creating missing nodes as required.
 
@@ -1773,16 +1744,6 @@ ACCC
 CCCT
 ```
 
-In the graph above, an artificial edge is inserted between CCT and TTA to create a balanced graph. With this balanced graph, a path that walks all edges (fragment_SEQs) can found by finding the Eulerian cycle from the original root node (TTA). The artificial edge will show up at the end of the Eulerian cycle (CCT to TTA), and as such can be dropped from the path.
-
-##### Eulerian Cycle
-
-`{bm} /(Algorithms\/Assembly\/Infer Genome\/De Bruijn Graph Algorithm\/Eulerian Cycle)_TOPIC/`
-
-```{prereq}
-Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm/Graph Construction_TOPIC
-```
-
 Given a de Bruijn graph (strongly connected and balanced_GRAPH), you can find a Eulerian cycle by randomly walking unexplored edges in the graph. Pick a starting node and randomly walk edges until you end up back at that same node, ignoring all edges that were previously walked over. Of the nodes that were walked over, pick one that still has unexplored edges and repeat the process: Walk edges from that node until you end up back at that same node, ignoring edges all edges that were previously walked over (including those in the past iteration). Continue this until you run out of unexplored edges.
 
 ```{output}
@@ -1802,19 +1763,126 @@ TCT
 CTT
 ```
 
-This algorithm picks one Eulerian cycle in a graph. In the above graph, there are two. In other real-world applications, there likely will be too many Eulerian cycles to enumerate all of them.
+Note that the graph above is naturally balanced_GRAPH (no artificial edges have been added in to make it balanced_GRAPH). If the graph you're finding a Eulerian cycle on has been artificially balanced_GRAPH, simply start the search for a Eulerian cycle from one of the original head node. The artificial edge will show up at the end of the Eulerian cycle, and as such can be dropped from the path.
+
+```{svgbob}
+TTA --> TAC --> ACC --> CCC --> CCT
+ ^                               |
+ |                               |
+ `-------------------------------'
+            "artificial edge"
+
+
+"Path = [TTA, TAC, ACC, CCC, CCT, TTA]"
+
+"* Last path element must be dropped (TTA)"
+```
+
+This algorithm picks one Eulerian cycle in a graph. Most graph have multiple Eulerian cycles, likely too many to enumerate all of them.
 
 ```{note}
 See the section on k-universal strings to see a real-world application of Eulerian graphs. For something like k=20, good luck trying to enumerate all Eulerian cycles.
 ```
 
-### Detect Error Branch
+### Find Bubbles
 
-`{bm} /(Algorithms\/Assembly\/Detect Error Branch)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Find Bubbles)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Infer Genome/Overlap Graph Algorithm_TOPIC
-Algorithms/Assembly/Infer Genome/De Bruijn Graph Algorithm_TOPIC
+Algorithms/Assembly/Overlap Graph_TOPIC
+Algorithms/Assembly/De Bruijn Graph_TOPIC
+```
+
+**WHAT**: Given a set of a fragment_SEQs that have been broken (read breaking / read-pair breaking) to length k, any ...
+
+ * forked prefixes,
+ * forked suffixes,
+ * or bubbles
+
+... of length ...
+
+ * k in the overlap graph,
+ * or k-1 in the de Bruijn graph
+
+... may have been from a sequencing error.
+
+```{svgbob}
+    "Forked prefix"                   "Forked suffix"                "Bubble"
+                                                                             
+x --> x --> x --.               .--> x --> x --> x           .--> x --> x --> x --.      
+                |               |                            |                    |      
+                +--> x      x --+                        x --+                    +--> x
+                |               |                            |                    |      
+x --> x --> x --'               `--> x --> x --> x           `--> x --> x --> x--'      
+```
+
+**WHY**: When fragment_SEQs returned by a sequencer get broken (read breaking / read-pair breaking), any fragment_SEQs containing sequencing errors may show up in the graph as one of 3 structures: forked prefix, forked suffix, or bubble. As such, it may be possible to detect these structures and flatten them (by removing bad branches) to get a cleaner graph.
+
+For example, imagine the read_SEQ ATTGG. Read breaking it into 2-mer read_SEQs results in: \[AT, TT, TG, GG\]. 
+
+```{svgbob}
+AT --> TT --> TG --> GG 
+```
+
+Now, imagine that the sequencer captured that same part of the genome again, but this time the read_SEQ contains a sequencing error. Depending on where the incorrect nucleotide is, one of the 3 structures will get introduced into the graph:
+
+ * ATTGG vs A**C**TGG (within first 2 elements)
+
+   ```{svgbob}
+   "ATTGG = [AT, TT, TG, GG]"
+   "ACTGG = [AC, CT, TG, GG]"
+
+   AT --> TT --.
+               |
+               +--> TG --> GG 
+               |
+   AC --> CT --'
+
+   "This is a forked prefix"
+   ```
+
+ * ATTGG vs ATT**C**G (within last 2 elements)
+
+   ```{svgbob}
+   "ATTGG breaks into [AT, TT, TG, GG]"
+   "ATTCG breaks into [AT, TT, TC, CG]"
+
+               .--> TG --> GG
+               |
+   AT --> TT --+
+               |
+               `--> TC --> CG
+
+   "This is a forked suffix"
+   ```
+
+ * ATTGG vs AT**C**GG (sandwiched after first 2 elements and before last 2 elements)
+
+   ```{svgbob}
+   "ATTGG = [AT, TT, TG, GG]"
+   "ATCGG = [AT, TC, CG, GG]"
+
+        .--> TC --> CG --.
+        |                |
+   AT --+                +--> GG 
+        |                |
+        `--> TT --> TG --'
+    
+   "This is a bubble"
+   ```
+
+Note that just because these structures exist doesn't mean that the fragment_SEQs they represent definitively have a sequencing errors. These structures could have been caused by other problems / may not be problems at all:
+
+ * Bubbles may be caused by repetitive regions of DNA.
+
+   Fragment_SEQs from different parts of the genome that are the same except for a few positions will show up as bubbles.
+
+ * Bubbles / forks may be caused when sequencing double-stranded DNA.
+
+   When both strands of DNA get tangled into the same graph, it's possible that fragment_SEQs from different strands may form bubbles or forks.
+
+```{note}
+The Pevzner book says that bubble removal is a common feature in modern assemblers. My assumption is that, before pulling out contigs (described later on), basic probabilities are used to try and suss out if a branch in a bubble / prefix fork / suffix fork is bad and remove it if it is. This (hopefully) results in longer contigs.
 ```
 
 **ALGORITHM**:
@@ -1828,42 +1896,32 @@ python
 ```{ch3}
 FindGraphAnomalies
 reads
-2096
-ATTGGACAATGTCCGCAT
-ATCGGAC
-30
-7
+14
+ATAGGAC 1
+ATTGGAC 55
+TTGGACA 30
+TGGACAA 30
+GGACAAT 30
+GACAATC 30
+ACAATCT 30
+ACAGTCT 1
+CAATCTC 30
+AATCTCG 30
+ATCTCGG 30
+TCTCGGG 30
+CTCGGGC 55
+CTCGTGC 1
 4
 ```
 
-```{ch3}
-FindGraphAnomalies
-reads
-2096
-ATTGGACAATGTCCGCAT
-ACAGTGT
-30
-7
-4
-```
+### Find Contigs
 
-```{ch3}
-FindGraphAnomalies
-reads
-2096
-ATTGGACAATGTCCGCAT
-ATTGAAC
-30
-7
-4
-```
-
-### Assemble Contigs
-
-`{bm} /(Algorithms\/Assembly\/Assemble Contigs)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Find Contigs)_TOPIC/`
 
 ```{prereq}
-Algorithms/Assembly/Assemble Fragments_TOPIC
+Algorithms/Assembly/Overlap Graph_TOPIC
+Algorithms/Assembly/De Bruijn Graph_TOPIC
+Algorithms/Assembly/Find Bubbles_TOPIC
 ```
 
 TODO: CONTINUE HERE
@@ -2243,7 +2301,7 @@ DnaABoxCandidateFinder
 
 A transcription factor / regulatory protein is an enzyme that influences the rate of gene expression for some set of genes. As the saturation of a transcription factor changes, so does the rate of gene expression for the set of genes that it influences.
 
-Transcription factors bind to DNA near the genes they influence: a transcription factor binding site is located in a gene's upstream region and the sequence at that location is a fuzzy nucleotide sequence of length 8 to 12 called a regulatory motif. The simplest way to think of a regulatory motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]CCCTA` may match to `ATTGCCCTA`, `ATTCCCCTA`, `TTTGCCCTA`, and `TTTCCCCTA`. The regex itself is the motif, while the sequences being matched are motif members.
+Transcription factors bind to DNA near the genes they influence: a transcription factor binding site is located in a gene's upstream region and the sequence at that location is a fuzzy nucleotide sequence of length 8 to 12 called a regulatory motif. The simplest way to think of a regulatory motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]CCCTA` may match to ATTGCCCTA, ATTCCCCTA, TTTGCCCTA, and TTTCCCCTA. The regex itself is the motif, while the sequences being matched are motif members.
 
 ```{svgbob}
   |- - - - - - - - - - - - - - - - gene upstream - - - - - - - - - - - - - - - - - -|- - - - - - - - gene - - - - - -|
@@ -2321,7 +2379,7 @@ PracticalMotifFindingExample
 
 # Terminology
 
- * `{bm} k-mer/(\d+-mer|k-mer|kmer)/i` - A subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence `GAAATC`, the following k-mer's exist:
+ * `{bm} k-mer/(\d+-mer|k-mer|kmer)/i` - A subsequence of length k within some larger biological sequence (e.g. DNA or amino acid chain). For example, in the DNA sequence GAAATC, the following k-mer's exist:
 
    | k | k-mers          |
    |---|-----------------|
@@ -2334,7 +2392,7 @@ PracticalMotifFindingExample
 
  * `{bm} kd-mer/(\(\d+,\s*\d+\)-mer|kd-mer|kdmer|\(k,\s*d\)-mer)/i` - A subsequence of length 2k + d within some larger biological sequence (e.g. DNA or amino acid chain) where the first k elements and the last k elements are known but the d elements in between isn't known.
  
-   When identifying a kd-mer with a specific k and d, the proper syntax is (k, d)-mer. For example, (1, 2)-mer represents a kd-mer with k=1 and d=2. In the DNA sequence `GAAATC`, the following (1, 2)-mer's exist: `G--A`, `A--T`, `A--C`.
+   When identifying a kd-mer with a specific k and d, the proper syntax is (k, d)-mer. For example, (1, 2)-mer represents a kd-mer with k=1 and d=2. In the DNA sequence GAAATC, the following (1, 2)-mer's exist: `G--A`, `A--T`, `A--C`.
 
    See read-pair.
 
@@ -2554,9 +2612,9 @@ PracticalMotifFindingExample
 
  * `{bm} transcription factor` - A regulatory protein that controls the rate of transcription for some gene that it has influence over (the copying of DNA to mRNA). The protein binds to a specific sequence in the gene's upstream region.
 
- * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC`.
+ * `{bm} motif` - A pattern that matches against many different k-mers, where those matched k-mers have some shared biological significance. The pattern matches a fixed k where each position may have alternate forms. The simplest way to think of a motif is a regex pattern without quantifiers. For example, the regex `[AT]TT[GC]C` may match to ATTGC, ATTCC, TTTGC, and TTTCC.
 
- * `{bm} motif member` `{bm} /\b(member)_MOTIF/i` - A specific nucleotide sequence that matches a motif. For example, given a motif represented by the regex `[AT]TT[GC]C`, the sequences `ATTGC`, `ATTCC`, `TTTGC`, and `TTTCC` would be its member_MOTIFs.
+ * `{bm} motif member` `{bm} /\b(member)_MOTIF/i` - A specific nucleotide sequence that matches a motif. For example, given a motif represented by the regex `[AT]TT[GC]C`, the sequences ATTGC, ATTCC, TTTGC, and TTTCC would be its member_MOTIFs.
 
  * `{bm} motif matrix/(motif matrix|motif matrices)/i` - A set of k-mers stacked on top of each other in a matrix, where the k-mers are either...
 
@@ -3001,7 +3059,32 @@ PracticalMotifFindingExample
 
    `{bm-error} Just use the words balanced graph/(balanced_GRAPH graph)/i`
 
- * `{bm} De Bruijn graph` - A special graph representing the k-mers making up a string. Specifically, the graph is built in 2 steps:
+ * `{bm} overlap graph` - A graph representing the k-mers making up a string. Specifically, the graph is built in 2 steps:
+ 
+   1. Each node is a fragment_SEQ.
+ 
+      ```{svgbob}
+      TTA     TAG     AGT     GTT 
+      TAC     TTA     CTT     ACT 
+      ```
+ 
+   2. Each edge is between overlapping fragment_SEQs (nodes), where the ...
+      * source node has the overlap in its suffix .
+      * destination node has the overlap in its prefix.
+ 
+      ```{svgbob}
+      +----------------------------------------------------------------+
+      |                                                                |
+      |                                                                |
+      +-> TTA --> TAG --> AGT --> GTT --> TTA --> TAC --> ACT --> CTT -+
+           ^                       |       ^                       |
+           |                       |       |                       |
+           +-----------------------+       +-----------------------+
+      ```
+
+   Overlap graphs used for genome assembly.
+
+ * `{bm} de Bruijn graph` - A special graph representing the k-mers making up a string. Specifically, the graph is built in 2 steps:
  
    1. Each k-mer is represented as an edge connecting 2 nodes. The ...
 
@@ -3046,7 +3129,9 @@ PracticalMotifFindingExample
                +------+
       ```
 
-   De Bruijn graphs are used for efficient genome assembly. They were originally invented to solve the k-universal string problem.
+   De Bruijn graphs are used for genome assembly. It's much faster to assemble a genome from a de Bruijn graph than it is to from an overlap graphs.
+   
+   De Bruijn graphs were originally invented to solve the k-universal string problem.
 
  * `{bm} k-universal/(k-universal|\d+-universal)/i` - For some alphabet and k, a string is considered k-universal if it contains every k-mer for that alphabet exactly once. For example, for an alphabet containing only 0 and 1 (binary) and k=3, a 3-universal string would be 0001110100 because it contains every 3-mer exactly once:
 
