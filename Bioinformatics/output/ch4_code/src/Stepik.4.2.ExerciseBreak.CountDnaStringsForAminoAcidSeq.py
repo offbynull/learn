@@ -1,6 +1,3 @@
-import operator
-from functools import reduce
-
 lookup = {
     'AAA': 'K',
     'AAC': 'N',
