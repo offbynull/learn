@@ -3342,7 +3342,7 @@ PracticalMotifFindingExample
 
  * `{bm} amino acid` - The building blocks of peptides / proteins, similar to how nucleotides are the building blocks of DNA.
 
-   | 1 Letter Code | 3 Letter Code | Amino acid                  |
+   | 1 Letter Code | 3 Letter Code | Amino Acid                  |
    |---------------|---------------|-----------------------------|
    | A             | Ala           | Alanine                     |
    | C             | Cys           | Cysteine                    |
@@ -3371,13 +3371,56 @@ PracticalMotifFindingExample
 
  * `{bm} central dogma of molecular biology` - The overall concept of transcription and translation: Instructions for making a protein are copied from DNA to RNA, then RNA feeds into the ribosome to make that protein (DNA → RNA → Protein).
 
+   Most, not all, peptides are synthesized as described above. Non-ribosomal peptides are synthesized outside of the transcription and translation.
+
+ * `{bm} non-ribosomal peptide` `{bm} /\b(NRP)\b/i` - A peptide that was synthesized by a protein called NRP synthetase rather than synthesized by a ribosome. NRP synthethase builds peptides one amino acid at a time without relying on transcription or translation.
+
+   Non-ribosomal peptides may be cyclic. Common use-cases for non-ribosomal peptides:
+
+   * antibiotics
+   * anti-tumor agents
+   * immunosuppressors
+   * communication between bacteria (quorum sensing)
+
+ * `{bm} mass spectrometer/(mass spectrometer|mass spectrometry)/i` - A device that shatters molecules into pieces and weighs the resulting pieces (measured in daltons). Mass spectrometry can be used to sequence peptides by inferring the amino acid sequence from the collection of masses.
+
+ * `{bm} experimental spectrum` - Given a shattered molecule, a collection consisting of the each piece's mass as measured by a mass spectrometer. For example, given the peptide ACDEFG, the experimental spectrum may be...
+
+   * mass(A)
+   * mass(AC)
+   * mass(ACD)
+   * mass(ACDE)
+   * mass(ACDEF)
+
+   Experimental spectrum are the masses returned from an actual mass spectrometry experiment, while theoretical spectrum are all possible masses for a mass spectrometry experiment.
+
+ * `{bm} theoretical spectrum` - A collection consisting of all possible masses measurable by a mass spectrometer in addition to 0 and the mass of the entire molecule being measured. For example, given the peptide ACDEFG, the theoretical spectrum would be...
+
+   * mass() = 0
+   * mass(A)
+   * mass(AC)
+   * mass(ACD)
+   * mass(ACDE)
+   * mass(ACDEF)
+   * mass(ACDEFG)
+
+   Experimental spectrum are the masses returned from an actual mass spectrometry experiment, while theoretical spectrum are all possible masses for a mass spectrometry experiment.
+
+ * `{bm} ideal spectrum` - When the experimental spectrum matches the theoretical spectrum.
+
+ * `{bm} dalton` `{bm} /\b(Da)\b/i` - A unit of measurement used in physics and chemistry. 1 Dalton is approximately the mass of a single proton / neutron, derived by taking the mass of a carbon-12 atom and dividing it by 12.
+
  * `{bm} codon/(codon|genetic code)/i` - A sequence of 3 ribonucleotides that maps to an amino acid or a stop marker. During translation, the ribosome translates the RNA to a protein 3 ribonucleotides at a time:
 
    ```{note}
    The stop marker tells the ribosome to stop translating / the protein is complete.
    ```
 
-   | 1 Letter Code | 3 Letter Code | Amino acid                  | Codons                       |
+   ```{note}
+   The codons are listed as ribonucleotides (RNA). For nucleotides (DNA), swap U with T.
+   ```
+
+   | 1 Letter Code | 3 Letter Code | Amino Acid                  | Codons                       |
    |---------------|---------------|-----------------------------|------------------------------|
    | A             | Ala           | Alanine                     | GCA, GCC, GCG, GCU           |
    | C             | Cys           | Cysteine                    | UGC, UGU                     |
@@ -3408,40 +3451,23 @@ PracticalMotifFindingExample
  
    For example, given the the string ATGTTCCATTAA, the the following codon division are possible:
 
-    * Idx 0: ATG TTC CAT TAA
-    * Idx 1: TGT TCC ATT
-    * Idx 2: GTT CCA TTA
-    * RC Idx 0
-    * RC Idx 1
-    * RC Idx 2
+    | DNA          | Start Index | Discard Prefix | Codons             | Discard Suffix |
+    |--------------|-------------|----------------|--------------------|----------------|
+    | ATGTTCCATTAA | 0           |                | ATG, TTC, CAT, TAA |                |
+    | ATGTTCCATTAA | 1           | A              | TGT, TCC, ATT      | AA             |
+    | ATGTTCCATTAA | 2           | AT             | GTT, CCA, TTA      | A              |
+    | TTAATGGAACAT | 0           |                | TTA, ATG, GAA, CAT |                |
+    | TTAATGGAACAT | 1           | T              | TAA, TGG, AAC      | AT             |
+    | TTAATGGAACAT | 2           | TT             | AAT, GGA, ACA      | T              |
+    
+   ```{note}
+   TTAATGGAACAT is the reverse complement of ATGTTCCATTAA.
+   ```
 
+ * `{bm} encode/(encode|encoding|decode|decoding)/i` - When a DNA string or its reverse complement is made up of the codons required for an amino acid sequence. For example, ACAGTA encodes for the amino acid sequence...
 
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
-    TODO: FIX ABOVE
-
+    * Threonine-Valine
+    * Tyrosine-Cysteine (derived from reverse complement)
     
 
 
