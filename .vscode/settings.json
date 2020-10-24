@@ -90,6 +90,9 @@
         "indegree",
         "outdegree",
         "contig",
-        "contigs"
+        "contigs",
+        "ribonucleotides",
+        "aspartic",
+        "glutamic"
     ]
 }

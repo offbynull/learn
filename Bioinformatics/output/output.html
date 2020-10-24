@@ -80,7 +80,7 @@
 <a name="H_Algorithms"></a><h1>Algorithms</h1>
 <a name="H_K-mer"></a><h2>K-mer</h2>
 <p><a name="BM_(Algorithms%5C%2FK-mer)_TOPIC%2F"></a><strong></strong></p>
-<p>A <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> is a sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
+<p>A <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> is a sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or <a href="#BM_(amino%20acid)%2Fi">amino acid</a> chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
@@ -3400,7 +3400,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <a name="H_Terminology"></a><h1>Terminology</h1>
 <ul>
 <li>
-<p><a name="BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi"></a><strong>k-mer</strong> - A sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
+<p><a name="BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi"></a><strong>k-mer</strong> - A sub<a href="#BM_(sequence)%2Fi">sequence</a> of length k within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or <a href="#BM_(amino%20acid)%2Fi">amino acid</a> chain). For example, in the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s exist:</p>
 <table>
 <thead>
 <tr>
@@ -3437,7 +3437,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 </li>
 <li>
-<p><a name="BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi"></a><strong>kd-mer</strong> - A sub<a href="#BM_(sequence)%2Fi">sequence</a> of length 2k + d within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or amino acid chain) where the first k elements and the last k elements are known but the d elements in between isn't known.</p>
+<p><a name="BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi"></a><strong>kd-mer</strong> - A sub<a href="#BM_(sequence)%2Fi">sequence</a> of length 2k + d within some larger biological <a href="#BM_(sequence)%2Fi">sequence</a> (e.g. DNA or <a href="#BM_(amino%20acid)%2Fi">amino acid</a> chain) where the first k elements and the last k elements are known but the d elements in between isn't known.</p>
 <p>When identifying a <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">kd-mer</a> with a specific k and d, the proper syntax is <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(k, d)-mer</a>. For example, <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(1, 2)-mer</a> represents a <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">kd-mer</a> with k=1 and d=2. In the DNA <a href="#BM_(sequence)%2Fi">sequence</a> GAAATC, the following <a href="#BM_(%5C(%5Cd%2B%2C%5Cs*%5Cd%2B%5C)-mer%7Ckd-mer%7Ckdmer%7C%5C(k%2C%5Cs*d%5C)-mer)%2Fi">(1, 2)-mer</a>'s exist: <code>G--A</code>, <code>A--T</code>, <code>A--C</code>.</p>
 <p>See <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a>.</p>
 </li>
@@ -3975,7 +3975,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </li>
 <li>
 <p><a name="BM_(%5Cblogo%7Csequence%20logo)%2Fi"></a><strong>sequence logo</strong> - A graphical representation of how conserved a <a href="#BM_(sequence)%2Fi">sequence</a>'s positions are. Each position has its possible nucleotides stacked on top of each other, where the height of each nucleotide is based on how conserved it is. The more conserved a position is, the taller that column will be.</p>
-<p>Typically applied to DNA or RNA, and May also be applied to other biological <a href="#BM_(sequence)%2Fi">sequence</a> types (e.g. amino acids).</p>
+<p>Typically applied to DNA or RNA, and May also be applied to other biological <a href="#BM_(sequence)%2Fi">sequence</a> types (e.g. <a href="#BM_(amino%20acid)%2Fi">amino acid</a>s).</p>
 <p>The following is an example of a <a href="#BM_(%5Cblogo%7Csequence%20logo)%2Fi">logo</a> generated from a <a href="#BM_(motif)%2Fi">motif</a> <a href="#BM_(sequence)%2Fi">sequence</a>:</p>
 <div style="border:1px solid black;">
 <p></p>
@@ -4383,6 +4383,306 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>G = Guanine (same as nucleotide)</li>
 <li>U = Uracil (replace nucleotide Thymine)</li>
 </ul>
+</li>
+<li>
+<p><a name="BM_(antibiotic)%2Fi"></a><strong>antibiotic</strong> - A substance (typically an enzyme) for killing, preventing, or inhibiting the grow of bacterial infections.</p>
+</li>
+<li>
+<p><a name="BM_(amino%20acid)%2Fi"></a><strong>amino acid</strong> - The building blocks of <a href="#BM_(peptide)%2Fi">peptide</a>s / proteins, similar to how nucleotides are the building blocks of DNA.</p>
+<table>
+<thead>
+<tr>
+<th>1 Letter Code</th>
+<th>3 Letter Code</th>
+<th><a href="#BM_(amino%20acid)%2Fi">Amino acid</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Ala</td>
+<td>Alanine</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Cys</td>
+<td>Cysteine</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Asp</td>
+<td>Aspartic acid</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Glu</td>
+<td>Glutamic acid</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Phe</td>
+<td>Phenylalanine</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Gly</td>
+<td>Glycine</td>
+</tr>
+<tr>
+<td>H</td>
+<td>His</td>
+<td>Histidine</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Ile</td>
+<td>Isoleucine</td>
+</tr>
+<tr>
+<td>K</td>
+<td>Lys</td>
+<td>Lysine</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Leu</td>
+<td>Leucine</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Met</td>
+<td>Methionine</td>
+</tr>
+<tr>
+<td>N</td>
+<td>Asn</td>
+<td>Asparagine</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Pro</td>
+<td>Proline</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>Gln</td>
+<td>Glutamine</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Arg</td>
+<td>Arginine</td>
+</tr>
+<tr>
+<td>S</td>
+<td>Ser</td>
+<td>Serine</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Thr</td>
+<td>Threonine</td>
+</tr>
+<tr>
+<td>V</td>
+<td>Val</td>
+<td>Valine</td>
+</tr>
+<tr>
+<td>W</td>
+<td>Trp</td>
+<td>Tryptophan</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>Tyr</td>
+<td>Tyrosine</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><a name="BM_(peptide)%2Fi"></a><strong>peptide</strong> - A short <a href="#BM_(amino%20acid)%2Fi">amino acid</a> chain of at least size two. <a href="#BM_(peptide)%2Fi">Peptide</a>s are considered miniature proteins, but when something should be called a <a href="#BM_(peptide)%2Fi">peptide</a> vs a protein is loosely defined: the cut-off is anywhere between 50 to 100 <a href="#BM_(amino%20acid)%2Fi">amino acid</a>s.</p>
+</li>
+<li>
+<p><a name="BM_(polypeptide)%2Fi"></a><strong>polypeptide</strong> - A <a href="#BM_(peptide)%2Fi">peptide</a> of at least size 10.</p>
+</li>
+<li>
+<p><a name="BM_(central%20dogma%20of%20molecular%20biology)%2Fi"></a><strong>central dogma of molecular biology</strong> - The overall concept of <a href="#BM_(transcription%7Ctranscribed%7Ctranscribe)%2Fi">transcription</a> and <a href="#BM_(translation%7Ctranslated%7Ctranslate)%2Fi">translation</a>: Instructions for making a protein are copied from DNA to RNA, then RNA feeds into the ribosome to make that protein (DNA → RNA → Protein).</p>
+</li>
+<li>
+<p><a name="BM_(codon%7Cgenetic%20code)%2Fi"></a><strong>codon</strong> - A <a href="#BM_(sequence)%2Fi">sequence</a> of 3 <a href="#BM_(ribonucleotide)%2Fi">ribonucleotide</a>s that maps to an <a href="#BM_(amino%20acid)%2Fi">amino acid</a> or a stop marker. During <a href="#BM_(translation%7Ctranslated%7Ctranslate)%2Fi">translation</a>, the ribosome <a href="#BM_(translation%7Ctranslated%7Ctranslate)%2Fi">translate</a>s the RNA to a protein 3 <a href="#BM_(ribonucleotide)%2Fi">ribonucleotide</a>s at a time:</p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>⚠️NOTE️️️⚠️</strong></p>
+<p>The stop marker tells the ribosome to stop translating / the protein is complete.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>1 Letter Code</th>
+<th>3 Letter Code</th>
+<th><a href="#BM_(amino%20acid)%2Fi">Amino acid</a></th>
+<th><a href="#BM_(codon%7Cgenetic%20code)%2Fi">Codon</a>s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Ala</td>
+<td>Alanine</td>
+<td>GCA, GCC, GCG, GCU</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Cys</td>
+<td>Cysteine</td>
+<td>UGC, UGU</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Asp</td>
+<td>Aspartic acid</td>
+<td>GAC, GAU</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Glu</td>
+<td>Glutamic acid</td>
+<td>GAA, GAG</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Phe</td>
+<td>Phenylalanine</td>
+<td>UUC, UUU</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Gly</td>
+<td>Glycine</td>
+<td>GGA, GGC, GGG, GGU</td>
+</tr>
+<tr>
+<td>H</td>
+<td>His</td>
+<td>Histidine</td>
+<td>CAC, CAU</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Ile</td>
+<td>Isoleucine</td>
+<td>AUA, AUC, AUU</td>
+</tr>
+<tr>
+<td>K</td>
+<td>Lys</td>
+<td>Lysine</td>
+<td>AAA, AAG</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Leu</td>
+<td>Leucine</td>
+<td>CUA, CUC, CUG, CUU, UUA, UUG</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Met</td>
+<td>Methionine</td>
+<td>AUG</td>
+</tr>
+<tr>
+<td>N</td>
+<td>Asn</td>
+<td>Asparagine</td>
+<td>AAC, AAU</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Pro</td>
+<td>Proline</td>
+<td>CCA, CCC, CCG, CCU</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>Gln</td>
+<td>Glutamine</td>
+<td>CAA, CAG</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Arg</td>
+<td>Arginine</td>
+<td>AGA, AGG, CGA, CGC, CGG, CGU</td>
+</tr>
+<tr>
+<td>S</td>
+<td>Ser</td>
+<td>Serine</td>
+<td>AGC, AGU, UCA, UCC, UCG, UCU</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Thr</td>
+<td>Threonine</td>
+<td>ACA, ACC, ACG, ACU</td>
+</tr>
+<tr>
+<td>V</td>
+<td>Val</td>
+<td>Valine</td>
+<td>GUA, GUC, GUG, GUU</td>
+</tr>
+<tr>
+<td>W</td>
+<td>Trp</td>
+<td>Tryptophan</td>
+<td>UGG</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>Tyr</td>
+<td>Tyrosine</td>
+<td>UAC, UAU</td>
+</tr>
+<tr>
+<td>*</td>
+<td>*</td>
+<td><strong>STOP</strong></td>
+<td>UAA, UAG, UGA</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><a name="BM_(reading%20frame)%2Fi"></a><strong>reading frame</strong> - The different ways of dividing a DNA string into <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a>s. Specifically, there are 6 different ways that a DNA string can be divided into <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a>s:</p>
+<ul>
+<li>You can start dividing at index 0, 1, or 2.</li>
+<li>You can divide either the string or the reverse complementing string (<a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>).</li>
+</ul>
+<p>For example, given the the string ATGTTCCATTAA, the the following <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a> division are possible:</p>
+<ul>
+<li>Idx 0: ATG TTC CAT TAA</li>
+<li>Idx 1: TGT TCC ATT</li>
+<li>Idx 2: GTT CCA TTA</li>
+<li>RC Idx 0</li>
+<li>RC Idx 1</li>
+<li>RC Idx 2</li>
+</ul>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
+<p>TODO: FIX ABOVE</p>
 </li>
 </ul>
 <p>

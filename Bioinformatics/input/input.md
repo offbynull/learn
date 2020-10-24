@@ -3337,6 +3337,113 @@ PracticalMotifFindingExample
    * C = Cytosine (same as nucleotide)
    * G = Guanine (same as nucleotide)
    * U = Uracil (replace nucleotide Thymine)
+  
+ * `{bm} antibiotic` - A substance (typically an enzyme) for killing, preventing, or inhibiting the grow of bacterial infections.
+
+ * `{bm} amino acid` - The building blocks of peptides / proteins, similar to how nucleotides are the building blocks of DNA.
+
+   | 1 Letter Code | 3 Letter Code | Amino acid                  |
+   |---------------|---------------|-----------------------------|
+   | A             | Ala           | Alanine                     |
+   | C             | Cys           | Cysteine                    |
+   | D             | Asp           | Aspartic acid               |
+   | E             | Glu           | Glutamic acid               |
+   | F             | Phe           | Phenylalanine               |
+   | G             | Gly           | Glycine                     |
+   | H             | His           | Histidine                   |
+   | I             | Ile           | Isoleucine                  |
+   | K             | Lys           | Lysine                      |
+   | L             | Leu           | Leucine                     |
+   | M             | Met           | Methionine                  |
+   | N             | Asn           | Asparagine                  |
+   | P             | Pro           | Proline                     |
+   | Q             | Gln           | Glutamine                   |
+   | R             | Arg           | Arginine                    |
+   | S             | Ser           | Serine                      |
+   | T             | Thr           | Threonine                   |
+   | V             | Val           | Valine                      |
+   | W             | Trp           | Tryptophan                  |
+   | Y             | Tyr           | Tyrosine                    |
+
+ * `{bm} peptide` - A short amino acid chain of at least size two. Peptides are considered miniature proteins, but when something should be called a peptide vs a protein is loosely defined: the cut-off is anywhere between 50 to 100 amino acids.
+ 
+ * `{bm} polypeptide` - A peptide of at least size 10.
+
+ * `{bm} central dogma of molecular biology` - The overall concept of transcription and translation: Instructions for making a protein are copied from DNA to RNA, then RNA feeds into the ribosome to make that protein (DNA → RNA → Protein).
+
+ * `{bm} codon/(codon|genetic code)/i` - A sequence of 3 ribonucleotides that maps to an amino acid or a stop marker. During translation, the ribosome translates the RNA to a protein 3 ribonucleotides at a time:
+
+   ```{note}
+   The stop marker tells the ribosome to stop translating / the protein is complete.
+   ```
+
+   | 1 Letter Code | 3 Letter Code | Amino acid                  | Codons                       |
+   |---------------|---------------|-----------------------------|------------------------------|
+   | A             | Ala           | Alanine                     | GCA, GCC, GCG, GCU           |
+   | C             | Cys           | Cysteine                    | UGC, UGU                     |
+   | D             | Asp           | Aspartic acid               | GAC, GAU                     |
+   | E             | Glu           | Glutamic acid               | GAA, GAG                     |
+   | F             | Phe           | Phenylalanine               | UUC, UUU                     |
+   | G             | Gly           | Glycine                     | GGA, GGC, GGG, GGU           |
+   | H             | His           | Histidine                   | CAC, CAU                     |
+   | I             | Ile           | Isoleucine                  | AUA, AUC, AUU                |
+   | K             | Lys           | Lysine                      | AAA, AAG                     |
+   | L             | Leu           | Leucine                     | CUA, CUC, CUG, CUU, UUA, UUG |
+   | M             | Met           | Methionine                  | AUG                          |
+   | N             | Asn           | Asparagine                  | AAC, AAU                     |
+   | P             | Pro           | Proline                     | CCA, CCC, CCG, CCU           |
+   | Q             | Gln           | Glutamine                   | CAA, CAG                     |
+   | R             | Arg           | Arginine                    | AGA, AGG, CGA, CGC, CGG, CGU |
+   | S             | Ser           | Serine                      | AGC, AGU, UCA, UCC, UCG, UCU |
+   | T             | Thr           | Threonine                   | ACA, ACC, ACG, ACU           |
+   | V             | Val           | Valine                      | GUA, GUC, GUG, GUU           |
+   | W             | Trp           | Tryptophan                  | UGG                          |
+   | Y             | Tyr           | Tyrosine                    | UAC, UAU                     |
+   | *             | * 	           | **STOP**                    | UAA, UAG, UGA                |
+
+ * `{bm} reading frame` - The different ways of dividing a DNA string into codons. Specifically, there are 6 different ways that a DNA string can be divided into codons:
+
+    * You can start dividing at index 0, 1, or 2.
+    * You can divide either the string or the reverse complementing string (double-stranded DNA).
+ 
+   For example, given the the string ATGTTCCATTAA, the the following codon division are possible:
+
+    * Idx 0: ATG TTC CAT TAA
+    * Idx 1: TGT TCC ATT
+    * Idx 2: GTT CCA TTA
+    * RC Idx 0
+    * RC Idx 1
+    * RC Idx 2
+
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    TODO: FIX ABOVE
+
+    
+
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _SEQ/\b(read)/i`
