@@ -53,7 +53,7 @@
 <li><a href="#H_Stitch%20Read-Pairs">Stitch Read-Pairs</a></li>
 <li><a href="#H_Break%20Reads">Break Reads</a></li>
 <li><a href="#H_Break%20Read-Pairs">Break Read-Pairs</a></li>
-<li><a href="#H_Fragment%20Occurrence%20in%20Genome%20Probability">Fragment Occurrence in Genome Probability</a></li>
+<li><a href="#H_Probability%20of%20Fragment%20Occurrence">Probability of Fragment Occurrence</a></li>
 <li><a href="#H_Overlap%20Graph">Overlap Graph</a></li>
 <li><a href="#H_De%20Bruijn%20Graph">De Bruijn Graph</a></li>
 <li><a href="#H_Find%20Bubbles">Find Bubbles</a></li>
@@ -205,7 +205,7 @@
 
     <span class="hljs-keyword">return</span> output</code></pre><div style="border:1px solid black;">
 <p></p>
-<p>Kmers within hamming distance 1 of AAAA: {'AAAC', 'GAAA', 'AAAT', 'AAGA', 'AAAG', 'ACAA', 'AGAA', 'AATA', 'AAAA', 'TAAA', 'CAAA', 'ATAA', 'AACA'}</p>
+<p>Kmers within hamming distance 1 of AAAA: {'AAAT', 'TAAA', 'AACA', 'AAGA', 'AGAA', 'ATAA', 'AATA', 'AAAG', 'ACAA', 'AAAC', 'AAAA', 'CAAA', 'GAAA'}</p>
 </div>
 <p></p>
 <a name="H_Find%20Locations"></a><h3>Find Locations</h3>
@@ -328,12 +328,12 @@
 <p></p>
 <p>Top 5-mer frequencies for GGGACTGAACAAACAAATTTGGGAGGGCACGGGTTAAAGGAGATGATGATTCAAAGGGT:</p>
 <ul>
-<li>TGATC = 6 occurrences</li>
-<li>AAGGG = 6 occurrences</li>
 <li>TTAAA = 6 occurrences</li>
+<li>AAGGG = 6 occurrences</li>
 <li>GATCA = 6 occurrences</li>
-<li>CCCTT = 6 occurrences</li>
 <li>TTTAA = 6 occurrences</li>
+<li>CCCTT = 6 occurrences</li>
+<li>TGATC = 6 occurrences</li>
 </ul>
 </div>
 <p></p>
@@ -405,17 +405,17 @@
 <p>Found clusters of k=9 (at least 6 occurrences in window of 20) in TTTTTTTTTTTTTCCCTTTTTTTTTCCCTTTTTTTTTTTTT at...</p>
 <ul>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=0, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='CAAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='TAAAAAAAA', start_index=0, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AGAAAAAAA', start_index=0, occurrence_count=6)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=0, occurrence_count=7)</li>
 <li>KmerCluster(kmer='GAAAAAAAA', start_index=1, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAGA', start_index=26, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAG', start_index=26, occurrence_count=7)</li>
 <li>KmerCluster(kmer='AAAAAAAAA', start_index=27, occurrence_count=6)</li>
-<li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 <li>KmerCluster(kmer='AAAAAAAAC', start_index=27, occurrence_count=6)</li>
+<li>KmerCluster(kmer='AAAAAAAAT', start_index=27, occurrence_count=6)</li>
 </ul>
 </div>
 <p></p>
@@ -1512,7 +1512,7 @@ SSSII
 <p>Searching for motif of k=5 and a max of 1 mismatches in the following...</p>
 <p>ATAAAGGGATA<br>ACAGAAATGAT<br>TGAAATAACCT</p>
 <p>Found the motif matrix...</p>
-<p>ATAAT<br>ATAAT<br>ATAAT</p>
+<p>AAAGA<br>AAAGA<br>AAAGA</p>
 </div>
 <p></p>
 <a name="H_Median%20String%20Algorithm"></a><h4>Median String Algorithm</h4>
@@ -1952,7 +1952,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>GAG<br>GAC</p>
 </div>
 <p></p>
 <a name="H_Gibbs%20Sampling%20Algorithm"></a><h4>Gibbs Sampling Algorithm</h4>
@@ -2023,7 +2023,7 @@ SSSII
 <p>AAATTGACGCAT<br>GACGACCACGTT<br>CGTCAGCGCCTG<br>GCTGAGCACCGG<br>AGTTCGGGACAG</p>
 <p>Running 1000 iterations...</p>
 <p>Best found the motif matrix...</p>
-<p>GAC<br>GAC<br>GCC<br>CAC<br>GAC</p>
+<p>GAC<br>GAC<br>GTC<br>CAC<br>GAC</p>
 </div>
 <p></p>
 <a name="H_Motif%20Matrix%20Hybrid%20Alphabet"></a><h3>Motif Matrix Hybrid Alphabet</h3>
@@ -2081,7 +2081,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>to...</p>
 <p>CWTCYK<br>CWTCYK<br>CWTCYK</p>
 <p>using...</p>
-<p>{frozenset({'A', 'T'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'T', 'C'}): 'Y'}</p>
+<p>{frozenset({'T', 'A'}): 'W', frozenset({'G', 'C'}): 'S', frozenset({'G', 'T'}): 'K', frozenset({'C', 'T'}): 'Y'}</p>
 </div>
 <p></p>
 <a name="H_Assembly"></a><h2>Assembly</h2>
@@ -2470,8 +2470,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p>Broke ACTA--AACC to [AC----AA, CT----AC, TA----CC]</p>
 </div>
 <p></p>
-<a name="H_Fragment%20Occurrence%20in%20Genome%20Probability"></a><h3>Fragment Occurrence in Genome Probability</h3>
-<p><a name="BM_(Algorithms%5C%2FAssembly%2FFragment%20Occurrence%20in%20Genome%20Probability)_TOPIC%2F"></a><strong></strong></p>
+<a name="H_Probability%20of%20Fragment%20Occurrence"></a><h3>Probability of Fragment Occurrence</h3>
+<p><a name="BM_(Algorithms%5C%2FAssembly%2FProbability%20of%20Fragment%20Occurrence)_TOPIC%2F"></a><strong></strong></p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
@@ -2610,6 +2610,16 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 <a name="H_Overlap%20Graph"></a><h3>Overlap Graph</h3>
 <p><a name="BM_(Algorithms%5C%2FAssembly%2FOverlap%20Graph)_TOPIC%2F"></a><strong></strong></p>
+<div style="margin:2em; background-color: #e0e0e0;">
+<p><strong>↩PREREQUISITES↩</strong></p>
+<ul>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FStitch%20Reads)_TOPIC%2F">Algorithms/Assembly/Stitch Reads</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FStitch%20Read-Pairs)_TOPIC%2F">Algorithms/Assembly/Stitch Read-Pairs</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FBreak%20Reads)_TOPIC%2F">Algorithms/Assembly/Break Reads</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FBreak%20Read-Pairs)_TOPIC%2F">Algorithms/Assembly/Break Read-Pairs</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FProbability%20of%20Fragment%20Occurrence)_TOPIC%2F">Algorithms/Assembly/Probability of Fragment Occurrence</a></li>
+</ul>
+</div>
 <p><strong>WHAT</strong>: Given the <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single strand of DNA, create a directed graph where ...</p>
 <ol>
 <li>
@@ -2727,20 +2737,20 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <ul>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
 <li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
 <li>TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
-<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
-<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
-<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
-<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
-<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
 <li>TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
+<li>GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT</li>
+<li>CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT</li>
+<li>ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC</li>
+<li>TTA -&gt; TAG -&gt; AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT</li>
+<li>AGT -&gt; GTT -&gt; TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG</li>
+<li>TTA -&gt; TAC -&gt; ACT -&gt; CTT -&gt; TTA -&gt; TAG -&gt; AGT -&gt; GTT</li>
 </ul>
 </div>
 <p></p>
@@ -2749,6 +2759,11 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>↩PREREQUISITES↩</strong></p>
 <ul>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FStitch%20Reads)_TOPIC%2F">Algorithms/Assembly/Stitch Reads</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FStitch%20Read-Pairs)_TOPIC%2F">Algorithms/Assembly/Stitch Read-Pairs</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FBreak%20Reads)_TOPIC%2F">Algorithms/Assembly/Break Reads</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FBreak%20Read-Pairs)_TOPIC%2F">Algorithms/Assembly/Break Read-Pairs</a></li>
+<li><a href="#BM_(Algorithms%5C%2FAssembly%2FProbability%20of%20Fragment%20Occurrence)_TOPIC%2F">Algorithms/Assembly/Probability of Fragment Occurrence</a></li>
 <li><a href="#BM_(Algorithms%5C%2FAssembly%2FOverlap%20Graph)_TOPIC%2F">Algorithms/Assembly/Overlap Graph</a></li>
 </ul>
 </div>
@@ -2923,7 +2938,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BM_(Algorithms%5C%2FAssembly%2FDe%20Bruijn%20Graph)_TOPIC%2F">Algorithms/Assembly/De Bruijn Graph</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a set of a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s that have been broken (<a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">read breaking</a> / <a href="#BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi">read-pair breaking</a>) to length k, any ...</p>
+<p><strong>WHAT</strong>: Given a set of a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s that have been broken to k (<a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">read breaking</a> / <a href="#BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi">read-pair breaking</a>), any ...</p>
 <ul>
 <li>forked prefixes,</li>
 <li>forked suffixes,</li>
@@ -2939,7 +2954,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>WHY</strong>: When <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s returned by a <a href="#BM_(sequencer)%2Fi">sequencer</a> get broken (<a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">read breaking</a> / <a href="#BM_(read-pair%20breaking%7Cread%20pair%20breaking%7Cbreaking%20read-pairs%7Cbreaking%20read%20pairs)%2Fi">read-pair breaking</a>), any <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s containing <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s may show up in the graph as one of 3 structures: forked prefix, forked suffix, or bubble. As such, it may be possible to detect these structures and flatten them (by removing bad branches) to get a cleaner graph.</p>
 <p>For example, imagine the <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> ATTGG. <a href="#BM_(read%20breaking%7Cread-breaking%7Cbreaking%20reads)%2Fi">Read breaking</a> it into <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">2-mer</a> <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s results in: [AT, TT, TG, GG].</p>
 <p><img src="svgbob_14d21a2810cefc8cfab333aadbe576260b565d48.svg" alt="Kroki diagram output"></p>
-<p>Now, imagine that the <a href="#BM_(sequencer)%2Fi">sequencer</a> captured that same part of the <a href="#BM_(genome)%2Fi">genome</a> again, but this time the <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> contains a <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>. Depending on where the incorrect nucleotide is, one of the 3 structures will get introduced into the graph:</p>
+<p>Now, imagine that the <a href="#BM_(sequencer)%2Fi">sequencer</a> captures that same part of the <a href="#BM_(genome)%2Fi">genome</a> again, but this time the <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> contains a <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>. Depending on where the incorrect nucleotide is, one of the 3 structures will get introduced into the graph:</p>
 <ul>
 <li>
 <p>ATTGG vs A<strong>C</strong>TGG (within first 2 elements)</p>
@@ -3275,8 +3290,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CTCGGCGGT', start_index=53, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGAAGATC', start_index=98, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGGCGGTTC', start_index=160, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGCT', start_index=161, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGCGGAT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGGT', start_index=161, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=161, occurrence_count=4)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=162, occurrence_count=4)</li>
@@ -3284,12 +3299,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='CATCAGGCG', start_index=164, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCATCAGGC', start_index=165, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGCGATGG', start_index=199, occurrence_count=3)</li>
-<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCGGTTCG', start_index=210, occurrence_count=3)</li>
+<li>KmerCluster(kmer='GGCGGTATG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGCAGTACG', start_index=210, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CAGGCGGTT', start_index=212, occurrence_count=3)</li>
-<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGG', start_index=213, occurrence_count=3)</li>
+<li>KmerCluster(kmer='TCAGGCGGC', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGT', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TCAGGCGGA', start_index=213, occurrence_count=3)</li>
 <li>KmerCluster(kmer='ATCAGGCGG', start_index=214, occurrence_count=3)</li>
@@ -3297,8 +3312,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='TTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTCAGGCGG', start_index=214, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGTCAGGCG', start_index=215, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CGGATCGTT', start_index=232, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCCTG', start_index=232, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GCGGATCCT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCGT', start_index=233, occurrence_count=3)</li>
 <li>KmerCluster(kmer='AGCCGGATC', start_index=235, occurrence_count=3)</li>
@@ -3312,12 +3327,12 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li>KmerCluster(kmer='GATCCTTAT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GATCCTTTT', start_index=515, occurrence_count=3)</li>
 <li>KmerCluster(kmer='GGATCCTTT', start_index=516, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CTGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGATCCTT', start_index=517, occurrence_count=3)</li>
-<li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CGGATCATT', start_index=517, occurrence_count=3)</li>
+<li>KmerCluster(kmer='AGGATCCTT', start_index=517, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCGGATCCC', start_index=518, occurrence_count=3)</li>
+<li>KmerCluster(kmer='CAGGATCCT', start_index=518, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCCGGATCC', start_index=519, occurrence_count=3)</li>
 <li>KmerCluster(kmer='TTATCCAGA', start_index=522, occurrence_count=3)</li>
 <li>KmerCluster(kmer='CCAGGTTTT', start_index=529, occurrence_count=3)</li>
@@ -3378,8 +3393,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p></p>
 <p>Organism is baker's yeast. Suspected genes influenced by transcription factor: THI12, YHL017W, SYN8, YCG1, UBX5, and KEI1.</p>
 <p>Searching for 18-mer across a set of 6 gene upstream regions...</p>
-<p>AGAAAAAGGAAGGAAAAA<br>AGAAAAAAAAAGGAAAAA<br>AGAAAAAGAAAAAAAAAA<br>AGAAAAGGAAAAAAAGAA<br>ATAAAAACATCATAAAAA<br>CGAACAACATGAGATAAA</p>
-<p>Score is: 19</p>
+<p>GAAAAAGGAAGGAAAAAT<br>GAAAAAAAAAGGAAAAAA<br>GAAAAAGAAAAAAAAAAA<br>GAAAAAAAGAAGACAAAG<br>GAATATAAACATATAAAA<br>GAATATAAACATATAAAA</p>
+<p>Score is: 20</p>
 </div>
 <p></p>
 <a name="H_Terminology"></a><h1>Terminology</h1>

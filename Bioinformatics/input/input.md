@@ -1432,9 +1432,9 @@ shatter
 ACTA|2|AACC
 ```
 
-### Fragment Occurrence in Genome Probability
+### Probability of Fragment Occurrence
 
-`{bm} /(Algorithms\/Assembly\/Fragment Occurrence in Genome Probability)_TOPIC/`
+`{bm} /(Algorithms\/Assembly\/Probability of Fragment Occurrence)_TOPIC/`
 
 ```{prereq}
 Algorithms/Assembly/Stitch Reads_TOPIC
@@ -1512,6 +1512,14 @@ TGT 1
 ### Overlap Graph
 
 `{bm} /(Algorithms\/Assembly\/Overlap Graph)_TOPIC/`
+
+```{prereq}
+Algorithms/Assembly/Stitch Reads_TOPIC
+Algorithms/Assembly/Stitch Read-Pairs_TOPIC
+Algorithms/Assembly/Break Reads_TOPIC
+Algorithms/Assembly/Break Read-Pairs_TOPIC
+Algorithms/Assembly/Probability of Fragment Occurrence_TOPIC
+```
 
 **WHAT**: Given the fragment_SEQs for a single strand of DNA, create a directed graph where ...
 
@@ -1632,6 +1640,11 @@ CTT
 `{bm} /(Algorithms\/Assembly\/De Bruijn Graph)_TOPIC/`
 
 ```{prereq}
+Algorithms/Assembly/Stitch Reads_TOPIC
+Algorithms/Assembly/Stitch Read-Pairs_TOPIC
+Algorithms/Assembly/Break Reads_TOPIC
+Algorithms/Assembly/Break Read-Pairs_TOPIC
+Algorithms/Assembly/Probability of Fragment Occurrence_TOPIC
 Algorithms/Assembly/Overlap Graph_TOPIC
 ```
 
@@ -1793,7 +1806,7 @@ Algorithms/Assembly/Overlap Graph_TOPIC
 Algorithms/Assembly/De Bruijn Graph_TOPIC
 ```
 
-**WHAT**: Given a set of a fragment_SEQs that have been broken (read breaking / read-pair breaking) to length k, any ...
+**WHAT**: Given a set of a fragment_SEQs that have been broken to k (read breaking / read-pair breaking), any ...
 
  * forked prefixes,
  * forked suffixes,
@@ -1824,7 +1837,7 @@ For example, imagine the read_SEQ ATTGG. Read breaking it into 2-mer read_SEQs r
 AT --> TT --> TG --> GG 
 ```
 
-Now, imagine that the sequencer captured that same part of the genome again, but this time the read_SEQ contains a sequencing error. Depending on where the incorrect nucleotide is, one of the 3 structures will get introduced into the graph:
+Now, imagine that the sequencer captures that same part of the genome again, but this time the read_SEQ contains a sequencing error. Depending on where the incorrect nucleotide is, one of the 3 structures will get introduced into the graph:
 
  * ATTGG vs A**C**TGG (within first 2 elements)
 

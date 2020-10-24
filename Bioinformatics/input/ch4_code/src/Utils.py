@@ -8,9 +8,14 @@ def count_kmers(data_len: int, k: int) -> int:
     return data_len - k + 1
 
 
-def slide_window(data: str, k: int) -> Tuple[str, int]:
+def slide_window(data: str, k: int, cyclic: bool = False) -> Tuple[str, int]:
     for i in range(0, len(data) - k + 1):
         yield data[i:i+k], i
+    if not cyclic:
+        return
+    for i in range(len(data) - k + 1, len(data)):
+        rem = k - (len(data) - i)
+        yield data[i:] + data[:rem], i
 
 
 def split_to_size(data: str, n: int) -> List[str]:

@@ -8,9 +8,14 @@ def count_kmers(data_len: int, k: int) -> int:
     return data_len - k + 1
 
 
-def slide_window(data: str, k: int) -> Tuple[str, int]:
+def slide_window(data: str, k: int, cyclic: bool = False) -> Tuple[str, int]:
     for i in range(0, len(data) - k + 1):
         yield data[i:i+k], i
+    if not cyclic:
+        return
+    for i in range(len(data) - k + 1, len(data)):
+        rem = k - (len(data) - i)
+        yield data[i:] + data[:rem], i
 
 
 def split_to_size(data: str, n: int) -> List[str]:
@@ -52,7 +57,7 @@ def generate_random_cyclic_genome(size: int, copies: int, r: Optional[Random] = 
 
 
 def dna_reverse_complement(dna: str):
-    return dna_complement(str)[::-1]
+    return dna_complement(dna)[::-1]
 
 
 def dna_complement(dna: str):
@@ -162,13 +167,13 @@ _codon_to_amino_acid = {
     'UUU': 'F'
 }
 
-def codon_to_amino_acid(rna: str) -> str:
-    return _codon_to_amino_acid[rna]
+def codon_to_amino_acid(rna: str) -> Optional[str]:
+    return _codon_to_amino_acid.get(rna)
 
 
 _amino_acid_to_codons = dict()
 for k, v in _codon_to_amino_acid.items():
     _amino_acid_to_codons.setdefault(v, []).append(k)
 
-def amino_acid_to_codons(codon: str) -> List[str]:
-    return _amino_acid_to_codons[codon]
+def amino_acid_to_codons(codon: str) -> Optional[List[str]]:
+    return _amino_acid_to_codons.get(codon)
