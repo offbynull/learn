@@ -2542,7 +2542,7 @@ PracticalMotifFindingExample
    5' . . . A -> A -> A -> C -> C -> G -> A -> A -> A -> C -> . . . 3'
    ```
 
- * `{bm} double stranded DNA/(double stranded DNA|double-stranded DNA)/i` - Two strands of DNA bound together, where each strand is the reverse complement of the other.
+ * `{bm} double stranded DNA/(double stranded DNA|double-stranded DNA|reverse complement)/i` - Two strands of DNA bound together, where each strand is the reverse complement of the other.
 
    ```{svgbob}
    3' . . . T <- T <- T <- G <- C <- T <- T <- T <- T <- G <- . . . 5'
@@ -3369,6 +3369,8 @@ PracticalMotifFindingExample
  
  * `{bm} polypeptide` - A peptide of at least size 10.
 
+ * `{bm} cyclopeptide` - A cyclic peptide.
+
  * `{bm} central dogma of molecular biology` - The overall concept of transcription and translation: Instructions for making a protein are copied from DNA to RNA, then RNA feeds into the ribosome to make that protein (DNA → RNA → Protein).
 
    Most, not all, peptides are synthesized as described above. Non-ribosomal peptides are synthesized outside of the transcription and translation.
@@ -3447,7 +3449,7 @@ PracticalMotifFindingExample
  * `{bm} reading frame` - The different ways of dividing a DNA string into codons. Specifically, there are 6 different ways that a DNA string can be divided into codons:
 
     * You can start dividing at index 0, 1, or 2.
-    * You can divide either the string or the reverse complementing string (double-stranded DNA).
+    * You can divide either the DNA string itself or the reverse complementing DNA string.
  
    For example, given the the string ATGTTCCATTAA, the the following codon division are possible:
 
@@ -3469,7 +3471,7 @@ PracticalMotifFindingExample
     * Threonine-Valine
     * Tyrosine-Cysteine (derived from reverse complement)
     
-
+ * `{bm} branch-and-bound algorithm/(branch-and-bound algorithm|branch and bound algorithm)/i` - A bruteforce algorithm that enumerates candidates to explore at each step but also discards untenable candidates using various checks. The enumeration of candidates is the branching step, while the culling of untenable candidates is the bounding step.
 
 `{bm-ignore} \b(read)_NORM/i`
 `{bm-error} Apply suffix _NORM or _SEQ/\b(read)/i`

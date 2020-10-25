@@ -123,7 +123,7 @@
 </ul>
 <a name="H_Reverse%20Complement"></a><h3>Reverse Complement</h3>
 <p><a name="BM_(Algorithms%5C%2FK-mer%2FReverse%20Complement)_TOPIC%2F"></a><strong></strong></p>
-<p><strong>WHAT</strong>: Given a DNA <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, calculate its reverse complement.</p>
+<p><strong>WHAT</strong>: Given a DNA <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, calculate its <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>.</p>
 <p><strong>WHY</strong>: Depending on the type of biological <a href="#BM_(sequence)%2Fi">sequence</a>, a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> may have one or more alternatives. For DNA <a href="#BM_(sequence)%2Fi">sequence</a>s specifically, a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> of interest may have an alternate form. Since the DNA molecule comes as 2 strands, where ...</p>
 <ul>
 <li>each strand's direction is opposite of the other,</li>
@@ -135,7 +135,7 @@
 </li>
 </ul>
 <p><img src="svgbob_c44b72fd8e03cfe92b63a0a3b83bfe37c5551666.svg" alt="Kroki diagram output"></p>
-<p>, ... the reverse complement of that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> may be just as valid as the original <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, it's possible that it might also bind to the reverse complement of that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>.</p>
+<p>, ... the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> of that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> may be just as valid as the original <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>. For example, if an enzyme is known to bind to a specific DNA <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, it's possible that it might also bind to the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> of that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_complement</span>(<span class="hljs-params">strand: str</span>):</span>
     ret = <span class="hljs-string">''</span>
@@ -217,13 +217,13 @@
 <li><a href="#BM_(Algorithms%5C%2FK-mer%2FReverse%20Complement)_TOPIC%2F">Algorithms/K-mer/Reverse Complement</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, find where that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> occurs in some larger <a href="#BM_(sequence)%2Fi">sequence</a>. The search may potentially include the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s variants (e.g. reverse complement).</p>
+<p><strong>WHAT</strong>: Given a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, find where that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> occurs in some larger <a href="#BM_(sequence)%2Fi">sequence</a>. The search may potentially include the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s variants (e.g. <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>).</p>
 <p><strong>WHY</strong>: Imagine that you know of a specific <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern that serves some function in an organism. If you see that same <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern appearing in some other related organism, it could be a sign that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern serves a similar function. For example, the same <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern could be used by 2 related types of bacteria as a <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a>.</p>
-<p>The enzyme that operates on that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> may also operate on its reverse complement as well as slight variations on that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>. For example, if an enzyme binds to AAAAAAAAA, it may also bind to its...</p>
+<p>The enzyme that operates on that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> may also operate on its <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> as well as slight variations on that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>. For example, if an enzyme binds to AAAAAAAAA, it may also bind to its...</p>
 <ul>
-<li>reverse complement: TTTTTTTTT</li>
+<li><a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>: TTTTTTTTT</li>
 <li>approximate variants: AAAAAAAAA, AAATAAAAA, AAAAAGAAA, ...</li>
-<li>approximate variants of its reverse complements: TTTTTTTTT, TTTTTTATT, TTCTTTTTT, ...</li>
+<li>approximate variants of its <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>s: TTTTTTTTT, TTTTTTATT, TTCTTTTTT, ...</li>
 </ul>
 <p><strong>ALGORITHM</strong>:</p>
 <pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Options</span>(<span class="hljs-params">NamedTuple</span>):</span>
@@ -259,7 +259,7 @@
 <li><a href="#BM_(Algorithms%5C%2FK-mer%2FFind%20Locations)_TOPIC%2F">Algorithms/K-mer/Find Locations</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, find where that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> clusters in some larger <a href="#BM_(sequence)%2Fi">sequence</a>. The search may potentially include the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s variants (e.g. reverse complement).</p>
+<p><strong>WHAT</strong>: Given a <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>, find where that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> clusters in some larger <a href="#BM_(sequence)%2Fi">sequence</a>. The search may potentially include the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>'s variants (e.g. <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>).</p>
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern to bind to, where that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> is a special <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BM_(replication%20origin)%2Fi">replication origin</a>. Finding the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> clustered in a small region is a good indicator that you've found the <a href="#BM_(replication%20origin)%2Fi">replication origin</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
@@ -292,7 +292,7 @@
 <li><a href="#BM_(Algorithms%5C%2FK-mer%2FHamming%20Distance%20Neighbourhood)_TOPIC%2F">Algorithms/K-mer/Hamming Distance Neighbourhood</a></li>
 </ul>
 </div>
-<p><strong>WHAT</strong>: Given a <a href="#BM_(sequence)%2Fi">sequence</a>, find clusters of unique <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s within that <a href="#BM_(sequence)%2Fi">sequence</a>. In other words, for each unique <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> that exists in the <a href="#BM_(sequence)%2Fi">sequence</a>, see if it clusters in the <a href="#BM_(sequence)%2Fi">sequence</a>. The search may potentially include variants of <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> variants (e.g. reverse complements of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s).</p>
+<p><strong>WHAT</strong>: Given a <a href="#BM_(sequence)%2Fi">sequence</a>, find clusters of unique <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s within that <a href="#BM_(sequence)%2Fi">sequence</a>. In other words, for each unique <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> that exists in the <a href="#BM_(sequence)%2Fi">sequence</a>, see if it clusters in the <a href="#BM_(sequence)%2Fi">sequence</a>. The search may potentially include variants of <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> variants (e.g. <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>s of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s).</p>
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern to bind to, where that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> is a special <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BM_(replication%20origin)%2Fi">replication origin</a>. Given that you don't know the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern for the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> but you do know the <a href="#BM_(replication%20origin)%2Fi">replication origin</a>, you can scan through the <a href="#BM_(replication%20origin)%2Fi">replication origin</a> for repeating <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern for the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
@@ -350,7 +350,7 @@
 <li>slide a window over the cluster.</li>
 <li>for each unique <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> that exists in the window, see if it clusters in the <a href="#BM_(sequence)%2Fi">sequence</a>.</li>
 </ul>
-<p>The search may potentially include variants of <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> variants (e.g. reverse complements of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s).</p>
+<p>The search may potentially include variants of <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> variants (e.g. <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>s of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a>s).</p>
 <p><strong>WHY</strong>: An enzyme may need to bind to a specific region of DNA to begin doing its job. That is, it looks for a specific <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern to bind to, where that <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> represents the beginning of some larger DNA region that it operates on. Since DNA is known to mutate, often times you'll find multiple copies of the same <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern clustered together -- if one copy mutated to become unusable, the other copies are still around.</p>
 <p>For example, the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> is a special <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern used by enzymes during DNA replication. Since DNA is known to mutate, the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> can be found repeating multiple times in the region of DNA known as the <a href="#BM_(replication%20origin)%2Fi">replication origin</a>. Given that you don't know the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern for the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a> but you do know the <a href="#BM_(replication%20origin)%2Fi">replication origin</a>, you can scan through the <a href="#BM_(replication%20origin)%2Fi">replication origin</a> for repeating <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> patterns. If a pattern is found to heavily repeat, it's a good candidate that it's the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">k-mer</a> pattern for the <a href="#BM_(DnaA%20box)%2Fi">DnaA box</a>.</p>
 <p><strong>ALGORITHM</strong>:</p>
@@ -564,10 +564,10 @@ SSSII
 <li>C is encountered, decrement the counter.</li>
 </ul>
 <p><strong>WHY</strong>: Given the DNA <a href="#BM_(sequence)%2Fi">sequence</a> of an organism, some segments may have lower count of Gs vs Cs.</p>
-<p>During replication, some segments of DNA stay single-stranded for a much longer time than other segments. <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>. Specifically, in <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, C has a greater tendency to mutate to T. When that <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a> re-binds to a neighbouring strand, the positions of any nucleotides that mutated from C to T will change on the neighbouring strand from G to A.</p>
+<p>During replication, some segments of DNA stay single-stranded for a much longer time than other segments. <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a>. Specifically, in <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, C has a greater tendency to mutate to T. When that <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a> re-binds to a neighbouring strand, the positions of any nucleotides that mutated from C to T will change on the neighbouring strand from G to A.</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>Recall that the reverse complements of ...</p>
+<p>Recall that the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>s of ...</p>
 <ul>
 <li>C is G</li>
 <li>A is T</li>
@@ -2109,7 +2109,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a href="#BM_(assembly%7Cassemble)%2Fi">Assembly</a> has many practical complications that prevent full <a href="#BM_(genome)%2Fi">genome</a> reconstruction from <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s:</p>
 <ul>
 <li>
-<p>Which strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double stranded DNA</a> that a <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> / <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> comes from isn't known, which means the overlaps you find may not be accurate.</p>
+<p>Which strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double stranded DNA</a> that a <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a> / <a href="#BM_(read-pair%7Cread%20pair)%2Fi">read-pair</a> comes from isn't known, which means the overlaps you find may not be accurate.</p>
 <p><img src="svgbob_9a1e8981d7c6da721c87d87057f266ca1aeee3d2.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
@@ -2499,7 +2499,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>ALGORITHM</strong>:</p>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>For simplicity's sake, the <a href="#BM_(genome)%2Fi">genome</a> is single-stranded (not <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a> / no reverse complementing stand).</p>
+<p>For simplicity's sake, the <a href="#BM_(genome)%2Fi">genome</a> is single-stranded (not <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a> / no <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>ing stand).</p>
 </div>
 <p>Imagine a <a href="#BM_(genome)%2Fi">genome</a> of ATGGATGC. A <a href="#BM_(sequencer)%2Fi">sequencer</a> runs over that single strand and generates <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">3-mer</a> <a href="#BM_%5Cb(read)_SEQ%2Fi">read</a>s with roughly 30x <a href="#BM_(coverage)_SEQ%2Fi">coverage</a>. The resulting <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s are ...</p>
 <table>
@@ -2652,7 +2652,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>ALGORITHM</strong>:</p>
 <p><a href="#BM_(sequencer)%2Fi">Sequencer</a>s produce <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s, but <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:</p>
 <ul>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s are for both strands (strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a> a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s from isn't known).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s are for both strands (strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a> a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s from isn't known).</li>
 <li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be missing (<a href="#BM_(sequencer)%2Fi">sequencer</a> didn't capture it).</li>
 <li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have incorrect occurrence counts (<a href="#BM_(sequencer)%2Fi">sequencer</a> captured it too many/few times).</li>
 <li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have errors (<a href="#BM_(sequencer)%2Fi">sequencer</a> produced <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s).</li>
@@ -2794,7 +2794,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><strong>ALGORITHM</strong>:</p>
 <p><a href="#BM_(sequencer)%2Fi">Sequencer</a>s produce <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s, but <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s by themselves typically aren't enough for most experiments / algorithms. In theory, stitching overlapping <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s for a single-strand of DNA should reveal that single-strand of DNA. In practice, real-world complications make revealing that single-strand of DNA nearly impossible:</p>
 <ul>
-<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s are for both strands (strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a> a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s from isn't known).</li>
+<li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s are for both strands (strand of <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a> a <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>'s from isn't known).</li>
 <li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may be missing (<a href="#BM_(sequencer)%2Fi">sequencer</a> didn't capture it).</li>
 <li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have incorrect occurrence counts (<a href="#BM_(sequencer)%2Fi">sequencer</a> captured it too many/few times).</li>
 <li><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s may have errors (<a href="#BM_(sequencer)%2Fi">sequencer</a> produced <a href="#BM_(sequencing%20error)%2Fi">sequencing error</a>s).</li>
@@ -2976,7 +2976,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a href="#BM_(fragment)_SEQ%2Fi">Fragment</a>s from different parts of the <a href="#BM_(genome)%2Fi">genome</a> that are the same except for a few positions will show up as bubbles.</p>
 </li>
 <li>
-<p>Bubbles / forks may be caused when <a href="#BM_(sequencing%7Csequenced)%2Fi">sequencing</a> <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>.</p>
+<p>Bubbles / forks may be caused when <a href="#BM_(sequencing%7Csequenced)%2Fi">sequencing</a> <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a>.</p>
 <p>When both strands of DNA get tangled into the same graph, it's possible that <a href="#BM_(fragment)_SEQ%2Fi">fragment</a>s from different strands may form bubbles or forks.</p>
 </li>
 </ul>
@@ -3200,9 +3200,9 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_308a4af4e5d6864abeb06f6652581aec0ff50fb1.svg" alt="Kroki diagram output"></p>
 <p>The replication process begins by a <a href="#BM_(replication%20fork)%2Fi">replication fork</a> opening at the <a href="#BM_%5Cb(ori)%5Cb%2Fi">ori</a>. As replication happens, that fork widens until the point it reaches <a href="#BM_%5Cb(ter)%5Cb%2Fi">ter</a>...</p>
 <p><img src="svgbob_fc7cf2c734fa0cab15b5746e25ad07e25f85ec64.svg" alt="Kroki diagram output"></p>
-<p>For each forked <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a>s attach on and synthesize a new reverse complement strand so that it turns back into <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>....</p>
+<p>For each forked <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a>s attach on and synthesize a new <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> strand so that it turns back into <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a>....</p>
 <p><img src="svgbob_971abfeff166ada9787cd484db9bfbe43120973a.svg" alt="Kroki diagram output"></p>
-<p>The process of synthesizing a reverse complement strand is different based on the section of DNA that <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a> is operating on. For each <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, if the direction of that DNA strand is traveling from ...</p>
+<p>The process of synthesizing a <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> strand is different based on the section of DNA that <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a> is operating on. For each <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, if the direction of that DNA strand is traveling from ...</p>
 <ul>
 <li><a href="#BM_%5Cb(ori)%5Cb%2Fi">ori</a> to <a href="#BM_%5Cb(ter)%5Cb%2Fi">ter</a>, it's called a <a href="#BM_(forward%20half-strand)%2Fi">forward half-strand</a>.</li>
 <li><a href="#BM_%5Cb(ter)%5Cb%2Fi">ter</a> to <a href="#BM_%5Cb(ori)%5Cb%2Fi">ori</a>, it's called a <a href="#BM_(reverse%20half-strand%7Cbackward%20half-strand%7Cbackwards%20half-strand)%2Fi">reverse half-strand</a>.</li>
@@ -3212,7 +3212,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_83b0a64a4614fa906388ef166341e3fd293c6dc0.svg" alt="Kroki diagram output"></p>
 <p>For the <a href="#BM_(forward%20half-strand)%2Fi">forward half-strand</a>s, the process is much slower. Since <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a> can only walk DNA in the reverse direction, the <a href="#BM_(forward%20half-strand)%2Fi">forward half-strand</a>s get replicated in small segments. That is, as the <a href="#BM_(replication%20fork)%2Fi">replication fork</a> continues to grow, every ~2000 nucleotides a new <a href="#BM_(primer)%2Fi">primer</a> attaches to the end of the fork on the forward strands. A new <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a> attaches to each <a href="#BM_(primer)%2Fi">primer</a> and walks in the reverse direction (towards the <a href="#BM_%5Cb(ori)%5Cb%2Fi">ori</a>) to synthesize a small segment of DNA. That small segment of DNA is called an <a href="#BM_(Okazaki%20fragment)%2Fi">Okazaki fragment</a>...</p>
 <p><img src="svgbob_4c651d9aa100c5b586103bb0d42cc91ff27da474.svg" alt="Kroki diagram output"></p>
-<p>The <a href="#BM_(replication%20fork)%2Fi">replication fork</a> will keep widening until the original 2 strands split off. <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a> will have made sure that for each separated strand, a newly synthesized reverse complement is paired to it. The end result is 2 daughter chromosome where each chromosome has gaps...</p>
+<p>The <a href="#BM_(replication%20fork)%2Fi">replication fork</a> will keep widening until the original 2 strands split off. <a href="#BM_(DNA%20polymerase)%2Fi">DNA polymerase</a> will have made sure that for each separated strand, a newly synthesized <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> is paired to it. The end result is 2 daughter chromosome where each chromosome has gaps...</p>
 <p><img src="svgbob_eac405c5709e835b492078d1ea557a7199d8f722.svg" alt="Kroki diagram output"></p>
 <p>The <a href="#BM_(Okazaki%20fragment)%2Fi">Okazaki fragment</a>s synthesized on the forward strands end up getting sewn together by <a href="#BM_(DNA%20ligase)%2Fi">DNA ligase</a>...</p>
 <p><img src="svgbob_5c3304d08cc6bbc226df966d6e1c119636331723.svg" alt="Kroki diagram output"></p>
@@ -3225,7 +3225,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <li><a href="#BM_(Algorithms%5C%2FGC%20Skew)_TOPIC%2F">Algorithms/GC Skew</a></li>
 </ul>
 </div>
-<p>Since the <a href="#BM_(forward%20half-strand)%2Fi">forward half-strand</a> gets its reverse complement synthesized at a much slower rate than the <a href="#BM_(reverse%20half-strand%7Cbackward%20half-strand%7Cbackwards%20half-strand)%2Fi">reverse half-strand</a>, it stays single stranded for a much longer time. <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>. Specifically, in <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.</p>
+<p>Since the <a href="#BM_(forward%20half-strand)%2Fi">forward half-strand</a> gets its <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> synthesized at a much slower rate than the <a href="#BM_(reverse%20half-strand%7Cbackward%20half-strand%7Cbackwards%20half-strand)%2Fi">reverse half-strand</a>, it stays single stranded for a much longer time. <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">Single-stranded DNA</a> is 100 times more susceptible to mutations than <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a>. Specifically, in <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>, C has a greater tendency to mutate to T. This process of mutation is referred to as deanimation.</p>
 <p><img src="svgbob_f52124bb3b29a8388ed6a1fc5f597b26a2514f42.svg" alt="Kroki diagram output"></p>
 <p>The <a href="#BM_(reverse%20half-strand%7Cbackward%20half-strand%7Cbackwards%20half-strand)%2Fi">reverse half-strand</a> spends much less time as a <a href="#BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi">single-stranded DNA</a>. As such, it experiences much less C to T mutations.</p>
 <p><img src="svgbob_7d778227822729bde64ce4a36b5cc9da206869c1.svg" alt="Kroki diagram output"></p>
@@ -3268,8 +3268,8 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <ul>
 <li>the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">9-mer</a> itself.</li>
 <li>slight variations of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">9-mer</a>.</li>
-<li>the reverse complement of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">9-mer</a>.</li>
-<li>slight variations of the reverse complement of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">9-mer</a>.</li>
+<li>the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">9-mer</a>.</li>
+<li>slight variations of the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> of the <a href="#BM_(%5Cd%2B-mer%7Ck-mer%7Ckmer)%2Fi">9-mer</a>.</li>
 </ul>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
@@ -3511,11 +3511,11 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a name="BM_(DnaA%20box)%2Fi"></a><strong>DnaA box</strong> - A <a href="#BM_(sequence)%2Fi">sequence</a> in the <a href="#BM_%5Cb(ori)%5Cb%2Fi">ori</a> that the DnaA protein (responsible for DNA replication) binds to.</p>
 </li>
 <li>
-<p><a name="BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi"></a><strong>single stranded DNA</strong> - A single strand of DNA, not bound to a strand of its reverse complements.</p>
+<p><a name="BM_(single%20stranded%20DNA%7Csingle-stranded%20DNA)%2Fi"></a><strong>single stranded DNA</strong> - A single strand of DNA, not bound to a strand of its <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>s.</p>
 <p><img src="svgbob_03d83c0a0dd86c50ead48a0a8bc87eebf4353039.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
-<p><a name="BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi"></a><strong>double stranded DNA</strong> - Two strands of DNA bound together, where each strand is the reverse complement of the other.</p>
+<p><a name="BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi"></a><strong>double stranded DNA</strong> - Two strands of DNA bound together, where each strand is the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> of the other.</p>
 <p><img src="svgbob_b05df825cb791aaf67d96b4e629e42c02b75f509.svg" alt="Kroki diagram output"></p>
 </li>
 <li>
@@ -3649,7 +3649,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><img src="svgbob_6ce607591d81d0fd6c7507408e97fb8146e83baf.svg" alt="Kroki diagram output"></p>
 <p>A sheet is broken up into multiple regions, where each region has the <a href="#BM_(cDNA)%2F">cDNA</a> for one specific <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a> from the control sample printed.</p>
 <p><img src="svgbob_421210658cf3b4d0040b4815e879948ebfd7ccc5.svg" alt="Kroki diagram output"></p>
-<p>The idea is that once the experimental <a href="#BM_(cDNA)%2F">cDNA</a> is introduced to that region, it should bind to the control <a href="#BM_(cDNA)%2F">cDNA</a> that's been printed to form <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>. The color emitted in a region should correspond to the amount of <a href="#BM_(gene%20expression)%2Fi">gene expression</a> for the <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a> that region represents. For example, if a region on the sheet is fully yellow, it means that the <a href="#BM_(gene%20expression)%2Fi">gene expression</a> for that <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a> is roughly equal (red mixed with green is yellow).</p>
+<p>The idea is that once the experimental <a href="#BM_(cDNA)%2F">cDNA</a> is introduced to that region, it should bind to the control <a href="#BM_(cDNA)%2F">cDNA</a> that's been printed to form <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">double-stranded DNA</a>. The color emitted in a region should correspond to the amount of <a href="#BM_(gene%20expression)%2Fi">gene expression</a> for the <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a> that region represents. For example, if a region on the sheet is fully yellow, it means that the <a href="#BM_(gene%20expression)%2Fi">gene expression</a> for that <a href="#BM_(%5Cbgenes%5Cb%7C%5Cbgene%5Cb)%2Fi">gene</a> is roughly equal (red mixed with green is yellow).</p>
 </li>
 <li>
 <p><a name="BM_(greedy%20algorithm)%2Fi"></a><strong>greedy algorithm</strong> - An algorithm that tries to speed things up by taking the locally optimal choice at each step. That is, the algorithm doesn't look more than 1 step ahead.</p>
@@ -4508,6 +4508,9 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a name="BM_(polypeptide)%2Fi"></a><strong>polypeptide</strong> - A <a href="#BM_(peptide)%2Fi">peptide</a> of at least size 10.</p>
 </li>
 <li>
+<p><a name="BM_(cyclopeptide)%2Fi"></a><strong>cyclopeptide</strong> - A cyclic <a href="#BM_(peptide)%2Fi">peptide</a>.</p>
+</li>
+<li>
 <p><a name="BM_(central%20dogma%20of%20molecular%20biology)%2Fi"></a><strong>central dogma of molecular biology</strong> - The overall concept of <a href="#BM_(transcription%7Ctranscribed%7Ctranscribe)%2Fi">transcription</a> and <a href="#BM_(translation%7Ctranslated%7Ctranslate)%2Fi">translation</a>: Instructions for making a protein are copied from DNA to RNA, then RNA feeds into the ribosome to make that protein (DNA → RNA → Protein).</p>
 <p>Most, not all, <a href="#BM_(peptide)%2Fi">peptide</a>s are synthesized as described above. <a href="#BM_(non-ribosomal%20peptide)%2Fi">Non-ribosomal peptide</a>s are synthesized outside of the <a href="#BM_(transcription%7Ctranscribed%7Ctranscribe)%2Fi">transcription</a> and <a href="#BM_(translation%7Ctranslated%7Ctranslate)%2Fi">translation</a>.</p>
 </li>
@@ -4707,7 +4710,7 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 <p><a name="BM_(reading%20frame)%2Fi"></a><strong>reading frame</strong> - The different ways of dividing a DNA string into <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a>s. Specifically, there are 6 different ways that a DNA string can be divided into <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a>s:</p>
 <ul>
 <li>You can start dividing at index 0, 1, or 2.</li>
-<li>You can divide either the string or the reverse complementing string (<a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA)%2Fi">double-stranded DNA</a>).</li>
+<li>You can divide either the DNA string itself or the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>ing DNA string.</li>
 </ul>
 <p>For example, given the the string ATGTTCCATTAA, the the following <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a> division are possible:</p>
 <table>
@@ -4767,15 +4770,18 @@ PEVZNER_2_16_ALPHABET[frozenset({<span class="hljs-string">'C'</span>, <span cla
 </table>
 <div style="margin:2em; background-color: #e0e0e0;">
 <p><strong>⚠️NOTE️️️⚠️</strong></p>
-<p>TTAATGGAACAT is the reverse complement of ATGTTCCATTAA.</p>
+<p>TTAATGGAACAT is the <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> of ATGTTCCATTAA.</p>
 </div>
 </li>
 <li>
-<p><a name="BM_(encode%7Cencoding%7Cdecode%7Cdecoding)%2Fi"></a><strong>encode</strong> - When a DNA string or its reverse complement is made up of the <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a>s required for an <a href="#BM_(amino%20acid)%2Fi">amino acid</a> <a href="#BM_(sequence)%2Fi">sequence</a>. For example, ACAGTA <a href="#BM_(encode%7Cencoding%7Cdecode%7Cdecoding)%2Fi">encode</a>s for the <a href="#BM_(amino%20acid)%2Fi">amino acid</a> <a href="#BM_(sequence)%2Fi">sequence</a>...</p>
+<p><a name="BM_(encode%7Cencoding%7Cdecode%7Cdecoding)%2Fi"></a><strong>encode</strong> - When a DNA string or its <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a> is made up of the <a href="#BM_(codon%7Cgenetic%20code)%2Fi">codon</a>s required for an <a href="#BM_(amino%20acid)%2Fi">amino acid</a> <a href="#BM_(sequence)%2Fi">sequence</a>. For example, ACAGTA <a href="#BM_(encode%7Cencoding%7Cdecode%7Cdecoding)%2Fi">encode</a>s for the <a href="#BM_(amino%20acid)%2Fi">amino acid</a> <a href="#BM_(sequence)%2Fi">sequence</a>...</p>
 <ul>
 <li>Threonine-Valine</li>
-<li>Tyrosine-Cysteine (derived from reverse complement)</li>
+<li>Tyrosine-Cysteine (derived from <a href="#BM_(double%20stranded%20DNA%7Cdouble-stranded%20DNA%7Creverse%20complement)%2Fi">reverse complement</a>)</li>
 </ul>
+</li>
+<li>
+<p><a name="BM_(branch-and-bound%20algorithm%7Cbranch%20and%20bound%20algorithm)%2Fi"></a><strong>branch-and-bound algorithm</strong> - A bruteforce algorithm that enumerates candidates to explore at each step but also discards untenable candidates using various checks. The enumeration of candidates is the branching step, while the culling of untenable candidates is the bounding step.</p>
 </li>
 </ul>
 <p>
