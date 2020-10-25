@@ -42,7 +42,7 @@ def is_consistent_with_spectrum(linear_peptide_theoretical_spectrum: typing.Coun
     return True
 
 
-def cyclopeptid_spectrum(peptide: List[int]) -> typing.Counter[int]:
+def cyclopeptide_spectrum(peptide: List[int]) -> typing.Counter[int]:
     prefix_masses = [0]
     for i, w in enumerate(peptide):
         prev_mass = prefix_masses[i]
@@ -78,7 +78,7 @@ while len(candidate_peptides) > 0:
     removal_set = set()
     for p in candidate_peptides:
         if sum(p) == max(spectrum.elements()):
-            if cyclopeptid_spectrum(p) == spectrum:
+            if cyclopeptide_spectrum(p) == spectrum:
                 final_peptides.add(p)
             removal_set.add(p)
         elif not is_consistent_with_spectrum(linear_peptid_spectrum(p)):
